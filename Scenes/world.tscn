@@ -1,0 +1,132 @@
+[gd_scene load_steps=19 format=3 uid="uid://dp33y25ncdla5"]
+
+[ext_resource type="Script" uid="uid://cl7b5tsk5cpy3" path="res://Scenes/ui.gd" id="2_adtv2"]
+[ext_resource type="PackedScene" uid="uid://c055smn111au7" path="res://Scenes/player.tscn" id="2_evir0"]
+[ext_resource type="Texture2D" uid="uid://dl55u8tb3x34h" path="res://Art/Sprites/crosshair007.png" id="2_rmtha"]
+[ext_resource type="Script" uid="uid://cxi6qud6ks724" path="res://addons/zylann.hterrain/hterrain.gd" id="4_o06y3"]
+[ext_resource type="Resource" uid="uid://cvscr5mn3uyuv" path="res://TerrainData/data.hterrain" id="5_k7acu"]
+[ext_resource type="Script" uid="uid://ck5ih40mh3nk8" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="6_5v1tr"]
+[ext_resource type="Texture2D" uid="uid://c5vubp6usyq24" path="res://Art/Textures/sand.png" id="7_0fj1v"]
+[ext_resource type="Script" uid="uid://ba01kvx1jag3c" path="res://Scripts/enemy.gd" id="8_k7acu"]
+[ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="9_5v1tr"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xqur4"]
+sky_top_color = Color(0.7392, 0.842453, 0.88, 1)
+sky_horizon_color = Color(0.619065, 0.686617, 0.907575, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_wng6k"]
+sky_material = SubResource("ProceduralSkyMaterial_xqur4")
+
+[sub_resource type="Environment" id="Environment_h5sev"]
+background_mode = 2
+background_color = Color(1, 1, 1, 1)
+sky = SubResource("Sky_wng6k")
+ambient_light_color = Color(0.986752, 0.986752, 0.986752, 1)
+ambient_light_sky_contribution = 0.0
+fog_light_color = Color(0.00898473, 1.12806e-06, 0.099307, 1)
+fog_density = 0.15
+
+[sub_resource type="Resource" id="Resource_ikia7"]
+script = ExtResource("6_5v1tr")
+mode = 0
+textures = [[ExtResource("7_0fj1v")], [null]]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_o06y3"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_k7acu"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o06y3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7acu"]
+albedo_color = Color(0.91, 0.2548, 0.2548, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5v1tr"]
+material = SubResource("StandardMaterial3D_k7acu")
+
+[node name="World" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h5sev")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.613331, -0.601996, 0.511298, 0.462396, 0.798499, 0.385473, -0.640324, 0, 0.768105, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("2_evir0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.576142, 1.04064)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("2_adtv2")
+
+[node name="Crosshair" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Crosshair"]
+layout_mode = 1
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 56.0
+offset_bottom = 56.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_rmtha")
+
+[node name="HTerrain" type="Node3D" parent="."]
+script = ExtResource("4_o06y3")
+centered = true
+_terrain_data = ExtResource("5_k7acu")
+chunk_size = 64
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_ikia7")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+metadata/_custom_type_script = "uid://cxi6qud6ks724"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.59197e-08, -0.821746, 0.569853, -1, -4.37114e-08, 0, 2.49091e-08, -0.569853, -0.821746, 4.88544, 1.19059, 5.27067)
+mesh = SubResource("PlaneMesh_o06y3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_k7acu")
+
+[node name="Enemy" type="CharacterBody3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.53674e-07, 1.37798, 7.80413)
+collision_layer = 2
+script = ExtResource("8_k7acu")
+target = NodePath("../CharacterBody3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301743, 0.0113287, 0.00144577)
+shape = SubResource("CapsuleShape3D_o06y3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy"]
+mesh = SubResource("CapsuleMesh_5v1tr")
+
+[node name="Hitbox" type="Area3D" parent="Enemy" groups=["enemies"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("9_5v1tr")
+hp = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy/Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301743, 0.0113287, 0.00144577)
+shape = SubResource("CapsuleShape3D_o06y3")

@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwq84n8f24jwt"]
+
+[ext_resource type="Script" uid="uid://bpukt2hanaqid" path="res://Scenes/bullet.gd" id="1_b0ufc"]
+
+[sub_resource type="Gradient" id="Gradient_xjght"]
+offsets = PackedFloat32Array(0, 0.647577, 0.674009)
+colors = PackedColorArray(0, 0, 0, 0, 1, 0.95, 0, 0.882353, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_oduel"]
+gradient = SubResource("Gradient_xjght")
+fill_from = Vector2(0.529915, 1)
+fill_to = Vector2(0.478632, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xjght"]
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("GradientTexture2D_oduel")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_oduel"]
+material = SubResource("StandardMaterial3D_xjght")
+radius = 0.05
+height = 1.0
+rings = 1
+
+[node name="Bullet" type="Node3D"]
+script = ExtResource("1_b0ufc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 8.74228e-08, -1, 1, -8.74228e-08, -4.37114e-08, -4.37114e-08, -2, -4.37114e-08, -0.000230551, 0.00245807, 1.01988)
+mesh = SubResource("CapsuleMesh_oduel")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+visible = false
+target_position = Vector3(0, 0, 10)
+collision_mask = 5
+hit_from_inside = true
+collide_with_areas = true

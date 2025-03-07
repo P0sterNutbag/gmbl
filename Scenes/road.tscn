@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0luiws1ev3ws"]
+
+[ext_resource type="PackedScene" uid="uid://bq0713os6n73a" path="res://Art/Models/roadAsphalt_center.glb" id="1_yqbn4"]
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_p07cp"]
+
+[node name="Road" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("HeightMapShape3D_p07cp")
+
+[node name="roadAsphalt_center2" parent="StaticBody3D" instance=ExtResource("1_yqbn4")]
+
+[node name="roadAsphalt_center" parent="StaticBody3D/roadAsphalt_center2/tmpParent" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[editable path="StaticBody3D/roadAsphalt_center2"]

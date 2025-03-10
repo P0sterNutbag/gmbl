@@ -1,5 +1,8 @@
 extends CharacterBody3D
+class_name Player
 
+enum states {walk, dead}
+var state = states.walk
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var speed = 8
 var jump_speed = 5
@@ -14,13 +17,16 @@ var firepoint
 @onready var animation_player = $Camera3D/Pistol/AnimationPlayer
 @onready var muzzel_raycast  = $Camera3D/Pistol/Gun/FirePoint/RayCast3D
 @onready var guns = [pistol, rifle]
+signal shoot
 
 
 func _ready() -> void:
+	Globals.player = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	for gun in guns:
 		gun.visible = false
 	change_gun(0)
+	shoot.connect($ShootComponent._on_shoot)
 
 
 func _physics_process(delta):
@@ -37,33 +43,33 @@ func _physics_process(delta):
 
 
 func _process(delta: float) -> void:
-	# combat animations
-	if Input.is_action_just_pressed("shoot"):
-		animation_player.play("shoot")
-		#var inst = Globals.create_instance(bullet, firepoint.global_position)
-		var inst: Node3D = bullet.instantiate()
-		inst.global_transform = firepoint.global_transform
-		get_tree().current_scene.add_child(inst)
-	if Input.is_action_pressed("aim"):
-		animation_player.play("ads")
-	if Input.is_action_just_released("aim"):
-		animation_player.play("idle")
-	
-	# change gun
-	if Input.is_action_just_released("next_gun"):
-		gun_index = wrap(gun_index - 1, 0, guns.size())
-		change_gun(gun_index)
-	if Input.is_action_just_released("last_gun"):
-		gun_index = wrap(gun_index + 1, 0, guns.size())
-		change_gun(gun_index)
-	
-	# leaning
-	if is_on_floor():
-		lean_angle = 15.0 * Input.get_axis("lean_right", "lean_left")
-	else:
-		lean_angle = 0.0
-	rotation_degrees.z = lerp(rotation_degrees.z, lean_angle, 10 * delta)
-	
+	match state:
+		states.walk:
+			# combat animations
+			if Input.is_action_just_pressed("shoot"):
+				animation_player.play("shoot")
+				shoot.emit()
+			if Input.is_action_pressed("aim"):
+				animation_player.play("ads")
+			if Input.is_action_just_released("aim"):
+				animation_player.play("idle")
+			
+			# change gun
+			if Input.is_action_just_released("next_gun"):
+				gun_index = wrap(gun_index - 1, 0, guns.size())
+				change_gun(gun_index)
+			if Input.is_action_just_released("last_gun"):
+				gun_index = wrap(gun_index + 1, 0, guns.size())
+				change_gun(gun_index)
+			
+			# leaning
+			if is_on_floor():
+				lean_angle = 15.0 * Input.get_axis("lean_right", "lean_left")
+			else:
+				lean_angle = 0.0
+			rotation_degrees.z = lerp(rotation_degrees.z, lean_angle, 10 * delta)
+		states.dead:
+			pass
 	# set crosshair position
 	if muzzel_raycast.is_colliding():
 		var pos = camera.unproject_position(muzzel_raycast.get_collision_point())
@@ -93,3 +99,7 @@ func change_gun(new_index) -> void:
 			firepoint = gun.get_node("Gun/FirePoint")
 			muzzel_raycast = gun.get_node("Gun/FirePoint/RayCast3D")
 			animation_player.play("draw")
+
+
+func _on_death() -> void:
+	state = states.dead

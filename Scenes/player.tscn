@@ -1,12 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://c055smn111au7"]
+[gd_scene load_steps=20 format=3 uid="uid://c055smn111au7"]
 
 [ext_resource type="Script" uid="uid://cslnx4rw32guw" path="res://Scripts/player.gd" id="1_5kxbm"]
-[ext_resource type="PackedScene" uid="uid://ce6mnuev50thq" path="res://Art/Models/Arms_M416_Assault_Rifle.fbx" id="1_ffx4m"]
-[ext_resource type="PackedScene" uid="uid://ctm2o1064uyc" path="res://Art/Models/Arms_Glock_G48.fbx" id="3_ir81v"]
+[ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_x3wgy"]
 [ext_resource type="PackedScene" uid="uid://cimrwcadyyj40" path="res://Art/Models/AssaultRifle_2.fbx" id="4_bwiei"]
 [ext_resource type="PackedScene" uid="uid://dbil1poy7mmp1" path="res://Art/Models/Pistol_1.fbx" id="5_80uax"]
+[ext_resource type="Script" uid="uid://ccu856f1csrwx" path="res://Scripts/shoot_component.gd" id="7_f1ek2"]
+[ext_resource type="PackedScene" uid="uid://yfhpkhkbky65" path="res://Scenes/hitmarker.tscn" id="8_tx1dd"]
+[ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="9_gymyn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kgvud"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3smsa"]
 
 [sub_resource type="Animation" id="Animation_yn3se"]
 length = 0.001
@@ -92,186 +96,38 @@ _data = {
 
 [sub_resource type="BoxMesh" id="BoxMesh_x3wgy"]
 
+[sub_resource type="Resource" id="Resource_pu2lt"]
+script = ExtResource("9_gymyn")
+speed = 250.0
+max_drop_speed = 3.0
+min_drop_speed = 0.0
+drop_speed = 0.0
+damage = 1.0
+is_hitscan = true
+bullet_drop = true
+collision_mask = 3
+hitmarker = ExtResource("8_tx1dd")
+metadata/_custom_type_script = "uid://c338ifvm4duar"
+
 [node name="CharacterBody3D" type="CharacterBody3D"]
 collision_layer = 0
 script = ExtResource("1_5kxbm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.955999, 0)
 shape = SubResource("CapsuleShape3D_kgvud")
 
+[node name="Hitbox" type="Area3D" parent="." groups=["enemies"]]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_x3wgy")
+hp = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301743, 0.0113287, 0.00144577)
+shape = SubResource("CapsuleShape3D_3smsa")
+
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.484, 0)
-
-[node name="Arms_M416_Assault_Rifle" parent="Camera3D" instance=ExtResource("1_ffx4m")]
-transform = Transform3D(-1, 0, -8.74227e-08, 0, 1, 0, 8.74227e-08, 0, -1, 0, -0.175775, 0)
-visible = false
-
-[node name="Skeleton3D" parent="Camera3D/Arms_M416_Assault_Rifle/Armature" index="0"]
-bones/1/position = Vector3(-2.7956e-18, 0.00140002, -4.45054e-26)
-bones/1/rotation = Quaternion(-0.371305, -0.512071, -0.541402, 0.553896)
-bones/1/scale = Vector3(1, 1, 1)
-bones/2/position = Vector3(-4.92385e-16, 0.00188143, 9.86677e-12)
-bones/2/rotation = Quaternion(0.335136, -0.485814, -0.452897, 0.668246)
-bones/2/scale = Vector3(1, 1, 1)
-bones/3/position = Vector3(4.40549e-16, 0.00333609, 3.55666e-12)
-bones/3/rotation = Quaternion(-0.423099, -0.122354, 0.207928, 0.873374)
-bones/3/scale = Vector3(1, 1, 1)
-bones/4/position = Vector3(2.24325e-05, 0.00106716, 0.000227389)
-bones/4/rotation = Quaternion(-0.121227, -0.0835049, -0.298472, 0.942998)
-bones/4/scale = Vector3(1, 1, 1)
-bones/5/position = Vector3(-3.76441e-08, 0.000365117, -2.69165e-06)
-bones/5/rotation = Quaternion(-0.0768447, 0.0013964, -0.35293, 0.932488)
-bones/5/scale = Vector3(1, 1, 1)
-bones/6/position = Vector3(6.60181e-06, 0.000915762, -0.000232518)
-bones/6/rotation = Quaternion(-0.201151, -0.185184, -0.540331, 0.795793)
-bones/6/scale = Vector3(1, 1, 1)
-bones/7/position = Vector3(3.8743e-09, 0.000359247, 4.13092e-06)
-bones/7/rotation = Quaternion(-0.0598122, -0.0355731, -0.0149559, 0.997463)
-bones/7/scale = Vector3(1, 1, 1)
-bones/8/position = Vector3(3.88968e-05, 0.000157423, 0.000257272)
-bones/8/rotation = Quaternion(0.530651, 0.548715, -0.0139278, 0.645854)
-bones/8/scale = Vector3(1, 1, 1)
-bones/9/position = Vector3(1.15829e-06, 0.000364365, 6.8428e-06)
-bones/9/rotation = Quaternion(-0.119742, 0.0322581, 0.0722062, 0.98965)
-bones/9/scale = Vector3(1, 1, 1)
-bones/10/position = Vector3(-5.53776e-06, 0.000402885, -3.35225e-05)
-bones/10/rotation = Quaternion(-0.134979, 0.01236, 0.0230681, 0.990503)
-bones/10/scale = Vector3(1, 1, 1)
-bones/11/rotation = Quaternion(0.501942, -0.498051, 0.50194, 0.498052)
-bones/12/position = Vector3(-2.34563e-16, 0.00140002, 7.02619e-23)
-bones/12/rotation = Quaternion(0.200919, 0.0622399, 0.491614, 0.845029)
-bones/12/scale = Vector3(1, 1, 1)
-bones/13/position = Vector3(4.79058e-17, 0.00188143, -5.53463e-12)
-bones/13/rotation = Quaternion(0.730089, 0.131374, 0.369989, 0.559302)
-bones/13/scale = Vector3(1, 1, 1)
-bones/14/position = Vector3(-7.18165e-16, 0.00333609, 2.35131e-12)
-bones/14/rotation = Quaternion(-0.239488, -0.0762272, -0.348143, 0.903123)
-bones/14/scale = Vector3(1, 1, 1)
-bones/15/position = Vector3(-0.000252371, 0.000530997, -0.000421328)
-bones/15/rotation = Quaternion(0.516514, -0.481452, -0.517929, 0.482874)
-bones/15/scale = Vector3(1, 1, 1)
-bones/16/position = Vector3(-0.00077786, 0.000681209, -1.09106e-05)
-bones/16/rotation = Quaternion(4.46333e-06, -1.16682e-06, -0.194454, 0.980912)
-bones/16/scale = Vector3(1, 1, 1)
-bones/17/position = Vector3(0.00013349, 0.00181684, -0.000121159)
-bones/17/rotation = Quaternion(0.707105, -9.80859e-07, -4.27815e-07, 0.707108)
-bones/17/scale = Vector3(1, 1, 1)
-bones/18/position = Vector3(-0.00139643, 0.0015854, -0.000175066)
-bones/18/rotation = Quaternion(0.496152, -0.503818, 0.496153, 0.503818)
-bones/18/scale = Vector3(1, 1, 1)
-bones/19/position = Vector3(-0.00174703, 9.9218e-05, -9.09223e-06)
-bones/19/rotation = Quaternion(0.000711033, -0.000286812, -0.133376, 0.991065)
-bones/19/scale = Vector3(1, 1, 1)
-bones/20/position = Vector3(1.63348e-05, 0.00111054, 0.000285131)
-bones/20/rotation = Quaternion(0.100477, -0.413801, 0.190572, 0.884509)
-bones/20/scale = Vector3(1, 1, 1)
-bones/21/position = Vector3(-4.88249e-05, 0.000369577, 5.81796e-05)
-bones/21/rotation = Quaternion(0.259483, 0.312841, 0.434589, 0.803699)
-bones/22/position = Vector3(-8.09866e-05, 0.00109954, -0.00020482)
-bones/22/rotation = Quaternion(0.255216, -0.352217, 0.623069, 0.650071)
-bones/22/scale = Vector3(1, 1, 1)
-bones/23/position = Vector3(-7.49116e-05, 0.000422593, 0.000101983)
-bones/23/rotation = Quaternion(0.406214, 0.30305, 0.652519, 0.563356)
-bones/23/scale = Vector3(1, 1, 1)
-bones/24/position = Vector3(-7.72069e-05, 0.000127896, 0.000330807)
-bones/24/rotation = Quaternion(-0.384384, 0.908085, -0.150149, -0.0713145)
-bones/24/scale = Vector3(1, 0.999999, 1)
-bones/25/position = Vector3(1.25215e-05, 0.000367267, -6.43844e-06)
-bones/25/rotation = Quaternion(0.00822244, 0.0881581, 0.0418579, 0.995193)
-bones/25/scale = Vector3(1, 1, 1)
-bones/26/position = Vector3(-2.04045e-05, 0.000372421, 3.49307e-05)
-bones/26/rotation = Quaternion(-0.0166314, 0.104704, -0.190987, -0.975851)
-bones/26/scale = Vector3(1, 1, 1)
-
-[node name="FirePoint" type="Node3D" parent="Camera3D/Arms_M416_Assault_Rifle/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.01, 0, -4.37114e-10, -4.37114e-10, 1.91069e-17, -0.01, 0, 0.01, 1.91068e-17, -0.00135839, -0.00910533, 0.0005507)
-
-[node name="RayCast3D" type="RayCast3D" parent="Camera3D/Arms_M416_Assault_Rifle/Armature/Skeleton3D/FirePoint"]
-target_position = Vector3(0, 0, 10)
-
-[node name="AnimationPlayer" parent="Camera3D/Arms_M416_Assault_Rifle" index="1"]
-autoplay = "Armature|M416_Idle_Anim"
-
-[node name="Arms_Glock_G48" parent="Camera3D" instance=ExtResource("3_ir81v")]
-transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, -0.175775, 0)
-visible = false
-
-[node name="Skeleton3D" parent="Camera3D/Arms_Glock_G48/Armature" index="0"]
-bones/1/position = Vector3(-2.7956e-18, 0.00140002, -4.45054e-26)
-bones/1/rotation = Quaternion(-0.38262, -0.391326, -0.508254, 0.664939)
-bones/1/scale = Vector3(1, 1, 1)
-bones/2/position = Vector3(-4.92385e-16, 0.00188143, 9.86677e-12)
-bones/2/rotation = Quaternion(-0.0585573, -0.0851276, -0.59812, 0.794718)
-bones/2/scale = Vector3(1, 1, 1)
-bones/3/position = Vector3(4.40549e-16, 0.00333609, 3.55666e-12)
-bones/3/rotation = Quaternion(-0.246025, -0.126674, 0.163778, 0.946891)
-bones/3/scale = Vector3(1, 1, 1)
-bones/4/position = Vector3(8.51318e-05, 0.000997804, 0.000276197)
-bones/4/rotation = Quaternion(-0.0540041, -0.0105681, -0.620624, 0.782175)
-bones/4/scale = Vector3(1, 1, 1)
-bones/5/position = Vector3(2.65042e-05, 0.000359881, 1.71282e-06)
-bones/5/rotation = Quaternion(0.00196222, -0.00231298, -0.18409, 0.982905)
-bones/5/scale = Vector3(1, 1, 1)
-bones/6/position = Vector3(0.00019009, 0.000887577, -0.000192097)
-bones/6/scale = Vector3(1, 1, 1)
-bones/7/position = Vector3(3.89215e-09, 0.000359247, 4.1308e-06)
-bones/7/rotation = Quaternion(-0.0861758, -0.113475, -0.252202, 0.957127)
-bones/7/scale = Vector3(1, 1, 1)
-bones/8/position = Vector3(-1.874e-05, 0.000167568, 0.000291813)
-bones/8/rotation = Quaternion(0.455388, 0.405973, -0.136781, 0.780448)
-bones/9/position = Vector3(1.15829e-06, 0.000364365, 6.8428e-06)
-bones/9/rotation = Quaternion(-0.0224793, 0.149761, -0.0735807, 0.985724)
-bones/9/scale = Vector3(1, 1, 1)
-bones/10/position = Vector3(1.93704e-05, 0.000329608, -9.90183e-08)
-bones/10/rotation = Quaternion(0.0567499, 0.0185486, -0.264045, 0.962661)
-bones/10/scale = Vector3(1, 1, 1)
-bones/12/position = Vector3(-2.34563e-16, 0.00140002, 7.02619e-23)
-bones/12/rotation = Quaternion(-0.192076, -0.0683067, 0.556774, 0.80526)
-bones/12/scale = Vector3(1, 1, 1)
-bones/13/position = Vector3(4.79058e-17, 0.00188143, -5.53463e-12)
-bones/13/rotation = Quaternion(0.781223, 0.0326342, 0.0112727, 0.623297)
-bones/13/scale = Vector3(1, 1, 1)
-bones/14/position = Vector3(-7.18165e-16, 0.00333609, 2.35131e-12)
-bones/14/rotation = Quaternion(-0.321816, 0.207561, -0.096008, 0.918768)
-bones/14/scale = Vector3(1, 1, 1)
-bones/15/position = Vector3(1.00527e-06, 0.00106111, 0.000281098)
-bones/15/rotation = Quaternion(0.089756, -0.49242, 0.242971, 0.830922)
-bones/15/scale = Vector3(1, 1, 1)
-bones/16/position = Vector3(-4.54759e-05, 0.000305136, 7.24252e-05)
-bones/16/rotation = Quaternion(0.275865, 0.37716, 0.356582, 0.809011)
-bones/16/scale = Vector3(1, 1, 1)
-bones/17/position = Vector3(-7.7016e-05, 0.00105092, -0.000178466)
-bones/17/rotation = Quaternion(0.269238, -0.310819, 0.658318, 0.630491)
-bones/18/rotation = Quaternion(0.336559, 0.34501, 0.546963, 0.684491)
-bones/18/scale = Vector3(1, 1, 1)
-bones/19/position = Vector3(-7.50898e-05, 7.25322e-05, 0.000294362)
-bones/19/rotation = Quaternion(-0.558671, 0.816835, 0.110646, 0.0917901)
-bones/19/scale = Vector3(1, 0.999999, 1)
-bones/20/position = Vector3(1.25215e-05, 0.000367267, -6.43844e-06)
-bones/20/rotation = Quaternion(0.0993687, 0.0640947, 0.325977, 0.937954)
-bones/20/scale = Vector3(1, 1, 1)
-bones/21/position = Vector3(-7.97791e-05, 0.000377555, 4.59077e-05)
-bones/21/rotation = Quaternion(-0.141319, 0.118892, -0.404747, -0.895586)
-bones/21/scale = Vector3(1, 1, 1)
-bones/22/position = Vector3(-0.000273237, 0.000581464, 0.000282672)
-bones/22/rotation = Quaternion(0.033188, -0.696482, 0.0146321, 0.716658)
-bones/22/scale = Vector3(1, 1, 1)
-bones/23/position = Vector3(0.000144353, 0.000474833, -1.09108e-05)
-bones/23/rotation = Quaternion(-0.556109, 0.831109, 5.45082e-06, -9.25484e-06)
-bones/23/scale = Vector3(1, 1, 1)
-bones/24/position = Vector3(0.000411224, 0.000113117, -7.3583e-06)
-bones/24/rotation = Quaternion(-1.55294e-06, -0.707105, 1.55296e-06, 0.707109)
-bones/24/scale = Vector3(1, 1, 1)
-bones/25/position = Vector3(-0.000593286, -2.91974e-05, 5.96562e-06)
-bones/25/rotation = Quaternion(-0.00105555, -0.00816982, -0.560209, 0.828311)
-bones/25/scale = Vector3(1, 1, 1)
-
-[node name="FirePoint" type="Node3D" parent="Camera3D/Arms_Glock_G48/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.01, 0, -4.37114e-10, -4.37114e-10, 1.91069e-17, -0.01, 0, 0.01, 1.91068e-17, -0.00104156, -0.00405447, 0.00159219)
-
-[node name="RayCast3D" type="RayCast3D" parent="Camera3D/Arms_Glock_G48/Armature/Skeleton3D/FirePoint"]
-target_position = Vector3(0, 0, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.598655, 0)
 
 [node name="AssaultRifle" type="Node3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.134174, -0.241032, -0.151671)
@@ -281,10 +137,10 @@ visible = false
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="FirePoint" type="Node3D" parent="Camera3D/AssaultRifle/Gun"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.763298, 0.120135, 0.0005507)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.763298, 0.120135, 0.0005507)
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D/AssaultRifle/Gun/FirePoint"]
-target_position = Vector3(0, 0, 10)
+target_position = Vector3(0, 0, -100)
 collision_mask = 5
 collide_with_areas = true
 
@@ -301,11 +157,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.207055, -0.19251, -0.378759
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="FirePoint" type="Node3D" parent="Camera3D/Pistol/Gun"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.763298, 0.120135, 0.0005507)
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0.295352, 0.120135, 0.000550706)
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D/Pistol/Gun/FirePoint"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.445609)
-target_position = Vector3(0, 0, 100)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00445208)
+target_position = Vector3(0, 0, -100)
 collision_mask = 5
 hit_from_inside = true
 collide_with_areas = true
@@ -324,5 +180,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_sinfg")
 }
 
-[editable path="Camera3D/Arms_M416_Assault_Rifle"]
-[editable path="Camera3D/Arms_Glock_G48"]
+[node name="ShootComponent" type="Node" parent="." node_paths=PackedStringArray("firepoint")]
+script = ExtResource("7_f1ek2")
+bullet_stats = SubResource("Resource_pu2lt")
+firepoint = NodePath("../Camera3D/Pistol/Gun/FirePoint")

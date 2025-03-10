@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cwq84n8f24jwt"]
 
-[ext_resource type="Script" uid="uid://bpukt2hanaqid" path="res://Scenes/bullet.gd" id="1_b0ufc"]
+[ext_resource type="Script" uid="uid://bpukt2hanaqid" path="res://Scripts/bullet.gd" id="1_b0ufc"]
 
 [sub_resource type="Gradient" id="Gradient_xjght"]
 offsets = PackedFloat32Array(0, 0.647577, 0.674009)
@@ -30,8 +30,6 @@ transform = Transform3D(-4.37114e-08, 8.74228e-08, -1, 1, -8.74228e-08, -4.37114
 mesh = SubResource("CapsuleMesh_oduel")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-visible = false
-target_position = Vector3(0, 0, 10)
-collision_mask = 5
+target_position = Vector3(0, 0, -10)
 hit_from_inside = true
 collide_with_areas = true

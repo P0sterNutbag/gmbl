@@ -1,0 +1,71 @@
+[gd_scene load_steps=12 format=3 uid="uid://cb05x24r4r8im"]
+
+[ext_resource type="Script" uid="uid://ba01kvx1jag3c" path="res://Scripts/enemy.gd" id="1_1f0kj"]
+[ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_afpow"]
+[ext_resource type="Script" uid="uid://ccu856f1csrwx" path="res://Scripts/shoot_component.gd" id="3_afpow"]
+[ext_resource type="PackedScene" uid="uid://yfhpkhkbky65" path="res://Scenes/hitmarker.tscn" id="4_0830c"]
+[ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="5_ghaa6"]
+[ext_resource type="Script" uid="uid://but6ijlpfowbx" path="res://Scripts/detection_component.gd" id="6_ghaa6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o06y3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7acu"]
+albedo_color = Color(0.91, 0.2548, 0.2548, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5v1tr"]
+material = SubResource("StandardMaterial3D_k7acu")
+
+[sub_resource type="BoxMesh" id="BoxMesh_1f0kj"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[sub_resource type="Resource" id="Resource_1dp5w"]
+script = ExtResource("5_ghaa6")
+speed = 50.0
+max_drop_speed = 3.0
+min_drop_speed = 0.0
+drop_speed = 0.0
+damage = 1.0
+is_hitscan = false
+bullet_drop = true
+collision_mask = 3
+hitmarker = ExtResource("4_0830c")
+metadata/_custom_type_script = "uid://c338ifvm4duar"
+
+[node name="Enemy" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_1f0kj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301743, 0.0113287, 0.00144577)
+shape = SubResource("CapsuleShape3D_o06y3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_5v1tr")
+
+[node name="Hitbox" type="Area3D" parent="." groups=["enemies"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("2_afpow")
+hp = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301743, 0.0113287, 0.00144577)
+shape = SubResource("CapsuleShape3D_o06y3")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.738366)
+mesh = SubResource("BoxMesh_1f0kj")
+
+[node name="FirePoint" type="Node3D" parent="MeshInstance3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.134421)
+script = ExtResource("3_afpow")
+bullet_stats = SubResource("Resource_1dp5w")
+
+[node name="Detection" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -50)
+collide_with_areas = true
+script = ExtResource("6_ghaa6")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

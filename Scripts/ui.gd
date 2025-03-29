@@ -1,8 +1,10 @@
 extends CanvasLayer
 
 var crosshair_target_pos: Vector2
-var middle_pos = Vector2(320, 240)
+@onready var middle_pos = DisplayServer.screen_get_size() / 4
 @onready var crosshair = $Crosshair
+@onready var player_hp_bar: ProgressBar = $ProgressBar
+
 
 func _ready() -> void:
 	Globals.ui = self

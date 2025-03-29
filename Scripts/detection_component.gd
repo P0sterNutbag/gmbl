@@ -6,7 +6,7 @@ var target: Node3D
 
 
 func _ready() -> void:
-	target = Globals.player
+	target = Globals.player.camera
 	look_at(target.global_position)
 
 
@@ -20,4 +20,6 @@ func can_see_target() -> bool:
 	var to_player = (target.global_transform.origin - get_parent().global_transform.origin).normalized()
 	var dot_product = forward.dot(to_player)
 	var dis_to_target = global_position.distance_to(target.position)
-	return !is_colliding() and dot_product < -0.25 and dis_to_target <= range
+	print(!is_colliding())
+	var collision = get_collider()
+	return get_collider() == null and dot_product < -0.25 and dis_to_target <= range

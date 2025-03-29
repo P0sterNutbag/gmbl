@@ -44,5 +44,4 @@ func hit():
 	var inst = bullet_stats.hitmarker.instantiate()
 	collider.add_child(inst)
 	inst.global_position = raycast.get_collision_point()
-	inst.set_rotation_to_normal(raycast.get_collision_normal())
 	queue_free()

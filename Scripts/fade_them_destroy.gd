@@ -1,6 +1,6 @@
 extends Timer
 
-@export var sprite_to_fade: SpriteBase3D
+@export var sprite_to_fade: Decal
 
 
 func _on_timeout() -> void:

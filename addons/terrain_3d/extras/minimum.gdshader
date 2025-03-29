@@ -94,10 +94,10 @@ void vertex() {
 	bool hole = bool(control >>2u & 0x1u);
 
 	// Show holes to all cameras except mouse camera (on exactly 1 layer)
-	if ( !(CAMERA_VISIBLE_LAYERS == _mouse_layer) && 
+	if ( !(CAMERA_VISIBLE_LAYERS == _mouse_layer) &&
 			(hole || (_background_mode == 0u && (get_region_uv(UV - _region_texel_size) & v_region).z < 0))) {
 		VERTEX.x = 0. / 0.;
-	} else {		
+	} else {
 		// Set final vertex height & calculate vertex normals. 3 lookups.
 		VERTEX.y = get_height(UV2);
 		v_vertex.y = VERTEX.y;
@@ -110,7 +110,7 @@ void vertex() {
 		// mask region edges and use vertex normals only across region boundaries.
 		v_region_border_mask = mod(UV.x + 2.5, _region_size) - fract(UV.x) < 5.0 || mod(UV.y + 2.5, _region_size) - fract(UV.y) < 5.0 ? 1. : 0.;
 	}
-		
+
 	// Transform UVs to local to avoid poor precision during varying interpolation.
 	v_uv_offset = MODEL_MATRIX[3].xz * _vertex_density;
 	UV -= v_uv_offset;
@@ -162,3 +162,10 @@ void fragment() {
 	// Apply PBR
 	ALBEDO=vec3(.2);
 }
+void light() {
+	float dotproduct = clamp(dot(NORMAL, LIGHT), -0.9, 0.9);
+	float sample = clamp((dotproduct + 1.0) * ATTENUATION / 2.1, 0.05, 0.95);
+	vec4 shaded = texture(color_gradient, vec2(sample, 0.0));
+	DIFFUSE_LIGHT += clamp((shaded.rgb * LIGHT_COLOR), 0.0, 1.0);
+}
+

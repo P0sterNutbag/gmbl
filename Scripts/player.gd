@@ -4,18 +4,29 @@ class_name Player
 enum states {walk, dead}
 var state = states.walk
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var speed = 8
-var jump_speed = 5
-var mouse_sensitivity = 0.004
-var lean_angle = 0.0
-var gun_index = 0
+var max_hp := 100.0
+var hp := max_hp: 
+	set(value):
+		hp = value
+		Globals.ui.player_hp_bar.value = (hp / max_hp)
+var base_speed := 8.0
+var crouch_speed := 3.0
+var speed = base_speed
+var jump_speed := 8.0
+var mouse_sensitivity := 0.004
+var lean_angle := 0.0
+var gun_index := 0
+var crouch_height := 1.0
+var is_crouching: bool
+var firepoint: Node3D
+@export var items: Array[Item]
 var bullet = preload("res://Scenes/bullet.tscn")
-var firepoint
-@onready var camera = $Camera3D
-@onready var pistol = $Camera3D/Pistol
-@onready var rifle = $Camera3D/AssaultRifle
-@onready var animation_player = $Camera3D/Pistol/AnimationPlayer
-@onready var muzzel_raycast  = $Camera3D/Pistol/Gun/FirePoint/RayCast3D
+@onready var camera = $CameraAnchor/Camera3D
+@onready var pistol = $CameraAnchor/Camera3D/Pistol
+@onready var rifle = $CameraAnchor/Camera3D/AssaultRifle
+@onready var animation_player = $CameraAnchor/Camera3D/Pistol/AnimationPlayer
+@onready var muzzel_raycast  = $CameraAnchor/Camera3D/Pistol/Gun/FirePoint/RayCast3D
+@onready var shoot_component: Node = $ShootComponent
 @onready var guns = [pistol, rifle]
 signal shoot
 
@@ -26,11 +37,20 @@ func _ready() -> void:
 	for gun in guns:
 		gun.visible = false
 	change_gun(0)
-	shoot.connect($ShootComponent._on_shoot)
+	shoot.connect(shoot_component._on_shoot)
 
 
 func _physics_process(delta):
+	# apply gravity
 	velocity.y += -gravity * delta
+	
+	# set speed
+	if is_crouching:
+		speed = crouch_speed
+	else:
+		speed = base_speed
+	
+	# get and apply inputs
 	var input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var movement_dir = transform.basis * Vector3(input.x, 0, input.y)
 	velocity.x = movement_dir.x * speed
@@ -46,13 +66,24 @@ func _process(delta: float) -> void:
 	match state:
 		states.walk:
 			# combat animations
+			var gun = guns[gun_index].get_child(0)
+			var gun_pos_offset = guns[gun_index].position
+			var gun_target_pos: Vector3
 			if Input.is_action_just_pressed("shoot"):
-				animation_player.play("shoot")
+				var tween = create_tween().set_ease(Tween.EASE_OUT)
+				tween.tween_property(gun, "position:z", 0.2, 0.01)
+				tween.tween_property(gun, "position:z", 0, 0.2)
 				shoot.emit()
 			if Input.is_action_pressed("aim"):
-				animation_player.play("ads")
-			if Input.is_action_just_released("aim"):
-				animation_player.play("idle")
+				gun_target_pos.x = -gun_pos_offset.x
+				#gun_target_pos.y = -gun_pos_offset.y
+				#print(gun.get_child(0).mesh.get_aabb().size)
+				Globals.ui.crosshair.hide()
+			else:
+				gun_target_pos.x = 0
+				gun_target_pos.y = 0
+				Globals.ui.crosshair.show()
+			gun.position = lerp(gun_target_pos, gun.position, 30 * delta)
 			
 			# change gun
 			if Input.is_action_just_released("next_gun"):
@@ -64,12 +95,22 @@ func _process(delta: float) -> void:
 			
 			# leaning
 			if is_on_floor():
-				lean_angle = 15.0 * Input.get_axis("lean_right", "lean_left")
+				lean_angle = 20.0 * Input.get_axis("lean_right", "lean_left")
 			else:
 				lean_angle = 0.0
 			rotation_degrees.z = lerp(rotation_degrees.z, lean_angle, 10 * delta)
+			
+			# crouching
+			if Input.is_action_just_pressed("crouch") and is_on_floor():
+				is_crouching = !is_crouching
+			var cam_target_pos = Vector3.ZERO
+			if is_crouching:
+				cam_target_pos = Vector3.DOWN * crouch_height
+			camera.position = lerp(camera.position, cam_target_pos, 10 * delta)
+			
 		states.dead:
 			pass
+	
 	# set crosshair position
 	if muzzel_raycast.is_colliding():
 		var pos = camera.unproject_position(muzzel_raycast.get_collision_point())
@@ -99,6 +140,20 @@ func change_gun(new_index) -> void:
 			firepoint = gun.get_node("Gun/FirePoint")
 			muzzel_raycast = gun.get_node("Gun/FirePoint/RayCast3D")
 			animation_player.play("draw")
+			shoot_component.firepoint = firepoint
+
+
+func use_item(index: int):
+	if items.size() - 1 < index:
+		return
+	var item = items[index]
+	item.use(self)
+	if item.uses <= 0:
+		items.erase(item)
+
+
+func _on_damaged() -> void:
+	hp -= 10
 
 
 func _on_death() -> void:

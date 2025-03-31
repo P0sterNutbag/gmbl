@@ -16,10 +16,14 @@ func _physics_process(delta: float) -> void:
 
 
 func can_see_target() -> bool:
-	#force_raycast_update()
+	# point at target
+	look_at(target.global_position)
+	target_position.z = -global_position.distance_to(target.global_position)
+	# check for collisions
 	var collider = get_collider()
 	if collider:
 		return false
+	# check dot to target
 	var forward = get_parent().global_transform.basis.z.normalized()
 	var to_player = (target.global_transform.origin - get_parent().global_transform.origin).normalized()
 	var dot_product = forward.dot(to_player)

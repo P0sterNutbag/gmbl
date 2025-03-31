@@ -117,10 +117,9 @@ func _physics_process(delta: float) -> void:
 func follow_path():
 	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
 	var new_velocity: Vector3 = global_position.direction_to(next_path_position) * speed
-	#navigation_agent.set_velocity(new_velocity)
 	velocity = new_velocity
 	#if abs(velocity) > Vector3.ZERO:
-		#look_at_position(global_position + velocity)
+	look_at_position(next_path_position)
 
 
 func look_at_position(pos: Vector3):
@@ -130,6 +129,8 @@ func look_at_position(pos: Vector3):
 
 
 func on_noise_heard(noise_position: Vector3):
+	if state != states.attack and state != states.search:
+		state = states.investigate
 	look_at_position(noise_position)
 	navigation_agent.set_target_position(noise_position)
 	await get_tree().create_timer(1).timeout
@@ -150,7 +151,7 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 	if state == states.idle:
 		path_index = wrap(path_index + 1, 0, get_parent().curve.point_count)
 		print("path point reached")
-	elif state == states.investigate:
+	elif state == states.search:
 		state = states.idle
 		print("target not found, return to idle")
 

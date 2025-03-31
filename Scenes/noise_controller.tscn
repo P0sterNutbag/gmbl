@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://p1limlnykapp"]
+
+[ext_resource type="Script" uid="uid://cv5x788yivrae" path="res://Scripts/noise_controller.gd" id="1_sll3y"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4jgi2"]
+radius = 1.5
+
+[node name="NoiseController" type="Node3D"]
+script = ExtResource("1_sll3y")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_4jgi2")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

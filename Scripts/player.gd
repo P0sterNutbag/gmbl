@@ -27,6 +27,7 @@ var bullet = preload("res://Scenes/bullet.tscn")
 @onready var animation_player = $CameraAnchor/Camera3D/Pistol/AnimationPlayer
 @onready var muzzel_raycast  = $CameraAnchor/Camera3D/Pistol/Gun/FirePoint/RayCast3D
 @onready var shoot_component: Node = $ShootComponent
+@onready var step_timer: Timer = $StepTimer
 @onready var guns = [pistol, rifle]
 signal shoot
 
@@ -65,26 +66,6 @@ func _physics_process(delta):
 func _process(delta: float) -> void:
 	match state:
 		states.walk:
-			# combat animations
-			var gun = guns[gun_index].get_child(0)
-			var gun_pos_offset = guns[gun_index].position
-			var gun_target_pos: Vector3
-			if Input.is_action_just_pressed("shoot"):
-				var tween = create_tween().set_ease(Tween.EASE_OUT)
-				tween.tween_property(gun, "position:z", 0.2, 0.01)
-				tween.tween_property(gun, "position:z", 0, 0.2)
-				shoot.emit()
-			if Input.is_action_pressed("aim"):
-				gun_target_pos.x = -gun_pos_offset.x
-				#gun_target_pos.y = -gun_pos_offset.y
-				#print(gun.get_child(0).mesh.get_aabb().size)
-				Globals.ui.crosshair.hide()
-			else:
-				gun_target_pos.x = 0
-				gun_target_pos.y = 0
-				Globals.ui.crosshair.show()
-			gun.position = lerp(gun_target_pos, gun.position, 30 * delta)
-			
 			# change gun
 			if Input.is_action_just_released("next_gun"):
 				gun_index = wrap(gun_index - 1, 0, guns.size())
@@ -107,6 +88,33 @@ func _process(delta: float) -> void:
 			if is_crouching:
 				cam_target_pos = Vector3.DOWN * crouch_height
 			camera.position = lerp(camera.position, cam_target_pos, 10 * delta)
+			
+			# noise
+			if abs(velocity) > Vector3.ZERO and is_on_floor() and !is_crouching:
+				if step_timer.time_left <= 0:
+					step_noise_event()
+					step_timer.start()
+			
+			# combat animations
+			var gun = guns[gun_index].get_child(0)
+			var gun_pos_offset = guns[gun_index].position
+			var gun_target_pos: Vector3
+			if Input.is_action_just_pressed("shoot"):
+				var tween = create_tween().set_ease(Tween.EASE_OUT)
+				tween.tween_property(gun, "position:z", 0.2, 0.01)
+				tween.tween_property(gun, "position:z", 0, 0.2)
+				shoot.emit()
+				Globals.noise_controller.create_noise_event(firepoint.global_position, 30)
+			if Input.is_action_pressed("aim"):
+				gun_target_pos.x = -gun_pos_offset.x
+				#gun_target_pos.y = -gun_pos_offset.y
+				#print(gun.get_child(0).mesh.get_aabb().size)
+				Globals.ui.crosshair.hide()
+			else:
+				gun_target_pos.x = 0
+				gun_target_pos.y = 0
+				Globals.ui.crosshair.show()
+			gun.position = lerp(gun_target_pos, gun.position, 30 * delta)
 			
 		states.dead:
 			pass
@@ -152,9 +160,17 @@ func use_item(index: int):
 		items.erase(item)
 
 
+func step_noise_event():
+	Globals.noise_controller.create_noise_event(global_position)
+
+
 func _on_damaged() -> void:
 	hp -= 10
 
 
 func _on_death() -> void:
 	state = states.dead
+
+#
+#func _on_step_timer_timeout() -> void:
+	#step_noise_event()

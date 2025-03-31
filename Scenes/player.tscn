@@ -54,6 +54,17 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, -0.207, 0.05, 0.1, 0.2, 1, -0.207, 0.05, 0)
 
+[sub_resource type="Animation" id="Animation_f1ek2"]
+resource_name = "ads_shoot"
+step = 0.05
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -0.207, 0.05, 0)
+
 [sub_resource type="Animation" id="Animation_d0tnu"]
 resource_name = "draw"
 length = 0.5
@@ -101,17 +112,6 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0.1, 0.1, 1, 0, 0, 0)
-
-[sub_resource type="Animation" id="Animation_f1ek2"]
-resource_name = "ads_shoot"
-step = 0.05
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("..")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, -0.207, 0.05, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sinfg"]
 _data = {
@@ -233,3 +233,9 @@ libraries = {
 script = ExtResource("7_f1ek2")
 bullet_stats = SubResource("Resource_pu2lt")
 firepoint = NodePath("../CameraAnchor/Camera3D/Pistol/Gun/FirePoint")
+
+[node name="StepTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="StepTimer" to="." method="_on_step_timer_timeout"]

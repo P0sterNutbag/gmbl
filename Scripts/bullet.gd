@@ -32,7 +32,6 @@ func _physics_process(delta: float) -> void:
 
 func hit():
 	# damage collider if enemy
-	print("hit")
 	var collider = raycast.get_collider()
 	var health_comp = collider.get_parent()
 	if collider is HealthComponent:
@@ -40,7 +39,6 @@ func hit():
 		queue_free()
 		return
 	# create hitmark
-	print("hitmarker")
 	var inst = bullet_stats.hitmarker.instantiate()
 	collider.add_child(inst)
 	inst.global_position = raycast.get_collision_point()

@@ -1,11 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://dp33y25ncdla5"]
+[gd_scene load_steps=20 format=3 uid="uid://dp33y25ncdla5"]
 
 [ext_resource type="Script" uid="uid://cl7b5tsk5cpy3" path="res://Scripts/ui.gd" id="2_adtv2"]
 [ext_resource type="PackedScene" uid="uid://c055smn111au7" path="res://Scenes/player.tscn" id="2_evir0"]
 [ext_resource type="Texture2D" uid="uid://dl55u8tb3x34h" path="res://Art/Sprites/crosshair007.png" id="2_rmtha"]
+[ext_resource type="Texture2D" uid="uid://hkv1jj2wvtml" path="res://Art/Textures/crosshair_point.png" id="4_k7acu"]
 [ext_resource type="Texture2D" uid="uid://c5vubp6usyq24" path="res://Art/Textures/sand.png" id="5_5v1tr"]
-[ext_resource type="PackedScene" path="res://Scenes/noise_controller.tscn" id="6_5ukr8"]
+[ext_resource type="PackedScene" uid="uid://p1limlnykapp" path="res://Scenes/noise_controller.tscn" id="6_5ukr8"]
+[ext_resource type="PackedScene" uid="uid://bffx37qlpw3cf" path="res://Scenes/pistol_ammo.tscn" id="7_o06y3"]
 [ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/enemy.tscn" id="8_k7acu"]
+[ext_resource type="PackedScene" uid="uid://cpukmt08k1x77" path="res://Scenes/rifle_ammo.tscn" id="9_5v1tr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k7acu"]
 
@@ -41,7 +44,7 @@ data = PackedVector3Array(-1.5, 1.5, 1.5, 1.5, 1.5, 1.5, -1.5, -1.5, 1.5, 1.5, 1
 [sub_resource type="Curve3D" id="Curve3D_5ukr8"]
 closed = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, -10, 0, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, -45, 0, 0),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -99,6 +102,20 @@ offset_bottom = 43.0
 max_value = 1.0
 value = 1.0
 
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_k7acu")
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_fo5ed")
 
@@ -139,9 +156,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.804)
 curve = SubResource("Curve3D_5ukr8")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5, 1, 0)
 progress = 10.0
 v_offset = 1.0
 
 [node name="Enemy" parent="Path3D" instance=ExtResource("8_k7acu")]
 transform = Transform3D(-0.043968, 0, -0.999033, 0, 1, 0, 0.999033, 0, -0.043968, 0, 1, 0)
+
+[node name="PistolAmmo" parent="." instance=ExtResource("7_o06y3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09968, 0.0500005, -11.4456)
+
+[node name="PistolAmmo2" parent="." instance=ExtResource("7_o06y3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.562849, 0.0499995, -11.0536)
+
+[node name="PistolAmmo3" parent="." instance=ExtResource("7_o06y3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27705, 0.05, -11.5602)
+
+[node name="RifleAmmo" parent="." instance=ExtResource("9_5v1tr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.768289, 0.0500002, -11.8201)
+
+[node name="RifleAmmo2" parent="." instance=ExtResource("9_5v1tr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.624185, 0.0500005, -11.5758)
+
+[node name="RifleAmmo3" parent="." instance=ExtResource("9_5v1tr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.52644, 0.05, -12.0423)

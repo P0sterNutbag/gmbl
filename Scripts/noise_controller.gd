@@ -19,7 +19,7 @@ func create_noise_event(event_position: Vector3, event_radius: float = 10):
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.has_method("on_noise_heard"):
-		body.on_noise_heard(global_position)
+		body.on_noise_heard(area_3d.global_position)
 
 
 func _on_timer_timeout() -> void:

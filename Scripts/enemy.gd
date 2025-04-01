@@ -2,7 +2,8 @@ extends CharacterBody3D
 
 enum states {idle, investigate, attack, search}
 var state = states.idle
-var speed := 1.5
+var walk_speed := 1.5
+var run_speed := 3.0
 var time_to_detect_max := 1.5
 var time_to_detect: float = time_to_detect_max
 var range := 100
@@ -13,6 +14,7 @@ var target: Node3D
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var anim_player: AnimationPlayer = $EnemyModel/AnimationPlayer
 @onready var return_to_idle_timer: Timer = $ReturnToIdleTimer
+@onready var path_wait_timer: Timer = $PathWaitTimer
 signal shoot
 
 
@@ -31,23 +33,14 @@ func _physics_process(delta: float) -> void:
 				if navigation_agent.target_position != next_point:
 					navigation_agent.set_target_position(next_point)
 				follow_path()
-				print("following path")
-			#if parent is PathFollow3D:
-				#if abs(position) > Vector3.ONE:
-					#navigation_agent.set_target_position(parent.global_position)
-					#follow_path()
-					#print("returning to path")
-				#else:
-					#parent.progress -= speed * delta
-					#print("following path")
-			
+
 			# switch to investigate
 			if detection.can_see_target():
 				state = states.investigate
 				time_to_detect = time_to_detect_max
 				print("target spotted")
 			
-			# animated
+			# animate
 			if velocity == Vector3.ZERO:
 				anim_player.play("Idle")
 			else:
@@ -56,6 +49,7 @@ func _physics_process(delta: float) -> void:
 		states.investigate:
 			# stop moving
 			velocity = Vector3.ZERO
+			print("investigating")
 			
 			# detect player
 			if detection.can_see_target():
@@ -74,11 +68,12 @@ func _physics_process(delta: float) -> void:
 		states.attack:
 			# look at player
 			look_at_position(target.global_position)
+			firepoint.look_at(target.global_position + Vector3.UP * 0.25)
 			
 			# get into range
 			if global_position.distance_to(target.global_position) > range:
 				navigation_agent.set_target_position(target.global_position)
-				follow_path()
+				follow_path(run_speed)
 			else:
 				velocity = Vector3.ZERO
 			
@@ -96,7 +91,7 @@ func _physics_process(delta: float) -> void:
 			
 		states.search:
 			# go to last seen position
-			follow_path()
+			follow_path(run_speed)
 			print("searching")
 			
 			# return to attack
@@ -114,11 +109,14 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func follow_path():
+func follow_path(speed: float = walk_speed):
 	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
+	next_path_position.y = global_position.y
+	if global_position.distance_to(next_path_position) < 0.1:
+		velocity = Vector3.ZERO
+		return
 	var new_velocity: Vector3 = global_position.direction_to(next_path_position) * speed
 	velocity = new_velocity
-	#if abs(velocity) > Vector3.ZERO:
 	look_at_position(next_path_position)
 
 
@@ -149,7 +147,7 @@ func _on_death() -> void:
 
 func _on_navigation_agent_3d_navigation_finished() -> void:
 	if state == states.idle:
-		path_index = wrap(path_index + 1, 0, get_parent().curve.point_count)
+		path_wait_timer.start()
 		print("path point reached")
 	elif state == states.search:
 		state = states.idle
@@ -159,3 +157,7 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 func _on_return_to_idle_timer_timeout() -> void:
 	if state == states.investigate and !detection.can_see_player():
 		state = "idle"
+
+
+func _on_path_wait_timer_timeout() -> void:
+	path_index = wrap(path_index + 1, 0, get_parent().curve.point_count)

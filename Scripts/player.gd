@@ -2,7 +2,9 @@ extends CharacterBody3D
 class_name Player
 
 enum states {walk, dead}
+enum zoom_levels {regular, ads, zoom}
 var state = states.walk
+var camera_zoom = zoom_levels.regular
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var max_hp := 100.0
 var hp := max_hp: 
@@ -17,8 +19,11 @@ var mouse_sensitivity := 0.004
 var lean_angle := 0.0
 var gun_index := 0
 var crouch_height := 1.0
+var target_fov := 75.0
+var shoot_timer := 0.0
 var is_crouching: bool
 var firepoint: Node3D
+var ammo: Array
 @export var items: Array[Item]
 var bullet = preload("res://Scenes/bullet.tscn")
 @onready var camera = $CameraAnchor/Camera3D
@@ -28,6 +33,7 @@ var bullet = preload("res://Scenes/bullet.tscn")
 @onready var muzzel_raycast  = $CameraAnchor/Camera3D/Pistol/Gun/FirePoint/RayCast3D
 @onready var shoot_component: Node = $ShootComponent
 @onready var step_timer: Timer = $StepTimer
+@onready var interact_cast: RayCast3D = $CameraAnchor/Camera3D/RayCast3D
 @onready var guns = [pistol, rifle]
 signal shoot
 
@@ -95,26 +101,68 @@ func _process(delta: float) -> void:
 					step_noise_event()
 					step_timer.start()
 			
-			# combat animations
-			var gun = guns[gun_index].get_child(0)
-			var gun_pos_offset = guns[gun_index].position
+			# gun things
+			var gun = guns[gun_index]
+			var gun_model = gun.get_child(0)
+			var gun_pos_offset = gun.position
 			var gun_target_pos: Vector3
-			if Input.is_action_just_pressed("shoot"):
+			if Input.is_action_pressed("shoot"):
+				if gun.ammo <= 0 or !gun.can_shoot:
+					return
 				var tween = create_tween().set_ease(Tween.EASE_OUT)
-				tween.tween_property(gun, "position:z", 0.2, 0.01)
-				tween.tween_property(gun, "position:z", 0, 0.2)
+				tween.tween_property(gun_model, "position:z", 0.2, 0.01)
+				tween.tween_property(gun_model, "position:z", 0, 0.2)
 				shoot.emit()
+				gun._on_shoot()
 				Globals.noise_controller.create_noise_event(firepoint.global_position, 30)
 			if Input.is_action_pressed("aim"):
 				gun_target_pos.x = -gun_pos_offset.x
+				camera_zoom = zoom_levels.ads
 				#gun_target_pos.y = -gun_pos_offset.y
 				#print(gun.get_child(0).mesh.get_aabb().size)
 				Globals.ui.crosshair.hide()
 			else:
 				gun_target_pos.x = 0
 				gun_target_pos.y = 0
+				camera_zoom = zoom_levels.regular
 				Globals.ui.crosshair.show()
-			gun.position = lerp(gun_target_pos, gun.position, 30 * delta)
+			gun_model.position = lerp(gun_target_pos, gun_model.position, 30 * delta)
+			
+			# reload
+			if Input.is_action_just_pressed("reload"):
+				var ammo = find_item(gun.ammo_type)
+				if !ammo:
+					return
+				var tween = create_tween()
+				tween.tween_property(gun_model, "position:y", -1, 0.25)
+				tween.tween_callback(use_item.bind("", ammo, gun))
+				tween.tween_property(gun_model, "position:y", 0, 0.25)
+				#await tween.finished
+				#use_item(gun.ammo_type, gun)
+			
+			# interact
+			if Input.is_action_just_pressed("interact"):
+				var collider = interact_cast.get_collider()
+				if !collider:
+					return
+				collider = collider.get_parent()
+				if collider is ItemPickup:
+					collider.pickup(self)
+			
+			# camera zoom
+			if Input.is_action_pressed("camera_zoom"):
+				camera_zoom = zoom_levels.zoom
+			match (camera_zoom):
+				zoom_levels.regular:
+					target_fov = 75
+					mouse_sensitivity = 0.004
+				zoom_levels.ads:
+					target_fov = 50
+					mouse_sensitivity = 0.002
+				zoom_levels.zoom:
+					target_fov = 10
+					mouse_sensitivity = 0.0005
+			camera.fov = lerp(camera.fov, target_fov, 30 * delta)
 			
 		states.dead:
 			pass
@@ -151,13 +199,24 @@ func change_gun(new_index) -> void:
 			shoot_component.firepoint = firepoint
 
 
-func use_item(index: int):
-	if items.size() - 1 < index:
+func use_item(item_name: String, item_id = null, target: Node = self):
+	var item
+	if item_id:
+		item = item_id
+	else:
+		item = find_item(item_name)
+	if item == null:
 		return
-	var item = items[index]
-	item.use(self)
+	item.use(target)
 	if item.uses <= 0:
 		items.erase(item)
+
+
+func find_item(item_name: String) -> Resource:
+	for i in items:
+		if i.resource_name == item_name:
+			return i
+	return null
 
 
 func step_noise_event():

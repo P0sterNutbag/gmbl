@@ -1,11 +1,13 @@
-[gd_scene load_steps=25 format=3 uid="uid://c055smn111au7"]
+[gd_scene load_steps=29 format=3 uid="uid://c055smn111au7"]
 
 [ext_resource type="Script" uid="uid://cslnx4rw32guw" path="res://Scripts/player.gd" id="1_5kxbm"]
 [ext_resource type="Script" uid="uid://2qhh6s86pakx" path="res://Scripts/item.gd" id="2_8erm5"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_x3wgy"]
 [ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="3_f1ek2"]
 [ext_resource type="PackedScene" uid="uid://cimrwcadyyj40" path="res://Art/Models/AssaultRifle_2.fbx" id="4_bwiei"]
+[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/pistol_ammo.tres" id="4_gymyn"]
 [ext_resource type="PackedScene" uid="uid://dbil1poy7mmp1" path="res://Art/Models/Pistol_1.fbx" id="5_80uax"]
+[ext_resource type="Script" uid="uid://bxtm0qbrn1i2u" path="res://Scripts/gun.gd" id="5_tx1dd"]
 [ext_resource type="Script" uid="uid://ccu856f1csrwx" path="res://Scripts/shoot_component.gd" id="7_f1ek2"]
 [ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/hitmarker.tscn" id="8_tx1dd"]
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="9_gymyn"]
@@ -28,6 +30,21 @@ metadata/_custom_type_script = "uid://2qhh6s86pakx"
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kgvud"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3smsa"]
+
+[sub_resource type="Resource" id="Resource_gymyn"]
+script = ExtResource("9_gymyn")
+speed = 250.0
+max_drop_speed = 3.0
+min_drop_speed = 0.0
+drop_speed = 0.0
+damage = 1.0
+h_angle_variance = 0.0
+v_angle_variance = 0.0
+is_hitscan = true
+bullet_drop = true
+collision_mask = 3
+hitmarker = ExtResource("8_tx1dd")
+metadata/_custom_type_script = "uid://c338ifvm4duar"
 
 [sub_resource type="SphereMesh" id="SphereMesh_fkybt"]
 
@@ -124,6 +141,21 @@ _data = {
 &"shoot": SubResource("Animation_tlgva")
 }
 
+[sub_resource type="Resource" id="Resource_ukyrk"]
+script = ExtResource("9_gymyn")
+speed = 250.0
+max_drop_speed = 3.0
+min_drop_speed = 0.0
+drop_speed = 0.0
+damage = 1.0
+h_angle_variance = 10.0
+v_angle_variance = 10.0
+is_hitscan = true
+bullet_drop = true
+collision_mask = 3
+hitmarker = ExtResource("8_tx1dd")
+metadata/_custom_type_script = "uid://c338ifvm4duar"
+
 [sub_resource type="Resource" id="Resource_pu2lt"]
 script = ExtResource("9_gymyn")
 speed = 250.0
@@ -131,6 +163,8 @@ max_drop_speed = 3.0
 min_drop_speed = 0.0
 drop_speed = 0.0
 damage = 1.0
+h_angle_variance = 0.0
+v_angle_variance = 0.0
 is_hitscan = true
 bullet_drop = true
 collision_mask = 3
@@ -140,7 +174,7 @@ metadata/_custom_type_script = "uid://c338ifvm4duar"
 [node name="CharacterBody3D" type="CharacterBody3D"]
 collision_layer = 0
 script = ExtResource("1_5kxbm")
-items = Array[ExtResource("2_8erm5")]([SubResource("Resource_f1ek2")])
+items = Array[ExtResource("2_8erm5")]([SubResource("Resource_f1ek2"), ExtResource("4_gymyn")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -164,6 +198,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63204, 0)
 
 [node name="AssaultRifle" type="Node3D" parent="CameraAnchor/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0932082, -0.227498, -0.151671)
+script = ExtResource("5_tx1dd")
+bullet_stats = SubResource("Resource_gymyn")
+ammo_type = "rifle_ammo"
+fire_type = 1
+fire_timer = 0.1
 
 [node name="Gun" parent="CameraAnchor/Camera3D/AssaultRifle" instance=ExtResource("4_bwiei")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
@@ -201,6 +240,9 @@ libraries = {
 [node name="Pistol" type="Node3D" parent="CameraAnchor/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.300252, -0.2427, -0.409018)
 visible = false
+script = ExtResource("5_tx1dd")
+bullet_stats = SubResource("Resource_ukyrk")
+ammo_type = "pistol_ammo"
 
 [node name="Gun" parent="CameraAnchor/Camera3D/Pistol" instance=ExtResource("5_80uax")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
@@ -228,6 +270,13 @@ root_node = NodePath("../Gun")
 libraries = {
 &"": SubResource("AnimationLibrary_sinfg")
 }
+
+[node name="RayCast3D" type="RayCast3D" parent="CameraAnchor/Camera3D"]
+target_position = Vector3(0, 0, -2.5)
+collision_mask = 16
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="ShootComponent" type="Node" parent="." node_paths=PackedStringArray("firepoint")]
 script = ExtResource("7_f1ek2")

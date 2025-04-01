@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://6vfmilbkneur"]
+
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="1_w6gb4"]
+[ext_resource type="Script" uid="uid://2qhh6s86pakx" path="res://Scripts/item.gd" id="2_jh4mt"]
+
+[sub_resource type="Resource" id="Resource_w6gb4"]
+script = ExtResource("1_w6gb4")
+values = ["ammo", 12]
+multiply = false
+add = false
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[resource]
+resource_name = "pistol_ammo"
+script = ExtResource("2_jh4mt")
+effects = Array[ExtResource("1_w6gb4")]([SubResource("Resource_w6gb4")])
+multiply = false
+add = false
+uses = 0
+metadata/_custom_type_script = "uid://2qhh6s86pakx"

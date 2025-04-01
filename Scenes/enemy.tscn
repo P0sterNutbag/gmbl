@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ba01kvx1jag3c" path="res://Scripts/enemy.gd" id="1_1f0kj"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_afpow"]
-[ext_resource type="PackedScene" path="res://Art/Models/enemy_model.tscn" id="2_haro7"]
+[ext_resource type="PackedScene" uid="uid://d5w6yrf03c0w" path="res://Art/Models/enemy_model.tscn" id="2_haro7"]
 [ext_resource type="Script" uid="uid://ccu856f1csrwx" path="res://Scripts/shoot_component.gd" id="3_afpow"]
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="5_ghaa6"]
 [ext_resource type="Script" uid="uid://but6ijlpfowbx" path="res://Scripts/detection_component.gd" id="6_ghaa6"]
@@ -31,6 +31,8 @@ max_drop_speed = 0.0
 min_drop_speed = 0.0
 drop_speed = 0.0
 damage = 1.0
+h_angle_variance = 1.0
+v_angle_variance = 1.0
 is_hitscan = false
 bullet_drop = true
 collision_mask = 4
@@ -48,7 +50,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1,
 transform = Transform3D(-0.389447, 0.743709, -0.543348, 0.435632, 0.668501, 0.60277, 0.811514, -0.00195316, -0.584329, -20.8788, 37.7992, -124.064)
 
 [node name="AssaultRifle_3" parent="EnemyModel/Armature/Skeleton3D/BoneAttachment3D" index="0"]
-transform = Transform3D(72.3924, -100.375, -34.9572, 34.825, 62.3596, -106.941, 100.422, 50.7332, 62.2857, 0, 0, 0)
+transform = Transform3D(72.3924, -100.375, -34.9573, 34.825, 62.3596, -106.941, 100.422, 50.7332, 62.2858, 0, 0, 0)
 
 [node name="BoneAttachment3D2" parent="EnemyModel/Armature/Skeleton3D" index="2"]
 transform = Transform3D(0.787284, -0.344946, -0.511073, 0.174802, 0.919727, -0.351492, 0.591294, 0.187387, 0.784383, 29.7848, 47.2281, -114.311)
@@ -87,9 +89,13 @@ firepoint = NodePath("../EnemyModel/Armature/Skeleton3D/BoneAttachment3D/Assault
 [node name="ReturnToIdleTimer" type="Timer" parent="."]
 wait_time = 5.0
 
+[node name="PathWaitTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="animation_finished" from="EnemyModel/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]
 [connection signal="timeout" from="ReturnToIdleTimer" to="." method="_on_return_to_idle_timer_timeout"]
+[connection signal="timeout" from="PathWaitTimer" to="." method="_on_path_wait_timer_timeout"]
 
 [editable path="EnemyModel"]
 [editable path="EnemyModel/Armature/Skeleton3D/BoneAttachment3D/AssaultRifle_3"]

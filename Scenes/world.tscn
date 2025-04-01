@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://hkv1jj2wvtml" path="res://Art/Textures/crosshair_point.png" id="4_k7acu"]
 [ext_resource type="Texture2D" uid="uid://c5vubp6usyq24" path="res://Art/Textures/sand.png" id="5_5v1tr"]
 [ext_resource type="PackedScene" uid="uid://p1limlnykapp" path="res://Scenes/noise_controller.tscn" id="6_5ukr8"]
-[ext_resource type="PackedScene" uid="uid://bffx37qlpw3cf" path="res://Scenes/pistol_ammo.tscn" id="7_o06y3"]
+[ext_resource type="PackedScene" path="res://Scenes/pistol_ammo.tscn" id="7_o06y3"]
 [ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/enemy.tscn" id="8_k7acu"]
-[ext_resource type="PackedScene" uid="uid://cpukmt08k1x77" path="res://Scenes/rifle_ammo.tscn" id="9_5v1tr"]
+[ext_resource type="PackedScene" path="res://Scenes/rifle_ammo.tscn" id="9_5v1tr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k7acu"]
 
@@ -64,6 +64,9 @@ directional_shadow_max_distance = 0.4
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_evir0")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.576142, -12.917)
 
+[node name="Hitbox" parent="CharacterBody3D" index="1" node_paths=PackedStringArray("hp_bar")]
+hp_bar = NodePath("../../CanvasLayer/ProgressBar")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource("2_adtv2")
 
@@ -115,6 +118,24 @@ offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_k7acu")
+
+[node name="HitEffect" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/HitEffect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.427451)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_fo5ed")
@@ -180,3 +201,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.624185, 0.0500005, -11.575
 
 [node name="RifleAmmo3" parent="." instance=ExtResource("9_5v1tr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.52644, 0.05, -12.0423)
+
+[editable path="CharacterBody3D"]

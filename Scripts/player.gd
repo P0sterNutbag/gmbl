@@ -1,16 +1,12 @@
 extends CharacterBody3D
 class_name Player
 
+@export var items: Array[Item]
 enum states {walk, dead}
 enum zoom_levels {regular, ads, zoom}
 var state = states.walk
 var camera_zoom = zoom_levels.regular
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var max_hp := 100.0
-var hp := max_hp: 
-	set(value):
-		hp = value
-		Globals.ui.player_hp_bar.value = (hp / max_hp)
 var base_speed := 8.0
 var crouch_speed := 3.0
 var speed = base_speed
@@ -20,11 +16,9 @@ var lean_angle := 0.0
 var gun_index := 0
 var crouch_height := 1.0
 var target_fov := 75.0
-var shoot_timer := 0.0
 var is_crouching: bool
 var firepoint: Node3D
 var ammo: Array
-@export var items: Array[Item]
 var bullet = preload("res://Scenes/bullet.tscn")
 @onready var camera = $CameraAnchor/Camera3D
 @onready var pistol = $CameraAnchor/Camera3D/Pistol
@@ -51,22 +45,28 @@ func _physics_process(delta):
 	# apply gravity
 	velocity.y += -gravity * delta
 	
-	# set speed
-	if is_crouching:
-		speed = crouch_speed
-	else:
-		speed = base_speed
-	
-	# get and apply inputs
-	var input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var movement_dir = transform.basis * Vector3(input.x, 0, input.y)
-	velocity.x = movement_dir.x * speed
-	velocity.z = movement_dir.z * speed
-
-	move_and_slide()
-	
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
-		velocity.y = jump_speed
+	match state:
+		states.walk:
+			# set speed
+			if is_crouching:
+				speed = crouch_speed
+			else:
+				speed = base_speed
+			
+			# get and apply inputs
+			var input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+			var movement_dir = transform.basis * Vector3(input.x, 0, input.y)
+			velocity.x = movement_dir.x * speed
+			velocity.z = movement_dir.z * speed
+			
+			move_and_slide()
+			
+			# jump
+			if is_on_floor() and Input.is_action_just_pressed("jump"):
+				velocity.y = jump_speed
+			
+		states.dead:
+			pass
 
 
 func _process(delta: float) -> void:
@@ -176,6 +176,8 @@ func _process(delta: float) -> void:
 
 
 func _input(event):
+	if state == states.dead:
+		return
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		camera.rotate_x(-event.relative.y * mouse_sensitivity)
@@ -224,11 +226,15 @@ func step_noise_event():
 
 
 func _on_damaged() -> void:
-	hp -= 10
+	Globals.ui.play_hit_effect()
 
 
 func _on_death() -> void:
 	state = states.dead
+	var tween = create_tween().set_ease(Tween.EASE_OUT)
+	tween.tween_property(camera, "position:y", -1, 0.5)
+	tween.tween_property(camera, "rotation:z", deg_to_rad(45), 1)
+	tween.tween_callback(get_tree().reload_current_scene)
 
 #
 #func _on_step_timer_timeout() -> void:

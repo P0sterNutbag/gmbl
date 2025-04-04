@@ -33,10 +33,18 @@ script/source = "@tool
 extends Node3D
 
 @export var point_at: Node3D
-
+@export var ammo := 12
+var max_ammo = ammo
 
 func _process(delta: float) -> void:
 	look_at(point_at.global_position)
+
+
+func _on_shoot():
+	ammo -= 1
+	if ammo <= 0:
+		await get_tree().create_timer(2).timeout
+		ammo = max_ammo
 "
 
 [node name="man" instance=ExtResource("1_3oudn")]

@@ -5,8 +5,11 @@ extends Node
 enum fire_types {semi_auto, auto}
 @export var fire_type: fire_types
 @export var fire_timer: float
-var ammo: int
+@export var zoom_amount: float = 1.25
+var ammo: int = 10
+var time_since_shot: float
 var can_shoot: bool = true
+var has_released: bool = true
 var shoot_timer: Timer
 
 
@@ -19,14 +22,19 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_released("shoot"):
-		if fire_type == fire_types.semi_auto:
+	time_since_shot += delta
+	if fire_type == fire_types.semi_auto:
+		if has_released and time_since_shot > fire_timer:
 			can_shoot = true
+	if Input.is_action_just_released("shoot"):
+		has_released = true
 
 
 func _on_shoot() -> void:
 	ammo -= 1
 	can_shoot = false
+	has_released = false
+	time_since_shot = 0
 	shoot_timer.start()
 
 

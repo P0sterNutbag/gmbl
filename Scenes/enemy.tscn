@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cb05x24r4r8im"]
+[gd_scene load_steps=13 format=3 uid="uid://cb05x24r4r8im"]
 
 [ext_resource type="Script" uid="uid://ba01kvx1jag3c" path="res://Scripts/enemy.gd" id="1_1f0kj"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_afpow"]
 [ext_resource type="PackedScene" uid="uid://d5w6yrf03c0w" path="res://Art/Models/enemy_model.tscn" id="2_haro7"]
 [ext_resource type="Script" uid="uid://ccu856f1csrwx" path="res://Scripts/shoot_component.gd" id="3_afpow"]
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="5_ghaa6"]
+[ext_resource type="PackedScene" uid="uid://cwq84n8f24jwt" path="res://Scenes/Bullets/bullet.tscn" id="6_8uf12"]
 [ext_resource type="Script" uid="uid://but6ijlpfowbx" path="res://Scripts/detection_component.gd" id="6_ghaa6"]
 [ext_resource type="Texture2D" uid="uid://blri7djde63q7" path="res://Art/Textures/bullet hole.png" id="6_po0sg"]
 [ext_resource type="Script" uid="uid://b1e6c1crno50r" path="res://Scripts/fade_them_destroy.gd" id="7_haro7"]
@@ -26,6 +27,8 @@ _bundled = {
 
 [sub_resource type="Resource" id="Resource_po0sg"]
 script = ExtResource("5_ghaa6")
+bullet_scene = ExtResource("6_8uf12")
+amount = 1
 speed = 50.0
 max_drop_speed = 0.0
 min_drop_speed = 0.0
@@ -39,52 +42,22 @@ collision_mask = 4
 hitmarker = SubResource("PackedScene_56vhr")
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
-[node name="Enemy" type="CharacterBody3D"]
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("gun")]
 collision_layer = 2
 script = ExtResource("1_1f0kj")
+gun = NodePath("EnemyModel/Armature/Skeleton3D/BoneAttachment3D/AssaultRifle_3")
 
 [node name="EnemyModel" parent="." instance=ExtResource("2_haro7")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1, 0)
 
-[node name="Skeleton3D" parent="EnemyModel/Armature" index="0"]
-bones/0/position = Vector3(-0.52949, -0.478623, -97.7516)
-bones/0/rotation = Quaternion(-0.49958, -0.470995, 0.56086, 0.462622)
-bones/1/rotation = Quaternion(-0.0155069, 0.0185002, -0.0478826, 0.998561)
-bones/2/rotation = Quaternion(-0.00608789, 0.00646886, -0.012955, 0.999877)
-bones/3/rotation = Quaternion(-0.00598218, 0.00649159, -0.0129067, 0.999878)
-bones/4/position = Vector3(5.93797e-07, 19.5506, 7.4504e-09)
-bones/4/rotation = Quaternion(0.0151239, 0.0464663, -0.0192666, 0.99862)
-bones/5/position = Vector3(0.677419, 12.7266, -2.53319e-07)
-bones/5/rotation = Quaternion(0.0189558, -0.0933871, -0.0267291, 0.995091)
-bones/6/position = Vector3(2.11029, 39.6457, 1.07288e-06)
-bones/7/rotation = Quaternion(-0.183905, -0.532168, 0.815611, -0.133246)
-bones/8/position = Vector3(3.02092e-07, 18.6485, -4.35302e-06)
-bones/8/rotation = Quaternion(0.269967, 0.146047, 0.0462951, 0.950603)
-bones/9/position = Vector3(-2.44548e-06, 37.9717, 5.02514e-06)
-bones/9/rotation = Quaternion(-0.184243, 0.0122028, 0.594859, 0.782335)
-bones/10/position = Vector3(1.81794e-06, 33.0781, -4.41074e-06)
-bones/11/rotation = Quaternion(0.786471, 0.0928283, -0.133424, 0.595856)
-bones/12/position = Vector3(-9.67329e-07, 18.4057, -6.30872e-06)
-bones/12/rotation = Quaternion(0.156876, 0.925762, 0.304621, 0.159876)
-bones/13/rotation = Quaternion(0.0061769, 0.000159353, 0.753721, 0.657166)
-bones/14/position = Vector3(2.89091e-06, 33.0673, 8.39165e-06)
-bones/15/rotation = Quaternion(0.106613, -0.0361114, 0.992862, -0.0394385)
-bones/16/rotation = Quaternion(-0.0147018, -0.0636254, -0.084559, 0.994276)
-bones/17/rotation = Quaternion(0.348282, -0.58491, 0.219542, 0.698843)
-bones/18/rotation = Quaternion(0.346641, 0.13808, -0.0516702, 0.926339)
-bones/20/rotation = Quaternion(-0.138042, 0.0489855, 0.987798, 0.0529164)
-bones/21/rotation = Quaternion(0.0400459, 0.0725452, -0.198547, 0.976582)
-bones/22/rotation = Quaternion(0.367241, -0.599729, 0.469524, 0.53386)
-bones/23/rotation = Quaternion(0.364226, -0.146218, 0.048148, 0.9185)
-
 [node name="BoneAttachment3D" parent="EnemyModel/Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.389449, 0.743708, -0.543348, 0.435632, 0.668501, 0.602769, 0.811514, -0.00195206, -0.58433, -20.8789, 37.7991, -124.064)
+transform = Transform3D(-0.389447, 0.743709, -0.543348, 0.435632, 0.668501, 0.60277, 0.811514, -0.00195316, -0.584329, -20.8788, 37.7992, -124.064)
 
 [node name="AssaultRifle_3" parent="EnemyModel/Armature/Skeleton3D/BoneAttachment3D" index="0"]
-transform = Transform3D(72.3925, -100.375, -34.957, 34.8249, 62.3593, -106.941, 100.422, 50.7334, 62.2857, 0, 0, 0)
+transform = Transform3D(72.3925, -100.375, -34.9572, 34.825, 62.3595, -106.941, 100.422, 50.7331, 62.2857, 0, 0, 0)
 
 [node name="BoneAttachment3D2" parent="EnemyModel/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.787283, -0.344948, -0.511074, 0.174804, 0.919727, -0.351491, 0.591294, 0.187385, 0.784384, 29.7847, 47.2281, -114.311)
+transform = Transform3D(0.787284, -0.344946, -0.511073, 0.174802, 0.919727, -0.351492, 0.591294, 0.187387, 0.784383, 29.7848, 47.2281, -114.311)
 
 [node name="Node3D" parent="EnemyModel/Armature/Skeleton3D/BoneAttachment3D2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2921, 18.0556, 13.0293)

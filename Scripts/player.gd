@@ -15,11 +15,10 @@ var mouse_sensitivity := 0.004
 var lean_angle := 0.0
 var gun_index := 0
 var crouch_height := 1.0
-var target_fov := 75.0
+var base_fov := 75.0
 var is_crouching: bool
 var firepoint: Node3D
 var ammo: Array
-var bullet = preload("res://Scenes/bullet.tscn")
 @onready var camera = $CameraAnchor/Camera3D
 @onready var pistol = $CameraAnchor/Camera3D/Pistol
 @onready var rifle = $CameraAnchor/Camera3D/AssaultRifle
@@ -150,15 +149,17 @@ func _process(delta: float) -> void:
 					collider.pickup(self)
 			
 			# camera zoom
+			var target_fov
 			if Input.is_action_pressed("camera_zoom"):
 				camera_zoom = zoom_levels.zoom
 			match (camera_zoom):
 				zoom_levels.regular:
-					target_fov = 75
+					target_fov = base_fov
 					mouse_sensitivity = 0.004
 				zoom_levels.ads:
-					target_fov = 50
 					mouse_sensitivity = 0.002
+					target_fov = base_fov / gun.zoom_amount
+					mouse_sensitivity = 0.003 * ((base_fov / gun.zoom_amount) / base_fov)
 				zoom_levels.zoom:
 					target_fov = 10
 					mouse_sensitivity = 0.0005
@@ -187,6 +188,9 @@ func _input(event):
 func change_gun(new_index) -> void:
 	animation_player.play("put_down")
 	await animation_player.animation_finished
+	for gun in guns:
+		gun.process_mode = PROCESS_MODE_DISABLED
+	guns[new_index].process_mode = PROCESS_MODE_ALWAYS
 	gun_index = new_index
 	for i in guns.size():
 		var gun = guns[i]
@@ -199,6 +203,7 @@ func change_gun(new_index) -> void:
 			muzzel_raycast = gun.get_node("Gun/FirePoint/RayCast3D")
 			animation_player.play("draw")
 			shoot_component.firepoint = firepoint
+			shoot_component.bullet_stats = gun.bullet_stats
 
 
 func use_item(item_name: String, item_id = null, target: Node = self):

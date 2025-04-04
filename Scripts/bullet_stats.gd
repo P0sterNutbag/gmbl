@@ -1,6 +1,8 @@
 extends Resource
 class_name BulletStats
 
+@export var bullet_scene = preload("res://Scenes/Bullets/bullet.tscn")
+@export var amount = 1
 @export var speed = 250.0
 @export var max_drop_speed = 3.0
 @export var min_drop_speed = 0.0

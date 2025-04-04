@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
-enum states {idle, investigate, attack, search}
+@export var gun: Node3D
+enum states {idle, investigate, attack, search, strafe}
 var state = states.idle
 var walk_speed := 1.5
 var run_speed := 3.0
@@ -8,6 +9,7 @@ var time_to_detect_max := 1.5
 var time_to_detect: float = time_to_detect_max
 var range := 100
 var path_index: int
+var is_new_state: bool
 var target: Node3D
 @onready var firepoint = $EnemyModel/Armature/Skeleton3D/BoneAttachment3D/AssaultRifle_3/FirePoint
 @onready var detection = $Detection
@@ -21,6 +23,7 @@ signal shoot
 func _ready() -> void:
 	target = Globals.player
 	shoot.connect($ShootComponent._on_shoot)
+	shoot.connect(gun._on_shoot)
 
 
 func _physics_process(delta: float) -> void:
@@ -58,11 +61,11 @@ func _physics_process(delta: float) -> void:
 				time_to_detect -= (20 / dis_to_target) * delta
 				if time_to_detect <= 0:
 					state = states.attack
-					print("attack from investigate!")
+					#print("attack from investigate!")
 			else:
-				if return_to_idle_timer.wait_time == 0:
+				if return_to_idle_timer.time_left <= 0:
 					return_to_idle_timer.start()
-				#state = states.idle
+				state = states.idle
 			anim_player.play("Idle")
 			
 		states.attack:
@@ -77,7 +80,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity = Vector3.ZERO
 			
-			# switch to search state
+			# switch to search
 			if !detection.can_see_target():
 				navigation_agent.set_target_position(target.global_position)
 				state = states.search
@@ -85,7 +88,10 @@ func _physics_process(delta: float) -> void:
 			
 			# animate 
 			if velocity == Vector3.ZERO:
-				anim_player.play("Shoot")
+				if gun.ammo > 0:
+					anim_player.play("Shoot")
+				else:
+					anim_player.play("Idle")
 			else:
 				anim_player.play("Walk")
 			
@@ -103,10 +109,34 @@ func _physics_process(delta: float) -> void:
 			# animate
 			anim_player.play("Walk")
 			
+		states.strafe:
+			# set new strafe position
+			if is_new_state:
+				var new_pos = global_position
+				#while global_position.distance_to(new_pos) < 3:
+				new_pos = global_position + Vector3(randf_range(-4, 4), randf_range(-4, 4), randf_range(-4, 4))
+				navigation_agent.set_target_position(new_pos)
+				is_new_state = false
+			
+			# run to new position
+			follow_path(run_speed)
+			print("strafing")
+			
+			# animate
+			if velocity == Vector3.ZERO:
+				anim_player.play("Idle")
+			else:
+				anim_player.play("Walk")
+		
 	# Add gravity and move
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	move_and_slide()
+
+
+func change_state(new_state: states):
+	state = new_state
+	is_new_state = true
 
 
 func follow_path(speed: float = walk_speed):
@@ -126,19 +156,23 @@ func look_at_position(pos: Vector3):
 	look_at(target_pos, Vector3.UP)
 
 
+func emit_shoot() -> void:
+	shoot.emit()
+
+
 func on_noise_heard(noise_position: Vector3):
-	if state != states.attack and state != states.search:
+	if state != states.attack and state != states.search and state != states.strafe:
 		state = states.investigate
 	look_at_position(noise_position)
-	navigation_agent.set_target_position(noise_position)
-	await get_tree().create_timer(1).timeout
-	if state != states.attack and state != states.search:
-		state = states.search
+	#navigation_agent.set_target_position(noise_position)
+	#await get_tree().create_timer(1).timeout
+	#if state != states.attack and state != states.search:
+		#state = states.search
 
 
 func _on_damaged() -> void:
 	if state != states.attack:
-		state = states.attack
+		change_state(states.attack)
 
 
 func _on_death() -> void:
@@ -148,16 +182,25 @@ func _on_death() -> void:
 func _on_navigation_agent_3d_navigation_finished() -> void:
 	if state == states.idle:
 		path_wait_timer.start()
-		print("path point reached")
+		#print("path point reached")
 	elif state == states.search:
-		state = states.idle
-		print("target not found, return to idle")
+		change_state(states.idle)
+	elif state == states.strafe:
+		look_at_position(target.global_position)
+		state = states.attack
+		#print("target not found, return to idle")
 
 
 func _on_return_to_idle_timer_timeout() -> void:
-	if state == states.investigate and !detection.can_see_player():
-		state = "idle"
+	if state == states.investigate and !detection.can_see_target():
+		change_state(states.idle)
 
 
 func _on_path_wait_timer_timeout() -> void:
 	path_index = wrap(path_index + 1, 0, get_parent().curve.point_count)
+
+
+func _on_shoot_finished() -> void:
+	 # switch to strafe
+	#if randf_range(0, 1) <= 0.5:
+	change_state(states.strafe)

@@ -1,14 +1,17 @@
-[gd_scene load_steps=20 format=3 uid="uid://dp33y25ncdla5"]
+[gd_scene load_steps=23 format=3 uid="uid://dp33y25ncdla5"]
 
 [ext_resource type="Script" uid="uid://cl7b5tsk5cpy3" path="res://Scripts/ui.gd" id="2_adtv2"]
 [ext_resource type="PackedScene" uid="uid://c055smn111au7" path="res://Scenes/player.tscn" id="2_evir0"]
 [ext_resource type="Texture2D" uid="uid://dl55u8tb3x34h" path="res://Art/Sprites/crosshair007.png" id="2_rmtha"]
 [ext_resource type="Texture2D" uid="uid://hkv1jj2wvtml" path="res://Art/Textures/crosshair_point.png" id="4_k7acu"]
 [ext_resource type="Texture2D" uid="uid://c5vubp6usyq24" path="res://Art/Textures/sand.png" id="5_5v1tr"]
+[ext_resource type="Texture2D" uid="uid://b7o6p645d7r1q" path="res://Art/Textures/scope.png" id="5_ikia7"]
 [ext_resource type="PackedScene" uid="uid://p1limlnykapp" path="res://Scenes/noise_controller.tscn" id="6_5ukr8"]
-[ext_resource type="PackedScene" uid="uid://p3p6qwcwj4sc" path="res://Scenes/Bullets/pistol_ammo.tscn" id="7_o06y3"]
+[ext_resource type="PackedScene" uid="uid://p3p6qwcwj4sc" path="res://Scenes/Items/pistol_ammo.tscn" id="7_o06y3"]
 [ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/enemy.tscn" id="8_k7acu"]
-[ext_resource type="PackedScene" uid="uid://bs4u1fwqmjcdq" path="res://Scenes/Bullets/rifle_ammo.tscn" id="9_5v1tr"]
+[ext_resource type="PackedScene" uid="uid://bs4u1fwqmjcdq" path="res://Scenes/Items/rifle_ammo.tscn" id="9_5v1tr"]
+[ext_resource type="PackedScene" uid="uid://cs2axhvg7t0k6" path="res://Scenes/Items/shotgun_ammo.tscn" id="10_0fj1v"]
+[ext_resource type="PackedScene" uid="uid://b65x4o42cd2d6" path="res://Scenes/Items/medkit.tscn" id="12_7yui6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k7acu"]
 
@@ -44,7 +47,7 @@ data = PackedVector3Array(-1.5, 1.5, 1.5, 1.5, 1.5, 1.5, -1.5, -1.5, 1.5, 1.5, 1
 [sub_resource type="Curve3D" id="Curve3D_5ukr8"]
 closed = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, -45, 0, 0),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, -5, 0, 0),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -137,6 +140,35 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 0.427451)
 
+[node name="Scope" type="TextureRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -400.0
+offset_right = 400.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_ikia7")
+
+[node name="MagsLeft" type="Label" parent="CanvasLayer"]
+offset_left = 16.0
+offset_top = 55.0
+offset_right = 66.0
+offset_bottom = 78.0
+text = "Mags: "
+
+[node name="MedkitsLeft" type="Label" parent="CanvasLayer"]
+offset_left = 16.0
+offset_top = 86.0
+offset_right = 87.0
+offset_bottom = 109.0
+text = "Medkits: 0"
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_fo5ed")
 
@@ -202,4 +234,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.624185, 0.0500005, -11.575
 [node name="RifleAmmo3" parent="." instance=ExtResource("9_5v1tr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.52644, 0.05, -12.0423)
 
+[node name="ShotgunAmmo" parent="." instance=ExtResource("10_0fj1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.838726, 0.05, -12.2306)
+
+[node name="ShotgunAmmo2" parent="." instance=ExtResource("10_0fj1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10582, 0.05, -11.9609)
+
+[node name="Medkit" parent="." instance=ExtResource("12_7yui6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16732, 0.05, -11.9954)
+
+[node name="Medkit2" parent="." instance=ExtResource("12_7yui6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.184721, 0.0499998, -12.4659)
+
 [editable path="CharacterBody3D"]
+[editable path="CharacterBody3D/CameraAnchor/Camera3D/SniperRifle/Gun"]

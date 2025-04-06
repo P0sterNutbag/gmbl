@@ -1,45 +1,31 @@
-[gd_scene load_steps=13 format=3 uid="uid://cb05x24r4r8im"]
+[gd_scene load_steps=11 format=3 uid="uid://cb05x24r4r8im"]
 
 [ext_resource type="Script" uid="uid://ba01kvx1jag3c" path="res://Scripts/enemy.gd" id="1_1f0kj"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_afpow"]
 [ext_resource type="PackedScene" uid="uid://d5w6yrf03c0w" path="res://Art/Models/enemy_model.tscn" id="2_haro7"]
 [ext_resource type="Script" uid="uid://ccu856f1csrwx" path="res://Scripts/shoot_component.gd" id="3_afpow"]
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="5_ghaa6"]
-[ext_resource type="PackedScene" uid="uid://cwq84n8f24jwt" path="res://Scenes/Bullets/bullet.tscn" id="6_8uf12"]
+[ext_resource type="PackedScene" uid="uid://cxgytywtim2v8" path="res://Scenes/Bullets/pellet.tscn" id="6_auwsv"]
 [ext_resource type="Script" uid="uid://but6ijlpfowbx" path="res://Scripts/detection_component.gd" id="6_ghaa6"]
-[ext_resource type="Texture2D" uid="uid://blri7djde63q7" path="res://Art/Textures/bullet hole.png" id="6_po0sg"]
-[ext_resource type="Script" uid="uid://b1e6c1crno50r" path="res://Scripts/fade_them_destroy.gd" id="7_haro7"]
+[ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/hitmarker.tscn" id="7_8uf12"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o06y3"]
 
-[sub_resource type="PackedScene" id="PackedScene_56vhr"]
-_bundled = {
-"conn_count": 2,
-"conns": PackedInt32Array(2, 0, 16, 15, 2, 0, 0, 2, 2, 16, 17, 2, 0, 0),
-"editable_instances": [],
-"names": PackedStringArray("Hitmarker", "Node3D", "Sprite3D", "transform", "visible", "texture", "Timer", "wait_time", "one_shot", "autostart", "script", "sprite_to_fade", "Decal", "size", "texture_albedo", "_on_timer_timeout", "timeout", "_on_timeout"),
-"node_count": 4,
-"node_paths": [],
-"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 0, 0, 0, 0, 2, 2, -1, 3, 3, 0, 4, 1, 5, 2, 0, 0, 0, 6, 6, -1, 5, 7, 3, 8, 4, 9, 4, 10, 5, 1073741835, 6, 0, 0, 0, 12, 12, -1, 2, 13, 7, 14, 2, 0),
-"variants": [Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.001), false, ExtResource("6_po0sg"), 5.0, true, ExtResource("7_haro7"), NodePath("../Sprite3D"), Vector3(0.1, 0.1, 0.1)],
-"version": 3
-}
-
 [sub_resource type="Resource" id="Resource_po0sg"]
 script = ExtResource("5_ghaa6")
-bullet_scene = ExtResource("6_8uf12")
-amount = 1
-speed = 50.0
-max_drop_speed = 0.0
+bullet_scene = ExtResource("6_auwsv")
+amount = 8
+speed = 150.0
+max_drop_speed = 3.0
 min_drop_speed = 0.0
 drop_speed = 0.0
-damage = 1.0
-h_angle_variance = 1.0
-v_angle_variance = 1.0
+damage = 0.25
+h_angle_variance = 3.0
+v_angle_variance = 3.0
 is_hitscan = false
 bullet_drop = true
 collision_mask = 4
-hitmarker = SubResource("PackedScene_56vhr")
+hitmarker = ExtResource("7_8uf12")
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
 [node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("gun")]
@@ -54,7 +40,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1,
 transform = Transform3D(-0.389447, 0.743709, -0.543348, 0.435632, 0.668501, 0.60277, 0.811514, -0.00195316, -0.584329, -20.8788, 37.7992, -124.064)
 
 [node name="AssaultRifle_3" parent="EnemyModel/Armature/Skeleton3D/BoneAttachment3D" index="0"]
-transform = Transform3D(72.3925, -100.375, -34.9572, 34.825, 62.3595, -106.941, 100.422, 50.7331, 62.2857, 0, 0, 0)
+transform = Transform3D(72.3925, -100.375, -34.9572, 34.825, 62.3595, -106.941, 100.422, 50.7331, 62.2858, 0, 0, 0)
 
 [node name="BoneAttachment3D2" parent="EnemyModel/Armature/Skeleton3D" index="2"]
 transform = Transform3D(0.787284, -0.344946, -0.511073, 0.174802, 0.919727, -0.351492, 0.591294, 0.187387, 0.784383, 29.7848, 47.2281, -114.311)

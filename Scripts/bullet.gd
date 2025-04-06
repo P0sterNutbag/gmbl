@@ -8,11 +8,13 @@ var bullet_stats: BulletStats
 
 func _ready() -> void:
 	raycast.set_collision_mask_value(bullet_stats.collision_mask, true)
-	if !bullet_stats.is_hitscan: return
-	bullet_mesh.visible = false
+	if bullet_stats.is_hitscan:
+		raycast.target_position.z = -100
 	raycast.force_raycast_update()
 	if raycast.is_colliding():
 		hit()
+	if bullet_stats.is_hitscan:
+		queue_free()
 
 
 func _physics_process(delta: float) -> void:

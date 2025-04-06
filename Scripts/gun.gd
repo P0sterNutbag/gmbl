@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 
 @export var bullet_stats: BulletStats
 @export var ammo_type: String
@@ -6,11 +6,16 @@ enum fire_types {semi_auto, auto}
 @export var fire_type: fire_types
 @export var fire_timer: float
 @export var zoom_amount: float = 1.25
+@export var kickback_magnitude: float = 1
+@export var ads_vector: Vector3
+@export var scope_texture: Texture2D
 var ammo: int = 10
 var time_since_shot: float
 var can_shoot: bool = true
 var has_released: bool = true
+var sway_vector: Vector3
 var shoot_timer: Timer
+@onready var gun_model: Node3D = $Gun
 
 
 func _ready() -> void:

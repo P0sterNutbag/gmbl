@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 @export var gun: Node3D
+@export var strafe_change := 0.2
 enum states {idle, investigate, attack, search, strafe}
 var state = states.idle
 var walk_speed := 1.5
@@ -10,6 +11,7 @@ var time_to_detect: float = time_to_detect_max
 var range := 100
 var path_index: int
 var is_new_state: bool
+var on_alert: bool
 var target: Node3D
 @onready var firepoint = $EnemyModel/Armature/Skeleton3D/BoneAttachment3D/AssaultRifle_3/FirePoint
 @onready var detection = $Detection
@@ -29,6 +31,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	match state:
 		states.idle:
+			if is_new_state:
+				on_alert = false
+				is_new_state = false
+			
 			# return to path
 			var parent = get_parent()
 			if parent is Path3D:
@@ -39,8 +45,7 @@ func _physics_process(delta: float) -> void:
 
 			# switch to investigate
 			if detection.can_see_target():
-				state = states.investigate
-				time_to_detect = time_to_detect_max
+				change_state(states.investigate)
 				print("target spotted")
 			
 			# animate
@@ -50,6 +55,10 @@ func _physics_process(delta: float) -> void:
 				anim_player.play("Walk")
 			
 		states.investigate:
+			if is_new_state:
+				time_to_detect = time_to_detect_max
+				is_new_state = false
+			
 			# stop moving
 			velocity = Vector3.ZERO
 			print("investigating")
@@ -59,16 +68,19 @@ func _physics_process(delta: float) -> void:
 				look_at_position(target.global_position)
 				var dis_to_target = global_position.distance_to(target.global_position)
 				time_to_detect -= (20 / dis_to_target) * delta
-				if time_to_detect <= 0:
-					state = states.attack
+				if time_to_detect <= 0 or on_alert:
+					change_state(states.attack)
 					#print("attack from investigate!")
 			else:
 				if return_to_idle_timer.time_left <= 0:
 					return_to_idle_timer.start()
-				state = states.idle
 			anim_player.play("Idle")
 			
 		states.attack:
+			if is_new_state:
+				on_alert = true
+				is_new_state = false
+			
 			# look at player
 			look_at_position(target.global_position)
 			firepoint.look_at(target.global_position + Vector3.UP * 0.25)
@@ -83,7 +95,7 @@ func _physics_process(delta: float) -> void:
 			# switch to search
 			if !detection.can_see_target():
 				navigation_agent.set_target_position(target.global_position)
-				state = states.search
+				change_state(states.search)
 				print("target lost")
 			
 			# animate 
@@ -102,7 +114,7 @@ func _physics_process(delta: float) -> void:
 			
 			# return to attack
 			if detection.can_see_target():
-				state = states.attack
+				change_state(states.attack)
 				velocity = Vector3.ZERO
 				print("attack from search!")
 			
@@ -113,14 +125,17 @@ func _physics_process(delta: float) -> void:
 			# set new strafe position
 			if is_new_state:
 				var new_pos = global_position
-				#while global_position.distance_to(new_pos) < 3:
 				new_pos = global_position + Vector3(randf_range(-4, 4), randf_range(-4, 4), randf_range(-4, 4))
 				navigation_agent.set_target_position(new_pos)
 				is_new_state = false
 			
 			# run to new position
 			follow_path(run_speed)
-			print("strafing")
+			print("strafing " + str(velocity))
+			
+			# stop strafing
+			if velocity.length() < 0.1:
+				change_state(states.attack)
 			
 			# animate
 			if velocity == Vector3.ZERO:
@@ -161,13 +176,11 @@ func emit_shoot() -> void:
 
 
 func on_noise_heard(noise_position: Vector3):
-	if state != states.attack and state != states.search and state != states.strafe:
-		state = states.investigate
+	if state != states.attack and state != states.search and state != states.strafe and state != states.investigate:
+		change_state(states.investigate)
+	elif state == states.investigate:
+		time_to_detect -= 0.5
 	look_at_position(noise_position)
-	#navigation_agent.set_target_position(noise_position)
-	#await get_tree().create_timer(1).timeout
-	#if state != states.attack and state != states.search:
-		#state = states.search
 
 
 func _on_damaged() -> void:
@@ -186,8 +199,7 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 	elif state == states.search:
 		change_state(states.idle)
 	elif state == states.strafe:
-		look_at_position(target.global_position)
-		state = states.attack
+		change_state(states.attack)
 		#print("target not found, return to idle")
 
 
@@ -201,6 +213,6 @@ func _on_path_wait_timer_timeout() -> void:
 
 
 func _on_shoot_finished() -> void:
-	 # switch to strafe
-	#if randf_range(0, 1) <= 0.5:
-	change_state(states.strafe)
+	# switch to strafe
+	if randf_range(0, 1) <= strafe_change:
+		change_state(states.strafe)

@@ -22,12 +22,15 @@ var ammo: Array
 @onready var camera = $CameraAnchor/Camera3D
 @onready var pistol = $CameraAnchor/Camera3D/Pistol
 @onready var rifle = $CameraAnchor/Camera3D/AssaultRifle
+@onready var sniper_rifle: Node3D = $CameraAnchor/Camera3D/SniperRifle
+@onready var shotgun: Node3D = $CameraAnchor/Camera3D/Shotgun
 @onready var animation_player = $CameraAnchor/Camera3D/Pistol/AnimationPlayer
 @onready var muzzel_raycast  = $CameraAnchor/Camera3D/Pistol/Gun/FirePoint/RayCast3D
 @onready var shoot_component: Node = $ShootComponent
 @onready var step_timer: Timer = $StepTimer
 @onready var interact_cast: RayCast3D = $CameraAnchor/Camera3D/RayCast3D
-@onready var guns = [pistol, rifle]
+@onready var hitbox: HealthComponent = $Hitbox
+@onready var guns = [pistol, rifle, sniper_rifle, shotgun]
 signal shoot
 
 
@@ -38,7 +41,6 @@ func _ready() -> void:
 		gun.visible = false
 	change_gun(0)
 	shoot.connect(shoot_component._on_shoot)
-
 
 func _physics_process(delta):
 	# apply gravity
@@ -75,8 +77,20 @@ func _process(delta: float) -> void:
 			if Input.is_action_just_released("next_gun"):
 				gun_index = wrap(gun_index - 1, 0, guns.size())
 				change_gun(gun_index)
-			if Input.is_action_just_released("last_gun"):
+			elif Input.is_action_just_released("last_gun"):
 				gun_index = wrap(gun_index + 1, 0, guns.size())
+				change_gun(gun_index)
+			elif Input.is_key_pressed(KEY_1):
+				gun_index = 0
+				change_gun(gun_index)
+			elif Input.is_key_pressed(KEY_2):
+				gun_index = 1
+				change_gun(gun_index)
+			elif Input.is_key_pressed(KEY_3):
+				gun_index = 2
+				change_gun(gun_index)
+			elif Input.is_key_pressed(KEY_4):
+				gun_index = 3
 				change_gun(gun_index)
 			
 			# leaning
@@ -113,18 +127,16 @@ func _process(delta: float) -> void:
 				tween.tween_property(gun_model, "position:z", 0, 0.2)
 				shoot.emit()
 				gun._on_shoot()
+				camera.screen_shake()
+				camera.kickback(gun.kickback_magnitude)
 				Globals.noise_controller.create_noise_event(firepoint.global_position, 30)
 			if Input.is_action_pressed("aim"):
-				gun_target_pos.x = -gun_pos_offset.x
+				gun_target_pos = gun.ads_vector
 				camera_zoom = zoom_levels.ads
-				#gun_target_pos.y = -gun_pos_offset.y
 				#print(gun.get_child(0).mesh.get_aabb().size)
-				Globals.ui.crosshair.hide()
 			else:
-				gun_target_pos.x = 0
-				gun_target_pos.y = 0
+				gun_target_pos = Vector3.ZERO
 				camera_zoom = zoom_levels.regular
-				Globals.ui.crosshair.show()
 			gun_model.position = lerp(gun_target_pos, gun_model.position, 30 * delta)
 			
 			# reload
@@ -132,12 +144,11 @@ func _process(delta: float) -> void:
 				var ammo = find_item(gun.ammo_type)
 				if !ammo:
 					return
+				Globals.ui.set_mag_count(get_item_amount(gun.ammo_type) - 1)
 				var tween = create_tween()
 				tween.tween_property(gun_model, "position:y", -1, 0.25)
 				tween.tween_callback(use_item.bind("", ammo, gun))
 				tween.tween_property(gun_model, "position:y", 0, 0.25)
-				#await tween.finished
-				#use_item(gun.ammo_type, gun)
 			
 			# interact
 			if Input.is_action_just_pressed("interact"):
@@ -147,10 +158,19 @@ func _process(delta: float) -> void:
 				collider = collider.get_parent()
 				if collider is ItemPickup:
 					collider.pickup(self)
+					Globals.ui.set_mag_count(get_item_amount(gun.ammo_type))
+					Globals.ui.set_medit_count(get_item_amount("medkit"))
+			
+			# heal
+			if Input.is_action_just_pressed("heal"):
+				var medkit = find_item("medkit")
+				if medkit:
+					use_item("", medkit, hitbox)
+					hitbox.hp = clamp(hitbox.hp, 0, hitbox.max_hp)
 			
 			# camera zoom
 			var target_fov
-			if Input.is_action_pressed("camera_zoom"):
+			if Input.is_action_pressed("camera_zoom") and !Input.is_action_pressed("aim"):
 				camera_zoom = zoom_levels.zoom
 			match (camera_zoom):
 				zoom_levels.regular:
@@ -161,9 +181,20 @@ func _process(delta: float) -> void:
 					target_fov = base_fov / gun.zoom_amount
 					mouse_sensitivity = 0.003 * ((base_fov / gun.zoom_amount) / base_fov)
 				zoom_levels.zoom:
-					target_fov = 10
+					target_fov = 10.0
 					mouse_sensitivity = 0.0005
-			camera.fov = lerp(camera.fov, target_fov, 30 * delta)
+			camera.fov = lerp(camera.fov, target_fov, 30.0 * delta)
+			
+			# ui
+			if Input.is_action_just_pressed("aim"):
+				Globals.ui.hide_crosshairs()
+				if gun.scope_texture != null:
+					Globals.ui.show_scope(gun.scope_texture)
+					gun_model.hide()
+			elif Input.is_action_just_released("aim"):
+				Globals.ui.show_crosshairs()
+				Globals.ui.scope.hide()
+				gun_model.show()
 			
 		states.dead:
 			pass
@@ -204,6 +235,7 @@ func change_gun(new_index) -> void:
 			animation_player.play("draw")
 			shoot_component.firepoint = firepoint
 			shoot_component.bullet_stats = gun.bullet_stats
+	Globals.ui.set_mag_count(get_item_amount(guns[new_index].ammo_type))
 
 
 func use_item(item_name: String, item_id = null, target: Node = self):
@@ -217,6 +249,7 @@ func use_item(item_name: String, item_id = null, target: Node = self):
 	item.use(target)
 	if item.uses <= 0:
 		items.erase(item)
+	Globals.ui.set_medit_count(get_item_amount("medkit"))
 
 
 func find_item(item_name: String) -> Resource:
@@ -224,6 +257,10 @@ func find_item(item_name: String) -> Resource:
 		if i.resource_name == item_name:
 			return i
 	return null
+
+
+func get_item_amount(item_name: String) -> int:
+	return items.filter(func(i): return i.resource_name == item_name).size()
 
 
 func step_noise_event():

@@ -40,6 +40,7 @@ var grenade = preload("res://Scenes/Bullets/grenade.tscn")
 @onready var fist_anim_player: AnimationPlayer = $CameraAnchor/Camera3D/Guns/Fist/AnimationPlayer
 @onready var fist_raycast: RayCast3D = $CameraAnchor/Camera3D/Guns/Fist/RayCast3D
 @onready var hitbox: HealthComponent = $Hitbox
+@onready var grenade_spawn: Node3D = $CameraAnchor/Camera3D/GrenadeSpawn
 @onready var guns = [pistol, rifle]
 signal shoot
 
@@ -168,9 +169,9 @@ func _process(delta: float) -> void:
 			
 			# throw grenade
 			if Input.is_action_just_pressed("grenade"):
-				var inst = Globals.create_instance(grenade, global_position)
-				inst.rotation = rotation
-				inst.apply_force((Vector3.UP * 500) + -global_transform.basis.z * 1000)
+				var inst = Globals.create_instance(grenade, grenade_spawn.global_position)
+				inst.rotation = camera.rotation
+				inst.apply_force((Vector3.UP * 500) + -camera.global_transform.basis.z * 750)
 			
 			# reload
 			if Input.is_action_just_pressed("reload"):

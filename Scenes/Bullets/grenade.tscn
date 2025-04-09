@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ebenhodrn8bk"]
+[gd_scene load_steps=5 format=3 uid="uid://ebenhodrn8bk"]
 
 [ext_resource type="Script" uid="uid://bonl158sskj1q" path="res://Scripts/grenade.gd" id="1_v0dxf"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v0dxf"]
+bounce = 0.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bgc3b"]
 radius = 0.25
@@ -12,8 +15,10 @@ height = 0.5
 [node name="Grenade" type="RigidBody3D"]
 collision_layer = 0
 collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_v0dxf")
 contact_monitor = true
 max_contacts_reported = 1
+angular_damp = 50.0
 script = ExtResource("1_v0dxf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

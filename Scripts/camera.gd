@@ -11,9 +11,11 @@ func screen_shake(magnitude: float = 0.1, shakes: int = 1):
 
 
 func kickback(magnitude: float = 1):
-	#var tween = create_tween()
-	#tween.tween_method(rotate_x, 0, deg_to_rad(magnitude), 0.05)
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+	tween.tween_method(rotate_x, deg_to_rad(magnitude) / 3, deg_to_rad(magnitude) / 3, 0.1)
+	#tween.tween_method(rotate_x, -deg_to_rad(magnitude), -deg_to_rad(magnitude) / 2, 0.1)
 	#tween.set_parallel()
-	#tween.tween_method(rotate_y, 0, deg_to_rad(randf_range(-magnitude / 2, magnitude / 2)), 0.05)
-	rotate_x(deg_to_rad(magnitude))
-	rotate_y(deg_to_rad(randf_range(-magnitude / 2, magnitude / 2)))
+	#var y_rot = deg_to_rad(randf_range(-magnitude / 2, magnitude / 2))
+	#tween.tween_method(rotate_y, y_rot, y_rot, 0.05)
+	#rotate_x(deg_to_rad(magnitude))
+	#rotate_y(deg_to_rad(randf_range(-magnitude / 2, magnitude / 2)))

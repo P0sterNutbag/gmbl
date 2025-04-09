@@ -16,6 +16,7 @@ var has_released: bool = true
 var sway_vector: Vector3
 var shoot_timer: Timer
 @onready var gun_model: Node3D = $Gun
+@onready var muzzle_flash: Node3D = $Gun/FirePoint/MuzzleFlash
 
 
 func _ready() -> void:
@@ -41,6 +42,9 @@ func _on_shoot() -> void:
 	has_released = false
 	time_since_shot = 0
 	shoot_timer.start()
+	muzzle_flash.visible = true
+	var tween = create_tween()
+	tween.tween_property(muzzle_flash, "visible", false, 0.1)
 
 
 func _on_shoot_timer_timeout() -> void:

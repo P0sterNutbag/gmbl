@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @export var gun: Node3D
 @export var strafe_change := 0.2
+@export var items_to_drop: Array[PackedScene]
 enum states {idle, investigate, attack, search, strafe}
 var state = states.idle
 var walk_speed := 1.5
@@ -189,6 +190,12 @@ func _on_damaged() -> void:
 
 
 func _on_death() -> void:
+	for i in items_to_drop:
+		var inst = i.instantiate()
+		inst.global_position = global_position
+		inst.apply_impulse(Vector3(randf_range(-1, 1), 1, randf_range(-1, 1)))
+		#inst.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
+		get_tree().root.add_child(inst)
 	queue_free()
 
 

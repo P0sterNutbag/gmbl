@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dp33y25ncdla5"]
+[gd_scene load_steps=27 format=3 uid="uid://dp33y25ncdla5"]
 
 [ext_resource type="Script" uid="uid://cl7b5tsk5cpy3" path="res://Scripts/ui.gd" id="2_adtv2"]
 [ext_resource type="PackedScene" uid="uid://c055smn111au7" path="res://Scenes/player.tscn" id="2_evir0"]
@@ -7,11 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://c5vubp6usyq24" path="res://Art/Textures/sand.png" id="5_5v1tr"]
 [ext_resource type="Texture2D" uid="uid://b7o6p645d7r1q" path="res://Art/Textures/scope.png" id="5_ikia7"]
 [ext_resource type="PackedScene" uid="uid://p1limlnykapp" path="res://Scenes/noise_controller.tscn" id="6_5ukr8"]
-[ext_resource type="PackedScene" uid="uid://p3p6qwcwj4sc" path="res://Scenes/Items/pistol_ammo.tscn" id="7_o06y3"]
+[ext_resource type="PackedScene" uid="uid://wfbh2lfg703p" path="res://Scenes/ladder.tscn" id="7_e0ngr"]
+[ext_resource type="PackedScene" uid="uid://p3p6qwcwj4sc" path="res://Scenes/Items/Ammo/pistol_ammo.tscn" id="7_o06y3"]
 [ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/enemy.tscn" id="8_k7acu"]
-[ext_resource type="PackedScene" uid="uid://bs4u1fwqmjcdq" path="res://Scenes/Items/rifle_ammo.tscn" id="9_5v1tr"]
-[ext_resource type="PackedScene" uid="uid://cs2axhvg7t0k6" path="res://Scenes/Items/shotgun_ammo.tscn" id="10_0fj1v"]
+[ext_resource type="PackedScene" uid="uid://bs4u1fwqmjcdq" path="res://Scenes/Items/Ammo/rifle_ammo.tscn" id="9_5v1tr"]
+[ext_resource type="PackedScene" uid="uid://cs2axhvg7t0k6" path="res://Scenes/Items/Ammo/shotgun_ammo.tscn" id="10_0fj1v"]
 [ext_resource type="PackedScene" uid="uid://b65x4o42cd2d6" path="res://Scenes/Items/medkit.tscn" id="12_7yui6"]
+[ext_resource type="PackedScene" uid="uid://bx5h70fy0b18o" path="res://Scenes/Items/Guns/shotgun.tscn" id="13_c5t2i"]
+[ext_resource type="PackedScene" uid="uid://dig2vgrs53m37" path="res://Scenes/Items/Guns/sniper_rifle.tscn" id="15_hgpy0"]
+[ext_resource type="PackedScene" uid="uid://cgtukpis1lq0a" path="res://Scenes/Items/Guns/assault_rifle.tscn" id="16_t2t4p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k7acu"]
 
@@ -23,6 +27,8 @@ background_mode = 2
 background_color = Color(1, 1, 1, 1)
 sky = SubResource("Sky_5v1tr")
 ambient_light_color = Color(1, 1, 1, 1)
+fog_enabled = true
+fog_sky_affect = 0.5
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_fo5ed"]
 vertices = PackedVector3Array(-1.25, 0.4347, -11, 0.5, 0.4347, -11.25, 0.25, 0.4347, -49.5, -49.5, 0.4347, -49.5, -49.5, 0.4347, -9.75, -1.25, 0.4347, -9.5, 1.25, 0.4347, -11.25, 1.5, 0.4347, -49.5, 3, 0.4347, -11, 49.5, 0.4347, -9, 49.5, 0.4347, -49.5, 3, 0.4347, -9, -0.25, 4.6847, -10.25, -0.25, 4.6847, -8, 2, 4.6847, -8, 2, 4.6847, -10.25, -11.5, 0.4347, 8.25, -8, 0.4347, 8.25, -1.25, 0.4347, -7.5, -49.5, 0.4347, 9.75, -11.75, 0.4347, 10, 2.75, 0.4347, -7, -0.75, 0.4347, -7, -7.5, 0.4347, 8.75, -7.5, 0.4347, 12.25, -9.5, 0.4347, 49.5, 49.5, 0.4347, 49.5, -9.5, 0.4347, 12.5, -10.75, 3.4347, 9.25, -10.75, 3.4347, 11.5, -8.5, 3.4347, 11.5, -8.5, 3.4347, 9.25, -10.5, 0.4347, 9.5, -10.5, 0.4347, 11.25, -8.75, 0.4347, 11.25, -8.75, 0.4347, 9.5, -49.5, 0.4347, 11, -11.75, 0.4347, 10.75, -11.5, 0.4347, 12.5, -49.5, 0.4347, 49.5)
@@ -202,6 +208,9 @@ mesh = SubResource("BoxMesh_fo5ed")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D3/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_5ukr8")
 
+[node name="Ladder" parent="NavigationRegion3D" instance=ExtResource("7_e0ngr")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.42392, -4.76837e-07, -11.0106)
+
 [node name="NoiseController" parent="." instance=ExtResource("6_5ukr8")]
 
 [node name="Path3D" type="Path3D" parent="."]
@@ -245,6 +254,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16732, 0.05, -11.9954)
 
 [node name="Medkit2" parent="." instance=ExtResource("12_7yui6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.184721, 0.0499998, -12.4659)
+
+[node name="Shotgun" parent="." instance=ExtResource("13_c5t2i")]
+transform = Transform3D(0.918446, 0.395546, 0, -0.395546, 0.918446, 0, 0, 0, 1, 0.260632, 0.632082, -11.6619)
+
+[node name="SniperRifle" parent="." instance=ExtResource("15_hgpy0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.172864, 0.15757, -10.8266)
+
+[node name="AssaultRifle" parent="." instance=ExtResource("16_t2t4p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.468276, 0.190255, -11.0171)
 
 [editable path="CharacterBody3D"]
 [editable path="CharacterBody3D/CameraAnchor/Camera3D/SniperRifle/Gun"]

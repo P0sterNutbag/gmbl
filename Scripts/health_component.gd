@@ -8,6 +8,7 @@ class_name HealthComponent
 			hp_bar.value = hp / max_hp
 @export var hp_bar: Control
 @onready var max_hp: float = hp
+var is_dead: bool
 signal damaged
 signal death
 
@@ -18,7 +19,10 @@ func _ready() -> void:
 
 
 func damage(dmg: float) -> void:
+	if is_dead:
+		return
 	hp -= dmg
 	damaged.emit()
 	if hp <= 0:
 		death.emit()
+		is_dead = true

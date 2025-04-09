@@ -13,31 +13,40 @@ var speed = base_speed
 var jump_speed := 8.0
 var mouse_sensitivity := 0.004
 var lean_angle := 0.0
-var gun_index := 0
+var gun_index := -1
 var crouch_height := 1.0
 var base_fov := 75.0
+var punch_dmg := 1.0
+var heavy_punch_dmg := 3.0
+var punch_charge := 1.0
+var walk_time := 0.0
 var is_crouching: bool
+var on_ladder: bool
 var firepoint: Node3D
 var ammo: Array
 @onready var camera = $CameraAnchor/Camera3D
-@onready var pistol = $CameraAnchor/Camera3D/Pistol
-@onready var rifle = $CameraAnchor/Camera3D/AssaultRifle
-@onready var sniper_rifle: Node3D = $CameraAnchor/Camera3D/SniperRifle
-@onready var shotgun: Node3D = $CameraAnchor/Camera3D/Shotgun
-@onready var animation_player = $CameraAnchor/Camera3D/Pistol/AnimationPlayer
-@onready var muzzel_raycast  = $CameraAnchor/Camera3D/Pistol/Gun/FirePoint/RayCast3D
+@onready var gun_anchor = $CameraAnchor/Camera3D/Guns
+@onready var pistol: Node3D = $CameraAnchor/Camera3D/Guns/Pistol
+@onready var silenced_pistol: Node3D = $CameraAnchor/Camera3D/Guns/SilencedPistol
+@onready var rifle: Node3D = $CameraAnchor/Camera3D/Guns/AssaultRifle
+@onready var sniper_rifle: Node3D = $CameraAnchor/Camera3D/Guns/SniperRifle
+@onready var shotgun: Node3D = $CameraAnchor/Camera3D/Guns/Shotgun
+@onready var animation_player = $CameraAnchor/Camera3D/Guns/Pistol/AnimationPlayer
+@onready var muzzel_raycast  = $CameraAnchor/Camera3D/Guns/Pistol/Gun/FirePoint/RayCast3D
 @onready var shoot_component: Node = $ShootComponent
 @onready var step_timer: Timer = $StepTimer
-@onready var interact_cast: RayCast3D = $CameraAnchor/Camera3D/RayCast3D
+@onready var interact_cast: = $CameraAnchor/Camera3D/RayCast3D
+@onready var fist_anim_player: AnimationPlayer = $CameraAnchor/Camera3D/Guns/Fist/AnimationPlayer
+@onready var fist_raycast: RayCast3D = $CameraAnchor/Camera3D/Guns/Fist/RayCast3D
 @onready var hitbox: HealthComponent = $Hitbox
-@onready var guns = [pistol, rifle, sniper_rifle, shotgun]
+@onready var guns = [pistol, rifle]
 signal shoot
 
 
 func _ready() -> void:
 	Globals.player = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	for gun in guns:
+	for gun in gun_anchor.get_children():
 		gun.visible = false
 	change_gun(0)
 	shoot.connect(shoot_component._on_shoot)
@@ -60,11 +69,34 @@ func _physics_process(delta):
 			velocity.x = movement_dir.x * speed
 			velocity.z = movement_dir.z * speed
 			
-			move_and_slide()
-			
 			# jump
 			if is_on_floor() and Input.is_action_just_pressed("jump"):
 				velocity.y = jump_speed
+			
+			# ladder
+			if on_ladder:
+				if input.y != 0:
+					velocity.y = -input.y * speed
+					if !is_on_floor():
+						velocity.x = 0
+						velocity.z = 0
+				else:
+					velocity.y = 0
+				if Input.is_action_just_pressed("jump"):
+					transform = transform.translated(Vector3.FORWARD * 0.05)
+			
+			move_and_slide()
+			
+			# walking animation
+			if (input.x or input.y) and !Input.is_action_pressed("aim"):
+				walk_time += delta
+				var bob = cos(walk_time * 20) * 0.25
+				gun_anchor.position.y += bob * delta
+			elif gun_anchor.position.y: 
+				walk_time = 0
+				var tween = create_tween()
+				tween.tween_property(gun_anchor, "position:y", 0, 0.1)
+				await tween.finished
 			
 		states.dead:
 			pass
@@ -74,24 +106,18 @@ func _process(delta: float) -> void:
 	match state:
 		states.walk:
 			# change gun
-			if Input.is_action_just_released("next_gun"):
-				gun_index = wrap(gun_index - 1, 0, guns.size())
-				change_gun(gun_index)
-			elif Input.is_action_just_released("last_gun"):
-				gun_index = wrap(gun_index + 1, 0, guns.size())
-				change_gun(gun_index)
-			elif Input.is_key_pressed(KEY_1):
-				gun_index = 0
-				change_gun(gun_index)
-			elif Input.is_key_pressed(KEY_2):
-				gun_index = 1
-				change_gun(gun_index)
-			elif Input.is_key_pressed(KEY_3):
-				gun_index = 2
-				change_gun(gun_index)
-			elif Input.is_key_pressed(KEY_4):
-				gun_index = 3
-				change_gun(gun_index)
+			if Input.is_action_just_released("next_gun") and guns.size() > 1:
+				change_gun(wrap(gun_index - 1, 0, guns.size()))
+			elif Input.is_action_just_released("last_gun") and guns.size() > 1:
+				change_gun(wrap(gun_index + 1, 0, guns.size()))
+			elif Input.is_action_just_pressed("slot_1"):
+				change_gun(0)
+			elif Input.is_action_just_pressed("slot_2"):
+				change_gun(1)
+			elif Input.is_action_just_pressed("slot_3"):
+				change_gun(2)
+			elif Input.is_action_just_pressed("slot_4"):
+				change_gun(3)
 			
 			# leaning
 			if is_on_floor():
@@ -129,7 +155,7 @@ func _process(delta: float) -> void:
 				gun._on_shoot()
 				camera.screen_shake()
 				camera.kickback(gun.kickback_magnitude)
-				Globals.noise_controller.create_noise_event(firepoint.global_position, 30)
+				Globals.noise_controller.create_noise_event(firepoint.global_position, gun.bullet_stats.noise_radius)
 			if Input.is_action_pressed("aim"):
 				gun_target_pos = gun.ads_vector
 				camera_zoom = zoom_levels.ads
@@ -152,14 +178,17 @@ func _process(delta: float) -> void:
 			
 			# interact
 			if Input.is_action_just_pressed("interact"):
-				var collider = interact_cast.get_collider()
-				if !collider:
+				if !interact_cast.is_colliding():
 					return
-				collider = collider.get_parent()
-				if collider is ItemPickup:
+				var collider = interact_cast.get_collider(0)
+				if collider is GunPickup:
 					collider.pickup(self)
-					Globals.ui.set_mag_count(get_item_amount(gun.ammo_type))
-					Globals.ui.set_medit_count(get_item_amount("medkit"))
+				else:
+					collider = collider.get_parent()
+					if collider is ItemPickup:
+						collider.pickup(self)
+				Globals.ui.set_mag_count(get_item_amount(gun.ammo_type))
+				Globals.ui.set_medit_count(get_item_amount("medkit"))
 			
 			# heal
 			if Input.is_action_just_pressed("heal"):
@@ -167,6 +196,16 @@ func _process(delta: float) -> void:
 				if medkit:
 					use_item("", medkit, hitbox)
 					hitbox.hp = clamp(hitbox.hp, 0, hitbox.max_hp)
+			
+			# punch
+			if Input.is_action_pressed("punch"):
+				punch_charge -= delta
+			if Input.is_action_just_released("punch"):
+				if punch_charge <= 0:
+					fist_anim_player.speed_scale = 2
+				else:
+					fist_anim_player.speed_scale = 1
+				fist_anim_player.play("punch")
 			
 			# camera zoom
 			var target_fov
@@ -195,7 +234,7 @@ func _process(delta: float) -> void:
 				Globals.ui.show_crosshairs()
 				Globals.ui.scope.hide()
 				gun_model.show()
-			
+				
 		states.dead:
 			pass
 	
@@ -217,8 +256,14 @@ func _input(event):
 
 
 func change_gun(new_index) -> void:
+	if new_index > guns.size() - 1:
+		return
 	animation_player.play("put_down")
 	await animation_player.animation_finished
+	if new_index == gun_index: 
+		guns[gun_index].visible = false
+		gun_index = -1
+		return
 	for gun in guns:
 		gun.process_mode = PROCESS_MODE_DISABLED
 	guns[new_index].process_mode = PROCESS_MODE_ALWAYS
@@ -228,13 +273,14 @@ func change_gun(new_index) -> void:
 		if i != gun_index:
 			gun.visible = false
 		else:
-			gun.visible = true
 			animation_player = gun.get_node("AnimationPlayer")
 			firepoint = gun.get_node("Gun/FirePoint")
 			muzzel_raycast = gun.get_node("Gun/FirePoint/RayCast3D")
 			animation_player.play("draw")
 			shoot_component.firepoint = firepoint
 			shoot_component.bullet_stats = gun.bullet_stats
+			await get_tree().create_timer(0.05).timeout
+			gun.visible = true
 	Globals.ui.set_mag_count(get_item_amount(guns[new_index].ammo_type))
 
 
@@ -254,13 +300,25 @@ func use_item(item_name: String, item_id = null, target: Node = self):
 
 func find_item(item_name: String) -> Resource:
 	for i in items:
-		if i.resource_name == item_name:
+		if i != null and i.resource_name == item_name:
 			return i
 	return null
 
 
 func get_item_amount(item_name: String) -> int:
-	return items.filter(func(i): return i.resource_name == item_name).size()
+	if items.size() <= 0:
+		return 0
+	return items.filter(func(i): return i != null and i.resource_name == item_name).size()
+
+
+func check_punch():
+	var enemy = fist_raycast.get_collider()
+	if enemy != null:
+		var dmg = punch_dmg
+		if punch_charge <= 0:
+			dmg = heavy_punch_dmg
+		enemy.damage(dmg)
+	punch_charge = 1.0
 
 
 func step_noise_event():
@@ -281,3 +339,14 @@ func _on_death() -> void:
 #
 #func _on_step_timer_timeout() -> void:
 	#step_noise_event()
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body.is_in_group("ladder"):
+		on_ladder = true
+
+
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	if body.is_in_group("ladder"):
+		on_ladder = false
+		velocity.y = 0

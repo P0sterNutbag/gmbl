@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bx5h70fy0b18o"]
+
+[ext_resource type="Script" uid="uid://cv3h0punkbvh7" path="res://Scripts/gun_pickup.gd" id="1_4xcmh"]
+[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/shotgun_ammo.tres" id="2_6u172"]
+[ext_resource type="PackedScene" uid="uid://dbt1rqwvs52sn" path="res://Art/Models/Shotgun_ShortStock.fbx" id="3_v1ktk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rk1p0"]
+size = Vector3(0.0542603, 0.188721, 0.888672)
+
+[node name="Shotgun" type="RigidBody3D"]
+collision_layer = 16
+script = ExtResource("1_4xcmh")
+gun_name = "shotgun"
+ammo = ExtResource("2_6u172")
+
+[node name="Shotgun_ShortStock" parent="." instance=ExtResource("3_v1ktk")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.85293e-08, 0, 0.423902)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.00500488, 0.0556641)
+shape = SubResource("BoxShape3D_rk1p0")
+debug_fill = false
+
+[editable path="Shotgun_ShortStock"]

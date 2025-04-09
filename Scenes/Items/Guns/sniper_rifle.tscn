@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://dig2vgrs53m37"]
+
+[ext_resource type="Script" uid="uid://cv3h0punkbvh7" path="res://Scripts/gun_pickup.gd" id="1_7xjnn"]
+[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/rifle_ammo.tres" id="2_fvdik"]
+[ext_resource type="PackedScene" uid="uid://ba14480cm06kj" path="res://Art/Models/SniperRifle_1.fbx" id="3_7xjnn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rk1p0"]
+size = Vector3(0.0542603, 0.188568, 0.431367)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fvdik"]
+size = Vector3(0.0542603, 0.102585, 0.567734)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ld636"]
+size = Vector3(0.0542603, 0.0423088, 0.471367)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7xjnn"]
+size = Vector3(0.0542603, 0.0661802, 0.417219)
+
+[node name="SniperRifle" type="RigidBody3D"]
+collision_layer = 16
+script = ExtResource("1_7xjnn")
+gun_name = "sniper_rifle"
+ammo = ExtResource("2_fvdik")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, -0.0592194, 0.492019)
+shape = SubResource("BoxShape3D_rk1p0")
+debug_fill = false
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00323486, 0.0246673, -0.0101059)
+shape = SubResource("BoxShape3D_fvdik")
+debug_fill = false
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00323486, 0.0520275, -0.526413)
+shape = SubResource("BoxShape3D_ld636")
+debug_fill = false
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00323486, 0.11039, 0.117501)
+shape = SubResource("BoxShape3D_7xjnn")
+debug_fill = false
+
+[node name="SniperRifle_1" parent="." instance=ExtResource("3_7xjnn")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.28333e-08, 0, 0.293593)

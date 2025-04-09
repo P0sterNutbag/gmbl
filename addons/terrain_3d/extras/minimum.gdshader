@@ -168,4 +168,3 @@ void light() {
 	vec4 shaded = texture(color_gradient, vec2(sample, 0.0));
 	DIFFUSE_LIGHT += clamp((shaded.rgb * LIGHT_COLOR), 0.0, 1.0);
 }
-

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cb05x24r4r8im"]
+[gd_scene load_steps=14 format=3 uid="uid://cb05x24r4r8im"]
 
 [ext_resource type="Script" uid="uid://ba01kvx1jag3c" path="res://Scripts/enemy.gd" id="1_1f0kj"]
 [ext_resource type="PackedScene" uid="uid://bx5h70fy0b18o" path="res://Scenes/Items/Guns/shotgun.tscn" id="2_8uf12"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://cxgytywtim2v8" path="res://Scenes/Bullets/pellet.tscn" id="6_auwsv"]
 [ext_resource type="Script" uid="uid://but6ijlpfowbx" path="res://Scripts/detection_component.gd" id="6_ghaa6"]
 [ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/hitmarker.tscn" id="7_8uf12"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8uf12"]
+height = 2.23647
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o06y3"]
 height = 1.75
@@ -57,7 +60,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2921, 18.0556, 13.0293)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301743, 0.0113287, 0.00144577)
-shape = SubResource("CapsuleShape3D_o06y3")
+shape = SubResource("CapsuleShape3D_8uf12")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 

@@ -24,6 +24,7 @@ var is_crouching: bool
 var on_ladder: bool
 var firepoint: Node3D
 var ammo: Array
+var grenade = preload("res://Scenes/Bullets/grenade.tscn")
 @onready var camera = $CameraAnchor/Camera3D
 @onready var gun_anchor = $CameraAnchor/Camera3D/Guns
 @onready var pistol: Node3D = $CameraAnchor/Camera3D/Guns/Pistol
@@ -164,6 +165,12 @@ func _process(delta: float) -> void:
 				gun_target_pos = Vector3.ZERO
 				camera_zoom = zoom_levels.regular
 			gun_model.position = lerp(gun_target_pos, gun_model.position, 30 * delta)
+			
+			# throw grenade
+			if Input.is_action_just_pressed("grenade"):
+				var inst = Globals.create_instance(grenade, global_position)
+				inst.rotation = rotation
+				inst.apply_force((Vector3.UP * 500) + -global_transform.basis.z * 1000)
 			
 			# reload
 			if Input.is_action_just_pressed("reload"):

@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name Enemy
 
 @export var gun: Node3D
 @export var strafe_change := 0.2

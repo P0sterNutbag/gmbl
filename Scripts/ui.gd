@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 var crosshair_target_pos: Vector2
-@onready var middle_pos = get_tree().root.get_viewport().size / 2
+@onready var middle_pos = get_tree().root.get_viewport().size / 8
 @onready var crosshair = $Crosshair
 @onready var player_hp_bar: ProgressBar = $ProgressBar
 @onready var hit_effect: Control = $HitEffect
@@ -9,6 +9,7 @@ var crosshair_target_pos: Vector2
 @onready var center_dot: TextureRect = $TextureRect
 @onready var mags_left: Label = $MagsLeft
 @onready var medkits_left: Label = $MedkitsLeft
+@onready var gun_name: Label = $GunName
 
 
 func _ready() -> void:
@@ -16,7 +17,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	crosshair.position = lerp(crosshair.position, crosshair_target_pos, 15 * delta)
+	#crosshair.position = lerp(crosshair.position, crosshair_target_pos, 15 * delta)
 	if Globals.player.state == Globals.player.states.dead:
 		hit_effect.show()
 		hit_effect.modulate.a = 1
@@ -46,11 +47,15 @@ func show_scope(scope_texture: Texture2D = scope.texture) -> void:
 
 
 func set_mag_count(amount: int) -> void:
-	mags_left.text = "Mags: " + str(amount)
+	mags_left.text = str(amount)
 
 
 func set_medit_count(amount: int) -> void:
-	medkits_left.text = "Medits: " + str(amount)
+	medkits_left.text = str(amount)
+
+
+func set_gun_name(new_name: String) -> void:
+	gun_name.text = new_name
 
 
 func play_hit_effect() -> void:

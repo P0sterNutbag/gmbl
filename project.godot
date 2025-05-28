@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GMBL"
-run/main_scene="res://Scenes/world.tscn"
+run/main_scene="uid://vaa87ae2qq6g"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -22,8 +22,6 @@ GameController="*res://Scripts/Autoloads/game_controller.gd"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="viewport"
@@ -171,6 +169,8 @@ grenade={
 3d_physics/layer_3="EnemyHitbox"
 3d_physics/layer_4="PlayerHitbox"
 3d_physics/layer_5="Interactable"
+3d_physics/layer_6="Player"
+3d_physics/layer_7="Encounter"
 
 [physics]
 
@@ -187,7 +187,7 @@ textures/decals/filter=0
 
 specular_smoothness={
 "type": "float",
-"value": 0.05
+"value": 0.0
 }
 outline_width={
 "type": "float",
@@ -203,5 +203,5 @@ outline_color={
 }
 diffuse_curve={
 "type": "sampler2D",
-"value": ""
+"value": "res://Art/Shaders/diffuse_curve.tres"
 }

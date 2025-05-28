@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgwlg3anvnbmw"]
+
+[ext_resource type="PackedScene" uid="uid://de0b6aj1eplv5" path="res://Scenes/Guns/gun_parent.tscn" id="1_y3opf"]
+[ext_resource type="PackedScene" uid="uid://rhtj73aayki" path="res://Scenes/Guns/Models/ak47_model.tscn" id="2_p5lgt"]
+
+[node name="AK47" instance=ExtResource("1_y3opf")]
+
+[node name="GunAnchor" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.279919, -0.248514)
+
+[node name="Model" parent="GunAnchor" index="1" instance=ExtResource("2_p5lgt")]

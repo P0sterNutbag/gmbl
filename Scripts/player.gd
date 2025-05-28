@@ -16,9 +16,6 @@ var lean_angle := 0.0
 var gun_index := -1
 var crouch_height := 1.0
 var base_fov := 75.0
-var punch_dmg := 1.0
-var heavy_punch_dmg := 3.0
-var punch_charge := 1.0
 var walk_time := 0.0
 var is_crouching: bool
 var on_ladder: bool
@@ -26,32 +23,28 @@ var firepoint: Node3D
 var ammo: Array
 var grenade = preload("res://Scenes/Bullets/grenade.tscn")
 @onready var camera = $CameraAnchor/Camera3D
-@onready var gun_anchor = $CameraAnchor/Camera3D/Guns
-@onready var pistol: Node3D = $CameraAnchor/Camera3D/Guns/Pistol
-@onready var silenced_pistol: Node3D = $CameraAnchor/Camera3D/Guns/SilencedPistol
-@onready var rifle: Node3D = $CameraAnchor/Camera3D/Guns/AssaultRifle
-@onready var sniper_rifle: Node3D = $CameraAnchor/Camera3D/Guns/SniperRifle
-@onready var shotgun: Node3D = $CameraAnchor/Camera3D/Guns/Shotgun
-@onready var animation_player = $CameraAnchor/Camera3D/Guns/Pistol/AnimationPlayer
-@onready var muzzel_raycast  = $CameraAnchor/Camera3D/Guns/Pistol/Gun/FirePoint/RayCast3D
+@onready var gun_anchor: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor
+@onready var gun_offset: Node3D = $CameraAnchor/Camera3D/GunOffset
+@onready var ads_position: Node3D = $CameraAnchor/Camera3D/AdsOffset/AdsPosition
+@onready var pistol: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol
+@onready var rifle: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47
+@onready var sniper_rifle: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor/SniperRifle
+@onready var shotgun: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun
 @onready var shoot_component: Node = $ShootComponent
 @onready var step_timer: Timer = $StepTimer
 @onready var interact_cast: = $CameraAnchor/Camera3D/RayCast3D
-@onready var fist_anim_player: AnimationPlayer = $CameraAnchor/Camera3D/Guns/Fist/AnimationPlayer
-@onready var fist_raycast: RayCast3D = $CameraAnchor/Camera3D/Guns/Fist/RayCast3D
 @onready var hitbox: HealthComponent = $Hitbox
 @onready var grenade_spawn: Node3D = $CameraAnchor/Camera3D/GrenadeSpawn
 @onready var guns = [pistol, rifle]
-signal shoot
 
 
 func _ready() -> void:
 	Globals.player = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	hitbox.hp_bar = Globals.ui.player_hp_bar
 	for gun in gun_anchor.get_children():
 		gun.visible = false
 	change_gun(0)
-	shoot.connect(shoot_component._on_shoot)
 
 func _physics_process(delta):
 	# apply gravity
@@ -90,14 +83,15 @@ func _physics_process(delta):
 			move_and_slide()
 			
 			# walking animation
+			var gun = guns[gun_index]
 			if (input.x or input.y) and !Input.is_action_pressed("aim"):
 				walk_time += delta
 				var bob = cos(walk_time * 20) * 0.25
-				gun_anchor.position.y += bob * delta
-			elif gun_anchor.position.y: 
+				gun.position.y += bob * delta
+			elif gun.position.y: 
 				walk_time = 0
 				var tween = create_tween()
-				tween.tween_property(gun_anchor, "position:y", 0, 0.1)
+				tween.tween_property(gun, "position:y", 0, 0.1)
 				await tween.finished
 			
 		states.dead:
@@ -144,28 +138,25 @@ func _process(delta: float) -> void:
 			
 			# gun things
 			var gun = guns[gun_index]
-			var gun_model = gun.get_child(0)
-			var gun_pos_offset = gun.position
 			var gun_target_pos: Vector3
 			if Input.is_action_pressed("shoot"):
 				if gun.ammo <= 0 or !gun.can_shoot:
 					return
 				var tween = create_tween().set_ease(Tween.EASE_OUT)
-				tween.tween_property(gun_model, "position:z", 0.2, 0.01)
-				tween.tween_property(gun_model, "position:z", 0, 0.2)
-				shoot.emit()
+				tween.tween_property(gun, "position:z", 0.1, 0.01)
+				tween.tween_property(gun, "position:z", 0, 0.2)
+				shoot_component._on_shoot(Input.is_action_pressed("aim"))
 				gun._on_shoot()
 				camera.screen_shake()
 				camera.kickback(gun.kickback_magnitude)
 				Globals.noise_controller.create_noise_event(firepoint.global_position, gun.bullet_stats.noise_radius)
 			if Input.is_action_pressed("aim"):
-				gun_target_pos = gun.ads_vector
+				gun_target_pos = ads_position.position
 				camera_zoom = zoom_levels.ads
-				#print(gun.get_child(0).mesh.get_aabb().size)
 			else:
 				gun_target_pos = Vector3.ZERO
 				camera_zoom = zoom_levels.regular
-			gun_model.position = lerp(gun_target_pos, gun_model.position, 30 * delta)
+			gun_anchor.position = lerp(gun_target_pos, gun_anchor.position, 30 * delta)
 			
 			# throw grenade
 			if Input.is_action_just_pressed("grenade"):
@@ -180,9 +171,9 @@ func _process(delta: float) -> void:
 					return
 				Globals.ui.set_mag_count(get_item_amount(gun.ammo_type) - 1)
 				var tween = create_tween()
-				tween.tween_property(gun_model, "position:y", -1, 0.25)
+				tween.tween_property(gun_anchor, "position:y", -0.5, 0.25)
 				tween.tween_callback(use_item.bind("", ammo, gun))
-				tween.tween_property(gun_model, "position:y", 0, 0.25)
+				tween.tween_property(gun_anchor, "position:y", 0, 0.25) 
 			
 			# interact
 			if Input.is_action_just_pressed("interact"):
@@ -205,16 +196,6 @@ func _process(delta: float) -> void:
 					use_item("", medkit, hitbox)
 					hitbox.hp = clamp(hitbox.hp, 0, hitbox.max_hp)
 			
-			# punch
-			if Input.is_action_pressed("punch"):
-				punch_charge -= delta
-			if Input.is_action_just_released("punch"):
-				if punch_charge <= 0:
-					fist_anim_player.speed_scale = 2
-				else:
-					fist_anim_player.speed_scale = 1
-				fist_anim_player.play("punch")
-			
 			# camera zoom
 			var target_fov
 			if Input.is_action_pressed("camera_zoom") and !Input.is_action_pressed("aim"):
@@ -234,24 +215,15 @@ func _process(delta: float) -> void:
 			
 			# ui
 			if Input.is_action_just_pressed("aim"):
-				Globals.ui.hide_crosshairs()
 				if gun.scope_texture != null:
 					Globals.ui.show_scope(gun.scope_texture)
-					gun_model.hide()
+					gun.hide()
 			elif Input.is_action_just_released("aim"):
-				Globals.ui.show_crosshairs()
 				Globals.ui.scope.hide()
-				gun_model.show()
+				gun.show()
 				
 		states.dead:
 			pass
-	
-	# set crosshair position
-	if muzzel_raycast.is_colliding():
-		var pos = camera.unproject_position(muzzel_raycast.get_collision_point())
-		Globals.ui.set_crosshair_position(pos)
-	else:
-		Globals.ui.reset_crosshair_position()
 
 
 func _input(event):
@@ -266,8 +238,6 @@ func _input(event):
 func change_gun(new_index) -> void:
 	if new_index > guns.size() - 1:
 		return
-	animation_player.play("put_down")
-	await animation_player.animation_finished
 	if new_index == gun_index: 
 		guns[gun_index].visible = false
 		gun_index = -1
@@ -281,15 +251,14 @@ func change_gun(new_index) -> void:
 		if i != gun_index:
 			gun.visible = false
 		else:
-			animation_player = gun.get_node("AnimationPlayer")
-			firepoint = gun.get_node("Gun/FirePoint")
-			muzzel_raycast = gun.get_node("Gun/FirePoint/RayCast3D")
-			animation_player.play("draw")
-			shoot_component.firepoint = firepoint
+			firepoint = gun.get_node("GunAnchor/FirePoint")
+			shoot_component.firepoint = camera
+			shoot_component.tracer_firepoint = firepoint
 			shoot_component.bullet_stats = gun.bullet_stats
 			await get_tree().create_timer(0.05).timeout
 			gun.visible = true
 	Globals.ui.set_mag_count(get_item_amount(guns[new_index].ammo_type))
+	Globals.ui.set_gun_name(guns[gun_index].name.to_upper())
 
 
 func use_item(item_name: String, item_id = null, target: Node = self):
@@ -319,21 +288,13 @@ func get_item_amount(item_name: String) -> int:
 	return items.filter(func(i): return i != null and i.resource_name == item_name).size()
 
 
-func check_punch():
-	var enemy = fist_raycast.get_collider()
-	if enemy != null:
-		var dmg = punch_dmg
-		if punch_charge <= 0:
-			dmg = heavy_punch_dmg
-		enemy.damage(dmg)
-	punch_charge = 1.0
-
-
 func step_noise_event():
+	if !Globals.noise_controller:
+		return
 	Globals.noise_controller.create_noise_event(global_position)
 
 
-func _on_damaged() -> void:
+func _on_damaged(hit_position: Vector3, hit_direction: Vector3) -> void:
 	Globals.ui.play_hit_effect()
 
 

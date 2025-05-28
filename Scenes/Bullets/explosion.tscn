@@ -1,9 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://8s5177geyvm6"]
+[gd_scene load_steps=5 format=3 uid="uid://8s5177geyvm6"]
 
 [ext_resource type="Script" uid="uid://d148senuwc6ay" path="res://Scripts/explsion.gd" id="1_qdrr0"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v7dup"]
-radius = 2.5
+radius = 3.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qdrr0"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.588235)
+
+[sub_resource type="SphereMesh" id="SphereMesh_muhhp"]
+material = SubResource("StandardMaterial3D_qdrr0")
+radius = 3.5
+height = 7.0
 
 [node name="Explosion" type="Area3D"]
 collision_layer = 0
@@ -12,5 +21,8 @@ script = ExtResource("1_qdrr0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_v7dup")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_muhhp")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

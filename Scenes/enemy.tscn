@@ -3,36 +3,38 @@
 [ext_resource type="Script" uid="uid://ba01kvx1jag3c" path="res://Scripts/enemy.gd" id="1_1f0kj"]
 [ext_resource type="PackedScene" uid="uid://bx5h70fy0b18o" path="res://Scenes/Items/Guns/shotgun.tscn" id="2_8uf12"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_afpow"]
-[ext_resource type="PackedScene" uid="uid://d5w6yrf03c0w" path="res://Art/Models/enemy_model.tscn" id="2_haro7"]
 [ext_resource type="Script" uid="uid://ccu856f1csrwx" path="res://Scripts/shoot_component.gd" id="3_afpow"]
+[ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Characters/enemy.tscn" id="3_po0sg"]
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="5_ghaa6"]
-[ext_resource type="PackedScene" uid="uid://cxgytywtim2v8" path="res://Scenes/Bullets/pellet.tscn" id="6_auwsv"]
 [ext_resource type="Script" uid="uid://but6ijlpfowbx" path="res://Scripts/detection_component.gd" id="6_ghaa6"]
 [ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/hitmarker.tscn" id="7_8uf12"]
+[ext_resource type="PackedScene" uid="uid://cwq84n8f24jwt" path="res://Scenes/Bullets/bullet.tscn" id="7_po0sg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8uf12"]
-height = 2.23647
+height = 1.96359
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o06y3"]
-height = 1.75
+height = 1.54964
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8uf12"]
 radius = 0.246082
 
 [sub_resource type="Resource" id="Resource_po0sg"]
 script = ExtResource("5_ghaa6")
-bullet_scene = ExtResource("6_auwsv")
-amount = 8
-speed = 150.0
-max_drop_speed = 3.0
+bullet_scene = ExtResource("7_po0sg")
+amount = 1
+speed = 100.0
+max_drop_speed = 0.0
 min_drop_speed = 0.0
 drop_speed = 0.0
-damage = 0.25
-h_angle_variance = 3.0
-v_angle_variance = 3.0
+damage = 1.0
+h_angle_variance_hip = 1.0
+v_angle_variance_hip = 1.0
+h_angle_variance_ads = 1.0
+v_angle_variance_ads = 1.0
 noise_radius = 30.0
 is_hitscan = false
-bullet_drop = true
+bullet_drop = false
 collision_mask = 4
 hitmarker = ExtResource("7_8uf12")
 metadata/_custom_type_script = "uid://c338ifvm4duar"
@@ -40,29 +42,23 @@ metadata/_custom_type_script = "uid://c338ifvm4duar"
 [node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("gun")]
 collision_layer = 2
 script = ExtResource("1_1f0kj")
-gun = NodePath("EnemyModel/Armature/Skeleton3D/BoneAttachment3D/AssaultRifle_3")
+gun = NodePath("EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/AK47")
 items_to_drop = Array[PackedScene]([ExtResource("2_8uf12")])
 
-[node name="EnemyModel" parent="." instance=ExtResource("2_haro7")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1, 0)
-
-[node name="BoneAttachment3D" parent="EnemyModel/Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.389447, 0.743709, -0.543348, 0.435632, 0.668501, 0.60277, 0.811514, -0.00195316, -0.584329, -20.8788, 37.7992, -124.064)
-
-[node name="AssaultRifle_3" parent="EnemyModel/Armature/Skeleton3D/BoneAttachment3D" index="0"]
-transform = Transform3D(72.3925, -100.375, -34.9573, 34.825, 62.3595, -106.941, 100.422, 50.7331, 62.2858, 0, 0, 0)
-
-[node name="BoneAttachment3D2" parent="EnemyModel/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.787284, -0.344946, -0.511073, 0.174802, 0.919727, -0.351492, 0.591294, 0.187387, 0.784383, 29.7848, 47.2281, -114.311)
-
-[node name="Node3D" parent="EnemyModel/Armature/Skeleton3D/BoneAttachment3D2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2921, 18.0556, 13.0293)
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301743, 0.0113287, 0.00144577)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301743, 0.985648, 0.00144577)
 shape = SubResource("CapsuleShape3D_8uf12")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+[node name="EnemyModel" parent="." instance=ExtResource("3_po0sg")]
+
+[node name="RightHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.489906, 0.457233, 0.742247, -0.620313, 0.781069, -0.0717219, -0.61254, -0.425288, 0.666278, -47.9717, 37.4896, -234.309)
+
+[node name="AK47" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="0"]
+transform = Transform3D(-90.7142, 91.2147, 77.1413, -43.5924, 64.9068, -128.011, -111.223, -99.8347, -12.7447, 0, 0, 0)
+
+[node name="LeftHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.0497794, -0.554518, -0.830682, 0.61663, 0.671333, -0.411193, 0.785678, -0.491755, 0.375351, -9.00934, 115.035, -241.999)
 
 [node name="Hitbox" type="Area3D" parent="." groups=["enemies"]]
 collision_layer = 4
@@ -71,7 +67,7 @@ script = ExtResource("2_afpow")
 hp = 3.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301743, -0.169618, 0.00144577)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301743, 0.774398, 0.00144577)
 shape = SubResource("CapsuleShape3D_o06y3")
 
 [node name="HeadHitbox" type="Area3D" parent="." groups=["enemies"]]
@@ -82,7 +78,11 @@ script = ExtResource("2_afpow")
 hp = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HeadHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.843204, 0)
 shape = SubResource("SphereShape3D_8uf12")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 1.5
 
 [node name="Detection" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.79409, 0)
@@ -94,7 +94,7 @@ script = ExtResource("6_ghaa6")
 [node name="ShootComponent" type="Node" parent="." node_paths=PackedStringArray("firepoint")]
 script = ExtResource("3_afpow")
 bullet_stats = SubResource("Resource_po0sg")
-firepoint = NodePath("../EnemyModel/Armature/Skeleton3D/BoneAttachment3D/AssaultRifle_3/FirePoint")
+firepoint = NodePath("../EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/AK47/GunAnchor/FirePoint")
 
 [node name="ReturnToIdleTimer" type="Timer" parent="."]
 wait_time = 5.0
@@ -102,10 +102,11 @@ wait_time = 5.0
 [node name="PathWaitTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="animation_finished" from="EnemyModel/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="EnemyModel/PersonAnimated/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]
 [connection signal="timeout" from="ReturnToIdleTimer" to="." method="_on_return_to_idle_timer_timeout"]
 [connection signal="timeout" from="PathWaitTimer" to="." method="_on_path_wait_timer_timeout"]
 
 [editable path="EnemyModel"]
-[editable path="EnemyModel/Armature/Skeleton3D/BoneAttachment3D/AssaultRifle_3"]
+[editable path="EnemyModel/PersonAnimated"]
+[editable path="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/AK47"]

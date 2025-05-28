@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3y8367d20mmh"]
+
+[ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="1_7gxq6"]
+[ext_resource type="PackedScene" uid="uid://dp33y25ncdla5" path="res://Scenes/world.tscn" id="1_rdwol"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qofie"]
+render_priority = 0
+shader = ExtResource("1_7gxq6")
+shader_parameter/depth_edge_threshold_lower = 0.15
+shader_parameter/depth_edge_threshold_upper = 0.3
+shader_parameter/normal_edge_threshold = 0.5
+shader_parameter/line_color = Color(0.41, 0.37, 0.42, 1)
+shader_parameter/line_width = 1.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rdwol"]
+viewport_path = NodePath("SubViewport")
+
+[node name="SubViewport" type="Node3D"]
+
+[node name="Sprite2D" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_qofie")
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("ViewportTexture_rdwol")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1920, 1080)
+
+[node name="World" parent="SubViewport" instance=ExtResource("1_rdwol")]
+
+[node name="Camera3D" parent="SubViewport/World/CharacterBody3D/CameraAnchor" index="0"]
+current = true
+
+[node name="PathFollow3D" parent="SubViewport/World/Path3D" index="0"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.00009, 1, 0)
+
+[editable path="SubViewport/World"]
+[editable path="SubViewport/World/CharacterBody3D"]
+[editable path="SubViewport/World/CharacterBody3D/CameraAnchor/Camera3D/Guns/SniperRifle/Gun"]

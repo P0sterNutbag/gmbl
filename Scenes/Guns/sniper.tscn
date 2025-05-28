@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkmenaf8dxpyr"]
+
+[ext_resource type="PackedScene" uid="uid://de0b6aj1eplv5" path="res://Scenes/Guns/gun_parent.tscn" id="1_5av3h"]
+[ext_resource type="PackedScene" uid="uid://b722wimup3f3u" path="res://Scenes/Guns/Models/sniper_model.tscn" id="2_e0wvy"]
+
+[node name="Sniper" instance=ExtResource("1_5av3h")]
+fire_type = 0
+
+[node name="GunAnchor" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.22842, -0.144578)
+
+[node name="FirePoint" parent="GunAnchor" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00265765, 0.229274, -0.728568)
+
+[node name="Model" parent="GunAnchor" index="1" instance=ExtResource("2_e0wvy")]

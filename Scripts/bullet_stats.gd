@@ -8,8 +8,10 @@ class_name BulletStats
 @export var min_drop_speed = 0.0
 @export var drop_speed = 0.0
 @export var damage = 1.0
-@export var h_angle_variance = 0.0
-@export var v_angle_variance = 0.0
+@export var h_angle_variance_hip = 0.0
+@export var v_angle_variance_hip = 0.0
+@export var h_angle_variance_ads = 0.0
+@export var v_angle_variance_ads = 0.0
 @export var noise_radius = 30.0
 @export var is_hitscan: bool = true
 @export var bullet_drop: bool = true

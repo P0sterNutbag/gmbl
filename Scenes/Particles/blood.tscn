@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://duvhic7qxcdpe"]
+
+[ext_resource type="Texture2D" uid="uid://d2c2vof5o6nch" path="res://Art/Textures/bloodspray.png" id="1_xh7xb"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gi2t5"]
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, 0.5, -1)
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+scale_min = 0.1
+scale_max = 0.3
+turbulence_noise_scale = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qsn3h"]
+render_priority = 1
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.82, 0.123, 0, 1)
+albedo_texture = ExtResource("1_xh7xb")
+texture_filter = 0
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_33mxt"]
+material = SubResource("StandardMaterial3D_qsn3h")
+
+[sub_resource type="GDScript" id="GDScript_xh7xb"]
+script/source = "extends GPUParticles3D
+
+
+func _on_finished() -> void:
+	queue_free()
+"
+
+[node name="Blood" type="GPUParticles3D"]
+emitting = false
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_gi2t5")
+draw_pass_1 = SubResource("QuadMesh_33mxt")
+script = SubResource("GDScript_xh7xb")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

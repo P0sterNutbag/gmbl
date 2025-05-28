@@ -5,11 +5,14 @@ class_name HealthComponent
 	set(value):
 		hp = value
 		if hp_bar:
-			hp_bar.value = hp / max_hp
+			if hp_bar is ProgressBar:
+				hp_bar.value = hp / max_hp
+			elif hp_bar is Label:
+				hp_bar.text = "HP:" + str(int((hp / max_hp) * 100))
 @export var hp_bar: Control
 @onready var max_hp: float = hp
 var is_dead: bool
-signal damaged
+signal damaged(hit_position: Vector3, hit_direction: Vector3)
 signal death
 
 
@@ -18,11 +21,11 @@ func _ready() -> void:
 	damaged.connect(get_parent()._on_damaged)
 
 
-func damage(dmg: float) -> void:
+func damage(dmg: float, hit_position: Vector3, hit_direction: Vector3) -> void:
+	damaged.emit(hit_position, hit_direction)
 	if is_dead:
 		return
 	hp -= dmg
-	damaged.emit()
 	if hp <= 0:
 		death.emit()
 		is_dead = true

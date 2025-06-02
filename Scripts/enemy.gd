@@ -4,6 +4,9 @@ class_name Enemy
 @export var gun: Node3D
 @export var strafe_change := 0.2
 @export var items_to_drop: Array[PackedScene]
+enum teams {enemies, allies}
+@export var team: teams = teams.enemies
+@export var follow_target: Node3D
 enum states {idle, investigate, attack, search, strafe, hurt, dead}
 var state = states.idle
 var walk_speed := 1.5
@@ -15,27 +18,36 @@ var range := 100
 var path_index: int
 var is_new_state: bool
 var on_alert: bool
+var damage_position: Vector3
 var target: Node3D
 var firepoint: Node3D
-var blood_particle: PackedScene = preload("res://Scenes/Particles/bloodspray.tscn")
+var blood_particle: PackedScene
 @onready var detection = $Detection
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var anim_player: AnimationPlayer = $EnemyModel/PersonAnimated/AnimationPlayer
 @onready var return_to_idle_timer: Timer = $ReturnToIdleTimer
 @onready var path_wait_timer: Timer = $PathWaitTimer
 @onready var right_hand: Node3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
+@onready var shoot_component: Node = $ShootComponent
 signal shoot
 
 
 func _ready() -> void:
-	target = Globals.player
+	#detection.targets.append(Globals.player)
 	firepoint = gun.fire_point
 	shoot.connect($ShootComponent._on_shoot)
 	shoot.connect(gun._on_shoot)
+	blood_particle = load("res://Scenes/Particles/bloodspray.tscn")
+	await get_tree().create_timer(0.5)
+	if team == teams.allies:
+		detection.targets = get_tree().get_nodes_in_group("enemies")
+		shoot_component.bullet_stats.collision_mask = 3
+	elif team == teams.enemies:
+		detection.targets = get_tree().get_nodes_in_group("allies")
+		shoot_component.bullet_stats.collision_mask = 4
 
 
 func _physics_process(delta: float) -> void:
-	print(global_position.y)
 	match state:
 		states.idle:
 			if is_new_state:
@@ -49,15 +61,20 @@ func _physics_process(delta: float) -> void:
 				if navigation_agent.target_position != next_point:
 					navigation_agent.set_target_position(next_point)
 				follow_path()
-
+			elif follow_target:
+				navigation_agent.set_target_position(follow_target.global_position)
+				follow_path(run_speed)
+			
 			# switch to investigate
-			if detection.can_see_target():
+			target = detection.get_visible_target()
+			if target != null:
 				change_state(states.investigate)
-				print("target spotted")
 			
 			# animate
-			if abs(velocity) < Vector3.ONE * 0.1:
+			if abs(velocity) == Vector3.ZERO:
 				anim_player.play("Idle")
+			elif velocity.length() >= run_speed-1:
+				anim_player.play("Run")
 			else:
 				anim_player.play("Walk")
 			
@@ -68,16 +85,15 @@ func _physics_process(delta: float) -> void:
 			
 			# stop moving
 			velocity = Vector3.ZERO
-			print("investigating")
 			
-			# detect player
-			if detection.can_see_target():
+			# detect target
+			target = detection.get_visible_target()
+			if target:
 				look_at_position(target.global_position)
 				var dis_to_target = global_position.distance_to(target.global_position)
 				time_to_detect -= (20 / dis_to_target) * delta
 				if time_to_detect <= 0 or on_alert:
 					change_state(states.attack)
-					#print("attack from investigate!")
 			else:
 				if return_to_idle_timer.time_left <= 0:
 					return_to_idle_timer.start()
@@ -88,9 +104,14 @@ func _physics_process(delta: float) -> void:
 				on_alert = true
 				is_new_state = false
 			
-			# look at player
+			if !target or target.state == states.dead:
+				target = null
+				change_state(states.investigate)
+				return
+			
+			# look at target
 			look_at_position(target.global_position)
-			firepoint.look_at(target.global_position + Vector3.UP * 0.25)
+			firepoint.look_at(target.global_position + Vector3.UP * 1)
 			
 			# get into range
 			if global_position.distance_to(target.global_position) > range:
@@ -100,10 +121,9 @@ func _physics_process(delta: float) -> void:
 				velocity = Vector3.ZERO
 			
 			# switch to search
-			if !detection.can_see_target():
+			if !detection.can_see_target(target):
 				navigation_agent.set_target_position(target.global_position)
 				change_state(states.search)
-				print("target lost")
 			
 			# animate 
 			if velocity == Vector3.ZERO:
@@ -117,13 +137,12 @@ func _physics_process(delta: float) -> void:
 		states.search:
 			# go to last seen position
 			follow_path(run_speed)
-			print("searching")
 			
 			# return to attack
-			if detection.can_see_target():
-				change_state(states.attack)
+			#target = detection.get_visible_target()
+			if detection.can_see_target(target):
 				velocity = Vector3.ZERO
-				print("attack from search!")
+				change_state(states.attack)
 			
 			# animate
 			anim_player.play("WalkPoint")
@@ -138,7 +157,6 @@ func _physics_process(delta: float) -> void:
 			
 			# run to new position
 			follow_path(run_speed)
-			print("strafing " + str(velocity))
 			
 			# stop strafing
 			if velocity.length() < 0.1:
@@ -189,15 +207,26 @@ func look_at_position(pos: Vector3):
 		look_at(target_pos, Vector3.UP)
 
 
+func set_detection_targets():
+	if team == teams.allies:
+		detection.targets = get_tree().get_nodes_in_group("enemies").filter(func(i): return i.state != states.dead)
+	elif team == teams.enemies:
+		detection.targets = get_tree().get_nodes_in_group("allies").filter(func(i): return i.state != states.dead)
+
+
 func emit_shoot() -> void:
 	shoot.emit()
 
 
-func on_noise_heard(noise_position: Vector3):
+func on_noise_heard(noise_position: Vector3, event_creator: Node):
+	if event_creator and event_creator.is_in_group(get_groups()[0]):
+		return
 	if state == states.dead or state == states.hurt:
 		return
-	if state != states.attack and state != states.search and state != states.strafe and state != states.investigate:
-		change_state(states.investigate)
+	if state == states.idle:
+		navigation_agent.set_target_position(noise_position)
+		target = event_creator
+		change_state(states.search)
 	elif state == states.investigate:
 		time_to_detect -= 0.5
 	look_at_position(noise_position)
@@ -205,6 +234,7 @@ func on_noise_heard(noise_position: Vector3):
 
 func _on_damaged(hit_position: Vector3, hit_direction: Vector3) -> void:
 	velocity = Vector3.ZERO
+	damage_position = hit_position
 	if time_since_bleed < 0.1:
 		return
 	time_since_bleed = 0
@@ -232,27 +262,30 @@ func _on_death() -> void:
 	velocity = Vector3.ZERO
 	anim_player.play("Die")
 	change_state(states.dead)
+	if team == teams.allies:
+		get_tree().call_group("enemies", "set_detection_targets")
+	if team == teams.enemies:
+		get_tree().call_group("allies", "set_detection_targets")
 
 
 func _on_navigation_agent_3d_navigation_finished() -> void:
 	if state == states.idle:
 		path_wait_timer.start()
 		velocity = Vector3.ZERO
-		#print("path point reached")
 	elif state == states.search:
 		change_state(states.idle)
 	elif state == states.strafe:
 		change_state(states.attack)
-		#print("target not found, return to idle")
 
 
 func _on_return_to_idle_timer_timeout() -> void:
-	if state == states.investigate and !detection.can_see_target():
+	if state == states.investigate and !detection.get_visible_target():
 		change_state(states.idle)
 
 
 func _on_path_wait_timer_timeout() -> void:
-	path_index = wrap(path_index + 1, 0, get_parent().curve.point_count)
+	if get_parent() is Path3D:
+		path_index = wrap(path_index + 1, 0, get_parent().curve.point_count)
 
 
 func _on_shoot_finished() -> void:
@@ -263,6 +296,7 @@ func _on_shoot_finished() -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name.contains("HitReaction"):
+		look_at_position(damage_position)
 		change_state(states.attack)
 	elif anim_name == "Fire":
 		emit_shoot()

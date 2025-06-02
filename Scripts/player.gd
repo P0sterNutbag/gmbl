@@ -4,8 +4,10 @@ class_name Player
 @export var items: Array[Item]
 enum states {walk, dead}
 enum zoom_levels {regular, ads, zoom}
+enum gun_states {point, ads, reload}
 var state = states.walk
 var camera_zoom = zoom_levels.regular
+var gun_state = gun_states.point
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var base_speed := 8.0
 var crouch_speed := 3.0
@@ -46,10 +48,11 @@ func _ready() -> void:
 		gun.visible = false
 	change_gun(0)
 
+
 func _physics_process(delta):
 	# apply gravity
 	velocity.y += -gravity * delta
-	
+	# state machine
 	match state:
 		states.walk:
 			# set speed
@@ -138,25 +141,24 @@ func _process(delta: float) -> void:
 			
 			# gun things
 			var gun = guns[gun_index]
-			var gun_target_pos: Vector3
-			if Input.is_action_pressed("shoot"):
-				if gun.ammo <= 0 or !gun.can_shoot:
-					return
-				var tween = create_tween().set_ease(Tween.EASE_OUT)
-				tween.tween_property(gun, "position:z", 0.1, 0.01)
-				tween.tween_property(gun, "position:z", 0, 0.2)
-				shoot_component._on_shoot(Input.is_action_pressed("aim"))
-				gun._on_shoot()
-				camera.screen_shake()
-				camera.kickback(gun.kickback_magnitude)
-				Globals.noise_controller.create_noise_event(firepoint.global_position, gun.bullet_stats.noise_radius)
-			if Input.is_action_pressed("aim"):
-				gun_target_pos = ads_position.position
-				camera_zoom = zoom_levels.ads
-			else:
-				gun_target_pos = Vector3.ZERO
-				camera_zoom = zoom_levels.regular
-			gun_anchor.position = lerp(gun_target_pos, gun_anchor.position, 30 * delta)
+			if gun_state != gun_states.reload:
+				if Input.is_action_pressed("shoot"):
+					if gun.ammo <= 0 or !gun.can_shoot:
+						return
+					var tween = create_tween().set_ease(Tween.EASE_OUT)
+					tween.tween_property(gun, "position:z", 0.1, 0.01)
+					tween.tween_property(gun, "position:z", 0, 0.2)
+					shoot_component._on_shoot(Input.is_action_pressed("aim"))
+					gun._on_shoot()
+					camera.screen_shake()
+					camera.kickback(gun.kickback_magnitude)
+					Globals.noise_controller.create_noise_event(firepoint.global_position, self, gun.bullet_stats.noise_radius)
+				if Input.is_action_pressed("aim"):
+					gun_state = gun_states.ads
+					camera_zoom = zoom_levels.ads
+				else:
+					gun_state = gun_states.point
+					camera_zoom = zoom_levels.regular
 			
 			# throw grenade
 			if Input.is_action_just_pressed("grenade"):
@@ -165,16 +167,19 @@ func _process(delta: float) -> void:
 				inst.apply_force((Vector3.UP * 500) + -camera.global_transform.basis.z * 750)
 			
 			# reload
-			if Input.is_action_just_pressed("reload"):
+			if Input.is_action_just_pressed("reload") and gun_state != gun_states.reload:
 				var ammo = find_item(gun.ammo_type)
 				if !ammo:
 					return
+				gun_state = gun_states.reload
 				Globals.ui.set_mag_count(get_item_amount(gun.ammo_type) - 1)
 				var tween = create_tween()
-				tween.tween_property(gun_anchor, "position:y", -0.5, 0.25)
+				tween.tween_property(gun_anchor, "position:y", -1, 0.25)
+				tween.tween_interval(0.5)
 				tween.tween_callback(use_item.bind("", ammo, gun))
-				tween.tween_property(gun_anchor, "position:y", 0, 0.25) 
-			
+				tween.tween_property(gun_anchor, "position:y", 0, 0.15) 
+				tween.tween_property(self, "gun_state", gun_states.point, 0)
+			print(gun_state)
 			# interact
 			if Input.is_action_just_pressed("interact"):
 				if !interact_cast.is_colliding():
@@ -223,6 +228,14 @@ func _process(delta: float) -> void:
 				gun.show()
 				
 		states.dead:
+			pass
+	
+	match gun_state:
+		gun_states.point:
+			gun_anchor.position = lerp(Vector3.ZERO, gun_anchor.position, 30 * delta)
+		gun_states.ads:
+			gun_anchor.position = lerp(ads_position.position, gun_anchor.position, 30 * delta)
+		gun_states.reload:
 			pass
 
 
@@ -291,7 +304,7 @@ func get_item_amount(item_name: String) -> int:
 func step_noise_event():
 	if !Globals.noise_controller:
 		return
-	Globals.noise_controller.create_noise_event(global_position)
+	Globals.noise_controller.create_noise_event(global_position, self)
 
 
 func _on_damaged(hit_position: Vector3, hit_direction: Vector3) -> void:
@@ -305,9 +318,9 @@ func _on_death() -> void:
 	tween.tween_property(camera, "rotation:z", deg_to_rad(45), 1)
 	tween.tween_callback(get_tree().reload_current_scene)
 
-#
-#func _on_step_timer_timeout() -> void:
-	#step_noise_event()
+
+func _on_step_timer_timeout() -> void:
+	step_noise_event()
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:

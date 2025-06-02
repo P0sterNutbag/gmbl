@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=3 uid="uid://y38oa3aalokc"]
+
+[ext_resource type="PackedScene" uid="uid://cjqqbpaywor2x" path="res://Art/Models/person animations.glb" id="1_13ioh"]
+[ext_resource type="PackedScene" uid="uid://dgwlg3anvnbmw" path="res://Scenes/Guns/ak47.tscn" id="2_b1c4r"]
+[ext_resource type="Material" uid="uid://d2ayahk310s3p" path="res://Art/Materials/fabric_brown.tres" id="4_gwe5h"]
+[ext_resource type="Material" uid="uid://gq6icaxkf727" path="res://Art/Materials/shirt.tres" id="4_t03nw"]
+[ext_resource type="Material" uid="uid://iagweyrwrs4k" path="res://Art/Materials/off_black.tres" id="5_43qwk"]
+[ext_resource type="Script" uid="uid://lqqeegrsnbnq" path="res://Scripts/gun_posable.gd" id="7_gwe5h"]
+[ext_resource type="Material" uid="uid://vkv3rps0wawi" path="res://Art/Materials/face.tres" id="9_43qwk"]
+
+[node name="EnemyModel" type="Node3D"]
+
+[node name="PersonAnimated" parent="." instance=ExtResource("1_13ioh")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="PersonAnimated/Armature" index="0"]
+bones/0/position = Vector3(-2.04112, 2.19943, -165.83)
+bones/0/rotation = Quaternion(-0.366186, -0.59545, 0.678043, 0.227165)
+bones/1/rotation = Quaternion(-0.000547499, -0.000657098, -0.0468872, 0.9989)
+bones/2/rotation = Quaternion(-0.0065926, 0.000184704, -0.142749, 0.989737)
+bones/3/position = Vector3(8.27015e-07, 24.9326, -2.83122e-07)
+bones/3/rotation = Quaternion(-0.00648998, -0.000436133, -0.142753, 0.989737)
+bones/4/position = Vector3(9.22268e-06, 28.0492, -2.74181e-06)
+bones/4/rotation = Quaternion(0.00898953, 0.0650237, -0.0264598, 0.997492)
+bones/5/position = Vector3(0.595635, 9.99197, 1.43051e-06)
+bones/5/rotation = Quaternion(0.0901484, 0.192195, 0.0401118, 0.976384)
+bones/6/position = Vector3(4.00831, 67.2396, 1.00136e-05)
+bones/7/position = Vector3(-0.191077, 23.5126, -14.985)
+bones/7/rotation = Quaternion(0.168617, -0.584958, 0.743545, -0.276646)
+bones/8/position = Vector3(-9.24695e-07, 31.2998, 3.38008e-05)
+bones/8/rotation = Quaternion(0.351256, -0.239271, 0.251193, 0.869638)
+bones/9/position = Vector3(1.77964e-05, 52.3843, -2.17893e-05)
+bones/9/rotation = Quaternion(0.0249493, -0.000239475, 0.535587, 0.844112)
+bones/10/position = Vector3(-5.28991e-07, 48.0139, 3.55672e-06)
+bones/11/position = Vector3(-0.223498, 23.5141, 14.985)
+bones/11/rotation = Quaternion(0.711717, 0.21257, 0.289709, 0.603607)
+bones/12/position = Vector3(-7.27005e-06, 31.2998, -1.88713e-05)
+bones/12/rotation = Quaternion(0.421637, -0.200501, -0.509102, 0.723075)
+bones/13/position = Vector3(-9.10837e-06, 52.3822, -4.88692e-06)
+bones/13/rotation = Quaternion(0.037567, -9.10982e-05, -0.756308, 0.653137)
+bones/14/position = Vector3(1.51992e-06, 48.0148, 2.95229e-06)
+bones/15/rotation = Quaternion(0.396909, -0.141278, 0.905099, -0.0574445)
+bones/16/position = Vector3(-7.89536e-07, 73.5593, -1.27844e-06)
+bones/16/rotation = Quaternion(-0.00330096, -0.00529586, -0.20565, 0.978606)
+bones/17/position = Vector3(4.18915e-06, 64.9924, 2.59457e-06)
+bones/17/rotation = Quaternion(0.301075, -0.699072, 0.384883, 0.522032)
+bones/18/position = Vector3(2.52966e-06, 41.0572, -3.57756e-06)
+bones/18/rotation = Quaternion(0.282079, -0.192323, 0.0568801, 0.938194)
+bones/19/position = Vector3(9.93908e-06, 20.7615, -5.96069e-08)
+bones/20/rotation = Quaternion(0.0450999, 0.04384, 0.996374, 0.0572884)
+bones/21/position = Vector3(1.42841e-06, 73.5589, -1.64062e-06)
+bones/21/rotation = Quaternion(-0.00118308, 0.00366922, -0.278089, 0.960548)
+bones/22/rotation = Quaternion(0.486149, -0.318655, 0.401059, 0.708004)
+bones/23/position = Vector3(4.52276e-06, 40.5276, 4.5326e-06)
+bones/23/rotation = Quaternion(0.284082, 0.186351, -0.0562996, 0.93883)
+bones/24/position = Vector3(-1.66893e-06, 20.6788, 2.14577e-06)
+
+[node name="Cube" parent="PersonAnimated/Armature/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("9_43qwk")
+
+[node name="Cube_001" parent="PersonAnimated/Armature/Skeleton3D" index="1"]
+surface_material_override/0 = ExtResource("4_t03nw")
+surface_material_override/1 = ExtResource("4_gwe5h")
+surface_material_override/2 = ExtResource("5_43qwk")
+
+[node name="RightHand" type="BoneAttachment3D" parent="PersonAnimated/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.489906, 0.457233, 0.742247, -0.620313, 0.781069, -0.0717219, -0.61254, -0.425288, 0.666278, -47.9717, 37.4896, -234.309)
+bone_name = "mixamorig_RightHand"
+bone_idx = 14
+
+[node name="Node3D" type="Node3D" parent="PersonAnimated/Armature/Skeleton3D/RightHand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.1499, 18.9219, -12.46)
+
+[node name="AK47" parent="PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" node_paths=PackedStringArray("point_at") instance=ExtResource("2_b1c4r")]
+transform = Transform3D(-90.7142, 91.2149, 77.1413, -43.5925, 64.9069, -128.011, -111.223, -99.8349, -12.7447, 0, 0, 0)
+script = ExtResource("7_gwe5h")
+point_at = NodePath("../../../LeftHand/Node3D")
+bullet_stats = null
+
+[node name="LeftHand" type="BoneAttachment3D" parent="PersonAnimated/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.0497794, -0.554518, -0.830682, 0.61663, 0.671333, -0.411193, 0.785678, -0.491755, 0.375351, -9.00934, 115.035, -241.999)
+bone_name = "mixamorig_LeftHand"
+bone_idx = 10
+
+[node name="Node3D" type="Node3D" parent="PersonAnimated/Armature/Skeleton3D/LeftHand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5451, 24.5409, -11.1804)
+
+[editable path="PersonAnimated"]

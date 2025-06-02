@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=3 uid="uid://c14x1owrc7ep5"]
+
+[ext_resource type="Texture2D" uid="uid://cyshvj2iqviq6" path="res://Art/Textures/sand2.png" id="1_ys1qc"]
+[ext_resource type="PackedScene" uid="uid://brrtfg5jynxnd" path="res://Scenes/Environment/rock.tscn" id="2_ys1qc"]
+[ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/enemy.tscn" id="3_i3aeo"]
+[ext_resource type="PackedScene" uid="uid://dh3jpt3np8wxk" path="res://Scenes/ally.tscn" id="4_5wyu1"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_0c07c"]
+vertices = PackedVector3Array(-49.5, 0.500001, -3.5, -7.5, 0.500001, -3.5, -7.5, 0.500001, -4.25, -6.75, 0.500001, -4.75, -6.75, 0.500001, -49.5, -49.5, 0.500001, -49.5, -3.5, 0.500001, -3.75, -3.25, 0.500001, -2.75, -1.75, 0.500001, -3.75, -1.75, 0.500001, -5, -4.75, 0.500001, -5, -6.25, 0.500001, -5.25, 0.75, 0.500001, -6.75, 0.75, 0.500001, -49.5, 2, 0.500001, -6.5, 3.25, 0.500001, -5.25, 4.25, 0.500001, -3, 49.5, 0.500001, -3, 49.5, 0.500001, -49.5, 2.25, 2, -2, 2.75, 1.75, -2, 3.25, 1.5, -3, 1.5, 3, -3.75, 0.5, 2.25, -3, -0.5, 1.75, -4.5, 0.75, 2.25, -5.25, 1, 0.500001, -4.25, 1, 0.500001, -3.75, 1.75, 0.500001, -3.5, -5.25, 1.75, -2.25, -4.5, 1.5, -2, -4.25, 1.25, -2.5, -6.25, 1.5, -3.75, -5.25, 2, -3.125, -0.25, 0.500001, -1.5, -3.75, 0.500001, -1, -4.75, 0.500001, -0.75, -4.75, 0.500001, 49.5, 2.25, 0.500001, 49.5, 2.25, 0.500001, -0.75, -7, 0.500001, -2, -49.5, 0.500001, 49.5, 3.75, 0.500001, -1.5, 3, 0.500001, -0.75, 49.5, 0.500001, 49.5)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(4, 0, 5), PackedInt32Array(8, 7, 6), PackedInt32Array(8, 6, 9), PackedInt32Array(9, 6, 10), PackedInt32Array(4, 11, 3), PackedInt32Array(10, 11, 9), PackedInt32Array(9, 11, 12), PackedInt32Array(12, 11, 13), PackedInt32Array(13, 11, 4), PackedInt32Array(14, 12, 13), PackedInt32Array(15, 14, 13), PackedInt32Array(15, 13, 16), PackedInt32Array(16, 13, 17), PackedInt32Array(17, 13, 18), PackedInt32Array(20, 19, 21), PackedInt32Array(21, 19, 22), PackedInt32Array(22, 19, 23), PackedInt32Array(23, 24, 22), PackedInt32Array(22, 24, 25), PackedInt32Array(28, 27, 26), PackedInt32Array(30, 29, 31), PackedInt32Array(31, 29, 33), PackedInt32Array(33, 29, 32), PackedInt32Array(7, 8, 35), PackedInt32Array(35, 8, 34), PackedInt32Array(35, 34, 36), PackedInt32Array(36, 34, 39), PackedInt32Array(36, 39, 38), PackedInt32Array(36, 38, 37), PackedInt32Array(0, 1, 40), PackedInt32Array(40, 36, 0), PackedInt32Array(0, 36, 37), PackedInt32Array(0, 37, 41), PackedInt32Array(42, 16, 17), PackedInt32Array(42, 17, 43), PackedInt32Array(43, 17, 38), PackedInt32Array(38, 17, 44), PackedInt32Array(38, 39, 43)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_agnh5"]
+albedo_texture = ExtResource("1_ys1qc")
+uv1_triplanar = true
+texture_filter = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2cgwh"]
+material = SubResource("StandardMaterial3D_agnh5")
+size = Vector2(100, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iaow0"]
+size = Vector3(100, 0.5, 100)
+
+[sub_resource type="Curve3D" id="Curve3D_ys1qc"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -10),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="Test" type="Node3D"]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_0c07c")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_2cgwh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_iaow0")
+
+[node name="Rock" parent="NavigationRegion3D" instance=ExtResource("2_ys1qc")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1.14339, 9.53674e-07, -3.62683)
+
+[node name="Rock2" parent="NavigationRegion3D" instance=ExtResource("2_ys1qc")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -5.49004, 9.53674e-07, -2.98971)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.815774, 0.57837, 0, -0.57837, 0.815774, 0, 10.0064, 8.76059)
+
+[node name="Enemy" parent="." instance=ExtResource("3_i3aeo")]
+transform = Transform3D(-0.0561178, 0, -0.998424, 0, 1, 0, 0.998424, 0, -0.0561178, -9.25573, 0.1273, -4.80293)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_i3aeo")]
+transform = Transform3D(-0.0561178, 0, -0.998424, 0, 1, 0, 0.998424, 0, -0.0561178, -9.47034, 0.1273, -0.984672)
+
+[node name="Enemy3" parent="." instance=ExtResource("3_i3aeo")]
+transform = Transform3D(-0.0561178, 0, -0.998424, 0, 1, 0, 0.998424, 0, -0.0561178, -5.14601, 0.1273, 1.91924)
+
+[node name="Enemy4" parent="." instance=ExtResource("3_i3aeo")]
+transform = Transform3D(0.859629, 0, -0.510918, 0, 1, 0, 0.510918, 0, 0.859629, -8.63083, 0.1273, 2.77553)
+
+[node name="Ally4" parent="." instance=ExtResource("4_5wyu1")]
+transform = Transform3D(-0.999245, 0, -0.0388413, 0, 1, 0, 0.0388413, 0, -0.999245, -8.61014, 0.0749965, -10.2316)
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.29066, 0, 0)
+curve = SubResource("Curve3D_ys1qc")
+
+[node name="Ally" parent="Path3D" instance=ExtResource("4_5wyu1")]
+transform = Transform3D(0.0904935, 0, 0.995897, 0, 1, 0, -0.995897, 0, 0.0904935, 0.37765, 0.0749965, -3.71531)
+
+[node name="Ally2" parent="Path3D" instance=ExtResource("4_5wyu1")]
+transform = Transform3D(0.0904935, 0, 0.995897, 0, 1, 0, -0.995897, 0, 0.0904935, -6.98564, 0.0749965, -9.99209)
+
+[node name="Ally3" parent="Path3D" instance=ExtResource("4_5wyu1")]
+transform = Transform3D(0.0904935, 0, 0.995897, 0, 1, 0, -0.995897, 0, 0.0904935, -4.02034, 0.0749965, -9.24291)

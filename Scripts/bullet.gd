@@ -16,11 +16,7 @@ func _ready() -> void:
 	if raycast.is_colliding():
 		hit()
 	if bullet_stats.is_hitscan:
-		var inst = tracer.instantiate()
-		get_tree().current_scene.add_child(inst)
-		inst.global_transform = tracer_firepoint.global_transform
-		inst.global_translate(-global_transform.basis.z.normalized() * 1)
-		inst.end_point = raycast.get_collision_point()
+		create_tracer()
 		queue_free.call_deferred()
 
 
@@ -55,3 +51,15 @@ func hit():
 	inst.global_position = raycast.get_collision_point()
 	if !bullet_stats.is_hitscan:
 		queue_free()
+
+
+func create_tracer():
+	var inst = tracer.instantiate()
+	get_tree().current_scene.add_child(inst)
+	inst.global_transform = tracer_firepoint.global_transform
+	#inst.global_translate(-tracer_firepoint.global_transform.basis.z.normalized())
+	if raycast.is_colliding():
+		inst.end_point = raycast.get_collision_point()
+	else:
+		inst.end_point = tracer_firepoint.global_position + (-global_transform.basis.z.normalized() * 100)
+	inst.look_at(inst.end_point)

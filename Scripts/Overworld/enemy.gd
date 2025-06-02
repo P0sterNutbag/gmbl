@@ -5,8 +5,13 @@ var walk_speed := 2
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var anim_player: AnimationPlayer = $EnemyModel/PersonAnimated/AnimationPlayer
 
+
+func _ready() -> void:
+	detection.targets.append(Globals.player)
+
+
 func _process(delta: float) -> void:
-	if detection.can_see_target():
+	if detection.get_visible_target():
 		navigation_agent.set_target_position(Globals.player.global_position)
 	follow_path()
 	

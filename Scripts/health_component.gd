@@ -10,6 +10,7 @@ class_name HealthComponent
 			elif hp_bar is Label:
 				hp_bar.text = "HP:" + str(int((hp / max_hp) * 100))
 @export var hp_bar: Control
+@export var otherHitboxes: Array[HealthComponent]
 @onready var max_hp: float = hp
 var is_dead: bool
 signal damaged(hit_position: Vector3, hit_direction: Vector3)
@@ -29,3 +30,6 @@ func damage(dmg: float, hit_position: Vector3, hit_direction: Vector3) -> void:
 	if hp <= 0:
 		death.emit()
 		is_dead = true
+		for inst in otherHitboxes:
+			inst.queue_free()
+		queue_free()

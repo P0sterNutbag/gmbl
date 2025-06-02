@@ -1,14 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://cb05x24r4r8im"]
+[gd_scene load_steps=14 format=3 uid="uid://dh3jpt3np8wxk"]
 
-[ext_resource type="Script" uid="uid://ba01kvx1jag3c" path="res://Scripts/enemy.gd" id="1_1f0kj"]
-[ext_resource type="PackedScene" uid="uid://bx5h70fy0b18o" path="res://Scenes/Items/Guns/shotgun.tscn" id="2_8uf12"]
-[ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_afpow"]
-[ext_resource type="Script" uid="uid://ccu856f1csrwx" path="res://Scripts/shoot_component.gd" id="3_afpow"]
-[ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="3_po0sg"]
-[ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="5_ghaa6"]
-[ext_resource type="Script" uid="uid://but6ijlpfowbx" path="res://Scripts/detection_component.gd" id="6_ghaa6"]
-[ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/hitmarker.tscn" id="7_8uf12"]
-[ext_resource type="PackedScene" uid="uid://cwq84n8f24jwt" path="res://Scenes/Bullets/bullet.tscn" id="7_po0sg"]
+[ext_resource type="Script" uid="uid://ba01kvx1jag3c" path="res://Scripts/enemy.gd" id="1_hqxkx"]
+[ext_resource type="PackedScene" uid="uid://bx5h70fy0b18o" path="res://Scenes/Items/Guns/shotgun.tscn" id="2_7mt7b"]
+[ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="3_m1equ"]
+[ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="4_6xcmo"]
+[ext_resource type="Script" uid="uid://but6ijlpfowbx" path="res://Scripts/detection_component.gd" id="5_sm1jp"]
+[ext_resource type="Script" uid="uid://ccu856f1csrwx" path="res://Scripts/shoot_component.gd" id="6_x3qkl"]
+[ext_resource type="PackedScene" uid="uid://cwq84n8f24jwt" path="res://Scenes/Bullets/bullet.tscn" id="7_hl1ka"]
+[ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/hitmarker.tscn" id="8_uyrhc"]
+[ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="9_cy4a7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8uf12"]
 height = 1.96359
@@ -20,10 +20,10 @@ height = 1.54964
 radius = 0.246082
 
 [sub_resource type="Resource" id="Resource_po0sg"]
-script = ExtResource("5_ghaa6")
-bullet_scene = ExtResource("7_po0sg")
+script = ExtResource("9_cy4a7")
+bullet_scene = ExtResource("7_hl1ka")
 amount = 1
-speed = 250.0
+speed = 100.0
 max_drop_speed = 0.0
 min_drop_speed = 0.0
 drop_speed = 0.0
@@ -36,21 +36,22 @@ noise_radius = 30.0
 is_hitscan = false
 bullet_drop = false
 collision_mask = 4
-hitmarker = ExtResource("7_8uf12")
+hitmarker = ExtResource("8_uyrhc")
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
-[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("gun") groups=["enemies"]]
+[node name="Ally" type="CharacterBody3D" node_paths=PackedStringArray("gun") groups=["allies"]]
 collision_layer = 2
-script = ExtResource("1_1f0kj")
+script = ExtResource("1_hqxkx")
 gun = NodePath("EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/AK47")
-items_to_drop = Array[PackedScene]([ExtResource("2_8uf12")])
+items_to_drop = Array[PackedScene]([ExtResource("2_7mt7b")])
+team = 1
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301743, 0.985648, 0.00144577)
 shape = SubResource("CapsuleShape3D_8uf12")
 
-[node name="EnemyModel" parent="." instance=ExtResource("3_po0sg")]
+[node name="EnemyModel" parent="." instance=ExtResource("3_m1equ")]
 
 [node name="RightHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="2"]
 transform = Transform3D(0.489906, 0.457233, 0.742247, -0.620313, 0.781069, -0.0717219, -0.61254, -0.425288, 0.666278, -47.9717, 37.4896, -234.309)
@@ -64,7 +65,7 @@ transform = Transform3D(0.0497794, -0.554518, -0.830682, 0.61663, 0.671333, -0.4
 [node name="Hitbox" type="Area3D" parent="." node_paths=PackedStringArray("otherHitboxes")]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("2_afpow")
+script = ExtResource("4_6xcmo")
 hp = 3.0
 otherHitboxes = [NodePath("../HeadHitbox")]
 
@@ -76,7 +77,7 @@ shape = SubResource("CapsuleShape3D_o06y3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.926, 0)
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("2_afpow")
+script = ExtResource("4_6xcmo")
 hp = 1.0
 otherHitboxes = [NodePath("../Hitbox")]
 
@@ -91,10 +92,10 @@ target_desired_distance = 1.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 target_position = Vector3(0, 0, -50)
 hit_from_inside = true
-script = ExtResource("6_ghaa6")
+script = ExtResource("5_sm1jp")
 
 [node name="ShootComponent" type="Node" parent="." node_paths=PackedStringArray("firepoint")]
-script = ExtResource("3_afpow")
+script = ExtResource("6_x3qkl")
 bullet_stats = SubResource("Resource_po0sg")
 firepoint = NodePath("../EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/AK47/GunAnchor/FirePoint")
 

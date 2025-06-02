@@ -54,8 +54,14 @@ mesh = SubResource("QuadMesh_v1c68")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00350237, 0.0046422, 0.0784659)
 collision_layer = 32
 
+[node name="RightHand" parent="CharacterBody3D/EnemyModel/PersonAnimated/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.489906, 0.457233, 0.742247, -0.620313, 0.781069, -0.0717219, -0.61254, -0.425288, 0.666278, -47.9717, 37.4896, -234.309)
+
 [node name="AK47" parent="CharacterBody3D/EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="0"]
-transform = Transform3D(-90.7144, 91.2145, 77.141, -43.5925, 64.9066, -128.01, -111.223, -99.8344, -12.7446, 0, 0, 0)
+transform = Transform3D(-90.7142, 91.2144, 77.1408, -43.5925, 64.9066, -128.01, -111.223, -99.8344, -12.7446, 0, 0, 0)
+
+[node name="LeftHand" parent="CharacterBody3D/EnemyModel/PersonAnimated/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.0497794, -0.554518, -0.830682, 0.61663, 0.671333, -0.411193, 0.785678, -0.491755, 0.375351, -9.00934, 115.035, -241.999)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_2ngsa")

@@ -3,24 +3,24 @@ extends CanvasLayer
 var crosshair_target_pos: Vector2
 @onready var middle_pos = get_tree().root.get_viewport().size / 8
 @onready var crosshair = $Crosshair
-@onready var player_hp_bar: ProgressBar = $ProgressBar
+@onready var player_hp_bar: ProgressBar = %ProgressBar
 @onready var hit_effect: Control = $HitEffect
 @onready var scope: TextureRect = $Scope
 @onready var center_dot: TextureRect = $TextureRect
-@onready var mags_left: Label = $MagsLeft
-@onready var medkits_left: Label = $MedkitsLeft
-@onready var gun_name: Label = $GunName
+@onready var mags_left: Label = %MagsLeft
+@onready var medkits_left: Label = %MedkitsLeft
+@onready var gun_name: Label = %GunName
 
 
 func _ready() -> void:
 	Globals.ui = self
 
 
-func _process(delta: float) -> void:
+#func _process(delta: float) -> void:
 	#crosshair.position = lerp(crosshair.position, crosshair_target_pos, 15 * delta)
-	if Globals.player.state == Globals.player.states.dead:
-		hit_effect.show()
-		hit_effect.modulate.a = 1
+	#if Globals.player.state == Globals.player.states.dead:
+		#hit_effect.show()
+		#hit_effect.modulate.a = 1
 
 
 func set_crosshair_position(pos: Vector2) -> void:

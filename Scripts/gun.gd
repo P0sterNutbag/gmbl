@@ -17,11 +17,13 @@ var can_shoot: bool = true
 var has_released: bool = true
 var sway_vector: Vector3
 var shoot_timer: Timer
+var shell: PackedScene = preload("res://Scenes/Particles/shell.tscn")
 @onready var gun_model: Node3D = $GunAnchor/Model
 @onready var muzzle_flash: Node3D = $GunAnchor/FirePoint/MuzzleFlash
 @onready var flash_texture: MeshInstance3D = $GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3
 @onready var fire_point: Node3D = $GunAnchor/FirePoint
 @onready var audio_player: AudioStreamPlayer3D = $GunAnchor/FirePoint/AudioStreamPlayer3D
+@onready var chamber: Node3D = $GunAnchor/Chamber
 
 
 func _ready() -> void:
@@ -58,6 +60,11 @@ func _on_shoot() -> void:
 	flash_texture.rotate_z(deg_to_rad(randf_range(0, 360)))
 	muzzle_flash.visible = true
 	audio_player.play()
+	var inst = shell.instantiate()
+	get_tree().current_scene.add_child(inst)
+	inst.global_transform = chamber.global_transform
+	inst.apply_impulse(global_transform.basis.x * randf_range(2, 4) + global_transform.basis.y * randf_range(2, 3))
+	inst.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
 	var tween = create_tween()
 	tween.tween_property(muzzle_flash, "visible", false, 0.1)
 

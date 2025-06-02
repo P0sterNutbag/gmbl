@@ -2,23 +2,25 @@ extends RayCast3D
 
 @export var view_angle: float = -0.25
 @export var range: float = 50
-var target: Node3D
+var targets: Array[Node]
 
 
-func _ready() -> void:
-	target = Globals.player.camera
-	look_at(target.global_position)
+func get_visible_target() -> Node:
+	for target in targets:
+		if can_see_target(target):
+			return target
+		else:
+			continue
+	return null
 
 
-func _physics_process(delta: float) -> void:
-	look_at(target.global_position)
-	target_position.z = -global_position.distance_to(target.global_position)
-
-
-func can_see_target() -> bool:
+func can_see_target(target: Node3D) -> bool:
 	# point at target
-	look_at(target.global_position)
-	target_position.z = -global_position.distance_to(target.global_position)
+	if !target:
+		return false
+	var target_pos = target.global_position + Vector3.UP * 1
+	look_at(target_pos)
+	target_position.z = -global_position.distance_to(target_pos)
 	# check for collisions
 	var collider = get_collider()
 	if collider:
@@ -28,4 +30,6 @@ func can_see_target() -> bool:
 	var to_player = (target.global_transform.origin - get_parent().global_transform.origin).normalized()
 	var dot_product = forward.dot(to_player)
 	var dis_to_target = global_position.distance_to(target.position)
-	return dot_product < -0.25 and dis_to_target <= range
+	if dot_product < -0.25 and dis_to_target <= range:
+		return true
+	return false

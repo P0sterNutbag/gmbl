@@ -1,0 +1,244 @@
+[gd_scene load_steps=11 format=3 uid="uid://r5yk1vfjjjcf"]
+
+[ext_resource type="PackedScene" uid="uid://c055smn111au7" path="res://Scenes/player.tscn" id="1_hybjd"]
+[ext_resource type="Script" uid="uid://cl7b5tsk5cpy3" path="res://Scripts/ui.gd" id="2_qpvdy"]
+[ext_resource type="Texture2D" uid="uid://dl55u8tb3x34h" path="res://Art/Textures/crosshair007.png" id="3_psekp"]
+[ext_resource type="Texture2D" uid="uid://hkv1jj2wvtml" path="res://Art/Textures/crosshair_point.png" id="4_rg2ap"]
+[ext_resource type="Texture2D" uid="uid://b7o6p645d7r1q" path="res://Art/Textures/scope.png" id="5_i258s"]
+[ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Styles/text.tres" id="6_2q1v1"]
+[ext_resource type="Theme" uid="uid://lg0ktyb6xeoh" path="res://Art/Styles/hp_bar.tres" id="7_ctjy4"]
+[ext_resource type="Texture2D" uid="uid://r08gms0nyjju" path="res://Art/Textures/hp icon.png" id="8_ttosy"]
+[ext_resource type="Texture2D" uid="uid://b1voy3waf4rwu" path="res://Art/Textures/medkits.png" id="9_rdg0y"]
+[ext_resource type="Texture2D" uid="uid://dpm0kcvglfrsb" path="res://Art/Textures/mag icon.png" id="10_56ulr"]
+
+[node name="Test2" type="Node3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("2_qpvdy")
+
+[node name="Crosshair" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Crosshair"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_psekp")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rg2ap")
+expand_mode = 1
+
+[node name="HitEffect" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/HitEffect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.427451)
+
+[node name="Scope" type="TextureRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = -202.0
+offset_right = 202.0
+offset_bottom = 202.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_i258s")
+expand_mode = 1
+
+[node name="HP" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 62.0
+offset_top = 602.0
+offset_right = 129.0
+offset_bottom = 630.0
+theme = ExtResource("6_2q1v1")
+text = "100"
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BottomLeft" type="Control" parent="CanvasLayer"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/BottomLeft"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = -39.0
+offset_right = 190.0
+offset_bottom = -19.0
+rotation = -0.0464826
+scale = Vector2(1.14879, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/BottomLeft"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 62.0
+offset_top = -44.0
+offset_right = 203.0
+offset_bottom = -25.0
+theme = ExtResource("7_ctjy4")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/BottomLeft"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = -49.0
+offset_right = 54.0
+offset_bottom = -21.0
+texture = ExtResource("8_ttosy")
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/BottomLeft"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = -75.0
+offset_right = 81.0
+offset_bottom = -55.0
+rotation = -0.0464826
+scale = Vector2(1.14879, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="MedkitsLeft" type="Label" parent="CanvasLayer/BottomLeft"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 65.0
+offset_top = -81.0
+offset_right = 145.0
+offset_bottom = -56.0
+theme = ExtResource("6_2q1v1")
+text = "0"
+
+[node name="TextureRect5" type="TextureRect" parent="CanvasLayer/BottomLeft"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = -85.0
+offset_right = 54.0
+offset_bottom = -57.0
+texture = ExtResource("9_rdg0y")
+
+[node name="BottomRight" type="Control" parent="CanvasLayer"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/BottomRight"]
+layout_mode = 0
+offset_left = -21.0
+offset_top = -40.0
+offset_right = 125.0
+offset_bottom = -20.0
+rotation = 0.0471239
+scale = Vector2(-0.810944, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="CanvasLayer/BottomRight"]
+layout_mode = 0
+offset_left = -13.0
+offset_top = -71.0
+offset_right = 89.0
+offset_bottom = -51.0
+rotation = 0.0471239
+scale = Vector2(-0.810944, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="MagsLeft" type="Label" parent="CanvasLayer/BottomRight"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -52.0
+offset_top = -76.0
+offset_right = 124.0
+offset_bottom = -48.0
+theme = ExtResource("6_2q1v1")
+text = "0"
+
+[node name="GunName" type="Label" parent="CanvasLayer/BottomRight"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -188.0
+offset_top = -46.0
+offset_right = -37.0
+offset_bottom = -18.0
+theme = ExtResource("6_2q1v1")
+text = "AK-47"
+horizontal_alignment = 2
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/BottomRight"]
+layout_mode = 0
+offset_left = -89.0
+offset_top = -79.0
+offset_right = -61.0
+offset_bottom = -51.0
+texture = ExtResource("10_56ulr")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_hybjd")]

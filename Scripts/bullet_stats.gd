@@ -14,6 +14,6 @@ class_name BulletStats
 @export var v_angle_variance_ads = 0.0
 @export var noise_radius = 30.0
 @export var is_hitscan: bool = true
-@export var bullet_drop: bool = true
+@export var bullet_drop: bool = false
 @export var collision_mask := 3
 @export var hitmarker = preload("res://Scenes/hitmarker.tscn")

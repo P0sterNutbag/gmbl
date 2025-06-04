@@ -5,13 +5,14 @@ class_name Gun
 @export var ammo_type: String
 enum fire_types {semi_auto, auto}
 @export var fire_type: fire_types
+@export var ammo: int = 8
 @export var fire_timer: float
 @export var zoom_amount: float = 1.25
 @export var kickback_magnitude: float = 1
 @export var ads_vector: Vector3
 @export var scope_texture: Texture2D
 @export var cast_shadow: bool = true
-var ammo: int = 10
+var max_ammo: int
 var time_since_shot: float
 var can_shoot: bool = true
 var has_released: bool = true
@@ -27,6 +28,7 @@ var shell: PackedScene = preload("res://Scenes/Particles/shell.tscn")
 
 
 func _ready() -> void:
+	max_ammo = ammo
 	shoot_timer = Timer.new()
 	shoot_timer.wait_time = 0.1
 	shoot_timer.one_shot = true
@@ -60,11 +62,10 @@ func _on_shoot() -> void:
 	flash_texture.rotate_z(deg_to_rad(randf_range(0, 360)))
 	muzzle_flash.visible = true
 	audio_player.play()
-	var inst = shell.instantiate()
-	get_tree().current_scene.add_child(inst)
-	inst.global_transform = chamber.global_transform
-	inst.apply_impulse(global_transform.basis.x * randf_range(2, 4) + global_transform.basis.y * randf_range(2, 3))
-	inst.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
+	var shell_instance = Globals.create_particle(shell, chamber.global_position, chamber)
+	if shell_instance != null:
+		shell_instance.apply_impulse(global_transform.basis.x * randf_range(2, 4) + global_transform.basis.y * randf_range(2, 3))
+		shell_instance.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
 	var tween = create_tween()
 	tween.tween_property(muzzle_flash, "visible", false, 0.1)
 

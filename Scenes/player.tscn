@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c055smn111au7"]
+[gd_scene load_steps=31 format=3 uid="uid://c055smn111au7"]
 
 [ext_resource type="Script" uid="uid://cslnx4rw32guw" path="res://Scripts/player.gd" id="1_5kxbm"]
 [ext_resource type="Script" uid="uid://2qhh6s86pakx" path="res://Scripts/item.gd" id="2_8erm5"]
@@ -11,11 +11,13 @@
 [ext_resource type="Script" uid="uid://ccu856f1csrwx" path="res://Scripts/shoot_component.gd" id="7_f1ek2"]
 [ext_resource type="PackedScene" uid="uid://c3hkwyvehkx4y" path="res://Art/Models/arm.glb" id="8_qqcod"]
 [ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/hitmarker.tscn" id="8_tx1dd"]
+[ext_resource type="PackedScene" uid="uid://dfxhgieagfc0d" path="res://Scenes/Models/player_arm.tscn" id="9_fs7ks"]
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="9_gymyn"]
 [ext_resource type="Texture2D" uid="uid://b7o6p645d7r1q" path="res://Art/Textures/scope.png" id="12_fd4e3"]
 [ext_resource type="PackedScene" uid="uid://dgwlg3anvnbmw" path="res://Scenes/Guns/ak47.tscn" id="12_fs7ks"]
 [ext_resource type="PackedScene" uid="uid://cnwsl1ltxxegm" path="res://Scenes/Guns/pistol.tscn" id="13_igrcy"]
-[ext_resource type="Resource" uid="uid://bqr7p1xwplitk" path="res://Resources/shotgun_bullet_stats.tres" id="15_qqcod"]
+[ext_resource type="FontFile" uid="uid://d0fpgnwmxa37x" path="res://Art/Fonts/bedstead-bold.otf" id="13_l6n3p"]
+[ext_resource type="Resource" uid="uid://bqr7p1xwplitk" path="res://Resources/BulletStats/shotgun_bullet_stats.tres" id="15_qqcod"]
 [ext_resource type="PackedScene" uid="uid://dkmenaf8dxpyr" path="res://Scenes/Guns/sniper.tscn" id="17_igrcy"]
 [ext_resource type="PackedScene" uid="uid://dts12bmvycipb" path="res://Scenes/Guns/shotgun.tscn" id="19_l6n3p"]
 
@@ -41,6 +43,46 @@ metadata/_custom_type_script = "uid://2qhh6s86pakx"
 [sub_resource type="SphereShape3D" id="SphereShape3D_qqcod"]
 radius = 0.2
 
+[sub_resource type="Resource" id="Resource_l6n3p"]
+script = ExtResource("9_gymyn")
+bullet_scene = ExtResource("7_7dp3o")
+amount = 1
+speed = 250.0
+max_drop_speed = 3.0
+min_drop_speed = 0.0
+drop_speed = 0.0
+damage = 1.0
+h_angle_variance_hip = 2.0
+v_angle_variance_hip = 2.0
+h_angle_variance_ads = 0.0
+v_angle_variance_ads = 0.0
+noise_radius = 30.0
+is_hitscan = true
+bullet_drop = false
+collision_mask = 3
+hitmarker = ExtResource("8_tx1dd")
+metadata/_custom_type_script = "uid://c338ifvm4duar"
+
+[sub_resource type="Resource" id="Resource_olqyp"]
+script = ExtResource("9_gymyn")
+bullet_scene = ExtResource("7_7dp3o")
+amount = 1
+speed = 250.0
+max_drop_speed = 3.0
+min_drop_speed = 0.0
+drop_speed = 0.0
+damage = 1.0
+h_angle_variance_hip = 2.0
+v_angle_variance_hip = 2.0
+h_angle_variance_ads = 0.0
+v_angle_variance_ads = 0.0
+noise_radius = 30.0
+is_hitscan = true
+bullet_drop = true
+collision_mask = 3
+hitmarker = ExtResource("8_tx1dd")
+metadata/_custom_type_script = "uid://c338ifvm4duar"
+
 [sub_resource type="Resource" id="Resource_fs7ks"]
 script = ExtResource("9_gymyn")
 bullet_scene = ExtResource("7_7dp3o")
@@ -56,7 +98,7 @@ h_angle_variance_ads = 0.0
 v_angle_variance_ads = 0.0
 noise_radius = 30.0
 is_hitscan = true
-bullet_drop = true
+bullet_drop = false
 collision_mask = 3
 hitmarker = ExtResource("8_tx1dd")
 metadata/_custom_type_script = "uid://c338ifvm4duar"
@@ -79,13 +121,13 @@ h_angle_variance_ads = 0.0
 v_angle_variance_ads = 0.0
 noise_radius = 30.0
 is_hitscan = true
-bullet_drop = true
+bullet_drop = false
 collision_mask = 3
 hitmarker = ExtResource("8_tx1dd")
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
 [node name="CharacterBody3D" type="CharacterBody3D" groups=["allies"]]
-collision_layer = 0
+collision_layer = 32
 script = ExtResource("1_5kxbm")
 items = Array[ExtResource("2_8erm5")]([SubResource("Resource_f1ek2"), ExtResource("4_gymyn"), ExtResource("5_igrcy"), ExtResource("5_igrcy"), ExtResource("5_igrcy")])
 
@@ -98,7 +140,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("2_x3wgy")
-hp = 3.0
+hp = 300.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301743, 0.0113287, 0.00144577)
@@ -123,23 +165,62 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.174548, -0.0832188, -0.2405
 
 [node name="AK47" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("12_fs7ks")]
 visible = false
+bullet_stats = SubResource("Resource_l6n3p")
 cast_shadow = false
 
-[node name="arm" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47" instance=ExtResource("8_qqcod")]
+[node name="armL" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47" instance=ExtResource("9_fs7ks")]
+transform = Transform3D(-0.78963, 0.172109, -0.58895, -1.51861e-07, -0.959854, -0.280499, -0.613582, -0.221491, 0.75793, -0.0448556, -0.110009, -0.336139)
+
+[node name="armR" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47" instance=ExtResource("9_fs7ks")]
 transform = Transform3D(0.758646, 0, 0.651503, 0, 1, 0, -0.651503, 0, 0.758646, -0.0101245, -0.189444, 0.036669)
 
-[node name="arm2" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47" instance=ExtResource("8_qqcod")]
-transform = Transform3D(-0.929667, 0.103336, -0.353611, -1.44934e-07, -0.959854, -0.280499, -0.3684, -0.260771, 0.892345, -0.0448556, -0.110009, -0.336139)
+[node name="Label3D" type="Label3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0504991, -0.0406023, -0.107153)
+visible = false
+alpha_cut = 1
+modulate = Color(1, 1, 0, 1)
+text = "0"
+font = ExtResource("13_l6n3p")
+font_size = 14
+outline_size = 8
+horizontal_alignment = 0
+
+[node name="Label3D" type="Label3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47/Label3D"]
+transform = Transform3D(0.795896, -0.605433, 8.92166e-09, 0.605433, 0.795896, -2.64643e-08, 8.92165e-09, 2.64643e-08, 1, -0.0375798, -0.0513902, 7.45058e-09)
+alpha_cut = 1
+modulate = Color(1, 1, 0, 1)
+text = "←"
+font_size = 14
+outline_size = 8
 
 [node name="Pistol" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("13_igrcy")]
-visible = false
+bullet_stats = SubResource("Resource_olqyp")
 ammo_type = "pistol_ammo"
 fire_type = 0
 ads_vector = Vector3(-0.195, 0.045, 0.07)
 cast_shadow = false
 
-[node name="arm" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol" instance=ExtResource("8_qqcod")]
+[node name="armR" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol" instance=ExtResource("9_fs7ks")]
 transform = Transform3D(1, 0, 0, 0, 0.995116, -0.0987119, 0, 0.0987119, 0.995116, 0.00196545, -0.13606, -0.0357737)
+
+[node name="Label3D" type="Label3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0375455, 0.0159749, -0.00703703)
+visible = false
+alpha_cut = 1
+modulate = Color(1, 1, 0, 1)
+text = "5"
+font = ExtResource("13_l6n3p")
+font_size = 14
+outline_size = 8
+horizontal_alignment = 0
+
+[node name="Label3D" type="Label3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol/Label3D"]
+transform = Transform3D(0.795896, -0.605433, 8.92166e-09, 0.605433, 0.795896, -2.64643e-08, 8.92165e-09, 2.64643e-08, 1, -0.0375798, -0.0513902, 7.45058e-09)
+alpha_cut = 1
+modulate = Color(1, 1, 0, 1)
+text = "←"
+font_size = 14
+outline_size = 8
 
 [node name="Shotgun" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("19_l6n3p")]
 visible = false
@@ -150,23 +231,62 @@ fire_timer = 0.5
 ads_vector = Vector3(-0.099, 0.045, 0.07)
 cast_shadow = false
 
-[node name="arm" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun" instance=ExtResource("8_qqcod")]
+[node name="armR" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun" instance=ExtResource("9_fs7ks")]
 transform = Transform3D(0.758646, 0, 0.651503, 0, 1, 0, -0.651503, 0, 0.758646, -0.0101245, -0.142833, 0.036669)
 
-[node name="arm2" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun" instance=ExtResource("8_qqcod")]
+[node name="armL" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun" instance=ExtResource("9_fs7ks")]
 transform = Transform3D(-0.929667, 0.103336, -0.353611, -1.44934e-07, -0.959854, -0.280499, -0.3684, -0.260771, 0.892345, -0.0113563, -0.122428, -0.420675)
 
+[node name="Label3D" type="Label3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0394222, 0.00612307, -0.0474407)
+visible = false
+alpha_cut = 1
+modulate = Color(1, 1, 0, 1)
+text = "5"
+font = ExtResource("13_l6n3p")
+font_size = 14
+outline_size = 8
+horizontal_alignment = 0
+
+[node name="Label3D" type="Label3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun/Label3D"]
+transform = Transform3D(0.795896, -0.605433, 8.92166e-09, 0.605433, 0.795896, -2.64643e-08, 8.92165e-09, 2.64643e-08, 1, -0.0375798, -0.0513902, 7.45058e-09)
+alpha_cut = 1
+modulate = Color(1, 1, 0, 1)
+text = "←"
+font_size = 14
+outline_size = 8
+
 [node name="SniperRifle" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("17_igrcy")]
+visible = false
 bullet_stats = SubResource("Resource_fs7ks")
 fire_timer = 1.0
 scope_texture = ExtResource("12_fd4e3")
 cast_shadow = false
 
-[node name="arm" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/SniperRifle" instance=ExtResource("8_qqcod")]
+[node name="armR" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/SniperRifle" instance=ExtResource("8_qqcod")]
 transform = Transform3D(0.758646, 0, 0.651503, 0, 1, 0, -0.651503, 0, 0.758646, 0.0101431, -0.104474, 0.0602696)
 
-[node name="arm2" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/SniperRifle" instance=ExtResource("8_qqcod")]
+[node name="armL" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/SniperRifle" instance=ExtResource("8_qqcod")]
 transform = Transform3D(-0.929667, 0.103336, -0.353611, -1.44934e-07, -0.959854, -0.280499, -0.3684, -0.260771, 0.892345, -0.0279254, -0.108934, -0.315145)
+
+[node name="Label3D" type="Label3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/SniperRifle"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0681, 0.0165281, -0.00249672)
+visible = false
+alpha_cut = 1
+modulate = Color(1, 1, 0, 1)
+text = "5"
+font = ExtResource("13_l6n3p")
+font_size = 14
+outline_size = 8
+horizontal_alignment = 0
+
+[node name="Label3D" type="Label3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/SniperRifle/Label3D"]
+transform = Transform3D(0.795896, -0.605433, 8.92166e-09, 0.605433, 0.795896, -2.64643e-08, 8.92165e-09, 2.64643e-08, 1, -0.0375798, -0.0513902, 7.45058e-09)
+alpha_cut = 1
+modulate = Color(1, 1, 0, 1)
+text = "←"
+font_size = 14
+outline_size = 8
 
 [node name="GrenadeSpawn" type="Node3D" parent="CameraAnchor/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.231521, -0.232048, 0)

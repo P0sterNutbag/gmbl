@@ -1,9 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://dts12bmvycipb"]
+[gd_scene load_steps=7 format=3 uid="uid://dts12bmvycipb"]
 
 [ext_resource type="PackedScene" uid="uid://de0b6aj1eplv5" path="res://Scenes/Guns/gun_parent.tscn" id="1_mej0h"]
+[ext_resource type="PackedScene" uid="uid://cwq84n8f24jwt" path="res://Scenes/Bullets/bullet.tscn" id="2_7cdj6"]
 [ext_resource type="PackedScene" uid="uid://d1pi0mdullohm" path="res://Scenes/Guns/Models/shotgun_model.tscn" id="2_s1qc3"]
+[ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/hitmarker.tscn" id="3_58v0y"]
+[ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="4_hufxr"]
+
+[sub_resource type="Resource" id="Resource_x1ctg"]
+script = ExtResource("4_hufxr")
+bullet_scene = ExtResource("2_7cdj6")
+amount = 5
+speed = 250.0
+max_drop_speed = 3.0
+min_drop_speed = 0.0
+drop_speed = 0.0
+damage = 0.75
+h_angle_variance_hip = 3.0
+v_angle_variance_hip = 3.0
+h_angle_variance_ads = 3.0
+v_angle_variance_ads = 3.0
+noise_radius = 30.0
+is_hitscan = true
+bullet_drop = false
+collision_mask = 3
+hitmarker = ExtResource("3_58v0y")
+metadata/_custom_type_script = "uid://c338ifvm4duar"
 
 [node name="Gun" instance=ExtResource("1_mej0h")]
+bullet_stats = SubResource("Resource_x1ctg")
 
 [node name="GunAnchor" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2701, -0.128087)

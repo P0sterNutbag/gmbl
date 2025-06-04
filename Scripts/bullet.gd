@@ -38,14 +38,15 @@ func _physics_process(delta: float) -> void:
 func hit():
 	# damage collider if enemy
 	var collider = raycast.get_collider()
-	var health_comp = collider.get_parent()
 	if collider is HealthComponent:
 		collider.damage(bullet_stats.damage, raycast.get_collision_point(), rotation)
-		print(rotation)
 		if !bullet_stats.is_hitscan:
 			queue_free()
-		return
+	if collider is RigidBody3D:
+		collider.apply_impulse(-global_transform.basis.z.normalized() * (bullet_stats.speed / 100))
 	# create hitmark
+	if collider.get_parent() is CharacterBody3D:
+		return
 	var inst = bullet_stats.hitmarker.instantiate()
 	get_tree().current_scene.add_child(inst)
 	inst.global_position = raycast.get_collision_point()
@@ -54,12 +55,10 @@ func hit():
 
 
 func create_tracer():
-	var inst = tracer.instantiate()
-	get_tree().current_scene.add_child(inst)
-	inst.global_transform = tracer_firepoint.global_transform
-	#inst.global_translate(-tracer_firepoint.global_transform.basis.z.normalized())
-	if raycast.is_colliding():
-		inst.end_point = raycast.get_collision_point()
-	else:
-		inst.end_point = tracer_firepoint.global_position + (-global_transform.basis.z.normalized() * 100)
-	inst.look_at(inst.end_point)
+	var tracer_instance = Globals.create_particle(tracer, tracer_firepoint.global_position, tracer_firepoint)
+	if tracer_instance != null:
+		if raycast.is_colliding():
+			tracer_instance.end_point = raycast.get_collision_point()
+		else:
+			tracer_instance.end_point = tracer_firepoint.global_position + (-global_transform.basis.z.normalized() * 100)
+		tracer_instance.look_at.call_deferred(tracer_instance.end_point)

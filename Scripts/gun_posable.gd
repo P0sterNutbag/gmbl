@@ -1,4 +1,4 @@
-@tool
+#@tool
 extends Node3D
 
 @export var point_at: Node3D

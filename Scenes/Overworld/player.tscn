@@ -1,19 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://cl4glsi76vapy"]
+[gd_scene load_steps=9 format=3 uid="uid://cl4glsi76vapy"]
 
 [ext_resource type="Script" uid="uid://bequ4vge6cubm" path="res://Scripts/player_overworld.gd" id="1_lvr5k"]
 [ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="3_uuhca"]
 [ext_resource type="Material" uid="uid://tu87et11vjjo" path="res://Art/Materials/player_face.tres" id="4_f4tgq"]
+[ext_resource type="PackedScene" uid="uid://dgwlg3anvnbmw" path="res://Scenes/Guns/ak47.tscn" id="5_6ovkh"]
 [ext_resource type="Script" uid="uid://0d1yg6lwhubo" path="res://Scripts/camera.gd" id="6_fl7hq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kgvud"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3smsa"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qqcod"]
-radius = 0.55
+[sub_resource type="SphereShape3D" id="SphereShape3D_kqvqf"]
+radius = 3.69271
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
-collision_layer = 0
+collision_layer = 32
 script = ExtResource("1_lvr5k")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -48,10 +49,11 @@ collide_with_bodies = false
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 0
+collision_mask = 64
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_qqcod")
+shape = SubResource("SphereShape3D_kqvqf")
 
 [node name="EnemyModel" parent="." instance=ExtResource("3_uuhca")]
 
@@ -59,20 +61,22 @@ shape = SubResource("CapsuleShape3D_qqcod")
 surface_material_override/0 = ExtResource("4_f4tgq")
 
 [node name="RightHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.489906, 0.457233, 0.742247, -0.620313, 0.781069, -0.0717219, -0.61254, -0.425288, 0.666278, -47.9717, 37.4896, -234.309)
+transform = Transform3D(0.813716, 0.076402, 0.57622, -0.195349, 0.969608, 0.147303, -0.547454, -0.232427, 0.80391, -64.7058, 22.5902, -243.032)
 
-[node name="AK47" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="0"]
-transform = Transform3D(-90.7142, 91.2149, 77.1413, -43.5925, 64.9069, -128.011, -111.223, -99.8349, -12.7447, 0, 0, 0)
+[node name="Node3D" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand" index="0"]
+transform = Transform3D(-11.567, 95.4157, -115.161, 145.587, 33.6094, 13.2239, 34.2151, -110.753, -95.2004, 31.1488, 18.921, -12.4602)
+
+[node name="AK47" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="0" instance=ExtResource("5_6ovkh")]
 
 [node name="LeftHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.0497794, -0.554518, -0.830682, 0.61663, 0.671333, -0.411193, 0.785678, -0.491755, 0.375351, -9.00934, 115.035, -241.999)
+transform = Transform3D(0.908562, 0.212637, -0.359584, -0.088681, 0.939318, 0.331388, 0.408229, -0.269198, 0.872285, 85.3927, -5.92127, -238.31)
 
 [node name="StepTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
 
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]
 [connection signal="timeout" from="StepTimer" to="." method="_on_step_timer_timeout"]
 
 [editable path="EnemyModel"]

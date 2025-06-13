@@ -1,0 +1,162 @@
+[gd_scene load_steps=13 format=3 uid="uid://1um45bviwf3x"]
+
+[ext_resource type="Texture2D" uid="uid://cj768d2oc5ivi" path="res://Art/Models/tree_tree.png" id="1_143he"]
+[ext_resource type="Texture2D" uid="uid://bd24b46wkbyu0" path="res://Art/Textures/tree.png" id="2_143he"]
+[ext_resource type="Material" uid="uid://boab7w88vk4yi" path="res://Art/Materials/rock_orange.tres" id="3_aqn3w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ypwix"]
+resource_name = "Material.001"
+render_priority = 1
+cull_mode = 2
+albedo_texture = ExtResource("1_143he")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_362ii"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1e-05, 2),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_quqve"]
+resource_name = "tree_Plane"
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1e-05, 2),
+"attribute_data": PackedByteArray(0, 0, 255, 255, 255, 255, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"material": SubResource("StandardMaterial3D_ypwix"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 255, 255, 255, 191, 0, 0, 0, 0, 0, 0, 255, 191, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_362ii")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jkpm7"]
+render_priority = 1
+transparency = 4
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("2_143he")
+texture_filter = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_m1hnp"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1e-05, 2),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_yq5jb"]
+resource_name = "tree_Plane_001"
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1e-05, 2),
+"attribute_data": PackedByteArray(0, 0, 255, 255, 255, 255, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"material": SubResource("StandardMaterial3D_ypwix"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 255, 255, 255, 191, 0, 0, 0, 0, 0, 0, 255, 191, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_m1hnp")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_02ftn"]
+radius = 0.254403
+height = 3.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_81woi"]
+material = ExtResource("3_aqn3w")
+top_radius = 0.2
+bottom_radius = 0.35
+height = 3.0
+radial_segments = 16
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wo3nn"]
+size = Vector3(0, 3, 1.17126)
+
+[node name="Tree" type="StaticBody3D"]
+
+[node name="tree" type="Node3D" parent="."]
+
+[node name="Plane" type="MeshInstance3D" parent="tree"]
+transform = Transform3D(2, 0, 0, 0, -8.74228e-08, -2, 0, 2, -8.74228e-08, 0, 2.32585, 0)
+visibility_range_end = 100.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
+mesh = SubResource("ArrayMesh_quqve")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_jkpm7")
+
+[node name="Plane_001" type="MeshInstance3D" parent="tree"]
+transform = Transform3D(-6.55671e-08, 1, -8.74228e-08, 0, -4.37114e-08, -2, -1.5, -4.37114e-08, 3.82137e-15, 0, 2.15434, 0)
+visibility_range_end = 100.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
+mesh = SubResource("ArrayMesh_yq5jb")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_jkpm7")
+
+[node name="Plane_002" type="MeshInstance3D" parent="tree"]
+transform = Transform3D(1.41421, 1.41421, -6.18172e-08, 0, -8.74228e-08, -2, -1.41421, 1.41421, -6.18172e-08, 0, 1.81, 0)
+visibility_range_end = 100.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
+mesh = SubResource("ArrayMesh_yq5jb")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_jkpm7")
+
+[node name="Plane_003" type="MeshInstance3D" parent="tree"]
+transform = Transform3D(1.41421, -1.41421, 6.18172e-08, 0, -8.74228e-08, -2, 1.41421, 1.41421, -6.18172e-08, 0, 1.98952, 0)
+visibility_range_end = 100.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
+mesh = SubResource("ArrayMesh_yq5jb")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_jkpm7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.74531, 0)
+shape = SubResource("CapsuleShape3D_02ftn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48913, 0)
+visibility_range_end = 100.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
+mesh = SubResource("CylinderMesh_81woi")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22312, 0.0187378)
+shape = SubResource("BoxShape3D_wo3nn")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22312, 0)
+shape = SubResource("BoxShape3D_wo3nn")

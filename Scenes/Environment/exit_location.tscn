@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://bechsj7oyoa41"]
+
+[ext_resource type="Script" uid="uid://cjv5ew7k7wom8" path="res://Scenes/exit_location.gd" id="1_l3vu0"]
+[ext_resource type="Texture2D" uid="uid://ddvw71e7xmbt8" path="res://Art/Textures/exit zone.png" id="2_wgdbt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ianw"]
+size = Vector3(100, 5, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l3vu0"]
+render_priority = 1
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0.619608)
+albedo_texture = ExtResource("2_wgdbt")
+uv1_triplanar = true
+distance_fade_mode = 1
+distance_fade_min_distance = 10.0
+distance_fade_max_distance = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_wgdbt"]
+material = SubResource("StandardMaterial3D_l3vu0")
+size = Vector3(100, 5, 15)
+
+[node name="Exit" type="Area3D"]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("1_l3vu0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47292, 0)
+shape = SubResource("BoxShape3D_8ianw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.55, 0)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_wgdbt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

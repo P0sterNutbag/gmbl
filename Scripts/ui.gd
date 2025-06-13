@@ -10,6 +10,7 @@ var crosshair_target_pos: Vector2
 @onready var mags_left: Label = %MagsLeft
 @onready var medkits_left: Label = %MedkitsLeft
 @onready var gun_name: Label = %GunName
+@onready var exit_area: Label = $Label
 
 
 func _ready() -> void:

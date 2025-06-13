@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=4 uid="uid://cac84v7aucntx"]
+
+[ext_resource type="PackedScene" uid="uid://bn7l35hi2askh" path="res://Art/Models/brush.glb" id="1_w4h2i"]
+[ext_resource type="Texture2D" uid="uid://d3rtqe0gurf4e" path="res://Art/Textures/grass.png" id="2_w4h2i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8smb"]
+resource_name = "Material.001"
+render_priority = 1
+transparency = 4
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("2_w4h2i")
+texture_filter = 2
+distance_fade_mode = 1
+distance_fade_min_distance = 100.0
+distance_fade_max_distance = 99.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dgjke"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUA"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAD/f///AAD///9/AAAAAP///3///wAAAAD/fwAAAAD/fwAA//8AAP9//v8AAAAA/3//////AAD/fwAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dhxkp"]
+resource_name = "brush_Plane"
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("AAD/////AAD/////AAAAAAAA/////wAA/////wAAAAA="),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUA"),
+"material": SubResource("StandardMaterial3D_l8smb"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAD/f////7////9/AAD/v////3////+/AAD/fwAA/7//fwAA//9U1f9//v8AAFTV/3//////VNX/fwAAAABU1f///3////9/////f////39U1VTVVNVU1VTVVNVU1VTV")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_dgjke")
+
+[node name="brush" instance=ExtResource("1_w4h2i")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Plane" parent="." index="0"]
+mesh = SubResource("ArrayMesh_dhxkp")

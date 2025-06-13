@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://3wt7ke0meaaj"]
+
+[ext_resource type="PackedScene" uid="uid://cdr3k44ro53a1" path="res://Scenes/Overworld/location.tscn" id="1_kewlo"]
+[ext_resource type="PackedScene" uid="uid://l1eb7nix2iki" path="res://Scenes/Environment/shack.tscn" id="2_3f2w6"]
+
+[node name="Fort" type="Node3D"]
+
+[node name="Area3D" parent="." instance=ExtResource("1_kewlo")]
+
+[node name="Shack" parent="." instance=ExtResource("2_3f2w6")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[editable path="Area3D"]

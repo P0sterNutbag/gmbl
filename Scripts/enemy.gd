@@ -301,7 +301,7 @@ func on_noise_heard(noise_position: Vector3, event_creator: Node):
 	if state == states.dead or state == states.hurt:
 		return
 	on_alert = true
-	if state == states.idle:
+	if state != states.attack:
 		last_seen_position = noise_position
 		#navigation_agent.set_target_position(noise_position)
 		#target = event_creator

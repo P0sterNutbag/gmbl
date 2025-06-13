@@ -1,16 +1,34 @@
 extends CanvasLayer
 
-@onready var encounter_info: Control = $EncounterInfo
-@onready var distance: Label = $EncounterInfo/Label2
+@onready var location_card: Control = $LocationCard
+
 
 func _enter_tree() -> void:
 	Globals.ui = self
 
 
-func show_encounter_info(encounter: Node3D) -> void:
-	encounter_info.show()
-	distance.text = "Distance: " + str(snappedf(Globals.player.global_position.distance_to(encounter.global_position), 0.01))
+func show_location_info(encounter: Node3D) -> void:
+	location_card.show()
+	location_card.target = encounter
+	if encounter.show_title:
+		location_card.title_value = encounter.title
+	else:
+		location_card.title_value = "???"
+	if encounter.show_faction:
+		location_card.faction_value = encounter.faction
+	else:
+		location_card.faction_value = "???"
+	if encounter.show_difficulty:
+		location_card.difficulty_value = encounter.difficulty
+	else:
+		location_card.difficulty_value = "???"
+	if encounter.show_resources:
+		location_card.resources_value = encounter.resources
+	else:
+		location_card.resources_value = "???"
+	location_card.set_process(true)
 
 
-func hide_encounter_info() -> void:
-	encounter_info.hide()
+func hide_location_info() -> void:
+	location_card.hide()
+	location_card.set_process(false)

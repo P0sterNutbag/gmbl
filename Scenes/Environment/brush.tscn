@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=4 uid="uid://bn6gcwwbm430j"]
+
+[ext_resource type="PackedScene" uid="uid://bn7l35hi2askh" path="res://Art/Models/brush.glb" id="1_m0o47"]
+[ext_resource type="Material" uid="uid://mhmkrsm1j16r" path="res://Art/Materials/brush.tres" id="2_jg1vf"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dgjke"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUA"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAD/f///AAD///9/AAAAAP///3///wAAAAD/fwAAAAD/fwAA//8AAP9//v8AAAAA/3//////AAD/fwAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dhxkp"]
+resource_name = "brush_Plane"
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("AAD/////AAD/////AAAAAAAA/////wAA/////wAAAAA="),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUA"),
+"material": ExtResource("2_jg1vf"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAD/f////7////9/AAD/v////3////+/AAD/fwAA/7//fwAA//9U1f9//v8AAFTV/3//////VNX/fwAAAABU1f///3////9/////f////39U1VTVVNVU1VTVVNVU1VTV")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_dgjke")
+
+[node name="brush" instance=ExtResource("1_m0o47")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Plane" parent="." index="0"]
+mesh = SubResource("ArrayMesh_dhxkp")

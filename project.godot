@@ -11,18 +11,19 @@ config_version=5
 [application]
 
 config/name="GMBL"
-run/main_scene="uid://cwly5u588dos3"
+run/main_scene="uid://bfnbncmqdwf6o"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
 [autoload]
 
 Globals="*res://Scripts/Autoloads/globals.gd"
 GameController="*res://Scripts/Autoloads/game_controller.gd"
+SceneManager="*res://Scenes/Autoloads/scene_manager.tscn"
 
 [display]
 
-window/size/window_width_override=1920
-window/size/window_height_override=1080
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="viewport"
 window/canvas_textures/default_texture_filter=1
 
@@ -172,6 +173,7 @@ check_ammo={
 3d_physics/layer_5="Interactable"
 3d_physics/layer_6="Player"
 3d_physics/layer_7="Encounter"
+3d_physics/layer_8="VisionBlocker"
 
 [physics]
 

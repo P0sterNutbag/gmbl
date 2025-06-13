@@ -9,7 +9,8 @@ var state = states.walk
 var camera_zoom = zoom_levels.regular
 var gun_state = gun_states.point
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var base_speed := 8.0
+var base_speed := 6.0
+var walk_speed := 3.0
 var crouch_speed := 3.0
 var speed = base_speed
 var jump_speed := 8.0
@@ -19,10 +20,12 @@ var gun_index := -1
 var crouch_height := 1.0
 var base_fov := 75.0
 var walk_time := 0.0
+var push_force := 20
 var is_crouching: bool
 var on_ladder: bool
 var firepoint: Node3D
 var ammo: Array
+var gun_tween: Tween
 var state_functions: Dictionary
 var exit_functions: Dictionary
 var enter_functions: Dictionary
@@ -43,7 +46,7 @@ var grenade = preload("res://Scenes/Bullets/grenade.tscn")
 @onready var interact_cast: = $CameraAnchor/Camera3D/RayCast3D
 @onready var hitbox: HealthComponent = $Hitbox
 @onready var grenade_spawn: Node3D = $CameraAnchor/Camera3D/GrenadeSpawn
-@onready var guns = [pistol, rifle]
+@onready var guns = [pistol, rifle, sniper_rifle]
 
 
 func _ready() -> void:
@@ -116,7 +119,10 @@ func state_walk(delta):
 	if is_crouching:
 		speed = crouch_speed
 	else:
-		speed = base_speed
+		if gun_state == gun_states.ads:
+			speed = walk_speed
+		else:
+			speed = base_speed
 	
 	# get and apply inputs
 	var input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -141,6 +147,11 @@ func state_walk(delta):
 			transform = transform.translated(Vector3.FORWARD * 0.05)
 	
 	move_and_slide()
+	
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		if c.get_collider() is RigidBody3D:
+			c.get_collider().apply_central_impulse(-c.get_normal() * push_force * delta)
 	
 	# change gun
 	var gun = guns[gun_index]
@@ -193,8 +204,8 @@ func state_walk(delta):
 			Globals.noise_controller.create_noise_event(firepoint.global_position, self, gun.bullet_stats.noise_radius)
 		if Input.is_action_pressed("aim") and gun_state != gun_states.ads:
 			change_gun_state(gun_states.ads)
-		elif Input.is_action_just_released("aim"):
-			change_gun_state(gun_states.point)
+	if !Input.is_action_pressed("aim") and gun_state == gun_states.ads:
+		change_gun_state(gun_states.point)
 	
 	# throw grenade
 	if Input.is_action_just_pressed("grenade"):
@@ -273,7 +284,7 @@ func state_walk(delta):
 		gun.show()
 	
 	# walking animation
-	if (input.x or input.y) and gun_state == gun_states.point:
+	if (input.x or input.y) and gun_state == gun_states.point and is_on_floor():
 		walk_time += delta
 		var bob = cos(walk_time * 20) * 0.25
 		gun.position.y += bob * delta
@@ -296,14 +307,18 @@ func state_dead(delta):
 
 
 func enter_gun_state_point():
-	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(gun_anchor, "position", Vector3.ZERO, 0.25)
+	if gun_tween:
+		gun_tween.kill()
+	gun_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	gun_tween.tween_property(gun_anchor, "position", Vector3.ZERO, 0.25)
 	camera_zoom = zoom_levels.regular
 
 
 func enter_gun_state_ads():
-	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(gun_anchor, "position", ads_position.position, 0.15)
+	if gun_tween:
+		gun_tween.kill()
+	gun_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	gun_tween.tween_property(gun_anchor, "position", ads_position.position, 0.15)
 	camera_zoom = zoom_levels.ads
 
 
@@ -366,9 +381,12 @@ func change_gun(new_index) -> void:
 			shoot_component.bullet_stats = gun.bullet_stats
 			await get_tree().create_timer(0.05).timeout
 			gun.visible = true
-	await change_gun_state(gun_states.point)
 	Globals.ui.set_mag_count(get_item_amount(guns[new_index].ammo_type))
 	Globals.ui.set_gun_name(guns[gun_index].name.to_upper())
+	if Input.is_action_pressed("aim"):
+		await change_gun_state(gun_states.ads)
+	else:
+		await change_gun_state(gun_states.point)
 
 
 func use_item(item_name: String, item_id = null, target: Node = self):

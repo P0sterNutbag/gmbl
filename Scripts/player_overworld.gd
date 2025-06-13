@@ -18,6 +18,11 @@ func _ready() -> void:
 
 func _enter_tree() -> void:
 	Globals.player = self
+	#var encounter
+	#if Globals.overworld:
+		#encounter = Globals.overworld.current_encounter
+	#if encounter:
+		#global_position = Globals.overworld.current_encounter.global_position + (global_position - Globals.overworld.current_encounter.global_position).normalized() * 5
 
 
 func _physics_process(delta: float) -> void:
@@ -43,28 +48,28 @@ func _physics_process(delta: float) -> void:
 	
 	# animate
 	if input_dir != Vector2.ZERO:
-		animation_player.play("Walk")
+		animation_player.play("Run")
 	else:
 		animation_player.play("Idle")
 	if direction != Vector3.ZERO:
 		model.look_at(global_position + direction)
 
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("aim"):
-		camera.current = true
-		camera_type = camera_types.fps
-		camera.rotation.x = 0
-	elif Input.is_action_just_released("aim"):
-		camera.current = false
-		camera_type = camera_types.overhead
-	Globals.ui.hide_encounter_info()
-	if Input.is_action_pressed("aim"):
-		if ray_cast.is_colliding():
-			var encounter = ray_cast.get_collider()
-			Globals.ui.show_encounter_info(encounter)
-			if Input.is_action_just_pressed("shoot"):
-				encounter.start_encounter()
+#func _process(delta: float) -> void:
+	#if Input.is_action_just_pressed("aim"):
+		#camera.current = true
+		#camera_type = camera_types.fps
+		#camera.rotation.x = 0
+	#elif Input.is_action_just_released("aim"):
+		#camera.current = false
+		#camera_type = camera_types.overhead
+	#Globals.ui.hide_encounter_info()
+	#if Input.is_action_pressed("aim"):
+		#if ray_cast.is_colliding():
+			#var encounter = ray_cast.get_collider()
+			#Globals.ui.show_encounter_info(encounter)
+			#if Input.is_action_just_pressed("shoot"):
+				#encounter.start_encounter()
 
 
 func _input(event):
@@ -76,3 +81,11 @@ func _input(event):
 				camera_anchor.rotate_y(-event.relative.x * mouse_sensitivity)
 				camera.rotate_x(-event.relative.y * mouse_sensitivity)
 				camera.rotation.x = clampf(camera.rotation.x, -deg_to_rad(70), deg_to_rad(70))
+
+
+func _on_area_3d_area_entered(area: Area3D) -> void:
+	Globals.ui.show_location_info(area)
+
+
+func _on_area_3d_area_exited(area: Area3D) -> void:
+	Globals.ui.hide_location_info()

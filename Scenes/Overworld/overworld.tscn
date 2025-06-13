@@ -1,0 +1,152 @@
+[gd_scene load_steps=17 format=3 uid="uid://bfnbncmqdwf6o"]
+
+[ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_6y65m"]
+[ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="2_gw0hx"]
+[ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand3.png" id="2_n65ad"]
+[ext_resource type="PackedScene" uid="uid://cl4glsi76vapy" path="res://Scenes/Overworld/player.tscn" id="3_c84f5"]
+[ext_resource type="PackedScene" uid="uid://3wt7ke0meaaj" path="res://Scenes/Overworld/fort.tscn" id="4_fea3m"]
+[ext_resource type="PackedScene" uid="uid://dhc6a3k8wyk4x" path="res://Scenes/Overworld/enemy.tscn" id="4_gw0hx"]
+[ext_resource type="Script" uid="uid://dr73ivowve6xe" path="res://Scripts/Overworld/ui.gd" id="5_n65ad"]
+[ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="6_c84f5"]
+[ext_resource type="PackedScene" uid="uid://cdexqegkymx2g" path="res://Scenes/Overworld/UI/location_card.tscn" id="7_phy3g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t2t4p"]
+render_priority = 0
+shader = ExtResource("2_gw0hx")
+shader_parameter/depth_edge_threshold_lower = 1.0
+shader_parameter/depth_edge_threshold_upper = 1.0
+shader_parameter/normal_edge_threshold = 1.0
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_width = 2.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_phy3g"]
+material = SubResource("ShaderMaterial_t2t4p")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_phy3g"]
+vertices = PackedVector3Array(-49.25, 0.5, -49.25, -49.25, 0.5, 49.25, 49.25, 0.5, 49.25, 49.25, 0.5, -49.25)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+agent_radius = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vq2ay"]
+albedo_texture = ExtResource("2_n65ad")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fea3m"]
+material = SubResource("StandardMaterial3D_vq2ay")
+size = Vector2(1000, 1000)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_t0fti"]
+data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50)
+
+[sub_resource type="Curve3D" id="Curve3D_phy3g"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -7.02501, 0, -0.0340143, 0, 0, 0, 0, 0, 0, 5.75808, 0, 0.0102684),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="Overworld" type="Node3D"]
+script = ExtResource("1_6y65m")
+
+[node name="Shader" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.492066, 0, 0)
+cast_shadow = 0
+extra_cull_margin = 16237.3
+mesh = SubResource("QuadMesh_phy3g")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("5_n65ad")
+
+[node name="LocationCard" parent="CanvasLayer" instance=ExtResource("7_phy3g")]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_phy3g")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_fea3m")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_t0fti")
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("6_c84f5")]
+
+[node name="DirectionalLight3D" parent="WorldEnvironment" index="0"]
+transform = Transform3D(1, 0, 0, 0, -0.533659, 0.8457, 0, -0.8457, -0.533659, 0, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("3_c84f5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.675677, 0.00653252, 7.8987)
+
+[node name="EnemyModel" parent="Player" index="4"]
+script = null
+
+[node name="Skeleton3D" parent="Player/EnemyModel/PersonAnimated/Armature" index="0"]
+bones/0/position = Vector3(0.134592, 3.76344, -169.65)
+bones/0/rotation = Quaternion(-0.528281, -0.457059, 0.511063, 0.50083)
+bones/1/rotation = Quaternion(0.00732733, -0.0453954, -0.0552957, 0.997411)
+bones/2/rotation = Quaternion(-0.0133546, -0.0118635, -0.0255266, 0.999515)
+bones/3/position = Vector3(2.4885e-06, 24.9326, 3.72529e-07)
+bones/3/rotation = Quaternion(-0.0130541, -0.0112733, -0.0257709, 0.999519)
+bones/4/position = Vector3(9.09093e-07, 28.0491, -5.36442e-07)
+bones/4/rotation = Quaternion(0.0281257, -0.00608599, -0.0199387, 0.999387)
+bones/5/position = Vector3(0.595645, 9.99195, -5.96046e-08)
+bones/5/rotation = Quaternion(-0.00567801, 0.0123181, 0.118818, 0.992823)
+bones/6/position = Vector3(4.00829, 67.2396, 8.9407e-07)
+bones/7/position = Vector3(-0.191096, 23.5126, -14.985)
+bones/7/rotation = Quaternion(-0.00122482, -0.533594, 0.845714, 0.00663298)
+bones/8/position = Vector3(-1.65113e-06, 31.2997, -1.12676e-05)
+bones/8/rotation = Quaternion(0.366886, 0.0709698, 0.0784588, 0.924231)
+bones/9/position = Vector3(-2.95287e-06, 52.3843, -1.48407e-05)
+bones/9/rotation = Quaternion(0.0301426, -0.000215959, 0.647071, 0.761833)
+bones/10/position = Vector3(2.33427e-05, 48.0139, 9.27877e-06)
+bones/11/position = Vector3(-0.22351, 23.5141, 14.985)
+bones/11/rotation = Quaternion(0.784458, 0.0280499, -0.147085, 0.601834)
+bones/12/position = Vector3(-7.35628e-06, 31.2998, -1.77283e-05)
+bones/12/rotation = Quaternion(0.39345, -0.107293, -0.0184016, 0.912878)
+bones/13/position = Vector3(6.92231e-06, 52.3822, 1.38237e-05)
+bones/13/rotation = Quaternion(0.039603, -8.40016e-05, -0.797299, 0.602284)
+bones/14/position = Vector3(9.32813e-06, 48.0148, -1.44523e-05)
+bones/15/rotation = Quaternion(0.0539427, 0.0134225, 0.978182, -0.200176)
+bones/16/position = Vector3(5.53522e-06, 73.5593, 2.60212e-06)
+bones/16/rotation = Quaternion(-0.0644738, 0.00325083, -0.509846, 0.85784)
+bones/17/position = Vector3(1.80786e-06, 64.9924, -2.42922e-07)
+bones/17/rotation = Quaternion(0.302472, -0.699952, 0.400835, 0.507847)
+bones/18/position = Vector3(4.82242e-06, 41.0572, -1.88804e-06)
+bones/18/rotation = Quaternion(0.366735, -0.271985, 0.0266169, 0.889281)
+bones/19/position = Vector3(1.87755e-06, 20.7615, 1.96695e-06)
+bones/20/rotation = Quaternion(-0.0557794, -0.0389647, 0.997121, -0.03346)
+bones/21/position = Vector3(7.1193e-07, 73.5589, 2.34168e-06)
+bones/21/rotation = Quaternion(0.0107883, -0.00589116, -0.148287, 0.988868)
+bones/22/rotation = Quaternion(0.465175, -0.523497, 0.307398, 0.644259)
+bones/23/position = Vector3(-5.4673e-07, 40.5276, 3.30583e-06)
+bones/23/rotation = Quaternion(0.283926, 0.186296, -0.056337, 0.938886)
+bones/24/position = Vector3(1.04309e-07, 20.6788, 1.49012e-06)
+
+[node name="RightHand" parent="Player/EnemyModel/PersonAnimated/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.328534, 0.505585, 0.797778, -0.018473, 0.847941, -0.529768, -0.944311, 0.159309, 0.287917, -47.867, 40.4203, -197.26)
+
+[node name="Node3D" parent="Player/EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand" index="0"]
+transform = Transform3D(-12.8247, 148.869, 13.1663, 108.922, 18.3587, -101.484, -102.331, 0.884018, -109.671, 31.1487, 18.92, -12.4604)
+
+[node name="LeftHand" parent="Player/EnemyModel/PersonAnimated/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.344506, -0.25668, -0.903012, -0.189149, 0.92319, -0.334578, 0.919531, 0.286068, 0.269494, 46.9115, 51.1533, -181.188)
+
+[node name="Fort" parent="." instance=ExtResource("4_fea3m")]
+transform = Transform3D(-0.464023, 0, 0.885823, 0, 1, 0, -0.885823, 0, -0.464023, 15.2023, -1.43051e-06, 0.974848)
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_phy3g")
+
+[node name="Enemy" parent="Path3D" instance=ExtResource("4_gw0hx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.746428, 0.00653252, -4.20381)
+
+[editable path="WorldEnvironment"]
+[editable path="Player"]
+[editable path="Player/EnemyModel"]
+[editable path="Player/EnemyModel/PersonAnimated"]

@@ -48,7 +48,7 @@ func hit():
 	if collider.get_parent() is CharacterBody3D:
 		return
 	var inst = bullet_stats.hitmarker.instantiate()
-	get_tree().current_scene.add_child(inst)
+	collider.add_child(inst)
 	inst.global_position = raycast.get_collision_point()
 	if !bullet_stats.is_hitscan:
 		queue_free()

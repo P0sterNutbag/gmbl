@@ -3483,6 +3483,29 @@ styles = ExtResource("2_u0tuk")
 [node name="PersonAnimated" parent="." instance=ExtResource("1_13ioh")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
+[node name="Skeleton3D" parent="PersonAnimated/Armature" index="0"]
+bones/0/position = Vector3(-4.70602, -66.8794, -156.166)
+bones/0/rotation = Quaternion(-0.604721, -0.37025, 0.473287, 0.522711)
+bones/1/rotation = Quaternion(-0.0160713, -0.00257952, -0.00955267, 0.999822)
+bones/2/rotation = Quaternion(-0.0491743, 0.00154437, -0.0629817, 0.996801)
+bones/3/rotation = Quaternion(-0.0491614, 0.00200383, -0.0629787, 0.996801)
+bones/4/rotation = Quaternion(-0.033976, -0.0229177, 0.0569047, 0.997538)
+bones/5/rotation = Quaternion(-0.0178056, -0.0758311, 0.698573, 0.711286)
+bones/7/rotation = Quaternion(0.0320307, -0.574422, 0.817554, 0.0248924)
+bones/8/rotation = Quaternion(-0.128889, -0.0988333, 0.60449, 0.779879)
+bones/9/rotation = Quaternion(0.012298, -0.000273619, 0.264009, 0.964442)
+bones/11/rotation = Quaternion(0.843667, -0.0318042, 0.0422295, 0.534258)
+bones/12/rotation = Quaternion(0.101935, 0.229448, -0.413678, 0.875119)
+bones/13/rotation = Quaternion(0.0177829, -0.000130589, -0.358003, 0.933551)
+bones/15/rotation = Quaternion(0.128683, -0.177077, 0.975005, 0.038065)
+bones/16/rotation = Quaternion(-0.0323373, -0.0588878, -0.428087, 0.901237)
+bones/17/rotation = Quaternion(0.490154, -0.59901, 0.495368, 0.394394)
+bones/18/rotation = Quaternion(0.390783, -0.229269, 0.0296331, 0.89098)
+bones/20/rotation = Quaternion(-0.0713553, 0.112046, 0.9674, -0.21562)
+bones/21/rotation = Quaternion(0.020635, 0.00442342, -0.206246, 0.978273)
+bones/22/rotation = Quaternion(0.313844, -0.52001, 0.31522, 0.729197)
+bones/23/rotation = Quaternion(0.283925, 0.186303, -0.0563348, 0.938884)
+
 [node name="Cube" parent="PersonAnimated/Armature/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("ShaderMaterial_gaxdt")
 
@@ -3492,17 +3515,17 @@ surface_material_override/1 = SubResource("ShaderMaterial_ijdac")
 surface_material_override/2 = SubResource("ShaderMaterial_rwj6q")
 
 [node name="RightHand" type="BoneAttachment3D" parent="PersonAnimated/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.998746, -0.00894446, 0.049245, 0.0102642, 0.999593, -0.0266118, -0.048987, 0.0270839, 0.998432, -0.211295, 145.081, -244.878)
+transform = Transform3D(0.813716, 0.076402, 0.57622, -0.195349, 0.969608, 0.147303, -0.547454, -0.232427, 0.80391, -64.7058, 22.5902, -243.032)
 bone_name = "mixamorig_RightHand"
 bone_idx = 14
 
 [node name="Node3D" type="Node3D" parent="PersonAnimated/Armature/Skeleton3D/RightHand" node_paths=PackedStringArray("point_at")]
-transform = Transform3D(149.541, 7.28464, 9.18785, -8.94596, -5.09834, 149.646, 7.57974, -149.736, -4.64829, 31.1497, 18.9219, -12.46)
+transform = Transform3D(-11.567, 95.4156, -115.161, 145.587, 33.6094, 13.2239, 34.2151, -110.753, -95.2002, 31.1488, 18.921, -12.4602)
 script = ExtResource("7_gwe5h")
 point_at = NodePath("../../LeftHand/Node3D")
 
 [node name="LeftHand" type="BoneAttachment3D" parent="PersonAnimated/Armature/Skeleton3D" index="3"]
-transform = Transform3D(-0.99888, 0.00642304, 0.046862, -0.00514435, -0.999612, 0.0273563, 0.0470195, 0.0270845, 0.998527, -0.0368555, -145.081, -244.878)
+transform = Transform3D(0.908562, 0.212637, -0.359584, -0.088681, 0.939318, 0.331388, 0.408229, -0.269198, 0.872285, 85.3927, -5.92127, -238.31)
 bone_name = "mixamorig_LeftHand"
 bone_idx = 10
 

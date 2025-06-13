@@ -1,0 +1,91 @@
+[gd_scene load_steps=15 format=3 uid="uid://bfnbncmqdwf6o"]
+
+[ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_6y65m"]
+[ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="2_gw0hx"]
+[ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand3.png" id="2_n65ad"]
+[ext_resource type="PackedScene" uid="uid://cl4glsi76vapy" path="res://Scenes/Overworld/player.tscn" id="3_c84f5"]
+[ext_resource type="PackedScene" uid="uid://dhc6a3k8wyk4x" path="res://Scenes/Overworld/enemy.tscn" id="4_gw0hx"]
+[ext_resource type="Script" uid="uid://dr73ivowve6xe" path="res://Scripts/Overworld/ui.gd" id="5_n65ad"]
+[ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="6_c84f5"]
+[ext_resource type="PackedScene" uid="uid://cdexqegkymx2g" path="res://Scenes/Overworld/UI/location_card.tscn" id="7_phy3g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t2t4p"]
+render_priority = 0
+shader = ExtResource("2_gw0hx")
+shader_parameter/depth_edge_threshold_lower = 1.0
+shader_parameter/depth_edge_threshold_upper = 1.0
+shader_parameter/normal_edge_threshold = 1.0
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_width = 2.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_phy3g"]
+material = SubResource("ShaderMaterial_t2t4p")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_phy3g"]
+vertices = PackedVector3Array(-49.25, 0.5, -49.25, -49.25, 0.5, 49.25, 49.25, 0.5, 49.25, 49.25, 0.5, -49.25)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+agent_radius = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vq2ay"]
+albedo_texture = ExtResource("2_n65ad")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fea3m"]
+material = SubResource("StandardMaterial3D_vq2ay")
+size = Vector2(1000, 1000)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_t0fti"]
+data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50)
+
+[node name="Overworld" type="Node3D"]
+script = ExtResource("1_6y65m")
+
+[node name="Shader" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.492066, 0, 0)
+cast_shadow = 0
+extra_cull_margin = 16237.3
+mesh = SubResource("QuadMesh_phy3g")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_phy3g")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_fea3m")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_t0fti")
+
+[node name="Player" parent="." instance=ExtResource("3_c84f5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.675677, 0.00653252, 7.8987)
+
+[node name="EnemyModel" parent="Player" index="4"]
+script = null
+
+[node name="Node3D" parent="Player/EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand" index="0"]
+transform = Transform3D(-11.5675, 95.4155, -115.161, 145.587, 33.6095, 13.2232, 34.2148, -110.753, -95.2002, 31.1487, 18.9204, -12.4602)
+
+[node name="Enemy" parent="." instance=ExtResource("4_gw0hx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0862494, 0.00653157, -1.30241)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("5_n65ad")
+
+[node name="LocationCard" parent="CanvasLayer" instance=ExtResource("7_phy3g")]
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("6_c84f5")]
+
+[node name="DirectionalLight3D" parent="WorldEnvironment" index="0"]
+transform = Transform3D(1, 0, 0, 0, -0.533659, 0.8457, 0, -0.8457, -0.533659, 0, 0, 0)
+
+[editable path="Player"]
+[editable path="Player/EnemyModel"]
+[editable path="Player/EnemyModel/PersonAnimated"]
+[editable path="Enemy"]
+[editable path="WorldEnvironment"]

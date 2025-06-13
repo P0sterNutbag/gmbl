@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdr3k44ro53a1"]
+
+[ext_resource type="Script" uid="uid://lblyysya3an4" path="res://Scripts/encounter.gd" id="1_hwnis"]
+[ext_resource type="PackedScene" uid="uid://cwly5u588dos3" path="res://Scenes/Places/encounter.tscn" id="2_ypbb5"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hwnis"]
+radius = 3.37127
+
+[node name="Area3D" type="Area3D"]
+collision_layer = 64
+collision_mask = 32
+script = ExtResource("1_hwnis")
+encounter_scene = ExtResource("2_ypbb5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02906, 0)
+shape = SubResource("SphereShape3D_hwnis")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

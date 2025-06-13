@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxn2w0eeltovy"]
+
+[ext_resource type="Script" uid="uid://digkdunkqyhf4" path="res://Scripts/Autoloads/scene_manager.gd" id="1_f1i8l"]
+[ext_resource type="Script" uid="uid://d2guveclyykbc" path="res://Scripts/Autoloads/scene_transition.gd" id="2_5xiqd"]
+
+[sub_resource type="Animation" id="Animation_8sxkv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_crfs3"]
+resource_name = "transition_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vin40"]
+resource_name = "transition_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sd3nk"]
+_data = {
+&"RESET": SubResource("Animation_8sxkv"),
+&"transition_in": SubResource("Animation_crfs3"),
+&"transition_out": SubResource("Animation_vin40")
+}
+
+[node name="SceneManager" type="CanvasLayer"]
+script = ExtResource("1_f1i8l")
+
+[node name="SceneTransition" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_5xiqd")
+
+[node name="ColorRect" type="ColorRect" parent="SceneTransition"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SceneTransition"]
+libraries = {
+&"": SubResource("AnimationLibrary_sd3nk")
+}
+
+[connection signal="transition_in_done" from="SceneTransition" to="." method="start_load"]
+[connection signal="animation_finished" from="SceneTransition/AnimationPlayer" to="SceneTransition" method="_on_animation_player_animation_finished"]

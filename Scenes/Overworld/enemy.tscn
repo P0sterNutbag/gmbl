@@ -1,33 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhc6a3k8wyk4x"]
+[gd_scene load_steps=6 format=3 uid="uid://dhc6a3k8wyk4x"]
 
 [ext_resource type="Script" uid="uid://dq5ymww0igewb" path="res://Scripts/Overworld/enemy.gd" id="1_11nfp"]
-[ext_resource type="Script" uid="uid://lblyysya3an4" path="res://Scripts/encounter.gd" id="2_cqx3h"]
-[ext_resource type="PackedScene" uid="uid://cwly5u588dos3" path="res://Scenes/Places/encounter.tscn" id="3_11nfp"]
+[ext_resource type="PackedScene" uid="uid://cdr3k44ro53a1" path="res://Scenes/Overworld/location.tscn" id="2_riojr"]
 [ext_resource type="Script" uid="uid://but6ijlpfowbx" path="res://Scripts/detection_component.gd" id="4_73otn"]
 [ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="5_i7slr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hf0oe"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4qj6l"]
-radius = 0.687701
-height = 2.52819
+radius = 0.434372
+height = 1.99564
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_11nfp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.998863, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.142736, 0.998863, 0)
 shape = SubResource("CapsuleShape3D_hf0oe")
 
-[node name="Area3D" type="Area3D" parent="."]
-collision_layer = 64
-collision_mask = 32
-script = ExtResource("2_cqx3h")
-encounter_scene = ExtResource("3_11nfp")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02906, 0)
-shape = SubResource("CapsuleShape3D_4qj6l")
+[node name="Area3D" parent="." instance=ExtResource("2_riojr")]
 
 [node name="Detection" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89564, 0)
@@ -38,6 +27,58 @@ script = ExtResource("4_73otn")
 
 [node name="EnemyModel" parent="." instance=ExtResource("5_i7slr")]
 
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
-[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
+[node name="Skeleton3D" parent="EnemyModel/PersonAnimated/Armature" index="0"]
+bones/0/position = Vector3(-0.915298, 4.42831, -166.842)
+bones/0/rotation = Quaternion(-0.454643, -0.534651, 0.552007, 0.450263)
+bones/1/rotation = Quaternion(0.0178973, 0.0161687, 0.00517763, 0.999696)
+bones/2/rotation = Quaternion(-0.00672369, 0.0353606, -0.0355106, 0.998721)
+bones/3/position = Vector3(-1.72853e-06, 24.9326, 1.49012e-08)
+bones/3/rotation = Quaternion(-0.00673514, 0.0357092, -0.0351568, 0.998721)
+bones/4/position = Vector3(-3.33626e-06, 28.0492, -6.51926e-07)
+bones/4/rotation = Quaternion(-0.0125479, 0.00198988, -0.0477541, 0.998778)
+bones/5/position = Vector3(0.595638, 9.99196, 1.3411e-07)
+bones/5/rotation = Quaternion(0.0169191, -0.00506404, 0.160614, 0.986859)
+bones/6/position = Vector3(4.00829, 67.2396, 1.40443e-06)
+bones/7/position = Vector3(-0.191094, 23.5126, -14.985)
+bones/7/rotation = Quaternion(0.0493024, -0.522607, 0.850394, 0.0357953)
+bones/8/position = Vector3(-1.04631e-06, 31.2998, 2.29364e-05)
+bones/8/rotation = Quaternion(0.428296, -0.00212557, 0.213213, 0.878122)
+bones/9/position = Vector3(-2.14877e-07, 52.3843, -2.33939e-06)
+bones/9/rotation = Quaternion(0.00455502, -0.000282339, 0.0977879, 0.995197)
+bones/10/position = Vector3(-4.99189e-07, 48.0139, -3.83425e-06)
+bones/11/position = Vector3(-0.223511, 23.5141, 14.985)
+bones/11/rotation = Quaternion(0.854386, -0.0368534, 0.0621778, 0.514587)
+bones/12/position = Vector3(8.04333e-07, 31.2998, 2.54846e-05)
+bones/12/rotation = Quaternion(0.397338, 0.0783279, -0.13779, 0.903881)
+bones/13/position = Vector3(4.63783e-06, 52.3822, -5.44454e-07)
+bones/13/rotation = Quaternion(0.00876354, -0.000137851, -0.17642, 0.984276)
+bones/14/position = Vector3(-9.53674e-07, 48.0148, -1.44523e-05)
+bones/15/rotation = Quaternion(0.0524549, -0.0594794, 0.994929, -0.0618622)
+bones/16/position = Vector3(-1.50039e-06, 73.5593, 7.06544e-06)
+bones/16/rotation = Quaternion(-0.0220884, 0.00134029, -0.216476, 0.976037)
+bones/17/position = Vector3(4.42225e-06, 64.9924, 4.56466e-06)
+bones/17/rotation = Quaternion(0.409551, -0.662086, 0.424848, 0.461967)
+bones/18/position = Vector3(3.01345e-06, 41.0572, -4.18057e-06)
+bones/18/rotation = Quaternion(0.282743, -0.192509, 0.0567325, 0.937965)
+bones/19/position = Vector3(5.57304e-06, 20.7615, -5.96051e-08)
+bones/20/rotation = Quaternion(-0.0748199, 0.0711453, 0.989147, -0.104537)
+bones/21/position = Vector3(2.07784e-06, 73.5589, 2.17537e-06)
+bones/21/rotation = Quaternion(0.0166506, -0.00786498, -0.226464, 0.973845)
+bones/22/rotation = Quaternion(0.400918, -0.473418, 0.390763, 0.680033)
+bones/23/position = Vector3(-4.18896e-06, 40.5276, 1.98247e-06)
+bones/23/rotation = Quaternion(0.283954, 0.186305, -0.0563301, 0.938876)
+bones/24/position = Vector3(-9.68574e-07, 20.6788, 1.07288e-06)
+
+[node name="RightHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="2"]
+transform = Transform3D(-0.00624186, -0.264346, 0.964408, 0.851127, 0.504854, 0.14389, -0.524922, 0.821732, 0.221841, -71.9335, 33.0758, -151.083)
+
+[node name="Node3D" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand" index="0"]
+transform = Transform3D(127.422, 77.4488, 16.2913, 73.4172, -127.201, 30.4912, 29.5587, -17.9277, -145.962, 31.1503, 18.921, -12.4588)
+
+[node name="LeftHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.184981, 0.17209, -0.967557, -0.896385, 0.433121, -0.0943394, 0.402834, 0.884755, 0.234378, 58.9588, 34.6165, -151.162)
+
 [connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]
+
+[editable path="EnemyModel"]
+[editable path="EnemyModel/PersonAnimated"]

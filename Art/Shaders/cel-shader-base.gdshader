@@ -50,7 +50,7 @@ group_uniforms BaseProperties;
 #if USE_ALPHA_CUTOFF
 uniform float alpha_cutoff: hint_range(0.0, 1.0) = 0.5;
 #endif
-uniform vec4 color: source_color = vec4(0.7, 0.12, 0.86, 1.0);
+uniform vec4 color: source_color = vec4(1.0, 1.0, 1.0, 1.0);
 uniform sampler2D base_texture: source_color, filter_nearest;
 uniform vec4 specular: source_color = vec4(0.3, 0.3, 0.3, 0.5);
 uniform sampler2D specular_texture: hint_default_white, filter_nearest;

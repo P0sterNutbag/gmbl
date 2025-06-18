@@ -1,32 +1,48 @@
 extends VBoxContainer
 
 var index: int
-var can_move: bool = true
+#var can_move: bool = true
 var menu_item = preload("res://Scenes/UI/menu_item.tscn")
 
 
-func _process(delta: float) -> void:
-	if !visible:
-		return
-	var dir: int = Input.get_axis("ui_up", "ui_down")
-	if dir and get_child_count()-1 > 0 and can_move:
-		get_child(index).selected = false
-		index = wrapi(index + dir, 0, get_child_count())
-		get_child(index).selected = true
-		can_move = false
-	if dir == 0:
-		can_move = true
-
-
-func create_menu_item() -> Control:
+func create_menu_item(parent = self) -> Control:
 	var inst = menu_item.instantiate()
-	inst.selected = false
-	add_child(inst)
+	if parent != null:
+		add_child(inst)
+	inst.focus_entered.connect(set_index.bind(inst))
+	inst.pressed.connect(select_last_button)
 	return inst
 
 
+func set_menu_item_focus() -> void:
+	get_child(0).focus_neighbor_top = get_child(-1).get_path()
+	get_child(-1).focus_neighbor_bottom = get_child(0).get_path()
+
+
 func delete_children() -> void:
-	index = 0
+	#index = 0
 	for child in get_children():
-		child.selected = false
 		child.queue_free()
+
+
+func set_index(button: Button):
+	index = button.get_index()
+
+
+func select_last_button() -> void:
+	if get_child_count() == 0:
+		return
+	index = clamp(index, 0, get_child_count() - 1)
+	await Engine.get_main_loop().process_frame
+	if index < get_child_count():
+		get_child(index).grab_focus()
+
+
+func sort_menu_items() -> void:
+	var sorted_children = get_children()
+	sorted_children.sort_custom(func(a, b): return a.text.naturalnocasecmp_to(b.text) < 0)
+	for child in get_children():
+		move_child(child, sorted_children.find(child))
+		child.focus_neighbor_top = NodePath("")
+		child.focus_neighbor_bottom = NodePath("")
+	set_menu_item_focus()

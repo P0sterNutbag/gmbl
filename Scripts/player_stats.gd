@@ -2,6 +2,7 @@ extends Node
 
 enum states {walk, pause, dead}
 var state = states.walk
+var money: int = 100
 var items: Array[Item]
 var guns: Array[Item]:
 	get(): return items.filter(func(i): return i is EquipmentGun)

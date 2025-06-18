@@ -20,16 +20,17 @@ func create_town(town_data: Town) -> void:
 	title.text = town_data.title
 	for shop in town_data.shops:
 		var inst = item_container.create_menu_item()
-		inst.title = shop.title
+		inst.text = shop.title
 		inst.alignment = BoxContainer.ALIGNMENT_CENTER 
 		inst.pressed.connect(Globals.ui.enter_shop.bind(shop))
 		inst.pressed.connect(enter_shop)
 	var inst = item_container.create_menu_item()
-	inst.title = "Leave"
+	inst.text = "Leave"
 	inst.alignment = BoxContainer.ALIGNMENT_CENTER 
 	inst.pressed.connect(exit)
 	await Engine.get_main_loop().process_frame
-	item_container.get_child(0).selected = true
+	item_container.get_child(0).grab_focus()
+	item_container.set_menu_item_focus()
 
 
 func exit():

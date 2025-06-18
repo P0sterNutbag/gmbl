@@ -3,21 +3,23 @@ class_name Inventory
 
 enum modes {use, loot}
 @export var mode = modes.use
-var index = 0
+@export var show_price: bool
 var target = PlayerStats
 var target2
-var menu_item = preload("res://Scenes/UI/menu_item.tscn")
 @onready var item_container: VBoxContainer = %Items
 @onready var title: Label = $MarginContainer/VBoxContainer/Label
+@onready var money_label: Label = $MarginContainer/VBoxContainer/Label/Label2
+
+
+func _ready():
+	if show_price and "money" in target:
+		money_label.show()
+		money_label.text = "$" + str(target.money)
+	else:
+		money_label.hide()
 
 
 func _process(delta: float) -> void:
-	if !visible or !has_focus() or item_container.get_child_count() == 0:
-		item_container.process_mode = Node.PROCESS_MODE_DISABLED
-		return
-	else:
-		item_container.process_mode = Node.PROCESS_MODE_INHERIT
-	
 	# take all
 	if Input.is_action_just_pressed("reload") and mode == modes.loot:
 		for item in item_container.get_children():
@@ -33,45 +35,56 @@ func set_items():
 	if item_container.get_child_count() > 0:
 		for child in item_container.get_children():
 			child.queue_free()
-	var items: Array
 	for item in target.items:
 		if item is not Equipment:
-			var same_items = items.filter(func(i): return i.title == item.title)
+			var same_items = item_container.get_children().filter(func(i): return i.text == item.title)
 			if same_items.size() > 0:
 				var same_item = same_items[0]
 				same_item.amount += 1
 				continue
-		var inst = menu_item.instantiate()
-		inst.title = item.title
-		inst.selected = false
+		var inst = item_container.create_menu_item()
+		inst.text = item.title
 		inst.item = item
+		if show_price:
+			inst.price = item.price
 		if mode == modes.use:
 			inst.pressed.connect(item.use.bind(target))
 		elif mode == modes.loot:
 			inst.pressed.connect(transfer_item.bind(inst))
-		items.append(inst)
-	if items.size() == 0:
-		return
-	items.sort_custom(func(a, b): return a.title.casecmp_to(b.title) == -1)
-	for item in items:
-		item_container.add_child(item)
-	await Engine.get_main_loop().process_frame
-	if has_focus():
-		index = clamp(index, 0, item_container.get_child_count() - 1)
-		item_container.get_child(index).selected = true
+	item_container.sort_menu_items()
+	item_container.set_menu_item_focus()
+	item_container.get_child(0).grab_focus()
 
 
 func transfer_item(menu_item: Control):
+	if show_price:
+		if target2.money >= menu_item.item.price:
+			target2.money -= menu_item.item.price
+			target.money += menu_item.item.price
+			get_parent().set_inventory_money()
+		else:
+			return
 	target.items.erase(menu_item.item)
+	item_container.remove_child(menu_item)
 	target2.items.append(menu_item.item)
-	#item_container.remove_child(menu_item)
-	get_parent().reset_inventories()
-
-
-func remove_item(item: Item) -> void:
-	target.items.erase(item)
-	item_container.remove_child(item_container.get_child(index))
-	set_items()
+	if menu_item.item is Equipment:
+		menu_item.item.equipped = false
+	var inventory2
+	if get_index() == 0:
+		inventory2 = get_parent().get_child(1)
+	else:
+		inventory2 = get_parent().get_child(0)
+	var inst = inventory2.item_container.create_menu_item()
+	inst.text = menu_item.item.title
+	inst.item = menu_item.item
+	if show_price:
+		inst.price = menu_item.item.price
+	if mode == modes.use:
+		inst.pressed.connect(menu_item.item.use.bind(target))
+	elif mode == modes.loot:
+		inst.pressed.connect(inventory2.transfer_item.bind(inst))
+	menu_item.queue_free()
+	inventory2.item_container.sort_menu_items()
 
 
 func _on_v_box_container_visibility_changed() -> void:
@@ -81,15 +94,3 @@ func _on_v_box_container_visibility_changed() -> void:
 			title.text = "Inventory"
 		else:
 			title.text = target.title
-
-
-func _on_focus_entered() -> void:
-	if item_container.get_child_count() > 0:
-		index = clamp(index, 0, item_container.get_child_count() - 1)
-		item_container.get_child(index).selected = true
-
-
-func _on_focus_exited() -> void:
-	if item_container.get_child_count() > 0:
-		index = clamp(index, 0, item_container.get_child_count() - 1)
-		item_container.get_child(index).selected = false

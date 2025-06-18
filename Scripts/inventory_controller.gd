@@ -5,6 +5,7 @@ signal exit
 
 func _ready() -> void:
 	visibility_changed.connect(_on_visibility_changed)
+	resized.connect(_on_resized)
 
 
 func _process(delta: float) -> void:
@@ -14,9 +15,11 @@ func _process(delta: float) -> void:
 		exit.emit()
 	if get_child_count() > 1:
 		if Input.is_action_just_pressed("ui_right"):
-			get_child(1).grab_focus()
+			var inventory = get_child(1)
+			inventory.item_container.select_last_button()
 		elif Input.is_action_just_pressed("ui_left"):
-			get_child(0).grab_focus()
+			var inventory = get_child(0)
+			inventory.item_container.select_last_button()
 
 
 func reset_inventories() -> void:
@@ -29,6 +32,16 @@ func clear_inventories() -> void:
 		child.item_container.delete_children()
 
 
+func set_inventory_money() -> void:
+	for child in get_children():
+		child.money_label.text = "$" + str(child.target.money)
+
+
 func _on_visibility_changed() -> void:
 	if visible:
 		get_child(get_child_count()-1).grab_focus()
+
+
+func _on_resized() -> void:
+	for child in get_children():
+		child.size = size

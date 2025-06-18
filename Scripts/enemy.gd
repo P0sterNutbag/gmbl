@@ -1,6 +1,7 @@
 extends CharacterBody3D
 class_name Enemy
 
+@export var title: String = "Enemy"
 @export var strafe_change := 0.2
 @export var items_to_drop: Array[PackedScene]
 enum guns {shotgun, ak47, sniper, pistol}
@@ -8,6 +9,7 @@ enum guns {shotgun, ak47, sniper, pistol}
 enum teams {enemies, allies}
 @export var team: teams = teams.enemies
 @export var follow_target: Node3D
+@export var items: Array[Item]
 enum states {idle, investigate, attack, search, strafe, hurt, reload, camp, dead}
 var state = states.idle
 var walk_speed := 1.5
@@ -43,6 +45,7 @@ var guns_dict: Dictionary = {
 @onready var shoot_component: Node = $ShootComponent
 @onready var gun_holder: Node3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
 @onready var shoot_timer: Timer = $ShootTimer
+@onready var loot_area: Area3D = $Loot
 signal shoot
 
 
@@ -314,21 +317,22 @@ func on_noise_heard(noise_position: Vector3, event_creator: Node):
 func _on_damaged(hit_position: Vector3, hit_direction: Vector3) -> void:
 	velocity = Vector3.ZERO
 	damage_position = hit_position
-	if time_since_bleed < 0.1:
-		return
-	time_since_bleed = 0
-	var blood_scene = load("res://Scenes/Particles/bloodspray.tscn")
-	var blood = Globals.create_particle(blood_scene, hit_position)
-	if blood != null:
-		blood.set_deferred("rotation", Vector3(0, hit_direction.y, 0))
-		blood.set_deferred("emitting", true)
-	if state == states.dead:
-		return
+	#if time_since_bleed < 0.1:
+		#return
+	#time_since_bleed = 0
+	#var blood_scene = load("res://Scenes/Particles/bloodspray.tscn")
+	#var blood = Globals.create_particle(blood_scene, hit_position)
+	#if blood != null:
+		#blood.set_deferred("rotation", Vector3(0, hit_direction.y, 0))
+		#blood.set_deferred("emitting", true)
+	#if state == states.dead:
+		#return
 	anim_player.play("HitReaction")
 	change_state(states.hurt)
 
 
 func _on_death() -> void:
+	loot_area.process_mode = PROCESS_MODE_INHERIT
 	if !gun:
 		return 
 	for i in items_to_drop:
@@ -336,6 +340,8 @@ func _on_death() -> void:
 		get_tree().current_scene.add_child.call_deferred(inst)
 		inst.set_deferred("global_position", right_hand.global_position)
 		inst.apply_impulse.call_deferred(Vector3(randf_range(-2, 2), 5, randf_range(-2, 2)))
+		if inst.item is EquipmentGun:
+			inst.item.gun_stats = gun.gun_stats
 		#inst.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
 	gun.queue_free()
 	velocity = Vector3.ZERO
@@ -382,7 +388,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		change_state(states.attack)
 	elif anim_name == "Fire":
 		#emit_shoot()
-		gun.ammo -= 1
+		gun.gun_stats.ammo -= 1
 		if gun.ammo <= 0:
 			gun.ammo = gun.max_ammo
 			change_state(states.reload)

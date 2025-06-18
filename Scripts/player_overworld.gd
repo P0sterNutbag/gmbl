@@ -5,6 +5,9 @@ var camera_type = camera_types.overhead
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 var mouse_sensitivity := 0.004
+var state_functions: Dictionary
+var exit_functions: Dictionary
+var enter_functions: Dictionary
 @onready var camera_anchor: Node3D = $CameraAnchor
 @onready var model: Node3D = $EnemyModel
 @onready var animation_player: AnimationPlayer = $EnemyModel/PersonAnimated/AnimationPlayer
@@ -14,18 +17,24 @@ var mouse_sensitivity := 0.004
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	state_functions = {
+		PlayerStats.states.walk: state_walk,
+		PlayerStats.states.pause: state_pause,
+		PlayerStats.states.dead: state_dead,
+	}
 
 
 func _enter_tree() -> void:
 	Globals.player = self
-	#var encounter
-	#if Globals.overworld:
-		#encounter = Globals.overworld.current_encounter
-	#if encounter:
-		#global_position = Globals.overworld.current_encounter.global_position + (global_position - Globals.overworld.current_encounter.global_position).normalized() * 5
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta):
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+
+func state_walk(delta) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -55,24 +64,17 @@ func _physics_process(delta: float) -> void:
 		model.look_at(global_position + direction)
 
 
-#func _process(delta: float) -> void:
-	#if Input.is_action_just_pressed("aim"):
-		#camera.current = true
-		#camera_type = camera_types.fps
-		#camera.rotation.x = 0
-	#elif Input.is_action_just_released("aim"):
-		#camera.current = false
-		#camera_type = camera_types.overhead
-	#Globals.ui.hide_encounter_info()
-	#if Input.is_action_pressed("aim"):
-		#if ray_cast.is_colliding():
-			#var encounter = ray_cast.get_collider()
-			#Globals.ui.show_encounter_info(encounter)
-			#if Input.is_action_just_pressed("shoot"):
-				#encounter.start_encounter()
+func state_pause(delta) -> void:
+	animation_player.play("Idle")
+
+
+func state_dead(delta) -> void:
+	pass
 
 
 func _input(event):
+	if PlayerStats.state != PlayerStats.states.walk:
+		return
 	if event is InputEventMouseMotion:
 		match camera_type:
 			camera_types.overhead:

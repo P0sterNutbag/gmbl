@@ -4,8 +4,6 @@ class_name ItemPickup
 @export var item: Item
 
 
-func pickup(target_node: Node3D):
-	if target_node.get("items") == null:
-		return
-	target_node.items.append(item)
+func pickup():
+	PlayerStats.items.append(item.duplicate())
 	queue_free()

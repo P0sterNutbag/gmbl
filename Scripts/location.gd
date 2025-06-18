@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var encounter_scene: PackedScene
+@export var town: Town
 @export var title: String
 @export var show_title: bool
 @export var faction: String
@@ -13,9 +14,23 @@ var transition_started: bool
 var can_transition: bool = true
 
 
+func _enter_tree() -> void:
+	if !Globals.overworld:
+		return
+	if Globals.overworld.current_encounter == self:
+		show_title = true
+		show_faction = true
+		show_difficulty = true
+		show_resources = true
+
+
 func start_encounter() -> void:
-	Globals.overworld.current_encounter = self
-	SceneManager.start_scene_transition(encounter_scene.resource_path, true)
+	if encounter_scene != null:
+		Globals.overworld.current_encounter = self
+		SceneManager.start_scene_transition(encounter_scene.resource_path, true)
+	else:
+		Globals.ui.town.create_town(town)
+		Globals.ui.hide_location_info()
 
 
 func _on_body_entered(body: Node3D) -> void:

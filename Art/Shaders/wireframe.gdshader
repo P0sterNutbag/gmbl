@@ -97,7 +97,9 @@ void fragment() {
 		(depth_edge > depth_edge_threshold_lower && normal_edge > 0.0) ||
 		depth_edge > depth_edge_threshold_upper) {
 		ALBEDO = line_color;
+		ALPHA = 1.0;
 	} else {
 		ALBEDO = screen_color.rgb;
+		ALPHA = screen_color.a; // preserve transparency
 	}
 }

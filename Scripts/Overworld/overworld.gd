@@ -6,7 +6,7 @@ var kill_encounter: bool
 
 func _enter_tree() -> void:
 	process_mode = Node.PROCESS_MODE_INHERIT
-	if current_encounter and kill_encounter:
+	if current_encounter and kill_encounter and current_encounter.get_parent().has_method("die"):
 		kill_encounter = false
 		current_encounter.get_parent().die()
 

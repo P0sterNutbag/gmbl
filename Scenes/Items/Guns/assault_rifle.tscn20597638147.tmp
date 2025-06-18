@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://cgtukpis1lq0a"]
+
+[ext_resource type="Script" uid="uid://bdvokalrlg1k6" path="res://Scripts/item_pickup.gd" id="1_2q4no"]
+[ext_resource type="Resource" uid="uid://ixc4pv5vjlno" path="res://Resources/Items/Guns/ak47.tres" id="2_6bf8n"]
+[ext_resource type="PackedScene" uid="uid://rhtj73aayki" path="res://Scenes/Guns/Models/ak47_model.tscn" id="3_2q4no"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rk1p0"]
+size = Vector3(0.0542603, 0.178436, 0.380432)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2q4no"]
+size = Vector3(0.0542603, 0.096611, 0.522598)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6bf8n"]
+size = Vector3(0.0542603, 0.0417309, 0.269112)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k4jng"]
+size = Vector3(0.0542603, 0.211849, 0.173174)
+
+[node name="AssaultRifle" type="RigidBody3D"]
+collision_layer = 16
+angular_damp = 5.0
+script = ExtResource("1_2q4no")
+item = ExtResource("2_6bf8n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, -0.00666812, 0.33604)
+shape = SubResource("BoxShape3D_rk1p0")
+debug_fill = false
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.0826401, -0.020333)
+shape = SubResource("BoxShape3D_2q4no")
+debug_fill = false
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.0814996, -0.413028)
+shape = SubResource("BoxShape3D_6bf8n")
+debug_fill = false
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, -0.0746792, -0.0264502)
+shape = SubResource("BoxShape3D_k4jng")
+debug_fill = false
+
+[node name="Ak47" parent="." instance=ExtResource("3_2q4no")]
+transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, -0.10933, -0.0069225)

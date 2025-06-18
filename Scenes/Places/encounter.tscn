@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cwly5u588dos3"]
+[gd_scene load_steps=42 format=3 uid="uid://cwly5u588dos3"]
 
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="1_6cq5c"]
 [ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="2_agnh5"]
@@ -15,10 +15,15 @@
 [ext_resource type="PackedScene" uid="uid://p1limlnykapp" path="res://Scenes/noise_controller.tscn" id="9_dkktg"]
 [ext_resource type="Texture2D" uid="uid://b1voy3waf4rwu" path="res://Art/Textures/medkits.png" id="9_g6h2j"]
 [ext_resource type="Shader" uid="uid://clx8i8jbtbgo3" path="res://Art/Shaders/retro.gdshader" id="12_pl43u"]
+[ext_resource type="Script" uid="uid://dav6t8b5brx1o" path="res://Scripts/inventory_controller.gd" id="13_ovyiq"]
+[ext_resource type="Script" uid="uid://2qhh6s86pakx" path="res://Scripts/item.gd" id="15_ak1mq"]
 [ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand3.png" id="15_pl43u"]
 [ext_resource type="PackedScene" uid="uid://b3f0jcvvcldns" path="res://Scenes/Environment/crate.tscn" id="16_300rs"]
+[ext_resource type="Resource" uid="uid://04hmx6qx4fsq" path="res://Resources/Items/medkit.tres" id="16_m3dbh"]
 [ext_resource type="PackedScene" uid="uid://due2b4mvg6l3b" path="res://Scenes/Environment/rock_gray.tscn" id="16_s7no7"]
+[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="17_o171k"]
 [ext_resource type="PackedScene" uid="uid://cnkhacjlogrim" path="res://Scenes/Environment/tree_thin.tscn" id="18_mhkkk"]
+[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="18_ovyiq"]
 [ext_resource type="PackedScene" uid="uid://bn6gcwwbm430j" path="res://Scenes/Environment/brush.tscn" id="18_vq2ay"]
 [ext_resource type="PackedScene" uid="uid://cac84v7aucntx" path="res://Scenes/Environment/brush_orange.tscn" id="19_300rs"]
 [ext_resource type="PackedScene" uid="uid://1um45bviwf3x" path="res://Scenes/Environment/tree_thick.tscn" id="19_pl43u"]
@@ -28,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://caaninc7023am" path="res://Scenes/Environment/barrel.tscn" id="23_1ohuf"]
 [ext_resource type="PackedScene" uid="uid://21yqxj5xl8cv" path="res://Scenes/Environment/drum barrel.tscn" id="27_ctfa7"]
 [ext_resource type="PackedScene" uid="uid://bechsj7oyoa41" path="res://Scenes/Environment/exit_location.tscn" id="28_cr7sm"]
+[ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="29_8ianw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ctfa7"]
 render_priority = 0
@@ -335,20 +341,58 @@ grow_vertical = 2
 theme = ExtResource("7_oq87f")
 text = "Leave Area? Press 'F'"
 
-[node name="Enemy" parent="." instance=ExtResource("20_300rs")]
-transform = Transform3D(0.144857, 0, 0.989453, 0, 1, 0, -0.989453, 0, 0.144857, -0.663052, 0, -5.93176)
+[node name="PlayerInventory" type="HBoxContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -311.5
+offset_top = -382.5
+offset_right = 311.5
+offset_bottom = 382.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+script = ExtResource("13_ovyiq")
 
-[node name="Enemy2" parent="." instance=ExtResource("20_300rs")]
-transform = Transform3D(0.144857, 0, 0.989453, 0, 1, 0, -0.989453, 0, 0.144857, 11.2475, 0, -4.94302)
+[node name="Inventory" parent="CanvasLayer/PlayerInventory" instance=ExtResource("29_8ianw")]
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Enemy3" parent="." instance=ExtResource("20_300rs")]
-transform = Transform3D(0.144857, 0, 0.989453, 0, 1, 0, -0.989453, 0, 0.144857, 13.6556, 0, 8.5794)
+[node name="TransferInventory" type="HBoxContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -797.0
+offset_top = -441.0
+offset_right = 798.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+script = ExtResource("13_ovyiq")
 
-[node name="Enemy4" parent="." instance=ExtResource("20_300rs")]
-transform = Transform3D(0.144857, 0, 0.989453, 0, 1, 0, -0.989453, 0, 0.144857, -6.85709, 0, -2.04266)
+[node name="Inventory" parent="CanvasLayer/TransferInventory" instance=ExtResource("29_8ianw")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mode = 1
+
+[node name="Inventory2" parent="CanvasLayer/TransferInventory" instance=ExtResource("29_8ianw")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mode = 1
 
 [node name="Enemy5" parent="." instance=ExtResource("20_300rs")]
-transform = Transform3D(0.144857, 0, 0.989453, 0, 1, 0, -0.989453, 0, 0.144857, -0.272664, 0, 8.80708)
+transform = Transform3D(0.144857, 0, 0.989453, 0, 1, 0, -0.989453, 0, 0.144857, 1.52899, 0, -33.2417)
+title = "Marauder"
+items = Array[ExtResource("15_ak1mq")]([ExtResource("16_m3dbh"), ExtResource("17_o171k"), ExtResource("17_o171k"), ExtResource("18_ovyiq")])
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_6cq5c")
@@ -2189,6 +2233,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.725716, 0.675, -26.411)
 
 [node name="Area3D" parent="." instance=ExtResource("28_cr7sm")]
 transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 0, -47.5)
+
+[connection signal="exit" from="CanvasLayer/PlayerInventory" to="CanvasLayer" method="_on_player_inventory_exit"]
+[connection signal="exit" from="CanvasLayer/TransferInventory" to="CanvasLayer" method="_on_transfer_inventory_exit"]
 
 [editable path="WorldEnvironment"]
 [editable path="Barrel"]

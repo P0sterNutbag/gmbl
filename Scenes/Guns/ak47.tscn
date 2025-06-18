@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgwlg3anvnbmw"]
+[gd_scene load_steps=9 format=3 uid="uid://dgwlg3anvnbmw"]
 
 [ext_resource type="PackedScene" uid="uid://de0b6aj1eplv5" path="res://Scenes/Guns/gun_parent.tscn" id="1_y3opf"]
 [ext_resource type="PackedScene" uid="uid://cwq84n8f24jwt" path="res://Scenes/Bullets/bullet.tscn" id="2_ai085"]
 [ext_resource type="PackedScene" uid="uid://rhtj73aayki" path="res://Scenes/Guns/Models/ak47_model.tscn" id="2_p5lgt"]
 [ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/hitmarker.tscn" id="3_7hf8y"]
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="4_ywb2m"]
+[ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="5_7hf8y"]
 
 [sub_resource type="Resource" id="Resource_rtl1f"]
 script = ExtResource("4_ywb2m")
@@ -26,8 +27,14 @@ collision_mask = 3
 hitmarker = ExtResource("3_7hf8y")
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
+[sub_resource type="Resource" id="Resource_ywb2m"]
+script = ExtResource("5_7hf8y")
+ammo = 24
+metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
 [node name="AK47" instance=ExtResource("1_y3opf")]
 bullet_stats = SubResource("Resource_rtl1f")
+gun_stats = SubResource("Resource_ywb2m")
 
 [node name="GunAnchor" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.279919, -0.248514)

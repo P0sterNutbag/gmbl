@@ -1,7 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://bx5h70fy0b18o"]
+[gd_scene load_steps=3 format=3 uid="uid://bx5h70fy0b18o"]
 
-[ext_resource type="Script" uid="uid://cv3h0punkbvh7" path="res://Scripts/gun_pickup.gd" id="1_4xcmh"]
-[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/shotgun_ammo.tres" id="2_6u172"]
 [ext_resource type="PackedScene" uid="uid://d1pi0mdullohm" path="res://Scenes/Guns/Models/shotgun_model.tscn" id="3_4xcmh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rk1p0"]
@@ -10,9 +8,6 @@ size = Vector3(0.0542603, 0.188721, 0.888672)
 [node name="Shotgun" type="RigidBody3D"]
 collision_layer = 16
 angular_damp = 5.0
-script = ExtResource("1_4xcmh")
-gun_name = "shotgun"
-ammo = ExtResource("2_6u172")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.00500488, 0.0556641)

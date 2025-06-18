@@ -65,7 +65,8 @@ func look_at_position(pos: Vector3):
 
 func die():
 	$Area3D.queue_free()
-	$CollisionShape3D.disabled = true
+	set_collision_layer_value(1, false)
+	velocity = Vector3.ZERO
 	set_process(false)
 	anim_player.play("Die")
 	anim_player.seek(4.4)

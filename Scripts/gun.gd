@@ -2,16 +2,18 @@ extends Node3D
 class_name Gun
 
 @export var bullet_stats: BulletStats
+@export var gun_stats: GunStats = GunStats.new()
 @export var ammo_type: String
 enum fire_types {semi_auto, auto}
 @export var fire_type: fire_types
-@export var ammo: int = 8
 @export var fire_timer: float
 @export var zoom_amount: float = 1.25
 @export var kickback_magnitude: float = 1
 @export var ads_vector: Vector3
 @export var scope_texture: Texture2D
 @export var cast_shadow: bool = true
+var ammo: int:
+	get(): return gun_stats.ammo
 var max_ammo: int
 var time_since_shot: float
 var can_shoot: bool = true
@@ -28,7 +30,7 @@ var shell: PackedScene = preload("res://Scenes/Particles/shell.tscn")
 
 
 func _ready() -> void:
-	max_ammo = ammo
+	max_ammo = gun_stats.ammo
 	shoot_timer = Timer.new()
 	shoot_timer.wait_time = 0.1
 	shoot_timer.one_shot = true
@@ -54,7 +56,7 @@ func aim_fire_point(pos: Vector3) -> void:
 
 
 func _on_shoot() -> void:
-	ammo -= 1
+	gun_stats.ammo -= 1
 	can_shoot = false
 	has_released = false
 	time_since_shot = 0

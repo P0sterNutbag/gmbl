@@ -1,10 +1,25 @@
-[gd_scene load_steps=23 format=3 uid="uid://cb05x24r4r8im"]
+[gd_scene load_steps=28 format=3 uid="uid://cb05x24r4r8im"]
 
 [ext_resource type="Script" uid="uid://ba01kvx1jag3c" path="res://Scripts/enemy.gd" id="1_1f0kj"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_afpow"]
+[ext_resource type="Script" uid="uid://3e36ru1e7k78" path="res://Scripts/spawn_chance_resource.gd" id="2_ghaa6"]
 [ext_resource type="Script" uid="uid://ccu856f1csrwx" path="res://Scripts/shoot_component.gd" id="3_afpow"]
+[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="3_auwsv"]
 [ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="3_po0sg"]
+[ext_resource type="Resource" uid="uid://04hmx6qx4fsq" path="res://Resources/Items/medkit.tres" id="4_8uf12"]
 [ext_resource type="Script" uid="uid://but6ijlpfowbx" path="res://Scripts/detection_component.gd" id="6_ghaa6"]
+
+[sub_resource type="Resource" id="Resource_po0sg"]
+script = ExtResource("2_ghaa6")
+object_to_spawn = ExtResource("3_auwsv")
+spawn_chance = 0.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_haro7"]
+script = ExtResource("2_ghaa6")
+object_to_spawn = ExtResource("4_8uf12")
+spawn_chance = 0.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8uf12"]
 radius = 0.25
@@ -3467,6 +3482,9 @@ size = Vector3(1.5, 0.25, 1.5)
 collision_layer = 2
 script = ExtResource("1_1f0kj")
 gun_index = 1
+potential_items = Array[ExtResource("2_ghaa6")]([SubResource("Resource_po0sg"), SubResource("Resource_haro7")])
+max_items = 3
+min_items = 2
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -3518,13 +3536,13 @@ bones/23/rotation = Quaternion(-0.0126181, -0.143005, -0.190973, 0.971041)
 bones/24/position = Vector3(-9.68574e-07, 20.6788, 1.07288e-06)
 
 [node name="RightHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.706668, -0.703444, 0.0760693, 0.686594, 0.707737, 0.166425, -0.170907, -0.0653783, 0.983115, -157.851, 28.7855, -20.3857)
+transform = Transform3D(0.706668, -0.703444, 0.076069, 0.686594, 0.707737, 0.166425, -0.170907, -0.0653783, 0.983116, -156.977, 27.2321, -19.8917)
 
 [node name="Node3D" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand" index="0"]
 transform = Transform3D(127.422, 77.4493, 16.2908, 73.4175, -127.202, 30.4902, 29.5578, -17.9272, -145.962, 31.1501, 18.9205, -12.4617)
 
 [node name="LeftHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.828479, -0.482345, -0.284546, 0.496893, 0.867487, -0.023766, 0.258303, -0.121699, 0.958368, -42.1436, 169.314, -23.3178)
+transform = Transform3D(0.828479, -0.482345, -0.284546, 0.496893, 0.867486, -0.0237659, 0.258303, -0.1217, 0.958368, -41.2688, 167.76, -22.8237)
 
 [node name="AnimationPlayer" parent="EnemyModel/PersonAnimated" index="1"]
 libraries = {
@@ -3568,10 +3586,11 @@ target_desired_distance = 1.5
 
 [node name="Detection" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-target_position = Vector3(0, 0, -50)
+target_position = Vector3(0, 0, -100)
 collision_mask = 129
 hit_from_inside = true
 script = ExtResource("6_ghaa6")
+range = 100.0
 
 [node name="ShootComponent" type="Node" parent="."]
 script = ExtResource("3_afpow")

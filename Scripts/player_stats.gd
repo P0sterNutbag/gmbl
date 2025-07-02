@@ -3,10 +3,27 @@ extends Node
 enum states {walk, pause, dead}
 var state = states.walk
 var money: int = 100
+var hp: int:
+	set(value):
+		hp = value
+		Globals.player.hitbox.hp = value
+	get():
+		return Globals.player.hitbox.hp
+var ammo: int:
+	set(value):
+		ammo = value
+		gun.gun_stats.ammo = value
+	get():
+		return gun.gun_stats.ammo
 var items: Array[Item]
 var guns: Array[Item]:
 	get(): return items.filter(func(i): return i is EquipmentGun)
 var gun: EquipmentGun
+
+
+func _enter_tree() -> void:
+	state = states.walk
+	items.append(load("res://Resources/Items/Ammo/rifle_ammo.tres"))
 
 
 func _ready() -> void:
@@ -17,6 +34,8 @@ func _ready() -> void:
 
 func _physics_process(delta):
 	# state machine
+	if !Globals.player or !get_tree().current_scene:
+		return
 	if Globals.player.process_mode == PROCESS_MODE_DISABLED or get_tree().current_scene.process_mode == PROCESS_MODE_DISABLED:
 		return
 	if Globals.player.state_functions.has(PlayerStats.state):
@@ -35,6 +54,13 @@ func get_item_amount(item_name: String) -> int:
 	if items.size() <= 0:
 		return 0
 	return items.filter(func(i): return i != null and i.resource_name == item_name).size()
+
+
+func save() -> Dictionary:
+	return {
+		"hp": hp,
+		"ammo": ammo,
+	}
 
 
 #func set_guns() -> void:

@@ -1,5 +1,5 @@
 extends Resource
-class_name NpcStyles
+class_name NpcStyle
 
 @export var faces: Array[Texture]
 @export var shirts: Array[Texture]

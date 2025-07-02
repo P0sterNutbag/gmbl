@@ -1,0 +1,395 @@
+[gd_scene load_steps=15 format=3 uid="uid://y6civk4251ei"]
+
+[ext_resource type="Script" uid="uid://cl7b5tsk5cpy3" path="res://Scripts/ui.gd" id="1_27ipd"]
+[ext_resource type="Texture2D" uid="uid://b7o6p645d7r1q" path="res://Art/Textures/scope.png" id="2_ed1w8"]
+[ext_resource type="Theme" uid="uid://lg0ktyb6xeoh" path="res://Art/Themes/hp_bar.tres" id="3_8ucm7"]
+[ext_resource type="Texture2D" uid="uid://bdcy6j83ie2fb" path="res://Art/Textures/hp_bar_lock.png" id="4_epllx"]
+[ext_resource type="Texture2D" uid="uid://r08gms0nyjju" path="res://Art/Textures/hp icon.png" id="5_e0hn7"]
+[ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="6_8v68b"]
+[ext_resource type="Texture2D" uid="uid://b1voy3waf4rwu" path="res://Art/Textures/medkits.png" id="7_hkj58"]
+[ext_resource type="Texture2D" uid="uid://btsqo4a5f5fw8" path="res://Art/Textures/mag icon sheet.png" id="8_6gmlr"]
+[ext_resource type="Shader" uid="uid://clx8i8jbtbgo3" path="res://Art/Shaders/retro.gdshader" id="9_a1pox"]
+[ext_resource type="Script" uid="uid://dav6t8b5brx1o" path="res://Scripts/inventory_controller.gd" id="10_ettqu"]
+[ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="11_3lnm2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ovyiq"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_imxu1"]
+texture = ExtResource("4_epllx")
+axis_stretch_horizontal = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pl43u"]
+shader = ExtResource("9_a1pox")
+shader_parameter/enabled = true
+shader_parameter/dithering = true
+shader_parameter/dither_size = 1
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_27ipd")
+
+[node name="Crosshair" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="Control" parent="Crosshair"]
+anchors_preset = 0
+offset_top = -20.0
+offset_bottom = -20.0
+
+[node name="ColorRect2" type="ColorRect" parent="Crosshair/Control"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -19.0
+offset_right = 2.0
+offset_bottom = 1.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Crosshair/Control"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -25.0
+offset_right = 2.0
+color = Color(1, 1, 0, 1)
+
+[node name="Control2" type="Control" parent="Crosshair"]
+anchors_preset = 0
+offset_top = 20.0
+offset_bottom = 20.0
+
+[node name="ColorRect3" type="ColorRect" parent="Crosshair/Control2"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 1.0
+offset_right = 2.0
+offset_bottom = 26.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Crosshair/Control2"]
+layout_mode = 0
+offset_left = -2.0
+offset_right = 2.0
+offset_bottom = 25.0
+color = Color(1, 1, 0, 1)
+
+[node name="Control3" type="Control" parent="Crosshair"]
+anchors_preset = 0
+offset_left = -20.0
+offset_right = -20.0
+
+[node name="ColorRect" type="ColorRect" parent="Crosshair/Control3"]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 4.0
+offset_bottom = 24.0
+rotation = 1.5708
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Crosshair/Control3"]
+layout_mode = 0
+offset_top = -2.0
+offset_right = 4.0
+offset_bottom = 23.0
+rotation = 1.5708
+color = Color(1, 1, 0, 1)
+
+[node name="Control4" type="Control" parent="Crosshair"]
+anchors_preset = 0
+offset_left = 20.0
+offset_right = 20.0
+
+[node name="ColorRect" type="ColorRect" parent="Crosshair/Control4"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = -1.0
+offset_right = 29.0
+offset_bottom = 24.0
+rotation = 1.5708
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Crosshair/Control4"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = -2.0
+offset_right = 29.0
+offset_bottom = 23.0
+rotation = 1.5708
+color = Color(1, 1, 0, 1)
+
+[node name="HitEffect" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="HitEffect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.427451)
+
+[node name="Scope" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = -202.0
+offset_right = 202.0
+offset_bottom = 202.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ed1w8")
+expand_mode = 1
+
+[node name="BottomLeft" type="Control" parent="."]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+scale = Vector2(2, 2)
+
+[node name="ColorRect" type="ColorRect" parent="BottomLeft"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = -39.0
+offset_right = 190.0
+offset_bottom = -19.0
+rotation = -0.0464826
+scale = Vector2(1.14879, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="ProgressBar2" type="ProgressBar" parent="BottomLeft"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 62.0
+offset_top = -44.0
+offset_right = 203.0
+offset_bottom = -25.0
+theme = ExtResource("3_8ucm7")
+theme_override_styles/background = SubResource("StyleBoxFlat_ovyiq")
+theme_override_styles/fill = SubResource("StyleBoxTexture_imxu1")
+max_value = 1.0
+fill_mode = 1
+show_percentage = false
+
+[node name="ColorRect" type="ColorRect" parent="BottomLeft/ProgressBar2"]
+layout_mode = 0
+offset_left = 139.0
+offset_right = 141.0
+offset_bottom = 19.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="BottomLeft/ProgressBar2"]
+layout_mode = 0
+offset_right = 2.0
+offset_bottom = 19.0
+color = Color(0, 0, 0, 1)
+
+[node name="ProgressBar" type="ProgressBar" parent="BottomLeft"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 62.0
+offset_top = -44.0
+offset_right = 203.0
+offset_bottom = -25.0
+theme = ExtResource("3_8ucm7")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="TextureRect3" type="TextureRect" parent="BottomLeft"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = -49.0
+offset_right = 54.0
+offset_bottom = -21.0
+texture = ExtResource("5_e0hn7")
+
+[node name="ColorRect3" type="ColorRect" parent="BottomLeft"]
+visible = false
+layout_mode = 0
+offset_left = 12.0
+offset_top = -75.0
+offset_right = 81.0
+offset_bottom = -55.0
+rotation = -0.0464826
+scale = Vector2(1.14879, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="MedkitsLeft" type="Label" parent="BottomLeft"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 65.0
+offset_top = -81.0
+offset_right = 145.0
+offset_bottom = -56.0
+theme = ExtResource("6_8v68b")
+text = "0"
+
+[node name="TextureRect5" type="TextureRect" parent="BottomLeft"]
+visible = false
+layout_mode = 0
+offset_left = 26.0
+offset_top = -85.0
+offset_right = 54.0
+offset_bottom = -57.0
+texture = ExtResource("7_hkj58")
+
+[node name="BottomRight" type="Control" parent="."]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(2, 2)
+
+[node name="ColorRect2" type="ColorRect" parent="BottomRight"]
+layout_mode = 0
+offset_left = -21.0
+offset_top = -40.0
+offset_right = 125.0
+offset_bottom = -20.0
+rotation = 0.0471239
+scale = Vector2(-0.810944, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="BottomRight"]
+layout_mode = 0
+offset_left = -13.0
+offset_top = -71.0
+offset_right = 89.0
+offset_bottom = -51.0
+rotation = 0.0471239
+scale = Vector2(-0.810944, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="MagsLeft" type="Label" parent="BottomRight"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -52.0
+offset_top = -76.0
+offset_right = 124.0
+offset_bottom = -48.0
+theme = ExtResource("6_8v68b")
+text = "0"
+
+[node name="GunName" type="Label" parent="BottomRight"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -188.0
+offset_top = -46.0
+offset_right = -37.0
+offset_bottom = -18.0
+theme = ExtResource("6_8v68b")
+text = "AK-47"
+horizontal_alignment = 2
+
+[node name="Sprite" type="Sprite2D" parent="BottomRight"]
+position = Vector2(-75.5001, -65.1636)
+texture = ExtResource("8_6gmlr")
+region_enabled = true
+region_rect = Rect2(0, 0, 28, 28)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_pl43u")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -151.0
+offset_top = -12.5
+offset_right = 151.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_8v68b")
+text = "Leave Area? Press 'F'"
+
+[node name="PlayerInventory" type="HBoxContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -311.5
+offset_top = -382.5
+offset_right = 311.5
+offset_bottom = 382.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+script = ExtResource("10_ettqu")
+
+[node name="Inventory" parent="PlayerInventory" instance=ExtResource("11_3lnm2")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TransferInventory" type="HBoxContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -797.0
+offset_top = -441.0
+offset_right = 798.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+script = ExtResource("10_ettqu")
+
+[node name="Inventory" parent="TransferInventory" instance=ExtResource("11_3lnm2")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mode = 1
+
+[node name="Inventory2" parent="TransferInventory" instance=ExtResource("11_3lnm2")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mode = 1
+
+[connection signal="exit" from="PlayerInventory" to="." method="_on_player_inventory_exit"]
+[connection signal="exit" from="TransferInventory" to="." method="_on_transfer_inventory_exit"]

@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxgfjx0yh13ie"]
+
+[ext_resource type="Texture2D" uid="uid://djtuv7qa4u1iq" path="res://Art/Textures/sandpags.png" id="1_dcg3v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2vfi5"]
+albedo_texture = ExtResource("1_dcg3v")
+uv1_triplanar = true
+texture_filter = 2
+
+[node name="Sandbags" type="CSGCombiner3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0, 0)
+size = Vector3(5.1, 1, 0.2)
+material = SubResource("StandardMaterial3D_2vfi5")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+operation = 2
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -2.28787, 0.412132, 0)
+size = Vector3(1.6, 1, 1)
+material = SubResource("StandardMaterial3D_2vfi5")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 2.41213, 0.412132, 0)
+size = Vector3(1.6, 1, 1)
+material = SubResource("StandardMaterial3D_2vfi5")

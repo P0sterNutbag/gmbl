@@ -28,6 +28,7 @@ func create_particle(particle_scene: PackedScene, position: Vector3, parent: Nod
 	particle.set_deferred("global_position", position)
 	if parent != null:
 		particle.set_deferred("global_transform", parent.global_transform)
+	particle.emitting = true
 	return particle
 
 
@@ -37,3 +38,16 @@ func change_scene(new_scene: PackedScene, delete_current: bool) -> void:
 	var inst = new_scene.instantiate()
 	get_tree().root.add_child(inst)
 	get_tree().current_scene = inst
+
+
+func get_weighted_index(array: Array) -> int:
+	var sum = 0
+	for i in array.size():
+		sum += array[i].spawn_chance
+	var rand_num = randi_range(0, sum)
+	var current_num = 0
+	for i in array.size():
+		current_num += array[i].spawn_chance
+		if rand_num <= current_num:
+			return i
+	return -1

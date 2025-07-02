@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+var current_town: Town
 @onready var location_card: Control = $LocationCard
 @onready var inventory_holder: HBoxContainer = $InventoryHolder
 @onready var town: PanelContainer = $Town
@@ -7,6 +8,7 @@ extends CanvasLayer
 @onready var shop_inventory: PanelContainer = $Shop/Inventory
 @onready var shop_inventory2: PanelContainer = $Shop/Inventory2
 @onready var portraits: HBoxContainer = $Portraits
+@onready var dialogue: VBoxContainer = $Dialogue
 
 
 func _enter_tree() -> void:
@@ -43,6 +45,12 @@ func show_location_info(encounter: Node3D) -> void:
 func hide_location_info() -> void:
 	location_card.hide()
 	location_card.set_process(false)
+
+
+func start_dialogue(dialogue_data: DialogueTree, shop: Shop = null) -> void:
+	dialogue.shop = shop
+	dialogue.show()
+	dialogue.start_dialogue(dialogue_data)
 
 
 func enter_shop(shop_data: Shop) -> void:

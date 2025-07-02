@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvt1ofd0p5g6o"]
+
+[ext_resource type="Script" uid="uid://lblyysya3an4" path="res://Scripts/location.gd" id="1_i1881"]
+[ext_resource type="Resource" uid="uid://c5kpuww7x3qfl" path="res://Resources/Towns/test_town.tres" id="3_1hyfe"]
+[ext_resource type="PackedScene" uid="uid://cwk6n1rlne3a6" path="res://Scenes/Environment/shack4.tscn" id="3_ey42m"]
+[ext_resource type="PackedScene" uid="uid://l1eb7nix2iki" path="res://Scenes/Environment/shack.tscn" id="4_1hyfe"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hwnis"]
+radius = 4.21719
+
+[node name="Area3D" type="Area3D"]
+collision_layer = 64
+collision_mask = 32
+script = ExtResource("1_i1881")
+town = ExtResource("3_1hyfe")
+title = "Small Town"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02906, 0)
+shape = SubResource("SphereShape3D_hwnis")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="Shack4" parent="Node3D" instance=ExtResource("3_ey42m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.8287)
+
+[node name="Shack" parent="Node3D" instance=ExtResource("4_1hyfe")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.69902, 0, 1.41147)
+
+[node name="Shack2" parent="Node3D" instance=ExtResource("4_1hyfe")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.69902, 0, -9.41775)
+
+[node name="Shack3" parent="Node3D" instance=ExtResource("4_1hyfe")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -7.90662, 0, -9.41775)
+
+[node name="Shack5" parent="Node3D" instance=ExtResource("4_1hyfe")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -7.90662, 0, 1.41147)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

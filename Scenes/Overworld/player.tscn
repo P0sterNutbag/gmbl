@@ -31,21 +31,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301743, 0.0113287, 0.0014
 shape = SubResource("CapsuleShape3D_3smsa")
 
 [node name="CameraAnchor" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06193, 0)
 
-[node name="OverheadCamera" type="Camera3D" parent="CameraAnchor"]
-transform = Transform3D(1, 0, 0, 0, 0.890943, 0.454115, 0, -0.454115, 0.890943, 0, 6.64065, 8.11491)
+[node name="RotationOffset" type="Node3D" parent="CameraAnchor"]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573577, 0, -0.573577, 0.819152, 0, 0, 0)
+
+[node name="OverheadCamera" type="Camera3D" parent="CameraAnchor/RotationOffset"]
+transform = Transform3D(1, 0, 0, 0, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, 0, 10)
 current = true
 script = ExtResource("6_fl7hq")
-
-[node name="FirstPersonCamera" type="Camera3D" parent="CameraAnchor"]
-transform = Transform3D(1, 0, -6.3573e-08, 0, 1, 0, 6.3573e-08, 0, 1, 0, 1.984, 0)
-fov = 37.5
-
-[node name="RayCast3D" type="RayCast3D" parent="CameraAnchor/FirstPersonCamera"]
-target_position = Vector3(0, 0, -50)
-collision_mask = 64
-collide_with_areas = true
-collide_with_bodies = false
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 0
@@ -60,16 +54,10 @@ shape = SubResource("SphereShape3D_kqvqf")
 [node name="Cube" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="0"]
 surface_material_override/0 = ExtResource("4_f4tgq")
 
-[node name="RightHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.813716, 0.076402, 0.57622, -0.195349, 0.969608, 0.147303, -0.547454, -0.232427, 0.80391, -64.7058, 22.5902, -243.032)
-
 [node name="Node3D" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand" index="0"]
 transform = Transform3D(-11.567, 95.4157, -115.161, 145.587, 33.6094, 13.2239, 34.2151, -110.753, -95.2004, 31.1488, 18.921, -12.4602)
 
 [node name="AK47" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="0" instance=ExtResource("5_6ovkh")]
-
-[node name="LeftHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.908562, 0.212637, -0.359584, -0.088681, 0.939318, 0.331388, 0.408229, -0.269198, 0.872285, 85.3927, -5.92127, -238.31)
 
 [node name="StepTimer" type="Timer" parent="."]
 wait_time = 0.5

@@ -18,7 +18,7 @@ func can_see_target(target: Node3D) -> bool:
 	# point at target
 	if !target:
 		return false
-	var target_pos = target.global_position + Vector3.UP * 1
+	var target_pos = target.global_position + Vector3.UP * 1.6
 	look_at(target_pos)
 	target_position.z = -global_position.distance_to(target_pos)
 	# check for collisions

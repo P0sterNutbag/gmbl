@@ -13,16 +13,21 @@ func _process(delta: float) -> void:
 
 
 func create_town(town_data: Town) -> void:
+	PlayerStats.change_state(PlayerStats.states.pause)
+	if town_data.shops.size() == 1:
+		var shop = town_data.shops[0]
+		Globals.ui.start_dialogue(shop.dialogue, shop)
+		return
+	Globals.ui.current_town = town_data
 	town_resource = town_data
 	item_container.delete_children()
 	show()
-	PlayerStats.change_state(PlayerStats.states.pause)
 	title.text = town_data.title
 	for shop in town_data.shops:
 		var inst = item_container.create_menu_item()
 		inst.text = shop.title
 		inst.alignment = BoxContainer.ALIGNMENT_CENTER 
-		inst.pressed.connect(Globals.ui.enter_shop.bind(shop))
+		inst.pressed.connect(Globals.ui.start_dialogue.bind(shop.dialogue, shop))
 		inst.pressed.connect(enter_shop)
 	var inst = item_container.create_menu_item()
 	inst.text = "Leave"
@@ -44,5 +49,5 @@ func enter_shop():
 	hide()
 
 
-func _on_shop_exit() -> void:
+func re_enter_town() -> void:
 	create_town(town_resource)

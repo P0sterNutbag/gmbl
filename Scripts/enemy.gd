@@ -9,7 +9,10 @@ enum guns {shotgun, ak47, sniper, pistol}
 enum teams {enemies, allies}
 @export var team: teams = teams.enemies
 @export var follow_target: Node3D
+@export var potential_items: Array[SpawnChanceResource]
 @export var items: Array[Item]
+@export var max_items: int
+@export var min_items: int
 enum states {idle, investigate, attack, search, strafe, hurt, reload, camp, dead}
 var state = states.idle
 var walk_speed := 1.5
@@ -32,7 +35,7 @@ var last_seen_position: Vector3
 var target: Node3D
 var guns_dict: Dictionary = {
 	0 : [preload("res://Scenes/Guns/shotgun.tscn"), preload("res://Scenes/Items/Guns/shotgun.tscn")],
-	1 : [preload("res://Scenes/Guns/ak47.tscn"), preload("res://Scenes/Items/Guns/assault_rifle.tscn")],
+	1 : [preload("res://Scenes/Guns/ak47.tscn"), preload("res://Scenes/Items/Guns/ak47.tscn")],
 	2 : [preload("res://Scenes/Guns/sniper.tscn"), preload("res://Scenes/Items/Guns/sniper_rifle.tscn")],
 	3 : [preload("res://Scenes/Guns/pistol.tscn"), preload("res://Scenes/Items/Guns/pistol.tscn")],
 }
@@ -320,13 +323,13 @@ func _on_damaged(hit_position: Vector3, hit_direction: Vector3) -> void:
 	#if time_since_bleed < 0.1:
 		#return
 	#time_since_bleed = 0
-	#var blood_scene = load("res://Scenes/Particles/bloodspray.tscn")
-	#var blood = Globals.create_particle(blood_scene, hit_position)
-	#if blood != null:
-		#blood.set_deferred("rotation", Vector3(0, hit_direction.y, 0))
-		#blood.set_deferred("emitting", true)
-	#if state == states.dead:
-		#return
+	var blood_scene = load("res://Scenes/Particles/bloodspray.tscn")
+	var blood = Globals.create_particle(blood_scene, hit_position)
+	if blood != null:
+		blood.set_deferred("rotation", Vector3(0, hit_direction.y, 0))
+		blood.set_deferred("emitting", true)
+	if state == states.dead:
+		return
 	anim_player.play("HitReaction")
 	change_state(states.hurt)
 
@@ -389,8 +392,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	elif anim_name == "Fire":
 		#emit_shoot()
 		gun.gun_stats.ammo -= 1
-		if gun.ammo <= 0:
-			gun.ammo = gun.max_ammo
+		if gun.gun_stats.ammo <= 0:
+			gun.gun_stats.ammo = gun.max_ammo
 			change_state(states.reload)
 			return
 		if randf_range(0, 1) <= strafe_change:

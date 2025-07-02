@@ -1,0 +1,123 @@
+[gd_scene load_steps=22 format=3 uid="uid://r4ktdn26psb3"]
+
+[ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="1_0pe3w"]
+[ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="2_os0xi"]
+[ext_resource type="PackedScene" uid="uid://y6civk4251ei" path="res://Scenes/UI/fps_ui.tscn" id="3_12h26"]
+[ext_resource type="Resource" uid="uid://de2okx524jxjn" path="res://addons/zylann.hterrain/data/backdrop/data.hterrain" id="6_afsqo"]
+[ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand3.png" id="6_nue3y"]
+[ext_resource type="PackedScene" uid="uid://p1limlnykapp" path="res://Scenes/noise_controller.tscn" id="10_07x41"]
+[ext_resource type="Script" uid="uid://chxn6jj2cv0p3" path="res://Scripts/scatterer.gd" id="11_wttml"]
+[ext_resource type="PackedScene" uid="uid://1um45bviwf3x" path="res://Scenes/Environment/tree_thick.tscn" id="12_8ixwd"]
+[ext_resource type="PackedScene" uid="uid://cnkhacjlogrim" path="res://Scenes/Environment/tree_thin.tscn" id="13_87544"]
+[ext_resource type="PackedScene" uid="uid://c055smn111au7" path="res://Scenes/player.tscn" id="16_6tord"]
+[ext_resource type="PackedScene" uid="uid://bechsj7oyoa41" path="res://Scenes/Environment/exit_location.tscn" id="20_ppnd3"]
+[ext_resource type="Script" uid="uid://cp3dswmfni4xd" path="res://Scripts/enemy_spawner.gd" id="28_pxsmc"]
+[ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="29_ad2h2"]
+[ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/enemy.tscn" id="30_p5k5h"]
+[ext_resource type="Script" uid="uid://bokxkydc5jmf" path="res://addons/zylann.hterrain/hterrain.gd" id="32_f4nmr"]
+[ext_resource type="Script" uid="uid://b8f4u7je7ufby" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="34_khkok"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ctfa7"]
+render_priority = 0
+shader = ExtResource("1_0pe3w")
+shader_parameter/depth_edge_threshold_lower = 1.0
+shader_parameter/depth_edge_threshold_upper = 1.0
+shader_parameter/normal_edge_threshold = 1.0
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_width = 2.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_dhle1"]
+material = SubResource("ShaderMaterial_ctfa7")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="Resource" id="Resource_my2y4"]
+script = ExtResource("34_khkok")
+mode = 0
+textures = [[ExtResource("6_nue3y")], [null]]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_6cq5c"]
+agent_radius = 0.75
+
+[sub_resource type="Resource" id="Resource_o171k"]
+script = ExtResource("29_ad2h2")
+object_to_spawn = ExtResource("30_p5k5h")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[node name="Encounter" type="Node3D"]
+
+[node name="CanvasLayer" parent="." instance=ExtResource("3_12h26")]
+
+[node name="Shader" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.492066, 0, 0)
+cast_shadow = 0
+extra_cull_margin = 16237.3
+mesh = SubResource("QuadMesh_dhle1")
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("2_os0xi")]
+
+[node name="DirectionalLight3D" parent="WorldEnvironment" index="0"]
+transform = Transform3D(1, 0, 0, 0, -0.533659, 0.8457, 0, -0.8457, -0.533659, 0, 0, 0)
+shadow_normal_bias = 10.0
+
+[node name="NoiseController" parent="." instance=ExtResource("10_07x41")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000435829, 0.0134783, 0.00178146)
+
+[node name="Background" type="Node3D" parent="." groups=["ground"]]
+script = ExtResource("32_f4nmr")
+centered = true
+_terrain_data = ExtResource("6_afsqo")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_my2y4")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 2.0
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = true
+shader_params/u_tile_reduction = Vector4(0, 0, 0, 0)
+metadata/_custom_type_script = "uid://bokxkydc5jmf"
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_6cq5c")
+metadata/_edit_lock_ = true
+
+[node name="Scatterer" type="Node3D" parent="."]
+script = ExtResource("11_wttml")
+scenes = Array[PackedScene]([ExtResource("12_8ixwd"), ExtResource("13_87544")])
+count = 45
+area_size = Vector2(100, 100)
+min_size = 0.75
+max_size = 1.25
+rotate_y = true
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("16_6tord")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -53.4217)
+
+[node name="EnemySpawner" type="Node3D" parent="."]
+script = ExtResource("28_pxsmc")
+enemies_to_spawn = Array[ExtResource("29_ad2h2")]([SubResource("Resource_o171k")])
+
+[node name="SpawnPoint" type="Node3D" parent="EnemySpawner"]
+
+[node name="Border" type="Node3D" parent="."]
+
+[node name="Area3D" parent="Border" instance=ExtResource("20_ppnd3")]
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 0, -47.5)
+
+[node name="Area3D4" parent="Border" instance=ExtResource("20_ppnd3")]
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 0, 47.5)
+
+[node name="Area3D2" parent="Border" instance=ExtResource("20_ppnd3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -47.5, 0, 0)
+
+[node name="Area3D3" parent="Border" instance=ExtResource("20_ppnd3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 47.5, 0, 0)
+
+[editable path="WorldEnvironment"]

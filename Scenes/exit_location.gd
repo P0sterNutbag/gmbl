@@ -12,11 +12,11 @@ func _process(delta: float) -> void:
 
 
 func leave_encounter() -> void:
-	Globals.overworld.kill_encounter = true
+	var enemy_count: int
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		if enemy.state != enemy.states.dead:
-			Globals.overworld.kill_encounter = false
-			continue
+			enemy_count += 1
+	Globals.overworld.current_encounter.population = enemy_count
 	SceneManager.start_scene_transition(Globals.overworld)
 
 

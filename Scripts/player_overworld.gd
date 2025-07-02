@@ -3,7 +3,6 @@ extends CharacterBody3D
 enum camera_types {overhead, fps}
 var camera_type = camera_types.overhead
 const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
 var mouse_sensitivity := 0.004
 var state_functions: Dictionary
 var exit_functions: Dictionary
@@ -11,8 +10,7 @@ var enter_functions: Dictionary
 @onready var camera_anchor: Node3D = $CameraAnchor
 @onready var model: Node3D = $EnemyModel
 @onready var animation_player: AnimationPlayer = $EnemyModel/PersonAnimated/AnimationPlayer
-@onready var camera: Camera3D = $CameraAnchor/FirstPersonCamera
-@onready var ray_cast: RayCast3D = $CameraAnchor/FirstPersonCamera/RayCast3D
+@onready var camera: Camera3D = $CameraAnchor/RotationOffset/OverheadCamera
 
 
 func _ready() -> void:

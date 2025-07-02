@@ -10,7 +10,7 @@ var base_speed := 6.0
 var walk_speed := 3.0
 var crouch_speed := 3.0
 var speed = base_speed
-var jump_speed := 8.0
+var jump_speed := 6.5
 var mouse_sensitivity := 0.004
 var lean_angle := 0.0
 var gun_index := -1
@@ -18,11 +18,16 @@ var crouch_height := 1.0
 var base_fov := 75.0
 var walk_time := 0.0
 var push_force := 20
+var sway_time := 0.0
+var sway_speed = 0.1
+var sway_intensity = 3
 var is_crouching: bool
 var on_ladder: bool
-var firepoint: Node3D
+var aim_rotation: Vector3
 var ammo: Array
+var firepoint: Node3D
 var gun_tween: Tween
+var sway_noise := FastNoiseLite.new()
 var state_functions: Dictionary
 var exit_functions: Dictionary
 var enter_functions: Dictionary
@@ -31,6 +36,8 @@ var gun_exit_functions: Dictionary
 var gun_enter_functions: Dictionary
 var gun: Node3D: 
 	get: 
+		if !PlayerStats.gun:
+			return null
 		return get(PlayerStats.gun.name)
 var grenade = preload("res://Scenes/Bullets/grenade.tscn")
 @onready var camera = $CameraAnchor/Camera3D
@@ -48,13 +55,23 @@ var grenade = preload("res://Scenes/Bullets/grenade.tscn")
 @onready var grenade_spawn: Node3D = $CameraAnchor/Camera3D/GrenadeSpawn
 
 
+func _enter_tree() -> void:
+	PlayerStats.state = PlayerStats.states.walk
+	aim_rotation = rotation
+
+
 func _ready() -> void:
 	Globals.player = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	hitbox.hp_bar = Globals.ui.player_hp_bar
+	hitbox.hp_bar2 = Globals.ui.player_hp_bar2
+	sway_noise.seed = randi()
+	sway_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	sway_noise.frequency = 0.5
 	for gun in gun_anchor.get_children():
 		gun.visible = false
-	change_gun(PlayerStats.gun)
+	if gun:
+		change_gun(PlayerStats.gun)
 	state_functions = {
 		PlayerStats.states.walk: state_walk,
 		PlayerStats.states.pause: state_pause,
@@ -66,15 +83,17 @@ func _ready() -> void:
 	}
 	gun_state_functions = {
 		#gun_states.point: gun_state_point,
-		#gun_states.ads: gun_state_ads,
+		gun_states.ads: gun_state_ads,
 	}
 	gun_enter_functions = {
 		gun_states.point: enter_gun_state_point,
 		gun_states.ads: enter_gun_state_ads,
 		gun_states.ammo_check: enter_gun_state_ammo_check,
 		gun_states.no_gun: enter_gun_state_no_gun,
+		gun_states.reload: enter_gun_state_reload,
 	}
 	gun_exit_functions = {
+		gun_states.reload: exit_gun_state_reload,
 		gun_states.ammo_check: exit_gun_state_ammo_check,
 		gun_states.no_gun: exit_gun_state_no_gun,
 	}
@@ -83,9 +102,19 @@ func _ready() -> void:
 func _physics_process(delta):
 	# apply gravity
 	velocity.y += -gravity * delta
+	
+	# stay in boundaries
+	position.x = clamp(position.x, -50, 50)
+	position.z = clamp(position.z, -50, 50)
+
+
+func _process(delta: float) -> void:
+	# control camera
+	if PlayerStats.state == PlayerStats.states.walk:
+		rotation.y = aim_rotation.y
+		camera.rotation.x = aim_rotation.x
+	
 	# state machine
-	#if state_functions.has(PlayerStats.state):
-		#state_functions[PlayerStats.state].call(delta)
 	if gun_state_functions.has(gun_state):
 		gun_state_functions[gun_state].call(delta)
 
@@ -110,9 +139,9 @@ func _input(event):
 	if PlayerStats.state != PlayerStats.states.walk:
 		return
 	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * mouse_sensitivity)
-		camera.rotate_x(-event.relative.y * mouse_sensitivity)
-		camera.rotation.x = clampf(camera.rotation.x, -deg_to_rad(70), deg_to_rad(70))
+		aim_rotation.y += -event.relative.x * mouse_sensitivity
+		aim_rotation.x += -event.relative.y * mouse_sensitivity
+		aim_rotation.x = clampf(aim_rotation.x, -deg_to_rad(70), deg_to_rad(70))
 
 
 func state_walk(delta):
@@ -197,10 +226,12 @@ func state_walk(delta):
 			var tween = create_tween().set_ease(Tween.EASE_OUT)
 			tween.tween_property(gun, "position:z", 0.1, 0.01)
 			tween.tween_property(gun, "position:z", 0, 0.2)
-			shoot_component._on_shoot(Input.is_action_pressed("aim"))
+			shoot_component._on_shoot(Input.is_action_pressed("aim"), velocity)
 			gun._on_shoot()
 			camera.screen_shake()
-			camera.kickback(gun.kickback_magnitude)
+			#camera.kickback(gun.kickback_magnitude)
+			var tween2 = create_tween().set_ease(Tween.EASE_OUT)
+			tween2.tween_property(self, "aim_rotation:x", aim_rotation.x + deg_to_rad(gun.kickback_magnitude) / 3, 0.01)
 			Globals.noise_controller.create_noise_event(firepoint.global_position, self, gun.bullet_stats.noise_radius)
 		if Input.is_action_pressed("aim") and gun_state != gun_states.ads:
 			change_gun_state(gun_states.ads)
@@ -219,21 +250,21 @@ func state_walk(delta):
 		if !ammo:
 			return
 		change_gun_state(gun_states.reload)
-		var tween = create_tween()
-		tween.tween_property(gun_anchor, "position:y", -1, 0.25)
-		tween.tween_interval(0.5)
-		tween.tween_callback(use_item.bind("", ammo, gun.gun_stats))
-		tween.tween_property(gun_anchor, "position:y", 0, 0.15) 
-		tween.tween_property(self, "gun_state", gun_states.point, 0)
+		#var tween = create_tween()
+		#tween.tween_property(gun_anchor, "position:y", -0.3, 0.25)
+		#tween.tween_interval(0.5)
+		#tween.tween_callback(use_item.bind("", ammo, gun.gun_stats))
+		#tween.tween_property(gun_anchor, "position:y", 0, 0.15) 
+		#tween.tween_property(self, "gun_state", gun_states.point, 0)
 	
 	# check ammo
-	if Input.is_action_just_pressed("check_ammo"):
-		if gun_state == gun_states.point:
-			change_gun_state(gun_states.ammo_check)
-		elif gun_state == gun_states.ammo_check:
-			change_gun_state(gun_states.point)
-	if Input.is_action_just_pressed("aim") and gun_state == gun_states.ammo_check:
-		change_gun_state(gun_states.ads)
+	#if Input.is_action_just_pressed("check_ammo"):
+		#if gun_state == gun_states.point:
+			#change_gun_state(gun_states.ammo_check)
+		#elif gun_state == gun_states.ammo_check:
+			#change_gun_state(gun_states.point)
+	#if Input.is_action_just_pressed("aim") and gun_state == gun_states.ammo_check:
+		#change_gun_state(gun_states.ads)
 	
 	# interact
 	if Input.is_action_just_pressed("interact"):
@@ -255,7 +286,7 @@ func state_walk(delta):
 		var medkit = find_item("medkit")
 		if medkit:
 			use_item("", medkit, hitbox)
-			hitbox.hp = clamp(hitbox.hp, 0, hitbox.max_hp)
+			hitbox.hp = clamp(hitbox.hp, 0, hitbox.max_hp - hitbox.unhealable_hp)
 	
 	# camera zoom
 	var target_fov
@@ -288,7 +319,7 @@ func state_walk(delta):
 		walk_time += delta
 		var bob = cos(walk_time * 20) * 0.25
 		gun.position.y += bob * delta
-	elif gun.position.y: 
+	elif gun and gun.position.y: 
 		walk_time = 0
 		var tween = create_tween()
 		tween.tween_property(gun, "position:y", 0, 0.1)
@@ -329,6 +360,26 @@ func enter_gun_state_ads():
 	gun_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	gun_tween.tween_property(gun_anchor, "position", ads_position.position, 0.15)
 	camera_zoom = zoom_levels.ads
+	sway_noise.seed = randi()
+	sway_time = 0
+
+
+func gun_state_ads(delta: float) -> void:
+	sway_time += delta * sway_speed
+	var x_offset = sway_noise.get_noise_2d(sway_time, 0.0) * sway_intensity
+	var y_offset = sway_noise.get_noise_2d(0.0, sway_time) * sway_intensity
+	rotation.y += deg_to_rad(y_offset)
+	camera.rotation.x += deg_to_rad(x_offset)
+
+
+func enter_gun_state_reload() -> void:
+	var anim_player = gun.get_node("AnimationPlayer")
+	anim_player.play("reload")
+
+
+func exit_gun_state_reload() -> void:
+	var ammo = find_item(gun.ammo_type)
+	use_item("", ammo, gun.gun_stats)
 
 
 func enter_gun_state_ammo_check():
@@ -337,7 +388,7 @@ func enter_gun_state_ammo_check():
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.set_parallel()
 	tween.tween_property(gun_anchor, "rotation:y", deg_to_rad(80), 0.25)
-	tween.tween_property(gun_anchor, "position:y", 0.1, 0.25)
+	tween.tween_property(gun_anchor, "position:y", 0.02, 0.25)
 	tween.set_parallel(false)
 	tween.tween_property(ammo_text, "visible", true, 0)
 
@@ -358,7 +409,7 @@ func enter_gun_state_no_gun():
 	for gun in gun_anchor.get_children():
 		gun.process_mode = PROCESS_MODE_DISABLED
 	var tween = create_tween()
-	tween.tween_property(gun_anchor, "position:y", -1, 0.25)
+	tween.tween_property(gun_anchor, "position:y", -0.3, 0.25)
 	tween.tween_property(gun, "visible", false, 0)
 	await tween.finished
 
@@ -372,10 +423,9 @@ func exit_gun_state_no_gun():
 
 
 func change_gun(new_gun: EquipmentGun) -> void:
-	#if new_index > PlayerStats.guns.size() - 1:
-		#return
+	if gun:
+		await change_gun_state(gun_states.no_gun)
 	PlayerStats.gun = new_gun
-	await change_gun_state(gun_states.no_gun)
 	for i in gun_anchor.get_children():
 		if i != gun:
 			i.visible = false
@@ -392,6 +442,11 @@ func change_gun(new_gun: EquipmentGun) -> void:
 		await change_gun_state(gun_states.ads)
 	else:
 		await change_gun_state(gun_states.point)
+
+
+func unequip_gun() -> void:
+	await change_gun_state(gun_states.no_gun)
+	PlayerStats.gun = null
 
 
 func use_item(item_name: String, item_id = null, target = null):

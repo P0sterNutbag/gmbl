@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EquipmentGun" load_steps=5 format=3 uid="uid://oaklo016ku8w"]
+
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="1_mvcdb"]
+[ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="2_gvty8"]
+[ext_resource type="Script" uid="uid://34toqwivxgyk" path="res://Scripts/equipment_gun.gd" id="3_fb7qp"]
+
+[sub_resource type="Resource" id="Resource_mvcdb"]
+script = ExtResource("2_gvty8")
+ammo = 8
+metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
+[resource]
+script = ExtResource("3_fb7qp")
+gun_stats = SubResource("Resource_mvcdb")
+name = "pistol"
+title = "Pistol"
+usable = true
+effects = Array[ExtResource("1_mvcdb")]([])
+multiply = false
+add = false
+uses = 1
+price = 45
+is_health_item = false
+metadata/_custom_type_script = "uid://34toqwivxgyk"

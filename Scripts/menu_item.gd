@@ -22,17 +22,20 @@ var price: int:
 			price_label.text += "$" + str(price)
 var item: Item
 var icon_texture: Texture2D
+var can_press: bool
 @onready var price_label: Label = %Price
 
 
 func _ready() -> void:
 	icon_texture = icon
 	icon = null
+	await get_tree().process_frame
+	can_press = true
 
 
 func _process(delta: float) -> void:
 	# select
-	if Input.is_action_just_pressed("interact") and has_focus():
+	if Input.is_action_just_pressed("interact") and has_focus() and can_press:
 		pressed.emit()
 	# show equipped
 	if item and item is Equipment:

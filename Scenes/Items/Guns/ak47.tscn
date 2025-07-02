@@ -1,25 +1,28 @@
 [gd_scene load_steps=12 format=3 uid="uid://cgtukpis1lq0a"]
 
-[ext_resource type="Script" uid="uid://bdvokalrlg1k6" path="res://Scripts/item_pickup.gd" id="1_2q4no"]
-[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="2_2q4no"]
-[ext_resource type="PackedScene" uid="uid://rhtj73aayki" path="res://Scenes/Guns/Models/ak47_model.tscn" id="3_2q4no"]
-[ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="3_k4jng"]
-[ext_resource type="Script" uid="uid://34toqwivxgyk" path="res://Scripts/equipment_gun.gd" id="4_ephws"]
+[ext_resource type="Script" uid="uid://bdvokalrlg1k6" path="res://Scripts/item_pickup.gd" id="1_2sgkx"]
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="2_qe716"]
+[ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="3_ewse8"]
+[ext_resource type="Script" uid="uid://34toqwivxgyk" path="res://Scripts/equipment_gun.gd" id="4_fkqp4"]
+[ext_resource type="PackedScene" uid="uid://rhtj73aayki" path="res://Scenes/Guns/Models/ak47_model.tscn" id="5_unrj6"]
 
 [sub_resource type="Resource" id="Resource_12duu"]
-script = ExtResource("3_k4jng")
+script = ExtResource("3_ewse8")
 ammo = 24
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
 [sub_resource type="Resource" id="Resource_62xu2"]
-script = ExtResource("4_ephws")
+script = ExtResource("4_fkqp4")
 gun_stats = SubResource("Resource_12duu")
 name = "rifle"
 title = "AK47"
-effects = Array[ExtResource("2_2q4no")]([])
+usable = true
+effects = Array[ExtResource("2_qe716")]([])
 multiply = false
 add = false
 uses = 1
+price = 45
+is_health_item = false
 metadata/_custom_type_script = "uid://34toqwivxgyk"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rk1p0"]
@@ -37,7 +40,7 @@ size = Vector3(0.0542603, 0.211849, 0.173174)
 [node name="AssaultRifle" type="RigidBody3D"]
 collision_layer = 16
 angular_damp = 5.0
-script = ExtResource("1_2q4no")
+script = ExtResource("1_2sgkx")
 item = SubResource("Resource_62xu2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -60,5 +63,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, -0.0746792, -0.02
 shape = SubResource("BoxShape3D_k4jng")
 debug_fill = false
 
-[node name="Ak47" parent="." instance=ExtResource("3_2q4no")]
-transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, -0.10933, -0.0069225)
+[node name="Ak47" parent="." instance=ExtResource("5_unrj6")]
+transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, 0.0127265, 0.0650347)

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://d24cwcumucxfb"]
+
+[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_m2hvl"]
+[ext_resource type="Script" uid="uid://vxmg7be0kyok" path="res://Scripts/dialogue_bubble.gd" id="2_bxbg0"]
+[ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="2_hllnk"]
+
+[node name="DialogueBubble" type="PanelContainer"]
+custom_minimum_size = Vector2(384, 128)
+size_flags_vertical = 8
+theme = ExtResource("1_m2hvl")
+script = ExtResource("2_bxbg0")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("2_hllnk")
+text = "Hello!"

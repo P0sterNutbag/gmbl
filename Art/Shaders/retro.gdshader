@@ -8,9 +8,9 @@ uniform int dither_size: hint_range(1, 8) = 1;
 
 float dithering_pattern(ivec2 fragcoord) {
 	const float pattern[] = {
-		0.00, 0.50, 0.10, 0.65, 
-		0.75, 0.25, 0.90, 0.35, 
-		0.20, 0.70, 0.05, 0.50, 
+		0.00, 0.50, 0.10, 0.65,
+		0.75, 0.25, 0.90, 0.35,
+		0.20, 0.70, 0.05, 0.50,
 		0.95, 0.40, 0.80, 0.30
 	};
 	int x = fragcoord.x % 4;

@@ -39,7 +39,8 @@ func _ready() -> void:
 	add_child(shoot_timer)
 	if !cast_shadow:
 		for child in gun_model.get_child(0).get_children():
-			child.cast_shadow = false
+			if child is MeshInstance3D:
+				child.cast_shadow = false
 
 
 func _process(delta: float) -> void:
@@ -64,10 +65,10 @@ func _on_shoot() -> void:
 	flash_texture.rotate_z(deg_to_rad(randf_range(0, 360)))
 	muzzle_flash.visible = true
 	audio_player.play()
-	var shell_instance = Globals.create_particle(shell, chamber.global_position, chamber)
-	if shell_instance != null:
-		shell_instance.apply_impulse(global_transform.basis.x * randf_range(2, 4) + global_transform.basis.y * randf_range(2, 3))
-		shell_instance.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
+	#var shell_instance = Globals.create_particle(shell, chamber.global_position, chamber)
+	#if shell_instance != null:
+		#shell_instance.apply_impulse(global_transform.basis.x * randf_range(2, 4) + global_transform.basis.y * randf_range(2, 3))
+		#shell_instance.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
 	var tween = create_tween()
 	tween.tween_property(muzzle_flash, "visible", false, 0.1)
 

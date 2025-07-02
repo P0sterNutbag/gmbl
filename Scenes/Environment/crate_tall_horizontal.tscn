@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://wubvthultu6w"]
+
+[ext_resource type="Shader" uid="uid://de6l4w30bo7u6" path="res://Art/Shaders/cel-shader-base.gdshader" id="1_bivks"]
+[ext_resource type="Texture2D" uid="uid://dmb4umujpf2cy" path="res://Art/Textures/crate tall.png" id="2_q1iw3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nolf3"]
+size = Vector3(1.15, 2.3, 1.15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jlwe5"]
+size = Vector3(1.15, 2.3, 1.15)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hota0"]
+render_priority = 0
+shader = ExtResource("1_bivks")
+shader_parameter/color = Color(0.86, 0.86, 0.86, 1)
+shader_parameter/base_texture = ExtResource("2_q1iw3")
+shader_parameter/specular = Color(0, 0, 0, 0)
+shader_parameter/fresnel = Color(0, 0, 0, 0)
+shader_parameter/uv_scale = Vector2(3, 2)
+shader_parameter/uv_offset = Vector2(0, 0)
+
+[node name="CrateTall" type="RigidBody3D"]
+collision_mask = 33
+mass = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_nolf3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_jlwe5")
+surface_material_override/0 = SubResource("ShaderMaterial_hota0")

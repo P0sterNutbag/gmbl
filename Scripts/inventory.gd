@@ -11,8 +11,8 @@ var target2
 @onready var money_label: Label = $MarginContainer/VBoxContainer/Label/Label2
 
 
-func _ready():
-	if show_price and "money" in target:
+func _ready() -> void:
+	if "money" in target:
 		money_label.show()
 		money_label.text = "$" + str(target.money)
 	else:
@@ -20,6 +20,9 @@ func _ready():
 
 
 func _process(delta: float) -> void:
+	if !visible or !get_parent().visible:
+		return
+	
 	# take all
 	if Input.is_action_just_pressed("reload") and mode == modes.loot:
 		for item in item_container.get_children():
@@ -28,12 +31,16 @@ func _process(delta: float) -> void:
 				target2.items.append(item.item)
 				item_container.remove_child(item)
 		get_parent().reset_inventories()
+	
+	# set money
+	if money_label.visible and "money" in target:
+		money_label.text = "$" + str(target.money)
 
 
 func set_items():
-	var old_items: Array
 	if item_container.get_child_count() > 0:
 		for child in item_container.get_children():
+			item_container.remove_child(child)
 			child.queue_free()
 	for item in target.items:
 		if item is not Equipment:
@@ -47,13 +54,17 @@ func set_items():
 		inst.item = item
 		if show_price:
 			inst.price = item.price
-		if mode == modes.use:
+		if mode == modes.use and item.usable:
 			inst.pressed.connect(item.use.bind(target))
+			if item.used_up.is_connected(on_use_item):
+				item.used_up.disconnect(on_use_item)
+			item.used_up.connect(on_use_item.bind(inst))
 		elif mode == modes.loot:
 			inst.pressed.connect(transfer_item.bind(inst))
-	item_container.sort_menu_items()
-	item_container.set_menu_item_focus()
-	item_container.get_child(0).grab_focus()
+	if item_container.get_child_count() > 0:
+		item_container.sort_menu_items()
+		item_container.set_menu_item_focus()
+		item_container.get_child(0).grab_focus()
 
 
 func transfer_item(menu_item: Control):
@@ -66,6 +77,9 @@ func transfer_item(menu_item: Control):
 			return
 	target.items.erase(menu_item.item)
 	item_container.remove_child(menu_item)
+	if menu_item.item is ItemMoney:
+		PlayerStats.money += menu_item.item.amount
+		return
 	target2.items.append(menu_item.item)
 	if menu_item.item is Equipment:
 		menu_item.item.equipped = false
@@ -94,3 +108,10 @@ func _on_v_box_container_visibility_changed() -> void:
 			title.text = "Inventory"
 		else:
 			title.text = target.title
+
+
+func on_use_item(menu_item) -> void:
+	if menu_item.get_index() == item_container.get_child_count() - 1:
+		item_container.get_child(-2).grab_focus()
+	menu_item.queue_free()
+		

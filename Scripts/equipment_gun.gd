@@ -6,10 +6,11 @@ class_name EquipmentGun
 
 func equip() -> void:
 	super.equip()
-	if equipped:
-		equipped = false
-		return
 	for gun in PlayerStats.guns:
-		gun.equipped = false
-	equipped = true
-	Globals.player.change_gun(self)
+		if gun != self:
+			gun.equipped = false
+	equipped = !equipped
+	if equipped:
+		Globals.player.change_gun(self)
+	else:
+		Globals.player.unequip_gun()

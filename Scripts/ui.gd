@@ -1,12 +1,12 @@
 extends CanvasLayer
 
-var crosshair_target_pos: Vector2
+var show_crosshair: bool = true
 @onready var middle_pos = get_tree().root.get_viewport().size / 8
 @onready var crosshair = $Crosshair
 @onready var player_hp_bar: ProgressBar = %ProgressBar
+@onready var player_hp_bar2: ProgressBar = %ProgressBar2
 @onready var hit_effect: Control = $HitEffect
 @onready var scope: TextureRect = $Scope
-@onready var center_dot: TextureRect = $TextureRect
 @onready var mags_left: Label = %MagsLeft
 @onready var medkits_left: Label = %MedkitsLeft
 @onready var gun_name: Label = %GunName
@@ -15,6 +15,7 @@ var crosshair_target_pos: Vector2
 @onready var inventory_container2: HBoxContainer = $TransferInventory
 @onready var inventory: PanelContainer = %Inventory
 @onready var inventory2: PanelContainer = %Inventory2
+@onready var mag_icon: Sprite2D = $BottomRight/Sprite
 
 
 func _ready() -> void:
@@ -22,29 +23,41 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	set_mag_count(PlayerStats.get_item_amount(Globals.player.gun.ammo_type))
-	set_medit_count(PlayerStats.get_item_amount("medkit"))
+	# magazine/medkits
+	if Globals.player.gun:
+		set_mag_count(PlayerStats.get_item_amount(Globals.player.gun.ammo_type))
+		set_medit_count(PlayerStats.get_item_amount("medkit"))
+		if Globals.player.gun.max_ammo > 0:
+			var current_ammo = float(Globals.player.gun.ammo)
+			var max_ammo = float(Globals.player.gun.max_ammo)
+			var ammo_percentage = current_ammo / max_ammo
+			var sprite_index = int(ammo_percentage * 20)
+			if sprite_index == 0 and current_ammo > 0:
+				sprite_index = 1
+			mag_icon.region_rect = Rect2(sprite_index * 28, 0, 28, mag_icon.region_rect.size.y)
+	
+	# inventory
 	if Input.is_action_just_pressed("inventory"):
 		inventory_container.visible = !inventory_container.visible
-		PlayerStats.change_state(PlayerStats.states.pause)
-
-
-func set_crosshair_position(pos: Vector2) -> void:
-	crosshair_target_pos = pos
-
-
-func reset_crosshair_position() -> void:
-	crosshair_target_pos = middle_pos
-
-
-func show_crosshairs():
-	crosshair.show()
-	center_dot.show()
-
-
-func hide_crosshairs() -> void:
-	crosshair.hide()
-	center_dot.hide()
+		if inventory_container.visible:
+			PlayerStats.change_state(PlayerStats.states.pause)
+		else:
+			PlayerStats.change_state(PlayerStats.states.walk)
+	
+	# crosshair
+	if !show_crosshair or Globals.player.gun_state == Globals.player.gun_states.ads or Globals.player.gun_state == Globals.player.gun_states.no_gun:
+		crosshair.hide()
+		return
+	else:
+		crosshair.show()
+	var base_pos = clamp(Globals.player.gun.bullet_stats.h_angle_variance_hip * 20, 1, 100)
+	for child in crosshair.get_children():
+		var target_pos = child.position
+		if child.position.x == 0:
+			target_pos.y = sign(child.position.y) * (base_pos * clamp(Globals.player.velocity.length(), 1, 2) * Globals.player.shoot_component.spread)
+		elif child.position.y == 0:
+			target_pos.x = sign(child.position.x) * (base_pos * clamp(Globals.player.velocity.length(), 1, 2) * Globals.player.shoot_component.spread)
+		child.position = lerp(child.position, target_pos, delta * 20)
 
 
 func show_scope(scope_texture: Texture2D = scope.texture) -> void:

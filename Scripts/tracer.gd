@@ -4,7 +4,7 @@ var end_point: Vector3
 
 
 func _process(delta: float) -> void:
-	global_translate(-global_transform.basis.z.normalized() * 250 * delta)
+	global_translate(-global_transform.basis.z.normalized() * 250 * delta * 0.01)
 	if global_position.distance_to(end_point) < 3:
 		queue_free()
 

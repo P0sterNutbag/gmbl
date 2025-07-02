@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://pkdxp0kobhyk"]
+
+[ext_resource type="Script" uid="uid://lblyysya3an4" path="res://Scripts/location.gd" id="1_m40sa"]
+[ext_resource type="PackedScene" uid="uid://b336bhu2grnix" path="res://Scenes/Places/encounter_1.tscn" id="2_m40sa"]
+[ext_resource type="PackedScene" uid="uid://bckm1lw4wvcpb" path="res://Scenes/Environment/shack_sandbrick.tscn" id="3_4w7n6"]
+[ext_resource type="PackedScene" uid="uid://di4qmk466fnrk" path="res://Scenes/Environment/shipping_container.tscn" id="3_7mnom"]
+[ext_resource type="PackedScene" uid="uid://dergqrsprx3qg" path="res://Scenes/Environment/shack3.tscn" id="4_kt10w"]
+[ext_resource type="PackedScene" uid="uid://bacbcwbytr4bc" path="res://Scenes/Environment/shack_tin_gray.tscn" id="6_e1ape"]
+[ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="7_kt10w"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hwnis"]
+radius = 4.46269
+
+[node name="Area3D" type="Area3D" groups=["persist"]]
+collision_layer = 64
+collision_mask = 32
+script = ExtResource("1_m40sa")
+encounter_scene = ExtResource("2_m40sa")
+title = "Gang Camp"
+show_title = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02906, 0)
+shape = SubResource("SphereShape3D_hwnis")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="Shack" parent="Node3D" instance=ExtResource("3_4w7n6")]
+transform = Transform3D(0.637504, 0, -0.770447, 0, 1, 0, 0.770447, 0, 0.637504, -8.47988, 0, -2.60693)
+
+[node name="Shack4" parent="Node3D" instance=ExtResource("4_kt10w")]
+transform = Transform3D(0.900994, 0, 0.433832, 0, 1, 0, -0.433832, 0, 0.900994, 8.38723, -1.66893e-06, 5.3018)
+
+[node name="ShippingContainer2" parent="Node3D" instance=ExtResource("3_7mnom")]
+transform = Transform3D(0.570914, 0, -0.82101, 0, 1, 0, 0.82101, 0, 0.570914, 0.928697, 1.5, 11.3218)
+
+[node name="ShippingContainer3" parent="Node3D" instance=ExtResource("3_7mnom")]
+transform = Transform3D(-0.540901, -0.000768779, -0.841086, -0.000561794, 1, -0.000552739, 0.841086, 0.000173528, -0.540902, -6.88827, 1.5, 7.42092)
+
+[node name="Shack2" parent="Node3D" instance=ExtResource("6_e1ape")]
+transform = Transform3D(-0.944812, 0, -0.327614, 0, 1, 0, 0.327614, 0, -0.944812, 1.11298, 1.43051e-06, -10.5274)
+
+[node name="EnemyModel" parent="." instance=ExtResource("7_kt10w")]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

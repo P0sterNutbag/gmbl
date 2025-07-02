@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c055smn111au7"]
+[gd_scene load_steps=38 format=3 uid="uid://c055smn111au7"]
 
 [ext_resource type="Script" uid="uid://cslnx4rw32guw" path="res://Scripts/player.gd" id="1_5kxbm"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_x3wgy"]
@@ -9,8 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/hitmarker.tscn" id="8_tx1dd"]
 [ext_resource type="PackedScene" uid="uid://dfxhgieagfc0d" path="res://Scenes/Models/player_arm.tscn" id="9_fs7ks"]
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="9_gymyn"]
+[ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="11_qqcod"]
 [ext_resource type="Texture2D" uid="uid://b7o6p645d7r1q" path="res://Art/Textures/scope.png" id="12_fd4e3"]
 [ext_resource type="PackedScene" uid="uid://dgwlg3anvnbmw" path="res://Scenes/Guns/ak47.tscn" id="12_fs7ks"]
+[ext_resource type="Material" uid="uid://iagweyrwrs4k" path="res://Art/Materials/off_black.tres" id="12_igrcy"]
 [ext_resource type="PackedScene" uid="uid://cnwsl1ltxxegm" path="res://Scenes/Guns/pistol.tscn" id="13_igrcy"]
 [ext_resource type="FontFile" uid="uid://d0fpgnwmxa37x" path="res://Art/Fonts/bedstead-bold.otf" id="13_l6n3p"]
 [ext_resource type="Resource" uid="uid://bqr7p1xwplitk" path="res://Resources/BulletStats/shotgun_bullet_stats.tres" id="15_qqcod"]
@@ -18,8 +20,10 @@
 [ext_resource type="PackedScene" uid="uid://dts12bmvycipb" path="res://Scenes/Guns/shotgun.tscn" id="19_l6n3p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kgvud"]
+radius = 0.279219
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3smsa"]
+radius = 0.258901
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qqcod"]
 radius = 0.2
@@ -37,14 +41,119 @@ h_angle_variance_hip = 2.0
 v_angle_variance_hip = 2.0
 h_angle_variance_ads = 0.0
 v_angle_variance_ads = 0.0
-noise_radius = 30.0
+noise_radius = 75.0
 is_hitscan = true
 bullet_drop = false
 collision_mask = 3
 hitmarker = ExtResource("8_tx1dd")
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
-[sub_resource type="Resource" id="Resource_olqyp"]
+[sub_resource type="Resource" id="Resource_igrcy"]
+script = ExtResource("11_qqcod")
+ammo = 24
+metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
+[sub_resource type="Animation" id="Animation_igrcy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ArmLAnchor/armL:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.38419e-07, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GunAnchor/Model/ak47/Cube_008:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.24495, 1.0984, 0.0105467)]
+}
+
+[sub_resource type="Animation" id="Animation_qqcod"]
+resource_name = "reload"
+length = 2.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.1, 1.5, 2.1, 2.5),
+"transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943, 0.267943, 0.267943),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.235619, 0, 0), Vector3(0.235619, 0, 0), Vector3(0.34383, 0, -0.47822), Vector3(0.34383, 0, -0.47822), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ArmLAnchor/armL:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.9, 1.6, 1.9, 2.1, 2.5),
+"transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943, 0.267943, 0.267943, 0.267943),
+"update": 0,
+"values": [Vector3(2.38419e-07, 0, 0), Vector3(0, -0.185, 0.135), Vector3(0, -0.555, 0.345), Vector3(0, -0.5, 0.345), Vector3(0, -0.185, 0.135), Vector3(0, -0.185, 0.135), Vector3(2.38419e-07, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GunAnchor/Model/ak47/Cube_008:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.9, 1.6, 1.9),
+"transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943, 0.267943),
+"update": 0,
+"values": [Vector3(0.24495, 1.0984, 0.0105467), Vector3(0.24495, 1.0984, 0.0105467), Vector3(0.905, -0.262, 0.011), Vector3(0.905, -0.102, 0.011), Vector3(0.245, 1.098, 0.011)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../../../..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0],
+"method": &"change_gun_state"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_igrcy"]
+_data = {
+&"RESET": SubResource("Animation_igrcy"),
+&"reload": SubResource("Animation_qqcod")
+}
+
+[sub_resource type="Resource" id="Resource_fd4e3"]
 script = ExtResource("9_gymyn")
 bullet_scene = ExtResource("7_7dp3o")
 amount = 1
@@ -53,16 +162,105 @@ max_drop_speed = 3.0
 min_drop_speed = 0.0
 drop_speed = 0.0
 damage = 1.0
-h_angle_variance_hip = 2.0
-v_angle_variance_hip = 2.0
+h_angle_variance_hip = 1.0
+v_angle_variance_hip = 1.0
 h_angle_variance_ads = 0.0
 v_angle_variance_ads = 0.0
-noise_radius = 30.0
+noise_radius = 60.0
 is_hitscan = true
 bullet_drop = true
 collision_mask = 3
 hitmarker = ExtResource("8_tx1dd")
 metadata/_custom_type_script = "uid://c338ifvm4duar"
+
+[sub_resource type="Resource" id="Resource_wpjfl"]
+script = ExtResource("11_qqcod")
+ammo = 8
+metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
+[sub_resource type="BoxMesh" id="BoxMesh_igrcy"]
+material = ExtResource("12_igrcy")
+size = Vector3(0.05, 0.2, 0.05)
+
+[sub_resource type="Animation" id="Animation_l6n3p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArmLAnchor/armL/MeshInstance3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_fs7ks"]
+resource_name = "reload"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.1, 1.5, 2.1, 2.5),
+"transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943, 0.267943, 0.267943),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.235619, 0, 0), Vector3(0.235619, 0, 0), Vector3(0.34383, 0, -0.47822), Vector3(0.34383, 0, -0.47822), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ArmLAnchor/armL:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.1, 1.5, 2.1, 2.5),
+"transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943, 0.267943, 0.267943),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.29, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0.31, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../../..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0],
+"method": &"change_gun_state"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ArmLAnchor/armL/MeshInstance3D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l6n3p"]
+_data = {
+&"RESET": SubResource("Animation_l6n3p"),
+&"reload": SubResource("Animation_fs7ks")
+}
+
+[sub_resource type="Resource" id="Resource_qqcod"]
+script = ExtResource("11_qqcod")
+ammo = 6
+metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
 [sub_resource type="Resource" id="Resource_fs7ks"]
 script = ExtResource("9_gymyn")
@@ -77,15 +275,20 @@ h_angle_variance_hip = 2.0
 v_angle_variance_hip = 2.0
 h_angle_variance_ads = 0.0
 v_angle_variance_ads = 0.0
-noise_radius = 30.0
+noise_radius = 100.0
 is_hitscan = true
 bullet_drop = false
 collision_mask = 3
 hitmarker = ExtResource("8_tx1dd")
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
+[sub_resource type="Resource" id="Resource_olqyp"]
+script = ExtResource("11_qqcod")
+ammo = 6
+metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qqcod"]
-radius = 0.55
+radius = 0.295198
 
 [sub_resource type="Resource" id="Resource_pu2lt"]
 script = ExtResource("9_gymyn")
@@ -109,6 +312,8 @@ metadata/_custom_type_script = "uid://c338ifvm4duar"
 
 [node name="CharacterBody3D" type="CharacterBody3D" groups=["allies"]]
 collision_layer = 32
+floor_max_angle = 1.0472
+safe_margin = 0.1
 script = ExtResource("1_5kxbm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -120,7 +325,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("2_x3wgy")
-hp = 300.0
+hp = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301743, 0.0113287, 0.00144577)
@@ -130,6 +335,7 @@ shape = SubResource("CapsuleShape3D_3smsa")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63204, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraAnchor"]
+near = 0.001
 script = ExtResource("6_qqcod")
 
 [node name="RayCast3D" type="ShapeCast3D" parent="CameraAnchor/Camera3D"]
@@ -139,20 +345,30 @@ collision_mask = 16
 collide_with_areas = true
 
 [node name="GunOffset" type="Node3D" parent="CameraAnchor/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.174548, -0.0832188, -0.240517)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0425207, -0.00875711, -0.04352)
 
 [node name="GunAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 
 [node name="AK47" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("12_fs7ks")]
-visible = false
 bullet_stats = SubResource("Resource_l6n3p")
+gun_stats = SubResource("Resource_igrcy")
 cast_shadow = false
 
-[node name="armL" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47" instance=ExtResource("9_fs7ks")]
-transform = Transform3D(-0.78963, 0.172109, -0.58895, -1.51861e-07, -0.959854, -0.280499, -0.613582, -0.221491, 0.75793, -0.0448556, -0.110009, -0.336139)
+[node name="Cube_008" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" index="6"]
+transform = Transform3D(-0.0887866, 0, 0, 0, -0.498048, 0, 0, 0, -0.229101, 0.24495, 1.0984, 0.0105467)
 
-[node name="armR" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47" instance=ExtResource("9_fs7ks")]
-transform = Transform3D(0.758646, 0, 0.651503, 0, 1, 0, -0.651503, 0, 0.758646, -0.0101245, -0.189444, 0.036669)
+[node name="ArmLAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, -0.0448556, -0.110009, -0.336139)
+
+[node name="armL" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47/ArmLAnchor" instance=ExtResource("9_fs7ks")]
+transform = Transform3D(-0.789631, 0.172109, -0.58895, -1.44934e-07, -0.959854, -0.280499, -0.613582, -0.221491, 0.75793, 2.38419e-07, 0, 0)
+
+[node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0101245, -0.189445, 0.0366693)
+
+[node name="armR" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47/ArmRAnchor" instance=ExtResource("9_fs7ks")]
+transform = Transform3D(0.758646, -1.57586e-08, 0.651503, 5.96047e-08, 1, -4.52188e-08, -0.651503, 7.31377e-08, 0.758646, 0, 4.76837e-07, -2.38419e-07)
 
 [node name="Label3D" type="Label3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0504991, -0.0406023, -0.107153)
@@ -173,15 +389,35 @@ text = "←"
 font_size = 14
 outline_size = 8
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47"]
+libraries = {
+&"": SubResource("AnimationLibrary_igrcy")
+}
+
 [node name="Pistol" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("13_igrcy")]
-bullet_stats = SubResource("Resource_olqyp")
+visible = false
+bullet_stats = SubResource("Resource_fd4e3")
+gun_stats = SubResource("Resource_wpjfl")
 ammo_type = "pistol_ammo"
 fire_type = 0
 ads_vector = Vector3(-0.195, 0.045, 0.07)
 cast_shadow = false
 
-[node name="armR" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol" instance=ExtResource("9_fs7ks")]
-transform = Transform3D(1, 0, 0, 0, 0.995116, -0.0987119, 0, 0.0987119, 0.995116, 0.00196545, -0.13606, -0.0357737)
+[node name="ArmLAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, -0.0214352, -0.527349, -0.0356533)
+
+[node name="armL" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol/ArmLAnchor" instance=ExtResource("9_fs7ks")]
+transform = Transform3D(-0.789631, 0.172109, -0.58895, -1.44934e-07, -0.959854, -0.280499, -0.613582, -0.221491, 0.75793, 0, 0.309448, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol/ArmLAnchor/armL"]
+transform = Transform3D(0.814319, -0.00717574, -0.580374, -0.151328, 0.962715, -0.224231, 0.560344, 0.270422, 0.782871, -0.0161014, 0.00350952, -0.0120094)
+mesh = SubResource("BoxMesh_igrcy")
+
+[node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00196543, -0.136061, -0.0357737)
+
+[node name="armR" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol/ArmRAnchor" instance=ExtResource("9_fs7ks")]
+transform = Transform3D(1, 0, 0, 0, 0.995116, -0.0987119, 0, 0.0987119, 0.995116, 1.49012e-08, 4.76837e-07, -1.19209e-07)
 
 [node name="Label3D" type="Label3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0375455, 0.0159749, -0.00703703)
@@ -202,9 +438,15 @@ text = "←"
 font_size = 14
 outline_size = 8
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol"]
+libraries = {
+&"": SubResource("AnimationLibrary_l6n3p")
+}
+
 [node name="Shotgun" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("19_l6n3p")]
 visible = false
 bullet_stats = ExtResource("15_qqcod")
+gun_stats = SubResource("Resource_qqcod")
 ammo_type = "shotgun_ammo"
 fire_type = 0
 fire_timer = 0.5
@@ -239,6 +481,7 @@ outline_size = 8
 [node name="SniperRifle" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("17_igrcy")]
 visible = false
 bullet_stats = SubResource("Resource_fs7ks")
+gun_stats = SubResource("Resource_olqyp")
 fire_timer = 1.0
 zoom_amount = 3.0
 scope_texture = ExtResource("12_fd4e3")
@@ -273,10 +516,10 @@ outline_size = 8
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.231521, -0.232048, 0)
 
 [node name="AdsOffset" type="Node3D" parent="CameraAnchor/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.174548, -0.0832188, -0.240517)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0425207, -0.00875711, -0.04352)
 
 [node name="AdsPosition" type="Node3D" parent="CameraAnchor/Camera3D/AdsOffset"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.175, 0.083, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.043, 0.009, 0)
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 0
@@ -296,3 +539,7 @@ one_shot = true
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
 [connection signal="timeout" from="StepTimer" to="." method="_on_step_timer_timeout"]
+
+[editable path="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47"]
+[editable path="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47/GunAnchor/Model"]
+[editable path="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47"]

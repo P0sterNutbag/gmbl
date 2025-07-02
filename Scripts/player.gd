@@ -339,7 +339,9 @@ func enter_dead():
 	var tween = create_tween().set_ease(Tween.EASE_OUT)
 	tween.tween_property(camera, "position:y", -1, 0.5)
 	tween.tween_property(camera, "rotation:z", deg_to_rad(45), 1)
-	tween.tween_callback(get_tree().reload_current_scene)
+	tween.tween_callback(SceneManager.start_scene_transition.bind("res://Scenes/Overworld/overworld.tscn"))
+	tween.tween_callback(SaveController.load_data_from_file)
+	tween.tween_property(PlayerStats, "state", PlayerStats.states.walk, 0)
 
 
 func state_dead(delta):

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ba01kvx1jag3c" path="res://Scripts/enemy.gd" id="1_1f0kj"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_afpow"]
-[ext_resource type="Script" uid="uid://3e36ru1e7k78" path="res://Scripts/spawn_chance_resource.gd" id="2_ghaa6"]
+[ext_resource type="Script" path="res://Scripts/spawn_chance_resource.gd" id="2_ghaa6"]
 [ext_resource type="Script" uid="uid://ccu856f1csrwx" path="res://Scripts/shoot_component.gd" id="3_afpow"]
 [ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="3_auwsv"]
 [ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="3_po0sg"]
@@ -12,13 +12,13 @@
 [sub_resource type="Resource" id="Resource_po0sg"]
 script = ExtResource("2_ghaa6")
 object_to_spawn = ExtResource("3_auwsv")
-spawn_chance = 0.0
+spawn_chance = 1.0
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_haro7"]
 script = ExtResource("2_ghaa6")
 object_to_spawn = ExtResource("4_8uf12")
-spawn_chance = 0.0
+spawn_chance = 1.0
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8uf12"]
@@ -3484,7 +3484,7 @@ script = ExtResource("1_1f0kj")
 gun_index = 1
 potential_items = Array[ExtResource("2_ghaa6")]([SubResource("Resource_po0sg"), SubResource("Resource_haro7")])
 max_items = 3
-min_items = 2
+min_items = 1
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

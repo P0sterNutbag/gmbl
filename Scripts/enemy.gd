@@ -63,6 +63,11 @@ func _ready() -> void:
 	items_to_drop.append(guns_dict[gun_index][1])
 	shoot.connect($ShootComponent._on_shoot)
 	shoot.connect(gun._on_shoot)
+	
+	# add items
+	for i in randi_range(min_items, max_items):
+		items.append(potential_items[Globals.get_weighted_index(potential_items)].object_to_spawn)
+	
 	await get_tree().create_timer(0.5)
 	if team == teams.allies:
 		detection.targets = get_tree().get_nodes_in_group("enemies")
@@ -70,7 +75,6 @@ func _ready() -> void:
 	elif team == teams.enemies:
 		detection.targets = get_tree().get_nodes_in_group("allies")
 		shoot_component.bullet_stats.collision_mask = 4
-	# set style
 	
 
 

@@ -2,13 +2,16 @@ extends Node
 
 enum states {walk, pause, dead}
 var state = states.walk
-var money: int = 100
-var hp: int:
+var money: int = 0
+var hp: int = 5:
 	set(value):
 		hp = value
 		Globals.player.hitbox.hp = value
 	get():
-		return Globals.player.hitbox.hp
+		if "hitbox" in Globals.player:
+			return Globals.player.hitbox.hp
+		else:
+			return 5
 var ammo: int:
 	set(value):
 		ammo = value
@@ -23,7 +26,7 @@ var gun: EquipmentGun
 
 func _enter_tree() -> void:
 	state = states.walk
-	items.append(load("res://Resources/Items/Ammo/rifle_ammo.tres"))
+	#items.append(load("res://Resources/Items/Ammo/rifle_ammo.tres"))
 
 
 func _ready() -> void:
@@ -58,6 +61,7 @@ func get_item_amount(item_name: String) -> int:
 
 func save() -> Dictionary:
 	return {
+		"money": money,
 		"hp": hp,
 		"ammo": ammo,
 	}

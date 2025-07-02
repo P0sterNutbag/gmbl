@@ -54,10 +54,16 @@ shape = SubResource("SphereShape3D_kqvqf")
 [node name="Cube" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="0"]
 surface_material_override/0 = ExtResource("4_f4tgq")
 
+[node name="RightHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.598873, 0.613495, 0.514757, -0.182657, 0.730464, -0.658072, -0.779736, 0.300078, 0.549514, -45.348, 44.0588, -188.174)
+
 [node name="Node3D" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand" index="0"]
 transform = Transform3D(-11.567, 95.4157, -115.161, 145.587, 33.6094, 13.2239, 34.2151, -110.753, -95.2004, 31.1488, 18.921, -12.4602)
 
 [node name="AK47" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="0" instance=ExtResource("5_6ovkh")]
+
+[node name="LeftHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.627573, -0.381902, -0.678456, -0.330967, 0.657903, -0.676479, 0.704707, 0.649087, 0.286485, 28.9594, 56.9011, -155.243)
 
 [node name="StepTimer" type="Timer" parent="."]
 wait_time = 0.5

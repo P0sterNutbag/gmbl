@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=6 format=3 uid="uid://dnwlld15upfkf"]
+
+[ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="1_8ydij"]
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="1_udkxl"]
+[ext_resource type="Script" uid="uid://h75f74ubyudu" path="res://Scripts/item_money.gd" id="2_bbouy"]
+[ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/enemy.tscn" id="2_bv8e0"]
+
+[sub_resource type="Resource" id="Resource_l7us6"]
+script = ExtResource("2_bbouy")
+amount = 100
+title = ""
+usable = false
+effects = Array[ExtResource("1_udkxl")]([])
+multiply = false
+add = false
+uses = 1
+price = 0
+is_health_item = false
+metadata/_custom_type_script = "uid://h75f74ubyudu"
+
+[resource]
+script = ExtResource("1_8ydij")
+title = "Jimmy Poopoohead"
+location = "Rocky Plain"
+reward = SubResource("Resource_l7us6")
+target = ExtResource("2_bv8e0")
+completed = false
+metadata/_custom_type_script = "uid://dkuy8ne1y8df"

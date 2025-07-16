@@ -1,6 +1,49 @@
-[gd_scene load_steps=2 format=3 uid="uid://cha53csgpqitn"]
+[gd_scene load_steps=10 format=3 uid="uid://cha53csgpqitn"]
 
 [ext_resource type="Script" uid="uid://bby8q5udlgb6g" path="res://Scripts/player_stats.gd" id="1_vjobs"]
+[ext_resource type="Script" uid="uid://2qhh6s86pakx" path="res://Scripts/item.gd" id="2_ey8gb"]
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="3_uiad6"]
+[ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="4_btj6c"]
+[ext_resource type="Script" uid="uid://34toqwivxgyk" path="res://Scripts/equipment_gun.gd" id="5_av3m6"]
+
+[sub_resource type="Resource" id="Resource_75wv8"]
+script = ExtResource("4_btj6c")
+ammo = 24
+metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
+[sub_resource type="Resource" id="Resource_uiad6"]
+script = ExtResource("5_av3m6")
+gun_stats = SubResource("Resource_75wv8")
+name = "rifle"
+title = "AK47"
+usable = true
+effects = Array[ExtResource("3_uiad6")]([])
+multiply = false
+add = false
+uses = 1
+price = 100
+is_health_item = false
+metadata/_custom_type_script = "uid://34toqwivxgyk"
+
+[sub_resource type="Resource" id="Resource_j8sse"]
+script = ExtResource("4_btj6c")
+ammo = 6
+metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
+[sub_resource type="Resource" id="Resource_bjmho"]
+script = ExtResource("5_av3m6")
+gun_stats = SubResource("Resource_j8sse")
+name = "sniper_rifle"
+title = "Sniper Rifle"
+usable = true
+effects = Array[ExtResource("3_uiad6")]([])
+multiply = false
+add = false
+uses = 1
+price = 200
+is_health_item = false
+metadata/_custom_type_script = "uid://34toqwivxgyk"
 
 [node name="PlayerStats" type="Node" groups=["persist"]]
 script = ExtResource("1_vjobs")
+items = Array[ExtResource("2_ey8gb")]([SubResource("Resource_uiad6"), SubResource("Resource_bjmho")])

@@ -4,6 +4,9 @@ enum guns {shotgun, ak47, sniper, pistol}
 @export var gun_index: guns
 var walk_speed := 2
 var path_index := 0
+var max_enemies := 6
+var min_enemies := 3
+var destination: Location
 var guns_dict: Dictionary = {
 	0 : [preload("res://Scenes/Guns/shotgun.tscn"), preload("res://Scenes/Items/Guns/shotgun.tscn")],
 	1 : [preload("res://Scenes/Guns/ak47.tscn"), preload("res://Scenes/Items/Guns/ak47.tscn")],
@@ -14,12 +17,16 @@ var guns_dict: Dictionary = {
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var anim_player: AnimationPlayer = $EnemyModel/PersonAnimated/AnimationPlayer
 @onready var gun_holder: Node3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
+@onready var location: Location = $Location
+@onready var enemy_model: Node3D = $EnemyModel
 
 
 func _ready() -> void:
 	detection.targets.append(Globals.player)
 	var gun = guns_dict[gun_index][0].instantiate()
 	gun_holder.add_child(gun)
+	location.population = randi_range(min_enemies, max_enemies)
+	location.spawn_player_random = true
 
 
 func _process(delta: float) -> void:
@@ -64,8 +71,9 @@ func look_at_position(pos: Vector3):
 
 
 func die():
-	$Area3D.queue_free()
 	set_collision_layer_value(1, false)
+	location.monitoring = false
+	location.monitorable = false
 	velocity = Vector3.ZERO
 	set_process(false)
 	anim_player.play("Die")
@@ -76,5 +84,11 @@ func die():
 
 
 func _on_navigation_agent_3d_navigation_finished() -> void:
+	if get_parent() is not Path3D:
+		if destination.population == 0:
+			destination.enemy_model.set_materials(enemy_model.current_style)
+		destination.population = clamp(destination.population + location.population, 0, destination.max_population)
+		queue_free()
+		return
 	path_index = wrap(path_index + 1, 0, get_parent().curve.point_count)
 	velocity = Vector3.ZERO

@@ -3,6 +3,7 @@ extends Node
 @onready var scene_transition: Control = $SceneTransition
 var next_scene
 var remove_from_tree: bool
+var load_on_enter: bool
 
 
 func _ready():
@@ -32,6 +33,12 @@ func change_scene() -> void:
 			get_tree().current_scene = next_scene
 	scene_transition.transition_out()
 	get_tree().paused = false
+	await get_tree().process_frame
+	if load_on_enter:
+		load_on_enter = false
+		PlayerStats.state = PlayerStats.states.walk
+		SaveController.load_data_from_file()
+
 
 
 func start_load() -> void:

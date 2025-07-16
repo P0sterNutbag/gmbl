@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://u5dcq2vxxw3e"]
+
+[ext_resource type="Material" uid="uid://b4aard1qnyqin" path="res://Art/Materials/tin_triplanar_gray.tres" id="1_k08ge"]
+[ext_resource type="Shader" uid="uid://t0rbtq4muofy" path="res://Art/Shaders/flag.gdshader" id="2_k08ge"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rnu4g"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6n12q"]
+noise = SubResource("FastNoiseLite_rnu4g")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rnu4g"]
+render_priority = 0
+shader = ExtResource("2_k08ge")
+shader_parameter/display_dampening = false
+shader_parameter/display_deformation = false
+shader_parameter/flag_color = Color(0.172, 0.4128, 0.86, 1)
+shader_parameter/wave_size = 0.5
+shader_parameter/face_distortion = 0.5
+shader_parameter/time_scale = 0.3
+shader_parameter/uv_offset_scale = Vector2(-0.2, -0.1)
+shader_parameter/uv_offset_texture = SubResource("NoiseTexture2D_6n12q")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1yg7q"]
+material = SubResource("ShaderMaterial_rnu4g")
+subdivide_width = 12
+
+[node name="Flagpole" type="CSGCombiner3D"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0734375, 0)
+radius = 0.2
+height = 0.146875
+material = ExtResource("1_k08ge")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.99209, 0)
+radius = 0.05
+height = 3.98418
+material = ExtResource("1_k08ge")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.56, 0, 0, 0, -4.37114e-08, -0.35, 0, 1, -1.5299e-08, 0.6, 3.6, 0)
+mesh = SubResource("PlaneMesh_1yg7q")

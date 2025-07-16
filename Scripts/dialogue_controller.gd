@@ -41,9 +41,12 @@ func advance_dialogue(next_index: int) -> void:
 		for option in bubble.options:
 			var inst2 = inst.option_container.create_menu_item()
 			inst2.text = option.text
+			inst2.pressed.connect(on_option_selected.bind(inst2))
 			inst2.pressed.connect(advance_dialogue.bind(option.destination))
 		inst.option_container.set_menu_item_focus()
 		inst.option_container.get_child(0).grab_focus()
+	if bubble is DialogueLoop:
+		advance_dialogue(bubble.next_index)
 	elif bubble is Dialogue:
 		for line in bubble.lines:
 			var inst = dialogue_bubble.instantiate()
@@ -52,6 +55,15 @@ func advance_dialogue(next_index: int) -> void:
 			inst.text = line
 	await get_tree().process_frame
 	can_advance = true
+
+
+func on_option_selected(option: Control) -> void:
+	for child in get_child(-1).option_container.get_children():
+		if child != option:
+			child.queue_free()
+		else:
+			child._on_focus_exited()
+	get_child(-1).size.y = 0
 
 
 func _on_visibility_changed() -> void:
@@ -79,6 +91,27 @@ func enter_town() -> void:
 	Globals.ui.town.re_enter_town()
 
 
+func enter_bounty_board() -> void:
+	hide()
+	Globals.ui.town.enter_bounty_board()
+
+
+func return_bounties() -> void:
+	var complete_quests = PlayerStats.quests.filter(func(i): return i.completed)
+	if complete_quests.size() == 0:
+		advance_dialogue(7)
+		return
+	var reward: int
+	for quest in complete_quests:
+		reward += quest.reward.amount
+		PlayerStats.quests.erase(quest)
+	PlayerStats.money += reward
+	dialogue_tree.bubbles[5].lines[0] += "($" +  str(reward) + ")"
+	advance_dialogue(5)
+
+
 func _on_shop_exit() -> void:
 	show()
-	get_child(-1).option_container.get_child(0).grab_focus()
+	advance_dialogue(index)
+	#get_child(-1).option_container.get_child(0).grab_focus()
+	

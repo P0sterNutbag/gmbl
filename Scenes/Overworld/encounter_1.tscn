@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://pkdxp0kobhyk"]
+[gd_scene load_steps=10 format=3 uid="uid://pkdxp0kobhyk"]
 
 [ext_resource type="Script" uid="uid://lblyysya3an4" path="res://Scripts/location.gd" id="1_m40sa"]
 [ext_resource type="PackedScene" uid="uid://b336bhu2grnix" path="res://Scenes/Places/encounter_1.tscn" id="2_m40sa"]
@@ -7,17 +7,19 @@
 [ext_resource type="PackedScene" uid="uid://dergqrsprx3qg" path="res://Scenes/Environment/shack3.tscn" id="4_kt10w"]
 [ext_resource type="PackedScene" uid="uid://bacbcwbytr4bc" path="res://Scenes/Environment/shack_tin_gray.tscn" id="6_e1ape"]
 [ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="7_kt10w"]
+[ext_resource type="Texture2D" uid="uid://dejeawiol7jdc" path="res://Art/Textures/ring.png" id="8_e1ape"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hwnis"]
 radius = 4.46269
 
-[node name="Area3D" type="Area3D" groups=["persist"]]
+[node name="Encounter1" type="Area3D" groups=["persist"]]
 collision_layer = 64
 collision_mask = 32
 script = ExtResource("1_m40sa")
 encounter_scene = ExtResource("2_m40sa")
 title = "Gang Camp"
 show_title = true
+faction = "Fiends"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02906, 0)
@@ -29,19 +31,62 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 [node name="Shack" parent="Node3D" instance=ExtResource("3_4w7n6")]
 transform = Transform3D(0.637504, 0, -0.770447, 0, 1, 0, 0.770447, 0, 0.637504, -8.47988, 0, -2.60693)
 
+[node name="CSGBakedCollisionShape3D" parent="Node3D/Shack/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
+
 [node name="Shack4" parent="Node3D" instance=ExtResource("4_kt10w")]
 transform = Transform3D(0.900994, 0, 0.433832, 0, 1, 0, -0.433832, 0, 0.900994, 8.38723, -1.66893e-06, 5.3018)
+
+[node name="CollisionShape3D" parent="Node3D/Shack4/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
 
 [node name="ShippingContainer2" parent="Node3D" instance=ExtResource("3_7mnom")]
 transform = Transform3D(0.570914, 0, -0.82101, 0, 1, 0, 0.82101, 0, 0.570914, 0.928697, 1.5, 11.3218)
 
+[node name="CollisionShape3D" parent="Node3D/ShippingContainer2/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
+
 [node name="ShippingContainer3" parent="Node3D" instance=ExtResource("3_7mnom")]
 transform = Transform3D(-0.540901, -0.000768779, -0.841086, -0.000561794, 1, -0.000552739, 0.841086, 0.000173528, -0.540902, -6.88827, 1.5, 7.42092)
+
+[node name="CollisionShape3D" parent="Node3D/ShippingContainer3/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
 
 [node name="Shack2" parent="Node3D" instance=ExtResource("6_e1ape")]
 transform = Transform3D(-0.944812, 0, -0.327614, 0, 1, 0, 0.327614, 0, -0.944812, 1.11298, 1.43051e-06, -10.5274)
 
+[node name="CSGBakedCollisionShape3D" parent="Node3D/Shack2/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
+
 [node name="EnemyModel" parent="." instance=ExtResource("7_kt10w")]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(3.68973, 0, 0, 0, 1.09963e-07, -0.999206, 0, 3.68973, 2.97786e-08, 0, 0.001, 0)
+visible = false
+visibility_range_end = 20.0
+visibility_range_end_margin = 2.0
+visibility_range_fade_mode = 1
+modulate = Color(1, 1, 0, 0.627451)
+render_priority = 1
+texture = ExtResource("8_e1ape")
+
+[node name="SpawnS" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 3.4973)
+
+[node name="SpawnE" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.95015, 0, -0.0203078)
+
+[node name="SpawnW" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.97495, 0, -0.0203078)
+
+[node name="SpawnN" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.02548)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+
+[editable path="Node3D/Shack"]
+[editable path="Node3D/Shack4"]
+[editable path="Node3D/ShippingContainer2"]
+[editable path="Node3D/ShippingContainer3"]
+[editable path="Node3D/Shack2"]

@@ -38,11 +38,12 @@ func damage(dmg: float, hit_position: Vector3, hit_direction: Vector3) -> void:
 	if is_dead:
 		return
 	hp -= dmg
-	if randf() > 0.5:
+	if randf() < 0.2:
 		unhealable_hp += 1
 	if hp <= 0:
 		death.emit()
 		is_dead = true
 		for inst in otherHitboxes:
 			inst.queue_free()
-		queue_free()
+		for child in get_children():
+			child.disabled = true

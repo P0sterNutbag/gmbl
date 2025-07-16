@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvt1ofd0p5g6o"]
+[gd_scene load_steps=9 format=3 uid="uid://dvt1ofd0p5g6o"]
 
 [ext_resource type="Script" uid="uid://lblyysya3an4" path="res://Scripts/location.gd" id="1_i1881"]
 [ext_resource type="Resource" uid="uid://c5kpuww7x3qfl" path="res://Resources/Towns/test_town.tres" id="3_1hyfe"]
 [ext_resource type="PackedScene" uid="uid://cwk6n1rlne3a6" path="res://Scenes/Environment/shack4.tscn" id="3_ey42m"]
 [ext_resource type="PackedScene" uid="uid://l1eb7nix2iki" path="res://Scenes/Environment/shack.tscn" id="4_1hyfe"]
+[ext_resource type="PackedScene" uid="uid://67h8w1jm2hbo" path="res://Scenes/Environment/flagpole.tscn" id="5_1hyfe"]
+[ext_resource type="Texture2D" uid="uid://dejeawiol7jdc" path="res://Art/Textures/ring.png" id="6_2x2qi"]
+[ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="7_uuatm"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hwnis"]
 radius = 4.21719
@@ -14,6 +17,7 @@ collision_mask = 32
 script = ExtResource("1_i1881")
 town = ExtResource("3_1hyfe")
 title = "Small Town"
+show_enemy_model = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02906, 0)
@@ -25,17 +29,69 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 [node name="Shack4" parent="Node3D" instance=ExtResource("3_ey42m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.8287)
 
+[node name="CollisionShape3D" parent="Node3D/Shack4/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
+
 [node name="Shack" parent="Node3D" instance=ExtResource("4_1hyfe")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.69902, 0, 1.41147)
+
+[node name="CSGBakedCollisionShape3D" parent="Node3D/Shack/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
 
 [node name="Shack2" parent="Node3D" instance=ExtResource("4_1hyfe")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.69902, 0, -9.41775)
 
+[node name="CSGBakedCollisionShape3D" parent="Node3D/Shack2/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
+
 [node name="Shack3" parent="Node3D" instance=ExtResource("4_1hyfe")]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -7.90662, 0, -9.41775)
+
+[node name="CSGBakedCollisionShape3D" parent="Node3D/Shack3/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
 
 [node name="Shack5" parent="Node3D" instance=ExtResource("4_1hyfe")]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -7.90662, 0, 1.41147)
 
+[node name="CSGBakedCollisionShape3D" parent="Node3D/Shack5/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
+
+[node name="Flagpole" parent="." instance=ExtResource("5_1hyfe")]
+
+[node name="CollisionShape3D" parent="Flagpole/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(4.31094, 0, 0, 0, 1.28476e-07, -0.999206, 0, 4.31094, 2.97786e-08, 0, 0.001, 0)
+visible = false
+visibility_range_end = 20.0
+visibility_range_end_margin = 2.0
+visibility_range_fade_mode = 1
+modulate = Color(1, 1, 0, 0.627451)
+render_priority = 1
+texture = ExtResource("6_2x2qi")
+
+[node name="SpawnS" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 3.4973)
+
+[node name="SpawnE" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.95015, 0, -0.0203078)
+
+[node name="SpawnW" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.97495, 0, -0.0203078)
+
+[node name="SpawnN" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.02548)
+
+[node name="EnemyModel" parent="." instance=ExtResource("7_uuatm")]
+visible = false
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+
+[editable path="Node3D/Shack4"]
+[editable path="Node3D/Shack"]
+[editable path="Node3D/Shack2"]
+[editable path="Node3D/Shack3"]
+[editable path="Node3D/Shack5"]
+[editable path="Flagpole"]

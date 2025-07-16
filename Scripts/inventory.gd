@@ -6,7 +6,7 @@ enum modes {use, loot}
 @export var show_price: bool
 var target = PlayerStats
 var target2
-@onready var item_container: VBoxContainer = %Items
+@onready var item_container: MenuController = %Items
 @onready var title: Label = $MarginContainer/VBoxContainer/Label
 @onready var money_label: Label = $MarginContainer/VBoxContainer/Label/Label2
 
@@ -42,16 +42,18 @@ func set_items():
 		for child in item_container.get_children():
 			item_container.remove_child(child)
 			child.queue_free()
+	var items: Array[Control]
 	for item in target.items:
 		if item is not Equipment:
-			var same_items = item_container.get_children().filter(func(i): return i.text == item.title)
+			var same_items = items.filter(func(i): return i.text.containsn(item.title))
 			if same_items.size() > 0:
 				var same_item = same_items[0]
 				same_item.amount += 1
 				continue
 		var inst = item_container.create_menu_item()
+		items.append(inst)
 		inst.text = item.title
-		inst.item = item
+		inst.resource = item
 		if show_price:
 			inst.price = item.price
 		if mode == modes.use and item.usable:
@@ -69,36 +71,43 @@ func set_items():
 
 func transfer_item(menu_item: Control):
 	if show_price:
-		if target2.money >= menu_item.item.price:
-			target2.money -= menu_item.item.price
-			target.money += menu_item.item.price
+		if target2.money >= menu_item.resource.price:
+			target2.money -= menu_item.resource.price
+			target.money += menu_item.resource.price
 			get_parent().set_inventory_money()
 		else:
+			var inventory2
+			if get_index() == 0: inventory2 = get_parent().get_child(1)
+			else: inventory2 = get_parent().get_child(0)
+			inventory2.money_label.modulate = Color.RED
+			var tween = create_tween()
+			tween.tween_property(inventory2.money_label, "modulate", Color.WHITE, 1)
 			return
-	target.items.erase(menu_item.item)
+	target.items.erase(menu_item.resource)
 	item_container.remove_child(menu_item)
-	if menu_item.item is ItemMoney:
-		PlayerStats.money += menu_item.item.amount
+	if menu_item.resource is ItemMoney:
+		PlayerStats.money += menu_item.resource.amount
 		return
-	target2.items.append(menu_item.item)
-	if menu_item.item is Equipment:
-		menu_item.item.equipped = false
-	var inventory2
-	if get_index() == 0:
-		inventory2 = get_parent().get_child(1)
-	else:
-		inventory2 = get_parent().get_child(0)
-	var inst = inventory2.item_container.create_menu_item()
-	inst.text = menu_item.item.title
-	inst.item = menu_item.item
-	if show_price:
-		inst.price = menu_item.item.price
-	if mode == modes.use:
-		inst.pressed.connect(menu_item.item.use.bind(target))
-	elif mode == modes.loot:
-		inst.pressed.connect(inventory2.transfer_item.bind(inst))
-	menu_item.queue_free()
-	inventory2.item_container.sort_menu_items()
+	target2.items.append(menu_item.resource)
+	if menu_item.resource is Equipment:
+		menu_item.resource.equipped = false
+	get_parent().reset_inventories()
+	#var inventory2
+	#if get_index() == 0:
+		#inventory2 = get_parent().get_child(1)
+	#else:
+		#inventory2 = get_parent().get_child(0)
+	#var inst = inventory2.item_container.create_menu_item()
+	#inst.text = menu_item.resource.title
+	#inst.resource = menu_item.resource
+	#if show_price:
+		#inst.price = menu_item.resource.price
+	#if mode == modes.use:
+		#inst.pressed.connect(menu_item.resource.use.bind(target))
+	#elif mode == modes.loot:
+		#inst.pressed.connect(inventory2.transfer_item.bind(inst))
+	#menu_item.queue_free()
+	#inventory2.item_container.sort_menu_items()
 
 
 func _on_v_box_container_visibility_changed() -> void:

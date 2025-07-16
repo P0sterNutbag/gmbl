@@ -5,3 +5,4 @@ class_name Shop
 @export var items: Array[Item]
 @export var money: int = 100
 @export var dialogue: DialogueTree
+@export var quests: Array[Quest]

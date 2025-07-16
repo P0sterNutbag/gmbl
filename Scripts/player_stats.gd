@@ -6,9 +6,10 @@ var money: int = 0
 var hp: int = 5:
 	set(value):
 		hp = value
-		Globals.player.hitbox.hp = value
+		if Globals.player and "hitbox" in Globals.player:
+			Globals.player.hitbox.hp = value
 	get():
-		if "hitbox" in Globals.player:
+		if Globals.player and "hitbox" in Globals.player:
 			return Globals.player.hitbox.hp
 		else:
 			return 5
@@ -17,22 +18,25 @@ var ammo: int:
 		ammo = value
 		gun.gun_stats.ammo = value
 	get():
-		return gun.gun_stats.ammo
-var items: Array[Item]
+		if gun:
+			return gun.gun_stats.ammo
+		else:
+			return 0
+@export var items: Array[Item]
 var guns: Array[Item]:
 	get(): return items.filter(func(i): return i is EquipmentGun)
 var gun: EquipmentGun
+@export var quests: Array[Quest]
 
 
 func _enter_tree() -> void:
 	state = states.walk
-	#items.append(load("res://Resources/Items/Ammo/rifle_ammo.tres"))
 
 
 func _ready() -> void:
-	gun = load("res://Resources/Items/Guns/ak47.tres").duplicate()
-	gun.equipped = true
-	items.append(gun)
+	if items.size() > 0 and items[0] is EquipmentGun:
+		gun = items[0]
+		gun.equipped = true
 
 
 func _physics_process(delta):
@@ -67,8 +71,13 @@ func save() -> Dictionary:
 	}
 
 
-#func set_guns() -> void:
-	#guns.clear()
-	#var gun_items = items.filter(func(item): return item is GunItem)
-	#for item in gun_items:
-		#guns.append(item.gun_name)
+func unquip_current_item():
+	for item in items:
+		if item is Equipment:
+			item.equipped = false
+
+
+func delete_current_equip():
+	for item in items:
+		if item is Equipment and item.equipped:
+			items.erase(item)

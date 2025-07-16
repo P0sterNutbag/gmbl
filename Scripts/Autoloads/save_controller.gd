@@ -4,7 +4,9 @@ var data = {}
 var save_path = "user://savegame.save"
 
 
-#func _ready() -> void:
+func _ready() -> void:
+	pass
+	#save_data_to_file()
 	#load_data_from_file()
 
 
@@ -56,4 +58,13 @@ func load_data_from_file():
 		for node_data in data[node_path]:
 			var node = get_tree().root.get_node(node_path)
 			var value = data[node_path][node_data]
-			node.set(node_data, value)
+			if node_data == "pos_x": 
+				node.global_position.x = value
+			elif node_data == "pos_y": 
+				node.global_position.y = value
+			elif node_data == "pos_z": 
+				node.global_position.z = value
+			elif node_data == "rot_y": 
+				node.global_rotation.y = value
+			else:
+				node.set(node_data, value)

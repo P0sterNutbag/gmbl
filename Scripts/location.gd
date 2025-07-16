@@ -1,6 +1,8 @@
 extends Node3D
+class_name Location
 
 @export var max_population := 6
+@export var start_with_enemies: bool = true
 @export var encounter_scene: PackedScene
 @export var town: Town
 @export var shop: Shop
@@ -13,9 +15,17 @@ extends Node3D
 @export var show_difficulty: bool
 @export var resources: String
 @export var show_resources: bool
+@export var spawn_player_random: bool = false
+@export var show_enemy_model: bool = true
 var transition_started: bool 
 var can_transition: bool = true
-var population := max_population
+var population: int
+@onready var enemy_model: Node3D = $EnemyModel
+@onready var spawn_s: Node3D = $SpawnS
+@onready var spawn_e: Node3D = $SpawnE
+@onready var spawn_w: Node3D = $SpawnW
+@onready var spawn_n: Node3D = $SpawnN
+@onready var spawn_points := [spawn_s, spawn_e, spawn_w, spawn_n]
 
 
 func _enter_tree() -> void:
@@ -26,11 +36,13 @@ func _enter_tree() -> void:
 		show_faction = true
 		show_difficulty = true
 		show_resources = true
-	if population == 0 and has_node("EnemyModel"):
-		$EnemyModel.hide()
 
 
 func _ready() -> void:
+	if !show_enemy_model:
+		enemy_model.hide()
+	if start_with_enemies:
+		population = max_population
 	if "style_data" in get_parent():
 		if shop:
 			shop.dialogue.npc_style = get_parent().current_style
@@ -38,9 +50,19 @@ func _ready() -> void:
 			dialogue_tree.npc_style = get_parent().current_style
 
 
+func _process(delta: float) -> void:
+	if show_enemy_model:
+		if population == 0:
+			enemy_model.hide()
+		else:
+			enemy_model.show()
+
+
 func start_encounter() -> void:
 	if encounter_scene != null:
 		Globals.overworld.current_encounter = self
+		spawn_points.sort_custom(func(a, b): return a.global_position.distance_to(Globals.player.global_position) < b.global_position.distance_to(Globals.player.global_position))
+		Globals.overworld.player_place = spawn_points[0].name
 		SceneManager.start_scene_transition(encounter_scene.resource_path, true)
 	elif town != null:
 		Globals.ui.town.create_town(town)
@@ -57,7 +79,7 @@ func save() -> Dictionary:
 
 
 func _on_body_entered(body: Node3D) -> void:
-	if !can_transition:
+	if !can_transition or PlayerStats.state != PlayerStats.states.walk:
 		return
 	can_transition = false
 	start_encounter()

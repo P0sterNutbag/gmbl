@@ -26,8 +26,13 @@ func create_town(town_data: Town) -> void:
 	for shop in town_data.shops:
 		var inst = item_container.create_menu_item()
 		inst.text = shop.title
-		inst.alignment = BoxContainer.ALIGNMENT_CENTER 
-		inst.pressed.connect(Globals.ui.start_dialogue.bind(shop.dialogue, shop))
+		inst.alignment = BoxContainer.ALIGNMENT_CENTER
+		if shop.quests.size() > 0:
+			inst.pressed.connect(Globals.ui.bounty_board.set.bind("shop", shop))
+			inst.pressed.connect(Globals.ui.start_dialogue.bind(shop.dialogue, shop))
+			#inst.pressed.connect(Globals.ui.bounty_board.open.bind(shop.quests))
+		else:
+			inst.pressed.connect(Globals.ui.start_dialogue.bind(shop.dialogue, shop))
 		inst.pressed.connect(enter_shop)
 	var inst = item_container.create_menu_item()
 	inst.text = "Leave"
@@ -51,3 +56,7 @@ func enter_shop():
 
 func re_enter_town() -> void:
 	create_town(town_resource)
+
+
+func enter_bounty_board() -> void:
+	Globals.ui.bounty_board.open(Globals.ui.bounty_board.shop.quests)

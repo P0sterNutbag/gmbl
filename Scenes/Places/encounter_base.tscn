@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://r4ktdn26psb3"]
+[gd_scene load_steps=21 format=3 uid="uid://r4ktdn26psb3"]
 
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="1_0pe3w"]
 [ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="2_os0xi"]
@@ -7,8 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand3.png" id="6_nue3y"]
 [ext_resource type="PackedScene" uid="uid://p1limlnykapp" path="res://Scenes/noise_controller.tscn" id="10_07x41"]
 [ext_resource type="Script" uid="uid://chxn6jj2cv0p3" path="res://Scripts/scatterer.gd" id="11_wttml"]
-[ext_resource type="PackedScene" uid="uid://1um45bviwf3x" path="res://Scenes/Environment/tree_thick.tscn" id="12_8ixwd"]
-[ext_resource type="PackedScene" uid="uid://cnkhacjlogrim" path="res://Scenes/Environment/tree_thin.tscn" id="13_87544"]
+[ext_resource type="Script" uid="uid://vl4exm3hukmx" path="res://Scripts/Overworld/player_spawn.gd" id="15_mydnv"]
 [ext_resource type="PackedScene" uid="uid://c055smn111au7" path="res://Scenes/player.tscn" id="16_6tord"]
 [ext_resource type="PackedScene" uid="uid://bechsj7oyoa41" path="res://Scenes/Environment/exit_location.tscn" id="20_ppnd3"]
 [ext_resource type="Script" uid="uid://cp3dswmfni4xd" path="res://Scripts/enemy_spawner.gd" id="28_pxsmc"]
@@ -90,7 +89,7 @@ metadata/_edit_lock_ = true
 
 [node name="Scatterer" type="Node3D" parent="."]
 script = ExtResource("11_wttml")
-scenes = Array[PackedScene]([ExtResource("12_8ixwd"), ExtResource("13_87544")])
+scenes = Array[PackedScene]([null, null])
 count = 45
 area_size = Vector2(100, 100)
 min_size = 0.75
@@ -119,5 +118,32 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -47.5,
 
 [node name="Area3D3" parent="Border" instance=ExtResource("20_ppnd3")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 47.5, 0, 0)
+
+[node name="PlayerSpawns" type="Node3D" parent="."]
+script = ExtResource("15_mydnv")
+
+[node name="Node3D" type="Node3D" parent="PlayerSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -40)
+
+[node name="SpawnN" type="Node3D" parent="PlayerSpawns"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -40)
+
+[node name="Node3D3" type="Node3D" parent="PlayerSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -40)
+
+[node name="SpawnE" type="Node3D" parent="PlayerSpawns"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 40, 0, 0)
+
+[node name="Node3D5" type="Node3D" parent="PlayerSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 40)
+
+[node name="SpawnS" type="Node3D" parent="PlayerSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
+
+[node name="Node3D7" type="Node3D" parent="PlayerSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, 40)
+
+[node name="SpawnW" type="Node3D" parent="PlayerSpawns"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -40, 0, 0)
 
 [editable path="WorldEnvironment"]

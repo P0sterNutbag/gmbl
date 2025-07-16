@@ -33,6 +33,7 @@ var gun: Node3D
 var damage_position: Vector3
 var last_seen_position: Vector3
 var target: Node3D
+var bounty: Quest
 var guns_dict: Dictionary = {
 	0 : [preload("res://Scenes/Guns/shotgun.tscn"), preload("res://Scenes/Items/Guns/shotgun.tscn")],
 	1 : [preload("res://Scenes/Guns/ak47.tscn"), preload("res://Scenes/Items/Guns/ak47.tscn")],
@@ -49,6 +50,7 @@ var guns_dict: Dictionary = {
 @onready var gun_holder: Node3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var loot_area: Area3D = $Loot
+@onready var health_component: HealthComponent = $Hitbox
 signal shoot
 
 
@@ -260,7 +262,11 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	if state != states.dead:
-		target = detection.get_visible_target()
+		if PlayerStats.state == PlayerStats.states.dead:
+			target = null
+		else:
+			target = detection.get_visible_target()
+
 
 
 func _process(delta: float) -> void:
@@ -353,6 +359,8 @@ func _on_death() -> void:
 	gun.queue_free()
 	velocity = Vector3.ZERO
 	anim_player.play("Die")
+	if bounty:
+		bounty.completed = true
 	change_state(states.dead)
 	if team == teams.allies:
 		get_tree().call_group("enemies", "set_detection_targets")

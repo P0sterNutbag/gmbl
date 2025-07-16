@@ -22,6 +22,10 @@ func _process(delta: float) -> void:
 			inventory.item_container.select_last_button()
 
 
+func open(shop: Shop) -> void:
+	Globals.ui.start_dialogue(shop.dialogue, shop)
+
+
 func reset_inventories() -> void:
 	for child in get_children():
 		child.set_items()

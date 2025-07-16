@@ -1,4 +1,5 @@
 extends VBoxContainer
+class_name MenuController
 
 var index: int
 #var can_move: bool = true
@@ -12,6 +13,24 @@ func create_menu_item(parent = self) -> Control:
 	inst.focus_entered.connect(set_index.bind(inst))
 	inst.pressed.connect(select_last_button)
 	return inst
+
+
+func create_menu_items(array: Array, on_pressed = null, on_focus = null, loop_focus: bool = true) -> Array:
+	if array.size() <= 0:
+		return []
+	for i in array:
+		var inst = create_menu_item()
+		inst.text = i.title
+		if i is Resource:
+			if on_pressed and on_pressed is Callable:
+				inst.pressed.connect(on_pressed.bind(inst, i))
+			if on_focus and on_focus is Callable:
+				inst.focus_entered.connect(on_focus.bind(inst, i))
+	if loop_focus:
+		set_menu_item_focus()
+	await get_tree().process_frame
+	get_child(0).grab_focus()
+	return get_children()
 
 
 func set_menu_item_focus() -> void:
@@ -30,10 +49,12 @@ func set_index(button: Button):
 
 
 func select_last_button() -> void:
+	if !visible:
+		return
+	await get_tree().process_frame
 	if get_child_count() == 0:
 		return
 	index = clamp(index, 0, get_child_count() - 1)
-	await Engine.get_main_loop().process_frame
 	if index < get_child_count():
 		get_child(index).grab_focus()
 

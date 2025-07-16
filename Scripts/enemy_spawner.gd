@@ -18,6 +18,20 @@ func _ready() -> void:
 		enemy_amount = 5
 	await get_tree().process_frame
 	
+	# spawn quest enemy
+	var quests = PlayerStats.quests.filter(func(i): 
+		var quest_location = i.location
+		var encounter_location = Globals.overworld.current_encounter.title
+		return quest_location == encounter_location)
+	for quest in quests: 
+		var inst = quest.target.instantiate()
+		get_tree().current_scene.add_child.call_deferred(inst)
+		var spawn_index = randi_range(0, spawn_points.size() - 1)
+		used_spawns.append(spawn_index)
+		inst.set_deferred("global_transform", spawn_points[spawn_index].global_transform)
+		inst.bounty = quest
+		enemy_amount -= 1
+	
 	# spawn enemies
 	for i in enemy_amount:
 		# get random enemy and spawn it

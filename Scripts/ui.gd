@@ -16,6 +16,9 @@ var show_crosshair: bool = true
 @onready var inventory: PanelContainer = %Inventory
 @onready var inventory2: PanelContainer = %Inventory2
 @onready var mag_icon: Sprite2D = $BottomRight/Sprite
+@onready var death_ui: PanelContainer = $DeathUI
+@onready var load_save: Button = $DeathUI/MarginContainer/VBoxContainer/VBoxContainer/LoadSave
+#@onready var compass: ColorRect = $TopCenter/Compass/ColorRect
 
 
 func _ready() -> void:
@@ -45,6 +48,8 @@ func _process(delta: float) -> void:
 			PlayerStats.change_state(PlayerStats.states.walk)
 	
 	# crosshair
+	if get_tree().current_scene == Globals.overworld:
+		return
 	if !show_crosshair or Globals.player.gun_state == Globals.player.gun_states.ads or Globals.player.gun_state == Globals.player.gun_states.no_gun:
 		crosshair.hide()
 		return
@@ -58,6 +63,10 @@ func _process(delta: float) -> void:
 		elif child.position.y == 0:
 			target_pos.x = sign(child.position.x) * (base_pos * clamp(Globals.player.velocity.length(), 1, 2) * Globals.player.shoot_component.spread)
 		child.position = lerp(child.position, target_pos, delta * 20)
+	
+	# compass
+	#var cam_rot = rad_to_deg(Globals.player.rotation.y)
+	#compass.position.x = compass.size.x * ((cam_rot / 360.0) + 0.5) - compass.size.x - 70
 
 
 func show_scope(scope_texture: Texture2D = scope.texture) -> void:
@@ -107,3 +116,17 @@ func _on_player_inventory_exit() -> void:
 
 func _on_transfer_inventory_exit() -> void:
 	PlayerStats.change_state(PlayerStats.states.walk)
+
+
+func open_death_ui() -> void:
+	death_ui.show()
+	load_save.grab_focus()
+
+
+func _on_load_save_pressed() -> void:
+	SceneManager.load_on_enter = true
+	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld.tscn")
+
+
+func _on_quit_pressed() -> void:
+	SceneManager.start_scene_transition("res://Scenes/UI/main_menu.tscn")

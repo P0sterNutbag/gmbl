@@ -26,6 +26,7 @@ var on_ladder: bool
 var aim_rotation: Vector3
 var ammo: Array
 var firepoint: Node3D
+var object_to_place: Node3D
 var gun_tween: Tween
 var sway_noise := FastNoiseLite.new()
 var state_functions: Dictionary
@@ -53,6 +54,8 @@ var grenade = preload("res://Scenes/Bullets/grenade.tscn")
 @onready var interact_cast: = $CameraAnchor/Camera3D/RayCast3D
 @onready var hitbox: HealthComponent = $Hitbox
 @onready var grenade_spawn: Node3D = $CameraAnchor/Camera3D/GrenadeSpawn
+@onready var place_position: Node3D = $PlacePosition
+@onready var placer_raycast: RayCast3D = $PlacePosition/PlacerRaycast3D
 
 
 func _enter_tree() -> void:
@@ -84,6 +87,7 @@ func _ready() -> void:
 	gun_state_functions = {
 		#gun_states.point: gun_state_point,
 		gun_states.ads: gun_state_ads,
+		gun_states.no_gun: gun_state_no_gun,
 	}
 	gun_enter_functions = {
 		gun_states.point: enter_gun_state_point,
@@ -306,13 +310,14 @@ func state_walk(delta):
 	camera.fov = lerp(camera.fov, target_fov, 30.0 * delta)
 	
 	# ui
-	if Input.is_action_just_pressed("aim"):
-		if gun.scope_texture != null:
-			Globals.ui.show_scope(gun.scope_texture)
-			gun.hide()
-	elif Input.is_action_just_released("aim"):
-		Globals.ui.scope.hide()
-		gun.show()
+	if gun != null:
+		if Input.is_action_just_pressed("aim"):
+			if gun.scope_texture != null:
+				Globals.ui.show_scope(gun.scope_texture)
+				gun.hide()
+		elif Input.is_action_just_released("aim"):
+			Globals.ui.scope.hide()
+			gun.show()
 	
 	# walking animation
 	if (input.x or input.y) and gun_state == gun_states.point and is_on_floor():
@@ -327,8 +332,9 @@ func state_walk(delta):
 
 
 func enter_pause():
-	var tween = create_tween()
-	tween.tween_property(gun, "position:y", 0, 0.1)
+	pass
+	#var tween = create_tween()
+	#tween.tween_property(gun, "position:y", 0, 0.1)
 
 
 func state_pause(delta):
@@ -336,12 +342,13 @@ func state_pause(delta):
 
 
 func enter_dead():
+	Globals.overworld.load_on_enter = true
 	var tween = create_tween().set_ease(Tween.EASE_OUT)
 	tween.tween_property(camera, "position:y", -1, 0.5)
 	tween.tween_property(camera, "rotation:z", deg_to_rad(45), 1)
-	tween.tween_callback(SceneManager.start_scene_transition.bind("res://Scenes/Overworld/overworld.tscn"))
-	tween.tween_callback(SaveController.load_data_from_file)
-	tween.tween_property(PlayerStats, "state", PlayerStats.states.walk, 0)
+	#tween.tween_property(PlayerStats, "state", PlayerStats.states.walk, 0)
+	tween.tween_callback(Globals.ui.open_death_ui)
+	#tween.tween_callback(SaveController.load_data_from_file).set_delay(5)
 
 
 func state_dead(delta):
@@ -416,7 +423,27 @@ func enter_gun_state_no_gun():
 	await tween.finished
 
 
+func gun_state_no_gun(delta: float):
+	if object_to_place == null:
+		return
+	placer_raycast.global_position = place_position.global_position
+	placer_raycast.enabled = true
+	if placer_raycast.is_colliding():
+		object_to_place.global_position = placer_raycast.get_collision_point()
+	if Input.is_action_just_pressed("interact") or Input.is_action_just_pressed("shoot"):
+		var item_transform = object_to_place.global_transform
+		place_position.remove_child(object_to_place)
+		get_tree().current_scene.add_child(object_to_place)
+		object_to_place.global_transform = item_transform
+		for child in object_to_place.get_children():
+			if child is MeshInstance3D:
+				child.transparency = 0
+		object_to_place = null
+		PlayerStats.delete_current_equip()
+
+
 func exit_gun_state_no_gun():
+	placer_raycast.enabled = false
 	var tween = create_tween()
 	tween.tween_property(gun_anchor, "position:y", 0, 0.25)
 	tween.tween_property(gun, "visible", true, 0)
@@ -449,6 +476,19 @@ func change_gun(new_gun: EquipmentGun) -> void:
 func unequip_gun() -> void:
 	await change_gun_state(gun_states.no_gun)
 	PlayerStats.gun = null
+
+
+func start_place_item(item_to_place: String):
+	if gun != null:
+		await unequip_gun()
+	object_to_place = load(item_to_place).instantiate()
+	object_to_place.placed = false
+	place_position.add_child(object_to_place)
+
+
+func end_place_item():
+	if object_to_place:
+		object_to_place.queue_free()
 
 
 func use_item(item_name: String, item_id = null, target = null):

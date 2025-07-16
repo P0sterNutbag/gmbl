@@ -4,8 +4,8 @@ extends Button
 var amount: int = 1:
 	set(value):
 		amount = value
+		text = text.rstrip("(1234567890)")
 		if amount <= 1: 
-			text = text.rstrip("(1234567890)")
 			return
 		text += "(" + str(value) + ")"
 var equipped: bool:
@@ -20,7 +20,7 @@ var price: int:
 		price_label.text = ""
 		if value > 0:
 			price_label.text += "$" + str(price)
-var item: Item
+var resource: Resource
 var icon_texture: Texture2D
 var can_press: bool
 @onready var price_label: Label = %Price
@@ -38,8 +38,8 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("interact") and has_focus() and can_press:
 		pressed.emit()
 	# show equipped
-	if item and item is Equipment:
-		equipped = item.equipped
+	if resource and resource is Equipment:
+		equipped = resource.equipped
 
 
 func _on_focus_entered() -> void:

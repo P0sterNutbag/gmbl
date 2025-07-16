@@ -1,5 +1,6 @@
 extends Area3D
 
+@export var overworld_point: String
 var has_player: bool
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 
@@ -17,6 +18,7 @@ func leave_encounter() -> void:
 		if enemy.state != enemy.states.dead:
 			enemy_count += 1
 	Globals.overworld.current_encounter.population = enemy_count
+	Globals.overworld.player_place = NodePath(overworld_point)
 	SceneManager.start_scene_transition(Globals.overworld)
 
 

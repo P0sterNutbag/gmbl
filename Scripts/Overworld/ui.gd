@@ -9,15 +9,34 @@ var current_town: Town
 @onready var shop_inventory2: PanelContainer = $Shop/Inventory2
 @onready var portraits: HBoxContainer = $Portraits
 @onready var dialogue: VBoxContainer = $Dialogue
+@onready var bounty_board: HBoxContainer = $BountyBoard
+@onready var quest_menu: MenuList = $Quests
+@onready var compass: ColorRect = $TopCenter/Compass/ColorRect
 
 
 func _enter_tree() -> void:
 	Globals.ui = self
+	if location_card:
+		hide_location_info()
 
 
 func _process(delta: float) -> void:
+	# opening things
 	if Input.is_action_just_pressed("inventory"):
 		inventory_holder.visible = !inventory_holder.visible
+	if Input.is_action_just_pressed("journal"):
+		if quest_menu.visible:
+			quest_menu.open(PlayerStats.quests)
+		else:
+			quest_menu.close()
+	
+	# compass movement
+	var cam_rot = rad_to_deg(Globals.player.camera_anchor.rotation.y)
+	compass.position.x = compass.size.x * ((cam_rot / 360.0) + 0.5) - compass.size.x - 70
+	
+	if Input.is_action_just_pressed("ui_cancel"):
+		if !town.visible and !shop.visible and !inventory_holder.visible:
+			Globals.pause_game()
 
 
 func show_location_info(encounter: Node3D) -> void:
@@ -63,4 +82,4 @@ func enter_shop(shop_data: Shop) -> void:
 
 
 func _on_shop_visibility_changed() -> void:
-	portraits.visible = shop.visible
+	portraits.visible = !shop.visible

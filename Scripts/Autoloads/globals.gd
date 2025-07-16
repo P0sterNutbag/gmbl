@@ -5,7 +5,8 @@ var ui: CanvasLayer
 var noise_controller
 var overworld: Node3D
 var particle_manager: Node
-
+var npc_controller: Node3D
+const PAUSE_MENU = preload("res://Scenes/UI/pause_menu.tscn")
 
 func _ready() -> void:
 	particle_manager = Node.new()
@@ -18,6 +19,13 @@ func create_instance(scene: PackedScene, position: Vector3 = Vector3.ZERO, paren
 	parent.add_child.call_deferred(instance)
 	instance.set_deferred("global_position", position)
 	return instance
+
+
+func pause_game() -> void:
+	get_tree().paused = true
+	var inst = PAUSE_MENU.instantiate()
+	get_tree().root.add_child(inst)
+	inst.get_child(0).activate()
 
 
 func create_particle(particle_scene: PackedScene, position: Vector3, parent: Node = null) -> Node:

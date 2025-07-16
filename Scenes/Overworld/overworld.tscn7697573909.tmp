@@ -1,0 +1,755 @@
+[gd_scene load_steps=53 format=3 uid="uid://bfnbncmqdwf6o"]
+
+[ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_6y65m"]
+[ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="2_gw0hx"]
+[ext_resource type="PackedScene" uid="uid://cl4glsi76vapy" path="res://Scenes/Overworld/player.tscn" id="3_c84f5"]
+[ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="5_l5erx"]
+[ext_resource type="Script" uid="uid://dr73ivowve6xe" path="res://Scripts/Overworld/ui.gd" id="5_n65ad"]
+[ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="5_t0fti"]
+[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="6_anxap"]
+[ext_resource type="Texture2D" uid="uid://x3spqeyiq8cr" path="res://Art/Textures/npc shirt white.png" id="6_by887"]
+[ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="6_c84f5"]
+[ext_resource type="Script" uid="uid://catvngsdo62hm" path="res://Scenes/Overworld/town.gd" id="7_lfx7i"]
+[ext_resource type="PackedScene" uid="uid://cdexqegkymx2g" path="res://Scenes/Overworld/UI/location_card.tscn" id="7_phy3g"]
+[ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="8_lfx7i"]
+[ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="9_6q8ew"]
+[ext_resource type="Script" uid="uid://dav6t8b5brx1o" path="res://Scripts/inventory_controller.gd" id="10_lfx7i"]
+[ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="11_2hpwo"]
+[ext_resource type="Script" uid="uid://bjmtcugcvwfgq" path="res://Scripts/bounty_board.gd" id="11_swbn6"]
+[ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="11_vrhs1"]
+[ext_resource type="Theme" uid="uid://efo20xxcf1e5" path="res://Art/Themes/vbox_container.tres" id="12_857re"]
+[ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand3.png" id="12_l5erx"]
+[ext_resource type="Script" uid="uid://bokxkydc5jmf" path="res://addons/zylann.hterrain/hterrain.gd" id="13_8owou"]
+[ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="13_swbn6"]
+[ext_resource type="Resource" uid="uid://pw1g23y0eavu" path="res://addons/zylann.hterrain/data/data.hterrain" id="14_4vmjd"]
+[ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="14_857re"]
+[ext_resource type="Script" uid="uid://gep7hf1s50y2" path="res://Scripts/dialogue_controller.gd" id="15_lo4k2"]
+[ext_resource type="Script" uid="uid://b8f4u7je7ufby" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="15_rvg24"]
+[ext_resource type="Script" uid="uid://b37bjjekoe1qe" path="res://Scripts/quest_menu.gd" id="16_oedh7"]
+[ext_resource type="Shader" uid="uid://de6l4w30bo7u6" path="res://Art/Shaders/cel-shader-base.gdshader" id="18_8owou"]
+[ext_resource type="PackedScene" uid="uid://dvt1ofd0p5g6o" path="res://Scenes/Overworld/town_1.tscn" id="20_4vmjd"]
+[ext_resource type="PackedScene" uid="uid://pkdxp0kobhyk" path="res://Scenes/Overworld/encounter_1.tscn" id="23_lo4k2"]
+[ext_resource type="PackedScene" uid="uid://dgwlg3anvnbmw" path="res://Scenes/Guns/ak47.tscn" id="25_4vmjd"]
+[ext_resource type="Texture2D" uid="uid://oacru53rac71" path="res://Art/Textures/player_face.png" id="25_545x4"]
+[ext_resource type="Script" uid="uid://dq1csolov4xy" path="res://Scripts/Overworld/npc_controller.gd" id="26_5q0os"]
+[ext_resource type="PackedScene" uid="uid://drm4ubuf1liaj" path="res://Scenes/Overworld/encounter_2.tscn" id="26_rvg24"]
+[ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="27_4xsnl"]
+[ext_resource type="PackedScene" uid="uid://dhc6a3k8wyk4x" path="res://Scenes/Overworld/enemy.tscn" id="28_72l67"]
+[ext_resource type="PackedScene" uid="uid://c0tio1doys3tp" path="res://Scenes/Overworld/rocky_plain.tscn" id="33_oedh7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t2t4p"]
+render_priority = 0
+shader = ExtResource("2_gw0hx")
+shader_parameter/depth_edge_threshold_lower = 1.0
+shader_parameter/depth_edge_threshold_upper = 1.0
+shader_parameter/normal_edge_threshold = 1.0
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_width = 2.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_phy3g"]
+material = SubResource("ShaderMaterial_t2t4p")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_arpq1"]
+viewport_path = NodePath("PlayerPortrait")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_l5erx"]
+viewport_path = NodePath("ShopkeeperPortrait")
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_phy3g"]
+vertices = PackedVector3Array(-499.25, 0.5, -499.25, -499.25, 0.5, 499.25, 499.25, 0.5, 499.25, 499.25, 0.5, -499.25)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+agent_radius = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_by887"]
+albedo_texture = ExtResource("12_l5erx")
+uv1_triplanar = true
+texture_filter = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lo4k2"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_545x4"]
+data = PackedVector3Array(500, 0, 500, -500, 0, 500, 500, 0, -500, -500, 0, 500, -500, 0, -500, 500, 0, -500)
+
+[sub_resource type="Resource" id="Resource_0e3xm"]
+script = ExtResource("15_rvg24")
+mode = 0
+textures = [[ExtResource("12_l5erx")], [null]]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4vmjd"]
+render_priority = 0
+shader = ExtResource("18_8owou")
+shader_parameter/color = Color(0.86, 0.86, 0.86, 1)
+shader_parameter/base_texture = ExtResource("6_by887")
+shader_parameter/specular = Color(0, 0, 0, 0)
+shader_parameter/fresnel = Color(0, 0, 0, 0)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_adm71"]
+script = ExtResource("27_4xsnl")
+object_to_spawn = ExtResource("28_72l67")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_06vt4"]
+sky_top_color = Color(0.302148, 0.453771, 0.663872, 1)
+sky_horizon_color = Color(0.707052, 0.837232, 1, 1)
+ground_bottom_color = Color(0.705882, 0.835294, 1, 1)
+ground_horizon_color = Color(0.705882, 0.835294, 1, 1)
+
+[sub_resource type="Sky" id="Sky_t2t4p"]
+sky_material = SubResource("ProceduralSkyMaterial_06vt4")
+
+[sub_resource type="Environment" id="Environment_oq87f"]
+background_mode = 2
+sky = SubResource("Sky_t2t4p")
+fog_sky_affect = 0.5
+
+[sub_resource type="World3D" id="World3D_m35ud"]
+environment = SubResource("Environment_oq87f")
+
+[sub_resource type="Resource" id="Resource_vrhs1"]
+script = ExtResource("5_l5erx")
+faces = Array[Texture]([ExtResource("25_545x4")])
+shirts = Array[Texture]([ExtResource("6_by887")])
+pants_colors = Array[Color]([Color(0.376471, 0.207843, 0.207843, 1)])
+shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1)])
+metadata/_custom_type_script = "uid://b80ipr8q70gqm"
+
+[node name="Overworld" type="Node3D"]
+script = ExtResource("1_6y65m")
+
+[node name="Shader" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.492066, 0, 0)
+cast_shadow = 0
+extra_cull_margin = 16237.3
+mesh = SubResource("QuadMesh_phy3g")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("5_n65ad")
+
+[node name="LocationCard" parent="CanvasLayer" instance=ExtResource("7_phy3g")]
+
+[node name="InventoryHolder" type="HBoxContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -333.0
+offset_top = -383.5
+offset_right = 333.0
+offset_bottom = 383.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_lfx7i")
+
+[node name="Inventory" parent="CanvasLayer/InventoryHolder" instance=ExtResource("5_t0fti")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Town" type="PanelContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -343.5
+offset_top = -323.5
+offset_right = 343.5
+offset_bottom = 323.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_anxap")
+script = ExtResource("7_lfx7i")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Town"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Town/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Town/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_lfx7i")
+text = "Town Name"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="CanvasLayer/Town/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Town/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("9_6q8ew")
+
+[node name="Shop" type="HBoxContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -64.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+script = ExtResource("10_lfx7i")
+
+[node name="Inventory" parent="CanvasLayer/Shop" instance=ExtResource("5_t0fti")]
+layout_mode = 2
+size_flags_horizontal = 3
+mode = 1
+show_price = true
+
+[node name="Inventory2" parent="CanvasLayer/Shop" instance=ExtResource("5_t0fti")]
+layout_mode = 2
+size_flags_horizontal = 3
+mode = 1
+show_price = true
+
+[node name="BountyBoard" type="HBoxContainer" parent="CanvasLayer" node_paths=PackedStringArray("item_container")]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 300.0
+offset_top = 100.0
+offset_right = -300.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+script = ExtResource("11_swbn6")
+item_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/ItemContainer")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/BountyBoard"]
+custom_minimum_size = Vector2(750, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_anxap")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/BountyBoard/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("11_vrhs1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BountyBoard/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("12_857re")
+
+[node name="Label" type="Label" parent="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_lfx7i")
+text = "Bounties"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MenuItem" parent="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("13_swbn6")]
+layout_mode = 2
+text = "Available"
+
+[node name="MenuItem2" parent="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("13_swbn6")]
+layout_mode = 2
+text = "Current"
+
+[node name="Control" type="Control" parent="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ItemContainer" type="VBoxContainer" parent="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("12_857re")
+script = ExtResource("9_6q8ew")
+
+[node name="Control2" type="Control" parent="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MenuItem2" parent="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("13_swbn6")]
+layout_mode = 2
+text = "Exit"
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/BountyBoard"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_anxap")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/BountyBoard/PanelContainer2"]
+layout_mode = 2
+theme = ExtResource("11_vrhs1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BountyBoard/PanelContainer2/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("12_857re")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/BountyBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 438)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/BountyBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_lfx7i")
+text = "$100"
+
+[node name="Label" type="Label" parent="CanvasLayer/BountyBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("14_857re")
+text = "Name"
+
+[node name="Label3" type="Label" parent="CanvasLayer/BountyBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("14_857re")
+text = "Last seen in:"
+
+[node name="Control" type="Control" parent="CanvasLayer/BountyBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BountyBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MenuItem3" parent="CanvasLayer/BountyBoard/PanelContainer2/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("13_swbn6")]
+layout_mode = 2
+text = "Accept"
+
+[node name="MenuItem4" parent="CanvasLayer/BountyBoard/PanelContainer2/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("13_swbn6")]
+layout_mode = 2
+text = "Back"
+
+[node name="Quests" type="HBoxContainer" parent="CanvasLayer" node_paths=PackedStringArray("item_container")]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 300.0
+offset_top = 100.0
+offset_right = -300.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+script = ExtResource("16_oedh7")
+item_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/ItemContainer")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Quests"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_anxap")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Quests/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("11_vrhs1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Quests/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("12_857re")
+
+[node name="Label" type="Label" parent="CanvasLayer/Quests/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_lfx7i")
+text = "Bounties"
+
+[node name="Control" type="Control" parent="CanvasLayer/Quests/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ItemContainer" type="VBoxContainer" parent="CanvasLayer/Quests/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("12_857re")
+script = ExtResource("9_6q8ew")
+
+[node name="Control2" type="Control" parent="CanvasLayer/Quests/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MenuItem" parent="CanvasLayer/Quests/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("13_swbn6")]
+layout_mode = 2
+text = "Exit"
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/Quests"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_anxap")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Quests/PanelContainer2"]
+layout_mode = 2
+theme = ExtResource("11_vrhs1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Quests/PanelContainer2/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("12_857re")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Quests/PanelContainer2/MarginContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 560)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Quests/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("14_857re")
+text = "Name"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Quests/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("14_857re")
+text = "$100"
+
+[node name="Label3" type="Label" parent="CanvasLayer/Quests/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("14_857re")
+text = "Location"
+
+[node name="Control" type="Control" parent="CanvasLayer/Quests/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Portraits" type="HBoxContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Player" type="TextureRect" parent="CanvasLayer/Portraits"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+texture = SubResource("ViewportTexture_arpq1")
+stretch_mode = 2
+
+[node name="Shopkeeper" type="TextureRect" parent="CanvasLayer/Portraits"]
+layout_mode = 2
+size_flags_vertical = 8
+texture = SubResource("ViewportTexture_l5erx")
+stretch_mode = 2
+flip_h = true
+
+[node name="Dialogue" type="VBoxContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -463.0
+offset_top = -1085.0
+offset_right = 463.0
+offset_bottom = -427.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 32
+alignment = 2
+script = ExtResource("15_lo4k2")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_phy3g")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+visible = false
+material_override = SubResource("StandardMaterial3D_by887")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_lo4k2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_545x4")
+
+[node name="HTerrain" type="Node3D" parent="NavigationRegion3D"]
+script = ExtResource("13_8owou")
+centered = true
+_terrain_data = ExtResource("14_4vmjd")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_0e3xm")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 3.0
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+metadata/_custom_type_script = "uid://bokxkydc5jmf"
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("6_c84f5")]
+
+[node name="DirectionalLight3D" parent="WorldEnvironment" index="0"]
+transform = Transform3D(1, 0, 0, 0, -0.533659, 0.8457, 0, -0.8457, -0.533659, 0, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("3_c84f5")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5.6385, 0, -176.704)
+metadata/_edit_group_ = true
+
+[node name="Area3D" parent="Player" index="3"]
+transform = Transform3D(1, -0.000757355, -0.000357468, 0.000757294, 1, -0.000173384, 0.000357597, 0.000173119, 1, 0, 0, 0)
+
+[node name="EnemyModel" parent="Player" index="4"]
+script = null
+
+[node name="Skeleton3D" parent="Player/EnemyModel/PersonAnimated/Armature" index="0"]
+bones/0/position = Vector3(4.3702, -9.09495e-13, -171.126)
+bones/0/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
+bones/1/rotation = Quaternion(-3.55364e-15, 1.10788e-16, 0.0228339, 0.999739)
+bones/2/rotation = Quaternion(-3.55702e-15, 7.22538e-17, 1.86265e-09, 1)
+bones/3/position = Vector3(-2.38419e-06, 24.9326, -2.10025e-12)
+bones/3/rotation = Quaternion(-3.55702e-15, 1.67426e-17, 4.84288e-08, 1)
+bones/4/position = Vector3(2.39164e-06, 28.0492, -1.81899e-12)
+bones/4/rotation = Quaternion(-3.55364e-15, 5.55256e-17, -0.0228339, 0.999739)
+bones/5/position = Vector3(0.595642, 9.99194, 2.77013e-13)
+bones/5/rotation = Quaternion(0, -7.75482e-26, 1.63582e-40, 1)
+bones/6/position = Vector3(4.00829, 67.2396, 3.60419e-26)
+bones/7/position = Vector3(-0.191094, 23.5126, -14.985)
+bones/7/rotation = Quaternion(0.0051565, -0.594548, 0.804034, 0.00386899)
+bones/8/position = Vector3(-4.27663e-06, 31.2998, -8.89879e-07)
+bones/8/rotation = Quaternion(-0.104513, 3.37508e-05, -0.000320908, 0.994523)
+bones/9/position = Vector3(3.12924e-06, 52.3843, -2.47583e-05)
+bones/9/rotation = Quaternion(-0.0302872, -0.000283608, 0.00935893, 0.999497)
+bones/10/position = Vector3(2.75671e-07, 48.0139, 2.97824e-05)
+bones/11/position = Vector3(-0.223508, 23.5141, 14.985)
+bones/11/rotation = Quaternion(0.803999, -0.00451377, 0.00602627, 0.594583)
+bones/12/position = Vector3(-2.57045e-07, 31.2998, -1.15705e-05)
+bones/12/rotation = Quaternion(-0.104158, 0.000752011, -0.0071805, 0.994535)
+bones/13/position = Vector3(7.37607e-07, 52.3822, 2.20118e-05)
+bones/13/rotation = Quaternion(-0.0309521, -0.000140028, 0.00452175, 0.999511)
+bones/14/position = Vector3(-2.98023e-08, 48.0148, -1.49291e-05)
+bones/15/rotation = Quaternion(-2.80684e-05, -0.0119371, 0.999926, -0.00235312)
+bones/16/position = Vector3(1.39698e-08, 73.5593, 1.68565e-06)
+bones/16/rotation = Quaternion(-0.008107, 7.50487e-05, -0.009222, 0.999925)
+bones/17/position = Vector3(5.61122e-07, 64.9923, -1.99198e-06)
+bones/17/rotation = Quaternion(0.298426, -0.690608, 0.386098, 0.533789)
+bones/18/position = Vector3(-4.5523e-06, 41.0572, -7.62939e-06)
+bones/18/rotation = Quaternion(0.280475, -0.191722, 0.0572802, 0.938774)
+bones/19/position = Vector3(3.8892e-06, 20.7615, 5.96046e-08)
+bones/20/rotation = Quaternion(2.03937e-05, 0.0119371, 0.999927, -0.00171727)
+bones/21/position = Vector3(-5.97211e-08, 73.5589, 1.34092e-06)
+bones/21/rotation = Quaternion(0.00810769, -4.75409e-05, -0.00585092, 0.99995)
+bones/22/rotation = Quaternion(0.382212, -0.533876, 0.293727, 0.694705)
+bones/23/position = Vector3(2.19047e-06, 40.5276, -1.78814e-07)
+bones/23/rotation = Quaternion(0.283926, 0.186295, -0.056337, 0.938886)
+bones/24/position = Vector3(-5.52833e-06, 20.6788, 4.76837e-07)
+
+[node name="Cube_001" parent="Player/EnemyModel/PersonAnimated/Armature/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_4vmjd")
+
+[node name="RightHand" parent="Player/EnemyModel/PersonAnimated/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.998747, -0.00894445, 0.0492451, 0.0102642, 0.999593, -0.0266123, -0.0489871, 0.0270844, 0.998432, 0.11527, 145.081, -243.05)
+
+[node name="Node3D" parent="Player/EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand" index="0"]
+transform = Transform3D(-12.8247, 148.869, 13.1663, 108.922, 18.3587, -101.484, -102.331, 0.884018, -109.671, 31.1487, 18.92, -12.4604)
+
+[node name="LeftHand" parent="Player/EnemyModel/PersonAnimated/Armature/Skeleton3D" index="3"]
+transform = Transform3D(-0.99888, 0.00642304, 0.0468618, -0.00514436, -0.999612, 0.0273561, 0.0470194, 0.0270844, 0.998527, 0.289708, -145.081, -243.05)
+
+[node name="NpcController" type="Node3D" parent="."]
+script = ExtResource("26_5q0os")
+npcs = Array[ExtResource("27_4xsnl")]([SubResource("Resource_adm71")])
+
+[node name="Timer" type="Timer" parent="NpcController"]
+wait_time = 10.0
+autostart = true
+
+[node name="PlayerPortrait" type="SubViewport" parent="."]
+world_3d = SubResource("World3D_m35ud")
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(750, 750)
+
+[node name="Shader" type="MeshInstance3D" parent="PlayerPortrait"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.492066, 0, 0)
+cast_shadow = 0
+extra_cull_margin = 16237.3
+mesh = SubResource("QuadMesh_phy3g")
+
+[node name="EnemyModel2" parent="PlayerPortrait" instance=ExtResource("11_2hpwo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.8062, -9.73897, 0)
+style_data = SubResource("Resource_vrhs1")
+
+[node name="Skeleton3D" parent="PlayerPortrait/EnemyModel2/PersonAnimated/Armature" index="0"]
+bones/0/position = Vector3(4.3702, -9.09495e-13, -171.126)
+bones/0/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
+bones/1/rotation = Quaternion(-3.55364e-15, 1.10788e-16, 0.0228339, 0.999739)
+bones/2/rotation = Quaternion(-3.55702e-15, 7.22538e-17, 1.86265e-09, 1)
+bones/3/position = Vector3(-2.38419e-06, 24.9326, -2.10025e-12)
+bones/3/rotation = Quaternion(-3.55702e-15, 1.67426e-17, 4.84288e-08, 1)
+bones/4/position = Vector3(2.39164e-06, 28.0492, -1.81899e-12)
+bones/4/rotation = Quaternion(-3.55364e-15, 5.55256e-17, -0.0228339, 0.999739)
+bones/5/position = Vector3(0.595642, 9.99194, 2.77013e-13)
+bones/5/rotation = Quaternion(0, -7.75482e-26, 1.63582e-40, 1)
+bones/6/position = Vector3(4.00829, 67.2396, 3.60419e-26)
+bones/7/position = Vector3(-0.191094, 23.5126, -14.985)
+bones/7/rotation = Quaternion(0.0051565, -0.594548, 0.804034, 0.00386899)
+bones/8/position = Vector3(-4.27663e-06, 31.2998, -8.89879e-07)
+bones/8/rotation = Quaternion(-0.104513, 3.37508e-05, -0.000320908, 0.994523)
+bones/9/position = Vector3(3.12924e-06, 52.3843, -2.47583e-05)
+bones/9/rotation = Quaternion(-0.0302872, -0.000283608, 0.00935893, 0.999497)
+bones/10/position = Vector3(2.75671e-07, 48.0139, 2.97824e-05)
+bones/11/position = Vector3(-0.223508, 23.5141, 14.985)
+bones/11/rotation = Quaternion(0.803999, -0.00451377, 0.00602627, 0.594583)
+bones/12/position = Vector3(-2.57045e-07, 31.2998, -1.15705e-05)
+bones/12/rotation = Quaternion(-0.104158, 0.000752011, -0.0071805, 0.994535)
+bones/13/position = Vector3(7.37607e-07, 52.3822, 2.20118e-05)
+bones/13/rotation = Quaternion(-0.0309521, -0.000140028, 0.00452175, 0.999511)
+bones/14/position = Vector3(-2.98023e-08, 48.0148, -1.49291e-05)
+bones/15/rotation = Quaternion(-2.80684e-05, -0.0119371, 0.999926, -0.00235312)
+bones/16/position = Vector3(1.39698e-08, 73.5593, 1.68565e-06)
+bones/16/rotation = Quaternion(-0.008107, 7.50487e-05, -0.009222, 0.999925)
+bones/17/position = Vector3(5.61122e-07, 64.9923, -1.99198e-06)
+bones/17/rotation = Quaternion(0.298426, -0.690608, 0.386098, 0.533789)
+bones/18/position = Vector3(-4.5523e-06, 41.0572, -7.62939e-06)
+bones/18/rotation = Quaternion(0.280475, -0.191722, 0.0572802, 0.938774)
+bones/19/position = Vector3(3.8892e-06, 20.7615, 5.96046e-08)
+bones/20/rotation = Quaternion(2.03937e-05, 0.0119371, 0.999927, -0.00171727)
+bones/21/position = Vector3(-5.97211e-08, 73.5589, 1.34092e-06)
+bones/21/rotation = Quaternion(0.00810769, -4.75409e-05, -0.00585092, 0.99995)
+bones/22/rotation = Quaternion(0.382212, -0.533876, 0.293727, 0.694705)
+bones/23/position = Vector3(2.19047e-06, 40.5276, -1.78814e-07)
+bones/23/rotation = Quaternion(0.283926, 0.186295, -0.056337, 0.938886)
+bones/24/position = Vector3(-5.52833e-06, 20.6788, 4.76837e-07)
+
+[node name="RightHand" parent="PlayerPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.998747, -0.00894445, 0.0492451, 0.0102642, 0.999593, -0.0266123, -0.0489871, 0.0270844, 0.998432, 0.11527, 145.081, -243.05)
+
+[node name="AK47" parent="PlayerPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="0" instance=ExtResource("25_4vmjd")]
+
+[node name="LeftHand" parent="PlayerPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D" index="3"]
+transform = Transform3D(-0.99888, 0.00642304, 0.0468618, -0.00514436, -0.999612, 0.0273561, 0.0470194, 0.0270844, 0.998527, 0.289708, -145.081, -243.05)
+
+[node name="Camera3D" type="Camera3D" parent="PlayerPortrait"]
+transform = Transform3D(-0.9391, 0, 0.343643, 0.0200749, 0.998292, 0.0548602, -0.343057, 0.0584178, -0.937496, -27.2178, -8.08504, -1.74455)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="PlayerPortrait"]
+transform = Transform3D(1, 0, 0, 0, -0.533659, 0.8457, 0, -0.8457, -0.533659, 0, 0, 0)
+shadow_enabled = true
+shadow_normal_bias = 0.0
+shadow_blur = 10.0
+
+[node name="ShopkeeperPortrait" type="SubViewport" parent="."]
+world_3d = SubResource("World3D_m35ud")
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(750, 750)
+
+[node name="Shader" type="MeshInstance3D" parent="ShopkeeperPortrait"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.492066, 0, 0)
+cast_shadow = 0
+extra_cull_margin = 16237.3
+mesh = SubResource("QuadMesh_phy3g")
+
+[node name="EnemyModel2" parent="ShopkeeperPortrait" instance=ExtResource("11_2hpwo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.73897, 0)
+
+[node name="Skeleton3D" parent="ShopkeeperPortrait/EnemyModel2/PersonAnimated/Armature" index="0"]
+bones/0/position = Vector3(4.3702, -9.09495e-13, -171.126)
+bones/0/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
+bones/1/rotation = Quaternion(-3.55364e-15, 1.10788e-16, 0.0228339, 0.999739)
+bones/2/rotation = Quaternion(-3.55702e-15, 7.22538e-17, 1.86265e-09, 1)
+bones/3/position = Vector3(-2.38419e-06, 24.9326, -2.10025e-12)
+bones/3/rotation = Quaternion(-3.55702e-15, 1.67426e-17, 4.84288e-08, 1)
+bones/4/position = Vector3(2.39164e-06, 28.0492, -1.81899e-12)
+bones/4/rotation = Quaternion(-3.55364e-15, 5.55256e-17, -0.0228339, 0.999739)
+bones/5/position = Vector3(0.595642, 9.99194, 2.77013e-13)
+bones/5/rotation = Quaternion(0, -7.75482e-26, 1.63582e-40, 1)
+bones/6/position = Vector3(4.00829, 67.2396, 3.60419e-26)
+bones/7/position = Vector3(-0.191094, 23.5126, -14.985)
+bones/7/rotation = Quaternion(0.0051565, -0.594548, 0.804034, 0.00386899)
+bones/8/position = Vector3(-4.27663e-06, 31.2998, -8.89879e-07)
+bones/8/rotation = Quaternion(-0.104513, 3.37508e-05, -0.000320908, 0.994523)
+bones/9/position = Vector3(3.12924e-06, 52.3843, -2.47583e-05)
+bones/9/rotation = Quaternion(-0.0302872, -0.000283608, 0.00935893, 0.999497)
+bones/10/position = Vector3(2.75671e-07, 48.0139, 2.97824e-05)
+bones/11/position = Vector3(-0.223508, 23.5141, 14.985)
+bones/11/rotation = Quaternion(0.803999, -0.00451377, 0.00602627, 0.594583)
+bones/12/position = Vector3(-2.57045e-07, 31.2998, -1.15705e-05)
+bones/12/rotation = Quaternion(-0.104158, 0.000752011, -0.0071805, 0.994535)
+bones/13/position = Vector3(7.37607e-07, 52.3822, 2.20118e-05)
+bones/13/rotation = Quaternion(-0.0309521, -0.000140028, 0.00452175, 0.999511)
+bones/14/position = Vector3(-2.98023e-08, 48.0148, -1.49291e-05)
+bones/15/rotation = Quaternion(-2.80684e-05, -0.0119371, 0.999926, -0.00235312)
+bones/16/position = Vector3(1.39698e-08, 73.5593, 1.68565e-06)
+bones/16/rotation = Quaternion(-0.008107, 7.50487e-05, -0.009222, 0.999925)
+bones/17/position = Vector3(5.61122e-07, 64.9923, -1.99198e-06)
+bones/17/rotation = Quaternion(0.298426, -0.690608, 0.386098, 0.533789)
+bones/18/position = Vector3(-4.5523e-06, 41.0572, -7.62939e-06)
+bones/18/rotation = Quaternion(0.280475, -0.191722, 0.0572802, 0.938774)
+bones/19/position = Vector3(3.8892e-06, 20.7615, 5.96046e-08)
+bones/20/rotation = Quaternion(2.03937e-05, 0.0119371, 0.999927, -0.00171727)
+bones/21/position = Vector3(-5.97211e-08, 73.5589, 1.34092e-06)
+bones/21/rotation = Quaternion(0.00810769, -4.75409e-05, -0.00585092, 0.99995)
+bones/22/rotation = Quaternion(0.382212, -0.533876, 0.293727, 0.694705)
+bones/23/position = Vector3(2.19047e-06, 40.5276, -1.78814e-07)
+bones/23/rotation = Quaternion(0.283926, 0.186295, -0.056337, 0.938886)
+bones/24/position = Vector3(-5.52833e-06, 20.6788, 4.76837e-07)
+
+[node name="RightHand" parent="ShopkeeperPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.998747, -0.00894445, 0.0492451, 0.0102642, 0.999593, -0.0266123, -0.0489871, 0.0270844, 0.998432, 0.11527, 145.081, -243.05)
+
+[node name="AK47" parent="ShopkeeperPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="0" instance=ExtResource("25_4vmjd")]
+
+[node name="LeftHand" parent="ShopkeeperPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D" index="3"]
+transform = Transform3D(-0.99888, 0.00642304, 0.0468618, -0.00514436, -0.999612, 0.0273561, 0.0470194, 0.0270844, 0.998527, 0.289708, -145.081, -243.05)
+
+[node name="Camera3D" type="Camera3D" parent="ShopkeeperPortrait"]
+transform = Transform3D(-0.9391, 0, 0.343643, 0.0200749, 0.998292, 0.0548602, -0.343057, 0.0584178, -0.937496, 0.588373, -8.08504, -1.74455)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="ShopkeeperPortrait"]
+transform = Transform3D(1, 0, 0, 0, -0.533659, 0.8457, 0, -0.8457, -0.533659, 0, 0, 0)
+visible = false
+shadow_enabled = true
+shadow_normal_bias = 0.0
+shadow_blur = 10.0
+
+[node name="Area3D" parent="." instance=ExtResource("23_lo4k2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3809, -0.0408411, -100.53)
+
+[node name="Area3D2" parent="." instance=ExtResource("20_4vmjd")]
+transform = Transform3D(-0.669977, 0, -0.745889, 0, 1.00261, 0, 0.745889, 0, -0.669977, 13.087, 0, -132.665)
+show_title = true
+
+[node name="Area3D3" parent="." instance=ExtResource("26_rvg24")]
+transform = Transform3D(-0.918777, 0, -0.394776, 0, 1, 0, 0.394776, 0, -0.918777, 0.916396, 0.00653252, -119.952)
+
+[node name="Area3D4" parent="." instance=ExtResource("33_oedh7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1396, -0.0150447, -154.089)
+faction = ""
+show_faction = false
+difficulty = ""
+show_difficulty = false
+resources = ""
+show_resources = false
+spawn_player_random = false
+
+[connection signal="exit" from="CanvasLayer/Shop" to="CanvasLayer/Dialogue" method="_on_shop_exit"]
+[connection signal="visibility_changed" from="CanvasLayer/Shop" to="CanvasLayer" method="_on_shop_visibility_changed"]
+[connection signal="exit" from="CanvasLayer/BountyBoard" to="CanvasLayer/Dialogue" method="_on_shop_exit"]
+[connection signal="pressed" from="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MenuItem" to="CanvasLayer/BountyBoard" method="_on_menu_item_pressed"]
+[connection signal="pressed" from="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MenuItem2" to="CanvasLayer/BountyBoard" method="_on_menu_item_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer/MenuItem2" to="CanvasLayer/BountyBoard" method="close"]
+[connection signal="pressed" from="CanvasLayer/Quests/PanelContainer/MarginContainer/VBoxContainer/MenuItem" to="CanvasLayer/Quests" method="close"]
+[connection signal="timeout" from="NpcController/Timer" to="NpcController" method="_on_timer_timeout"]
+
+[editable path="CanvasLayer/Shop/Inventory"]
+[editable path="WorldEnvironment"]
+[editable path="Player"]
+[editable path="Player/EnemyModel"]
+[editable path="Player/EnemyModel/PersonAnimated"]
+[editable path="PlayerPortrait/EnemyModel2"]
+[editable path="PlayerPortrait/EnemyModel2/PersonAnimated"]
+[editable path="ShopkeeperPortrait/EnemyModel2"]
+[editable path="ShopkeeperPortrait/EnemyModel2/PersonAnimated"]

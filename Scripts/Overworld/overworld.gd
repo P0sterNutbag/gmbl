@@ -1,13 +1,20 @@
 extends Node3D
 
+var load_on_enter: bool
 var current_encounter: Node3D
+var player_place: NodePath
 @onready var npc_portrait_model: Node3D = $ShopkeeperPortrait/EnemyModel2
 
 
 func _enter_tree() -> void:
 	process_mode = Node.PROCESS_MODE_INHERIT
-	if current_encounter and current_encounter.population <= 0 and current_encounter.get_parent().has_method("die"):
-		current_encounter.get_parent().die()
+	if current_encounter:
+		if current_encounter.population <= 0 and current_encounter.get_parent().has_method("die"):
+			current_encounter.get_parent().die()
+		if player_place:
+			var player = get_node("Player")
+			await get_tree().process_frame
+			get_node("Player").global_transform = current_encounter.get_node(player_place).global_transform
 
 
 func _ready() -> void:

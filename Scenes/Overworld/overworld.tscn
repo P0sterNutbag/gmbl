@@ -1,8 +1,9 @@
-[gd_scene load_steps=58 format=3 uid="uid://bfnbncmqdwf6o"]
+[gd_scene load_steps=59 format=3 uid="uid://bfnbncmqdwf6o"]
 
 [ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_6y65m"]
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="2_gw0hx"]
 [ext_resource type="PackedScene" uid="uid://cl4glsi76vapy" path="res://Scenes/Overworld/player.tscn" id="3_c84f5"]
+[ext_resource type="Script" uid="uid://bclh5yhrpmkxf" path="res://Scripts/stat_visual.gd" id="4_3x1tr"]
 [ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="5_l5erx"]
 [ext_resource type="Script" uid="uid://dr73ivowve6xe" path="res://Scripts/Overworld/ui.gd" id="5_n65ad"]
 [ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="5_t0fti"]
@@ -173,20 +174,19 @@ anchor_bottom = 1.0
 grow_vertical = 0
 scale = Vector2(2, 2)
 
-[node name="Stats" type="Control" parent="CanvasLayer/ScaleOffset/BottomLeft"]
-visible = false
-anchors_preset = 0
-offset_left = 16.5
-offset_top = -105.0
-offset_right = 139.5
-offset_bottom = -16.0
+[node name="Stats" type="VBoxContainer" parent="CanvasLayer/ScaleOffset/BottomLeft"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = -111.0
+offset_right = 140.0
+offset_bottom = -43.0
+theme_override_constants/separation = 20
+alignment = 2
 
 [node name="Health" type="Control" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats"]
-anchors_preset = 0
-offset_left = 11.5
-offset_top = -6.5
-offset_right = 11.5
-offset_bottom = -6.5
+layout_mode = 2
+script = ExtResource("4_3x1tr")
+stat_name = "hp"
 metadata/_edit_group_ = true
 
 [node name="ColorRect4" type="ColorRect" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats/Health"]
@@ -220,11 +220,9 @@ value = 1.0
 show_percentage = false
 
 [node name="Hunger" type="Control" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats"]
-anchors_preset = 0
-offset_left = 10.0
-offset_top = 13.5
-offset_right = 10.0
-offset_bottom = 13.5
+layout_mode = 2
+script = ExtResource("4_3x1tr")
+stat_name = "hunger"
 metadata/_edit_group_ = true
 
 [node name="ColorRect5" type="ColorRect" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats/Hunger"]
@@ -260,18 +258,16 @@ value = 1.0
 show_percentage = false
 
 [node name="Water" type="Control" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats"]
-anchors_preset = 0
-offset_left = 12.0
-offset_top = 36.0
-offset_right = 12.0
-offset_bottom = 36.0
+layout_mode = 2
+script = ExtResource("4_3x1tr")
+stat_name = "thirst"
 metadata/_edit_group_ = true
 
 [node name="ColorRect4" type="ColorRect" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats/Water"]
 layout_mode = 0
-offset_left = 103.0
+offset_left = 108.0
 offset_top = 1.0
-offset_right = 231.0
+offset_right = 243.0
 offset_bottom = 16.0
 rotation = -0.0471239
 scale = Vector2(-0.810944, 0.690912)
@@ -284,13 +280,13 @@ offset_top = 0.5
 offset_right = 160.135
 offset_bottom = 28.5
 theme = ExtResource("21_3x1tr")
-text = "Water"
+text = "Thirst"
 
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats/Water"]
 layout_mode = 0
-offset_left = 51.5
+offset_left = 58.0
 offset_top = 1.5
-offset_right = 94.5
+offset_right = 101.0
 offset_bottom = 12.5
 theme = ExtResource("18_agdr0")
 max_value = 1.0
@@ -298,11 +294,9 @@ value = 1.0
 show_percentage = false
 
 [node name="Sleep" type="Control" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats"]
-anchors_preset = 0
-offset_left = 11.0
-offset_top = 57.0
-offset_right = 11.0
-offset_bottom = 57.0
+layout_mode = 2
+script = ExtResource("4_3x1tr")
+stat_name = "sleep"
 metadata/_edit_group_ = true
 
 [node name="ColorRect4" type="ColorRect" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats/Sleep"]
@@ -1009,6 +1003,12 @@ style_data = SubResource("Resource_vrhs1")
 [node name="Skeleton3D" parent="PlayerPortrait/EnemyModel2/PersonAnimated/Armature" index="0"]
 bones/24/position = Vector3(3.03984e-06, 20.6789, 5.24521e-06)
 
+[node name="RightHand" parent="PlayerPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.36131, 0.743698, 0.562466, -0.404402, 0.668513, -0.624139, -0.840186, -0.0019542, 0.542293, -26.3741, 54.6199, -199.656)
+
+[node name="LeftHand" parent="PlayerPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.558552, -0.344945, -0.754342, 0.0406938, 0.919727, -0.390442, 0.82847, 0.187385, 0.527753, 41.3443, 63.5835, -185.361)
+
 [node name="Camera3D" type="Camera3D" parent="PlayerPortrait"]
 transform = Transform3D(-0.9391, 0, 0.343643, 0.0200749, 0.998292, 0.0548602, -0.343057, 0.0584178, -0.937496, -27.2178, -8.08504, -1.74455)
 
@@ -1035,6 +1035,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.73897, 0)
 
 [node name="Skeleton3D" parent="ShopkeeperPortrait/EnemyModel2/PersonAnimated/Armature" index="0"]
 bones/24/position = Vector3(3.03984e-06, 20.6789, 5.24521e-06)
+
+[node name="RightHand" parent="ShopkeeperPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.36131, 0.743698, 0.562466, -0.404402, 0.668513, -0.624139, -0.840186, -0.0019542, 0.542293, -26.3741, 54.6199, -199.656)
+
+[node name="LeftHand" parent="ShopkeeperPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.558552, -0.344945, -0.754342, 0.0406938, 0.919727, -0.390442, 0.82847, 0.187385, 0.527753, 41.3443, 63.5835, -185.361)
 
 [node name="Camera3D" type="Camera3D" parent="ShopkeeperPortrait"]
 transform = Transform3D(-0.9391, 0, 0.343643, 0.0200749, 0.998292, 0.0548602, -0.343057, 0.0584178, -0.937496, 0.588373, -8.08504, -1.74455)

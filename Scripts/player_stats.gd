@@ -13,6 +13,7 @@ var hp: int = 5:
 			return Globals.player.hitbox.hp
 		else:
 			return 5
+var max_hp := 5
 var ammo: int:
 	set(value):
 		ammo = value
@@ -23,10 +24,25 @@ var ammo: int:
 		else:
 			return 0
 @export var items: Array[Item]
+@export var quests: Array[Quest]
 var guns: Array[Item]:
 	get(): return items.filter(func(i): return i is EquipmentGun)
 var gun: EquipmentGun
-@export var quests: Array[Quest]
+var sleep := 100.0:
+	set(value):
+		sleep = clamp(value, 0, max_sleep)
+var hunger := 100.0:
+	set(value):
+		hunger = clamp(value, 0, max_hunger)
+var thirst := 100.0:
+	set(value):
+		thirst = clamp(value, 0, max_thirst)
+var max_sleep := 100.0
+var max_hunger := 100.0
+var max_thirst = 100.0
+var sleep_decrease_rate := 0.5
+var hunger_decrease_rate := 0.75
+var thirst_decrease_rate := 1.0
 
 
 func _enter_tree() -> void:
@@ -37,6 +53,13 @@ func _ready() -> void:
 	if items.size() > 0 and items[0] is EquipmentGun:
 		gun = items[0]
 		gun.equipped = true
+
+
+func _process(delta: float) -> void:
+	sleep -= delta * sleep_decrease_rate
+	hunger -= delta * hunger_decrease_rate
+	thirst -= delta * thirst_decrease_rate
+	
 
 
 func _physics_process(delta):
@@ -81,3 +104,14 @@ func delete_current_equip():
 	for item in items:
 		if item is Equipment and item.equipped:
 			items.erase(item)
+
+
+func go_to_sleep():
+	Globals.ui.inventory_holder.hide()
+	change_state(states.pause)
+	var tween = create_tween()
+	tween.tween_callback(SceneManager.animation_player.play.bind("fade_in"))
+	tween.tween_callback(SceneManager.animation_player.play.bind("fade_out")).set_delay(2)
+	tween.tween_property(self, "sleep", max_sleep, 0)
+	tween.tween_property(self, "state", states.walk, 0)
+	

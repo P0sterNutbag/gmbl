@@ -44,6 +44,9 @@ func set_inventory_money() -> void:
 func _on_visibility_changed() -> void:
 	if visible:
 		get_child(get_child_count()-1).grab_focus()
+		PlayerStats.state = PlayerStats.states.pause
+	else:
+		PlayerStats.state = PlayerStats.states.walk
 
 
 func _on_resized() -> void:

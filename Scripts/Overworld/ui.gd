@@ -34,8 +34,9 @@ func _process(delta: float) -> void:
 	var cam_rot = rad_to_deg(Globals.player.camera_anchor.rotation.y)
 	compass.position.x = compass.size.x * ((cam_rot / 360.0) + 0.5) - compass.size.x - 70
 	
+	# open pause menu
 	if Input.is_action_just_pressed("ui_cancel"):
-		if !town.visible and !shop.visible and !inventory_holder.visible:
+		if PlayerStats.state != PlayerStats.states.pause:
 			Globals.pause_game()
 
 

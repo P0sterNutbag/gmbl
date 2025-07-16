@@ -1,6 +1,7 @@
 extends Node
 
 @onready var scene_transition: Control = $SceneTransition
+@onready var animation_player: AnimationPlayer = $SceneTransition/AnimationPlayer
 var next_scene
 var remove_from_tree: bool
 var load_on_enter: bool

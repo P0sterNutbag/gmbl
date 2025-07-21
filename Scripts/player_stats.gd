@@ -59,7 +59,6 @@ func _process(delta: float) -> void:
 	sleep -= delta * sleep_decrease_rate
 	hunger -= delta * hunger_decrease_rate
 	thirst -= delta * thirst_decrease_rate
-	
 
 
 func _physics_process(delta):
@@ -91,6 +90,7 @@ func save() -> Dictionary:
 		"money": money,
 		"hp": hp,
 		"ammo": ammo,
+		"items" : items
 	}
 
 

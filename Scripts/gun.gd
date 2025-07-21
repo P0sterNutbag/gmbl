@@ -58,6 +58,7 @@ func aim_fire_point(pos: Vector3) -> void:
 
 func _on_shoot() -> void:
 	gun_stats.ammo -= 1
+	gun_stats.condition -= 0.05
 	can_shoot = false
 	has_released = false
 	time_since_shot = 0

@@ -3,6 +3,7 @@ extends Node3D
 var last_position: Vector3
 var tracer_firepoint: Node3D
 var bullet_stats: BulletStats
+var gun_stats: GunStats
 var tracer: PackedScene = preload("res://Scenes/Bullets/tracer.tscn")
 var dust: PackedScene = preload("res://Scenes/Particles/dust.tscn")
 @onready var bullet_mesh = $MeshInstance3D
@@ -40,6 +41,7 @@ func hit():
 	# damage collider if enemy
 	var collider = raycast.get_collider()
 	if collider is HealthComponent:
+		var damage = bullet_stats.damage * (0.5 + min(0.5 * (gun_stats.condition / gun_stats.max_condition) / 0.75, 0.5))
 		collider.damage(bullet_stats.damage, raycast.get_collision_point(), rotation)
 		if !bullet_stats.is_hitscan:
 			queue_free()

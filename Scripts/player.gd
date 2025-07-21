@@ -464,6 +464,7 @@ func change_gun(new_gun: EquipmentGun) -> void:
 			shoot_component.firepoint = camera
 			shoot_component.tracer_firepoint = firepoint
 			shoot_component.bullet_stats = gun.bullet_stats
+			shoot_component.gun_stats = gun.gun_stats
 			await get_tree().create_timer(0.05).timeout
 			gun.visible = true
 	Globals.ui.set_gun_name(gun.name.to_upper())

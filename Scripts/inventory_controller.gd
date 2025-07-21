@@ -17,9 +17,11 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("ui_right"):
 			var inventory = get_child(1)
 			inventory.item_container.select_last_button()
+			get_child(0).stats_panel.hide()
 		elif Input.is_action_just_pressed("ui_left"):
 			var inventory = get_child(0)
 			inventory.item_container.select_last_button()
+			get_child(1).stats_panel.hide()
 
 
 func open(shop: Shop) -> void:
@@ -43,7 +45,7 @@ func set_inventory_money() -> void:
 
 func _on_visibility_changed() -> void:
 	if visible:
-		get_child(get_child_count()-1).grab_focus()
+		#get_child(get_child_count()-1).grab_focus()
 		PlayerStats.state = PlayerStats.states.pause
 	else:
 		PlayerStats.state = PlayerStats.states.walk

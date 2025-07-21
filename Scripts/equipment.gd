@@ -5,7 +5,7 @@ class_name Equipment
 var equipped: bool
 
 
-func use(target_node: Node) -> void:
+func on_pressed() -> void:
 	equip()
 
 

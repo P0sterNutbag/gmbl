@@ -1,51 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://cha53csgpqitn"]
+[gd_scene load_steps=7 format=3 uid="uid://cha53csgpqitn"]
 
 [ext_resource type="Script" uid="uid://bby8q5udlgb6g" path="res://Scripts/player_stats.gd" id="1_vjobs"]
 [ext_resource type="Script" uid="uid://2qhh6s86pakx" path="res://Scripts/item.gd" id="2_ey8gb"]
-[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="3_uiad6"]
-[ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="4_btj6c"]
-[ext_resource type="Script" uid="uid://34toqwivxgyk" path="res://Scripts/equipment_gun.gd" id="5_av3m6"]
-[ext_resource type="Resource" uid="uid://kkq8uwhdx6ig" path="res://Resources/Items/Survival/water.tres" id="6_btj6c"]
-[ext_resource type="Resource" uid="uid://bilc3njrt4s7v" path="res://Resources/Items/Survival/sleeping_bag.tres" id="7_av3m6"]
-
-[sub_resource type="Resource" id="Resource_75wv8"]
-script = ExtResource("4_btj6c")
-ammo = 24
-metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
-
-[sub_resource type="Resource" id="Resource_uiad6"]
-script = ExtResource("5_av3m6")
-gun_stats = SubResource("Resource_75wv8")
-name = "rifle"
-title = "AK47"
-usable = true
-effects = Array[ExtResource("3_uiad6")]([])
-method = ""
-uses = 1
-price = 100
-is_health_item = false
-custom_path = ""
-metadata/_custom_type_script = "uid://34toqwivxgyk"
-
-[sub_resource type="Resource" id="Resource_j8sse"]
-script = ExtResource("4_btj6c")
-ammo = 6
-metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
-
-[sub_resource type="Resource" id="Resource_bjmho"]
-script = ExtResource("5_av3m6")
-gun_stats = SubResource("Resource_j8sse")
-name = "sniper_rifle"
-title = "Sniper Rifle"
-usable = true
-effects = Array[ExtResource("3_uiad6")]([])
-method = ""
-uses = 1
-price = 200
-is_health_item = false
-custom_path = ""
-metadata/_custom_type_script = "uid://34toqwivxgyk"
+[ext_resource type="Resource" uid="uid://ixc4pv5vjlno" path="res://Resources/Items/Guns/ak47.tres" id="3_btj6c"]
+[ext_resource type="Resource" uid="uid://bhs8tbv5iox6e" path="res://Resources/Items/Guns/sniper_rifle.tres" id="4_av3m6"]
+[ext_resource type="Resource" uid="uid://glkl1ugkvv6m" path="res://Resources/Items/Survival/water.tres" id="6_btj6c"]
+[ext_resource type="Resource" uid="uid://dvooyj5cqcclc" path="res://Resources/Items/Survival/sleeping_bag.tres" id="7_av3m6"]
 
 [node name="PlayerStats" type="Node" groups=["persist"]]
 script = ExtResource("1_vjobs")
-items = Array[ExtResource("2_ey8gb")]([SubResource("Resource_uiad6"), SubResource("Resource_bjmho"), ExtResource("6_btj6c"), ExtResource("7_av3m6")])
+items = Array[ExtResource("2_ey8gb")]([ExtResource("3_btj6c"), ExtResource("4_av3m6"), ExtResource("6_btj6c"), ExtResource("7_av3m6")])

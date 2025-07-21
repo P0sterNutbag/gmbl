@@ -5,6 +5,7 @@ extends Node
 @export var tracer_firepoint: Node3D
 var time_shooting := 0.0
 var spread := 1.0
+var gun_stats: GunStats
 var spread_curve := (preload("res://Resources/bullet_spread.tres"))
 
 
@@ -31,5 +32,6 @@ func _on_shoot(is_ads: bool = false, movement_speed = Vector3.ZERO) -> void:
 		var v_angle_variance = randf_range(-variance.y, variance.y)
 		inst.rotate_x(deg_to_rad(v_angle_variance))
 		inst.bullet_stats = bullet_stats
+		inst.gun_stats = gun_stats
 		inst.tracer_firepoint = tracer_firepoint
 		get_tree().current_scene.add_child(inst)

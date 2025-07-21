@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemUsable" load_steps=4 format=3 uid="uid://c4vot4kh7bffi"]
+
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="1_tsdro"]
+[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="2_x8dnf"]
+
+[sub_resource type="Resource" id="Resource_x8dnf"]
+script = ExtResource("1_tsdro")
+values = Dictionary[String, Variant]({
+"unhealable_hp": -2
+})
+multiply = false
+add = true
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[resource]
+script = ExtResource("2_x8dnf")
+uses = 1
+effects = Array[ExtResource("1_tsdro")]([SubResource("Resource_x8dnf")])
+method = ""
+custom_path = ""
+is_health_item = true
+title = "Bandage"
+price = 10
+description = "-2 wounds"
+metadata/_custom_type_script = "uid://dd1ly8qocexg4"

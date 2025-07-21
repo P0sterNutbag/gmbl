@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://o1c18mja4sla"]
+[gd_scene load_steps=28 format=3 uid="uid://o1c18mja4sla"]
 
 [ext_resource type="PackedScene" uid="uid://y6civk4251ei" path="res://Scenes/UI/fps_ui.tscn" id="1_otjo7"]
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="2_dqj6b"]
@@ -14,13 +14,14 @@
 [ext_resource type="PackedScene" uid="uid://c055smn111au7" path="res://Scenes/player.tscn" id="12_1qjq5"]
 [ext_resource type="Script" uid="uid://cp3dswmfni4xd" path="res://Scripts/enemy_spawner.gd" id="13_d78k0"]
 [ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="14_57f3t"]
-[ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/enemy.tscn" id="15_x0sf4"]
+[ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/Enemies/enemy.tscn" id="15_x0sf4"]
 [ext_resource type="PackedScene" uid="uid://bechsj7oyoa41" path="res://Scenes/Environment/exit_location.tscn" id="16_ow1ir"]
 [ext_resource type="PackedScene" uid="uid://6fpvot4g04d0" path="res://Scenes/Environment/spawn_point.tscn" id="16_ptprv"]
 [ext_resource type="PackedScene" uid="uid://cwk6n1rlne3a6" path="res://Scenes/Environment/shack4.tscn" id="18_sliq1"]
 [ext_resource type="PackedScene" uid="uid://dergqrsprx3qg" path="res://Scenes/Environment/shack3.tscn" id="19_s63dp"]
 [ext_resource type="PackedScene" uid="uid://dkdmdcbv1thv3" path="res://Scenes/Environment/shack2.tscn" id="20_erwy3"]
 [ext_resource type="PackedScene" uid="uid://di4qmk466fnrk" path="res://Scenes/Environment/shipping_container.tscn" id="21_7rkcn"]
+[ext_resource type="Script" uid="uid://vl4exm3hukmx" path="res://Scripts/Overworld/player_spawn.gd" id="22_sliq1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ctfa7"]
 render_priority = 0
@@ -102,7 +103,7 @@ min_size = 0.75
 max_size = 1.25
 rotate_y = true
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("12_1qjq5")]
+[node name="Player" parent="." instance=ExtResource("12_1qjq5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -43.6456)
 
 [node name="EnemySpawner" type="Node3D" parent="."]
@@ -173,5 +174,32 @@ transform = Transform3D(-0.981272, 0, 0.192625, 0, 1, 0, -0.192625, 0, -0.981272
 
 [node name="ShippingContainer" parent="." instance=ExtResource("21_7rkcn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.23306, 4.7339, -8.96538)
+
+[node name="PlayerSpawns" type="Node3D" parent="."]
+script = ExtResource("22_sliq1")
+
+[node name="Node3D" type="Node3D" parent="PlayerSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 0, -35)
+
+[node name="SpawnN" type="Node3D" parent="PlayerSpawns"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -35)
+
+[node name="Node3D3" type="Node3D" parent="PlayerSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 0, -35)
+
+[node name="SpawnE" type="Node3D" parent="PlayerSpawns"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 35, 0, 0)
+
+[node name="Node3D5" type="Node3D" parent="PlayerSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 0, 35)
+
+[node name="SpawnS" type="Node3D" parent="PlayerSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 35)
+
+[node name="Node3D7" type="Node3D" parent="PlayerSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 0, 35)
+
+[node name="SpawnW" type="Node3D" parent="PlayerSpawns"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -35, 0, 0)
 
 [editable path="WorldEnvironment"]

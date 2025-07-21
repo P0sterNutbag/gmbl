@@ -6,9 +6,13 @@ enum modes {use, loot}
 @export var show_price: bool
 var target = PlayerStats
 var target2
+const text_style = preload("res://Art/Themes/text.tres")
 @onready var item_container: MenuController = %Items
 @onready var title: Label = $MarginContainer/VBoxContainer/Label
 @onready var money_label: Label = $MarginContainer/VBoxContainer/Label/Label2
+@onready var stats: HBoxContainer = %Stats
+@onready var stats_panel: PanelContainer = $MarginContainer/VBoxContainer/Panel
+@onready var description: Label = %Label
 
 
 func _ready() -> void:
@@ -56,11 +60,15 @@ func set_items():
 		inst.resource = item
 		if show_price:
 			inst.price = item.price
-		if mode == modes.use and item.usable:
-			inst.pressed.connect(item.use.bind(target))
-			if item.used_up.is_connected(on_use_item):
-				item.used_up.disconnect(on_use_item)
-			item.used_up.connect(on_use_item.bind(inst))
+		inst.focus_entered.connect(set_description.bind(item))
+		if mode == modes.use:
+			if item is ItemUsable:
+				item.target_node = target
+				if item.used_up.is_connected(on_use_item):
+					item.used_up.disconnect(on_use_item)
+				item.used_up.connect(on_use_item.bind(inst))
+				item.used_up.connect(target.items.erase.bind(item))
+			inst.pressed.connect(item.on_pressed)
 		elif mode == modes.loot:
 			inst.pressed.connect(transfer_item.bind(inst))
 	if item_container.get_child_count() > 0:
@@ -110,6 +118,29 @@ func transfer_item(menu_item: Control):
 	#inventory2.item_container.sort_menu_items()
 
 
+func set_description(item: Item):
+	for child in stats.get_children():
+		child.queue_free()
+	if item.description != "":
+		description.show()
+		description.text = item.description
+	else:
+		description.hide()
+	if item is not Equipment and item.description == "":
+		stats_panel.hide()
+		return
+	if item is not Equipment:
+		return
+	stats_panel.show()
+	for stat in item.stats:
+		var inst = Label.new()
+		#inst.text = stat + ": " + str(item.stats[stat])
+		#inst.text = stat + ": " + str(item.get("gun_stats").condition) + "/" + str(item.get("gun_stats").max_condition)
+		inst.text = stat + ": " + str(item.get(item.stats[stat]))
+		inst.theme = text_style
+		stats.add_child(inst)
+
+
 func _on_v_box_container_visibility_changed() -> void:
 	if visible and get_parent().visible:
 		set_items()
@@ -123,4 +154,3 @@ func on_use_item(menu_item) -> void:
 	if menu_item.get_index() == item_container.get_child_count() - 1:
 		item_container.get_child(-2).grab_focus()
 	menu_item.queue_free()
-		

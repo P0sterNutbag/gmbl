@@ -1,24 +1,25 @@
-[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://kkq8uwhdx6ig"]
+[gd_resource type="Resource" script_class="ItemUsable" load_steps=4 format=3 uid="uid://glkl1ugkvv6m"]
 
 [ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="1_7pven"]
-[ext_resource type="Script" uid="uid://2qhh6s86pakx" path="res://Scripts/item.gd" id="2_px07o"]
+[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="2_sw8tj"]
 
-[sub_resource type="Resource" id="Resource_7pven"]
+[sub_resource type="Resource" id="Resource_sw8tj"]
 script = ExtResource("1_7pven")
-values = ["thirst", 50.0]
+values = Dictionary[String, Variant]({
+"thirst": 50.0
+})
 multiply = false
 add = true
 metadata/_custom_type_script = "uid://4c6own63hs8c"
 
 [resource]
-script = ExtResource("2_px07o")
-title = "Water"
-usable = true
-effects = Array[ExtResource("1_7pven")]([SubResource("Resource_7pven")])
-multiply = false
-add = false
+script = ExtResource("2_sw8tj")
 uses = 1
-price = 1
-is_health_item = false
+effects = Array[ExtResource("1_7pven")]([SubResource("Resource_sw8tj")])
+method = ""
 custom_path = "PlayerStats"
-metadata/_custom_type_script = "uid://2qhh6s86pakx"
+is_health_item = false
+title = "Water"
+price = 0
+description = "-50 Hunger"
+metadata/_custom_type_script = "uid://dd1ly8qocexg4"

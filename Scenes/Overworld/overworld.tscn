@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://bfnbncmqdwf6o"]
+[gd_scene load_steps=60 format=3 uid="uid://bfnbncmqdwf6o"]
 
 [ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_6y65m"]
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="2_gw0hx"]
@@ -41,6 +41,7 @@
 [ext_resource type="PackedScene" uid="uid://dhc6a3k8wyk4x" path="res://Scenes/Overworld/enemy.tscn" id="28_72l67"]
 [ext_resource type="Script" uid="uid://bxtcknb4rx5h2" path="res://Scripts/random_timer.gd" id="29_72l67"]
 [ext_resource type="PackedScene" uid="uid://c0tio1doys3tp" path="res://Scenes/Overworld/rocky_plain.tscn" id="33_oedh7"]
+[ext_resource type="PackedScene" uid="uid://bttlllip2h1ea" path="res://Scenes/Overworld/encounter_3.tscn" id="42_xp1ub"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t2t4p"]
 render_priority = 0
@@ -1053,19 +1054,22 @@ shadow_normal_bias = 0.0
 shadow_blur = 10.0
 
 [node name="Area3D" parent="." instance=ExtResource("23_lo4k2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7605, -0.0408411, -100.53)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.7931, -0.0408335, -78.0638)
 
 [node name="Area3D2" parent="." instance=ExtResource("20_4vmjd")]
-transform = Transform3D(0.785845, 0, 0.622629, 0, 1.00261, 0, -0.622629, 0, 0.785845, 13.087, 0, -132.665)
+transform = Transform3D(0.785845, 0, 0.622629, 0, 1.00261, 0, -0.622629, 0, 0.785845, 17.0097, 0, -128.994)
 show_title = true
 
 [node name="Area3D3" parent="." instance=ExtResource("26_rvg24")]
-transform = Transform3D(0.162809, 0, -0.986657, 0, 1, 0, 0.986657, 0, 0.162809, -2.29731, 0.00653252, -119.422)
+transform = Transform3D(0.162809, 0, -0.986657, 0, 1, 0, 0.986657, 0, 0.162809, -4.24161, 0.00653252, -105.31)
 
 [node name="Area3D4" parent="." instance=ExtResource("33_oedh7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1396, -0.0150447, -154.089)
 max_population = 6
 start_with_enemies = false
+
+[node name="Location" parent="." instance=ExtResource("42_xp1ub")]
+transform = Transform3D(0.852567, 0, -0.522618, 0, 1, 0, 0.522618, 0, 0.852567, -34.2372, 0.069664, -72.5201)
 
 [connection signal="exit" from="CanvasLayer/Shop" to="CanvasLayer/Dialogue" method="_on_shop_exit"]
 [connection signal="visibility_changed" from="CanvasLayer/Shop" to="CanvasLayer" method="_on_shop_visibility_changed"]

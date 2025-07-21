@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Town" load_steps=58 format=3 uid="uid://c5kpuww7x3qfl"]
+[gd_resource type="Resource" script_class="Town" load_steps=59 format=3 uid="uid://c5kpuww7x3qfl"]
 
 [ext_resource type="Script" uid="uid://bbi3gcsb33muk" path="res://Scripts/town.gd" id="1_boc7n"]
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="2_60f61"]
@@ -8,13 +8,12 @@
 [ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="4_jfela"]
 [ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="4_qjbs6"]
 [ext_resource type="Script" uid="uid://cnu4xeujmgk51" path="res://Scripts/dialogue_options.gd" id="4_t35h1"]
-[ext_resource type="Resource" uid="uid://04hmx6qx4fsq" path="res://Resources/Items/medkit.tres" id="5_r7b6r"]
+[ext_resource type="Resource" uid="uid://ccm2c5fc8xn15" path="res://Resources/Items/Survival/medkit.tres" id="5_r7b6r"]
 [ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="6_0o5nu"]
 [ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="6_6lldf"]
 [ext_resource type="Resource" uid="uid://nm0e00c2fx4" path="res://Resources/NpcStyles/npc_styles.tres" id="7_8pniq"]
-[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="12_375gu"]
 [ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="13_8pniq"]
-[ext_resource type="Resource" uid="uid://kkq8uwhdx6ig" path="res://Resources/Items/Survival/water.tres" id="13_42xsr"]
+[ext_resource type="Resource" uid="uid://dfkmfm7wu8mw4" path="res://Resources/Items/Survival/beans.tres" id="13_hil7u"]
 [ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="13_usrj7"]
 [ext_resource type="Script" uid="uid://34toqwivxgyk" path="res://Scripts/equipment_gun.gd" id="14_xa6dy"]
 [ext_resource type="Resource" uid="uid://oaklo016ku8w" path="res://Resources/Items/Guns/pistol.tres" id="16_q1nwr"]
@@ -23,7 +22,7 @@
 [ext_resource type="Script" uid="uid://h75f74ubyudu" path="res://Scripts/item_money.gd" id="20_5oaiu"]
 [ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="20_42xsr"]
 [ext_resource type="Script" uid="uid://px5dr31pd885" path="res://Scripts/dialogue_loop.gd" id="20_hil7u"]
-[ext_resource type="PackedScene" uid="uid://cdyu4tr3ku43v" path="res://Scenes/enemy_bounty.tscn" id="21_hil7u"]
+[ext_resource type="PackedScene" uid="uid://ds7n104oln2ve" path="res://Scenes/Enemies/enemy_bounty.tscn" id="23_hil7u"]
 
 [sub_resource type="Resource" id="Resource_6lldf"]
 script = ExtResource("3_0o5nu")
@@ -75,7 +74,7 @@ metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 [sub_resource type="Resource" id="Resource_qjbs6"]
 script = ExtResource("2_60f61")
 title = "General Store"
-items = Array[ExtResource("3_nk61p")]([ExtResource("4_jfela"), ExtResource("5_r7b6r"), ExtResource("6_0o5nu"), ExtResource("13_42xsr")])
+items = Array[ExtResource("3_nk61p")]([ExtResource("4_jfela"), ExtResource("5_r7b6r"), ExtResource("6_0o5nu"), ExtResource("13_hil7u")])
 money = 100
 dialogue = SubResource("Resource_t35h1")
 quests = Array[ExtResource("13_usrj7")]([])
@@ -119,6 +118,7 @@ metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 [sub_resource type="Resource" id="Resource_75wv8"]
 script = ExtResource("13_8pniq")
 ammo = 24
+condition = 100.0
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
 [sub_resource type="Resource" id="Resource_sj5y1"]
@@ -126,13 +126,8 @@ script = ExtResource("14_xa6dy")
 gun_stats = SubResource("Resource_75wv8")
 name = "rifle"
 title = "AK47"
-usable = false
-effects = Array[ExtResource("12_375gu")]([])
-multiply = false
-add = false
-uses = 1
 price = 45
-is_health_item = false
+description = ""
 metadata/_custom_type_script = "uid://34toqwivxgyk"
 
 [sub_resource type="Resource" id="Resource_r7b6r"]
@@ -227,13 +222,8 @@ metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 script = ExtResource("20_5oaiu")
 amount = 100
 title = ""
-usable = false
-effects = Array[ExtResource("12_375gu")]([])
-multiply = false
-add = false
-uses = 1
 price = 0
-is_health_item = false
+description = ""
 metadata/_custom_type_script = "uid://h75f74ubyudu"
 
 [sub_resource type="Resource" id="Resource_pbnsr"]
@@ -241,7 +231,7 @@ script = ExtResource("13_usrj7")
 title = "Johnny Grease"
 location = "Crateyard"
 reward = SubResource("Resource_i2d6u")
-target = ExtResource("21_hil7u")
+target = ExtResource("23_hil7u")
 completed = false
 metadata/_custom_type_script = "uid://dkuy8ne1y8df"
 
@@ -249,13 +239,8 @@ metadata/_custom_type_script = "uid://dkuy8ne1y8df"
 script = ExtResource("20_5oaiu")
 amount = 100
 title = ""
-usable = false
-effects = Array[ExtResource("12_375gu")]([])
-multiply = false
-add = false
-uses = 1
 price = 0
-is_health_item = false
+description = ""
 metadata/_custom_type_script = "uid://h75f74ubyudu"
 
 [sub_resource type="Resource" id="Resource_usrj7"]
@@ -263,7 +248,24 @@ script = ExtResource("13_usrj7")
 title = "Slick Rick"
 location = "Gang Camp"
 reward = SubResource("Resource_clt0f")
-target = ExtResource("21_hil7u")
+target = ExtResource("23_hil7u")
+completed = false
+metadata/_custom_type_script = "uid://dkuy8ne1y8df"
+
+[sub_resource type="Resource" id="Resource_eg73l"]
+script = ExtResource("20_5oaiu")
+amount = 100
+title = ""
+price = 0
+description = ""
+metadata/_custom_type_script = "uid://h75f74ubyudu"
+
+[sub_resource type="Resource" id="Resource_u0s17"]
+script = ExtResource("13_usrj7")
+title = "Big Boy"
+location = "Bandit Village"
+reward = SubResource("Resource_eg73l")
+target = ExtResource("23_hil7u")
 completed = false
 metadata/_custom_type_script = "uid://dkuy8ne1y8df"
 
@@ -273,7 +275,7 @@ title = "Bounty Board"
 items = Array[ExtResource("3_nk61p")]([])
 money = 100
 dialogue = SubResource("Resource_bsumm")
-quests = Array[ExtResource("13_usrj7")]([SubResource("Resource_pbnsr"), SubResource("Resource_usrj7")])
+quests = Array[ExtResource("13_usrj7")]([SubResource("Resource_pbnsr"), SubResource("Resource_usrj7"), SubResource("Resource_u0s17")])
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [resource]

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemUsable" load_steps=4 format=3 uid="uid://ccm2c5fc8xn15"]
+
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="1_qhv0s"]
+[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="2_boyid"]
+
+[sub_resource type="Resource" id="Resource_boyid"]
+script = ExtResource("1_qhv0s")
+values = Dictionary[String, Variant]({
+"hp": 3
+})
+multiply = false
+add = true
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[resource]
+script = ExtResource("2_boyid")
+uses = 1
+effects = Array[ExtResource("1_qhv0s")]([SubResource("Resource_boyid")])
+method = ""
+custom_path = ""
+is_health_item = true
+title = "Medkit"
+price = 0
+description = ""
+metadata/_custom_type_script = "uid://dd1ly8qocexg4"

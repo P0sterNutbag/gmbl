@@ -61,6 +61,7 @@ func _ready() -> void:
 	shoot_component.firepoint = gun.fire_point
 	shoot_component.tracer_firepoint = gun.fire_point
 	shoot_component.bullet_stats = gun.bullet_stats
+	shoot_component.gun_stats = gun.gun_stats
 	shoot_timer.wait_time = gun.fire_timer
 	items_to_drop.append(guns_dict[gun_index][1])
 	shoot.connect($ShootComponent._on_shoot)
@@ -366,6 +367,8 @@ func _on_death() -> void:
 		get_tree().call_group("enemies", "set_detection_targets")
 	if team == teams.enemies:
 		get_tree().call_group("allies", "set_detection_targets")
+	if has_node("Sprite3D"):
+		$Sprite3D.hide()
 
 
 func _on_navigation_agent_3d_navigation_finished() -> void:

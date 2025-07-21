@@ -2,6 +2,14 @@ extends Equipment
 class_name EquipmentGun
 
 @export var gun_stats: GunStats = GunStats.new()
+var ammo: 
+	get(): return gun_stats.ammo
+var condition: 
+	get(): return gun_stats.condition
+var stats := {
+	"AMMO": "ammo",
+	"CND": "condition"
+}
 
 
 func equip() -> void:

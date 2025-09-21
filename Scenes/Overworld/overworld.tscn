@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://bfnbncmqdwf6o"]
+[gd_scene load_steps=59 format=3 uid="uid://bfnbncmqdwf6o"]
 
 [ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_6y65m"]
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="2_gw0hx"]
@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand3.png" id="12_l5erx"]
 [ext_resource type="Script" uid="uid://bokxkydc5jmf" path="res://addons/zylann.hterrain/hterrain.gd" id="13_8owou"]
 [ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="13_swbn6"]
-[ext_resource type="Resource" uid="uid://pw1g23y0eavu" path="res://addons/zylann.hterrain/data/data.hterrain" id="14_4vmjd"]
+[ext_resource type="Resource" path="res://addons/zylann.hterrain/data/data.hterrain" id="14_4vmjd"]
 [ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="14_857re"]
 [ext_resource type="Script" uid="uid://gep7hf1s50y2" path="res://Scripts/dialogue_controller.gd" id="15_lo4k2"]
 [ext_resource type="Script" uid="uid://b8f4u7je7ufby" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="15_rvg24"]
@@ -33,7 +33,6 @@
 [ext_resource type="Texture2D" uid="uid://cvly0bfjs24or" path="res://Art/Textures/sun-moon.png" id="20_3x1tr"]
 [ext_resource type="PackedScene" uid="uid://dvt1ofd0p5g6o" path="res://Scenes/Overworld/town_1.tscn" id="20_4vmjd"]
 [ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="21_3x1tr"]
-[ext_resource type="PackedScene" uid="uid://pkdxp0kobhyk" path="res://Scenes/Overworld/encounter_1.tscn" id="23_lo4k2"]
 [ext_resource type="Texture2D" uid="uid://oacru53rac71" path="res://Art/Textures/player_face.png" id="25_545x4"]
 [ext_resource type="Script" uid="uid://dq1csolov4xy" path="res://Scripts/Overworld/npc_controller.gd" id="26_5q0os"]
 [ext_resource type="PackedScene" uid="uid://drm4ubuf1liaj" path="res://Scenes/Overworld/encounter_2.tscn" id="26_rvg24"]
@@ -41,7 +40,7 @@
 [ext_resource type="PackedScene" uid="uid://dhc6a3k8wyk4x" path="res://Scenes/Overworld/enemy.tscn" id="28_72l67"]
 [ext_resource type="Script" uid="uid://bxtcknb4rx5h2" path="res://Scripts/random_timer.gd" id="29_72l67"]
 [ext_resource type="PackedScene" uid="uid://c0tio1doys3tp" path="res://Scenes/Overworld/rocky_plain.tscn" id="33_oedh7"]
-[ext_resource type="PackedScene" uid="uid://bttlllip2h1ea" path="res://Scenes/Overworld/encounter_3.tscn" id="42_xp1ub"]
+[ext_resource type="PackedScene" uid="uid://by4o77yhxnddh" path="res://Scenes/Overworld/trash_heap.tscn" id="43_1k2ge"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t2t4p"]
 render_priority = 0
@@ -68,8 +67,8 @@ viewport_path = NodePath("PlayerPortrait")
 viewport_path = NodePath("ShopkeeperPortrait")
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_phy3g"]
-vertices = PackedVector3Array(-499.25, 0.5, -499.25, -499.25, 0.5, 499.25, 499.25, 0.5, 499.25, 499.25, 0.5, -499.25)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+vertices = PackedVector3Array(-4.25, 0.466647, -131.75, -2.5, 0.466647, -131.75, -2.5, 0.466647, -499.25, -5.75, 0.466647, -131, -7.75, 0.466647, -128.5, -499.25, 0.466647, -499.25, -499.25, 0.466647, -126.75, -7.75, 0.466647, -126.75, -1, 0.466647, -131.75, 0.5, 0.466647, -131, 2.25, 0.466647, -128.75, 2.5, 0.466647, -126.75, 499.25, 0.466647, -126.75, 499.25, 0.466647, -499.25, -4.25, 1.46665, -128.75, -5.5, 1.21665, -127.25, -5.25, 1.46665, -125.75, 0, 1.46665, -126.25, -0.5, 1.46665, -128, -1.75, 1.46665, -129.25, -4.25, 1.21665, -124.25, -0.5, 1.21665, -124.5, -3, 1.71665, -124.333, -3.48999, 1.96665, -126.514, -3.5, 4.21665, -129, -4.5, 3.96665, -128.5, -5, 4.21665, -127.5, -0.75, 4.21665, -128.25, -1.75, 4.21665, -129, -1, 3.96665, -124.75, -0.25, 4.21665, -126.5, -4.75, 4.21665, -125.25, -3, 4.21665, -124.25, -1.98999, 4.71665, -126.514, -3.52499, 4.71665, -126.525, -7.75, 0.466647, -125, -7, 0.466647, -123.5, -4.75, 0.466647, -121.75, -2.75, 0.466647, -121.5, -499.25, 0.466647, 499.25, -2.75, 0.466647, 499.25, 1.75, 0.466647, -123.75, 0.25, 0.466647, -122.25, 499.25, 0.466647, 499.25)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(3, 2, 0), PackedInt32Array(3, 4, 2), PackedInt32Array(2, 4, 5), PackedInt32Array(5, 4, 6), PackedInt32Array(4, 7, 6), PackedInt32Array(8, 1, 2), PackedInt32Array(9, 8, 2), PackedInt32Array(10, 9, 2), PackedInt32Array(10, 2, 11), PackedInt32Array(11, 2, 12), PackedInt32Array(12, 2, 13), PackedInt32Array(16, 15, 14), PackedInt32Array(19, 18, 17), PackedInt32Array(17, 23, 19), PackedInt32Array(19, 23, 14), PackedInt32Array(14, 23, 16), PackedInt32Array(16, 23, 20), PackedInt32Array(20, 23, 22), PackedInt32Array(22, 23, 21), PackedInt32Array(21, 23, 17), PackedInt32Array(26, 25, 24), PackedInt32Array(24, 28, 27), PackedInt32Array(29, 27, 30), PackedInt32Array(24, 34, 26), PackedInt32Array(26, 34, 31), PackedInt32Array(31, 34, 32), PackedInt32Array(32, 33, 29), PackedInt32Array(29, 33, 27), PackedInt32Array(27, 33, 24), PackedInt32Array(24, 33, 34), PackedInt32Array(34, 33, 32), PackedInt32Array(6, 7, 35), PackedInt32Array(6, 35, 36), PackedInt32Array(6, 36, 37), PackedInt32Array(37, 38, 6), PackedInt32Array(6, 38, 40), PackedInt32Array(6, 40, 39), PackedInt32Array(41, 11, 12), PackedInt32Array(42, 41, 12), PackedInt32Array(42, 12, 38), PackedInt32Array(38, 12, 40), PackedInt32Array(40, 12, 43)]
 agent_radius = 0.75
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_by887"]
@@ -906,6 +905,9 @@ shader_params/u_triplanar = null
 shader_params/u_tile_reduction = null
 metadata/_custom_type_script = "uid://bokxkydc5jmf"
 
+[node name="TrashHeap" parent="NavigationRegion3D" instance=ExtResource("43_1k2ge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.68715, -0.148702, -126.692)
+
 [node name="WorldEnvironment" parent="." instance=ExtResource("6_c84f5")]
 
 [node name="DirectionalLight3D" parent="WorldEnvironment" index="0"]
@@ -974,16 +976,17 @@ transform = Transform3D(-12.8247, 148.869, 13.1663, 108.922, 18.3587, -101.484, 
 [node name="LeftHand" parent="Player/EnemyModel/PersonAnimated/Armature/Skeleton3D" index="3"]
 transform = Transform3D(-0.998998, -0.0157068, 0.0418909, 0.0186219, -0.997364, 0.0701313, 0.0406789, 0.070841, 0.996658, 0.0906596, -143.748, -243.682)
 
-[node name="NpcController" type="Node3D" parent="."]
+[node name="NpcController" type="Node3D" parent="." node_paths=PackedStringArray("locations")]
 script = ExtResource("26_5q0os")
 npcs = Array[ExtResource("27_4xsnl")]([SubResource("Resource_adm71")])
+locations = [NodePath("../Area3D2"), NodePath("../Area3D3"), NodePath("../Area3D4"), NodePath("../NavigationRegion3D/TrashHeap")]
 
 [node name="Timer" type="Timer" parent="NpcController"]
 wait_time = 10.0
 autostart = true
 script = ExtResource("29_72l67")
-min_wait_time = 5.0
-max_wait_time = 15.0
+min_wait_time = 1.0
+max_wait_time = 10.0
 
 [node name="PlayerPortrait" type="SubViewport" parent="."]
 world_3d = SubResource("World3D_m35ud")
@@ -1002,13 +1005,51 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.8062, -9.73897, 0)
 style_data = SubResource("Resource_vrhs1")
 
 [node name="Skeleton3D" parent="PlayerPortrait/EnemyModel2/PersonAnimated/Armature" index="0"]
-bones/24/position = Vector3(3.03984e-06, 20.6789, 5.24521e-06)
+bones/0/position = Vector3(2.7188, -9.09495e-13, -174.991)
+bones/0/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
+bones/1/rotation = Quaternion(-3.55317e-15, 5.53884e-17, 0.0160342, 0.999871)
+bones/2/rotation = Quaternion(-3.55272e-15, 5.53813e-17, 6.51926e-09, 1)
+bones/3/position = Vector3(-7.15256e-07, 23.8011, -3.36404e-12)
+bones/3/rotation = Quaternion(-3.55272e-15, -1.29814e-19, -4.65661e-09, 1)
+bones/4/position = Vector3(2.44379e-06, 26.7763, 0)
+bones/4/rotation = Quaternion(-3.55317e-15, 5.55183e-17, -0.0160342, 0.999871)
+bones/5/position = Vector3(0.618727, 9.57428, 1.81899e-12)
+bones/5/rotation = Quaternion(0, 6.46235e-27, 5.55111e-17, 1)
+bones/6/position = Vector3(4.39056, 67.9402, 2.77013e-13)
+bones/7/position = Vector3(-0.100141, 21.7302, -14.7033)
+bones/7/rotation = Quaternion(0.00305049, -0.564889, 0.825157, 0.00253352)
+bones/8/position = Vector3(8.3074e-07, 31.0315, 2.17059e-05)
+bones/8/rotation = Quaternion(-0.177951, -0.00241229, 0.013338, 0.983946)
+bones/9/position = Vector3(-4.17233e-07, 48.3511, -3.98383e-05)
+bones/9/rotation = Quaternion(0.0288936, -0.000520184, -0.0179926, 0.99942)
+bones/10/position = Vector3(4.76837e-07, 51.9133, 3.71153e-05)
+bones/11/position = Vector3(-0.223487, 21.7342, 14.7033)
+bones/11/rotation = Quaternion(0.82506, -0.00496515, 0.00653481, 0.564986)
+bones/12/position = Vector3(4.47035e-07, 31.0315, -1.7928e-05)
+bones/12/rotation = Quaternion(-0.177881, 0.00271545, -0.0150202, 0.983934)
+bones/13/position = Vector3(-1.40071e-06, 48.3472, 1.54953e-05)
+bones/13/rotation = Quaternion(0.0289056, 0.00049708, 0.0171876, 0.999434)
+bones/14/position = Vector3(3.27826e-06, 51.9165, -4.79706e-05)
+bones/15/rotation = Quaternion(8.25242e-06, -0.0210647, 0.999778, 0.000393264)
+bones/16/position = Vector3(6.34464e-09, 73.3651, -4.77745e-07)
+bones/16/rotation = Quaternion(0.0107794, -2.74746e-05, -0.0025047, 0.999939)
+bones/17/position = Vector3(-3.44589e-08, 69.4685, 9.06653e-07)
+bones/17/rotation = Quaternion(0.295263, -0.694505, 0.387081, 0.529765)
+bones/18/position = Vector3(4.21423e-06, 41.0572, -1.03712e-05)
+bones/18/rotation = Quaternion(0.281157, -0.180166, 0.0538275, 0.94106)
+bones/19/position = Vector3(-5.96046e-08, 20.7615, -2.38419e-07)
+bones/20/rotation = Quaternion(2.99804e-05, 0.0210647, 0.999777, -0.00142069)
+bones/21/position = Vector3(1.69966e-08, 73.3653, 1.49135e-06)
+bones/21/rotation = Quaternion(-0.0107792, 5.32667e-05, -0.00491133, 0.99993)
+bones/22/rotation = Quaternion(0.385323, -0.529138, 0.292465, 0.69714)
+bones/23/position = Vector3(-6.22775e-06, 40.5276, -9.29832e-06)
+bones/23/rotation = Quaternion(0.284546, 0.17563, -0.0531117, 0.940939)
 
 [node name="RightHand" parent="PlayerPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.36131, 0.743698, 0.562466, -0.404402, 0.668513, -0.624139, -0.840186, -0.0019542, 0.542293, -26.3741, 54.6199, -199.656)
+transform = Transform3D(0.998874, -0.0193141, 0.0433234, 0.0223175, 0.997301, -0.0699488, -0.0418555, 0.0708368, 0.996609, -0.72303, 143.748, -243.682)
 
 [node name="LeftHand" parent="PlayerPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.558552, -0.344945, -0.754342, 0.0406938, 0.919727, -0.390442, 0.82847, 0.187385, 0.527753, 41.3443, 63.5835, -185.361)
+transform = Transform3D(-0.998998, -0.0157068, 0.0418909, 0.0186219, -0.997364, 0.0701313, 0.0406789, 0.070841, 0.996658, 0.0906596, -143.748, -243.682)
 
 [node name="Camera3D" type="Camera3D" parent="PlayerPortrait"]
 transform = Transform3D(-0.9391, 0, 0.343643, 0.0200749, 0.998292, 0.0548602, -0.343057, 0.0584178, -0.937496, -27.2178, -8.08504, -1.74455)
@@ -1035,13 +1076,51 @@ mesh = SubResource("QuadMesh_phy3g")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.73897, 0)
 
 [node name="Skeleton3D" parent="ShopkeeperPortrait/EnemyModel2/PersonAnimated/Armature" index="0"]
-bones/24/position = Vector3(3.03984e-06, 20.6789, 5.24521e-06)
+bones/0/position = Vector3(2.7188, -9.09495e-13, -174.991)
+bones/0/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
+bones/1/rotation = Quaternion(-3.55317e-15, 5.53884e-17, 0.0160342, 0.999871)
+bones/2/rotation = Quaternion(-3.55272e-15, 5.53813e-17, 6.51926e-09, 1)
+bones/3/position = Vector3(-7.15256e-07, 23.8011, -3.36404e-12)
+bones/3/rotation = Quaternion(-3.55272e-15, -1.29814e-19, -4.65661e-09, 1)
+bones/4/position = Vector3(2.44379e-06, 26.7763, 0)
+bones/4/rotation = Quaternion(-3.55317e-15, 5.55183e-17, -0.0160342, 0.999871)
+bones/5/position = Vector3(0.618727, 9.57428, 1.81899e-12)
+bones/5/rotation = Quaternion(0, 6.46235e-27, 5.55111e-17, 1)
+bones/6/position = Vector3(4.39056, 67.9402, 2.77013e-13)
+bones/7/position = Vector3(-0.100141, 21.7302, -14.7033)
+bones/7/rotation = Quaternion(0.00305049, -0.564889, 0.825157, 0.00253352)
+bones/8/position = Vector3(8.3074e-07, 31.0315, 2.17059e-05)
+bones/8/rotation = Quaternion(-0.177951, -0.00241229, 0.013338, 0.983946)
+bones/9/position = Vector3(-4.17233e-07, 48.3511, -3.98383e-05)
+bones/9/rotation = Quaternion(0.0288936, -0.000520184, -0.0179926, 0.99942)
+bones/10/position = Vector3(4.76837e-07, 51.9133, 3.71153e-05)
+bones/11/position = Vector3(-0.223487, 21.7342, 14.7033)
+bones/11/rotation = Quaternion(0.82506, -0.00496515, 0.00653481, 0.564986)
+bones/12/position = Vector3(4.47035e-07, 31.0315, -1.7928e-05)
+bones/12/rotation = Quaternion(-0.177881, 0.00271545, -0.0150202, 0.983934)
+bones/13/position = Vector3(-1.40071e-06, 48.3472, 1.54953e-05)
+bones/13/rotation = Quaternion(0.0289056, 0.00049708, 0.0171876, 0.999434)
+bones/14/position = Vector3(3.27826e-06, 51.9165, -4.79706e-05)
+bones/15/rotation = Quaternion(8.25242e-06, -0.0210647, 0.999778, 0.000393264)
+bones/16/position = Vector3(6.34464e-09, 73.3651, -4.77745e-07)
+bones/16/rotation = Quaternion(0.0107794, -2.74746e-05, -0.0025047, 0.999939)
+bones/17/position = Vector3(-3.44589e-08, 69.4685, 9.06653e-07)
+bones/17/rotation = Quaternion(0.295263, -0.694505, 0.387081, 0.529765)
+bones/18/position = Vector3(4.21423e-06, 41.0572, -1.03712e-05)
+bones/18/rotation = Quaternion(0.281157, -0.180166, 0.0538275, 0.94106)
+bones/19/position = Vector3(-5.96046e-08, 20.7615, -2.38419e-07)
+bones/20/rotation = Quaternion(2.99804e-05, 0.0210647, 0.999777, -0.00142069)
+bones/21/position = Vector3(1.69966e-08, 73.3653, 1.49135e-06)
+bones/21/rotation = Quaternion(-0.0107792, 5.32667e-05, -0.00491133, 0.99993)
+bones/22/rotation = Quaternion(0.385323, -0.529138, 0.292465, 0.69714)
+bones/23/position = Vector3(-6.22775e-06, 40.5276, -9.29832e-06)
+bones/23/rotation = Quaternion(0.284546, 0.17563, -0.0531117, 0.940939)
 
 [node name="RightHand" parent="ShopkeeperPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.36131, 0.743698, 0.562466, -0.404402, 0.668513, -0.624139, -0.840186, -0.0019542, 0.542293, -26.3741, 54.6199, -199.656)
+transform = Transform3D(0.998874, -0.0193141, 0.0433234, 0.0223175, 0.997301, -0.0699488, -0.0418555, 0.0708368, 0.996609, -0.72303, 143.748, -243.682)
 
 [node name="LeftHand" parent="ShopkeeperPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.558552, -0.344945, -0.754342, 0.0406938, 0.919727, -0.390442, 0.82847, 0.187385, 0.527753, 41.3443, 63.5835, -185.361)
+transform = Transform3D(-0.998998, -0.0157068, 0.0418909, 0.0186219, -0.997364, 0.0701313, 0.0406789, 0.070841, 0.996658, 0.0906596, -143.748, -243.682)
 
 [node name="Camera3D" type="Camera3D" parent="ShopkeeperPortrait"]
 transform = Transform3D(-0.9391, 0, 0.343643, 0.0200749, 0.998292, 0.0548602, -0.343057, 0.0584178, -0.937496, 0.588373, -8.08504, -1.74455)
@@ -1053,23 +1132,17 @@ shadow_enabled = true
 shadow_normal_bias = 0.0
 shadow_blur = 10.0
 
-[node name="Area3D" parent="." instance=ExtResource("23_lo4k2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.7931, -0.0408335, -78.0638)
-
 [node name="Area3D2" parent="." instance=ExtResource("20_4vmjd")]
 transform = Transform3D(0.785845, 0, 0.622629, 0, 1.00261, 0, -0.622629, 0, 0.785845, 17.0097, 0, -128.994)
 show_title = true
 
 [node name="Area3D3" parent="." instance=ExtResource("26_rvg24")]
-transform = Transform3D(0.162809, 0, -0.986657, 0, 1, 0, 0.986657, 0, 0.162809, -4.24161, 0.00653252, -105.31)
+transform = Transform3D(-0.161139, 0, -0.986931, 0, 1, 0, 0.986931, 0, -0.161139, -4.24161, 0.00653252, -105.31)
 
 [node name="Area3D4" parent="." instance=ExtResource("33_oedh7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1396, -0.0150447, -154.089)
-max_population = 6
+target_distance = 5.0
 start_with_enemies = false
-
-[node name="Location" parent="." instance=ExtResource("42_xp1ub")]
-transform = Transform3D(0.852567, 0, -0.522618, 0, 1, 0, 0.522618, 0, 0.852567, -34.2372, 0.069664, -72.5201)
 
 [connection signal="exit" from="CanvasLayer/Shop" to="CanvasLayer/Dialogue" method="_on_shop_exit"]
 [connection signal="visibility_changed" from="CanvasLayer/Shop" to="CanvasLayer" method="_on_shop_visibility_changed"]

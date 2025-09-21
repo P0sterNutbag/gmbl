@@ -1,10 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://drm4ubuf1liaj"]
+[gd_scene load_steps=9 format=3 uid="uid://drm4ubuf1liaj"]
 
 [ext_resource type="Script" uid="uid://lblyysya3an4" path="res://Scripts/location.gd" id="1_wgi48"]
+[ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_kbe5y"]
 [ext_resource type="PackedScene" uid="uid://cgmuwhpyws26t" path="res://Scenes/Places/encounter_2.tscn" id="2_vr4ym"]
 [ext_resource type="Texture2D" uid="uid://dejeawiol7jdc" path="res://Art/Textures/ring.png" id="5_ahiaf"]
-[ext_resource type="PackedScene" uid="uid://di4qmk466fnrk" path="res://Scenes/Environment/shipping_container.tscn" id="5_hkgk8"]
+[ext_resource type="PackedScene" uid="uid://di4qmk466fnrk" path="res://Scenes/Environment/Buildings/shipping_container.tscn" id="5_hkgk8"]
 [ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="7_q5ju4"]
+
+[sub_resource type="Resource" id="Resource_wgi48"]
+script = ExtResource("2_kbe5y")
+population = 0
+loot_chance = 0.1
+loot_rarity = 0
+npc_spawn_chance = 0.1
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hwnis"]
 radius = 2.89524
@@ -13,6 +22,7 @@ radius = 2.89524
 collision_layer = 64
 collision_mask = 32
 script = ExtResource("1_wgi48")
+location_data = SubResource("Resource_wgi48")
 encounter_scene = ExtResource("2_vr4ym")
 title = "Crateyard"
 show_title = true
@@ -24,7 +34,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02906, 0)
 shape = SubResource("SphereShape3D_hwnis")
 
 [node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0.794592)
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, -0.35, 0.795)
 
 [node name="ShippingContainer" parent="Node3D" instance=ExtResource("5_hkgk8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80066, 1.5, -1.15123)

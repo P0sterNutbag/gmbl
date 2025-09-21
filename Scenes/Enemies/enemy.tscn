@@ -3480,6 +3480,7 @@ size = Vector3(1.5, 0.25, 1.5)
 
 [node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
 collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_u0emo")
 gun_index = 1
 potential_items = Array[ExtResource("2_tq087")]([SubResource("Resource_po0sg"), SubResource("Resource_haro7")])
@@ -3607,6 +3608,9 @@ one_shot = true
 [node name="ShootTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="AimTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.406753, -1.03996)
 visible = false
@@ -3619,6 +3623,7 @@ font_size = 64
 [connection signal="timeout" from="ReturnToIdleTimer" to="." method="_on_return_to_idle_timer_timeout"]
 [connection signal="timeout" from="PathWaitTimer" to="." method="_on_path_wait_timer_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="AimTimer" to="." method="_on_aim_timer_timeout"]
 
 [editable path="EnemyModel"]
 [editable path="EnemyModel/PersonAnimated"]

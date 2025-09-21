@@ -6,6 +6,7 @@ var noise_controller
 var overworld: Node3D
 var particle_manager: Node
 var npc_controller: Node3D
+var inventory_menu: Control
 const PAUSE_MENU = preload("res://Scenes/UI/pause_menu.tscn")
 
 func _ready() -> void:

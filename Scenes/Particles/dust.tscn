@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxwa7hpni4yxi"]
+[gd_scene load_steps=9 format=3 uid="uid://bxwa7hpni4yxi"]
 
 [ext_resource type="Texture2D" uid="uid://c463itv1mr6tl" path="res://Art/Textures/smoke.png" id="1_ue3yl"]
 
@@ -9,18 +9,27 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_on2jh"]
 curve = SubResource("Curve_h4cwm")
 
+[sub_resource type="Curve" id="Curve_ue3yl"]
+_data = [Vector2(0, 0.251673), 0.0, 0.431435, 0, 0, Vector2(0.0511551, 1), -0.505639, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_h4cwm"]
+curve = SubResource("Curve_ue3yl")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sus2j"]
 emission_shape = 1
 emission_sphere_radius = 0.25
 angle_min = -180.0
 angle_max = 180.0
 direction = Vector3(0, 1, 1)
-initial_velocity_min = 0.5
-initial_velocity_max = 1.0
+initial_velocity_min = 0.1
+initial_velocity_max = 0.2
 angular_velocity_min = -180.0
 angular_velocity_max = 180.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_h4cwm")
 alpha_curve = SubResource("CurveTexture_on2jh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dd34b"]
@@ -28,16 +37,23 @@ transparency = 1
 cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.94606, 0.886625, 0.78015, 1)
+albedo_color = Color(0.54902, 0.54902, 0.509804, 0.101961)
 albedo_texture = ExtResource("1_ue3yl")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_onipu"]
 material = SubResource("StandardMaterial3D_dd34b")
-size = Vector2(1, 1)
+size = Vector2(3, 3)
 orientation = 2
 
 [node name="Dust" type="GPUParticles3D"]
 emitting = false
+amount = 2
+lifetime = 5.0
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_sus2j")

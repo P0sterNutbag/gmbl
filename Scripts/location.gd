@@ -1,8 +1,11 @@
 extends Node3D
 class_name Location
 
+@export var location_data: LocationData = LocationData.new()
 @export var max_population := 6
+@export var target_distance := 0.0
 @export var start_with_enemies: bool = true
+@export var can_spawn_npcs: bool = true
 @export var encounter_scene: PackedScene
 @export var town: Town
 @export var shop: Shop
@@ -19,13 +22,7 @@ class_name Location
 @export var show_enemy_model: bool = true
 var transition_started: bool 
 var can_transition: bool = true
-var population: int
-@onready var enemy_model: Node3D = $EnemyModel
-@onready var spawn_s: Node3D = $SpawnS
-@onready var spawn_e: Node3D = $SpawnE
-@onready var spawn_w: Node3D = $SpawnW
-@onready var spawn_n: Node3D = $SpawnN
-@onready var spawn_points := [spawn_s, spawn_e, spawn_w, spawn_n]
+var enemy_model: Node3D
 
 
 func _enter_tree() -> void:
@@ -39,10 +36,11 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	if !show_enemy_model:
+	enemy_model = get_node_or_null("EnemyModel")
+	if !show_enemy_model and enemy_model:
 		enemy_model.hide()
 	if start_with_enemies:
-		population = max_population
+		location_data.population = max_population
 	if "style_data" in get_parent():
 		if shop:
 			shop.dialogue.npc_style = get_parent().current_style
@@ -52,7 +50,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if show_enemy_model:
-		if population == 0:
+		if location_data.population == 0:
 			enemy_model.hide()
 		else:
 			enemy_model.show()
@@ -61,8 +59,8 @@ func _process(delta: float) -> void:
 func start_encounter() -> void:
 	if encounter_scene != null:
 		Globals.overworld.current_encounter = self
-		spawn_points.sort_custom(func(a, b): return a.global_position.distance_to(Globals.player.global_position) < b.global_position.distance_to(Globals.player.global_position))
-		Globals.overworld.player_place = spawn_points[0].name
+		var player_vector: Vector3 = (global_position - Globals.player.global_position).normalized().rotated(Vector3.UP, -rotation.y)
+		Globals.overworld.player_spawn_vector = player_vector
 		SceneManager.start_scene_transition(encounter_scene.resource_path, true)
 	elif town != null:
 		Globals.ui.town.create_town(town)
@@ -74,7 +72,7 @@ func start_encounter() -> void:
 
 func save() -> Dictionary:
 	return {
-		"population" : population,
+		"location_data.population" : location_data.population,
 	}
 
 

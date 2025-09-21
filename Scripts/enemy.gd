@@ -2,7 +2,7 @@ extends CharacterBody3D
 class_name Enemy
 
 @export var title: String = "Enemy"
-@export var strafe_change := 0.2
+@export var strafe_change := 0.5
 @export var items_to_drop: Array[PackedScene]
 enum guns {shotgun, ak47, sniper, pistol}
 @export var gun_index: guns
@@ -13,7 +13,7 @@ enum teams {enemies, allies}
 @export var items: Array[Item]
 @export var max_items: int
 @export var min_items: int
-enum states {idle, investigate, attack, search, strafe, hurt, reload, camp, dead}
+enum states {idle, investigate, shoot, search, strafe, hurt, reload, camp, dead, aim, walk}
 var state = states.idle
 var walk_speed := 1.5
 var run_speed := 3.0
@@ -32,6 +32,7 @@ var on_alert: bool
 var gun: Node3D
 var damage_position: Vector3
 var last_seen_position: Vector3
+var destination: Vector3
 var target: Node3D
 var bounty: Quest
 var guns_dict: Dictionary = {
@@ -51,6 +52,7 @@ var guns_dict: Dictionary = {
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var loot_area: Area3D = $Loot
 @onready var health_component: HealthComponent = $Hitbox
+@onready var aim_timer: Timer = $AimTimer
 signal shoot
 
 
@@ -88,6 +90,8 @@ func _physics_process(delta: float) -> void:
 			if is_new_state:
 				on_alert = false
 				velocity = Vector3.ZERO
+				if destination != Vector3.ZERO:
+					change_state(states.walk)
 				is_new_state = false
 			
 			# return to path
@@ -113,6 +117,17 @@ func _physics_process(delta: float) -> void:
 			else:
 				anim_player.play("Walk")
 			
+		states.walk:
+			if is_new_state:
+				navigation_agent.set_target_position(destination)
+				anim_player.play("Walk")
+			
+			follow_path()
+			
+			# switch to investigate
+			if target != null:
+				change_state(states.investigate)
+		
 		states.investigate:
 			if is_new_state:
 				time_to_detect = time_to_detect_max
@@ -128,13 +143,27 @@ func _physics_process(delta: float) -> void:
 				var dis_to_target = global_position.distance_to(target.global_position)
 				time_to_detect -= (20 / dis_to_target) * delta
 				if time_to_detect <= 0 or on_alert:
-					change_state(states.attack)
+					change_state(states.aim)
 			else:
 				if return_to_idle_timer.time_left <= 0:
 					return_to_idle_timer.start()
 			anim_player.play("IdlePoint")
+		
+		states.aim:
+			if is_new_state:
+				on_alert = true
+				velocity = Vector3.ZERO
+				aim_timer.start()
+				anim_player.play("Aim")
+				for enemy in get_tree().get_nodes_in_group("enemies"):
+					if enemy.state == states.idle or enemy.state == states.walk:
+						enemy.change_state(states.investigate)
+				is_new_state = false
 			
-		states.attack:
+			if target:
+				look_at_position(target.global_position)
+		
+		states.shoot:
 			if is_new_state:
 				on_alert = true
 				if !target:
@@ -157,7 +186,8 @@ func _physics_process(delta: float) -> void:
 			if target:
 				last_seen_position = target.global_position
 				look_at_position(last_seen_position)
-				shoot_component.firepoint.look_at(target.global_position + Vector3.UP * 1)
+				if shoot_component.firepoint != null:
+					shoot_component.firepoint.look_at(target.global_position + Vector3.UP * 1)
 			
 			# get into range
 			#if target and global_position.distance_to(target.global_position) > range:
@@ -201,7 +231,7 @@ func _physics_process(delta: float) -> void:
 				is_new_state = false
 			
 			if target:
-				change_state(states.attack)
+				change_state(states.aim)
 			
 			time_since_detect += delta
 			if time_since_detect > camp_time:
@@ -222,7 +252,7 @@ func _physics_process(delta: float) -> void:
 			# go to last seen position
 			follow_path(run_speed)
 			
-			# return to attack
+			# return to shoot
 			if target:
 				change_state(states.investigate)
 			
@@ -243,7 +273,7 @@ func _physics_process(delta: float) -> void:
 			# stop strafing
 			if velocity.length() < 0.1:
 				look_at_position(last_seen_position)
-				change_state(states.attack)
+				change_state(states.aim)
 			
 			# animate
 			if velocity == Vector3.ZERO:
@@ -277,6 +307,8 @@ func _process(delta: float) -> void:
 func change_state(new_state: states):
 	if state == new_state:
 		return
+	if state == states.shoot:
+		shoot_timer.stop()
 	state = new_state
 	is_new_state = true
 
@@ -293,6 +325,8 @@ func follow_path(speed: float = walk_speed):
 
 
 func look_at_position(pos: Vector3):
+	if !is_inside_tree():
+		return
 	var target_pos = pos
 	target_pos.y = global_position.y
 	if target_pos != global_position:
@@ -307,8 +341,9 @@ func set_detection_targets():
 
 
 func emit_shoot() -> void:
-	shoot.emit()
-	shoot_timer.start()
+	if gun:
+		shoot.emit()
+		shoot_timer.start()
 
 
 func on_noise_heard(noise_position: Vector3, event_creator: Node):
@@ -317,14 +352,14 @@ func on_noise_heard(noise_position: Vector3, event_creator: Node):
 		return
 	if state == states.dead or state == states.hurt:
 		return
-	on_alert = true
-	if state != states.attack:
+	if !on_alert:
 		last_seen_position = noise_position
 		#navigation_agent.set_target_position(noise_position)
 		#target = event_creator
 		change_state(states.investigate)
 	elif state == states.investigate:
 		time_to_detect -= 0.5
+	on_alert = true
 	look_at_position(noise_position)
 
 
@@ -347,8 +382,6 @@ func _on_damaged(hit_position: Vector3, hit_direction: Vector3) -> void:
 
 func _on_death() -> void:
 	loot_area.process_mode = PROCESS_MODE_INHERIT
-	if !gun:
-		return 
 	for i in items_to_drop:
 		var inst = i.instantiate()
 		get_tree().current_scene.add_child.call_deferred(inst)
@@ -357,7 +390,8 @@ func _on_death() -> void:
 		if inst.item is EquipmentGun:
 			inst.item.gun_stats = gun.gun_stats
 		#inst.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
-	gun.queue_free()
+	if gun:
+		gun.queue_free()
 	velocity = Vector3.ZERO
 	anim_player.play("Die")
 	if bounty:
@@ -378,7 +412,10 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 	elif state == states.search:
 		change_state(states.investigate)
 	elif state == states.strafe:
-		change_state(states.attack)
+		look_at_position(last_seen_position)
+		change_state(states.aim)
+	elif state == states.walk:
+		change_state(states.idle)
 
 
 func _on_return_to_idle_timer_timeout() -> void:
@@ -403,9 +440,11 @@ func _on_path_wait_timer_timeout() -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name.contains("HitReaction"):
 		look_at_position(damage_position)
-		change_state(states.attack)
+		change_state(states.aim)
 	elif anim_name == "Fire":
 		#emit_shoot()
+		if !gun:
+			return
 		gun.gun_stats.ammo -= 1
 		if gun.gun_stats.ammo <= 0:
 			gun.gun_stats.ammo = gun.max_ammo
@@ -418,9 +457,13 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	elif anim_name == "Reload":
 		if target:
 			look_at_position(target.global_position)
-		change_state(states.attack)
+		change_state(states.aim)
 
 
 func _on_shoot_timer_timeout() -> void:
 	if anim_player.current_animation == "Fire":
 		anim_player.advance(anim_player.current_animation.length())
+
+
+func _on_aim_timer_timeout() -> void:
+	change_state(states.shoot)

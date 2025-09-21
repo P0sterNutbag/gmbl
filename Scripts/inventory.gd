@@ -16,6 +16,7 @@ const text_style = preload("res://Art/Themes/text.tres")
 
 
 func _ready() -> void:
+	Globals.inventory_menu = self
 	if "money" in target:
 		money_label.show()
 		money_label.text = "$" + str(target.money)

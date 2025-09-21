@@ -20,9 +20,13 @@ data = PackedVector3Array(-3.5, 1.5, -1.5, -3.5, -1.5, -1.5, 3.4877, 1.5, -1.5, 
 [node name="ShippingContainer" type="Node3D"]
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49258, 0)
 mesh = SubResource("ArrayMesh_teulj")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="CSGBakedMeshInstance3D"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBakedMeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_0c2tv")
+
+[node name="SpawnRadius" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)

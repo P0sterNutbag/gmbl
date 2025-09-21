@@ -25,7 +25,7 @@ func _ready() -> void:
 	detection.targets.append(Globals.player)
 	var gun = guns_dict[gun_index][0].instantiate()
 	gun_holder.add_child(gun)
-	location.population = randi_range(min_enemies, max_enemies)
+	location.location_data.population = randi_range(min_enemies, max_enemies)
 	location.spawn_player_random = true
 
 
@@ -85,9 +85,16 @@ func die():
 
 func _on_navigation_agent_3d_navigation_finished() -> void:
 	if get_parent() is not Path3D:
-		if destination.population == 0:
+		if destination.max_population == 0:
+			velocity = Vector3.ZERO
+			look_at(destination.global_position)
+			await get_tree().create_timer(randf_range(3, 10)).timeout
+			var dest = Globals.overworld.npc_controller.get_destination()
+			navigation_agent.set_target_position(dest.global_position)
+			return
+		if destination.location_data.population == 0:
 			destination.enemy_model.set_materials(enemy_model.current_style)
-		destination.population = clamp(destination.population + location.population, 0, destination.max_population)
+		destination.location_data.population = clamp(destination.location_data.population + location.location_data.population, 0, destination.max_population)
 		queue_free()
 		return
 	path_index = wrap(path_index + 1, 0, get_parent().curve.point_count)

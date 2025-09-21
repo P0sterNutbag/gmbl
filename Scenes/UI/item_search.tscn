@@ -1,0 +1,186 @@
+[gd_scene load_steps=30 format=3 uid="uid://bb3l137e5kgt1"]
+
+[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_du8i4"]
+[ext_resource type="Script" uid="uid://bpdqecv5v8t0u" path="res://Scripts/item_search.gd" id="1_k5cjb"]
+[ext_resource type="Script" uid="uid://3e36ru1e7k78" path="res://Scripts/spawn_chance_resource.gd" id="2_6nqv7"]
+[ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="2_hl21w"]
+[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="3_5u8f5"]
+[ext_resource type="Theme" uid="uid://lg0ktyb6xeoh" path="res://Art/Themes/hp_bar.tres" id="3_k5cjb"]
+[ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="4_6nqv7"]
+[ext_resource type="Resource" uid="uid://glkl1ugkvv6m" path="res://Resources/Items/Survival/water.tres" id="4_qltm1"]
+[ext_resource type="Resource" uid="uid://ccm2c5fc8xn15" path="res://Resources/Items/Survival/medkit.tres" id="5_paml6"]
+[ext_resource type="Resource" uid="uid://dfkmfm7wu8mw4" path="res://Resources/Items/Survival/beans.tres" id="6_xlg73"]
+[ext_resource type="Resource" uid="uid://c4vot4kh7bffi" path="res://Resources/Items/Survival/bandage.tres" id="7_iqvu5"]
+[ext_resource type="Resource" uid="uid://bhs8tbv5iox6e" path="res://Resources/Items/Guns/sniper_rifle.tres" id="8_h1e5m"]
+[ext_resource type="Resource" uid="uid://de20gnenmrrxa" path="res://Resources/Items/Guns/shotgun.tres" id="9_f3bkl"]
+[ext_resource type="Resource" uid="uid://oaklo016ku8w" path="res://Resources/Items/Guns/pistol.tres" id="10_4gkod"]
+[ext_resource type="Resource" uid="uid://ixc4pv5vjlno" path="res://Resources/Items/Guns/ak47.tres" id="11_eg0id"]
+[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="12_aw7lv"]
+[ext_resource type="Script" uid="uid://2qhh6s86pakx" path="res://Scripts/item.gd" id="13_5u8f5"]
+
+[sub_resource type="Resource" id="Resource_uwt23"]
+script = ExtResource("2_6nqv7")
+object_to_spawn = ExtResource("3_5u8f5")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_qjs6x"]
+script = ExtResource("2_6nqv7")
+object_to_spawn = ExtResource("4_qltm1")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_aphqw"]
+script = ExtResource("2_6nqv7")
+object_to_spawn = ExtResource("5_paml6")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_nj12d"]
+script = ExtResource("2_6nqv7")
+object_to_spawn = ExtResource("6_xlg73")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_nh3na"]
+script = ExtResource("2_6nqv7")
+object_to_spawn = ExtResource("7_iqvu5")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_xtune"]
+script = ExtResource("2_6nqv7")
+object_to_spawn = ExtResource("8_h1e5m")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_ppxri"]
+script = ExtResource("2_6nqv7")
+object_to_spawn = ExtResource("9_f3bkl")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_ximms"]
+script = ExtResource("2_6nqv7")
+object_to_spawn = ExtResource("10_4gkod")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_2r114"]
+script = ExtResource("2_6nqv7")
+object_to_spawn = ExtResource("11_eg0id")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_u4ygx"]
+script = ExtResource("2_6nqv7")
+object_to_spawn = ExtResource("12_aw7lv")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_qltm1"]
+resource_name = "shotgun_ammo"
+script = ExtResource("13_5u8f5")
+title = "Shotgun Magazine"
+price = 6
+description = "Usable in: Shotgun"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
+
+[sub_resource type="Resource" id="Resource_qn2kf"]
+script = ExtResource("2_6nqv7")
+object_to_spawn = SubResource("Resource_qltm1")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[node name="ItemSearch" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_k5cjb")
+potential_items = Array[ExtResource("2_6nqv7")]([SubResource("Resource_uwt23"), SubResource("Resource_qjs6x"), SubResource("Resource_aphqw"), SubResource("Resource_nj12d"), SubResource("Resource_nh3na"), SubResource("Resource_xtune"), SubResource("Resource_ppxri"), SubResource("Resource_ximms"), SubResource("Resource_2r114"), SubResource("Resource_u4ygx"), SubResource("Resource_qn2kf")])
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = -197.0
+offset_top = -441.0
+offset_right = 199.0
+offset_bottom = -162.0
+theme = ExtResource("1_du8i4")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("2_hl21w")
+text = "Trash Heap"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="Input" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="BoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/Input"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/Input/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("4_6nqv7")
+text = "F"
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_6nqv7")
+text = "Start Scavenging"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 106)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/Control"]
+custom_minimum_size = Vector2(106, 0)
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/Control"]
+custom_minimum_size = Vector2(106, 0)
+layout_mode = 2
+
+[node name="PanelContainer3" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/Control"]
+custom_minimum_size = Vector2(106, 0)
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme = ExtResource("3_k5cjb")
+show_percentage = false
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

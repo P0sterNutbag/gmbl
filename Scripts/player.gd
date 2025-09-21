@@ -342,7 +342,8 @@ func state_pause(delta):
 
 
 func enter_dead():
-	Globals.overworld.load_on_enter = true
+	if Globals.overworld != null:
+		Globals.overworld.load_on_enter = true
 	var tween = create_tween().set_ease(Tween.EASE_OUT)
 	tween.tween_property(camera, "position:y", -1, 0.5)
 	tween.tween_property(camera, "rotation:z", deg_to_rad(45), 1)
@@ -516,6 +517,11 @@ func step_noise_event():
 	if !Globals.noise_controller:
 		return
 	Globals.noise_controller.create_noise_event(global_position, self)
+
+
+func face_center():
+	look_at(Vector3(0, camera.position.y, 0))
+	aim_rotation = rotation
 
 
 func _on_damaged(hit_position: Vector3, hit_direction: Vector3) -> void:

@@ -56,7 +56,9 @@ func load_data_from_file():
 		data = node_data
 	for node_path in data.keys():
 		for node_data in data[node_path]:
-			var node = get_tree().root.get_node(node_path)
+			var node = get_tree().root.get_node_or_null(node_path)
+			if !node:
+				continue
 			var value = data[node_path][node_data]
 			if node_data == "pos_x": 
 				node.global_position.x = value

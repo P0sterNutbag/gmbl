@@ -21,6 +21,7 @@ var has_released: bool = true
 var sway_vector: Vector3
 var shoot_timer: Timer
 var shell: PackedScene = preload("res://Scenes/Particles/shell.tscn")
+var smoke: PackedScene = preload("res://Scenes/Particles/gun_smoke.tscn")
 @onready var gun_model: Node3D = $GunAnchor/Model
 @onready var muzzle_flash: Node3D = $GunAnchor/FirePoint/MuzzleFlash
 @onready var flash_texture: MeshInstance3D = $GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3
@@ -72,6 +73,11 @@ func _on_shoot() -> void:
 		#shell_instance.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
 	var tween = create_tween()
 	tween.tween_property(muzzle_flash, "visible", false, 0.1)
+	#var inst = smoke.instantiate()
+	#get_tree().current_scene.add_child(inst)
+	#inst.global_position = fire_point.global_position
+	#inst.emitting = true
+	
 
 
 func _on_shoot_timer_timeout() -> void:

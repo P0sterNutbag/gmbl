@@ -45,9 +45,9 @@ func hit():
 		collider.damage(bullet_stats.damage, raycast.get_collision_point(), rotation)
 		if !bullet_stats.is_hitscan:
 			queue_free()
-	elif collider is RigidBody3D:
-		collider.apply_impulse(-global_transform.basis.z.normalized() * (bullet_stats.speed / 100))
-	elif collider.is_in_group("ground"):
+	else:
+		if collider is RigidBody3D:
+			collider.apply_impulse(-global_transform.basis.z.normalized() * (bullet_stats.speed / 100))
 		var inst = dust.instantiate() 
 		get_tree().current_scene.add_child(inst)
 		inst.global_position = raycast.get_collision_point()

@@ -11,11 +11,8 @@ func _ready() -> void:
 		return
 	
 	# get enemy amount
-	var enemy_amount
-	if Globals.overworld:
-		enemy_amount = Globals.overworld.current_encounter.population
-	else:
-		enemy_amount = 5
+	var enemy_amount = get_parent().location_data.population
+	enemy_amount = clamp(enemy_amount, 0, spawn_points.size())
 	await get_tree().process_frame
 	
 	# spawn quest enemy
@@ -37,7 +34,6 @@ func _ready() -> void:
 		# get random enemy and spawn it
 		var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
 		var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
-		get_tree().current_scene.add_child.call_deferred(inst)
 		
 		# position enemy at spawn point
 		var spawn_index = randi_range(0, spawn_points.size() - 1)
@@ -45,3 +41,5 @@ func _ready() -> void:
 			spawn_index = randi_range(0, spawn_points.size() - 1)
 		used_spawns.append(spawn_index)
 		inst.set_deferred("global_transform", spawn_points[spawn_index].global_transform)
+		
+		get_tree().current_scene.add_child.call_deferred(inst)

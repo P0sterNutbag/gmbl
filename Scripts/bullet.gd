@@ -8,6 +8,7 @@ var tracer: PackedScene = preload("res://Scenes/Bullets/tracer.tscn")
 var dust: PackedScene = preload("res://Scenes/Particles/dust.tscn")
 @onready var bullet_mesh = $MeshInstance3D
 @onready var raycast = $RayCast3D
+@onready var audio_stream_player_3d: AudioStreamPlayer3D = $AudioStreamPlayer3D
 
 
 func _ready() -> void:
@@ -23,18 +24,15 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	last_position = global_position
-	bullet_mesh.visible = true
+	raycast.target_position = Vector3.FORWARD * bullet_stats.speed * delta
+	raycast.force_raycast_update()
+	if raycast.is_colliding():
+		hit()
 	global_translate(-global_transform.basis.z.normalized() * bullet_stats.speed * delta)
 	if bullet_stats.bullet_drop:
 		global_translate(global_transform.basis.y.normalized() * -bullet_stats.drop_speed * delta)
 		bullet_stats.drop_speed = move_toward(bullet_stats.drop_speed, bullet_stats.max_drop_speed, delta * 50)
-	var last_velocity = global_position - last_position
-	var max_speed = max(abs(last_velocity.x), abs(last_velocity.y), abs(last_velocity.z))
-	raycast.target_position = Vector3.FORWARD * max_speed * 2
-	raycast.force_raycast_update()
-	if raycast.is_colliding():
-		hit()
+	visible = true
 
 
 func hit():
@@ -60,6 +58,7 @@ func hit():
 	collider.add_child(inst)
 	inst.global_position = raycast.get_collision_point()
 	inst.look_at(inst.global_position + raycast.get_collision_normal(), Vector3.FORWARD)
+	audio_stream_player_3d.play()
 	if !bullet_stats.is_hitscan:
 		queue_free()
 

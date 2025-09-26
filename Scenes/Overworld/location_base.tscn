@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cdr3k44ro53a1"]
 
 [ext_resource type="Script" uid="uid://lblyysya3an4" path="res://Scripts/location.gd" id="1_lyudo"]
-[ext_resource type="PackedScene" uid="uid://bd83cvp2rb2qr" path="res://Scenes/Places/procgen_encounter.tscn" id="2_rbsup"]
+[ext_resource type="PackedScene" uid="uid://c3p7tbg7t42b1" path="res://Scenes/Places/procgen_encounter.tscn" id="2_rbsup"]
 [ext_resource type="Texture2D" uid="uid://dejeawiol7jdc" path="res://Art/Textures/ring.png" id="3_pkpdw"]
 [ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="4_rbsup"]
 
@@ -44,6 +44,12 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.974
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.02548)
 
 [node name="EnemyModel" parent="." instance=ExtResource("4_rbsup")]
+
+[node name="RightHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.36131, 0.743698, 0.562466, -0.404402, 0.668513, -0.624139, -0.840186, -0.0019542, 0.542293, -26.3741, 54.6199, -199.656)
+
+[node name="LeftHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.558552, -0.344945, -0.754342, 0.0406938, 0.919727, -0.390442, 0.82847, 0.187385, 0.527753, 41.3443, 63.5835, -185.361)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

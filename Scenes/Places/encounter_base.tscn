@@ -1,13 +1,18 @@
-[gd_scene load_steps=22 format=3 uid="uid://r4ktdn26psb3"]
+[gd_scene load_steps=31 format=3 uid="uid://r4ktdn26psb3"]
 
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="1_0pe3w"]
 [ext_resource type="Script" uid="uid://ysmfpedeqrtw" path="res://Scripts/encounter.gd" id="1_afsqo"]
 [ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="2_os0xi"]
+[ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_yd52q"]
 [ext_resource type="PackedScene" uid="uid://y6civk4251ei" path="res://Scenes/UI/fps_ui.tscn" id="3_12h26"]
-[ext_resource type="Resource" path="res://addons/zylann.hterrain/data/backdrop/data.hterrain" id="6_afsqo"]
+[ext_resource type="Resource" uid="uid://de2okx524jxjn" path="res://addons/zylann.hterrain/data/backdrop/data.hterrain" id="6_afsqo"]
 [ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand3.png" id="6_nue3y"]
 [ext_resource type="PackedScene" uid="uid://p1limlnykapp" path="res://Scenes/noise_controller.tscn" id="10_07x41"]
+[ext_resource type="Script" uid="uid://ejdyuf8c7kui" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="10_52w5m"]
+[ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="11_48aj5"]
+[ext_resource type="Texture2D" uid="uid://d3rtqe0gurf4e" path="res://Art/Textures/grass.png" id="11_qrsnk"]
 [ext_resource type="Script" uid="uid://chxn6jj2cv0p3" path="res://Scripts/scatterer.gd" id="11_wttml"]
+[ext_resource type="ArrayMesh" uid="uid://dpef2d0qcn5d4" path="res://addons/zylann.hterrain/models/grass_quad_x2.obj" id="12_yd52q"]
 [ext_resource type="Script" uid="uid://vl4exm3hukmx" path="res://Scripts/Overworld/player_spawn.gd" id="15_mydnv"]
 [ext_resource type="PackedScene" uid="uid://c055smn111au7" path="res://Scenes/player.tscn" id="16_6tord"]
 [ext_resource type="PackedScene" uid="uid://bechsj7oyoa41" path="res://Scenes/Environment/exit_location.tscn" id="20_ppnd3"]
@@ -16,6 +21,14 @@
 [ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/Enemies/enemy.tscn" id="30_p5k5h"]
 [ext_resource type="Script" uid="uid://bokxkydc5jmf" path="res://addons/zylann.hterrain/hterrain.gd" id="32_f4nmr"]
 [ext_resource type="Script" uid="uid://b8f4u7je7ufby" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="34_khkok"]
+
+[sub_resource type="Resource" id="Resource_fwcaj"]
+script = ExtResource("2_yd52q")
+population = 5
+loot_spawn_chance = 0.1
+loot_rarity = 0
+npc_spawn_chance = 0.1
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ctfa7"]
 render_priority = 0
@@ -37,7 +50,23 @@ mode = 0
 textures = [[ExtResource("6_nue3y")], [null]]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_6cq5c"]
+vertices = PackedVector3Array(-54.2278, 0.5, -54.2334, -54.2278, 0.5, 54.2666, 54.2722, 0.5, 54.2666, 54.2722, 0.5, -54.2334)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 agent_radius = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llyl3"]
+shading_mode = 2
+albedo_texture = ExtResource("6_nue3y")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yd52q"]
+material = SubResource("StandardMaterial3D_llyl3")
+size = Vector2(110, 110)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yd52q"]
+points = PackedVector3Array(-55, 0, -55, -55, 0, 55, 55, 0, -55, 55, 0, 55)
 
 [sub_resource type="Resource" id="Resource_o171k"]
 script = ExtResource("29_ad2h2")
@@ -47,6 +76,7 @@ metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [node name="Encounter" type="Node3D"]
 script = ExtResource("1_afsqo")
+location_data = SubResource("Resource_fwcaj")
 
 [node name="CanvasLayer" parent="." instance=ExtResource("3_12h26")]
 
@@ -85,9 +115,32 @@ shader_params/u_triplanar = true
 shader_params/u_tile_reduction = Vector4(0, 0, 0, 0)
 metadata/_custom_type_script = "uid://bokxkydc5jmf"
 
+[node name="HTerrainDetailLayer" type="Node3D" parent="Background"]
+script = ExtResource("10_52w5m")
+texture = ExtResource("11_qrsnk")
+density = 1.0
+instance_mesh = ExtResource("12_yd52q")
+cast_shadow = 0
+shader_params/u_globalmap_tint_bottom = null
+shader_params/u_globalmap_tint_top = null
+shader_params/u_bottom_ao = null
+shader_params/u_instance_scale = Vector3(0.5, 0.5, 0.5)
+shader_params/u_roughness = null
+metadata/_editor_icon = ExtResource("11_48aj5")
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_6cq5c")
 metadata/_edit_lock_ = true
+
+[node name="Ground" type="MeshInstance3D" parent="NavigationRegion3D" groups=["ground"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0222092, 0, 0.0166473)
+visible = false
+mesh = SubResource("PlaneMesh_yd52q")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Ground/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_yd52q")
 
 [node name="Scatterer" type="Node3D" parent="."]
 script = ExtResource("11_wttml")
@@ -98,7 +151,7 @@ min_size = 0.75
 max_size = 1.25
 rotate_y = true
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("16_6tord")]
+[node name="Player" parent="." instance=ExtResource("16_6tord")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -53.4217)
 
 [node name="EnemySpawner" type="Node3D" parent="."]

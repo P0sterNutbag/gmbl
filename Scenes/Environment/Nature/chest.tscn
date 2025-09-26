@@ -48,19 +48,20 @@ spawn_chance = 10.0
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i8ls8"]
-size = Vector3(2, 1, 1.5)
+size = Vector3(1, 0.5, 0.75)
 
 [node name="chest" instance=ExtResource("1_lewkn")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("2_aceba")
 item_chances = Array[ExtResource("3_nxxjw")]([SubResource("Resource_ch7bk"), SubResource("Resource_gxu6n"), SubResource("Resource_ri1rp"), SubResource("Resource_yrsgs"), SubResource("Resource_kgl22"), SubResource("Resource_sg1i2")])
 min_items = 2
 max_items = 5
 
 [node name="Cube" parent="." index="0"]
+transform = Transform3D(0.5, 0, 0, 0, 0.25, 0, 0, 0, 0.375, 0, 0.25, 0)
 surface_material_override/0 = ExtResource("9_3milu")
 
 [node name="StaticBody3D" type="RigidBody3D" parent="." index="1" groups=["lootable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 collision_layer = 17
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]

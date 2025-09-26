@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://de0b6aj1eplv5"]
+[gd_scene load_steps=16 format=3 uid="uid://de0b6aj1eplv5"]
 
 [ext_resource type="Script" uid="uid://bxtm0qbrn1i2u" path="res://Scripts/gun.gd" id="1_4wfcx"]
 [ext_resource type="PackedScene" uid="uid://cwq84n8f24jwt" path="res://Scenes/Bullets/bullet.tscn" id="2_tq64m"]
 [ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/hitmarker.tscn" id="3_5jabk"]
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="4_sso4b"]
+[ext_resource type="Texture2D" uid="uid://cdsgikxhnf7rh" path="res://Art/Textures/muzzle flash2.png" id="6_3somh"]
 [ext_resource type="Texture2D" uid="uid://c25kf2horo2vw" path="res://Art/Textures/muzzle flash.png" id="6_ab8a3"]
 [ext_resource type="AudioStream" uid="uid://dh8aqylwf7m42" path="res://Audio/Guns/assault_A_shot_single_01.wav" id="7_qq8yb"]
 
@@ -30,6 +31,7 @@ metadata/_custom_type_script = "uid://c338ifvm4duar"
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fs7ks"]
 transparency = 1
 blend_mode = 1
+cull_mode = 2
 shading_mode = 0
 albedo_texture = ExtResource("6_ab8a3")
 refraction_scale = -0.47
@@ -41,6 +43,7 @@ size = Vector2(0.7, 0.4)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_olqyp"]
 transparency = 1
 blend_mode = 1
+cull_mode = 2
 shading_mode = 0
 albedo_color = Color(1, 0.683333, 0, 1)
 albedo_texture = ExtResource("6_ab8a3")
@@ -48,6 +51,19 @@ refraction_scale = -0.47
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wpjfl"]
 material = SubResource("StandardMaterial3D_olqyp")
+size = Vector2(0.525, 0.345)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xws2q"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 0.683333, 0, 1)
+albedo_texture = ExtResource("6_3somh")
+refraction_scale = -0.47
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bpsw6"]
+material = SubResource("StandardMaterial3D_xws2q")
 size = Vector2(0.525, 0.345)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l6n3p"]
@@ -86,12 +102,23 @@ transform = Transform3D(0.910366, 0, -0.413804, 0, 1, 0, 0.413804, 0, 0.910366, 
 mesh = SubResource("PlaneMesh_wpjfl")
 skeleton = NodePath("../../..")
 
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3"]
+transform = Transform3D(0.5, 4.23658e-23, 0, 0, -4.37114e-08, 1.25, 0, -1, -5.46392e-08, 1.49012e-08, -0.218581, 9.77889e-09)
+mesh = SubResource("PlaneMesh_bpsw6")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3"]
+transform = Transform3D(-2.18557e-08, -1, 5.46393e-08, 0, 4.37114e-08, 1.25, -0.5, 4.37114e-08, 3.55271e-15, 1.49012e-08, -0.218581, 1.00117e-08)
+mesh = SubResource("PlaneMesh_bpsw6")
+skeleton = NodePath("../../..")
+
 [node name="OmniLight3D" type="OmniLight3D" parent="GunAnchor/FirePoint/MuzzleFlash"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0270571, -0.0166076)
 omni_attenuation = 10.0
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="GunAnchor/FirePoint"]
 stream = SubResource("AudioStreamRandomizer_l6n3p")
+unit_size = 20.0
 bus = &"SFX"
 
 [node name="Chamber" type="Node3D" parent="GunAnchor"]

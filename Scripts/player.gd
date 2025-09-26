@@ -20,6 +20,7 @@ var walk_time := 0.0
 var push_force := 20
 var sway_time := 0.0
 var sway_speed = 0.1
+var footstep_timer := 0.0
 var sway_intensity = 3
 var is_crouching: bool
 var on_ladder: bool
@@ -56,6 +57,8 @@ var grenade = preload("res://Scenes/Bullets/grenade.tscn")
 @onready var grenade_spawn: Node3D = $CameraAnchor/Camera3D/GrenadeSpawn
 @onready var place_position: Node3D = $PlacePosition
 @onready var placer_raycast: RayCast3D = $PlacePosition/PlacerRaycast3D
+@onready var bullet_flyby_sfx: AudioStreamPlayer3D = $CameraAnchor/BulletListener/AudioStreamPlayer3D
+@onready var footstep_sfx: AudioStreamPlayer3D = $FootstepPlayer
 
 
 func _enter_tree() -> void:
@@ -222,18 +225,17 @@ func state_walk(delta):
 			step_noise_event()
 			step_timer.start()
 	
-	# gun things
+	# shooting and aiming
 	if gun_state == gun_states.ads or gun_state == gun_states.point:
 		if Input.is_action_pressed("shoot"):
 			if gun.ammo <= 0 or !gun.can_shoot:
 				return
+			shoot_component._on_shoot(Input.is_action_pressed("aim"), velocity)
+			gun._on_shoot()
+			#camera.screen_shake()
 			var tween = create_tween().set_ease(Tween.EASE_OUT)
 			tween.tween_property(gun, "position:z", 0.1, 0.01)
 			tween.tween_property(gun, "position:z", 0, 0.2)
-			shoot_component._on_shoot(Input.is_action_pressed("aim"), velocity)
-			gun._on_shoot()
-			camera.screen_shake()
-			#camera.kickback(gun.kickback_magnitude)
 			var tween2 = create_tween().set_ease(Tween.EASE_OUT)
 			tween2.tween_property(self, "aim_rotation:x", aim_rotation.x + deg_to_rad(gun.kickback_magnitude) / 3, 0.01)
 			Globals.noise_controller.create_noise_event(firepoint.global_position, self, gun.bullet_stats.noise_radius)
@@ -324,11 +326,23 @@ func state_walk(delta):
 		walk_time += delta
 		var bob = cos(walk_time * 20) * 0.25
 		gun.position.y += bob * delta
+		var sway = cos(walk_time * 10) * 0.25
+		gun.position.x += sway * delta
 	elif gun and gun.position.y: 
 		walk_time = 0
 		var tween = create_tween()
-		tween.tween_property(gun, "position:y", 0, 0.1)
+		tween.tween_property(gun, "position", Vector3.ZERO, 0.1)
 		await tween.finished
+	
+	# walking sfx
+	if (input.x or input.y) and is_on_floor():
+		footstep_timer += delta
+		var time_to_sound = 0.35
+		if speed < base_speed:
+			time_to_sound = 0.45
+		if footstep_timer >= time_to_sound:
+			footstep_sfx.play()
+			footstep_timer = 0.0
 
 
 func enter_pause():
@@ -462,7 +476,7 @@ func change_gun(new_gun: EquipmentGun) -> void:
 		else:
 			gun.gun_stats = PlayerStats.gun.gun_stats
 			firepoint = gun.get_node("GunAnchor/FirePoint")
-			shoot_component.firepoint = camera
+			shoot_component.firepoint = firepoint
 			shoot_component.tracer_firepoint = firepoint
 			shoot_component.bullet_stats = gun.bullet_stats
 			shoot_component.gun_stats = gun.gun_stats
@@ -546,3 +560,7 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body.is_in_group("ladder"):
 		on_ladder = false
 		velocity.y = 0
+
+
+func _on_bullet_listener_area_entered(area: Area3D) -> void:
+	bullet_flyby_sfx.play()

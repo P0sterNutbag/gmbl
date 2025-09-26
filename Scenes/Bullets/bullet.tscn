@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwq84n8f24jwt"]
+[gd_scene load_steps=7 format=3 uid="uid://cwq84n8f24jwt"]
 
 [ext_resource type="Script" uid="uid://bpukt2hanaqid" path="res://Scripts/bullet.gd" id="1_tcy0y"]
+[ext_resource type="AudioStream" uid="uid://bjgw8wy3ah1es" path="res://Audio/Bullets/bullet_hit.wav" id="2_qngn8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xjght"]
 shading_mode = 0
@@ -9,17 +10,37 @@ albedo_color = Color(1, 1, 0, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_oduel"]
 material = SubResource("StandardMaterial3D_xjght")
 radius = 0.05
-height = 1.0
+height = 0.5
 rings = 1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tcy0y"]
+radius = 0.0896851
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_510l0"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("2_qngn8")
 
 [node name="Bullet" type="Node3D"]
 script = ExtResource("1_tcy0y")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, 8.74228e-08, -1, 1, -8.74228e-08, -4.37114e-08, -4.37114e-08, -2, -4.37114e-08, -0.000230463, 0.00245798, -1.0014)
+transform = Transform3D(-4.37114e-08, 8.74228e-08, -1, 1, -8.74228e-08, -4.37114e-08, -4.37114e-08, -2, -4.37114e-08, -0.000230463, 0.00245798, -0.490138)
 mesh = SubResource("CapsuleMesh_oduel")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-target_position = Vector3(0, 0, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.958255)
+target_position = Vector3(0, 0, 1)
 hit_from_inside = true
 collide_with_areas = true
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_tcy0y")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_510l0")
+volume_db = 12.0

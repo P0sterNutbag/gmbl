@@ -17,6 +17,7 @@ class_name HealthComponent
 @export var hp_bar2: Control
 @export var otherHitboxes: Array[HealthComponent]
 @onready var max_hp: float = hp
+@onready var audio_stream_player: AudioStreamPlayer3D = $AudioStreamPlayer3D
 var unhealable_hp: int = 0:
 	set(value):
 		unhealable_hp += value
@@ -40,10 +41,12 @@ func damage(dmg: float, hit_position: Vector3, hit_direction: Vector3) -> void:
 	hp -= dmg
 	if randf() < 0.2:
 		unhealable_hp += 1
+	audio_stream_player.play()
 	if hp <= 0:
 		death.emit()
 		is_dead = true
 		for inst in otherHitboxes:
 			inst.queue_free()
 		for child in get_children():
-			child.disabled = true
+			if child is CollisionShape3D:
+				child.disabled = true

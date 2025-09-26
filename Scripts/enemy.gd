@@ -329,7 +329,7 @@ func look_at_position(pos: Vector3):
 		return
 	var target_pos = pos
 	target_pos.y = global_position.y
-	if target_pos != global_position:
+	if target_pos.distance_to(global_position) > 0.1:
 		look_at(target_pos, Vector3.UP)
 
 
@@ -397,6 +397,8 @@ func _on_death() -> void:
 	if bounty:
 		bounty.completed = true
 	change_state(states.dead)
+	shoot_timer.stop()
+	aim_timer.stop()
 	if team == teams.allies:
 		get_tree().call_group("enemies", "set_detection_targets")
 	if team == teams.enemies:
@@ -443,8 +445,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		change_state(states.aim)
 	elif anim_name == "Fire":
 		#emit_shoot()
-		if !gun:
-			return
 		gun.gun_stats.ammo -= 1
 		if gun.gun_stats.ammo <= 0:
 			gun.gun_stats.ammo = gun.max_ammo

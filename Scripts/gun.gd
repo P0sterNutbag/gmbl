@@ -28,6 +28,7 @@ var smoke: PackedScene = preload("res://Scenes/Particles/gun_smoke.tscn")
 @onready var fire_point: Node3D = $GunAnchor/FirePoint
 @onready var audio_player: AudioStreamPlayer3D = $GunAnchor/FirePoint/AudioStreamPlayer3D
 @onready var chamber: Node3D = $GunAnchor/Chamber
+@onready var empty_click: AudioStreamPlayer3D = $EmptyClick
 
 
 func _ready() -> void:
@@ -51,6 +52,9 @@ func _process(delta: float) -> void:
 			can_shoot = true
 	if Input.is_action_just_released("shoot"):
 		has_released = true
+	if Input.is_action_just_pressed("shoot"):
+		if gun_stats.ammo == 0:
+			empty_click.play()
 
 
 func aim_fire_point(pos: Vector3) -> void:

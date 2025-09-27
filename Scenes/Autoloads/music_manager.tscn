@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dv3u5v1n33nor"]
+
+[ext_resource type="Script" uid="uid://dicpd1oojgte2" path="res://Scripts/music_manager.gd" id="1_16sca"]
+[ext_resource type="AudioStream" uid="uid://cmo0jualyft33" path="res://Audio/Music/urban-hip-hop-beat-347151.mp3" id="2_v36pn"]
+[ext_resource type="AudioStream" uid="uid://bpavqoi5412kv" path="res://Audio/Music/modern-hip-hop-instrumental-124648.mp3" id="3_v36pn"]
+
+[node name="MusicManager" type="Node"]
+process_mode = 3
+script = ExtResource("1_16sca")
+tracks = Dictionary[String, AudioStream]({
+"res://Scenes/Overworld/overworld.tscn": ExtResource("2_v36pn"),
+"res://Scenes/Places/procgen_encounter.tscn": ExtResource("3_v36pn")
+})
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_v36pn")

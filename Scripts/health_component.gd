@@ -17,7 +17,7 @@ class_name HealthComponent
 @export var hp_bar2: Control
 @export var otherHitboxes: Array[HealthComponent]
 @onready var max_hp: float = hp
-@onready var audio_stream_player: AudioStreamPlayer3D = $AudioStreamPlayer3D
+var audio_stream_player: AudioStreamPlayer3D
 var unhealable_hp: int = 0:
 	set(value):
 		unhealable_hp += value
@@ -32,6 +32,8 @@ signal death
 func _ready() -> void:
 	death.connect(get_parent()._on_death)
 	damaged.connect(get_parent()._on_damaged)
+	if get_node_or_null("AudioStreamPlayer3D"):
+		audio_stream_player = $AudioStreamPlayer3D
 
 
 func damage(dmg: float, hit_position: Vector3, hit_direction: Vector3) -> void:
@@ -41,7 +43,8 @@ func damage(dmg: float, hit_position: Vector3, hit_direction: Vector3) -> void:
 	hp -= dmg
 	if randf() < 0.2:
 		unhealable_hp += 1
-	audio_stream_player.play()
+	if audio_stream_player:
+		audio_stream_player.play()
 	if hp <= 0:
 		death.emit()
 		is_dead = true

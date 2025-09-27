@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://de0b6aj1eplv5"]
+[gd_scene load_steps=17 format=3 uid="uid://de0b6aj1eplv5"]
 
 [ext_resource type="Script" uid="uid://bxtm0qbrn1i2u" path="res://Scripts/gun.gd" id="1_4wfcx"]
 [ext_resource type="PackedScene" uid="uid://cwq84n8f24jwt" path="res://Scenes/Bullets/bullet.tscn" id="2_tq64m"]
@@ -6,7 +6,8 @@
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="4_sso4b"]
 [ext_resource type="Texture2D" uid="uid://cdsgikxhnf7rh" path="res://Art/Textures/muzzle flash2.png" id="6_3somh"]
 [ext_resource type="Texture2D" uid="uid://c25kf2horo2vw" path="res://Art/Textures/muzzle flash.png" id="6_ab8a3"]
-[ext_resource type="AudioStream" uid="uid://dh8aqylwf7m42" path="res://Audio/Guns/assault_A_shot_single_01.wav" id="7_qq8yb"]
+[ext_resource type="AudioStream" uid="uid://biqtl4lectxh6" path="res://Audio/Guns/shotgun_B_shot_single_03.wav" id="7_xws2q"]
+[ext_resource type="AudioStream" uid="uid://cg1ead7veeqpv" path="res://Audio/Guns/antitank_empty.wav" id="8_xws2q"]
 
 [sub_resource type="Resource" id="Resource_gymyn"]
 script = ExtResource("4_sso4b")
@@ -67,9 +68,9 @@ material = SubResource("StandardMaterial3D_xws2q")
 size = Vector2(0.525, 0.345)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l6n3p"]
-random_pitch = 1.05
+random_pitch = 1.1
 streams_count = 1
-stream_0/stream = ExtResource("7_qq8yb")
+stream_0/stream = ExtResource("7_xws2q")
 
 [node name="Gun" type="Node3D"]
 script = ExtResource("1_4wfcx")
@@ -122,3 +123,6 @@ unit_size = 20.0
 bus = &"SFX"
 
 [node name="Chamber" type="Node3D" parent="GunAnchor"]
+
+[node name="EmptyClick" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_xws2q")

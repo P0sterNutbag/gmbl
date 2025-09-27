@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://cgtukpis1lq0a"]
+[gd_scene load_steps=11 format=3 uid="uid://cgtukpis1lq0a"]
 
 [ext_resource type="Script" uid="uid://bdvokalrlg1k6" path="res://Scripts/item_pickup.gd" id="1_2sgkx"]
-[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="2_qe716"]
 [ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="3_ewse8"]
 [ext_resource type="Script" uid="uid://34toqwivxgyk" path="res://Scripts/equipment_gun.gd" id="4_fkqp4"]
 [ext_resource type="PackedScene" uid="uid://rhtj73aayki" path="res://Scenes/Guns/Models/ak47_model.tscn" id="5_unrj6"]
@@ -9,6 +8,7 @@
 [sub_resource type="Resource" id="Resource_12duu"]
 script = ExtResource("3_ewse8")
 ammo = 24
+condition = 100.0
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
 [sub_resource type="Resource" id="Resource_62xu2"]
@@ -16,13 +16,8 @@ script = ExtResource("4_fkqp4")
 gun_stats = SubResource("Resource_12duu")
 name = "rifle"
 title = "AK47"
-usable = true
-effects = Array[ExtResource("2_qe716")]([])
-multiply = false
-add = false
-uses = 1
 price = 45
-is_health_item = false
+description = ""
 metadata/_custom_type_script = "uid://34toqwivxgyk"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rk1p0"]

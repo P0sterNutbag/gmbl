@@ -11,7 +11,7 @@ func _ready() -> void:
 	area_3d.monitoring = false
 
 
-func create_noise_event(event_position: Vector3, creator: Node, event_radius: float = 10):
+func create_noise_event(event_position: Vector3, creator: Node = null, event_radius: float = 10):
 	area_3d.global_position = event_position
 	event_creator = creator
 	collision_shape.shape.radius = event_radius

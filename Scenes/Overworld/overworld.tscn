@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://bfnbncmqdwf6o"]
+[gd_scene load_steps=67 format=3 uid="uid://bfnbncmqdwf6o"]
 
 [ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_6y65m"]
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="2_gw0hx"]
@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://cvly0bfjs24or" path="res://Art/Textures/sun-moon.png" id="20_3x1tr"]
 [ext_resource type="PackedScene" uid="uid://dvt1ofd0p5g6o" path="res://Scenes/Overworld/town_1.tscn" id="20_4vmjd"]
 [ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="21_3x1tr"]
+[ext_resource type="Script" uid="uid://i7dctewbr76v" path="res://Scripts/job_list.gd" id="23_i1n2v"]
 [ext_resource type="Texture2D" uid="uid://oacru53rac71" path="res://Art/Textures/player_face.png" id="25_545x4"]
 [ext_resource type="Script" uid="uid://dq1csolov4xy" path="res://Scripts/Overworld/npc_controller.gd" id="26_5q0os"]
 [ext_resource type="PackedScene" uid="uid://drm4ubuf1liaj" path="res://Scenes/Overworld/encounter_2.tscn" id="26_rvg24"]
@@ -877,6 +878,17 @@ theme_override_constants/separation = 32
 alignment = 2
 script = ExtResource("15_lo4k2")
 
+[node name="Jobs" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 72.0
+offset_bottom = 72.0
+script = ExtResource("23_i1n2v")
+
+[node name="Label" type="Label" parent="CanvasLayer/Jobs"]
+layout_mode = 2
+theme = ExtResource("14_857re")
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_phy3g")
 metadata/_edit_lock_ = true
@@ -992,7 +1004,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_4vmjd")
 transform = Transform3D(0.998874, -0.0193141, 0.0433234, 0.0223175, 0.997301, -0.0699488, -0.0418555, 0.0708368, 0.996609, -0.72303, 143.748, -243.682)
 
 [node name="Node3D" parent="Player/EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand" index="0"]
-transform = Transform3D(149.476, 6.19986, 10.8908, -10.384, -11.7021, 149.182, 7.01573, -149.414, -11.2321, 31.1479, 18.918, -12.4429)
+transform = Transform3D(149.476, 6.19994, 10.8906, -10.3839, -11.7015, 149.182, 7.01574, -149.414, -11.2314, 31.1476, 18.918, -12.4414)
 
 [node name="AK47" parent="Player/EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="0"]
 transform = Transform3D(1, -1.49012e-08, 2.98023e-08, 7.45058e-09, 1, 0, 0, -7.45058e-09, 1, -0.00205994, -8.86917e-05, -0.00257111)
@@ -1073,7 +1085,7 @@ bones/23/rotation = Quaternion(0.284546, 0.17563, -0.0531117, 0.940939)
 transform = Transform3D(0.998874, -0.0193141, 0.0433234, 0.0223175, 0.997301, -0.0699488, -0.0418555, 0.0708368, 0.996609, -0.72303, 143.748, -243.682)
 
 [node name="Node3D" parent="PlayerPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D/RightHand" index="0"]
-transform = Transform3D(149.476, 6.19941, 10.8873, -10.3802, -11.7092, 149.182, 7.01547, -149.414, -11.2393, 31.1401, 18.9202, -12.4592)
+transform = Transform3D(149.476, 6.19946, 10.8873, -10.3802, -11.7092, 149.182, 7.01551, -149.414, -11.2393, 31.1401, 18.9201, -12.4592)
 
 [node name="LeftHand" parent="PlayerPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D" index="3"]
 transform = Transform3D(-0.998998, -0.0157068, 0.0418909, 0.0186219, -0.997364, 0.0701313, 0.0406789, 0.070841, 0.996658, 0.0906596, -143.748, -243.682)
@@ -1147,7 +1159,7 @@ bones/23/rotation = Quaternion(0.284546, 0.17563, -0.0531117, 0.940939)
 transform = Transform3D(0.998874, -0.0193141, 0.0433234, 0.0223175, 0.997301, -0.0699488, -0.0418555, 0.0708368, 0.996609, -0.72303, 143.748, -243.682)
 
 [node name="Node3D" parent="ShopkeeperPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D/RightHand" index="0"]
-transform = Transform3D(149.476, 6.19974, 10.8912, -10.3843, -11.7046, 149.182, 7.01577, -149.414, -11.2345, 31.1491, 18.9211, -12.4485)
+transform = Transform3D(149.476, 6.19974, 10.8912, -10.3843, -11.7046, 149.182, 7.01579, -149.414, -11.2345, 31.1491, 18.9211, -12.4485)
 
 [node name="LeftHand" parent="ShopkeeperPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D" index="3"]
 transform = Transform3D(-0.998998, -0.0157068, 0.0418909, 0.0186219, -0.997364, 0.0701313, 0.0406789, 0.070841, 0.996658, 0.0906596, -143.748, -243.682)

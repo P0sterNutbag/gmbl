@@ -2,6 +2,7 @@ extends Equipment
 class_name EquipmentGun
 
 @export var gun_stats: GunStats = GunStats.new()
+@export var slot: int
 var ammo: 
 	get(): return gun_stats.ammo
 var condition: 
@@ -15,10 +16,11 @@ var stats := {
 func equip() -> void:
 	super.equip()
 	for gun in PlayerStats.guns:
-		if gun != self:
+		if gun != self and gun.slot == slot:
 			gun.equipped = false
 	equipped = !equipped
 	if equipped:
-		Globals.player.change_gun(self)
-	else:
+		PlayerStats.equipped_guns[slot] = self
+		#Globals.player.change_gun(self)
+	elif PlayerStats.gun_index == slot:
 		Globals.player.unequip_gun()

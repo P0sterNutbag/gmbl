@@ -4,6 +4,7 @@ var shop: Shop
 @onready var name_label: Label = $PanelContainer2/MarginContainer/VBoxContainer/Label
 @onready var location_label: Label = $PanelContainer2/MarginContainer/VBoxContainer/Label3
 @onready var reward_label: Label = $PanelContainer2/MarginContainer/VBoxContainer/Label2
+@onready var jobs: VBoxContainer = $"../Jobs"
 
 
 func on_button_pressed(button: Control, resource: Resource) -> void:
@@ -13,6 +14,7 @@ func on_button_pressed(button: Control, resource: Resource) -> void:
 	PlayerStats.quests.append(resource)
 	shop.quests.erase(resource)
 	button.queue_free()
+	jobs.populate_list()
 
 
 func on_button_focus_entered(button: Control, resource: Resource) -> void:

@@ -25,9 +25,11 @@ var ammo: int:
 			return 0
 @export var items: Array[Item]
 @export var quests: Array[Quest]
-var guns: Array[Item]:
+@onready var guns: Array[Item]:
 	get(): return items.filter(func(i): return i is EquipmentGun)
 var gun: EquipmentGun
+@onready var equipped_guns: Array[EquipmentGun] = [guns[0], null]
+var gun_index := 0
 var sleep := 100.0:
 	set(value):
 		sleep = clamp(value, 0, max_sleep)

@@ -346,11 +346,13 @@ func emit_shoot() -> void:
 		shoot_timer.start()
 
 
-func on_noise_heard(noise_position: Vector3, event_creator: Node):
+func on_noise_heard(noise_position: Vector3, event_creator):
 	pass
 	if event_creator and event_creator.is_in_group(get_groups()[0]):
 		return
 	if state == states.dead or state == states.hurt:
+		return
+	if target:
 		return
 	if !on_alert:
 		last_seen_position = noise_position

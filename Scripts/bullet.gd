@@ -75,3 +75,7 @@ func create_tracer():
 		#else:
 			#tracer_instance.end_point = tracer_firepoint.global_position + (-global_transform.basis.z.normalized() * 100)
 		#tracer_instance.look_at.call_deferred(tracer_instance.end_point)
+
+
+func _exit_tree() -> void:
+	Globals.noise_controller.create_noise_event(global_position, self)

@@ -191,18 +191,14 @@ func state_walk(delta):
 			c.get_collider().apply_central_impulse(-c.get_normal() * push_force * delta)
 	
 	# change gun
-	#if Input.is_action_just_released("next_gun") and PlayerStats.guns.size() > 1:
-		#change_gun(wrap(gun_index - 1, 0, PlayerStats.guns.size()))
-	#elif Input.is_action_just_released("last_gun") and PlayerStats.guns.size() > 1:
-		#change_gun(wrap(gun_index + 1, 0, PlayerStats.guns.size()))
-	#elif Input.is_action_just_pressed("slot_1"):
-		#change_gun(0)
-	#elif Input.is_action_just_pressed("slot_2"):
-		#change_gun(1)
-	#elif Input.is_action_just_pressed("slot_3"):
-		#change_gun(2)
-	#elif Input.is_action_just_pressed("slot_4"):
-		#change_gun(3)
+	if Input.is_action_just_released("next_gun") and PlayerStats.guns.size() > 1:
+		change_gun_slot(wrap(PlayerStats.gun_index - 1, 0, PlayerStats.equipped_guns.size()))
+	elif Input.is_action_just_released("last_gun") and PlayerStats.guns.size() > 1:
+		change_gun_slot(wrap(PlayerStats.gun_index + 1, 0, PlayerStats.equipped_guns.size()))
+	elif Input.is_action_just_pressed("slot_1"):
+		change_gun_slot(0)
+	elif Input.is_action_just_pressed("slot_2"):
+		change_gun_slot(1)
 	
 	# leaning
 	if is_on_floor():
@@ -464,6 +460,13 @@ func exit_gun_state_no_gun():
 	tween.tween_property(gun, "visible", true, 0)
 	tween.tween_property(gun, "process_mode", PROCESS_MODE_ALWAYS, 0)
 	await tween.finished
+
+
+func change_gun_slot(slot_index: int) -> void:
+	var gun = PlayerStats.equipped_guns[slot_index]
+	if gun != null:
+		change_gun(gun)
+		PlayerStats.gun_index = slot_index
 
 
 func change_gun(new_gun: EquipmentGun) -> void:

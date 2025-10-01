@@ -9,6 +9,8 @@ func _ready() -> void:
 
 
 func on_scene_transition(scene_name: String) -> void:
+	if !tracks.has(scene_name):
+		return
 	var track = tracks[scene_name]
 	audio_stream_player.stream = track
 	audio_stream_player.play()

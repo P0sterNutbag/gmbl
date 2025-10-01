@@ -1,0 +1,101 @@
+[gd_scene load_steps=26 format=3 uid="uid://c3p7tbg7t42b1"]
+
+[ext_resource type="Script" uid="uid://bge81dgb3rx2t" path="res://Scripts/procedural_environment.gd" id="1_n2q0j"]
+[ext_resource type="PackedScene" uid="uid://r4ktdn26psb3" path="res://Scenes/Places/encounter_base.tscn" id="1_xg5g1"]
+[ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_em3rq"]
+[ext_resource type="Script" uid="uid://gw7xclj5260y" path="res://Scripts/procgen_enemy_spawner.gd" id="3_2tynf"]
+[ext_resource type="PackedScene" uid="uid://d1ic5q83d2oe6" path="res://Scenes/Environment/Prefabs With Spawning/shack.tscn" id="5_oftcu"]
+[ext_resource type="PackedScene" uid="uid://b48xbl6fohkm4" path="res://Scenes/Environment/Prefabs With Spawning/shack2.tscn" id="6_cyu4r"]
+[ext_resource type="PackedScene" uid="uid://cj5jci52r3cnn" path="res://Scenes/Environment/Prefabs With Spawning/shack3.tscn" id="7_2tynf"]
+[ext_resource type="PackedScene" uid="uid://ciydkkvue7fu2" path="res://Scenes/Environment/Prefabs With Spawning/shipping_container.tscn" id="9_jsbij"]
+[ext_resource type="PackedScene" uid="uid://d25jtyba6hs61" path="res://Scenes/Environment/Prefabs With Spawning/shack4.tscn" id="10_h2sp1"]
+[ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="12_n5v1j"]
+[ext_resource type="Script" uid="uid://yjtjuxrauvya" path="res://Scripts/procgen_map.gd" id="16_wy85s"]
+[ext_resource type="PackedScene" uid="uid://b6nrlkb5wnbsg" path="res://Scenes/Environment/Nature/rock_large.tscn" id="22_4531t"]
+[ext_resource type="PackedScene" uid="uid://brrtfg5jynxnd" path="res://Scenes/Environment/Nature/rock.tscn" id="25_uxntf"]
+[ext_resource type="PackedScene" uid="uid://due2b4mvg6l3b" path="res://Scenes/Environment/Nature/rock_gray.tscn" id="26_wy85s"]
+
+[sub_resource type="Resource" id="Resource_40f7q"]
+script = ExtResource("2_em3rq")
+population = 5
+loot_spawn_chance = 0.5
+loot_rarity = 0
+npc_spawn_chance = 1.0
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
+
+[sub_resource type="Resource" id="Resource_c4jsb"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("6_cyu4r")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_gvimo"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("7_2tynf")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_n2q0j"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("10_h2sp1")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_du1od"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("5_oftcu")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_40vji"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("9_jsbij")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_4531t"]
+script = ExtResource("16_wy85s")
+objects = Array[ExtResource("12_n5v1j")]([SubResource("Resource_c4jsb"), SubResource("Resource_gvimo"), SubResource("Resource_n2q0j"), SubResource("Resource_du1od"), SubResource("Resource_40vji")])
+min_amount = 0
+max_amount = 4
+cluster_radius = 0.0
+metadata/_custom_type_script = "uid://yjtjuxrauvya"
+
+[sub_resource type="Resource" id="Resource_mjrdb"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("25_uxntf")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_5i41r"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("26_wy85s")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_oftcu"]
+script = ExtResource("16_wy85s")
+objects = Array[ExtResource("12_n5v1j")]([SubResource("Resource_mjrdb"), SubResource("Resource_5i41r")])
+min_amount = 5
+max_amount = 25
+cluster_radius = 0.0
+metadata/_custom_type_script = "uid://yjtjuxrauvya"
+
+[sub_resource type="Resource" id="Resource_n5v1j"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("22_4531t")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[node name="Encounter" instance=ExtResource("1_xg5g1")]
+location_data = SubResource("Resource_40f7q")
+
+[node name="EnemySpawner" parent="." index="8"]
+script = ExtResource("3_2tynf")
+
+[node name="Environment" type="Node3D" parent="." index="10"]
+script = ExtResource("1_n2q0j")
+maps = Array[ExtResource("16_wy85s")]([SubResource("Resource_4531t"), SubResource("Resource_oftcu")])
+cover = Array[ExtResource("12_n5v1j")]([SubResource("Resource_n5v1j")])
+
+[editable path="WorldEnvironment"]

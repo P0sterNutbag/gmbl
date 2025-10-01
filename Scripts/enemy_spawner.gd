@@ -18,7 +18,7 @@ func _ready() -> void:
 	# spawn quest enemy
 	var quests = PlayerStats.quests.filter(func(i): 
 		var quest_location = i.location
-		var encounter_location = Globals.overworld.current_encounter.title
+		var encounter_location = Globals.overworld.current_encounter.get_parent().title
 		return quest_location == encounter_location)
 	for quest in quests: 
 		var inst = quest.target.instantiate()

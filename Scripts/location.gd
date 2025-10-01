@@ -10,14 +10,6 @@ class_name Location
 @export var town: Town
 @export var shop: Shop
 @export var dialogue_tree: DialogueTree
-@export var title: String
-@export var show_title: bool
-@export var faction: String
-@export var show_faction: bool
-@export var difficulty: String
-@export var show_difficulty: bool
-@export var resources: String
-@export var show_resources: bool
 @export var spawn_player_random: bool = false
 @export var show_enemy_model: bool = true
 var transition_started: bool 
@@ -25,14 +17,14 @@ var can_transition: bool = true
 var enemy_model: Node3D
 
 
-func _enter_tree() -> void:
-	if !Globals.overworld:
-		return
-	if Globals.overworld.current_encounter == self:
-		show_title = true
-		show_faction = true
-		show_difficulty = true
-		show_resources = true
+#func _enter_tree() -> void:
+	#if !Globals.overworld:
+		#return
+	#if Globals.overworld.current_encounter == self:
+		#show_title = true
+		#show_faction = true
+		#show_difficulty = true
+		#show_resources = true
 
 
 func _ready() -> void:

@@ -558,6 +558,7 @@ one_shot = true
 
 [node name="FootstepPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_bi64h")
+bus = &"SFX"
 
 [connection signal="area_entered" from="CameraAnchor/BulletListener" to="." method="_on_bullet_listener_area_entered"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

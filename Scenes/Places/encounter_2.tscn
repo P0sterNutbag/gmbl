@@ -1,8 +1,7 @@
-[gd_scene load_steps=37 format=4 uid="uid://cgmuwhpyws26t"]
+[gd_scene load_steps=35 format=4 uid="uid://cgmuwhpyws26t"]
 
 [ext_resource type="PackedScene" uid="uid://y6civk4251ei" path="res://Scenes/UI/fps_ui.tscn" id="1_dr1yk"]
 [ext_resource type="Script" uid="uid://ysmfpedeqrtw" path="res://Scripts/encounter.gd" id="1_vf2dc"]
-[ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_qitp3"]
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="2_qxhp7"]
 [ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="3_noikq"]
 [ext_resource type="PackedScene" uid="uid://p1limlnykapp" path="res://Scenes/noise_controller.tscn" id="4_llyl3"]
@@ -25,14 +24,6 @@
 [ext_resource type="PackedScene" uid="uid://bechsj7oyoa41" path="res://Scenes/Environment/exit_location.tscn" id="16_iw2vx"]
 [ext_resource type="PackedScene" uid="uid://di4qmk466fnrk" path="res://Scenes/Environment/Buildings/shipping_container.tscn" id="17_qxhp7"]
 [ext_resource type="Script" uid="uid://vl4exm3hukmx" path="res://Scripts/Overworld/player_spawn.gd" id="19_llyl3"]
-
-[sub_resource type="Resource" id="Resource_0h51r"]
-script = ExtResource("2_qitp3")
-population = 0
-loot_spawn_chance = 0.1
-loot_rarity = 0
-npc_spawn_chance = 0.1
-metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ctfa7"]
 render_priority = 0
@@ -105,12 +96,10 @@ data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0,
 [sub_resource type="Resource" id="Resource_o171k"]
 script = ExtResource("14_1nuob")
 object_to_spawn = ExtResource("15_uhgav")
-spawn_chance = 1.0
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [node name="Encounter_2" type="Node3D"]
 script = ExtResource("1_vf2dc")
-location_data = SubResource("Resource_0h51r")
 
 [node name="CanvasLayer" parent="." instance=ExtResource("1_dr1yk")]
 

@@ -125,13 +125,13 @@ func _input(event):
 				camera.rotation.x = clampf(camera.rotation.x, -deg_to_rad(70), deg_to_rad(70))
 
 
-func _on_area_3d_area_entered(area: Area3D) -> void:
-	#if velocity.length() > 0:
-	Globals.ui.show_location_info(area)
+#func _on_area_3d_area_entered(area: Area3D) -> void:
+	##if velocity.length() > 0:
+	#Globals.ui.show_location_info(area)
 
 
-func _on_area_3d_area_exited(area: Area3D) -> void:
-	Globals.ui.hide_location_info()
+#func _on_area_3d_area_exited(area: Area3D) -> void:
+	#Globals.ui.hide_location_info()
 
 
 func save() -> Dictionary:

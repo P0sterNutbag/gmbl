@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqnwuiew1q2il"]
+
+[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_3kl7u"]
+[ext_resource type="Script" uid="uid://bocymopxj1vj7" path="res://Scripts/point_of_interest.gd" id="1_wb1da"]
+[ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="2_wb1da"]
+[ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="4_5twat"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cpnmm"]
+radius = 3.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_avo8c"]
+radius = 0.14289628
+
+[node name="PointOfInterest" type="Node3D"]
+script = ExtResource("1_wb1da")
+description = "South: Town
+North: Crateyard"
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_cpnmm")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CardOffset" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/CardOffset"]
+layout_mode = 0
+offset_left = -197.0
+offset_top = -364.0
+offset_right = 199.0
+offset_bottom = -225.0
+theme = ExtResource("1_3kl7u")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CardOffset/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CardOffset/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="CanvasLayer/CardOffset/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(328, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("2_wb1da")
+text = "Location Name"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Description" type="Label" parent="CanvasLayer/CardOffset/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(328, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("4_5twat")
+text = "Location Name"
+autowrap_mode = 2
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("SphereShape3D_avo8c")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

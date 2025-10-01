@@ -1,18 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://bttlllip2h1ea"]
+[gd_scene load_steps=9 format=3 uid="uid://bttlllip2h1ea"]
 
 [ext_resource type="PackedScene" uid="uid://cdr3k44ro53a1" path="res://Scenes/Overworld/location_base.tscn" id="1_sb26p"]
 [ext_resource type="PackedScene" uid="uid://dkdmdcbv1thv3" path="res://Scenes/Environment/Buildings/shack2.tscn" id="2_5ar1a"]
+[ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_ufvjc"]
 [ext_resource type="PackedScene" uid="uid://o1c18mja4sla" path="res://Scenes/Places/encounter_3.tscn" id="2_x1xns"]
 [ext_resource type="PackedScene" uid="uid://dergqrsprx3qg" path="res://Scenes/Environment/Buildings/shack3.tscn" id="3_x1xns"]
 [ext_resource type="PackedScene" uid="uid://di4qmk466fnrk" path="res://Scenes/Environment/Buildings/shipping_container.tscn" id="4_ufvjc"]
+
+[sub_resource type="Resource" id="Resource_r5i30"]
+script = ExtResource("2_ufvjc")
+population = 6
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_r5i30"]
 radius = 3.0
 
 [node name="Location" instance=ExtResource("1_sb26p")]
+location_data = SubResource("Resource_r5i30")
 encounter_scene = ExtResource("2_x1xns")
-title = "Bandit Village"
-show_title = true
 
 [node name="CollisionShape3D" parent="." index="0"]
 shape = SubResource("SphereShape3D_r5i30")
@@ -31,6 +36,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.23306, 4.7339, -8.96538)
 
 [node name="EnemyModel" parent="." index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.29639)
+
+[node name="RightHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.3613104, 0.74369776, 0.5624657, -0.40440166, 0.6685125, -0.624139, -0.8401865, -0.0019542023, 0.54229337, -26.37408, 54.619926, -199.6564)
+
+[node name="Node3D" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand" index="0"]
+transform = Transform3D(-80.46736, 110.32776, 62.070786, 22.419275, 84.80686, -121.676476, -124.58902, -55.995907, -61.984364, 31.148735, 18.92096, -12.460236)
+
+[node name="LeftHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.55855244, -0.3449454, -0.75434196, 0.040693846, 0.91972744, -0.3904415, 0.82847047, 0.18738504, 0.52775323, 41.34433, 63.58348, -185.361)
 
 [editable path="EnemyModel"]
 [editable path="EnemyModel/PersonAnimated"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=28 format=3 uid="uid://o1c18mja4sla"]
+[gd_scene load_steps=29 format=3 uid="uid://o1c18mja4sla"]
 
 [ext_resource type="PackedScene" uid="uid://y6civk4251ei" path="res://Scenes/UI/fps_ui.tscn" id="1_otjo7"]
+[ext_resource type="Script" uid="uid://ysmfpedeqrtw" path="res://Scripts/encounter.gd" id="1_s63dp"]
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="2_dqj6b"]
 [ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="3_0bu43"]
 [ext_resource type="PackedScene" uid="uid://p1limlnykapp" path="res://Scenes/noise_controller.tscn" id="4_op3nx"]
@@ -48,10 +49,10 @@ agent_radius = 0.75
 [sub_resource type="Resource" id="Resource_o171k"]
 script = ExtResource("14_57f3t")
 object_to_spawn = ExtResource("15_x0sf4")
-spawn_chance = 1.0
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [node name="Encounter_3" type="Node3D"]
+script = ExtResource("1_s63dp")
 
 [node name="CanvasLayer" parent="." instance=ExtResource("1_otjo7")]
 
@@ -173,7 +174,7 @@ transform = Transform3D(-0.99881, 0, -0.0487627, 0, 1, 0, 0.0487627, 0, -0.99881
 transform = Transform3D(-0.981272, 0, 0.192625, 0, 1, 0, -0.192625, 0, -0.981272, 5.98347, 5.96046e-08, -8.22832)
 
 [node name="ShippingContainer" parent="." instance=ExtResource("21_7rkcn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.23306, 4.7339, -8.96538)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.23306, 3.205821, -8.96538)
 
 [node name="PlayerAnchor" type="Node3D" parent="."]
 script = ExtResource("22_sliq1")

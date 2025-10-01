@@ -1,25 +1,28 @@
-[gd_scene load_steps=10 format=3 uid="uid://pkdxp0kobhyk"]
+[gd_scene load_steps=11 format=3 uid="uid://pkdxp0kobhyk"]
 
 [ext_resource type="Script" uid="uid://lblyysya3an4" path="res://Scripts/location.gd" id="1_m40sa"]
+[ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_e1ape"]
 [ext_resource type="PackedScene" uid="uid://b336bhu2grnix" path="res://Scenes/Places/encounter_1.tscn" id="2_m40sa"]
 [ext_resource type="PackedScene" uid="uid://bckm1lw4wvcpb" path="res://Scenes/Environment/Buildings/shack_sandbrick.tscn" id="3_4w7n6"]
 [ext_resource type="PackedScene" uid="uid://di4qmk466fnrk" path="res://Scenes/Environment/Buildings/shipping_container.tscn" id="3_7mnom"]
 [ext_resource type="PackedScene" uid="uid://dergqrsprx3qg" path="res://Scenes/Environment/Buildings/shack3.tscn" id="4_kt10w"]
 [ext_resource type="PackedScene" uid="uid://bacbcwbytr4bc" path="res://Scenes/Environment/Buildings/shack_tin_gray.tscn" id="6_e1ape"]
 [ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="7_kt10w"]
-[ext_resource type="Texture2D" uid="uid://dejeawiol7jdc" path="res://Art/Textures/ring.png" id="8_e1ape"]
+
+[sub_resource type="Resource" id="Resource_dfpji"]
+script = ExtResource("2_e1ape")
+population = 5
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hwnis"]
-radius = 4.46269
+radius = 4.0
 
 [node name="Encounter1" type="Area3D" groups=["persist"]]
 collision_layer = 64
 collision_mask = 32
 script = ExtResource("1_m40sa")
+location_data = SubResource("Resource_dfpji")
 encounter_scene = ExtResource("2_m40sa")
-title = "Gang Camp"
-show_title = true
-faction = "Fiends"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02906, 0)
@@ -59,28 +62,6 @@ transform = Transform3D(-0.944812, 0, -0.327614, 0, 1, 0, 0.327614, 0, -0.944812
 disabled = true
 
 [node name="EnemyModel" parent="." instance=ExtResource("7_kt10w")]
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(3.68973, 0, 0, 0, 1.09963e-07, -0.999206, 0, 3.68973, 2.97786e-08, 0, 0.001, 0)
-visible = false
-visibility_range_end = 20.0
-visibility_range_end_margin = 2.0
-visibility_range_fade_mode = 1
-modulate = Color(1, 1, 0, 0.627451)
-render_priority = 1
-texture = ExtResource("8_e1ape")
-
-[node name="SpawnS" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 3.4973)
-
-[node name="SpawnE" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.95015, 0, -0.0203078)
-
-[node name="SpawnW" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.97495, 0, -0.0203078)
-
-[node name="SpawnN" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.02548)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

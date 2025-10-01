@@ -10,7 +10,7 @@ var current_town: Town
 @onready var portraits: HBoxContainer = $Portraits
 @onready var dialogue: VBoxContainer = $Dialogue
 @onready var bounty_board: HBoxContainer = $BountyBoard
-@onready var quest_menu: MenuList = $Quests
+@onready var journal: MenuList = $Journal
 @onready var compass: ColorRect = $TopCenter/Compass/ColorRect
 
 
@@ -20,15 +20,15 @@ func _enter_tree() -> void:
 		hide_location_info()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# opening things
 	if Input.is_action_just_pressed("inventory"):
 		inventory_holder.visible = !inventory_holder.visible
 	if Input.is_action_just_pressed("journal"):
-		if quest_menu.visible:
-			quest_menu.open(PlayerStats.quests)
+		if journal.visible:
+			journal.close()
 		else:
-			quest_menu.close()
+			journal.open(PlayerStats.quests)
 	
 	# compass movement
 	var cam_rot = rad_to_deg(Globals.player.camera_anchor.rotation.y)

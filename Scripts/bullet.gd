@@ -46,11 +46,11 @@ func hit():
 	else:
 		if collider is RigidBody3D:
 			collider.apply_impulse(-global_transform.basis.z.normalized() * (bullet_stats.speed / 100))
-		var inst = dust.instantiate() 
-		get_tree().current_scene.add_child(inst)
-		inst.global_position = raycast.get_collision_point()
-		inst.rotation.y = rotation.y
-		inst.emitting = true
+		var dust_inst = dust.instantiate() 
+		get_tree().current_scene.add_child(dust_inst)
+		dust_inst.global_position = raycast.get_collision_point()
+		dust_inst.rotation.y = rotation.y
+		dust_inst.emitting = true
 	# create hitmark
 	if collider.get_parent() is CharacterBody3D:
 		return

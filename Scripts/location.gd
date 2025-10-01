@@ -48,7 +48,7 @@ func _ready() -> void:
 			dialogue_tree.npc_style = get_parent().current_style
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if show_enemy_model:
 		if location_data.population == 0:
 			enemy_model.hide()
@@ -76,13 +76,13 @@ func save() -> Dictionary:
 	}
 
 
-func _on_body_entered(body: Node3D) -> void:
+func _on_body_entered(_body: Node3D) -> void:
 	if !can_transition or PlayerStats.state != PlayerStats.states.walk:
 		return
 	can_transition = false
 	start_encounter()
 
 
-func _on_body_exited(body: Node3D) -> void:
+func _on_body_exited(_body: Node3D) -> void:
 	if Globals.overworld.process_mode == PROCESS_MODE_INHERIT:
 		can_transition = true

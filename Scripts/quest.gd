@@ -1,7 +1,9 @@
 extends Resource
 class_name Quest
 
+@export var type: String
 @export var title: String
+@export var description: String
 @export var location: String
 @export var reward: Item
 @export var target: PackedScene

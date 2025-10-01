@@ -33,7 +33,7 @@ func _ready() -> void:
 	can_press = true
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# select
 	if Input.is_action_just_pressed("interact") and has_focus() and can_press:
 		pressed.emit()

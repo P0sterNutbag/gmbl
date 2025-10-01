@@ -1,0 +1,1212 @@
+[gd_scene load_steps=67 format=3 uid="uid://bfnbncmqdwf6o"]
+
+[ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_6y65m"]
+[ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="2_gw0hx"]
+[ext_resource type="PackedScene" uid="uid://cl4glsi76vapy" path="res://Scenes/Overworld/player.tscn" id="3_c84f5"]
+[ext_resource type="Script" uid="uid://bclh5yhrpmkxf" path="res://Scripts/stat_visual.gd" id="4_3x1tr"]
+[ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="5_l5erx"]
+[ext_resource type="Script" uid="uid://dr73ivowve6xe" path="res://Scripts/Overworld/ui.gd" id="5_n65ad"]
+[ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="5_t0fti"]
+[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="6_anxap"]
+[ext_resource type="Texture2D" uid="uid://x3spqeyiq8cr" path="res://Art/Textures/npc shirt white.png" id="6_by887"]
+[ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="6_c84f5"]
+[ext_resource type="Script" uid="uid://catvngsdo62hm" path="res://Scenes/Overworld/town.gd" id="7_lfx7i"]
+[ext_resource type="PackedScene" uid="uid://cdexqegkymx2g" path="res://Scenes/Overworld/UI/location_card.tscn" id="7_phy3g"]
+[ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="8_lfx7i"]
+[ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="9_6q8ew"]
+[ext_resource type="Script" uid="uid://dav6t8b5brx1o" path="res://Scripts/inventory_controller.gd" id="10_lfx7i"]
+[ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="11_2hpwo"]
+[ext_resource type="Script" uid="uid://bjmtcugcvwfgq" path="res://Scripts/bounty_board.gd" id="11_swbn6"]
+[ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="11_vrhs1"]
+[ext_resource type="Theme" uid="uid://efo20xxcf1e5" path="res://Art/Themes/vbox_container.tres" id="12_857re"]
+[ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand3.png" id="12_l5erx"]
+[ext_resource type="Script" uid="uid://bokxkydc5jmf" path="res://addons/zylann.hterrain/hterrain.gd" id="13_8owou"]
+[ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="13_swbn6"]
+[ext_resource type="Resource" uid="uid://pw1g23y0eavu" path="res://addons/zylann.hterrain/data/data.hterrain" id="14_4vmjd"]
+[ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="14_857re"]
+[ext_resource type="Script" uid="uid://gep7hf1s50y2" path="res://Scripts/dialogue_controller.gd" id="15_lo4k2"]
+[ext_resource type="Script" uid="uid://b8f4u7je7ufby" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="15_rvg24"]
+[ext_resource type="Script" uid="uid://b37bjjekoe1qe" path="res://Scripts/journal_menu.gd" id="16_oedh7"]
+[ext_resource type="Shader" uid="uid://de6l4w30bo7u6" path="res://Art/Shaders/cel-shader-base.gdshader" id="18_8owou"]
+[ext_resource type="Theme" uid="uid://lg0ktyb6xeoh" path="res://Art/Themes/hp_bar.tres" id="18_agdr0"]
+[ext_resource type="StyleBox" uid="uid://bcg5bax3erc8w" path="res://Art/Themes/style_box.tres" id="19_agdr0"]
+[ext_resource type="Texture2D" uid="uid://cvly0bfjs24or" path="res://Art/Textures/sun-moon.png" id="20_3x1tr"]
+[ext_resource type="PackedScene" uid="uid://dvt1ofd0p5g6o" path="res://Scenes/Overworld/town_1.tscn" id="20_4vmjd"]
+[ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="21_3x1tr"]
+[ext_resource type="Script" uid="uid://i7dctewbr76v" path="res://Scripts/job_list.gd" id="23_i1n2v"]
+[ext_resource type="Texture2D" uid="uid://oacru53rac71" path="res://Art/Textures/player_face.png" id="25_545x4"]
+[ext_resource type="Script" uid="uid://dq1csolov4xy" path="res://Scripts/Overworld/npc_controller.gd" id="26_5q0os"]
+[ext_resource type="PackedScene" uid="uid://drm4ubuf1liaj" path="res://Scenes/Overworld/encounter_2.tscn" id="26_rvg24"]
+[ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="27_4xsnl"]
+[ext_resource type="Texture2D" uid="uid://oamh8tah7tlw" path="res://Art/Textures/grass and dirt.png" id="27_8cq34"]
+[ext_resource type="Script" uid="uid://ejdyuf8c7kui" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="28_8cq34"]
+[ext_resource type="PackedScene" uid="uid://dhc6a3k8wyk4x" path="res://Scenes/Overworld/enemy.tscn" id="28_72l67"]
+[ext_resource type="Script" uid="uid://bxtcknb4rx5h2" path="res://Scripts/random_timer.gd" id="29_72l67"]
+[ext_resource type="Texture2D" uid="uid://d3rtqe0gurf4e" path="res://Art/Textures/grass.png" id="29_i1n2v"]
+[ext_resource type="ArrayMesh" uid="uid://dpef2d0qcn5d4" path="res://addons/zylann.hterrain/models/grass_quad_x2.obj" id="30_8cq34"]
+[ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="30_hmgos"]
+[ext_resource type="PackedScene" uid="uid://c0tio1doys3tp" path="res://Scenes/Overworld/rocky_plain.tscn" id="33_oedh7"]
+[ext_resource type="Script" uid="uid://chxn6jj2cv0p3" path="res://Scripts/scatterer.gd" id="42_1k2ge"]
+[ext_resource type="PackedScene" uid="uid://by4o77yhxnddh" path="res://Scenes/Overworld/trash_heap.tscn" id="43_1k2ge"]
+[ext_resource type="PackedScene" uid="uid://cac84v7aucntx" path="res://Scenes/Environment/Nature/brush_orange.tscn" id="43_v4rs2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t2t4p"]
+render_priority = 0
+shader = ExtResource("2_gw0hx")
+shader_parameter/depth_edge_threshold_lower = 1.0
+shader_parameter/depth_edge_threshold_upper = 3.0
+shader_parameter/normal_edge_threshold = 1.0
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_width = 2.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_phy3g"]
+material = SubResource("ShaderMaterial_t2t4p")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_agdr0"]
+bg_color = Color(0, 0, 0, 0.784314)
+border_color = Color(1, 1, 0, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_arpq1"]
+viewport_path = NodePath("PlayerPortrait")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_l5erx"]
+viewport_path = NodePath("ShopkeeperPortrait")
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_phy3g"]
+vertices = PackedVector3Array(-4.25, 0.466647, -131.75, -2.5, 0.466647, -131.75, -2.5, 0.466647, -499.25, -5.75, 0.466647, -131, -7.75, 0.466647, -128.5, -499.25, 0.466647, -499.25, -499.25, 0.466647, -126.75, -7.75, 0.466647, -126.75, -1, 0.466647, -131.75, 0.5, 0.466647, -131, 2.25, 0.466647, -128.75, 2.5, 0.466647, -126.75, 499.25, 0.466647, -126.75, 499.25, 0.466647, -499.25, -4.25, 1.46665, -128.75, -5.5, 1.21665, -127.25, -5.25, 1.46665, -125.75, 0, 1.46665, -126.25, -0.5, 1.46665, -128, -1.75, 1.46665, -129.25, -4.25, 1.21665, -124.25, -0.5, 1.21665, -124.5, -3, 1.71665, -124.333, -3.48999, 1.96665, -126.514, -3.5, 4.21665, -129, -4.5, 3.96665, -128.5, -5, 4.21665, -127.5, -0.75, 4.21665, -128.25, -1.75, 4.21665, -129, -1, 3.96665, -124.75, -0.25, 4.21665, -126.5, -4.75, 4.21665, -125.25, -3, 4.21665, -124.25, -1.98999, 4.71665, -126.514, -3.52499, 4.71665, -126.525, -7.75, 0.466647, -125, -7, 0.466647, -123.5, -4.75, 0.466647, -121.75, -2.75, 0.466647, -121.5, -499.25, 0.466647, 499.25, -2.75, 0.466647, 499.25, 1.75, 0.466647, -123.75, 0.25, 0.466647, -122.25, 499.25, 0.466647, 499.25)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(3, 2, 0), PackedInt32Array(3, 4, 2), PackedInt32Array(2, 4, 5), PackedInt32Array(5, 4, 6), PackedInt32Array(4, 7, 6), PackedInt32Array(8, 1, 2), PackedInt32Array(9, 8, 2), PackedInt32Array(10, 9, 2), PackedInt32Array(10, 2, 11), PackedInt32Array(11, 2, 12), PackedInt32Array(12, 2, 13), PackedInt32Array(16, 15, 14), PackedInt32Array(19, 18, 17), PackedInt32Array(17, 23, 19), PackedInt32Array(19, 23, 14), PackedInt32Array(14, 23, 16), PackedInt32Array(16, 23, 20), PackedInt32Array(20, 23, 22), PackedInt32Array(22, 23, 21), PackedInt32Array(21, 23, 17), PackedInt32Array(26, 25, 24), PackedInt32Array(24, 28, 27), PackedInt32Array(29, 27, 30), PackedInt32Array(24, 34, 26), PackedInt32Array(26, 34, 31), PackedInt32Array(31, 34, 32), PackedInt32Array(32, 33, 29), PackedInt32Array(29, 33, 27), PackedInt32Array(27, 33, 24), PackedInt32Array(24, 33, 34), PackedInt32Array(34, 33, 32), PackedInt32Array(6, 7, 35), PackedInt32Array(6, 35, 36), PackedInt32Array(6, 36, 37), PackedInt32Array(37, 38, 6), PackedInt32Array(6, 38, 40), PackedInt32Array(6, 40, 39), PackedInt32Array(41, 11, 12), PackedInt32Array(42, 41, 12), PackedInt32Array(42, 12, 38), PackedInt32Array(38, 12, 40), PackedInt32Array(40, 12, 43)]
+agent_radius = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_by887"]
+albedo_texture = ExtResource("12_l5erx")
+uv1_triplanar = true
+texture_filter = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lo4k2"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_545x4"]
+data = PackedVector3Array(500, 0, 500, -500, 0, 500, 500, 0, -500, -500, 0, 500, -500, 0, -500, 500, 0, -500)
+
+[sub_resource type="Resource" id="Resource_0e3xm"]
+script = ExtResource("15_rvg24")
+mode = 0
+textures = [[ExtResource("12_l5erx"), ExtResource("27_8cq34")], [null, null]]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4vmjd"]
+render_priority = 0
+shader = ExtResource("18_8owou")
+shader_parameter/color = Color(0.86, 0.86, 0.86, 1)
+shader_parameter/base_texture = ExtResource("6_by887")
+shader_parameter/specular = Color(0, 0, 0, 0)
+shader_parameter/fresnel = Color(0, 0, 0, 0)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_adm71"]
+script = ExtResource("27_4xsnl")
+object_to_spawn = ExtResource("28_72l67")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v4rs2"]
+sky_top_color = Color(0.302148, 0.453771, 0.663872, 1)
+sky_horizon_color = Color(0.707052, 0.837232, 1, 1)
+ground_bottom_color = Color(0.705882, 0.835294, 1, 1)
+ground_horizon_color = Color(0.705882, 0.835294, 1, 1)
+
+[sub_resource type="Sky" id="Sky_6h4fi"]
+sky_material = SubResource("ProceduralSkyMaterial_v4rs2")
+
+[sub_resource type="Environment" id="Environment_oq87f"]
+background_mode = 2
+sky = SubResource("Sky_6h4fi")
+fog_sky_affect = 0.5
+
+[sub_resource type="World3D" id="World3D_m35ud"]
+environment = SubResource("Environment_oq87f")
+
+[sub_resource type="Resource" id="Resource_vrhs1"]
+script = ExtResource("5_l5erx")
+faces = Array[Texture]([ExtResource("25_545x4")])
+shirts = Array[Texture]([ExtResource("6_by887")])
+pants_colors = Array[Color]([Color(0.376471, 0.207843, 0.207843, 1)])
+shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1)])
+metadata/_custom_type_script = "uid://b80ipr8q70gqm"
+
+[node name="Overworld" type="Node3D"]
+script = ExtResource("1_6y65m")
+
+[node name="Shader" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.492066, 0, 0)
+cast_shadow = 0
+extra_cull_margin = 16237.3
+mesh = SubResource("QuadMesh_phy3g")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("5_n65ad")
+
+[node name="ScaleOffset" type="Control" parent="CanvasLayer"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Bottom Center" type="Control" parent="CanvasLayer/ScaleOffset"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 480.0
+offset_top = 540.0
+offset_right = 480.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2, 2)
+
+[node name="BottomLeft" type="Control" parent="CanvasLayer/ScaleOffset"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+scale = Vector2(2, 2)
+
+[node name="Stats" type="VBoxContainer" parent="CanvasLayer/ScaleOffset/BottomLeft"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = -111.0
+offset_right = 140.0
+offset_bottom = -43.0
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="Health" type="Control" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats"]
+layout_mode = 2
+script = ExtResource("4_3x1tr")
+stat_name = "hp"
+metadata/_edit_group_ = true
+
+[node name="ColorRect4" type="ColorRect" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats/Health"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 1.0
+offset_right = 242.0
+offset_bottom = 16.0
+rotation = -0.0471239
+scale = Vector2(-0.810944, 0.690912)
+color = Color(0, 0, 0, 1)
+
+[node name="GunName" type="Label" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats/Health"]
+layout_mode = 0
+offset_left = 9.13538
+offset_top = 0.5
+offset_right = 160.135
+offset_bottom = 28.5
+theme = ExtResource("21_3x1tr")
+text = "Health"
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats/Health"]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 1.5
+offset_right = 102.0
+offset_bottom = 12.5
+theme = ExtResource("18_agdr0")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="Hunger" type="Control" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats"]
+layout_mode = 2
+script = ExtResource("4_3x1tr")
+stat_name = "hunger"
+metadata/_edit_group_ = true
+
+[node name="ColorRect5" type="ColorRect" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats/Hunger"]
+layout_mode = 0
+offset_left = 109.0
+offset_top = 1.0
+offset_right = 245.0
+offset_bottom = 16.0
+rotation = -0.0471239
+scale = Vector2(-0.810944, 0.690912)
+color = Color(0, 0, 0, 1)
+
+[node name="GunName" type="Label" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats/Hunger"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 9.13538
+offset_top = 0.5
+offset_right = 160.135
+offset_bottom = 28.5
+theme = ExtResource("21_3x1tr")
+text = "Hunger"
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats/Hunger"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 59.0
+offset_top = 1.5
+offset_right = 102.0
+offset_bottom = 12.5
+theme = ExtResource("18_agdr0")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="Water" type="Control" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats"]
+layout_mode = 2
+script = ExtResource("4_3x1tr")
+stat_name = "thirst"
+metadata/_edit_group_ = true
+
+[node name="ColorRect4" type="ColorRect" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats/Water"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 1.0
+offset_right = 243.0
+offset_bottom = 16.0
+rotation = -0.0471239
+scale = Vector2(-0.810944, 0.690912)
+color = Color(0, 0, 0, 1)
+
+[node name="GunName" type="Label" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats/Water"]
+layout_mode = 0
+offset_left = 9.13538
+offset_top = 0.5
+offset_right = 160.135
+offset_bottom = 28.5
+theme = ExtResource("21_3x1tr")
+text = "Thirst"
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats/Water"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 1.5
+offset_right = 101.0
+offset_bottom = 12.5
+theme = ExtResource("18_agdr0")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="Sleep" type="Control" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats"]
+layout_mode = 2
+script = ExtResource("4_3x1tr")
+stat_name = "sleep"
+metadata/_edit_group_ = true
+
+[node name="ColorRect4" type="ColorRect" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats/Sleep"]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 1.0
+offset_right = 231.0
+offset_bottom = 16.0
+rotation = -0.0471239
+scale = Vector2(-0.810944, 0.690912)
+color = Color(0, 0, 0, 1)
+
+[node name="GunName" type="Label" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats/Sleep"]
+layout_mode = 0
+offset_left = 9.13538
+offset_top = 0.5
+offset_right = 160.135
+offset_bottom = 28.5
+theme = ExtResource("21_3x1tr")
+text = "Sleep"
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/ScaleOffset/BottomLeft/Stats/Sleep"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 1.5
+offset_right = 94.0
+offset_bottom = 12.5
+theme = ExtResource("18_agdr0")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="TopCenter" type="Control" parent="CanvasLayer"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/TopCenter"]
+layout_mode = 0
+offset_left = -100.0
+offset_right = 100.0
+offset_bottom = 25.0
+theme = ExtResource("14_857re")
+horizontal_alignment = 1
+
+[node name="Time" type="Panel" parent="CanvasLayer/TopCenter"]
+visible = false
+clip_contents = true
+layout_mode = 0
+offset_left = -170.0
+offset_top = 22.0
+offset_right = -123.0
+offset_bottom = 69.0
+theme_override_styles/panel = ExtResource("19_agdr0")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/TopCenter/Time"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 56.0
+offset_bottom = 17.0
+scale = Vector2(3, 3)
+texture = ExtResource("20_3x1tr")
+
+[node name="Compass" type="Control" parent="CanvasLayer/TopCenter"]
+clip_contents = true
+anchors_preset = 0
+offset_left = -414.0
+offset_top = 25.0
+offset_right = 415.0
+offset_bottom = 53.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/TopCenter/Compass"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 19.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_agdr0")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/TopCenter/Compass"]
+layout_mode = 0
+offset_top = 21.0
+offset_right = 3840.0
+offset_bottom = 23.0
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = 480.0
+offset_top = -2.0
+offset_right = 482.0
+offset_bottom = 4.0
+
+[node name="Label" type="Label" parent="CanvasLayer/TopCenter/Compass/ColorRect/ColorRect2"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -18.0
+offset_right = 6.0
+offset_bottom = 5.0
+theme = ExtResource("21_3x1tr")
+text = "N"
+
+[node name="ColorRect7" type="ColorRect" parent="CanvasLayer/TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = 960.0
+offset_top = -2.0
+offset_right = 962.0
+offset_bottom = 4.0
+
+[node name="Label" type="Label" parent="CanvasLayer/TopCenter/Compass/ColorRect/ColorRect7"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -18.0
+offset_right = 11.0
+offset_bottom = 5.0
+theme = ExtResource("21_3x1tr")
+text = "NE"
+horizontal_alignment = 1
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = 1440.0
+offset_top = -2.0
+offset_right = 1442.0
+offset_bottom = 4.0
+
+[node name="Label" type="Label" parent="CanvasLayer/TopCenter/Compass/ColorRect/ColorRect3"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -18.0
+offset_right = 6.0
+offset_bottom = 5.0
+theme = ExtResource("21_3x1tr")
+text = "E"
+
+[node name="ColorRect8" type="ColorRect" parent="CanvasLayer/TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = 1920.0
+offset_top = -2.0
+offset_right = 1922.0
+offset_bottom = 4.0
+
+[node name="Label" type="Label" parent="CanvasLayer/TopCenter/Compass/ColorRect/ColorRect8"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -18.0
+offset_right = 11.0
+offset_bottom = 5.0
+theme = ExtResource("21_3x1tr")
+text = "SE"
+horizontal_alignment = 1
+
+[node name="ColorRect4" type="ColorRect" parent="CanvasLayer/TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = 2400.0
+offset_top = -2.0
+offset_right = 2402.0
+offset_bottom = 4.0
+
+[node name="Label" type="Label" parent="CanvasLayer/TopCenter/Compass/ColorRect/ColorRect4"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -18.0
+offset_right = 6.0
+offset_bottom = 5.0
+theme = ExtResource("21_3x1tr")
+text = "S"
+
+[node name="ColorRect9" type="ColorRect" parent="CanvasLayer/TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = 2880.0
+offset_top = -2.0
+offset_right = 2882.0
+offset_bottom = 4.0
+
+[node name="Label" type="Label" parent="CanvasLayer/TopCenter/Compass/ColorRect/ColorRect9"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -18.0
+offset_right = 11.0
+offset_bottom = 5.0
+theme = ExtResource("21_3x1tr")
+text = "SW"
+horizontal_alignment = 1
+
+[node name="ColorRect5" type="ColorRect" parent="CanvasLayer/TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = 3360.0
+offset_top = -2.0
+offset_right = 3362.0
+offset_bottom = 4.0
+
+[node name="Label" type="Label" parent="CanvasLayer/TopCenter/Compass/ColorRect/ColorRect5"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -18.0
+offset_right = 6.0
+offset_bottom = 5.0
+theme = ExtResource("21_3x1tr")
+text = "W"
+
+[node name="ColorRect10" type="ColorRect" parent="CanvasLayer/TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = 3840.0
+offset_top = -2.0
+offset_right = 3842.0
+offset_bottom = 4.0
+
+[node name="Label" type="Label" parent="CanvasLayer/TopCenter/Compass/ColorRect/ColorRect10"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -18.0
+offset_right = 11.0
+offset_bottom = 5.0
+theme = ExtResource("21_3x1tr")
+text = "NW"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = 3842.0
+offset_right = 4842.0
+offset_bottom = 2.0
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/TopCenter/Compass/ColorRect/ColorRect"]
+layout_mode = 0
+offset_left = 478.0
+offset_top = -2.0
+offset_right = 480.0
+offset_bottom = 4.0
+
+[node name="Label" type="Label" parent="CanvasLayer/TopCenter/Compass/ColorRect/ColorRect/ColorRect2"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -18.0
+offset_right = 6.0
+offset_bottom = 5.0
+theme = ExtResource("21_3x1tr")
+text = "N"
+
+[node name="ColorRect6" type="ColorRect" parent="CanvasLayer/TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = -20.0
+offset_bottom = 2.0
+
+[node name="LocationCard" parent="CanvasLayer" instance=ExtResource("7_phy3g")]
+
+[node name="InventoryHolder" type="HBoxContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -333.0
+offset_top = -383.5
+offset_right = 333.0
+offset_bottom = 383.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_lfx7i")
+
+[node name="Inventory" parent="CanvasLayer/InventoryHolder" instance=ExtResource("5_t0fti")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Town" type="PanelContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -343.5
+offset_top = -323.5
+offset_right = 343.5
+offset_bottom = 323.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_anxap")
+script = ExtResource("7_lfx7i")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Town"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Town/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Town/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_lfx7i")
+text = "Town Name"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="CanvasLayer/Town/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Town/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("9_6q8ew")
+
+[node name="Shop" type="HBoxContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -64.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+script = ExtResource("10_lfx7i")
+
+[node name="Inventory" parent="CanvasLayer/Shop" instance=ExtResource("5_t0fti")]
+layout_mode = 2
+size_flags_horizontal = 3
+mode = 1
+show_price = true
+
+[node name="Inventory2" parent="CanvasLayer/Shop" instance=ExtResource("5_t0fti")]
+layout_mode = 2
+size_flags_horizontal = 3
+mode = 1
+show_price = true
+
+[node name="BountyBoard" type="HBoxContainer" parent="CanvasLayer" node_paths=PackedStringArray("item_container")]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 300.0
+offset_top = 100.0
+offset_right = -300.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+script = ExtResource("11_swbn6")
+item_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/ItemContainer")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/BountyBoard"]
+custom_minimum_size = Vector2(750, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_anxap")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/BountyBoard/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("11_vrhs1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BountyBoard/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("12_857re")
+
+[node name="Label" type="Label" parent="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_lfx7i")
+text = "Bounties"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MenuItem" parent="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("13_swbn6")]
+layout_mode = 2
+text = "Available"
+
+[node name="MenuItem2" parent="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("13_swbn6")]
+layout_mode = 2
+text = "Current"
+
+[node name="Control" type="Control" parent="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ItemContainer" type="VBoxContainer" parent="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("12_857re")
+script = ExtResource("9_6q8ew")
+
+[node name="Control2" type="Control" parent="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MenuItem2" parent="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("13_swbn6")]
+layout_mode = 2
+text = "Exit"
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/BountyBoard"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_anxap")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/BountyBoard/PanelContainer2"]
+layout_mode = 2
+theme = ExtResource("11_vrhs1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BountyBoard/PanelContainer2/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("12_857re")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/BountyBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 438)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/BountyBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_lfx7i")
+text = "$100"
+
+[node name="Label" type="Label" parent="CanvasLayer/BountyBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("14_857re")
+text = "Name"
+
+[node name="Label3" type="Label" parent="CanvasLayer/BountyBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("14_857re")
+text = "Last seen in:"
+
+[node name="Control" type="Control" parent="CanvasLayer/BountyBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BountyBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MenuItem3" parent="CanvasLayer/BountyBoard/PanelContainer2/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("13_swbn6")]
+layout_mode = 2
+text = "Accept"
+
+[node name="MenuItem4" parent="CanvasLayer/BountyBoard/PanelContainer2/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("13_swbn6")]
+layout_mode = 2
+text = "Back"
+
+[node name="Journal" type="HBoxContainer" parent="CanvasLayer" node_paths=PackedStringArray("item_container")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 526.0
+offset_top = 271.0
+offset_right = -548.0
+offset_bottom = -272.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+script = ExtResource("16_oedh7")
+item_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/ItemContainer")
+pause_on_open = true
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Journal"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_anxap")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Journal/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("11_vrhs1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Journal/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("12_857re")
+
+[node name="Label" type="Label" parent="CanvasLayer/Journal/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_lfx7i")
+text = "Bounties"
+
+[node name="Control" type="Control" parent="CanvasLayer/Journal/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ItemContainer" type="VBoxContainer" parent="CanvasLayer/Journal/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("12_857re")
+script = ExtResource("9_6q8ew")
+
+[node name="Control2" type="Control" parent="CanvasLayer/Journal/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MenuItem" parent="CanvasLayer/Journal/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("13_swbn6")]
+layout_mode = 2
+text = "Exit"
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/Journal"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_anxap")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Journal/PanelContainer2"]
+layout_mode = 2
+theme = ExtResource("11_vrhs1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Journal/PanelContainer2/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("12_857re")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 560)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("14_857re")
+text = "Name"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("14_857re")
+text = "$100"
+
+[node name="Label3" type="Label" parent="CanvasLayer/Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("14_857re")
+text = "Location"
+
+[node name="Control" type="Control" parent="CanvasLayer/Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Portraits" type="HBoxContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Player" type="TextureRect" parent="CanvasLayer/Portraits"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+texture = SubResource("ViewportTexture_arpq1")
+stretch_mode = 2
+
+[node name="Shopkeeper" type="TextureRect" parent="CanvasLayer/Portraits"]
+layout_mode = 2
+size_flags_vertical = 8
+texture = SubResource("ViewportTexture_l5erx")
+stretch_mode = 2
+flip_h = true
+
+[node name="Dialogue" type="VBoxContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -463.0
+offset_top = -1085.0
+offset_right = 463.0
+offset_bottom = -427.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 32
+alignment = 2
+script = ExtResource("15_lo4k2")
+
+[node name="Jobs" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 72.0
+offset_bottom = 72.0
+script = ExtResource("23_i1n2v")
+
+[node name="Label" type="Label" parent="CanvasLayer/Jobs"]
+layout_mode = 2
+theme = ExtResource("14_857re")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_phy3g")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+visible = false
+material_override = SubResource("StandardMaterial3D_by887")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_lo4k2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_545x4")
+
+[node name="HTerrain" type="Node3D" parent="NavigationRegion3D"]
+script = ExtResource("13_8owou")
+centered = true
+_terrain_data = ExtResource("14_4vmjd")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_0e3xm")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 3.0
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+metadata/_custom_type_script = "uid://bokxkydc5jmf"
+
+[node name="HTerrainDetailLayer" type="Node3D" parent="NavigationRegion3D/HTerrain"]
+script = ExtResource("28_8cq34")
+texture = ExtResource("29_i1n2v")
+density = 2.0
+instance_mesh = ExtResource("30_8cq34")
+cast_shadow = 0
+shader_params/u_globalmap_tint_bottom = null
+shader_params/u_globalmap_tint_top = null
+shader_params/u_bottom_ao = null
+shader_params/u_instance_scale = Vector3(0.75, 0.75, 0.75)
+shader_params/u_roughness = null
+metadata/_editor_icon = ExtResource("30_hmgos")
+
+[node name="TrashHeap" parent="NavigationRegion3D" instance=ExtResource("43_1k2ge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.68715, -0.148702, -126.692)
+visible = false
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("6_c84f5")]
+
+[node name="DirectionalLight3D" parent="WorldEnvironment" index="0"]
+transform = Transform3D(1, 0, 0, 0, -0.533659, 0.8457, 0, -0.8457, -0.533659, 0, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("3_c84f5")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.82101, 3.8147e-06, -121.325)
+
+[node name="Area3D" parent="Player" index="3"]
+transform = Transform3D(1, -0.000757355, -0.000357468, 0.000757294, 1, -0.000173384, 0.000357597, 0.000173119, 1, 0, 0, 0)
+
+[node name="EnemyModel" parent="Player" index="4"]
+script = null
+
+[node name="Skeleton3D" parent="Player/EnemyModel/PersonAnimated/Armature" index="0"]
+bones/0/position = Vector3(2.7188, -9.09495e-13, -174.991)
+bones/0/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
+bones/1/rotation = Quaternion(-3.55317e-15, 5.53884e-17, 0.0160342, 0.999871)
+bones/2/rotation = Quaternion(-3.55272e-15, 5.53813e-17, 6.51926e-09, 1)
+bones/3/position = Vector3(-7.15256e-07, 23.8011, -3.36404e-12)
+bones/3/rotation = Quaternion(-3.55272e-15, -1.29814e-19, -4.65661e-09, 1)
+bones/4/position = Vector3(2.44379e-06, 26.7763, 0)
+bones/4/rotation = Quaternion(-3.55317e-15, 5.55183e-17, -0.0160342, 0.999871)
+bones/5/position = Vector3(0.618727, 9.57428, 1.81899e-12)
+bones/5/rotation = Quaternion(0, 6.46235e-27, 5.55111e-17, 1)
+bones/6/position = Vector3(4.39056, 67.9402, 2.77013e-13)
+bones/7/position = Vector3(-0.100141, 21.7302, -14.7033)
+bones/7/rotation = Quaternion(0.00305049, -0.564889, 0.825157, 0.00253352)
+bones/8/position = Vector3(8.3074e-07, 31.0315, 2.17059e-05)
+bones/8/rotation = Quaternion(-0.177951, -0.00241229, 0.013338, 0.983946)
+bones/9/position = Vector3(-4.17233e-07, 48.3511, -3.98383e-05)
+bones/9/rotation = Quaternion(0.0288936, -0.000520184, -0.0179926, 0.99942)
+bones/10/position = Vector3(4.76837e-07, 51.9133, 3.71153e-05)
+bones/11/position = Vector3(-0.223487, 21.7342, 14.7033)
+bones/11/rotation = Quaternion(0.82506, -0.00496515, 0.00653481, 0.564986)
+bones/12/position = Vector3(4.47035e-07, 31.0315, -1.7928e-05)
+bones/12/rotation = Quaternion(-0.177881, 0.00271545, -0.0150202, 0.983934)
+bones/13/position = Vector3(-1.40071e-06, 48.3472, 1.54953e-05)
+bones/13/rotation = Quaternion(0.0289056, 0.00049708, 0.0171876, 0.999434)
+bones/14/position = Vector3(3.27826e-06, 51.9165, -4.79706e-05)
+bones/15/rotation = Quaternion(8.25242e-06, -0.0210647, 0.999778, 0.000393264)
+bones/16/position = Vector3(6.34464e-09, 73.3651, -4.77745e-07)
+bones/16/rotation = Quaternion(0.0107794, -2.74746e-05, -0.0025047, 0.999939)
+bones/17/position = Vector3(-3.44589e-08, 69.4685, 9.06653e-07)
+bones/17/rotation = Quaternion(0.295263, -0.694505, 0.387081, 0.529765)
+bones/18/position = Vector3(4.21423e-06, 41.0572, -1.03712e-05)
+bones/18/rotation = Quaternion(0.281157, -0.180166, 0.0538275, 0.94106)
+bones/19/position = Vector3(-5.96046e-08, 20.7615, -2.38419e-07)
+bones/20/rotation = Quaternion(2.99804e-05, 0.0210647, 0.999777, -0.00142069)
+bones/21/position = Vector3(1.69966e-08, 73.3653, 1.49135e-06)
+bones/21/rotation = Quaternion(-0.0107792, 5.32667e-05, -0.00491133, 0.99993)
+bones/22/rotation = Quaternion(0.385323, -0.529138, 0.292465, 0.69714)
+bones/23/position = Vector3(-6.22775e-06, 40.5276, -9.29832e-06)
+bones/23/rotation = Quaternion(0.284546, 0.17563, -0.0531117, 0.940939)
+bones/24/position = Vector3(3.03984e-06, 20.6789, 5.24521e-06)
+
+[node name="Cube_001" parent="Player/EnemyModel/PersonAnimated/Armature/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_4vmjd")
+
+[node name="RightHand" parent="Player/EnemyModel/PersonAnimated/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.99887425, -0.019314053, 0.043323398, 0.022317452, 0.9973008, -0.06994877, -0.041855466, 0.070836835, 0.9966093, -0.7230301, 143.74823, -243.68211)
+
+[node name="Node3D" parent="Player/EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand" index="0"]
+transform = Transform3D(149.47601, 6.1999583, 10.890606, -10.38389, -11.701169, 149.18204, 7.0157213, -149.41403, -11.231094, 31.147583, 18.917969, -12.440674)
+
+[node name="AK47" parent="Player/EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="0"]
+transform = Transform3D(1, -1.49012e-08, 2.98023e-08, 7.45058e-09, 1, 0, 0, -7.45058e-09, 1, -0.00205994, -8.86917e-05, -0.00257111)
+
+[node name="LeftHand" parent="Player/EnemyModel/PersonAnimated/Armature/Skeleton3D" index="3"]
+transform = Transform3D(-0.9989982, -0.015706806, 0.041890852, 0.018621914, -0.9973638, 0.07013126, 0.04067887, 0.07084103, 0.9966577, 0.09065956, -143.7483, -243.68204)
+
+[node name="NpcController" type="Node3D" parent="." node_paths=PackedStringArray("locations")]
+script = ExtResource("26_5q0os")
+npcs = Array[ExtResource("27_4xsnl")]([SubResource("Resource_adm71")])
+locations = [NodePath("../Area3D2"), NodePath("../Area3D3"), NodePath("../Area3D4"), NodePath("../NavigationRegion3D/TrashHeap")]
+
+[node name="Timer" type="Timer" parent="NpcController"]
+wait_time = 10.0
+autostart = true
+script = ExtResource("29_72l67")
+min_wait_time = 5.0
+max_wait_time = 10.0
+
+[node name="PlayerPortrait" type="SubViewport" parent="."]
+world_3d = SubResource("World3D_m35ud")
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(750, 750)
+
+[node name="Shader" type="MeshInstance3D" parent="PlayerPortrait"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.492066, 0, 0)
+cast_shadow = 0
+extra_cull_margin = 16237.3
+mesh = SubResource("QuadMesh_phy3g")
+
+[node name="EnemyModel2" parent="PlayerPortrait" instance=ExtResource("11_2hpwo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.8062, -9.73897, 0)
+style_data = SubResource("Resource_vrhs1")
+
+[node name="Skeleton3D" parent="PlayerPortrait/EnemyModel2/PersonAnimated/Armature" index="0"]
+bones/0/position = Vector3(2.7188, -9.09495e-13, -174.991)
+bones/0/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
+bones/1/rotation = Quaternion(-3.55317e-15, 5.53884e-17, 0.0160342, 0.999871)
+bones/2/rotation = Quaternion(-3.55272e-15, 5.53813e-17, 6.51926e-09, 1)
+bones/3/position = Vector3(-7.15256e-07, 23.8011, -3.36404e-12)
+bones/3/rotation = Quaternion(-3.55272e-15, -1.29814e-19, -4.65661e-09, 1)
+bones/4/position = Vector3(2.44379e-06, 26.7763, 0)
+bones/4/rotation = Quaternion(-3.55317e-15, 5.55183e-17, -0.0160342, 0.999871)
+bones/5/position = Vector3(0.618727, 9.57428, 1.81899e-12)
+bones/5/rotation = Quaternion(0, 6.46235e-27, 5.55111e-17, 1)
+bones/6/position = Vector3(4.39056, 67.9402, 2.77013e-13)
+bones/7/position = Vector3(-0.100141, 21.7302, -14.7033)
+bones/7/rotation = Quaternion(0.00305049, -0.564889, 0.825157, 0.00253352)
+bones/8/position = Vector3(8.3074e-07, 31.0315, 2.17059e-05)
+bones/8/rotation = Quaternion(-0.177951, -0.00241229, 0.013338, 0.983946)
+bones/9/position = Vector3(-4.17233e-07, 48.3511, -3.98383e-05)
+bones/9/rotation = Quaternion(0.0288936, -0.000520184, -0.0179926, 0.99942)
+bones/10/position = Vector3(4.76837e-07, 51.9133, 3.71153e-05)
+bones/11/position = Vector3(-0.223487, 21.7342, 14.7033)
+bones/11/rotation = Quaternion(0.82506, -0.00496515, 0.00653481, 0.564986)
+bones/12/position = Vector3(4.47035e-07, 31.0315, -1.7928e-05)
+bones/12/rotation = Quaternion(-0.177881, 0.00271545, -0.0150202, 0.983934)
+bones/13/position = Vector3(-1.40071e-06, 48.3472, 1.54953e-05)
+bones/13/rotation = Quaternion(0.0289056, 0.00049708, 0.0171876, 0.999434)
+bones/14/position = Vector3(3.27826e-06, 51.9165, -4.79706e-05)
+bones/15/rotation = Quaternion(8.25242e-06, -0.0210647, 0.999778, 0.000393264)
+bones/16/position = Vector3(6.34464e-09, 73.3651, -4.77745e-07)
+bones/16/rotation = Quaternion(0.0107794, -2.74746e-05, -0.0025047, 0.999939)
+bones/17/position = Vector3(-3.44589e-08, 69.4685, 9.06653e-07)
+bones/17/rotation = Quaternion(0.295263, -0.694505, 0.387081, 0.529765)
+bones/18/position = Vector3(4.21423e-06, 41.0572, -1.03712e-05)
+bones/18/rotation = Quaternion(0.281157, -0.180166, 0.0538275, 0.94106)
+bones/19/position = Vector3(-5.96046e-08, 20.7615, -2.38419e-07)
+bones/20/rotation = Quaternion(2.99804e-05, 0.0210647, 0.999777, -0.00142069)
+bones/21/position = Vector3(1.69966e-08, 73.3653, 1.49135e-06)
+bones/21/rotation = Quaternion(-0.0107792, 5.32667e-05, -0.00491133, 0.99993)
+bones/22/rotation = Quaternion(0.385323, -0.529138, 0.292465, 0.69714)
+bones/23/position = Vector3(-6.22775e-06, 40.5276, -9.29832e-06)
+bones/23/rotation = Quaternion(0.284546, 0.17563, -0.0531117, 0.940939)
+
+[node name="RightHand" parent="PlayerPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.99887425, -0.019314053, 0.043323398, 0.022317452, 0.9973008, -0.06994877, -0.041855466, 0.070836835, 0.9966093, -0.7230301, 143.74823, -243.68211)
+
+[node name="Node3D" parent="PlayerPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D/RightHand" index="0"]
+transform = Transform3D(149.476, 6.199464, 10.887303, -10.380212, -11.709236, 149.182, 7.015507, -149.414, -11.239323, 31.140137, 18.920074, -12.4592285)
+
+[node name="LeftHand" parent="PlayerPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D" index="3"]
+transform = Transform3D(-0.9989982, -0.015706806, 0.041890852, 0.018621914, -0.9973638, 0.07013126, 0.04067887, 0.07084103, 0.9966577, 0.09065956, -143.7483, -243.68204)
+
+[node name="Camera3D" type="Camera3D" parent="PlayerPortrait"]
+transform = Transform3D(-0.9391, 0, 0.343643, 0.0200749, 0.998292, 0.0548602, -0.343057, 0.0584178, -0.937496, -27.2178, -8.08504, -1.74455)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="PlayerPortrait"]
+transform = Transform3D(1, 0, 0, 0, -0.533659, 0.8457, 0, -0.8457, -0.533659, 0, 0, 0)
+shadow_enabled = true
+shadow_normal_bias = 0.0
+shadow_blur = 10.0
+
+[node name="ShopkeeperPortrait" type="SubViewport" parent="."]
+world_3d = SubResource("World3D_m35ud")
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(750, 750)
+
+[node name="Shader" type="MeshInstance3D" parent="ShopkeeperPortrait"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.492066, 0, 0)
+cast_shadow = 0
+extra_cull_margin = 16237.3
+mesh = SubResource("QuadMesh_phy3g")
+
+[node name="EnemyModel2" parent="ShopkeeperPortrait" instance=ExtResource("11_2hpwo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.73897, 0)
+
+[node name="Skeleton3D" parent="ShopkeeperPortrait/EnemyModel2/PersonAnimated/Armature" index="0"]
+bones/0/position = Vector3(2.7188, -9.09495e-13, -174.991)
+bones/0/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
+bones/1/rotation = Quaternion(-3.55317e-15, 5.53884e-17, 0.0160342, 0.999871)
+bones/2/rotation = Quaternion(-3.55272e-15, 5.53813e-17, 6.51926e-09, 1)
+bones/3/position = Vector3(-7.15256e-07, 23.8011, -3.36404e-12)
+bones/3/rotation = Quaternion(-3.55272e-15, -1.29814e-19, -4.65661e-09, 1)
+bones/4/position = Vector3(2.44379e-06, 26.7763, 0)
+bones/4/rotation = Quaternion(-3.55317e-15, 5.55183e-17, -0.0160342, 0.999871)
+bones/5/position = Vector3(0.618727, 9.57428, 1.81899e-12)
+bones/5/rotation = Quaternion(0, 6.46235e-27, 5.55111e-17, 1)
+bones/6/position = Vector3(4.39056, 67.9402, 2.77013e-13)
+bones/7/position = Vector3(-0.100141, 21.7302, -14.7033)
+bones/7/rotation = Quaternion(0.00305049, -0.564889, 0.825157, 0.00253352)
+bones/8/position = Vector3(8.3074e-07, 31.0315, 2.17059e-05)
+bones/8/rotation = Quaternion(-0.177951, -0.00241229, 0.013338, 0.983946)
+bones/9/position = Vector3(-4.17233e-07, 48.3511, -3.98383e-05)
+bones/9/rotation = Quaternion(0.0288936, -0.000520184, -0.0179926, 0.99942)
+bones/10/position = Vector3(4.76837e-07, 51.9133, 3.71153e-05)
+bones/11/position = Vector3(-0.223487, 21.7342, 14.7033)
+bones/11/rotation = Quaternion(0.82506, -0.00496515, 0.00653481, 0.564986)
+bones/12/position = Vector3(4.47035e-07, 31.0315, -1.7928e-05)
+bones/12/rotation = Quaternion(-0.177881, 0.00271545, -0.0150202, 0.983934)
+bones/13/position = Vector3(-1.40071e-06, 48.3472, 1.54953e-05)
+bones/13/rotation = Quaternion(0.0289056, 0.00049708, 0.0171876, 0.999434)
+bones/14/position = Vector3(3.27826e-06, 51.9165, -4.79706e-05)
+bones/15/rotation = Quaternion(8.25242e-06, -0.0210647, 0.999778, 0.000393264)
+bones/16/position = Vector3(6.34464e-09, 73.3651, -4.77745e-07)
+bones/16/rotation = Quaternion(0.0107794, -2.74746e-05, -0.0025047, 0.999939)
+bones/17/position = Vector3(-3.44589e-08, 69.4685, 9.06653e-07)
+bones/17/rotation = Quaternion(0.295263, -0.694505, 0.387081, 0.529765)
+bones/18/position = Vector3(4.21423e-06, 41.0572, -1.03712e-05)
+bones/18/rotation = Quaternion(0.281157, -0.180166, 0.0538275, 0.94106)
+bones/19/position = Vector3(-5.96046e-08, 20.7615, -2.38419e-07)
+bones/20/rotation = Quaternion(2.99804e-05, 0.0210647, 0.999777, -0.00142069)
+bones/21/position = Vector3(1.69966e-08, 73.3653, 1.49135e-06)
+bones/21/rotation = Quaternion(-0.0107792, 5.32667e-05, -0.00491133, 0.99993)
+bones/22/rotation = Quaternion(0.385323, -0.529138, 0.292465, 0.69714)
+bones/23/position = Vector3(-6.22775e-06, 40.5276, -9.29832e-06)
+bones/23/rotation = Quaternion(0.284546, 0.17563, -0.0531117, 0.940939)
+
+[node name="RightHand" parent="ShopkeeperPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.99887425, -0.019314053, 0.043323398, 0.022317452, 0.9973008, -0.06994877, -0.041855466, 0.070836835, 0.9966093, -0.7230301, 143.74823, -243.68211)
+
+[node name="Node3D" parent="ShopkeeperPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D/RightHand" index="0"]
+transform = Transform3D(149.476, 6.199744, 10.891201, -10.384325, -11.704558, 149.18202, 7.015789, -149.414, -11.234468, 31.149136, 18.921097, -12.448486)
+
+[node name="LeftHand" parent="ShopkeeperPortrait/EnemyModel2/PersonAnimated/Armature/Skeleton3D" index="3"]
+transform = Transform3D(-0.9989982, -0.015706806, 0.041890852, 0.018621914, -0.9973638, 0.07013126, 0.04067887, 0.07084103, 0.9966577, 0.09065956, -143.7483, -243.68204)
+
+[node name="Camera3D" type="Camera3D" parent="ShopkeeperPortrait"]
+transform = Transform3D(-0.9391, 0, 0.343643, 0.0200749, 0.998292, 0.0548602, -0.343057, 0.0584178, -0.937496, 0.588373, -8.08504, -1.74455)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="ShopkeeperPortrait"]
+transform = Transform3D(1, 0, 0, 0, -0.533659, 0.8457, 0, -0.8457, -0.533659, 0, 0, 0)
+visible = false
+shadow_enabled = true
+shadow_normal_bias = 0.0
+shadow_blur = 10.0
+
+[node name="Area3D2" parent="." instance=ExtResource("20_4vmjd")]
+transform = Transform3D(0.785845, 0, 0.622629, 0, 1.00261, 0, -0.622629, 0, 0.785845, 17.0097, 0, -128.994)
+show_title = true
+
+[node name="Area3D3" parent="." instance=ExtResource("26_rvg24")]
+transform = Transform3D(-0.161139, 0, -0.986931, 0, 1, 0, 0.986931, 0, -0.161139, -4.24161, 0.00653252, -105.31)
+
+[node name="Area3D4" parent="." instance=ExtResource("33_oedh7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1396, -0.0150447, -154.089)
+target_distance = 5.0
+start_with_enemies = false
+
+[node name="Scatterer" type="Node3D" parent="."]
+script = ExtResource("42_1k2ge")
+scenes = Array[PackedScene]([ExtResource("43_v4rs2")])
+count = 5000
+area_size = Vector2(1000, 1000)
+
+[connection signal="exit" from="CanvasLayer/Shop" to="CanvasLayer/Dialogue" method="_on_shop_exit"]
+[connection signal="visibility_changed" from="CanvasLayer/Shop" to="CanvasLayer" method="_on_shop_visibility_changed"]
+[connection signal="exit" from="CanvasLayer/BountyBoard" to="CanvasLayer/Dialogue" method="_on_shop_exit"]
+[connection signal="pressed" from="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MenuItem" to="CanvasLayer/BountyBoard" method="_on_menu_item_pressed"]
+[connection signal="pressed" from="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MenuItem2" to="CanvasLayer/BountyBoard" method="_on_menu_item_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/BountyBoard/PanelContainer/MarginContainer/VBoxContainer/MenuItem2" to="CanvasLayer/BountyBoard" method="close"]
+[connection signal="pressed" from="CanvasLayer/Journal/PanelContainer/MarginContainer/VBoxContainer/MenuItem" to="CanvasLayer/Journal" method="close"]
+[connection signal="timeout" from="NpcController/Timer" to="NpcController" method="_on_timer_timeout"]
+[connection signal="timeout" from="NpcController/Timer" to="NpcController/Timer" method="_on_timeout"]
+
+[editable path="CanvasLayer/Shop/Inventory"]
+[editable path="WorldEnvironment"]
+[editable path="Player"]
+[editable path="Player/EnemyModel"]
+[editable path="Player/EnemyModel/PersonAnimated"]
+[editable path="PlayerPortrait/EnemyModel2"]
+[editable path="PlayerPortrait/EnemyModel2/PersonAnimated"]
+[editable path="ShopkeeperPortrait/EnemyModel2"]
+[editable path="ShopkeeperPortrait/EnemyModel2/PersonAnimated"]

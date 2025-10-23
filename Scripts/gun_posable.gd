@@ -5,7 +5,7 @@ extends Node3D
 #var max_ammo = ammo
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if point_at != null:
 		look_at(point_at.global_position)
 

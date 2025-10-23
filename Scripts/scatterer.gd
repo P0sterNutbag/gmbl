@@ -10,6 +10,7 @@ extends Node3D
 @export var rotate_y: bool
 @export var rotate_z: bool
 @export var scatter_button := false : set = _on_scatter_button_pressed
+@onready var terrain: Node3D = $"../Terrain"
 
 
 func _on_scatter_button_pressed(value):
@@ -35,8 +36,8 @@ func _on_scatter_button_pressed(value):
 	for i in count:
 		var pc = scenes[randi() % scenes.size()-1]
 		var bush = pc.instantiate()
-		var pos = Vector3(randf_range(-area_size.x / 2, area_size.x / 2), 0.0, randf_range(-area_size.y / 2, area_size.y / 2))
-		bush.position = pos
+		var pos = Vector3(global_position.x + randf_range(-area_size.x / 2, area_size.x / 2), 0.0, global_position.z + randf_range(-area_size.y / 2, area_size.y / 2))
+		bush.position = get_position_on_heightmap(pos)
 		if rotate_x: bush.rotation.x = randf_range(0, TAU)
 		if rotate_y: bush.rotation.y = randf_range(0, TAU)
 		if rotate_z: bush.rotation.z = randf_range(0, TAU)
@@ -57,3 +58,9 @@ func _get_property_list():
 			"usage": PROPERTY_USAGE_EDITOR,
 		}
 	]
+
+
+func get_position_on_heightmap(in_vector) -> Vector3:
+	var height = terrain.get_data().get_height_at(in_vector.x, in_vector.z)
+	in_vector.y = height
+	return in_vector

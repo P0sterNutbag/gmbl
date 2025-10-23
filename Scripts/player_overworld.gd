@@ -83,13 +83,27 @@ func state_walk(delta) -> void:
 		animation_player.play(idle_animation)
 	if direction != Vector3.ZERO:
 		model.look_at(global_position + direction)
+	
+	# change gun
+	if Input.is_action_just_released("next_gun") and PlayerStats.guns.size() > 1:
+		change_gun_slot(wrap(PlayerStats.gun_index - 1, 0, PlayerStats.equipped_guns.size()))
+	elif Input.is_action_just_released("last_gun") and PlayerStats.guns.size() > 1:
+		change_gun_slot(wrap(PlayerStats.gun_index + 1, 0, PlayerStats.equipped_guns.size()))
+	elif Input.is_action_just_pressed("slot_1"):
+		change_gun_slot(0)
+	elif Input.is_action_just_pressed("slot_2"):
+		change_gun_slot(1)
+	
+	# set gun sprite
+	#if gun != PlayerStats.gun:
+		#change_gun(PlayerStats.gun)
 
 
-func state_pause(delta) -> void:
+func state_pause(_delta) -> void:
 	animation_player.play(idle_animation)
 
 
-func state_dead(delta) -> void:
+func state_dead(_delta) -> void:
 	pass
 
 
@@ -102,6 +116,13 @@ func change_gun(new_gun: EquipmentGun) -> void:
 			i.visible = true
 	run_animation = "Run"
 	idle_animation = "Idle"
+
+
+func change_gun_slot(slot_index: int) -> void:
+	var _gun = PlayerStats.equipped_guns[slot_index]
+	if _gun != null:
+		change_gun(_gun)
+		PlayerStats.gun_index = slot_index
 
 
 func unequip_gun() -> void:

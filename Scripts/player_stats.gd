@@ -2,7 +2,7 @@ extends Node
 
 enum states {walk, pause, dead}
 var state = states.walk
-var money: int = 0
+@export var money: int = 0
 var hp: int = 5:
 	set(value):
 		hp = value
@@ -23,7 +23,10 @@ var ammo: int:
 			return gun.gun_stats.ammo
 		else:
 			return 0
-@export var items: Array[Item]
+var items:
+	get():
+		return inventory.items
+@export var inventory: Inventory
 @export var quests: Array[Quest]
 @onready var guns: Array[Item]:
 	get(): return items.filter(func(i): return i is EquipmentGun)
@@ -61,6 +64,11 @@ func _process(delta: float) -> void:
 	sleep -= delta * sleep_decrease_rate
 	hunger -= delta * hunger_decrease_rate
 	thirst -= delta * thirst_decrease_rate
+	if !guns.has(gun):
+		gun = null
+	for i in equipped_guns.size() - 1:
+		if !guns.has(equipped_guns[i]):
+			equipped_guns[i] = null
 
 
 func _physics_process(delta):

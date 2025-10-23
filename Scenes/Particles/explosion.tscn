@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccmgwe0nbei36"]
+
+[ext_resource type="Texture2D" uid="uid://cmbody8mx7y1c" path="res://Art/Textures/dirt_01.png" id="1_trwrv"]
+[ext_resource type="Script" uid="uid://3dk6rpsbhcfs" path="res://Scripts/particle.gd" id="2_w8aus"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w8aus"]
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, 1, 0)
+spread = 13.72
+initial_velocity_min = 4.0
+initial_velocity_max = 8.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trwrv"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_color = Color(0.38, 0.29817334, 0.25079998, 1)
+albedo_texture = ExtResource("1_trwrv")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_w8aus"]
+material = SubResource("StandardMaterial3D_trwrv")
+
+[node name="Explosion" type="GPUParticles3D"]
+emitting = false
+amount = 20
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_w8aus")
+draw_pass_1 = SubResource("QuadMesh_w8aus")
+script = ExtResource("2_w8aus")

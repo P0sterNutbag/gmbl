@@ -2,7 +2,10 @@ extends Resource
 class_name Shop
 
 @export var title: String
-@export var items: Array[Item]
+@export var all_items: Array[Item]
+var items: Array[Item] = all_items.duplicate_deep()
 @export var money: int = 100
+var max_money = money
 @export var dialogue: DialogueTree
 @export var quests: Array[Quest]
+@export var minimum_quests: int

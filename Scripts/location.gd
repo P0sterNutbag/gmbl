@@ -15,7 +15,7 @@ class_name Location
 var transition_started: bool 
 var can_transition: bool = true
 var enemy_model: Node3D
-
+var shop_timer: Timer
 
 #func _enter_tree() -> void:
 	#if !Globals.overworld:
@@ -38,6 +38,15 @@ func _ready() -> void:
 			shop.dialogue.npc_style = get_parent().current_style
 		elif dialogue_tree:
 			dialogue_tree.npc_style = get_parent().current_style
+	# shop timer
+	if town != null:
+		stock_shops()
+		shop_timer = Timer.new()
+		shop_timer.wait_time = town.restock_timer
+		shop_timer.one_shot = true
+		shop_timer.timeout.connect(stock_shops)
+		shop_timer.process_mode = Node.PROCESS_MODE_ALWAYS
+		add_child(shop_timer)
 
 
 func _process(_delta: float) -> void:
@@ -57,9 +66,23 @@ func start_encounter() -> void:
 	elif town != null:
 		Globals.ui.town.create_town(town)
 		Globals.ui.hide_location_info()
+		shop_timer.start()
 	elif shop != null:
 		Globals.ui.start_dialogue(shop.dialogue, shop)
 		Globals.ui.hide_location_info()
+
+
+func stock_shops() -> void:
+	if town == null:
+		return
+	for i in town.shops:
+		i.money = i.max_money
+		if i.minimum_quests > 0:
+			for n in i.minimum_quests - i.quests.size():
+				var quest = QuestRandom.new().generate_quest()
+				i.quests.append(quest)
+		if i.all_items.size() > 0:
+			i.items = i.all_items.duplicate_deep()
 
 
 func save() -> Dictionary:

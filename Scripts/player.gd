@@ -14,7 +14,7 @@ var jump_speed := 6.5
 var mouse_sensitivity := 0.004
 var lean_angle := 0.0
 var gun_index := -1
-var crouch_height := 1.0
+var crouch_height := 0.65
 var base_fov := 75.0
 var walk_time := 0.0
 var push_force := 20
@@ -25,7 +25,9 @@ var sway_intensity = 3
 var is_crouching: bool
 var on_ladder: bool
 var aim_rotation: Vector3
-var ammo: Array
+var ammo: int:
+	get():
+		return gun.gun_stats.ammo
 var firepoint: Node3D
 var object_to_place: Node3D
 var gun_tween: Tween
@@ -78,6 +80,8 @@ func _ready() -> void:
 		gun.visible = false
 	if gun:
 		change_gun(PlayerStats.gun)
+	else:
+		gun_state = gun_states.no_gun
 	state_functions = {
 		PlayerStats.states.walk: state_walk,
 		PlayerStats.states.pause: state_pause,
@@ -111,8 +115,8 @@ func _physics_process(delta):
 	velocity.y += -gravity * delta
 	
 	# stay in boundaries
-	position.x = clamp(position.x, -50, 50)
-	position.z = clamp(position.z, -50, 50)
+	#position.x = clamp(position.x, -50, 50)
+	#position.z = clamp(position.z, -50, 50)
 
 
 func _process(delta: float) -> void:
@@ -235,7 +239,7 @@ func state_walk(delta):
 			var tween2 = create_tween().set_ease(Tween.EASE_OUT)
 			tween2.tween_property(self, "aim_rotation:x", aim_rotation.x + deg_to_rad(gun.kickback_magnitude) / 3, 0.01)
 			Globals.noise_controller.create_noise_event(firepoint.global_position, self, gun.bullet_stats.noise_radius)
-		if Input.is_action_pressed("aim") and gun_state != gun_states.ads:
+		if Input.is_action_pressed("aim") and gun_state != gun_states.ads and gun:
 			change_gun_state(gun_states.ads)
 	if !Input.is_action_pressed("aim") and gun_state == gun_states.ads:
 		change_gun_state(gun_states.point)
@@ -248,8 +252,8 @@ func state_walk(delta):
 	
 	# reload
 	if Input.is_action_just_pressed("reload") and gun_state != gun_states.reload:
-		var ammo = find_item(gun.ammo_type)
-		if !ammo:
+		var _ammo = find_item(gun.ammo_type)
+		if !_ammo or ammo == gun.max_ammo:
 			return
 		change_gun_state(gun_states.reload)
 		#var tween = create_tween()
@@ -292,7 +296,7 @@ func state_walk(delta):
 	
 	# camera zoom
 	var target_fov
-	if Input.is_action_pressed("camera_zoom") and !Input.is_action_pressed("aim"):
+	if Input.is_action_pressed("camera_zoom") and !Input.is_action_pressed("aim") and gun:
 		camera_zoom = zoom_levels.zoom
 	match (camera_zoom):
 		zoom_levels.regular:
@@ -308,7 +312,7 @@ func state_walk(delta):
 	camera.fov = lerp(camera.fov, target_fov, 30.0 * delta)
 	
 	# ui
-	if gun != null:
+	if gun:
 		if Input.is_action_just_pressed("aim"):
 			if gun.scope_texture != null:
 				Globals.ui.show_scope(gun.scope_texture)
@@ -318,17 +322,18 @@ func state_walk(delta):
 			gun.show()
 	
 	# walking animation
-	if (input.x or input.y) and gun_state == gun_states.point and is_on_floor():
-		walk_time += delta
-		var bob = cos(walk_time * 20) * 0.25
-		gun.position.y += bob * delta
-		var sway = cos(walk_time * 10) * 0.25
-		gun.position.x += sway * delta
-	elif gun and gun.position.y: 
-		walk_time = 0
-		var tween = create_tween()
-		tween.tween_property(gun, "position", Vector3.ZERO, 0.1)
-		await tween.finished
+	if gun:
+		if (input.x or input.y) and gun_state == gun_states.point and is_on_floor():
+			walk_time += delta
+			var bob = cos(walk_time * 20) * 0.25
+			gun.position.y += bob * delta
+			var sway = cos(walk_time * 10) * 0.25
+			gun.position.x += sway * delta
+		elif gun and gun.position.y: 
+			walk_time = 0
+			var tween = create_tween()
+			tween.tween_property(gun, "position", Vector3.ZERO, 0.1)
+			await tween.finished
 	
 	# walking sfx
 	if (input.x or input.y) and is_on_floor():
@@ -398,8 +403,10 @@ func enter_gun_state_reload() -> void:
 
 
 func exit_gun_state_reload() -> void:
-	var ammo = find_item(gun.ammo_type)
-	use_item("", ammo, gun.gun_stats)
+	if gun.ammo_type == "shotgun_ammo":
+		return
+	var _ammo = find_item(gun.ammo_type)
+	use_item("", _ammo, gun.gun_stats)
 
 
 func enter_gun_state_ammo_check():
@@ -536,12 +543,23 @@ func step_noise_event():
 	Globals.noise_controller.create_noise_event(global_position, self)
 
 
-func face_center():
-	look_at(Vector3(0, camera.position.y, 0))
+func face_center(vector: Vector3 = Vector3(0, camera.position.y, 0)):
+	look_at(vector)
 	aim_rotation = rotation
 
 
-func _on_damaged(hit_position: Vector3, hit_direction: Vector3) -> void:
+func check_reload_ammo(time_to_skip_to: float):
+	var _ammo = find_item(gun.ammo_type)
+	use_item(_ammo.resource_name, _ammo, gun.gun_stats)
+	_ammo = find_item(gun.ammo_type)
+	if !_ammo:
+		gun.get_node("AnimationPlayer").seek(time_to_skip_to, true, true)
+	elif ammo >= gun.max_ammo:
+		gun.get_node("AnimationPlayer").seek(time_to_skip_to, true, true)
+
+
+
+func _on_damaged(_hit_position: Vector3, _hit_direction: Vector3) -> void:
 	Globals.ui.play_hit_effect()
 
 

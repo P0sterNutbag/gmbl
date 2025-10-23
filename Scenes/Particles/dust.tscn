@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxwa7hpni4yxi"]
+[gd_scene load_steps=10 format=3 uid="uid://bxwa7hpni4yxi"]
 
 [ext_resource type="Texture2D" uid="uid://c463itv1mr6tl" path="res://Art/Textures/smoke.png" id="1_ue3yl"]
+[ext_resource type="Script" uid="uid://3dk6rpsbhcfs" path="res://Scripts/particle.gd" id="2_h4cwm"]
 
 [sub_resource type="Curve" id="Curve_h4cwm"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -35,9 +36,10 @@ alpha_curve = SubResource("CurveTexture_on2jh")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dd34b"]
 transparency = 1
 cull_mode = 2
+depth_draw_mode = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.54902, 0.54902, 0.509804, 0.101961)
+albedo_color = Color(0.55, 0.55, 0.5115, 0.1882353)
 albedo_texture = ExtResource("1_ue3yl")
 billboard_mode = 3
 billboard_keep_scale = true
@@ -51,6 +53,7 @@ size = Vector2(3, 3)
 orientation = 2
 
 [node name="Dust" type="GPUParticles3D"]
+cast_shadow = 0
 emitting = false
 amount = 2
 lifetime = 5.0
@@ -58,3 +61,4 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_sus2j")
 draw_pass_1 = SubResource("PlaneMesh_onipu")
+script = ExtResource("2_h4cwm")

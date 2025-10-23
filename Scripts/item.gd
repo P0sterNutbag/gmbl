@@ -5,6 +5,8 @@ class_name Item
 @export var icon: Texture
 @export var price: int
 @export var description: String
+@export var stackable: bool = true
+@export var takes_space: bool = true
 signal used_up
 
 

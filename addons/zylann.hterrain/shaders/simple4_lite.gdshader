@@ -14,10 +14,10 @@ uniform sampler2D u_terrain_splatmap;
 uniform mat4 u_terrain_inverse_transform;
 uniform mat3 u_terrain_normal_basis;
 
-uniform sampler2D u_ground_albedo_bump_0 : source_color;
-uniform sampler2D u_ground_albedo_bump_1 : source_color;
-uniform sampler2D u_ground_albedo_bump_2 : source_color;
-uniform sampler2D u_ground_albedo_bump_3 : source_color;
+uniform sampler2D u_ground_albedo_bump_0 : source_color, filter_nearest;
+uniform sampler2D u_ground_albedo_bump_1 : source_color, filter_nearest;
+uniform sampler2D u_ground_albedo_bump_2 : source_color, filter_nearest;
+uniform sampler2D u_ground_albedo_bump_3 : source_color, filter_nearest;
 
 uniform float u_ground_uv_scale = 20.0;
 uniform bool u_depth_blending = true;

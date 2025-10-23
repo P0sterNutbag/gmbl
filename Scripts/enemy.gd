@@ -10,7 +10,10 @@ enum teams {enemies, allies}
 @export var team: teams = teams.enemies
 @export var follow_target: Node3D
 @export var potential_items: Array[SpawnChanceResource]
-@export var items: Array[Item]
+var items:
+	get():
+		return inventory.items
+var inventory: Inventory = Inventory.new()
 @export var max_items: int
 @export var min_items: int
 enum states {idle, investigate, shoot, search, strafe, hurt, reload, camp, dead, aim, walk}
@@ -18,17 +21,20 @@ var state = states.idle
 var walk_speed := 1.5
 var run_speed := 3.0
 var time_to_detect_max := 1.5
-var camp_chance := 0.5
+var camp_chance := 0
 var camp_time := 5
 var camp_time_min := 5
 var camp_time_max := 10
 var time_to_detect: float = time_to_detect_max
 var time_since_bleed: float
 var time_since_detect: float
+var time_to_see_max: float = 1.0
+var time_to_see: float = 0.0
 var range := 100
 var path_index: int
 var is_new_state: bool
 var on_alert: bool
+var free_on_destination: bool
 var gun: Node3D
 var damage_position: Vector3
 var last_seen_position: Vector3
@@ -71,7 +77,7 @@ func _ready() -> void:
 	
 	# add items
 	for i in randi_range(min_items, max_items):
-		items.append(potential_items[Globals.get_weighted_index(potential_items)].object_to_spawn)
+		inventory.items.append(potential_items[Globals.get_weighted_index(potential_items)].object_to_spawn)
 	
 	await get_tree().create_timer(0.5)
 	if team == teams.allies:
@@ -105,9 +111,16 @@ func _physics_process(delta: float) -> void:
 				navigation_agent.set_target_position(follow_target.global_position)
 				follow_path(run_speed)
 			
+			# return to walk
+			if destination != Vector3.ZERO:
+				change_state(states.walk)
+			
 			# switch to investigate
 			if target != null:
-				change_state(states.investigate)
+				time_to_see += delta
+				if time_to_see > time_to_see_max:
+					time_to_see = 0
+					change_state(states.investigate)
 			
 			# animate
 			if abs(velocity) == Vector3.ZERO:
@@ -126,7 +139,18 @@ func _physics_process(delta: float) -> void:
 			
 			# switch to investigate
 			if target != null:
-				change_state(states.investigate)
+				time_to_see += delta
+				if time_to_see > time_to_see_max:
+					time_to_see = 0
+					change_state(states.investigate)
+			
+			# animate
+			if abs(velocity) == Vector3.ZERO:
+				anim_player.play("Idle")
+			elif velocity.length() >= run_speed-1:
+				anim_player.play("Run")
+			else:
+				anim_player.play("Walk")
 		
 		states.investigate:
 			if is_new_state:
@@ -155,9 +179,9 @@ func _physics_process(delta: float) -> void:
 				velocity = Vector3.ZERO
 				aim_timer.start()
 				anim_player.play("Aim")
-				for enemy in get_tree().get_nodes_in_group("enemies"):
-					if enemy.state == states.idle or enemy.state == states.walk:
-						enemy.change_state(states.investigate)
+				#for enemy in get_tree().get_nodes_in_group("enemies"):
+					#if enemy.state == states.idle or enemy.state == states.walk:
+						#enemy.change_state(states.investigate)
 				is_new_state = false
 			
 			if target:
@@ -254,7 +278,7 @@ func _physics_process(delta: float) -> void:
 			
 			# return to shoot
 			if target:
-				change_state(states.investigate)
+				change_state(states.aim)
 			
 			# animate
 			anim_player.play("WalkPoint")
@@ -410,6 +434,8 @@ func _on_death() -> void:
 
 
 func _on_navigation_agent_3d_navigation_finished() -> void:
+	if free_on_destination:
+		queue_free()
 	if state == states.idle:
 		path_wait_timer.start()
 		velocity = Vector3.ZERO

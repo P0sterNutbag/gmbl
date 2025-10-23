@@ -37,8 +37,8 @@ func create_particle(particle_scene: PackedScene, position: Vector3, parent: Nod
 	particle.set_deferred("global_position", position)
 	if parent != null:
 		particle.set_deferred("global_transform", parent.global_transform)
-	if particle is GPUParticles3D:
-		particle.emitting = true
+	#if particle is GPUParticles3D:
+	particle.emitting = true
 	return particle
 
 

@@ -52,4 +52,4 @@ func damage(dmg: float, hit_position: Vector3, hit_direction: Vector3) -> void:
 			inst.queue_free()
 		for child in get_children():
 			if child is CollisionShape3D:
-				child.disabled = true
+				child.set_deferred("disabled", true)

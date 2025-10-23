@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://cl4glsi76vapy"]
+[gd_scene load_steps=12 format=3 uid="uid://cl4glsi76vapy"]
 
 [ext_resource type="Script" uid="uid://bequ4vge6cubm" path="res://Scripts/player_overworld.gd" id="1_lvr5k"]
 [ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="3_uuhca"]
 [ext_resource type="Material" uid="uid://tu87et11vjjo" path="res://Art/Materials/player_face.tres" id="4_f4tgq"]
+[ext_resource type="PackedScene" uid="uid://cnwsl1ltxxegm" path="res://Scenes/Guns/pistol.tscn" id="5_ppqj6"]
 [ext_resource type="Script" uid="uid://0d1yg6lwhubo" path="res://Scripts/camera.gd" id="6_fl7hq"]
+[ext_resource type="PackedScene" uid="uid://dts12bmvycipb" path="res://Scenes/Guns/shotgun.tscn" id="6_xjgfg"]
+[ext_resource type="PackedScene" uid="uid://dkmenaf8dxpyr" path="res://Scenes/Guns/sniper.tscn" id="7_dc60h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kgvud"]
 
@@ -62,44 +65,25 @@ shape = SubResource("SphereShape3D_kqvqf")
 [node name="EnemyModel" parent="." instance=ExtResource("3_uuhca")]
 
 [node name="Skeleton3D" parent="EnemyModel/PersonAnimated/Armature" index="0"]
-bones/0/rotation = Quaternion(-0.489018, -0.482062, 0.57097, 0.449968)
-bones/1/rotation = Quaternion(-0.0147791, 0.0187244, -0.0231078, 0.999448)
-bones/2/rotation = Quaternion(-0.00522287, 0.00704263, -0.0127381, 0.99988)
-bones/3/position = Vector3(-3.41061e-13, 24.9326, -1.63913e-07)
-bones/4/position = Vector3(6.15838e-07, 28.0492, -1.3411e-07)
-bones/4/rotation = Quaternion(0.0162002, 0.0463476, -0.0433397, 0.997853)
-bones/5/rotation = Quaternion(0.0192434, -0.0933569, -0.0262969, 0.995099)
-bones/7/rotation = Quaternion(-0.0881751, -0.464751, 0.880025, -0.0422735)
-bones/8/position = Vector3(-2.60925e-06, 31.2997, -9.8347e-06)
-bones/8/rotation = Quaternion(0.222305, 0.0501558, -0.0237657, 0.973396)
-bones/9/rotation = Quaternion(0.0318697, -0.000206483, 0.68415, 0.728645)
-bones/11/rotation = Quaternion(0.851145, 0.0696877, -0.13195, 0.503274)
-bones/12/rotation = Quaternion(0.210995, -0.173679, -0.128899, 0.953259)
-bones/13/rotation = Quaternion(0.0373937, -9.18284e-05, -0.752821, 0.657162)
-bones/14/position = Vector3(-8.01682e-06, 48.0148, -8.73022e-06)
-bones/15/rotation = Quaternion(0.107783, -0.0293855, 0.992202, -0.0552713)
-bones/16/rotation = Quaternion(-0.0292097, -0.0608843, -0.106617, 0.992004)
-bones/17/position = Vector3(4.78174e-06, 64.9924, -3.65675e-06)
-bones/17/rotation = Quaternion(0.294806, -0.715065, 0.344074, 0.532339)
-bones/18/position = Vector3(-3.90273e-06, 41.0572, -2.2815e-06)
-bones/18/rotation = Quaternion(0.280474, -0.191721, 0.0572801, 0.938774)
-bones/21/position = Vector3(3.06635e-08, 73.5589, -8.66359e-07)
-bones/21/rotation = Quaternion(0.046674, 0.071916, -0.205643, 0.974864)
-bones/22/rotation = Quaternion(0.442235, -0.411551, 0.421966, 0.676017)
-bones/23/rotation = Quaternion(0.301847, 0.192599, -0.0520107, 0.932249)
-bones/24/position = Vector3(6.85455e-07, 20.6788, 7.15256e-07)
+bones/9/scale = Vector3(1.0000001, 0.99999976, 0.99999994)
 
-[node name="Cube" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="0"]
+[node name="Cube_001" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="0"]
 surface_material_override/0 = ExtResource("4_f4tgq")
 
-[node name="RightHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.373853, 0.714075, 0.591887, -0.385727, 0.70006, -0.600941, -0.843474, -0.00364364, 0.537158, -32.4816, 50.2144, -202.8)
-
 [node name="Node3D" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand" index="0"]
-transform = Transform3D(-74.6107, 125.777, 33.3676, 57.4316, 66.3429, -121.656, -116.768, -47.7367, -81.1564, 31.1488, 18.921, -12.4602)
+transform = Transform3D(-75.242516, 124.14967, 37.754616, 57.935337, 71.19157, -118.638985, -116.11188, -44.92931, -83.66191, 31.149887, 18.92126, -12.46022)
+
+[node name="Pistol" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="1" instance=ExtResource("5_ppqj6")]
+visible = false
+
+[node name="Shotgun" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="2" instance=ExtResource("6_xjgfg")]
+visible = false
+
+[node name="SniperRifle" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="3" instance=ExtResource("7_dc60h")]
+visible = false
 
 [node name="LeftHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.482842, -0.287874, -0.827038, 0.000455088, 0.944505, -0.328496, 0.875707, 0.158235, 0.456178, 47.3877, 55.3183, -189.14)
+transform = Transform3D(0.4884011, -0.28723484, -0.82399064, 0.0023260808, 0.94469756, -0.32793376, 0.87261665, 0.15824643, 0.46205965, 45.77562, 55.881283, -186.22168)
 
 [node name="StepTimer" type="Timer" parent="."]
 wait_time = 0.5

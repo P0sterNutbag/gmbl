@@ -9,11 +9,12 @@ func _ready() -> void:
 	if Globals.overworld:
 		var dis = player_spawn.position.z
 		player_spawn.position = -Globals.overworld.player_spawn_vector * dis
+		player_spawn.position_on_heightmap()
 		dis = cover_spawn.position.z
 		cover_spawn.position = -Globals.overworld.player_spawn_vector * dis
 	#print(player_spawn.global_position)
 	player.global_position = player_spawn.global_position
-	player.face_center()
+	player.face_center(global_position)
 	#remove_child(player)
 	#get_parent().add_child(player)
 

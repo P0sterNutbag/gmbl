@@ -9,8 +9,8 @@ var shop: Shop
 
 func on_button_pressed(button: Control, resource: Resource) -> void:
 	super.on_button_pressed(button, resource)
-	if PlayerStats.quests.has(resource):
-		return
+	#if PlayerStats.quests.has(resource):
+		#return
 	PlayerStats.quests.append(resource)
 	shop.quests.erase(resource)
 	button.queue_free()

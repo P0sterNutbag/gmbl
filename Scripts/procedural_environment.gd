@@ -2,7 +2,7 @@ extends Node3D
 
 @export var maps: Array[ProcgenMap]
 @export var cover: Array[SpawnChance]
-@export var spawn_radius = 40.0
+@export var spawn_radius = 128
 var enemy_amount: int = 4
 @onready var navigation_region_3d: NavigationRegion3D = $"../NavigationRegion3D"
 @onready var cover_spawn: Node3D = $"../PlayerAnchor/CoverSpawn"
@@ -52,9 +52,9 @@ func generate_level() -> void:
 
 func get_weighted_position(cluster_position: Vector3 = Vector3.ZERO, cluster_radius: float = 0) -> Vector3:
 	if cluster_position == Vector3.ZERO:
-		return Vector3(randf_range(-spawn_radius, spawn_radius), 0,randf_range(-spawn_radius, spawn_radius))
+		return position + Vector3(randf_range(-spawn_radius, spawn_radius), 0, randf_range(-spawn_radius, spawn_radius))
 	else:
-		return Vector3(cluster_position.x + randf_range(-cluster_radius, cluster_radius), 0, cluster_position.z + randf_range(-cluster_radius, cluster_radius))
+		return position + Vector3(cluster_position.x + randf_range(-cluster_radius, cluster_radius), 0, cluster_position.z + randf_range(-cluster_radius, cluster_radius))
 	#var base_center: Vector3
 	#if get_child_count() < 1:
 		#base_center = Vector3.ZERO

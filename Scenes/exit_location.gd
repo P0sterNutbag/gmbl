@@ -18,7 +18,9 @@ func leave_encounter() -> void:
 		if enemy.state != enemy.states.dead:
 			enemy_count += 1
 	Globals.overworld.current_encounter.location_data.population = enemy_count
-	Globals.overworld.player_place = NodePath(overworld_point)
+	var player_vector: Vector3 = (get_parent().global_position - Globals.player.global_position).normalized().rotated(Vector3.UP, -rotation.y)
+	Globals.overworld.player_spawn_vector = player_vector
+	#Globals.overworld.player_place = NodePath(overworld_point)
 	SceneManager.start_scene_transition(Globals.overworld)
 
 

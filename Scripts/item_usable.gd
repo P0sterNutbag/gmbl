@@ -6,12 +6,14 @@ class_name ItemUsable
 @export var method: String
 @export var custom_path: String
 @export var is_health_item: bool
+@export var usable_in_menu: bool = true
 var target_node: Node
 
 
 func on_pressed():
 	super.on_pressed()
-	use(target_node)
+	if usable_in_menu:
+		use(target_node)
 
 
 func use(target_node):

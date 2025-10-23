@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmrtdpri7xt8x"]
+
+[ext_resource type="Script" uid="uid://cibt7wtr4je88" path="res://Scripts/explosion.gd" id="1_6lhdn"]
+[ext_resource type="PackedScene" uid="uid://ccmgwe0nbei36" path="res://Scenes/Particles/explosion.tscn" id="2_ppevp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0dulb"]
+radius = 3.0
+
+[node name="ExplosionOnGround" type="Node3D"]
+script = ExtResource("1_6lhdn")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 1024
+collision_mask = 525
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_0dulb")
+
+[node name="Explosion" parent="." instance=ExtResource("2_ppevp")]
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="finished" from="Explosion" to="." method="_on_explosion_finished"]

@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=3 uid="uid://bqui4egb4d3em"]
+
+[ext_resource type="PackedScene" uid="uid://21yqxj5xl8cv" path="res://Scenes/Environment/Props/Physics/drum_barrel_blue.tscn" id="1_w1w1o"]
+[ext_resource type="PackedScene" uid="uid://dvpgm7keysw0" path="res://Scenes/Environment/Props/Physics/drum_barrel_rust.tscn" id="2_6mfym"]
+[ext_resource type="Script" uid="uid://bdayrcr4af73n" path="res://Scripts/spawner.gd" id="3_tc812"]
+[ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="4_b1iqd"]
+[ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/Enemies/enemy.tscn" id="5_wxbdk"]
+[ext_resource type="PackedScene" uid="uid://cwn2oirx41io" path="res://Scenes/Environment/Nature/chest.tscn" id="6_ogm0s"]
+
+[sub_resource type="Resource" id="Resource_kn4lb"]
+script = ExtResource("4_b1iqd")
+object_to_spawn = ExtResource("5_wxbdk")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_rt3de"]
+script = ExtResource("4_b1iqd")
+object_to_spawn = ExtResource("6_ogm0s")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_4kfej"]
+script = ExtResource("4_b1iqd")
+object_to_spawn = ExtResource("6_ogm0s")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[node name="Barrels" type="Node3D"]
+
+[node name="RigidBody3D" parent="." instance=ExtResource("1_w1w1o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.043245554, 0.5, 2.393278)
+
+[node name="RigidBody3D2" parent="." instance=ExtResource("2_6mfym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.88768196, 0.5, 1.5213153)
+
+[node name="RigidBody3D3" parent="." instance=ExtResource("1_w1w1o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4010253, 0.5, -0.13964313)
+
+[node name="RigidBody3D4" parent="." instance=ExtResource("2_6mfym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7905877, 0.5, -2.679916)
+
+[node name="RigidBody3D5" parent="." instance=ExtResource("2_6mfym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6919323, 0.5, -2.5818822)
+
+[node name="RigidBody3D6" parent="." instance=ExtResource("2_6mfym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.396079, 0.5, -1.2355306)
+
+[node name="RigidBody3D7" parent="." instance=ExtResource("2_6mfym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.659543, 0.5, 4.34872)
+
+[node name="RigidBody3D8" parent="." instance=ExtResource("1_w1w1o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1351786, 0.5000005, -1.3772383)
+
+[node name="NPCSpawns" type="Node3D" parent="."]
+script = ExtResource("3_tc812")
+possible_spawns = Array[ExtResource("4_b1iqd")]([SubResource("Resource_kn4lb")])
+location_data_variable = "npc_spawn_chance"
+
+[node name="Node3D" type="Node3D" parent="NPCSpawns"]
+transform = Transform3D(-0.999141, 0, -0.0414396, 0, 1, 0, 0.0414396, 0, -0.999141, 2.4450388, -1.19209e-07, 4.472017)
+
+[node name="Node3D2" type="Node3D" parent="NPCSpawns"]
+transform = Transform3D(-0.99848, 0, -0.0551069, 0, 1, 0, 0.0551069, 0, -0.99848, -3.1046193, 0, 4.518872)
+
+[node name="Node3D3" type="Node3D" parent="NPCSpawns"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, 1.1382066, -9.536743e-07, 0.18714094)
+
+[node name="Node3D4" type="Node3D" parent="NPCSpawns"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, 1.9957625, -1.4305115e-06, -4.77362)
+
+[node name="Node3D5" type="Node3D" parent="NPCSpawns"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, -2.5711832, -9.536743e-07, -6.278622)
+
+[node name="Node3D6" type="Node3D" parent="NPCSpawns"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, -3.971037, -9.536743e-07, -1.6547046)
+
+[node name="Node3D7" type="Node3D" parent="NPCSpawns"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, 4.3784084, -9.536743e-07, 5.246243)
+
+[node name="Node3D8" type="Node3D" parent="NPCSpawns"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, -1.3674159, -9.536743e-07, 6.2237315)
+
+[node name="LootSpawns" type="Node3D" parent="."]
+script = ExtResource("3_tc812")
+possible_spawns = Array[ExtResource("4_b1iqd")]([SubResource("Resource_rt3de"), SubResource("Resource_4kfej")])
+spawn_amount_max = 2
+location_data_variable = "loot_spawn_chance"
+
+[node name="Node3D" type="Node3D" parent="LootSpawns"]
+transform = Transform3D(0.712002, 0, 0.702178, 0, 1, 0, -0.702178, 0, 0.712002, 0.06898451, 0.0939577, -1.1774095)
+
+[node name="Node3D2" type="Node3D" parent="LootSpawns"]
+transform = Transform3D(-0.713972, 0, -0.700174, 0, 1, 0, 0.700174, 0, -0.713972, -1.1785476, 0.0939578, 0.6628082)

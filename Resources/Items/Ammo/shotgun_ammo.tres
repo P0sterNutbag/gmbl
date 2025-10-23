@@ -1,11 +1,22 @@
-[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://c0mlniyk1an3w"]
+[gd_resource type="Resource" script_class="ItemUsable" load_steps=4 format=3 uid="uid://c0mlniyk1an3w"]
 
-[ext_resource type="Script" uid="uid://2qhh6s86pakx" path="res://Scripts/item.gd" id="2_bnppq"]
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="1_5yhr3"]
+[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="2_smugn"]
+
+[sub_resource type="Resource" id="Resource_08fje"]
+script = ExtResource("1_5yhr3")
+values = Dictionary[String, Variant]({
+"ammo": 1
+})
+add = true
+metadata/_custom_type_script = "uid://4c6own63hs8c"
 
 [resource]
 resource_name = "shotgun_ammo"
-script = ExtResource("2_bnppq")
-title = "Shotgun Magazine"
-price = 6
+script = ExtResource("2_smugn")
+effects = Array[ExtResource("1_5yhr3")]([SubResource("Resource_08fje")])
+usable_in_menu = false
+title = "Shotgun Shell"
+price = 50
 description = "Usable in: Shotgun"
 metadata/_custom_type_script = "uid://2qhh6s86pakx"

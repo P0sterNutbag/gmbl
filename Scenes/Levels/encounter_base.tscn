@@ -1,0 +1,261 @@
+[gd_scene load_steps=36 format=3 uid="uid://r4ktdn26psb3"]
+
+[ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="1_0pe3w"]
+[ext_resource type="Script" uid="uid://ysmfpedeqrtw" path="res://Scripts/encounter.gd" id="1_afsqo"]
+[ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="2_os0xi"]
+[ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_yd52q"]
+[ext_resource type="PackedScene" uid="uid://y6civk4251ei" path="res://Scenes/UI/fps_ui.tscn" id="3_12h26"]
+[ext_resource type="Resource" uid="uid://de2okx524jxjn" path="res://addons/zylann.hterrain/data/backdrop/data.hterrain" id="6_afsqo"]
+[ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand3.png" id="6_nue3y"]
+[ext_resource type="PackedScene" uid="uid://p1limlnykapp" path="res://Scenes/noise_controller.tscn" id="10_07x41"]
+[ext_resource type="Texture2D" uid="uid://oamh8tah7tlw" path="res://Art/Textures/grass and dirt.png" id="11_qrsnk"]
+[ext_resource type="Script" uid="uid://chxn6jj2cv0p3" path="res://Scripts/scatterer.gd" id="11_wttml"]
+[ext_resource type="Texture2D" uid="uid://cfsov1xtejnen" path="res://Art/Textures/gravel.png" id="12_yd52q"]
+[ext_resource type="Script" uid="uid://cjv5ew7k7wom8" path="res://Scenes/exit_location.gd" id="14_3f870"]
+[ext_resource type="Texture2D" uid="uid://ddvw71e7xmbt8" path="res://Art/Textures/exit zone.png" id="15_2a2fa"]
+[ext_resource type="Script" uid="uid://b04s1m7lnvjkt" path="res://Scripts/position_on_terrain.gd" id="15_52w5m"]
+[ext_resource type="Script" uid="uid://vl4exm3hukmx" path="res://Scripts/Overworld/player_spawn.gd" id="15_mydnv"]
+[ext_resource type="Script" uid="uid://gw7xclj5260y" path="res://Scripts/procgen_enemy_spawner.gd" id="15_oex8s"]
+[ext_resource type="PackedScene" uid="uid://c055smn111au7" path="res://Scenes/player.tscn" id="16_6tord"]
+[ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="16_52w5m"]
+[ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/Enemies/enemy.tscn" id="17_48aj5"]
+[ext_resource type="Script" uid="uid://cp50dadh73l3f" path="res://Scripts/snap_to_terrain.gd" id="21_lsls5"]
+[ext_resource type="Script" uid="uid://bokxkydc5jmf" path="res://addons/zylann.hterrain/hterrain.gd" id="32_f4nmr"]
+[ext_resource type="Script" uid="uid://b8f4u7je7ufby" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="34_khkok"]
+
+[sub_resource type="Resource" id="Resource_fwcaj"]
+script = ExtResource("2_yd52q")
+population = 5
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ctfa7"]
+render_priority = 0
+shader = ExtResource("1_0pe3w")
+shader_parameter/depth_edge_threshold_lower = 1.0
+shader_parameter/depth_edge_threshold_upper = 1.0
+shader_parameter/normal_edge_threshold = 1.0
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_width = 2.0
+shader_parameter/fog_color = Color(0.48235294, 0.7176471, 1, 1)
+shader_parameter/fog_start = 0.0
+shader_parameter/fog_end = 300.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_dhle1"]
+material = SubResource("ShaderMaterial_ctfa7")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_06vt4"]
+sky_top_color = Color(0, 0.389097, 0.741599, 1)
+sky_horizon_color = Color(0.486486, 0.716971, 0.999999, 1)
+ground_bottom_color = Color(0.486275, 0.717647, 1, 1)
+ground_horizon_color = Color(0.486275, 0.717647, 1, 1)
+ground_curve = 0.15
+
+[sub_resource type="Sky" id="Sky_t2t4p"]
+sky_material = SubResource("ProceduralSkyMaterial_06vt4")
+
+[sub_resource type="Environment" id="Environment_cael4"]
+background_mode = 2
+sky = SubResource("Sky_t2t4p")
+ambient_light_source = 2
+ambient_light_color = Color(0.556153, 0.556153, 0.556153, 1)
+fog_mode = 1
+fog_density = 1.0
+fog_aerial_perspective = 1.0
+fog_sky_affect = 0.0
+fog_depth_end = 210.0
+
+[sub_resource type="Resource" id="Resource_my2y4"]
+script = ExtResource("34_khkok")
+mode = 0
+textures = [[ExtResource("6_nue3y"), ExtResource("11_qrsnk"), ExtResource("12_yd52q")], [null, null, null]]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_6cq5c"]
+agent_radius = 0.75
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yd52q"]
+size = Vector3(255, 1, 255)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ianw"]
+size = Vector3(200, 5, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l3vu0"]
+render_priority = 1
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0.619608)
+albedo_texture = ExtResource("15_2a2fa")
+uv1_triplanar = true
+distance_fade_mode = 1
+distance_fade_min_distance = 10.0
+distance_fade_max_distance = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_wgdbt"]
+material = SubResource("StandardMaterial3D_l3vu0")
+size = Vector3(257, 5, 15)
+
+[sub_resource type="Resource" id="Resource_qrsnk"]
+script = ExtResource("16_52w5m")
+object_to_spawn = ExtResource("17_48aj5")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[node name="Encounter" type="Node3D"]
+script = ExtResource("1_afsqo")
+location_data = SubResource("Resource_fwcaj")
+
+[node name="CanvasLayer" parent="." instance=ExtResource("3_12h26")]
+
+[node name="Shader" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.492066, 0, 0)
+cast_shadow = 0
+extra_cull_margin = 16237.3
+mesh = SubResource("QuadMesh_dhle1")
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("2_os0xi")]
+environment = SubResource("Environment_cael4")
+
+[node name="DirectionalLight3D" parent="WorldEnvironment" index="0"]
+transform = Transform3D(1, 0, 0, 0, -0.533659, 0.8457, 0, -0.8457, -0.533659, 0, 0, 0)
+shadow_normal_bias = 10.0
+
+[node name="NoiseController" parent="." instance=ExtResource("10_07x41")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000435829, 0.0134783, 0.00178146)
+
+[node name="Terrain" type="Node3D" parent="." groups=["ground"]]
+script = ExtResource("32_f4nmr")
+_terrain_data = ExtResource("6_afsqo")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_my2y4")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 2.0
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = true
+shader_params/u_tile_reduction = Vector4(0, 0, 0, 0)
+metadata/_custom_type_script = "uid://bokxkydc5jmf"
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_6cq5c")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 127.5, -1, 127.5)
+shape = SubResource("BoxShape3D_yd52q")
+
+[node name="Player" parent="." instance=ExtResource("16_6tord")]
+
+[node name="Border" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 128)
+
+[node name="Area3D" type="Area3D" parent="Border"]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, -125.5)
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("14_3f870")
+overworld_point = "SpawnS"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Border/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47292, 0)
+shape = SubResource("BoxShape3D_8ianw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Border/Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.55, 0)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_wgdbt")
+
+[node name="Area3D4" type="Area3D" parent="Border"]
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 0, 125.5)
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("14_3f870")
+overworld_point = "SpawnN"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Border/Area3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47292, 0)
+shape = SubResource("BoxShape3D_8ianw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Border/Area3D4"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.55, 0)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_wgdbt")
+
+[node name="Area3D2" type="Area3D" parent="Border"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -125.5, 0, 0)
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("14_3f870")
+overworld_point = "SpawnE"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Border/Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47292, 0)
+shape = SubResource("BoxShape3D_8ianw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Border/Area3D2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.55, 0)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_wgdbt")
+
+[node name="Area3D3" type="Area3D" parent="Border"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 125.5, 0, 0)
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("14_3f870")
+overworld_point = "SpawnW"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Border/Area3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47292, 0)
+shape = SubResource("BoxShape3D_8ianw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Border/Area3D3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.55, 0)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_wgdbt")
+
+[node name="PlayerAnchor" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 128)
+script = ExtResource("15_mydnv")
+
+[node name="PlayerSpawn" type="Node3D" parent="PlayerAnchor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 115)
+script = ExtResource("15_52w5m")
+
+[node name="CoverSpawn" type="Node3D" parent="PlayerAnchor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 95)
+
+[node name="EnemySpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 128)
+script = ExtResource("15_oex8s")
+enemies_to_spawn = Array[ExtResource("16_52w5m")]([SubResource("Resource_qrsnk")])
+
+[node name="SnapToTerrain" type="Node3D" parent="."]
+script = ExtResource("21_lsls5")
+
+[node name="Scatterer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 128)
+script = ExtResource("11_wttml")
+scenes = Array[PackedScene]([null, null])
+count = 45
+area_size = Vector2(100, 100)
+min_size = 0.75
+max_size = 1.25
+rotate_y = true
+
+[connection signal="body_entered" from="Border/Area3D" to="Border/Area3D" method="_on_body_entered"]
+[connection signal="body_exited" from="Border/Area3D" to="Border/Area3D" method="_on_body_exited"]
+[connection signal="body_entered" from="Border/Area3D4" to="Border/Area3D4" method="_on_body_entered"]
+[connection signal="body_exited" from="Border/Area3D4" to="Border/Area3D4" method="_on_body_exited"]
+[connection signal="body_entered" from="Border/Area3D2" to="Border/Area3D2" method="_on_body_entered"]
+[connection signal="body_exited" from="Border/Area3D2" to="Border/Area3D2" method="_on_body_exited"]
+[connection signal="body_entered" from="Border/Area3D3" to="Border/Area3D3" method="_on_body_entered"]
+[connection signal="body_exited" from="Border/Area3D3" to="Border/Area3D3" method="_on_body_exited"]
+
+[editable path="WorldEnvironment"]

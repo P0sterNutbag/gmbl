@@ -1,28 +1,76 @@
-[gd_scene load_steps=30 format=3 uid="uid://cb05x24r4r8im"]
+[gd_scene load_steps=44 format=3 uid="uid://cb05x24r4r8im"]
 
 [ext_resource type="Script" uid="uid://ba01kvx1jag3c" path="res://Scripts/enemy.gd" id="1_u0emo"]
 [ext_resource type="Script" uid="uid://3e36ru1e7k78" path="res://Scripts/spawn_chance_resource.gd" id="2_tq087"]
 [ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="3_4bcle"]
 [ext_resource type="Resource" uid="uid://ccm2c5fc8xn15" path="res://Resources/Items/Survival/medkit.tres" id="4_beuat"]
+[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="5_3hxf3"]
 [ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="5_7ubbs"]
+[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="6_xedeb"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="6_ycxl0"]
+[ext_resource type="Resource" uid="uid://dfkmfm7wu8mw4" path="res://Resources/Items/Survival/beans.tres" id="7_kx2d8"]
 [ext_resource type="Script" uid="uid://but6ijlpfowbx" path="res://Scripts/detection_component.gd" id="7_pko3b"]
 [ext_resource type="Script" uid="uid://ccu856f1csrwx" path="res://Scripts/shoot_component.gd" id="8_53ao7"]
+[ext_resource type="Resource" uid="uid://glkl1ugkvv6m" path="res://Resources/Items/Survival/water.tres" id="8_lobkc"]
 [ext_resource type="AudioStream" uid="uid://c0kyabwelhmj5" path="res://Audio/Bullets/bullet_hit_person.wav" id="9_tq087"]
+[ext_resource type="Resource" uid="uid://brmi40g2jr38s" path="res://Resources/Items/money.tres" id="9_y6od5"]
+[ext_resource type="Resource" uid="uid://oaklo016ku8w" path="res://Resources/Items/Guns/pistol.tres" id="10_xedeb"]
+[ext_resource type="Resource" uid="uid://bkae25scq6c12" path="res://Resources/Items/Ammo/sniper_ammo.tres" id="11_kx2d8"]
 
 [sub_resource type="Resource" id="Resource_po0sg"]
 script = ExtResource("2_tq087")
 object_to_spawn = ExtResource("3_4bcle")
-spawn_chance = 1.0
+spawn_chance = 3.0
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_haro7"]
 script = ExtResource("2_tq087")
 object_to_spawn = ExtResource("4_beuat")
-spawn_chance = 1.0
+spawn_chance = 5.0
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8uf12"]
+[sub_resource type="Resource" id="Resource_4dn76"]
+script = ExtResource("2_tq087")
+object_to_spawn = ExtResource("5_3hxf3")
+spawn_chance = 5.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_ijacg"]
+script = ExtResource("2_tq087")
+object_to_spawn = ExtResource("6_xedeb")
+spawn_chance = 2.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_rs8ny"]
+script = ExtResource("2_tq087")
+object_to_spawn = ExtResource("7_kx2d8")
+spawn_chance = 3.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_o0lyu"]
+script = ExtResource("2_tq087")
+object_to_spawn = ExtResource("8_lobkc")
+spawn_chance = 3.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_p6pjt"]
+script = ExtResource("2_tq087")
+object_to_spawn = ExtResource("9_y6od5")
+spawn_chance = 3.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_kx2d8"]
+script = ExtResource("2_tq087")
+object_to_spawn = ExtResource("10_xedeb")
+spawn_chance = 2.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_lobkc"]
+script = ExtResource("2_tq087")
+object_to_spawn = ExtResource("11_kx2d8")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ueksw"]
 radius = 0.25
 height = 1.96359
 
@@ -3470,18 +3518,18 @@ _data = {
 &"WalkPoint": SubResource("Animation_hgeoe")
 }
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o06y3"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h157u"]
 height = 1.54964
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4bcle"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vc6v4"]
 random_pitch = 2.0
 streams_count = 1
 stream_0/stream = ExtResource("9_tq087")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_8uf12"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_q0yer"]
 radius = 0.246082
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_0830c"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_wfsql"]
 size = Vector3(1.5, 0.25, 1.5)
 
 [node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
@@ -3489,70 +3537,70 @@ collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_u0emo")
 gun_index = 1
-potential_items = Array[ExtResource("2_tq087")]([SubResource("Resource_po0sg"), SubResource("Resource_haro7")])
+potential_items = Array[ExtResource("2_tq087")]([SubResource("Resource_po0sg"), SubResource("Resource_haro7"), SubResource("Resource_4dn76"), SubResource("Resource_ijacg"), SubResource("Resource_rs8ny"), SubResource("Resource_o0lyu"), SubResource("Resource_p6pjt"), SubResource("Resource_kx2d8"), SubResource("Resource_lobkc")])
 max_items = 3
 min_items = 1
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301743, 0.985648, 0.00144577)
-shape = SubResource("CapsuleShape3D_8uf12")
+shape = SubResource("CapsuleShape3D_ueksw")
 
 [node name="EnemyModel" parent="." instance=ExtResource("5_7ubbs")]
 
 [node name="Skeleton3D" parent="EnemyModel/PersonAnimated/Armature" index="0"]
-bones/0/position = Vector3(-57.7595, 8.19067, -17.7465)
-bones/0/rotation = Quaternion(0.106568, -0.657133, 0.206616, 0.717028)
-bones/1/rotation = Quaternion(0.0356829, -0.00776891, 0.00370614, 0.999326)
-bones/2/rotation = Quaternion(0.03293, -0.0110394, -0.038691, 0.998647)
-bones/3/position = Vector3(-1.72853e-06, 24.9326, 1.49012e-08)
-bones/3/rotation = Quaternion(0.0329481, -0.010703, -0.0387698, 0.998648)
-bones/4/position = Vector3(-3.33626e-06, 28.0492, -6.51926e-07)
-bones/4/rotation = Quaternion(0.0439928, -0.100678, -0.0743958, 0.991158)
-bones/5/position = Vector3(0.595638, 9.99196, 1.3411e-07)
-bones/5/rotation = Quaternion(0.0582626, -0.46573, 0.32065, 0.82273)
-bones/6/position = Vector3(4.00829, 67.2396, 1.40443e-06)
-bones/7/position = Vector3(-0.191094, 23.5126, -14.985)
-bones/7/rotation = Quaternion(0.0303776, -0.616373, 0.786574, 0.0215281)
-bones/8/position = Vector3(-1.04631e-06, 31.2998, 2.29364e-05)
-bones/8/rotation = Quaternion(0.117503, -0.749441, 0.145765, 0.635046)
-bones/9/position = Vector3(-2.14877e-07, 52.3843, -2.33939e-06)
-bones/9/rotation = Quaternion(0.0338413, -0.000194508, 0.726472, 0.686363)
-bones/10/position = Vector3(-4.99189e-07, 48.0139, -3.83425e-06)
-bones/11/position = Vector3(-0.223511, 23.5141, 14.985)
-bones/11/rotation = Quaternion(0.844483, -0.0294076, 0.0365474, 0.533524)
-bones/12/position = Vector3(8.04333e-07, 31.2998, 2.54846e-05)
-bones/12/rotation = Quaternion(0.278466, 0.689945, 0.150806, 0.650915)
-bones/13/position = Vector3(4.63783e-06, 52.3822, -5.44454e-07)
-bones/13/rotation = Quaternion(0.0470599, -4.38616e-05, -0.947427, 0.316493)
-bones/14/position = Vector3(-9.53674e-07, 48.0148, -1.44523e-05)
-bones/15/rotation = Quaternion(0.367297, -0.294578, 0.847304, -0.24575)
-bones/16/position = Vector3(-1.50039e-06, 73.5593, 7.06544e-06)
-bones/16/rotation = Quaternion(0.0455924, -0.0728802, -0.584241, 0.807014)
-bones/17/position = Vector3(4.42225e-06, 64.9924, 4.56466e-06)
-bones/17/rotation = Quaternion(0.327385, -0.68386, 0.372089, 0.535448)
-bones/18/position = Vector3(3.01345e-06, 41.0572, -4.18057e-06)
-bones/18/rotation = Quaternion(0.00129565, -0.0880354, 0.125137, 0.988225)
-bones/19/position = Vector3(5.57304e-06, 20.7615, -5.96051e-08)
-bones/20/rotation = Quaternion(-0.131998, 0.242337, 0.96086, -0.0244373)
-bones/21/position = Vector3(2.07784e-06, 73.5589, 2.17537e-06)
-bones/21/rotation = Quaternion(0.0784317, 0.0199265, -0.22808, 0.970274)
-bones/22/rotation = Quaternion(0.404873, -0.517203, 0.320753, 0.682419)
-bones/23/position = Vector3(-4.18896e-06, 40.5276, 1.98247e-06)
-bones/23/rotation = Quaternion(-0.0126181, -0.143005, -0.190973, 0.971041)
-bones/24/position = Vector3(-9.68574e-07, 20.6788, 1.07288e-06)
+bones/0/position = Vector3(-0.712204, 3.47808, -167.659)
+bones/0/rotation = Quaternion(-0.48901793, -0.48206192, 0.5709699, 0.44996795)
+bones/1/rotation = Quaternion(-0.014779108, 0.01872441, -0.023107812, 0.9994484)
+bones/2/rotation = Quaternion(-0.0052228724, 0.0070426334, -0.012738107, 0.9998805)
+bones/3/position = Vector3(-3.55049e-13, 24.9326, -1.63913e-07)
+bones/3/rotation = Quaternion(-0.00497256, 0.006878, -0.0127269, 0.999883)
+bones/4/position = Vector3(6.15838e-07, 28.0492, -1.3411e-07)
+bones/4/rotation = Quaternion(0.016200205, 0.04634761, -0.043339714, 0.99785334)
+bones/5/position = Vector3(0.595642, 9.99198, -3.35276e-07)
+bones/5/rotation = Quaternion(0.019243408, -0.09335693, -0.02629691, 0.99509937)
+bones/6/position = Vector3(4.0083, 67.2396, 1.66893e-06)
+bones/7/position = Vector3(-0.191092, 23.5127, -14.985)
+bones/7/rotation = Quaternion(-0.08817513, -0.46475115, 0.8800253, -0.042273514)
+bones/8/position = Vector3(-2.6092493e-06, 31.2997, -9.834708e-06)
+bones/8/rotation = Quaternion(0.222305, 0.05015581, -0.023765706, 0.9733962)
+bones/9/position = Vector3(-2.35371e-06, 52.3843, -6.32308e-06)
+bones/9/rotation = Quaternion(0.03186969, -0.00020648162, 0.68414974, 0.7286449)
+bones/10/position = Vector3(-1.47261e-05, 48.0139, 9.278767e-06)
+bones/11/position = Vector3(-0.223506, 23.5141, 14.985)
+bones/11/rotation = Quaternion(0.85114515, 0.06968772, -0.13195004, 0.5032741)
+bones/12/position = Vector3(3.5119601e-06, 31.2997, -2.03901e-05)
+bones/12/rotation = Quaternion(0.21099488, -0.17367892, -0.12889895, 0.9532585)
+bones/13/position = Vector3(4.8980583e-06, 52.3822, 1.18264e-05)
+bones/13/rotation = Quaternion(0.037393704, -9.182656e-05, -0.75282115, 0.6571621)
+bones/14/position = Vector3(-8.016821e-06, 48.0148, -8.730218e-06)
+bones/15/rotation = Quaternion(0.10778299, -0.029385496, 0.99220186, -0.055271294)
+bones/16/position = Vector3(6.71918e-06, 73.5593, -4.2926513e-07)
+bones/16/rotation = Quaternion(-0.029209713, -0.060884334, -0.106617056, 0.9920044)
+bones/17/position = Vector3(4.7817393e-06, 64.9924, -3.6567508e-06)
+bones/17/rotation = Quaternion(0.29480597, -0.71506494, 0.34407398, 0.5323389)
+bones/18/position = Vector3(-3.9027364e-06, 41.0572, -2.2815002e-06)
+bones/18/rotation = Quaternion(0.28047398, -0.19172099, 0.057280093, 0.93877393)
+bones/19/position = Vector3(4.9620867e-06, 20.7615, 2.9802322e-07)
+bones/20/rotation = Quaternion(-0.135482, 0.048073597, 0.988816, 0.039705697)
+bones/21/position = Vector3(3.0663614e-08, 73.5589, -8.663592e-07)
+bones/21/rotation = Quaternion(0.046674017, 0.07191602, -0.20564307, 0.9748644)
+bones/22/rotation = Quaternion(0.44223487, -0.41155097, 0.42196593, 0.67601687)
+bones/23/position = Vector3(-2.5058398e-06, 40.5276, 2.8564828e-06)
+bones/23/rotation = Quaternion(0.3018471, 0.19259907, -0.05201071, 0.93224937)
+bones/24/position = Vector3(6.85455e-07, 20.6788, 7.1525574e-07)
 
 [node name="RightHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.706668, -0.703444, 0.076069, 0.686594, 0.707737, 0.166425, -0.170907, -0.0653783, 0.983116, -156.977, 27.2321, -19.8917)
+transform = Transform3D(0.37241232, 0.71436375, 0.5924466, -0.38626394, 0.69975626, -0.6009502, -0.84386563, -0.0050395224, 0.53653103, -35.165325, 52.99352, -197.27382)
 
 [node name="Node3D" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand" index="0"]
-transform = Transform3D(-26.0272, 24.3632, -145.702, 147.63, 9.59062, -24.7679, 5.29294, -147.698, -25.6423, 31.1501, 18.9205, -12.4617)
+transform = Transform3D(-71.18193, 130.06718, 22.71233, 71.04884, 59.481274, -117.958145, -111.289024, -45.218826, -89.83364, 31.150452, 18.920475, -12.461487)
 
 [node name="AK47" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="0"]
 visible = false
 
 [node name="LeftHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.828479, -0.482345, -0.284546, 0.496893, 0.867486, -0.0237659, 0.258303, -0.1217, 0.958368, -41.2688, 167.76, -22.8237)
+transform = Transform3D(0.48416808, -0.28723526, -0.8264848, 0.0006440461, 0.9446972, -0.32794186, 0.8749747, 0.15824667, 0.45757768, 50.66967, 53.287163, -184.27649)
 
 [node name="AnimationPlayer" parent="EnemyModel/PersonAnimated" index="1"]
 libraries = {
@@ -3568,11 +3616,12 @@ otherHitboxes = [NodePath("../HeadHitbox")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00301743, 0.774398, 0.00144577)
-shape = SubResource("CapsuleShape3D_o06y3")
+shape = SubResource("CapsuleShape3D_h157u")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Hitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99657, 0)
-stream = SubResource("AudioStreamRandomizer_4bcle")
+stream = SubResource("AudioStreamRandomizer_vc6v4")
+bus = &"SFX"
 
 [node name="HeadHitbox" type="Area3D" parent="." node_paths=PackedStringArray("otherHitboxes")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.926, 0)
@@ -3584,7 +3633,7 @@ otherHitboxes = [NodePath("../Hitbox")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HeadHitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.843204, 0)
-shape = SubResource("SphereShape3D_8uf12")
+shape = SubResource("SphereShape3D_q0yer")
 
 [node name="Loot" type="Area3D" parent="." groups=["lootable"]]
 process_mode = 4
@@ -3593,7 +3642,7 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Loot"]
-shape = SubResource("BoxShape3D_0830c")
+shape = SubResource("BoxShape3D_wfsql")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 target_desired_distance = 1.5
@@ -3622,7 +3671,7 @@ one_shot = true
 one_shot = true
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.406753, -1.03996)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.27395, -0.026355982)
 visible = false
 billboard = 1
 text = "1"

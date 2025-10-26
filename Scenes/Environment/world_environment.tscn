@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://chqydw4q66jmg"]
+[gd_scene load_steps=11 format=3 uid="uid://chqydw4q66jmg"]
 
 [ext_resource type="Script" uid="uid://o72anv73qvg8" path="res://Scripts/world_environment.gd" id="1_4ikoo"]
 
@@ -20,21 +20,26 @@ ambient_light_color = Color(0.556153, 0.556153, 0.556153, 1)
 
 [sub_resource type="Gradient" id="Gradient_4ikoo"]
 offsets = PackedFloat32Array(0, 0.4, 0.5, 0.6, 1)
-colors = PackedColorArray(0, 0.008333325, 0.1, 1, 0, 0.008333325, 0.1, 1, 0.86560625, 0.396807, 0, 1, 0, 0.3882353, 0.7411765, 1, 0, 0.3882353, 0.7411765, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 0.8666667, 0.39607844, 0, 1, 0, 0.3882353, 0.7411765, 1, 0, 0.3882353, 0.7411765, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_5l0ki"]
 gradient = SubResource("Gradient_4ikoo")
 
 [sub_resource type="Gradient" id="Gradient_psook"]
-offsets = PackedFloat32Array(0, 0.4, 0.5, 0.6, 1)
-colors = PackedColorArray(0.06886001, 0.0539, 0.11, 1, 0.06886001, 0.0539, 0.11, 1, 0.9, 0.6378, 0.48599994, 1, 0.4862745, 0.7176471, 1, 1, 0.4862745, 0.7176471, 1, 1)
+offsets = PackedFloat32Array(0.008928572, 0.4, 0.5, 0.6, 1)
+colors = PackedColorArray(0.012833333, 0.01, 0.02, 1, 0.012833333, 0.01, 0.02, 1, 0.87, 0.635535, 0.4437, 1, 0.4862745, 0.7176471, 1, 1, 0.4862745, 0.7176471, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_dbj7e"]
 gradient = SubResource("Gradient_psook")
 
 [sub_resource type="Curve" id="Curve_4ikoo"]
 _limits = [0.0, 1.0, -1.0, 1.0]
-_data = [Vector2(-1, 0), 0.0, 0.0, 0, 0, Vector2(-0.16296303, 0), 0.0, 0.0, 0, 0, Vector2(0.17777777, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(-1, 0), 0.0, 0.0, 0, 0, Vector2(-0.25096524, 0), 0.0, 0.0, 0, 0, Vector2(0.2548262, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_5l0ki"]
+_limits = [0.0, 1.0, -1.0, 1.0]
+_data = [Vector2(-1, 0), 0.0, 0.0, 0, 0, Vector2(-0.251, 0), 0.0, 0.0, 0, 0, Vector2(0.2548262, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [node name="WorldEnvironment" type="WorldEnvironment"]
@@ -42,7 +47,8 @@ environment = SubResource("Environment_jgqc4")
 script = ExtResource("1_4ikoo")
 sky_gradient = SubResource("GradientTexture1D_5l0ki")
 horizon_gradient = SubResource("GradientTexture1D_dbj7e")
-time_curve = SubResource("Curve_4ikoo")
+sun_energy_curve = SubResource("Curve_4ikoo")
+sky_energy_curve = SubResource("Curve_5l0ki")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.624739, 0.780834, 0, -0.780834, 0.624739, 0, 0, 0)

@@ -31,22 +31,26 @@ shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_cr7sm"]
-height = 1.05
+height = 1.3159668
+radius = 0.62646484
 
-[node name="RigidBody3D" type="RigidBody3D"]
+[node name="RigidBody3D" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.655, 0)
 collision_mask = 33
 
-[node name="drum barrel2" parent="." instance=ExtResource("1_q76g2")]
+[node name="drum barrel2" parent="RigidBody3D" instance=ExtResource("1_q76g2")]
 
-[node name="Cylinder_001" parent="drum barrel2" index="0"]
+[node name="Cylinder_001" parent="RigidBody3D/drum barrel2" index="0"]
 surface_material_override/0 = SubResource("ShaderMaterial_ld3no")
 
-[node name="Cylinder" parent="drum barrel2" index="1"]
+[node name="Cylinder" parent="RigidBody3D/drum barrel2" index="1"]
 surface_material_override/0 = SubResource("ShaderMaterial_q76g2")
 surface_material_override/1 = SubResource("ShaderMaterial_jnfs2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1.25, 0, 0, 0, 1, 0, 0.000972524, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, 0.012422696, 0)
 shape = SubResource("CylinderShape3D_cr7sm")
 
-[editable path="drum barrel2"]
+[editable path="RigidBody3D/drum barrel2"]

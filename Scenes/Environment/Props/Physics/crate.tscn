@@ -19,14 +19,17 @@ size = Vector3(1.15, 1.15, 1.15)
 [sub_resource type="BoxShape3D" id="BoxShape3D_nolf3"]
 size = Vector3(1.5, 1.5, 1.5)
 
-[node name="Crate" type="RigidBody3D"]
+[node name="Crate" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.575, 0)
 collision_mask = 33
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="RigidBody3D"]
 material_override = SubResource("ShaderMaterial_k0cn2")
 mesh = SubResource("BoxMesh_n4ogv")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../../../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 shape = SubResource("BoxShape3D_nolf3")

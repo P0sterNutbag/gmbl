@@ -115,8 +115,8 @@ func _physics_process(delta):
 	velocity.y += -gravity * delta
 	
 	# stay in boundaries
-	#position.x = clamp(position.x, -50, 50)
-	#position.z = clamp(position.z, -50, 50)
+	position.x = clamp(position.x, 2, 255)
+	position.z = clamp(position.z, 2, 255)
 
 
 func _process(delta: float) -> void:

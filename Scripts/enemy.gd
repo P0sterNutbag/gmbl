@@ -16,7 +16,7 @@ var items:
 var inventory: Inventory = Inventory.new()
 @export var max_items: int
 @export var min_items: int
-enum states {idle, investigate, shoot, search, strafe, hurt, reload, camp, dead, aim, walk}
+enum states {idle, investigate, shoot, search, strafe, hurt, reload, camp, dead, aim, walk, standby}
 var state = states.idle
 var walk_speed := 1.5
 var run_speed := 3.0
@@ -30,7 +30,8 @@ var time_since_bleed: float
 var time_since_detect: float
 var time_to_see_max: float = 1.0
 var time_to_see: float = 0.0
-var range := 100
+var day_range := 100
+var night_range := 25
 var path_index: int
 var is_new_state: bool
 var on_alert: bool
@@ -74,6 +75,8 @@ func _ready() -> void:
 	items_to_drop.append(guns_dict[gun_index][1])
 	shoot.connect($ShootComponent._on_shoot)
 	shoot.connect(gun._on_shoot)
+	DayNightCycle.night_start.connect(on_night_start)
+	DayNightCycle.day_start.connect(on_day_start)
 	
 	# add items
 	for i in randi_range(min_items, max_items):
@@ -90,6 +93,12 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if state == states.standby:
+		if is_new_state:
+			visible = false
+			position = Vector3.ONE * 1000
+			is_new_state = false
+		return
 	$Label3D.text = str(state)
 	match state:
 		states.idle:
@@ -495,3 +504,11 @@ func _on_shoot_timer_timeout() -> void:
 
 func _on_aim_timer_timeout() -> void:
 	change_state(states.shoot)
+
+
+func on_night_start() -> void:
+	detection.range = night_range
+
+
+func on_day_start() -> void:
+	detection.range = day_range

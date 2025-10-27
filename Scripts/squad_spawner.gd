@@ -3,7 +3,7 @@ extends Node3D
 @export var enemies_to_spawn: Array[SpawnChance]
 @export var borders: Array[Area3D]
 var enemy_amount: int = 3
-var spawn_radius: float = 8
+var spawn_radius: float = 2
 var enemies: Array
 @onready var timer: Timer = $Timer
 
@@ -13,7 +13,7 @@ func _ready() -> void:
 		var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
 		var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
 		get_tree().current_scene.add_child.call_deferred(inst)
-		inst.process_mode = Node.PROCESS_MODE_DISABLED
+		inst.change_state(inst.states.standby)
 		enemies.append(inst)
 
 
@@ -28,7 +28,7 @@ func spawn_squad() -> void:
 	# spawn enemies
 	for inst in enemies:
 		# get random enemy and spawn it
-		inst.process_mode = Node.PROCESS_MODE_INHERIT
+		#inst.process_mode = Node.PROCESS_MODE_INHERIT
 		#var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
 		#var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
 		#get_tree().current_scene.add_child.call_deferred(inst)
@@ -36,8 +36,10 @@ func spawn_squad() -> void:
 		var offset = Vector3(randf_range(-spawn_radius, spawn_radius), 0, randf_range(-spawn_radius, spawn_radius))
 		inst.set_deferred("global_position", spawn_point + offset)
 		inst.destination = dest + spawn_point
-		inst.free_on_destination = false
+		inst.free_on_destination = true
 		inst.look_at_position(inst.destination)
+		inst.change_state(inst.states.walk)
+		inst.visible = true
 		#enemies.append(inst)
 	#await get_tree().create_timer(1).timeout
 	#for enemy in enemies:

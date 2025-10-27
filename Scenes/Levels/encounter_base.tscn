@@ -16,10 +16,10 @@
 [ext_resource type="Texture2D" uid="uid://ddvw71e7xmbt8" path="res://Art/Textures/exit zone.png" id="15_2a2fa"]
 [ext_resource type="Script" uid="uid://b04s1m7lnvjkt" path="res://Scripts/position_on_terrain.gd" id="15_52w5m"]
 [ext_resource type="Script" uid="uid://vl4exm3hukmx" path="res://Scripts/Overworld/player_spawn.gd" id="15_mydnv"]
-[ext_resource type="Script" uid="uid://gw7xclj5260y" path="res://Scripts/procgen_enemy_spawner.gd" id="15_oex8s"]
 [ext_resource type="PackedScene" uid="uid://c055smn111au7" path="res://Scenes/player.tscn" id="16_6tord"]
 [ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="16_52w5m"]
 [ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/Enemies/enemy.tscn" id="17_48aj5"]
+[ext_resource type="Script" uid="uid://c71oliiugr1df" path="res://Scripts/squad_spawner.gd" id="19_2a2fa"]
 [ext_resource type="Script" uid="uid://cp50dadh73l3f" path="res://Scripts/snap_to_terrain.gd" id="21_lsls5"]
 [ext_resource type="Script" uid="uid://bokxkydc5jmf" path="res://addons/zylann.hterrain/hterrain.gd" id="32_f4nmr"]
 [ext_resource type="Script" uid="uid://b8f4u7je7ufby" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="34_khkok"]
@@ -233,11 +233,15 @@ script = ExtResource("15_52w5m")
 [node name="CoverSpawn" type="Node3D" parent="PlayerAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 95)
 
-[node name="EnemySpawner" type="Node3D" parent="."]
+[node name="SquadSpawner" type="Node3D" parent="." node_paths=PackedStringArray("borders")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 128)
-script = ExtResource("15_oex8s")
+script = ExtResource("19_2a2fa")
 enemies_to_spawn = Array[ExtResource("16_52w5m")]([SubResource("Resource_qrsnk")])
-enemy_amount = 0
+borders = [NodePath("../Border/Area3D"), NodePath("../Border/Area3D4"), NodePath("../Border/Area3D2"), NodePath("../Border/Area3D3")]
+
+[node name="Timer" type="Timer" parent="SquadSpawner"]
+wait_time = 2.0
+one_shot = true
 
 [node name="SnapToTerrain" type="Node3D" parent="."]
 script = ExtResource("21_lsls5")
@@ -259,5 +263,6 @@ rotate_y = true
 [connection signal="body_exited" from="Border/Area3D2" to="Border/Area3D2" method="_on_body_exited"]
 [connection signal="body_entered" from="Border/Area3D3" to="Border/Area3D3" method="_on_body_entered"]
 [connection signal="body_exited" from="Border/Area3D3" to="Border/Area3D3" method="_on_body_exited"]
+[connection signal="timeout" from="SquadSpawner/Timer" to="SquadSpawner" method="_on_timer_timeout"]
 
 [editable path="WorldEnvironment"]

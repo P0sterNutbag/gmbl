@@ -1,0 +1,358 @@
+[gd_scene load_steps=18 format=3 uid="uid://chqf3urx7gfya"]
+
+[ext_resource type="Script" uid="uid://pfvownh6oavj" path="res://Scripts/town_ui.gd" id="1_405pq"]
+[ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="5_f6css"]
+[ext_resource type="PackedScene" uid="uid://cdexqegkymx2g" path="res://Scenes/Overworld/UI/location_card.tscn" id="8_wr7yp"]
+[ext_resource type="Script" uid="uid://dav6t8b5brx1o" path="res://Scripts/inventory_controller.gd" id="9_y2gp4"]
+[ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="10_3gb70"]
+[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="11_rkx7j"]
+[ext_resource type="Script" uid="uid://catvngsdo62hm" path="res://Scenes/Overworld/town.gd" id="12_nsyyh"]
+[ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="13_tokue"]
+[ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="14_q0snl"]
+[ext_resource type="Script" uid="uid://bjmtcugcvwfgq" path="res://Scripts/bounty_board.gd" id="15_cnohn"]
+[ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="16_okk7v"]
+[ext_resource type="Theme" uid="uid://efo20xxcf1e5" path="res://Art/Themes/vbox_container.tres" id="17_cttt6"]
+[ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="18_663k3"]
+[ext_resource type="Script" uid="uid://b37bjjekoe1qe" path="res://Scripts/journal_menu.gd" id="19_x20ne"]
+[ext_resource type="Script" uid="uid://gep7hf1s50y2" path="res://Scripts/dialogue_controller.gd" id="20_caolh"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_arpq1"]
+viewport_path = NodePath("PlayerPortrait")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_l5erx"]
+viewport_path = NodePath("ShopkeeperPortrait")
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_405pq")
+
+[node name="LocationCard" parent="." instance=ExtResource("8_wr7yp")]
+
+[node name="InventoryHolder" type="HBoxContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -333.0
+offset_top = -383.5
+offset_right = 333.0
+offset_bottom = 383.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_y2gp4")
+
+[node name="Inventory" parent="InventoryHolder" instance=ExtResource("10_3gb70")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Town" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -343.5
+offset_top = -323.5
+offset_right = 343.5
+offset_bottom = 323.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_rkx7j")
+script = ExtResource("12_nsyyh")
+
+[node name="MarginContainer" type="MarginContainer" parent="Town"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Town/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Town/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("13_tokue")
+text = "Town Name"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="Town/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Town/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("14_q0snl")
+
+[node name="Shop" type="HBoxContainer" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -64.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+script = ExtResource("9_y2gp4")
+
+[node name="Inventory" parent="Shop" instance=ExtResource("10_3gb70")]
+layout_mode = 2
+size_flags_horizontal = 3
+mode = 1
+show_price = true
+
+[node name="Inventory2" parent="Shop" instance=ExtResource("10_3gb70")]
+layout_mode = 2
+size_flags_horizontal = 3
+mode = 1
+show_price = true
+
+[node name="BountyBoard" type="HBoxContainer" parent="." node_paths=PackedStringArray("item_container")]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 300.0
+offset_top = 185.0
+offset_right = -300.0
+offset_bottom = -231.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+script = ExtResource("15_cnohn")
+item_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/ItemContainer")
+
+[node name="PanelContainer" type="PanelContainer" parent="BountyBoard"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme = ExtResource("11_rkx7j")
+
+[node name="MarginContainer" type="MarginContainer" parent="BountyBoard/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("16_okk7v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BountyBoard/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("17_cttt6")
+
+[node name="Label" type="Label" parent="BountyBoard/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("13_tokue")
+text = "Bounties"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="BountyBoard/PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MenuItem" parent="BountyBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("18_663k3")]
+layout_mode = 2
+text = "Available"
+
+[node name="MenuItem2" parent="BountyBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("18_663k3")]
+layout_mode = 2
+text = "Current"
+
+[node name="Control" type="Control" parent="BountyBoard/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ItemContainer" type="VBoxContainer" parent="BountyBoard/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("17_cttt6")
+script = ExtResource("14_q0snl")
+
+[node name="Control2" type="Control" parent="BountyBoard/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MenuItem2" parent="BountyBoard/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("18_663k3")]
+layout_mode = 2
+text = "Exit"
+
+[node name="PanelContainer2" type="PanelContainer" parent="BountyBoard"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("11_rkx7j")
+
+[node name="MarginContainer" type="MarginContainer" parent="BountyBoard/PanelContainer2"]
+layout_mode = 2
+theme = ExtResource("16_okk7v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BountyBoard/PanelContainer2/MarginContainer"]
+custom_minimum_size = Vector2(438, 0)
+layout_mode = 2
+theme = ExtResource("17_cttt6")
+
+[node name="PanelContainer" type="PanelContainer" parent="BountyBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 438)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="BountyBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("13_tokue")
+
+[node name="Description" type="Label" parent="BountyBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(788, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("5_f6css")
+autowrap_mode = 2
+
+[node name="Reward" type="Label" parent="BountyBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_f6css")
+
+[node name="Control" type="Control" parent="BountyBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BountyBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MenuItem3" parent="BountyBoard/PanelContainer2/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("18_663k3")]
+layout_mode = 2
+text = "Accept"
+
+[node name="MenuItem4" parent="BountyBoard/PanelContainer2/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("18_663k3")]
+layout_mode = 2
+text = "Back"
+
+[node name="Journal" type="HBoxContainer" parent="." node_paths=PackedStringArray("item_container")]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 399.0
+offset_top = 266.0
+offset_right = -389.0
+offset_bottom = -277.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+script = ExtResource("19_x20ne")
+item_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/ItemContainer")
+pause_on_open = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Journal"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme = ExtResource("11_rkx7j")
+
+[node name="MarginContainer" type="MarginContainer" parent="Journal/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("16_okk7v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Journal/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("17_cttt6")
+
+[node name="Label" type="Label" parent="Journal/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("13_tokue")
+text = "Jobs"
+
+[node name="Control" type="Control" parent="Journal/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ItemContainer" type="VBoxContainer" parent="Journal/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("17_cttt6")
+script = ExtResource("14_q0snl")
+
+[node name="Control2" type="Control" parent="Journal/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MenuItem" parent="Journal/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("18_663k3")]
+layout_mode = 2
+text = "Exit"
+
+[node name="PanelContainer2" type="PanelContainer" parent="Journal"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("11_rkx7j")
+
+[node name="MarginContainer" type="MarginContainer" parent="Journal/PanelContainer2"]
+layout_mode = 2
+theme = ExtResource("16_okk7v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Journal/PanelContainer2/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("17_cttt6")
+
+[node name="PanelContainer" type="PanelContainer" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 560)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_f6css")
+
+[node name="Description" type="Label" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+theme = ExtResource("5_f6css")
+autowrap_mode = 2
+
+[node name="Reward" type="Label" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_f6css")
+
+[node name="Control" type="Control" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Portraits" type="HBoxContainer" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Player" type="TextureRect" parent="Portraits"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+texture = SubResource("ViewportTexture_arpq1")
+stretch_mode = 2
+
+[node name="Shopkeeper" type="TextureRect" parent="Portraits"]
+layout_mode = 2
+size_flags_vertical = 8
+texture = SubResource("ViewportTexture_l5erx")
+stretch_mode = 2
+flip_h = true
+
+[node name="Dialogue" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -463.0
+offset_top = -1085.0
+offset_right = 463.0
+offset_bottom = -427.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 32
+alignment = 2
+script = ExtResource("20_caolh")
+
+[connection signal="exit" from="Shop" to="Dialogue" method="_on_shop_exit"]
+[connection signal="visibility_changed" from="Shop" to="." method="_on_shop_visibility_changed"]
+[connection signal="exit" from="BountyBoard" to="Dialogue" method="_on_shop_exit"]
+[connection signal="pressed" from="BountyBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MenuItem" to="BountyBoard" method="_on_menu_item_pressed"]
+[connection signal="pressed" from="BountyBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MenuItem2" to="BountyBoard" method="_on_menu_item_2_pressed"]
+[connection signal="pressed" from="BountyBoard/PanelContainer/MarginContainer/VBoxContainer/MenuItem2" to="BountyBoard" method="close"]
+[connection signal="pressed" from="Journal/PanelContainer/MarginContainer/VBoxContainer/MenuItem" to="Journal" method="close"]
+
+[editable path="Shop/Inventory"]

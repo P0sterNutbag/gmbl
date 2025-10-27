@@ -1,13 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://cxxd2nxqg758c"]
 
-[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_kdnb7"]
-[ext_resource type="Script" uid="uid://dykqct6penfmb" path="res://Scripts/pause_menu.gd" id="2_kdnb7"]
-[ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="3_qyryt"]
-[ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="4_23me3"]
-[ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="5_deree"]
+[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_pg5rf"]
+[ext_resource type="Script" uid="uid://dykqct6penfmb" path="res://Scripts/pause_menu.gd" id="2_ap6qm"]
+[ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="3_dl4fl"]
+[ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="4_w1ue4"]
+[ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="5_nse5y"]
 
 [node name="PauseMenu" type="CanvasLayer"]
-process_mode = 3
+process_mode = 2
+visible = false
 
 [node name="Menu" type="PanelContainer" parent="." node_paths=PackedStringArray("item_container")]
 anchors_preset = 8
@@ -21,8 +22,8 @@ offset_right = 343.5
 offset_bottom = 323.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_kdnb7")
-script = ExtResource("2_kdnb7")
+theme = ExtResource("1_pg5rf")
+script = ExtResource("2_ap6qm")
 item_container = NodePath("MarginContainer/VBoxContainer/VBoxContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="Menu"]
@@ -37,7 +38,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("3_qyryt")
+theme = ExtResource("3_dl4fl")
 text = "Game Paused"
 horizontal_alignment = 1
 
@@ -48,21 +49,21 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("4_23me3")
+script = ExtResource("4_w1ue4")
 
-[node name="Resume" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("5_deree")]
+[node name="Resume" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("5_nse5y")]
 layout_mode = 2
 text = "Resume"
 
-[node name="Load" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("5_deree")]
+[node name="Load" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("5_nse5y")]
 layout_mode = 2
 text = "Load Game"
 
-[node name="Settings" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("5_deree")]
+[node name="Settings" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("5_nse5y")]
 layout_mode = 2
 text = "Settings"
 
-[node name="Quit" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("5_deree")]
+[node name="Quit" parent="Menu/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("5_nse5y")]
 layout_mode = 2
 text = "Quit"
 

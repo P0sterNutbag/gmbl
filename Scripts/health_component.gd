@@ -18,7 +18,7 @@ class_name HealthComponent
 @export var otherHitboxes: Array[HealthComponent]
 @onready var max_hp: float = hp
 var audio_stream_player: AudioStreamPlayer3D
-var unhealable_hp: int = 0:
+var unhealable_hp: float = 0:
 	set(value):
 		unhealable_hp += value
 		unhealable_hp = clamp(unhealable_hp, 0, max_hp)
@@ -36,13 +36,13 @@ func _ready() -> void:
 		audio_stream_player = $AudioStreamPlayer3D
 
 
-func damage(dmg: float, hit_position: Vector3, hit_direction: Vector3) -> void:
+func damage(dmg: float, hit_position: Vector3 = Vector3.ZERO, hit_direction: Vector3 = Vector3.ZERO) -> void:
 	damaged.emit(hit_position, hit_direction)
 	if is_dead:
 		return
 	hp -= dmg
 	if randf() < 0.2:
-		unhealable_hp += 1
+		unhealable_hp += dmg
 	if audio_stream_player:
 		audio_stream_player.play()
 	if hp <= 0:

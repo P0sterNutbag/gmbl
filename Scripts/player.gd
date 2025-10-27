@@ -61,6 +61,7 @@ var grenade = preload("res://Scenes/Bullets/grenade.tscn")
 @onready var placer_raycast: RayCast3D = $PlacePosition/PlacerRaycast3D
 @onready var bullet_flyby_sfx: AudioStreamPlayer3D = $CameraAnchor/BulletListener/AudioStreamPlayer3D
 @onready var footstep_sfx: AudioStreamPlayer3D = $FootstepPlayer
+@onready var spot_light: SpotLight3D = $CameraAnchor/Camera3D/SpotLight3D
 
 
 func _enter_tree() -> void:
@@ -310,6 +311,14 @@ func state_walk(delta):
 			target_fov = 10.0
 			mouse_sensitivity = 0.0005
 	camera.fov = lerp(camera.fov, target_fov, 30.0 * delta)
+	
+	# light
+	if Input.is_action_just_pressed("light") and find_item("flashlight"):
+		PlayerStats.flashlight_on = !PlayerStats.flashlight_on
+	if PlayerStats.flashlight_on:
+		spot_light.visible = true
+	else:
+		spot_light.visible = false
 	
 	# ui
 	if gun:

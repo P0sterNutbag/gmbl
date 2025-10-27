@@ -450,6 +450,9 @@ gun_stats = SubResource("Resource_igrcy")
 ads_vector = Vector3(-0.188, 0.085, 0)
 cast_shadow = false
 
+[node name="OmniLight3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47/GunAnchor/FirePoint/MuzzleFlash" index="1"]
+omni_attenuation = 10.0
+
 [node name="AudioStreamPlayer3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47/GunAnchor/FirePoint" index="2"]
 unit_size = 10.0
 
@@ -556,6 +559,9 @@ fire_timer = 0.5
 ads_vector = Vector3(-0.099, 0.045, 0.07)
 cast_shadow = false
 
+[node name="OmniLight3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun/GunAnchor/FirePoint/MuzzleFlash" index="1"]
+omni_attenuation = 10.0
+
 [node name="ArmLAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun"]
 transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, -0.044855595, -0.11000872, -0.42224616)
 
@@ -601,6 +607,9 @@ fire_timer = 1.0
 zoom_amount = 3.0
 scope_texture = ExtResource("12_fd4e3")
 cast_shadow = false
+
+[node name="OmniLight3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/SniperRifle/GunAnchor/FirePoint/MuzzleFlash" index="1"]
+omni_attenuation = 10.0
 
 [node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/SniperRifle"]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.024554007, -0.10447359, 0.060269624)
@@ -649,6 +658,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.111368775, -0.061341286, -0
 
 [node name="AdsPosition" type="Node3D" parent="CameraAnchor/Camera3D/AdsOffset"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.111, 0.06099999, -0.009501129)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CameraAnchor/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.104569435, 0)
+visible = false
+spot_range = 50.0
+spot_angle = 30.0
 
 [node name="BulletListener" type="Area3D" parent="CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00123417, 0.245037)

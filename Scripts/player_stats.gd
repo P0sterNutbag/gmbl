@@ -3,16 +3,16 @@ extends Node
 enum states {walk, pause, dead}
 var state = states.walk
 @export var money: int = 0
-var hp: int = 5:
+var hp: float = 5:
 	set(value):
 		hp = value
 		if Globals.player and "hitbox" in Globals.player:
 			Globals.player.hitbox.hp = value
-	get():
-		if Globals.player and "hitbox" in Globals.player:
-			return Globals.player.hitbox.hp
-		else:
-			return 5
+	#get():
+		#if Globals.player and "hitbox" in Globals.player:
+			#return Globals.player.hitbox.hp
+		#else:
+			#return 5
 var max_hp := 5
 var ammo: int:
 	set(value):
@@ -23,6 +23,7 @@ var ammo: int:
 			return gun.gun_stats.ammo
 		else:
 			return 0
+var flashlight_on: bool
 var items:
 	get():
 		return inventory.items
@@ -45,9 +46,9 @@ var thirst := 100.0:
 var max_sleep := 100.0
 var max_hunger := 100.0
 var max_thirst = 100.0
-var sleep_decrease_rate := 0.5
-var hunger_decrease_rate := 0.75
-var thirst_decrease_rate := 1.0
+var sleep_decrease_rate := 0.05
+var hunger_decrease_rate := 0.1
+var thirst_decrease_rate := 0.1
 
 
 func _enter_tree() -> void:
@@ -55,15 +56,20 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+	SceneManager.scene_changed.connect(on_scene_changed)
 	if items.size() > 0 and items[0] is EquipmentGun:
 		gun = items[0]
 		gun.equipped = true
 
 
 func _process(delta: float) -> void:
+	# survival stats
 	sleep -= delta * sleep_decrease_rate
 	hunger -= delta * hunger_decrease_rate
 	thirst -= delta * thirst_decrease_rate
+	if hunger <= 0 or thirst <= 0:
+		Globals.player.hitbox.damage(0.1 * delta)
+	# gun management
 	if !guns.has(gun):
 		gun = null
 	for i in equipped_guns.size() - 1:
@@ -89,6 +95,13 @@ func change_state(new_state):
 		await Globals.player.enter_functions[PlayerStats.state].call()
 
 
+func find_item(item_name: String) -> Resource:
+	for i in items:
+		if i != null and i.resource_name == item_name:
+			return i
+	return null
+
+
 func get_item_amount(item_name: String) -> int:
 	if items.size() <= 0:
 		return 0
@@ -96,6 +109,7 @@ func get_item_amount(item_name: String) -> int:
 
 
 func save() -> Dictionary:
+	hp = Globals.player.hitbox.hp
 	return {
 		"money": money,
 		"hp": hp,
@@ -124,4 +138,7 @@ func go_to_sleep():
 	tween.tween_callback(SceneManager.animation_player.play.bind("fade_out")).set_delay(2)
 	tween.tween_property(self, "sleep", max_sleep, 0)
 	tween.tween_property(self, "state", states.walk, 0)
-	
+
+
+func on_scene_changed():
+	hp = Globals.player.hitbox.hp

@@ -143,7 +143,7 @@ func set_description(item: Item):
 	if item is not Equipment and item.description == "":
 		stats_panel.hide()
 		return
-	if item is not Equipment:
+	if item is not EquipmentGun:
 		return
 	stats_panel.show()
 	for stat in item.stats:

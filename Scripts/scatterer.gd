@@ -36,7 +36,7 @@ func _on_scatter_button_pressed(value):
 	for i in count:
 		var pc = scenes[randi() % scenes.size()-1]
 		var bush = pc.instantiate()
-		var pos = Vector3(global_position.x + randf_range(-area_size.x / 2, area_size.x / 2), 0.0, global_position.z + randf_range(-area_size.y / 2, area_size.y / 2))
+		var pos = Vector3(randf_range(0, area_size.x), 0.0, position.z + randf_range(0, area_size.y))
 		bush.position = get_position_on_heightmap(pos)
 		if rotate_x: bush.rotation.x = randf_range(0, TAU)
 		if rotate_y: bush.rotation.y = randf_range(0, TAU)
@@ -48,16 +48,6 @@ func _on_scatter_button_pressed(value):
 	# Reset the button
 	scatter_button = false
 	notify_property_list_changed()
-
-
-func _get_property_list():
-	return [
-		{
-			"name": "scatter_button",
-			"type": TYPE_BOOL,
-			"usage": PROPERTY_USAGE_EDITOR,
-		}
-	]
 
 
 func get_position_on_heightmap(in_vector) -> Vector3:

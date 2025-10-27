@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://cl4glsi76vapy"]
+[gd_scene load_steps=14 format=3 uid="uid://cl4glsi76vapy"]
 
 [ext_resource type="Script" uid="uid://bequ4vge6cubm" path="res://Scripts/player_overworld.gd" id="1_lvr5k"]
+[ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_xjgfg"]
 [ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="3_uuhca"]
 [ext_resource type="Material" uid="uid://tu87et11vjjo" path="res://Art/Materials/player_face.tres" id="4_f4tgq"]
 [ext_resource type="PackedScene" uid="uid://cnwsl1ltxxegm" path="res://Scenes/Guns/pistol.tscn" id="5_ppqj6"]
@@ -9,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://dkmenaf8dxpyr" path="res://Scenes/Guns/sniper.tscn" id="7_dc60h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kgvud"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dc60h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3smsa"]
 
@@ -33,7 +36,16 @@ script = ExtResource("1_lvr5k")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_kgvud")
 
-[node name="Hitbox" type="Area3D" parent="." groups=["enemies"]]
+[node name="HealthComponent" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("2_xjgfg")
+hp = 5.0
+metadata/_custom_type_script = "uid://cdgvftnrtwbf7"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HealthComponent"]
+shape = SubResource("CapsuleShape3D_dc60h")
+
+[node name="Hitbox" type="Area3D" parent="." groups=["allies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 8
 collision_mask = 0
@@ -85,10 +97,24 @@ visible = false
 [node name="LeftHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="3"]
 transform = Transform3D(0.4884011, -0.28723484, -0.82399064, 0.0023260808, 0.94469756, -0.32793376, 0.87261665, 0.15824643, 0.46205965, 45.77562, 55.881283, -186.22168)
 
+[node name="SpotLight3D" type="SpotLight3D" parent="EnemyModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7942363, -0.015511632)
+visible = false
+spot_range = 50.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="EnemyModel/SpotLight3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31530797, 0.38542747)
+omni_range = 2.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="EnemyModel/SpotLight3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31530797, -0.50899506)
+omni_range = 2.0
+
 [node name="StepTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
 
+[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]
 [connection signal="timeout" from="StepTimer" to="." method="_on_step_timer_timeout"]

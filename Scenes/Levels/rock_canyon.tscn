@@ -38,7 +38,7 @@ _surfaces = [{
 [node name="Encounter" instance=ExtResource("1_wyyf0")]
 location_data = SubResource("Resource_oy5nx")
 
-[node name="Terrain" parent="." index="4"]
+[node name="Terrain" parent="." index="5"]
 _terrain_data = ExtResource("2_w380c")
 
 [node name="HTerrainDetailLayer" type="Node3D" parent="Terrain" index="0"]
@@ -54,7 +54,7 @@ shader_params/u_instance_scale = Vector3(0.5, 0.5, 0.5)
 shader_params/u_roughness = null
 metadata/_editor_icon = ExtResource("17_iwifo")
 
-[node name="NavigationRegion3D" parent="." index="5"]
+[node name="NavigationRegion3D" parent="." index="6"]
 navigation_mesh = SubResource("NavigationMesh_ghiyu")
 
 [node name="Terrain_FullMesh" type="MeshInstance3D" parent="NavigationRegion3D" index="0"]
@@ -71,13 +71,10 @@ transform = Transform3D(-0.003892098, 0, 0.99999243, 0, 1, 0, -0.99999243, 0, -0
 [node name="Shack4" parent="NavigationRegion3D" index="4" instance=ExtResource("9_oy5nx")]
 transform = Transform3D(0.29395688, 0, 0.95581865, 0, 1, 0, -0.95581865, 0, 0.29395688, 140.50208, 3.3093152, 94.26734)
 
-[node name="EnemySpawner" parent="." index="9"]
-enemy_amount = 0
-
-[node name="SnapToTerrain" parent="." index="10" node_paths=PackedStringArray("objects_to_snap")]
+[node name="SnapToTerrain" parent="." index="11" node_paths=PackedStringArray("objects_to_snap")]
 objects_to_snap = [NodePath("../NavigationRegion3D/Shack2"), NodePath("../NavigationRegion3D/Shack3")]
 
-[node name="Scatterer" parent="." index="11"]
+[node name="Scatterer" parent="." index="12"]
 scenes = Array[PackedScene]([ExtResource("7_kntjh")])
 
 [editable path="WorldEnvironment"]

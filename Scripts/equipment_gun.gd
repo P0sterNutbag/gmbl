@@ -18,7 +18,6 @@ func equip() -> void:
 	for gun in PlayerStats.guns:
 		if gun != self and gun.slot == slot:
 			gun.equipped = false
-	equipped = !equipped
 	if equipped:
 		PlayerStats.equipped_guns[slot] = self
 		if PlayerStats.gun_index == slot:

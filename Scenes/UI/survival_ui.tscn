@@ -1,0 +1,428 @@
+[gd_scene load_steps=9 format=3 uid="uid://cc458wgoeu6t4"]
+
+[ext_resource type="Script" uid="uid://dr73ivowve6xe" path="res://Scripts/survival_ui.gd" id="1_e5c6o"]
+[ext_resource type="Script" uid="uid://bclh5yhrpmkxf" path="res://Scripts/stat_visual.gd" id="2_k4cvi"]
+[ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="3_1lobq"]
+[ext_resource type="Theme" uid="uid://lg0ktyb6xeoh" path="res://Art/Themes/hp_bar.tres" id="4_1kfkr"]
+[ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="5_jtf3n"]
+[ext_resource type="StyleBox" uid="uid://bcg5bax3erc8w" path="res://Art/Themes/style_box.tres" id="6_8egi5"]
+[ext_resource type="Texture2D" uid="uid://cvly0bfjs24or" path="res://Art/Textures/sun-moon.png" id="7_guqia"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_agdr0"]
+bg_color = Color(0, 0, 0, 0.784314)
+border_color = Color(1, 1, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_e5c6o")
+
+[node name="ScaleOffset" type="Control" parent="."]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Bottom Center" type="Control" parent="ScaleOffset"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 480.0
+offset_top = 540.0
+offset_right = 480.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2, 2)
+
+[node name="BottomLeft" type="Control" parent="ScaleOffset"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+scale = Vector2(2, 2)
+
+[node name="TopLeft" type="Control" parent="ScaleOffset"]
+layout_mode = 1
+anchors_preset = 0
+
+[node name="Stats" type="VBoxContainer" parent="ScaleOffset/TopLeft"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 155.0
+offset_bottom = 100.0
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="Health" type="Control" parent="ScaleOffset/TopLeft/Stats"]
+layout_mode = 2
+script = ExtResource("2_k4cvi")
+stat_name = "hp"
+metadata/_edit_group_ = true
+
+[node name="ColorRect4" type="ColorRect" parent="ScaleOffset/TopLeft/Stats/Health"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 1.0
+offset_right = 242.0
+offset_bottom = 16.0
+rotation = -0.0471239
+scale = Vector2(-0.810944, 0.690912)
+color = Color(0, 0, 0, 1)
+
+[node name="GunName" type="Label" parent="ScaleOffset/TopLeft/Stats/Health"]
+layout_mode = 0
+offset_left = 9.13538
+offset_top = 0.5
+offset_right = 160.135
+offset_bottom = 28.5
+theme = ExtResource("3_1lobq")
+text = "Health"
+
+[node name="ProgressBar" type="ProgressBar" parent="ScaleOffset/TopLeft/Stats/Health"]
+layout_mode = 0
+offset_left = 81.5
+offset_top = 6.0
+offset_right = 124.5
+offset_bottom = 17.0
+theme = ExtResource("4_1kfkr")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="Hunger" type="Control" parent="ScaleOffset/TopLeft/Stats"]
+layout_mode = 2
+script = ExtResource("2_k4cvi")
+stat_name = "hunger"
+metadata/_edit_group_ = true
+
+[node name="ColorRect5" type="ColorRect" parent="ScaleOffset/TopLeft/Stats/Hunger"]
+layout_mode = 0
+offset_left = 109.0
+offset_top = 1.0
+offset_right = 245.0
+offset_bottom = 16.0
+rotation = -0.0471239
+scale = Vector2(-0.810944, 0.690912)
+color = Color(0, 0, 0, 1)
+
+[node name="GunName" type="Label" parent="ScaleOffset/TopLeft/Stats/Hunger"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 9.13538
+offset_top = 0.5
+offset_right = 160.135
+offset_bottom = 28.5
+theme = ExtResource("3_1lobq")
+text = "Hunger"
+
+[node name="ProgressBar" type="ProgressBar" parent="ScaleOffset/TopLeft/Stats/Hunger"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 81.5
+offset_top = 6.0
+offset_right = 124.5
+offset_bottom = 17.0
+theme = ExtResource("4_1kfkr")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="Water" type="Control" parent="ScaleOffset/TopLeft/Stats"]
+layout_mode = 2
+script = ExtResource("2_k4cvi")
+stat_name = "thirst"
+metadata/_edit_group_ = true
+
+[node name="ColorRect4" type="ColorRect" parent="ScaleOffset/TopLeft/Stats/Water"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 1.0
+offset_right = 243.0
+offset_bottom = 16.0
+rotation = -0.0471239
+scale = Vector2(-0.810944, 0.690912)
+color = Color(0, 0, 0, 1)
+
+[node name="GunName" type="Label" parent="ScaleOffset/TopLeft/Stats/Water"]
+layout_mode = 0
+offset_left = 9.13538
+offset_top = 0.5
+offset_right = 160.135
+offset_bottom = 28.5
+theme = ExtResource("3_1lobq")
+text = "Thirst"
+
+[node name="ProgressBar" type="ProgressBar" parent="ScaleOffset/TopLeft/Stats/Water"]
+layout_mode = 0
+offset_left = 80.5
+offset_top = 6.0
+offset_right = 123.5
+offset_bottom = 17.0
+theme = ExtResource("4_1kfkr")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="Sleep" type="Control" parent="ScaleOffset/TopLeft/Stats"]
+layout_mode = 2
+script = ExtResource("2_k4cvi")
+stat_name = "sleep"
+metadata/_edit_group_ = true
+
+[node name="ColorRect4" type="ColorRect" parent="ScaleOffset/TopLeft/Stats/Sleep"]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 1.0
+offset_right = 231.0
+offset_bottom = 16.0
+rotation = -0.0471239
+scale = Vector2(-0.810944, 0.690912)
+color = Color(0, 0, 0, 1)
+
+[node name="GunName" type="Label" parent="ScaleOffset/TopLeft/Stats/Sleep"]
+layout_mode = 0
+offset_left = 9.13538
+offset_top = 0.5
+offset_right = 160.135
+offset_bottom = 28.5
+theme = ExtResource("3_1lobq")
+text = "Sleep"
+
+[node name="ProgressBar" type="ProgressBar" parent="ScaleOffset/TopLeft/Stats/Sleep"]
+layout_mode = 0
+offset_left = 73.5
+offset_top = 6.0
+offset_right = 116.5
+offset_bottom = 17.0
+theme = ExtResource("4_1kfkr")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="TopCenter" type="Control" parent="."]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="TopCenter"]
+layout_mode = 0
+offset_left = -100.0
+offset_right = 100.0
+offset_bottom = 25.0
+theme = ExtResource("5_jtf3n")
+horizontal_alignment = 1
+
+[node name="Time" type="Panel" parent="TopCenter"]
+visible = false
+clip_contents = true
+layout_mode = 0
+offset_left = -170.0
+offset_top = 22.0
+offset_right = -123.0
+offset_bottom = 69.0
+theme_override_styles/panel = ExtResource("6_8egi5")
+
+[node name="TextureRect" type="TextureRect" parent="TopCenter/Time"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 56.0
+offset_bottom = 17.0
+scale = Vector2(3, 3)
+texture = ExtResource("7_guqia")
+
+[node name="Compass" type="Control" parent="TopCenter"]
+clip_contents = true
+anchors_preset = 0
+offset_left = -414.0
+offset_top = 25.0
+offset_right = 415.0
+offset_bottom = 53.0
+
+[node name="Panel" type="Panel" parent="TopCenter/Compass"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 19.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_agdr0")
+
+[node name="ColorRect" type="ColorRect" parent="TopCenter/Compass"]
+layout_mode = 0
+offset_top = 21.0
+offset_right = 3840.0
+offset_bottom = 23.0
+
+[node name="ColorRect2" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = 480.0
+offset_top = -2.0
+offset_right = 482.0
+offset_bottom = 4.0
+
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect2"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -18.0
+offset_right = 6.0
+offset_bottom = 5.0
+theme = ExtResource("3_1lobq")
+text = "N"
+
+[node name="ColorRect7" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = 960.0
+offset_top = -2.0
+offset_right = 962.0
+offset_bottom = 4.0
+
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect7"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -18.0
+offset_right = 11.0
+offset_bottom = 5.0
+theme = ExtResource("3_1lobq")
+text = "NE"
+horizontal_alignment = 1
+
+[node name="ColorRect3" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = 1440.0
+offset_top = -2.0
+offset_right = 1442.0
+offset_bottom = 4.0
+
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect3"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -18.0
+offset_right = 6.0
+offset_bottom = 5.0
+theme = ExtResource("3_1lobq")
+text = "E"
+
+[node name="ColorRect8" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = 1920.0
+offset_top = -2.0
+offset_right = 1922.0
+offset_bottom = 4.0
+
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect8"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -18.0
+offset_right = 11.0
+offset_bottom = 5.0
+theme = ExtResource("3_1lobq")
+text = "SE"
+horizontal_alignment = 1
+
+[node name="ColorRect4" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = 2400.0
+offset_top = -2.0
+offset_right = 2402.0
+offset_bottom = 4.0
+
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect4"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -18.0
+offset_right = 6.0
+offset_bottom = 5.0
+theme = ExtResource("3_1lobq")
+text = "S"
+
+[node name="ColorRect9" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = 2880.0
+offset_top = -2.0
+offset_right = 2882.0
+offset_bottom = 4.0
+
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect9"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -18.0
+offset_right = 11.0
+offset_bottom = 5.0
+theme = ExtResource("3_1lobq")
+text = "SW"
+horizontal_alignment = 1
+
+[node name="ColorRect5" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = 3360.0
+offset_top = -2.0
+offset_right = 3362.0
+offset_bottom = 4.0
+
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect5"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -18.0
+offset_right = 6.0
+offset_bottom = 5.0
+theme = ExtResource("3_1lobq")
+text = "W"
+
+[node name="ColorRect10" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = 3840.0
+offset_top = -2.0
+offset_right = 3842.0
+offset_bottom = 4.0
+
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect10"]
+layout_mode = 0
+offset_left = -10.0
+offset_top = -18.0
+offset_right = 11.0
+offset_bottom = 5.0
+theme = ExtResource("3_1lobq")
+text = "NW"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = 3842.0
+offset_right = 4842.0
+offset_bottom = 2.0
+
+[node name="ColorRect2" type="ColorRect" parent="TopCenter/Compass/ColorRect/ColorRect"]
+layout_mode = 0
+offset_left = 478.0
+offset_top = -2.0
+offset_right = 480.0
+offset_bottom = 4.0
+
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect/ColorRect2"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -18.0
+offset_right = 6.0
+offset_bottom = 5.0
+theme = ExtResource("3_1lobq")
+text = "N"
+
+[node name="ColorRect6" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+layout_mode = 0
+offset_left = -20.0
+offset_bottom = 2.0

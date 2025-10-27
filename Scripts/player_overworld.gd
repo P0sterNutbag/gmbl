@@ -27,6 +27,8 @@ var enter_functions: Dictionary
 @onready var pistol: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/Pistol
 @onready var sniper_rifle: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/SniperRifle
 @onready var shotgun: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/Shotgun
+@onready var hitbox: HealthComponent = $HealthComponent
+@onready var spot_light: SpotLight3D = $EnemyModel/SpotLight3D
 var gun: Node3D: 
 	get: 
 		if !PlayerStats.gun:
@@ -46,6 +48,7 @@ func _ready() -> void:
 func _enter_tree() -> void:
 	Globals.player = self
 	await get_tree().process_frame
+	hitbox.hp = PlayerStats.hp
 	change_gun(PlayerStats.gun)
 
 
@@ -93,6 +96,14 @@ func state_walk(delta) -> void:
 		change_gun_slot(0)
 	elif Input.is_action_just_pressed("slot_2"):
 		change_gun_slot(1)
+	
+	# light
+	if Input.is_action_just_pressed("light") and PlayerStats.find_item("flashlight"):
+		PlayerStats.flashlight_on = !PlayerStats.flashlight_on
+	if PlayerStats.flashlight_on:
+		spot_light.visible = true
+	else:
+		spot_light.visible = false
 	
 	# set gun sprite
 	#if gun != PlayerStats.gun:
@@ -162,3 +173,12 @@ func save() -> Dictionary:
 		"pos_z": global_position.z,
 		"model_rotation": model_rotation,
 	}
+
+
+func _on_damaged(_hit_position: Vector3, _hit_direction: Vector3) -> void:
+	pass
+
+
+func _on_death() -> void:
+	PlayerStats.change_state(PlayerStats.states.dead)
+	animation_player.play("Die")

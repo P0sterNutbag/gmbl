@@ -11,15 +11,13 @@ var current_town: Town
 @onready var dialogue: VBoxContainer = $Dialogue
 @onready var bounty_board: HBoxContainer = $BountyBoard
 @onready var journal: MenuList = $Journal
-@onready var compass: ColorRect = $TopCenter/Compass/ColorRect
 
 
 func _enter_tree() -> void:
 	Globals.ui = self
 	if location_card:
 		hide_location_info()
-
-
+	
 func _process(_delta: float) -> void:
 	# opening things
 	if Input.is_action_just_pressed("inventory"):
@@ -29,10 +27,6 @@ func _process(_delta: float) -> void:
 			journal.close()
 		else:
 			journal.open(PlayerStats.quests)
-	
-	# compass movement
-	var cam_rot = rad_to_deg(Globals.player.camera_anchor.rotation.y)
-	compass.position.x = compass.size.x * ((cam_rot / 360.0) + 0.5) - compass.size.x - 70
 	
 	# open pause menu
 	if Input.is_action_just_pressed("ui_cancel"):

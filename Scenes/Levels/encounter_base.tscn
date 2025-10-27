@@ -1,10 +1,11 @@
-[gd_scene load_steps=36 format=3 uid="uid://r4ktdn26psb3"]
+[gd_scene load_steps=37 format=3 uid="uid://r4ktdn26psb3"]
 
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="1_0pe3w"]
 [ext_resource type="Script" uid="uid://ysmfpedeqrtw" path="res://Scripts/encounter.gd" id="1_afsqo"]
 [ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="2_os0xi"]
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_yd52q"]
 [ext_resource type="PackedScene" uid="uid://y6civk4251ei" path="res://Scenes/UI/fps_ui.tscn" id="3_12h26"]
+[ext_resource type="PackedScene" uid="uid://cc458wgoeu6t4" path="res://Scenes/UI/survival_ui.tscn" id="4_2a2fa"]
 [ext_resource type="Resource" uid="uid://de2okx524jxjn" path="res://addons/zylann.hterrain/data/backdrop/data.hterrain" id="6_afsqo"]
 [ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand3.png" id="6_nue3y"]
 [ext_resource type="PackedScene" uid="uid://p1limlnykapp" path="res://Scenes/noise_controller.tscn" id="10_07x41"]
@@ -107,6 +108,8 @@ location_data = SubResource("Resource_fwcaj")
 
 [node name="CanvasLayer" parent="." instance=ExtResource("3_12h26")]
 
+[node name="CanvasLayer2" parent="." instance=ExtResource("4_2a2fa")]
+
 [node name="Shader" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.492066, 0, 0)
 cast_shadow = 0
@@ -117,7 +120,6 @@ mesh = SubResource("QuadMesh_dhle1")
 environment = SubResource("Environment_cael4")
 
 [node name="DirectionalLight3D" parent="WorldEnvironment" index="0"]
-transform = Transform3D(1, 0, 0, 0, -0.533659, 0.8457, 0, -0.8457, -0.533659, 0, 0, 0)
 shadow_normal_bias = 10.0
 
 [node name="NoiseController" parent="." instance=ExtResource("10_07x41")]
@@ -235,16 +237,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 95)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 128)
 script = ExtResource("15_oex8s")
 enemies_to_spawn = Array[ExtResource("16_52w5m")]([SubResource("Resource_qrsnk")])
+enemy_amount = 0
 
 [node name="SnapToTerrain" type="Node3D" parent="."]
 script = ExtResource("21_lsls5")
 
 [node name="Scatterer" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 128)
 script = ExtResource("11_wttml")
 scenes = Array[PackedScene]([null, null])
 count = 45
-area_size = Vector2(100, 100)
+area_size = Vector2(257, 257)
 min_size = 0.75
 max_size = 1.25
 rotate_y = true

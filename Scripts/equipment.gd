@@ -18,4 +18,4 @@ func drop(target_node: Node) -> void:
 
 
 func equip() -> void:
-	pass
+	equipped = !equipped

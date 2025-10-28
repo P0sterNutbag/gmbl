@@ -17,6 +17,7 @@ class_name HealthComponent
 @export var hp_bar2: Control
 @export var otherHitboxes: Array[HealthComponent]
 @onready var max_hp: float = hp
+@onready var physical_bone_simulator: PhysicalBoneSimulator3D = $"../EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D"
 var audio_stream_player: AudioStreamPlayer3D
 var unhealable_hp: float = 0:
 	set(value):

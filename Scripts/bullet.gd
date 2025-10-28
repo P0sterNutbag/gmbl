@@ -38,8 +38,10 @@ func _physics_process(delta: float) -> void:
 func hit():
 	# damage collider if enemy
 	var collider = raycast.get_collider()
+	var damage = bullet_stats.damage * (0.5 + min(0.5 * (gun_stats.condition / gun_stats.max_condition) / 0.75, 0.5))
+	if collider is PhysicalBone3D:
+		collider.health_component.damage(bullet_stats.damage, raycast.get_collision_point(), rotation)
 	if collider is HealthComponent:
-		var damage = bullet_stats.damage * (0.5 + min(0.5 * (gun_stats.condition / gun_stats.max_condition) / 0.75, 0.5))
 		collider.damage(bullet_stats.damage, raycast.get_collision_point(), rotation)
 		if !bullet_stats.is_hitscan:
 			queue_free()

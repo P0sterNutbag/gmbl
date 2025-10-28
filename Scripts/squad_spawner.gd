@@ -9,6 +9,7 @@ var enemies: Array
 
 
 func _ready() -> void:
+	await get_tree().process_frame
 	for i in enemy_amount:
 		var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
 		var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()

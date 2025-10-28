@@ -44,4 +44,6 @@ func spawn():
 func position_on_heightmap(node: Node3D) -> void:
 	var terrain = get_tree().root.get_child(-1).get_node("Terrain")
 	var height = terrain.get_data().get_height_at(global_position.x, global_position.z)
-	node.global_position.y = height + 0.5
+	node.global_position.y = height
+	if location_data_variable == "npc_spawn_chance":
+		node.global_position.y += 0.5

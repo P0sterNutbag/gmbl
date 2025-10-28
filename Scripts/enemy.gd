@@ -38,6 +38,7 @@ var on_alert: bool
 var free_on_destination: bool
 var gun: Node3D
 var damage_position: Vector3
+var damage_direction: Vector3
 var last_seen_position: Vector3
 var destination: Vector3
 var target: Node3D
@@ -60,6 +61,7 @@ var guns_dict: Dictionary = {
 @onready var loot_area: Area3D = $Loot
 @onready var health_component: HealthComponent = $Hitbox
 @onready var aim_timer: Timer = $AimTimer
+@onready var physical_bone_simulator: PhysicalBoneSimulator3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D
 signal shoot
 
 
@@ -401,6 +403,7 @@ func on_noise_heard(noise_position: Vector3, event_creator):
 func _on_damaged(hit_position: Vector3, hit_direction: Vector3) -> void:
 	velocity = Vector3.ZERO
 	damage_position = hit_position
+	damage_direction = hit_direction
 	#if time_since_bleed < 0.1:
 		#return
 	#time_since_bleed = 0
@@ -428,7 +431,14 @@ func _on_death() -> void:
 	if gun:
 		gun.queue_free()
 	velocity = Vector3.ZERO
-	anim_player.play("Die")
+	#anim_player.play("Die")
+	anim_player.active = false
+	physical_bone_simulator.active = true
+	physical_bone_simulator.physical_bones_start_simulation()
+	var bones = physical_bone_simulator.get_children()
+	bones.sort_custom(func(a, b): return a.global_position.distance_to(damage_position) < b.global_position.distance_to(damage_position))
+	#var head = physical_bone_simulator.get_node("Physical Bone mixamorig_Head")
+	bones[0].apply_impulse(damage_direction.normalized() * 35)
 	if bounty:
 		bounty.completed = true
 	change_state(states.dead)

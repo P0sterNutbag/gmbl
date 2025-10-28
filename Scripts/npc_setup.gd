@@ -4,6 +4,7 @@ extends Node3D
 var current_style := NpcStyle.new()
 @onready var cube: MeshInstance3D = $PersonAnimated/Armature/Skeleton3D/Cube_001
 @onready var cube2: MeshInstance3D = $PersonAnimated/Armature/Skeleton3D/Cube_002
+@onready var skeleton_3d: Skeleton3D = $PersonAnimated/Armature/Skeleton3D
 
 
 func _ready() -> void:

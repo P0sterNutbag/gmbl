@@ -29,6 +29,9 @@ var enter_functions: Dictionary
 @onready var shotgun: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/Shotgun
 @onready var hitbox: HealthComponent = $HealthComponent
 @onready var spot_light: SpotLight3D = $EnemyModel/SpotLight3D
+@onready var skeleton: Skeleton3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D
+@onready var physical_bone_simulator_3d: PhysicalBoneSimulator3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D
+
 var gun: Node3D: 
 	get: 
 		if !PlayerStats.gun:

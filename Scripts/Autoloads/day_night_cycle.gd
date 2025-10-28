@@ -2,7 +2,7 @@ extends Node
 
 @export var time_curve: Curve
 var time: float = 1.0
-var time_speed: float = -0.1
+var time_speed: float = -0.01
 var sun_time: float = 0.5
 var sky_progress: float
 var is_night: bool:

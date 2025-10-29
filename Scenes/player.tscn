@@ -26,7 +26,6 @@
 [ext_resource type="AudioStream" uid="uid://ddrjpnastg7jv" path="res://Audio/CharacterActions/footstep-74321.wav" id="22_wpjfl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kgvud"]
-radius = 0.279219
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3smsa"]
 radius = 0.258901
@@ -593,7 +592,6 @@ libraries = {
 }
 
 [node name="SniperRifle" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("17_igrcy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0776536, -0.0241413, 0.00821416)
 visible = false
 bullet_stats = SubResource("Resource_fs7ks")
 gun_stats = SubResource("Resource_olqyp")
@@ -640,6 +638,10 @@ libraries = {
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="CameraAnchor/Camera3D/GunOffset"]
 bus = &"SFX"
+
+[node name="RayCast3D" type="RayCast3D" parent="CameraAnchor/Camera3D/GunOffset"]
+target_position = Vector3(0, 0, -1)
+hit_from_inside = true
 
 [node name="GrenadeSpawn" type="Node3D" parent="CameraAnchor/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.231521, -0.232048, 0)

@@ -2,7 +2,7 @@ extends CharacterBody3D
 class_name Player
 
 enum zoom_levels {regular, ads, zoom}
-enum gun_states {point, ads, reload, ammo_check, no_gun}
+enum gun_states {point, ads, reload, ammo_check, no_gun, point_up}
 var camera_zoom = zoom_levels.regular
 var gun_state = gun_states.point
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -62,6 +62,7 @@ var grenade = preload("res://Scenes/Bullets/grenade.tscn")
 @onready var bullet_flyby_sfx: AudioStreamPlayer3D = $CameraAnchor/BulletListener/AudioStreamPlayer3D
 @onready var footstep_sfx: AudioStreamPlayer3D = $FootstepPlayer
 @onready var spot_light: SpotLight3D = $CameraAnchor/Camera3D/SpotLight3D
+@onready var gun_collision_cast: RayCast3D = $CameraAnchor/Camera3D/GunOffset/RayCast3D
 
 
 func _enter_tree() -> void:
@@ -96,6 +97,7 @@ func _ready() -> void:
 		#gun_states.point: gun_state_point,
 		gun_states.ads: gun_state_ads,
 		gun_states.no_gun: gun_state_no_gun,
+		gun_states.point_up: gun_state_point_up,
 	}
 	gun_enter_functions = {
 		gun_states.point: enter_gun_state_point,
@@ -103,11 +105,13 @@ func _ready() -> void:
 		gun_states.ammo_check: enter_gun_state_ammo_check,
 		gun_states.no_gun: enter_gun_state_no_gun,
 		gun_states.reload: enter_gun_state_reload,
+		gun_states.point_up: enter_gun_state_point_up,
 	}
 	gun_exit_functions = {
 		gun_states.reload: exit_gun_state_reload,
 		gun_states.ammo_check: exit_gun_state_ammo_check,
 		gun_states.no_gun: exit_gun_state_no_gun,
+		gun_states.point_up: exit_gun_state_point_up,
 	}
 
 
@@ -330,6 +334,13 @@ func state_walk(delta):
 			Globals.ui.scope.hide()
 			gun.show()
 	
+	# point gun up if colliding
+	if gun_collision_cast.is_colliding():
+		if gun_state != gun_states.point_up and gun_state != gun_states.no_gun:
+			change_gun_state(gun_states.point_up)
+	elif gun_state == gun_states.point_up:
+		change_gun_state(gun_states.point)
+	
 	# walking animation
 	if gun:
 		if (input.x or input.y) and gun_state == gun_states.point and is_on_floor():
@@ -478,6 +489,32 @@ func exit_gun_state_no_gun():
 	await tween.finished
 
 
+func enter_gun_state_point_up() -> void:
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel()
+	tween.tween_property(gun_anchor, "rotation:x", deg_to_rad(90), 0.25)
+	tween.tween_property(gun_anchor, "position:y", -0.3, 0.25)
+	await tween.finished
+
+
+func gun_state_point_up(delta: float) -> void:
+	var dis = gun_collision_cast.global_position.distance_to(gun_collision_cast.get_collision_point())
+	var target_z = 0.0
+	if dis < 0.5:
+		if dis > 0.3:
+			target_z = 0.5 - dis
+		else:
+			target_z = 0.2
+	gun_anchor.position.z = lerp(gun_anchor.position.z, target_z, 20 * delta)
+
+
+func exit_gun_state_point_up() -> void:
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel()
+	tween.tween_property(gun_anchor, "rotation:x", deg_to_rad(0), 0.25)
+	tween.tween_property(gun_anchor, "position:y", 0, 0.25)
+	tween.tween_property(gun_anchor, "position:z", 0, 0.25)
+	await tween.finished
+
+
 func change_gun_slot(slot_index: int) -> void:
 	var gun = PlayerStats.equipped_guns[slot_index]
 	if gun != null:
@@ -494,6 +531,7 @@ func change_gun(new_gun: EquipmentGun) -> void:
 			i.visible = false
 		else:
 			gun.gun_stats = PlayerStats.gun.gun_stats
+			gun.rotation = Vector3.ZERO
 			firepoint = gun.get_node("GunAnchor/FirePoint")
 			shoot_component.firepoint = firepoint
 			shoot_component.tracer_firepoint = firepoint

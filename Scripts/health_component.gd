@@ -17,7 +17,7 @@ class_name HealthComponent
 @export var hp_bar2: Control
 @export var otherHitboxes: Array[HealthComponent]
 @onready var max_hp: float = hp
-@onready var physical_bone_simulator: PhysicalBoneSimulator3D = $"../EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D"
+#@onready var physical_bone_simulator: PhysicalBoneSimulator3D = $"../EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D"
 var audio_stream_player: AudioStreamPlayer3D
 var unhealable_hp: float = 0:
 	set(value):
@@ -42,8 +42,8 @@ func damage(dmg: float, hit_position: Vector3 = Vector3.ZERO, hit_direction: Vec
 	if is_dead:
 		return
 	hp -= dmg
-	if randf() < 0.2:
-		unhealable_hp += dmg
+	#if randf() < 0.2:
+		#unhealable_hp += dmg
 	if audio_stream_player:
 		audio_stream_player.play()
 	if hp <= 0:

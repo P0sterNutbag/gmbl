@@ -31,4 +31,3 @@ func _process(delta: float) -> void:
 		sun_time += abs(time_speed / 2) * delta
 	else:
 		sun_time = 0
-	print(sun_time)

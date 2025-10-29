@@ -203,11 +203,11 @@ transform = Transform3D(0.005000021, -5.820766e-10, -1.6880222e-09, 6.693881e-10
 shape = SubResource("BoxShape3D_rwj6q")
 
 [node name="Physical Bone mixamorig_Spine1" type="PhysicalBone3D" parent="PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D"]
-transform = Transform3D(-10.603882, -166.32114, 1.6186188, 166.18558, -10.526906, 7.0216036, -6.9048114, 2.0606842, 166.51079, -1.7452319, -2.7933693, -220.53928)
+transform = Transform3D(-10.603882, -166.32114, 1.6186188, 166.18558, -10.526906, 7.0216036, -6.9048114, 2.0606842, 166.51079, -1.7452308, -2.7720149, -220.08002)
 collision_layer = 2052
 joint_type = 2
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2232382e-06, -5.9878483e-05, 0.06480965)
-body_offset = Transform3D(166.66663, -0.00019073486, -8.440018e-05, -9.346008e-05, 1.3977289e-05, -166.66663, 0.0002193451, 166.66673, 5.930662e-06, 0.00020933151, 10.801605, 0.009979367)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4820249e-05, -8.58493e-05, 0.062051255)
+body_offset = Transform3D(166.66663, -0.00019073486, -8.440018e-05, -9.346008e-05, 1.3977289e-05, -166.66663, 0.0002193451, 166.66673, 5.930662e-06, 0.0024752617, 10.341873, 0.014307857)
 linear_damp = 2.0
 angular_damp = 4.0
 bone_name = "mixamorig_Spine1"
@@ -223,11 +223,11 @@ transform = Transform3D(0.005000033, -1.193257e-09, 0, -2.2992026e-09, -2.064553
 shape = SubResource("BoxShape3D_7vuam")
 
 [node name="Physical Bone mixamorig_Spine2" type="PhysicalBone3D" parent="PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D"]
-transform = Transform3D(-8.314418, -166.45908, 0.17344347, 166.43753, -8.310537, 2.692448, -2.6804454, 0.30752185, 166.64479, -1.8754215, -3.5437338, -245.92116)
+transform = Transform3D(-8.314418, -166.45908, 0.17344347, 166.43753, -8.310537, 2.692448, -2.6804454, 0.30752185, 166.64479, -1.8754215, -3.5383008, -245.49344)
 collision_layer = 2052
 joint_type = 2
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6867007e-05, -6.9394914e-06, 0.07437717)
-body_offset = Transform3D(166.66667, 1.335144e-05, -3.170967e-05, -4.1007996e-05, 3.759563e-05, -166.66664, 1.1444092e-05, 166.66673, 3.0636787e-05, -0.0028088093, 12.396194, 0.0011543036)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5586914e-05, -1.0049666e-05, 0.07181068)
+body_offset = Transform3D(166.66667, 1.335144e-05, -3.170967e-05, -4.1007996e-05, 3.759563e-05, -166.66664, 1.1444092e-05, 166.66673, 3.0636787e-05, -0.004262209, 11.968445, 0.0016727448)
 linear_damp = 2.0
 angular_damp = 4.0
 bone_name = "mixamorig_Spine2"
@@ -277,6 +277,7 @@ joint_constraints/bias = 0.3
 joint_constraints/softness = 0.8
 joint_constraints/relaxation = 1.0
 script = ExtResource("10_rwj6q")
+damage_modifier = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_Head"]
 transform = Transform3D(0.0050000083, -3.3469405e-10, 1.7462298e-10, -1.9615982e-08, -6.4028427e-10, 0.0050000055, 8.4983185e-09, -0.004999992, -1.2223609e-09, 5.9604645e-08, 6.556511e-07, 0.010426164)
@@ -297,6 +298,7 @@ joint_constraints/bias = 0.3
 joint_constraints/softness = 0.8
 joint_constraints/relaxation = 1.0
 script = ExtResource("10_rwj6q")
+damage_modifier = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_LeftShoulder"]
 transform = Transform3D(0.005, -8.1490725e-10, 0, 0, -1.0040822e-09, 0.005, 0, -0.0049999994, -3.4924597e-10, 0, 0, 0)
@@ -317,6 +319,7 @@ joint_constraints/bias = 0.3
 joint_constraints/softness = 0.8
 joint_constraints/relaxation = 1.0
 script = ExtResource("10_rwj6q")
+damage_modifier = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_LeftArm"]
 transform = Transform3D(0.0050000018, 1.3606041e-09, -3.4924597e-10, -1.1641532e-10, -2.3574103e-09, 0.0050000018, 3.7107384e-10, -0.005000002, -3.2014214e-10, 0, 0, 0)
@@ -337,6 +340,7 @@ joint_constraints/bias = 0.3
 joint_constraints/softness = 0.8
 joint_constraints/relaxation = 1.0
 script = ExtResource("10_rwj6q")
+damage_modifier = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_LeftForeArm"]
 transform = Transform3D(0.005, 1.1641532e-10, -8.605639e-09, -3.8244252e-10, -1.8098945e-10, 0.0049999994, -2.3283064e-10, -0.0049999994, -2.2564564e-09, 0, 0, 0)
@@ -357,17 +361,18 @@ joint_constraints/bias = 0.3
 joint_constraints/softness = 0.8
 joint_constraints/relaxation = 1.0
 script = ExtResource("10_rwj6q")
+damage_modifier = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_RightShoulder"]
 transform = Transform3D(0.005, -7.2759576e-11, 6.9849193e-10, 0, -2.3283064e-10, 0.0049999957, 4.3655746e-11, -0.005, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_e0fye")
 
 [node name="Physical Bone mixamorig_RightArm" type="PhysicalBone3D" parent="PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D"]
-transform = Transform3D(-100.031975, 104.73142, 82.478584, 91.522675, 128.92894, -52.713295, -96.92768, 13.653875, -134.89389, -53.766388, 9.470933, -218.81813)
+transform = Transform3D(-100.031975, 104.73142, 82.47858, 91.522675, 128.92894, -52.7133, -96.92768, 13.653873, -134.89389, -53.766388, 9.470933, -218.81813)
 collision_layer = 2052
 joint_type = 2
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.891179e-07, -1.3418624e-07, 0.14504322)
-body_offset = Transform3D(-0.0012207031, 166.66667, 0.0002593994, 0.00012588501, 0.00022506714, -166.66669, -166.66667, -0.0012054443, -4.005432e-05, -1.5258789e-05, 24.173874, 0.0001373291)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.87458e-07, -1.3750604e-07, 0.14504322)
+body_offset = Transform3D(-0.0012207031, 166.66667, 0.0002632141, 0.00012588501, 0.00022888184, -166.66669, -166.66667, -0.0011978149, -4.196167e-05, -1.5258789e-05, 24.173874, 0.0001373291)
 linear_damp = 2.0
 angular_damp = 4.0
 bone_name = "mixamorig_RightArm"
@@ -377,6 +382,7 @@ joint_constraints/bias = 0.3
 joint_constraints/softness = 0.8
 joint_constraints/relaxation = 1.0
 script = ExtResource("10_rwj6q")
+damage_modifier = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_RightArm"]
 transform = Transform3D(0.0050000087, 1.8626451e-09, 4.656613e-10, 6.2864274e-09, 1.2805685e-09, 0.005, 5.820766e-11, -0.0050000027, -2.4447218e-09, 0, 0, 0)
@@ -398,6 +404,7 @@ joint_constraints/bias = 0.3
 joint_constraints/softness = 0.8
 joint_constraints/relaxation = 1.0
 script = ExtResource("10_rwj6q")
+damage_modifier = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_RightForeArm"]
 transform = Transform3D(0.004999998, 6.9849193e-10, 9.313226e-10, 2.3283064e-09, -2.3283064e-10, 0.0050000013, 5.355105e-09, -0.005, -1.1641532e-10, 0, 0, 0)
@@ -419,6 +426,7 @@ joint_constraints/bias = 0.3
 joint_constraints/softness = 0.8
 joint_constraints/relaxation = 1.0
 script = ExtResource("10_rwj6q")
+damage_modifier = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_LeftUpLeg"]
 transform = Transform3D(0.004999999, 4.3655746e-11, 0, 1.1641532e-10, -3.4924597e-10, 0.005, -2.910383e-11, -0.005000001, -2.3283064e-10, 0, 0, -0.010612786)
@@ -440,6 +448,7 @@ joint_constraints/bias = 0.3
 joint_constraints/softness = 0.8
 joint_constraints/relaxation = 1.0
 script = ExtResource("10_rwj6q")
+damage_modifier = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_LeftLeg"]
 transform = Transform3D(0.0050000018, -2.6193447e-10, 0, -4.656613e-10, -1.36788e-09, 0.005, 1.2441888e-09, -0.005, -2.1827873e-10, 0, -1.4901161e-08, 0.018248409)
@@ -461,6 +470,7 @@ joint_constraints/bias = 0.3
 joint_constraints/softness = 0.8
 joint_constraints/relaxation = 1.0
 script = ExtResource("10_rwj6q")
+damage_modifier = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_LeftFoot"]
 transform = Transform3D(0.005, 3.4924597e-10, 1.1641532e-10, 0, 1.2805685e-09, 0.005, 0, -0.004999998, -3.4924597e-10, 0, 0, 0)
@@ -482,6 +492,7 @@ joint_constraints/bias = 0.3
 joint_constraints/softness = 0.8
 joint_constraints/relaxation = 1.0
 script = ExtResource("10_rwj6q")
+damage_modifier = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_RightUpLeg"]
 transform = Transform3D(0.0049999943, 2.557499e-09, -4.656613e-10, 1.839362e-08, -3.79805e-09, 0.0050000018, 2.222805e-09, -0.005, -1.3096724e-10, 0, 0, 0)
@@ -503,6 +514,7 @@ joint_constraints/bias = 0.3
 joint_constraints/softness = 0.8
 joint_constraints/relaxation = 1.0
 script = ExtResource("10_rwj6q")
+damage_modifier = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_RightLeg"]
 transform = Transform3D(0.005, 5.2386895e-10, -2.3283064e-10, 2.3283064e-10, -1.1641532e-10, 0.0050000004, 5.820766e-10, -0.005, -4.656613e-10, 0, 0, 0)
@@ -524,6 +536,7 @@ joint_constraints/bias = 0.3
 joint_constraints/softness = 0.8
 joint_constraints/relaxation = 1.0
 script = ExtResource("10_rwj6q")
+damage_modifier = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_RightFoot"]
 transform = Transform3D(0.0049999985, 1.1641532e-10, -3.4924597e-10, 0, -3.4924597e-10, 0.004999999, 1.6298145e-09, -0.005, 1.2805685e-08, 0, 0, 0)

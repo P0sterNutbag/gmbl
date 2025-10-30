@@ -44,8 +44,10 @@ func _process(delta: float) -> void:
 		inventory_container.visible = !inventory_container.visible
 		if inventory_container.visible:
 			PlayerStats.change_state(PlayerStats.states.pause)
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
 			PlayerStats.change_state(PlayerStats.states.walk)
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	# crosshair
 	if get_tree().current_scene == Globals.overworld:
@@ -64,9 +66,6 @@ func _process(delta: float) -> void:
 			target_pos.x = sign(child.position.x) * (base_pos * clamp(Globals.player.velocity.length(), 1, 2) * Globals.player.shoot_component.spread)
 		child.position = lerp(child.position, target_pos, delta * 20)
 	
-	# compass
-	#var cam_rot = rad_to_deg(Globals.player.rotation.y)
-	#compass.position.x = compass.size.x * ((cam_rot / 360.0) + 0.5) - compass.size.x - 70
 
 
 func show_scope(scope_texture: Texture2D = scope.texture) -> void:

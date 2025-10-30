@@ -2,7 +2,6 @@ extends VBoxContainer
 class_name MenuController
 
 var index: int
-#var can_move: bool = true
 var menu_item = preload("res://Scenes/UI/menu_item.tscn")
 
 

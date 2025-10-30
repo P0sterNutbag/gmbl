@@ -29,9 +29,9 @@ func _process(_delta: float) -> void:
 			journal.open(PlayerStats.quests)
 	
 	# open pause menu
-	if Input.is_action_just_pressed("ui_cancel"):
-		if PlayerStats.state != PlayerStats.states.pause:
-			Globals.pause_game()
+	#if Input.is_action_just_pressed("ui_cancel"):
+		#if PlayerStats.state != PlayerStats.states.pause:
+			#PauseMenu.activate()
 
 
 func show_location_info(encounter: Node3D) -> void:

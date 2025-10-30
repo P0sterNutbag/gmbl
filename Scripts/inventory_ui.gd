@@ -65,9 +65,14 @@ func set_items():
 		items.append(inst)
 		inst.text = item.title
 		inst.resource = item
+		inst.owner = self
+		inst.moveable = true
 		if show_price:
 			inst.price = item.price
 		inst.focus_entered.connect(set_description.bind(item))
+		inst.delete.connect(target.items.erase.bind(inst.resource))
+		inst.delete.connect(set_items)
+		inst.transfer.connect(transfer_item.bind(inst))
 		if mode == modes.use:
 			if item is ItemUsable:
 				item.target_node = target

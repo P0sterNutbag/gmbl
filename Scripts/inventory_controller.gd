@@ -47,8 +47,10 @@ func _on_visibility_changed() -> void:
 	if visible:
 		#get_child(get_child_count()-1).grab_focus()
 		PlayerStats.state = PlayerStats.states.pause
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	else:
 		PlayerStats.state = PlayerStats.states.walk
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func _on_resized() -> void:

@@ -1,6 +1,5 @@
 extends Button
 
-
 var amount: int = 1:
 	set(value):
 		amount = value
@@ -23,7 +22,12 @@ var price: int:
 var resource: Resource
 var icon_texture: Texture2D
 var can_press: bool
+var moveable: bool
+var can_grab: bool
+var follow_mouse: bool
 @onready var price_label: Label = %Price
+signal delete
+signal transfer
 
 
 func _ready() -> void:
@@ -40,6 +44,9 @@ func _process(_delta: float) -> void:
 	# show equipped
 	if resource and resource is Equipment:
 		equipped = resource.equipped
+	# follow mouse
+	if follow_mouse:
+		global_position = get_global_mouse_position()
 
 
 func _on_focus_entered() -> void:
@@ -48,3 +55,52 @@ func _on_focus_entered() -> void:
 
 func _on_focus_exited() -> void:
 	icon = null
+
+
+func _on_mouse_entered() -> void:
+	grab_focus()
+
+
+func _on_mouse_exited() -> void:
+	release_focus()
+
+
+func _on_gui_input(event: InputEvent) -> void:
+	if !moveable:
+		return
+	if event is InputEventMouseButton:
+		if event.pressed:
+			can_grab = true
+	if event is InputEventMouseMotion and can_grab and !follow_mouse:
+		follow_mouse = true
+		#get_tree().current_scene.add_child(self)
+	if event is InputEventMouseButton and event.is_released():
+		if !follow_mouse:
+			return
+		follow_mouse = false
+		can_grab = false
+		if Globals.ui.inventory_container.visible:
+			var menu = Globals.ui.inventory_container.get_child(0)
+			var in_menu = (get_global_mouse_position().x > menu.global_position.x and 
+			get_global_mouse_position().x < menu.global_position.x + menu.size.x and 
+			get_global_mouse_position().y > menu.global_position.y and 
+			get_global_mouse_position().y < menu.global_position.y + menu.size.y)
+			if !in_menu:
+				delete.emit()
+				queue_free()
+		elif Globals.ui.inventory_container2.visible:
+			var menu_1 = Globals.ui.inventory_container2.get_child(0)
+			var in_menu1 = (get_global_mouse_position().x > menu_1.global_position.x and 
+			get_global_mouse_position().x < menu_1.global_position.x + menu_1.size.x and 
+			get_global_mouse_position().y > menu_1.global_position.y and 
+			get_global_mouse_position().y < menu_1.global_position.y + menu_1.size.y)
+			var menu_2 = Globals.ui.inventory_container2.get_child(1)
+			var in_menu2 = (get_global_mouse_position().x > menu_2.global_position.x and 
+			get_global_mouse_position().x < menu_2.global_position.x + menu_2.size.x and 
+			get_global_mouse_position().y > menu_2.global_position.y and 
+			get_global_mouse_position().y < menu_2.global_position.y + menu_2.size.y)
+			if !in_menu1 and !in_menu2:
+				delete.emit()
+				queue_free()
+			elif (in_menu2 and owner == menu_1) or (in_menu1 and owner == menu_2):
+				transfer.emit()

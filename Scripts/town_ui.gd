@@ -7,7 +7,7 @@ var current_town: Town
 @onready var shop: HBoxContainer = $Shop
 @onready var shop_inventory: PanelContainer = $Shop/Inventory
 @onready var shop_inventory2: PanelContainer = $Shop/Inventory2
-@onready var portraits: HBoxContainer = $Portraits
+#@onready var portraits: HBoxContainer = $Portraits
 @onready var dialogue: VBoxContainer = $Dialogue
 @onready var bounty_board: HBoxContainer = $BountyBoard
 @onready var journal: MenuList = $Journal
@@ -76,5 +76,5 @@ func enter_shop(shop_data: Shop) -> void:
 	shop.show()
 
 
-func _on_shop_visibility_changed() -> void:
-	portraits.visible = !shop.visible
+#func _on_shop_visibility_changed() -> void:
+	#portraits.visible = !shop.visible

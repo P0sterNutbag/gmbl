@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://doydk513gm02l"]
+[gd_scene load_steps=37 format=3 uid="uid://doydk513gm02l"]
 
 [ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_8a8sp"]
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="2_8km0n"]
@@ -13,12 +13,17 @@
 [ext_resource type="Texture2D" uid="uid://d3rtqe0gurf4e" path="res://Art/Textures/grass.png" id="11_xeul4"]
 [ext_resource type="ArrayMesh" uid="uid://dpef2d0qcn5d4" path="res://addons/zylann.hterrain/models/grass_quad_x2.obj" id="12_tcfdj"]
 [ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="13_ndfb3"]
-[ext_resource type="PackedScene" uid="uid://bhm0d0as5r4an" path="res://Scenes/Overworld/sand_dunes_poi2.tscn" id="23_g4mon"]
+[ext_resource type="PackedScene" uid="uid://bhm0d0as5r4an" path="res://Scenes/Overworld/POIs/sand_dunes.tscn" id="23_g4mon"]
+[ext_resource type="PackedScene" uid="uid://c2qnc6mc8mi82" path="res://Scenes/Overworld/POIs/bandit_camp.tscn" id="23_tmnft"]
+[ext_resource type="PackedScene" uid="uid://dwmif1gu3kcoq" path="res://Scenes/Overworld/POIs/bandit_town.tscn" id="24_qmlme"]
 [ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="25_2tpug"]
+[ext_resource type="PackedScene" uid="uid://tytoy87nm7u3" path="res://Scenes/Overworld/POIs/crateyard.tscn" id="25_o1ymp"]
+[ext_resource type="PackedScene" uid="uid://bq3maily0jjmb" path="res://Scenes/Overworld/POIs/rock_canyon.tscn" id="26_4fv5b"]
 [ext_resource type="PackedScene" uid="uid://cl4glsi76vapy" path="res://Scenes/Overworld/player.tscn" id="26_sumxb"]
 [ext_resource type="Script" uid="uid://dq1csolov4xy" path="res://Scripts/Overworld/npc_controller.gd" id="27_mc2kn"]
 [ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="28_iobr3"]
-[ext_resource type="PackedScene" uid="uid://dhc6a3k8wyk4x" path="res://Scenes/Overworld/enemy.tscn" id="29_d6iya"]
+[ext_resource type="PackedScene" uid="uid://chmu736lsu106" path="res://Scenes/Overworld/POIs/small_town.tscn" id="28_veblk"]
+[ext_resource type="PackedScene" uid="uid://dhc6a3k8wyk4x" path="res://Scenes/Overworld/NPCs/enemy.tscn" id="29_d6iya"]
 [ext_resource type="Script" uid="uid://bxtcknb4rx5h2" path="res://Scripts/random_timer.gd" id="30_674rd"]
 [ext_resource type="Script" uid="uid://chxn6jj2cv0p3" path="res://Scripts/scatterer.gd" id="36_lkfci"]
 [ext_resource type="PackedScene" uid="uid://cac84v7aucntx" path="res://Scenes/Environment/Nature/brush_orange.tscn" id="37_21yxh"]
@@ -151,13 +156,28 @@ area_size = Vector2(1000, 1000)
 
 [node name="SnapToTerrain" type="Node3D" parent="." node_paths=PackedStringArray("objects_to_snap")]
 script = ExtResource("41_8km0n")
-objects_to_snap = [null, null, null, null, null, null, null, null]
+objects_to_snap = [NodePath("../BanditCamp"), NodePath("../BanditTown"), NodePath("../Crateyard"), NodePath("../RockCanyon"), NodePath("../SandDunes"), NodePath("../SmallTown")]
 
 [node name="Player" parent="." instance=ExtResource("26_sumxb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.009062, 2.8766785, 24.508362)
+transform = Transform3D(-0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710677, 23.009062, 2.8766785, 24.508362)
 
-[node name="PointOfInterest" parent="." instance=ExtResource("23_g4mon")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.232058, 0.5954943, 41.67036)
+[node name="BanditCamp" parent="." instance=ExtResource("23_tmnft")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.003296, 0.97714686, 70.449745)
+
+[node name="BanditTown" parent="." instance=ExtResource("24_qmlme")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.27599, 0.72225976, 91.82686)
+
+[node name="Crateyard" parent="." instance=ExtResource("25_o1ymp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 149.96858, 1.2790873, 76.05634)
+
+[node name="RockCanyon" parent="." instance=ExtResource("26_4fv5b")]
+transform = Transform3D(0.6270934, 0, 0.77894413, 0, 1, 0, -0.77894413, 0, 0.6270934, 41.403187, 0.951236, 50.427628)
+
+[node name="SandDunes" parent="." instance=ExtResource("23_g4mon")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.584854, 0.40683475, 114.55108)
+
+[node name="SmallTown" parent="." instance=ExtResource("28_veblk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.32245, 0.8049815, 60.194256)
 
 [connection signal="timeout" from="NpcController/Timer" to="NpcController" method="_on_timer_timeout"]
 [connection signal="timeout" from="NpcController/Timer" to="NpcController/Timer" method="_on_timeout"]

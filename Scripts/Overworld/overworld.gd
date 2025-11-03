@@ -4,8 +4,8 @@ var player_spawn_vector: Vector3
 var load_on_enter: bool
 var current_encounter: Node3D
 var player_place: NodePath
-@onready var npc_portrait_model: Node3D = $ShopkeeperPortrait/EnemyModel2
-@onready var npc_controller: Node3D = $NpcController
+#@onready var npc_portrait_model: Node3D = $ShopkeeperPortrait/EnemyModel2
+#@onready var npc_controller: Node3D = $NpcController
 
 
 func _enter_tree() -> void:

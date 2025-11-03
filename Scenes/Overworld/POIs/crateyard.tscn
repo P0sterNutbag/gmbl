@@ -1,0 +1,84 @@
+[gd_scene load_steps=10 format=3 uid="uid://tytoy87nm7u3"]
+
+[ext_resource type="PackedScene" uid="uid://cqnwuiew1q2il" path="res://Scenes/Overworld/point_of_interest.tscn" id="1_adwor"]
+[ext_resource type="Script" uid="uid://lblyysya3an4" path="res://Scripts/location.gd" id="2_vy3hd"]
+[ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="3_12ax0"]
+[ext_resource type="PackedScene" uid="uid://dwnxniisp8nr2" path="res://Scenes/Levels/crateyard.tscn" id="4_vy3hd"]
+[ext_resource type="PackedScene" uid="uid://di4qmk466fnrk" path="res://Scenes/Environment/Buildings/shipping_container.tscn" id="5_ydli0"]
+[ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="6_uqimq"]
+[ext_resource type="Texture2D" uid="uid://dejeawiol7jdc" path="res://Art/Textures/ring.png" id="7_ngsgb"]
+
+[sub_resource type="Resource" id="Resource_wgi48"]
+script = ExtResource("3_12ax0")
+population = 6
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hwnis"]
+radius = 2.89524
+
+[node name="Crateyard" instance=ExtResource("1_adwor")]
+title = "Crateyard"
+
+[node name="Encounter" type="Area3D" parent="." index="3" groups=["persist"]]
+collision_layer = 64
+collision_mask = 32
+script = ExtResource("2_vy3hd")
+location_data = SubResource("Resource_wgi48")
+encounter_scene = ExtResource("4_vy3hd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Encounter" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02906, 0)
+shape = SubResource("SphereShape3D_hwnis")
+
+[node name="Node3D" type="Node3D" parent="Encounter" index="1"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, -0.35, 0.795)
+
+[node name="ShippingContainer" parent="Encounter/Node3D" index="0" instance=ExtResource("5_ydli0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80066, 1.5, -1.15123)
+
+[node name="CollisionShape3D" parent="Encounter/Node3D/ShippingContainer/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
+
+[node name="ShippingContainer4" parent="Encounter/Node3D" index="1" instance=ExtResource("5_ydli0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.65487, 1.5, -0.216857)
+
+[node name="CollisionShape3D" parent="Encounter/Node3D/ShippingContainer4/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
+
+[node name="ShippingContainer2" parent="Encounter/Node3D" index="2" instance=ExtResource("5_ydli0")]
+transform = Transform3D(0.98165, 0, -0.190689, 0, 1, 0, 0.190689, 0, 0.98165, -0.501112, 4.5, -1.36387)
+
+[node name="CollisionShape3D" parent="Encounter/Node3D/ShippingContainer2/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
+
+[node name="EnemyModel" parent="Encounter" index="2" instance=ExtResource("6_uqimq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.444815)
+
+[node name="Sprite3D" type="Sprite3D" parent="Encounter" index="3"]
+transform = Transform3D(2.71843, 0, 0, 0, 8.10155e-08, -0.999206, 0, 2.71843, 2.97786e-08, 0, 0.001, 0)
+visible = false
+visibility_range_end = 20.0
+visibility_range_end_margin = 2.0
+visibility_range_fade_mode = 1
+modulate = Color(1, 1, 0, 0.627451)
+render_priority = 1
+texture = ExtResource("7_ngsgb")
+
+[node name="SpawnS" type="Node3D" parent="Encounter" index="4"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 3.4973)
+
+[node name="SpawnE" type="Node3D" parent="Encounter" index="5"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.95015, 0, -0.0203078)
+
+[node name="SpawnW" type="Node3D" parent="Encounter" index="6"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.97495, 0, -0.0203078)
+
+[node name="SpawnN" type="Node3D" parent="Encounter" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.02548)
+
+[connection signal="body_entered" from="Encounter" to="Encounter" method="_on_body_entered"]
+[connection signal="body_exited" from="Encounter" to="Encounter" method="_on_body_exited"]
+
+[editable path="Encounter/Node3D/ShippingContainer"]
+[editable path="Encounter/Node3D/ShippingContainer4"]
+[editable path="Encounter/Node3D/ShippingContainer2"]

@@ -1,0 +1,77 @@
+[gd_scene load_steps=12 format=3 uid="uid://c2qnc6mc8mi82"]
+
+[ext_resource type="PackedScene" uid="uid://cqnwuiew1q2il" path="res://Scenes/Overworld/point_of_interest.tscn" id="1_4e01a"]
+[ext_resource type="Script" uid="uid://lblyysya3an4" path="res://Scripts/location.gd" id="2_dx210"]
+[ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="3_ojs31"]
+[ext_resource type="PackedScene" uid="uid://y7epyw5i4ifp" path="res://Scenes/Levels/bandit_camp.tscn" id="4_dx210"]
+[ext_resource type="PackedScene" uid="uid://bckm1lw4wvcpb" path="res://Scenes/Environment/Buildings/shack_sandbrick.tscn" id="5_e8630"]
+[ext_resource type="PackedScene" uid="uid://dergqrsprx3qg" path="res://Scenes/Environment/Buildings/shack3.tscn" id="6_kj5c5"]
+[ext_resource type="PackedScene" uid="uid://di4qmk466fnrk" path="res://Scenes/Environment/Buildings/shipping_container.tscn" id="7_4pg48"]
+[ext_resource type="PackedScene" uid="uid://bacbcwbytr4bc" path="res://Scenes/Environment/Buildings/shack_tin_gray.tscn" id="8_ured6"]
+[ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="9_8yx4k"]
+
+[sub_resource type="Resource" id="Resource_dfpji"]
+script = ExtResource("3_ojs31")
+population = 5
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hwnis"]
+radius = 4.0
+
+[node name="BanditCamp" instance=ExtResource("1_4e01a")]
+title = "Bandit Camp"
+
+[node name="Encounter" type="Area3D" parent="." index="3" groups=["persist"]]
+collision_layer = 64
+collision_mask = 32
+script = ExtResource("2_dx210")
+location_data = SubResource("Resource_dfpji")
+encounter_scene = ExtResource("4_dx210")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Encounter" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02906, 0)
+shape = SubResource("SphereShape3D_hwnis")
+
+[node name="Node3D" type="Node3D" parent="Encounter" index="1"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="Shack" parent="Encounter/Node3D" index="0" instance=ExtResource("5_e8630")]
+transform = Transform3D(0.637504, 0, -0.770447, 0, 1, 0, 0.770447, 0, 0.637504, -8.47988, 0, -2.60693)
+
+[node name="CSGBakedCollisionShape3D" parent="Encounter/Node3D/Shack/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
+
+[node name="Shack4" parent="Encounter/Node3D" index="1" instance=ExtResource("6_kj5c5")]
+transform = Transform3D(0.900994, 0, 0.433832, 0, 1, 0, -0.433832, 0, 0.900994, 8.38723, -1.66893e-06, 5.3018)
+
+[node name="CollisionShape3D" parent="Encounter/Node3D/Shack4/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
+
+[node name="ShippingContainer2" parent="Encounter/Node3D" index="2" instance=ExtResource("7_4pg48")]
+transform = Transform3D(0.570914, 0, -0.82101, 0, 1, 0, 0.82101, 0, 0.570914, 0.928697, 1.5, 11.3218)
+
+[node name="CollisionShape3D" parent="Encounter/Node3D/ShippingContainer2/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
+
+[node name="ShippingContainer3" parent="Encounter/Node3D" index="3" instance=ExtResource("7_4pg48")]
+transform = Transform3D(-0.540901, -0.000768779, -0.841086, -0.000561794, 1, -0.000552739, 0.841086, 0.000173528, -0.540902, -6.88827, 1.5, 7.42092)
+
+[node name="CollisionShape3D" parent="Encounter/Node3D/ShippingContainer3/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
+
+[node name="Shack2" parent="Encounter/Node3D" index="4" instance=ExtResource("8_ured6")]
+transform = Transform3D(-0.944812, 0, -0.327614, 0, 1, 0, 0.327614, 0, -0.944812, 1.11298, 1.43051e-06, -10.5274)
+
+[node name="CSGBakedCollisionShape3D" parent="Encounter/Node3D/Shack2/CSGBakedMeshInstance3D/StaticBody3D" index="0"]
+disabled = true
+
+[node name="EnemyModel" parent="Encounter" index="2" instance=ExtResource("9_8yx4k")]
+
+[connection signal="body_entered" from="Encounter" to="Encounter" method="_on_body_entered"]
+[connection signal="body_exited" from="Encounter" to="Encounter" method="_on_body_exited"]
+
+[editable path="Encounter/Node3D/Shack"]
+[editable path="Encounter/Node3D/Shack4"]
+[editable path="Encounter/Node3D/ShippingContainer2"]
+[editable path="Encounter/Node3D/ShippingContainer3"]
+[editable path="Encounter/Node3D/Shack2"]

@@ -67,6 +67,7 @@ signal shoot
 
 
 func _ready() -> void:
+	gun_holder.get_child(0).queue_free()
 	gun = guns_dict[gun_index][0].instantiate()
 	gun_holder.add_child(gun)
 	gun.bullet_stats.collision_mask = 4

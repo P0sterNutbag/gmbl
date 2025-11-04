@@ -336,7 +336,7 @@ func state_walk(delta):
 	
 	# point gun up if colliding
 	if gun_collision_cast.is_colliding():
-		if gun_state != gun_states.point_up and gun_state != gun_states.no_gun:
+		if gun_state != gun_states.point_up and gun_state != gun_states.no_gun and gun_state != gun_states.reload:
 			change_gun_state(gun_states.point_up)
 	elif gun_state == gun_states.point_up:
 		change_gun_state(gun_states.point)

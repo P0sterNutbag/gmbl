@@ -11,6 +11,8 @@ var used_spawns: Array[int]
 
 
 func _ready() -> void:
+	if location_data_variable == "npc_spawn_chance":
+		get_tree().root.get_node("Encounter/EnemySpawner").spawn_points.append_array(get_children())
 	if spawn_on_heightmap:
 		for child in get_children():
 			position_on_heightmap(child)
@@ -19,13 +21,13 @@ func _ready() -> void:
 				child.rotate_y(deg_to_rad(180))
 				child.global_rotation.x = 0
 				child.global_rotation.z = 0
-	await get_tree().process_frame
-	if "location_data" in get_tree().current_scene:
-		spawn_chance = get_tree().current_scene.location_data.get(location_data_variable)
-	var spawn_amount = randi_range(spawn_amount_min, spawn_amount_max)
-	if randf() <= spawn_chance:
-		for i in spawn_amount:
-			spawn()
+	#await get_tree().process_frame
+	#if "location_data" in get_tree().current_scene:
+		#spawn_chance = get_tree().current_scene.location_data.get(location_data_variable)
+	#var spawn_amount = randi_range(spawn_amount_min, spawn_amount_max)
+	#if randf() <= spawn_chance:
+		#for i in spawn_amount:
+			#spawn()
 
 
 func spawn():

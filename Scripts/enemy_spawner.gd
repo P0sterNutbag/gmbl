@@ -6,12 +6,12 @@ var used_spawns: Array[int]
 
 
 func _ready() -> void:
-	spawn_points.append_array(get_children())
 	if spawn_points.size() == 0:
 		return
 	
 	# get enemy amount
-	var enemy_amount = get_parent().location_data.population
+	#var enemy_amount = get_parent().location_data.population
+	var enemy_amount = randi_range(get_parent().location_data.min_population, get_parent().location_data.max_population)
 	enemy_amount = clamp(enemy_amount, 0, spawn_points.size())
 	await get_tree().process_frame
 	
@@ -28,6 +28,7 @@ func _ready() -> void:
 		inst.set_deferred("global_transform", spawn_points[spawn_index].global_transform)
 		inst.bounty = quest
 		enemy_amount -= 1
+		quest.target_node = inst
 	
 	# spawn enemies
 	for i in enemy_amount:

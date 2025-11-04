@@ -8,3 +8,4 @@ class_name Quest
 @export var reward: Item
 @export var target: PackedScene
 @export var completed: bool
+var target_node: Node3D

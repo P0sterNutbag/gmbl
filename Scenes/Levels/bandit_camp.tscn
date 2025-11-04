@@ -21,6 +21,8 @@
 
 [sub_resource type="Resource" id="Resource_fui2k"]
 script = ExtResource("2_ytiro")
+min_population = 3
+max_population = 4
 loot_spawn_chance = 0.25
 npc_spawn_chance = 1.0
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
@@ -191,14 +193,13 @@ transform = Transform3D(-0.37148145, 0, -1.3564684, 0, 1.4064157, 0, 1.3564684, 
 [node name="PlayerSpawn" parent="PlayerAnchor" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
 
-[node name="SnapToTerrain" parent="." index="11" node_paths=PackedStringArray("objects_to_snap")]
+[node name="SnapToTerrain" parent="." index="12" node_paths=PackedStringArray("objects_to_snap")]
 objects_to_snap = [NodePath("../NavigationRegion3D/Shack"), NodePath("../NavigationRegion3D/Shack3"), NodePath("../NavigationRegion3D/Shack2"), NodePath("../NavigationRegion3D/ShippingContainerSpawning"), NodePath("../NavigationRegion3D/ShippingContainerSpawning2")]
 
-[node name="Scatterer" parent="." index="12"]
+[node name="Scatterer" parent="." index="13"]
 scenes = Array[PackedScene]([ExtResource("18_fui2k")])
 count = 20
 min_size = 1.0
 max_size = 2.0
 
 [editable path="WorldEnvironment"]
-[editable path="NavigationRegion3D/Shack"]

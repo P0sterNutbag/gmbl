@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 func start_dialogue(tree: DialogueTree) -> void:
 	for child in get_children():
 		child.queue_free()
-	Globals.overworld.npc_portrait_model.set_materials(tree.npc_style)
+	#Globals.overworld.npc_portrait_model.set_materials(tree.npc_style)
 	dialogue_tree = tree
 	advance_dialogue(index + 1)
 
@@ -70,10 +70,10 @@ func _on_visibility_changed() -> void:
 	if visible:
 		index = -1
 		can_advance = false
-		Globals.ui.portraits.show()
+		#Globals.ui.portraits.show()
 		PlayerStats.change_state(PlayerStats.states.pause)
-	else:
-		Globals.ui.portraits.hide()
+	#else:
+		#Globals.ui.portraits.hide()
 
 
 func exit_dialogue() -> void:

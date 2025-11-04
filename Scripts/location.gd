@@ -29,8 +29,8 @@ var shop_timer: Timer
 
 func _ready() -> void:
 	enemy_model = get_node_or_null("EnemyModel")
-	if !show_enemy_model and enemy_model:
-		enemy_model.hide()
+	#if !show_enemy_model and enemy_model:
+		#enemy_model.hide()
 	if start_with_enemies:
 		location_data.population = max_population
 	if "style_data" in get_parent():
@@ -49,12 +49,12 @@ func _ready() -> void:
 		add_child(shop_timer)
 
 
-func _process(_delta: float) -> void:
-	if show_enemy_model:
-		if location_data.population == 0:
-			enemy_model.hide()
-		else:
-			enemy_model.show()
+#func _process(_delta: float) -> void:
+	#if show_enemy_model:
+		#if location_data.population == 0:
+			#enemy_model.hide()
+		#else:
+			#enemy_model.show()
 
 
 func start_encounter() -> void:

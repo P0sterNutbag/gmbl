@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cqnwuiew1q2il" path="res://Scenes/Overworld/point_of_interest.tscn" id="1_ifw3f"]
 [ext_resource type="Script" uid="uid://lblyysya3an4" path="res://Scripts/location.gd" id="2_7lgip"]
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="3_7t6bt"]
-[ext_resource type="PackedScene" uid="uid://blxue5sfnx7s" path="res://Scenes/Levels/bandit_town.tscn" id="4_ifw3f"]
+[ext_resource type="PackedScene" path="res://Scenes/Levels/bandit_town.tscn" id="4_ifw3f"]
 [ext_resource type="PackedScene" uid="uid://dkdmdcbv1thv3" path="res://Scenes/Environment/Buildings/shack2.tscn" id="5_033ar"]
 [ext_resource type="PackedScene" uid="uid://dergqrsprx3qg" path="res://Scenes/Environment/Buildings/shack3.tscn" id="6_r7ui0"]
 [ext_resource type="PackedScene" uid="uid://di4qmk466fnrk" path="res://Scenes/Environment/Buildings/shipping_container.tscn" id="7_nr3cv"]
@@ -68,6 +68,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.02548)
 
 [node name="EnemyModel" parent="Encounter" index="7" instance=ExtResource("9_oj5pg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.29639)
+visible = false
 
 [connection signal="body_entered" from="Encounter" to="Encounter" method="_on_body_entered"]
 [connection signal="body_exited" from="Encounter" to="Encounter" method="_on_body_exited"]

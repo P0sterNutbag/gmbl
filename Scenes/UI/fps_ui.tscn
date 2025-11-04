@@ -664,13 +664,18 @@ script = ExtResource("14_hkj58")
 
 [node name="LoadSave" parent="DeathUI/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("15_6gmlr")]
 layout_mode = 2
-text = "Load Last Save"
+text = "Create New Character"
 
 [node name="Quit" parent="DeathUI/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("15_6gmlr")]
 layout_mode = 2
-text = "Quit"
+text = "Quit to Main Menu"
+
+[node name="Quit2" parent="DeathUI/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("15_6gmlr")]
+layout_mode = 2
+text = "Quit to Desktop"
 
 [connection signal="exit" from="PlayerInventory" to="." method="_on_player_inventory_exit"]
 [connection signal="exit" from="TransferInventory" to="." method="_on_transfer_inventory_exit"]
 [connection signal="pressed" from="DeathUI/MarginContainer/VBoxContainer/VBoxContainer/LoadSave" to="." method="_on_load_save_pressed"]
 [connection signal="pressed" from="DeathUI/MarginContainer/VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="DeathUI/MarginContainer/VBoxContainer/VBoxContainer/Quit2" to="." method="_on_quit_2_pressed"]

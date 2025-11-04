@@ -62,6 +62,7 @@ var guns_dict: Dictionary = {
 @onready var health_component: HealthComponent = $Hitbox
 @onready var aim_timer: Timer = $AimTimer
 @onready var physical_bone_simulator: PhysicalBoneSimulator3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D
+@onready var target_sprite: Sprite3D = $Target
 signal shoot
 
 
@@ -84,7 +85,7 @@ func _ready() -> void:
 	for i in randi_range(min_items, max_items):
 		inventory.items.append(potential_items[Globals.get_weighted_index(potential_items)].object_to_spawn)
 	
-	await get_tree().create_timer(0.5)
+	await get_tree().create_timer(0.5).timeout
 	if team == teams.allies:
 		detection.targets = get_tree().get_nodes_in_group("enemies")
 		shoot_component.bullet_stats.collision_mask = 3

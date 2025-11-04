@@ -2,11 +2,12 @@ extends Node
 
 enum states {walk, pause, dead}
 var state = states.walk
-@export var money: int = 0
+@export var starting_money: int = 0
+var money: int
 var hp: float = 5:
 	set(value):
 		hp = value
-		if Globals.player and "hitbox" in Globals.player:
+		if Globals.player and "hitbox" in Globals.player and Globals.player.hitbox:
 			Globals.player.hitbox.hp = value
 	#get():
 		#if Globals.player and "hitbox" in Globals.player:
@@ -27,12 +28,13 @@ var flashlight_on: bool
 var items:
 	get():
 		return inventory.items
-@export var inventory: Inventory
-@export var quests: Array[Quest]
+@export var starting_inventory: Inventory
+var inventory: Inventory = Inventory.new()
+var quests: Array[Quest]
 @onready var guns: Array[Item]:
 	get(): return items.filter(func(i): return i is EquipmentGun)
 var gun: EquipmentGun
-@onready var equipped_guns: Array[EquipmentGun] = [guns[0], null]
+var equipped_guns: Array[EquipmentGun]
 var gun_index := 0
 var sleep := 100.0:
 	set(value):
@@ -51,11 +53,8 @@ var hunger_decrease_rate := 0.1
 var thirst_decrease_rate := 0.1
 
 
-func _enter_tree() -> void:
-	state = states.walk
-
-
 func _ready() -> void:
+	reset_stats()
 	SceneManager.scene_changed.connect(on_scene_changed)
 	if items.size() > 0 and items[0] is EquipmentGun:
 		gun = items[0]
@@ -85,6 +84,18 @@ func _physics_process(delta):
 		return
 	if Globals.player.state_functions.has(PlayerStats.state):
 		Globals.player.state_functions[PlayerStats.state].call(delta)
+
+
+func reset_stats() -> void:
+	state = states.walk
+	money = starting_money
+	inventory = starting_inventory.duplicate(true)
+	equipped_guns = [guns[0], null]
+	quests.clear()
+	hp = max_hp
+	sleep = max_sleep
+	hunger = max_hunger
+	thirst = max_thirst
 
 
 func change_state(new_state):

@@ -46,6 +46,7 @@ func _ready() -> void:
 		PlayerStats.states.pause: state_pause,
 		PlayerStats.states.dead: state_dead,
 	}
+	gun_anchor.scale = Vector3.ONE * 0.006
 
 
 func _enter_tree() -> void:

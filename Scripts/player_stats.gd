@@ -4,7 +4,7 @@ enum states {walk, pause, dead}
 var state = states.walk
 @export var starting_money: int = 0
 var money: int
-var hp: float = 5:
+var hp: float = 8:
 	set(value):
 		hp = value
 		if Globals.player and "hitbox" in Globals.player and Globals.player.hitbox:
@@ -14,7 +14,7 @@ var hp: float = 5:
 			#return Globals.player.hitbox.hp
 		#else:
 			#return 5
-var max_hp := 5
+var max_hp := 8
 var ammo: int:
 	set(value):
 		ammo = value
@@ -91,6 +91,9 @@ func reset_stats() -> void:
 	money = starting_money
 	inventory = starting_inventory.duplicate(true)
 	equipped_guns = [guns[0], null]
+	for i in equipped_guns:
+		if i:
+			i.gun_stats.reset()
 	quests.clear()
 	hp = max_hp
 	sleep = max_sleep

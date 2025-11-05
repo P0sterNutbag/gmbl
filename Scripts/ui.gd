@@ -124,6 +124,8 @@ func open_death_ui() -> void:
 
 func _on_load_save_pressed() -> void:
 	#SceneManager.load_on_enter = true
+	if Globals.overworld:
+		Globals.overworld.queue_free()
 	PlayerStats.reset_stats()
 	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld.tscn")
 

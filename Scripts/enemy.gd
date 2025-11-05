@@ -16,12 +16,13 @@ var items:
 var inventory: Inventory = Inventory.new()
 @export var max_items: int
 @export var min_items: int
-enum states {idle, investigate, shoot, search, strafe, hurt, reload, camp, dead, aim, walk, standby}
+enum states {idle, investigate, shoot, search, strafe, hurt, reload, camp, dead, aim, walk, standby, supress}
 var state = states.idle
 var walk_speed := 1.5
 var run_speed := 3.0
 var time_to_detect_max := 1.5
 var camp_chance := 0
+var supress_change := 1.0
 var camp_time := 5
 var camp_time_min := 5
 var camp_time_max := 10
@@ -62,7 +63,7 @@ var guns_dict: Dictionary = {
 @onready var health_component: HealthComponent = $Hitbox
 @onready var aim_timer: Timer = $AimTimer
 @onready var physical_bone_simulator: PhysicalBoneSimulator3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D
-@onready var target_sprite: Sprite3D = $Target
+@onready var supress_timer: Timer = $SupressTimer
 signal shoot
 
 
@@ -206,6 +207,8 @@ func _physics_process(delta: float) -> void:
 				if !target:
 					if randf() <= camp_chance:
 						change_state(states.camp)
+					elif randf() <= supress_change:
+						change_state(states.supress)
 					else:
 						#navigation_agent.set_target_position(last_seen_position)
 						change_state(states.search)
@@ -239,6 +242,8 @@ func _physics_process(delta: float) -> void:
 				if time_since_detect >= 3:
 					if randf() <= camp_chance:
 						change_state(states.camp)
+					elif randf() <= supress_change:
+						change_state(states.supress)
 					else:
 						#navigation_agent.set_target_position(last_seen_position)
 						change_state(states.search)
@@ -253,6 +258,15 @@ func _physics_process(delta: float) -> void:
 					#anim_player.play("Idle")
 			#else:
 				#anim_player.play("WalkPoint")
+		
+		states.supress:
+			if is_new_state:
+				look_at_position(last_seen_position)
+				anim_player.play("Fire")
+				velocity = Vector3.ZERO
+				supress_timer.start()
+				is_new_state = false
+			
 		
 		states.reload:
 			if is_new_state:
@@ -421,7 +435,7 @@ func _on_damaged(hit_position: Vector3, hit_direction: Vector3) -> void:
 
 
 func _on_death() -> void:
-	loot_area.process_mode = PROCESS_MODE_INHERIT
+	#loot_area.process_mode = PROCESS_MODE_INHERIT
 	for i in items_to_drop:
 		var inst = i.instantiate()
 		get_tree().current_scene.add_child.call_deferred(inst)
@@ -499,7 +513,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			gun.gun_stats.ammo = gun.max_ammo
 			change_state(states.reload)
 			return
-		if randf_range(0, 1) <= strafe_change:
+		if state == states.shoot and randf_range(0, 1) <= strafe_change:
 			change_state(states.strafe)
 		else:
 			anim_player.play("Fire")
@@ -524,3 +538,10 @@ func on_night_start() -> void:
 
 func on_day_start() -> void:
 	detection.range = day_range
+
+
+func _on_supress_timer_timeout() -> void:
+	if randf() < 0.5:
+		change_state(states.search)
+	else:
+		change_state(states.camp)

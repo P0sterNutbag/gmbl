@@ -6,6 +6,7 @@ var bullet_stats: BulletStats
 var gun_stats: GunStats
 var tracer: PackedScene = preload("res://Scenes/Bullets/tracer.tscn")
 var dust: PackedScene = preload("res://Scenes/Particles/dust.tscn")
+var blood_spatter: PackedScene = preload("res://Scenes/Particles/bloodspatter.tscn")
 @onready var bullet_mesh = $MeshInstance3D
 @onready var raycast = $RayCast3D
 @onready var audio_stream_player_3d: AudioStreamPlayer3D = $AudioStreamPlayer3D
@@ -42,6 +43,9 @@ func hit():
 	if collider is PhysicalBone3D:
 		if collider.health_component:
 			collider.health_component.damage(bullet_stats.damage * collider.damage_modifier, raycast.get_collision_point(), rotation)
+		var decal = blood_spatter.instantiate()
+		decal.set_deferred("global_position", raycast.get_collision_point())
+		collider.add_child(decal)
 		#collider.get_parent().physical_bones_start_simulation([collider.bone_name])
 		#collider.apply_impulse(rotation * 50, raycast.get_collision_point())
 		#collider.turn_off_simulation()

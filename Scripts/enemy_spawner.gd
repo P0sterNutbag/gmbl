@@ -9,17 +9,20 @@ func _ready() -> void:
 	if spawn_points.size() == 0:
 		return
 	
+	# get quests
+	var quests = PlayerStats.quests.filter(func(i): 
+		var quest_location = i.location
+		var encounter_location = Globals.overworld.current_encounter.get_parent().title
+		return quest_location == encounter_location)
+	
 	# get enemy amount
-	#var enemy_amount = get_parent().location_data.population
+	get_parent().location_data.min_population = clamp(get_parent().location_data.min_population, quests.size(), 1000)
+	get_parent().location_data.min_population = clamp(get_parent().location_data.max_population, quests.size(), 1000)
 	var enemy_amount = randi_range(get_parent().location_data.min_population, get_parent().location_data.max_population)
 	enemy_amount = clamp(enemy_amount, 0, spawn_points.size())
 	await get_tree().process_frame
 	
 	# spawn quest enemy
-	var quests = PlayerStats.quests.filter(func(i): 
-		var quest_location = i.location
-		var encounter_location = Globals.overworld.current_encounter.get_parent().title
-		return quest_location == encounter_location)
 	for quest in quests: 
 		var inst = quest.target.instantiate()
 		get_tree().current_scene.add_child.call_deferred(inst)

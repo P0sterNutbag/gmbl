@@ -58,5 +58,5 @@ func damage(dmg: float, hit_position: Vector3 = Vector3.ZERO, hit_direction: Vec
 	var inst = blood_spatter.instantiate()
 	var spawn_pos = get_parent().global_position + Vector3(randf_range(-1, 1), 0, randf_range(-1, 1))
 	inst.set_deferred("global_position", spawn_pos)
-	inst.set_deferred("rotation:y", deg_to_rad(randf_range(-180, 180)))
+	inst.set_deferred("rotation.y", deg_to_rad(randf_range(-180, 180)))
 	get_tree().current_scene.add_child(inst)

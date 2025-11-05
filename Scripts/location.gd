@@ -80,6 +80,7 @@ func stock_shops() -> void:
 		if i.minimum_quests > 0:
 			for n in i.minimum_quests - i.quests.size():
 				var quest = QuestRandom.new().generate_quest()
+				quest.return_location = get_parent().title
 				i.quests.append(quest)
 		if i.all_items.size() > 0:
 			i.items = i.all_items.duplicate_deep()

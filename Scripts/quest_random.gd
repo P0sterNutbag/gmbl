@@ -3,10 +3,30 @@ class_name QuestRandom
 
 @export var type: String = "Bounty"
 @export var titles: Array[String] = [
-	"Megan",
-	"Tommy",
-	"Josh",
-	"Jaymie"
+	"Ace",
+	"Bones",
+	"Creep",
+	"Dino",
+	"Ernest",
+	"Frag",
+	"Gimp",
+	"Hemlock",
+	"Iggy",
+	"Jax",
+	"Kritter",
+	"Larry",
+	"Max",
+	"Nasty",
+	"Oscar",
+	"Percy",
+	"Quin",
+	"Rusty",
+	"Sully",
+	"Tony",
+	"Vice",
+	"Warren",
+	"Xander",
+	"Zylan",
 ]
 @export var descriptions: Array[String] = [
 	"Wanted for robbery and cheating at cards.",
@@ -15,9 +35,11 @@ class_name QuestRandom
 	"Wanted for stealing roomate's bagel."
 ]
 @export var locations: Array[String] =[
+	"Bandit Camp",
+	"Bandit Town",
 	"Crateyard",
-	"Bandit Village",
-	"Bandit Hideout"
+	"Rock Canyon",
+	"Sand Dunes",
 ]
 @export var rewards: Array[Item] = [
 	ItemMoney.new()
@@ -29,7 +51,8 @@ func generate_quest() -> Quest:
 	var quest = Quest.new()
 	quest.type = type
 	quest.title = titles[randi_range(0, titles.size()-1)]
-	quest.description = descriptions[randi_range(0, descriptions.size()-1)]
 	quest.location = locations[randi_range(0, locations.size()-1)]
+	quest.description = descriptions[randi_range(0, descriptions.size()-1)] + "Last seen at " + quest.location + "."
 	quest.reward = rewards[randi_range(0, rewards.size()-1)]
+	quest.target = preload("res://Scenes/Enemies/enemy.tscn")
 	return quest

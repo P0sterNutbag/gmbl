@@ -519,9 +519,9 @@ func exit_gun_state_point_up() -> void:
 
 
 func change_gun_slot(slot_index: int) -> void:
-	var gun = PlayerStats.equipped_guns[slot_index]
-	if gun != null:
-		change_gun(gun)
+	var g = PlayerStats.equipped_guns[slot_index]
+	if g != null:
+		change_gun(g)
 		PlayerStats.gun_index = slot_index
 
 

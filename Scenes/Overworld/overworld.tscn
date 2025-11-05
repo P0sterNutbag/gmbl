@@ -153,7 +153,7 @@ transform = Transform3D(1, 0, 0, 0, -0.53365904, 0.84569997, 0, -0.84569997, -0.
 [node name="NpcController" type="Node3D" parent="." node_paths=PackedStringArray("locations")]
 script = ExtResource("26_5q0os")
 npcs = Array[ExtResource("27_4xsnl")]([SubResource("Resource_adm71")])
-locations = [null, null, null, null, null]
+locations = [NodePath("../NavigationRegion3D/BanditCamp"), NodePath("../NavigationRegion3D/BanditTown"), NodePath("../NavigationRegion3D/Crateyard"), NodePath("../NavigationRegion3D/RockCanyon"), NodePath("../NavigationRegion3D/SandDunes"), NodePath("../NavigationRegion3D/SmallTown")]
 
 [node name="Timer" type="Timer" parent="NpcController"]
 wait_time = 10.0
@@ -177,4 +177,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.858303, 1.6800957, 71.7289
 [connection signal="timeout" from="NpcController/Timer" to="NpcController" method="_on_timer_timeout"]
 [connection signal="timeout" from="NpcController/Timer" to="NpcController/Timer" method="_on_timeout"]
 
+[editable path="NavigationRegion3D/SmallTown"]
+[editable path="NavigationRegion3D/SmallTown/Encounter"]
+[editable path="NavigationRegion3D/SmallTown/Encounter/Node3D/Shack4"]
+[editable path="NavigationRegion3D/SmallTown/Encounter/Node3D/Shack"]
+[editable path="NavigationRegion3D/SmallTown/Encounter/Node3D/Shack2"]
+[editable path="NavigationRegion3D/SmallTown/Encounter/Node3D/Shack3"]
+[editable path="NavigationRegion3D/SmallTown/Encounter/Node3D/Shack5"]
+[editable path="NavigationRegion3D/SmallTown/Encounter/Flagpole"]
 [editable path="WorldEnvironment"]

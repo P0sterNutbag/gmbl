@@ -21,8 +21,8 @@ var state = states.idle
 var walk_speed := 1.5
 var run_speed := 3.0
 var time_to_detect_max := 1.5
-var camp_chance := 0
-var supress_change := 1.0
+var camp_chance := 0.1
+var supress_change := 0.25
 var camp_time := 5
 var camp_time_min := 5
 var camp_time_max := 10
@@ -457,6 +457,7 @@ func _on_death() -> void:
 	bones[0].apply_impulse(damage_direction.normalized() * 35)
 	if bounty:
 		bounty.completed = true
+		bounty.location = bounty.return_location
 	change_state(states.dead)
 	shoot_timer.stop()
 	aim_timer.stop()

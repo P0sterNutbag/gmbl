@@ -26,14 +26,32 @@ func _process(_delta: float) -> void:
 		var cam_rot = rad_to_deg(compass_object.rotation.y)
 		compass.position.x = compass.size.x * ((cam_rot / 360.0) + 0.5) - compass.size.x - 70
 		# Position quest marker
+		if get_tree().current_scene == Globals.overworld:
+			quests = PlayerStats.quests
+		else:
+			quests = PlayerStats.quests.filter(func(i): 
+				var quest_location = i.location
+				var encounter_location = Globals.overworld.current_encounter.get_parent().title
+				return quest_location == encounter_location)
 		for i in quests.size():
+			if i > quests.size():
+				markers.get_child(i).queue_free()
+				return
 			var quest = quests[i]
+			var children = markers.get_child_count()
+			if children <= i:
+				create_quest_marker()
 			var quest_marker = markers.get_child(i)
-			if quest.completed:
-				quests.erase(quest)
+			if quest.completed and get_tree().current_scene != Globals.overworld:
 				quest_marker.queue_free()
 				continue
-			var quest_object = quest.target_node
+			var quest_object = null
+			if get_tree().current_scene == Globals.overworld:
+				for l in Globals.overworld.npc_controller.locations:
+					if quest.location.replace(" ", "") == l.name.replace(" ", ""):
+						quest_object = l
+			else:
+				quest_object = quest.target_node
 			var player_forward = -compass_object.global_transform.basis.z.normalized()
 			player_forward.y = 0
 			var to_quest = (quest_object.global_transform.origin - compass_object.global_transform.origin).normalized()
@@ -45,7 +63,8 @@ func _process(_delta: float) -> void:
 			var fov = 90.0  # adjust as needed
 			var normalized = clamp(angle_deg / (fov / 2.0), -1.0, 1.0)
 			var half_width = compass_holder.size.x / 2.0
-			quest_marker.position.x = half_width + (normalized * half_width)
+			quest_marker.position.x = half_width + (normalized * half_width) - 12
+			quest_marker.position.x = clamp(quest_marker.position.x, -12, compass_holder.size.x - 12)
 	else:
 		compass_holder.visible = false
 	
@@ -55,7 +74,7 @@ func _process(_delta: float) -> void:
 			#Globals.pause_game()
 
 func add_quest_markers():
-	quests.clear()
+	#quests.clear()
 	for child in markers.get_children():
 		child.queue_free()
 	quests = PlayerStats.quests.filter(func(i): 
@@ -63,9 +82,13 @@ func add_quest_markers():
 		var encounter_location = Globals.overworld.current_encounter.get_parent().title
 		return quest_location == encounter_location)
 	for quest in quests:
-		var inst = TextureRect.new()
-		inst.texture = quest_marker_texture
-		inst.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		inst.size = Vector2.ONE * 24
-		inst.position.y = 11
-		get_node("TopCenter/Compass/Markers").add_child(inst)
+		create_quest_marker()
+
+
+func create_quest_marker():
+	var inst = TextureRect.new()
+	inst.texture = quest_marker_texture
+	inst.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	inst.size = Vector2.ONE * 24
+	inst.position.y = 11
+	get_node("TopCenter/Compass/Markers").add_child(inst)

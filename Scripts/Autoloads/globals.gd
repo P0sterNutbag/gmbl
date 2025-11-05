@@ -61,3 +61,9 @@ func get_weighted_index(array: Array) -> int:
 		if rand_num <= current_num:
 			return i
 	return -1
+
+
+func get_heightmap_position(pos: Vector3) -> float:
+	var terrain = get_tree().root.get_child(-1).get_node("Terrain")
+	var height = terrain.get_data().get_height_at(pos.x, pos.z)
+	return height

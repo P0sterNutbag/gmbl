@@ -90,7 +90,8 @@ func reset_stats() -> void:
 	state = states.walk
 	money = starting_money
 	inventory = starting_inventory.duplicate(true)
-	equipped_guns = [guns[0], null]
+	equipped_guns = [null, null]
+	equipped_guns[guns[0].slot] = guns[0]
 	for i in equipped_guns:
 		if i:
 			i.gun_stats.reset()

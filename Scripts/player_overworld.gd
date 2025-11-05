@@ -50,6 +50,7 @@ func _ready() -> void:
 
 func _enter_tree() -> void:
 	Globals.player = self
+	global_position.y = Globals.get_heightmap_position(global_position)
 	await get_tree().process_frame
 	hitbox.hp = PlayerStats.hp
 	change_gun(PlayerStats.gun)

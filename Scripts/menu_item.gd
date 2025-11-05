@@ -68,14 +68,14 @@ func _on_mouse_exited() -> void:
 func _on_gui_input(event: InputEvent) -> void:
 	if !moveable:
 		return
-	if event is InputEventMouseButton:
-		if event.pressed:
-			can_grab = true
+	if event is InputEventMouseButton and event.pressed:
+		can_grab = true
 	if event is InputEventMouseMotion and can_grab and !follow_mouse:
 		follow_mouse = true
 		#get_tree().current_scene.add_child(self)
 	if event is InputEventMouseButton and event.is_released():
 		if !follow_mouse:
+			can_grab = false
 			return
 		follow_mouse = false
 		can_grab = false

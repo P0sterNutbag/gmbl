@@ -3,6 +3,7 @@ class_name Item
 
 @export var title: String
 @export var icon: Texture
+@export var physical_item: PackedScene
 @export var price: int
 @export var description: String
 @export var stackable: bool = true

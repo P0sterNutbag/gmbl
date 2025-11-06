@@ -6,7 +6,7 @@ class_name EquipmentGun
 var ammo: 
 	get(): return gun_stats.ammo
 var condition: 
-	get(): return gun_stats.condition
+	get(): return snappedf(gun_stats.condition, 0.01)
 var stats := {
 	"AMMO": "ammo",
 	"CND": "condition"

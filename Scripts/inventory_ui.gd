@@ -69,6 +69,8 @@ func set_items():
 		inst.moveable = true
 		if show_price:
 			inst.price = item.price
+			if item is EquipmentGun:
+				inst.price = round(inst.price * item.condition / 100)
 		inst.focus_entered.connect(set_description.bind(item))
 		inst.delete.connect(target.items.erase.bind(inst.resource))
 		inst.delete.connect(set_items)
@@ -115,7 +117,11 @@ func transfer_item(menu_item: Control):
 	if menu_item.resource is ItemMoney:
 		PlayerStats.money += menu_item.resource.amount
 		return
-	target2.items.append(menu_item.resource)
+	if item is ItemBundle:
+		for i in item.items:
+			target2.items.append(i)
+	else:
+		target2.items.append(menu_item.resource)
 	if menu_item.resource is Equipment:
 		menu_item.resource.equipped = false
 	get_parent().reset_inventories()

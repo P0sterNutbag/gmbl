@@ -86,6 +86,8 @@ func _on_gui_input(event: InputEvent) -> void:
 			get_global_mouse_position().y > menu.global_position.y and 
 			get_global_mouse_position().y < menu.global_position.y + menu.size.y)
 			if !in_menu:
+				if resource.physical_item != null:
+					create_physical_item(resource.physical_item)
 				delete.emit()
 				queue_free()
 		elif Globals.ui.inventory_container2.visible:
@@ -100,7 +102,17 @@ func _on_gui_input(event: InputEvent) -> void:
 			get_global_mouse_position().y > menu_2.global_position.y and 
 			get_global_mouse_position().y < menu_2.global_position.y + menu_2.size.y)
 			if !in_menu1 and !in_menu2:
+				if resource.physical_item != null:
+					create_physical_item(resource.physical_item)
 				delete.emit()
 				queue_free()
 			elif (in_menu2 and owner == menu_1) or (in_menu1 and owner == menu_2):
 				transfer.emit()
+
+
+func create_physical_item(physical_item: PackedScene) -> void:
+	var inst: RigidBody3D = physical_item.instantiate()
+	get_tree().current_scene.add_child.call_deferred(inst)
+	inst.set_deferred("global_position", Globals.player.global_position + Vector3.UP * 1)
+	inst.apply_impulse.call_deferred(Vector3(randf_range(-2, 2), 5, randf_range(-2, 2)))
+	#inst.apply_force.call_deferred(-Globals.player.basis.z)

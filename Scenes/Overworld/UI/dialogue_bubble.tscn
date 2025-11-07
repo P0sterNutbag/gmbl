@@ -1,11 +1,17 @@
 [gd_scene load_steps=5 format=3 uid="uid://d24cwcumucxfb"]
 
-[ext_resource type="StyleBox" uid="uid://bcg5bax3erc8w" path="res://Art/Themes/style_box.tres" id="1_bxbg0"]
 [ext_resource type="Script" uid="uid://vxmg7be0kyok" path="res://Scripts/dialogue_bubble.gd" id="2_bxbg0"]
 [ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="2_hllnk"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_utpw1"]
+bg_color = Color(0, 0, 0, 0.784314)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color(1, 1, 0, 1)
+
 [sub_resource type="Theme" id="Theme_vifsl"]
-PanelContainer/styles/panel = ExtResource("1_bxbg0")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_utpw1")
 
 [node name="DialogueBubble" type="PanelContainer"]
 custom_minimum_size = Vector2(384, 0)
@@ -28,6 +34,7 @@ custom_minimum_size = Vector2(384, 24)
 layout_mode = 2
 size_flags_vertical = 0
 theme = ExtResource("2_hllnk")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
 text = "Hello!"
 autowrap_mode = 2
 

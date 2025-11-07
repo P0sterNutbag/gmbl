@@ -56,3 +56,9 @@ func _on_visibility_changed() -> void:
 func _on_resized() -> void:
 	for child in get_children():
 		child.size = size
+
+
+func _on_menu_item_pressed() -> void:
+	clear_inventories()
+	hide()
+	exit.emit()

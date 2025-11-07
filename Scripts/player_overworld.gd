@@ -4,6 +4,10 @@ enum camera_types {overhead, fps}
 var camera_type = camera_types.overhead
 const SPEED = 5.0
 var mouse_sensitivity := 0.004
+var camera_max_zoom: float = 20.0
+var camera_min_zoom: float = 2.0
+var camera_target_zoom: float = 10.0
+var camera_zoom_incrament: float = 1
 var run_animation := "Run"
 var idle_animation := "Idle"
 var model_rotation: float:
@@ -60,6 +64,13 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	
+	# zoom camera
+	if Input.is_action_just_pressed("next_gun"):
+		camera_target_zoom = clamp(camera_target_zoom - camera_zoom_incrament, camera_min_zoom, camera_max_zoom)
+	elif Input.is_action_just_pressed("last_gun"):
+		camera_target_zoom = clamp(camera_target_zoom + camera_zoom_incrament, camera_min_zoom, camera_max_zoom)
+	camera.position.z = lerp(camera.position.z, camera_target_zoom, delta * 10)
 
 
 func state_walk(delta) -> void:

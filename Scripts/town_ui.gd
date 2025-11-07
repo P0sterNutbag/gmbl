@@ -17,7 +17,12 @@ func _enter_tree() -> void:
 	Globals.ui = self
 	if location_card:
 		hide_location_info()
-	
+
+
+func _ready() -> void:
+	for child in get_children():
+		child.hide()
+
 
 func _process(_delta: float) -> void:
 	# opening things

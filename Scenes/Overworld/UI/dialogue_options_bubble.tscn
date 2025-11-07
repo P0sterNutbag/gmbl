@@ -1,11 +1,17 @@
 [gd_scene load_steps=5 format=3 uid="uid://dfscj4odlwurg"]
 
-[ext_resource type="StyleBox" uid="uid://bcg5bax3erc8w" path="res://Art/Themes/style_box.tres" id="1_gt2py"]
 [ext_resource type="Script" uid="uid://c848ikiqkmd60" path="res://Scripts/dialogue_options_bubble.gd" id="2_gt2py"]
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="3_gt2py"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ipmj"]
+bg_color = Color(0, 0, 0, 0.784314)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color(1, 1, 0, 1)
+
 [sub_resource type="Theme" id="Theme_shf8x"]
-PanelContainer/styles/panel = ExtResource("1_gt2py")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_1ipmj")
 
 [node name="DialogueOptionsBubble" type="PanelContainer"]
 custom_minimum_size = Vector2(384, 126)

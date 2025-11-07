@@ -7,6 +7,7 @@ var dialogue_tree: DialogueTree
 var dialogue_bubble = preload("res://Scenes/Overworld/UI/dialogue_bubble.tscn")
 var option_bubble = preload("res://Scenes/Overworld/UI/dialogue_options_bubble.tscn")
 var menu_item = preload("res://Scenes/UI/menu_item.tscn")
+@onready var label: Label = $"../PortraitHolder/HBoxContainer/NpcName"
 signal exit
 
 
@@ -14,10 +15,10 @@ func _ready() -> void:
 	visibility_changed.connect(_on_visibility_changed)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !visible:
 		return
-	if Input.is_action_just_pressed("select") and dialogue_tree.bubbles[index] is not DialogueOptions and can_advance:
+	if (Input.is_action_just_pressed("select") or Input.is_action_just_pressed("shoot")) and dialogue_tree.bubbles[index] is not DialogueOptions and can_advance:
 		advance_dialogue(index + 1)
 
 
@@ -25,6 +26,7 @@ func start_dialogue(tree: DialogueTree) -> void:
 	for child in get_children():
 		child.queue_free()
 	Globals.overworld.npc_portrait_model.set_materials(tree.npc_style)
+	label.text = tree.npc_name
 	dialogue_tree = tree
 	advance_dialogue(index + 1)
 

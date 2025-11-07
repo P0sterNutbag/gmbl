@@ -2,7 +2,7 @@ extends Item
 class_name Equipment
 
 @export var name: String
-var equipped: bool
+@export var equipped: bool
 
 
 func on_pressed() -> void:

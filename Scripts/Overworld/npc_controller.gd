@@ -33,4 +33,4 @@ func _on_timer_timeout() -> void:
 
 func get_destination() -> Location:
 	# return location instead and factor in target distance
-	return locations[randi() % locations.size()]
+	return locations[randi() % locations.size()].get_child(-1)

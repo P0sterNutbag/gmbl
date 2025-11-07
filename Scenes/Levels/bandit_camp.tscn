@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://y7epyw5i4ifp"]
+[gd_scene load_steps=23 format=4 uid="uid://y7epyw5i4ifp"]
 
 [ext_resource type="PackedScene" uid="uid://r4ktdn26psb3" path="res://Scenes/Levels/encounter_base.tscn" id="1_o4pf0"]
 [ext_resource type="Resource" uid="uid://bo526no3os8wr" path="res://addons/zylann.hterrain/data/bandit_camp/data.hterrain" id="2_kabbc"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://b25ik5iwp3sgi" path="res://Scenes/Environment/Prefabs With Spawning/shack_tin_gray.tscn" id="15_fui2k"]
 [ext_resource type="PackedScene" uid="uid://ciydkkvue7fu2" path="res://Scenes/Environment/Prefabs With Spawning/shipping_container.tscn" id="16_cmkxe"]
 [ext_resource type="PackedScene" uid="uid://bb1xt6row3akg" path="res://Scenes/Environment/Nature/rock_large_orange.tscn" id="18_fui2k"]
+[ext_resource type="PackedScene" uid="uid://bx5h70fy0b18o" path="res://Scenes/Items/Guns/shotgun.tscn" id="19_cmkxe"]
 
 [sub_resource type="Resource" id="Resource_fui2k"]
 script = ExtResource("2_ytiro")
@@ -200,5 +201,8 @@ scenes = Array[PackedScene]([ExtResource("18_fui2k")])
 count = 20
 min_size = 1.0
 max_size = 2.0
+
+[node name="Shotgun" parent="." index="14" instance=ExtResource("19_cmkxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 4.4037724, 178)
 
 [editable path="WorldEnvironment"]

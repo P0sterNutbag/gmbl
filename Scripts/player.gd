@@ -344,6 +344,10 @@ func state_walk(delta):
 	elif gun_state == gun_states.point_up:
 		change_gun_state(gun_states.point)
 	
+	# make sure we actually have a gun
+	if PlayerStats.gun == null and gun_state != gun_states.no_gun:
+		change_gun_state(gun_states.no_gun)
+	
 	# walking animation
 	if gun:
 		if (input.x or input.y) and gun_state == gun_states.point and is_on_floor():
@@ -456,11 +460,15 @@ func exit_gun_state_ammo_check():
 
 
 func enter_gun_state_no_gun():
-	for gun in gun_anchor.get_children():
-		gun.process_mode = PROCESS_MODE_DISABLED
+	for i in gun_anchor.get_children():
+		i.process_mode = PROCESS_MODE_DISABLED
+	if !gun:
+		for g in gun_anchor.get_children():
+			g.visible = false
 	var tween = create_tween()
 	tween.tween_property(gun_anchor, "position:y", -0.3, 0.25)
-	tween.tween_property(gun, "visible", false, 0)
+	if gun:
+		tween.tween_property(gun, "visible", false, 0)
 	await tween.finished
 
 

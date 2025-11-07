@@ -18,6 +18,8 @@ var show_crosshair: bool = true
 @onready var mag_icon: Sprite2D = $BottomRight/Sprite
 @onready var death_ui: PanelContainer = $DeathUI
 @onready var load_save: Button = $DeathUI/MarginContainer/VBoxContainer/VBoxContainer/LoadSave
+@onready var bottom_right: Control = $BottomRight
+
 #@onready var compass: ColorRect = $TopCenter/Compass/ColorRect
 
 
@@ -28,6 +30,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# magazine/medkits
 	if Globals.player.gun:
+		bottom_right.visible = true
 		set_mag_count(PlayerStats.get_item_amount(Globals.player.gun.ammo_type))
 		set_medit_count(PlayerStats.get_item_amount("medkit"))
 		if Globals.player.gun.max_ammo > 0:
@@ -38,6 +41,8 @@ func _process(delta: float) -> void:
 			if sprite_index == 0 and current_ammo > 0:
 				sprite_index = 1
 			mag_icon.region_rect = Rect2(sprite_index * 28, 0, 28, mag_icon.region_rect.size.y)
+	else:
+		bottom_right.visible = false
 	
 	# inventory
 	if Input.is_action_just_pressed("inventory"):

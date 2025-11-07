@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://chqf3urx7gfya"]
+[gd_scene load_steps=16 format=3 uid="uid://chqf3urx7gfya"]
 
 [ext_resource type="Script" uid="uid://pfvownh6oavj" path="res://Scripts/town_ui.gd" id="1_405pq"]
 [ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="5_f6css"]
@@ -15,12 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="18_663k3"]
 [ext_resource type="Script" uid="uid://b37bjjekoe1qe" path="res://Scripts/journal_menu.gd" id="19_x20ne"]
 [ext_resource type="Script" uid="uid://gep7hf1s50y2" path="res://Scripts/dialogue_controller.gd" id="20_caolh"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_arpq1"]
-viewport_path = NodePath("PlayerPortrait")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_l5erx"]
-viewport_path = NodePath("ShopkeeperPortrait")
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_405pq")
@@ -89,13 +83,16 @@ script = ExtResource("14_q0snl")
 
 [node name="Shop" type="HBoxContainer" parent="."]
 visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 64.0
-offset_top = 64.0
-offset_right = -64.0
-offset_bottom = -64.0
+custom_minimum_size = Vector2(1000, 500)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -383.5
+offset_right = 500.0
+offset_bottom = 383.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 64
@@ -320,13 +317,11 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-texture = SubResource("ViewportTexture_arpq1")
 stretch_mode = 2
 
 [node name="Shopkeeper" type="TextureRect" parent="Portraits"]
 layout_mode = 2
 size_flags_vertical = 8
-texture = SubResource("ViewportTexture_l5erx")
 stretch_mode = 2
 flip_h = true
 

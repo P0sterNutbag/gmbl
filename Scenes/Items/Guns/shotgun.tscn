@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bx5h70fy0b18o"]
+[gd_scene load_steps=11 format=3 uid="uid://bx5h70fy0b18o"]
 
 [ext_resource type="Script" uid="uid://bdvokalrlg1k6" path="res://Scripts/item_pickup.gd" id="1_hdplf"]
 [ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="2_6u172"]
@@ -10,27 +10,52 @@ script = ExtResource("2_6u172")
 ammo = 5
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
-[sub_resource type="Resource" id="Resource_3xj32"]
+[sub_resource type="Resource" id="Resource_6u172"]
 script = ExtResource("3_v1ktk")
 gun_stats = SubResource("Resource_j8sse")
 name = "shotgun"
 title = "Shotgun"
+physical_item = null
 price = 600
 stackable = false
 metadata/_custom_type_script = "uid://34toqwivxgyk"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rk1p0"]
-size = Vector3(0.0542603, 0.188721, 0.888672)
+size = Vector3(0.075, 0.08324805, 0.394)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6u172"]
+size = Vector3(0.075, 0.10028418, 0.251)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v1ktk"]
+size = Vector3(0.075, 0.09210547, 0.119)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3xj32"]
+size = Vector3(0.075, 0.10978906, 0.23)
 
 [node name="Shotgun" type="RigidBody3D"]
 collision_layer = 16
 angular_damp = 5.0
 script = ExtResource("1_hdplf")
-item = SubResource("Resource_3xj32")
+item = SubResource("Resource_6u172")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.00500488, 0.0556641)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.07589927, -0.19143677)
 shape = SubResource("BoxShape3D_rk1p0")
+debug_fill = false
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.02941135, 0.37018788)
+shape = SubResource("BoxShape3D_6u172")
+debug_fill = false
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, -0.065614864, 0.44905257)
+shape = SubResource("BoxShape3D_v1ktk")
+debug_fill = false
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.04150533, 0.12363976)
+shape = SubResource("BoxShape3D_3xj32")
 debug_fill = false
 
 [node name="Node3D" parent="." instance=ExtResource("3_4xcmh")]

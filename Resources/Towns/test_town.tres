@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Town" load_steps=59 format=3 uid="uid://c5kpuww7x3qfl"]
+[gd_resource type="Resource" script_class="Town" load_steps=55 format=3 uid="uid://c5kpuww7x3qfl"]
 
 [ext_resource type="Script" uid="uid://bbi3gcsb33muk" path="res://Scripts/town.gd" id="1_boc7n"]
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="2_60f61"]
@@ -19,12 +19,13 @@
 [ext_resource type="Resource" uid="uid://ixc4pv5vjlno" path="res://Resources/Items/Guns/ak47.tres" id="17_i2d6u"]
 [ext_resource type="Resource" uid="uid://oaklo016ku8w" path="res://Resources/Items/Guns/pistol.tres" id="18_pbnsr"]
 [ext_resource type="Resource" uid="uid://de20gnenmrrxa" path="res://Resources/Items/Guns/shotgun.tres" id="19_pv0ty"]
-[ext_resource type="Script" uid="uid://h75f74ubyudu" path="res://Scripts/item_money.gd" id="20_5oaiu"]
 [ext_resource type="Script" uid="uid://px5dr31pd885" path="res://Scripts/dialogue_loop.gd" id="20_hil7u"]
 [ext_resource type="Resource" uid="uid://bhs8tbv5iox6e" path="res://Resources/Items/Guns/sniper_rifle.tres" id="20_txphe"]
 [ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="21_rtygk"]
 [ext_resource type="Resource" uid="uid://bf23ua6ic8mo4" path="res://Resources/Items/Ammo/shotgun_ammo_box.tres" id="22_17jta"]
-[ext_resource type="PackedScene" uid="uid://ds7n104oln2ve" path="res://Scenes/Enemies/enemy_bounty.tscn" id="23_hil7u"]
+[ext_resource type="Texture2D" uid="uid://25baqqag6lrp" path="res://Art/Textures/npc_face4.png" id="24_im0yk"]
+[ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="25_2fanp"]
+[ext_resource type="Texture2D" uid="uid://whgiy4tx5l5g" path="res://Art/Textures/npc brown jacket.png" id="26_i2d6u"]
 
 [sub_resource type="Resource" id="Resource_6lldf"]
 script = ExtResource("3_0o5nu")
@@ -166,59 +167,25 @@ script = ExtResource("20_hil7u")
 next_index = 1
 metadata/_custom_type_script = "uid://px5dr31pd885"
 
+[sub_resource type="Resource" id="Resource_pbnsr"]
+script = ExtResource("25_2fanp")
+faces = Array[Texture]([ExtResource("24_im0yk")])
+shirts = Array[Texture]([ExtResource("26_i2d6u")])
+pants_colors = Array[Color]([Color(0.48, 0.21888001, 0.15359999, 1)])
+shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1), Color(0.133333, 0.12549, 0.203922, 1), Color(0.4, 0.19146667, 0.128, 1)])
+metadata/_custom_type_script = "uid://b80ipr8q70gqm"
+
 [sub_resource type="Resource" id="Resource_bsumm"]
 script = ExtResource("4_qjbs6")
 bubbles = Array[ExtResource("3_0o5nu")]([SubResource("Resource_5oaiu"), SubResource("Resource_17jta"), SubResource("Resource_r3o7g"), SubResource("Resource_rtygk"), SubResource("Resource_2fanp"), SubResource("Resource_rkg8l"), SubResource("Resource_v7uwj"), SubResource("Resource_hqc43"), SubResource("Resource_fr5lk")])
+npc_style = SubResource("Resource_pbnsr")
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
-
-[sub_resource type="Resource" id="Resource_i2d6u"]
-script = ExtResource("20_5oaiu")
-metadata/_custom_type_script = "uid://h75f74ubyudu"
-
-[sub_resource type="Resource" id="Resource_pbnsr"]
-script = ExtResource("13_usrj7")
-type = "Bounty"
-title = "Johnny Guitar"
-description = "Johnny's annoying and nobody likes him. Last seen at the Crateyard."
-location = "Crateyard"
-reward = SubResource("Resource_i2d6u")
-target = ExtResource("23_hil7u")
-metadata/_custom_type_script = "uid://dkuy8ne1y8df"
-
-[sub_resource type="Resource" id="Resource_clt0f"]
-script = ExtResource("20_5oaiu")
-metadata/_custom_type_script = "uid://h75f74ubyudu"
-
-[sub_resource type="Resource" id="Resource_usrj7"]
-script = ExtResource("13_usrj7")
-type = "Bounty"
-title = "Slick Rick"
-description = "He's too slick, it's not okay. You can find him at the Bandit Town"
-location = "Bandit Town"
-reward = SubResource("Resource_clt0f")
-target = ExtResource("23_hil7u")
-metadata/_custom_type_script = "uid://dkuy8ne1y8df"
-
-[sub_resource type="Resource" id="Resource_eg73l"]
-script = ExtResource("20_5oaiu")
-metadata/_custom_type_script = "uid://h75f74ubyudu"
-
-[sub_resource type="Resource" id="Resource_u0s17"]
-script = ExtResource("13_usrj7")
-type = "Bounty"
-title = "Big Boy"
-description = "This is one big boy. Last seen at the Bandit Camp."
-location = "Bandit Camp"
-reward = SubResource("Resource_eg73l")
-target = ExtResource("23_hil7u")
-metadata/_custom_type_script = "uid://dkuy8ne1y8df"
 
 [sub_resource type="Resource" id="Resource_pv0ty"]
 script = ExtResource("2_60f61")
 title = "Bounty Board"
 dialogue = SubResource("Resource_bsumm")
-quests = Array[ExtResource("13_usrj7")]([SubResource("Resource_pbnsr"), SubResource("Resource_usrj7"), SubResource("Resource_u0s17")])
-minimum_quests = 6
+minimum_quests = 3
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [resource]

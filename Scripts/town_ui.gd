@@ -7,7 +7,7 @@ var current_town: Town
 @onready var shop: HBoxContainer = $Shop
 @onready var shop_inventory: PanelContainer = $Shop/Inventory
 @onready var shop_inventory2: PanelContainer = $Shop/Inventory2
-#@onready var portraits: HBoxContainer = $Portraits
+@onready var portraits: Control = $PortraitHolder
 @onready var dialogue: VBoxContainer = $Dialogue
 @onready var bounty_board: HBoxContainer = $BountyBoard
 @onready var journal: MenuList = $Journal
@@ -18,6 +18,7 @@ func _enter_tree() -> void:
 	if location_card:
 		hide_location_info()
 	
+
 func _process(_delta: float) -> void:
 	# opening things
 	if Input.is_action_just_pressed("inventory"):
@@ -65,6 +66,7 @@ func start_dialogue(dialogue_data: DialogueTree, shop: Shop = null) -> void:
 	dialogue.shop = shop
 	dialogue.show()
 	dialogue.start_dialogue(dialogue_data)
+	portraits.show()
 
 
 func enter_shop(shop_data: Shop) -> void:

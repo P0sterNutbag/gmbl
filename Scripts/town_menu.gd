@@ -13,6 +13,7 @@ func _process(delta: float) -> void:
 
 
 func create_town(town_data: Town) -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	PlayerStats.change_state(PlayerStats.states.pause)
 	if town_data.shops.size() == 1:
 		var shop = town_data.shops[0]
@@ -44,6 +45,7 @@ func create_town(town_data: Town) -> void:
 
 
 func exit():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	PlayerStats.change_state(PlayerStats.states.walk)
 	item_container.delete_children()
 	hide()
@@ -56,6 +58,7 @@ func enter_shop():
 
 func re_enter_town() -> void:
 	create_town(town_resource)
+	get_parent().portraits.hide()
 
 
 func enter_bounty_board() -> void:

@@ -67,6 +67,7 @@ func start_encounter() -> void:
 		Globals.ui.town.create_town(town)
 		Globals.ui.hide_location_info()
 		shop_timer.start()
+		get_parent().location_card.hide()
 	elif shop != null:
 		Globals.ui.start_dialogue(shop.dialogue, shop)
 		Globals.ui.hide_location_info()

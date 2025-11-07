@@ -28,7 +28,6 @@ const mat3 sobel_x = mat3(
 	vec3(-1.0, -2.0, -1.0)
 );
 
-// --- Linearize depth from depth texture ---
 float linearize_depth(vec2 uv_coord, mat4 proj_matrix){
 	float depth = texture(DEPTH_TEXTURE, uv_coord).x;
 	vec3 ndc = vec3(uv_coord * 2.0 - 1.0, depth);
@@ -92,17 +91,20 @@ void fragment() {
 	float normal_edge_y = dot(sobel_y[0], normal_surrounding_pixels[0]) + dot(sobel_y[1], normal_surrounding_pixels[1]) + dot(sobel_y[2], normal_surrounding_pixels[2]);
 	float normal_edge = sqrt(pow(normal_edge_x, 2.0) + pow(normal_edge_y, 2.0));
 
-	// --- fog using linear depth ---
+	// --- fog ---
 	float fog_factor = smoothstep(fog_start, fog_end, depth);
 	vec3 fogged_color = mix(screen_color.rgb, fog_color, fog_factor);
 
-	// --- final color: fog drawn on top of outlines ---
+	// --- halo-free blending on edges ---
+	float edge_strength = clamp(normal_edge / normal_edge_threshold, 0.0, 1.0);
+	float fog_on_edge = fog_factor * (1.0 - edge_strength); // reduces fog on strong edges
+
 	vec3 final_color;
 	float final_alpha;
 
 	if (normal_edge > normal_edge_threshold || (depth_edge > depth_edge_threshold_lower && normal_edge > 0.0) || depth_edge > depth_edge_threshold_upper) {
-		final_color = mix(line_color, fogged_color, fog_factor);
-		final_alpha = 1.0; // keep wireframe fully opaque
+		final_color = mix(line_color, fogged_color, fog_on_edge);
+		final_alpha = 1.0;
 	} else {
 		final_color = fogged_color;
 		final_alpha = screen_color.a;

@@ -88,6 +88,8 @@ func _on_gui_input(event: InputEvent) -> void:
 			if !in_menu:
 				if resource.physical_item != null:
 					create_physical_item(resource.physical_item)
+					if resource == PlayerStats.gun:
+						Globals.player.gun.visible = false
 				delete.emit()
 				queue_free()
 		elif Globals.ui.inventory_container2.visible:
@@ -104,6 +106,8 @@ func _on_gui_input(event: InputEvent) -> void:
 			if !in_menu1 and !in_menu2:
 				if resource.physical_item != null:
 					create_physical_item(resource.physical_item)
+					if resource == PlayerStats.gun:
+						Globals.player.gun.visible = false
 				delete.emit()
 				queue_free()
 			elif (in_menu2 and owner == menu_1) or (in_menu1 and owner == menu_2):
@@ -113,6 +117,9 @@ func _on_gui_input(event: InputEvent) -> void:
 func create_physical_item(physical_item: PackedScene) -> void:
 	var inst: RigidBody3D = physical_item.instantiate()
 	get_tree().current_scene.add_child.call_deferred(inst)
-	inst.set_deferred("global_position", Globals.player.global_position + Vector3.UP * 1)
-	inst.apply_impulse.call_deferred(Vector3(randf_range(-2, 2), 5, randf_range(-2, 2)))
-	#inst.apply_force.call_deferred(-Globals.player.basis.z)
+	inst.set_deferred("global_position", Globals.player.global_position + Vector3.UP * 1.5)
+	inst.apply_impulse.call_deferred(-Globals.player.basis.z * 5)
+	inst.apply_torque_impulse.call_deferred(Vector3(randf_range(-0.1, 0.1), randf_range(-5, 5), randf_range(-0.1, 0.1)))
+	inst.item = resource
+	#if inst.item is EquipmentGun:
+		#inst.item.gun_stats = resource.gun_stats

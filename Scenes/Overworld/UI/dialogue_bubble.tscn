@@ -1,24 +1,46 @@
-[gd_scene load_steps=4 format=3 uid="uid://d24cwcumucxfb"]
+[gd_scene load_steps=5 format=3 uid="uid://d24cwcumucxfb"]
 
-[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_m2hvl"]
+[ext_resource type="StyleBox" uid="uid://bcg5bax3erc8w" path="res://Art/Themes/style_box.tres" id="1_bxbg0"]
 [ext_resource type="Script" uid="uid://vxmg7be0kyok" path="res://Scripts/dialogue_bubble.gd" id="2_bxbg0"]
 [ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="2_hllnk"]
 
+[sub_resource type="Theme" id="Theme_vifsl"]
+PanelContainer/styles/panel = ExtResource("1_bxbg0")
+
 [node name="DialogueBubble" type="PanelContainer"]
-custom_minimum_size = Vector2(384, 128)
+custom_minimum_size = Vector2(384, 0)
+offset_right = 500.0
+offset_bottom = 57.0
 size_flags_vertical = 8
-theme = ExtResource("1_m2hvl")
+theme = SubResource("Theme_vifsl")
 script = ExtResource("2_bxbg0")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+size_flags_vertical = 0
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
 [node name="Label" type="Label" parent="MarginContainer"]
+custom_minimum_size = Vector2(384, 24)
 layout_mode = 2
-size_flags_vertical = 1
+size_flags_vertical = 0
 theme = ExtResource("2_hllnk")
 text = "Hello!"
+autowrap_mode = 2
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Polygon2D" type="Polygon2D" parent="Control"]
+color = Color(0, 0, 0, 0.78431374)
+polygon = PackedVector2Array(0, 0, 0, 20, -25, 0)
+
+[node name="Line2D" type="Line2D" parent="Control"]
+points = PackedVector2Array(1, 0, 1, 20, -25, 0, -498, 0)
+width = 2.0
+default_color = Color(1, 1, 0, 1)

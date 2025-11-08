@@ -35,6 +35,8 @@ var enter_functions: Dictionary
 @onready var spot_light: SpotLight3D = $EnemyModel/SpotLight3D
 @onready var skeleton: Skeleton3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D
 @onready var physical_bone_simulator_3d: PhysicalBoneSimulator3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D
+@onready var loot_area: Area3D = $EnemyModel/LootArea
+
 
 var gun: Node3D: 
 	get: 
@@ -119,6 +121,16 @@ func state_walk(delta) -> void:
 		spot_light.visible = true
 	else:
 		spot_light.visible = false
+	
+	# pick up loot
+	if Input.is_action_just_pressed("interact"):
+		var areas = loot_area.get_overlapping_areas()
+		if areas.size() > 0:
+			Globals.survival_ui.loot(areas[0])
+			return
+		var bodies = loot_area.get_overlapping_bodies()
+		if bodies.size() > 0:
+			Globals.survival_ui.loot(bodies[0])
 	
 	# set gun sprite
 	#if gun != PlayerStats.gun:

@@ -118,9 +118,13 @@ func find_item(item_name: String) -> Resource:
 
 
 func get_item_amount(item_name: String) -> int:
-	if items.size() <= 0:
-		return 0
-	return items.filter(func(i): return i != null and i.resource_name == item_name).size()
+	var item = find_item(item_name)
+	if item:
+		return item.amount
+	return 0
+	#if items.size() <= 0:
+		#return 0
+	#return items.filter(func(i): return i != null and i.resource_name == item_name).size()
 
 
 func save() -> Dictionary:

@@ -63,6 +63,7 @@ var grenade = preload("res://Scenes/Bullets/grenade.tscn")
 @onready var footstep_sfx: AudioStreamPlayer3D = $FootstepPlayer
 @onready var spot_light: SpotLight3D = $CameraAnchor/Camera3D/SpotLight3D
 @onready var gun_collision_cast: RayCast3D = $CameraAnchor/Camera3D/GunOffset/RayCast3D
+@onready var loot_area: Area3D = $LootArea
 
 
 func _enter_tree() -> void:
@@ -583,8 +584,10 @@ func use_item(item_name: String, item_id = null, target = null):
 		item = find_item(item_name)
 	if item == null:
 		return
-	item.use(target)
-	if item.uses <= 0:
+	if item is ItemUsable:
+		item.use(target)
+	item.amount -= 1
+	if item.amount <= 0:
 		PlayerStats.items.erase(item)
 
 

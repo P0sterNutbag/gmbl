@@ -1,15 +1,48 @@
-[gd_scene load_steps=17 format=3 uid="uid://cha53csgpqitn"]
+[gd_scene load_steps=18 format=3 uid="uid://cha53csgpqitn"]
 
 [ext_resource type="Script" uid="uid://bby8q5udlgb6g" path="res://Scripts/player_stats.gd" id="1_vjobs"]
 [ext_resource type="Script" uid="uid://2qhh6s86pakx" path="res://Scripts/item.gd" id="2_ey8gb"]
+[ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="3_348xh"]
+[ext_resource type="PackedScene" uid="uid://cqgfvmnhvnu77" path="res://Scenes/Items/Guns/pistol.tscn" id="4_a5k1m"]
 [ext_resource type="Resource" uid="uid://m28p1phfm50g" path="res://Resources/Items/compass.tres" id="5_btj6c"]
 [ext_resource type="Script" uid="uid://6ucyr0petjnx" path="res://Scripts/inventory.gd" id="5_uiad6"]
+[ext_resource type="Script" uid="uid://34toqwivxgyk" path="res://Scripts/equipment_gun.gd" id="5_upw4t"]
 [ext_resource type="Resource" uid="uid://de20gnenmrrxa" path="res://Resources/Items/Guns/shotgun.tres" id="6_av3m6"]
-[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="7_3r183"]
-[ext_resource type="Resource" uid="uid://oaklo016ku8w" path="res://Resources/Items/Guns/pistol.tres" id="7_bjmho"]
 [ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="8_kx86g"]
 [ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="9_348xh"]
-[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="12_bpue1"]
+
+[sub_resource type="Resource" id="Resource_mvcdb"]
+script = ExtResource("3_348xh")
+metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
+[sub_resource type="Resource" id="Resource_h6bws"]
+script = ExtResource("5_upw4t")
+gun_stats = SubResource("Resource_mvcdb")
+slot = 1
+name = "pistol"
+title = "Pistol"
+physical_item = ExtResource("4_a5k1m")
+price = 100
+stackable = false
+metadata/_custom_type_script = "uid://34toqwivxgyk"
+
+[sub_resource type="Resource" id="Resource_hiovw"]
+script = ExtResource("8_kx86g")
+values = Dictionary[String, Variant]({
+"ammo": 8
+})
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[sub_resource type="Resource" id="Resource_kx86g"]
+resource_name = "pistol_ammo"
+script = ExtResource("9_348xh")
+effects = Array[ExtResource("8_kx86g")]([SubResource("Resource_hiovw")])
+usable_in_menu = false
+title = "9mm Magazine"
+price = 25
+amount = 2
+description = "Usable in: Pistol"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
 [sub_resource type="Resource" id="Resource_08fje"]
 script = ExtResource("8_kx86g")
@@ -19,49 +52,20 @@ values = Dictionary[String, Variant]({
 add = true
 metadata/_custom_type_script = "uid://4c6own63hs8c"
 
-[sub_resource type="Resource" id="Resource_a5k1m"]
+[sub_resource type="Resource" id="Resource_348xh"]
 resource_name = "shotgun_ammo"
 script = ExtResource("9_348xh")
 effects = Array[ExtResource("8_kx86g")]([SubResource("Resource_08fje")])
 usable_in_menu = false
 title = "Shotgun Shell"
-price = 50
-description = "Usable in: Shotgun"
-metadata/_custom_type_script = "uid://2qhh6s86pakx"
-
-[sub_resource type="Resource" id="Resource_upw4t"]
-resource_name = "shotgun_ammo"
-script = ExtResource("9_348xh")
-effects = Array[ExtResource("8_kx86g")]([SubResource("Resource_08fje")])
-usable_in_menu = false
-title = "Shotgun Shell"
-price = 50
-description = "Usable in: Shotgun"
-metadata/_custom_type_script = "uid://2qhh6s86pakx"
-
-[sub_resource type="Resource" id="Resource_h6bws"]
-resource_name = "shotgun_ammo"
-script = ExtResource("9_348xh")
-effects = Array[ExtResource("8_kx86g")]([SubResource("Resource_08fje")])
-usable_in_menu = false
-title = "Shotgun Shell"
-price = 50
-description = "Usable in: Shotgun"
-metadata/_custom_type_script = "uid://2qhh6s86pakx"
-
-[sub_resource type="Resource" id="Resource_jjpmw"]
-resource_name = "shotgun_ammo"
-script = ExtResource("9_348xh")
-effects = Array[ExtResource("8_kx86g")]([SubResource("Resource_08fje")])
-usable_in_menu = false
-title = "Shotgun Shell"
-price = 50
+price = 5
+amount = 5
 description = "Usable in: Shotgun"
 metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
 [sub_resource type="Resource" id="Resource_ey8gb"]
 script = ExtResource("5_uiad6")
-items = Array[ExtResource("2_ey8gb")]([ExtResource("7_bjmho"), ExtResource("12_bpue1"), ExtResource("12_bpue1"), ExtResource("5_btj6c"), ExtResource("6_av3m6"), ExtResource("7_3r183"), SubResource("Resource_a5k1m"), SubResource("Resource_upw4t"), SubResource("Resource_h6bws"), SubResource("Resource_jjpmw")])
+items = Array[ExtResource("2_ey8gb")]([SubResource("Resource_h6bws"), SubResource("Resource_kx86g"), ExtResource("5_btj6c"), ExtResource("6_av3m6"), SubResource("Resource_348xh")])
 metadata/_custom_type_script = "uid://6ucyr0petjnx"
 
 [node name="PlayerStats" type="Node" groups=["persist"]]

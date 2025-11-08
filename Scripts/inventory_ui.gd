@@ -17,7 +17,6 @@ const text_style = preload("res://Art/Themes/text.tres")
 
 
 func _ready() -> void:
-	Globals.inventory_menu = self
 	if "money" in target:
 		money_label.show()
 		money_label.text = "$" + str(target.money)
@@ -55,16 +54,18 @@ func set_items():
 			child.queue_free()
 	var items: Array[Control]
 	for item in target.items:
-		if item is not Equipment:
-			var same_items = items.filter(func(i): return i.text.containsn(item.title))
-			if same_items.size() > 0:
-				var same_item = same_items[0]
-				same_item.amount += 1
-				continue
+		#if item.stackable:
+			#var same_items = items.filter(func(i): return i.text.containsn(item.title))
+			#if same_items.size() > 0:
+				#var same_item = same_items[0]
+				#same_item.resource.amount += 1
+				#same_item.amount += 1
+				#continue
 		var inst = item_container.create_menu_item()
 		items.append(inst)
 		inst.text = item.title
 		inst.resource = item
+		inst.amount = item.amount
 		inst.owner = self
 		inst.moveable = true
 		if show_price:
@@ -98,6 +99,12 @@ func transfer_item(menu_item: Control):
 	if "inventory" in target2:
 		if target2.inventory.get_space_left(item) <= 0 and item.takes_space:
 			return
+	# determine other inventory
+	var inventory2
+	if get_index() == 0: 
+		inventory2 = get_parent().get_child(1)
+	else: 
+		inventory2 = get_parent().get_child(0)
 	# check money
 	if show_price:
 		if target2.money >= menu_item.resource.price:
@@ -105,25 +112,32 @@ func transfer_item(menu_item: Control):
 			target.money += menu_item.resource.price
 			get_parent().set_inventory_money()
 		else:
-			var inventory2
-			if get_index() == 0: inventory2 = get_parent().get_child(1)
-			else: inventory2 = get_parent().get_child(0)
 			inventory2.money_label.modulate = Color.RED
 			var tween = create_tween()
 			tween.tween_property(inventory2.money_label, "modulate", Color.WHITE, 1)
 			return
-	target.items.erase(menu_item.resource)
-	item_container.remove_child(menu_item)
-	if menu_item.resource is ItemMoney:
-		PlayerStats.money += menu_item.resource.amount
+	var amount_to_move = 1
+	if Input.is_action_pressed("shift"):
+		amount_to_move = item.amount
+	item.amount -= amount_to_move
+	if item.amount <= 0:
+		target.items.erase(item)
+	if item is ItemMoney:
+		PlayerStats.money += item.amount
 		return
 	if item is ItemBundle:
 		for i in item.items:
 			target2.items.append(i)
 	else:
-		target2.items.append(menu_item.resource)
-	if menu_item.resource is Equipment:
-		menu_item.resource.equipped = false
+		var same_item = Globals.find_item(target2.items, item.title)
+		if same_item:
+			same_item.amount += amount_to_move
+		else:
+			var new_item = item.duplicate()
+			new_item.amount = amount_to_move
+			target2.items.append(new_item)
+	if item is Equipment:
+		item.resource.equipped = false
 	get_parent().reset_inventories()
 	#var inventory2
 	#if get_index() == 0:

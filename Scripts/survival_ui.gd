@@ -6,10 +6,15 @@ var quests: Array[Quest]
 @onready var compass: ColorRect = $TopCenter/Compass/ColorRect
 @onready var markers: Control = $TopCenter/Compass/Markers
 @onready var compass_holder: Control = $TopCenter/Compass
+@onready var player_inventory_holder: HBoxContainer = $PlayerInventory
+@onready var transfer_inventory_holder: HBoxContainer = $TransferInventory
+@onready var player_transfer_inventory: InventoryUI = %Inventory
+@onready var loot_transfer_inventory: InventoryUI = %Inventory2
+@onready var journal: HBoxContainer = $Journal
 
 
 func _enter_tree() -> void:
-	#Globals.ui = self
+	Globals.survival_ui = self
 	await get_tree().process_frame
 	add_quest_markers()
 	if get_tree().current_scene.name == "Overworld":
@@ -18,7 +23,25 @@ func _enter_tree() -> void:
 		compass_object = Globals.player
 
 
+func _ready() -> void:
+	for child in get_children():
+		child.hide()
+
+
 func _process(_delta: float) -> void:
+	# opening things
+	if Input.is_action_just_pressed("inventory"):
+		if !player_inventory_holder.visible:
+			open_menu(player_inventory_holder)
+		else:
+			close_menu(player_inventory_holder)
+	if Input.is_action_just_pressed("journal"):
+		if journal.visible:
+			journal.close()
+		else:
+			journal.open(PlayerStats.quests)
+	
+	# compass
 	var compass_item = PlayerStats.find_item("compass")
 	if compass_item and compass_item.equipped:
 		compass_holder.visible = true
@@ -92,3 +115,23 @@ func create_quest_marker():
 	inst.size = Vector2.ONE * 24
 	inst.position.y = 11
 	get_node("TopCenter/Compass/Markers").add_child(inst)
+
+
+func open_menu(menu: Control) -> void:
+	menu.show()
+	PlayerStats.change_state(PlayerStats.states.pause)
+
+
+func close_menu(menu: Control) -> void:
+	menu.hide()
+	PlayerStats.change_state(PlayerStats.states.walk)
+
+
+func loot(target) -> void:
+	player_transfer_inventory.mode = player_transfer_inventory.modes.loot
+	loot_transfer_inventory.mode = loot_transfer_inventory.modes.loot
+	player_transfer_inventory.target2 = target
+	loot_transfer_inventory.target = target
+	loot_transfer_inventory.target2 = PlayerStats
+	loot_transfer_inventory.grab_focus()
+	open_menu(transfer_inventory_holder)

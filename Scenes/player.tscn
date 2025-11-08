@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://c055smn111au7"]
+[gd_scene load_steps=50 format=3 uid="uid://c055smn111au7"]
 
 [ext_resource type="Script" uid="uid://cslnx4rw32guw" path="res://Scripts/player.gd" id="1_5kxbm"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_x3wgy"]
@@ -401,6 +401,9 @@ random_pitch = 1.5
 streams_count = 1
 stream_0/stream = ExtResource("22_wpjfl")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_2ijsl"]
+radius = 1.0
+
 [node name="Player" type="CharacterBody3D" groups=["allies"]]
 collision_layer = 32
 slide_on_ceiling = false
@@ -698,6 +701,15 @@ one_shot = true
 [node name="FootstepPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_bi64h")
 bus = &"SFX"
+
+[node name="LootArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LootArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9665127)
+shape = SubResource("SphereShape3D_2ijsl")
 
 [connection signal="area_entered" from="CameraAnchor/BulletListener" to="." method="_on_bullet_listener_area_entered"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

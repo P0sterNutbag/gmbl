@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cc458wgoeu6t4"]
+[gd_scene load_steps=18 format=3 uid="uid://cc458wgoeu6t4"]
 
 [ext_resource type="Script" uid="uid://dr73ivowve6xe" path="res://Scripts/survival_ui.gd" id="1_e5c6o"]
 [ext_resource type="Script" uid="uid://bclh5yhrpmkxf" path="res://Scripts/stat_visual.gd" id="2_k4cvi"]
@@ -7,6 +7,15 @@
 [ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="5_jtf3n"]
 [ext_resource type="StyleBox" uid="uid://bcg5bax3erc8w" path="res://Art/Themes/style_box.tres" id="6_8egi5"]
 [ext_resource type="Texture2D" uid="uid://cvly0bfjs24or" path="res://Art/Textures/sun-moon.png" id="7_guqia"]
+[ext_resource type="Script" uid="uid://dav6t8b5brx1o" path="res://Scripts/inventory_controller.gd" id="8_k3cux"]
+[ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="9_to4rm"]
+[ext_resource type="Script" uid="uid://b37bjjekoe1qe" path="res://Scripts/journal_menu.gd" id="10_vghdt"]
+[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="11_0pkni"]
+[ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="12_2dyl4"]
+[ext_resource type="Theme" uid="uid://efo20xxcf1e5" path="res://Art/Themes/vbox_container.tres" id="13_oq622"]
+[ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="14_e5c6o"]
+[ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="15_k4cvi"]
+[ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="16_1lobq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_agdr0"]
 bg_color = Color(0, 0, 0, 0.784314)
@@ -453,3 +462,138 @@ mouse_filter = 2
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="PlayerInventory" type="HBoxContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -311.5
+offset_top = -382.5
+offset_right = 311.5
+offset_bottom = 382.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+script = ExtResource("8_k3cux")
+
+[node name="Inventory" parent="PlayerInventory" instance=ExtResource("9_to4rm")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TransferInventory" type="HBoxContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -655.0
+offset_top = -382.5
+offset_right = 655.0
+offset_bottom = 382.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+script = ExtResource("8_k3cux")
+
+[node name="Inventory" parent="TransferInventory" instance=ExtResource("9_to4rm")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mode = 1
+
+[node name="Inventory2" parent="TransferInventory" instance=ExtResource("9_to4rm")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mode = 1
+
+[node name="Journal" type="HBoxContainer" parent="." node_paths=PackedStringArray("item_container")]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 399.0
+offset_top = 266.0
+offset_right = -389.0
+offset_bottom = -277.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+script = ExtResource("10_vghdt")
+item_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/ItemContainer")
+pause_on_open = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Journal"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme = ExtResource("11_0pkni")
+
+[node name="MarginContainer" type="MarginContainer" parent="Journal/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("12_2dyl4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Journal/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("13_oq622")
+
+[node name="Label" type="Label" parent="Journal/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("14_e5c6o")
+text = "Jobs"
+
+[node name="Control" type="Control" parent="Journal/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ItemContainer" type="VBoxContainer" parent="Journal/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("13_oq622")
+script = ExtResource("15_k4cvi")
+
+[node name="Control2" type="Control" parent="Journal/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MenuItem" parent="Journal/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
+layout_mode = 2
+text = "Exit"
+
+[node name="PanelContainer2" type="PanelContainer" parent="Journal"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("11_0pkni")
+
+[node name="MarginContainer" type="MarginContainer" parent="Journal/PanelContainer2"]
+layout_mode = 2
+theme = ExtResource("12_2dyl4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Journal/PanelContainer2/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("13_oq622")
+
+[node name="PanelContainer" type="PanelContainer" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 560)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_jtf3n")
+
+[node name="Description" type="Label" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+theme = ExtResource("5_jtf3n")
+autowrap_mode = 2
+
+[node name="Reward" type="Label" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_jtf3n")
+
+[node name="Control" type="Control" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[connection signal="pressed" from="Journal/PanelContainer/MarginContainer/VBoxContainer/MenuItem" to="Journal" method="close"]

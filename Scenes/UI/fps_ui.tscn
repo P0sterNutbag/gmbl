@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://y6civk4251ei"]
+[gd_scene load_steps=21 format=3 uid="uid://y6civk4251ei"]
 
 [ext_resource type="Script" uid="uid://cl7b5tsk5cpy3" path="res://Scripts/ui.gd" id="1_27ipd"]
 [ext_resource type="Texture2D" uid="uid://b7o6p645d7r1q" path="res://Art/Textures/scope.png" id="2_ed1w8"]
@@ -11,8 +11,6 @@
 [ext_resource type="StyleBox" uid="uid://bcg5bax3erc8w" path="res://Art/Themes/style_box.tres" id="9_6gmlr"]
 [ext_resource type="Shader" uid="uid://clx8i8jbtbgo3" path="res://Art/Shaders/retro.gdshader" id="9_a1pox"]
 [ext_resource type="Texture2D" uid="uid://cvly0bfjs24or" path="res://Art/Textures/sun-moon.png" id="10_a1pox"]
-[ext_resource type="Script" uid="uid://dav6t8b5brx1o" path="res://Scripts/inventory_controller.gd" id="10_ettqu"]
-[ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="11_3lnm2"]
 [ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="11_ettqu"]
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="12_e0hn7"]
 [ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="13_8v68b"]
@@ -574,54 +572,6 @@ grow_vertical = 2
 theme = ExtResource("6_8v68b")
 text = "Leave Area? Press 'F'"
 
-[node name="PlayerInventory" type="HBoxContainer" parent="."]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -311.5
-offset_top = -382.5
-offset_right = 311.5
-offset_bottom = 382.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 64
-script = ExtResource("10_ettqu")
-
-[node name="Inventory" parent="PlayerInventory" instance=ExtResource("11_3lnm2")]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="TransferInventory" type="HBoxContainer" parent="."]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -797.0
-offset_top = -441.0
-offset_right = 798.0
-offset_bottom = 324.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 64
-script = ExtResource("10_ettqu")
-
-[node name="Inventory" parent="TransferInventory" instance=ExtResource("11_3lnm2")]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-mode = 1
-
-[node name="Inventory2" parent="TransferInventory" instance=ExtResource("11_3lnm2")]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-mode = 1
-
 [node name="DeathUI" type="PanelContainer" parent="."]
 visible = false
 anchors_preset = 8
@@ -674,8 +624,6 @@ text = "Quit to Main Menu"
 layout_mode = 2
 text = "Quit to Desktop"
 
-[connection signal="exit" from="PlayerInventory" to="." method="_on_player_inventory_exit"]
-[connection signal="exit" from="TransferInventory" to="." method="_on_transfer_inventory_exit"]
 [connection signal="pressed" from="DeathUI/MarginContainer/VBoxContainer/VBoxContainer/LoadSave" to="." method="_on_load_save_pressed"]
 [connection signal="pressed" from="DeathUI/MarginContainer/VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="DeathUI/MarginContainer/VBoxContainer/VBoxContainer/Quit2" to="." method="_on_quit_2_pressed"]

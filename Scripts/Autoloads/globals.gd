@@ -6,7 +6,7 @@ var noise_controller
 var overworld: Node3D
 var particle_manager: Node
 var npc_controller: Node3D
-var inventory_menu: Control
+var survival_ui: CanvasLayer
 #const PAUSE_MENU = preload("res://Scenes/UI/pause_menu.tscn")
 
 func _ready() -> void:
@@ -67,3 +67,10 @@ func get_heightmap_position(pos: Vector3) -> float:
 	var terrain = get_tree().root.get_child(-1).get_node("Terrain")
 	var height = terrain.get_data().get_height_at(pos.x, pos.z)
 	return height
+
+
+func find_item(items: Array, item_name: String) -> Resource:
+	for i in items:
+		if i != null and (i.resource_name == item_name or i.title.to_lower() == item_name.to_lower()):
+			return i
+	return null

@@ -25,6 +25,7 @@ var can_press: bool
 var moveable: bool
 var can_grab: bool
 var follow_mouse: bool
+var pouch = preload("res://Scenes/Items/pouch.tscn")
 @onready var price_label: Label = %Price
 signal delete
 signal transfer
@@ -79,19 +80,25 @@ func _on_gui_input(event: InputEvent) -> void:
 			return
 		follow_mouse = false
 		can_grab = false
-		if Globals.ui.inventory_container.visible:
-			var menu = Globals.ui.inventory_container.get_child(0)
+		# determine amount to move
+		var amount_to_move = 1
+		if Input.is_action_just_pressed("shift"):
+			amount_to_move = resource.amount
+		if owner.visible:
+			var menu = owner.get_child(0)
 			var in_menu = (get_global_mouse_position().x > menu.global_position.x and 
 			get_global_mouse_position().x < menu.global_position.x + menu.size.x and 
 			get_global_mouse_position().y > menu.global_position.y and 
 			get_global_mouse_position().y < menu.global_position.y + menu.size.y)
 			if !in_menu:
-				if resource.physical_item != null:
-					create_physical_item(resource.physical_item)
-					if resource == PlayerStats.gun:
-						Globals.player.gun.visible = false
-				delete.emit()
-				queue_free()
+				create_physical_item(resource.physical_item)
+				if resource == PlayerStats.gun:
+					Globals.player.gun.visible = false
+				amount -= amount_to_move
+				resource.amount -= amount_to_move
+				if amount <= 0:
+					delete.emit()
+					queue_free()
 		elif Globals.ui.inventory_container2.visible:
 			var menu_1 = Globals.ui.inventory_container2.get_child(0)
 			var in_menu1 = (get_global_mouse_position().x > menu_1.global_position.x and 
@@ -104,17 +111,41 @@ func _on_gui_input(event: InputEvent) -> void:
 			get_global_mouse_position().y > menu_2.global_position.y and 
 			get_global_mouse_position().y < menu_2.global_position.y + menu_2.size.y)
 			if !in_menu1 and !in_menu2:
-				if resource.physical_item != null:
-					create_physical_item(resource.physical_item)
-					if resource == PlayerStats.gun:
-						Globals.player.gun.visible = false
-				delete.emit()
-				queue_free()
+				create_physical_item(resource.physical_item)
+				if resource == PlayerStats.gun:
+					Globals.player.gun.visible = false
+				amount -= amount_to_move
+				resource.amount -= amount_to_move
+				if amount <= 0:
+					delete.emit()
+					queue_free()
 			elif (in_menu2 and owner == menu_1) or (in_menu1 and owner == menu_2):
 				transfer.emit()
 
 
-func create_physical_item(physical_item: PackedScene) -> void:
+func create_physical_item(physical_item: PackedScene = null) -> void:
+	if physical_item == null or get_tree().current_scene == Globals.overworld:
+		# determine amount to move
+		var amount_to_move = 1
+		if Input.is_action_just_pressed("shift"):
+			amount_to_move = resource.amount
+		var new_item = resource.duplicate()
+		new_item.amount = amount_to_move
+		# create pouch or move to pouch
+		var pouches: Array = Globals.player.loot_area.get_overlapping_areas()
+		pouches.filter(func(i): return i.is_in_group("pouches"))
+		if pouches.size() > 0:
+			pouches[0].items.append(new_item)
+			return
+		var p = pouch.instantiate()
+		get_tree().current_scene.add_child(p)
+		var offset = -Globals.player.basis.z
+		if get_tree().current_scene == Globals.overworld:
+			offset = -Globals.player.model.basis.z
+		p.global_position = Globals.player.global_position + offset
+		p.global_position.y = Globals.get_heightmap_position(p.global_position)
+		p.items.append(new_item)
+		return
 	var inst: RigidBody3D = physical_item.instantiate()
 	get_tree().current_scene.add_child.call_deferred(inst)
 	inst.set_deferred("global_position", Globals.player.global_position + Vector3.UP * 1.5)

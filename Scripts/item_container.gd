@@ -4,7 +4,7 @@ extends Node3D
 @export var item_chances: Array[SpawnChanceResource]
 @export var min_items: int
 @export var max_items: int
-var title = "Chest"
+@export var title = "Chest"
 
 
 func _ready() -> void:

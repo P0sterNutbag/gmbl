@@ -29,8 +29,6 @@ func find_item() -> void:
 	var inst = ALERT.instantiate()
 	Globals.ui.add_child(inst)
 	inst.text = "+1 " + item.title
-	#if Globals.inventory_menu:
-		#Globals.inventory_menu.set_items()
 
 
 func _on_visibility_changed() -> void:

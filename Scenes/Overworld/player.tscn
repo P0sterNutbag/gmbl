@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cl4glsi76vapy"]
+[gd_scene load_steps=19 format=3 uid="uid://cl4glsi76vapy"]
 
 [ext_resource type="Script" uid="uid://bequ4vge6cubm" path="res://Scripts/player_overworld.gd" id="1_lvr5k"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_xjgfg"]
@@ -40,6 +40,9 @@ noise_radius = 75.0
 is_hitscan = false
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_fjqub"]
+radius = 0.6177978
+
 [node name="Player" type="CharacterBody3D" groups=["persist"]]
 collision_layer = 32
 script = ExtResource("1_lvr5k")
@@ -72,7 +75,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06193, 0)
 script = SubResource("GDScript_6ovkh")
 
 [node name="RotationOffset" type="Node3D" parent="CameraAnchor"]
-transform = Transform3D(1, 0, 0, 0, 0.766045, 0.642788, 0, -0.642788, 0.766045, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.7660449, 0.642788, 0, -0.642788, 0.7660449, 0, 0, 0)
 
 [node name="OverheadCamera" type="Camera3D" parent="CameraAnchor/RotationOffset"]
 transform = Transform3D(1, 0, 0, 0, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, 0, 10)
@@ -140,20 +143,23 @@ visible = false
 [node name="LeftHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="3"]
 transform = Transform3D(-0.48717433, -0.8675192, -0.100355886, -0.80223095, 0.4899698, -0.3411085, 0.3450896, -0.08567051, -0.93465143, -0.10977833, 0.64809364, -1.0887973)
 
+[node name="PhysicalBoneSimulator3D" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="4"]
+visible = false
+
 [node name="Physical Bone mixamorig_Hips" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="0"]
-transform = Transform3D(0.825314, -0.5528941, -0.11473861, 0.5500821, 0.8331088, -0.057788238, 0.12754053, -0.015422212, 0.99171346, 3.7295587e-05, 0.017755885, -0.9266323)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.896219e-06, 8.147662e-05, 0.051534653)
-body_offset = Transform3D(-2.1010637e-05, 0.99948967, 0.031945307, 2.4847686e-06, 0.03194529, -0.9994896, -1, -2.092123e-05, -3.233552e-06, -0.0017277254, 0.051505744, -6.7278743e-06)
+transform = Transform3D(0.825314, -0.5528942, -0.11473861, 0.5500821, 0.8331088, -0.05778824, 0.12754053, -0.015422212, 0.99171346, 3.7295587e-05, 0.017755885, -0.9266323)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.896408e-06, 8.1476384e-05, 0.051534653)
+body_offset = Transform3D(-2.1010637e-05, 0.99948967, 0.03194531, 2.4847686e-06, 0.03194529, -0.9994896, -1, -2.0891428e-05, -3.2372773e-06, -0.0017277254, 0.051505744, -6.7278743e-06)
 
 [node name="Physical Bone mixamorig_Spine" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="1"]
-transform = Transform3D(-0.5872182, -0.8094008, 0.0067199725, 0.7916666, -0.57604223, -0.20356657, 0.16863793, -0.11421802, 0.97903806, 0.0059505138, 0.03305197, -1.0391738)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.624592e-05, 3.140857e-05, 0.05867695)
-body_offset = Transform3D(1.0000002, -2.69413e-05, 1.758337e-06, 1.7732382e-06, -8.6426735e-07, -1.0000001, 2.6911497e-05, 1.0000001, -9.23872e-07, 8.614361e-05, 0.058676958, -3.1352043e-05)
+transform = Transform3D(-0.5872182, -0.8094008, 0.0067199664, 0.7916666, -0.5760422, -0.20356657, 0.16863793, -0.11421802, 0.97903806, 0.0059505138, 0.03305197, -1.0391738)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.624592e-05, 3.1409003e-05, 0.05867695)
+body_offset = Transform3D(1.0000002, -2.6971102e-05, 1.758337e-06, 1.7732382e-06, -8.7171793e-07, -1.0000001, 2.6911497e-05, 1.0000002, -9.313226e-07, 8.614361e-05, 0.058676958, -3.1352043e-05)
 
 [node name="Physical Bone mixamorig_Spine1" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="2"]
-transform = Transform3D(-0.5778217, -0.7792358, 0.24272145, 0.70826626, -0.6265251, -0.32530782, 0.40556255, -0.01605846, 0.91392624, -0.0112688225, 0.06861829, -1.1582214)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0034446972, -7.571385e-05, 0.06076822)
-body_offset = Transform3D(1, -0.00055933, 3.6507845e-05, 3.668666e-05, 0.00014273822, -1.0000001, 0.0005592406, 0.99999976, 0.00014273822, 0.0034424365, 0.060768366, 6.89663e-05)
+transform = Transform3D(-0.5778217, -0.7792358, 0.24272147, 0.70826626, -0.6265251, -0.32530782, 0.40556255, -0.01605846, 0.91392624, -0.011268811, 0.06714519, -1.113527)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020527663, -0.00028091882, 0.019441765)
+body_offset = Transform3D(1, -0.00055933, 3.6492944e-05, 3.668666e-05, 0.00014273822, -1.0000001, 0.0005592406, 0.99999976, 0.00014278293, 0.020526797, 0.019442558, 0.0002896227)
 
 [node name="Physical Bone mixamorig_Spine2" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="3"]
 transform = Transform3D(-0.49174467, -0.7417225, 0.45610848, 0.6104814, -0.6671931, -0.42680904, 0.6208863, 0.06856467, 0.78089637, -0.06575346, 0.12712425, -1.2970853)
@@ -161,9 +167,9 @@ joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.854728e-05, -3.308017e-
 body_offset = Transform3D(1.0000001, -0.00034713745, 0.00036862493, 0.00036874413, 0.00026479363, -1.0000002, 0.00034698844, 1, 0.00026491284, 5.90086e-05, 0.08010101, 1.1891127e-05)
 
 [node name="Physical Bone mixamorig_Neck" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="4"]
-transform = Transform3D(-0.7999556, 0.5185615, 0.30193552, -0.5982432, -0.72833365, -0.33411857, 0.046648797, -0.44791093, 0.8928604, -0.11149004, 0.16997132, -1.382459)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0010751899, 0.0007955658, 0.025601165)
-body_offset = Transform3D(0.00020211935, -0.99793285, -0.064271286, 8.34316e-05, 0.06427133, -0.99793273, 0.9999999, 0.0001963377, 9.62019e-05, 0.0024395585, 0.025497198, 0.0010725707)
+transform = Transform3D(-0.7999556, 0.5185615, 0.30193552, -0.5982432, -0.72833365, -0.33411857, 0.046648797, -0.44791093, 0.8928604, -0.11394948, 0.16821031, -1.3779234)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0043077297, 0.0028199367, 0.021705598)
+body_offset = Transform3D(0.00020211935, -0.99793285, -0.064271286, 8.34316e-05, 0.06427133, -0.99793273, 0.9999999, 0.0001963377, 9.62019e-05, 0.004210025, 0.021479845, 0.004305087)
 
 [node name="Physical Bone mixamorig_Head" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="5"]
 transform = Transform3D(-0.9780957, 0.099192895, 0.18300152, -0.15810838, -0.92585844, -0.34320247, 0.13539025, -0.36461896, 0.92126137, -0.15698169, 0.24999607, -1.5970244)
@@ -186,29 +192,29 @@ joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.007531e-05, -1.829631e-
 body_offset = Transform3D(0.9999998, 6.2584877e-07, 2.6673079e-05, 2.6524067e-05, 1.0073185e-05, -1.0000002, -7.4505806e-07, 1, 9.9390745e-06, 6.592274e-05, 0.15568376, 1.6748905e-05)
 
 [node name="Physical Bone mixamorig_RightShoulder" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="9"]
-transform = Transform3D(-0.18507801, 0.7774167, 0.6011401, 0.706145, -0.32021642, 0.63152254, 0.683451, 0.541373, -0.48970392, -0.20939401, 0.030085996, -1.2852618)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00017672844, -0.00018349654, 0.09323249)
-body_offset = Transform3D(1.0000004, -1.0430813e-06, 2.5629997e-06, 2.592802e-06, -4.529953e-06, -1.0000002, 9.685755e-07, 1.0000002, -4.7534704e-06, 0.00017648935, 0.09323251, 0.00018393993)
+transform = Transform3D(-0.18507801, 0.7774167, 0.6011401, 0.706145, -0.32021642, 0.63152254, 0.683451, 0.541373, -0.48970395, -0.20939401, 0.030085996, -1.2852618)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00017673122, -0.00018349654, 0.09323249)
+body_offset = Transform3D(1.0000004, -1.0430813e-06, 2.592802e-06, 2.592802e-06, -4.529953e-06, -1.0000002, 9.685755e-07, 1.0000002, -4.7534704e-06, 0.00017648935, 0.09323251, 0.00018393993)
 
 [node name="Physical Bone mixamorig_RightArm" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="10"]
-transform = Transform3D(0.27643389, 0.7411419, 0.61179495, 0.95131636, -0.30132517, -0.06481152, 0.13631466, 0.5999266, -0.78835684, -0.35208666, -0.020275705, -1.1239146)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00015116269, -0.0028274136, 0.14507575)
-body_offset = Transform3D(1.0000002, -4.556775e-05, -5.1409006e-07, -4.4330955e-07, -1.8071383e-05, -1.0000002, 4.544854e-05, 1.0000004, -1.8065795e-05, -0.00015121698, 0.14507574, 0.0028300285)
+transform = Transform3D(0.27643389, 0.7411419, 0.61179495, 0.95131636, -0.30132517, -0.06481152, 0.13631466, 0.5999266, -0.7883567, -0.35208666, -0.020275705, -1.1239146)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00015116594, -0.002827405, 0.14507574)
+body_offset = Transform3D(1.0000002, -4.556775e-05, -5.364418e-07, -4.4330955e-07, -1.8071383e-05, -1.0000004, 4.544854e-05, 1.0000004, -1.81254e-05, -0.00015121698, 0.14507574, 0.0028300285)
 
 [node name="Physical Bone mixamorig_RightForeArm" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="11"]
-transform = Transform3D(0.2049129, 0.9044821, -0.37406242, -0.23636106, -0.32513425, -0.9156534, -0.94981277, 0.27604294, 0.14716016, -0.3846429, 0.13275175, -1.0253625)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008400701, -0.0023917686, 0.15445216)
-body_offset = Transform3D(1.0000005, -4.813075e-06, -1.013279e-06, -1.0877848e-06, 1.9073486e-06, -1.0000002, 4.7385693e-06, 1.0000002, 2.1457672e-06, -0.008400559, 0.1544522, 0.002391398)
+transform = Transform3D(0.2049129, 0.9044821, -0.37406242, -0.23636106, -0.32513425, -0.9156534, -0.94981277, 0.27604294, 0.14716016, -0.38578418, 0.13375573, -0.998206)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.034665503, -0.008529434, 0.15094817)
+body_offset = Transform3D(1.0000005, -4.813075e-06, -1.013279e-06, -1.0877848e-06, 1.9073486e-06, -1.0000002, 4.7385693e-06, 1.0000002, 2.1457672e-06, -0.034665406, 0.15094826, 0.008528948)
 
 [node name="Physical Bone mixamorig_LeftUpLeg" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="12"]
-transform = Transform3D(0.26738396, -0.96134454, 0.065746345, -0.66861707, -0.23423247, -0.7057524, 0.6938711, 0.14474773, -0.7054013, 0.06590052, 0.2076974, -0.6476575)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00047882184, -0.00012615338, 0.22089228)
-body_offset = Transform3D(1, 4.336238e-06, 1.1146069e-05, 1.1146069e-05, 7.659197e-06, -1.0000005, -4.351139e-06, 0.99999934, 7.748604e-06, 0.00047636032, 0.22089237, 0.0001244396)
+transform = Transform3D(0.26738396, -0.96134454, 0.06574633, -0.66861707, -0.23423247, -0.7057524, 0.6938711, 0.14474773, -0.7054013, 0.06590052, 0.2076974, -0.6476575)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00047882184, -0.00012615009, 0.22089228)
+body_offset = Transform3D(1, 4.336238e-06, 1.1146069e-05, 1.1146069e-05, 7.659197e-06, -1.0000005, -4.351139e-06, 0.99999934, 7.733703e-06, 0.00047636032, 0.22089237, 0.0001244396)
 
 [node name="Physical Bone mixamorig_LeftLeg" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="13"]
-transform = Transform3D(0.11550659, -0.9766708, -0.18103167, -0.5754945, -0.21434702, 0.7892157, -0.8096075, 0.013023146, -0.5868272, 0.08956964, 0.19764192, -0.3703784)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00010531257, 0.00020468095, 0.20938721)
-body_offset = Transform3D(0.99999833, 0.0020559207, -0.0005156398, -0.0005131662, -0.0011039823, -0.9999993, -0.0020561963, 0.9999967, -0.0011028051, 2.2351742e-06, 0.20938733, 2.6449561e-05)
+transform = Transform3D(0.12544242, -0.97636044, -0.17602426, -0.5704767, -0.21614647, 0.7923616, -0.8116776, 0.0010219828, -0.5841049, 0.08956964, 0.19764192, -0.3703784)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00081004336, 0.0013713016, 0.20938127)
+body_offset = Transform3D(0.99991024, 0.012840547, -0.0039631724, -0.0038774908, -0.0066756904, -0.99997026, -0.012866311, 0.9998947, -0.0066251606, 2.2351742e-06, 0.20938733, 2.6449561e-05)
 
 [node name="Physical Bone mixamorig_LeftFoot" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="14"]
 transform = Transform3D(-0.96647775, -0.18865573, -0.17415476, -0.15540372, 0.96977615, -0.18810622, 0.20437844, -0.15473618, -0.9665848, 0.14881213, 0.05721852, -0.12950319)
@@ -242,6 +248,15 @@ omni_range = 2.0
 [node name="OmniLight3D2" type="OmniLight3D" parent="EnemyModel/SpotLight3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31530797, -0.50899506)
 omni_range = 2.0
+
+[node name="LootArea" type="Area3D" parent="EnemyModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyModel/LootArea"]
+shape = SubResource("SphereShape3D_fjqub")
 
 [node name="StepTimer" type="Timer" parent="."]
 wait_time = 0.5

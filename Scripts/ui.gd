@@ -11,10 +11,10 @@ var show_crosshair: bool = true
 @onready var medkits_left: Label = %MedkitsLeft
 @onready var gun_name: Label = %GunName
 @onready var exit_area: Label = $Label
-@onready var inventory_container: HBoxContainer = $PlayerInventory
-@onready var inventory_container2: HBoxContainer = $TransferInventory
-@onready var inventory: PanelContainer = %Inventory
-@onready var inventory2: PanelContainer = %Inventory2
+#@onready var inventory_container: HBoxContainer = $PlayerInventory
+#@onready var inventory_container2: HBoxContainer = $TransferInventory
+#@onready var inventory: PanelContainer = %Inventory
+#@onready var inventory2: PanelContainer = %Inventory2
 @onready var mag_icon: Sprite2D = $BottomRight/Sprite
 @onready var death_ui: PanelContainer = $DeathUI
 @onready var load_save: Button = $DeathUI/MarginContainer/VBoxContainer/VBoxContainer/LoadSave
@@ -45,14 +45,14 @@ func _process(delta: float) -> void:
 		bottom_right.visible = false
 	
 	# inventory
-	if Input.is_action_just_pressed("inventory"):
-		inventory_container.visible = !inventory_container.visible
-		if inventory_container.visible:
-			PlayerStats.change_state(PlayerStats.states.pause)
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		else:
-			PlayerStats.change_state(PlayerStats.states.walk)
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#if Input.is_action_just_pressed("inventory"):
+		#inventory_container.visible = !inventory_container.visible
+		#if inventory_container.visible:
+			#PlayerStats.change_state(PlayerStats.states.pause)
+			#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		#else:
+			#PlayerStats.change_state(PlayerStats.states.walk)
+			#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	# crosshair
 	if get_tree().current_scene == Globals.overworld:
@@ -98,20 +98,20 @@ func play_hit_effect() -> void:
 	tween.tween_property(hit_effect, "visible", false, 0)
 
 
-func loot(target) -> void:
-	PlayerStats.change_state(PlayerStats.states.pause)
-	inventory.mode = inventory.modes.loot
-	inventory2.mode = inventory2.modes.loot
-	inventory.target2 = target
-	inventory2.target = target
-	inventory2.target2 = PlayerStats
-	inventory2.grab_focus()
-	inventory_container2.show()
-
-
-func reset_inventoryies() -> void:
-	inventory.set_items()
-	inventory2.set_items()
+#func loot(target) -> void:
+	#PlayerStats.change_state(PlayerStats.states.pause)
+	#inventory.mode = inventory.modes.loot
+	#inventory2.mode = inventory2.modes.loot
+	#inventory.target2 = target
+	#inventory2.target = target
+	#inventory2.target2 = PlayerStats
+	#inventory2.grab_focus()
+	#inventory_container2.show()
+#
+#
+#func reset_inventoryies() -> void:
+	#inventory.set_items()
+	#inventory2.set_items()
 
 
 func _on_player_inventory_exit() -> void:

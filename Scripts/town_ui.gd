@@ -24,15 +24,15 @@ func _ready() -> void:
 		child.hide()
 
 
-func _process(_delta: float) -> void:
-	# opening things
-	if Input.is_action_just_pressed("inventory"):
-		inventory_holder.visible = !inventory_holder.visible
-	if Input.is_action_just_pressed("journal"):
-		if journal.visible:
-			journal.close()
-		else:
-			journal.open(PlayerStats.quests)
+#func _process(_delta: float) -> void:
+	## opening things
+	#if Input.is_action_just_pressed("inventory"):
+		#inventory_holder.visible = !inventory_holder.visible
+	#if Input.is_action_just_pressed("journal"):
+		#if journal.visible:
+			#journal.close()
+		#else:
+			#journal.open(PlayerStats.quests)
 	
 	# open pause menu
 	#if Input.is_action_just_pressed("ui_cancel"):
@@ -77,8 +77,10 @@ func start_dialogue(dialogue_data: DialogueTree, shop: Shop = null) -> void:
 func enter_shop(shop_data: Shop) -> void:
 	shop_inventory.target = PlayerStats
 	shop_inventory.target2 = shop_data
+	shop_inventory.show_price = true
 	shop_inventory2.target = shop_data
 	shop_inventory2.target2 = PlayerStats
+	shop_inventory.show_price = true
 	shop_inventory2.grab_focus()
 	shop.show()
 

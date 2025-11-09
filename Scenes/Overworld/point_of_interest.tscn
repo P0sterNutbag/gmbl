@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqnwuiew1q2il"]
+[gd_scene load_steps=6 format=3 uid="uid://cqnwuiew1q2il"]
 
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_3kl7u"]
 [ext_resource type="Script" uid="uid://bocymopxj1vj7" path="res://Scripts/point_of_interest.gd" id="1_wb1da"]
@@ -7,9 +7,6 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cpnmm"]
 radius = 6.021006
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_avo8c"]
-radius = 0.14289628
 
 [node name="PointOfInterest" type="Node3D"]
 script = ExtResource("1_wb1da")
@@ -68,11 +65,6 @@ size_flags_vertical = 6
 theme = ExtResource("4_5twat")
 text = "Location Name"
 autowrap_mode = 2
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("SphereShape3D_avo8c")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

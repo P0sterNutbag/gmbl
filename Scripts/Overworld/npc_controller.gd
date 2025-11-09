@@ -20,9 +20,12 @@ func _on_timer_timeout() -> void:
 	var spawn_location = get_destination()
 	spawn_location.location_data.population = clamp(spawn_location.location_data.population - inst.location.location_data.population, 0, spawn_location.max_population)
 	inst.global_position = spawn_location.global_position
+	inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
 	# determine desination
 	var dest = get_destination()
-	var pos = dest.global_position + Vector3.RIGHT.rotated(Vector3.UP, deg_to_rad(randf_range(0, 360))) * dest.target_distance
+	while dest == spawn_location:
+		dest = get_destination()
+	var pos = dest.global_position# + Vector3.RIGHT.rotated(Vector3.UP, deg_to_rad(randf_range(0, 360))) * dest.target_distance
 	inst.navigation_agent.set_target_position(pos)
 	inst.destination = dest
 

@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bq3maily0jjmb"]
+[gd_scene load_steps=7 format=3 uid="uid://bq3maily0jjmb"]
 
 [ext_resource type="PackedScene" uid="uid://cqnwuiew1q2il" path="res://Scenes/Overworld/point_of_interest.tscn" id="1_6bmx8"]
 [ext_resource type="Script" uid="uid://lblyysya3an4" path="res://Scripts/location.gd" id="2_3wuxp"]
 [ext_resource type="PackedScene" uid="uid://c3wywlngou3jc" path="res://Scenes/Levels/rock_canyon.tscn" id="3_6bmx8"]
-[ext_resource type="PackedScene" uid="uid://fgyjmx6rbowy" path="res://Scenes/Environment/Collisionless/rock_no_collision.tscn" id="4_1bmfk"]
-[ext_resource type="Texture2D" uid="uid://dejeawiol7jdc" path="res://Art/Textures/ring.png" id="5_thaem"]
-[ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="6_yyftj"]
+[ext_resource type="Script" uid="uid://chxn6jj2cv0p3" path="res://Scripts/scatterer.gd" id="4_hq58m"]
+[ext_resource type="PackedScene" uid="uid://ccasv3bhe2jhu" path="res://Art/Models/rock.glb" id="5_6bmx8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xf0n4"]
 size = Vector3(10, 1, 5)
@@ -13,7 +12,7 @@ size = Vector3(10, 1, 5)
 [node name="RockCanyon" instance=ExtResource("1_6bmx8")]
 title = "Rock Canyon"
 
-[node name="Encounter" type="Area3D" parent="." index="3" groups=["location", "persist"]]
+[node name="Encounter" type="Area3D" parent="." index="2" groups=["location", "persist"]]
 collision_layer = 64
 collision_mask = 32
 script = ExtResource("2_3wuxp")
@@ -24,165 +23,36 @@ encounter_scene = ExtResource("3_6bmx8")
 shape = SubResource("BoxShape3D_xf0n4")
 
 [node name="Node3D" type="Node3D" parent="Encounter" index="1"]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2877375, 0, 0)
+script = ExtResource("4_hq58m")
+scenes = Array[PackedScene]([ExtResource("5_6bmx8")])
+count = 20
+min_size = 0.2
+max_size = 0.5
+rotate_x = true
+rotate_y = true
+rotate_z = true
 
-[node name="Rocks" type="Node3D" parent="Encounter/Node3D" index="0"]
+[node name="rock" parent="Encounter" index="2" instance=ExtResource("5_6bmx8")]
+transform = Transform3D(-0.9993468, -0.03613797, 0, 0.03613797, -0.9993468, 0, 0, 0, 1, 3.9636326, 0, 0)
 
-[node name="Rock" parent="Encounter/Node3D/Rocks" index="0" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(-0.597383, -0.457109, -0.0948506, -0.424722, 0.4682, 0.418584, -0.193797, 0.382951, -0.624982, 16.0966, 0, 6.25898)
+[node name="rock2" parent="Encounter" index="3" instance=ExtResource("5_6bmx8")]
+transform = Transform3D(0.90408254, -0.31019974, 0.29395726, 0, 0.687848, 0.72585475, -0.42735788, -0.6562326, 0.62187135, 2.6538398, 0, 2.029161)
 
-[node name="@Node3D@221665" parent="Encounter/Node3D/Rocks" index="1" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(-0.894217, 0.947745, 0.572362, -0.440839, 0.370111, -1.30158, -1.01562, -0.995108, 0.0610205, 13.5616, 0, -4.84711)
+[node name="rock3" parent="Encounter" index="4" instance=ExtResource("5_6bmx8")]
+transform = Transform3D(-0.11530815, -0.07186797, -0.99072653, -0.52894205, 0.84865797, 0, 0.84078795, 0.52403694, -0.13587117, -0.0088558495, 0, -0.6472268)
 
-[node name="@Node3D@221666" parent="Encounter/Node3D/Rocks" index="2" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(1.1491, 0.829905, 0.909423, -0.249178, -1.06148, 1.28351, 1.2057, -1.01032, -0.601473, 17.7881, 0, 6.54289)
+[node name="rock4" parent="Encounter" index="5" instance=ExtResource("5_6bmx8")]
+transform = Transform3D(0.53246266, -0.8464535, 0, 0.8464535, 0.53246266, 0, 0, 0, 1, -2.8570144, 0, 1.3519661)
 
-[node name="@Node3D@221667" parent="Encounter/Node3D/Rocks" index="3" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(0.856226, 0.0144658, 0.0222768, -0.0157839, -0.300741, 0.801956, 0.0213631, -0.801981, -0.30033, 12.7107, 0, -5.88412)
+[node name="rock5" parent="Encounter" index="6" instance=ExtResource("5_6bmx8")]
+transform = Transform3D(-0.20191559, -0.979403, 0, 0.84635293, -0.17448573, 0.50323117, -0.492866, 0.10161019, 0.86415184, -3.820554, 0, -1.475534)
 
-[node name="@Node3D@221668" parent="Encounter/Node3D/Rocks" index="4" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(0.616978, -0.437994, -1.506, -0.431918, 1.50831, -0.615614, 1.50775, 0.611306, 0.439909, 1.16528, 0, -0.665018)
+[node name="rock6" parent="Encounter" index="7" instance=ExtResource("5_6bmx8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3812737, 0, 2.38445)
 
-[node name="@Node3D@221669" parent="Encounter/Node3D/Rocks" index="5" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(-0.367758, -0.370662, -0.819695, 0.103413, 0.862253, -0.436303, 0.893642, -0.252318, -0.286837, -3.16731, 0, -8.29113)
-
-[node name="@Node3D@221670" parent="Encounter/Node3D/Rocks" index="6" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(-0.706221, -0.686579, -1.47548, 0.426343, 1.47419, -0.890043, 1.57056, -0.70891, -0.421856, 18.6546, 0, 2.3282)
-
-[node name="@Node3D@221671" parent="Encounter/Node3D/Rocks" index="7" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(-0.657739, 0.968378, 0.384353, 0.473531, -0.127018, 1.13037, 0.928036, 0.751142, -0.304365, -17.657, 0, -9.51605)
-
-[node name="@Node3D@221672" parent="Encounter/Node3D/Rocks" index="8" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(-0.753661, 0.0269605, 0.00243877, -0.00452188, -0.0583939, -0.751869, -0.0266902, -0.7514, 0.0585179, 5.73982, 0, -3.05976)
-
-[node name="@Node3D@221673" parent="Encounter/Node3D/Rocks" index="9" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(0.100688, -1.1655, -0.625342, 0.527279, 0.610533, -1.053, 1.21302, -0.168645, 0.509628, -16.5508, 0, 0.735902)
-
-[node name="@Node3D@221674" parent="Encounter/Node3D/Rocks" index="10" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(0.574081, -0.769086, -0.142887, 0.0625365, 0.221793, -0.942537, 0.779743, 0.548447, 0.180793, -16.0411, 0, -5.61566)
-
-[node name="@Node3D@221675" parent="Encounter/Node3D/Rocks" index="11" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(-0.199888, -0.673581, 0.0237042, 0.0332113, -0.034538, -0.701379, 0.673179, -0.198303, 0.041641, 1.59219, 0, -4.74032)
-
-[node name="@Node3D@221676" parent="Encounter/Node3D/Rocks" index="12" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(0.985512, -1.54893, 0.78521, 0.101932, 0.952878, 1.75175, -1.7336, -0.824507, 0.549374, -9.72177, 0, -3.81362)
-
-[node name="@Node3D@221677" parent="Encounter/Node3D/Rocks" index="13" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(-0.0791598, -1.29072, 0.443728, -0.588976, -0.368656, -1.17742, 1.23124, -0.259333, -0.534701, 15.2225, 0, -6.89431)
-
-[node name="@Node3D@221678" parent="Encounter/Node3D/Rocks" index="14" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(-1.34903, -0.174362, 0.0680211, 0.0688114, -0.00175287, 1.36021, -0.174052, 1.35075, 0.0105457, -5.75999, 0, -5.01712)
-
-[node name="@Node3D@221679" parent="Encounter/Node3D/Rocks" index="15" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(0.207321, 0.199247, 0.169603, 0.230772, -0.241224, 0.00129373, 0.123325, 0.116439, -0.287541, -12.2645, 0, 2.98428)
-
-[node name="@Node3D@221680" parent="Encounter/Node3D/Rocks" index="16" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(0.227664, -0.684685, -0.138895, 0.197272, 0.203141, -0.678037, 0.670201, 0.17279, 0.246761, 5.07098, 0, -1.81579)
-
-[node name="@Node3D@221681" parent="Encounter/Node3D/Rocks" index="17" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(1.25939, -0.0170453, 0.103199, -0.104542, -0.164607, 1.24859, -0.00339888, -1.25284, -0.165452, -3.29325, 0, 2.37859)
-
-[node name="@Node3D@221682" parent="Encounter/Node3D/Rocks" index="18" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(-0.118556, -0.330947, -0.454288, -0.559606, 0.112782, 0.06388, 0.0523915, 0.455756, -0.345689, 6.05035, 0, 3.88331)
-
-[node name="@Node3D@221683" parent="Encounter/Node3D/Rocks" index="19" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(-1.15202, 1.1408, 0.117608, 0.721902, 0.850861, -1.18208, -0.891137, -0.785503, -1.10963, 14.7859, 0, 6.01241)
-
-[node name="@Node3D@221684" parent="Encounter/Node3D/Rocks" index="20" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(0.277881, 0.215754, -0.886826, -0.87978, -0.183384, -0.320289, -0.242892, 0.91107, 0.145544, -7.56588, 0, 2.42838)
-
-[node name="@Node3D@221685" parent="Encounter/Node3D/Rocks" index="21" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(0.347019, -0.0876499, 0.410058, 0.231555, -0.403696, -0.282248, 0.349588, 0.3544, -0.220093, -0.327775, 0, 5.91036)
-
-[node name="@Node3D@221686" parent="Encounter/Node3D/Rocks" index="22" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(0.613598, 0.402458, -0.461951, -0.591608, 0.559174, -0.298658, 0.159281, 0.526522, 0.670282, -3.21052, 0, 8.33061)
-
-[node name="@Node3D@221687" parent="Encounter/Node3D/Rocks" index="23" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(-0.323932, 0.210902, -0.0857431, 0.0201072, 0.175036, 0.354573, 0.226776, 0.285738, -0.153916, 18.5258, 0, -8.08503)
-
-[node name="@Node3D@221688" parent="Encounter/Node3D/Rocks" index="24" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(-0.610013, 1.36118, 0.384512, -0.454896, -0.585297, 1.35028, 1.3393, 0.42118, 0.633762, -10.1739, 0, -6.47827)
-
-[node name="@Node3D@221689" parent="Encounter/Node3D/Rocks" index="25" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(0.927878, 0.159022, -1.04051, -0.240413, -1.31839, -0.41588, -1.02477, 0.453284, -0.844564, 14.4308, 0, -0.180638)
-
-[node name="@Node3D@221690" parent="Encounter/Node3D/Rocks" index="26" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(-1.26004, -0.312197, 0.325105, -0.102906, -0.740492, -1.10993, 0.438829, -1.07008, 0.67322, -19.4784, 0, 7.54553)
-
-[node name="@Node3D@221691" parent="Encounter/Node3D/Rocks" index="27" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(0.33296, -0.445028, -0.325742, -0.403176, -0.456043, 0.210935, -0.376306, 0.0948408, -0.514217, -14.3888, 0, 7.11249)
-
-[node name="@Node3D@221692" parent="Encounter/Node3D/Rocks" index="28" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(0.0637266, -1.31964, 0.129407, 1.10499, -0.018761, -0.735471, 0.732945, 0.143022, 1.09754, -6.01795, 0, -9.10518)
-
-[node name="@Node3D@221693" parent="Encounter/Node3D/Rocks" index="29" instance=ExtResource("4_1bmfk")]
-transform = Transform3D(0.151106, 0.499668, -0.0180788, -0.0583203, -0.00114369, -0.519062, -0.496582, 0.152179, 0.0554592, -15.8893, 0, -2.53808)
-
-[node name="Sprite3D" type="Sprite3D" parent="Encounter" index="2"]
-transform = Transform3D(4.31094, 0, 0, 0, 1.28476e-07, -0.999206, 0, 4.31094, 2.97786e-08, 0, 0.001, 0)
-visible = false
-visibility_range_end = 20.0
-visibility_range_end_margin = 2.0
-visibility_range_fade_mode = 1
-modulate = Color(0.172, 0.4128, 0.86, 0.627451)
-render_priority = 1
-texture = ExtResource("5_thaem")
-
-[node name="EnemyModel" parent="Encounter" index="3" instance=ExtResource("6_yyftj")]
-visible = false
-
-[node name="Physical Bone mixamorig_Spine" parent="Encounter/EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="1"]
-transform = Transform3D(-0.5828543, -0.81133664, 0.04487521, 0.79585934, -0.58113647, -0.16996577, 0.16397808, -0.06335093, 0.9844277, 0.019926446, 0.023176186, -1.0509676)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00043674893, -6.500827e-05, 0.05051664)
-body_offset = Transform3D(0.99999976, -0.0003503859, 6.2167645e-05, 6.215274e-05, -2.7120113e-05, -0.99999994, 0.0003503263, 0.9999999, -2.7030706e-05, -0.00043991208, 0.050516605, 6.622076e-05)
-
-[node name="Physical Bone mixamorig_Spine1" parent="Encounter/EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="2"]
-transform = Transform3D(-0.5821079, -0.7654099, 0.27440506, 0.7048501, -0.64325213, -0.2990202, 0.40538466, 0.019352395, 0.9139413, -0.0008642126, 0.054960832, -1.1814367)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.227182e-05, -3.8374663e-05, 0.06267572)
-body_offset = Transform3D(0.9999999, -0.00038325787, 2.014637e-05, 2.0071864e-05, 9.405613e-05, -0.99999994, 0.00038322806, 1, 9.4115734e-05, 3.0994415e-05, 0.062675714, 3.2488257e-05)
-
-[node name="Physical Bone mixamorig_Spine2" parent="Encounter/EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="3"]
-transform = Transform3D(-0.50707304, -0.7131059, 0.48410425, 0.5960391, -0.695839, -0.40068132, 0.6225868, 0.08537035, 0.77788025, -0.06027769, 0.10986078, -1.3145198)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00018629989, -7.370314e-05, 0.077079386)
-body_offset = Transform3D(1, -0.00017353892, 0.00013716519, 0.00013713539, 0.00010192394, -1, 0.00017344952, 1, 0.00010213256, 0.0001757145, 0.077079415, 6.586313e-05)
-
-[node name="Physical Bone mixamorig_Head" parent="Encounter/EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="5"]
-transform = Transform3D(-0.977446, 0.109580316, 0.18053116, -0.16704912, -0.9241832, -0.34348217, 0.12920496, -0.36589283, 0.9216445, -0.15509151, 0.22949204, -1.6118646)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00032820064, 0.0006750833, 0.1965382)
-body_offset = Transform3D(0.00047959387, -0.9979496, -0.06400555, 0.0004231073, 0.06400585, -0.9979496, 0.9999997, 0.00045149028, 0.00045299158, 0.013253391, 0.19609213, 0.00023886561)
-
-[node name="Physical Bone mixamorig_LeftShoulder" parent="Encounter/EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="6"]
-transform = Transform3D(0.6048422, 0.26701948, -0.75024444, -0.41888776, -0.69456285, -0.5849064, -0.67727333, 0.6680442, -0.30824968, 0.04785444, 0.2461856, -1.3347203)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00023406408, -0.0009113391, 0.093576215)
-body_offset = Transform3D(1, 7.1823597e-06, 4.3347478e-05, 4.3168664e-05, -3.2305717e-05, -0.99999964, -7.2717667e-06, 0.9999999, -3.2037497e-05, 0.00023001432, 0.09357616, 0.00091433525)
-
-[node name="Physical Bone mixamorig_LeftArm" parent="Encounter/EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="7"]
-transform = Transform3D(0.8209798, -0.55661917, -0.127151, -0.50567585, -0.6054469, -0.61459416, 0.26511174, 0.56886655, -0.7785286, 0.13474192, 0.3894834, -1.1915917)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0003939443, -0.0020262138, 0.14614394)
-body_offset = Transform3D(0.99999964, 0.0001526475, 3.322959e-05, 3.325939e-05, -0.0013503134, -0.99999875, -0.00015240908, 0.9999989, -0.0013503134, 0.00038939714, 0.14614105, 0.0022234917)
-
-[node name="Physical Bone mixamorig_LeftForeArm" parent="Encounter/EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="8"]
-transform = Transform3D(-0.53126395, -0.098385885, 0.8414743, -0.8018426, -0.2622601, -0.5369062, 0.27350911, -0.9599687, 0.060439344, 0.023018029, 0.5630408, -1.0903523)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00017747586, -6.147112e-06, 0.15563744)
-body_offset = Transform3D(0.9999999, 2.6747584e-05, -9.745359e-06, -9.953976e-06, 4.5210123e-05, -1, -2.7000904e-05, 0.9999998, 4.5210123e-05, 0.00017899275, 0.15563744, -8.940697e-07)
-
-[node name="Physical Bone mixamorig_RightShoulder" parent="Encounter/EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="9"]
-transform = Transform3D(-0.20411956, 0.79880357, 0.5659046, 0.6997683, -0.28519532, 0.6549717, 0.68458706, 0.5296946, -0.5007635, -0.20083155, 0.0078024156, -1.302433)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.875812e-05, -0.00028172525, 0.093378134)
-body_offset = Transform3D(1.0000002, 1.898408e-05, -9.930134e-05, -9.933114e-05, -6.514788e-05, -1.0000002, -1.8969178e-05, 1.0000001, -6.54012e-05, 8.803606e-05, 0.09337813, 0.00028783083)
-
-[node name="Physical Bone mixamorig_LeftUpLeg" parent="Encounter/EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="12"]
-transform = Transform3D(0.21309331, -0.9765007, 0.0322139, -0.7997043, -0.19326484, -0.568438, 0.5613059, 0.09536874, -0.8220953, 0.092175975, 0.17628129, -0.64424837)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00027188702, -2.0970518e-05, 0.22039355)
-body_offset = Transform3D(0.9999998, -1.2665987e-05, 1.758337e-06, 1.8179417e-06, -7.1898103e-06, -1.0000002, 1.2889504e-05, 0.99999917, -7.1302056e-06, 0.00027149916, 0.2203936, 2.2545457e-05)
-
-[node name="Physical Bone mixamorig_RightLeg" parent="Encounter/EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="16"]
-transform = Transform3D(0.28704157, -0.9209356, -0.26359987, -0.9311726, -0.3328262, 0.1488099, -0.22477725, 0.20274234, -0.9530849, -0.07740728, 0.21316028, -0.332276)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1367416e-05, 0.00021510273, 0.20897038)
-body_offset = Transform3D(1, 3.6150217e-05, 3.1381845e-05, 3.1247735e-05, -9.729713e-05, -0.9999998, -3.620982e-05, 0.9999991, -9.7200274e-05, -7.793307e-05, 0.20897037, -0.00019478798)
+[node name="rock7" parent="Encounter" index="8" instance=ExtResource("5_6bmx8")]
+transform = Transform3D(0.9354255, 0.22589558, -0.271938, 0, -0.7692211, -0.63898265, -0.35352382, 0.5977207, -0.71954906, 2.4929821, -0.07963753, -1.7042007)
 
 [connection signal="body_entered" from="Encounter" to="Encounter" method="_on_body_entered"]
 [connection signal="body_exited" from="Encounter" to="Encounter" method="_on_body_exited"]
-
-[editable path="Encounter/EnemyModel"]
-[editable path="Encounter/EnemyModel/PersonAnimated"]

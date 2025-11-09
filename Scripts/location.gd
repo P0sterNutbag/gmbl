@@ -11,10 +11,8 @@ class_name Location
 @export var shop: Shop
 @export var dialogue_tree: DialogueTree
 @export var spawn_player_random: bool = false
-@export var show_enemy_model: bool = true
 var transition_started: bool 
 var can_transition: bool = true
-var enemy_model: Node3D
 var shop_timer: Timer
 
 #func _enter_tree() -> void:
@@ -28,9 +26,6 @@ var shop_timer: Timer
 
 
 func _ready() -> void:
-	enemy_model = get_node_or_null("EnemyModel")
-	#if !show_enemy_model and enemy_model:
-		#enemy_model.hide()
 	if start_with_enemies:
 		location_data.population = max_population
 	if "style_data" in get_parent():
@@ -47,14 +42,6 @@ func _ready() -> void:
 		shop_timer.timeout.connect(stock_shops)
 		shop_timer.process_mode = Node.PROCESS_MODE_ALWAYS
 		add_child(shop_timer)
-
-
-#func _process(_delta: float) -> void:
-	#if show_enemy_model:
-		#if location_data.population == 0:
-			#enemy_model.hide()
-		#else:
-			#enemy_model.show()
 
 
 func start_encounter() -> void:

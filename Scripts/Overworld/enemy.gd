@@ -29,14 +29,10 @@ func _ready() -> void:
 	location.spawn_player_random = true
 
 
-func _process(delta: float) -> void:
-	#if detection.get_visible_target():
-		#navigation_agent.set_target_position(Globals.player.global_position)
-	if get_parent() is Path3D:
-		var next_point = get_parent().global_position + get_parent().curve.get_point_position(path_index)
-		if navigation_agent.target_position != next_point:
-			navigation_agent.set_target_position(next_point)
-	follow_path()
+func _process(_delta: float) -> void:
+	# move towards destination
+	if navigation_agent.target_position != Vector3.ZERO:
+		follow_path()
 	
 	# animate
 	if velocity != Vector3.ZERO:
@@ -84,18 +80,5 @@ func die():
 
 
 func _on_navigation_agent_3d_navigation_finished() -> void:
-	if get_parent() is not Path3D:
-		if destination.max_population == 0:
-			velocity = Vector3.ZERO
-			look_at(destination.global_position)
-			await get_tree().create_timer(randf_range(3, 10)).timeout
-			var dest = Globals.overworld.npc_controller.get_destination()
-			navigation_agent.set_target_position(dest.global_position)
-			return
-		if destination.location_data.population == 0:
-			destination.enemy_model.set_materials(enemy_model.current_style)
-		destination.location_data.population = clamp(destination.location_data.population + location.location_data.population, 0, destination.max_population)
-		queue_free()
-		return
-	path_index = wrap(path_index + 1, 0, get_parent().curve.point_count)
-	velocity = Vector3.ZERO
+	destination.location_data.change_population(location.location_data.population)
+	queue_free()

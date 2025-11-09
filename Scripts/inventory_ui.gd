@@ -137,7 +137,7 @@ func transfer_item(menu_item: Control):
 			new_item.amount = amount_to_move
 			target2.items.append(new_item)
 	if item is Equipment:
-		item.resource.equipped = false
+		item.equipped = false
 	get_parent().reset_inventories()
 	#var inventory2
 	#if get_index() == 0:
@@ -192,6 +192,9 @@ func _on_v_box_container_visibility_changed() -> void:
 func on_use_item(menu_item) -> void:
 	if !menu_item:
 		return
-	if menu_item.get_index() == item_container.get_child_count() - 1:
-		item_container.get_child(-2).grab_focus()
-	menu_item.queue_free()
+	var item = menu_item.resource
+	item.amount -= 1
+	if item.amount <= 0:
+		if menu_item.get_index() == item_container.get_child_count() - 1:
+			item_container.get_child(-2).grab_focus()
+		menu_item.queue_free()

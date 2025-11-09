@@ -129,14 +129,19 @@ func create_physical_item(physical_item: PackedScene = null) -> void:
 		var amount_to_move = 1
 		if Input.is_action_just_pressed("shift"):
 			amount_to_move = resource.amount
+		# move to pouch
 		var new_item = resource.duplicate()
 		new_item.amount = amount_to_move
-		# create pouch or move to pouch
 		var pouches: Array = Globals.player.loot_area.get_overlapping_areas()
 		pouches.filter(func(i): return i.is_in_group("pouches"))
 		if pouches.size() > 0:
-			pouches[0].items.append(new_item)
+			var previous_item = Globals.find_item(pouches[0].items, resource.title)
+			if previous_item:
+				previous_item.amount += amount_to_move
+			else:
+				pouches[0].items.append(new_item)
 			return
+		# create new physical pouch
 		var p = pouch.instantiate()
 		get_tree().current_scene.add_child(p)
 		var offset = -Globals.player.basis.z

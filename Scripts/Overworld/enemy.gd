@@ -30,10 +30,6 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	# move towards destination
-	if navigation_agent.target_position != Vector3.ZERO:
-		follow_path()
-	
 	# animate
 	if velocity != Vector3.ZERO:
 		anim_player.play("Walk")
@@ -42,6 +38,9 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	# move towards destination
+	if navigation_agent.target_position != Vector3.ZERO:
+		follow_path()
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	move_and_slide()
@@ -51,10 +50,7 @@ func follow_path(speed: float = walk_speed):
 	if navigation_agent.is_navigation_finished():
 		return
 	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
-	next_path_position.y = global_position.y
-	var new_velocity: Vector3 = global_position.direction_to(next_path_position) * speed
-	navigation_agent.set_velocity(velocity)
-	velocity = new_velocity
+	velocity = global_position.direction_to(next_path_position) * speed
 	look_at_position(next_path_position)
 
 

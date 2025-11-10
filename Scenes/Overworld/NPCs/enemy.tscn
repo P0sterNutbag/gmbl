@@ -1,12 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhc6a3k8wyk4x"]
+[gd_scene load_steps=8 format=3 uid="uid://dhc6a3k8wyk4x"]
 
 [ext_resource type="Script" uid="uid://dq5ymww0igewb" path="res://Scripts/Overworld/enemy.gd" id="1_11nfp"]
 [ext_resource type="PackedScene" uid="uid://cdr3k44ro53a1" path="res://Scenes/Overworld/location_base.tscn" id="2_riojr"]
+[ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="3_o6ebo"]
 [ext_resource type="Script" uid="uid://but6ijlpfowbx" path="res://Scripts/detection_component.gd" id="4_73otn"]
 [ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="5_i7slr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hf0oe"]
 radius = 0.434372
+
+[sub_resource type="Resource" id="Resource_ndpai"]
+script = ExtResource("3_o6ebo")
+population = 3
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [node name="Enemy" type="CharacterBody3D"]
 collision_layer = 0
@@ -17,6 +23,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.143, 1, 0)
 shape = SubResource("CapsuleShape3D_hf0oe")
 
 [node name="Location" parent="." instance=ExtResource("2_riojr")]
+location_data = SubResource("Resource_ndpai")
 
 [node name="Detection" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89564, 0)

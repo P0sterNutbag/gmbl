@@ -23,9 +23,9 @@ func _enter_tree() -> void:
 		compass_object = Globals.player
 
 
-func _ready() -> void:
-	for child in get_children():
-		child.hide()
+#func _ready() -> void:
+	#for child in get_children():
+		#child.hide()
 
 
 func _process(_delta: float) -> void:

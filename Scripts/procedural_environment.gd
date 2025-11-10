@@ -28,7 +28,7 @@ func generate_level() -> void:
 			# get building
 			var index = Globals.get_weighted_index(map.objects)
 			var inst = map.objects[index].object_to_spawn.instantiate()
-			# get spawn point
+			# get spawn pointz
 			var spawn_pos = get_weighted_position(spawn_center, map.cluster_radius)
 			if navigation_region_3d.get_child_count() > 1:
 				for child in navigation_region_3d.get_children():
@@ -45,16 +45,20 @@ func generate_level() -> void:
 	var inst = cover[Globals.get_weighted_index(cover)].object_to_spawn.instantiate()
 	navigation_region_3d.add_child(inst)
 	inst.global_position = cover_spawn.global_position + Vector3(randf_range(-1, 1), 0, randf_range(-1, 1))
+	inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
 	inst.rotation.y = randf_range(0, TAU)
 	navigation_region_3d.bake_navigation_mesh()
 
 
 
 func get_weighted_position(cluster_position: Vector3 = Vector3.ZERO, cluster_radius: float = 0) -> Vector3:
+	var pos
 	if cluster_position == Vector3.ZERO:
-		return position + Vector3(randf_range(-spawn_radius, spawn_radius), 0, randf_range(-spawn_radius, spawn_radius))
+		pos = position + Vector3(randf_range(-spawn_radius, spawn_radius), 0, randf_range(-spawn_radius, spawn_radius))
 	else:
-		return position + Vector3(cluster_position.x + randf_range(-cluster_radius, cluster_radius), 0, cluster_position.z + randf_range(-cluster_radius, cluster_radius))
+		pos = position + Vector3(cluster_position.x + randf_range(-cluster_radius, cluster_radius), 0, cluster_position.z + randf_range(-cluster_radius, cluster_radius))
+	pos.y = Globals.get_heightmap_position(pos)
+	return pos
 	#var base_center: Vector3
 	#if get_child_count() < 1:
 		#base_center = Vector3.ZERO

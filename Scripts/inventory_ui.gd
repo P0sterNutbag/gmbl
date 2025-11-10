@@ -71,7 +71,7 @@ func set_items():
 		if show_price:
 			inst.price = item.price
 			if item is EquipmentGun:
-				inst.price = round(inst.price * item.condition / 100)
+				inst.price = item.get_modified_price()
 		inst.focus_entered.connect(set_description.bind(item))
 		inst.delete.connect(target.items.erase.bind(inst.resource))
 		inst.delete.connect(set_items)

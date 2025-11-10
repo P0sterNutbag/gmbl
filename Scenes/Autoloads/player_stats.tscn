@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cha53csgpqitn"]
+[gd_scene load_steps=15 format=3 uid="uid://cha53csgpqitn"]
 
 [ext_resource type="Script" uid="uid://bby8q5udlgb6g" path="res://Scripts/player_stats.gd" id="1_vjobs"]
 [ext_resource type="Script" uid="uid://2qhh6s86pakx" path="res://Scripts/item.gd" id="2_ey8gb"]
@@ -7,7 +7,6 @@
 [ext_resource type="Resource" uid="uid://m28p1phfm50g" path="res://Resources/Items/compass.tres" id="5_btj6c"]
 [ext_resource type="Script" uid="uid://6ucyr0petjnx" path="res://Scripts/inventory.gd" id="5_uiad6"]
 [ext_resource type="Script" uid="uid://34toqwivxgyk" path="res://Scripts/equipment_gun.gd" id="5_upw4t"]
-[ext_resource type="Resource" uid="uid://de20gnenmrrxa" path="res://Resources/Items/Guns/shotgun.tres" id="6_av3m6"]
 [ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="8_kx86g"]
 [ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="9_348xh"]
 
@@ -44,28 +43,9 @@ amount = 2
 description = "Usable in: Pistol"
 metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
-[sub_resource type="Resource" id="Resource_08fje"]
-script = ExtResource("8_kx86g")
-values = Dictionary[String, Variant]({
-"ammo": 1
-})
-add = true
-metadata/_custom_type_script = "uid://4c6own63hs8c"
-
-[sub_resource type="Resource" id="Resource_348xh"]
-resource_name = "shotgun_ammo"
-script = ExtResource("9_348xh")
-effects = Array[ExtResource("8_kx86g")]([SubResource("Resource_08fje")])
-usable_in_menu = false
-title = "Shotgun Shell"
-price = 5
-amount = 5
-description = "Usable in: Shotgun"
-metadata/_custom_type_script = "uid://2qhh6s86pakx"
-
 [sub_resource type="Resource" id="Resource_ey8gb"]
 script = ExtResource("5_uiad6")
-items = Array[ExtResource("2_ey8gb")]([SubResource("Resource_h6bws"), SubResource("Resource_kx86g"), ExtResource("5_btj6c"), ExtResource("6_av3m6"), SubResource("Resource_348xh")])
+items = Array[ExtResource("2_ey8gb")]([SubResource("Resource_h6bws"), SubResource("Resource_kx86g"), ExtResource("5_btj6c")])
 metadata/_custom_type_script = "uid://6ucyr0petjnx"
 
 [node name="PlayerStats" type="Node" groups=["persist"]]

@@ -70,9 +70,9 @@ func _process(_delta: float) -> void:
 				continue
 			var quest_object = null
 			if get_tree().current_scene == Globals.overworld:
-				for l in Globals.overworld.npc_controller.locations:
-					if quest.location.replace(" ", "") == l.name.replace(" ", ""):
-						quest_object = l
+				for location in get_tree().get_nodes_in_group("location"):
+					if quest.location.to_lower() == location.get_parent().title.to_lower():
+						quest_object = location
 			else:
 				quest_object = quest.target_node
 			var player_forward = -compass_object.global_transform.basis.z.normalized()
@@ -134,4 +134,6 @@ func loot(target) -> void:
 	loot_transfer_inventory.target = target
 	loot_transfer_inventory.target2 = PlayerStats
 	loot_transfer_inventory.grab_focus()
+	player_transfer_inventory.show_price = false
+	loot_transfer_inventory.show_price = false
 	open_menu(transfer_inventory_holder)

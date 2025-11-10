@@ -284,10 +284,10 @@ func state_walk(delta):
 			return
 		var collider = interact_cast.get_collider(0)
 		if collider.is_in_group("lootable"):
-			Globals.ui.loot(collider.get_parent())
+			Globals.survival_ui.loot(collider.get_parent())
 		elif collider is PhysicalBone3D:
 			if collider.health_component and collider.health_component.is_dead:
-				Globals.ui.loot(collider.health_component.get_parent())
+				Globals.survival_ui.loot(collider.health_component.get_parent())
 		else:
 			if collider is ItemPickup:
 				collider.pickup()

@@ -26,3 +26,7 @@ func equip() -> void:
 		PlayerStats.equipped_guns[slot] = null
 		if PlayerStats.gun_index == slot:
 			Globals.player.unequip_gun()
+
+
+func get_modified_price() -> int:
+	return round(price * gun_stats.condition / 100)

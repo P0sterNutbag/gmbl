@@ -27,14 +27,13 @@ uv1_scale = Vector3(5, 5, 5)
 [node name="SandDunes" instance=ExtResource("1_lc1jq")]
 title = "Sand Dunes"
 
-[node name="SandDunesPoi" type="Area3D" parent="." index="3" groups=["location"]]
+[node name="SandDunesPoi" type="Area3D" parent="." index="2" groups=["location"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7152003, 0)
 collision_layer = 64
 collision_mask = 32
 script = ExtResource("2_ya5de")
 location_data = SubResource("Resource_ubq58")
 encounter_scene = ExtResource("4_3vsq3")
-show_enemy_model = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SandDunesPoi" index="0"]
 shape = SubResource("SphereShape3D_h80xa")

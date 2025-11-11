@@ -6,11 +6,18 @@ enum modes {use, loot}
 @export var show_price: bool
 var target = PlayerStats
 var target2
+var categories = {
+	-1 : "All" ,
+	Item.categories.survival : "Surival",
+	Item.categories.guns : "Guns", 
+	Item.categories.ammo : "Ammo"}
+var category_index = -1
 const text_style = preload("res://Art/Themes/text.tres")
 @onready var item_container: MenuController = %Items
 @onready var title: Label = $MarginContainer/VBoxContainer/HBoxContainer/Label
-@onready var money_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/Label2
-@onready var size_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/Label3
+@onready var money_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/Money
+@onready var size_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/Size
+@onready var category_label: Label = %Category
 @onready var stats: HBoxContainer = %Stats
 @onready var stats_panel: PanelContainer = $MarginContainer/VBoxContainer/Panel
 @onready var description: Label = %Label
@@ -45,6 +52,14 @@ func _process(_delta: float) -> void:
 	if "inventory" in target:
 		var space_left = target.inventory.get_space_left()
 		size_label.text = str(target.inventory.space - space_left) + "/" + str(target.inventory.space)
+	
+	# filtere
+	if Input.is_action_just_pressed("ui_right"):
+		category_index = wrapi(category_index + 1, -1, categories.size() - 1)
+		filter(category_index)
+	elif Input.is_action_just_pressed("ui_left"):
+		category_index = wrapi(category_index + 1, -1, categories.size() - 1)
+		filter(category_index)
 
 
 func set_items():
@@ -87,6 +102,7 @@ func set_items():
 			inst.pressed.connect(item.on_pressed)
 		elif mode == modes.loot:
 			inst.pressed.connect(transfer_item.bind(inst))
+	filter(category_index)
 	if item_container.get_child_count() > 0:
 		item_container.sort_menu_items()
 		item_container.set_menu_item_focus()
@@ -117,13 +133,13 @@ func transfer_item(menu_item: Control):
 			tween.tween_property(inventory2.money_label, "modulate", Color.WHITE, 1)
 			return
 	var amount_to_move = 1
-	if Input.is_action_pressed("shift"):
+	if Input.is_action_pressed("shift") or item is ItemMoney:
 		amount_to_move = item.amount
 	item.amount -= amount_to_move
 	if item.amount <= 0:
 		target.items.erase(item)
 	if item is ItemMoney:
-		PlayerStats.money += item.amount
+		PlayerStats.money += amount_to_move
 		return
 	if item is ItemBundle:
 		for i in item.items:
@@ -180,6 +196,17 @@ func set_description(item: Item):
 		stats.add_child(inst)
 
 
+func filter(category: int) -> void:
+	category_label.text = categories[category]
+	for child in item_container.get_children():
+		var item = child.resource
+		if item.category == category or category_index == -1:
+			child.show()
+		else:
+			child.hide()
+	
+
+
 func _on_v_box_container_visibility_changed() -> void:
 	if visible and get_parent().visible:
 		set_items()
@@ -198,3 +225,13 @@ func on_use_item(menu_item) -> void:
 		if menu_item.get_index() == item_container.get_child_count() - 1:
 			item_container.get_child(-2).grab_focus()
 		menu_item.queue_free()
+
+
+func _on_left_category_pressed() -> void:
+	category_index = wrapi(category_index - 1, -1, categories.size() - 1)
+	filter(category_index)
+
+
+func _on_right_category_pressed() -> void:
+	category_index = wrapi(category_index + 1, -1, categories.size() - 1)
+	filter(category_index)

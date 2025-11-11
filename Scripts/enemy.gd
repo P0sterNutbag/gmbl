@@ -64,6 +64,7 @@ var guns_dict: Dictionary = {
 @onready var aim_timer: Timer = $AimTimer
 @onready var physical_bone_simulator: PhysicalBoneSimulator3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D
 @onready var supress_timer: Timer = $SupressTimer
+@onready var new_destination_timer: Timer = $NewDestinationTimer
 signal shoot
 
 
@@ -482,6 +483,7 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 		change_state(states.aim)
 	elif state == states.walk:
 		change_state(states.idle)
+		new_destination_timer.start()
 
 
 func _on_return_to_idle_timer_timeout() -> void:
@@ -546,3 +548,10 @@ func _on_supress_timer_timeout() -> void:
 		change_state(states.search)
 	else:
 		change_state(states.camp)
+
+
+func _on_new_destination_timer_timeout() -> void:
+	if state != states.idle:
+		return
+	destination = get_tree().current_scene.get_node("enemy_spawner").get_destination(global_position)
+	change_state(states.walk)

@@ -50,7 +50,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.551934, 1.2687867, -2.078514)
 metadata/_edit_group_ = true
 
-[node name="NPCSpawns" type="Node3D" parent="."]
+[node name="NPCSpawns" type="Node3D" parent="." groups=["spawn points"]]
 script = ExtResource("5_2qq8x")
 possible_spawns = Array[ExtResource("6_lljc6")]([SubResource("Resource_kn4lb")])
 location_data_variable = "npc_spawn_chance"
@@ -82,6 +82,7 @@ transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, 
 [node name="LootSpawns" type="Node3D" parent="."]
 script = ExtResource("5_2qq8x")
 possible_spawns = Array[ExtResource("6_lljc6")]([SubResource("Resource_rt3de"), SubResource("Resource_4kfej")])
+spawn_on_ready = true
 location_data_variable = "loot_spawn_chance"
 
 [node name="Node3D" type="Node3D" parent="LootSpawns"]

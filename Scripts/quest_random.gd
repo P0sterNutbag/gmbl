@@ -54,5 +54,6 @@ func generate_quest() -> Quest:
 	quest.location = locations[randi_range(0, locations.size()-1)]
 	quest.description = descriptions[randi_range(0, descriptions.size()-1)] + "Last seen at " + quest.location + "."
 	quest.reward = rewards[randi_range(0, rewards.size()-1)]
+	quest.reward.amount = 100
 	quest.target = preload("res://Scenes/Enemies/enemy.tscn")
 	return quest

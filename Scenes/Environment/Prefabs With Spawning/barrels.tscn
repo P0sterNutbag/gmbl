@@ -48,7 +48,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.659543, 0.5, 4.34872)
 [node name="RigidBody3D8" parent="." instance=ExtResource("1_w1w1o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1351786, 0.5000005, -1.3772383)
 
-[node name="NPCSpawns" type="Node3D" parent="."]
+[node name="NPCSpawns" type="Node3D" parent="." groups=["spawn points"]]
 script = ExtResource("3_tc812")
 possible_spawns = Array[ExtResource("4_b1iqd")]([SubResource("Resource_kn4lb")])
 location_data_variable = "npc_spawn_chance"
@@ -80,6 +80,7 @@ transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, 
 [node name="LootSpawns" type="Node3D" parent="."]
 script = ExtResource("3_tc812")
 possible_spawns = Array[ExtResource("4_b1iqd")]([SubResource("Resource_rt3de"), SubResource("Resource_4kfej")])
+spawn_on_ready = true
 spawn_amount_max = 2
 location_data_variable = "loot_spawn_chance"
 

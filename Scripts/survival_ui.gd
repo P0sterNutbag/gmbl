@@ -37,9 +37,9 @@ func _process(_delta: float) -> void:
 			close_menu(player_inventory_holder)
 	if Input.is_action_just_pressed("journal"):
 		if journal.visible:
-			journal.close()
+			close_menu(journal)
 		else:
-			journal.open(PlayerStats.quests)
+			open_menu(journal, PlayerStats.quests)
 	
 	# compass
 	var compass_item = PlayerStats.find_item("compass")
@@ -53,6 +53,8 @@ func _process(_delta: float) -> void:
 			quests = PlayerStats.quests
 		else:
 			quests = PlayerStats.quests.filter(func(i): 
+				if i.completed:
+					return false
 				var quest_location = i.location
 				var encounter_location = Globals.overworld.current_encounter.get_parent().title
 				return quest_location == encounter_location)
@@ -117,12 +119,16 @@ func create_quest_marker():
 	get_node("TopCenter/Compass/Markers").add_child(inst)
 
 
-func open_menu(menu: Control) -> void:
+func open_menu(menu: Control, array: Array = []) -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	menu.show()
+	if menu is MenuList:
+		menu.open(array)
 	PlayerStats.change_state(PlayerStats.states.pause)
 
 
 func close_menu(menu: Control) -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	menu.hide()
 	PlayerStats.change_state(PlayerStats.states.walk)
 

@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="11_4i57y"]
 [ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand3.png" id="12_l5erx"]
 [ext_resource type="Script" uid="uid://bjmtcugcvwfgq" path="res://Scripts/bounty_board.gd" id="12_nu3le"]
+[ext_resource type="PackedScene" uid="uid://connpctdgiwij" path="res://Scenes/UI/exit_button.tscn" id="13_1x7m6"]
 [ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="13_5dqkm"]
 [ext_resource type="Script" uid="uid://bokxkydc5jmf" path="res://addons/zylann.hterrain/hterrain.gd" id="13_8owou"]
 [ext_resource type="Theme" uid="uid://efo20xxcf1e5" path="res://Art/Themes/vbox_container.tres" id="14_3jgu8"]
@@ -28,7 +29,6 @@
 [ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="16_r6vt6"]
 [ext_resource type="PackedScene" uid="uid://tytoy87nm7u3" path="res://Scenes/Overworld/POIs/crateyard.tscn" id="16_swbn6"]
 [ext_resource type="PackedScene" uid="uid://bq3maily0jjmb" path="res://Scenes/Overworld/POIs/rock_canyon.tscn" id="17_7fbp6"]
-[ext_resource type="Script" uid="uid://b37bjjekoe1qe" path="res://Scripts/journal_menu.gd" id="17_55mfw"]
 [ext_resource type="PackedScene" uid="uid://bhm0d0as5r4an" path="res://Scenes/Overworld/POIs/sand_dunes.tscn" id="18_oedh7"]
 [ext_resource type="Script" uid="uid://gep7hf1s50y2" path="res://Scripts/dialogue_controller.gd" id="18_s0vc6"]
 [ext_resource type="PackedScene" uid="uid://chmu736lsu106" path="res://Scenes/Overworld/POIs/small_town.tscn" id="19_5q0os"]
@@ -128,25 +128,6 @@ script = ExtResource("4_1x7m6")
 
 [node name="LocationCard" parent="CanvasLayer2" instance=ExtResource("5_e5dqa")]
 
-[node name="InventoryHolder" type="HBoxContainer" parent="CanvasLayer2"]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -333.0
-offset_top = -383.5
-offset_right = 333.0
-offset_bottom = 383.5
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("6_8cq34")
-
-[node name="Inventory" parent="CanvasLayer2/InventoryHolder" instance=ExtResource("7_i1n2v")]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="Town" type="PanelContainer" parent="CanvasLayer2"]
 visible = false
 anchors_preset = 8
@@ -222,27 +203,9 @@ mouse_filter = 2
 
 [node name="Control" type="Control" parent="CanvasLayer2/Shop/Inventory"]
 layout_mode = 2
-mouse_filter = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2/Shop/Inventory/Control"]
-layout_mode = 1
-offset_left = -2.0
-offset_top = -77.5
-offset_right = 171.0
-offset_bottom = -20.5
-mouse_filter = 2
-theme = ExtResource("8_hmgos")
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/Shop/Inventory/Control/PanelContainer"]
-layout_mode = 2
-mouse_filter = 2
-theme = ExtResource("13_5dqkm")
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="MenuItem" parent="CanvasLayer2/Shop/Inventory/Control/PanelContainer/MarginContainer" instance=ExtResource("15_c1mwn")]
-layout_mode = 2
-text = "Leave"
+[node name="Button" parent="CanvasLayer2/Shop/Inventory/Control" instance=ExtResource("13_1x7m6")]
+layout_mode = 0
 
 [node name="Inventory2" parent="CanvasLayer2/Shop" instance=ExtResource("7_i1n2v")]
 layout_mode = 2
@@ -313,27 +276,9 @@ text = "Exit"
 
 [node name="Control" type="Control" parent="CanvasLayer2/BountyBoard/PanelContainer"]
 layout_mode = 2
-mouse_filter = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2/BountyBoard/PanelContainer/Control"]
-layout_mode = 1
-offset_left = -2.0
-offset_top = -77.5
-offset_right = 171.0
-offset_bottom = -20.5
-mouse_filter = 2
-theme = ExtResource("8_hmgos")
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/BountyBoard/PanelContainer/Control/PanelContainer"]
-layout_mode = 2
-mouse_filter = 2
-theme = ExtResource("13_5dqkm")
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="MenuItem" parent="CanvasLayer2/BountyBoard/PanelContainer/Control/PanelContainer/MarginContainer" instance=ExtResource("15_c1mwn")]
-layout_mode = 2
-text = "Leave"
+[node name="Button" parent="CanvasLayer2/BountyBoard/PanelContainer/Control" instance=ExtResource("13_1x7m6")]
+layout_mode = 0
 
 [node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer2/BountyBoard"]
 layout_mode = 2
@@ -381,91 +326,6 @@ text = "Accept"
 [node name="MenuItem4" parent="CanvasLayer2/BountyBoard/PanelContainer2/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("15_c1mwn")]
 layout_mode = 2
 text = "Back"
-
-[node name="Journal" type="HBoxContainer" parent="CanvasLayer2" node_paths=PackedStringArray("item_container")]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 399.0
-offset_top = 266.0
-offset_right = -389.0
-offset_bottom = -277.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 64
-script = ExtResource("17_55mfw")
-item_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/ItemContainer")
-pause_on_open = true
-
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2/Journal"]
-custom_minimum_size = Vector2(400, 0)
-layout_mode = 2
-theme = ExtResource("8_hmgos")
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/Journal/PanelContainer"]
-layout_mode = 2
-theme = ExtResource("13_5dqkm")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/Journal/PanelContainer/MarginContainer"]
-layout_mode = 2
-theme = ExtResource("14_3jgu8")
-
-[node name="Label" type="Label" parent="CanvasLayer2/Journal/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("10_jl4w7")
-text = "Jobs"
-
-[node name="Control" type="Control" parent="CanvasLayer2/Journal/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="ItemContainer" type="VBoxContainer" parent="CanvasLayer2/Journal/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("14_3jgu8")
-script = ExtResource("11_4i57y")
-
-[node name="Control2" type="Control" parent="CanvasLayer2/Journal/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MenuItem" parent="CanvasLayer2/Journal/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("15_c1mwn")]
-layout_mode = 2
-text = "Exit"
-
-[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer2/Journal"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("8_hmgos")
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/Journal/PanelContainer2"]
-layout_mode = 2
-theme = ExtResource("13_5dqkm")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/Journal/PanelContainer2/MarginContainer"]
-layout_mode = 2
-theme = ExtResource("14_3jgu8")
-
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2/Journal/PanelContainer2/MarginContainer/VBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(0, 560)
-layout_mode = 2
-
-[node name="Title" type="Label" parent="CanvasLayer2/Journal/PanelContainer2/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("16_r6vt6")
-
-[node name="Description" type="Label" parent="CanvasLayer2/Journal/PanelContainer2/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(600, 0)
-layout_mode = 2
-theme = ExtResource("16_r6vt6")
-autowrap_mode = 2
-
-[node name="Reward" type="Label" parent="CanvasLayer2/Journal/PanelContainer2/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("16_r6vt6")
-
-[node name="Control" type="Control" parent="CanvasLayer2/Journal/PanelContainer2/MarginContainer/VBoxContainer"]
-layout_mode = 2
 
 [node name="PortraitHolder" type="Control" parent="CanvasLayer2"]
 visible = false
@@ -542,13 +402,17 @@ vertical_alignment = 1
 
 [node name="Dialogue" type="VBoxContainer" parent="CanvasLayer2"]
 visible = false
-anchors_preset = 5
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
+anchor_bottom = 1.0
 offset_left = -320.0
+offset_top = -3797.0
 offset_right = 320.0
-offset_bottom = 747.0
+offset_bottom = -333.0
 grow_horizontal = 2
+grow_vertical = 0
 theme_override_constants/separation = 32
 alignment = 2
 script = ExtResource("18_s0vc6")
@@ -663,13 +527,12 @@ script = ExtResource("27_oapb8")
 
 [connection signal="exit" from="CanvasLayer2/Shop" to="CanvasLayer2/Dialogue" method="_on_shop_exit"]
 [connection signal="visibility_changed" from="CanvasLayer2/Shop" to="CanvasLayer2" method="_on_shop_visibility_changed"]
-[connection signal="pressed" from="CanvasLayer2/Shop/Inventory/Control/PanelContainer/MarginContainer/MenuItem" to="CanvasLayer2/Shop" method="_on_menu_item_pressed"]
+[connection signal="pressed" from="CanvasLayer2/Shop/Inventory/Control/Button" to="CanvasLayer2/Shop" method="close"]
 [connection signal="exit" from="CanvasLayer2/BountyBoard" to="CanvasLayer2/Dialogue" method="_on_shop_exit"]
 [connection signal="pressed" from="CanvasLayer2/BountyBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MenuItem" to="CanvasLayer2/BountyBoard" method="_on_menu_item_pressed"]
 [connection signal="pressed" from="CanvasLayer2/BountyBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MenuItem2" to="CanvasLayer2/BountyBoard" method="_on_menu_item_2_pressed"]
 [connection signal="pressed" from="CanvasLayer2/BountyBoard/PanelContainer/MarginContainer/VBoxContainer/MenuItem2" to="CanvasLayer2/BountyBoard" method="close"]
-[connection signal="pressed" from="CanvasLayer2/BountyBoard/PanelContainer/Control/PanelContainer/MarginContainer/MenuItem" to="CanvasLayer2/BountyBoard" method="close"]
-[connection signal="pressed" from="CanvasLayer2/Journal/PanelContainer/MarginContainer/VBoxContainer/MenuItem" to="CanvasLayer2/Journal" method="close"]
+[connection signal="pressed" from="CanvasLayer2/BountyBoard/PanelContainer/Control/Button" to="CanvasLayer2/BountyBoard" method="close"]
 [connection signal="timeout" from="NpcController/Timer" to="NpcController" method="_on_timer_timeout"]
 [connection signal="timeout" from="NpcController/Timer" to="NpcController/Timer" method="_on_timeout"]
 

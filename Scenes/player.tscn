@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://c055smn111au7"]
+[gd_scene load_steps=52 format=3 uid="uid://c055smn111au7"]
 
 [ext_resource type="Script" uid="uid://cslnx4rw32guw" path="res://Scripts/player.gd" id="1_5kxbm"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_x3wgy"]
@@ -15,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://b7o6p645d7r1q" path="res://Art/Textures/scope.png" id="12_fd4e3"]
 [ext_resource type="PackedScene" uid="uid://dgwlg3anvnbmw" path="res://Scenes/Guns/ak47.tscn" id="12_fs7ks"]
 [ext_resource type="Material" uid="uid://iagweyrwrs4k" path="res://Art/Materials/off_black.tres" id="12_igrcy"]
-[ext_resource type="AnimationLibrary" uid="uid://co0m8jfoidhgb" path="res://Resources/AnimationLibraries/ak47_anim_library.res" id="12_p1odr"]
 [ext_resource type="AudioStream" uid="uid://60w0i24eh0i3" path="res://Audio/Guns/insert_magazine.wav" id="12_wpjfl"]
 [ext_resource type="PackedScene" uid="uid://cnwsl1ltxxegm" path="res://Scenes/Guns/pistol.tscn" id="13_igrcy"]
 [ext_resource type="FontFile" uid="uid://d0fpgnwmxa37x" path="res://Art/Fonts/bedstead-bold.otf" id="13_l6n3p"]
@@ -175,6 +174,101 @@ metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 [sub_resource type="BoxMesh" id="BoxMesh_igrcy"]
 material = ExtResource("12_igrcy")
 size = Vector3(0.05, 0.2, 0.05)
+
+[sub_resource type="Animation" id="Animation_bi64h"]
+resource_name = "reload"
+length = 1.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.32637706, 0.6, 0.8, 1.5, 1.8),
+"transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943, 0.267943, 0.267943, 0.267943),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.34382987, 0, 0), Vector3(0.34382987, 0, 0), Vector3(0.34382987, 0, 0), Vector3(0.34383, 0, -0.47822), Vector3(0.34383, 0, -0.47822), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ArmLAnchor/armL:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 1.3, 1.56, 1.8),
+"transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943, 0.267943, 0.267943),
+"update": 0,
+"values": [Vector3(2.38419e-07, 0, 0), Vector3(0, -0.01, 0), Vector3(0, -0.5, 0), Vector3(0, -0.5, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../../..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0],
+"method": &"change_gun_state"
+}]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../AudioStreamPlayer3D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("11_olqyp")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("12_wpjfl")
+}],
+"times": PackedFloat32Array(0.3, 1.2)
+}
+tracks/3/use_blend = true
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ArmLAnchor/armL/MeshInstance3D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.3, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_0gysh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArmLAnchor/armL/MeshInstance3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0gysh"]
+_data = {
+&"RESET": SubResource("Animation_0gysh"),
+&"reload": SubResource("Animation_bi64h")
+}
 
 [sub_resource type="Resource" id="Resource_qqcod"]
 script = ExtResource("11_qqcod")
@@ -447,6 +541,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.111368775, -0.061341286, -0
 [node name="GunAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset"]
 
 [node name="AK47" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("12_fs7ks")]
+visible = false
 bullet_stats = SubResource("Resource_l6n3p")
 gun_stats = SubResource("Resource_igrcy")
 ads_vector = Vector3(-0.188, 0.085, 0)
@@ -501,7 +596,6 @@ libraries = {
 }
 
 [node name="Pistol" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("13_igrcy")]
-visible = false
 bullet_stats = SubResource("Resource_fd4e3")
 gun_stats = SubResource("Resource_wpjfl")
 ammo_type = "pistol_ammo"
@@ -513,10 +607,10 @@ cast_shadow = false
 transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, -0.021435186, -0.15550089, -0.035653293)
 
 [node name="armL" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol/ArmLAnchor" instance=ExtResource("9_fs7ks")]
-transform = Transform3D(-0.789631, 0.172109, -0.58895, -1.44934e-07, -0.959854, -0.280499, -0.613582, -0.221491, 0.75793, 2.38419e-07, 0, 0)
+transform = Transform3D(-0.789631, 0.172109, -0.58895, -1.44934e-07, -0.959854, -0.280499, -0.613582, -0.221491, 0.75793, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol/ArmLAnchor/armL"]
-transform = Transform3D(0.814319, -0.00717574, -0.580374, -0.151328, 0.962715, -0.224231, 0.560344, 0.270422, 0.782871, -0.0161014, 0.00350952, -0.0120094)
+transform = Transform3D(0.8143191, -0.007175714, -0.580374, -0.151328, 0.96271497, -0.22423102, 0.560344, 0.270422, 0.782871, -0.019074023, -0.00073468685, -0.015655994)
 mesh = SubResource("BoxMesh_igrcy")
 
 [node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol"]
@@ -546,7 +640,7 @@ outline_size = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol"]
 libraries = {
-&"": ExtResource("12_p1odr")
+&"": SubResource("AnimationLibrary_0gysh")
 }
 
 [node name="Shotgun" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("19_l6n3p")]

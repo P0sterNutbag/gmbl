@@ -4,7 +4,7 @@ extends MenuList
 @onready var description_label: Label = $PanelContainer2/MarginContainer/VBoxContainer/Description
 @onready var reward_label: Label = $PanelContainer2/MarginContainer/VBoxContainer/Reward
 @onready var exit_button: Button = $PanelContainer/MarginContainer/VBoxContainer/MenuItem
-
+var quest_array
 
 func open(array: Array):
 	super.open(array)

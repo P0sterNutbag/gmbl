@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvwo5rcugthhe"]
+[gd_scene load_steps=10 format=3 uid="uid://dvwo5rcugthhe"]
 
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_osrsm"]
 [ext_resource type="Script" uid="uid://cggchd80ddnc1" path="res://Scripts/inventory_ui.gd" id="2_yyv02"]
 [ext_resource type="Theme" uid="uid://cdtfcbhvps3m1" path="res://Art/Themes/text_mediun.tres" id="3_yyv02"]
+[ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="4_14o23"]
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="4_ic2qw"]
+[ext_resource type="Texture2D" uid="uid://djj6aa5nkatda" path="res://Art/Textures/arrow.png" id="4_t62he"]
 [ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="5_yyv02"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_osrsm"]
@@ -55,18 +57,51 @@ size_flags_horizontal = 3
 theme = ExtResource("3_yyv02")
 text = "Inventory"
 
-[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Control4" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
-theme = ExtResource("3_yyv02")
+mouse_filter = 2
+
+[node name="Control3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="LeftCategory" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Control3"]
+layout_mode = 2
+theme = ExtResource("4_14o23")
+icon = ExtResource("4_t62he")
+flat = true
+
+[node name="Category" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Control3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("4_14o23")
+text = "Survival"
+horizontal_alignment = 1
+
+[node name="RightCategory" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Control3"]
+layout_mode = 2
+icon = ExtResource("4_t62he")
+flat = true
+
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Size" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_14o23")
 
 [node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Money" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme = ExtResource("3_yyv02")
+theme = ExtResource("4_14o23")
 
 [node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 8)
@@ -112,4 +147,7 @@ theme_override_constants/separation = 32
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Control3/LeftCategory" to="." method="_on_left_category_pressed"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/HBoxContainer/Control3/RightCategory" to="." method="_on_right_category_button_down"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Control3/RightCategory" to="." method="_on_right_category_pressed"]
 [connection signal="visibility_changed" from="MarginContainer/VBoxContainer/Items" to="." method="_on_v_box_container_visibility_changed"]

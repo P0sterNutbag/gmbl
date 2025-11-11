@@ -2,7 +2,6 @@ extends CanvasLayer
 
 var current_town: Town
 @onready var location_card: Control = $LocationCard
-@onready var inventory_holder: HBoxContainer = $InventoryHolder
 @onready var town: PanelContainer = $Town
 @onready var shop: HBoxContainer = $Shop
 @onready var shop_inventory: PanelContainer = $Shop/Inventory
@@ -10,7 +9,6 @@ var current_town: Town
 @onready var portraits: Control = $PortraitHolder
 @onready var dialogue: VBoxContainer = $Dialogue
 @onready var bounty_board: HBoxContainer = $BountyBoard
-@onready var journal: MenuList = $Journal
 
 
 func _enter_tree() -> void:

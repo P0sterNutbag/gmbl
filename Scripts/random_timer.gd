@@ -6,7 +6,8 @@ extends Timer
 
 func _ready():
 	randomize_time()
-	start()
+	if !timeout.is_connected(_on_timeout):
+		timeout.connect(_on_timeout)
 
 
 func _on_timeout() -> void:

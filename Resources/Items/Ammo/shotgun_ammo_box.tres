@@ -1,10 +1,37 @@
-[gd_resource type="Resource" script_class="ItemBundle" load_steps=3 format=3 uid="uid://bf23ua6ic8mo4"]
+[gd_resource type="Resource" script_class="ItemBundle" load_steps=7 format=3 uid="uid://bf23ua6ic8mo4"]
 
 [ext_resource type="Script" uid="uid://2qhh6s86pakx" path="res://Scripts/item.gd" id="1_rwoaf"]
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="2_71dx7"]
 [ext_resource type="Script" uid="uid://xmg82u0lc6kf" path="res://Scripts/item_bundle.gd" id="2_alffo"]
+[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="3_ksyf0"]
+
+[sub_resource type="Resource" id="Resource_08fje"]
+script = ExtResource("2_71dx7")
+values = Dictionary[String, Variant]({
+"ammo": 1
+})
+add = true
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[sub_resource type="Resource" id="Resource_oube3"]
+resource_local_to_scene = true
+resource_name = "shotgun_ammo"
+script = ExtResource("3_ksyf0")
+effects = Array[ExtResource("2_71dx7")]([SubResource("Resource_08fje")])
+usable_in_menu = false
+title = "Shotgun Shell"
+category = 1
+price = 5
+amount = 5
+description = "Usable in: Shotgun"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("2_alffo")
+items = Array[ExtResource("1_rwoaf")]([SubResource("Resource_oube3")])
+title = "Shotgun Shell Box"
 category = 1
+price = 50
+description = "Contains 5 shotgun shells"
 metadata/_custom_type_script = "uid://xmg82u0lc6kf"

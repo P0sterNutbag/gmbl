@@ -11,6 +11,7 @@ class_name Location
 @export var shop: Shop
 @export var dialogue_tree: DialogueTree
 @export var spawn_player_random: bool = false
+var title: String
 var transition_started: bool 
 var can_transition: bool = true
 var shop_timer: Timer
@@ -26,13 +27,16 @@ var shop_timer: Timer
 
 
 func _ready() -> void:
+	var parent = get_parent()
+	if parent is PointOfInterest:
+		title = parent.title
 	if start_with_enemies:
 		location_data.population = max_population
-	if "style_data" in get_parent():
+	if "style_data" in parent:
 		if shop:
-			shop.dialogue.npc_style = get_parent().current_style
+			shop.dialogue.npc_style = parent.current_style
 		elif dialogue_tree:
-			dialogue_tree.npc_style = get_parent().current_style
+			dialogue_tree.npc_style = parent.current_style
 	# shop timer
 	if town != null:
 		stock_shops()

@@ -32,6 +32,8 @@ func _process(_delta: float) -> void:
 	# opening things
 	if Input.is_action_just_pressed("inventory"):
 		if !player_inventory_holder.visible:
+			if journal.visible:
+				journal.hide()
 			open_menu(player_inventory_holder)
 		else:
 			close_menu(player_inventory_holder)
@@ -39,6 +41,8 @@ func _process(_delta: float) -> void:
 		if journal.visible:
 			close_menu(journal)
 		else:
+			if player_inventory_holder.visible:
+				player_inventory_holder.hide()
 			open_menu(journal, PlayerStats.quests)
 	
 	# compass
@@ -53,8 +57,6 @@ func _process(_delta: float) -> void:
 			quests = PlayerStats.quests
 		else:
 			quests = PlayerStats.quests.filter(func(i): 
-				if i.completed:
-					return false
 				var quest_location = i.location
 				var encounter_location = Globals.overworld.current_encounter.get_parent().title
 				return quest_location == encounter_location)
@@ -67,9 +69,6 @@ func _process(_delta: float) -> void:
 			if children <= i:
 				create_quest_marker()
 			var quest_marker = markers.get_child(i)
-			if quest.completed and get_tree().current_scene != Globals.overworld:
-				quest_marker.queue_free()
-				continue
 			var quest_object = null
 			if get_tree().current_scene == Globals.overworld:
 				for location in get_tree().get_nodes_in_group("location"):
@@ -143,3 +142,8 @@ func loot(target) -> void:
 	player_transfer_inventory.show_price = false
 	loot_transfer_inventory.show_price = false
 	open_menu(transfer_inventory_holder)
+
+
+func _on_menu_exit() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	PlayerStats.change_state(PlayerStats.states.walk)

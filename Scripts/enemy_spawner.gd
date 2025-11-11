@@ -15,7 +15,7 @@ func _ready() -> void:
 	# get quests
 	var quests = PlayerStats.quests.filter(func(i): 
 		var quest_location = i.location
-		var encounter_location = Globals.overworld.current_encounter.get_parent().title
+		var encounter_location = Globals.overworld.current_encounter.title
 		return quest_location == encounter_location)
 	
 	# get enemy amount

@@ -1,18 +1,39 @@
-[gd_scene load_steps=8 format=3 uid="uid://cha53csgpqitn"]
+[gd_scene load_steps=11 format=3 uid="uid://cha53csgpqitn"]
 
 [ext_resource type="Script" uid="uid://bby8q5udlgb6g" path="res://Scripts/player_stats.gd" id="1_vjobs"]
 [ext_resource type="Script" uid="uid://2qhh6s86pakx" path="res://Scripts/item.gd" id="2_ey8gb"]
 [ext_resource type="Resource" uid="uid://oaklo016ku8w" path="res://Resources/Items/Guns/pistol.tres" id="3_av3m6"]
-[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="4_btj6c"]
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="4_av3m6"]
+[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="5_bjmho"]
 [ext_resource type="Resource" uid="uid://m28p1phfm50g" path="res://Resources/Items/Survival/compass.tres" id="5_btj6c"]
 [ext_resource type="Script" uid="uid://6ucyr0petjnx" path="res://Scripts/inventory.gd" id="5_uiad6"]
 
+[sub_resource type="Resource" id="Resource_hiovw"]
+script = ExtResource("4_av3m6")
+values = Dictionary[String, Variant]({
+"ammo": 8
+})
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[sub_resource type="Resource" id="Resource_3r183"]
+resource_local_to_scene = true
+resource_name = "pistol_ammo"
+script = ExtResource("5_bjmho")
+effects = Array[ExtResource("4_av3m6")]([SubResource("Resource_hiovw")])
+usable_in_menu = false
+title = "9mm Magazine"
+category = 1
+price = 25
+amount = 3
+description = "Usable in: Pistol"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
+
 [sub_resource type="Resource" id="Resource_ey8gb"]
 script = ExtResource("5_uiad6")
-items = Array[ExtResource("2_ey8gb")]([ExtResource("3_av3m6"), ExtResource("4_btj6c"), ExtResource("5_btj6c")])
+items = Array[ExtResource("2_ey8gb")]([ExtResource("3_av3m6"), SubResource("Resource_3r183"), ExtResource("5_btj6c")])
 metadata/_custom_type_script = "uid://6ucyr0petjnx"
 
 [node name="PlayerStats" type="Node" groups=["persist"]]
 script = ExtResource("1_vjobs")
-starting_money = 20
+starting_money = 2000
 starting_inventory = SubResource("Resource_ey8gb")

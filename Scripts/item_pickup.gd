@@ -6,5 +6,5 @@ class_name ItemPickup
 
 
 func pickup():
-	PlayerStats.items.append(item.duplicate())
+	PlayerStats.items.append(item.duplicate(true))
 	object_to_delete.queue_free()

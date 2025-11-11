@@ -486,6 +486,7 @@ size_flags_horizontal = 3
 
 [node name="Control" type="Control" parent="PlayerInventory/Inventory"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Button" parent="PlayerInventory/Inventory/Control" instance=ExtResource("10_0pkni")]
 layout_mode = 0
@@ -514,9 +515,12 @@ mode = 1
 
 [node name="Control" type="Control" parent="TransferInventory/Inventory"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Button" parent="TransferInventory/Inventory/Control" instance=ExtResource("10_0pkni")]
 layout_mode = 0
+offset_left = -2.0
+offset_right = 22.0
 
 [node name="Inventory2" parent="TransferInventory" instance=ExtResource("9_to4rm")]
 unique_name_in_owner = true
@@ -576,9 +580,12 @@ text = "Exit"
 
 [node name="Control" type="Control" parent="Journal/PanelContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Button" parent="Journal/PanelContainer/Control" instance=ExtResource("10_0pkni")]
 layout_mode = 0
+offset_left = -2.0
+offset_right = 22.0
 
 [node name="PanelContainer2" type="PanelContainer" parent="Journal"]
 layout_mode = 2
@@ -615,6 +622,10 @@ theme = ExtResource("5_jtf3n")
 [node name="Control" type="Control" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
+[connection signal="exit" from="PlayerInventory" to="." method="_on_menu_exit"]
+[connection signal="pressed" from="PlayerInventory/Inventory/Control/Button" to="PlayerInventory" method="close"]
+[connection signal="exit" from="TransferInventory" to="." method="_on_menu_exit"]
 [connection signal="pressed" from="TransferInventory/Inventory/Control/Button" to="TransferInventory" method="close"]
+[connection signal="exit" from="Journal" to="." method="_on_menu_exit"]
 [connection signal="pressed" from="Journal/PanelContainer/MarginContainer/VBoxContainer/MenuItem" to="Journal" method="close"]
 [connection signal="pressed" from="Journal/PanelContainer/Control/Button" to="Journal" method="close"]

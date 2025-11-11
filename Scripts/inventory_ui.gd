@@ -53,13 +53,6 @@ func _process(_delta: float) -> void:
 		var space_left = target.inventory.get_space_left()
 		size_label.text = str(target.inventory.space - space_left) + "/" + str(target.inventory.space)
 	
-	# filtere
-	if Input.is_action_just_pressed("ui_right"):
-		category_index = wrapi(category_index + 1, -1, categories.size() - 1)
-		filter(category_index)
-	elif Input.is_action_just_pressed("ui_left"):
-		category_index = wrapi(category_index + 1, -1, categories.size() - 1)
-		filter(category_index)
 
 
 func set_items():
@@ -132,26 +125,30 @@ func transfer_item(menu_item: Control):
 			var tween = create_tween()
 			tween.tween_property(inventory2.money_label, "modulate", Color.WHITE, 1)
 			return
+	if item is ItemMoney:
+		PlayerStats.money += item.amount
+		item.queue_free()
+		get_parent().reset_inventories()
+		return
 	var amount_to_move = 1
 	if Input.is_action_pressed("shift") or item is ItemMoney:
 		amount_to_move = item.amount
 	item.amount -= amount_to_move
 	if item.amount <= 0:
 		target.items.erase(item)
-	if item is ItemMoney:
-		PlayerStats.money += amount_to_move
-		return
 	if item is ItemBundle:
 		for i in item.items:
 			target2.items.append(i)
 	else:
 		var same_item = Globals.find_item(target2.items, item.title)
-		if same_item:
+		if same_item and item.stackable:
 			same_item.amount += amount_to_move
 		else:
-			var new_item = item.duplicate()
+			var new_item = item.duplicate(true)
 			new_item.amount = amount_to_move
 			target2.items.append(new_item)
+			if new_item is Equipment:
+				item.equipped = false
 	if item is Equipment:
 		item.equipped = false
 	get_parent().reset_inventories()

@@ -71,6 +71,7 @@ signal shoot
 func _ready() -> void:
 	gun_holder.get_child(0).queue_free()
 	gun = guns_dict[gun_index][0].instantiate()
+	gun.gun_stats.condition = randf_range(10, 50)
 	gun_holder.add_child(gun)
 	gun.bullet_stats.collision_mask = 4
 	shoot_component.firepoint = gun.fire_point
@@ -443,7 +444,7 @@ func _on_death() -> void:
 		inst.set_deferred("global_position", right_hand.global_position)
 		inst.apply_impulse.call_deferred(Vector3(randf_range(-2, 2), 5, randf_range(-2, 2)))
 		if inst.item is EquipmentGun:
-			inst.item.gun_stats = gun.gun_stats
+			inst.item.gun_stats = gun.gun_stats.duplicate()
 		#inst.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
 	if gun:
 		gun.queue_free()

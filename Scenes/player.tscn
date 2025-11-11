@@ -175,6 +175,21 @@ metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 material = ExtResource("12_igrcy")
 size = Vector3(0.05, 0.2, 0.05)
 
+[sub_resource type="Animation" id="Animation_0gysh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArmLAnchor/armL/MeshInstance3D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_bi64h"]
 resource_name = "reload"
 length = 1.8
@@ -247,21 +262,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
-}
-
-[sub_resource type="Animation" id="Animation_0gysh"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ArmLAnchor/armL/MeshInstance3D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0gysh"]
@@ -603,18 +603,21 @@ fire_type = 0
 ads_vector = Vector3(-0.195, 0.045, 0.07)
 cast_shadow = false
 
+[node name="GunAnchor" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.049000025, -0.22472692)
+
 [node name="ArmLAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol"]
-transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, -0.021435186, -0.15550089, -0.035653293)
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, -0.021435186, -0.15550089, -0.16448134)
 
 [node name="armL" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol/ArmLAnchor" instance=ExtResource("9_fs7ks")]
-transform = Transform3D(-0.789631, 0.172109, -0.58895, -1.44934e-07, -0.959854, -0.280499, -0.613582, -0.221491, 0.75793, 0, 0, 0)
+transform = Transform3D(-0.789631, 0.172109, -0.58895, -1.44934e-07, -0.959854, -0.280499, -0.613582, -0.221491, 0.75793, 2.38419e-07, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol/ArmLAnchor/armL"]
 transform = Transform3D(0.8143191, -0.007175714, -0.580374, -0.151328, 0.96271497, -0.22423102, 0.560344, 0.270422, 0.782871, -0.019074023, -0.00073468685, -0.015655994)
 mesh = SubResource("BoxMesh_igrcy")
 
 [node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00196543, -0.136061, -0.0357737)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0019654334, -0.13606095, -0.16460174)
 
 [node name="armR" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol/ArmRAnchor" instance=ExtResource("9_fs7ks")]
 transform = Transform3D(1, 0, 0, 0, 0.995116, -0.0987119, 0, 0.0987119, 0.995116, 1.49012e-08, 4.76837e-07, -1.19209e-07)
@@ -813,6 +816,7 @@ shape = SubResource("SphereShape3D_2ijsl")
 [editable path="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47"]
 [editable path="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47/GunAnchor/Model"]
 [editable path="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47"]
+[editable path="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol"]
 [editable path="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun"]
 [editable path="CameraAnchor/Camera3D/GunOffset/GunAnchor/SniperRifle"]
 [editable path="CameraAnchor/Camera3D/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model"]

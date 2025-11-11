@@ -3,10 +3,10 @@ extends Button
 var amount: int = 1:
 	set(value):
 		amount = value
-		text = text.rstrip("(1234567890)")
+		text = resource.title
 		if amount <= 1: 
 			return
-		text += "(" + str(value) + ")"
+		text += " (" + str(value) + ")"
 var equipped: bool:
 	set(value):
 		equipped = value

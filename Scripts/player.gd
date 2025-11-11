@@ -619,7 +619,6 @@ func check_reload_ammo(time_to_skip_to: float):
 		gun.get_node("AnimationPlayer").seek(time_to_skip_to, true, true)
 
 
-
 func _on_damaged(_hit_position: Vector3, _hit_direction: Vector3) -> void:
 	Globals.ui.play_hit_effect()
 

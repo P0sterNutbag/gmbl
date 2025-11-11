@@ -4,7 +4,6 @@ signal exit
 
 
 func _ready() -> void:
-	visibility_changed.connect(_on_visibility_changed)
 	resized.connect(_on_resized)
 
 
@@ -43,20 +42,12 @@ func set_inventory_money() -> void:
 		child.money_label.text = "$" + str(child.target.money)
 
 
-func _on_visibility_changed() -> void:
-	if visible:
-		#get_child(get_child_count()-1).grab_focus()
-		PlayerStats.state = PlayerStats.states.pause
-	else:
-		PlayerStats.state = PlayerStats.states.walk
-
-
 func _on_resized() -> void:
 	for child in get_children():
 		child.size = size
 
 
 func close() -> void:
-	clear_inventories()
 	hide()
+	clear_inventories()
 	exit.emit()

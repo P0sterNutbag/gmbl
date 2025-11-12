@@ -73,11 +73,11 @@ func start_dialogue(dialogue_data: DialogueTree, shop: Shop = null) -> void:
 
 
 func enter_shop(shop_data: Shop) -> void:
-	shop_inventory.target = PlayerStats
-	shop_inventory.target2 = shop_data
+	shop_inventory.target = PlayerStats.inventory
+	shop_inventory.target2 = shop_data.inventory
 	shop_inventory.show_price = true
-	shop_inventory2.target = shop_data
-	shop_inventory2.target2 = PlayerStats
+	shop_inventory2.target = shop_data.inventory
+	shop_inventory2.target2 = PlayerStats.inventory
 	shop_inventory.show_price = true
 	shop_inventory2.grab_focus()
 	shop.show()

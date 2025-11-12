@@ -15,6 +15,9 @@ var title: String
 var transition_started: bool 
 var can_transition: bool = true
 var shop_timer: Timer
+var shops_base_inventory: Dictionary
+var shops_max_money: Dictionary
+
 
 #func _enter_tree() -> void:
 	#if !Globals.overworld:
@@ -39,6 +42,9 @@ func _ready() -> void:
 			dialogue_tree.npc_style = parent.current_style
 	# shop timer
 	if town != null:
+		for i in town.shops:
+			shops_base_inventory[i.title] = i.inventory.items
+			shops_max_money[i.title] = i.inventory.money
 		stock_shops()
 		shop_timer = Timer.new()
 		shop_timer.wait_time = town.restock_timer
@@ -68,14 +74,14 @@ func stock_shops() -> void:
 	if town == null:
 		return
 	for i in town.shops:
-		i.money = i.max_money
+		var inventory = i.inventory
+		inventory.money = shops_max_money[i.title]
 		if i.minimum_quests > 0:
 			for n in i.minimum_quests - i.quests.size():
 				var quest = QuestRandom.new().generate_quest()
 				quest.return_location = get_parent().title
 				i.quests.append(quest)
-		if i.all_items.size() > 0:
-			i.items = i.all_items.duplicate_deep()
+		inventory.items = shops_base_inventory[i.title].duplicate_deep()
 
 
 func save() -> Dictionary:

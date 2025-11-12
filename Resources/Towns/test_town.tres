@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Town" load_steps=56 format=3 uid="uid://c5kpuww7x3qfl"]
+[gd_resource type="Resource" script_class="Town" load_steps=63 format=3 uid="uid://c5kpuww7x3qfl"]
 
 [ext_resource type="Script" uid="uid://bbi3gcsb33muk" path="res://Scripts/town.gd" id="1_boc7n"]
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="2_60f61"]
@@ -15,6 +15,8 @@
 [ext_resource type="Resource" uid="uid://c4vot4kh7bffi" path="res://Resources/Items/Survival/bandage.tres" id="7_im0yk"]
 [ext_resource type="Resource" uid="uid://dvooyj5cqcclc" path="res://Resources/Items/Survival/sleeping_bag.tres" id="9_2fanp"]
 [ext_resource type="Resource" uid="uid://fioag0fe2wqb" path="res://Resources/Items/Survival/flashlight.tres" id="10_2fanp"]
+[ext_resource type="Script" uid="uid://6ucyr0petjnx" path="res://Scripts/inventory.gd" id="10_8pniq"]
+[ext_resource type="Resource" uid="uid://m28p1phfm50g" path="res://Resources/Items/Survival/compass.tres" id="12_txphe"]
 [ext_resource type="Resource" uid="uid://dfkmfm7wu8mw4" path="res://Resources/Items/Survival/beans.tres" id="13_hil7u"]
 [ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="13_usrj7"]
 [ext_resource type="Resource" uid="uid://ixc4pv5vjlno" path="res://Resources/Items/Guns/ak47.tres" id="17_i2d6u"]
@@ -26,7 +28,9 @@
 [ext_resource type="Resource" uid="uid://bf23ua6ic8mo4" path="res://Resources/Items/Ammo/shotgun_ammo_box.tres" id="22_17jta"]
 [ext_resource type="Texture2D" uid="uid://25baqqag6lrp" path="res://Art/Textures/npc_face4.png" id="24_im0yk"]
 [ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="25_2fanp"]
+[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="25_rtygk"]
 [ext_resource type="Texture2D" uid="uid://whgiy4tx5l5g" path="res://Art/Textures/npc brown jacket.png" id="26_i2d6u"]
+[ext_resource type="Resource" uid="uid://bkae25scq6c12" path="res://Resources/Items/Ammo/sniper_ammo.tres" id="27_bsumm"]
 
 [sub_resource type="Resource" id="Resource_6lldf"]
 script = ExtResource("3_0o5nu")
@@ -61,18 +65,25 @@ script = ExtResource("6_6lldf")
 method = "enter_town"
 metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
-[sub_resource type="Resource" id="Resource_t35h1"]
+[sub_resource type="Resource" id="Resource_sj5y1"]
 script = ExtResource("4_qjbs6")
 bubbles = Array[ExtResource("3_0o5nu")]([SubResource("Resource_6lldf"), SubResource("Resource_8pniq"), SubResource("Resource_xa6dy"), SubResource("Resource_26jmx")])
 npc_name = "Durk"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
-[sub_resource type="Resource" id="Resource_qjbs6"]
+[sub_resource type="Resource" id="Resource_usrj7"]
+script = ExtResource("10_8pniq")
+items = Array[ExtResource("3_nk61p")]([ExtResource("7_im0yk"), ExtResource("13_hil7u"), ExtResource("12_txphe"), ExtResource("10_2fanp"), ExtResource("5_r7b6r"), ExtResource("9_2fanp"), ExtResource("5_17jta")])
+space = 100
+money = 1000
+title = "General Store"
+metadata/_custom_type_script = "uid://6ucyr0petjnx"
+
+[sub_resource type="Resource" id="Resource_h2qg1"]
 script = ExtResource("2_60f61")
 title = "General Store"
-all_items = Array[ExtResource("3_nk61p")]([ExtResource("13_hil7u"), ExtResource("5_17jta"), ExtResource("5_r7b6r"), ExtResource("7_im0yk"), ExtResource("7_im0yk"), ExtResource("4_jfela"), ExtResource("9_2fanp"), ExtResource("10_2fanp")])
-money = 1000
-dialogue = SubResource("Resource_t35h1")
+inventory = SubResource("Resource_usrj7")
+dialogue = SubResource("Resource_sj5y1")
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [sub_resource type="Resource" id="Resource_nn0b0"]
@@ -102,11 +113,18 @@ bubbles = Array[ExtResource("3_0o5nu")]([SubResource("Resource_nn0b0"), SubResou
 npc_name = "Axel"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
+[sub_resource type="Resource" id="Resource_clt0f"]
+script = ExtResource("10_8pniq")
+items = Array[ExtResource("3_nk61p")]([ExtResource("17_i2d6u"), ExtResource("18_pbnsr"), ExtResource("19_pv0ty"), ExtResource("20_txphe"), ExtResource("4_jfela"), ExtResource("21_rtygk"), ExtResource("25_rtygk"), ExtResource("22_17jta"), ExtResource("27_bsumm")])
+space = 100
+money = 1000
+title = "Gun Shop"
+metadata/_custom_type_script = "uid://6ucyr0petjnx"
+
 [sub_resource type="Resource" id="Resource_r7b6r"]
 script = ExtResource("2_60f61")
 title = "Gun Shop"
-all_items = Array[ExtResource("3_nk61p")]([ExtResource("17_i2d6u"), ExtResource("18_pbnsr"), ExtResource("19_pv0ty"), ExtResource("20_txphe"), ExtResource("21_rtygk"), ExtResource("4_jfela"), ExtResource("22_17jta")])
-money = 1000
+inventory = SubResource("Resource_clt0f")
 dialogue = SubResource("Resource_q1nwr")
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
@@ -186,10 +204,15 @@ npc_style = SubResource("Resource_pbnsr")
 npc_name = "Duster"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
+[sub_resource type="Resource" id="Resource_eg73l"]
+script = ExtResource("10_8pniq")
+title = "Bounty Board"
+metadata/_custom_type_script = "uid://6ucyr0petjnx"
+
 [sub_resource type="Resource" id="Resource_pv0ty"]
 script = ExtResource("2_60f61")
 title = "Bounty Board"
-money = 1000
+inventory = SubResource("Resource_eg73l")
 dialogue = SubResource("Resource_bsumm")
 minimum_quests = 3
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
@@ -198,5 +221,5 @@ metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 resource_local_to_scene = true
 script = ExtResource("1_boc7n")
 title = "Small Town"
-shops = Array[ExtResource("2_60f61")]([SubResource("Resource_qjbs6"), SubResource("Resource_r7b6r"), SubResource("Resource_pv0ty")])
+shops = Array[ExtResource("2_60f61")]([SubResource("Resource_h2qg1"), SubResource("Resource_r7b6r"), SubResource("Resource_pv0ty")])
 metadata/_custom_type_script = "uid://bbi3gcsb33muk"

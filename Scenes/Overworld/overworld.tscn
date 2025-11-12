@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://doydk513gm02l"]
+[gd_scene load_steps=118 format=4 uid="uid://doydk513gm02l"]
 
 [ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_6y65m"]
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="2_gw0hx"]
@@ -46,6 +46,36 @@
 [ext_resource type="Texture2D" uid="uid://x3spqeyiq8cr" path="res://Art/Textures/npc shirt white.png" id="32_1k2ge"]
 [ext_resource type="Script" uid="uid://chxn6jj2cv0p3" path="res://Scripts/scatterer.gd" id="42_1k2ge"]
 [ext_resource type="PackedScene" uid="uid://cac84v7aucntx" path="res://Scenes/Environment/Nature/brush_orange.tscn" id="43_v4rs2"]
+[ext_resource type="Script" uid="uid://bbi3gcsb33muk" path="res://Scripts/town.gd" id="44_c2v6x"]
+[ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="45_ua8uw"]
+[ext_resource type="Script" uid="uid://2qhh6s86pakx" path="res://Scripts/item.gd" id="46_jvu1d"]
+[ext_resource type="Resource" uid="uid://dfkmfm7wu8mw4" path="res://Resources/Items/Survival/beans.tres" id="47_lf2le"]
+[ext_resource type="Resource" uid="uid://glkl1ugkvv6m" path="res://Resources/Items/Survival/water.tres" id="48_1qd3k"]
+[ext_resource type="Resource" uid="uid://ccm2c5fc8xn15" path="res://Resources/Items/Survival/medkit.tres" id="49_xt1pr"]
+[ext_resource type="Resource" uid="uid://c4vot4kh7bffi" path="res://Resources/Items/Survival/bandage.tres" id="50_i627v"]
+[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="51_opo3i"]
+[ext_resource type="Resource" uid="uid://dvooyj5cqcclc" path="res://Resources/Items/Survival/sleeping_bag.tres" id="52_nggm6"]
+[ext_resource type="Resource" uid="uid://fioag0fe2wqb" path="res://Resources/Items/Survival/flashlight.tres" id="53_v8snn"]
+[ext_resource type="Script" uid="uid://de6rxup5nru4w" path="res://Scripts/dialogue.gd" id="54_jdigv"]
+[ext_resource type="Resource" uid="uid://m28p1phfm50g" path="res://Resources/Items/Survival/compass.tres" id="55_1qd3k"]
+[ext_resource type="Script" uid="uid://ctb2g10cnu2sg" path="res://Scripts/dialogue_option.gd" id="55_ccrpr"]
+[ext_resource type="Script" uid="uid://cnu4xeujmgk51" path="res://Scripts/dialogue_options.gd" id="56_rkewd"]
+[ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="57_ri526"]
+[ext_resource type="Resource" uid="uid://nm0e00c2fx4" path="res://Resources/NpcStyles/npc_styles.tres" id="58_g1wl1"]
+[ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="59_tqcp0"]
+[ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="60_nmfa1"]
+[ext_resource type="Script" uid="uid://6ucyr0petjnx" path="res://Scripts/inventory.gd" id="60_xt1pr"]
+[ext_resource type="Resource" uid="uid://ixc4pv5vjlno" path="res://Resources/Items/Guns/ak47.tres" id="61_2063u"]
+[ext_resource type="Resource" uid="uid://oaklo016ku8w" path="res://Resources/Items/Guns/pistol.tres" id="62_p80om"]
+[ext_resource type="Resource" uid="uid://de20gnenmrrxa" path="res://Resources/Items/Guns/shotgun.tres" id="63_n62ny"]
+[ext_resource type="Resource" uid="uid://bhs8tbv5iox6e" path="res://Resources/Items/Guns/sniper_rifle.tres" id="64_xkckx"]
+[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="65_ku0d1"]
+[ext_resource type="Resource" uid="uid://bf23ua6ic8mo4" path="res://Resources/Items/Ammo/shotgun_ammo_box.tres" id="66_jby7l"]
+[ext_resource type="Script" uid="uid://px5dr31pd885" path="res://Scripts/dialogue_loop.gd" id="67_t56bl"]
+[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="68_i627v"]
+[ext_resource type="Texture2D" uid="uid://25baqqag6lrp" path="res://Art/Textures/npc_face4.png" id="68_me12r"]
+[ext_resource type="Texture2D" uid="uid://whgiy4tx5l5g" path="res://Art/Textures/npc brown jacket.png" id="69_bqxwu"]
+[ext_resource type="Resource" uid="uid://bkae25scq6c12" path="res://Resources/Items/Ammo/sniper_ammo.tres" id="70_opo3i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t2t4p"]
 render_priority = 0
@@ -106,6 +136,198 @@ _surfaces = [{
 script = ExtResource("27_4xsnl")
 object_to_spawn = ExtResource("28_72l67")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_6lldf"]
+script = ExtResource("54_jdigv")
+lines = Array[String](["Hey bud, what can I do for you?"])
+speaker = 1
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_lyof2"]
+script = ExtResource("55_ccrpr")
+text = "Show me your wares."
+destination = 2
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
+[sub_resource type="Resource" id="Resource_375gu"]
+script = ExtResource("55_ccrpr")
+text = "Leave"
+destination = 3
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
+[sub_resource type="Resource" id="Resource_8pniq"]
+script = ExtResource("56_rkewd")
+options = Array[ExtResource("55_ccrpr")]([SubResource("Resource_lyof2"), SubResource("Resource_375gu")])
+metadata/_custom_type_script = "uid://cnu4xeujmgk51"
+
+[sub_resource type="Resource" id="Resource_xa6dy"]
+script = ExtResource("57_ri526")
+method = "enter_shop"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_26jmx"]
+script = ExtResource("57_ri526")
+method = "enter_town"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_sj5y1"]
+script = ExtResource("59_tqcp0")
+bubbles = Array[ExtResource("54_jdigv")]([SubResource("Resource_6lldf"), SubResource("Resource_8pniq"), SubResource("Resource_xa6dy"), SubResource("Resource_26jmx")])
+npc_name = "Durk"
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+
+[sub_resource type="Resource" id="Resource_usrj7"]
+script = ExtResource("60_xt1pr")
+items = Array[ExtResource("46_jvu1d")]([ExtResource("50_i627v"), ExtResource("47_lf2le"), ExtResource("55_1qd3k"), ExtResource("53_v8snn"), ExtResource("49_xt1pr"), ExtResource("52_nggm6"), ExtResource("48_1qd3k")])
+space = 100
+money = 1000
+title = "General Store"
+metadata/_custom_type_script = "uid://6ucyr0petjnx"
+
+[sub_resource type="Resource" id="Resource_h2qg1"]
+script = ExtResource("45_ua8uw")
+title = "General Store"
+inventory = SubResource("Resource_usrj7")
+dialogue = SubResource("Resource_sj5y1")
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+
+[sub_resource type="Resource" id="Resource_nn0b0"]
+script = ExtResource("54_jdigv")
+lines = Array[String](["Let's make this quick, I got places to be."])
+speaker = 1
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_6cih4"]
+script = ExtResource("56_rkewd")
+options = Array[ExtResource("55_ccrpr")]([SubResource("Resource_lyof2"), SubResource("Resource_375gu")])
+metadata/_custom_type_script = "uid://cnu4xeujmgk51"
+
+[sub_resource type="Resource" id="Resource_im0yk"]
+script = ExtResource("57_ri526")
+method = "enter_shop"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_2fanp"]
+script = ExtResource("57_ri526")
+method = "enter_town"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_q1nwr"]
+script = ExtResource("59_tqcp0")
+bubbles = Array[ExtResource("54_jdigv")]([SubResource("Resource_nn0b0"), SubResource("Resource_6cih4"), SubResource("Resource_im0yk"), SubResource("Resource_2fanp")])
+npc_name = "Axel"
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+
+[sub_resource type="Resource" id="Resource_clt0f"]
+script = ExtResource("60_xt1pr")
+items = Array[ExtResource("46_jvu1d")]([ExtResource("61_2063u"), ExtResource("62_p80om"), ExtResource("63_n62ny"), ExtResource("64_xkckx"), ExtResource("51_opo3i"), ExtResource("65_ku0d1"), ExtResource("68_i627v"), ExtResource("66_jby7l"), ExtResource("70_opo3i")])
+space = 100
+money = 1000
+title = "Gun Shop"
+metadata/_custom_type_script = "uid://6ucyr0petjnx"
+
+[sub_resource type="Resource" id="Resource_r7b6r"]
+script = ExtResource("45_ua8uw")
+title = "Gun Shop"
+inventory = SubResource("Resource_clt0f")
+dialogue = SubResource("Resource_q1nwr")
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+
+[sub_resource type="Resource" id="Resource_5oaiu"]
+script = ExtResource("54_jdigv")
+lines = Array[String](["You looking for some cash? We got a few hoodlums here that aren't going to kill themselves."])
+speaker = 1
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_hil7u"]
+script = ExtResource("55_ccrpr")
+text = "Take new bounties"
+destination = 2
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
+[sub_resource type="Resource" id="Resource_txphe"]
+script = ExtResource("55_ccrpr")
+text = "Return bounties"
+destination = 3
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
+[sub_resource type="Resource" id="Resource_42xsr"]
+script = ExtResource("55_ccrpr")
+text = "Leave"
+destination = 4
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
+[sub_resource type="Resource" id="Resource_17jta"]
+script = ExtResource("56_rkewd")
+options = Array[ExtResource("55_ccrpr")]([SubResource("Resource_hil7u"), SubResource("Resource_txphe"), SubResource("Resource_42xsr")])
+metadata/_custom_type_script = "uid://cnu4xeujmgk51"
+
+[sub_resource type="Resource" id="Resource_r3o7g"]
+script = ExtResource("57_ri526")
+method = "enter_bounty_board"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_rtygk"]
+script = ExtResource("57_ri526")
+method = "return_bounties"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_rkg8l"]
+script = ExtResource("54_jdigv")
+lines = Array[String](["Nice work! Here's the reward."])
+speaker = 1
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_v7uwj"]
+script = ExtResource("67_t56bl")
+next_index = 1
+metadata/_custom_type_script = "uid://px5dr31pd885"
+
+[sub_resource type="Resource" id="Resource_hqc43"]
+script = ExtResource("54_jdigv")
+lines = Array[String](["Looks like you haven't completed any bounties."])
+speaker = 1
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_fr5lk"]
+script = ExtResource("67_t56bl")
+next_index = 1
+metadata/_custom_type_script = "uid://px5dr31pd885"
+
+[sub_resource type="Resource" id="Resource_pbnsr"]
+script = ExtResource("31_xp1ub")
+faces = Array[Texture]([ExtResource("68_me12r")])
+shirts = Array[Texture]([ExtResource("69_bqxwu")])
+pants_colors = Array[Color]([Color(0.48, 0.21888001, 0.15359999, 1)])
+shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1), Color(0.133333, 0.12549, 0.203922, 1), Color(0.4, 0.19146667, 0.128, 1)])
+metadata/_custom_type_script = "uid://b80ipr8q70gqm"
+
+[sub_resource type="Resource" id="Resource_bsumm"]
+script = ExtResource("59_tqcp0")
+bubbles = Array[ExtResource("54_jdigv")]([SubResource("Resource_5oaiu"), SubResource("Resource_17jta"), SubResource("Resource_r3o7g"), SubResource("Resource_rtygk"), SubResource("Resource_2fanp"), SubResource("Resource_rkg8l"), SubResource("Resource_v7uwj"), SubResource("Resource_hqc43"), SubResource("Resource_fr5lk")])
+npc_style = SubResource("Resource_pbnsr")
+npc_name = "Duster"
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+
+[sub_resource type="Resource" id="Resource_eg73l"]
+script = ExtResource("60_xt1pr")
+title = "Bounty Board"
+metadata/_custom_type_script = "uid://6ucyr0petjnx"
+
+[sub_resource type="Resource" id="Resource_pv0ty"]
+script = ExtResource("45_ua8uw")
+title = "Bounty Board"
+inventory = SubResource("Resource_eg73l")
+dialogue = SubResource("Resource_bsumm")
+minimum_quests = 3
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+
+[sub_resource type="Resource" id="Resource_nggm6"]
+resource_local_to_scene = true
+script = ExtResource("44_c2v6x")
+title = "Small Town"
+shops = Array[ExtResource("45_ua8uw")]([SubResource("Resource_h2qg1"), SubResource("Resource_r7b6r"), SubResource("Resource_pv0ty")])
+metadata/_custom_type_script = "uid://bbi3gcsb33muk"
 
 [node name="Overworld" type="Node3D"]
 script = ExtResource("1_6y65m")
@@ -208,7 +430,9 @@ mouse_filter = 2
 [node name="Button" parent="CanvasLayer2/Shop/Inventory/Control" instance=ExtResource("13_1x7m6")]
 layout_mode = 0
 offset_left = -2.0
+offset_top = 0.0
 offset_right = 22.0
+offset_bottom = 24.0
 
 [node name="Inventory2" parent="CanvasLayer2/Shop" instance=ExtResource("7_i1n2v")]
 layout_mode = 2
@@ -284,7 +508,9 @@ mouse_filter = 2
 [node name="Button" parent="CanvasLayer2/BountyBoard/PanelContainer/Control" instance=ExtResource("13_1x7m6")]
 layout_mode = 0
 offset_left = -2.0
+offset_top = 0.0
 offset_right = 22.0
+offset_bottom = 24.0
 
 [node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer2/BountyBoard"]
 layout_mode = 2
@@ -521,6 +747,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.584854, 0.40683475, 114.55
 
 [node name="SmallTown" parent="." instance=ExtResource("19_5q0os")]
 transform = Transform3D(-0.81175745, 0, 0.58399475, 0, 1, 0, -0.58399475, 0, -0.81175745, 58.32245, 0.8049815, 60.194256)
+
+[node name="Encounter" parent="SmallTown" index="2"]
+town = SubResource("Resource_nggm6")
 
 [node name="Scatterer" type="Node3D" parent="."]
 script = ExtResource("42_1k2ge")

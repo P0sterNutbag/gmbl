@@ -3,6 +3,40 @@ class_name Inventory
 
 @export var items: Array[Item]
 @export var space: int = 10
+@export var money: int
+@export var title: String
+
+
+func add_item(item: Item, amount: int = 1) -> bool:
+	if item is ItemMoney:
+		money += item.amount
+		return true
+	var same_item = find_item(item.title)
+	if same_item and item.stackable:
+		same_item.amount += amount
+	elif get_space_left(item) > 0 or !item.takes_space:
+		var new_item = item.duplicate(true)
+		new_item.amount = amount
+		items.append(new_item)
+		if new_item is Equipment:
+			item.equipped = false
+	else:
+		return false
+	return true
+
+
+func remove_item(item: Item, amount: int = 1) -> void:
+	item.amount -= amount
+	if item.amount <= 0:
+		items.erase(item)
+
+
+func find_item(item_name: String) -> Resource:
+	for i in items:
+		if i != null and (i.resource_name == item_name or i.title.to_lower() == item_name.to_lower()):
+			return i
+	return null
+
 
 
 func get_space_left(item_to_add: Item = null) -> int:

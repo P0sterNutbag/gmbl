@@ -10,7 +10,7 @@ func _process(_delta: float) -> void:
 	if !visible:
 		return
 	if Input.is_action_just_pressed("ui_cancel"):
-		close()
+		UiController.close_interface(self)
 
 
 func open(array: Array):
@@ -21,11 +21,11 @@ func open(array: Array):
 	item_container.create_menu_items(array, on_button_pressed, on_button_focus_entered, false)
 
 
-func close() -> void:
-	hide()
-	exit.emit()
-	if pause_on_open:
-		PlayerStats.change_state(PlayerStats.states.walk)
+#func close() -> void:
+	#hide()
+	#exit.emit()
+	#if pause_on_open:
+		#PlayerStats.change_state(PlayerStats.states.walk)
 
 
 func on_button_pressed(button: Control, resource: Resource) -> void:

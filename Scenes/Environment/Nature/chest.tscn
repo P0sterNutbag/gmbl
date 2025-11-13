@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cwn2oirx41io"]
+[gd_scene load_steps=21 format=3 uid="uid://cwn2oirx41io"]
 
 [ext_resource type="PackedScene" uid="uid://m12xhyrtsknj" path="res://Art/Models/chest.glb" id="1_lewkn"]
 [ext_resource type="Script" uid="uid://dqdp6l81o8ei8" path="res://Scripts/item_container.gd" id="2_aceba"]
@@ -10,35 +10,32 @@
 [ext_resource type="Resource" uid="uid://ccm2c5fc8xn15" path="res://Resources/Items/Survival/medkit.tres" id="8_bfds5"]
 [ext_resource type="Material" uid="uid://cwhba100ef4q3" path="res://Art/Materials/chest.tres" id="9_3milu"]
 [ext_resource type="Resource" uid="uid://brmi40g2jr38s" path="res://Resources/Items/money.tres" id="9_nxxjw"]
+[ext_resource type="Script" uid="uid://2qhh6s86pakx" path="res://Scripts/item.gd" id="10_uiafa"]
+[ext_resource type="Script" uid="uid://6ucyr0petjnx" path="res://Scripts/inventory.gd" id="11_8ywml"]
 
 [sub_resource type="Resource" id="Resource_ch7bk"]
 script = ExtResource("3_nxxjw")
 object_to_spawn = ExtResource("4_sg1i2")
-spawn_chance = 1.0
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_gxu6n"]
 script = ExtResource("3_nxxjw")
 object_to_spawn = ExtResource("5_7iplq")
-spawn_chance = 1.0
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_ri1rp"]
 script = ExtResource("3_nxxjw")
 object_to_spawn = ExtResource("6_mf5vy")
-spawn_chance = 1.0
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_yrsgs"]
 script = ExtResource("3_nxxjw")
 object_to_spawn = ExtResource("7_wwho0")
-spawn_chance = 1.0
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_kgl22"]
 script = ExtResource("3_nxxjw")
 object_to_spawn = ExtResource("8_bfds5")
-spawn_chance = 1.0
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_sg1i2"]
@@ -47,12 +44,19 @@ object_to_spawn = ExtResource("9_nxxjw")
 spawn_chance = 10.0
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
+[sub_resource type="Resource" id="Resource_3j2nl"]
+resource_local_to_scene = true
+script = ExtResource("11_8ywml")
+title = "Chest"
+metadata/_custom_type_script = "uid://6ucyr0petjnx"
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_i8ls8"]
 size = Vector3(1, 0.5, 0.75)
 
 [node name="chest" instance=ExtResource("1_lewkn")]
 script = ExtResource("2_aceba")
 item_chances = Array[ExtResource("3_nxxjw")]([SubResource("Resource_ch7bk"), SubResource("Resource_gxu6n"), SubResource("Resource_ri1rp"), SubResource("Resource_yrsgs"), SubResource("Resource_kgl22"), SubResource("Resource_sg1i2")])
+inventory = SubResource("Resource_3j2nl")
 min_items = 2
 max_items = 5
 

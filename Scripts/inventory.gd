@@ -1,24 +1,32 @@
 extends Resource
 class_name Inventory
 
-@export var items: Array[Item]
+@export var item_slots: Array[ItemSlot]
 @export var space: int = 10
 @export var money: int
 @export var title: String
-
+var items: Array[Item]:
+	get():
+		var array: Array[Item] = []
+		for slot in item_slots:
+			var item = slot.item
+			array.append(item)
+		return array
+	
 
 func add_item(item: Item, amount: int = 1) -> bool:
 	if item is ItemMoney:
-		money += item.amount
+		money += amount
 		return true
-	var same_item = find_item(item.title)
+	var same_item = find_item_slot(item.title)
 	if same_item and item.stackable:
 		same_item.amount += amount
 	elif get_space_left(item) > 0 or !item.takes_space:
-		var new_item = item.duplicate(true)
-		new_item.amount = amount
-		items.append(new_item)
-		if new_item is Equipment:
+		var new_slot = ItemSlot.new()#item.duplicate(true)
+		new_slot.item = item.duplicate(true)
+		new_slot.amount = amount
+		item_slots.append(new_slot)
+		if new_slot is Equipment:
 			item.equipped = false
 	else:
 		return false
@@ -26,27 +34,41 @@ func add_item(item: Item, amount: int = 1) -> bool:
 
 
 func remove_item(item: Item, amount: int = 1) -> void:
-	item.amount -= amount
-	if item.amount <= 0:
-		items.erase(item)
+	var slot = find_item_slot(item.title)
+	slot.amount -= amount
+	if slot.amount <= 0:
+		item_slots.erase(slot)
 
 
-func find_item(item_name: String) -> Resource:
-	for i in items:
-		if i != null and (i.resource_name == item_name or i.title.to_lower() == item_name.to_lower()):
-			return i
+func find_item(item_name: String) -> Item:
+	for item in items:
+		if item != null and (item.resource_name == item_name or item.title.to_lower() == item_name.to_lower()):
+			return item
 	return null
 
 
+func find_item_slot(item_name: String) -> ItemSlot:
+	for slot in item_slots:
+		var item = slot.item
+		if item != null and (item.resource_name == item_name or item.title.to_lower() == item_name.to_lower()):
+			return slot
+	return null
+
+func get_item_amount(item_name: String) -> int:
+	var slot = find_item_slot(item_name)
+	if slot:
+		return slot.amount
+	return 0
 
 func get_space_left(item_to_add: Item = null) -> int:
 	var used_space = 0
-	for item in items:
+	for slot in item_slots:
+		var item = slot.item
 		if item.stackable:
 			if !item_to_add or item.title != item_to_add.title:
 				used_space += 1
 		elif item.takes_space:
-			used_space += item.amount
+			used_space += slot.amount
 	return space - used_space
 	#var item_names: Array
 	#for item in items:

@@ -3,6 +3,7 @@ class_name InventoryUI
 
 enum modes {use, loot}
 @export var mode = modes.use
+@export var show_size: bool = true
 @export var show_price: bool
 var target: Inventory = PlayerStats.inventory
 var target2: Inventory
@@ -49,10 +50,9 @@ func _process(_delta: float) -> void:
 		money_label.text = "$" + str(target.money)
 	
 	# set size
-	if "inventory" in target:
-		var space_left = target.inventory.get_space_left()
-		size_label.text = str(target.inventory.space - space_left) + "/" + str(target.inventory.space)
-	
+	if show_size:
+		var space_left = target.get_space_left()
+		size_label.text = str(target.space - space_left) + "/" + str(target.space)
 
 
 func set_items():
@@ -61,7 +61,8 @@ func set_items():
 			item_container.remove_child(child)
 			child.queue_free()
 	var items: Array[Control]
-	for item in target.items:
+	for slot in target.item_slots:
+		var item = slot.item
 		#if item.stackable:
 			#var same_items = items.filter(func(i): return i.text.containsn(item.title))
 			#if same_items.size() > 0:
@@ -73,7 +74,7 @@ func set_items():
 		items.append(inst)
 		inst.text = item.title
 		inst.resource = item
-		inst.amount = item.amount
+		inst.amount = slot.amount
 		inst.owner = self
 		inst.moveable = true
 		if show_price:
@@ -124,8 +125,8 @@ func transfer_item(menu_item: Control):
 	var amount_to_move = 1
 	if Input.is_action_pressed("shift") or item is ItemMoney:
 		amount_to_move = item.amount
-	target.remove_item(item, amount_to_move)
-	target2.add_item(item, amount_to_move)
+	if target2.add_item(item, amount_to_move):
+		target.remove_item(item, amount_to_move)
 	get_parent().reset_inventories()
 
 

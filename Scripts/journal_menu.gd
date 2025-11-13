@@ -6,6 +6,7 @@ extends MenuList
 @onready var exit_button: Button = $PanelContainer/MarginContainer/VBoxContainer/MenuItem
 var quest_array
 
+
 func open(array: Array):
 	super.open(array)
 	if array.size() == 0:

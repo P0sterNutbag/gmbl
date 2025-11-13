@@ -51,11 +51,13 @@ func _process(_delta: float) -> void:
 
 
 func _on_focus_entered() -> void:
-	icon = icon_texture
+	if !disabled:
+		icon = icon_texture
 
 
 func _on_focus_exited() -> void:
-	icon = null
+	if !disabled:
+		icon = null
 
 
 func _on_mouse_entered() -> void:

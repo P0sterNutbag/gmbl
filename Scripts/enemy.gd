@@ -4,8 +4,9 @@ class_name Enemy
 @export var title: String = "Enemy"
 @export var strafe_change := 0.5
 @export var items_to_drop: Array[PackedScene]
-enum guns {shotgun, ak47, sniper, pistol}
-@export var gun_index: guns
+#enum guns {shotgun, ak47, sniper, pistol}
+#@export var gun_index: guns
+@export var gun_item: EquipmentGun
 enum teams {enemies, allies}
 @export var team: teams = teams.enemies
 @export var follow_target: Node3D
@@ -13,7 +14,7 @@ enum teams {enemies, allies}
 var items:
 	get():
 		return inventory.items
-var inventory: Inventory = Inventory.new()
+@export var inventory: Inventory
 @export var max_items: int
 @export var min_items: int
 enum states {idle, investigate, shoot, search, strafe, hurt, reload, camp, dead, aim, walk, standby, supress}
@@ -44,12 +45,12 @@ var last_seen_position: Vector3
 var destination: Vector3
 var target: Node3D
 var bounty: Quest
-var guns_dict: Dictionary = {
-	0 : [preload("res://Scenes/Guns/shotgun.tscn"), preload("res://Scenes/Items/Guns/shotgun.tscn")],
-	1 : [preload("res://Scenes/Guns/ak47.tscn"), preload("res://Scenes/Items/Guns/ak47.tscn")],
-	2 : [preload("res://Scenes/Guns/sniper.tscn"), preload("res://Scenes/Items/Guns/sniper_rifle.tscn")],
-	3 : [preload("res://Scenes/Guns/pistol.tscn"), preload("res://Scenes/Items/Guns/pistol.tscn")],
-}
+#var guns_dict: Dictionary = {
+	#0 : [preload("res://Scenes/Guns/shotgun.tscn"), preload("res://Resources/Items/Guns/shotgun.tres")],
+	#1 : [preload("res://Scenes/Guns/ak47.tscn"), preload("res://Resources/Items/Guns/ak47.tres")],
+	#2 : [preload("res://Scenes/Guns/sniper.tscn"), preload("res://Resources/Items/Guns/sniper_rifle.tres")],
+	#3 : [preload("res://Scenes/Guns/pistol.tscn"), preload("res://Resources/Items/Guns/pistol.tres")],
+#}
 @onready var detection = $Detection
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var anim_player: AnimationPlayer = $EnemyModel/PersonAnimated/AnimationPlayer
@@ -70,7 +71,8 @@ signal shoot
 
 func _ready() -> void:
 	gun_holder.get_child(0).queue_free()
-	gun = guns_dict[gun_index][0].instantiate()
+	#gun = guns_dict[gun_index][0].instantiate()
+	gun = gun_item.gun_object.instantiate()
 	gun.gun_stats.condition = randf_range(10, 50)
 	gun_holder.add_child(gun)
 	gun.bullet_stats.collision_mask = 4
@@ -79,7 +81,7 @@ func _ready() -> void:
 	shoot_component.bullet_stats = gun.bullet_stats
 	shoot_component.gun_stats = gun.gun_stats
 	shoot_timer.wait_time = gun.fire_timer
-	items_to_drop.append(guns_dict[gun_index][1])
+	items_to_drop.append(gun_item.physical_item)
 	shoot.connect($ShootComponent._on_shoot)
 	shoot.connect(gun._on_shoot)
 	DayNightCycle.night_start.connect(on_night_start)
@@ -87,7 +89,7 @@ func _ready() -> void:
 	
 	# add items
 	for i in randi_range(min_items, max_items):
-		inventory.items.append(potential_items[Globals.get_weighted_index(potential_items)].object_to_spawn)
+		inventory.add_item(potential_items[Globals.get_weighted_index(potential_items)].object_to_spawn)
 	
 	await get_tree().create_timer(0.5).timeout
 	if team == teams.allies:
@@ -443,8 +445,9 @@ func _on_death() -> void:
 		get_tree().current_scene.add_child.call_deferred(inst)
 		inst.set_deferred("global_position", right_hand.global_position)
 		inst.apply_impulse.call_deferred(Vector3(randf_range(-2, 2), 5, randf_range(-2, 2)))
-		if inst.item is EquipmentGun:
-			inst.item.gun_stats = gun.gun_stats.duplicate()
+		if i == gun_item.physical_item:
+			inst.item_slot.item = gun_item
+			inst.item_slot.item.gun_stats = gun.gun_stats.duplicate(true)
 		#inst.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
 	if gun:
 		gun.queue_free()

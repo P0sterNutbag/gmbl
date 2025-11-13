@@ -18,7 +18,7 @@ func _on_timer_timeout() -> void:
 	Globals.overworld.add_child(inst)
 	# determine spawn location
 	var spawn_location = get_destination()
-	spawn_location.location_data.population = clamp(spawn_location.location_data.population - inst.location.location_data.population, 0, spawn_location.max_population)
+	spawn_location.location_data.population = clamp(spawn_location.location_data.population - inst.location.location_data.population, 0, spawn_location.location_data.max_population)
 	inst.global_position = spawn_location.global_position
 	inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
 	# determine desination

@@ -262,21 +262,6 @@ func state_walk(delta):
 		if !_ammo or ammo == gun.max_ammo:
 			return
 		change_gun_state(gun_states.reload)
-		#var tween = create_tween()
-		#tween.tween_property(gun_anchor, "position:y", -0.3, 0.25)
-		#tween.tween_interval(0.5)
-		#tween.tween_callback(use_item.bind("", ammo, gun.gun_stats))
-		#tween.tween_property(gun_anchor, "position:y", 0, 0.15) 
-		#tween.tween_property(self, "gun_state", gun_states.point, 0)
-	
-	# check ammo
-	#if Input.is_action_just_pressed("check_ammo"):
-		#if gun_state == gun_states.point:
-			#change_gun_state(gun_states.ammo_check)
-		#elif gun_state == gun_states.ammo_check:
-			#change_gun_state(gun_states.point)
-	#if Input.is_action_just_pressed("aim") and gun_state == gun_states.ammo_check:
-		#change_gun_state(gun_states.ads)
 	
 	# interact
 	if Input.is_action_just_pressed("interact"):
@@ -284,10 +269,10 @@ func state_walk(delta):
 			return
 		var collider = interact_cast.get_collider(0)
 		if collider.is_in_group("lootable"):
-			Globals.survival_ui.loot(collider.get_parent())
+			Globals.survival_ui.loot(collider.get_parent().inventory)
 		elif collider is PhysicalBone3D:
 			if collider.health_component and collider.health_component.is_dead:
-				Globals.survival_ui.loot(collider.health_component.get_parent())
+				Globals.survival_ui.loot(collider.health_component.get_parent().inventory)
 		else:
 			if collider is ItemPickup:
 				collider.pickup()
@@ -380,7 +365,7 @@ func enter_pause():
 	#tween.tween_property(gun, "position:y", 0, 0.1)
 
 
-func state_pause(delta):
+func state_pause(_delta):
 	pass
 
 
@@ -395,7 +380,7 @@ func enter_dead():
 	#tween.tween_callback(SaveController.load_data_from_file).set_delay(5)
 
 
-func state_dead(delta):
+func state_dead(_delta):
 	pass
 
 
@@ -473,7 +458,7 @@ func enter_gun_state_no_gun():
 	await tween.finished
 
 
-func gun_state_no_gun(delta: float):
+func gun_state_no_gun(_delta: float):
 	if object_to_place == null:
 		return
 	placer_raycast.global_position = place_position.global_position
@@ -586,16 +571,14 @@ func use_item(item_name: String, item_id = null, target = null):
 		return
 	if item is ItemUsable:
 		item.use(target)
-	item.amount -= 1
-	if item.amount <= 0:
-		PlayerStats.items.erase(item)
+	PlayerStats.inventory.remove_item(item)
+	#item.amount -= 1
+	#if item.amount <= 0:
+		#PlayerStats.items.erase(item)
 
 
 func find_item(item_name: String) -> Resource:
-	for i in PlayerStats.items:
-		if i != null and i.resource_name == item_name:
-			return i
-	return null
+	return PlayerStats.inventory.find_item(item_name)
 
 
 func step_noise_event():
@@ -643,5 +626,5 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 		velocity.y = 0
 
 
-func _on_bullet_listener_area_entered(area: Area3D) -> void:
+func _on_bullet_listener_area_entered(_area: Area3D) -> void:
 	bullet_flyby_sfx.play()

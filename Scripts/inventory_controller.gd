@@ -7,10 +7,10 @@ func _ready() -> void:
 	resized.connect(_on_resized)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel") and visible:
 		clear_inventories()
-		hide()
+		UiController.close_interface(self)
 		exit.emit()
 	if get_child_count() > 1:
 		if Input.is_action_just_pressed("ui_right"):

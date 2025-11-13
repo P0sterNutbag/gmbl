@@ -17,7 +17,6 @@
 script = ExtResource("2_f2t4n")
 population = 5
 npc_spawn_chance = 0.5
-trap_spawn_change = 0.5
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_ux4qu"]
@@ -40,9 +39,6 @@ _surfaces = [{
 [node name="Encounter" instance=ExtResource("1_qo84g")]
 location_data = SubResource("Resource_ux4qu")
 
-[node name="Shader" parent="." index="2"]
-visible = false
-
 [node name="Terrain" parent="." index="5"]
 _terrain_data = ExtResource("3_j8qiv")
 
@@ -62,153 +58,153 @@ metadata/_editor_icon = ExtResource("7_aqbia")
 [node name="NavigationRegion3D" parent="." index="6"]
 navigation_mesh = SubResource("NavigationMesh_ux4qu")
 
-[node name="Terrain_FullMesh" type="MeshInstance3D" parent="NavigationRegion3D" index="1"]
+[node name="Terrain_FullMesh" type="MeshInstance3D" parent="NavigationRegion3D" index="0"]
 visible = false
 mesh = SubResource("ArrayMesh_ux4qu")
 skeleton = NodePath("../..")
 
-[node name="ShippingContainer" parent="NavigationRegion3D" index="2" instance=ExtResource("2_uee76")]
+[node name="ShippingContainer" parent="NavigationRegion3D" index="1" instance=ExtResource("2_uee76")]
 transform = Transform3D(-0.99569386, 0, 0.09270252, 0, 1, 0, -0.09270252, 0, -0.99569386, 128.4846, 2.8267825, 135.64713)
 
-[node name="ShippingContainer2" parent="NavigationRegion3D" index="3" instance=ExtResource("2_uee76")]
+[node name="ShippingContainer2" parent="NavigationRegion3D" index="2" instance=ExtResource("2_uee76")]
 transform = Transform3D(-0.027522983, -0.0016510752, -0.9996198, -0.059881307, 0.9982055, -1.1641532e-10, 0.9978259, 0.059858542, -0.027572462, 104.77725, 4.2208295, 136.58784)
 
-[node name="ShippingContainer3" parent="NavigationRegion3D" index="4" instance=ExtResource("2_uee76")]
+[node name="ShippingContainer3" parent="NavigationRegion3D" index="3" instance=ExtResource("2_uee76")]
 transform = Transform3D(-0.5738946, 0, -0.81892914, 0, 1, 0, 0.81892914, 0, -0.5738946, 116.24902, 5.1615286, 120.26725)
 
-[node name="ShippingContainer4" parent="NavigationRegion3D" index="5" instance=ExtResource("2_uee76")]
+[node name="ShippingContainer4" parent="NavigationRegion3D" index="4" instance=ExtResource("2_uee76")]
 transform = Transform3D(0.18224618, 0, 0.98325294, 0, 1, 0, -0.98325294, 0, 0.18224618, 96.96675, 6.585273, 120.451126)
 
-[node name="ShippingContainer5" parent="NavigationRegion3D" index="6" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer5" parent="NavigationRegion3D" index="5" instance=ExtResource("16_ap53a")]
 transform = Transform3D(-0.8484366, 0, -0.529297, 0, 1, 0, 0.529297, 0, -0.8484366, 108.671104, 4.7110963, 129.19264)
 
-[node name="ShippingContainer6" parent="NavigationRegion3D" index="7" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer6" parent="NavigationRegion3D" index="6" instance=ExtResource("16_ap53a")]
 transform = Transform3D(0.99982744, 0, -0.018575855, 0, 1, 0, 0.018575855, 0, 0.99982744, 118.5726, 3.9411573, 129.61499)
 
-[node name="ShippingContainer7" parent="NavigationRegion3D" index="8" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer7" parent="NavigationRegion3D" index="7" instance=ExtResource("16_ap53a")]
 transform = Transform3D(-0.9674915, 0.14200352, 0.20927352, 0.14044268, 0.98983586, -0.02237806, -0.21032423, 0.007740356, -0.97760135, 113.730354, 7.4388447, 129.58173)
 
-[node name="ShippingContainer8" parent="NavigationRegion3D" index="9" instance=ExtResource("2_uee76")]
+[node name="ShippingContainer8" parent="NavigationRegion3D" index="8" instance=ExtResource("2_uee76")]
 transform = Transform3D(0.8507304, 0, 0.5256022, 0, 1, 0, -0.5256022, 0, 0.8507304, 81.945786, 4.4865685, 170.94138)
 
-[node name="ShippingContainer9" parent="NavigationRegion3D" index="10" instance=ExtResource("2_uee76")]
+[node name="ShippingContainer9" parent="NavigationRegion3D" index="9" instance=ExtResource("2_uee76")]
 transform = Transform3D(-0.99747145, 0, 0.071068086, 0, 1, 0, -0.071068086, 0, -0.99747145, 85.62082, 4.702573, 158.1355)
 
-[node name="ShippingContainer10" parent="NavigationRegion3D" index="11" instance=ExtResource("2_uee76")]
+[node name="ShippingContainer10" parent="NavigationRegion3D" index="10" instance=ExtResource("2_uee76")]
 transform = Transform3D(-0.9882566, 0, 0.15280366, 0, 1, 0, -0.15280366, 0, -0.9882566, 108.30237, 2.9721518, 168.16748)
 
-[node name="ShippingContainer11" parent="NavigationRegion3D" index="12" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer11" parent="NavigationRegion3D" index="11" instance=ExtResource("16_ap53a")]
 transform = Transform3D(-0.70575863, 0, 0.70845234, 0, 1, 0, -0.70845234, 0, -0.70575863, 171.02509, 3.811161, 189.16086)
 
-[node name="ShippingContainer12" parent="NavigationRegion3D" index="13" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer12" parent="NavigationRegion3D" index="12" instance=ExtResource("16_ap53a")]
 transform = Transform3D(0.8747936, 0, -0.48449582, 0, 1, 0, 0.48449582, 0, 0.8747936, 188.46161, 3.2040625, 172.95235)
 
-[node name="ShippingContainer13" parent="NavigationRegion3D" index="14" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer13" parent="NavigationRegion3D" index="13" instance=ExtResource("16_ap53a")]
 transform = Transform3D(-0.8634467, 0, -0.50444007, 0, 1, 0, 0.50444007, 0, -0.8634467, 176.34447, 3.798644, 180.28033)
 
-[node name="ShippingContainer14" parent="NavigationRegion3D" index="15" instance=ExtResource("2_uee76")]
+[node name="ShippingContainer14" parent="NavigationRegion3D" index="14" instance=ExtResource("2_uee76")]
 transform = Transform3D(-0.9908371, 0, 0.13506223, 0, 1, 0, -0.13506223, 0, -0.9908371, 188.58473, 3.5200608, 188.07016)
 
-[node name="ShippingContainer15" parent="NavigationRegion3D" index="16" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer15" parent="NavigationRegion3D" index="15" instance=ExtResource("16_ap53a")]
 transform = Transform3D(-0.31606498, 0, -0.94873756, 0, 1, 0, 0.94873756, 0, -0.31606498, 50.25223, 5.4464664, 61.94032)
 
-[node name="ShippingContainerSpawning" parent="NavigationRegion3D" index="17" instance=ExtResource("2_uee76")]
+[node name="ShippingContainerSpawning" parent="NavigationRegion3D" index="16" instance=ExtResource("2_uee76")]
 transform = Transform3D(-0.9695411, 0, -0.2449287, 0, 1, 0, 0.2449287, 0, -0.9695411, 61.879375, 6.7931166, 74.37675)
 
-[node name="ShippingContainer16" parent="NavigationRegion3D" index="18" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer16" parent="NavigationRegion3D" index="17" instance=ExtResource("16_ap53a")]
 transform = Transform3D(0.7803743, 0, 0.6253127, 0, 1, 0, -0.6253127, 0, 0.7803743, 52.130054, 6.6411853, 81.35194)
 
-[node name="ShippingContainer17" parent="NavigationRegion3D" index="19" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer17" parent="NavigationRegion3D" index="18" instance=ExtResource("16_ap53a")]
 transform = Transform3D(-0.6642051, 0, -0.7475504, 0, 1, 0, 0.7475504, 0, -0.6642051, 198.88374, 4.1184, 77.09634)
 
-[node name="ShippingContainer18" parent="NavigationRegion3D" index="20" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer18" parent="NavigationRegion3D" index="19" instance=ExtResource("16_ap53a")]
 transform = Transform3D(0.8677162, 0, -0.49705997, 0, 1, 0, 0.49705997, 0, 0.8677162, 182.25594, 4.896244, 62.649963)
 
-[node name="ShippingContainer19" parent="NavigationRegion3D" index="21" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer19" parent="NavigationRegion3D" index="20" instance=ExtResource("16_ap53a")]
 transform = Transform3D(-0.9297211, 0, -0.36826444, 0, 1, 0, 0.36826444, 0, -0.9297211, 169.24306, 9.188086, 110.9719)
 
-[node name="ShippingContainer20" parent="NavigationRegion3D" index="22" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer20" parent="NavigationRegion3D" index="21" instance=ExtResource("16_ap53a")]
 transform = Transform3D(-0.20160547, 0, 0.9794668, 0, 1, 0, -0.9794668, 0, -0.20160547, 155.23508, 3.4543455, 160.44044)
 
-[node name="ShippingContainer21" parent="NavigationRegion3D" index="23" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer21" parent="NavigationRegion3D" index="22" instance=ExtResource("16_ap53a")]
 transform = Transform3D(-0.9662554, 0, 0.2575857, 0, 1, 0, -0.2575857, 0, -0.9662554, 63.318592, 6.631041, 143.7791)
 
-[node name="ShippingContainer22" parent="NavigationRegion3D" index="24" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer22" parent="NavigationRegion3D" index="23" instance=ExtResource("16_ap53a")]
 transform = Transform3D(0.7907076, 0, 0.612194, 0, 1, 0, -0.612194, 0, 0.7907076, 68.418175, 8.494619, 112.135185)
 
-[node name="ShippingContainer23" parent="NavigationRegion3D" index="25" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer23" parent="NavigationRegion3D" index="24" instance=ExtResource("16_ap53a")]
 transform = Transform3D(0.8156428, 0, -0.5785559, 0, 1, 0, 0.5785559, 0, 0.8156428, 130.14432, 3.8516796, 63.08407)
 
-[node name="ShippingContainer24" parent="NavigationRegion3D" index="26" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer24" parent="NavigationRegion3D" index="25" instance=ExtResource("16_ap53a")]
 transform = Transform3D(0.19585219, 0, -0.98063344, 0, 1, 0, 0.98063344, 0, 0.19585219, 119.317345, 4.8870153, 82.862526)
 
-[node name="ShippingContainer25" parent="NavigationRegion3D" index="27" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer25" parent="NavigationRegion3D" index="26" instance=ExtResource("16_ap53a")]
 transform = Transform3D(0.6412804, 0, 0.7673066, 0, 1, 0, -0.7673066, 0, 0.6412804, 89.64614, 4.784361, 65.498184)
 
-[node name="ShippingContainer26" parent="NavigationRegion3D" index="28" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer26" parent="NavigationRegion3D" index="27" instance=ExtResource("16_ap53a")]
 transform = Transform3D(0.3433138, 0, -0.9392207, 0, 1, 0, 0.9392207, 0, 0.3433138, 67.24511, 5.070009, 202.56282)
 
-[node name="ShippingContainer27" parent="NavigationRegion3D" index="29" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer27" parent="NavigationRegion3D" index="28" instance=ExtResource("16_ap53a")]
 transform = Transform3D(-0.90323794, 0, 0.42914006, 0, 1, 0, -0.42914006, 0, -0.90323794, 48.653904, 4.2483373, 187.9148)
 
-[node name="ShippingContainer28" parent="NavigationRegion3D" index="30" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer28" parent="NavigationRegion3D" index="29" instance=ExtResource("16_ap53a")]
 transform = Transform3D(-0.5676192, 0, 0.82329124, 0, 1, 0, -0.82329124, 0, -0.5676192, 141.34976, 2.9172456, 195.0999)
 
-[node name="ShippingContainer29" parent="NavigationRegion3D" index="31" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer29" parent="NavigationRegion3D" index="30" instance=ExtResource("16_ap53a")]
 transform = Transform3D(-0.6955424, 0, -0.71848506, 0, 1, 0, 0.71848506, 0, -0.6955424, 156.6541, 1.3577876, 38.722305)
 
-[node name="ShippingContainer30" parent="NavigationRegion3D" index="32" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer30" parent="NavigationRegion3D" index="31" instance=ExtResource("16_ap53a")]
 transform = Transform3D(-0.9718962, 0, 0.2354099, 0, 1, 0, -0.2354099, 0, -0.9718962, 167.29384, 4.235678, 213.65352)
 
-[node name="ShippingContainer31" parent="NavigationRegion3D" index="33" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer31" parent="NavigationRegion3D" index="32" instance=ExtResource("16_ap53a")]
 transform = Transform3D(-0.9256512, 0, -0.37837788, 0, 1, 0, 0.37837788, 0, -0.9256512, 211.14302, 2.0167174, 135.85333)
 
-[node name="ShippingContainer32" parent="NavigationRegion3D" index="34" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer32" parent="NavigationRegion3D" index="33" instance=ExtResource("16_ap53a")]
 transform = Transform3D(0.13584617, 0.01479977, -0.9906193, -0.1173777, 0.9930866, -0.0012596862, 0.9837522, 0.11644774, 0.13664414, 114.8591, 3.1352453, 136.29692)
 
-[node name="ShippingContainer33" parent="NavigationRegion3D" index="35" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer33" parent="NavigationRegion3D" index="34" instance=ExtResource("16_ap53a")]
 transform = Transform3D(0.6235931, 0, 0.78174907, 0, 1, 0, -0.78174907, 0, 0.6235931, 121.51926, 4.866364, 123.53482)
 
-[node name="ShippingContainer34" parent="NavigationRegion3D" index="36" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer34" parent="NavigationRegion3D" index="35" instance=ExtResource("16_ap53a")]
 transform = Transform3D(-0.12966192, -0.028904468, -0.9911369, -0.21758112, 0.9760422, -1.8626451e-09, 0.9673916, 0.21565266, -0.13284458, 121.20177, 7.8663635, 125.84327)
 
-[node name="ShippingContainer35" parent="NavigationRegion3D" index="37" instance=ExtResource("16_ap53a")]
+[node name="ShippingContainer35" parent="NavigationRegion3D" index="36" instance=ExtResource("16_ap53a")]
 transform = Transform3D(0.80124307, -0.12411057, 0.58532566, 0.15307206, 0.988215, 7.450581e-09, -0.5784276, 0.08959701, 0.8107983, 118.59115, 10.866362, 127.173294)
 
-[node name="CrateTall" parent="NavigationRegion3D" index="38" instance=ExtResource("6_0766s")]
+[node name="CrateTall" parent="NavigationRegion3D" index="37" instance=ExtResource("6_0766s")]
 transform = Transform3D(0.9798097, 0, -0.19993229, 0, 1, 0, 0.19993229, 0, 0.9798097, 119.80809, 4.8924837, 131.76302)
 
-[node name="Crate" parent="NavigationRegion3D" index="39" instance=ExtResource("7_54835")]
+[node name="Crate" parent="NavigationRegion3D" index="38" instance=ExtResource("7_54835")]
 transform = Transform3D(0.99275523, 0, 0.120154165, 0, 1, 0, -0.120154165, 0, 0.99275523, 118.41616, 4.2379, 131.5948)
 
-[node name="Crate2" parent="NavigationRegion3D" index="40" instance=ExtResource("7_54835")]
+[node name="Crate2" parent="NavigationRegion3D" index="39" instance=ExtResource("7_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 102.56903, 5.282646, 134.06914)
 
-[node name="CrateTall2" parent="NavigationRegion3D" index="41" instance=ExtResource("6_0766s")]
+[node name="CrateTall2" parent="NavigationRegion3D" index="40" instance=ExtResource("6_0766s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 102.740906, 5.667545, 135.55203)
 
-[node name="Crate3" parent="NavigationRegion3D" index="42" instance=ExtResource("7_54835")]
+[node name="Crate3" parent="NavigationRegion3D" index="41" instance=ExtResource("7_54835")]
 transform = Transform3D(0.79076433, 0, 0.6121206, 0, 1, 0, -0.6121206, 0, 0.79076433, 109.69408, 4.943592, 131.38998)
 
-[node name="CrateTall3" parent="NavigationRegion3D" index="43" instance=ExtResource("6_0766s")]
+[node name="CrateTall3" parent="NavigationRegion3D" index="42" instance=ExtResource("6_0766s")]
 transform = Transform3D(0.89709646, 0, 0.4418347, 0, 1, 0, -0.4418347, 0, 0.89709646, 108.273575, 5.562129, 131.99573)
 
-[node name="Crate4" parent="NavigationRegion3D" index="44" instance=ExtResource("7_54835")]
+[node name="Crate4" parent="NavigationRegion3D" index="43" instance=ExtResource("7_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 109.78825, 8.278677, 127.88268)
 
-[node name="Crate5" parent="NavigationRegion3D" index="45" instance=ExtResource("7_54835")]
+[node name="Crate5" parent="NavigationRegion3D" index="44" instance=ExtResource("7_54835")]
 transform = Transform3D(0.9353638, 0, -0.35368708, 0, 1, 0, 0.35368708, 0, 0.9353638, 121.178185, 5.412567, 120.01287)
 
-[node name="ShippingContainerSpawning2" parent="NavigationRegion3D" index="46" instance=ExtResource("12_gvafb")]
+[node name="ShippingContainerSpawning2" parent="NavigationRegion3D" index="45" instance=ExtResource("12_gvafb")]
 transform = Transform3D(0.9429557, 0, 0.3329183, 0, 1, 0, -0.3329183, 0, 0.9429557, 106.691864, 2.7037067, 44.22863)
 
-[node name="ShippingContainerSpawning3" parent="NavigationRegion3D" index="47" instance=ExtResource("12_gvafb")]
+[node name="ShippingContainerSpawning3" parent="NavigationRegion3D" index="46" instance=ExtResource("12_gvafb")]
 transform = Transform3D(0.75198936, 0, 0.6591752, 0, 1, 0, -0.6591752, 0, 0.75198936, 173.58118, 6.629917, 137.85324)
 
-[node name="ShippingContainerSpawning4" parent="NavigationRegion3D" index="48" instance=ExtResource("12_gvafb")]
+[node name="ShippingContainerSpawning4" parent="NavigationRegion3D" index="47" instance=ExtResource("12_gvafb")]
 transform = Transform3D(-0.19005513, 0, 0.98177344, 0, 1, 0, -0.98177344, 0, -0.19005513, 44.42328, 7.0227, 122.36564)
 
-[node name="ShippingContainerSpawning5" parent="NavigationRegion3D" index="49" instance=ExtResource("12_gvafb")]
+[node name="ShippingContainerSpawning5" parent="NavigationRegion3D" index="48" instance=ExtResource("12_gvafb")]
 transform = Transform3D(0.9364887, 0, 0.3506978, 0, 1, 0, -0.3506978, 0, 0.9364887, 99.742134, 4.408953, 207.33186)
 
 [editable path="WorldEnvironment"]

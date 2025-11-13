@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmq0wn4dja58d"]
+
+[ext_resource type="PackedScene" uid="uid://cdr3k44ro53a1" path="res://Scenes/Overworld/Locations/location_base.tscn" id="1_272vu"]
+[ext_resource type="PackedScene" uid="uid://c3wywlngou3jc" path="res://Scenes/Levels/rock_canyon.tscn" id="3_6bmx8"]
+[ext_resource type="PackedScene" uid="uid://ccasv3bhe2jhu" path="res://Art/Models/rock.glb" id="5_6bmx8"]
+
+[node name="Location" groups=["location"] instance=ExtResource("1_272vu")]
+encounter_scene = ExtResource("3_6bmx8")
+
+[node name="Meshes" parent="." index="1"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="rock" parent="Meshes" index="0" instance=ExtResource("5_6bmx8")]
+transform = Transform3D(-0.9993468, -0.03613797, 0, 0.03613797, -0.9993468, 0, 0, 0, 1, 3.9636326, 0, 0)
+
+[node name="rock2" parent="Meshes" index="1" instance=ExtResource("5_6bmx8")]
+transform = Transform3D(0.90408254, -0.31019974, 0.29395726, 0, 0.687848, 0.72585475, -0.42735788, -0.6562326, 0.62187135, 2.6538398, 0, 2.029161)
+
+[node name="rock3" parent="Meshes" index="2" instance=ExtResource("5_6bmx8")]
+transform = Transform3D(-0.11530815, -0.07186797, -0.99072653, -0.52894205, 0.84865797, 0, 0.84078795, 0.52403694, -0.13587117, -0.0088558495, 0, -0.6472268)
+
+[node name="rock4" parent="Meshes" index="3" instance=ExtResource("5_6bmx8")]
+transform = Transform3D(0.53246266, -0.8464535, 0, 0.8464535, 0.53246266, 0, 0, 0, 1, -2.8570144, 0, 1.3519661)
+
+[node name="rock5" parent="Meshes" index="4" instance=ExtResource("5_6bmx8")]
+transform = Transform3D(-0.20191559, -0.979403, 0, 0.84635293, -0.17448573, 0.50323117, -0.492866, 0.10161019, 0.86415184, -3.820554, 0, -1.475534)
+
+[node name="rock6" parent="Meshes" index="5" instance=ExtResource("5_6bmx8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3812737, 0, 2.38445)
+
+[node name="rock7" parent="Meshes" index="6" instance=ExtResource("5_6bmx8")]
+transform = Transform3D(0.9354255, 0.22589558, -0.271938, 0, -0.7692211, -0.63898265, -0.35352382, 0.5977207, -0.71954906, 2.4929821, -0.07963753, -1.7042007)
+
+[node name="PointOfInterest" parent="." index="2"]
+title = "Rock Canyon"

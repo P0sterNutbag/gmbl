@@ -24,19 +24,20 @@ func _process(_delta: float) -> void:
 			if journal.visible:
 				journal.hide()
 			player_inventory_holder.get_child(0).target = PlayerStats.inventory
-			open_menu(player_inventory_holder)
+			UiController.open_interface(player_inventory_holder)
 		else:
-			close_menu(player_inventory_holder)
+			UiController.close_interface(player_inventory_holder)
 	if Input.is_action_just_pressed("journal"):
-		if journal.visible:
-			close_menu(journal)
-		else:
+		if !journal.visible:
 			if player_inventory_holder.visible:
 				player_inventory_holder.hide()
-			open_menu(journal, PlayerStats.quests)
+			UiController.open_interface(journal)
+			journal.open(PlayerStats.quests)
+		else:
+			UiController.close_interface(journal)
 	
 	# compass
-	var compass_item = PlayerStats.find_item("compass")
+	var compass_item = PlayerStats.inventory.find_item("compass")
 	if compass_item and compass_item.equipped:
 		compass.visible = true
 	else:
@@ -48,18 +49,18 @@ func _process(_delta: float) -> void:
 			#Globals.pause_game()
 
 
-func open_menu(menu: Control, array: Array = []) -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	menu.show()
-	if menu is MenuList:
-		menu.open(array)
-	PlayerStats.change_state(PlayerStats.states.pause)
-
-
-func close_menu(menu: Control) -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	menu.hide()
-	PlayerStats.change_state(PlayerStats.states.walk)
+#func open_menu(menu: Control, array: Array = []) -> void:
+	#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	#menu.show()
+	#if menu is MenuList:
+		#menu.open(array)
+	#PlayerStats.change_state(PlayerStats.states.pause)
+#
+#
+#func close_menu(menu: Control) -> void:
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#menu.hide()
+	#PlayerStats.change_state(PlayerStats.states.walk)
 
 
 func loot(target: Inventory) -> void:
@@ -71,9 +72,9 @@ func loot(target: Inventory) -> void:
 	loot_transfer_inventory.grab_focus()
 	player_transfer_inventory.show_price = false
 	loot_transfer_inventory.show_price = false
-	open_menu(transfer_inventory_holder)
+	UiController.open_interface(transfer_inventory_holder)
 
 
-func _on_menu_exit() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	PlayerStats.change_state(PlayerStats.states.walk)
+#func _on_menu_exit() -> void:
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#PlayerStats.change_state(PlayerStats.states.walk)

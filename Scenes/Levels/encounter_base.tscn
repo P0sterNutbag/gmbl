@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://r4ktdn26psb3"]
+[gd_scene load_steps=38 format=3 uid="uid://r4ktdn26psb3"]
 
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="1_0pe3w"]
 [ext_resource type="Script" uid="uid://ysmfpedeqrtw" path="res://Scripts/encounter.gd" id="1_afsqo"]
@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://oamh8tah7tlw" path="res://Art/Textures/grass and dirt.png" id="11_qrsnk"]
 [ext_resource type="Script" uid="uid://chxn6jj2cv0p3" path="res://Scripts/scatterer.gd" id="11_wttml"]
 [ext_resource type="Texture2D" uid="uid://cfsov1xtejnen" path="res://Art/Textures/gravel.png" id="12_yd52q"]
-[ext_resource type="Script" uid="uid://cjv5ew7k7wom8" path="res://Scenes/exit_location.gd" id="14_3f870"]
+[ext_resource type="Script" uid="uid://cjv5ew7k7wom8" path="res://Scripts/exit_location.gd" id="14_3f870"]
 [ext_resource type="Texture2D" uid="uid://ddvw71e7xmbt8" path="res://Art/Textures/exit zone.png" id="15_2a2fa"]
 [ext_resource type="Script" uid="uid://b04s1m7lnvjkt" path="res://Scripts/position_on_terrain.gd" id="15_52w5m"]
 [ext_resource type="Script" uid="uid://vl4exm3hukmx" path="res://Scripts/Overworld/player_spawn.gd" id="15_mydnv"]
@@ -75,9 +75,6 @@ textures = [[ExtResource("6_nue3y"), ExtResource("11_qrsnk"), ExtResource("12_yd
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_6cq5c"]
 agent_radius = 0.75
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_yd52q"]
-size = Vector3(255, 1, 255)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ianw"]
 size = Vector3(257, 15, 5)
@@ -152,12 +149,6 @@ metadata/_custom_type_script = "uid://bokxkydc5jmf"
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_6cq5c")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 127.5, -1, 127.5)
-shape = SubResource("BoxShape3D_yd52q")
 
 [node name="Player" parent="." instance=ExtResource("16_6tord")]
 

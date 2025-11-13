@@ -25,14 +25,15 @@ var ammo: int:
 		else:
 			return 0
 var flashlight_on: bool
-var items:
-	get():
-		return inventory.items
+#var items:
+	#get():
+		#return inventory.items
 @export var starting_inventory: Inventory
 var inventory: Inventory = Inventory.new()
 var quests: Array[Quest]
 @onready var guns: Array[Item]:
-	get(): return items.filter(func(i): return i is EquipmentGun)
+	get(): 
+		return inventory.items.filter(func(i): return i is EquipmentGun)
 var gun: EquipmentGun
 var equipped_guns: Array[EquipmentGun]
 var gun_index := 0
@@ -56,8 +57,8 @@ var thirst_decrease_rate := 0.1
 func _ready() -> void:
 	reset_stats()
 	SceneManager.scene_changed.connect(on_scene_changed)
-	if items.size() > 0 and items[0] is EquipmentGun:
-		gun = items[0]
+	if inventory.item_slots.size() > 0 and inventory.item_slots[0].item is EquipmentGun:
+		gun = inventory.item_slots[0].item
 		gun.equipped = true
 
 
@@ -110,18 +111,18 @@ func change_state(new_state):
 		await Globals.player.enter_functions[PlayerStats.state].call()
 
 
-func find_item(item_name: String) -> Resource:
-	for i in items:
-		if i != null and i.resource_name == item_name:
-			return i
-	return null
+#func find_item(item_name: String) -> Resource:
+	#for i in items:
+		#if i != null and i.resource_name == item_name:
+			#return i
+	#return null
 
 
-func get_item_amount(item_name: String) -> int:
-	var item = find_item(item_name)
-	if item:
-		return item.amount
-	return 0
+#func get_item_amount(item_name: String) -> int:
+	#var item = inventory.find_item_slot(item_name).item
+	#if item:
+		#return item.amount
+	#return 0
 	#if items.size() <= 0:
 		#return 0
 	#return items.filter(func(i): return i != null and i.resource_name == item_name).size()
@@ -133,20 +134,22 @@ func save() -> Dictionary:
 		"money": money,
 		"hp": hp,
 		"ammo": ammo,
-		"items" : items
+		"inventory.item_slots" : inventory.item_slots
 	}
 
 
 func unquip_current_item():
-	for item in items:
+	for slot in inventory.items_slots:
+		var item = slot.item
 		if item is Equipment:
 			item.equipped = false
 
 
 func delete_current_equip():
-	for item in items:
+	for slot in inventory.items_slots:
+		var item = slot.item
 		if item is Equipment and item.equipped:
-			items.erase(item)
+			inventory.items_slots.remove_item(item)
 
 
 func go_to_sleep():

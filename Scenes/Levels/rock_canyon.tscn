@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_ghiyu"]
 [ext_resource type="Resource" uid="uid://cfuo7lbkf1m0v" path="res://addons/zylann.hterrain/data/rock_canyon2/data.hterrain" id="2_w380c"]
 [ext_resource type="PackedScene" uid="uid://b48xbl6fohkm4" path="res://Scenes/Environment/Prefabs With Spawning/shack2.tscn" id="7_hyfhq"]
-[ext_resource type="PackedScene" uid="uid://c0tio1doys3tp" path="res://Scenes/Overworld/Old/rocky_plain.tscn" id="7_kntjh"]
+[ext_resource type="PackedScene" uid="uid://dwnxniisp8nr2" path="res://Scenes/Levels/crateyard.tscn" id="7_kntjh"]
 [ext_resource type="PackedScene" uid="uid://cj5jci52r3cnn" path="res://Scenes/Environment/Prefabs With Spawning/shack3.tscn" id="8_ghiyu"]
 [ext_resource type="PackedScene" uid="uid://d25jtyba6hs61" path="res://Scenes/Environment/Prefabs With Spawning/shack4.tscn" id="9_oy5nx"]
 [ext_resource type="Script" uid="uid://ejdyuf8c7kui" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="13_euisr"]
@@ -62,13 +62,13 @@ visible = false
 mesh = SubResource("ArrayMesh_oy5nx")
 skeleton = NodePath("../..")
 
-[node name="Shack2" parent="NavigationRegion3D" index="2" instance=ExtResource("7_hyfhq")]
+[node name="Shack2" parent="NavigationRegion3D" index="1" instance=ExtResource("7_hyfhq")]
 transform = Transform3D(-0.9340799, 0, -0.357064, 0, 1, 0, 0.357064, 0, -0.9340799, 76.95733, 1.9805381, 203.86757)
 
-[node name="Shack3" parent="NavigationRegion3D" index="3" instance=ExtResource("8_ghiyu")]
+[node name="Shack3" parent="NavigationRegion3D" index="2" instance=ExtResource("8_ghiyu")]
 transform = Transform3D(-0.003892098, 0, 0.99999243, 0, 1, 0, -0.99999243, 0, -0.003892098, 141.73216, 3.6467342, 80.94959)
 
-[node name="Shack4" parent="NavigationRegion3D" index="4" instance=ExtResource("9_oy5nx")]
+[node name="Shack4" parent="NavigationRegion3D" index="3" instance=ExtResource("9_oy5nx")]
 transform = Transform3D(0.29395688, 0, 0.95581865, 0, 1, 0, -0.95581865, 0, 0.29395688, 140.50208, 3.3093152, 94.26734)
 
 [node name="SquadSpawner" parent="." index="11" node_paths=PackedStringArray("borders")]

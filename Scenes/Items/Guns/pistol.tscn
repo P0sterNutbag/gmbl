@@ -1,24 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqgfvmnhvnu77"]
+[gd_scene load_steps=6 format=3 uid="uid://cqgfvmnhvnu77"]
 
 [ext_resource type="Script" uid="uid://bdvokalrlg1k6" path="res://Scripts/item_pickup.gd" id="1_46iok"]
-[ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="2_ehmee"]
 [ext_resource type="PackedScene" uid="uid://dpffikxirjfnq" path="res://Scenes/Guns/Models/pistol_model.tscn" id="3_dwr3s"]
-[ext_resource type="Script" uid="uid://34toqwivxgyk" path="res://Scripts/equipment_gun.gd" id="3_tphca"]
+[ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="4_tphca"]
 
-[sub_resource type="Resource" id="Resource_mvcdb"]
-script = ExtResource("2_ehmee")
-metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
-
-[sub_resource type="Resource" id="Resource_ehmee"]
-script = ExtResource("3_tphca")
-gun_stats = SubResource("Resource_mvcdb")
-slot = 1
-name = "pistol"
-title = "Pistol"
-physical_item = null
-price = 100
-stackable = false
-metadata/_custom_type_script = "uid://34toqwivxgyk"
+[sub_resource type="Resource" id="Resource_dwr3s"]
+script = ExtResource("4_tphca")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rk1p0"]
 size = Vector3(0.0542603, 0.23999, 0.37085)
@@ -27,7 +15,7 @@ size = Vector3(0.0542603, 0.23999, 0.37085)
 collision_layer = 16
 angular_damp = 5.0
 script = ExtResource("1_46iok")
-item = SubResource("Resource_ehmee")
+item_slot = SubResource("Resource_dwr3s")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.0306396, -0.0101318)

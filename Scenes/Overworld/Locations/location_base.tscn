@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdr3k44ro53a1"]
+
+[ext_resource type="Script" uid="uid://lblyysya3an4" path="res://Scripts/location.gd" id="1_lyudo"]
+[ext_resource type="PackedScene" uid="uid://cqnwuiew1q2il" path="res://Scenes/Overworld/point_of_interest.tscn" id="3_lyudo"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hwnis"]
+radius = 3.0
+
+[node name="Location" type="Area3D" groups=["persist"]]
+collision_layer = 64
+collision_mask = 32
+script = ExtResource("1_lyudo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02906, 0)
+shape = SubResource("SphereShape3D_hwnis")
+
+[node name="Meshes" type="Node3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="PointOfInterest" parent="." instance=ExtResource("3_lyudo")]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

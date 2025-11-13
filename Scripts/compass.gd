@@ -32,7 +32,7 @@ func _process(_delta: float) -> void:
 		var quest_object = null
 		if get_tree().current_scene == Globals.overworld:
 			for location in get_tree().get_nodes_in_group("location"):
-				if quest.location.to_lower() == location.get_parent().title.to_lower():
+				if quest.location.to_lower() == location.point_of_interest.title.to_lower():
 					quest_object = location
 		else:
 			quest_object = quest.target_node
@@ -48,7 +48,7 @@ func _process(_delta: float) -> void:
 		var normalized = clamp(angle_deg / (fov / 2.0), -1.0, 1.0)
 		var half_width = size.x / 2.0
 		marker.position.x = half_width + (normalized * half_width) - 12
-		marker.position.x = clamp(quest_marker.position.x, -12, size.x - 12)
+		marker.position.x = clamp(marker.position.x, -12, size.x - 12)
 
 
 func set_quest_markers():
@@ -60,7 +60,7 @@ func set_quest_markers():
 	else:
 		quests = PlayerStats.quests.filter(func(i): 
 			var quest_location = i.location
-			var encounter_location = Globals.overworld.current_encounter.get_parent().title
+			var encounter_location = Globals.overworld.current_encounter.point_of_interest.title
 			return quest_location == encounter_location)
 	for quest in quests:
 		var inst = quest_marker.instantiate()

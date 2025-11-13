@@ -1,22 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgtukpis1lq0a"]
+[gd_scene load_steps=9 format=3 uid="uid://cgtukpis1lq0a"]
 
 [ext_resource type="Script" uid="uid://bdvokalrlg1k6" path="res://Scripts/item_pickup.gd" id="1_2sgkx"]
-[ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="3_ewse8"]
-[ext_resource type="Script" uid="uid://34toqwivxgyk" path="res://Scripts/equipment_gun.gd" id="4_fkqp4"]
+[ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="3_2sgkx"]
 [ext_resource type="PackedScene" uid="uid://rhtj73aayki" path="res://Scenes/Guns/Models/ak47_model.tscn" id="5_unrj6"]
 
-[sub_resource type="Resource" id="Resource_12duu"]
-script = ExtResource("3_ewse8")
-ammo = 24
-metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
-
-[sub_resource type="Resource" id="Resource_62xu2"]
-script = ExtResource("4_fkqp4")
-gun_stats = SubResource("Resource_12duu")
-name = "rifle"
-title = "AK47"
-price = 45
-metadata/_custom_type_script = "uid://34toqwivxgyk"
+[sub_resource type="Resource" id="Resource_ibnff"]
+script = ExtResource("3_2sgkx")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rk1p0"]
 size = Vector3(0.1, 0.178, 0.38)
@@ -34,7 +24,7 @@ size = Vector3(0.1, 0.212, 0.173)
 collision_layer = 16
 angular_damp = 5.0
 script = ExtResource("1_2sgkx")
-item = SubResource("Resource_62xu2")
+item_slot = SubResource("Resource_ibnff")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, -0.00666812, 0.33604)

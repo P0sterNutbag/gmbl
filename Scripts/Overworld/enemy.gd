@@ -26,7 +26,6 @@ func _ready() -> void:
 	var gun = guns_dict[gun_index][0].instantiate()
 	gun_holder.add_child(gun)
 	location.location_data.population = randi_range(min_enemies, max_enemies)
-	location.spawn_player_random = true
 
 
 func _process(_delta: float) -> void:

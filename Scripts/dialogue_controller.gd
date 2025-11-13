@@ -66,6 +66,7 @@ func on_option_selected(option: Control) -> void:
 			child.queue_free()
 		else:
 			child._on_focus_exited()
+			child.disabled = true
 	get_child(-1).size.y = 0
 
 
@@ -104,11 +105,11 @@ func return_bounties() -> void:
 	if complete_quests.size() == 0:
 		advance_dialogue(7)
 		return
-	var reward: int
+	var reward = 0
 	for quest in complete_quests:
+		PlayerStats.inventory.add_item(quest.reward)
 		reward += quest.reward.amount
 		PlayerStats.quests.erase(quest)
-	PlayerStats.money += reward
 	dialogue_tree.bubbles[5].lines[0] += "($" +  str(reward) + ")"
 	advance_dialogue(5)
 

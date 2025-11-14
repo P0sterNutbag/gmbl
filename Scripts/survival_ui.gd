@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var loot_transfer_inventory: InventoryUI = %Inventory2
 @onready var journal: HBoxContainer = $Journal
 @onready var compass: Control = $TopCenter/Compass
+@onready var pause_menu: PanelContainer = $PauseMenu
 
 
 func _enter_tree() -> void:
@@ -21,20 +22,29 @@ func _process(_delta: float) -> void:
 	# opening things
 	if Input.is_action_just_pressed("inventory"):
 		if !player_inventory_holder.visible:
-			if journal.visible:
-				journal.hide()
+			if UiController.is_canvas_layer_open(Globals.ui):
+				return
 			player_inventory_holder.get_child(0).target = PlayerStats.inventory
 			UiController.open_interface(player_inventory_holder)
 		else:
 			UiController.close_interface(player_inventory_holder)
 	if Input.is_action_just_pressed("journal"):
 		if !journal.visible:
+			if UiController.is_canvas_layer_open(Globals.ui):
+				return
 			if player_inventory_holder.visible:
 				player_inventory_holder.hide()
 			UiController.open_interface(journal)
 			journal.open(PlayerStats.quests)
 		else:
 			UiController.close_interface(journal)
+	if Input.is_action_just_pressed("ui_cancel"):
+		if !pause_menu.visible:
+			if UiController.is_canvas_layer_open(Globals.ui) or UiController.is_canvas_layer_open(self):
+				return
+			UiController.open_interface(pause_menu)
+		else:
+			UiController.close_interface(pause_menu)
 	
 	# compass
 	var compass_item = PlayerStats.inventory.find_item("compass")

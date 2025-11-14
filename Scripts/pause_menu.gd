@@ -12,9 +12,11 @@ func activate() -> void:
 	super.activate()
 	get_tree().paused = true
 
+
 func _on_resume_pressed() -> void:
-	get_tree().paused = false
-	get_parent().visibe = false
+	UiController.close_interface(self)
+	#get_tree().paused = false
+	#get_parent().visibe = false
 
 
 func _on_load_pressed() -> void:

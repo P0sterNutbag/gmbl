@@ -22,7 +22,8 @@ func create_town(town_data: Town) -> void:
 	Globals.ui.current_town = town_data
 	town_resource = town_data
 	item_container.delete_children()
-	show()
+	UiController.open_interface(self)
+	#show()
 	title.text = town_data.title
 	for shop in town_data.shops:
 		var inst = item_container.create_menu_item()
@@ -62,4 +63,5 @@ func re_enter_town() -> void:
 
 
 func enter_bounty_board() -> void:
+	UiController.open_interface(Globals.ui.bounty_board)
 	Globals.ui.bounty_board.open(Globals.ui.bounty_board.shop.quests)

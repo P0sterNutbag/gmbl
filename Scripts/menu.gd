@@ -1,4 +1,4 @@
-extends Node
+extends Control
 class_name Menu
 
 @export var item_container: MenuController

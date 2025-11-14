@@ -1,7 +1,6 @@
 extends CanvasLayer
 
 var current_town: Town
-@onready var location_card: Control = $LocationCard
 @onready var town: PanelContainer = $Town
 @onready var shop: HBoxContainer = $Shop
 @onready var shop_inventory: PanelContainer = $Shop/Inventory
@@ -13,8 +12,6 @@ var current_town: Town
 
 func _enter_tree() -> void:
 	Globals.ui = self
-	if location_card:
-		hide_location_info()
 
 
 func _ready() -> void:
@@ -38,36 +35,10 @@ func _ready() -> void:
 			#PauseMenu.activate()
 
 
-func show_location_info(encounter: Node3D) -> void:
-	location_card.show()
-	location_card.target = encounter
-	if encounter.show_title:
-		location_card.title_value = encounter.title
-	else:
-		location_card.title_value = "???"
-	if encounter.show_faction:
-		location_card.faction_value = encounter.faction
-	else:
-		location_card.faction_value = "???"
-	if encounter.show_difficulty:
-		location_card.difficulty_value = encounter.difficulty
-	else:
-		location_card.difficulty_value = "???"
-	if encounter.show_resources:
-		location_card.resources_value = encounter.resources
-	else:
-		location_card.resources_value = "???"
-	location_card.set_process(true)
-
-
-func hide_location_info() -> void:
-	location_card.hide()
-	location_card.set_process(false)
-
-
-func start_dialogue(dialogue_data: DialogueTree, shop: Shop = null) -> void:
-	dialogue.shop = shop
-	dialogue.show()
+func start_dialogue(dialogue_data: DialogueTree, _shop: Shop = null) -> void:
+	dialogue.shop = _shop
+	#dialogue.show()
+	UiController.open_interface(dialogue)
 	dialogue.start_dialogue(dialogue_data)
 	portraits.show()
 
@@ -80,7 +51,8 @@ func enter_shop(shop_data: Shop) -> void:
 	shop_inventory2.target2 = PlayerStats.inventory
 	shop_inventory.show_price = true
 	shop_inventory2.grab_focus()
-	shop.show()
+	UiController.open_interface(shop)
+	#shop.show()
 
 
 #func _on_shop_visibility_changed() -> void:

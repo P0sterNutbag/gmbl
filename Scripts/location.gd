@@ -51,7 +51,7 @@ func start_encounter() -> void:
 		SceneManager.start_scene_transition(encounter_scene.resource_path, true)
 	elif town != null:
 		Globals.ui.town.create_town(town)
-		Globals.ui.hide_location_info()
+		#Globals.ui.hide_location_info()
 		point_of_interest.location_card.hide()
 	elif shop != null:
 		Globals.ui.start_dialogue(shop.dialogue, shop)

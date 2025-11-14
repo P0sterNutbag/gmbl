@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cc458wgoeu6t4"]
+[gd_scene load_steps=21 format=3 uid="uid://cc458wgoeu6t4"]
 
 [ext_resource type="Script" uid="uid://dr73ivowve6xe" path="res://Scripts/survival_ui.gd" id="1_e5c6o"]
 [ext_resource type="Script" uid="uid://bclh5yhrpmkxf" path="res://Scripts/stat_visual.gd" id="2_k4cvi"]
@@ -18,6 +18,7 @@
 [ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="14_e5c6o"]
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="15_k4cvi"]
 [ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="16_1lobq"]
+[ext_resource type="PackedScene" uid="uid://bos3d7nxhdnc5" path="res://Scenes/UI/pause_menu.tscn" id="19_oq622"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_agdr0"]
 bg_color = Color(0, 0, 0, 0.784314)
@@ -631,6 +632,9 @@ theme = ExtResource("5_jtf3n")
 
 [node name="Control" type="Control" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="PauseMenu" parent="." instance=ExtResource("19_oq622")]
+visible = false
 
 [connection signal="exit" from="PlayerInventory" to="." method="_on_menu_exit"]
 [connection signal="pressed" from="PlayerInventory/Inventory/Control/Button" to="PlayerInventory" method="close"]

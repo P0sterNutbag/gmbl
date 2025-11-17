@@ -7,7 +7,7 @@ var current_town: Town
 @onready var shop_inventory2: PanelContainer = $Shop/Inventory2
 @onready var portraits: Control = $PortraitHolder
 @onready var dialogue: VBoxContainer = $Dialogue
-@onready var bounty_board: HBoxContainer = $BountyBoard
+@onready var job_board: HBoxContainer = $JobBoard
 
 
 func _enter_tree() -> void:

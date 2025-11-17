@@ -48,6 +48,6 @@ func _on_resized() -> void:
 
 
 func close() -> void:
-	hide()
+	UiController.close_interface(self, false)
 	clear_inventories()
 	exit.emit()

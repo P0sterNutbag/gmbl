@@ -54,6 +54,7 @@ func find_item_slot(item_name: String) -> ItemSlot:
 			return slot
 	return null
 
+
 func get_item_amount(item_name: String) -> int:
 	var slot = find_item_slot(item_name)
 	if slot:

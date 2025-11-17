@@ -44,8 +44,8 @@ func _ready() -> void:
 
 
 func start_encounter() -> void:
+	Globals.overworld.current_encounter = self
 	if encounter_scene != null:
-		Globals.overworld.current_encounter = self
 		var player_vector: Vector3 = (global_position - Globals.player.global_position).normalized().rotated(Vector3.UP, -rotation.y)
 		Globals.overworld.player_spawn_vector = player_vector
 		SceneManager.start_scene_transition(encounter_scene.resource_path, true)

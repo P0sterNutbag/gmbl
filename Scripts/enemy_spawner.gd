@@ -16,7 +16,7 @@ func _ready() -> void:
 	var quests = PlayerStats.quests.filter(func(i): 
 		var quest_location = i.location
 		var encounter_location = Globals.overworld.current_encounter.point_of_interest.title
-		return quest_location == encounter_location)
+		return "target" in i and quest_location == encounter_location)
 	
 	# get enemy amount
 	get_parent().location_data.min_population = clamp(get_parent().location_data.min_population, quests.size(), 1000)

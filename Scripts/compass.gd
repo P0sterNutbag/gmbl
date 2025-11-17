@@ -35,6 +35,8 @@ func _process(_delta: float) -> void:
 				if quest.location.to_lower() == location.point_of_interest.title.to_lower():
 					quest_object = location
 		else:
+			if !quest.target_node:
+				return
 			quest_object = quest.target_node
 		var player_forward = -compass_object.global_transform.basis.z.normalized()
 		player_forward.y = 0
@@ -56,7 +58,7 @@ func set_quest_markers():
 	for child in markers.get_children():
 		child.queue_free()
 	if get_tree().current_scene == Globals.overworld:
-		quests = PlayerStats.quests.duplicate(true)
+		quests = PlayerStats.quests.filter(func(i): return i.location != "")
 	else:
 		quests = PlayerStats.quests.filter(func(i): 
 			var quest_location = i.location

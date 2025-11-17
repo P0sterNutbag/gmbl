@@ -48,7 +48,7 @@ class_name QuestRandom
 
 
 func generate_quest() -> Quest:
-	var quest = Quest.new()
+	var quest = QuestBounty.new()
 	quest.type = type
 	quest.title = titles[randi_range(0, titles.size()-1)]
 	quest.location = locations[randi_range(0, locations.size()-1)]

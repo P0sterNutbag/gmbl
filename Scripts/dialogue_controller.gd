@@ -95,13 +95,13 @@ func enter_town() -> void:
 	Globals.ui.town.re_enter_town()
 
 
-func enter_bounty_board() -> void:
+func enter_job_board() -> void:
 	hide()
-	Globals.ui.town.enter_bounty_board()
+	Globals.ui.town.enter_job_board()
 
 
 func return_bounties() -> void:
-	var complete_quests = PlayerStats.quests.filter(func(i): return i.completed)
+	var complete_quests = PlayerStats.quests.filter(func(i): return i is QuestBounty and i.completed)
 	if complete_quests.size() == 0:
 		advance_dialogue(7)
 		return
@@ -114,8 +114,27 @@ func return_bounties() -> void:
 	advance_dialogue(5)
 
 
+func return_quests(quest_type: Quest, success_index: int, fail_index: int) -> void:
+	for quest in PlayerStats.quests:
+		if quest.has_method("check_complete"):
+			quest.check_complete()
+	var complete_quests = PlayerStats.quests.filter(func(i): return i.get_class() == quest_type.get_class() and i.return_location == Globals.ui.current_town.title and i.completed)
+	if complete_quests.size() == 0:
+		advance_dialogue(fail_index)
+		return
+	var reward = 0
+	for quest in complete_quests:
+		if quest.has_method("remove_items"):
+			quest.remove_items()
+		PlayerStats.inventory.add_item(quest.reward.item, quest.reward.amount)
+		reward += quest.reward.amount
+		PlayerStats.quests.erase(quest)
+	dialogue_tree.bubbles[success_index].lines[0] += "($" +  str(reward) + ")"
+	advance_dialogue(success_index)
+
+
 func _on_shop_exit() -> void:
-	show()
+	UiController.open_interface(self)
 	advance_dialogue(index)
 	#get_child(-1).option_container.get_child(0).grab_focus()
 	

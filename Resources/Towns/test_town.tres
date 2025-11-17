@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Town" load_steps=75 format=3 uid="uid://c5kpuww7x3qfl"]
+[gd_resource type="Resource" script_class="Town" load_steps=87 format=3 uid="uid://c5kpuww7x3qfl"]
 
 [ext_resource type="Script" uid="uid://bbi3gcsb33muk" path="res://Scripts/town.gd" id="1_boc7n"]
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="2_60f61"]
@@ -28,7 +28,10 @@
 [ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="25_2fanp"]
 [ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="25_rtygk"]
 [ext_resource type="Texture2D" uid="uid://whgiy4tx5l5g" path="res://Art/Textures/npc brown jacket.png" id="26_i2d6u"]
+[ext_resource type="Script" uid="uid://cjfktv164o4el" path="res://Scripts/quest_bounty.gd" id="26_pv0ty"]
 [ext_resource type="Resource" uid="uid://bkae25scq6c12" path="res://Resources/Items/Ammo/sniper_ammo.tres" id="27_bsumm"]
+[ext_resource type="Resource" uid="uid://brmi40g2jr38s" path="res://Resources/Items/money.tres" id="31_rtygk"]
+[ext_resource type="Script" uid="uid://c6knlgr6wx0i1" path="res://Scripts/quest_fetch.gd" id="32_bsumm"]
 
 [sub_resource type="Resource" id="Resource_6lldf"]
 script = ExtResource("3_0o5nu")
@@ -237,9 +240,14 @@ script = ExtResource("6_6lldf")
 method = "enter_bounty_board"
 metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
+[sub_resource type="Resource" id="Resource_clt0f"]
+script = ExtResource("26_pv0ty")
+metadata/_custom_type_script = "uid://cjfktv164o4el"
+
 [sub_resource type="Resource" id="Resource_rtygk"]
 script = ExtResource("6_6lldf")
-method = "return_bounties"
+method = "return_quests"
+arguments = [SubResource("Resource_clt0f"), 5, 7]
 metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
 [sub_resource type="Resource" id="Resource_rkg8l"]
@@ -292,9 +300,58 @@ dialogue = SubResource("Resource_bsumm")
 minimum_quests = 3
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
+[sub_resource type="Resource" id="Resource_hqi5f"]
+script = ExtResource("32_bsumm")
+metadata/_custom_type_script = "uid://c6knlgr6wx0i1"
+
+[sub_resource type="Resource" id="Resource_wbsme"]
+script = ExtResource("6_6lldf")
+method = "return_quests"
+arguments = [SubResource("Resource_hqi5f"), 5, 7]
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_3gw2v"]
+script = ExtResource("4_qjbs6")
+bubbles = Array[ExtResource("3_0o5nu")]([SubResource("Resource_5oaiu"), SubResource("Resource_17jta"), SubResource("Resource_r3o7g"), SubResource("Resource_wbsme"), SubResource("Resource_2fanp"), SubResource("Resource_rkg8l"), SubResource("Resource_v7uwj"), SubResource("Resource_hqc43"), SubResource("Resource_fr5lk")])
+npc_style = SubResource("Resource_pbnsr")
+npc_name = "Duster"
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+
+[sub_resource type="Resource" id="Resource_cand8"]
+script = ExtResource("10_8pniq")
+metadata/_custom_type_script = "uid://6ucyr0petjnx"
+
+[sub_resource type="Resource" id="Resource_d2b80"]
+script = ExtResource("9_pbnsr")
+item = ExtResource("18_pbnsr")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_u0s17"]
+script = ExtResource("9_pbnsr")
+item = ExtResource("31_rtygk")
+amount = 50
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_k306w"]
+script = ExtResource("32_bsumm")
+required_items = Array[ExtResource("9_pbnsr")]([SubResource("Resource_d2b80")])
+type = "Fetch"
+title = "Find me a pistol"
+return_location = "Small Town"
+reward = SubResource("Resource_u0s17")
+metadata/_custom_type_script = "uid://c6knlgr6wx0i1"
+
+[sub_resource type="Resource" id="Resource_fn85v"]
+script = ExtResource("2_60f61")
+title = "Scrapyard"
+inventory = SubResource("Resource_cand8")
+dialogue = SubResource("Resource_3gw2v")
+quests = Array[ExtResource("13_usrj7")]([SubResource("Resource_k306w")])
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_boc7n")
 title = "Small Town"
-shops = Array[ExtResource("2_60f61")]([SubResource("Resource_h2qg1"), SubResource("Resource_r7b6r"), SubResource("Resource_pv0ty")])
+shops = Array[ExtResource("2_60f61")]([SubResource("Resource_h2qg1"), SubResource("Resource_r7b6r"), SubResource("Resource_pv0ty"), SubResource("Resource_fn85v")])
 metadata/_custom_type_script = "uid://bbi3gcsb33muk"

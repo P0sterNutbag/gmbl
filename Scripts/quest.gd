@@ -7,6 +7,5 @@ class_name Quest
 @export var location: String
 @export var return_location: String
 @export var reward: ItemSlot
-@export var target: PackedScene
 @export var completed: bool
 var target_node: Node3D

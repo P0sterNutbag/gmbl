@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bqui4egb4d3em"]
+[gd_scene load_steps=11 format=3 uid="uid://bqui4egb4d3em"]
 
+[ext_resource type="Script" uid="uid://bf1yc1wrj6qoi" path="res://Scripts/prefab_controller.gd" id="1_6mfym"]
 [ext_resource type="PackedScene" uid="uid://21yqxj5xl8cv" path="res://Scenes/Environment/Props/Physics/drum_barrel_blue.tscn" id="1_w1w1o"]
 [ext_resource type="PackedScene" uid="uid://dvpgm7keysw0" path="res://Scenes/Environment/Props/Physics/drum_barrel_rust.tscn" id="2_6mfym"]
 [ext_resource type="Script" uid="uid://bdayrcr4af73n" path="res://Scripts/spawner.gd" id="3_tc812"]
@@ -23,6 +24,7 @@ object_to_spawn = ExtResource("6_ogm0s")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [node name="Barrels" type="Node3D"]
+script = ExtResource("1_6mfym")
 
 [node name="RigidBody3D" parent="." instance=ExtResource("1_w1w1o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.043245554, 0.5, 2.393278)

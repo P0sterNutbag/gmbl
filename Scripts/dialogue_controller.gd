@@ -11,8 +11,8 @@ var menu_item = preload("res://Scenes/UI/menu_item.tscn")
 signal exit
 
 
-func _ready() -> void:
-	visibility_changed.connect(_on_visibility_changed)
+#func _ready() -> void:
+	#visibility_changed.connect(_on_visibility_changed)
 
 
 func _process(_delta: float) -> void:
@@ -23,6 +23,7 @@ func _process(_delta: float) -> void:
 
 
 func start_dialogue(tree: DialogueTree) -> void:
+	index = -1
 	for child in get_children():
 		child.queue_free()
 	Globals.overworld.npc_portrait_model.set_materials(tree.npc_style)
@@ -70,19 +71,25 @@ func on_option_selected(option: Control) -> void:
 	get_child(-1).size.y = 0
 
 
-func _on_visibility_changed() -> void:
-	if visible:
-		index = -1
-		can_advance = false
-		Globals.ui.portraits.show()
-		PlayerStats.change_state(PlayerStats.states.pause)
+#func _on_visibility_changed() -> void:
+	#if visible:
+		#index = -1
+		#can_advance = false
+		#Globals.ui.portraits.show()
+		#PlayerStats.change_state(PlayerStats.states.pause)
 	#else:
 		#Globals.ui.portraits.hide()
 
 
-func exit_dialogue() -> void:
-	hide()
-	PlayerStats.change_state(PlayerStats.states.walk)
+func exit_to_game() -> void:
+	Globals.ui.portraits.hide()
+	UiController.close_interface(self)
+
+
+
+#func exit_dialogue() -> void:
+	#hide()
+	#PlayerStats.change_state(PlayerStats.states.walk)
 
 
 func enter_shop() -> void:
@@ -134,6 +141,7 @@ func return_quests(quest_type: Quest, success_index: int, fail_index: int) -> vo
 
 
 func _on_shop_exit() -> void:
+	index = 1
 	UiController.open_interface(self)
 	advance_dialogue(index)
 	#get_child(-1).option_container.get_child(0).grab_focus()

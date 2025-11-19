@@ -1,5 +1,5 @@
-extends Resource
-class_name QuestRandom
+extends QuestRandom
+class_name QuestBountyRandom
 
 @export var type: String = "Bounty"
 @export var titles: Array[String] = [
@@ -28,12 +28,6 @@ class_name QuestRandom
 	"Xander",
 	"Zylan",
 ]
-@export var descriptions: Array[String] = [
-	"Wanted for robbery and cheating at cards.",
-	"Ex wife wants him dead.",
-	"Escaped slave.",
-	"Wanted for stealing roomate's bagel."
-]
 @export var locations: Array[String] =[
 	"Bandit Camp",
 	"Bandit Town",
@@ -50,9 +44,9 @@ class_name QuestRandom
 func generate_quest() -> Quest:
 	var quest = QuestBounty.new()
 	quest.type = type
-	quest.title = titles[randi_range(0, titles.size()-1)]
+	quest.title = "Kill " + titles[randi_range(0, titles.size()-1)]
 	quest.location = locations[randi_range(0, locations.size()-1)]
-	quest.description = descriptions[randi_range(0, descriptions.size()-1)] + "\nLast seen at " + quest.location + "."
+	quest.description = "Location: " + quest.location + ""
 	#quest.reward = rewards[randi_range(0, rewards.size()-1)]
 	quest.reward = ItemSlot.new()
 	quest.reward.item = rewards[randi_range(0, rewards.size()-1)]

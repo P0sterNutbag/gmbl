@@ -4,7 +4,7 @@ class_name Gun
 @export var bullet_stats: BulletStats
 @export var gun_stats: GunStats = GunStats.new()
 @export var ammo_type: String
-enum fire_types {semi_auto, auto}
+enum fire_types {semi_auto, auto, pump}
 @export var fire_type: fire_types
 @export var fire_timer: float
 @export var zoom_amount: float = 1.25
@@ -20,6 +20,7 @@ var can_shoot: bool = true
 var has_released: bool = true
 var sway_vector: Vector3
 var shoot_timer: Timer
+var anim_player: AnimationPlayer
 var shell: PackedScene = preload("res://Scenes/Particles/shell.tscn")
 var smoke: PackedScene = preload("res://Scenes/Particles/gun_smoke.tscn")
 @onready var gun_model: Node3D = $GunAnchor/Model
@@ -37,6 +38,7 @@ func _ready() -> void:
 	shoot_timer.wait_time = 0.1
 	shoot_timer.one_shot = true
 	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
+	anim_player = get_node_or_null("AnimationPlayer")
 	#muzzle_flash.hide()
 	add_child(shoot_timer)
 	if !cast_shadow:
@@ -77,13 +79,21 @@ func _on_shoot() -> void:
 		#shell_instance.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
 	var tween = create_tween()
 	tween.tween_property(muzzle_flash, "visible", false, 0.1)
+	if fire_type == fire_types.pump:
+		await get_tree().create_timer(fire_timer).timeout
+		if anim_player:
+			anim_player.play("pump")
 	#var inst = smoke.instantiate()
 	#get_tree().current_scene.add_child(inst)
 	#inst.global_position = fire_point.global_position
 	#inst.emitting = true
-	
 
 
 func _on_shoot_timer_timeout() -> void:
 	if fire_type == fire_types.auto:
+		can_shoot = true
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "pump":
 		can_shoot = true

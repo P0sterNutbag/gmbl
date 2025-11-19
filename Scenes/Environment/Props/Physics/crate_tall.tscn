@@ -19,13 +19,16 @@ shader_parameter/fresnel = Color(0, 0, 0, 0)
 shader_parameter/uv_scale = Vector2(3, 2)
 shader_parameter/uv_offset = Vector2(0, 0)
 
-[node name="CrateTall" type="RigidBody3D"]
-collision_mask = 33
+[node name="CrateTall" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 mass = 2.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("BoxShape3D_nolf3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
 mesh = SubResource("BoxMesh_jlwe5")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_hota0")

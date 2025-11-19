@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://cdo0acn1lkrd5"]
+[gd_scene load_steps=13 format=3 uid="uid://cdo0acn1lkrd5"]
 
+[ext_resource type="Script" uid="uid://bf1yc1wrj6qoi" path="res://Scripts/prefab_controller.gd" id="1_lljc6"]
 [ext_resource type="PackedScene" uid="uid://b3f0jcvvcldns" path="res://Scenes/Environment/Props/Physics/crate.tscn" id="1_r7pww"]
 [ext_resource type="PackedScene" uid="uid://btjp27ft7kaqr" path="res://Scenes/Environment/Props/Physics/crate_tall.tscn" id="2_wtsk8"]
 [ext_resource type="PackedScene" uid="uid://wubvthultu6w" path="res://Scenes/Environment/Props/Physics/crate_tall_horizontal.tscn" id="3_gck1c"]
@@ -25,29 +26,33 @@ object_to_spawn = ExtResource("8_r57do")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [node name="WoodenCrates" type="Node3D"]
+script = ExtResource("1_lljc6")
 
 [node name="Crate" parent="." instance=ExtResource("1_r7pww")]
-transform = Transform3D(0.9726139, 0, 0.23242697, 0, 1, 0, -0.23242697, 0, 0.9726139, -0.7415856, 0.5, 1.1982685)
+transform = Transform3D(0.9726139, 0, 0.23242697, 0, 1, 0, -0.23242697, 0, 0.9726139, -0.7415856, 0, 1.1982685)
 metadata/_edit_group_ = true
 
 [node name="CrateTall" parent="." instance=ExtResource("2_wtsk8")]
-transform = Transform3D(0.8500306, 0, -0.5267333, 0, 1, 0, 0.5267333, 0, 0.8500306, -2.89, 1, 0.488)
+transform = Transform3D(0.8500306, 0, -0.5267333, 0, 1, 0, 0.5267333, 0, 0.8500306, -2.89, 0, 0.488)
 metadata/_edit_group_ = true
 
 [node name="Crate2" parent="." instance=ExtResource("1_r7pww")]
-transform = Transform3D(0.8864864, 0, -0.4627546, 0, 1, 0, 0.4627546, 0, 0.8864864, 0.05109954, 0.49999952, -3.372024)
+transform = Transform3D(0.8864864, 0, -0.4627546, 0, 1, 0, 0.4627546, 0, 0.8864864, 0.05109954, 0, -3.372024)
 metadata/_edit_group_ = true
 
 [node name="Crate3" parent="." instance=ExtResource("1_r7pww")]
-transform = Transform3D(0.9301615, 0, 0.3671507, 0, 1, 0, -0.3671507, 0, 0.9301615, 2.8608224, 0.5000005, -1.0287457)
+transform = Transform3D(0.9301615, 0, 0.3671507, 0, 1, 0, -0.3671507, 0, 0.9301615, 2.8608224, 0, -1.0287457)
 metadata/_edit_group_ = true
 
-[node name="CrateTall2" parent="." instance=ExtResource("3_gck1c")]
-transform = Transform3D(0.8948331, 0, -0.44640085, 0, 1, 0, 0.44640085, 0, 0.8948331, -3.055525, 0.5, -2.41518)
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, -3.056, 0, -2.415)
+
+[node name="CrateTall2" parent="Node3D" instance=ExtResource("3_gck1c")]
+transform = Transform3D(0.89483297, 0, -0.4464008, 0, 1, 0, 0.4464008, 0, 0.89483297, 0, 0, 0)
 metadata/_edit_group_ = true
 
-[node name="Tire2" parent="." instance=ExtResource("4_yr1ku")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.551934, 1.2687867, -2.078514)
+[node name="Tire2" parent="Node3D" instance=ExtResource("4_yr1ku")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.50406575, 1.1796929, 0.33648586)
 metadata/_edit_group_ = true
 
 [node name="NPCSpawns" type="Node3D" parent="." groups=["spawn points"]]

@@ -15,6 +15,10 @@ func open(array: Array):
 
 func on_button_focus_entered(button: Control, resource: Resource) -> void:
 	super.on_button_focus_entered(button, resource)
-	name_label.text = resource.type + ": " + resource.title
+	name_label.text = resource.title #resource.type + ": " + resource.title
 	description_label.text = resource.description
+	if description_label.text == "":
+		description_label.hide()
+	else:
+		description_label.show()
 	reward_label.text = "Reward: $" + str(resource.reward.amount)

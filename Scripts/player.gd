@@ -8,6 +8,7 @@ var gun_state = gun_states.point
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var base_speed := 6.0
 var walk_speed := 3.0
+var run_speed := 9.0
 var crouch_speed := 3.0
 var speed = base_speed
 var jump_speed := 6.5
@@ -31,6 +32,7 @@ var ammo: int:
 var firepoint: Node3D
 var object_to_place: Node3D
 var gun_tween: Tween
+var walk_tween: Tween
 var sway_noise := FastNoiseLite.new()
 var state_functions: Dictionary
 var exit_functions: Dictionary
@@ -74,13 +76,14 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	Globals.player = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	hitbox.hp = PlayerStats.hp
 	hitbox.hp_bar = Globals.ui.player_hp_bar
 	hitbox.hp_bar2 = Globals.ui.player_hp_bar2
 	sway_noise.seed = randi()
 	sway_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	sway_noise.frequency = 0.5
-	for gun in gun_anchor.get_children():
-		gun.visible = false
+	for i in gun_anchor.get_children():
+		i.visible = false
 	if gun:
 		change_gun(PlayerStats.gun)
 	else:
@@ -162,20 +165,22 @@ func _input(event):
 
 
 func state_walk(delta):
+	# get and apply inputs
+	var input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var movement_dir = transform.basis * Vector3(input.x, 0, input.y)
+	velocity.x = movement_dir.x * speed
+	velocity.z = movement_dir.z * speed
+	
 	# set speed
 	if is_crouching:
 		speed = crouch_speed
 	else:
 		if gun_state == gun_states.ads:
 			speed = walk_speed
+		elif Input.is_action_pressed("sprint") and input.y < 0 and gun.shoot_timer.time_left == 0 and !Input.is_action_pressed("shoot"):
+			speed = run_speed
 		else:
 			speed = base_speed
-	
-	# get and apply inputs
-	var input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var movement_dir = transform.basis * Vector3(input.x, 0, input.y)
-	velocity.x = movement_dir.x * speed
-	velocity.z = movement_dir.z * speed
 	
 	# jump
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
@@ -232,7 +237,7 @@ func state_walk(delta):
 			step_timer.start()
 	
 	# shooting and aiming
-	if gun_state == gun_states.ads or gun_state == gun_states.point:
+	if gun_state == gun_states.ads or gun_state == gun_states.point and gun.rotation.y == 0:
 		if Input.is_action_pressed("shoot"):
 			if gun.ammo <= 0 or !gun.can_shoot:
 				return
@@ -338,19 +343,41 @@ func state_walk(delta):
 	if gun:
 		if (input.x or input.y) and gun_state == gun_states.point and is_on_floor():
 			walk_time += delta
+			if speed == run_speed:
+				walk_time += delta * 0.25
+				if gun.rotation.y == 0:
+					if walk_tween:
+						walk_tween.kill()
+					walk_tween = create_tween()
+					walk_tween.tween_property(gun, "rotation:y", deg_to_rad(45), 0.2)
+				#gun.rotation.y = deg_to_rad(45)
+				#gun.position.x = 0.1
+			else:
+				if gun.rotation.y > 0 and !walk_tween.is_running():
+					if walk_tween:
+						walk_tween.kill()
+					walk_tween = create_tween()
+					walk_tween.tween_property(gun, "rotation:y", 0, 0.2)
+				#gun.rotation.y = deg_to_rad(0)
+				#gun.position.x = 0
 			var bob = cos(walk_time * 20) * 0.25
 			gun.position.y += bob * delta
 			var sway = cos(walk_time * 10) * 0.25
 			gun.position.x += sway * delta
-		elif gun and gun.position.y: 
+		elif gun and walk_time != 0: 
 			walk_time = 0
-			var tween = create_tween()
-			tween.tween_property(gun, "position", Vector3.ZERO, 0.1)
-			await tween.finished
+			if walk_tween:
+				walk_tween.kill()
+			walk_tween = create_tween().set_parallel()
+			walk_tween.tween_property(gun, "position", Vector3.ZERO, 0.1)
+			walk_tween.tween_property(gun, "rotation:y", 0, 0.1)
+			#await tween.finished
 	
 	# walking sfx
 	if (input.x or input.y) and is_on_floor():
 		footstep_timer += delta
+		if speed == run_speed:
+			footstep_timer += delta * 0.25
 		var time_to_sound = 0.35
 		if speed < base_speed:
 			time_to_sound = 0.45

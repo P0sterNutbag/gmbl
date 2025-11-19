@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dslqh13kv6g1u"]
+[gd_scene load_steps=11 format=3 uid="uid://dslqh13kv6g1u"]
 
 [ext_resource type="PackedScene" uid="uid://bjama3lmb5mct" path="res://Scenes/Environment/Props/Physics/tire_stack.tscn" id="1_pmwwb"]
+[ext_resource type="Script" uid="uid://bf1yc1wrj6qoi" path="res://Scripts/prefab_controller.gd" id="1_qk8o1"]
 [ext_resource type="PackedScene" uid="uid://bfxa04usil2ao" path="res://Scenes/Environment/Props/Physics/tire.tscn" id="2_ye5ya"]
 [ext_resource type="Script" uid="uid://bdayrcr4af73n" path="res://Scripts/spawner.gd" id="3_wsai5"]
 [ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="4_hlp4a"]
@@ -23,6 +24,7 @@ object_to_spawn = ExtResource("6_hlp4a")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [node name="TireStacks" type="Node3D"]
+script = ExtResource("1_qk8o1")
 
 [node name="TireStack" parent="." instance=ExtResource("1_pmwwb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.860911, 1.1920929e-07, 3.1711175)

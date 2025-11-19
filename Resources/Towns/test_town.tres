@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Town" load_steps=87 format=3 uid="uid://c5kpuww7x3qfl"]
+[gd_resource type="Resource" script_class="Town" load_steps=103 format=3 uid="uid://c5kpuww7x3qfl"]
 
 [ext_resource type="Script" uid="uid://bbi3gcsb33muk" path="res://Scripts/town.gd" id="1_boc7n"]
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="2_60f61"]
@@ -30,8 +30,12 @@
 [ext_resource type="Texture2D" uid="uid://whgiy4tx5l5g" path="res://Art/Textures/npc brown jacket.png" id="26_i2d6u"]
 [ext_resource type="Script" uid="uid://cjfktv164o4el" path="res://Scripts/quest_bounty.gd" id="26_pv0ty"]
 [ext_resource type="Resource" uid="uid://bkae25scq6c12" path="res://Resources/Items/Ammo/sniper_ammo.tres" id="27_bsumm"]
-[ext_resource type="Resource" uid="uid://brmi40g2jr38s" path="res://Resources/Items/money.tres" id="31_rtygk"]
+[ext_resource type="Script" uid="uid://ds2br0dh5ir38" path="res://Scripts/quest_bounty_random.gd" id="31_bsumm"]
 [ext_resource type="Script" uid="uid://c6knlgr6wx0i1" path="res://Scripts/quest_fetch.gd" id="32_bsumm"]
+[ext_resource type="Resource" uid="uid://bwlq354wireli" path="res://Resources/Quests/random_fetch.tres" id="32_rtygk"]
+[ext_resource type="Resource" uid="uid://6c7s1e0y4ekq" path="res://Resources/Items/Junk/cigarettes.tres" id="33_hqc43"]
+[ext_resource type="Resource" uid="uid://du57k1x7scpfk" path="res://Resources/Items/Junk/metal_scraps.tres" id="34_fr5lk"]
+[ext_resource type="Resource" uid="uid://cw12h3yyn5tgy" path="res://Resources/Items/Junk/playing cards.tres" id="35_clt0f"]
 
 [sub_resource type="Resource" id="Resource_6lldf"]
 script = ExtResource("3_0o5nu")
@@ -212,27 +216,33 @@ lines = Array[String](["You looking for some cash? We got a few hoodlums here th
 speaker = 1
 metadata/_custom_type_script = "uid://de6rxup5nru4w"
 
-[sub_resource type="Resource" id="Resource_hil7u"]
+[sub_resource type="Resource" id="Resource_30xu6"]
 script = ExtResource("4_6lldf")
-text = "Take new bounties"
+text = "Browse items"
+destination = 9
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
+[sub_resource type="Resource" id="Resource_xkckx"]
+script = ExtResource("4_6lldf")
+text = "Take jobs"
 destination = 2
 metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
 
-[sub_resource type="Resource" id="Resource_txphe"]
+[sub_resource type="Resource" id="Resource_ku0d1"]
 script = ExtResource("4_6lldf")
-text = "Return bounties"
+text = "Return jobs"
 destination = 3
 metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
 
-[sub_resource type="Resource" id="Resource_42xsr"]
+[sub_resource type="Resource" id="Resource_jby7l"]
 script = ExtResource("4_6lldf")
 text = "Leave"
 destination = 4
 metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
 
-[sub_resource type="Resource" id="Resource_17jta"]
+[sub_resource type="Resource" id="Resource_t56bl"]
 script = ExtResource("4_t35h1")
-options = Array[ExtResource("4_6lldf")]([SubResource("Resource_hil7u"), SubResource("Resource_txphe"), SubResource("Resource_42xsr")])
+options = Array[ExtResource("4_6lldf")]([SubResource("Resource_30xu6"), SubResource("Resource_xkckx"), SubResource("Resource_ku0d1"), SubResource("Resource_jby7l")])
 metadata/_custom_type_script = "uid://cnu4xeujmgk51"
 
 [sub_resource type="Resource" id="Resource_r3o7g"]
@@ -250,29 +260,34 @@ method = "return_quests"
 arguments = [SubResource("Resource_clt0f"), 5, 7]
 metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
-[sub_resource type="Resource" id="Resource_rkg8l"]
+[sub_resource type="Resource" id="Resource_cvr5w"]
+script = ExtResource("6_6lldf")
+method = "exit_to_game"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_4o6vd"]
 script = ExtResource("3_0o5nu")
 lines = Array[String](["Nice work! Here's the reward."])
 speaker = 1
 metadata/_custom_type_script = "uid://de6rxup5nru4w"
 
-[sub_resource type="Resource" id="Resource_v7uwj"]
+[sub_resource type="Resource" id="Resource_5yx2b"]
 script = ExtResource("20_hil7u")
 next_index = 1
 metadata/_custom_type_script = "uid://px5dr31pd885"
 
-[sub_resource type="Resource" id="Resource_hqc43"]
+[sub_resource type="Resource" id="Resource_ksfoy"]
 script = ExtResource("3_0o5nu")
-lines = Array[String](["Looks like you haven't completed any bounties."])
+lines = Array[String](["Looks like you haven't completed any jobs."])
 speaker = 1
 metadata/_custom_type_script = "uid://de6rxup5nru4w"
 
-[sub_resource type="Resource" id="Resource_fr5lk"]
+[sub_resource type="Resource" id="Resource_6l6oi"]
 script = ExtResource("20_hil7u")
 next_index = 1
 metadata/_custom_type_script = "uid://px5dr31pd885"
 
-[sub_resource type="Resource" id="Resource_pbnsr"]
+[sub_resource type="Resource" id="Resource_ptrkr"]
 script = ExtResource("25_2fanp")
 faces = Array[Texture]([ExtResource("24_im0yk")])
 shirts = Array[Texture]([ExtResource("26_i2d6u")])
@@ -282,8 +297,8 @@ metadata/_custom_type_script = "uid://b80ipr8q70gqm"
 
 [sub_resource type="Resource" id="Resource_bsumm"]
 script = ExtResource("4_qjbs6")
-bubbles = Array[ExtResource("3_0o5nu")]([SubResource("Resource_5oaiu"), SubResource("Resource_17jta"), SubResource("Resource_r3o7g"), SubResource("Resource_rtygk"), SubResource("Resource_2fanp"), SubResource("Resource_rkg8l"), SubResource("Resource_v7uwj"), SubResource("Resource_hqc43"), SubResource("Resource_fr5lk")])
-npc_style = SubResource("Resource_pbnsr")
+bubbles = Array[ExtResource("3_0o5nu")]([SubResource("Resource_5oaiu"), SubResource("Resource_t56bl"), SubResource("Resource_r3o7g"), SubResource("Resource_rtygk"), SubResource("Resource_cvr5w"), SubResource("Resource_4o6vd"), SubResource("Resource_5yx2b"), SubResource("Resource_ksfoy"), SubResource("Resource_6l6oi")])
+npc_style = SubResource("Resource_ptrkr")
 npc_name = "Duster"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
@@ -292,61 +307,117 @@ script = ExtResource("10_8pniq")
 title = "Bounty Board"
 metadata/_custom_type_script = "uid://6ucyr0petjnx"
 
+[sub_resource type="Resource" id="Resource_u0s17"]
+script = ExtResource("31_bsumm")
+rewards = null
+metadata/_custom_type_script = "uid://ds2br0dh5ir38"
+
 [sub_resource type="Resource" id="Resource_pv0ty"]
 script = ExtResource("2_60f61")
 title = "Bounty Board"
 inventory = SubResource("Resource_eg73l")
 dialogue = SubResource("Resource_bsumm")
+random_quest = SubResource("Resource_u0s17")
 minimum_quests = 3
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
-[sub_resource type="Resource" id="Resource_hqi5f"]
+[sub_resource type="Resource" id="Resource_xk40u"]
+script = ExtResource("3_0o5nu")
+lines = Array[String](["You want some useless crap? I'll buy it!"])
+speaker = 1
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_1c6gi"]
+script = ExtResource("6_6lldf")
+method = "enter_job_board"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_me12r"]
 script = ExtResource("32_bsumm")
 metadata/_custom_type_script = "uid://c6knlgr6wx0i1"
 
-[sub_resource type="Resource" id="Resource_wbsme"]
+[sub_resource type="Resource" id="Resource_bqxwu"]
 script = ExtResource("6_6lldf")
 method = "return_quests"
-arguments = [SubResource("Resource_hqi5f"), 5, 7]
+arguments = [SubResource("Resource_me12r"), 5, 7]
 metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_olmbu"]
+script = ExtResource("6_6lldf")
+method = "enter_shop"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_tfd8k"]
+script = ExtResource("20_hil7u")
+next_index = 1
+metadata/_custom_type_script = "uid://px5dr31pd885"
 
 [sub_resource type="Resource" id="Resource_3gw2v"]
 script = ExtResource("4_qjbs6")
-bubbles = Array[ExtResource("3_0o5nu")]([SubResource("Resource_5oaiu"), SubResource("Resource_17jta"), SubResource("Resource_r3o7g"), SubResource("Resource_wbsme"), SubResource("Resource_2fanp"), SubResource("Resource_rkg8l"), SubResource("Resource_v7uwj"), SubResource("Resource_hqc43"), SubResource("Resource_fr5lk")])
-npc_style = SubResource("Resource_pbnsr")
+bubbles = Array[ExtResource("3_0o5nu")]([SubResource("Resource_xk40u"), SubResource("Resource_t56bl"), SubResource("Resource_1c6gi"), SubResource("Resource_bqxwu"), SubResource("Resource_cvr5w"), SubResource("Resource_4o6vd"), SubResource("Resource_5yx2b"), SubResource("Resource_ksfoy"), SubResource("Resource_6l6oi"), SubResource("Resource_olmbu"), SubResource("Resource_tfd8k")])
+npc_style = SubResource("Resource_ptrkr")
 npc_name = "Duster"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
-[sub_resource type="Resource" id="Resource_cand8"]
+[sub_resource type="Resource" id="Resource_c1xm0"]
+script = ExtResource("9_pbnsr")
+item = ExtResource("33_hqc43")
+amount = 10
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_lgnbj"]
+script = ExtResource("9_pbnsr")
+item = ExtResource("34_fr5lk")
+amount = 10
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_aj0wn"]
+script = ExtResource("9_pbnsr")
+item = ExtResource("35_clt0f")
+amount = 10
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_pay3g"]
+script = ExtResource("9_pbnsr")
+item = ExtResource("4_jfela")
+amount = 3
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_61ge7"]
+script = ExtResource("9_pbnsr")
+item = ExtResource("10_2fanp")
+amount = 2
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_3le6t"]
+script = ExtResource("9_pbnsr")
+item = ExtResource("9_2fanp")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_g8jxq"]
+script = ExtResource("9_pbnsr")
+item = ExtResource("5_r7b6r")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_8jwt6"]
+script = ExtResource("9_pbnsr")
+item = ExtResource("13_hil7u")
+amount = 2
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_rsj15"]
 script = ExtResource("10_8pniq")
+item_slots = Array[ExtResource("9_pbnsr")]([SubResource("Resource_c1xm0"), SubResource("Resource_lgnbj"), SubResource("Resource_aj0wn"), SubResource("Resource_pay3g"), SubResource("Resource_61ge7"), SubResource("Resource_3le6t"), SubResource("Resource_g8jxq"), SubResource("Resource_8jwt6")])
+space = 50
 metadata/_custom_type_script = "uid://6ucyr0petjnx"
-
-[sub_resource type="Resource" id="Resource_d2b80"]
-script = ExtResource("9_pbnsr")
-item = ExtResource("18_pbnsr")
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_u0s17"]
-script = ExtResource("9_pbnsr")
-item = ExtResource("31_rtygk")
-amount = 50
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_k306w"]
-script = ExtResource("32_bsumm")
-required_items = Array[ExtResource("9_pbnsr")]([SubResource("Resource_d2b80")])
-type = "Fetch"
-title = "Find me a pistol"
-return_location = "Small Town"
-reward = SubResource("Resource_u0s17")
-metadata/_custom_type_script = "uid://c6knlgr6wx0i1"
 
 [sub_resource type="Resource" id="Resource_fn85v"]
 script = ExtResource("2_60f61")
 title = "Scrapyard"
-inventory = SubResource("Resource_cand8")
+inventory = SubResource("Resource_rsj15")
 dialogue = SubResource("Resource_3gw2v")
-quests = Array[ExtResource("13_usrj7")]([SubResource("Resource_k306w")])
+random_quest = ExtResource("32_rtygk")
+minimum_quests = 3
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [resource]

@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=3 uid="uid://cup3dthe624if"]
+
+[ext_resource type="Material" uid="uid://b4aard1qnyqin" path="res://Art/Materials/tin_triplanar_gray.tres" id="1_4u2sb"]
+
+[node name="Bunker" type="CSGCombiner3D"]
+
+[node name="Tunnel" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Tunnel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, -1.5, -0.3)
+size = Vector3(0.2, 3, 2)
+material = ExtResource("1_4u2sb")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Tunnel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9000001, -1.5, -0.3)
+size = Vector3(0.2, 3, 2)
+material = ExtResource("1_4u2sb")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Tunnel"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.9604645e-08, -1.5, -1.2)
+size = Vector3(0.2, 3, 2)
+material = ExtResource("1_4u2sb")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Tunnel"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.9604645e-08, -1.5, 0.6)
+size = Vector3(0.2, 3, 2)
+material = ExtResource("1_4u2sb")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Tunnel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -4.3, -4.4)
+size = Vector3(0.2, 3, 10.2)
+material = ExtResource("1_4u2sb")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Tunnel"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.9802322e-07, -4.3, -9.4)
+size = Vector3(0.2, 3, 10.2)
+material = ExtResource("1_4u2sb")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Tunnel"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.9802322e-07, -4.3, 0.5999999)
+material_override = ExtResource("1_4u2sb")
+size = Vector3(0.2, 3, 10.2)
+material = ExtResource("1_4u2sb")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Tunnel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -4.3, -4.4)
+size = Vector3(0.2, 3, 10.2)
+material = ExtResource("1_4u2sb")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Tunnel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.7000003, -4.4)
+size = Vector3(10, 0.2, 10.2)
+material = ExtResource("1_4u2sb")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Tunnel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.8999999, -4.4)
+size = Vector3(10, 0.2, 10.2)
+material = ExtResource("1_4u2sb")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Tunnel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10000002, -0.3)
+size = Vector3(3, 0.2, 3)
+material = ExtResource("1_4u2sb")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.3)
+operation = 2
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.35, 0)
+size = Vector3(1.6, 3.3, 1.6)
+material = ExtResource("1_4u2sb")

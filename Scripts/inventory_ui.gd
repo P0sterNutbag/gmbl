@@ -11,7 +11,9 @@ var categories = {
 	-1 : "All" ,
 	Item.categories.survival : "Surival",
 	Item.categories.guns : "Guns", 
-	Item.categories.ammo : "Ammo"}
+	Item.categories.ammo : "Ammo",
+	Item.categories.junk : "Junk"
+	}
 var category_index = -1
 const text_style = preload("res://Art/Themes/text.tres")
 @onready var item_container: MenuController = %Items

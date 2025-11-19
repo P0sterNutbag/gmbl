@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ho6uehmhr0bo"]
+
+[ext_resource type="PackedScene" uid="uid://dybrwmsyyec6j" path="res://Art/Models/tire.glb" id="1_sjhau"]
+[ext_resource type="Material" uid="uid://iagweyrwrs4k" path="res://Art/Materials/off_black.tres" id="2_tr5cr"]
+
+[node name="Tire" type="Node3D"]
+
+[node name="tire" parent="." instance=ExtResource("1_sjhau")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.189, 0)
+
+[node name="Cylinder_001" parent="tire" index="0"]
+surface_material_override/0 = ExtResource("2_tr5cr")
+
+[editable path="tire"]

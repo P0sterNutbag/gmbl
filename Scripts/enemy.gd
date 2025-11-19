@@ -6,7 +6,8 @@ class_name Enemy
 @export var items_to_drop: Array[PackedScene]
 #enum guns {shotgun, ak47, sniper, pistol}
 #@export var gun_index: guns
-@export var gun_item: EquipmentGun
+@export var potential_gun_items: Array[SpawnChanceResource]
+var gun_item: EquipmentGun
 enum teams {enemies, allies}
 @export var team: teams = teams.enemies
 @export var follow_target: Node3D
@@ -38,6 +39,7 @@ var path_index: int
 var is_new_state: bool
 var on_alert: bool
 var free_on_destination: bool
+var is_starting_squad: bool
 var gun: Node3D
 var damage_position: Vector3
 var damage_direction: Vector3
@@ -72,6 +74,7 @@ signal shoot
 func _ready() -> void:
 	gun_holder.get_child(0).queue_free()
 	#gun = guns_dict[gun_index][0].instantiate()
+	gun_item = potential_gun_items[Globals.get_weighted_index(potential_gun_items)].object_to_spawn
 	gun = gun_item.gun_object.instantiate()
 	gun.gun_stats.condition = randf_range(10, 50)
 	gun_holder.add_child(gun)

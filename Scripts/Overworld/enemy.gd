@@ -67,6 +67,7 @@ func die():
 	location.monitorable = false
 	velocity = Vector3.ZERO
 	set_process(false)
+	set_physics_process(false)
 	anim_player.play("Die")
 	anim_player.seek(4.4)
 	await tree_entered

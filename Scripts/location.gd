@@ -41,35 +41,44 @@ func _ready() -> void:
 			shops_max_money[i.title] = i.inventory.money
 		stock_shops()
 		DayNightCycle.day_start.connect(stock_shops)
+	if shop != null:
+		shops_base_inventory[shop.title] = shop.inventory.items
+		shops_max_money[shop.title] = shop.inventory.money
+		stock_shops()
 
 
 func start_encounter() -> void:
 	Globals.overworld.current_encounter = self
 	if encounter_scene != null:
-		var player_vector: Vector3 = (global_position - Globals.player.global_position).normalized().rotated(Vector3.UP, -rotation.y)
+		var player_vector: Vector3 = (global_position - Globals.player.global_position).normalized().rotated(Vector3.UP, -global_rotation.y)
 		Globals.overworld.player_spawn_vector = player_vector
 		SceneManager.start_scene_transition(encounter_scene.resource_path, true)
 	elif town != null:
 		Globals.ui.town.create_town(town)
-		#Globals.ui.hide_location_info()
 		point_of_interest.location_card.hide()
 	elif shop != null:
+		Globals.ui.job_board.shop = shop
 		Globals.ui.start_dialogue(shop.dialogue, shop)
-		Globals.ui.hide_location_info()
 
 
 func stock_shops() -> void:
-	if town == null:
+	var shops: Array
+	if shop:
+		shops.append(shop)
+	elif town:
+		shops.append_array(town.shops)
+	if shops.size() == 0:
 		return
-	for i in town.shops:
-		var inventory = i.inventory
-		inventory.money = shops_max_money[i.title]
-		if i.minimum_quests > 0:
+	for i in shops:
+		if i.inventory:
+			var inventory = i.inventory
+			inventory.money = shops_max_money[i.title]
+			inventory.items = shops_base_inventory[i.title].duplicate_deep()
+		if i.minimum_quests > 0 and i.random_quest:
 			for n in i.minimum_quests - i.quests.size():
-				var quest = QuestRandom.new().generate_quest()
+				var quest = i.random_quest.generate_quest()
 				quest.return_location = point_of_interest.title
 				i.quests.append(quest)
-		inventory.items = shops_base_inventory[i.title].duplicate_deep()
 
 
 func save() -> Dictionary:

@@ -19,20 +19,20 @@ shader_parameter/fresnel = Color(0, 0, 0, 0)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 
-[node name="Barrel" type="RigidBody3D"]
-collision_mask = 33
-linear_damp = 1.0
-angular_damp = 1.0
+[node name="Barrel" type="Node3D"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000671387, 0)
 shape = SubResource("CylinderShape3D_1u5h1")
 
-[node name="barrel" parent="." instance=ExtResource("1_1ofwc")]
+[node name="barrel" parent="RigidBody3D" instance=ExtResource("1_1ofwc")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="Cylinder" parent="barrel" index="0"]
+[node name="Cylinder" parent="RigidBody3D/barrel" index="0"]
 surface_material_override/0 = SubResource("ShaderMaterial_hqxg6")
 surface_material_override/1 = ExtResource("4_mkatg")
 
-[editable path="barrel"]
+[editable path="RigidBody3D/barrel"]

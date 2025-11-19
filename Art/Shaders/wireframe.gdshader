@@ -7,7 +7,7 @@ uniform sampler2D NORMAL_TEXTURE : hint_normal_roughness_texture, filter_linear;
 
 uniform float depth_edge_threshold_lower: hint_range(0.0, 1.0, 0.01) = 0.15;
 uniform float depth_edge_threshold_upper: hint_range(0.0, 45.0, 0.05) = 0.3;
-uniform float normal_edge_threshold: hint_range(0.0, 1.0, 0.1) = 0.5;
+uniform float normal_edge_threshold: hint_range(0.0, 10.0, 0.1) = 0.5;
 uniform vec3 line_color: source_color = vec3(0.41, 0.37, 0.42);
 uniform float line_width: hint_range(0.1, 4.0, 0.1) = 1.0;
 

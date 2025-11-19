@@ -1,0 +1,289 @@
+[gd_scene load_steps=65 format=4 uid="uid://csjsfdmnghtqx"]
+
+[ext_resource type="PackedScene" uid="uid://cdr3k44ro53a1" path="res://Scenes/Overworld/Locations/location_base.tscn" id="1_enopj"]
+[ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_h750r"]
+[ext_resource type="Script" uid="uid://de6rxup5nru4w" path="res://Scripts/dialogue.gd" id="3_xk40u"]
+[ext_resource type="Script" uid="uid://ctb2g10cnu2sg" path="res://Scripts/dialogue_option.gd" id="4_1c6gi"]
+[ext_resource type="Script" uid="uid://cnu4xeujmgk51" path="res://Scripts/dialogue_options.gd" id="5_30xu6"]
+[ext_resource type="PackedScene" uid="uid://bacbcwbytr4bc" path="res://Scenes/Environment/Buildings/shack_tin_gray.tscn" id="6_65ce2"]
+[ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="6_c1xm0"]
+[ext_resource type="Material" uid="uid://b4aard1qnyqin" path="res://Art/Materials/tin_triplanar_gray.tres" id="7_0apu8"]
+[ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="7_olmbu"]
+[ext_resource type="PackedScene" uid="uid://ho6uehmhr0bo" path="res://Scenes/Environment/Props/Without Physics/tire_no_physics.tscn" id="7_xhtva"]
+[ext_resource type="Shader" uid="uid://t0rbtq4muofy" path="res://Art/Shaders/flag.gdshader" id="8_3k7lu"]
+[ext_resource type="Script" uid="uid://c6knlgr6wx0i1" path="res://Scripts/quest_fetch.gd" id="8_533gp"]
+[ext_resource type="PackedScene" uid="uid://tknfqysh38b2" path="res://Scenes/Environment/Props/Without Physics/tire_stack_no_physics.tscn" id="8_ib311"]
+[ext_resource type="Script" uid="uid://px5dr31pd885" path="res://Scripts/dialogue_loop.gd" id="9_dthii"]
+[ext_resource type="PackedScene" uid="uid://ca476pf2s17wy" path="res://Scenes/Environment/Props/Without Physics/drum_barrel_rust_no_physics.tscn" id="9_nruut"]
+[ext_resource type="PackedScene" uid="uid://dhcsnrbkrbtv" path="res://Scenes/Environment/Props/Without Physics/drum_barrel_blue_no_physics.tscn" id="10_nj14g"]
+[ext_resource type="Texture2D" uid="uid://25baqqag6lrp" path="res://Art/Textures/npc_face4.png" id="10_uppy3"]
+[ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="11_qd4ri"]
+[ext_resource type="Texture2D" uid="uid://whgiy4tx5l5g" path="res://Art/Textures/npc brown jacket.png" id="12_u4vgk"]
+[ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="13_1cwge"]
+[ext_resource type="Resource" uid="uid://6c7s1e0y4ekq" path="res://Resources/Items/Junk/cigarettes.tres" id="14_qd4ri"]
+[ext_resource type="Script" uid="uid://6ucyr0petjnx" path="res://Scripts/inventory.gd" id="14_st61y"]
+[ext_resource type="Resource" uid="uid://du57k1x7scpfk" path="res://Resources/Items/Junk/metal_scraps.tres" id="15_u4vgk"]
+[ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="15_upb1b"]
+[ext_resource type="Resource" uid="uid://cw12h3yyn5tgy" path="res://Resources/Items/Junk/playing cards.tres" id="16_1cwge"]
+[ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="17_d403n"]
+[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="17_st61y"]
+[ext_resource type="Resource" uid="uid://fioag0fe2wqb" path="res://Resources/Items/Survival/flashlight.tres" id="18_upb1b"]
+[ext_resource type="Script" uid="uid://bicpdyf13vj1j" path="res://Scripts/quest_fetch_random.gd" id="24_qd4ri"]
+
+[sub_resource type="Resource" id="Resource_vcknj"]
+script = ExtResource("2_h750r")
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
+
+[sub_resource type="Resource" id="Resource_xk40u"]
+script = ExtResource("3_xk40u")
+lines = Array[String](["You want some useless crap? I'll buy it!"])
+speaker = 1
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_30xu6"]
+script = ExtResource("4_1c6gi")
+text = "Browse items"
+destination = 9
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
+[sub_resource type="Resource" id="Resource_xkckx"]
+script = ExtResource("4_1c6gi")
+text = "Take jobs"
+destination = 2
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
+[sub_resource type="Resource" id="Resource_ku0d1"]
+script = ExtResource("4_1c6gi")
+text = "Return jobs"
+destination = 3
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
+[sub_resource type="Resource" id="Resource_jby7l"]
+script = ExtResource("4_1c6gi")
+text = "Leave"
+destination = 4
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
+[sub_resource type="Resource" id="Resource_t56bl"]
+script = ExtResource("5_30xu6")
+options = Array[ExtResource("4_1c6gi")]([SubResource("Resource_30xu6"), SubResource("Resource_xkckx"), SubResource("Resource_ku0d1"), SubResource("Resource_jby7l")])
+metadata/_custom_type_script = "uid://cnu4xeujmgk51"
+
+[sub_resource type="Resource" id="Resource_1c6gi"]
+script = ExtResource("6_c1xm0")
+method = "enter_job_board"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_me12r"]
+script = ExtResource("8_533gp")
+metadata/_custom_type_script = "uid://c6knlgr6wx0i1"
+
+[sub_resource type="Resource" id="Resource_bqxwu"]
+script = ExtResource("6_c1xm0")
+method = "return_quests"
+arguments = [SubResource("Resource_me12r"), 5, 7]
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_cvr5w"]
+script = ExtResource("6_c1xm0")
+method = "exit_to_game"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_4o6vd"]
+script = ExtResource("3_xk40u")
+lines = Array[String](["Nice work! Here's the reward."])
+speaker = 1
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_5yx2b"]
+script = ExtResource("9_dthii")
+next_index = 1
+metadata/_custom_type_script = "uid://px5dr31pd885"
+
+[sub_resource type="Resource" id="Resource_ksfoy"]
+script = ExtResource("3_xk40u")
+lines = Array[String](["Looks like you haven't completed any jobs."])
+speaker = 1
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_6l6oi"]
+script = ExtResource("9_dthii")
+next_index = 1
+metadata/_custom_type_script = "uid://px5dr31pd885"
+
+[sub_resource type="Resource" id="Resource_olmbu"]
+script = ExtResource("6_c1xm0")
+method = "enter_shop"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_do23q"]
+script = ExtResource("9_dthii")
+next_index = 1
+metadata/_custom_type_script = "uid://px5dr31pd885"
+
+[sub_resource type="Resource" id="Resource_ptrkr"]
+script = ExtResource("11_qd4ri")
+faces = Array[Texture]([ExtResource("10_uppy3")])
+shirts = Array[Texture]([ExtResource("12_u4vgk")])
+pants_colors = Array[Color]([Color(0.48, 0.21888001, 0.15359999, 1)])
+shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1), Color(0.133333, 0.12549, 0.203922, 1), Color(0.4, 0.19146667, 0.128, 1)])
+metadata/_custom_type_script = "uid://b80ipr8q70gqm"
+
+[sub_resource type="Resource" id="Resource_pc4vu"]
+script = ExtResource("13_1cwge")
+bubbles = Array[ExtResource("3_xk40u")]([SubResource("Resource_xk40u"), SubResource("Resource_t56bl"), SubResource("Resource_1c6gi"), SubResource("Resource_bqxwu"), SubResource("Resource_cvr5w"), SubResource("Resource_4o6vd"), SubResource("Resource_5yx2b"), SubResource("Resource_ksfoy"), SubResource("Resource_6l6oi"), SubResource("Resource_olmbu"), SubResource("Resource_do23q")])
+npc_style = SubResource("Resource_ptrkr")
+npc_name = "Duster"
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+
+[sub_resource type="Resource" id="Resource_c1xm0"]
+script = ExtResource("7_olmbu")
+item = ExtResource("14_qd4ri")
+amount = 10
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_lgnbj"]
+script = ExtResource("7_olmbu")
+item = ExtResource("15_u4vgk")
+amount = 10
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_aj0wn"]
+script = ExtResource("7_olmbu")
+item = ExtResource("16_1cwge")
+amount = 10
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_pay3g"]
+script = ExtResource("7_olmbu")
+item = ExtResource("17_st61y")
+amount = 3
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_61ge7"]
+script = ExtResource("7_olmbu")
+item = ExtResource("18_upb1b")
+amount = 2
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_rsj15"]
+script = ExtResource("14_st61y")
+item_slots = Array[ExtResource("7_olmbu")]([SubResource("Resource_c1xm0"), SubResource("Resource_lgnbj"), SubResource("Resource_aj0wn"), SubResource("Resource_pay3g"), SubResource("Resource_61ge7")])
+space = 50
+metadata/_custom_type_script = "uid://6ucyr0petjnx"
+
+[sub_resource type="Resource" id="Resource_u4vgk"]
+script = ExtResource("7_olmbu")
+item = ExtResource("14_qd4ri")
+amount = 5
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_1cwge"]
+script = ExtResource("7_olmbu")
+item = ExtResource("15_u4vgk")
+amount = 5
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_st61y"]
+script = ExtResource("7_olmbu")
+item = ExtResource("16_1cwge")
+amount = 5
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_upb1b"]
+script = ExtResource("24_qd4ri")
+required_items = Array[ExtResource("7_olmbu")]([SubResource("Resource_u4vgk"), SubResource("Resource_1cwge"), SubResource("Resource_st61y")])
+rewards = Array[Object]([])
+metadata/_custom_type_script = "uid://bicpdyf13vj1j"
+
+[sub_resource type="Resource" id="Resource_hr5f0"]
+script = ExtResource("17_d403n")
+title = "Scrapyard"
+inventory = SubResource("Resource_rsj15")
+dialogue = SubResource("Resource_pc4vu")
+random_quest = SubResource("Resource_upb1b")
+minimum_quests = 3
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_q3cep"]
+_surfaces = [{
+"aabb": AABB(-0.2, 0, -0.2, 0.4, 3.98418, 0.4),
+"attribute_data": PackedByteArray("AAAgPwAAwD6eoBY/AADAPnqCWj8AAAAAAABgPwAAgD8AAEA/AACAPwAAQD8AAAAAAACAPwAAAAAAAAA/AAAAABj2FT4AAAAAAAAAPwAAAACeoBY/AADAPniCWj8AAAAAAABAPwAAAAAAAGA/AAAAAAAAYD8AAIA/AAAAPwAAAAAAAAA/AADAPp6gFj8AAMA+nqAWPwAAwD4AACA/AADAPgAAgD8AAAAAAACAPwAAAAB4glo/AAAAAAAAAD8AAAAAnqAWPwAAwD4AAIA/AAAAAHiCWj8AAAAAAAAAAAAAgD8AAGA/AACAPwAAYD8AAAAAAAAAAAAAAAAAAAAAAACAPwAAYD8AAAAAAAAgPwAAgD8AAAA/AACAPwAAAD8AAAAA////PgAAAACeoBY/AADAPgAAAD8AAMA+////PgAAAAAAAIA/AAAAABr2FT4AAAAAeoJaPwAAAACeoBY/AADAPv///z4AAAAAAACAPgAAgD8AAAA+AAAAAAAAgD4AAAAAAACAPgAAgD8AAAA+AACAPwAAAD4AAAAAAAAgPwAAwD56glo/AAAAAAAAgD8AAAAAAAAAPgAAgD8AAAAAAACAPwAAAAAAAAAAAAAAPgAAAAAAAAA+AACAPwAAAAAAAAAAeoJaPwAAAAAAAIA/AAAAAP///z4AAAAAAAAAPwAAwD7DvtI+AADAPhr2FT4AAAAAw77SPgAAwD4AAAA/AAAAABj2FT4AAAAAAAAAAAAAAAAAAMA+AADAPsO+0j4AAMA+w77SPgAAwD4AAAA/AADAPgAAAD8AAAAAAAAAAAAAAAAAAIA/AAAAABj2FT4AAAAAAAAgPwAAAAAAAEA/AAAAAAAAQD8AAIA/AADAPgAAAAAAAAA/AAAAAAAAAD8AAIA/AAAAPwAAgD8AAMA+AACAPwAAwD4AAAAAGvYVPgAAAAAAAMA+AADAPgAAAAAAAAAAGvYVPgAAAADDvtI+AADAPgAAwD4AAMA+AABAPwAAgD8AACA/AACAPwAAID8AAAAAAAAAAAAAAADDvtI+AADAPhj2FT4AAAAAGvYVPgAAAAAAAIA/AAAAAAAAAAAAAAAAAAAAPwAAwD4a9hU+AAAAAP///z4AAAAAAACAPgAAAAAAAMA+AAAAAAAAwD4AAIA/AADAPgAAgD8AAIA+AACAPwAAgD4AAAAAAAAAPwAAAAAAACA/AAAAAAAAID8AAIA/eoJaPwAAAAAAAIA/AAAAAAAAAD8AAAA/AABAPwAAgD8AAGA/SP8WPQAAYD8AAIA/AABgPwAAgD8AAAAASP8WPQAAAAAAAIA/AAAAPwAAAAAAAAA/AAAAP3iCWj8AAAAAeIJaPwAAAAAAAAA/AAAAPwAAgD8AAAAAAAAAAEj/Fj0AAAA+SP8WPQAAAAAAAIA/AACAPgAAgD8AAAA+AACAPwAAgD5I/xY9AAAAAAAAgD8AAAA+SP8WPQAAAD4AAIA/AAAAPwAAAD////8+AAAAAHqCWj8AAAAAAACAPkj/Fj0AAMA+SP8WPQAAgD4AAIA/AACAPkj/Fj0AAAA+AACAPwAAAD5I/xY9AAAAP0j/Fj0AACA/SP8WPQAAAD8AAIA/AAAgP0j/Fj0AAEA/SP8WPQAAID8AAIA/AABgP0j/Fj0AAAAASP8WPQAAYD8AAIA/AABAP0j/Fj0AAGA/SP8WPQAAQD8AAIA/AADAPkj/Fj0AAAA/SP8WPQAAwD4AAIA/AAAAPwAAAD8a9hU+AAAAAP///z4AAAAAAAAAPwAAAD8AAAAAAAAAABr2FT4AAAAAAADAPgAAgD8AAIA+AACAPwAAwD5I/xY9AAAAPwAAgD8AAMA+AACAPwAAAD9I/xY9GPYVPgAAAAAAAAA/AAAAPwAAAD8AAAAAGPYVPgAAAAAAAAAAAAAAAAAAAD8AAAA/AABAPwAAgD8AACA/AACAPwAAQD9I/xY9AAAgPwAAgD8AAAA/AACAPwAAID9I/xY9"),
+"format": 34359738391,
+"material": ExtResource("7_0apu8"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 186,
+"vertex_data": PackedByteArray("w9AQPWZmFj7D0BA9zcxMPWZmFj4AAAAAzcxMPmZmFj4AAAAAwdAQPmZmFj7E0BC+8uQjMWZmFj7NzEy+8uQjMQAAAADNzEy+zcxMPgAAAAAAAAAA8uQjMQAAAADNzEy+w9AQvgAAAADC0BC+wdAQPmZmFj7E0BC+8uQjMGZmFj7NzEy98uQjMWZmFj7NzEy+8uQjMQAAAADNzEy+wdAQPgAAAADE0BC+wdAQPmZmFj7E0BC+wdAQPmZmFj7E0BC+wdAQPWZmFj7E0BC98uQjMGZmFj7NzEy9zcxMPWZmFj4AAAAAwdAQPWZmFj7E0BC9wdAQPmZmFj7E0BC+zcxMPgAAAAAAAAAAwdAQPgAAAADE0BC+8uQjMQAAAADNzEy+zcxMPWZmFj4AAAAAwdAQPmZmFj7E0BC+zcxMPmZmFj4AAAAAzcxMPmZmFj4AAAAAwdAQPmZmFj7E0BC+wdAQPgAAAADE0BC+zcxMPgAAAAAAAAAAzcxMPmZmFj4AAAAAwdAQPgAAAADE0BC+w9AQvmZmFj7C0BC+zcxMvmZmFj7yMJayzcxMvgAAAADyMJayw9AQPmZmFj7D0BA+8jAWsWZmFj7NzEw9w9AQPWZmFj7D0BA98jAWsgAAAADNzEw+zcxMPgAAAAAAAAAAw9AQvgAAAADD0BA+8jAWsmZmFj7NzEw+8jAWsWZmFj7NzEw9w9AQPmZmFj7D0BA+8jAWsmZmFj7NzEw+w9AQPgAAAADD0BA+8jAWsgAAAADNzEw+8jAWsmZmFj7NzEw+w9AQPmZmFj7D0BA+w9AQPgAAAADD0BA+w9AQPWZmFj7D0BA9zcxMPmZmFj4AAAAAw9AQPmZmFj7D0BA+w9AQPmZmFj7D0BA+zcxMPmZmFj4AAAAAzcxMPgAAAAAAAAAAw9AQPgAAAADD0BA+w9AQPmZmFj7D0BA+zcxMPgAAAAAAAAAAw9AQPgAAAADD0BA+zcxMPgAAAAAAAAAA8jAWsgAAAADNzEw+w9AQvWZmFj7D0BA98jAWsWZmFj7NzEw98jAWsmZmFj7NzEw+8uQjMGZmFj7NzEy9w9AQvmZmFj7C0BC+8uQjMWZmFj7NzEy+w9AQvmZmFj7C0BC+w9AQvWZmFj7C0BC9zcxMvWZmFj7yMJax8uQjMGZmFj7NzEy9w9AQvWZmFj7C0BC9w9AQvmZmFj7C0BC+zcxMvgAAAADyMJayzcxMPgAAAAAAAAAAw9AQvgAAAADC0BC+w9AQvgAAAADC0BC+8uQjMQAAAADNzEy+8uQjMWZmFj7NzEy+w9AQvgAAAADD0BA+zcxMvgAAAADyMJayzcxMvmZmFj7yMJayzcxMvmZmFj7yMJayw9AQvmZmFj7D0BA+w9AQvgAAAADD0BA+zcxMvmZmFj7yMJayw9AQvWZmFj7D0BA9w9AQvmZmFj7D0BA+zcxMvmZmFj7yMJayzcxMvWZmFj7yMJaxw9AQvWZmFj7D0BA98uQjMWZmFj7NzEy+w9AQvmZmFj7C0BC+w9AQvgAAAADC0BC+w9AQvmZmFj7C0BC+zcxMvWZmFj7yMJaxzcxMvmZmFj7yMJayw9AQvgAAAADD0BA+zcxMPgAAAAAAAAAAzcxMvgAAAADyMJayw9AQvWZmFj7D0BA98jAWsmZmFj7NzEw+w9AQvmZmFj7D0BA+8jAWsgAAAADNzEw+w9AQvgAAAADD0BA+w9AQvmZmFj7D0BA+w9AQvmZmFj7D0BA+8jAWsmZmFj7NzEw+8jAWsgAAAADNzEw+zcxMvgAAAADyMJayw9AQvgAAAADC0BC+w9AQvmZmFj7C0BC+zcxMPc78fkAAAAAAw9AQPc78fkDD0BA9AAAAAM78fkAAAAAA8uQjMM78fkDNzEy9wdAQPWZmFj7E0BC9wdAQPc78fkDE0BC9wdAQPc78fkDE0BC9zcxMPWZmFj4AAAAAzcxMPc78fkAAAAAAwdAQPc78fkDE0BC9AAAAAM78fkAAAAAA8uQjMM78fkDNzEy9zcxMPc78fkAAAAAAAAAAAM78fkAAAAAAwdAQPc78fkDE0BC9zcxMPWZmFj4AAAAAw9AQPWZmFj7D0BA9zcxMPc78fkAAAAAA8jAWsc78fkDNzEw9w9AQPc78fkDD0BA98jAWsWZmFj7NzEw9zcxMPc78fkAAAAAAw9AQPWZmFj7D0BA9w9AQPc78fkDD0BA9AAAAAM78fkAAAAAAw9AQPc78fkDD0BA98jAWsc78fkDNzEw98jAWsWZmFj7NzEw9w9AQvWZmFj7D0BA98jAWsc78fkDNzEw98jAWsWZmFj7NzEw9w9AQPc78fkDD0BA9w9AQPWZmFj7D0BA9zcxMvWZmFj7yMJaxw9AQvWZmFj7C0BC9zcxMvc78fkDyMJaxw9AQvWZmFj7C0BC98uQjMGZmFj7NzEy9w9AQvc78fkDC0BC9wdAQPWZmFj7E0BC9zcxMPWZmFj4AAAAAwdAQPc78fkDE0BC98uQjMGZmFj7NzEy9wdAQPWZmFj7E0BC98uQjMM78fkDNzEy9w9AQvWZmFj7D0BA9zcxMvWZmFj7yMJaxw9AQvc78fkDD0BA9AAAAAM78fkAAAAAA8jAWsc78fkDNzEw9w9AQvc78fkDD0BA9AAAAAM78fkAAAAAAw9AQvc78fkDD0BA9zcxMvc78fkDyMJaxw9AQvc78fkDD0BA98jAWsc78fkDNzEw9w9AQvWZmFj7D0BA9zcxMvc78fkDyMJaxw9AQvc78fkDD0BA9zcxMvWZmFj7yMJax8uQjMM78fkDNzEy9AAAAAM78fkAAAAAAw9AQvc78fkDC0BC9zcxMvc78fkDyMJaxw9AQvc78fkDC0BC9AAAAAM78fkAAAAAA8uQjMM78fkDNzEy9w9AQvc78fkDC0BC98uQjMGZmFj7NzEy9w9AQvc78fkDC0BC9zcxMvc78fkDyMJaxw9AQvWZmFj7C0BC9/3///4Ja/7//f///glr/v/9///+CWv+////VyNXI/78AAHfw///Cx///d/B38P+//38AAP///7//fwAA////v/9/AAD///+//3///wAAQS3/f///AABBLf9///8AAEEt//938Hfw/7///ym3Kbf/v///1cjVyP+//3///wAAQS3/f///AABBLf9///8AAEEt/3///wAAvhL/f///AAC+Ev9///8AAL4S/38AAP///7//fwAA////v/9/AAD///+//3///wAAvhL/f///AAC+Ev9///8AAL4S//+GjwAAwwf//9XIAABqJP//KbcAAJQbd/D/f///wwf//4aPAADDB///KbcAAJQbAAApt///auSHD/9/AAA7+AAAho///zv4/3///30l/7//f///fSX/v/9///99Jf+//38AAP///7//fwAA////v/9/AAD///+//3///30l/7//f///fSX/v/9///99Jf+/ho//f4cP/78pt/9/KTf/v3hw/38AAMLHho//f4cP/7/VyP9/1Uj/vym3/38pN/+//3///4Ja/7//f///glr/v/9///+CWv+/1cj/f9VI/7///4aPho//v3fw/394cP+/Kbf/fyk3/7/VyP9/1Uj/v3fw/394cP+//38AAP///7//fwAA////v/9/AAD///+//3///wAAvdL/f///AAC90v9///8AAL3S/3///30l/z//f///fSX/P/9///99Jf8//3///4Ja/z//f///glr/P/9///+CWv8//3///30l/z//f///fSX/P/9///99Jf8//38AAP///7//fwAA////v/9/AAD///+/AADVyP//lNv//3fwd/D/vwAAd/D//8LHKTf/fwAAauQAAIaP//87+IcP/38AADv4hw//fwAAO/jVSP9/AACU2yk3/38AAGrk/3///wAAQO3/f///AABA7f9///8AAEDt/3///wAAQO3/f///AABA7f9///8AAEDtAAB38P//wscAACm3//9q5AAA1cj//5Tb/3///4Ja/z//f///glr/P/9///+CWv8//38AAP///7//fwAA////v/9/AAD///+//3///wAAvdL/f///AAC90v9///8AAL3SeHD/fwAAwscpN/9/AABq5NVI/38AAJTb1Uj/fwAAlNuGj/9/hw//v3hw/38AAMLHAACGj///O/gAANXI//+U2wAAKbf//2rk/3///4Ja/7//f///glr/v/9///+CWv+///938Hfw/7///9XI1cj/v///Kbcpt/+///8ptwAAlBv//4aPAADDB3fw/3///8MH/3///wAAQS3/f///AABBLf9///8AAEEt/3///wAAvhL/f///AAC+Ev9///8AAL4S//+Gj4aP/7/VyP9/1Uj/v3fw/394cP+/eHD/fwAAwscpt/9/KTf/v4aP/3+HD/+/d/D/f3hw/7/VyP9/1Uj/vym3/38pN/+//3///30l/7//f///fSX/v/9///99Jf+/ho//f4cP/7/VSP9/AACU23hw/38AAMLHho//f4cP/78pt/9/KTf/v9XI/3/VSP+/hw//fwAAO/gAACm3//9q5AAAho///zv4AAApt///auQAAHfw///CxwAA1cj//5Tb///VyAAAaiT//4aPAADDB///KbcAAJQbAAB38P//wsf//9XI1cj/v///d/B38P+/1Uj/fwAAlNuHD/9/AAA7+Ck3/38AAGrk/3///wAAvdL/f///AAC90v9///8AAL3S/3///wAAQO3/f///AABA7f9///8AAEDtKTf/fwAAauR4cP9/AADCx9VI/38AAJTbAACGj///O/gpN/9/AABq5IcP/38AADv4/3///30l/z//f///fSX/P/9///99Jf8//3///4Ja/z//f///glr/P/9///+CWv8///938Hfw/78AANXI//+U2wAAd/D//8LHAADVyP//lNsAAIaP//87+AAAKbf//2rk")
+}]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_16p8b"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_16p8b"]
+noise = SubResource("FastNoiseLite_16p8b")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q3cep"]
+render_priority = 0
+shader = ExtResource("8_3k7lu")
+shader_parameter/display_dampening = false
+shader_parameter/display_deformation = false
+shader_parameter/flag_color = Color(0.172, 0.4128, 0.86, 1)
+shader_parameter/wave_size = 0.5
+shader_parameter/face_distortion = 0.5
+shader_parameter/time_scale = 0.3
+shader_parameter/uv_offset_scale = Vector2(-0.2, -0.1)
+shader_parameter/uv_offset_texture = SubResource("NoiseTexture2D_16p8b")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_16p8b"]
+material = SubResource("ShaderMaterial_q3cep")
+subdivide_width = 12
+
+[node name="Location" groups=["location"] instance=ExtResource("1_enopj")]
+location_data = SubResource("Resource_vcknj")
+shop = SubResource("Resource_hr5f0")
+
+[node name="Flagpole" type="Node3D" parent="Meshes" index="0"]
+transform = Transform3D(-8.742278e-08, 0, -2, 0, 2, 0, 2, 0, -8.742278e-08, 0, 0, 0)
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Meshes/Flagpole" index="0"]
+mesh = SubResource("ArrayMesh_q3cep")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes/Flagpole" index="1"]
+transform = Transform3D(0.56, 0, 0, 0, -4.37114e-08, -0.35, 0, 1, -1.5299e-08, 0.6, 3.6, 0)
+mesh = SubResource("PlaneMesh_16p8b")
+
+[node name="Shack" parent="Meshes" index="1" instance=ExtResource("6_65ce2")]
+transform = Transform3D(-0.31387642, 0, -0.94946384, 0, 1, 0, 0.94946384, 0, -0.31387642, -6.7148247, 0, -3.6958346)
+
+[node name="Tire" parent="Meshes" index="2" instance=ExtResource("7_xhtva")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7542152, 0, 3.0317068)
+
+[node name="TireStack" parent="Meshes" index="3" instance=ExtResource("8_ib311")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.794239, 0, 4.6619544)
+
+[node name="Tire2" parent="Meshes" index="4" instance=ExtResource("7_xhtva")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3670826, 0, 5.120661)
+
+[node name="Tire3" parent="Meshes" index="5" instance=ExtResource("7_xhtva")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6296644, 0, 6.203094)
+
+[node name="TireStack2" parent="Meshes" index="6" instance=ExtResource("8_ib311")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4071064, 0, 6.7509084)
+
+[node name="TireStack3" parent="Meshes" index="7" instance=ExtResource("8_ib311")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10163307, 0, 2.7593253)
+
+[node name="RigidBody3D" parent="Meshes" index="8" instance=ExtResource("9_nruut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0, 8)
+
+[node name="RigidBody3D3" parent="Meshes" index="9" instance=ExtResource("9_nruut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0459015, 0, 4.73145)
+
+[node name="RigidBody3D2" parent="Meshes" index="10" instance=ExtResource("10_nj14g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6, 0, 2.8)
+
+[node name="RigidBody3D4" parent="Meshes" index="11" instance=ExtResource("10_nj14g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.847855, 0, 6.2083273)
+
+[node name="PointOfInterest" parent="." index="2"]
+title = "Scrap Yard"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://c055smn111au7"]
+[gd_scene load_steps=54 format=3 uid="uid://c055smn111au7"]
 
 [ext_resource type="Script" uid="uid://cslnx4rw32guw" path="res://Scripts/player.gd" id="1_5kxbm"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_x3wgy"]
@@ -20,6 +20,7 @@
 [ext_resource type="FontFile" uid="uid://d0fpgnwmxa37x" path="res://Art/Fonts/bedstead-bold.otf" id="13_l6n3p"]
 [ext_resource type="Resource" uid="uid://bqr7p1xwplitk" path="res://Resources/BulletStats/shotgun_bullet_stats.tres" id="15_qqcod"]
 [ext_resource type="PackedScene" uid="uid://dkmenaf8dxpyr" path="res://Scenes/Guns/sniper.tscn" id="17_igrcy"]
+[ext_resource type="AudioStream" uid="uid://cto85fmsr4w4y" path="res://Audio/Guns/shotgun_A_reload_01.wav" id="18_2ijsl"]
 [ext_resource type="AudioStream" uid="uid://b88hp6hc2yyuq" path="res://Audio/Bullets/weapon_bullet_flyby_02.wav" id="18_fs7ks"]
 [ext_resource type="PackedScene" uid="uid://dts12bmvycipb" path="res://Scenes/Guns/shotgun.tscn" id="19_l6n3p"]
 [ext_resource type="AudioStream" uid="uid://ddrjpnastg7jv" path="res://Audio/CharacterActions/footstep-74321.wav" id="22_wpjfl"]
@@ -302,6 +303,49 @@ tracks/1/keys = {
 "values": [Vector3(2.38419e-07, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_vfarp"]
+resource_name = "pump"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArmLAnchor/armL:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.75),
+"transitions": PackedFloat32Array(1.189207, 1.189207, 0.5, 0.5),
+"update": 0,
+"values": [Vector3(2.38419e-07, 0, 0), Vector3(0, 0, 0.13), Vector3(0, 0, 0.13), Vector3(2.38419e-07, 0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pump")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GunAnchor/Model/shotgun/Cube_002:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.75),
+"transitions": PackedFloat32Array(1.189207, 1.189207, 0.5, 0.5),
+"update": 0,
+"values": [Vector3(-1.1318305, 0.763854, 0), Vector3(-0.777, 0.764, 0), Vector3(-0.777, 0.764, 0), Vector3(-1.1318305, 0.763854, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_qqcod"]
 resource_name = "reload"
 length = 2.5
@@ -383,6 +427,7 @@ tracks/3/use_blend = true
 resource_local_to_scene = true
 _data = {
 &"RESET": SubResource("Animation_igrcy"),
+&"pump": SubResource("Animation_vfarp"),
 &"reload": SubResource("Animation_qqcod")
 }
 
@@ -491,7 +536,7 @@ script = ExtResource("9_gymyn")
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bi64h"]
-random_pitch = 1.5
+random_pitch = 1.2
 streams_count = 1
 stream_0/stream = ExtResource("22_wpjfl")
 
@@ -541,7 +586,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.111368775, -0.061341286, -0
 [node name="GunAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset"]
 
 [node name="AK47" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("12_fs7ks")]
-visible = false
 bullet_stats = SubResource("Resource_l6n3p")
 gun_stats = SubResource("Resource_igrcy")
 ads_vector = Vector3(-0.188, 0.085, 0)
@@ -550,13 +594,14 @@ cast_shadow = false
 [node name="AudioStreamPlayer3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47/GunAnchor/FirePoint" index="2"]
 unit_size = 10.0
 
-[node name="Cube_008" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" index="6"]
+[node name="Cube_008" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" index="4"]
 transform = Transform3D(-0.0887866, 0, 0, 0, -0.498048, 0, 0, 0, -0.229101, 0.285, 1.139, 0)
 
 [node name="Chamber" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47/GunAnchor" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0352937, 0.269934, 0.071584)
 
 [node name="EmptyClick" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47" index="1"]
+stream = null
 bus = &"Master"
 
 [node name="ArmLAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47"]
@@ -596,6 +641,7 @@ libraries = {
 }
 
 [node name="Pistol" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("13_igrcy")]
+visible = false
 bullet_stats = SubResource("Resource_fd4e3")
 gun_stats = SubResource("Resource_wpjfl")
 ammo_type = "pistol_ammo"
@@ -650,10 +696,12 @@ libraries = {
 visible = false
 bullet_stats = ExtResource("15_qqcod")
 gun_stats = SubResource("Resource_qqcod")
-fire_type = 0
-fire_timer = 0.5
+fire_timer = 0.2
 ads_vector = Vector3(-0.099, 0.045, 0.07)
 cast_shadow = false
+
+[node name="Pump" type="AudioStreamPlayer3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun"]
+stream = ExtResource("18_2ijsl")
 
 [node name="ArmLAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun"]
 transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, -0.044855595, -0.11000872, -0.42224616)
@@ -754,9 +802,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.111, 0.06099999, -0.009501
 
 [node name="SpotLight3D" type="SpotLight3D" parent="CameraAnchor/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.104569435, 0)
-visible = false
 spot_range = 35.0
-spot_angle = 40.0
+spot_angle = 30.0
 
 [node name="BulletListener" type="Area3D" parent="CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00123417, 0.245037)
@@ -808,6 +855,7 @@ monitorable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9665127)
 shape = SubResource("SphereShape3D_2ijsl")
 
+[connection signal="animation_finished" from="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun/AnimationPlayer" to="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun" method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="CameraAnchor/BulletListener" to="." method="_on_bullet_listener_area_entered"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
@@ -818,6 +866,8 @@ shape = SubResource("SphereShape3D_2ijsl")
 [editable path="CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47"]
 [editable path="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol"]
 [editable path="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun"]
+[editable path="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun/GunAnchor/Model"]
+[editable path="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun/GunAnchor/Model/shotgun"]
 [editable path="CameraAnchor/Camera3D/GunOffset/GunAnchor/SniperRifle"]
 [editable path="CameraAnchor/Camera3D/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model"]
 [editable path="CameraAnchor/Camera3D/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper"]

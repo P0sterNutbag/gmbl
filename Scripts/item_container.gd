@@ -11,4 +11,4 @@ func _ready() -> void:
 	if item_chances.size() > 0:
 		for i in randi_range(min_items, max_items):
 			var index = Globals.get_weighted_index(item_chances)
-			inventory.items.append(item_chances[index].object_to_spawn)
+			inventory.add_item(item_chances[index].object_to_spawn)

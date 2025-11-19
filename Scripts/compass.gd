@@ -20,8 +20,14 @@ func _process(_delta: float) -> void:
 	if !visible:
 		return
 	# compass movement
-	var cam_rot = rad_to_deg(compass_object.rotation.y)
-	compass.position.x = compass.size.x * ((cam_rot / 360.0) + 0.5) - compass.size.x - 70
+	var cam_rot = rad_to_deg(compass_object.global_rotation.y)
+	var location_offset := 0.0
+	if !Globals.overworld or get_tree().current_scene != Globals.overworld:
+		#location_offset = Vector3.BACK.angle_to(Globals.overworld.player_spawn_vector)
+		#location_offset = rad_to_deg(location_offset)
+		location_offset = rad_to_deg(Globals.overworld.current_encounter.rotation.y)
+	var facing_direciton = ((cam_rot + location_offset) / 360.0) + 0.5
+	compass.position.x = compass.size.x * facing_direciton - compass.size.x - 70
 	# Position quest marker
 	for i in quests.size():
 		var quest = quests[i]
@@ -49,8 +55,8 @@ func _process(_delta: float) -> void:
 		var fov = 90.0  # adjust as needed
 		var normalized = clamp(angle_deg / (fov / 2.0), -1.0, 1.0)
 		var half_width = size.x / 2.0
-		marker.position.x = half_width + (normalized * half_width) - 12
-		marker.position.x = clamp(marker.position.x, -12, size.x - 12)
+		marker.position.x = half_width + (normalized * half_width)
+		#marker.position.x = clamp(marker.position.x, 0, size.x + 100)
 
 
 func set_quest_markers():

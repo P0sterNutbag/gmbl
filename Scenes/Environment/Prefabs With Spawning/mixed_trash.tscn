@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://di3h341sotn78"]
+[gd_scene load_steps=17 format=3 uid="uid://di3h341sotn78"]
 
+[ext_resource type="Script" uid="uid://bf1yc1wrj6qoi" path="res://Scripts/prefab_controller.gd" id="1_bix1x"]
 [ext_resource type="PackedScene" uid="uid://b3f0jcvvcldns" path="res://Scenes/Environment/Props/Physics/crate.tscn" id="1_f2g5r"]
 [ext_resource type="PackedScene" uid="uid://btjp27ft7kaqr" path="res://Scenes/Environment/Props/Physics/crate_tall.tscn" id="2_f6gvf"]
 [ext_resource type="PackedScene" uid="uid://wubvthultu6w" path="res://Scenes/Environment/Props/Physics/crate_tall_horizontal.tscn" id="3_7clhc"]
@@ -29,13 +30,14 @@ object_to_spawn = ExtResource("8_dcx57")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [node name="WoodenCrates" type="Node3D"]
+script = ExtResource("1_bix1x")
 
 [node name="Crate" parent="." instance=ExtResource("1_f2g5r")]
-transform = Transform3D(0.86480105, 0, -0.50211465, 0, 1, 0, 0.50211465, 0, 0.86480105, -3.3799968, 0.5848098, 3.082798)
+transform = Transform3D(0.86480105, 0, -0.50211465, 0, 1, 0, 0.50211465, 0, 0.86480105, -3.38, 0, 3.083)
 metadata/_edit_group_ = true
 
 [node name="CrateTall" parent="." instance=ExtResource("2_f6gvf")]
-transform = Transform3D(0.8500306, 0, -0.5267333, 0, 1, 0, 0.5267333, 0, 0.8500306, 2.8209388, 1.1601946, 1.3004137)
+transform = Transform3D(0.8500306, 0, -0.5267333, 0, 1, 0, 0.5267333, 0, 0.8500306, 0, 0, 0)
 metadata/_edit_group_ = true
 
 [node name="CrateTall2" parent="." instance=ExtResource("3_7clhc")]
@@ -43,7 +45,7 @@ transform = Transform3D(0.8948331, 0, -0.44640085, 0, 1, 0, 0.44640085, 0, 0.894
 metadata/_edit_group_ = true
 
 [node name="Barrel" parent="." instance=ExtResource("4_bustw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8862927, 0.62721324, 0.89210844)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.886, 0, 0.892)
 
 [node name="NPCSpawns" type="Node3D" parent="." groups=["spawn points"]]
 script = ExtResource("5_bustw")
@@ -87,13 +89,13 @@ transform = Transform3D(0.712002, 0, 0.702178, 0, 1, 0, -0.702178, 0, 0.712002, 
 transform = Transform3D(-0.713972, 0, -0.700174, 0, 1, 0, 0.700174, 0, -0.713972, 0.14119482, 0.0939578, 1.7817461)
 
 [node name="RigidBody3D" parent="." instance=ExtResource("9_bix1x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16395283, 0.6690475, -1.938798)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16395283, 0, -1.938798)
 
 [node name="RigidBody3D2" parent="." instance=ExtResource("10_1y20r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5507219, 1.231579, -1.8584003)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5507219, 0, -1.8584003)
 
 [node name="TireStack" parent="." instance=ExtResource("11_dcx57")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7634776, 0.19317555, -3.0428524)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.763, 0, -3.043)
 
 [node name="Tire" parent="." instance=ExtResource("4_c2ou7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1318235, 0.1978873, -1.1881845)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.132, 0, -1.188)

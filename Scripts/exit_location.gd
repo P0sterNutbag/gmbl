@@ -13,10 +13,15 @@ func _process(delta: float) -> void:
 
 
 func leave_encounter() -> void:
-	var enemy_count: int
-	for enemy in get_tree().get_nodes_in_group("enemies"):
-		if enemy.state != enemy.states.dead:
-			enemy_count += 1
+	var enemy_count: int = 0
+	if Globals.overworld.current_encounter.get_node_or_null("StartingSquadSpawner"):
+		for enemy in get_tree().get_nodes_in_group("enemies"):
+			if enemy.is_starting_squad and enemy.state != enemy.states.dead and enemy.state != enemy.states.standby:
+				enemy_count += 1
+	else:
+		for enemy in get_tree().get_nodes_in_group("enemies"):
+			if enemy.state != enemy.states.dead and enemy.state != enemy.states.standby:
+				enemy_count += 1
 	Globals.overworld.current_encounter.location_data.population = enemy_count
 	var player_vector: Vector3 = (get_parent().global_position - Globals.player.global_position).normalized().rotated(Vector3.UP, -rotation.y)
 	Globals.overworld.player_spawn_vector = player_vector

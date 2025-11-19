@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cc458wgoeu6t4"]
+[gd_scene load_steps=22 format=3 uid="uid://cc458wgoeu6t4"]
 
 [ext_resource type="Script" uid="uid://dr73ivowve6xe" path="res://Scripts/survival_ui.gd" id="1_e5c6o"]
 [ext_resource type="Script" uid="uid://bclh5yhrpmkxf" path="res://Scripts/stat_visual.gd" id="2_k4cvi"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cvly0bfjs24or" path="res://Art/Textures/sun-moon.png" id="7_guqia"]
 [ext_resource type="Script" uid="uid://d34nt8desp71" path="res://Scripts/compass.gd" id="8_2dyl4"]
 [ext_resource type="Script" uid="uid://dav6t8b5brx1o" path="res://Scripts/inventory_controller.gd" id="8_k3cux"]
+[ext_resource type="PackedScene" uid="uid://dht8msbc26v1q" path="res://Scenes/UI/quest_marker.tscn" id="9_e5c6o"]
 [ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="9_to4rm"]
 [ext_resource type="PackedScene" uid="uid://connpctdgiwij" path="res://Scenes/UI/exit_button.tscn" id="10_0pkni"]
 [ext_resource type="Script" uid="uid://b37bjjekoe1qe" path="res://Scripts/journal_menu.gd" id="10_vghdt"]
@@ -466,6 +467,11 @@ mouse_filter = 2
 anchors_preset = 0
 offset_top = 22.0
 offset_bottom = 22.0
+
+[node name="QuestMarker" parent="TopCenter/Compass/Markers" instance=ExtResource("9_e5c6o")]
+layout_mode = 0
+offset_left = 829.0
+offset_right = 829.0
 
 [node name="PlayerInventory" type="HBoxContainer" parent="."]
 visible = false

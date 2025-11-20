@@ -311,7 +311,8 @@ func state_walk(delta):
 	camera.fov = lerp(camera.fov, target_fov, 30.0 * delta)
 	
 	# light
-	if Input.is_action_just_pressed("light") and find_item("flashlight"):
+	var flashlight = PlayerStats.inventory.find_item("flashlight")
+	if Input.is_action_just_pressed("light") and flashlight and flashlight.equipped:
 		PlayerStats.flashlight_on = !PlayerStats.flashlight_on
 	if PlayerStats.flashlight_on:
 		spot_light.visible = true

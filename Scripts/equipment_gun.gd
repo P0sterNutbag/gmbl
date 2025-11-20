@@ -3,7 +3,7 @@ class_name EquipmentGun
 
 @export var gun_stats: GunStats = GunStats.new()
 @export var gun_object: PackedScene
-@export var slot: int
+#@export var slot: int
 var ammo: 
 	get(): return gun_stats.ammo
 var condition: 
@@ -16,15 +16,10 @@ var stats := {
 
 func equip() -> void:
 	super.equip()
-	for gun in PlayerStats.guns:
-		if gun != self and gun.slot == slot:
-			gun.equipped = false
 	if equipped:
-		PlayerStats.equipped_guns[slot] = self
 		if PlayerStats.gun_index == slot or !PlayerStats.gun:
 			Globals.player.change_gun(self)
 	else:
-		PlayerStats.equipped_guns[slot] = null
 		if PlayerStats.gun_index == slot:
 			Globals.player.unequip_gun()
 

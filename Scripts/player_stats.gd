@@ -36,6 +36,8 @@ var quests: Array[Quest]
 		return inventory.items.filter(func(i): return i is EquipmentGun)
 var gun: EquipmentGun
 var equipped_guns: Array[EquipmentGun]
+var equipped_armor: Array[Equipment] = [null, null, null]
+var equipped_util: Array[Equipment] = [null, null, null]
 var gun_index := 0
 var sleep := 100.0:
 	set(value):

@@ -11,9 +11,12 @@ var amount: int = 1:
 var equipped: bool:
 	set(value):
 		equipped = value
-		text = text.rstrip("*")
+		#text = text.rstrip("*")
 		if equipped:
-			text += "*"
+			hide()
+			#text += "*"
+		else:
+			show()
 var price: int:
 	set(value):
 		price = value

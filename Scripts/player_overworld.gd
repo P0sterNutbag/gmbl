@@ -115,7 +115,8 @@ func state_walk(delta) -> void:
 		change_gun_slot(1)
 	
 	# light
-	if Input.is_action_just_pressed("light") and PlayerStats.inventory.find_item("flashlight"):
+	var flashlight = PlayerStats.inventory.find_item("flashlight")
+	if Input.is_action_just_pressed("light") and flashlight and flashlight.equipped:
 		PlayerStats.flashlight_on = !PlayerStats.flashlight_on
 	if PlayerStats.flashlight_on:
 		spot_light.visible = true

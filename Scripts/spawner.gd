@@ -1,11 +1,13 @@
 extends Node3D
 
+@export_category("Spawning")
 @export var possible_spawns: Array[SpawnChance]
 @export var spawn_on_ready: bool = false
-@export var spawn_chance: float = 0
 @export var spawn_amount_min: int = 1
 @export var spawn_amount_max: int = 1
 @export var location_data_variable: String
+@export_category("Positioning")
+@export var ignore_heightmap: Array[Node3D]
 @export var spawn_on_heightmap: bool = true
 @export var face_away_from_center: bool = true
 var used_spawns: Array[int]
@@ -14,6 +16,8 @@ var used_spawns: Array[int]
 func _ready() -> void:
 	if spawn_on_heightmap:
 		for child in get_children():
+			if ignore_heightmap.has(child):
+				continue
 			position_on_heightmap(child)
 			if face_away_from_center:
 				child.look_at(global_position)
@@ -23,6 +27,7 @@ func _ready() -> void:
 	if !spawn_on_ready:
 		return
 	await get_tree().process_frame
+	var spawn_chance
 	if "location_data" in get_tree().current_scene:
 		spawn_chance = get_tree().current_scene.location_data.get(location_data_variable)
 	var spawn_amount = randi_range(spawn_amount_min, spawn_amount_max)

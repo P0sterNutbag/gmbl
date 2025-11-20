@@ -1,17 +1,17 @@
-[gd_scene load_steps=10 format=4 uid="uid://bdh3nex5rxv1a"]
+[gd_scene load_steps=11 format=4 uid="uid://ciydkkvue7fu2"]
 
-[ext_resource type="Material" uid="uid://bfqtn7csb0xd" path="res://Art/Materials/tin_triplanar_rust.tres" id="1_mtb8i"]
-[ext_resource type="Script" uid="uid://bdayrcr4af73n" path="res://Scripts/spawner.gd" id="2_t483y"]
-[ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="3_p6nx0"]
-[ext_resource type="PackedScene" uid="uid://cwn2oirx41io" path="res://Scenes/Environment/Nature/chest.tscn" id="4_1wk7h"]
-[ext_resource type="PackedScene" uid="uid://b77wn23o8x4a3" path="res://Scenes/Environment/Traps/mine.tscn" id="4_mtb8i"]
+[ext_resource type="Material" uid="uid://bfqtn7csb0xd" path="res://Art/Materials/tin_triplanar_rust.tres" id="1_cajg6"]
+[ext_resource type="Script" uid="uid://bdayrcr4af73n" path="res://Scripts/spawner.gd" id="2_5j46b"]
+[ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="3_sum18"]
+[ext_resource type="PackedScene" uid="uid://cwn2oirx41io" path="res://Scenes/Environment/Nature/chest.tscn" id="4_p6f07"]
+[ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/Enemies/enemy.tscn" id="5_rbr0s"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_teulj"]
 _surfaces = [{
 "aabb": AABB(-4.82452, -1.5, -1.5183, 9.62186, 3, 3.0366),
 "attribute_data": PackedByteArray("AACAPwAAgD8AAIA/AAAAAOOo5Tr//38/AACAP+Sfdz+LiAg9d3d3P6uqKjPkn3c/AACAPwAAgD8AAIA/p8t9P6uqKjOny30/REQEPwAAAACAiIg8AAAAAAAAgD8AAIA/AAAAAAAAAADwK3o/+xt+PwAAgD8sjX8/AACAPyyNfz8Agro8koxlOy0WDTwAAAAAAACAPyyNfz8tFg08AAAAAAAAAAAAAAAALRYNPAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAgIiIPAAAgD+AiIg8REQEPwAAAAAAAIA/AACAPwAAgD/jqOU6LRYNPAAAgD+ZKeE8AACAPwAAAAAAAAAAmSnhPAAAgD93d/c+AACAPwAAAAAAAAAAd3d3P3d3dz+LiAg9d3d3PwAAgD+z9ng/AAAAAAAAAAC8u3s/AACAPwAAgD8AAIA/AACAPwAAAAAAAAAAAAAAAAAAgD+AiIg8d3f3PgAAgD+8u3s/AACAPwAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAP7P2eD+LiAg9d3d3P6uqKjOz9ng/AACAPwAAgD+rqiozp8t9PwAAAAAAAIA/REQEPwAAgD8AAAAAAAAAAICIiDwAAIA/AAAAAEREBD+LiAg9d3d3P4uICD1ERAQ/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/gIiIPAAAgD8AAAAAAAAAAAAAAAAAAIA/q6oqM7P2eD+LiAg9d3d3PwAAAABERAQ/d3d3P0REBD8AAIA/s/Z4PwAAgD9ERAQ/d3d3P0REBD8AAIA/5J93PwAAgD9ERAQ/AACAPwAAAAAAAAAAAAAAAAAAgD+AiIg8i4gIPXd3dz8AAIA/5J93P3d3dz93d3c/AAAAAICIiDwAAIA/gIiIPAAAAAAAAAAAd3d3P3d3dz8AAIA/5J93P3d3dz9ERAQ/vLt7PwAAAAAAAIA/LI1/PwAAgD8AAAAAd3f3PgAAAAAAAIA/LI1/P7y7ez8AAAAA5J93PwAAgD/wK3o/+xt+P0REBD8AAIA/d3f3PgAAAAAAgro8koxlOwAAgD8sjX8/REQEPwAAgD/wK3o/+xt+PwAAAAAAAAAAAACAPwAAgD+AiIg8AAAAAAAAAAAAAAAAq6oqM+Sfdz+LiAg9REQEPwAAAABERAQ/mSnhPAAAAAAAgro8koxlO3d39z4AAAAAd3d3P3d3dz8AAIA/s/Z4P3d3dz9ERAQ/AACAP+Oo5Trkn3c/AAAAAEREBD8AAAAAi4gIPXd3dz+LiAg9REQEP6uqKjPkn3c/5J93PwAAAAAAAIA/46jlOgAAgD8AAAAAAAAAAAAAgD+rqiozAACAP6uqKjPkn3c/AAAAAAAAgD/jqOU6//9/PwAAAAD//38/46jlOgAAAADjqOU6//9/PwAAgD8AAAAAAAAAAAAAAABu2/Y+AACAPwAAAAAAAIA/AACAPwAAgD9JkgQ/AACAPwAAAAAAAAAAAAAAAAAAAABJkgQ/AACAPwAAAAAAAIA/btv2PgAAgD8AAAAAAAAAAAAAgD8AAIA/AAAAAAAAAAAAAIA/AAAAAAAAgD8AAIA/AACAPwAAgD8AAAAAAACAPwAAAAAAAAAAbtv2PgAAAAAAAIA/AAAAAAAAgD8AAIA/AACAPwAAgD9JkgQ/AAAAAAAAgD8AAAAASZIEPwAAAAAAAIA/AACAPwAAAAAAAAAAbtv2PgAAAAAAAIA/AACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPwAAAAAAAIA/AACAPwAAAAAAAAAAAACAP3d3dz8AAAAAAAAAAAAAgD8AAIA/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AAAAAAAAAAAAAIA/i4gIPQAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAP3d3dz8AAIA/i4gIPQAAAAAAAAAAi4gIPXd3dz93d3c/AAAAAIuICD0AAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/d3d3PwAAAACLiAg9d3d3P3d3dz93d3c/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAA0s91PwAAAAAAAAAAAAAAAAAAgD+e5kk/AAAAAAAAAAAAAAAAAACAP4plWD4AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA///9/P+YCIz0AAAAA5gIjPQAAAAAAAIA/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAAADsL34/UZkZPgAAgD+KZVg+AAAAAAAAAADsL34/UZkZPgAAgD8AAAAAAAAAAAAAAADSz3U/AACAP+wvfj9RmRk+AAAAAAAAAAAAAAAAAACAP9LPdT8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAAACKZVg+q6oqMwAAgD+rqiozAACAP57mST8AAIA/AAAAANLPdT8AAAAAAACAPwAAgD8AAAAAAAAAAAAAAAAAAIA///9/P+YCIz0AAIA/AAAAAP//fz8AAAAA//9/P+YCIz0AAAAAAACAPwAAgD8AAIA/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAgD8AAIA/nuZJPwAAAAAAAAAAimVYPquqKjMAAAAAAAAAAIplWD4AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAd3d3PwAAAACLiAg9d3d3P3d3dz93d3c/AAAAAAAAAAAAAIA/i4gIPQAAgD8AAAAAAACAP3d3dz8AAIA/i4gIPQAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAd3d3PwAAAACLiAg9AAAAAIuICD13d3c/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAgD8AAIA/AACAPwAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAP3d3dz8AAAAAAAAAAAAAgD8AAIA/AAAAAAAAgD8AAIA/AACAPwAAAAAAAAAA//9/P2KemjwAAIA/AAAAAP//fz8AAAAAAACAPwAAAAANK3s/AACAPwAAgD/xdgI/DSt7PwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPw0rez8AAIA/8XYCPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAGKemjwAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/DSt7PwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAGKemjwAAIA/AACAP///fz9inpo8DSt7PwAAAAAAAIA/HhL7PgAAgD8AAAAAAACAPwAAAADxdgI/q6oqMwAAgD+rqiozAACAPwAAgD8AAIA/HhL7Pg0rez8AAAAAAACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAAADxdgI/AACAP/F2Aj+rqioz"),
 "format": 34359738391,
-"material": ExtResource("1_mtb8i"),
+"material": ExtResource("1_cajg6"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 360,
@@ -22,16 +22,21 @@ _surfaces = [{
 data = PackedVector3Array(-3.5, 1.5, -1.5, -3.5, -1.5, -1.5, 3.4877, 1.5, -1.5, 3.5, -1.5, -1.4019, 3.5, 1.4, -1.4, 3.5, 1.5, -1.4019, -3.5, -1.5, 1.5, -3.5, -1.5, 1.4742, -3.5, 1.5, 1.4742, 3.5, 1.5, -0.05, 3.5, 1.5, 1.45, -3.5, 1.5, -1.5, -3.5, -1.5, 1.5, 3.4483, -1.5, -1.4317, 3.4877, -1.5, -1.5, 3.4877, -1.5, -1.5, -3.4755, -1.5, 1.4317, -3.5, -1.5, 1.4742, 3.4877, -1.5, -1.5, -3.5, -1.5, 1.4742, -3.5, -1.5, 1.5, -3.5, 1.5, 1.4742, 3.5, 1.5, 1.5, -3.5, 1.5, 1.5, -3.5, 1.5, -1.5, -3.5, 1.5, -1.45, -3.5, -1.5, -1.45, 3.5, 1.5, -0.05, -3.5, 1.5, -1.5, 3.4877, 1.5, -1.5, -3.5, 1.5, 1.4742, -3.5, 1.5, 1.4175, 3.5, 1.5, 1.5, -3.5, 1.5, 1.4175, -3.5, 1.5, 0.05, 3.5, 1.5, 1.5, -3.5, -1.4, 1.4, -3.5, 1.4, 1.4, -3.5, -1.5, 1.4175, 3.5, 1.5, 1.5, -3.5, 1.5, -1.45, -3.5, 1.5, -1.5, 3.5, -1.5, 1.5, 3.5, 1.5, 1.5, 3.5, -1.5, 1.45, -3.5, 1.5, 0.05, -3.5, 1.5, -1.45, 3.5, 1.5, 1.5, -3.5, 1.5, 1.5, 3.5, 1.5, 1.5, -3.5, -1.5, 1.5, -3.5, -1.5, 1.4175, -3.5, 1.4, 1.4, -3.5, 1.5, 1.4175, -3.5, -1.5, 1.5, -3.5, 1.5, 1.4742, -3.5, 1.5, 1.5, 3.5, -1.5, -0.05, -3.5, -1.5, 1.5, 3.5, -1.5, 1.45, -3.5, 1.5, 0.05, -3.5, 1.4, 1.4, -3.5, 1.4, 0.05, 3.5, 1.5, 1.5, 3.5, -1.5, 1.5, -3.5, -1.5, 1.5, 3.5, -1.5, 1.45, -3.5, -1.5, 1.5, 3.5, -1.5, 1.5, -3.5, 1.5, 1.4175, -3.5, 1.4, 1.4, -3.5, 1.5, 0.05, -3.5, -1.4, 0.05, -3.5, -1.5, 1.4175, -3.5, -1.5, 0.05, 3.5, -1.4, -0.05, 3.5, -1.5, -1.4019, 3.5, -1.5, -0.05, -3.5, -1.5, -1.5, -3.5, 1.5, -1.5, -3.5, -1.5, -1.45, 3.5, 1.4, -1.4, 3.5, -1.5, -1.4019, 3.5, -1.4, -1.4, 3.5, 1.5, 1.45, 3.5, -1.5, 1.45, 3.5, 1.5, 1.5, 3.5, -1.4, -1.4, 3.5, -1.5, -1.4019, 3.5, -1.4, -0.05, -3.5, -1.5, -1.45, 3.4877, -1.5, -1.5, -3.5, -1.5, -1.5, -3.5, -1.5, 0.05, 3.4877, -1.5, -1.5, -3.5, -1.5, -1.45, 3.5, -1.5, -1.4019, 3.4483, -1.5, -1.4317, 3.5, -1.5, -0.05, -3.5, -1.5, 0.05, -3.4755, -1.5, 1.4317, 3.4877, -1.5, -1.5, 3.5, -1.5, -0.05, 3.4483, -1.5, -1.4317, -3.5, -1.5, 1.5, -3.5, 1.5, -1.5, 3.5, 1.5, 1.45, 3.5, 1.5, 1.5, 3.5, 1.5, -1.4019, 3.5, 1.4, -0.05, 3.5, 1.5, -0.05, -3.5, -1.5, 1.4175, -3.4755, -1.5, 1.4317, -3.5, -1.5, 0.05, -3.5, -1.4, 1.4, -3.5, -1.5, 1.4175, -3.5, -1.4, 0.05, 3.4877, 1.5, -1.5, 3.5, 1.5, -1.4019, 3.5, 1.5, -0.05, 3.5, 1.4, -1.4, 3.5, 1.4, -0.05, 3.5, 1.5, -1.4019, 3.5, 1.5, -1.4019, 3.4877, 1.5, -1.5, 3.5, 1.5, -1.5, 3.5, 1.5, -1.5, 3.5, 1.5, -1.5, 3.5, 1.5, -1.4019, 3.5, 1.5, -1.5, 3.4877, 1.5, -1.5, 3.5, 1.5, -1.5, 3.4877, -1.5, -1.5, 3.4877, 1.5, -1.5, -3.5, -1.5, -1.5, 3.5, 1.4, 1.4, -3.5, 1.4, 0.05, -3.5, 1.4, 1.4, 3.5, -1.4, -1.4, 3.5, -1.4, -0.05, -3.5, -1.4, 1.4, -3.5, -1.4, 1.4, 3.5, -1.4, -0.05, 3.5, -1.4, 1.4, -3.5, 1.4, 0.05, 3.5, 1.4, 1.4, -3.5, 1.4, -1.4, 3.5, 1.4, 1.4, -3.5, 1.4, 1.4, -3.5, -1.4, 1.4, -3.5, 1.4, -1.4, 3.5, 1.4, -1.4, 3.5, -1.4, -1.4, -3.5, -1.4, 0.05, -3.5, -1.4, -1.4, 3.5, -1.4, -1.4, -3.5, 1.4, -1.4, 3.5, 1.4, -0.05, 3.5, 1.4, -1.4, 3.5, 1.4, -0.05, -3.5, 1.4, -1.4, 3.5, 1.4, 1.4, -3.5, -1.4, 0.05, 3.5, -1.4, -1.4, -3.5, -1.4, 1.4, 3.5, -1.4, 1.4, 3.5, 1.4, 1.4, -3.5, -1.4, 1.4, -3.5, -1.4, -1.4, -3.5, 1.4, -1.4, 3.5, -1.4, -1.4, 3.5, 1.4, -0.05, 3.6, -1.5, -0.05, 3.5, 1.5, -0.05, 3.6, 1.5, -0.05, 3.6, 1.5, 1.45, 3.5, 1.5, -0.05, 3.6, -1.5, -0.05, 3.5, -1.4, -0.05, 3.5, -1.5, -0.05, 3.6, 1.5, 1.45, 3.5, -1.5, 1.45, 3.5, 1.5, 1.45, 3.6, 1.5, 1.45, 3.6, 1.5, -0.05, 3.6, -1.5, -0.05, 3.5, 1.4, -0.05, 3.5, -1.4, -0.05, 3.6, -1.5, -0.05, 3.5, 1.4, 1.4, 3.5, -1.4, -0.05, 3.5, 1.4, -0.05, 3.6, -1.5, -0.05, 3.6, 1.5, -0.05, 3.5, 1.5, -0.05, 3.6, 1.5, 1.45, 3.5, 1.5, 1.45, 3.5, 1.5, -0.05, 3.6, -1.5, 1.45, 3.6, 1.5, 1.45, 3.6, -1.5, -0.05, 3.5, -1.5, 1.45, 3.6, 1.5, 1.45, 3.6, -1.5, 1.45, 3.5, -1.4, -0.05, 3.5, 1.4, 1.4, 3.5, -1.4, 1.4, 3.5, -1.5, 1.45, 3.6, -1.5, 1.45, 3.6, -1.5, -0.05, 3.6, -1.5, -0.05, 3.5, -1.5, -0.05, 3.5, -1.5, 1.45, 3.5, -1.5, -1.4019, 4.7473, -1.5, -0.6817, 3.4877, -1.5, -1.5, 3.4983, -1.5, -1.5183, 3.4983, 1.5, -1.5183, 3.4877, 1.5, -1.5, 4.7973, 1.5, -0.7683, 3.4983, 1.5, -1.5183, 3.4983, -1.5, -1.5183, 3.5, -1.5, -1.4019, 3.5, 1.5, -1.4019, 4.7473, 1.5, -0.6817, 4.7473, 1.5, -0.6817, 4.7973, 1.5, -0.7683, 4.7473, -1.5, -0.6817, 3.4983, 1.5, -1.5183, 3.5, 1.5, -1.5, 3.4877, 1.5, -1.5, 4.7973, 1.5, -0.7683, 3.5, 1.5, -1.5, 3.4983, 1.5, -1.5183, 4.7973, 1.5, -0.7683, 3.5, 1.5, -1.4019, 3.5, 1.5, -1.5, 4.7973, 1.5, -0.7683, 4.7473, 1.5, -0.6817, 3.5, 1.5, -1.4019, 4.7473, -1.5, -0.6817, 4.7973, -1.5, -0.7683, 3.4983, -1.5, -1.5183, 3.4483, -1.5, -1.4317, 3.4877, -1.5, -1.5, 3.4483, -1.5, -1.4317, 3.4877, -1.5, -1.5, 3.4483, -1.5, -1.4317, 3.5, -1.5, -1.4019, 4.7473, -1.5, -0.6817, 4.7973, 1.5, -0.7683, 4.7973, -1.5, -0.7683, 3.5, -1.5, -1.4019, 3.4483, -1.5, -1.4317, 3.4483, -1.5, -1.4317, 3.5, -1.5, -1.4019, 4.7473, 1.5, -0.6817, 4.7473, -1.5, -0.6817, 4.7973, -1.5, -0.7683, 4.7973, 1.5, -0.7683, 3.4983, -1.5, -1.5183, 3.4983, -1.5, -1.5183, 3.4877, -1.5, -1.5, 4.7473, -1.5, -0.6817, 3.4877, -1.5, -1.5, 3.4983, -1.5, -1.5183, 3.4877, 1.5, -1.5, -3.6, -1.5, 0.05, -3.5, -1.5, 0.05, -3.5, -1.5, -1.45, -3.5, -1.5, -1.45, -3.6, 1.5, -1.45, -3.6, -1.5, -1.45, -3.6, 1.5, -1.45, -3.6, -1.5, 0.05, -3.6, -1.5, -1.45, -3.5, -1.4, 0.05, -3.5, 1.4, -1.4, -3.5, -1.4, -1.4, -3.6, -1.5, 0.05, -3.5, -1.4, 0.05, -3.5, -1.5, 0.05, -3.5, 1.4, 0.05, -3.5, -1.4, 0.05, -3.6, -1.5, 0.05, -3.5, -1.5, -1.45, -3.6, -1.5, -1.45, -3.6, -1.5, 0.05, -3.6, 1.5, -1.45, -3.5, -1.5, -1.45, -3.5, 1.5, -1.45, -3.5, -1.4, 0.05, -3.5, 1.4, 0.05, -3.5, 1.4, -1.4, -3.6, 1.5, -1.45, -3.6, 1.5, 0.05, -3.6, -1.5, 0.05, -3.5, 1.5, -1.45, -3.5, 1.5, 0.05, -3.6, 1.5, -1.45, -3.5, 1.5, 0.05, -3.6, 1.5, 0.05, -3.6, 1.5, -1.45, -3.5, 1.4, 0.05, -3.6, -1.5, 0.05, -3.5, 1.5, 0.05, -3.6, 1.5, 0.05, -3.5, 1.5, 0.05, -3.6, -1.5, 0.05, -3.5, -1.5, 1.4175, -3.4755, -1.5, 1.4317, -3.4755, -1.5, 1.4317, -3.5255, 1.5, 1.5183, -3.5, 1.5, 1.4175, -3.5, 1.5, 1.4742, -3.5, 1.5, 1.4175, -3.5255, 1.5, 1.5183, -4.8245, 1.5, 0.7683, -4.8245, 1.5, 0.7683, -4.7745, 1.5, 0.6817, -3.5, 1.5, 1.4175, -3.5, 1.5, 1.4742, -3.5255, -1.5, 1.5183, -3.5255, 1.5, 1.5183, -4.8245, 1.5, 0.7683, -3.5255, 1.5, 1.5183, -3.5255, -1.5, 1.5183, -3.5, 1.5, 1.4175, -4.7745, 1.5, 0.6817, -4.7745, -1.5, 0.6817, -4.7745, -1.5, 0.6817, -4.8245, -1.5, 0.7683, -3.5255, -1.5, 1.5183, -3.5, -1.5, 1.4175, -4.7745, -1.5, 0.6817, -3.5255, -1.5, 1.5183, -4.7745, -1.5, 0.6817, -4.7745, 1.5, 0.6817, -4.8245, 1.5, 0.7683, -3.5, 1.5, 1.4175, -4.7745, -1.5, 0.6817, -3.5, -1.5, 1.4175, -3.5, -1.5, 1.4175, -3.5, -1.5, 1.4742, -3.4755, -1.5, 1.4317, -3.4755, -1.5, 1.4317, -3.5, -1.5, 1.4742, -3.4755, -1.5, 1.4317, -3.5255, -1.5, 1.5183, -3.5, -1.5, 1.4742, -3.5, -1.5, 1.4175, -4.7745, -1.5, 0.6817, -4.8245, 1.5, 0.7683, -4.8245, -1.5, 0.7683, -4.8245, 1.5, 0.7683, -3.5255, -1.5, 1.5183, -4.8245, -1.5, 0.7683, -3.5255, -1.5, 1.5183, -3.5, 1.5, 1.4742, -3.5, -1.5, 1.4742)
 
 [sub_resource type="Resource" id="Resource_rt3de"]
-script = ExtResource("3_p6nx0")
-object_to_spawn = ExtResource("4_mtb8i")
+script = ExtResource("3_sum18")
+object_to_spawn = ExtResource("4_p6f07")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [sub_resource type="Resource" id="Resource_4kfej"]
-script = ExtResource("3_p6nx0")
-object_to_spawn = ExtResource("4_1wk7h")
+script = ExtResource("3_sum18")
+object_to_spawn = ExtResource("4_p6f07")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
-[node name="ShippingContainerSpawning" type="Node3D"]
+[sub_resource type="Resource" id="Resource_kn4lb"]
+script = ExtResource("3_sum18")
+object_to_spawn = ExtResource("5_rbr0s")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[node name="ShippingContainerNpcLoot" type="Node3D"]
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49258, 0)
@@ -46,8 +51,8 @@ shape = SubResource("ConcavePolygonShape3D_0c2tv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
 
 [node name="LootSpawns" type="Node3D" parent="."]
-script = ExtResource("2_t483y")
-possible_spawns = Array[ExtResource("3_p6nx0")]([SubResource("Resource_rt3de"), SubResource("Resource_4kfej")])
+script = ExtResource("2_5j46b")
+possible_spawns = Array[ExtResource("3_sum18")]([SubResource("Resource_rt3de"), SubResource("Resource_4kfej")])
 spawn_on_ready = true
 location_data_variable = "loot_spawn_chance"
 
@@ -57,33 +62,37 @@ transform = Transform3D(0.712002, 0, 0.702178, 0, 1, 0, -0.702178, 0, 0.712002, 
 [node name="Node3D2" type="Node3D" parent="LootSpawns"]
 transform = Transform3D(-0.713972, 0, -0.700174, 0, 1, 0, 0.700174, 0, -0.713972, -2.8414, 0.0939578, -0.863316)
 
-[node name="TrapSpawns" type="Node3D" parent="."]
-script = ExtResource("2_t483y")
-possible_spawns = Array[ExtResource("3_p6nx0")]([SubResource("Resource_rt3de")])
-spawn_on_ready = true
-spawn_amount_max = 2
-location_data_variable = "trap_spawn_chance"
+[node name="NPCSpawns" type="Node3D" parent="." groups=["spawn points"]]
+script = ExtResource("2_5j46b")
+possible_spawns = Array[ExtResource("3_sum18")]([SubResource("Resource_kn4lb")])
+location_data_variable = "npc_spawn_chance"
 
-[node name="Node3D" type="Node3D" parent="TrapSpawns"]
-transform = Transform3D(0.712002, 0, 0.702178, 0, 1, 0, -0.702178, 0, 0.712002, 3.9427662, 0, -0.3419459)
+[node name="Node3D" type="Node3D" parent="NPCSpawns"]
+transform = Transform3D(-0.999141, 0, -0.0414396, 0, 1, 0, 0.0414396, 0, -0.999141, 1.91108, -1.19209e-07, 2.49701)
 
-[node name="Node3D3" type="Node3D" parent="TrapSpawns"]
-transform = Transform3D(0.712002, 0, 0.702178, 0, 1, 0, -0.702178, 0, 0.712002, 3.0467594, 0, 0.47680146)
+[node name="Node3D6" type="Node3D" parent="NPCSpawns"]
+transform = Transform3D(-0.999141, 0, -0.0414396, 0, 1, 0, 0.0414396, 0, -0.999141, 4.590048, -1.19209e-07, 4.4987874)
 
-[node name="Node3D4" type="Node3D" parent="TrapSpawns"]
-transform = Transform3D(0.712002, 0, 0.702178, 0, 1, 0, -0.702178, 0, 0.712002, -2.9135575, 0.0939577, 0.67953765)
+[node name="Node3D7" type="Node3D" parent="NPCSpawns"]
+transform = Transform3D(-0.999141, 0, -0.0414396, 0, 1, 0, 0.0414396, 0, -0.999141, 0.40471268, -1.19209e-07, 5.0453157)
 
-[node name="Node3D5" type="Node3D" parent="TrapSpawns"]
-transform = Transform3D(0.712002, 0, 0.702178, 0, 1, 0, -0.702178, 0, 0.712002, -2.75345, 0.09395794, -0.7520436)
+[node name="Node3D8" type="Node3D" parent="NPCSpawns"]
+transform = Transform3D(-0.999141, 0, -0.0414396, 0, 1, 0, 0.0414396, 0, -0.999141, -3.4357705, -1.19209e-07, 4.5889487)
 
-[node name="Node3D6" type="Node3D" parent="TrapSpawns"]
-transform = Transform3D(0.712002, 0, 0.702178, 0, 1, 0, -0.702178, 0, 0.712002, 2.4074583, 0.09395746, -0.6654949)
+[node name="Node3D2" type="Node3D" parent="NPCSpawns"]
+transform = Transform3D(-0.99848, 0, -0.0551069, 0, 1, 0, 0.0551069, 0, -0.99848, -2.02403, 0, 2.66471)
 
-[node name="Node3D7" type="Node3D" parent="TrapSpawns"]
-transform = Transform3D(0.712002, 0, 0.702178, 0, 1, 0, -0.702178, 0, 0.712002, 2.4074583, 2.9956288, -0.6654949)
+[node name="Node3D3" type="Node3D" parent="NPCSpawns"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, 0.0149314, 0, -3.0125)
 
-[node name="Node3D8" type="Node3D" parent="TrapSpawns"]
-transform = Transform3D(0.712002, 0, 0.702178, 0, 1, 0, -0.702178, 0, 0.712002, -2.5254898, 2.9956288, 0.6362106)
+[node name="Node3D4" type="Node3D" parent="NPCSpawns"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, 3.971971, 0, -4.404119)
 
-[node name="Node3D2" type="Node3D" parent="TrapSpawns"]
-transform = Transform3D(-0.713972, 0, -0.700174, 0, 1, 0, 0.700174, 0, -0.713972, -4.161711, 0.09395827, -0.03351164)
+[node name="Node3D5" type="Node3D" parent="NPCSpawns"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, -6.1836696, 0, -6.0040298)
+
+[node name="Node3D9" type="Node3D" parent="NPCSpawns"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, -1.9948791, 2.99258, 0.24445945)
+
+[node name="Node3D10" type="Node3D" parent="NPCSpawns"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, 1.546538, 2.99258, 0.3481434)

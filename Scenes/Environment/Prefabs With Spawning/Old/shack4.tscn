@@ -70,7 +70,7 @@ script = ExtResource("6_5i0m5")
 object_to_spawn = ExtResource("8_8ye0i")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
-[node name="Shack4" type="Node3D"]
+[node name="ShackNpcLoot" type="Node3D"]
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_qsepm")
@@ -86,11 +86,12 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.75,
 [node name="SpawnRadius" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
 
-[node name="LootSpawns" type="Node3D" parent="."]
+[node name="LootSpawns" type="Node3D" parent="." node_paths=PackedStringArray("ignore_heightmap")]
 script = ExtResource("5_tc1x3")
 possible_spawns = Array[ExtResource("6_5i0m5")]([SubResource("Resource_rt3de"), SubResource("Resource_4kfej")])
 spawn_on_ready = true
 location_data_variable = "loot_spawn_chance"
+ignore_heightmap = [NodePath("Node3D2"), NodePath("Node3D5"), NodePath("Node3D6")]
 
 [node name="Node3D" type="Node3D" parent="LootSpawns"]
 transform = Transform3D(0.748921, 0, 0.662659, 0, 1, 0, -0.662659, 0, 0.748921, 2.44491, -1.19209e-07, 2.54173)
@@ -110,10 +111,11 @@ transform = Transform3D(-0.909918, 0, -0.414789, 0, 1, 0, 0.414789, 0, -0.909918
 [node name="Node3D6" type="Node3D" parent="LootSpawns"]
 transform = Transform3D(-0.889982, 0, 0.455995, 0, 1, 0, -0.455995, 0, -0.889982, 2.50409, 3.20923, -2.46088)
 
-[node name="NPCSpawns" type="Node3D" parent="." groups=["spawn points"]]
+[node name="NPCSpawns" type="Node3D" parent="." node_paths=PackedStringArray("ignore_heightmap") groups=["spawn points"]]
 script = ExtResource("5_tc1x3")
 possible_spawns = Array[ExtResource("6_5i0m5")]([SubResource("Resource_kn4lb")])
 location_data_variable = "npc_spawn_chance"
+ignore_heightmap = [NodePath("Node3D8"), NodePath("Node3D10"), NodePath("Node3D9"), NodePath("Node3D11")]
 
 [node name="Node3D" type="Node3D" parent="NPCSpawns"]
 transform = Transform3D(-0.999141, 0, -0.0414396, 0, 1, 0, 0.0414396, 0, -0.999141, 1.91108, -1.19209e-07, 2.49701)

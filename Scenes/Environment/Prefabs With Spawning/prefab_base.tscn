@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=3 uid="uid://bqjryb6et7jsj"]
+
+[ext_resource type="Script" uid="uid://bf1yc1wrj6qoi" path="res://Scripts/prefab_controller.gd" id="1_a3e38"]
+[ext_resource type="Script" uid="uid://bdayrcr4af73n" path="res://Scripts/spawner.gd" id="2_eiwgt"]
+[ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="3_6acor"]
+[ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/Enemies/enemy.tscn" id="4_fyj08"]
+[ext_resource type="PackedScene" uid="uid://cwn2oirx41io" path="res://Scenes/Environment/Nature/chest.tscn" id="5_m28ai"]
+[ext_resource type="PackedScene" uid="uid://b77wn23o8x4a3" path="res://Scenes/Environment/Traps/mine.tscn" id="6_kynkf"]
+
+[sub_resource type="Resource" id="Resource_kn4lb"]
+script = ExtResource("3_6acor")
+object_to_spawn = ExtResource("4_fyj08")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_rt3de"]
+script = ExtResource("3_6acor")
+object_to_spawn = ExtResource("5_m28ai")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_2gyk4"]
+script = ExtResource("3_6acor")
+object_to_spawn = ExtResource("6_kynkf")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[node name="PrefabBase" type="Node3D" node_paths=PackedStringArray("nodes_to_exclude")]
+script = ExtResource("1_a3e38")
+spawn_npcs = true
+spawn_loot = true
+nodes_to_exclude = [NodePath("NpcSpawns"), NodePath("LootSpawns"), NodePath("TrapSpawns")]
+
+[node name="NpcSpawns" type="Node3D" parent="." groups=["spawn points"]]
+script = ExtResource("2_eiwgt")
+possible_spawns = Array[ExtResource("3_6acor")]([SubResource("Resource_kn4lb")])
+location_data_variable = "npc_spawn_chance"
+
+[node name="LootSpawns" type="Node3D" parent="."]
+script = ExtResource("2_eiwgt")
+possible_spawns = Array[ExtResource("3_6acor")]([SubResource("Resource_rt3de")])
+spawn_on_ready = true
+location_data_variable = "loot_spawn_chance"
+
+[node name="TrapSpawns" type="Node3D" parent="."]
+script = ExtResource("2_eiwgt")
+possible_spawns = Array[ExtResource("3_6acor")]([SubResource("Resource_2gyk4")])
+location_data_variable = "trap_spawn_chance"
+
+[node name="SpawnBuffer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)

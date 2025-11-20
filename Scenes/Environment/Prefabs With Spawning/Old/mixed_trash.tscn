@@ -1,55 +1,55 @@
 [gd_scene load_steps=17 format=3 uid="uid://di3h341sotn78"]
 
-[ext_resource type="Script" uid="uid://bf1yc1wrj6qoi" path="res://Scripts/prefab_controller.gd" id="1_bix1x"]
-[ext_resource type="PackedScene" uid="uid://b3f0jcvvcldns" path="res://Scenes/Environment/Props/Physics/crate.tscn" id="1_f2g5r"]
-[ext_resource type="PackedScene" uid="uid://btjp27ft7kaqr" path="res://Scenes/Environment/Props/Physics/crate_tall.tscn" id="2_f6gvf"]
-[ext_resource type="PackedScene" uid="uid://wubvthultu6w" path="res://Scenes/Environment/Props/Physics/crate_tall_horizontal.tscn" id="3_7clhc"]
-[ext_resource type="PackedScene" uid="uid://caaninc7023am" path="res://Scenes/Environment/Props/Physics/barrel.tscn" id="4_bustw"]
-[ext_resource type="PackedScene" uid="uid://bfxa04usil2ao" path="res://Scenes/Environment/Props/Physics/tire.tscn" id="4_c2ou7"]
-[ext_resource type="Script" uid="uid://bdayrcr4af73n" path="res://Scripts/spawner.gd" id="5_bustw"]
-[ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="6_bix1x"]
-[ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/Enemies/enemy.tscn" id="7_1y20r"]
-[ext_resource type="PackedScene" uid="uid://cwn2oirx41io" path="res://Scenes/Environment/Nature/chest.tscn" id="8_dcx57"]
-[ext_resource type="PackedScene" uid="uid://dvpgm7keysw0" path="res://Scenes/Environment/Props/Physics/drum_barrel_rust.tscn" id="9_bix1x"]
-[ext_resource type="PackedScene" uid="uid://21yqxj5xl8cv" path="res://Scenes/Environment/Props/Physics/drum_barrel_blue.tscn" id="10_1y20r"]
-[ext_resource type="PackedScene" uid="uid://bjama3lmb5mct" path="res://Scenes/Environment/Props/Physics/tire_stack.tscn" id="11_dcx57"]
+[ext_resource type="Script" uid="uid://bf1yc1wrj6qoi" path="res://Scripts/prefab_controller.gd" id="1_igp8r"]
+[ext_resource type="PackedScene" uid="uid://b3f0jcvvcldns" path="res://Scenes/Environment/Props/Physics/crate.tscn" id="2_1h1u2"]
+[ext_resource type="PackedScene" uid="uid://btjp27ft7kaqr" path="res://Scenes/Environment/Props/Physics/crate_tall.tscn" id="3_17su6"]
+[ext_resource type="PackedScene" uid="uid://wubvthultu6w" path="res://Scenes/Environment/Props/Physics/crate_tall_horizontal.tscn" id="4_dk6cn"]
+[ext_resource type="PackedScene" uid="uid://caaninc7023am" path="res://Scenes/Environment/Props/Physics/barrel.tscn" id="5_4cy36"]
+[ext_resource type="Script" uid="uid://bdayrcr4af73n" path="res://Scripts/spawner.gd" id="6_fgpx7"]
+[ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="7_km42f"]
+[ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/Enemies/enemy.tscn" id="8_av8lk"]
+[ext_resource type="PackedScene" uid="uid://cwn2oirx41io" path="res://Scenes/Environment/Nature/chest.tscn" id="9_l8pqe"]
+[ext_resource type="PackedScene" uid="uid://dvpgm7keysw0" path="res://Scenes/Environment/Props/Physics/drum_barrel_rust.tscn" id="10_f7eif"]
+[ext_resource type="PackedScene" uid="uid://21yqxj5xl8cv" path="res://Scenes/Environment/Props/Physics/drum_barrel_blue.tscn" id="11_trmu5"]
+[ext_resource type="PackedScene" uid="uid://bjama3lmb5mct" path="res://Scenes/Environment/Props/Physics/tire_stack.tscn" id="12_epcsm"]
+[ext_resource type="PackedScene" uid="uid://bfxa04usil2ao" path="res://Scenes/Environment/Props/Physics/tire.tscn" id="13_pq3q5"]
 
 [sub_resource type="Resource" id="Resource_kn4lb"]
-script = ExtResource("6_bix1x")
-object_to_spawn = ExtResource("7_1y20r")
+script = ExtResource("7_km42f")
+object_to_spawn = ExtResource("8_av8lk")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [sub_resource type="Resource" id="Resource_rt3de"]
-script = ExtResource("6_bix1x")
-object_to_spawn = ExtResource("8_dcx57")
+script = ExtResource("7_km42f")
+object_to_spawn = ExtResource("9_l8pqe")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [sub_resource type="Resource" id="Resource_4kfej"]
-script = ExtResource("6_bix1x")
-object_to_spawn = ExtResource("8_dcx57")
+script = ExtResource("7_km42f")
+object_to_spawn = ExtResource("9_l8pqe")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
-[node name="WoodenCrates" type="Node3D"]
-script = ExtResource("1_bix1x")
+[node name="WoodenCratesNpcLoot" type="Node3D"]
+script = ExtResource("1_igp8r")
 
-[node name="Crate" parent="." instance=ExtResource("1_f2g5r")]
+[node name="Crate" parent="." instance=ExtResource("2_1h1u2")]
 transform = Transform3D(0.86480105, 0, -0.50211465, 0, 1, 0, 0.50211465, 0, 0.86480105, -3.38, 0, 3.083)
 metadata/_edit_group_ = true
 
-[node name="CrateTall" parent="." instance=ExtResource("2_f6gvf")]
+[node name="CrateTall" parent="." instance=ExtResource("3_17su6")]
 transform = Transform3D(0.8500306, 0, -0.5267333, 0, 1, 0, 0.5267333, 0, 0.8500306, 0, 0, 0)
 metadata/_edit_group_ = true
 
-[node name="CrateTall2" parent="." instance=ExtResource("3_7clhc")]
+[node name="CrateTall2" parent="." instance=ExtResource("4_dk6cn")]
 transform = Transform3D(0.8948331, 0, -0.44640085, 0, 1, 0, 0.44640085, 0, 0.8948331, 4.5749245, 0.5848088, 0.42412353)
 metadata/_edit_group_ = true
 
-[node name="Barrel" parent="." instance=ExtResource("4_bustw")]
+[node name="Barrel" parent="." instance=ExtResource("5_4cy36")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.886, 0, 0.892)
 
 [node name="NPCSpawns" type="Node3D" parent="." groups=["spawn points"]]
-script = ExtResource("5_bustw")
-possible_spawns = Array[ExtResource("6_bix1x")]([SubResource("Resource_kn4lb")])
+script = ExtResource("6_fgpx7")
+possible_spawns = Array[ExtResource("7_km42f")]([SubResource("Resource_kn4lb")])
 location_data_variable = "npc_spawn_chance"
 
 [node name="Node3D" type="Node3D" parent="NPCSpawns"]
@@ -77,8 +77,8 @@ transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, 
 transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, -1.3674159, -9.536743e-07, 6.2237315)
 
 [node name="LootSpawns" type="Node3D" parent="."]
-script = ExtResource("5_bustw")
-possible_spawns = Array[ExtResource("6_bix1x")]([SubResource("Resource_rt3de"), SubResource("Resource_4kfej")])
+script = ExtResource("6_fgpx7")
+possible_spawns = Array[ExtResource("7_km42f")]([SubResource("Resource_rt3de"), SubResource("Resource_4kfej")])
 spawn_on_ready = true
 location_data_variable = "loot_spawn_chance"
 
@@ -88,14 +88,14 @@ transform = Transform3D(0.712002, 0, 0.702178, 0, 1, 0, -0.702178, 0, 0.712002, 
 [node name="Node3D2" type="Node3D" parent="LootSpawns"]
 transform = Transform3D(-0.713972, 0, -0.700174, 0, 1, 0, 0.700174, 0, -0.713972, 0.14119482, 0.0939578, 1.7817461)
 
-[node name="RigidBody3D" parent="." instance=ExtResource("9_bix1x")]
+[node name="RigidBody3D" parent="." instance=ExtResource("10_f7eif")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16395283, 0, -1.938798)
 
-[node name="RigidBody3D2" parent="." instance=ExtResource("10_1y20r")]
+[node name="RigidBody3D2" parent="." instance=ExtResource("11_trmu5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5507219, 0, -1.8584003)
 
-[node name="TireStack" parent="." instance=ExtResource("11_dcx57")]
+[node name="TireStack" parent="." instance=ExtResource("12_epcsm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.763, 0, -3.043)
 
-[node name="Tire" parent="." instance=ExtResource("4_c2ou7")]
+[node name="Tire" parent="." instance=ExtResource("13_pq3q5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.132, 0, -1.188)

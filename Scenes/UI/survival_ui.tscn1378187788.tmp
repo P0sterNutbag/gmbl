@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cc458wgoeu6t4"]
+[gd_scene load_steps=26 format=3 uid="uid://cc458wgoeu6t4"]
 
 [ext_resource type="Script" uid="uid://dr73ivowve6xe" path="res://Scripts/survival_ui.gd" id="1_e5c6o"]
 [ext_resource type="Script" uid="uid://bclh5yhrpmkxf" path="res://Scripts/stat_visual.gd" id="2_k4cvi"]
@@ -12,15 +12,16 @@
 [ext_resource type="PackedScene" uid="uid://dht8msbc26v1q" path="res://Scenes/UI/quest_marker.tscn" id="9_e5c6o"]
 [ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="9_to4rm"]
 [ext_resource type="PackedScene" uid="uid://connpctdgiwij" path="res://Scenes/UI/exit_button.tscn" id="10_0pkni"]
-[ext_resource type="Script" uid="uid://b5dg453t2l2fh" path="res://Scripts/menu.gd" id="10_1kfkr"]
 [ext_resource type="Script" uid="uid://b37bjjekoe1qe" path="res://Scripts/journal_menu.gd" id="10_vghdt"]
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="11_0pkni"]
 [ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="12_2dyl4"]
 [ext_resource type="Theme" uid="uid://efo20xxcf1e5" path="res://Art/Themes/vbox_container.tres" id="13_oq622"]
+[ext_resource type="Script" uid="uid://7iem50uoaviu" path="res://Scripts/equipment_ui.gd" id="14_1kfkr"]
 [ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="14_e5c6o"]
 [ext_resource type="Theme" uid="uid://cdtfcbhvps3m1" path="res://Art/Themes/text_mediun.tres" id="15_1lobq"]
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="15_k4cvi"]
 [ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="16_1lobq"]
+[ext_resource type="Script" uid="uid://bo0c2fte0cq5p" path="res://Scripts/menu_item.gd" id="17_jtf3n"]
 [ext_resource type="Script" uid="uid://da4hlku4dc72j" path="res://Scripts/equipmen_button.gd" id="19_jtf3n"]
 [ext_resource type="PackedScene" uid="uid://bos3d7nxhdnc5" path="res://Scenes/UI/pause_menu.tscn" id="19_oq622"]
 
@@ -477,7 +478,6 @@ offset_left = 829.0
 offset_right = 829.0
 
 [node name="PlayerInventory" type="HBoxContainer" parent="."]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -490,8 +490,7 @@ offset_bottom = 382.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 64
-script = ExtResource("10_1kfkr")
-pause_on_open = true
+script = ExtResource("8_k3cux")
 
 [node name="Inventory" parent="PlayerInventory" instance=ExtResource("9_to4rm")]
 layout_mode = 2
@@ -508,159 +507,46 @@ offset_top = 0.0
 offset_right = 24.0
 offset_bottom = 24.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory"]
-layout_mode = 2
-theme_override_constants/separation = 48
-
-[node name="Equipment" type="PanelContainer" parent="PlayerInventory/VBoxContainer"]
-custom_minimum_size = Vector2(497, 0)
+[node name="Equipment" type="PanelContainer" parent="PlayerInventory"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-mouse_filter = 2
 theme = ExtResource("11_0pkni")
+script = ExtResource("14_1kfkr")
 
-[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/VBoxContainer/Equipment"]
+[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/Equipment"]
 layout_mode = 2
-mouse_filter = 2
 theme = ExtResource("12_2dyl4")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/VBoxContainer/Equipment/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/Equipment/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/Equipment/MarginContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/VBoxContainer/Equipment/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PlayerInventory/VBoxContainer/Equipment/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="PlayerInventory/Equipment/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("15_1lobq")
 text = "Guns"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/VBoxContainer/Equipment/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/Equipment/MarginContainer/VBoxContainer"]
 layout_mode = 2
-mouse_filter = 2
+script = ExtResource("17_jtf3n")
 
-[node name="MenuItem" parent="PlayerInventory/VBoxContainer/Equipment/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
+[node name="MenuItem" parent="PlayerInventory/Equipment/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
 layout_mode = 2
-text = "Primary: "
+text = "Primary:"
 script = ExtResource("19_jtf3n")
 equipment_array = "equipped_guns"
 slot_index = 0
 
-[node name="MenuItem2" parent="PlayerInventory/VBoxContainer/Equipment/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
+[node name="MenuItem2" parent="PlayerInventory/Equipment/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Secondary: "
 script = ExtResource("19_jtf3n")
 equipment_array = "equipped_guns"
-slot_index = 1
-
-[node name="Equipment2" type="PanelContainer" parent="PlayerInventory/VBoxContainer"]
-custom_minimum_size = Vector2(497, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-mouse_filter = 2
-theme = ExtResource("11_0pkni")
-
-[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/VBoxContainer/Equipment2"]
-layout_mode = 2
-mouse_filter = 2
-theme = ExtResource("12_2dyl4")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/VBoxContainer/Equipment2/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("15_1lobq")
-text = "Armor"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="MenuItem" parent="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Head: "
-script = ExtResource("19_jtf3n")
-equipment_array = ""
-slot_index = 0
-
-[node name="MenuItem2" parent="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Body: "
-script = ExtResource("19_jtf3n")
-equipment_array = ""
-slot_index = 1
-
-[node name="MenuItem3" parent="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Legs: "
-script = ExtResource("19_jtf3n")
-equipment_array = ""
-slot_index = 1
-
-[node name="Equipment3" type="PanelContainer" parent="PlayerInventory/VBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(497, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-mouse_filter = 2
-theme = ExtResource("11_0pkni")
-
-[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/VBoxContainer/Equipment3"]
-layout_mode = 2
-mouse_filter = 2
-theme = ExtResource("12_2dyl4")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/VBoxContainer/Equipment3/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("15_1lobq")
-text = "Utility"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="MenuItem" parent="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Light: "
-script = ExtResource("19_jtf3n")
-equipment_array = ""
-slot_index = 0
-
-[node name="MenuItem2" parent="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Nav: "
-script = ExtResource("19_jtf3n")
-equipment_array = ""
-slot_index = 1
-
-[node name="MenuItem3" parent="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
-visible = false
-layout_mode = 2
-text = "Vision: "
-script = ExtResource("19_jtf3n")
-equipment_array = ""
 slot_index = 1
 
 [node name="TransferInventory" type="HBoxContainer" parent="."]
@@ -801,15 +687,8 @@ layout_mode = 2
 [node name="PauseMenu" parent="." instance=ExtResource("19_oq622")]
 visible = false
 
+[connection signal="exit" from="PlayerInventory" to="." method="_on_menu_exit"]
 [connection signal="pressed" from="PlayerInventory/Inventory/Control/Button" to="PlayerInventory" method="close"]
-[connection signal="pressed" from="PlayerInventory/VBoxContainer/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="PlayerInventory/VBoxContainer/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" method="_on_pressed"]
-[connection signal="pressed" from="PlayerInventory/VBoxContainer/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" to="PlayerInventory/VBoxContainer/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" method="_on_pressed"]
-[connection signal="pressed" from="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" method="_on_pressed"]
-[connection signal="pressed" from="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" to="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" method="_on_pressed"]
-[connection signal="pressed" from="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem3" to="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem3" method="_on_pressed"]
-[connection signal="pressed" from="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" method="_on_pressed"]
-[connection signal="pressed" from="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" to="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" method="_on_pressed"]
-[connection signal="pressed" from="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem3" to="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem3" method="_on_pressed"]
 [connection signal="exit" from="TransferInventory" to="." method="_on_menu_exit"]
 [connection signal="pressed" from="TransferInventory/Inventory/Control/Button" to="TransferInventory" method="close"]
 [connection signal="exit" from="Journal" to="." method="_on_menu_exit"]

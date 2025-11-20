@@ -211,6 +211,7 @@ func _physics_process(delta: float) -> void:
 		states.shoot:
 			if is_new_state:
 				on_alert = true
+				anim_player.play("Fire")
 				if !target:
 					if randf() <= camp_chance:
 						change_state(states.camp)
@@ -220,7 +221,6 @@ func _physics_process(delta: float) -> void:
 						#navigation_agent.set_target_position(last_seen_position)
 						change_state(states.search)
 					return
-				anim_player.play("Fire")
 				velocity = Vector3.ZERO
 				is_new_state = false
 			
@@ -526,6 +526,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		if state == states.shoot and randf_range(0, 1) <= strafe_change:
 			change_state(states.strafe)
 		else:
+			shoot_timer.start()
+			await shoot_timer.timeout
 			anim_player.play("Fire")
 	elif anim_name == "Reload":
 		if target:
@@ -534,8 +536,9 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 
 func _on_shoot_timer_timeout() -> void:
-	if anim_player.current_animation == "Fire":
-		anim_player.advance(anim_player.current_animation.length())
+	pass
+	#if anim_player.current_animation == "Fire":
+		#anim_player.advance(anim_player.current_animation.length())
 
 
 func _on_aim_timer_timeout() -> void:

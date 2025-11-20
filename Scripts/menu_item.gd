@@ -1,4 +1,5 @@
 extends Button
+class_name MenuItem
 
 var amount: int = 1:
 	set(value):

@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://51vl25435j83"]
+
+[ext_resource type="Script" uid="uid://bdvokalrlg1k6" path="res://Scripts/item_pickup.gd" id="1_hsks4"]
+[ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="2_0iuk2"]
+[ext_resource type="PackedScene" uid="uid://dpffikxirjfnq" path="res://Scenes/Guns/Models/pistol_model.tscn" id="3_rbj7w"]
+
+[sub_resource type="Resource" id="Resource_dwr3s"]
+script = ExtResource("2_0iuk2")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rk1p0"]
+size = Vector3(0.0542603, 0.23999, 0.37085)
+
+[node name="Pistol" type="RigidBody3D"]
+collision_layer = 16
+angular_damp = 5.0
+script = ExtResource("1_hsks4")
+item_slot = SubResource("Resource_dwr3s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.0306396, -0.0101318)
+shape = SubResource("BoxShape3D_rk1p0")
+debug_fill = false
+
+[node name="Pistol" parent="." instance=ExtResource("3_rbj7w")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.0195705, 0)

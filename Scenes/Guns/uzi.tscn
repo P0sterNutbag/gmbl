@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://cmgrxwiw6y3kg"]
+
+[ext_resource type="PackedScene" uid="uid://de0b6aj1eplv5" path="res://Scenes/Guns/gun_parent.tscn" id="1_5eyec"]
+[ext_resource type="PackedScene" uid="uid://cwq84n8f24jwt" path="res://Scenes/Bullets/bullet.tscn" id="2_c0m27"]
+[ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/hitmarker.tscn" id="3_f4idb"]
+[ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="4_qdpo4"]
+[ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="5_vhdqu"]
+[ext_resource type="PackedScene" uid="uid://dpffikxirjfnq" path="res://Scenes/Guns/Models/pistol_model.tscn" id="6_56dqv"]
+
+[sub_resource type="Resource" id="Resource_5eyec"]
+script = ExtResource("4_qdpo4")
+h_angle_variance_hip = 2.5
+v_angle_variance_hip = 2.5
+h_angle_variance_ads = 0.5
+v_angle_variance_ads = 0.5
+is_hitscan = false
+bullet_drop = true
+metadata/_custom_type_script = "uid://c338ifvm4duar"
+
+[sub_resource type="Resource" id="Resource_c0m27"]
+script = ExtResource("5_vhdqu")
+ammo = 24
+metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
+[node name="Uzi" instance=ExtResource("1_5eyec")]
+bullet_stats = SubResource("Resource_5eyec")
+gun_stats = SubResource("Resource_c0m27")
+ammo_type = "pistol_ammo"
+
+[node name="GunAnchor" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.049, -0.114)
+
+[node name="FirePoint" parent="GunAnchor" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00265765, 0.028532462, -0.125765)
+
+[node name="MuzzleFlash" parent="GunAnchor/FirePoint" index="1"]
+transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 0, 0, 0)
+
+[node name="Model" parent="GunAnchor" index="1" instance=ExtResource("6_56dqv")]
+
+[node name="Chamber" parent="GunAnchor" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0174474, 0.0364762, 0.0380221)

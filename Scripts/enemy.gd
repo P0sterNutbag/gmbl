@@ -83,7 +83,7 @@ func _ready() -> void:
 	shoot_component.tracer_firepoint = gun.fire_point
 	shoot_component.bullet_stats = gun.bullet_stats
 	shoot_component.gun_stats = gun.gun_stats
-	shoot_timer.wait_time = gun.fire_timer
+	shoot_timer.wait_time = gun.shoot_cooldown
 	items_to_drop.append(gun_item.physical_item)
 	shoot.connect($ShootComponent._on_shoot)
 	shoot.connect(gun._on_shoot)

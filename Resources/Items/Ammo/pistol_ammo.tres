@@ -1,20 +1,14 @@
-[gd_resource type="Resource" script_class="ItemUsable" load_steps=4 format=3 uid="uid://6vfmilbkneur"]
+[gd_resource type="Resource" script_class="ItemUsable" load_steps=3 format=3 uid="uid://6vfmilbkneur"]
 
 [ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="1_hiovw"]
 [ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="2_hiovw"]
-
-[sub_resource type="Resource" id="Resource_hiovw"]
-script = ExtResource("1_hiovw")
-values = Dictionary[String, Variant]({
-"ammo": 8
-})
-metadata/_custom_type_script = "uid://4c6own63hs8c"
 
 [resource]
 resource_local_to_scene = true
 resource_name = "pistol_ammo"
 script = ExtResource("2_hiovw")
-effects = Array[ExtResource("1_hiovw")]([SubResource("Resource_hiovw")])
+method = "reload_gun"
+custom_path = "PlayerStats"
 usable_in_menu = false
 title = "9mm Magazine"
 category = 1

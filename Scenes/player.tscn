@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://c055smn111au7"]
+[gd_scene load_steps=65 format=3 uid="uid://c055smn111au7"]
 
 [ext_resource type="Script" uid="uid://cslnx4rw32guw" path="res://Scripts/player.gd" id="1_5kxbm"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_x3wgy"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://cc6hd7m7eqnp" path="res://Scenes/Guns/sawed_off.tscn" id="22_p1odr"]
 [ext_resource type="AudioStream" uid="uid://ddrjpnastg7jv" path="res://Audio/CharacterActions/footstep-74321.wav" id="22_wpjfl"]
 [ext_resource type="PackedScene" uid="uid://cmgrxwiw6y3kg" path="res://Scenes/Guns/uzi.tscn" id="23_0gysh"]
+[ext_resource type="PackedScene" uid="uid://bu88iqf6x1y6s" path="res://Scenes/Guns/hunting_rifle.tscn" id="24_vfarp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kgvud"]
 
@@ -542,9 +543,15 @@ tracks/0/path = NodePath("../../../../..")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.20000005, 0.56666666, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
+"args": [1.0],
+"method": &"check_reload_ammo"
+}, {
+"args": [1.0],
+"method": &"check_reload_ammo"
+}, {
 "args": [0],
 "method": &"change_gun_state"
 }]
@@ -553,6 +560,55 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_83xs0"]
 _data = {
 &"reload": SubResource("Animation_y6uwr")
+}
+
+[sub_resource type="Animation" id="Animation_83xs0"]
+resource_name = "reload"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.9333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0],
+"method": &"change_gun_state"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ypfnu"]
+_data = {
+&"reload": SubResource("Animation_83xs0")
+}
+
+[sub_resource type="Animation" id="Animation_ypfnu"]
+resource_name = "reload"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0],
+"method": &"change_gun_state"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_xuaoq"]
+resource_name = "pump"
+length = 0.5
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wohnl"]
+_data = {
+&"pump": SubResource("Animation_xuaoq"),
+&"reload": SubResource("Animation_ypfnu")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fs7ks"]
@@ -675,7 +731,6 @@ libraries = {
 visible = false
 bullet_stats = SubResource("Resource_fd4e3")
 gun_stats = SubResource("Resource_wpjfl")
-ammo_type = "pistol_ammo"
 fire_type = 0
 ads_vector = Vector3(-0.195, 0.045, 0.07)
 cast_shadow = false
@@ -836,6 +891,7 @@ libraries = {
 }
 
 [node name="Uzi" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("23_0gysh")]
+visible = false
 
 [node name="GunAnchor" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Uzi" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.049000025, -0.22472692)
@@ -855,6 +911,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0019654334, -0.13606095, -0
 
 [node name="armR" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Uzi/ArmRAnchor" instance=ExtResource("9_fs7ks")]
 transform = Transform3D(1, 0, 0, 0, 0.995116, -0.0987119, 0, 0.0987119, 0.995116, 1.49012e-08, 4.76837e-07, -1.19209e-07)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Uzi"]
+libraries = {
+&"": SubResource("AnimationLibrary_ypfnu")
+}
+
+[node name="HuntingRifle" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("24_vfarp")]
+
+[node name="ArmLAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/HuntingRifle"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, -0.044855595, -0.16167152, -0.33613902)
+
+[node name="armL" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/HuntingRifle/ArmLAnchor" instance=ExtResource("9_fs7ks")]
+transform = Transform3D(-0.9297765, 0.1033202, -0.3533278, 8.3908844e-08, -0.9598051, -0.28066665, -0.3681245, -0.26095727, 0.8924042, 2.38419e-07, 0, 0)
+
+[node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/HuntingRifle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0101245, -0.189445, 0.0366693)
+
+[node name="armR" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/HuntingRifle/ArmRAnchor" instance=ExtResource("9_fs7ks")]
+transform = Transform3D(0.758646, -1.57586e-08, 0.651503, 5.96047e-08, 1, -4.52188e-08, -0.651503, 7.31377e-08, 0.758646, 0, 4.76837e-07, -2.38419e-07)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/HuntingRifle"]
+libraries = {
+&"": SubResource("AnimationLibrary_wohnl")
+}
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="CameraAnchor/Camera3D/GunOffset"]
 bus = &"SFX"
@@ -928,6 +1008,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9665127)
 shape = SubResource("SphereShape3D_2ijsl")
 
 [connection signal="animation_finished" from="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun/AnimationPlayer" to="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="CameraAnchor/Camera3D/GunOffset/GunAnchor/HuntingRifle/AnimationPlayer" to="CameraAnchor/Camera3D/GunOffset/GunAnchor/HuntingRifle" method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="CameraAnchor/BulletListener" to="." method="_on_bullet_listener_area_entered"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

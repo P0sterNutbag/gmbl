@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EquipmentGun" load_steps=6 format=3 uid="uid://dpt1btw7n2g0c"]
+
+[ext_resource type="PackedScene" uid="uid://bu88iqf6x1y6s" path="res://Scenes/Guns/hunting_rifle.tscn" id="1_jx1js"]
+[ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="2_ow6hk"]
+[ext_resource type="PackedScene" uid="uid://b0bma8cj8ymso" path="res://Scenes/Items/Guns/hunting_rifle.tscn" id="3_rfqax"]
+[ext_resource type="Script" uid="uid://34toqwivxgyk" path="res://Scripts/equipment_gun.gd" id="4_gb0xs"]
+
+[sub_resource type="Resource" id="Resource_u1us2"]
+script = ExtResource("2_ow6hk")
+ammo = 5
+metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
+[resource]
+script = ExtResource("4_gb0xs")
+gun_stats = SubResource("Resource_u1us2")
+gun_object = ExtResource("1_jx1js")
+name = "hunting_rifle"
+array_name = "equipped_guns"
+title = "Hunting Rifle"
+category = 2
+physical_item = ExtResource("3_rfqax")
+price = 500
+metadata/_custom_type_script = "uid://34toqwivxgyk"

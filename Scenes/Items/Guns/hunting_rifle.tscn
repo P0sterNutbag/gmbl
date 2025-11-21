@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://b0bma8cj8ymso"]
+
+[ext_resource type="Script" uid="uid://bdvokalrlg1k6" path="res://Scripts/item_pickup.gd" id="1_lfedf"]
+[ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="2_viwo2"]
+[ext_resource type="PackedScene" uid="uid://rhtj73aayki" path="res://Scenes/Guns/Models/ak47_model.tscn" id="3_x6jg1"]
+
+[sub_resource type="Resource" id="Resource_ibnff"]
+script = ExtResource("2_viwo2")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rk1p0"]
+size = Vector3(0.1, 0.178, 0.38)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2q4no"]
+size = Vector3(0.1, 0.127602, 0.471461)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6bf8n"]
+size = Vector3(0.1, 0.0620156, 0.317605)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k4jng"]
+size = Vector3(0.1, 0.212, 0.173)
+
+[node name="HuntingRifle" type="RigidBody3D"]
+collision_layer = 16
+angular_damp = 5.0
+script = ExtResource("1_lfedf")
+item_slot = SubResource("Resource_ibnff")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, -0.00666812, 0.33604)
+shape = SubResource("BoxShape3D_rk1p0")
+debug_fill = false
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.0673393, 0.00543653)
+shape = SubResource("BoxShape3D_2q4no")
+debug_fill = false
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.0714918, -0.388725)
+shape = SubResource("BoxShape3D_6bf8n")
+debug_fill = false
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, -0.110099, 0.0341526)
+shape = SubResource("BoxShape3D_k4jng")
+debug_fill = false
+
+[node name="Ak47" parent="." instance=ExtResource("3_x6jg1")]
+transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, -0.122254, 0.016794)

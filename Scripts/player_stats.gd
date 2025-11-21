@@ -154,14 +154,20 @@ func delete_current_equip():
 			inventory.items_slots.remove_item(item)
 
 
+func reload_gun() -> void:
+	gun.ammo = gun.gun_stats.max_ammo
+
+
 func go_to_sleep():
-	Globals.ui.inventory_holder.hide()
+	UiController.close_interface(Globals.survival_ui.player_inventory_holder)
 	change_state(states.pause)
 	var tween = create_tween()
 	tween.tween_callback(SceneManager.animation_player.play.bind("fade_in"))
 	tween.tween_callback(SceneManager.animation_player.play.bind("fade_out")).set_delay(2)
 	tween.tween_property(self, "sleep", max_sleep, 0)
 	tween.tween_property(self, "state", states.walk, 0)
+	await tween.finished
+	DayNightCycle.time_speed *= 0.1
 
 
 func on_scene_changed():

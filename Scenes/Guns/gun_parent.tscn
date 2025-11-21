@@ -64,7 +64,6 @@ script = ExtResource("1_4wfcx")
 bullet_stats = SubResource("Resource_gymyn")
 ammo_type = "rifle_ammo"
 fire_type = 1
-fire_timer = 0.1
 ads_vector = Vector3(-0.192, 0.045, 0.07)
 
 [node name="GunAnchor" type="Node3D" parent="."]
@@ -114,3 +113,8 @@ bus = &"SFX"
 [node name="EmptyClick" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("8_xws2q")
 bus = &"SFX"
+
+[node name="ShootCooldown" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="ShootCooldown" to="." method="_on_shoot_cooldown_timeout"]

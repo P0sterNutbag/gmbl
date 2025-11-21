@@ -6,7 +6,7 @@ class_name Gun
 @export var ammo_type: String
 enum fire_types {semi_auto, auto, pump}
 @export var fire_type: fire_types
-@export var fire_timer: float
+@export var shoot_cooldown: float = 0.1
 @export var zoom_amount: float = 1.25
 @export var kickback_magnitude: float = 1
 @export var ads_vector: Vector3
@@ -14,12 +14,15 @@ enum fire_types {semi_auto, auto, pump}
 @export var cast_shadow: bool = true
 var ammo: int:
 	get(): return gun_stats.ammo
+	set(value): 
+		ammo = value
+		gun_stats.ammo = value
 var max_ammo: int
 var time_since_shot: float
 var can_shoot: bool = true
 var has_released: bool = true
 var sway_vector: Vector3
-var shoot_timer: Timer
+#var shoot_timer: Timer
 var anim_player: AnimationPlayer
 var shell: PackedScene = preload("res://Scenes/Particles/shell.tscn")
 var smoke: PackedScene = preload("res://Scenes/Particles/gun_smoke.tscn")
@@ -30,28 +33,30 @@ var smoke: PackedScene = preload("res://Scenes/Particles/gun_smoke.tscn")
 @onready var audio_player: AudioStreamPlayer3D = $GunAnchor/FirePoint/AudioStreamPlayer3D
 @onready var chamber: Node3D = $GunAnchor/Chamber
 @onready var empty_click: AudioStreamPlayer3D = $EmptyClick
+@onready var shoot_cooldown_timer: Timer = $ShootCooldown
 
 
 func _ready() -> void:
 	max_ammo = gun_stats.ammo
-	shoot_timer = Timer.new()
-	shoot_timer.wait_time = 0.1
-	shoot_timer.one_shot = true
-	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
+	shoot_cooldown_timer.wait_time = shoot_cooldown
+	#shoot_timer = Timer.new()
+	#shoot_timer.wait_time = 0.1
+	#shoot_timer.one_shot = true
+	#shoot_timer.timeout.connect(_on_shoot_timer_timeout)
 	anim_player = get_node_or_null("AnimationPlayer")
 	#muzzle_flash.hide()
-	add_child(shoot_timer)
+	#add_child(shoot_timer)
 	if !cast_shadow:
 		for child in gun_model.get_child(0).get_children():
 			if child is MeshInstance3D:
 				child.cast_shadow = false
 
 
-func _process(delta: float) -> void:
-	time_since_shot += delta
-	if fire_type == fire_types.semi_auto:
-		if has_released and time_since_shot > fire_timer:
-			can_shoot = true
+func _process(_delta: float) -> void:
+	#time_since_shot += delta
+	#if fire_type == fire_types.semi_auto:
+		#if has_released and time_since_shot > fire_timer:
+			#can_shoot = true
 	if Input.is_action_just_released("shoot"):
 		has_released = true
 	if Input.is_action_just_pressed("shoot"):
@@ -68,30 +73,25 @@ func _on_shoot() -> void:
 	gun_stats.condition -= 0.05
 	can_shoot = false
 	has_released = false
-	time_since_shot = 0
-	shoot_timer.start()
 	flash_texture.rotate_z(deg_to_rad(randf_range(0, 360)))
 	muzzle_flash.visible = true
 	audio_player.play()
+	var tween = create_tween()
+	tween.tween_property(muzzle_flash, "visible", false, 0.1)
+	if fire_type == fire_types.pump:
+		await get_tree().create_timer(0.25).timeout
+		if anim_player:
+			anim_player.play("pump")
+	else:
+		shoot_cooldown_timer.start()
 	#var shell_instance = Globals.create_particle(shell, chamber.global_position, chamber)
 	#if shell_instance != null:
 		#shell_instance.apply_impulse(global_transform.basis.x * randf_range(2, 4) + global_transform.basis.y * randf_range(2, 3))
 		#shell_instance.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
-	var tween = create_tween()
-	tween.tween_property(muzzle_flash, "visible", false, 0.1)
-	if fire_type == fire_types.pump:
-		await get_tree().create_timer(fire_timer).timeout
-		if anim_player:
-			anim_player.play("pump")
-	#var inst = smoke.instantiate()
-	#get_tree().current_scene.add_child(inst)
-	#inst.global_position = fire_point.global_position
-	#inst.emitting = true
 
 
-func _on_shoot_timer_timeout() -> void:
-	if fire_type == fire_types.auto:
-		can_shoot = true
+func _on_shoot_cooldown_timeout() -> void:
+	can_shoot = true
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

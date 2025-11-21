@@ -54,6 +54,9 @@ var grenade = preload("res://Scenes/Bullets/grenade.tscn")
 @onready var rifle: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47
 @onready var sniper_rifle: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor/SniperRifle
 @onready var shotgun: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun
+@onready var sawed_off: Gun = $CameraAnchor/Camera3D/GunOffset/GunAnchor/SawedOff
+@onready var uzi: Gun = $CameraAnchor/Camera3D/GunOffset/GunAnchor/Uzi
+@onready var hunting_rifle: Gun = $CameraAnchor/Camera3D/GunOffset/GunAnchor/HuntingRifle
 @onready var shoot_component: Node = $ShootComponent
 @onready var step_timer: Timer = $StepTimer
 @onready var interact_cast: = $CameraAnchor/Camera3D/RayCast3D
@@ -177,7 +180,7 @@ func state_walk(delta):
 	else:
 		if gun_state == gun_states.ads:
 			speed = walk_speed
-		elif Input.is_action_pressed("sprint") and input.y < 0 and gun.shoot_timer.time_left == 0 and !Input.is_action_pressed("shoot"):
+		elif Input.is_action_pressed("sprint") and input.y < 0 and gun.shoot_cooldown_timer.time_left == 0 and !Input.is_action_pressed("shoot"):
 			speed = run_speed
 		else:
 			speed = base_speed

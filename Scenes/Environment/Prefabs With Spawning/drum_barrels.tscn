@@ -4,8 +4,41 @@
 [ext_resource type="PackedScene" uid="uid://21yqxj5xl8cv" path="res://Scenes/Environment/Props/Physics/drum_barrel_blue.tscn" id="2_8fx0m"]
 [ext_resource type="PackedScene" uid="uid://dvpgm7keysw0" path="res://Scenes/Environment/Props/Physics/drum_barrel_rust.tscn" id="3_6jkp2"]
 
-[node name="DrumBarrelsWSpawning" node_paths=PackedStringArray("nodes_to_exclude") instance=ExtResource("1_l7tv1")]
+[node name="DrumBarrels" node_paths=PackedStringArray("nodes_to_exclude") instance=ExtResource("1_l7tv1")]
 nodes_to_exclude = [NodePath("NpcSpawns"), NodePath("LootSpawns"), null]
+
+[node name="Node3D" type="Node3D" parent="NpcSpawns" index="0"]
+transform = Transform3D(-0.999141, 0, -0.0414396, 0, 1, 0, 0.0414396, 0, -0.999141, 2.4450388, -1.19209e-07, 4.472017)
+
+[node name="Node3D2" type="Node3D" parent="NpcSpawns" index="1"]
+transform = Transform3D(-0.99848, 0, -0.0551069, 0, 1, 0, 0.0551069, 0, -0.99848, -3.1046193, 0, 4.518872)
+
+[node name="Node3D3" type="Node3D" parent="NpcSpawns" index="2"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, 1.1382066, -9.536743e-07, 0.18714094)
+
+[node name="Node3D4" type="Node3D" parent="NpcSpawns" index="3"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, 1.9957625, -1.4305115e-06, -4.77362)
+
+[node name="Node3D5" type="Node3D" parent="NpcSpawns" index="4"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, -2.5711832, -9.536743e-07, -6.278622)
+
+[node name="Node3D6" type="Node3D" parent="NpcSpawns" index="5"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, -3.971037, -9.536743e-07, -1.6547046)
+
+[node name="Node3D7" type="Node3D" parent="NpcSpawns" index="6"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, 4.3784084, -9.536743e-07, 5.246243)
+
+[node name="Node3D8" type="Node3D" parent="NpcSpawns" index="7"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, -1.3674159, -9.536743e-07, 6.2237315)
+
+[node name="Node3D" type="Node3D" parent="LootSpawns" index="0"]
+transform = Transform3D(0.712002, 0, 0.702178, 0, 1, 0, -0.702178, 0, 0.712002, 0.06898451, 0.0939577, -1.1774095)
+
+[node name="Node3D2" type="Node3D" parent="LootSpawns" index="1"]
+transform = Transform3D(-0.713972, 0, -0.700174, 0, 1, 0, 0.700174, 0, -0.713972, -1.1785476, 0.0939578, 0.6628082)
+
+[node name="TrapSpawns" parent="." index="2"]
+process_mode = 4
 
 [node name="RigidBody3D" parent="." index="3" instance=ExtResource("2_8fx0m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.043245554, 0.5, 2.393278)

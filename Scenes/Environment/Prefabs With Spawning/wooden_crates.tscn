@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8837t6cigbtp"]
+
+[ext_resource type="PackedScene" uid="uid://bqjryb6et7jsj" path="res://Scenes/Environment/Prefabs With Spawning/prefab_base.tscn" id="1_wtsk8"]
+[ext_resource type="PackedScene" uid="uid://b3f0jcvvcldns" path="res://Scenes/Environment/Props/Physics/crate.tscn" id="2_gck1c"]
+[ext_resource type="PackedScene" uid="uid://btjp27ft7kaqr" path="res://Scenes/Environment/Props/Physics/crate_tall.tscn" id="3_yr1ku"]
+[ext_resource type="PackedScene" uid="uid://wubvthultu6w" path="res://Scenes/Environment/Props/Physics/crate_tall_horizontal.tscn" id="4_2qq8x"]
+[ext_resource type="PackedScene" uid="uid://bfxa04usil2ao" path="res://Scenes/Environment/Props/Physics/tire.tscn" id="5_lljc6"]
+
+[node name="WoodenCrates" instance=ExtResource("1_wtsk8")]
+
+[node name="Node3D" type="Node3D" parent="NpcSpawns" index="0"]
+transform = Transform3D(-0.999141, 0, -0.0414396, 0, 1, 0, 0.0414396, 0, -0.999141, 2.4450388, -1.19209e-07, 4.472017)
+
+[node name="Node3D2" type="Node3D" parent="NpcSpawns" index="1"]
+transform = Transform3D(-0.99848, 0, -0.0551069, 0, 1, 0, 0.0551069, 0, -0.99848, -3.1046193, 0, 4.518872)
+
+[node name="Node3D3" type="Node3D" parent="NpcSpawns" index="2"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, 1.1382066, -9.536743e-07, 0.18714094)
+
+[node name="Node3D4" type="Node3D" parent="NpcSpawns" index="3"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, 1.9957625, -1.4305115e-06, -4.77362)
+
+[node name="Node3D5" type="Node3D" parent="NpcSpawns" index="4"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, -2.5711832, -9.536743e-07, -6.278622)
+
+[node name="Node3D6" type="Node3D" parent="NpcSpawns" index="5"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, -3.971037, -9.536743e-07, -1.6547046)
+
+[node name="Node3D7" type="Node3D" parent="NpcSpawns" index="6"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, 4.3784084, -9.536743e-07, 5.246243)
+
+[node name="Node3D8" type="Node3D" parent="NpcSpawns" index="7"]
+transform = Transform3D(0.999572, 0, -0.029265, 0, 1, 0, 0.029265, 0, 0.999572, -1.3674159, -9.536743e-07, 6.2237315)
+
+[node name="Node3D" type="Node3D" parent="LootSpawns" index="0"]
+transform = Transform3D(0.712002, 0, 0.702178, 0, 1, 0, -0.702178, 0, 0.712002, 1.4722761, 0.0939577, -2.5839345)
+
+[node name="Node3D2" type="Node3D" parent="LootSpawns" index="1"]
+transform = Transform3D(-0.713972, 0, -0.700174, 0, 1, 0, 0.700174, 0, -0.713972, 0.14119482, 0.0939578, 1.7817461)
+
+[node name="TrapSpawns" parent="." index="2"]
+process_mode = 4
+
+[node name="Crate" parent="." index="4" instance=ExtResource("2_gck1c")]
+transform = Transform3D(0.9726139, 0, 0.23242697, 0, 1, 0, -0.23242697, 0, 0.9726139, -0.7415856, 0, 1.1982685)
+metadata/_edit_group_ = true
+
+[node name="CrateTall" parent="." index="5" instance=ExtResource("3_yr1ku")]
+transform = Transform3D(0.8500306, 0, -0.5267333, 0, 1, 0, 0.5267333, 0, 0.8500306, -2.89, 0, 0.488)
+metadata/_edit_group_ = true
+
+[node name="Crate2" parent="." index="6" instance=ExtResource("2_gck1c")]
+transform = Transform3D(0.8864864, 0, -0.4627546, 0, 1, 0, 0.4627546, 0, 0.8864864, 0.05109954, 0, -3.372024)
+metadata/_edit_group_ = true
+
+[node name="Crate3" parent="." index="7" instance=ExtResource("2_gck1c")]
+transform = Transform3D(0.9301615, 0, 0.3671507, 0, 1, 0, -0.3671507, 0, 0.9301615, 2.8608224, 0, -1.0287457)
+metadata/_edit_group_ = true
+
+[node name="Node3D" type="Node3D" parent="." index="8"]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, -3.056, 0, -2.415)
+
+[node name="CrateTall2" parent="Node3D" index="0" instance=ExtResource("4_2qq8x")]
+transform = Transform3D(0.89483297, 0, -0.4464008, 0, 1, 0, 0.4464008, 0, 0.89483297, 0, 0, 0)
+metadata/_edit_group_ = true
+
+[node name="Tire2" parent="Node3D" index="1" instance=ExtResource("5_lljc6")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.50406575, 1.1796929, 0.33648586)
+metadata/_edit_group_ = true

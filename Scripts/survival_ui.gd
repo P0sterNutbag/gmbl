@@ -7,6 +7,7 @@ extends CanvasLayer
 @onready var journal: HBoxContainer = $Journal
 @onready var compass: Control = $TopCenter/Compass
 @onready var pause_menu: PanelContainer = $PauseMenu
+@onready var player_inventory: InventoryUI = $PlayerInventory/Inventory
 
 
 func _enter_tree() -> void:

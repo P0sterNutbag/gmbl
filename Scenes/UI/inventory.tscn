@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvwo5rcugthhe"]
+[gd_scene load_steps=15 format=3 uid="uid://dvwo5rcugthhe"]
 
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_osrsm"]
 [ext_resource type="Script" uid="uid://cggchd80ddnc1" path="res://Scripts/inventory_ui.gd" id="2_yyv02"]
@@ -16,6 +16,20 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d513x"]
+bg_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2lqwa"]
+bg_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v8bd3"]
+bg_color = Color(1, 1, 0, 1)
+
+[sub_resource type="Theme" id="Theme_m06hg"]
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_d513x")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_2lqwa")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_v8bd3")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ic2qw"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -37,6 +51,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_osrsm")
 script = ExtResource("2_yyv02")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 811)
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 32
@@ -115,7 +130,12 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Items" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 637)
+layout_mode = 2
+theme = SubResource("Theme_m06hg")
+
+[node name="Items" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -123,6 +143,7 @@ theme_override_constants/separation = 8
 script = ExtResource("4_ic2qw")
 
 [node name="Panel" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 61)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ic2qw")
@@ -157,4 +178,4 @@ theme_override_constants/separation = 32
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Control3/LeftCategory" to="." method="_on_left_category_pressed"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/HBoxContainer/Control3/RightCategory" to="." method="_on_right_category_button_down"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Control3/RightCategory" to="." method="_on_right_category_pressed"]
-[connection signal="visibility_changed" from="MarginContainer/VBoxContainer/Items" to="." method="_on_v_box_container_visibility_changed"]
+[connection signal="visibility_changed" from="MarginContainer/VBoxContainer/ScrollContainer/Items" to="." method="_on_v_box_container_visibility_changed"]

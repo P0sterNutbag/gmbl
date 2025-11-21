@@ -84,6 +84,7 @@ func set_items():
 			if item is EquipmentGun:
 				inst.price = item.get_modified_price()
 		inst.focus_entered.connect(set_description.bind(item))
+		inst.focus_exited.connect(set_description)
 		inst.delete.connect(target.items.erase.bind(inst.resource))
 		inst.delete.connect(set_items)
 		inst.transfer.connect(transfer_item.bind(inst))
@@ -132,9 +133,12 @@ func transfer_item(menu_item: Control):
 	get_parent().reset_inventories()
 
 
-func set_description(item: Item):
+func set_description(item: Item = null):
 	for child in stats.get_children():
 		child.queue_free()
+	if !item:
+		stats_panel.hide()
+		return
 	if item.description != "":
 		description.show()
 		description.text = item.description

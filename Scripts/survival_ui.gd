@@ -77,6 +77,7 @@ func _process(_delta: float) -> void:
 func loot(target: Inventory) -> void:
 	player_transfer_inventory.mode = player_transfer_inventory.modes.loot
 	loot_transfer_inventory.mode = loot_transfer_inventory.modes.loot
+	player_transfer_inventory.target = PlayerStats.inventory
 	player_transfer_inventory.target2 = target
 	loot_transfer_inventory.target = target
 	loot_transfer_inventory.target2 = PlayerStats.inventory

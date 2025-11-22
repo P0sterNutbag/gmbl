@@ -5,16 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/hitmarker.tscn" id="3_1q0xx"]
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="4_vcp2d"]
 [ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="5_j0a3k"]
-[ext_resource type="PackedScene" uid="uid://d1pi0mdullohm" path="res://Scenes/Guns/Models/shotgun_model.tscn" id="5_jk3wv"]
+[ext_resource type="PackedScene" uid="uid://bt07vvnr66rmp" path="res://Scenes/Guns/Models/sawed_off_model.tscn" id="6_j0a3k"]
 
 [sub_resource type="Resource" id="Resource_ow28f"]
 script = ExtResource("4_vcp2d")
 amount = 5
 damage = 0.5
-h_angle_variance_hip = 4.0
-v_angle_variance_hip = 4.0
-h_angle_variance_ads = 4.0
-v_angle_variance_ads = 4.0
+h_angle_variance_hip = 3.0
+v_angle_variance_hip = 3.0
+h_angle_variance_ads = 3.0
+v_angle_variance_ads = 3.0
 noise_radius = 50.0
 is_hitscan = false
 metadata/_custom_type_script = "uid://c338ifvm4duar"
@@ -30,16 +30,16 @@ bullet_stats = SubResource("Resource_ow28f")
 gun_stats = SubResource("Resource_1q0xx")
 ammo_type = "shotgun_ammo"
 fire_type = 0
-fire_timer = 1.0
+shoot_cooldown = 0.5
 
 [node name="GunAnchor" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2701, -0.128087)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2701, -0.027859353)
 
 [node name="FirePoint" parent="GunAnchor" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00265765, 0.241867, -0.665348)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00265765, 0.241867, -0.3514861)
 
-[node name="Model" parent="GunAnchor" index="1" instance=ExtResource("5_jk3wv")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
-
-[node name="Chamber" parent="GunAnchor" index="2"]
+[node name="Chamber" parent="GunAnchor" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0230249, 0.272144, 0)
+
+[node name="Model" parent="GunAnchor" index="2" instance=ExtResource("6_j0a3k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24422811, -0.17727391)

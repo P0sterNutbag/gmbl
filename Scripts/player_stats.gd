@@ -155,7 +155,7 @@ func delete_current_equip():
 
 
 func reload_gun() -> void:
-	gun.ammo = gun.gun_stats.max_ammo
+	Globals.player.gun.ammo = Globals.player.gun.max_ammo
 
 
 func go_to_sleep():

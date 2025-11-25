@@ -2,7 +2,7 @@ extends CharacterBody3D
 class_name Player
 
 enum zoom_levels {regular, ads, zoom}
-enum gun_states {point, ads, reload, ammo_check, no_gun, point_up}
+enum gun_states {point, ads, reload, ammo_check, no_gun, point_up, pump}
 var camera_zoom = zoom_levels.regular
 var gun_state = gun_states.point
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -253,6 +253,10 @@ func state_walk(delta):
 			var tween2 = create_tween().set_ease(Tween.EASE_OUT)
 			tween2.tween_property(self, "aim_rotation:x", aim_rotation.x + deg_to_rad(gun.kickback_magnitude) / 3, 0.01)
 			Globals.noise_controller.create_noise_event(firepoint.global_position, self, gun.bullet_stats.noise_radius)
+			if gun.fire_type == gun.fire_types.pump:
+				gun.shoot_cooldown_timer.stop()
+				await get_tree().create_timer(0.25).timeout
+				gun.anim_player.play("pump")
 		if Input.is_action_pressed("aim") and gun_state != gun_states.ads and gun:
 			change_gun_state(gun_states.ads)
 	if !Input.is_action_pressed("aim") and gun_state == gun_states.ads:
@@ -447,6 +451,7 @@ func enter_gun_state_reload() -> void:
 
 
 func exit_gun_state_reload() -> void:
+	gun.can_shoot = true
 	if gun.ammo_type == "shotgun_ammo":
 		return
 	var _ammo = find_item(gun.ammo_type)
@@ -541,6 +546,14 @@ func exit_gun_state_point_up() -> void:
 	tween.tween_property(gun_anchor, "position:y", 0, 0.25)
 	tween.tween_property(gun_anchor, "position:z", 0, 0.25)
 	await tween.finished
+
+
+#func enter_gun_state_pump() -> void:
+	#pass
+#
+#
+#func exit_gun_state_pump() -> void:
+	#pass
 
 
 func change_gun_slot(slot_index: int) -> void:
@@ -659,3 +672,8 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 
 func _on_bullet_listener_area_entered(_area: Area3D) -> void:
 	bullet_flyby_sfx.play()
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "pump":
+		gun.can_shoot = true

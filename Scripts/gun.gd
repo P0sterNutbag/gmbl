@@ -78,12 +78,12 @@ func _on_shoot() -> void:
 	audio_player.play()
 	var tween = create_tween()
 	tween.tween_property(muzzle_flash, "visible", false, 0.1)
-	if fire_type == fire_types.pump:
-		await get_tree().create_timer(0.25).timeout
-		if anim_player:
-			anim_player.play("pump")
-	else:
-		shoot_cooldown_timer.start()
+	#if fire_type == fire_types.pump:
+		#await get_tree().create_timer(0.25).timeout
+		#if anim_player:
+			#anim_player.play("pump")
+	#else:
+	shoot_cooldown_timer.start()
 	#var shell_instance = Globals.create_particle(shell, chamber.global_position, chamber)
 	#if shell_instance != null:
 		#shell_instance.apply_impulse(global_transform.basis.x * randf_range(2, 4) + global_transform.basis.y * randf_range(2, 3))
@@ -92,8 +92,3 @@ func _on_shoot() -> void:
 
 func _on_shoot_cooldown_timeout() -> void:
 	can_shoot = true
-
-
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "pump":
-		can_shoot = true

@@ -9,6 +9,7 @@ extends Node3D
 @export var nodes_to_exclude: Array[Node3D]
 @export var buffer: float
 @export var snap_to_terrain := false : set = position_on_terrain
+@export var spin := false : set = rotate_objects
 #@export_tool_button("snap", "Area2D") var action = position_on_terrain
 @onready var npc_spawns: Node3D = $NpcSpawns
 @onready var loot_spawns: Node3D = $LootSpawns
@@ -35,3 +36,8 @@ func position_on_terrain(_value) -> void:
 			continue
 		var height = terrain.get_data().get_height_at(child.global_position.x, child.global_position.z)
 		child.global_position.y = height + buffer
+
+
+func rotate_objects(_value) -> void:
+	for child in get_children():
+		child.rotation.y = randf_range(0.0, deg_to_rad(360))

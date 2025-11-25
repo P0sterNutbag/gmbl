@@ -5,11 +5,13 @@ enum modes {use, loot}
 @export var mode = modes.use
 @export var show_size: bool = true
 @export var show_price: bool
+@export var opposing_ui: Control
 var target: Inventory = PlayerStats.inventory
 var target2: Inventory
+var shop: Shop
 var categories = {
 	-1 : "All" ,
-	Item.categories.survival : "Surival",
+	Item.categories.survival : "Survival",
 	Item.categories.guns : "Guns", 
 	Item.categories.ammo : "Ammo",
 	Item.categories.junk : "Junk"
@@ -80,9 +82,12 @@ func set_items():
 		inst.owner = self
 		inst.moveable = true
 		if show_price:
-			inst.price = item.price
+			var price_modifier = 1.0
+			if opposing_ui.shop != null:
+				price_modifier = opposing_ui.shop.price_modifiers[categories[item.category]]
 			if item is EquipmentGun:
 				inst.price = item.get_modified_price()
+			inst.price = round(float(item.price) * price_modifier)
 		inst.focus_entered.connect(set_description.bind(item))
 		inst.focus_exited.connect(set_description)
 		inst.delete.connect(target.items.erase.bind(inst.resource))
@@ -109,21 +114,21 @@ func set_items():
 func transfer_item(menu_item: Control):
 	var item = menu_item.resource
 	# determine other inventory
-	var inventory2
-	if get_index() == 0: 
-		inventory2 = get_parent().get_child(1)
-	else: 
-		inventory2 = get_parent().get_child(0)
+	#var inventory2
+	#if get_index() == 0: 
+		#inventory2 = get_parent().get_child(1)
+	#else: 
+		#inventory2 = get_parent().get_child(0)
 	# check money
 	if show_price:
-		if target2.money >= menu_item.resource.price:
-			target2.money -= menu_item.resource.price
-			target.money += menu_item.resource.price
+		if target2.money >= menu_item.price:
+			target2.money -= menu_item.price
+			target.money += menu_item.price
 			get_parent().set_inventory_money()
 		else:
-			inventory2.money_label.modulate = Color.RED
+			opposing_ui.money_label.modulate = Color.RED
 			var tween = create_tween()
-			tween.tween_property(inventory2.money_label, "modulate", Color.WHITE, 1)
+			tween.tween_property(opposing_ui.money_label, "modulate", Color.WHITE, 1)
 			return
 	var amount_to_move = 1
 	if Input.is_action_pressed("shift") or item is ItemMoney:

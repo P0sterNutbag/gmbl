@@ -49,7 +49,8 @@ func enter_shop(shop_data: Shop) -> void:
 	shop_inventory.show_price = true
 	shop_inventory2.target = shop_data.inventory
 	shop_inventory2.target2 = PlayerStats.inventory
-	shop_inventory.show_price = true
+	shop_inventory2.shop = shop_data
+	shop_inventory2.show_price = true
 	shop_inventory2.grab_focus()
 	UiController.open_interface(shop)
 	#shop.show()

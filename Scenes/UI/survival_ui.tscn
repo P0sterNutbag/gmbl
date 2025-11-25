@@ -678,11 +678,12 @@ grow_vertical = 2
 theme_override_constants/separation = 64
 script = ExtResource("8_k3cux")
 
-[node name="Inventory" parent="TransferInventory" instance=ExtResource("9_to4rm")]
+[node name="Inventory" parent="TransferInventory" node_paths=PackedStringArray("opposing_ui") instance=ExtResource("9_to4rm")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mode = 1
+opposing_ui = NodePath("../Inventory2")
 
 [node name="Control" type="Control" parent="TransferInventory/Inventory"]
 layout_mode = 2
@@ -695,11 +696,12 @@ offset_top = 0.0
 offset_right = 22.0
 offset_bottom = 24.0
 
-[node name="Inventory2" parent="TransferInventory" instance=ExtResource("9_to4rm")]
+[node name="Inventory2" parent="TransferInventory" node_paths=PackedStringArray("opposing_ui") instance=ExtResource("9_to4rm")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mode = 1
+opposing_ui = NodePath("../Inventory")
 
 [node name="Journal" type="HBoxContainer" parent="." node_paths=PackedStringArray("item_container")]
 visible = false

@@ -7,10 +7,10 @@ class_name Shop
 #@export var money: int = 100
 @export var inventory: Inventory
 @export var price_modifiers: Dictionary = {
-	"Survival" : 1.0,
-	"Guns" : 1.0,
-	"Ammo" : 1.0,
-	"Junk" : 1.0,
+	"Survival" : 0.75,
+	"Guns" : 0.75,
+	"Ammo" : 0.75,
+	"Junk" : 0.75,
 }
 @export var dialogue: DialogueTree
 @export var quests: Array[Quest]

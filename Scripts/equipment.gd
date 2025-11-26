@@ -5,6 +5,7 @@ class_name Equipment
 @export var equipped: bool
 @export var slot: int
 @export var array_name: String
+signal equipped_changed
 
 
 func on_pressed() -> void:
@@ -25,7 +26,9 @@ func equip() -> void:
 	for item in array:
 		if item and item != self and item.slot == slot:
 			item.equipped = false
+			item.equipped_changed.emit()
 	if equipped:
 		array[slot] = self
 	else:
 		array[slot] = null
+	equipped_changed.emit()

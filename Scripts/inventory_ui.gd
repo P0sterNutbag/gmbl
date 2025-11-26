@@ -28,14 +28,6 @@ const text_style = preload("res://Art/Themes/text.tres")
 @onready var description: Label = %Label
 
 
-#func _ready() -> void:
-	#if "money" in target:
-		#money_label.show()
-		#money_label.text = "$" + str(target.money)
-	#else:
-		#money_label.hide()
-
-
 func _process(_delta: float) -> void:
 	if !visible or !get_parent().visible:
 		return
@@ -80,7 +72,6 @@ func set_items():
 		inst.resource = item
 		inst.amount = slot.amount
 		inst.owner = self
-		inst.moveable = true
 		if show_price:
 			var price_modifier = 1.0
 			if opposing_ui.shop != null:
@@ -90,9 +81,12 @@ func set_items():
 			inst.price = round(float(item.price) * price_modifier)
 		inst.focus_entered.connect(set_description.bind(item))
 		inst.focus_exited.connect(set_description)
-		inst.delete.connect(target.items.erase.bind(inst.resource))
-		inst.delete.connect(set_items)
-		inst.transfer.connect(transfer_item.bind(inst))
+		#inst.delete.connect(target.items.erase.bind(inst.resource))
+		#inst.delete.connect(set_items)
+		#inst.transfer.connect(transfer_item.bind(inst))
+		if item is Equipment:
+			if !item.equipped_changed.is_connected(_on_item_equipped_changed):
+				item.equipped_changed.connect(_on_item_equipped_changed.bind(inst))
 		if mode == modes.use:
 			if item is ItemUsable:
 				item.target_node = target.get_local_scene()
@@ -104,6 +98,8 @@ func set_items():
 			inst.pressed.connect(item.on_pressed)
 		elif mode == modes.loot:
 			inst.pressed.connect(transfer_item.bind(inst))
+			if item is Equipment and item.equipped:
+				inst.text += " (equipped)"
 	filter(category_index)
 	if item_container.get_child_count() > 0:
 		item_container.sort_menu_items()
@@ -168,11 +164,19 @@ func filter(category: int) -> void:
 	category_label.text = categories[category]
 	for child in item_container.get_children():
 		var item = child.resource
-		if item.category == category or category_index == -1:
+		if item_is_in_category(item):
+			if mode == modes.use and item is Equipment and item.equipped:
+				child.hide()
+				continue
 			child.show()
 		else:
 			child.hide()
-	
+
+
+func item_is_in_category(item: Item) -> bool:
+	if category_index == -1 or item.category == category_index:
+		return true
+	return false
 
 
 func _on_v_box_container_visibility_changed() -> void:
@@ -192,6 +196,12 @@ func on_use_item(menu_item) -> void:
 		menu_item.queue_free()
 
 
+func _on_item_equipped_changed(menu_item: MenuItem) -> void:
+	var item = menu_item.resource
+	if mode == modes.use and item_is_in_category(item):
+		menu_item.visible = !item.equipped
+
+
 func _on_left_category_pressed() -> void:
 	category_index = wrapi(category_index - 1, -1, categories.size() - 1)
 	filter(category_index)
@@ -200,3 +210,41 @@ func _on_left_category_pressed() -> void:
 func _on_right_category_pressed() -> void:
 	category_index = wrapi(category_index + 1, -1, categories.size() - 1)
 	filter(category_index)
+
+
+#func create_physical_item(physical_item: PackedScene = null) -> void:
+	#if physical_item == null or get_tree().current_scene == Globals.overworld:
+		## determine amount to move
+		#var amount_to_move = 1
+		#if Input.is_action_just_pressed("shift"):
+			#amount_to_move = resource.amount
+		## move to pouch
+		#var new_item = resource.duplicate()
+		#new_item.amount = amount_to_move
+		#var pouches: Array = Globals.player.loot_area.get_overlapping_areas()
+		#pouches.filter(func(i): return i.is_in_group("pouches"))
+		#if pouches.size() > 0:
+			#var previous_item = Globals.find_item(pouches[0].items, resource.title)
+			#if previous_item:
+				#previous_item.amount += amount_to_move
+			#else:
+				#pouches[0].items.append(new_item)
+			#return
+		## create new physical pouch
+		#var p = pouch.instantiate()
+		#get_tree().current_scene.add_child(p)
+		#var offset = -Globals.player.basis.z
+		#if get_tree().current_scene == Globals.overworld:
+			#offset = -Globals.player.model.basis.z
+		#p.global_position = Globals.player.global_position + offset
+		#p.global_position.y = Globals.get_heightmap_position(p.global_position)
+		#p.items.append(new_item)
+		#return
+	#var inst: RigidBody3D = physical_item.instantiate()
+	#get_tree().current_scene.add_child.call_deferred(inst)
+	#inst.set_deferred("global_position", Globals.player.global_position + Vector3.UP * 1.5)
+	#inst.apply_impulse.call_deferred(-Globals.player.basis.z * 5)
+	#inst.apply_torque_impulse.call_deferred(Vector3(randf_range(-0.1, 0.1), randf_range(-5, 5), randf_range(-0.1, 0.1)))
+	#inst.item = resource
+	#if inst.item is EquipmentGun:
+		#inst.item.gun_stats = resource.gun_stats

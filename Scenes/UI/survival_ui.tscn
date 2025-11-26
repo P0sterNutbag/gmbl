@@ -704,7 +704,6 @@ mode = 1
 opposing_ui = NodePath("../Inventory")
 
 [node name="Journal" type="HBoxContainer" parent="." node_paths=PackedStringArray("item_container")]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -748,10 +747,6 @@ script = ExtResource("15_k4cvi")
 [node name="Control2" type="Control" parent="Journal/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="MenuItem" parent="Journal/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Exit"
 
 [node name="Control" type="Control" parent="Journal/PanelContainer"]
 layout_mode = 2
@@ -814,5 +809,4 @@ visible = false
 [connection signal="exit" from="TransferInventory" to="." method="_on_menu_exit"]
 [connection signal="pressed" from="TransferInventory/Inventory/Control/Button" to="TransferInventory" method="close"]
 [connection signal="exit" from="Journal" to="." method="_on_menu_exit"]
-[connection signal="pressed" from="Journal/PanelContainer/MarginContainer/VBoxContainer/MenuItem" to="Journal" method="close"]
 [connection signal="pressed" from="Journal/PanelContainer/Control/Button" to="Journal" method="close"]

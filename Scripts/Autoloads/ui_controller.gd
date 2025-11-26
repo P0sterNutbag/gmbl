@@ -23,6 +23,14 @@ func close_interface(node_to_close: Control, activate_player: bool = true) -> vo
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
+func close_all(activate_player: bool = true) -> void:
+	for node in ui_nodes:
+		node.hide()
+	if activate_player:
+		PlayerStats.change_state(PlayerStats.states.walk)
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+
 func is_canvas_layer_open(canvas_layer: CanvasLayer) -> bool:
 	for node in ui_nodes:
 		if node.visible and node.get_parent() == canvas_layer:

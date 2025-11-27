@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cc6hd7m7eqnp"]
+[gd_scene load_steps=10 format=3 uid="uid://cc6hd7m7eqnp"]
 
 [ext_resource type="PackedScene" uid="uid://de0b6aj1eplv5" path="res://Scenes/Guns/gun_parent.tscn" id="1_ow28f"]
 [ext_resource type="PackedScene" uid="uid://cwq84n8f24jwt" path="res://Scenes/Bullets/bullet.tscn" id="2_j0a3k"]
 [ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/hitmarker.tscn" id="3_1q0xx"]
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="4_vcp2d"]
 [ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="5_j0a3k"]
+[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="6_1q0xx"]
 [ext_resource type="PackedScene" uid="uid://bt07vvnr66rmp" path="res://Scenes/Guns/Models/sawed_off_model.tscn" id="6_j0a3k"]
 
 [sub_resource type="Resource" id="Resource_ow28f"]
@@ -28,7 +29,7 @@ metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 [node name="SawedOff" instance=ExtResource("1_ow28f")]
 bullet_stats = SubResource("Resource_ow28f")
 gun_stats = SubResource("Resource_1q0xx")
-ammo_type = "shotgun_ammo"
+ammo_item = ExtResource("6_1q0xx")
 fire_type = 0
 shoot_cooldown = 0.5
 

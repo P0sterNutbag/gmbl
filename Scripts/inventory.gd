@@ -18,7 +18,7 @@ func add_item(item: Item, amount: int = 1) -> bool:
 	if item is ItemMoney:
 		money += amount
 		return true
-	var same_item = find_item_slot(item.title)
+	var same_item = find_item_slot(item)
 	if same_item and item.stackable:
 		same_item.amount += amount
 	elif get_space_left(item) > 0 or !item.takes_space:
@@ -34,7 +34,7 @@ func add_item(item: Item, amount: int = 1) -> bool:
 
 
 func remove_item(item: Item, amount: int = 1) -> void:
-	var slot = find_item_slot(item.title)
+	var slot = find_item_slot(item)
 	slot.amount -= amount
 	if slot.amount <= 0:
 		item_slots.erase(slot)
@@ -47,7 +47,8 @@ func find_item(item_name: String) -> Item:
 	return null
 
 
-func find_item_slot(item_name: String) -> ItemSlot:
+func find_item_slot(_item: Item) -> ItemSlot:
+	var item_name = _item.title
 	for slot in item_slots:
 		var item = slot.item
 		if item != null and (item.resource_name == item_name or item.title.to_lower() == item_name.to_lower()):
@@ -55,11 +56,12 @@ func find_item_slot(item_name: String) -> ItemSlot:
 	return null
 
 
-func get_item_amount(item_name: String) -> int:
-	var slot = find_item_slot(item_name)
+func get_item_amount(item: Item) -> int:
+	var slot = find_item_slot(item)
 	if slot:
 		return slot.amount
 	return 0
+
 
 func get_space_left(item_to_add: Item = null) -> int:
 	var used_space = 0

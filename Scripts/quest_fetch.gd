@@ -6,7 +6,7 @@ class_name QuestFetch
 
 func check_complete() -> void:
 	for slot in required_items:
-		var slot2 = PlayerStats.inventory.find_item_slot(slot.item.title)
+		var slot2 = PlayerStats.inventory.find_item_slot(slot.item)
 		if !slot2 or slot2.amount < slot.amount:
 			return
 	completed = true

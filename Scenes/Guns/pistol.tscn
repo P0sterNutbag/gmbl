@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cnwsl1ltxxegm"]
+[gd_scene load_steps=10 format=3 uid="uid://cnwsl1ltxxegm"]
 
 [ext_resource type="PackedScene" uid="uid://de0b6aj1eplv5" path="res://Scenes/Guns/gun_parent.tscn" id="1_mfn4u"]
 [ext_resource type="PackedScene" uid="uid://cwq84n8f24jwt" path="res://Scenes/Bullets/bullet.tscn" id="2_nfi5v"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="4_l6qq8"]
 [ext_resource type="PackedScene" uid="uid://dpffikxirjfnq" path="res://Scenes/Guns/Models/pistol_model.tscn" id="5_l6qq8"]
 [ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="5_nwufo"]
+[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="6_l6qq8"]
 
 [sub_resource type="Resource" id="Resource_nfi5v"]
 script = ExtResource("4_l6qq8")
@@ -20,7 +21,7 @@ metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 [node name="Pistol" instance=ExtResource("1_mfn4u")]
 bullet_stats = SubResource("Resource_nfi5v")
 gun_stats = SubResource("Resource_l6qq8")
-ammo_type = "pistol_ammo"
+ammo_item = ExtResource("6_l6qq8")
 
 [node name="GunAnchor" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.049, -0.114)

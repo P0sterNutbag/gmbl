@@ -9,6 +9,7 @@ enum modes {use, loot}
 var target: Inventory = PlayerStats.inventory
 var target2: Inventory
 var shop: Shop
+var current_item: Item
 var categories = {
 	-1 : "All" ,
 	Item.categories.survival : "Survival",
@@ -40,6 +41,12 @@ func _process(_delta: float) -> void:
 				target2.items.append(item.item)
 				item_container.remove_child(item)
 		get_parent().reset_inventories()
+	
+	# drop
+	if Input.is_action_just_pressed("drop_item"):
+		if current_item:
+			target.remove_item(current_item)
+			update_items()
 	
 	# set money
 	if money_label.visible and "money" in target:
@@ -79,8 +86,8 @@ func set_items():
 			if item is EquipmentGun:
 				inst.price = item.get_modified_price()
 			inst.price = round(float(item.price) * price_modifier)
-		inst.focus_entered.connect(set_description.bind(item))
-		inst.focus_exited.connect(set_description)
+		inst.focus_entered.connect(_on_item_focus_entered.bind(inst))
+		inst.focus_exited.connect(_on_item_focus_exited.bind(inst))
 		#inst.delete.connect(target.items.erase.bind(inst.resource))
 		#inst.delete.connect(set_items)
 		#inst.transfer.connect(transfer_item.bind(inst))
@@ -105,6 +112,17 @@ func set_items():
 		item_container.sort_menu_items()
 		item_container.set_menu_item_focus()
 		item_container.get_child(0).grab_focus()
+
+
+func update_items() -> void:
+	for child in item_container.get_children():
+		var item = child.resource
+		var slot = target.find_item_slot(item)
+		if !slot or slot.amount <= 0:
+			#child.get_index()
+			child.queue_free.call_deferred()
+		else:
+			child.amount = slot.amount
 
 
 func transfer_item(menu_item: Control):
@@ -194,6 +212,17 @@ func on_use_item(menu_item) -> void:
 		if menu_item.get_index() == item_container.get_child_count() - 1:
 			item_container.get_child(-2).grab_focus()
 		menu_item.queue_free()
+
+
+func _on_item_focus_entered(menu_item: MenuItem):
+	var item = menu_item.resource
+	current_item = item
+	set_description(item)
+
+
+func _on_item_focus_exited(_menu_item: MenuItem):
+	current_item = null
+	set_description()
 
 
 func _on_item_equipped_changed(menu_item: MenuItem) -> void:

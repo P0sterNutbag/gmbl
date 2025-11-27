@@ -3,7 +3,7 @@ class_name Gun
 
 @export var bullet_stats: BulletStats
 @export var gun_stats: GunStats = GunStats.new()
-@export var ammo_type: String
+@export var ammo_item: ItemUsable
 enum fire_types {semi_auto, auto, pump}
 @export var fire_type: fire_types
 @export var shoot_cooldown: float = 0.1

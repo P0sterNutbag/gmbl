@@ -31,8 +31,8 @@ func _process(delta: float) -> void:
 	# magazine/medkits
 	if Globals.player.gun:
 		bottom_right.visible = true
-		set_mag_count(PlayerStats.inventory.get_item_amount(Globals.player.gun.ammo_type))
-		set_medit_count(PlayerStats.inventory.get_item_amount("medkit"))
+		set_mag_count(PlayerStats.inventory.get_item_amount(Globals.player.gun.ammo_item))
+		#set_medit_count(PlayerStats.inventory.get_item_amount("medkit"))
 		if Globals.player.gun.max_ammo > 0:
 			var current_ammo = float(Globals.player.gun.ammo)
 			var max_ammo = float(Globals.player.gun.max_ammo)

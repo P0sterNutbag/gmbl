@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=4 uid="uid://doydk513gm02l"]
+[gd_scene load_steps=133 format=4 uid="uid://doydk513gm02l"]
 
 [ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_6y65m"]
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="2_gw0hx"]
@@ -44,7 +44,6 @@
 [ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="31_xp1ub"]
 [ext_resource type="Texture2D" uid="uid://x3spqeyiq8cr" path="res://Art/Textures/npc shirt white.png" id="32_1k2ge"]
 [ext_resource type="Script" uid="uid://chxn6jj2cv0p3" path="res://Scripts/scatterer.gd" id="42_1k2ge"]
-[ext_resource type="PackedScene" uid="uid://cac84v7aucntx" path="res://Scenes/Environment/Nature/brush_orange.tscn" id="43_v4rs2"]
 [ext_resource type="Script" uid="uid://bbi3gcsb33muk" path="res://Scripts/town.gd" id="46_1qd3k"]
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="47_xt1pr"]
 [ext_resource type="Script" uid="uid://de6rxup5nru4w" path="res://Scripts/dialogue.gd" id="48_i627v"]
@@ -815,39 +814,38 @@ min_wait_time = 5.0
 max_wait_time = 30.0
 
 [node name="Player" parent="." instance=ExtResource("3_c84f5")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 44.370995, 0.28847465, 73.36004)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 228.93915, 0.7191785, 73.36004)
 
 [node name="Scatterer" type="Node3D" parent="."]
 script = ExtResource("42_1k2ge")
-scenes = Array[PackedScene]([ExtResource("43_v4rs2")])
 count = 5000
 area_size = Vector2(1000, 1000)
 
 [node name="SnapToTerrain" type="Node3D" parent="." node_paths=PackedStringArray("objects_to_snap")]
 script = ExtResource("27_oapb8")
-objects_to_snap = [null]
+objects_to_snap = [NodePath("../Location"), NodePath("../Location2"), NodePath("../Location3"), NodePath("../Location4"), NodePath("../Location5"), NodePath("../Location6"), NodePath("../Location7"), NodePath("../Player")]
 
 [node name="Location" parent="." instance=ExtResource("14_vrhs1")]
-transform = Transform3D(-0.89596, 0, -0.44413477, 0, 1, 0, 0.44413477, 0, -0.89596, 97.394554, 0.74172604, 49.553886)
+transform = Transform3D(-0.89596, 0, -0.44413477, 0, 1, 0, 0.44413477, 0, -0.89596, 254.46658, 0.46895346, 49.553886)
 
 [node name="Location2" parent="." instance=ExtResource("15_857re")]
-transform = Transform3D(-0.36455172, 0, -0.93118316, 0, 1, 0, 0.93118316, 0, -0.36455172, 137.59862, 0.4851477, 73.664955)
+transform = Transform3D(-0.36455172, 0, -0.93118316, 0, 1, 0, 0.93118316, 0, -0.36455172, 294.67065, 0.45317036, 73.664955)
 
 [node name="Location3" parent="." instance=ExtResource("16_swbn6")]
-transform = Transform3D(0.62348396, 0, 0.78183615, 0, 1, 0, -0.78183615, 0, 0.62348396, 92.09875, 1.5658635, 116.60408)
+transform = Transform3D(0.62348396, 0, 0.78183615, 0, 1, 0, -0.78183615, 0, 0.62348396, 249.17078, 3.0252607, 116.60408)
 
 [node name="Location4" parent="." instance=ExtResource("17_7fbp6")]
-transform = Transform3D(0.56685203, 0, 0.82381964, 0, 1, 0, -0.82381964, 0, 0.56685203, 35.87833, 1.3727882, 45.988274)
+transform = Transform3D(0.56685203, 0, 0.82381964, 0, 1, 0, -0.82381964, 0, 0.56685203, 212.54651, 1.7472469, 62.74669)
 
 [node name="Location5" parent="." instance=ExtResource("18_oedh7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79.11355, 1.1676655, 92.69101)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 236.18558, 2.2907436, 92.69101)
 
 [node name="Location6" parent="." instance=ExtResource("19_5q0os")]
-transform = Transform3D(0.0452235, 0, 0.9989769, 0, 1, 0, -0.9989769, 0, 0.0452235, 42.123756, 0.3100045, 85.22468)
+transform = Transform3D(0.0452235, 0, 0.9989769, 0, 1, 0, -0.9989769, 0, 0.0452235, 199.1958, 1.0444885, 85.22468)
 town = SubResource("Resource_rp2u8")
 
 [node name="Location7" parent="." instance=ExtResource("80_nggm6")]
-transform = Transform3D(-0.99983275, 0, 0.018290073, 0, 1, 0, -0.018290073, 0, -0.99983275, 54.098564, 1.5624266, 79.82682)
+transform = Transform3D(-0.99983275, 0, 0.018290073, 0, 1, 0, -0.018290073, 0, -0.99983275, 211.1706, 2.5636363, 79.82682)
 
 [connection signal="exit" from="CanvasLayer2/Shop" to="CanvasLayer2/Dialogue" method="_on_shop_exit"]
 [connection signal="pressed" from="CanvasLayer2/Shop/Inventory/Control/Button" to="CanvasLayer2/Shop" method="close"]

@@ -19,6 +19,8 @@ var ammo: int:
 		gun_stats.ammo = value
 var max_ammo: int
 var time_since_shot: float
+var time_shooting: float
+var spread := 1.0
 var can_shoot: bool = true
 var has_released: bool = true
 var sway_vector: Vector3
@@ -26,6 +28,7 @@ var sway_vector: Vector3
 var anim_player: AnimationPlayer
 var shell: PackedScene = preload("res://Scenes/Particles/shell.tscn")
 var smoke: PackedScene = preload("res://Scenes/Particles/gun_smoke.tscn")
+var spread_curve := (preload("res://Resources/bullet_spread.tres"))
 @onready var gun_model: Node3D = $GunAnchor/Model
 @onready var muzzle_flash: Node3D = $GunAnchor/FirePoint/MuzzleFlash
 @onready var flash_texture: MeshInstance3D = $GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3
@@ -34,6 +37,7 @@ var smoke: PackedScene = preload("res://Scenes/Particles/gun_smoke.tscn")
 @onready var chamber: Node3D = $GunAnchor/Chamber
 @onready var empty_click: AudioStreamPlayer3D = $EmptyClick
 @onready var shoot_cooldown_timer: Timer = $ShootCooldown
+@onready var firepoint = $Firepoint
 
 
 func _ready() -> void:
@@ -52,7 +56,7 @@ func _ready() -> void:
 				child.cast_shadow = false
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	#time_since_shot += delta
 	#if fire_type == fire_types.semi_auto:
 		#if has_released and time_since_shot > fire_timer:
@@ -62,6 +66,12 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("shoot"):
 		if gun_stats.ammo == 0:
 			empty_click.play()
+	
+	# spread
+	time_shooting -= delta * 2
+	time_shooting = clamp(time_shooting, 0, 1)
+	spread = lerp(1, 2, spread_curve.sample(time_shooting))
+
 
 
 func aim_fire_point(pos: Vector3) -> void:
@@ -88,6 +98,31 @@ func _on_shoot() -> void:
 	#if shell_instance != null:
 		#shell_instance.apply_impulse(global_transform.basis.x * randf_range(2, 4) + global_transform.basis.y * randf_range(2, 3))
 		#shell_instance.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
+
+
+func shoot_bullets(is_ads: bool = false, movement_speed = Vector3.ZERO) -> void:
+	time_shooting += 0.4
+	for i in bullet_stats.amount:
+		var inst = bullet_stats.bullet_scene.instantiate()
+		inst.global_transform = firepoint.global_transform
+		inst.scale = Vector3.ONE
+		inst.visible = false
+		var variance = Vector2(bullet_stats.h_angle_variance_hip, bullet_stats.v_angle_variance_hip)
+		if is_ads:
+			variance = Vector2(bullet_stats.h_angle_variance_ads, bullet_stats.v_angle_variance_ads)
+		if movement_speed:
+			var magnitude = clamp(movement_speed.length(), 1, 2)
+			variance *= magnitude
+		variance *= spread
+		var h_angle_variance = randf_range(-variance.x, variance.x * 1.1)
+		inst.rotate_y(deg_to_rad(h_angle_variance))
+		var v_angle_variance = randf_range(-variance.y, variance.y)
+		inst.rotate_x(deg_to_rad(v_angle_variance))
+		inst.bullet_stats = bullet_stats
+		inst.gun_stats = gun_stats
+		#inst.tracer_firepoint = tracer_firepoint
+		get_tree().current_scene.add_child(inst)
+
 
 
 func _on_shoot_cooldown_timeout() -> void:

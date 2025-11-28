@@ -26,7 +26,7 @@ func start_dialogue(tree: DialogueTree) -> void:
 	index = -1
 	for child in get_children():
 		child.queue_free()
-	Globals.overworld.npc_portrait_model.set_materials(tree.npc_style)
+	Globals.ui.npc_portrait_model.set_materials(tree.npc_style)
 	label.text = tree.npc_name
 	dialogue_tree = tree
 	advance_dialogue(index + 1)
@@ -140,7 +140,7 @@ func return_quests(quest_type: Quest, success_index: int, fail_index: int) -> vo
 	advance_dialogue(success_index)
 
 
-func _on_shop_exit() -> void:
+func leave_shop() -> void:
 	index = 1
 	UiController.open_interface(self)
 	advance_dialogue(index)

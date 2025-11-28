@@ -25,7 +25,7 @@ func _process(_delta: float) -> void:
 		if !player_inventory_holder.visible:
 			if UiController.is_canvas_layer_open(Globals.ui):
 				return
-			player_inventory_holder.get_child(0).target = PlayerStats.inventory
+			player_inventory_holder.get_child(0).source_inventory = PlayerStats.inventory
 			UiController.open_interface(player_inventory_holder)
 		else:
 			UiController.close_interface(player_inventory_holder)
@@ -78,14 +78,18 @@ func _process(_delta: float) -> void:
 func loot(target: Inventory) -> void:
 	player_transfer_inventory.mode = player_transfer_inventory.modes.loot
 	loot_transfer_inventory.mode = loot_transfer_inventory.modes.loot
-	player_transfer_inventory.target = PlayerStats.inventory
-	player_transfer_inventory.target2 = target
-	loot_transfer_inventory.target = target
-	loot_transfer_inventory.target2 = PlayerStats.inventory
+	player_transfer_inventory.source_inventory = PlayerStats.inventory
+	player_transfer_inventory.target_inventory = target
+	loot_transfer_inventory.source_inventory = target
+	loot_transfer_inventory.target_inventory = PlayerStats.inventory
 	loot_transfer_inventory.grab_focus()
 	player_transfer_inventory.show_price = false
 	loot_transfer_inventory.show_price = false
 	UiController.open_interface(transfer_inventory_holder)
+
+
+func close_transfer_inventory() -> void:
+	UiController.close_interface(transfer_inventory_holder)
 
 
 #func _on_menu_exit() -> void:

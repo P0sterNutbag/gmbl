@@ -6,10 +6,10 @@ enum modes {use, loot}
 @export var show_size: bool = true
 @export var show_price: bool
 @export var opposing_ui: Control
-var target: Inventory = PlayerStats.inventory
-var target2: Inventory
+var source_inventory: Inventory = PlayerStats.inventory
+var target_inventory: Inventory
 var shop: Shop
-var current_item: Item
+var current_menu_item: MenuItem
 var categories = {
 	-1 : "All" ,
 	Item.categories.survival : "Survival",
@@ -37,25 +37,33 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("reload") and mode == modes.loot:
 		for item in item_container.get_children():
 			for amount in item.amount:
-				target.items.erase(item.item)
-				target2.items.append(item.item)
+				source_inventory.items.erase(item.item)
+				target_inventory.items.append(item.item)
 				item_container.remove_child(item)
-		get_parent().reset_inventories()
+		set_items()
+		target_inventory.set_items()
 	
 	# drop
 	if Input.is_action_just_pressed("drop_item"):
-		if current_item:
-			target.remove_item(current_item)
-			update_items()
+		if current_menu_item:
+			var item = current_menu_item.resource
+			source_inventory.remove_item(item)
+			var item_slot = source_inventory.find_item_slot(item)
+			if item_slot:
+				current_menu_item.amount = item_slot.amount
+			else:
+				var new_index = clamp(current_menu_item.get_index() + 1, 0, 1000)
+				current_menu_item.queue_free()
+				item_container.get_child(new_index).grab_focus()
 	
 	# set money
-	if money_label.visible and "money" in target:
-		money_label.text = "$" + str(target.money)
+	if money_label.visible and "money" in source_inventory:
+		money_label.text = "$" + str(source_inventory.money)
 	
 	# set size
 	if show_size:
-		var space_left = target.get_space_left()
-		size_label.text = str(target.space - space_left) + "/" + str(target.space)
+		var space_left = source_inventory.get_space_left()
+		size_label.text = str(source_inventory.space - space_left) + "/" + str(source_inventory.space)
 
 
 func set_items():
@@ -64,15 +72,8 @@ func set_items():
 			item_container.remove_child(child)
 			child.queue_free()
 	var items: Array[Control]
-	for slot in target.item_slots:
+	for slot in source_inventory.item_slots:
 		var item = slot.item
-		#if item.stackable:
-			#var same_items = items.filter(func(i): return i.text.containsn(item.title))
-			#if same_items.size() > 0:
-				#var same_item = same_items[0]
-				#same_item.resource.amount += 1
-				#same_item.amount += 1
-				#continue
 		var inst = item_container.create_menu_item()
 		items.append(inst)
 		inst.text = item.title
@@ -88,20 +89,17 @@ func set_items():
 			inst.price = round(float(item.price) * price_modifier)
 		inst.focus_entered.connect(_on_item_focus_entered.bind(inst))
 		inst.focus_exited.connect(_on_item_focus_exited.bind(inst))
-		#inst.delete.connect(target.items.erase.bind(inst.resource))
-		#inst.delete.connect(set_items)
-		#inst.transfer.connect(transfer_item.bind(inst))
 		if item is Equipment:
 			if !item.equipped_changed.is_connected(_on_item_equipped_changed):
 				item.equipped_changed.connect(_on_item_equipped_changed.bind(inst))
 		if mode == modes.use:
 			if item is ItemUsable:
-				item.target_node = target.get_local_scene()
-				if item.used_up.is_connected(on_use_item):
-					item.used_up.disconnect(on_use_item)
-				item.used_up.connect(on_use_item.bind(inst))
-				if !item.used_up.is_connected(target.items.erase):
-					item.used_up.connect(target.items.erase.bind(item))
+				item.target_node = source_inventory.get_local_scene()
+				if item.used_up.is_connected(_on_use_item):
+					item.used_up.disconnect(_on_use_item)
+				item.used_up.connect(_on_use_item.bind(inst))
+				if !item.used_up.is_connected(source_inventory.items.erase):
+					item.used_up.connect(source_inventory.items.erase.bind(item))
 			inst.pressed.connect(item.on_pressed)
 		elif mode == modes.loot:
 			inst.pressed.connect(transfer_item.bind(inst))
@@ -114,30 +112,13 @@ func set_items():
 		item_container.get_child(0).grab_focus()
 
 
-func update_items() -> void:
-	for child in item_container.get_children():
-		var item = child.resource
-		var slot = target.find_item_slot(item)
-		if !slot or slot.amount <= 0:
-			#child.get_index()
-			child.queue_free.call_deferred()
-		else:
-			child.amount = slot.amount
-
-
 func transfer_item(menu_item: Control):
 	var item = menu_item.resource
-	# determine other inventory
-	#var inventory2
-	#if get_index() == 0: 
-		#inventory2 = get_parent().get_child(1)
-	#else: 
-		#inventory2 = get_parent().get_child(0)
 	# check money
 	if show_price:
-		if target2.money >= menu_item.price:
-			target2.money -= menu_item.price
-			target.money += menu_item.price
+		if target_inventory.money >= menu_item.price:
+			target_inventory.money -= menu_item.price
+			target_inventory.money += menu_item.price
 			get_parent().set_inventory_money()
 		else:
 			opposing_ui.money_label.modulate = Color.RED
@@ -147,9 +128,10 @@ func transfer_item(menu_item: Control):
 	var amount_to_move = 1
 	if Input.is_action_pressed("shift") or item is ItemMoney:
 		amount_to_move = item.amount
-	if target2.add_item(item, amount_to_move):
-		target.remove_item(item, amount_to_move)
-	get_parent().reset_inventories()
+	if target_inventory.add_item(item, amount_to_move):
+		source_inventory.remove_item(item, amount_to_move)
+	set_items()
+	target_inventory.set_items()
 
 
 func set_description(item: Item = null):
@@ -200,10 +182,10 @@ func item_is_in_category(item: Item) -> bool:
 func _on_v_box_container_visibility_changed() -> void:
 	if visible and get_parent().visible:
 		set_items()
-		title.text = target.title
+		title.text = source_inventory.title
 
 
-func on_use_item(menu_item) -> void:
+func _on_use_item(menu_item) -> void:
 	if !menu_item:
 		return
 	var item = menu_item.resource
@@ -215,13 +197,13 @@ func on_use_item(menu_item) -> void:
 
 
 func _on_item_focus_entered(menu_item: MenuItem):
+	current_menu_item = menu_item
 	var item = menu_item.resource
-	current_item = item
 	set_description(item)
 
 
 func _on_item_focus_exited(_menu_item: MenuItem):
-	current_item = null
+	current_menu_item = null
 	set_description()
 
 

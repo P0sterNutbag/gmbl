@@ -1,0 +1,368 @@
+[gd_scene load_steps=21 format=3 uid="uid://djj4qtaqbuthn"]
+
+[ext_resource type="Script" uid="uid://pfvownh6oavj" path="res://Scripts/town_ui.gd" id="1_fvsxv"]
+[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="2_anjm7"]
+[ext_resource type="Script" uid="uid://catvngsdo62hm" path="res://Scripts/town_menu.gd" id="3_ssrtp"]
+[ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="4_yov6g"]
+[ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="5_747ce"]
+[ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="6_6ir2b"]
+[ext_resource type="PackedScene" uid="uid://connpctdgiwij" path="res://Scenes/UI/exit_button.tscn" id="7_otkb8"]
+[ext_resource type="Script" uid="uid://bjmtcugcvwfgq" path="res://Scripts/job_board.gd" id="8_o4uqd"]
+[ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="9_uo1c6"]
+[ext_resource type="Theme" uid="uid://efo20xxcf1e5" path="res://Art/Themes/vbox_container.tres" id="10_26bd6"]
+[ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="11_bgh71"]
+[ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="12_er26y"]
+[ext_resource type="Script" uid="uid://gep7hf1s50y2" path="res://Scripts/dialogue_controller.gd" id="13_mf2v8"]
+[ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="14_747ce"]
+[ext_resource type="Texture2D" uid="uid://bo7tofhok4iw1" path="res://Art/Textures/npc_face1.png" id="15_6ir2b"]
+[ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="16_otkb8"]
+[ext_resource type="Texture2D" uid="uid://x3spqeyiq8cr" path="res://Art/Textures/npc shirt white.png" id="17_o4uqd"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vrhs1"]
+viewport_path = NodePath("PlayerPortrait")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_857re"]
+viewport_path = NodePath("ShopkeeperPortrait")
+
+[sub_resource type="Resource" id="Resource_uo1c6"]
+script = ExtResource("16_otkb8")
+faces = Array[Texture]([ExtResource("15_6ir2b")])
+shirts = Array[Texture]([ExtResource("17_o4uqd")])
+pants_colors = Array[Color]([Color(0.48, 0.21888001, 0.15359999, 1)])
+shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1)])
+metadata/_custom_type_script = "uid://b80ipr8q70gqm"
+
+[node name="TownUi" type="CanvasLayer"]
+script = ExtResource("1_fvsxv")
+
+[node name="Town" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -343.5
+offset_top = -323.5
+offset_right = 343.5
+offset_bottom = 323.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_anjm7")
+script = ExtResource("3_ssrtp")
+
+[node name="MarginContainer" type="MarginContainer" parent="Town"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Town/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Town/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_yov6g")
+text = "Town Name"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="Town/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Town/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("5_747ce")
+
+[node name="Shop" type="HBoxContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -383.5
+offset_right = 500.0
+offset_bottom = 383.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 64
+
+[node name="Inventory" parent="Shop" node_paths=PackedStringArray("opposing_ui") instance=ExtResource("6_6ir2b")]
+layout_mode = 2
+size_flags_horizontal = 3
+mode = 1
+show_price = true
+opposing_ui = NodePath("../Inventory2")
+
+[node name="Control" type="Control" parent="Shop/Inventory"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" parent="Shop/Inventory/Control" instance=ExtResource("7_otkb8")]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 0.0
+offset_right = 22.0
+offset_bottom = 24.0
+
+[node name="Inventory2" parent="Shop" node_paths=PackedStringArray("opposing_ui") instance=ExtResource("6_6ir2b")]
+layout_mode = 2
+size_flags_horizontal = 3
+mode = 1
+show_size = false
+show_price = true
+opposing_ui = NodePath("../Inventory")
+
+[node name="JobBoard" type="HBoxContainer" parent="." node_paths=PackedStringArray("item_container")]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 460.0
+offset_top = 157.0
+offset_right = -460.0
+offset_bottom = -156.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+script = ExtResource("8_o4uqd")
+item_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/ItemContainer")
+
+[node name="PanelContainer" type="PanelContainer" parent="JobBoard"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme = ExtResource("2_anjm7")
+
+[node name="MarginContainer" type="MarginContainer" parent="JobBoard/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("9_uo1c6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="JobBoard/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("10_26bd6")
+
+[node name="Label" type="Label" parent="JobBoard/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_yov6g")
+text = "Jobs"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="JobBoard/PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MenuItem" parent="JobBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("11_bgh71")]
+layout_mode = 2
+text = "Available"
+
+[node name="MenuItem2" parent="JobBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("11_bgh71")]
+layout_mode = 2
+text = "Current"
+
+[node name="Control" type="Control" parent="JobBoard/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ItemContainer" type="VBoxContainer" parent="JobBoard/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("10_26bd6")
+script = ExtResource("5_747ce")
+
+[node name="Control2" type="Control" parent="JobBoard/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MenuItem2" parent="JobBoard/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("11_bgh71")]
+visible = false
+layout_mode = 2
+text = "Exit"
+
+[node name="Control" type="Control" parent="JobBoard/PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" parent="JobBoard/PanelContainer/Control" instance=ExtResource("7_otkb8")]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 0.0
+offset_right = 22.0
+offset_bottom = 24.0
+
+[node name="PanelContainer2" type="PanelContainer" parent="JobBoard"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_anjm7")
+
+[node name="MarginContainer" type="MarginContainer" parent="JobBoard/PanelContainer2"]
+layout_mode = 2
+theme = ExtResource("9_uo1c6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="JobBoard/PanelContainer2/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("10_26bd6")
+
+[node name="PanelContainer" type="PanelContainer" parent="JobBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 438)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="JobBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_yov6g")
+
+[node name="Description" type="Label" parent="JobBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("12_er26y")
+autowrap_mode = 2
+
+[node name="Reward" type="Label" parent="JobBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("12_er26y")
+
+[node name="Control" type="Control" parent="JobBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="JobBoard/PanelContainer2/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MenuItem3" parent="JobBoard/PanelContainer2/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("11_bgh71")]
+layout_mode = 2
+text = "Accept"
+
+[node name="MenuItem4" parent="JobBoard/PanelContainer2/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("11_bgh71")]
+layout_mode = 2
+text = "Back"
+
+[node name="PortraitHolder" type="Control" parent="."]
+visible = false
+z_index = -1
+clip_contents = true
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -738.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Portraits" type="HBoxContainer" parent="PortraitHolder"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -750.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Player" type="TextureRect" parent="PortraitHolder/Portraits"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+mouse_filter = 2
+texture = SubResource("ViewportTexture_vrhs1")
+stretch_mode = 2
+
+[node name="Shopkeeper" type="TextureRect" parent="PortraitHolder/Portraits"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+texture = SubResource("ViewportTexture_857re")
+stretch_mode = 2
+flip_h = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PortraitHolder"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -638.0
+offset_bottom = -595.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="PlayerName" type="Label" parent="PortraitHolder/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_yov6g")
+text = "Player"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="PortraitHolder/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="NpcName" type="Label" parent="PortraitHolder/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_yov6g")
+text = "Player"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dialogue" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -3797.0
+offset_right = 320.0
+offset_bottom = -333.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 32
+alignment = 2
+script = ExtResource("13_mf2v8")
+
+[node name="PlayerPortrait" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(750, 750)
+
+[node name="Offset" type="Node3D" parent="PlayerPortrait"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 500, 500)
+
+[node name="EnemyModel" parent="PlayerPortrait/Offset" instance=ExtResource("14_747ce")]
+style_data = SubResource("Resource_uo1c6")
+
+[node name="Camera3D" type="Camera3D" parent="PlayerPortrait/Offset"]
+transform = Transform3D(-1, 1.7763568e-15, -8.742278e-08, -1.6240486e-08, 0.98259336, 0.18576951, 8.590104e-08, 0.18576951, -0.98259336, 0, 1.864, -1)
+
+[node name="ShopkeeperPortrait" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(750, 750)
+
+[node name="Offset" type="Node3D" parent="ShopkeeperPortrait"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 500, 500)
+
+[node name="EnemyModel" parent="ShopkeeperPortrait/Offset" instance=ExtResource("14_747ce")]
+
+[node name="Camera3D" type="Camera3D" parent="ShopkeeperPortrait/Offset"]
+transform = Transform3D(-1, 1.15222285e-08, -1.4836748e-07, -1.6240486e-08, 0.98259336, 0.18576951, 1.4792536e-07, 0.18576951, -0.98259336, 0, 1.864, -1)
+
+[connection signal="pressed" from="Shop/Inventory/Control/Button" to="." method="close_shop"]
+[connection signal="exit" from="JobBoard" to="Dialogue" method="_on_shop_exit"]
+[connection signal="pressed" from="JobBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MenuItem" to="JobBoard" method="_on_menu_item_pressed"]
+[connection signal="pressed" from="JobBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MenuItem2" to="JobBoard" method="_on_menu_item_2_pressed"]
+[connection signal="pressed" from="JobBoard/PanelContainer/MarginContainer/VBoxContainer/MenuItem2" to="JobBoard" method="close"]
+[connection signal="pressed" from="JobBoard/PanelContainer/Control/Button" to="JobBoard" method="close"]

@@ -37,7 +37,7 @@ var spread_curve := (preload("res://Resources/bullet_spread.tres"))
 @onready var chamber: Node3D = $GunAnchor/Chamber
 @onready var empty_click: AudioStreamPlayer3D = $EmptyClick
 @onready var shoot_cooldown_timer: Timer = $ShootCooldown
-@onready var firepoint = $Firepoint
+@onready var firepoint: Node3D = $GunAnchor/FirePoint
 
 
 func _ready() -> void:
@@ -100,7 +100,7 @@ func _on_shoot() -> void:
 		#shell_instance.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
 
 
-func shoot_bullets(is_ads: bool = false, movement_speed = Vector3.ZERO) -> void:
+func shoot(is_ads: bool = false, movement_speed = Vector3.ZERO) -> void:
 	time_shooting += 0.4
 	for i in bullet_stats.amount:
 		var inst = bullet_stats.bullet_scene.instantiate()
@@ -120,8 +120,17 @@ func shoot_bullets(is_ads: bool = false, movement_speed = Vector3.ZERO) -> void:
 		inst.rotate_x(deg_to_rad(v_angle_variance))
 		inst.bullet_stats = bullet_stats
 		inst.gun_stats = gun_stats
-		#inst.tracer_firepoint = tracer_firepoint
 		get_tree().current_scene.add_child(inst)
+	gun_stats.ammo -= 1
+	gun_stats.condition -= 0.05
+	can_shoot = false
+	has_released = false
+	flash_texture.rotate_z(deg_to_rad(randf_range(0, 360)))
+	muzzle_flash.visible = true
+	audio_player.play()
+	var tween = create_tween()
+	tween.tween_property(muzzle_flash, "visible", false, 0.1)
+	shoot_cooldown_timer.start()
 
 
 

@@ -59,7 +59,6 @@ var bounty: Quest
 @onready var return_to_idle_timer: Timer = $ReturnToIdleTimer
 @onready var path_wait_timer: Timer = $PathWaitTimer
 @onready var right_hand: Node3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
-@onready var shoot_component: Node = $ShootComponent
 @onready var gun_holder: Node3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
 @onready var shoot_timer: Timer = $ShootTimer
 @onready var loot_area: Area3D = $Loot
@@ -68,7 +67,6 @@ var bounty: Quest
 @onready var physical_bone_simulator: PhysicalBoneSimulator3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D
 @onready var supress_timer: Timer = $SupressTimer
 @onready var new_destination_timer: Timer = $NewDestinationTimer
-signal shoot
 
 
 func _ready() -> void:
@@ -79,14 +77,10 @@ func _ready() -> void:
 	gun.gun_stats.condition = randf_range(10, 50)
 	gun_holder.add_child(gun)
 	gun.bullet_stats.collision_mask = 4
-	shoot_component.firepoint = gun.fire_point
-	shoot_component.tracer_firepoint = gun.fire_point
-	shoot_component.bullet_stats = gun.bullet_stats
-	shoot_component.gun_stats = gun.gun_stats
 	shoot_timer.wait_time = gun.shoot_cooldown
 	items_to_drop.append(gun_item.physical_item)
-	shoot.connect($ShootComponent._on_shoot)
-	shoot.connect(gun._on_shoot)
+	#shoot.connect($ShootComponent._on_shoot)
+	#shoot.connect(gun._on_shoot)
 	DayNightCycle.night_start.connect(on_night_start)
 	DayNightCycle.day_start.connect(on_day_start)
 	
@@ -97,10 +91,10 @@ func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout
 	if team == teams.allies:
 		detection.targets = get_tree().get_nodes_in_group("enemies")
-		shoot_component.bullet_stats.collision_mask = 3
+		gun.bullet_stats.collision_mask = 3
 	elif team == teams.enemies:
 		detection.targets = get_tree().get_nodes_in_group("allies")
-		shoot_component.bullet_stats.collision_mask = 4
+		gun.bullet_stats.collision_mask = 4
 	
 
 
@@ -233,8 +227,8 @@ func _physics_process(delta: float) -> void:
 			if target:
 				last_seen_position = target.global_position
 				look_at_position(last_seen_position)
-				if shoot_component.firepoint != null:
-					shoot_component.firepoint.look_at(target.global_position + Vector3.UP * 1)
+				if gun.firepoint != null:
+					gun.firepoint.look_at(target.global_position + Vector3.UP * 1)
 			
 			# get into range
 			#if target and global_position.distance_to(target.global_position) > range:
@@ -399,9 +393,10 @@ func set_detection_targets():
 
 
 func emit_shoot() -> void:
-	if gun:
-		shoot.emit()
-		shoot_timer.start()
+	if !gun:
+		return
+	gun.shoot()
+	shoot_timer.start()
 
 
 func on_noise_heard(noise_position: Vector3, event_creator):

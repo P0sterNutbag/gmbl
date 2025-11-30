@@ -90,8 +90,9 @@ func set_items():
 		inst.focus_entered.connect(_on_item_focus_entered.bind(inst))
 		inst.focus_exited.connect(_on_item_focus_exited.bind(inst))
 		if item is Equipment:
-			if !item.equipped_changed.is_connected(_on_item_equipped_changed):
-				item.equipped_changed.connect(_on_item_equipped_changed.bind(inst))
+			if item.equipped_changed.is_connected(_on_item_equipped_changed):
+				item.equipped_changed.disconnect(_on_item_equipped_changed)
+			item.equipped_changed.connect(_on_item_equipped_changed.bind(inst))
 		if mode == modes.use:
 			if item is ItemUsable:
 				item.target_node = source_inventory.get_local_scene()

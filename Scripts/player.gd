@@ -57,7 +57,6 @@ var grenade = preload("res://Scenes/Bullets/grenade.tscn")
 @onready var sawed_off: Gun = $CameraAnchor/Camera3D/GunOffset/GunAnchor/SawedOff
 @onready var uzi: Gun = $CameraAnchor/Camera3D/GunOffset/GunAnchor/Uzi
 @onready var hunting_rifle: Gun = $CameraAnchor/Camera3D/GunOffset/GunAnchor/HuntingRifle
-@onready var shoot_component: Node = $ShootComponent
 @onready var step_timer: Timer = $StepTimer
 @onready var interact_cast: = $CameraAnchor/Camera3D/RayCast3D
 @onready var hitbox: HealthComponent = $Hitbox
@@ -244,8 +243,7 @@ func state_walk(delta):
 		if Input.is_action_pressed("shoot"):
 			if gun.ammo <= 0 or !gun.can_shoot:
 				return
-			shoot_component._on_shoot(Input.is_action_pressed("aim"), velocity)
-			gun._on_shoot()
+			gun.shoot(Input.is_action_pressed("aim"), velocity)
 			#camera.screen_shake()
 			var tween = create_tween().set_ease(Tween.EASE_OUT)
 			tween.tween_property(gun, "position:z", 0.1, 0.01)
@@ -270,7 +268,7 @@ func state_walk(delta):
 	
 	# reload
 	if Input.is_action_just_pressed("reload") and gun_state != gun_states.reload:
-		var _ammo = find_item(gun.ammo_type)
+		var _ammo = PlayerStats.inventory.find_item(gun.ammo_item.title)
 		if !_ammo or ammo == gun.max_ammo:
 			return
 		change_gun_state(gun_states.reload)
@@ -452,9 +450,9 @@ func enter_gun_state_reload() -> void:
 
 func exit_gun_state_reload() -> void:
 	gun.can_shoot = true
-	if gun.ammo_type == "shotgun_ammo":
+	if gun.ammo_item.title.contains("shotgun"):
 		return
-	var _ammo = find_item(gun.ammo_type)
+	var _ammo = find_item(gun.ammo_item.title)
 	use_item("", _ammo, gun.gun_stats)
 
 
@@ -574,10 +572,6 @@ func change_gun(new_gun: EquipmentGun) -> void:
 			gun.gun_stats = PlayerStats.gun.gun_stats
 			gun.rotation = Vector3.ZERO
 			firepoint = gun.get_node("GunAnchor/FirePoint")
-			shoot_component.firepoint = firepoint
-			shoot_component.tracer_firepoint = firepoint
-			shoot_component.bullet_stats = gun.bullet_stats
-			shoot_component.gun_stats = gun.gun_stats
 			await get_tree().create_timer(0.05).timeout
 			gun.visible = true
 	Globals.ui.set_gun_name(gun.name.to_upper())
@@ -637,9 +631,9 @@ func face_center(vector: Vector3 = Vector3(0, camera.position.y, 0)):
 
 
 func check_reload_ammo(time_to_skip_to: float):
-	var _ammo = find_item(gun.ammo_type)
+	var _ammo = find_item(gun.ammo_item.title)
 	use_item(_ammo.resource_name, _ammo, gun.gun_stats)
-	_ammo = find_item(gun.ammo_type)
+	_ammo = find_item(gun.ammo_item.title)
 	if !_ammo:
 		gun.get_node("AnimationPlayer").seek(time_to_skip_to, true, true)
 	elif ammo >= gun.max_ammo:

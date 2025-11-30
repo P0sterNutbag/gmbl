@@ -66,9 +66,9 @@ func _process(delta: float) -> void:
 	for child in crosshair.get_children():
 		var target_pos = child.position
 		if child.position.x == 0:
-			target_pos.y = sign(child.position.y) * (base_pos * clamp(Globals.player.velocity.length(), 1, 2) * Globals.player.shoot_component.spread)
+			target_pos.y = sign(child.position.y) * (base_pos * clamp(Globals.player.velocity.length(), 1, 2) * Globals.player.gun.spread)
 		elif child.position.y == 0:
-			target_pos.x = sign(child.position.x) * (base_pos * clamp(Globals.player.velocity.length(), 1, 2) * Globals.player.shoot_component.spread)
+			target_pos.x = sign(child.position.x) * (base_pos * clamp(Globals.player.velocity.length(), 1, 2) * Globals.player.gun.spread)
 		child.position = lerp(child.position, target_pos, delta * 20)
 	
 

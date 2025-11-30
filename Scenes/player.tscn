@@ -1,17 +1,18 @@
-[gd_scene load_steps=67 format=3 uid="uid://c055smn111au7"]
+[gd_scene load_steps=75 format=3 uid="uid://c055smn111au7"]
 
 [ext_resource type="Script" uid="uid://cslnx4rw32guw" path="res://Scripts/player.gd" id="1_5kxbm"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_x3wgy"]
 [ext_resource type="AudioStream" uid="uid://c0kyabwelhmj5" path="res://Audio/Bullets/bullet_hit_person.wav" id="3_bi64h"]
 [ext_resource type="Script" uid="uid://0d1yg6lwhubo" path="res://Scripts/camera.gd" id="6_qqcod"]
 [ext_resource type="PackedScene" uid="uid://cwq84n8f24jwt" path="res://Scenes/Bullets/bullet.tscn" id="7_7dp3o"]
-[ext_resource type="Script" uid="uid://ccu856f1csrwx" path="res://Scripts/shoot_component.gd" id="7_f1ek2"]
 [ext_resource type="PackedScene" uid="uid://c3hkwyvehkx4y" path="res://Art/Models/arm.glb" id="8_qqcod"]
 [ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/hitmarker.tscn" id="8_tx1dd"]
 [ext_resource type="PackedScene" uid="uid://dfxhgieagfc0d" path="res://Scenes/Models/player_arm.tscn" id="9_fs7ks"]
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="9_gymyn"]
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="10_83xs0"]
 [ext_resource type="AudioStream" uid="uid://kwc4fqixs4ne" path="res://Audio/Guns/remove_magazine.wav" id="11_olqyp"]
 [ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="11_qqcod"]
+[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="11_ypfnu"]
 [ext_resource type="Texture2D" uid="uid://b7o6p645d7r1q" path="res://Art/Textures/scope.png" id="12_fd4e3"]
 [ext_resource type="PackedScene" uid="uid://dgwlg3anvnbmw" path="res://Scenes/Guns/ak47.tscn" id="12_fs7ks"]
 [ext_resource type="Material" uid="uid://iagweyrwrs4k" path="res://Art/Materials/off_black.tres" id="12_igrcy"]
@@ -54,6 +55,24 @@ metadata/_custom_type_script = "uid://c338ifvm4duar"
 script = ExtResource("11_qqcod")
 ammo = 24
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
+[sub_resource type="Resource" id="Resource_q7l5h"]
+script = ExtResource("10_83xs0")
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[sub_resource type="Resource" id="Resource_xuaoq"]
+resource_local_to_scene = true
+resource_name = "rifle_ammo"
+script = ExtResource("11_ypfnu")
+effects = Array[ExtResource("10_83xs0")]([SubResource("Resource_q7l5h")])
+method = "reload_gun"
+custom_path = "PlayerStats"
+usable_in_menu = false
+title = "7.62×39mm Magazine"
+category = 1
+price = 50
+description = "Usable in: AK-47"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
 [sub_resource type="Animation" id="Animation_2ijsl"]
 length = 0.001
@@ -174,6 +193,19 @@ metadata/_custom_type_script = "uid://c338ifvm4duar"
 [sub_resource type="Resource" id="Resource_wpjfl"]
 script = ExtResource("11_qqcod")
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
+[sub_resource type="Resource" id="Resource_wohnl"]
+resource_local_to_scene = true
+resource_name = "pistol_ammo"
+script = ExtResource("11_ypfnu")
+method = "reload_gun"
+custom_path = "PlayerStats"
+usable_in_menu = false
+title = "9mm Magazine"
+category = 1
+price = 25
+description = "Usable in: Pistol"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
 [sub_resource type="BoxMesh" id="BoxMesh_igrcy"]
 material = ExtResource("12_igrcy")
@@ -448,6 +480,19 @@ script = ExtResource("11_qqcod")
 ammo = 6
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
+[sub_resource type="Resource" id="Resource_36dho"]
+resource_local_to_scene = true
+resource_name = "sniper_ammo"
+script = ExtResource("11_ypfnu")
+method = "reload_gun"
+custom_path = "PlayerStats"
+usable_in_menu = false
+title = "7.62×51mm Magazine"
+category = 1
+price = 10
+description = "Usable in: Sniper Rifle"
+metadata/_custom_type_script = "uid://dd1ly8qocexg4"
+
 [sub_resource type="Animation" id="Animation_p1odr"]
 resource_name = "reload"
 length = 1.8
@@ -533,6 +578,28 @@ resource_local_to_scene = true
 script = ExtResource("11_qqcod")
 ammo = 2
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
+[sub_resource type="Resource" id="Resource_08fje"]
+script = ExtResource("10_83xs0")
+values = Dictionary[String, Variant]({
+"ammo": 1
+})
+add = true
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[sub_resource type="Resource" id="Resource_yh6i2"]
+resource_local_to_scene = true
+resource_name = "shotgun_ammo"
+script = ExtResource("11_ypfnu")
+effects = Array[ExtResource("10_83xs0")]([SubResource("Resource_08fje")])
+method = "reload_gun"
+custom_path = "PlayerStats"
+usable_in_menu = false
+title = "Shotgun Shell"
+category = 1
+price = 5
+description = "Usable in: Shotgun"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
 [sub_resource type="Animation" id="Animation_36dho"]
 length = 0.001
@@ -640,6 +707,19 @@ _data = {
 &"reload": SubResource("Animation_y6uwr")
 }
 
+[sub_resource type="Resource" id="Resource_nv4vc"]
+resource_local_to_scene = true
+resource_name = "pistol_ammo"
+script = ExtResource("11_ypfnu")
+method = "reload_gun"
+custom_path = "PlayerStats"
+usable_in_menu = false
+title = "9mm Magazine"
+category = 1
+price = 25
+description = "Usable in: Pistol"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
+
 [sub_resource type="Animation" id="Animation_83xs0"]
 resource_name = "reload"
 tracks/0/type = "method"
@@ -661,6 +741,20 @@ tracks/0/keys = {
 _data = {
 &"reload": SubResource("Animation_83xs0")
 }
+
+[sub_resource type="Resource" id="Resource_8gxox"]
+resource_local_to_scene = true
+resource_name = "rifle_ammo"
+script = ExtResource("11_ypfnu")
+effects = Array[ExtResource("10_83xs0")]([SubResource("Resource_q7l5h")])
+method = "reload_gun"
+custom_path = "PlayerStats"
+usable_in_menu = false
+title = "7.62×39mm Magazine"
+category = 1
+price = 50
+description = "Usable in: AK-47"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
 [sub_resource type="Animation" id="Animation_wohnl"]
 length = 0.001
@@ -773,10 +867,6 @@ size = Vector3(3, 3, 0.177)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qqcod"]
 radius = 0.295198
 
-[sub_resource type="Resource" id="Resource_pu2lt"]
-script = ExtResource("9_gymyn")
-metadata/_custom_type_script = "uid://c338ifvm4duar"
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bi64h"]
 random_pitch = 1.2
 streams_count = 1
@@ -831,6 +921,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.111368775, -0.061341286, -0
 visible = false
 bullet_stats = SubResource("Resource_l6n3p")
 gun_stats = SubResource("Resource_igrcy")
+ammo_item = SubResource("Resource_xuaoq")
 ads_vector = Vector3(-0.188, 0.085, 0)
 cast_shadow = false
 
@@ -887,6 +978,7 @@ libraries = {
 visible = false
 bullet_stats = SubResource("Resource_fd4e3")
 gun_stats = SubResource("Resource_wpjfl")
+ammo_item = SubResource("Resource_wohnl")
 fire_type = 0
 ads_vector = Vector3(-0.195, 0.045, 0.07)
 cast_shadow = false
@@ -984,6 +1076,7 @@ libraries = {
 visible = false
 bullet_stats = SubResource("Resource_fs7ks")
 gun_stats = SubResource("Resource_olqyp")
+ammo_item = SubResource("Resource_36dho")
 zoom_amount = 3.0
 scope_texture = ExtResource("12_fd4e3")
 cast_shadow = false
@@ -1027,6 +1120,7 @@ libraries = {
 [node name="SawedOff" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("22_p1odr")]
 visible = false
 gun_stats = SubResource("Resource_0gysh")
+ammo_item = SubResource("Resource_yh6i2")
 
 [node name="Hinge" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/SawedOff/GunAnchor/Model/sawed off shotgun" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6421651, 0.13032669, -2.806993e-08)
@@ -1050,6 +1144,7 @@ libraries = {
 
 [node name="Uzi" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("23_0gysh")]
 visible = false
+ammo_item = SubResource("Resource_nv4vc")
 
 [node name="GunAnchor" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Uzi" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.049000025, -0.22472692)
@@ -1076,6 +1171,7 @@ libraries = {
 }
 
 [node name="HuntingRifle" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("24_vfarp")]
+ammo_item = SubResource("Resource_8gxox")
 
 [node name="MeshInstance3D6" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/HuntingRifle/GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3" index="2"]
 transform = Transform3D(-2.18557e-08, -1, 5.46393e-08, 0, 4.37114e-08, 1.25, -0.5, 4.37114e-08, 3.55271e-15, 0, -0.219, 2.155)
@@ -1147,10 +1243,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63204, -2.5)
 [node name="PlacerRaycast3D" type="RayCast3D" parent="PlacePosition"]
 enabled = false
 target_position = Vector3(0, -3, 0)
-
-[node name="ShootComponent" type="Node" parent="."]
-script = ExtResource("7_f1ek2")
-bullet_stats = SubResource("Resource_pu2lt")
 
 [node name="StepTimer" type="Timer" parent="."]
 wait_time = 0.5

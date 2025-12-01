@@ -19,6 +19,8 @@ func equip() -> void:
 	if equipped:
 		if PlayerStats.gun_index == slot or !PlayerStats.gun:
 			Globals.player.change_gun(self)
+		else:
+			Globals.player.change_gun_slot(slot)
 	else:
 		if PlayerStats.gun_index == slot:
 			Globals.player.unequip_gun()

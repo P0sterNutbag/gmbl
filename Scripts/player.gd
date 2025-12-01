@@ -178,7 +178,7 @@ func state_walk(delta):
 	else:
 		if gun_state == gun_states.ads:
 			speed = walk_speed
-		elif Input.is_action_pressed("sprint") and input.y < 0 and gun.shoot_cooldown_timer.time_left == 0 and !Input.is_action_pressed("shoot"):
+		elif Input.is_action_pressed("sprint") and input.y < 0 and (!gun or (gun.shoot_cooldown_timer.time_left == 0 and !Input.is_action_pressed("shoot"))):
 			speed = run_speed
 		else:
 			speed = base_speed
@@ -207,10 +207,11 @@ func state_walk(delta):
 			c.get_collider().apply_central_impulse(-c.get_normal() * push_force * delta)
 	
 	# change gun
-	if Input.is_action_just_released("next_gun") and PlayerStats.guns.size() > 1:
-		change_gun_slot(wrap(PlayerStats.gun_index - 1, 0, PlayerStats.equipped_guns.size()))
-	elif Input.is_action_just_released("last_gun") and PlayerStats.guns.size() > 1:
-		change_gun_slot(wrap(PlayerStats.gun_index + 1, 0, PlayerStats.equipped_guns.size()))
+	var kit = PlayerStats.inventory.equipment_kit
+	if Input.is_action_just_released("next_gun"):
+		change_gun_slot(wrap(PlayerStats.gun_index - 1, 0, kit.gun_slots.size()))
+	elif Input.is_action_just_released("last_gun"):
+		change_gun_slot(wrap(PlayerStats.gun_index + 1, 0, kit.gun_slots.size()))
 	elif Input.is_action_just_pressed("slot_1"):
 		change_gun_slot(0)
 	elif Input.is_action_just_pressed("slot_2"):
@@ -554,15 +555,27 @@ func exit_gun_state_point_up() -> void:
 
 
 func change_gun_slot(slot_index: int) -> void:
-	var g = PlayerStats.equipped_guns[slot_index]
-	if g != null:
-		change_gun(g)
-		PlayerStats.gun_index = slot_index
+	var kit = PlayerStats.inventory.equipment_kit
+	var g = kit.equipment[kit.gun_slots[slot_index]]
+	#if !g:
+		#return
+	change_gun(g)
+	#if PlayerStats.gun_index == g.slot:
+		#change_gun(null)
+	#else:
+		#change_gun(g)
+	PlayerStats.gun_index = slot_index
 
 
 func change_gun(new_gun: EquipmentGun) -> void:
 	if gun:
 		await change_gun_state(gun_states.no_gun)
+	else:
+		gun_anchor.position.y = -0.3
+	if !new_gun:
+		#if gun:
+			#unequip_gun()
+		return
 	PlayerStats.gun = new_gun
 	for i in gun_anchor.get_children():
 		if i != gun:

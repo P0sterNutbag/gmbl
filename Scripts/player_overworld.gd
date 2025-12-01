@@ -106,10 +106,11 @@ func state_walk(delta) -> void:
 		model.look_at(global_position + direction)
 	
 	# change gun
-	if Input.is_action_just_released("next_gun") and PlayerStats.guns.size() > 1:
-		change_gun_slot(wrap(PlayerStats.gun_index - 1, 0, PlayerStats.equipped_guns.size()))
-	elif Input.is_action_just_released("last_gun") and PlayerStats.guns.size() > 1:
-		change_gun_slot(wrap(PlayerStats.gun_index + 1, 0, PlayerStats.equipped_guns.size()))
+	var kit = PlayerStats.inventory.equipment_kit.gun_slots
+	if Input.is_action_just_released("next_gun"):
+		change_gun_slot(wrap(PlayerStats.gun_index - 1, 0, kit.size()))
+	elif Input.is_action_just_released("last_gun"):
+		change_gun_slot(wrap(PlayerStats.gun_index + 1, 0, kit.size()))
 	elif Input.is_action_just_pressed("slot_1"):
 		change_gun_slot(0)
 	elif Input.is_action_just_pressed("slot_2"):
@@ -159,7 +160,8 @@ func change_gun(new_gun: EquipmentGun) -> void:
 
 
 func change_gun_slot(slot_index: int) -> void:
-	var _gun = PlayerStats.equipped_guns[slot_index]
+	var kit = PlayerStats.inventory.equipment_kit
+	var _gun = kit.equipment[kit.gun_slots[slot_index]]
 	if _gun != null:
 		change_gun(_gun)
 		PlayerStats.gun_index = slot_index

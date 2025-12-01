@@ -21,9 +21,12 @@ func drop(target_node: Node) -> void:
 
 
 func equip() -> void:
-	equipped = !equipped
 	var kit = PlayerStats.inventory.equipment_kit
-	kit.equipment[slot] = self
+	equipped = !equipped
+	if equipped:
+		kit.equipment[slot] = self
+	else:
+		kit.equipment[slot] = null
 	#var array = PlayerStats.get(array_name)
 	#for item in array:
 		#if item and item != self and item.slot == slot:

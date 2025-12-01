@@ -59,9 +59,9 @@ var thirst_decrease_rate := 0.1
 func _ready() -> void:
 	reset_stats()
 	SceneManager.scene_changed.connect(on_scene_changed)
-	if inventory.item_slots.size() > 0 and inventory.item_slots[0].item is EquipmentGun:
-		gun = inventory.item_slots[0].item
-		gun.equipped = true
+	#if inventory.item_slots.size() > 0 and inventory.item_slots[0].item is EquipmentGun:
+		#gun = inventory.item_slots[0].item
+		#gun.equipped = true
 
 
 func _process(delta: float) -> void:
@@ -72,11 +72,11 @@ func _process(delta: float) -> void:
 	if hunger <= 0 or thirst <= 0:
 		Globals.player.hitbox.damage(0.1 * delta)
 	# gun management
-	if !guns.has(gun):
-		gun = null
-	for i in equipped_guns.size() - 1:
-		if !guns.has(equipped_guns[i]):
-			equipped_guns[i] = null
+	#if !guns.has(gun):
+		#gun = null
+	#for i in equipped_guns.size() - 1:
+		#if !guns.has(equipped_guns[i]):
+			#equipped_guns[i] = null
 
 
 func _physics_process(delta):
@@ -93,11 +93,11 @@ func reset_stats() -> void:
 	state = states.walk
 	money = starting_money
 	inventory = starting_inventory.duplicate(true)
-	equipped_guns = [null, null]
-	equipped_guns[guns[0].slot] = guns[0]
-	for i in equipped_guns:
-		if i:
-			i.gun_stats.reset()
+	inventory.equipment_kit.remove_all()
+	#equipped_guns[guns[0].slot] = guns[0]
+	#for i in equipped_guns:
+		#if i:
+			#i.gun_stats.reset()
 	quests.clear()
 	hp = max_hp
 	sleep = max_sleep

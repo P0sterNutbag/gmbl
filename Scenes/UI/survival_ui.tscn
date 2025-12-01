@@ -19,7 +19,7 @@
 [ext_resource type="Theme" uid="uid://cdtfcbhvps3m1" path="res://Art/Themes/text_mediun.tres" id="15_1lobq"]
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="15_k4cvi"]
 [ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="16_1lobq"]
-[ext_resource type="Script" uid="uid://da4hlku4dc72j" path="res://Scripts/equipmen_button.gd" id="19_jtf3n"]
+[ext_resource type="Script" uid="uid://da4hlku4dc72j" path="res://Scripts/equipment_button.gd" id="19_jtf3n"]
 [ext_resource type="PackedScene" uid="uid://bos3d7nxhdnc5" path="res://Scenes/UI/pause_menu.tscn" id="19_oq622"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_agdr0"]
@@ -475,6 +475,7 @@ offset_left = 829.0
 offset_right = 829.0
 
 [node name="PlayerInventory" type="HBoxContainer" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -543,14 +544,14 @@ layout_mode = 2
 text = "Primary: "
 script = ExtResource("19_jtf3n")
 equipment_array = "equipped_guns"
-slot_index = 0
+slot = 0
 
 [node name="MenuItem2" parent="PlayerInventory/VBoxContainer/Equipment/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Secondary: "
 script = ExtResource("19_jtf3n")
 equipment_array = "equipped_guns"
-slot_index = 1
+slot = 1
 
 [node name="Equipment2" type="PanelContainer" parent="PlayerInventory/VBoxContainer"]
 custom_minimum_size = Vector2(497, 0)
@@ -588,14 +589,14 @@ layout_mode = 2
 text = "Head: "
 script = ExtResource("19_jtf3n")
 equipment_array = "equipped_armor"
-slot_index = 0
+slot = 2
 
 [node name="MenuItem2" parent="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Body: "
 script = ExtResource("19_jtf3n")
 equipment_array = "equipped_armor"
-slot_index = 1
+slot = 3
 
 [node name="Equipment3" type="PanelContainer" parent="PlayerInventory/VBoxContainer"]
 custom_minimum_size = Vector2(497, 0)
@@ -633,14 +634,14 @@ layout_mode = 2
 text = "Nav: "
 script = ExtResource("19_jtf3n")
 equipment_array = "equipped_util"
-slot_index = 0
+slot = 4
 
 [node name="MenuItem2" parent="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Light: "
 script = ExtResource("19_jtf3n")
 equipment_array = "equipped_util"
-slot_index = 1
+slot = 5
 
 [node name="MenuItem3" parent="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
 visible = false
@@ -648,7 +649,7 @@ layout_mode = 2
 text = "Vision: "
 script = ExtResource("19_jtf3n")
 equipment_array = "equipped_util"
-slot_index = 2
+slot = 6
 
 [node name="TransferInventory" type="HBoxContainer" parent="."]
 visible = false

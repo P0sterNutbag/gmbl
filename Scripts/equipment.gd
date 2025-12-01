@@ -3,7 +3,7 @@ class_name Equipment
 
 @export var name: String
 @export var equipped: bool
-@export var slot: int
+@export var slot: EquipmentKit.slots
 @export var array_name: String
 signal equipped_changed
 

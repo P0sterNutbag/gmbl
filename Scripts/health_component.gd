@@ -5,7 +5,6 @@ class_name HealthComponent
 	set(value):
 		if value > hp and hp != 0:
 			hp = value
-			hp = clamp(hp, 0, max_hp - unhealable_hp)
 		else:
 			hp = value
 		if hp_bar:
@@ -14,17 +13,9 @@ class_name HealthComponent
 			elif hp_bar is Label:
 				hp_bar.text = "HP:" + str(int((hp / max_hp) * 100))
 @export var hp_bar: Control
-@export var hp_bar2: Control
 @export var otherHitboxes: Array[HealthComponent]
 @onready var max_hp: float = hp
-#@onready var physical_bone_simulator: PhysicalBoneSimulator3D = $"../EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D"
 var audio_stream_player: AudioStreamPlayer3D
-var unhealable_hp: float = 0:
-	set(value):
-		unhealable_hp += value
-		unhealable_hp = clamp(unhealable_hp, 0, max_hp)
-		if hp_bar2:
-			hp_bar2.value = unhealable_hp / max_hp
 var is_dead: bool
 var blood_spatter: PackedScene = preload("res://Scenes/Particles/bloodspatter_ground.tscn")
 signal damaged(hit_position: Vector3, hit_direction: Vector3)
@@ -43,8 +34,6 @@ func damage(dmg: float, hit_position: Vector3 = Vector3.ZERO, hit_direction: Vec
 	if is_dead:
 		return
 	hp -= dmg
-	#if randf() < 0.2:
-		#unhealable_hp += dmg
 	if audio_stream_player:
 		audio_stream_player.play()
 	if hp <= 0:

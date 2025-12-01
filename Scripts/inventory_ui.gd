@@ -15,7 +15,8 @@ var categories = {
 	Item.categories.survival : "Survival",
 	Item.categories.guns : "Guns", 
 	Item.categories.ammo : "Ammo",
-	Item.categories.junk : "Junk"
+	Item.categories.armor: "Armor",
+	Item.categories.junk : "Junk",
 	}
 var category_index = -1
 const text_style = preload("res://Art/Themes/text.tres")

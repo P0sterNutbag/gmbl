@@ -80,7 +80,6 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	hitbox.hp = PlayerStats.hp
 	hitbox.hp_bar = Globals.ui.player_hp_bar
-	hitbox.hp_bar2 = Globals.ui.player_hp_bar2
 	sway_noise.seed = randi()
 	sway_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	sway_noise.frequency = 0.5

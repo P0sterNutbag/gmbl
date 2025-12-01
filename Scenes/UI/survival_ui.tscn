@@ -475,7 +475,6 @@ offset_left = 829.0
 offset_right = 829.0
 
 [node name="PlayerInventory" type="HBoxContainer" parent="."]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -492,6 +491,9 @@ theme_override_constants/separation = 64
 [node name="Inventory" parent="PlayerInventory" instance=ExtResource("9_to4rm")]
 layout_mode = 2
 size_flags_horizontal = 3
+mode = null
+show_size = null
+show_price = null
 
 [node name="Control" type="Control" parent="PlayerInventory/Inventory"]
 layout_mode = 2
@@ -598,13 +600,6 @@ script = ExtResource("19_jtf3n")
 equipment_array = "equipped_armor"
 slot_index = 1
 
-[node name="MenuItem3" parent="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Legs: "
-script = ExtResource("19_jtf3n")
-equipment_array = "equipped_armor"
-slot_index = 2
-
 [node name="Equipment3" type="PanelContainer" parent="PlayerInventory/VBoxContainer"]
 custom_minimum_size = Vector2(497, 0)
 layout_mode = 2
@@ -678,6 +673,8 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mode = 1
+show_size = null
+show_price = null
 opposing_ui = NodePath("../Inventory2")
 
 [node name="Control" type="Control" parent="TransferInventory/Inventory"]
@@ -696,6 +693,8 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mode = 1
+show_size = null
+show_price = null
 opposing_ui = NodePath("../Inventory")
 
 [node name="Journal" type="HBoxContainer" parent="." node_paths=PackedStringArray("item_container")]
@@ -798,7 +797,6 @@ visible = false
 [connection signal="pressed" from="PlayerInventory/VBoxContainer/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" to="PlayerInventory/VBoxContainer/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" method="_on_pressed"]
 [connection signal="pressed" from="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" method="_on_pressed"]
 [connection signal="pressed" from="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" to="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" method="_on_pressed"]
-[connection signal="pressed" from="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem3" to="PlayerInventory/VBoxContainer/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem3" method="_on_pressed"]
 [connection signal="pressed" from="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" method="_on_pressed"]
 [connection signal="pressed" from="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" to="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" method="_on_pressed"]
 [connection signal="pressed" from="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem3" to="PlayerInventory/VBoxContainer/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem3" method="_on_pressed"]

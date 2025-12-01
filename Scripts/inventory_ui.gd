@@ -211,6 +211,7 @@ func _on_item_focus_exited(_menu_item: MenuItem):
 
 func _on_item_equipped_changed(menu_item: MenuItem) -> void:
 	var item = menu_item.resource
+	source_inventory.equipment_kit.equipment[item.slot] = item
 	if mode == modes.use and item_is_in_category(item):
 		menu_item.visible = !item.equipped
 

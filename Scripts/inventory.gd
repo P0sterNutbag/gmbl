@@ -12,7 +12,8 @@ var items: Array[Item]:
 			var item = slot.item
 			array.append(item)
 		return array
-	
+var equipment_kit := EquipmentKit.new()
+
 
 func add_item(item: Item, amount: int = 1) -> bool:
 	if item is ItemMoney:

@@ -10,10 +10,10 @@ var equipment := {
 }
 
 
-func set_equippment(inventory: Inventory) -> void:
-	for item in inventory:
-		if item is Equipment and item.equipped:
-			equipment[item.slot] = item
+#func set_equippment(inventory: Inventory) -> void:
+	#for item in inventory:
+		#if item is Equipment and item.equipped:
+			#equipment[item.slot] = item
 
 
 func get_damage_mitigation() -> float:

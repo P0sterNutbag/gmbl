@@ -22,13 +22,15 @@ func drop(target_node: Node) -> void:
 
 func equip() -> void:
 	equipped = !equipped
-	var array = PlayerStats.get(array_name)
-	for item in array:
-		if item and item != self and item.slot == slot:
-			item.equipped = false
-			item.equipped_changed.emit()
-	if equipped:
-		array[slot] = self
-	else:
-		array[slot] = null
+	var kit = PlayerStats.inventory.equipment_kit
+	kit.equipment[slot] = self
+	#var array = PlayerStats.get(array_name)
+	#for item in array:
+		#if item and item != self and item.slot == slot:
+			#item.equipped = false
+			#item.equipped_changed.emit()
+	#if equipped:
+		#array[slot] = self
+	#else:
+		#array[slot] = null
 	equipped_changed.emit()

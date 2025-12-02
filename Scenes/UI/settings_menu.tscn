@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://c4m6uckxpd6d8"]
+
+[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_ynxh7"]
+[ext_resource type="Script" uid="uid://cxkoa2hl7kp5s" path="res://Scripts/settings_menu.gd" id="2_n6o6n"]
+[ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="3_cs2gm"]
+[ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="4_oadur"]
+[ext_resource type="PackedScene" uid="uid://bdxd0o243hn4c" path="res://Scenes/UI/slider_button.tscn" id="5_n6o6n"]
+[ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="5_sv08j"]
+
+[node name="SettingsMenu" type="PanelContainer" node_paths=PackedStringArray("item_container")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -343.5
+offset_top = -323.5
+offset_right = 343.5
+offset_bottom = 323.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ynxh7")
+script = ExtResource("2_n6o6n")
+item_container = NodePath("MarginContainer/VBoxContainer/VBoxContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_cs2gm")
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("4_oadur")
+
+[node name="Volume" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("5_n6o6n")]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="MusicVolume" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("5_n6o6n")]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="SfxVolume" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("5_n6o6n")]
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="Back" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("5_sv08j")]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
+
+[editable path="MarginContainer/VBoxContainer/VBoxContainer/Volume"]
+[editable path="MarginContainer/VBoxContainer/VBoxContainer/MusicVolume"]
+[editable path="MarginContainer/VBoxContainer/VBoxContainer/SfxVolume"]

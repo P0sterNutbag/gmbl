@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bos3d7nxhdnc5"]
+[gd_scene load_steps=7 format=3 uid="uid://bos3d7nxhdnc5"]
 
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_kdnb7"]
 [ext_resource type="Script" uid="uid://dykqct6penfmb" path="res://Scripts/pause_menu.gd" id="2_702e2"]
 [ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="3_qyryt"]
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="4_23me3"]
 [ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="5_deree"]
+[ext_resource type="PackedScene" uid="uid://c4m6uckxpd6d8" path="res://Scenes/UI/settings_menu.tscn" id="6_702e2"]
 
 [node name="PauseMenu" type="PanelContainer" node_paths=PackedStringArray("item_container")]
 anchors_preset = 8
@@ -52,6 +53,7 @@ layout_mode = 2
 text = "Resume"
 
 [node name="Load" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("5_deree")]
+visible = false
 layout_mode = 2
 text = "Load Game"
 
@@ -61,9 +63,19 @@ text = "Settings"
 
 [node name="Quit" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("5_deree")]
 layout_mode = 2
-text = "Quit"
+text = "Save and Quit"
+
+[node name="Quit2" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("5_deree")]
+layout_mode = 2
+text = "Quit to Desktop"
+
+[node name="SettingsMenu" parent="." instance=ExtResource("6_702e2")]
+visible = false
+layout_mode = 2
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Quit2" to="." method="_on_quit_2_pressed"]
+[connection signal="hidden" from="SettingsMenu" to="." method="_on_settings_menu_hidden"]

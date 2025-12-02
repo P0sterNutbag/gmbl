@@ -18,7 +18,8 @@ var max_hp := 8
 var ammo: int:
 	set(value):
 		ammo = value
-		gun.gun_stats.ammo = value
+		if gun:
+			gun.gun_stats.ammo = value
 	get():
 		if gun:
 			return gun.gun_stats.ammo
@@ -35,9 +36,9 @@ var quests: Array[Quest]
 	get(): 
 		return inventory.items.filter(func(i): return i is EquipmentGun)
 var gun: EquipmentGun
-var equipped_guns: Array[EquipmentGun]
-var equipped_armor: Array[Equipment] = [null, null]
-var equipped_util: Array[Equipment] = [null, null, null]
+#var equipped_guns: Array[EquipmentGun]
+#var equipped_armor: Array[Equipment] = [null, null]
+#var equipped_util: Array[Equipment] = [null, null, null]
 var gun_index := 0
 var sleep := 100.0:
 	set(value):
@@ -171,4 +172,5 @@ func go_to_sleep():
 
 
 func on_scene_changed():
-	hp = Globals.player.hitbox.hp
+	if Globals.player:
+		hp = Globals.player.hitbox.hp

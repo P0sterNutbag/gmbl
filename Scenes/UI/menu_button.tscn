@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://bj7gyfau2dx5w"]
+
+[ext_resource type="FontFile" uid="uid://d0fpgnwmxa37x" path="res://Art/Fonts/bedstead-bold.otf" id="1_56pne"]
+[ext_resource type="Texture2D" uid="uid://djj6aa5nkatda" path="res://Art/Textures/arrow.png" id="2_ujyj2"]
+[ext_resource type="Script" uid="uid://c47qqa8oxrofj" path="res://Scripts/menu_button.gd" id="3_k5i4o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_is1bq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d0ywl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s0t5v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0lamd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xmtvc"]
+
+[sub_resource type="Theme" id="Theme_d0ywl"]
+Button/colors/font_color = Color(0.87451, 0.87451, 0, 1)
+Button/colors/font_disabled_color = Color(0.8745098, 0.8745098, 0, 0.5019608)
+Button/colors/font_focus_color = Color(0.94902, 0.94902, 0, 1)
+Button/colors/font_hover_color = Color(0.94902, 0.94902, 0, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 0, 1)
+Button/colors/font_pressed_color = Color(1, 1, 0, 1)
+Button/font_sizes/font_size = 25
+Button/fonts/font = ExtResource("1_56pne")
+Button/styles/disabled = SubResource("StyleBoxEmpty_is1bq")
+Button/styles/focus = SubResource("StyleBoxEmpty_d0ywl")
+Button/styles/hover = SubResource("StyleBoxEmpty_s0t5v")
+Button/styles/normal = SubResource("StyleBoxEmpty_0lamd")
+Button/styles/pressed = SubResource("StyleBoxEmpty_xmtvc")
+
+[node name="MenuButton" type="Button"]
+z_index = 1
+offset_right = 179.0
+offset_bottom = 25.0
+size_flags_horizontal = 3
+mouse_filter = 1
+theme = SubResource("Theme_d0ywl")
+text = "Name"
+icon = ExtResource("2_ujyj2")
+flat = true
+alignment = 0
+script = ExtResource("3_k5i4o")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

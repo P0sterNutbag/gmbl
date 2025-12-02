@@ -16,6 +16,7 @@ class_name HealthComponent
 @export var otherHitboxes: Array[HealthComponent]
 @onready var max_hp: float = hp
 var audio_stream_player: AudioStreamPlayer3D
+var damage_modifier: float = 1.0
 var is_dead: bool
 var blood_spatter: PackedScene = preload("res://Scenes/Particles/bloodspatter_ground.tscn")
 signal damaged(hit_position: Vector3, hit_direction: Vector3)
@@ -33,7 +34,7 @@ func damage(dmg: float, hit_position: Vector3 = Vector3.ZERO, hit_direction: Vec
 	damaged.emit(hit_position, hit_direction)
 	if is_dead:
 		return
-	hp -= dmg
+	hp -= dmg * damage_modifier
 	if audio_stream_player:
 		audio_stream_player.play()
 	if hp <= 0:

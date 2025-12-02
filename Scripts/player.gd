@@ -557,18 +557,18 @@ func exit_gun_state_point_up() -> void:
 func change_gun_slot(slot_index: int) -> void:
 	var kit = PlayerStats.inventory.equipment_kit
 	var g = kit.equipment[kit.gun_slots[slot_index]]
-	#if !g:
-		#return
-	change_gun(g)
-	#if PlayerStats.gun_index == g.slot:
-		#change_gun(null)
-	#else:
-		#change_gun(g)
+	if slot_index == PlayerStats.gun_index:
+		if gun_state == gun_states.no_gun:
+			change_gun(g)
+		else:
+			change_gun(null)
+	else:
+		change_gun(g)
 	PlayerStats.gun_index = slot_index
 
 
 func change_gun(new_gun: EquipmentGun) -> void:
-	if gun:
+	if gun and gun_state != gun_states.no_gun:
 		await change_gun_state(gun_states.no_gun)
 	else:
 		gun_anchor.position.y = -0.3
@@ -653,12 +653,14 @@ func check_reload_ammo(time_to_skip_to: float):
 
 
 func _on_damaged(_hit_position: Vector3, _hit_direction: Vector3) -> void:
+	hitbox.damage_modifier = PlayerStats.inventory.equipment_kit.get_damage_modifier()
 	Globals.ui.play_hit_effect()
 
 
 func _on_death() -> void:
 	PlayerStats.change_state(PlayerStats.states.dead)
 	gun_state = gun_states.point
+	SaveController.delete_save_data()
 
 
 func _on_step_timer_timeout() -> void:

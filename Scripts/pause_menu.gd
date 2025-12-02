@@ -1,5 +1,8 @@
 extends Menu
 
+@onready var main_menu: MarginContainer = $MarginContainer
+@onready var settings_menu: PanelContainer = $SettingsMenu
+
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -24,10 +27,20 @@ func _on_load_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	pass # Replace with function body.
+	main_menu.hide()
+	settings_menu.activate()
 
 
 func _on_quit_pressed() -> void:
-	get_tree().quit()
-	#SceneManager.start_scene_transition("res://Scenes/UI/main_menu.tscn")
+	SaveController.save_data_to_file()
+	#get_tree().quit()
+	SceneManager.start_scene_transition("res://Scenes/UI/main_menu.tscn")
 	#queue_free()
+
+
+func _on_quit_2_pressed() -> void:
+	get_tree().quit()
+
+
+func _on_settings_menu_hidden() -> void:
+	main_menu.show()

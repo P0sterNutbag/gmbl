@@ -6,7 +6,11 @@ class_name Menu
 
 
 func activate():
-	item_container.get_child(0).grab_focus()
+	visible = true
+	for child in item_container.get_children():
+		if child.visible:
+			child.grab_focus()
+			return
 
 
 func close() -> void:

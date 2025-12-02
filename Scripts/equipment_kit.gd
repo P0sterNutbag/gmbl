@@ -16,12 +16,13 @@ var gun_slots := [slots.primary_gun, slots.secondary_gun]
 
 func remove_all() -> void:
 	for i in equipment:
-		i = null
+		equipment[i] = null
 
 
-func get_damage_mitigation() -> float:
-	var dm = 0.0
+func get_damage_modifier() -> float:
+	var dm = 1.0
 	for i in equipment:
-		if i is EquipmentArmor:
-			dm += i.damage_mitigation
+		var item = equipment[i]
+		if item is EquipmentArmor:
+			dm -= item.damage_modifier
 	return dm

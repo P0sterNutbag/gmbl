@@ -70,3 +70,14 @@ func load_data_from_file():
 				node.global_rotation.y = value
 			else:
 				node.set(node_data, value)
+
+
+func delete_save_data() -> void:
+	var dir = DirAccess.open("user://")
+	dir.remove("savegame.save")
+
+
+func save_file_exists() -> bool:
+	if FileAccess.file_exists(save_path):
+		return true
+	return false

@@ -27,7 +27,7 @@ var enter_functions: Dictionary
 @onready var animation_player: AnimationPlayer = $EnemyModel/PersonAnimated/AnimationPlayer
 @onready var camera: Camera3D = $CameraAnchor/RotationOffset/OverheadCamera
 @onready var gun_anchor: Node3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
-@onready var rifle: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/AK47
+@onready var ak_47: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/AK47
 @onready var pistol: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/Pistol
 @onready var sniper_rifle: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/SniperRifle
 @onready var shotgun: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/Shotgun
@@ -36,13 +36,11 @@ var enter_functions: Dictionary
 @onready var skeleton: Skeleton3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D
 @onready var physical_bone_simulator_3d: PhysicalBoneSimulator3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D
 @onready var loot_area: Area3D = $EnemyModel/LootArea
-
-
 var gun: Node3D: 
 	get: 
 		if !PlayerStats.gun:
 			return null
-		return get(PlayerStats.gun.name)
+		return get(PlayerStats.gun.resource_name)
 
 
 func _ready() -> void:

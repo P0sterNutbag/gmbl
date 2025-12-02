@@ -44,14 +44,15 @@ var gun: Node3D:
 	get: 
 		if !PlayerStats.gun:
 			return null
-		return get(PlayerStats.gun.name)
+		var gun_name = PlayerStats.gun.resource_name
+		return get(gun_name)
 var grenade = preload("res://Scenes/Bullets/grenade.tscn")
 @onready var camera = $CameraAnchor/Camera3D
 @onready var gun_anchor: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor
 @onready var gun_offset: Node3D = $CameraAnchor/Camera3D/GunOffset
 @onready var ads_position: Node3D = $CameraAnchor/Camera3D/AdsOffset/AdsPosition
 @onready var pistol: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol
-@onready var rifle: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47
+@onready var ak_47: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor/AK47
 @onready var sniper_rifle: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor/SniperRifle
 @onready var shotgun: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun
 @onready var sawed_off: Gun = $CameraAnchor/Camera3D/GunOffset/GunAnchor/SawedOff
@@ -586,7 +587,7 @@ func change_gun(new_gun: EquipmentGun) -> void:
 			firepoint = gun.get_node("GunAnchor/FirePoint")
 			await get_tree().create_timer(0.05).timeout
 			gun.visible = true
-	Globals.ui.set_gun_name(gun.name.to_upper())
+	Globals.ui.set_gun_name(PlayerStats.gun.title.to_upper())
 	if Input.is_action_pressed("aim"):
 		await change_gun_state(gun_states.ads)
 	else:

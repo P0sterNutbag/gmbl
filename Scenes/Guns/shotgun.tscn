@@ -27,7 +27,6 @@ metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 [node name="Gun" instance=ExtResource("1_mej0h")]
 bullet_stats = SubResource("Resource_x1ctg")
 gun_stats = SubResource("Resource_hufxr")
-ammo_type = "shotgun_ammo"
 fire_type = 2
 shoot_cooldown = 0.5
 
@@ -36,6 +35,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2701, -0.128087)
 
 [node name="FirePoint" parent="GunAnchor" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00265765, 0.241867, -0.665348)
+
+[node name="RayCast3D" parent="GunAnchor/FirePoint" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.029448777, 0)
 
 [node name="Model" parent="GunAnchor" index="1" instance=ExtResource("2_s1qc3")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)

@@ -133,7 +133,7 @@ func transfer_item(menu_item: Control):
 	if target_inventory.add_item(item, amount_to_move):
 		source_inventory.remove_item(item, amount_to_move)
 	set_items()
-	target_inventory.set_items()
+	opposing_ui.set_items()
 
 
 func set_description(item: Item = null):

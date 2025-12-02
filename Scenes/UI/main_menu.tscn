@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqnmrknu73rsn"]
+[gd_scene load_steps=9 format=3 uid="uid://dqnmrknu73rsn"]
 
 [ext_resource type="Texture2D" uid="uid://bgtj2hkiw3u6a" path="res://Art/Textures/screenshot.png" id="1_28flt"]
 [ext_resource type="Script" uid="uid://ba3gw1buyi5y1" path="res://Scripts/main_menu.gd" id="1_n45e2"]
+[ext_resource type="Texture2D" uid="uid://dcgpfk37llcwk" path="res://Art/Textures/logo 2.png" id="3_k33u3"]
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="3_opfnp"]
 [ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="4_cp0ys"]
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="5_yhxw7"]
@@ -31,6 +32,22 @@ mouse_filter = 2
 texture = ExtResource("1_28flt")
 expand_mode = 2
 
+[node name="TextureRect2" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 378.0
+offset_top = 27.0
+offset_right = -311.77783
+offset_bottom = -361.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_k33u3")
+expand_mode = 2
+
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -38,10 +55,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -343.5
-offset_top = -323.5
-offset_right = 343.5
-offset_bottom = 323.5
+offset_left = -104.0
+offset_top = 221.0
+offset_right = 104.0
+offset_bottom = 401.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -60,12 +77,14 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("4_cp0ys")
-text = "GMBL"
+text = "DOG VALLEY"
 horizontal_alignment = 1
 
 [node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 mouse_filter = 2
@@ -102,8 +121,11 @@ text = "Quit"
 
 [node name="SettingsMenu" parent="." instance=ExtResource("7_gih0s")]
 visible = false
-layout_mode = 0
-anchors_preset = 0
+layout_mode = 1
+offset_left = -341.5
+offset_top = -321.5
+offset_right = 341.5
+offset_bottom = 321.5
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="." method="_on_menu_item_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" to="." method="_on_menu_item_2_pressed"]

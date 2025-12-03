@@ -1,0 +1,171 @@
+[gd_scene load_steps=39 format=3 uid="uid://s4g2uyw4yjm5"]
+
+[ext_resource type="Script" uid="uid://b7gndoluwck72" path="res://Scripts/character_creation.gd" id="1_l0mq6"]
+[ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="2_bprwu"]
+[ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="3_g1y6k"]
+[ext_resource type="Resource" uid="uid://m28p1phfm50g" path="res://Resources/Items/Survival/compass.tres" id="4_rw6kf"]
+[ext_resource type="Resource" uid="uid://fioag0fe2wqb" path="res://Resources/Items/Survival/flashlight.tres" id="5_l5p3j"]
+[ext_resource type="Resource" uid="uid://ccm2c5fc8xn15" path="res://Resources/Items/Survival/medkit.tres" id="6_kw4yq"]
+[ext_resource type="Resource" uid="uid://dvooyj5cqcclc" path="res://Resources/Items/Survival/sleeping_bag.tres" id="7_jbbp7"]
+[ext_resource type="Resource" uid="uid://glkl1ugkvv6m" path="res://Resources/Items/Survival/water.tres" id="8_21g50"]
+[ext_resource type="Resource" uid="uid://dfkmfm7wu8mw4" path="res://Resources/Items/Survival/beans.tres" id="9_vdhcy"]
+[ext_resource type="Resource" uid="uid://81yrbdei6ihs" path="res://Resources/Items/Armor/helmet.tres" id="10_ns86h"]
+[ext_resource type="Resource" uid="uid://c7nqsvb4lasw1" path="res://Resources/Items/Armor/kevlar_vest.tres" id="11_se8u5"]
+[ext_resource type="Resource" uid="uid://ixc4pv5vjlno" path="res://Resources/Items/Guns/ak47.tres" id="12_r0iug"]
+[ext_resource type="Resource" uid="uid://dpt1btw7n2g0c" path="res://Resources/Items/Guns/hunting_rifle.tres" id="13_mfae7"]
+[ext_resource type="Resource" uid="uid://oaklo016ku8w" path="res://Resources/Items/Guns/pistol.tres" id="14_oy6s8"]
+[ext_resource type="Resource" uid="uid://lrml50x6ifrj" path="res://Resources/Items/Guns/sawed_off.tres" id="15_y0pjf"]
+[ext_resource type="Resource" uid="uid://de20gnenmrrxa" path="res://Resources/Items/Guns/shotgun.tres" id="16_enqay"]
+[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="17_7h4pg"]
+[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="18_6e25c"]
+[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="19_3exws"]
+[ext_resource type="Script" uid="uid://6ucyr0petjnx" path="res://Scripts/inventory.gd" id="20_jjwbk"]
+[ext_resource type="PackedScene" uid="uid://bj7gyfau2dx5w" path="res://Scenes/UI/menu_button.tscn" id="21_bprwu"]
+
+[sub_resource type="Resource" id="Resource_eae16"]
+script = ExtResource("3_g1y6k")
+item = ExtResource("4_rw6kf")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_xrmpo"]
+script = ExtResource("3_g1y6k")
+item = ExtResource("5_l5p3j")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_3jsbx"]
+script = ExtResource("3_g1y6k")
+item = ExtResource("6_kw4yq")
+amount = 3
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_4rhhb"]
+script = ExtResource("3_g1y6k")
+item = ExtResource("7_jbbp7")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_mteci"]
+script = ExtResource("3_g1y6k")
+item = ExtResource("8_21g50")
+amount = 3
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_rwgs6"]
+script = ExtResource("3_g1y6k")
+item = ExtResource("9_vdhcy")
+amount = 3
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_6cdiu"]
+script = ExtResource("3_g1y6k")
+item = ExtResource("10_ns86h")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_m383b"]
+script = ExtResource("3_g1y6k")
+item = ExtResource("11_se8u5")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_m2j50"]
+script = ExtResource("3_g1y6k")
+item = ExtResource("12_r0iug")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_qy0vt"]
+script = ExtResource("3_g1y6k")
+item = ExtResource("13_mfae7")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_34teq"]
+script = ExtResource("3_g1y6k")
+item = ExtResource("14_oy6s8")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_ybhi0"]
+script = ExtResource("3_g1y6k")
+item = ExtResource("15_y0pjf")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_kohxv"]
+script = ExtResource("3_g1y6k")
+item = ExtResource("16_enqay")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_mayu8"]
+script = ExtResource("3_g1y6k")
+item = ExtResource("17_7h4pg")
+amount = 5
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_451wk"]
+script = ExtResource("3_g1y6k")
+item = ExtResource("18_6e25c")
+amount = 5
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_xpqge"]
+script = ExtResource("3_g1y6k")
+item = ExtResource("19_3exws")
+amount = 25
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_bprwu"]
+resource_local_to_scene = true
+script = ExtResource("20_jjwbk")
+item_slots = Array[ExtResource("3_g1y6k")]([SubResource("Resource_eae16"), SubResource("Resource_xrmpo"), SubResource("Resource_3jsbx"), SubResource("Resource_4rhhb"), SubResource("Resource_mteci"), SubResource("Resource_rwgs6"), SubResource("Resource_6cdiu"), SubResource("Resource_m383b"), SubResource("Resource_m2j50"), SubResource("Resource_qy0vt"), SubResource("Resource_34teq"), SubResource("Resource_ybhi0"), SubResource("Resource_kohxv"), SubResource("Resource_mayu8"), SubResource("Resource_451wk"), SubResource("Resource_xpqge")])
+space = 100
+money = 100000
+title = "Starting Equipment"
+metadata/_custom_type_script = "uid://6ucyr0petjnx"
+
+[node name="CharacterCreation" type="Control"]
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+script = ExtResource("1_l0mq6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_right = 1504.0
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="Inventory" parent="VBoxContainer/HBoxContainer" node_paths=PackedStringArray("opposing_ui") instance=ExtResource("2_bprwu")]
+unique_name_in_owner = true
+layout_mode = 2
+mode = 1
+show_price = true
+show_money = false
+starting_inventory = SubResource("Resource_bprwu")
+opposing_ui = NodePath("../Inventory2")
+
+[node name="Inventory2" parent="VBoxContainer/HBoxContainer" node_paths=PackedStringArray("opposing_ui") instance=ExtResource("2_bprwu")]
+unique_name_in_owner = true
+layout_mode = 2
+mode = 1
+show_price = true
+opposing_ui = NodePath("../Inventory")
+
+[node name="MenuButton" parent="VBoxContainer" instance=ExtResource("21_bprwu")]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Confirm"

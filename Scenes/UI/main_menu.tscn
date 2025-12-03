@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqnmrknu73rsn"]
+[gd_scene load_steps=16 format=3 uid="uid://dqnmrknu73rsn"]
 
 [ext_resource type="Texture2D" uid="uid://bgtj2hkiw3u6a" path="res://Art/Textures/screenshot.png" id="1_28flt"]
 [ext_resource type="Script" uid="uid://ba3gw1buyi5y1" path="res://Scripts/main_menu.gd" id="1_n45e2"]
@@ -8,19 +8,51 @@
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="5_yhxw7"]
 [ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="6_opfnp"]
 [ext_resource type="PackedScene" uid="uid://c4m6uckxpd6d8" path="res://Scenes/UI/settings_menu.tscn" id="7_gih0s"]
+[ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="9_jewm6"]
+[ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand3.png" id="10_cejvf"]
+[ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="11_ru8vt"]
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("item_container")]
+[sub_resource type="PlaneMesh" id="PlaneMesh_ypsd1"]
+size = Vector2(1000, 500)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xp0kt"]
+albedo_texture = ExtResource("10_cejvf")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ctfa7"]
+render_priority = 0
+shader = ExtResource("11_ru8vt")
+shader_parameter/depth_edge_threshold_lower = 0.999999977648
+shader_parameter/depth_edge_threshold_upper = 1.0
+shader_parameter/normal_edge_threshold = 1.0000000149012
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_width = 2.0
+shader_parameter/fog_color = Color(0.48235294, 0.7176471, 1, 1)
+shader_parameter/fog_start = 0.0
+shader_parameter/fog_end = 400.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_1yfdm"]
+material = SubResource("ShaderMaterial_ctfa7")
+flip_faces = true
+size = Vector2(2, 2)
+
+[node name="MainMenu" type="Node3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("item_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 script = ExtResource("1_n45e2")
 item_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/VBoxContainer")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MainMenu"]
+visible = false
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -32,39 +64,53 @@ mouse_filter = 2
 texture = ExtResource("1_28flt")
 expand_mode = 2
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-z_index = -1
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/MainMenu"]
+visible = false
+z_index = -2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 378.0
-offset_top = 27.0
-offset_right = -311.77783
-offset_bottom = -361.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("3_k33u3")
-expand_mode = 2
+color = Color(0, 0, 0, 1)
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/MainMenu"]
+z_index = -1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -104.0
-offset_top = 221.0
-offset_right = 104.0
-offset_bottom = 401.0
+offset_left = -540.0
+offset_top = -482.0
+offset_right = 540.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(540, 270)
+mouse_filter = 2
+texture = ExtResource("3_k33u3")
+expand_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/MainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -108.0
+offset_top = 214.0
+offset_right = 100.0
+offset_bottom = 394.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("3_opfnp")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu/PanelContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 32
@@ -72,63 +118,78 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu/PanelContainer/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
 theme = ExtResource("4_cp0ys")
 text = "DOG VALLEY"
 horizontal_alignment = 1
 
-[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("5_yhxw7")
 
-[node name="MenuItem" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_opfnp")]
+[node name="MenuItem" parent="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_opfnp")]
 layout_mode = 2
 mouse_filter = 0
 mouse_behavior_recursive = 2
 text = "Continue"
 
-[node name="MenuItem2" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_opfnp")]
+[node name="MenuItem2" parent="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_opfnp")]
 layout_mode = 2
 mouse_filter = 0
 mouse_behavior_recursive = 2
 text = "New Game"
 
-[node name="MenuItem3" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_opfnp")]
+[node name="MenuItem3" parent="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_opfnp")]
 layout_mode = 2
 mouse_filter = 0
 mouse_behavior_recursive = 2
 text = "Settings"
 
-[node name="MenuItem4" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_opfnp")]
+[node name="MenuItem4" parent="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_opfnp")]
 layout_mode = 2
 mouse_filter = 0
 mouse_behavior_recursive = 2
 text = "Quit"
 
-[node name="SettingsMenu" parent="." instance=ExtResource("7_gih0s")]
+[node name="SettingsMenu" parent="CanvasLayer/MainMenu" instance=ExtResource("7_gih0s")]
 visible = false
 layout_mode = 1
-offset_left = -341.5
-offset_top = -321.5
-offset_right = 341.5
-offset_bottom = 321.5
+offset_left = 598.5
+offset_top = 198.5
+offset_right = 1281.5
+offset_bottom = 841.5
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="." method="_on_menu_item_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" to="." method="_on_menu_item_2_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem3" to="." method="_on_menu_item_3_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem4" to="." method="_on_menu_item_4_pressed"]
-[connection signal="hidden" from="SettingsMenu" to="." method="_on_settings_menu_hidden"]
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.7823573, 45.364048, -2.4915352)
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("9_jewm6")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ypsd1")
+surface_material_override/0 = SubResource("StandardMaterial3D_xp0kt")
+
+[node name="Shader" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.492066, 0, 0)
+cast_shadow = 0
+extra_cull_margin = 16237.3
+mesh = SubResource("QuadMesh_1yfdm")
+
+[connection signal="pressed" from="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="CanvasLayer/MainMenu" method="_on_menu_item_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" to="CanvasLayer/MainMenu" method="_on_menu_item_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem3" to="CanvasLayer/MainMenu" method="_on_menu_item_3_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem4" to="CanvasLayer/MainMenu" method="_on_menu_item_4_pressed"]
+[connection signal="hidden" from="CanvasLayer/MainMenu/SettingsMenu" to="." method="_on_settings_menu_hidden"]

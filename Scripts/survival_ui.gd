@@ -6,8 +6,9 @@ extends CanvasLayer
 @onready var loot_transfer_inventory: InventoryUI = %Inventory2
 @onready var journal: HBoxContainer = $Journal
 @onready var compass: Control = $TopCenter/Compass
-@onready var pause_menu: PanelContainer = $PauseMenu
+@onready var pause_menu: Control = $PauseMenu/PanelContainer
 @onready var player_inventory: InventoryUI = $PlayerInventory/Inventory
+@onready var death_menu: PanelContainer = $DeathMenu
 
 
 func _enter_tree() -> void:

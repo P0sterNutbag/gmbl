@@ -2,18 +2,11 @@ extends Node
 
 enum states {walk, pause, dead}
 var state = states.walk
-@export var starting_money: int = 0
-var money: int
 var hp: float = 8:
 	set(value):
 		hp = value
 		if Globals.player and "hitbox" in Globals.player and Globals.player.hitbox:
 			Globals.player.hitbox.hp = value
-	#get():
-		#if Globals.player and "hitbox" in Globals.player:
-			#return Globals.player.hitbox.hp
-		#else:
-			#return 5
 var max_hp := 8
 var ammo: int:
 	set(value):
@@ -36,9 +29,6 @@ var quests: Array[Quest]
 	get(): 
 		return inventory.items.filter(func(i): return i is EquipmentGun)
 var gun: EquipmentGun
-#var equipped_guns: Array[EquipmentGun]
-#var equipped_armor: Array[Equipment] = [null, null]
-#var equipped_util: Array[Equipment] = [null, null, null]
 var gun_index := 0
 var sleep := 100.0:
 	set(value):
@@ -60,9 +50,6 @@ var thirst_decrease_rate := 0.1
 func _ready() -> void:
 	reset_stats()
 	SceneManager.scene_changed.connect(on_scene_changed)
-	#if inventory.item_slots.size() > 0 and inventory.item_slots[0].item is EquipmentGun:
-		#gun = inventory.item_slots[0].item
-		#gun.equipped = true
 
 
 func _process(delta: float) -> void:
@@ -92,7 +79,6 @@ func _physics_process(delta):
 
 func reset_stats() -> void:
 	state = states.walk
-	money = starting_money
 	inventory = starting_inventory.duplicate(true)
 	inventory.equipment_kit.remove_all()
 	#equipped_guns[guns[0].slot] = guns[0]
@@ -134,7 +120,6 @@ func change_state(new_state):
 func save() -> Dictionary:
 	hp = Globals.player.hitbox.hp
 	return {
-		"money": money,
 		"hp": hp,
 		"ammo": ammo,
 		"inventory.item_slots" : inventory.item_slots
@@ -172,5 +157,7 @@ func go_to_sleep():
 
 
 func on_scene_changed():
+	if get_tree().current_scene.name == "CharacterCreation":
+		reset_stats()
 	if Globals.player:
 		hp = Globals.player.hitbox.hp

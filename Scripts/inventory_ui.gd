@@ -5,7 +5,11 @@ enum modes {use, loot}
 @export var mode = modes.use
 @export var show_size: bool = true
 @export var show_price: bool
+@export var show_money: bool = true
+@export var show_space: bool = true
+@export var starting_inventory: Inventory
 @export var opposing_ui: Control
+var is_ready: bool
 var source_inventory: Inventory = PlayerStats.inventory
 var target_inventory: Inventory
 var shop: Shop
@@ -19,15 +23,23 @@ var categories = {
 	Item.categories.junk : "Junk",
 	}
 var category_index = -1
-const text_style = preload("res://Art/Themes/text.tres")
+const text_style = preload("res://Art/Themes/text_small.tres")
 @onready var item_container: MenuController = %Items
-@onready var title: Label = $MarginContainer/VBoxContainer/HBoxContainer/Label
+@onready var title: Label = $MarginContainer/VBoxContainer/Label
 @onready var money_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/Money
 @onready var size_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/Size
 @onready var category_label: Label = %Category
 @onready var stats: HBoxContainer = %Stats
 @onready var stats_panel: PanelContainer = $MarginContainer/VBoxContainer/Panel
 @onready var description: Label = %Label
+
+
+func _ready() -> void:
+	is_ready = true
+	if starting_inventory:
+		source_inventory = starting_inventory
+	money_label.visible = show_money
+	size_label.visible = show_space
 
 
 func _process(_delta: float) -> void:
@@ -58,7 +70,7 @@ func _process(_delta: float) -> void:
 				item_container.get_child(new_index).grab_focus()
 	
 	# set money
-	if money_label.visible and "money" in source_inventory:
+	if money_label.visible:
 		money_label.text = "$" + str(source_inventory.money)
 	
 	# set size
@@ -119,9 +131,10 @@ func transfer_item(menu_item: Control):
 	# check money
 	if show_price:
 		if target_inventory.money >= menu_item.price:
+			source_inventory.money += menu_item.price
 			target_inventory.money -= menu_item.price
-			target_inventory.money += menu_item.price
-			get_parent().set_inventory_money()
+			#money_label.text = str(source_inventory.money)
+			#opposing_ui.money_label.text = str(opposing_ui.source_inventory.money)
 		else:
 			opposing_ui.money_label.modulate = Color.RED
 			var tween = create_tween()
@@ -145,6 +158,7 @@ func set_description(item: Item = null):
 	if item.description != "":
 		description.show()
 		description.text = item.description
+		stats_panel.show()
 	else:
 		description.hide()
 	if item is not Equipment and item.description == "":
@@ -183,6 +197,8 @@ func item_is_in_category(item: Item) -> bool:
 
 func _on_v_box_container_visibility_changed() -> void:
 	if visible and get_parent().visible:
+		if !is_ready:
+			await ready
 		set_items()
 		title.text = source_inventory.title
 

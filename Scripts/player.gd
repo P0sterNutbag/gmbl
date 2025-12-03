@@ -410,7 +410,7 @@ func enter_dead():
 	tween.tween_property(camera, "position:y", -1, 0.5)
 	tween.tween_property(camera, "rotation:z", deg_to_rad(45), 1)
 	#tween.tween_property(PlayerStats, "state", PlayerStats.states.walk, 0)
-	tween.tween_callback(Globals.ui.open_death_ui)
+	tween.tween_callback(UiController.open_interface.bind(Globals.survival_ui.death_menu))
 	#tween.tween_callback(SaveController.load_data_from_file).set_delay(5)
 
 
@@ -648,6 +648,7 @@ func check_reload_ammo(time_to_skip_to: float):
 	use_item(_ammo.resource_name, _ammo, gun.gun_stats)
 	_ammo = find_item(gun.ammo_item.title)
 	if !_ammo:
+		gun.get_node("AnimationPlayer").seek(time_to_skip_to, true, true)
 		gun.get_node("AnimationPlayer").seek(time_to_skip_to, true, true)
 	elif ammo >= gun.max_ammo:
 		gun.get_node("AnimationPlayer").seek(time_to_skip_to, true, true)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxn2w0eeltovy"]
+[gd_scene load_steps=10 format=3 uid="uid://cxn2w0eeltovy"]
 
 [ext_resource type="Script" uid="uid://digkdunkqyhf4" path="res://Scripts/Autoloads/scene_manager.gd" id="1_f1i8l"]
 [ext_resource type="Script" uid="uid://d2guveclyykbc" path="res://Scripts/Autoloads/scene_transition.gd" id="2_5xiqd"]
+[ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="3_5xiqd"]
 
 [sub_resource type="Animation" id="Animation_8sxkv"]
 length = 0.001
@@ -114,10 +115,31 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
+[node name="Label" type="Label" parent="SceneTransition/ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -244.0
+offset_top = -75.0
+offset_right = -100.0
+offset_bottom = -50.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("3_5xiqd")
+text = "Loading"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SceneTransition"]
 libraries = {
 &"": SubResource("AnimationLibrary_sd3nk")
 }
 
+[node name="Timer" type="Timer" parent="SceneTransition"]
+wait_time = 0.5
+
 [connection signal="transition_in_done" from="SceneTransition" to="." method="start_load"]
 [connection signal="animation_finished" from="SceneTransition/AnimationPlayer" to="SceneTransition" method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="SceneTransition/Timer" to="SceneTransition" method="_on_timer_timeout"]

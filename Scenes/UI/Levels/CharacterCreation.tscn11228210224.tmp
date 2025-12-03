@@ -1,0 +1,344 @@
+[gd_scene load_steps=44 format=3 uid="uid://s4g2uyw4yjm5"]
+
+[ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="1_m65yk"]
+[ext_resource type="Script" uid="uid://b7gndoluwck72" path="res://Scripts/character_creation.gd" id="1_njrn5"]
+[ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="2_b1c7s"]
+[ext_resource type="PackedScene" uid="uid://connpctdgiwij" path="res://Scenes/UI/exit_button.tscn" id="2_idefd"]
+[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="3_dmfr6"]
+[ext_resource type="Resource" uid="uid://m28p1phfm50g" path="res://Resources/Items/Survival/compass.tres" id="3_njrn5"]
+[ext_resource type="Resource" uid="uid://fioag0fe2wqb" path="res://Resources/Items/Survival/flashlight.tres" id="4_wis30"]
+[ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="4_xl7bn"]
+[ext_resource type="Theme" uid="uid://cdtfcbhvps3m1" path="res://Art/Themes/text_mediun.tres" id="5_0icd7"]
+[ext_resource type="Resource" uid="uid://ccm2c5fc8xn15" path="res://Resources/Items/Survival/medkit.tres" id="5_aikfy"]
+[ext_resource type="Resource" uid="uid://dvooyj5cqcclc" path="res://Resources/Items/Survival/sleeping_bag.tres" id="6_5r56t"]
+[ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="6_r6487"]
+[ext_resource type="Script" uid="uid://eo5omrsmkx27" path="res://Scripts/equipmen_button.gd" id="7_mog5s"]
+[ext_resource type="Resource" uid="uid://glkl1ugkvv6m" path="res://Resources/Items/Survival/water.tres" id="7_vvuaa"]
+[ext_resource type="Resource" uid="uid://dfkmfm7wu8mw4" path="res://Resources/Items/Survival/beans.tres" id="8_edxoh"]
+[ext_resource type="Resource" uid="uid://81yrbdei6ihs" path="res://Resources/Items/Armor/helmet.tres" id="9_2hjy6"]
+[ext_resource type="Resource" uid="uid://c7nqsvb4lasw1" path="res://Resources/Items/Armor/kevlar_vest.tres" id="10_odgtl"]
+[ext_resource type="Resource" uid="uid://ixc4pv5vjlno" path="res://Resources/Items/Guns/ak47.tres" id="11_niygt"]
+[ext_resource type="Resource" uid="uid://dpt1btw7n2g0c" path="res://Resources/Items/Guns/hunting_rifle.tres" id="12_3hayq"]
+[ext_resource type="Resource" uid="uid://oaklo016ku8w" path="res://Resources/Items/Guns/pistol.tres" id="13_s35nj"]
+[ext_resource type="Resource" uid="uid://lrml50x6ifrj" path="res://Resources/Items/Guns/sawed_off.tres" id="14_u0mdf"]
+[ext_resource type="Resource" uid="uid://de20gnenmrrxa" path="res://Resources/Items/Guns/shotgun.tres" id="15_8yj42"]
+[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="16_iic5e"]
+[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="17_0yxbn"]
+[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="18_kq5io"]
+[ext_resource type="Script" uid="uid://6ucyr0petjnx" path="res://Scripts/inventory.gd" id="19_k5g3d"]
+
+[sub_resource type="Resource" id="Resource_eae16"]
+script = ExtResource("2_b1c7s")
+item = ExtResource("3_njrn5")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_xrmpo"]
+script = ExtResource("2_b1c7s")
+item = ExtResource("4_wis30")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_3jsbx"]
+script = ExtResource("2_b1c7s")
+item = ExtResource("5_aikfy")
+amount = 3
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_4rhhb"]
+script = ExtResource("2_b1c7s")
+item = ExtResource("6_5r56t")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_mteci"]
+script = ExtResource("2_b1c7s")
+item = ExtResource("7_vvuaa")
+amount = 3
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_rwgs6"]
+script = ExtResource("2_b1c7s")
+item = ExtResource("8_edxoh")
+amount = 3
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_6cdiu"]
+script = ExtResource("2_b1c7s")
+item = ExtResource("9_2hjy6")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_m383b"]
+script = ExtResource("2_b1c7s")
+item = ExtResource("10_odgtl")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_m2j50"]
+script = ExtResource("2_b1c7s")
+item = ExtResource("11_niygt")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_qy0vt"]
+script = ExtResource("2_b1c7s")
+item = ExtResource("12_3hayq")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_34teq"]
+script = ExtResource("2_b1c7s")
+item = ExtResource("13_s35nj")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_ybhi0"]
+script = ExtResource("2_b1c7s")
+item = ExtResource("14_u0mdf")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_kohxv"]
+script = ExtResource("2_b1c7s")
+item = ExtResource("15_8yj42")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_mayu8"]
+script = ExtResource("2_b1c7s")
+item = ExtResource("16_iic5e")
+amount = 5
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_451wk"]
+script = ExtResource("2_b1c7s")
+item = ExtResource("17_0yxbn")
+amount = 5
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_xpqge"]
+script = ExtResource("2_b1c7s")
+item = ExtResource("18_kq5io")
+amount = 25
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_g0bt7"]
+resource_local_to_scene = true
+script = ExtResource("19_k5g3d")
+item_slots = Array[ExtResource("2_b1c7s")]([SubResource("Resource_eae16"), SubResource("Resource_xrmpo"), SubResource("Resource_3jsbx"), SubResource("Resource_4rhhb"), SubResource("Resource_mteci"), SubResource("Resource_rwgs6"), SubResource("Resource_6cdiu"), SubResource("Resource_m383b"), SubResource("Resource_m2j50"), SubResource("Resource_qy0vt"), SubResource("Resource_34teq"), SubResource("Resource_ybhi0"), SubResource("Resource_kohxv"), SubResource("Resource_mayu8"), SubResource("Resource_451wk"), SubResource("Resource_xpqge")])
+space = 100
+money = 100000
+title = "Starting Equipment"
+metadata/_custom_type_script = "uid://6ucyr0petjnx"
+
+[node name="CharacterCreation" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_njrn5")
+
+[node name="TransferInventory" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -655.0
+offset_top = -382.5
+offset_right = 655.0
+offset_bottom = 382.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+
+[node name="Inventory" parent="TransferInventory" node_paths=PackedStringArray("opposing_ui") instance=ExtResource("1_m65yk")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+mode = 1
+show_price = true
+show_money = false
+starting_inventory = SubResource("Resource_g0bt7")
+opposing_ui = NodePath("../PlayerInventory/Inventory")
+
+[node name="Control" type="Control" parent="TransferInventory/Inventory"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" parent="TransferInventory/Inventory/Control" instance=ExtResource("2_idefd")]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 0.0
+offset_right = 22.0
+offset_bottom = 24.0
+
+[node name="PlayerInventory" type="HBoxContainer" parent="TransferInventory"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="Inventory" parent="TransferInventory/PlayerInventory" node_paths=PackedStringArray("opposing_ui") instance=ExtResource("1_m65yk")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+mode = 1
+show_price = true
+opposing_ui = NodePath("../../Inventory")
+
+[node name="Control" type="Control" parent="TransferInventory/PlayerInventory/Inventory"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" parent="TransferInventory/PlayerInventory/Inventory/Control" instance=ExtResource("2_idefd")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 24.0
+offset_bottom = 24.0
+
+[node name="EquipmentSlots" type="VBoxContainer" parent="TransferInventory/PlayerInventory"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 48
+
+[node name="Equipment" type="PanelContainer" parent="TransferInventory/PlayerInventory/EquipmentSlots"]
+custom_minimum_size = Vector2(497, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("3_dmfr6")
+
+[node name="MarginContainer" type="MarginContainer" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("4_xl7bn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_0icd7")
+text = "Guns"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MenuItem" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_r6487")]
+layout_mode = 2
+text = "Primary: "
+script = ExtResource("7_mog5s")
+slot = 0
+
+[node name="MenuItem2" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_r6487")]
+layout_mode = 2
+text = "Secondary: "
+script = ExtResource("7_mog5s")
+slot = 1
+
+[node name="Equipment2" type="PanelContainer" parent="TransferInventory/PlayerInventory/EquipmentSlots"]
+custom_minimum_size = Vector2(497, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("3_dmfr6")
+
+[node name="MarginContainer" type="MarginContainer" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment2"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("4_xl7bn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_0icd7")
+text = "Armor"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MenuItem" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_r6487")]
+layout_mode = 2
+text = "Head: "
+script = ExtResource("7_mog5s")
+slot = 2
+
+[node name="MenuItem2" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_r6487")]
+layout_mode = 2
+text = "Body: "
+script = ExtResource("7_mog5s")
+slot = 3
+
+[node name="Equipment3" type="PanelContainer" parent="TransferInventory/PlayerInventory/EquipmentSlots"]
+custom_minimum_size = Vector2(497, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("3_dmfr6")
+
+[node name="MarginContainer" type="MarginContainer" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment3"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("4_xl7bn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_0icd7")
+text = "Utility"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MenuItem" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_r6487")]
+layout_mode = 2
+text = "Nav: "
+script = ExtResource("7_mog5s")
+slot = 4
+
+[node name="MenuItem2" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_r6487")]
+layout_mode = 2
+text = "Light: "
+script = ExtResource("7_mog5s")
+slot = 5
+
+[node name="MenuItem3" parent="TransferInventory/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_r6487")]
+visible = false
+layout_mode = 2
+text = "Vision: "
+script = ExtResource("7_mog5s")
+slot = 6
+
+[connection signal="pressed" from="TransferInventory/PlayerInventory/Inventory/Control/Button" to="TransferInventory/PlayerInventory" method="close"]
+[connection signal="pressed" from="TransferInventory/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="TransferInventory/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" method="_on_pressed"]
+[connection signal="pressed" from="TransferInventory/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" to="TransferInventory/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" method="_on_pressed"]
+[connection signal="pressed" from="TransferInventory/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="TransferInventory/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" method="_on_pressed"]
+[connection signal="pressed" from="TransferInventory/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" to="TransferInventory/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" method="_on_pressed"]
+[connection signal="pressed" from="TransferInventory/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="TransferInventory/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" method="_on_pressed"]
+[connection signal="pressed" from="TransferInventory/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" to="TransferInventory/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" method="_on_pressed"]
+[connection signal="pressed" from="TransferInventory/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem3" to="TransferInventory/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem3" method="_on_pressed"]
+
+[editable path="TransferInventory/Inventory"]

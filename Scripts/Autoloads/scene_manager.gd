@@ -21,7 +21,6 @@ func start_scene_transition(scene, remove_current: bool = false) -> void:
 
 
 func change_scene() -> void:
-	scene_changed.emit()
 	if remove_from_tree:
 		get_tree().root.remove_child(get_tree().current_scene)
 		var inst = load(next_scene).instantiate()
@@ -38,13 +37,14 @@ func change_scene() -> void:
 			get_tree().current_scene = next_scene
 			MusicManager.on_scene_transition(next_scene.name)
 	scene_transition.transition_out()
+	UiController.reset_list()
 	get_tree().paused = false
+	scene_changed.emit()
 	await get_tree().process_frame
 	if load_on_enter:
 		load_on_enter = false
 		PlayerStats.state = PlayerStats.states.walk
 		SaveController.load_data_from_file()
-
 
 
 func start_load() -> void:

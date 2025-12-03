@@ -36,3 +36,7 @@ func is_canvas_layer_open(canvas_layer: CanvasLayer) -> bool:
 		if node.visible and node.get_parent() == canvas_layer:
 			return true
 	return false
+
+
+func reset_list():
+	ui_nodes.clear()

@@ -51,5 +51,5 @@ func generate_quest() -> Quest:
 	quest.reward = ItemSlot.new()
 	quest.reward.item = rewards[randi_range(0, rewards.size()-1)]
 	quest.reward.amount = 100
-	quest.target = preload("res://Scenes/Enemies/enemy.tscn")
+	quest.target = preload("res://Scenes/NPCs/enemy.tscn")
 	return quest

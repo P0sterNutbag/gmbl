@@ -2,7 +2,8 @@ extends Menu
 
 @onready var resume_button: MenuItem = $PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem
 @onready var settings_menu: PanelContainer = $SettingsMenu
-@onready var main_menu: MarginContainer = $PanelContainer/MarginContainer
+@onready var main_menu: PanelContainer = $PanelContainer
+const CHARACTER_CREATION = preload("uid://s4g2uyw4yjm5")
 
 
 func _ready() -> void:
@@ -18,7 +19,7 @@ func _on_menu_item_pressed() -> void:
 
 
 func _on_menu_item_2_pressed() -> void:
-	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld.tscn")
+	SceneManager.start_scene_transition("res://Scenes/UI/Levels/character_creation.tscn")
 
 
 func _on_menu_item_3_pressed() -> void:
@@ -27,8 +28,9 @@ func _on_menu_item_3_pressed() -> void:
 
 
 func _on_menu_item_4_pressed() -> void:
-	get_tree().quit
+	get_tree().quit()
 
 
 func _on_settings_menu_hidden() -> void:
 	main_menu.show()
+	activate()

@@ -1,6 +1,13 @@
 extends Menu
 
 
+#func _process(_delta: float) -> void:
+	#if !visible:
+		#return
+	#if Input.is_action_just_pressed("ui_cancel"):
+		#hide()
+
+
 func _on_volume_pressed() -> void:
 	pass # Replace with function body.
 

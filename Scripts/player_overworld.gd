@@ -27,10 +27,13 @@ var enter_functions: Dictionary
 @onready var animation_player: AnimationPlayer = $EnemyModel/PersonAnimated/AnimationPlayer
 @onready var camera: Camera3D = $CameraAnchor/RotationOffset/OverheadCamera
 @onready var gun_anchor: Node3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
-@onready var ak_47: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/AK47
+@onready var ak_47: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/ak_47
 @onready var pistol: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/Pistol
 @onready var sniper_rifle: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/SniperRifle
 @onready var shotgun: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/Shotgun
+@onready var sawed_off: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/SawedOff
+@onready var uzi: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/Uzi
+@onready var hunting_rifle: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/HuntingRifle
 @onready var hitbox: HealthComponent = $HealthComponent
 @onready var spot_light: SpotLight3D = $EnemyModel/SpotLight3D
 @onready var skeleton: Skeleton3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D

@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://cc458wgoeu6t4"]
+[gd_scene load_steps=25 format=3 uid="uid://cc458wgoeu6t4"]
 
 [ext_resource type="Script" uid="uid://dr73ivowve6xe" path="res://Scripts/survival_ui.gd" id="1_e5c6o"]
 [ext_resource type="Script" uid="uid://bclh5yhrpmkxf" path="res://Scripts/stat_visual.gd" id="2_k4cvi"]
+[ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="3_1kfkr"]
 [ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="3_1lobq"]
 [ext_resource type="Theme" uid="uid://lg0ktyb6xeoh" path="res://Art/Themes/hp_bar.tres" id="4_1kfkr"]
 [ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="5_jtf3n"]
@@ -21,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="16_1lobq"]
 [ext_resource type="Script" uid="uid://eo5omrsmkx27" path="res://Scripts/equipmen_button.gd" id="19_jtf3n"]
 [ext_resource type="PackedScene" uid="uid://bos3d7nxhdnc5" path="res://Scenes/UI/pause_menu.tscn" id="19_oq622"]
+[ext_resource type="Script" uid="uid://bbbs0n5jbnghm" path="res://Scripts/death_menu.gd" id="23_1kfkr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_agdr0"]
 bg_color = Color(0, 0, 0, 0.784314)
@@ -103,14 +105,14 @@ offset_left = 9.13538
 offset_top = 0.5
 offset_right = 160.135
 offset_bottom = 28.5
-theme = ExtResource("3_1lobq")
+theme = ExtResource("3_1kfkr")
 text = "Health"
 
 [node name="ProgressBar" type="ProgressBar" parent="ScaleOffset/TopLeft/Stats/Health"]
 layout_mode = 0
-offset_left = 81.5
+offset_left = 90.0
 offset_top = 6.0
-offset_right = 124.5
+offset_right = 150.0
 offset_bottom = 17.0
 theme = ExtResource("4_1kfkr")
 max_value = 1.0
@@ -140,15 +142,15 @@ offset_left = 9.13538
 offset_top = 0.5
 offset_right = 160.135
 offset_bottom = 28.5
-theme = ExtResource("3_1lobq")
+theme = ExtResource("3_1kfkr")
 text = "Hunger"
 
 [node name="ProgressBar" type="ProgressBar" parent="ScaleOffset/TopLeft/Stats/Hunger"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 81.5
+offset_left = 90.0
 offset_top = 6.0
-offset_right = 124.5
+offset_right = 150.0
 offset_bottom = 17.0
 theme = ExtResource("4_1kfkr")
 max_value = 1.0
@@ -177,14 +179,14 @@ offset_left = 9.13538
 offset_top = 0.5
 offset_right = 160.135
 offset_bottom = 28.5
-theme = ExtResource("3_1lobq")
+theme = ExtResource("3_1kfkr")
 text = "Thirst"
 
 [node name="ProgressBar" type="ProgressBar" parent="ScaleOffset/TopLeft/Stats/Water"]
 layout_mode = 0
-offset_left = 80.5
+offset_left = 90.0
 offset_top = 6.0
-offset_right = 123.5
+offset_right = 150.0
 offset_bottom = 17.0
 theme = ExtResource("4_1kfkr")
 max_value = 1.0
@@ -213,14 +215,14 @@ offset_left = 9.13538
 offset_top = 0.5
 offset_right = 160.135
 offset_bottom = 28.5
-theme = ExtResource("3_1lobq")
+theme = ExtResource("3_1kfkr")
 text = "Sleep"
 
 [node name="ProgressBar" type="ProgressBar" parent="ScaleOffset/TopLeft/Stats/Sleep"]
 layout_mode = 0
-offset_left = 73.5
+offset_left = 90.0
 offset_top = 6.0
-offset_right = 116.5
+offset_right = 150.0
 offset_bottom = 17.0
 theme = ExtResource("4_1kfkr")
 max_value = 1.0
@@ -777,7 +779,75 @@ theme = ExtResource("5_jtf3n")
 layout_mode = 2
 
 [node name="PauseMenu" parent="." instance=ExtResource("19_oq622")]
+
+[node name="PanelContainer" parent="PauseMenu" index="0"]
 visible = false
+
+[node name="SettingsMenu" parent="PauseMenu" index="1"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 687.0
+offset_bottom = 647.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="DeathMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("item_container")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -343.0
+offset_top = -167.0
+offset_right = 344.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_0pkni")
+script = ExtResource("23_1kfkr")
+item_container = NodePath("MarginContainer/VBoxContainer/VBoxContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="DeathMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DeathMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("14_e5c6o")
+text = "You Died"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="DeathMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("15_k4cvi")
+
+[node name="Continue" parent="DeathMenu/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
+layout_mode = 2
+text = "Create New Character"
+
+[node name="Quit" parent="DeathMenu/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
+layout_mode = 2
+text = "Quit to Main Menu"
+
+[node name="Quit2" parent="DeathMenu/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
+layout_mode = 2
+text = "Quit to Desktop"
 
 [connection signal="pressed" from="PlayerInventory/Inventory/Control/Button" to="PlayerInventory" method="close"]
 [connection signal="pressed" from="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" method="_on_pressed"]
@@ -790,3 +860,8 @@ visible = false
 [connection signal="pressed" from="TransferInventory/Inventory/Control/Button" to="." method="close_transfer_inventory"]
 [connection signal="exit" from="Journal" to="." method="_on_menu_exit"]
 [connection signal="pressed" from="Journal/PanelContainer/Control/Button" to="Journal" method="close"]
+[connection signal="pressed" from="DeathMenu/MarginContainer/VBoxContainer/VBoxContainer/Continue" to="DeathMenu" method="_on_continue_pressed"]
+[connection signal="pressed" from="DeathMenu/MarginContainer/VBoxContainer/VBoxContainer/Quit" to="DeathMenu" method="_on_quit_pressed"]
+[connection signal="pressed" from="DeathMenu/MarginContainer/VBoxContainer/VBoxContainer/Quit2" to="DeathMenu" method="_on_quit_2_pressed"]
+
+[editable path="PauseMenu"]

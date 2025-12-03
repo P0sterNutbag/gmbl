@@ -39,8 +39,8 @@ func change_scene() -> void:
 	scene_transition.transition_out()
 	UiController.reset_list()
 	get_tree().paused = false
-	scene_changed.emit()
 	await get_tree().process_frame
+	scene_changed.emit()
 	if load_on_enter:
 		load_on_enter = false
 		PlayerStats.state = PlayerStats.states.walk

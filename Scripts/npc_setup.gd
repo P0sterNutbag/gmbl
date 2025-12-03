@@ -12,7 +12,7 @@ func _ready() -> void:
 	set_materials(style_data)
 
 
-func set_materials(style: NpcStyle) -> void:
+func set_materials(style: NpcStyle = style_data) -> void:
 	# Create unique material instances
 	var face_material = cube.get_surface_override_material(0).duplicate()
 	var shirt_material = cube2.get_surface_override_material(0).duplicate()

@@ -1,0 +1,97 @@
+[gd_scene load_steps=13 format=3 uid="uid://dnl56ggtju325"]
+
+[ext_resource type="FontFile" uid="uid://d0fpgnwmxa37x" path="res://Art/Fonts/bedstead-bold.otf" id="1_6o2n8"]
+[ext_resource type="Texture2D" uid="uid://djj6aa5nkatda" path="res://Art/Textures/arrow.png" id="2_0gh2u"]
+[ext_resource type="Script" uid="uid://cjy4l58tth8ta" path="res://Scripts/option_button.gd" id="3_l7vy8"]
+[ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="4_7ia75"]
+[ext_resource type="Texture2D" uid="uid://d08xeomlxj5wh" path="res://Art/Textures/arrow_small_left.png" id="5_tyr7v"]
+[ext_resource type="Texture2D" uid="uid://byvpghxprlvv3" path="res://Art/Textures/arrow_small.png" id="6_qlpql"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_is1bq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d0ywl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s0t5v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0lamd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xmtvc"]
+
+[sub_resource type="Theme" id="Theme_d0ywl"]
+Button/colors/font_color = Color(0.87451, 0.87451, 0, 1)
+Button/colors/font_disabled_color = Color(0.8745098, 0.8745098, 0, 0.5019608)
+Button/colors/font_focus_color = Color(0.94902, 0.94902, 0, 1)
+Button/colors/font_hover_color = Color(0.94902, 0.94902, 0, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 0, 1)
+Button/font_sizes/font_size = 25
+Button/fonts/font = ExtResource("1_6o2n8")
+Button/styles/disabled = SubResource("StyleBoxEmpty_is1bq")
+Button/styles/focus = SubResource("StyleBoxEmpty_d0ywl")
+Button/styles/hover = SubResource("StyleBoxEmpty_s0t5v")
+Button/styles/normal = SubResource("StyleBoxEmpty_0lamd")
+Button/styles/pressed = SubResource("StyleBoxEmpty_xmtvc")
+
+[node name="MenuButton" type="Button"]
+z_index = 1
+offset_right = 280.0
+offset_bottom = 25.0
+size_flags_horizontal = 3
+mouse_filter = 1
+theme = SubResource("Theme_d0ywl")
+text = "Name"
+icon = ExtResource("2_0gh2u")
+flat = true
+alignment = 0
+script = ExtResource("3_l7vy8")
+
+[node name="Control" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -10.0
+offset_bottom = 10.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 0
+alignment = 1
+
+[node name="LeftScroll" type="Button" parent="Control"]
+modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("4_7ia75")
+icon = ExtResource("5_tyr7v")
+flat = true
+expand_icon = true
+
+[node name="Label" type="Label" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("4_7ia75")
+text = "Option"
+horizontal_alignment = 1
+
+[node name="RightScroll" type="Button" parent="Control"]
+modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+icon = ExtResource("6_qlpql")
+flat = true
+expand_icon = true
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="Control/LeftScroll" to="." method="_on_left_category_pressed"]
+[connection signal="pressed" from="Control/RightScroll" to="." method="_on_right_category_pressed"]

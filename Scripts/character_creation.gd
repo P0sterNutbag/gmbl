@@ -12,9 +12,11 @@ const starting_gear = preload("uid://dpjy0ettwaiyp")
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	var saved_gear = starting_gear.duplicate(true)
+	var saved_gear
 	if ResourceLoader.exists("user://starting_gear.res"):
 		saved_gear = ResourceLoader.load("user://starting_gear.res")
+	else:
+		saved_gear = starting_gear.duplicate(true)
 	starting_inventory.source_inventory = saved_gear
 	player_inventory.source_inventory = PlayerStats.inventory
 	starting_inventory.target_inventory = player_inventory.source_inventory

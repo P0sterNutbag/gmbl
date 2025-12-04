@@ -7,6 +7,6 @@ class_name ProgressData
 
 func add_xp(xp_to_add: int) -> void: 
 	xp += xp_to_add
-	if xp >= 100:
-		xp -= 100
+	while xp >= 100:
 		level += 1
+		xp -= 100

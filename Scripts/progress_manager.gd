@@ -3,11 +3,14 @@ extends Node
 @export var level_rewards : Array[Resource]
 var progress_data := ProgressData.new()
 var kills = 0
+var progress_path = "user://progress_data.res"
+var gear_path = "user://starting_gear.res"
+const starting_gear = preload("uid://dpjy0ettwaiyp")
 
 
 func _ready() -> void:
-	if ResourceLoader.exists("user://progress_data.res"):
-		progress_data = ResourceLoader.load("user://progress_data.res")
+	if ResourceLoader.exists(progress_path):
+		progress_data = ResourceLoader.load(progress_path)
 
 
 func apply_progress() -> void:
@@ -15,17 +18,19 @@ func apply_progress() -> void:
 	progress_data.add_xp(kills * 110)
 	var new_level = progress_data.level
 	if old_level < progress_data.level:
-		var starting_gear = load("res://Resources/SaveData/starting_gear.tres")
-		if ResourceLoader.exists("user://starting_gear.res"):
-			starting_gear = ResourceLoader.load("user://starting_gear.res")
+		var saved_gear
+		if ResourceLoader.exists(gear_path):
+			saved_gear = ResourceLoader.load(gear_path)
+		else:
+			saved_gear = starting_gear.duplicate(true)
 		for i in range(old_level + 1, new_level):
-			starting_gear.add_item(level_rewards[i - 2])
-		ResourceSaver.save(starting_gear, "user://starting_gear.res")
+			saved_gear.add_item(level_rewards[i - 2])
+		ResourceSaver.save(saved_gear, gear_path)
 	save_progress_data()
 
 
 func save_progress_data() -> void:
-	ResourceSaver.save(progress_data, "user://progress_data.res")
+	ResourceSaver.save(progress_data, progress_path)
 
 
 func save() -> Dictionary:

@@ -12,7 +12,12 @@ var items: Array[Item]:
 			var item = slot.item
 			array.append(item)
 		return array
-var equipment_kit := EquipmentKit.new()
+var equipment_kit := EquipmentKit.new(): 
+	get():
+		if !equipment_kit.has_equipment():
+			for item in items.filter(func(i): return i is Equipment and i.equipped):
+				equipment_kit.equipment[item.slot] = item
+		return equipment_kit
 
 
 func add_item(item: Item, amount: int = 1) -> bool:

@@ -49,7 +49,8 @@ var thirst_decrease_rate := 0.1
 
 func _ready() -> void:
 	reset_stats()
-	SceneManager.scene_changed.connect(on_scene_changed)
+	SceneManager.scene_changed.connect(_on_scene_changed)
+	SaveController.load.connect(_on_load)
 
 
 func _process(delta: float) -> void:
@@ -119,6 +120,7 @@ func change_state(new_state):
 
 func save() -> Dictionary:
 	hp = Globals.player.hitbox.hp
+	ResourceSaver.save(inventory, "user://inventory.res")
 	return {
 		"hp": hp,
 		"ammo": ammo,
@@ -156,8 +158,10 @@ func go_to_sleep():
 	DayNightCycle.time_speed *= 0.1
 
 
-func on_scene_changed():
-	if get_tree().current_scene.name == "CharacterCreation":
-		reset_stats()
+func _on_scene_changed():
 	if Globals.player:
 		hp = Globals.player.hitbox.hp
+
+
+func _on_load():
+	inventory = ResourceLoader.load("user://inventory.res")

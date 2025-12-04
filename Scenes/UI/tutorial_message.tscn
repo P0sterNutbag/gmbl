@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cftuqp2dc7t7b"]
+
+[ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="1_864ip"]
+[ext_resource type="Script" uid="uid://b75xfvk5hu3cb" path="res://Scripts/tutorial_message.gd" id="2_wbrpk"]
+
+[node name="Label" type="Label"]
+theme = ExtResource("1_864ip")
+text = "WASD to move"
+horizontal_alignment = 2
+script = ExtResource("2_wbrpk")
+input_action = "ui_up"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

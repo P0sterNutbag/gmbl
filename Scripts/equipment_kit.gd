@@ -16,7 +16,16 @@ var gun_slots := [slots.primary_gun, slots.secondary_gun]
 
 func remove_all() -> void:
 	for i in equipment:
+		if equipment[i]:
+			equipment[i].equipped = false
 		equipment[i] = null
+
+
+func has_equipment() -> bool:
+	for i in equipment:
+		if equipment[i] != null:
+			return true
+	return false
 
 
 func get_damage_modifier() -> float:

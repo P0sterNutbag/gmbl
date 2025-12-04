@@ -1,13 +1,15 @@
 extends UiButton
 
-@export var options: Dictionary[String, Resource]
+@export var options: Array[StringResourcePair]
 var index: int
 @onready var option_label: Label = %Label
 signal option_changed(resource)
 
 
 func _ready() -> void:
-	option_label.text = options.keys()[index]
+	super._ready()
+	await get_tree().current_scene.ready
+	option_label.text = options[index].string
 
 
 func _on_left_category_pressed() -> void:
@@ -20,6 +22,6 @@ func _on_right_category_pressed() -> void:
 
 func change_index(new_index: int):
 	index = new_index
-	var option_text = options.keys()[index]
+	var option_text = options[index].string
 	option_label.text = option_text
-	option_changed.emit(options[option_text])
+	option_changed.emit(options[index].resource)

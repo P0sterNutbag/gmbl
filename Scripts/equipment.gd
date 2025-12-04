@@ -25,13 +25,5 @@ func equip() -> void:
 		kit.equipment[slot] = self
 	else:
 		kit.equipment[slot] = null
-	#var array = PlayerStats.get(array_name)
-	#for item in array:
-		#if item and item != self and item.slot == slot:
-			#item.equipped = false
-			#item.equipped_changed.emit()
-	#if equipped:
-		#array[slot] = self
-	#else:
-		#array[slot] = null
+	PlayerStats.inventory.equipment_kit = kit
 	equipped_changed.emit()

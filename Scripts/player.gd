@@ -410,7 +410,8 @@ func enter_dead():
 	tween.tween_property(camera, "position:y", -1, 0.5)
 	tween.tween_property(camera, "rotation:z", deg_to_rad(45), 1)
 	#tween.tween_property(PlayerStats, "state", PlayerStats.states.walk, 0)
-	tween.tween_callback(UiController.open_interface.bind(Globals.survival_ui.death_menu))
+	tween.tween_callback(Globals.survival_ui.hide_all_ui)
+	tween.tween_callback(UiController.open_interface.bind(Globals.survival_ui.progress_menu))
 	#tween.tween_callback(SaveController.load_data_from_file).set_delay(5)
 
 
@@ -661,8 +662,10 @@ func _on_damaged(_hit_position: Vector3, _hit_direction: Vector3) -> void:
 
 func _on_death() -> void:
 	PlayerStats.change_state(PlayerStats.states.dead)
+	PlayerStats.reset_stats()
 	gun_state = gun_states.point
 	SaveController.delete_save_data()
+	
 
 
 func _on_step_timer_timeout() -> void:

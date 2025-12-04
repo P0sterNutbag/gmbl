@@ -1,32 +1,17 @@
-[gd_scene load_steps=83 format=3 uid="uid://blwe17vmld3s"]
+[gd_scene load_steps=64 format=3 uid="uid://blwe17vmld3s"]
 
 [ext_resource type="Script" uid="uid://b7gndoluwck72" path="res://Scripts/character_creation.gd" id="1_v05k5"]
-[ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/enemy.tscn" id="1_wnp2j"]
-[ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="2_grpyo"]
+[ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/npc.tscn" id="1_wnp2j"]
 [ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="2_yggav"]
 [ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="3_eda0b"]
 [ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand3.png" id="4_j8a2e"]
-[ext_resource type="Resource" uid="uid://ccm2c5fc8xn15" path="res://Resources/Items/Survival/medkit.tres" id="5_yggav"]
-[ext_resource type="Resource" uid="uid://dvooyj5cqcclc" path="res://Resources/Items/Survival/sleeping_bag.tres" id="6_73w0w"]
-[ext_resource type="Resource" uid="uid://glkl1ugkvv6m" path="res://Resources/Items/Survival/water.tres" id="7_8ky2f"]
-[ext_resource type="Resource" uid="uid://dfkmfm7wu8mw4" path="res://Resources/Items/Survival/beans.tres" id="8_fibwy"]
-[ext_resource type="Resource" uid="uid://81yrbdei6ihs" path="res://Resources/Items/Armor/helmet.tres" id="9_2qjs2"]
-[ext_resource type="Resource" uid="uid://c7nqsvb4lasw1" path="res://Resources/Items/Armor/kevlar_vest.tres" id="10_rmcps"]
-[ext_resource type="Resource" uid="uid://ixc4pv5vjlno" path="res://Resources/Items/Guns/ak47.tres" id="11_j4b5t"]
-[ext_resource type="Resource" uid="uid://dpt1btw7n2g0c" path="res://Resources/Items/Guns/hunting_rifle.tres" id="12_sb010"]
-[ext_resource type="Resource" uid="uid://oaklo016ku8w" path="res://Resources/Items/Guns/pistol.tres" id="13_r8q12"]
-[ext_resource type="Resource" uid="uid://lrml50x6ifrj" path="res://Resources/Items/Guns/sawed_off.tres" id="14_5loco"]
-[ext_resource type="Resource" uid="uid://de20gnenmrrxa" path="res://Resources/Items/Guns/shotgun.tres" id="15_gtnlk"]
-[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="16_011oh"]
-[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="17_j6ghl"]
-[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="18_fuobc"]
-[ext_resource type="Script" uid="uid://6ucyr0petjnx" path="res://Scripts/inventory.gd" id="19_wahcg"]
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="21_8ky2f"]
 [ext_resource type="PackedScene" uid="uid://bj7gyfau2dx5w" path="res://Scenes/UI/menu_button.tscn" id="21_73w0w"]
 [ext_resource type="Theme" uid="uid://djqipqwy5toiu" path="res://Art/Themes/VBoxContainer.tres" id="22_36mat"]
 [ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="22_fibwy"]
+[ext_resource type="Theme" uid="uid://cdtfcbhvps3m1" path="res://Art/Themes/text_mediun.tres" id="22_gx4n8"]
 [ext_resource type="PackedScene" uid="uid://dnl56ggtju325" path="res://Scenes/UI/option_button.tscn" id="22_l0gxb"]
-[ext_resource type="Texture2D" uid="uid://bo7tofhok4iw1" path="res://Art/Textures/npc_face1.png" id="23_36mat"]
+[ext_resource type="Script" uid="uid://ba4324tncpb5w" path="res://Scripts/string_resource_pair.gd" id="24_36mat"]
 [ext_resource type="Texture2D" uid="uid://cdy46hgsd08s6" path="res://Art/Textures/npc_face2.png" id="24_e4cpa"]
 [ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="25_011oh"]
 [ext_resource type="Resource" uid="uid://b4ypcwfcexyed" path="res://Resources/NpcStyles/player_style.tres" id="25_j6ghl"]
@@ -37,113 +22,93 @@
 [ext_resource type="PackedScene" uid="uid://bu88iqf6x1y6s" path="res://Scenes/Guns/hunting_rifle.tscn" id="27_fuobc"]
 [ext_resource type="Texture2D" uid="uid://oacru53rac71" path="res://Art/Textures/player_face.png" id="27_l0gxb"]
 [ext_resource type="Texture2D" uid="uid://x3spqeyiq8cr" path="res://Art/Textures/npc shirt white.png" id="28_36mat"]
-[ext_resource type="Texture2D" uid="uid://b4d58y5scbpqf" path="res://Art/Textures/npc shirt blue.png" id="28_gx4n8"]
 [ext_resource type="PackedScene" uid="uid://cnwsl1ltxxegm" path="res://Scenes/Guns/pistol.tscn" id="28_wahcg"]
 [ext_resource type="PackedScene" uid="uid://cc6hd7m7eqnp" path="res://Scenes/Guns/sawed_off.tscn" id="29_bq3xa"]
 [ext_resource type="Texture2D" uid="uid://c7ele6asl40c4" path="res://Art/Textures/npc shirt bluesleeve.png" id="29_kgbab"]
+[ext_resource type="Texture2D" uid="uid://whgiy4tx5l5g" path="res://Art/Textures/npc brown jacket.png" id="30_kgbab"]
 [ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="30_l0gxb"]
 [ext_resource type="PackedScene" uid="uid://dts12bmvycipb" path="res://Scenes/Guns/shotgun.tscn" id="31_36mat"]
+[ext_resource type="Script" uid="uid://blxosgrxl33hh" path="res://Scripts/color_export.gd" id="31_kgbab"]
 [ext_resource type="PackedScene" uid="uid://dkmenaf8dxpyr" path="res://Scenes/Guns/sniper.tscn" id="32_e4cpa"]
 [ext_resource type="PackedScene" uid="uid://cmgrxwiw6y3kg" path="res://Scenes/Guns/uzi.tscn" id="33_miwqf"]
 
-[sub_resource type="Resource" id="Resource_3jsbx"]
-script = ExtResource("2_grpyo")
-item = ExtResource("5_yggav")
-amount = 3
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+[sub_resource type="Resource" id="Resource_e4cpa"]
+script = ExtResource("24_36mat")
+string = "Face 1"
+resource = ExtResource("27_l0gxb")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
-[sub_resource type="Resource" id="Resource_4rhhb"]
-script = ExtResource("2_grpyo")
-item = ExtResource("6_73w0w")
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_mteci"]
-script = ExtResource("2_grpyo")
-item = ExtResource("7_8ky2f")
-amount = 3
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_rwgs6"]
-script = ExtResource("2_grpyo")
-item = ExtResource("8_fibwy")
-amount = 3
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_6cdiu"]
-script = ExtResource("2_grpyo")
-item = ExtResource("9_2qjs2")
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_m383b"]
-script = ExtResource("2_grpyo")
-item = ExtResource("10_rmcps")
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_m2j50"]
-script = ExtResource("2_grpyo")
-item = ExtResource("11_j4b5t")
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_qy0vt"]
-script = ExtResource("2_grpyo")
-item = ExtResource("12_sb010")
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_34teq"]
-script = ExtResource("2_grpyo")
-item = ExtResource("13_r8q12")
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_ybhi0"]
-script = ExtResource("2_grpyo")
-item = ExtResource("14_5loco")
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_kohxv"]
-script = ExtResource("2_grpyo")
-item = ExtResource("15_gtnlk")
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_mayu8"]
-script = ExtResource("2_grpyo")
-item = ExtResource("16_011oh")
-amount = 5
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_451wk"]
-script = ExtResource("2_grpyo")
-item = ExtResource("17_j6ghl")
-amount = 5
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_xpqge"]
-script = ExtResource("2_grpyo")
-item = ExtResource("18_fuobc")
-amount = 25
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+[sub_resource type="Resource" id="Resource_miwqf"]
+script = ExtResource("24_36mat")
+string = "Face 2"
+resource = ExtResource("24_e4cpa")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
 [sub_resource type="Resource" id="Resource_5527h"]
-resource_local_to_scene = true
-script = ExtResource("19_wahcg")
-item_slots = Array[ExtResource("2_grpyo")]([SubResource("Resource_3jsbx"), SubResource("Resource_4rhhb"), SubResource("Resource_mteci"), SubResource("Resource_rwgs6"), SubResource("Resource_6cdiu"), SubResource("Resource_m383b"), SubResource("Resource_m2j50"), SubResource("Resource_qy0vt"), SubResource("Resource_34teq"), SubResource("Resource_ybhi0"), SubResource("Resource_kohxv"), SubResource("Resource_mayu8"), SubResource("Resource_451wk"), SubResource("Resource_xpqge")])
-space = 100
-money = 100000
-title = "Starting Equipment"
-metadata/_custom_type_script = "uid://6ucyr0petjnx"
+script = ExtResource("24_36mat")
+string = "Shirt 1"
+resource = ExtResource("28_36mat")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
-[sub_resource type="ColorPalette" id="ColorPalette_5527h"]
-colors = PackedColorArray(0.47843137, 0.21960784, 0.15294118, 1)
+[sub_resource type="Resource" id="Resource_gx4n8"]
+script = ExtResource("24_36mat")
+string = "Shirt 2"
+resource = ExtResource("27_5527h")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
-[sub_resource type="ColorPalette" id="ColorPalette_gx4n8"]
-colors = PackedColorArray(0.078431375, 0.078431375, 0.21960784, 1)
+[sub_resource type="Resource" id="Resource_3jura"]
+script = ExtResource("24_36mat")
+string = "Shirt 3"
+resource = ExtResource("29_kgbab")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
-[sub_resource type="ColorPalette" id="ColorPalette_kgbab"]
-colors = PackedColorArray(0.101960786, 0.101960786, 0.101960786, 1)
+[sub_resource type="Resource" id="Resource_oje6o"]
+script = ExtResource("24_36mat")
+string = "Jacket 1"
+resource = ExtResource("30_kgbab")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
-[sub_resource type="ColorPalette" id="ColorPalette_ktceq"]
-colors = PackedColorArray(0.4, 0.19215687, 0.12941177, 1)
+[sub_resource type="Resource" id="Resource_vr1p2"]
+script = ExtResource("31_kgbab")
+metadata/_custom_type_script = "uid://blxosgrxl33hh"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gx4n8"]
+[sub_resource type="Resource" id="Resource_t3ngt"]
+script = ExtResource("24_36mat")
+string = "Pants 1"
+resource = SubResource("Resource_vr1p2")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
+[sub_resource type="Resource" id="Resource_oheva"]
+script = ExtResource("31_kgbab")
+metadata/_custom_type_script = "uid://blxosgrxl33hh"
+
+[sub_resource type="Resource" id="Resource_1rftj"]
+script = ExtResource("24_36mat")
+string = "Pants 2"
+resource = SubResource("Resource_oheva")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
+[sub_resource type="Resource" id="Resource_8cblx"]
+script = ExtResource("31_kgbab")
+metadata/_custom_type_script = "uid://blxosgrxl33hh"
+
+[sub_resource type="Resource" id="Resource_pthfa"]
+script = ExtResource("24_36mat")
+string = "Shoes 1"
+resource = SubResource("Resource_8cblx")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
+[sub_resource type="Resource" id="Resource_fat0s"]
+script = ExtResource("31_kgbab")
+metadata/_custom_type_script = "uid://blxosgrxl33hh"
+
+[sub_resource type="Resource" id="Resource_renkc"]
+script = ExtResource("24_36mat")
+string = "Shoes 2"
+resource = SubResource("Resource_fat0s")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3jura"]
 render_priority = 0
 shader = ExtResource("26_bq3xa")
 shader_parameter/color = Color(0.86, 0.86, 0.86, 1)
@@ -153,7 +118,7 @@ shader_parameter/fresnel = Color(0, 0, 0, 0)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kgbab"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oje6o"]
 render_priority = 0
 shader = ExtResource("26_bq3xa")
 shader_parameter/color = Color(0.86, 0.86, 0.86, 1)
@@ -163,7 +128,7 @@ shader_parameter/fresnel = Color(0, 0, 0, 0)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ktceq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t3ngt"]
 render_priority = 0
 shader = ExtResource("26_bq3xa")
 shader_parameter/color = Color(0.54901963, 0.34509805, 0.23529412, 1)
@@ -172,7 +137,7 @@ shader_parameter/fresnel = Color(0, 0, 0, 0)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_s7bfm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vr1p2"]
 render_priority = 0
 shader = ExtResource("26_bq3xa")
 shader_parameter/color = Color(0.23137255, 0.23137255, 0.23137255, 1)
@@ -318,8 +283,11 @@ script = ExtResource("1_v05k5")
 
 [node name="Inventories" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 9
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Inventories"]
@@ -335,10 +303,16 @@ color = Color(0, 0, 0, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Inventories"]
 layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_left = 100.0
-offset_right = 1805.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -808.5
+offset_top = -447.0
+offset_right = 808.5
+offset_bottom = 447.0
+grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
 alignment = 1
@@ -354,7 +328,6 @@ size_flags_horizontal = 0
 mode = 1
 show_price = true
 show_money = false
-starting_inventory = SubResource("Resource_5527h")
 opposing_ui = NodePath("../Inventory2")
 
 [node name="Inventory2" parent="CanvasLayer/Inventories/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("opposing_ui") instance=ExtResource("2_yggav")]
@@ -379,39 +352,30 @@ theme = ExtResource("22_fibwy")
 layout_mode = 2
 theme = ExtResource("22_36mat")
 
+[node name="Label" type="Label" parent="CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("22_gx4n8")
+text = "Appearance"
+
 [node name="FaceOptions" parent="CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer" instance=ExtResource("22_l0gxb")]
 layout_mode = 2
 text = "Face"
-options = Dictionary[String, Resource]({
-"Face 1": ExtResource("23_36mat"),
-"Face 2": ExtResource("24_e4cpa")
-})
+options = Array[ExtResource("24_36mat")]([SubResource("Resource_e4cpa"), SubResource("Resource_miwqf")])
 
 [node name="ShirtOptions" parent="CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer" instance=ExtResource("22_l0gxb")]
 layout_mode = 2
 text = "Torso"
-options = Dictionary[String, Resource]({
-"Shirt 1": ExtResource("28_36mat"),
-"Shirt 2": ExtResource("27_5527h"),
-"Shirt 3": ExtResource("28_gx4n8"),
-"Shirt 4": ExtResource("29_kgbab")
-})
+options = Array[ExtResource("24_36mat")]([SubResource("Resource_5527h"), SubResource("Resource_gx4n8"), SubResource("Resource_3jura"), SubResource("Resource_oje6o")])
 
 [node name="PantsOptions" parent="CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer" instance=ExtResource("22_l0gxb")]
 layout_mode = 2
 text = "Legs"
-options = Dictionary[String, Resource]({
-"Pants 1": SubResource("ColorPalette_5527h"),
-"Pants 2": SubResource("ColorPalette_gx4n8")
-})
+options = Array[ExtResource("24_36mat")]([SubResource("Resource_t3ngt"), SubResource("Resource_1rftj")])
 
 [node name="ShoesOptions" parent="CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer" instance=ExtResource("22_l0gxb")]
 layout_mode = 2
 text = "Feet"
-options = Dictionary[String, Resource]({
-"Shoes 1": SubResource("ColorPalette_kgbab"),
-"Shoes 2": SubResource("ColorPalette_ktceq")
-})
+options = Array[ExtResource("24_36mat")]([SubResource("Resource_pthfa"), SubResource("Resource_renkc")])
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Inventories/VBoxContainer"]
 layout_mode = 2
@@ -436,12 +400,12 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.78
 style_data = ExtResource("25_j6ghl")
 
 [node name="Cube_001" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="0"]
-surface_material_override/0 = SubResource("ShaderMaterial_gx4n8")
+surface_material_override/0 = SubResource("ShaderMaterial_3jura")
 
 [node name="Cube_002" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="1"]
-surface_material_override/0 = SubResource("ShaderMaterial_kgbab")
-surface_material_override/1 = SubResource("ShaderMaterial_ktceq")
-surface_material_override/2 = SubResource("ShaderMaterial_s7bfm")
+surface_material_override/0 = SubResource("ShaderMaterial_oje6o")
+surface_material_override/1 = SubResource("ShaderMaterial_t3ngt")
+surface_material_override/2 = SubResource("ShaderMaterial_vr1p2")
 
 [node name="ak_47" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="0"]
 visible = false
@@ -472,30 +436,60 @@ ammo_item = SubResource("Resource_ygrfb")
 visible = false
 ammo_item = SubResource("Resource_y7a80")
 
+[node name="Physical Bone mixamorig_Hips" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="0"]
+transform = Transform3D(0.8327417, -0.5447718, -0.09881769, 0.5452914, 0.83790106, -0.024064153, 0.09590891, -0.033845212, 0.99481463, 0.015945042, 0.012816122, -0.93820345)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00017120132, 0.00069417234, 0.04382448)
+body_offset = Transform3D(-0.00042837858, 0.99950004, 0.03161601, 1.6080216e-05, 0.03161608, -0.99950016, -0.9999999, -0.00042787194, -2.9562041e-05, -0.002079307, 0.043780625, 0.00017279387)
+
 [node name="Physical Bone mixamorig_Spine" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="1"]
-transform = Transform3D(-0.5828663, -0.8113282, 0.044872444, 0.7958522, -0.5811482, -0.16995901, 0.16397008, -0.06335155, 0.98442894, 0.019926446, 0.023176186, -1.0509676)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00043638286, -6.4925654e-05, 0.05051664)
-body_offset = Transform3D(0.9999998, -0.00036489964, 6.939471e-05, 6.937981e-05, -2.8900802e-05, -0.99999994, 0.00036484003, 0.9999999, -2.8789043e-05, -0.00043991208, 0.050516605, 6.622076e-05)
+transform = Transform3D(-0.5828663, -0.8113282, 0.044872444, 0.7958522, -0.5811482, -0.16995902, 0.16397008, -0.06335155, 0.984429, 0.019926446, 0.023176186, -1.0509676)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00043638292, -6.49249e-05, 0.050516646)
+body_offset = Transform3D(0.9999998, -0.00036489964, 6.939471e-05, 6.937981e-05, -2.8900802e-05, -0.9999999, 0.00036484003, 0.9999999, -2.8803945e-05, -0.00043991208, 0.050516605, 6.622076e-05)
 
 [node name="Physical Bone mixamorig_Spine1" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="2"]
 transform = Transform3D(-0.5821079, -0.7654099, 0.27440506, 0.7048501, -0.64325213, -0.2990202, 0.40538466, 0.019352395, 0.9139413, -0.0008642126, 0.054960832, -1.1814367)
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.227182e-05, -3.8374663e-05, 0.06267572)
 body_offset = Transform3D(0.9999999, -0.00038325787, 2.014637e-05, 2.0071864e-05, 9.405613e-05, -0.99999994, 0.00038322806, 1, 9.4115734e-05, 3.0994415e-05, 0.062675714, 3.2488257e-05)
 
+[node name="Physical Bone mixamorig_Spine2" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="3"]
+transform = Transform3D(-0.50707304, -0.713106, 0.4841042, 0.5960391, -0.695839, -0.4006813, 0.6225868, 0.085370354, 0.77788013, -0.06027769, 0.10986078, -1.3145198)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0001862999, -7.370084e-05, 0.07707938)
+body_offset = Transform3D(1, -0.00017356873, 0.00013716519, 0.00013713539, 0.00010192394, -1.0000001, 0.00017344952, 1, 0.00010210276, 0.0001757145, 0.077079415, 6.586313e-05)
+
 [node name="Physical Bone mixamorig_Head" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="5"]
-transform = Transform3D(-0.9774606, 0.1095441, 0.1804741, -0.1669947, -0.9241898, -0.34349093, 0.1291649, -0.36588708, 0.9216524, -0.15509151, 0.22949204, -1.6118646)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00033967907, 0.00067529234, 0.19653814)
-body_offset = Transform3D(0.00052048266, -0.99794966, -0.06400439, 0.00047887862, 0.06400481, -0.99794966, 0.99999964, 0.0004887432, 0.0005112663, 0.013253391, 0.19609213, 0.00023886561)
+transform = Transform3D(-0.9774606, 0.1095441, 0.18047409, -0.1669947, -0.9241898, -0.3434909, 0.1291649, -0.36588708, 0.9216524, -0.15509151, 0.22949204, -1.6118646)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00033967686, 0.00067528675, 0.19653814)
+body_offset = Transform3D(0.00052048266, -0.99794966, -0.06400442, 0.00047887862, 0.06400481, -0.99794966, 0.99999964, 0.0004887432, 0.0005112551, 0.013253391, 0.19609213, 0.00023886561)
 
 [node name="Physical Bone mixamorig_LeftShoulder" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="6"]
-transform = Transform3D(0.6048422, 0.26701948, -0.7502444, -0.41888776, -0.69456285, -0.58490646, -0.67727333, 0.6680442, -0.30824968, 0.04785444, 0.2461856, -1.3347203)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00023405849, -0.00091133354, 0.093576215)
-body_offset = Transform3D(1, 7.1823597e-06, 4.3287873e-05, 4.3168664e-05, -3.2305717e-05, -0.99999964, -7.2717667e-06, 0.9999999, -3.20971e-05, 0.00023001432, 0.09357616, 0.00091433525)
+transform = Transform3D(0.6048422, 0.26701948, -0.75024444, -0.41888776, -0.69456285, -0.5849064, -0.67727333, 0.6680442, -0.30824968, 0.04785444, 0.2461856, -1.3347203)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00023406408, -0.0009113391, 0.093576215)
+body_offset = Transform3D(1, 7.1823597e-06, 4.3347478e-05, 4.3168664e-05, -3.2305717e-05, -0.99999964, -7.2717667e-06, 0.9999999, -3.2037497e-05, 0.00023001432, 0.09357616, 0.00091433525)
 
 [node name="Physical Bone mixamorig_LeftArm" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="7"]
-transform = Transform3D(0.8209798, -0.55661917, -0.127151, -0.50567585, -0.6054469, -0.6145942, 0.26511174, 0.56886655, -0.7785285, 0.13483831, 0.38949034, -1.1911391)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0005895995, -0.0022258852, 0.14651294)
-body_offset = Transform3D(0.99999964, 0.0001526475, 3.3169985e-05, 3.325939e-05, -0.0013503134, -0.9999988, -0.00015240908, 0.9999989, -0.0013504028, 0.0005850792, 0.14650977, 0.002423644)
+transform = Transform3D(0.8209798, -0.55661917, -0.127151, -0.50567585, -0.6054469, -0.61459416, 0.26511174, 0.56886655, -0.7785286, 0.13483831, 0.38949034, -1.1911391)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0005896082, -0.002225898, 0.14651294)
+body_offset = Transform3D(0.99999964, 0.0001526475, 3.322959e-05, 3.325939e-05, -0.0013503134, -0.99999875, -0.00015240908, 0.9999989, -0.0013503134, 0.0005850792, 0.14650977, 0.002423644)
+
+[node name="Physical Bone mixamorig_LeftForeArm" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="8"]
+transform = Transform3D(-0.53126395, -0.098385885, 0.8414743, -0.8018426, -0.2622601, -0.5369062, 0.27350911, -0.9599687, 0.060439352, 0.023018029, 0.5630408, -1.0903523)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00017747586, -6.149431e-06, 0.15563744)
+body_offset = Transform3D(0.9999999, 2.6747584e-05, -9.745359e-06, -9.953976e-06, 4.5210123e-05, -1, -2.7000904e-05, 0.9999998, 4.5225024e-05, 0.00017899275, 0.15563744, -8.940697e-07)
+
+[node name="Physical Bone mixamorig_RightShoulder" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="9"]
+transform = Transform3D(-0.20411956, 0.7988036, 0.56590456, 0.6997683, -0.28519535, 0.65497166, 0.68458706, 0.5296947, -0.5007635, -0.20083155, 0.0078024156, -1.302433)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.87609e-05, -0.00028172668, 0.093378134)
+body_offset = Transform3D(1.0000002, 1.8969178e-05, -9.9271536e-05, -9.933114e-05, -6.516278e-05, -1.0000002, -1.8969178e-05, 1, -6.5386295e-05, 8.803606e-05, 0.09337813, 0.00028783083)
+
+[node name="Physical Bone mixamorig_RightArm" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="10"]
+transform = Transform3D(0.2636906, 0.7924496, 0.5499918, 0.9622741, -0.25573832, -0.09287938, 0.067051746, 0.5537342, -0.8299895, -0.33106536, -0.040583078, -1.1338209)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0003121431, -0.0031737383, 0.14533001)
+body_offset = Transform3D(1.0000002, -0.00024302304, -2.7410686e-05, -2.7544796e-05, -0.00017564371, -1.0000001, 0.00024285913, 1.0000002, -0.00017585419, -0.00030893087, 0.14532948, 0.0031992197)
+
+[node name="Physical Bone mixamorig_LeftLeg" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="13"]
+transform = Transform3D(0.04580153, -0.99027866, -0.13134116, -0.36330235, -0.13898845, 0.92124575, -0.9305448, 0.0055220914, -0.36613646, 0.1128781, 0.105908446, -0.3861709)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00012660329, -5.7585385e-05, 0.2121712)
+body_offset = Transform3D(1.0000002, 1.033023e-05, 0.00047042966, 0.00047048926, -6.107986e-05, -1, -1.0151416e-05, 0.9999993, -6.121397e-05, 2.6792288e-05, 0.21217126, 7.05719e-05)
 
 [node name="Physical Bone mixamorig_RightLeg" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="16"]
 transform = Transform3D(0.28704157, -0.9209356, -0.26359987, -0.9311726, -0.3328262, 0.1488099, -0.22477725, 0.20274234, -0.9530849, -0.07740728, 0.21316028, -0.332276)

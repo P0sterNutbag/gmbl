@@ -9,6 +9,7 @@ extends CanvasLayer
 @onready var pause_menu: Control = $PauseMenu/PanelContainer
 @onready var player_inventory: InventoryUI = $PlayerInventory/Inventory
 @onready var death_menu: PanelContainer = $DeathMenu
+@onready var progress_menu: PanelContainer = $ProgressMenu
 
 
 func _enter_tree() -> void:
@@ -92,6 +93,10 @@ func loot(target: Inventory) -> void:
 func close_transfer_inventory() -> void:
 	UiController.close_interface(transfer_inventory_holder)
 
+
+func hide_all_ui() -> void:
+	for child in get_children():
+		child.hide()
 
 #func _on_menu_exit() -> void:
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

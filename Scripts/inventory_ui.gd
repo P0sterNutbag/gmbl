@@ -7,7 +7,6 @@ enum modes {use, loot}
 @export var show_price: bool
 @export var show_money: bool = true
 @export var show_space: bool = true
-@export var starting_inventory: Inventory
 @export var opposing_ui: Control
 var is_ready: bool
 var source_inventory: Inventory = PlayerStats.inventory
@@ -36,8 +35,6 @@ const text_style = preload("res://Art/Themes/text_small.tres")
 
 func _ready() -> void:
 	is_ready = true
-	if starting_inventory:
-		source_inventory = starting_inventory
 	money_label.visible = show_money
 	size_label.visible = show_space
 

@@ -1,7 +1,10 @@
 extends Node
-
 var data = {}
+
+var save_dir = "user://"
 var save_path = "user://savegame.save"
+signal save
+signal load
 
 
 func _ready() -> void:
@@ -10,7 +13,7 @@ func _ready() -> void:
 	#load_data_from_file()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_copy"):
 		#save_session_data()
 		save_data_to_file()
@@ -39,6 +42,7 @@ func save_data_to_file():
 	var save_file = FileAccess.open(save_path, FileAccess.WRITE)
 	var json_string = JSON.stringify(data)
 	save_file.store_line(json_string)
+	save.emit()
 
 
 func load_data_from_file():
@@ -55,10 +59,10 @@ func load_data_from_file():
 		var node_data = json.data
 		data = node_data
 	for node_path in data.keys():
+		var node = get_tree().root.get_node_or_null(node_path)
+		if !node:
+			continue
 		for node_data in data[node_path]:
-			var node = get_tree().root.get_node_or_null(node_path)
-			if !node:
-				continue
 			var value = data[node_path][node_data]
 			if node_data == "pos_x": 
 				node.global_position.x = value
@@ -70,11 +74,13 @@ func load_data_from_file():
 				node.global_rotation.y = value
 			else:
 				node.set(node_data, value)
+	load.emit()
 
 
 func delete_save_data() -> void:
 	var dir = DirAccess.open("user://")
 	dir.remove("savegame.save")
+	dir.remove("inventory.res")
 
 
 func save_file_exists() -> bool:

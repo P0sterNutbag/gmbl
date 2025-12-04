@@ -1,12 +1,15 @@
-[gd_scene load_steps=114 format=4 uid="uid://doydk513gm02l"]
+[gd_scene load_steps=117 format=4 uid="uid://doydk513gm02l"]
 
 [ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_6y65m"]
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="2_gw0hx"]
 [ext_resource type="PackedScene" uid="uid://cc458wgoeu6t4" path="res://Scenes/UI/survival_ui.tscn" id="3_4xsnl"]
 [ext_resource type="PackedScene" uid="uid://cl4glsi76vapy" path="res://Scenes/Overworld/player.tscn" id="3_c84f5"]
+[ext_resource type="Theme" uid="uid://djqipqwy5toiu" path="res://Art/Themes/VBoxContainer.tres" id="5_7t5fg"]
 [ext_resource type="PackedScene" uid="uid://djj4qtaqbuthn" path="res://Scenes/Overworld/UI/town_ui.tscn" id="5_gqxbg"]
 [ext_resource type="Resource" uid="uid://b5m4fenjpy1re" path="res://addons/zylann.hterrain/data/overworld/data.hterrain" id="6_0e3xm"]
 [ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="6_c84f5"]
+[ext_resource type="Script" uid="uid://b3sl56v1enqpw" path="res://Scenes/Overworld/tutorial_message_controller.gd" id="6_gqxbg"]
+[ext_resource type="PackedScene" uid="uid://cftuqp2dc7t7b" path="res://Scenes/UI/tutorial_message.tscn" id="6_jhm1l"]
 [ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand3.png" id="12_l5erx"]
 [ext_resource type="Script" uid="uid://bokxkydc5jmf" path="res://addons/zylann.hterrain/hterrain.gd" id="13_8owou"]
 [ext_resource type="PackedScene" uid="uid://nyq5u06k06t8" path="res://Scenes/Overworld/Locations/bandit_camp.tscn" id="14_vrhs1"]
@@ -401,6 +404,32 @@ extra_cull_margin = 16237.3
 mesh = SubResource("QuadMesh_phy3g")
 
 [node name="CanvasLayer" parent="." instance=ExtResource("3_4xsnl")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -490.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = 123.0
+grow_horizontal = 0
+theme = ExtResource("5_7t5fg")
+script = ExtResource("6_gqxbg")
+
+[node name="Label" parent="CanvasLayer/VBoxContainer" instance=ExtResource("6_jhm1l")]
+layout_mode = 2
+text = "Press WASD to move"
+
+[node name="Label2" parent="CanvasLayer/VBoxContainer" instance=ExtResource("6_jhm1l")]
+layout_mode = 2
+text = "Press Tab to open Inventory"
+input_action = "inventory"
+
+[node name="Label3" parent="CanvasLayer/VBoxContainer" instance=ExtResource("6_jhm1l")]
+layout_mode = 2
+text = "Press J to see current Jobs"
+input_action = "journal"
 
 [node name="CanvasLayer2" parent="." instance=ExtResource("5_gqxbg")]
 

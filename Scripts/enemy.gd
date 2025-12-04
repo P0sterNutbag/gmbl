@@ -438,6 +438,7 @@ func _on_damaged(hit_position: Vector3, hit_direction: Vector3) -> void:
 
 func _on_death() -> void:
 	#loot_area.process_mode = PROCESS_MODE_INHERIT
+	ProgressManager.kills += 1
 	for i in items_to_drop:
 		var inst = i.instantiate()
 		get_tree().current_scene.add_child.call_deferred(inst)

@@ -2,6 +2,7 @@ extends Menu
 
 @onready var pause_menu: PanelContainer = $PanelContainer
 @onready var settings_menu: PanelContainer = $SettingsMenu
+@onready var save_quit_button: MenuItem = %Quit
 
 
 func _process(_delta: float) -> void:
@@ -37,3 +38,13 @@ func _on_quit_2_pressed() -> void:
 
 func _on_settings_menu_hidden() -> void:
 	UiController.open_interface(pause_menu)
+
+
+func _on_panel_container_visibility_changed() -> void:
+	if !is_inside_tree():
+		return
+	if visible:
+		if Globals.overworld and get_tree().current_scene == Globals.overworld:
+			save_quit_button.show()
+		else:
+			save_quit_button.hide()

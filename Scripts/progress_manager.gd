@@ -23,8 +23,8 @@ func apply_progress() -> void:
 			saved_gear = ResourceLoader.load(gear_path)
 		else:
 			saved_gear = starting_gear.duplicate(true)
-		for i in range(old_level + 1, new_level):
-			saved_gear.add_item(level_rewards[i - 2])
+		for i in range(old_level, new_level):
+			saved_gear.add_item(level_rewards[i - 1])
 		ResourceSaver.save(saved_gear, gear_path)
 	save_progress_data()
 

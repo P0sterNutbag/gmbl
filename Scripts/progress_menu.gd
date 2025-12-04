@@ -12,7 +12,6 @@ func activate():
 	ProgressManager.apply_progress()
 	var new_xp = ProgressManager.progress_data.xp
 	var new_level = ProgressManager.progress_data.level
-	var tween = create_tween()
 	#tween.tween_property(kills, "text", "Kills: " + str(ProgressManager.kills), 1)
 	#tween.tween_property(level, "text", "Level: " + str(ProgressManager.progress_data.level))
 	kills.text = "Kills: " + str(ProgressManager.kills)
@@ -23,8 +22,10 @@ func activate():
 		var target_xp = new_xp
 		if i - new_level != 0:
 			target_xp = 100
+		var tween = create_tween()
 		tween.tween_property(progress_bar, "value", target_xp, 1)
-		tween.tween_property(level, "text", "Level: " + str(i), 0)
+		if target_xp == 100:
+			tween.tween_property(level, "text", "Level: " + str(i+1), 0)
 		await tween.finished
 		old_xp = 0
 	#progress_bar.value = ProgressManager.progress_data.xp

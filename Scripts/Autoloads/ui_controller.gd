@@ -1,7 +1,7 @@
 extends Node
 
 var ui_nodes: Array[Control]
-
+var current_ui: Control
 
 func open_interface(node_to_open: Control, pause_player: bool = true) -> void:
 	if !ui_nodes.has(node_to_open):
@@ -9,6 +9,7 @@ func open_interface(node_to_open: Control, pause_player: bool = true) -> void:
 	for node in ui_nodes:
 		if node == node_to_open:
 			node.show()
+			current_ui = node
 		else:
 			node.hide()
 	if pause_player:
@@ -18,6 +19,7 @@ func open_interface(node_to_open: Control, pause_player: bool = true) -> void:
 
 func close_interface(node_to_close: Control, activate_player: bool = true) -> void:
 	node_to_close.hide()
+	current_ui = null
 	if activate_player:
 		PlayerStats.change_state(PlayerStats.states.walk)
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -26,6 +28,7 @@ func close_interface(node_to_close: Control, activate_player: bool = true) -> vo
 func close_all(activate_player: bool = true) -> void:
 	for node in ui_nodes:
 		node.hide()
+	current_ui = null
 	if activate_player:
 		PlayerStats.change_state(PlayerStats.states.walk)
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

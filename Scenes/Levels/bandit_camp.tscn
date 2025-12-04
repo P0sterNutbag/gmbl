@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://y7epyw5i4ifp"]
+[gd_scene load_steps=28 format=4 uid="uid://y7epyw5i4ifp"]
 
 [ext_resource type="PackedScene" uid="uid://r4ktdn26psb3" path="res://Scenes/Levels/encounter_base.tscn" id="1_o4pf0"]
 [ext_resource type="Resource" uid="uid://bo526no3os8wr" path="res://addons/zylann.hterrain/data/bandit_camp/data.hterrain" id="2_kabbc"]
@@ -19,7 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://ciydkkvue7fu2" path="res://Scenes/Environment/Prefabs With Spawning/Old/shipping_container.tscn" id="16_cmkxe"]
 [ext_resource type="PackedScene" uid="uid://bb1xt6row3akg" path="res://Scenes/Environment/Nature/rock_large_orange.tscn" id="18_fui2k"]
 [ext_resource type="PackedScene" uid="uid://7ckg1cl2oun2" path="res://Scenes/Environment/Prefabs With Spawning/trash.tscn" id="18_i5jua"]
-[ext_resource type="PackedScene" uid="uid://bx5h70fy0b18o" path="res://Scenes/Items/Guns/shotgun.tscn" id="19_cmkxe"]
 [ext_resource type="PackedScene" uid="uid://bf3gw6c3ye46j" path="res://Scenes/Environment/Prefabs With Spawning/drum_barrels.tscn" id="19_mr0ka"]
 [ext_resource type="PackedScene" uid="uid://bxxs6ujnftm71" path="res://Scenes/Environment/Prefabs With Spawning/tire_stacks.tscn" id="20_4gbpe"]
 [ext_resource type="PackedScene" uid="uid://c8837t6cigbtp" path="res://Scenes/Environment/Prefabs With Spawning/wooden_crates.tscn" id="21_6f6bu"]
@@ -52,9 +51,6 @@ _surfaces = [{
 
 [node name="Encounter" instance=ExtResource("1_o4pf0")]
 location_data = SubResource("Resource_fui2k")
-
-[node name="Shader" parent="." index="2"]
-visible = false
 
 [node name="DirectionalLight3D" parent="WorldEnvironment" index="0"]
 transform = Transform3D(1, 0, 0, 0, -0.53365904, 0.84569997, 0, -0.84569997, -0.53365904, 0, 0, 128)
@@ -229,67 +225,64 @@ count = 20
 
 [node name="Bushs" type="Node3D" parent="Scatterer" index="0"]
 
-[node name="Bush" type="Node3D" parent="Scatterer/Bushs" index="0" instance=ExtResource("24_n15fv")]
+[node name="Bush" parent="Scatterer/Bushs" index="0" instance=ExtResource("24_n15fv")]
 transform = Transform3D(1.1155086, 0, 0.15853381, 0, 1.1267174, 0, -0.15853381, 0, 1.1155086, 138.64076, 4.504572, 153.02213)
 
-[node name="@Node3D@81277" type="Node3D" parent="Scatterer/Bushs" index="1" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81277" parent="Scatterer/Bushs" index="1" instance=ExtResource("24_n15fv")]
 transform = Transform3D(-0.40629306, 0, 1.166473, 0, 1.2352058, 0, -1.166473, 0, -0.40629306, 170.16893, 2.795281, 6.296209)
 
-[node name="@Node3D@81278" type="Node3D" parent="Scatterer/Bushs" index="2" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81278" parent="Scatterer/Bushs" index="2" instance=ExtResource("24_n15fv")]
 transform = Transform3D(-0.11380625, 0, 1.2086798, 0, 1.2140259, 0, -1.2086798, 0, -0.11380625, 121.20216, 1.833751, 233.3797)
 
-[node name="@Node3D@81279" type="Node3D" parent="Scatterer/Bushs" index="3" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81279" parent="Scatterer/Bushs" index="3" instance=ExtResource("24_n15fv")]
 transform = Transform3D(-1.0068297, 0, 0.40826052, 0, 1.0864542, 0, -0.40826052, 0, -1.0068297, 41.16025, 1.4031076, 66.77886)
 
-[node name="@Node3D@81280" type="Node3D" parent="Scatterer/Bushs" index="4" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81280" parent="Scatterer/Bushs" index="4" instance=ExtResource("24_n15fv")]
 transform = Transform3D(0.90723264, 0, -0.6005157, 0, 1.0879753, 0, 0.6005157, 0, 0.90723264, 3.7523782, 3.9372957, 241.7243)
 
-[node name="@Node3D@81281" type="Node3D" parent="Scatterer/Bushs" index="5" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81281" parent="Scatterer/Bushs" index="5" instance=ExtResource("24_n15fv")]
 transform = Transform3D(1.0496038, 0, 0.4139542, 0, 1.1282847, 0, -0.4139542, 0, 1.0496038, 153.82045, 3.7020855, 27.164986)
 
-[node name="@Node3D@81282" type="Node3D" parent="Scatterer/Bushs" index="6" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81282" parent="Scatterer/Bushs" index="6" instance=ExtResource("24_n15fv")]
 transform = Transform3D(-0.4065295, 0, 0.92557836, 0, 1.0109211, 0, -0.92557836, 0, -0.4065295, 154.39581, 5.3246217, 70.094986)
 
-[node name="@Node3D@81283" type="Node3D" parent="Scatterer/Bushs" index="7" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81283" parent="Scatterer/Bushs" index="7" instance=ExtResource("24_n15fv")]
 transform = Transform3D(0.7082374, 0, -0.7182716, 0, 1.0087192, 0, 0.7182716, 0, 0.7082374, 180.96059, 5.522282, 109.95137)
 
-[node name="@Node3D@81284" type="Node3D" parent="Scatterer/Bushs" index="8" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81284" parent="Scatterer/Bushs" index="8" instance=ExtResource("24_n15fv")]
 transform = Transform3D(-0.7648961, 0, -0.6439242, 0, 0.9998522, 0, 0.6439242, 0, -0.7648961, 228.73123, 1.9344852, 66.24096)
 
-[node name="@Node3D@81285" type="Node3D" parent="Scatterer/Bushs" index="9" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81285" parent="Scatterer/Bushs" index="9" instance=ExtResource("24_n15fv")]
 transform = Transform3D(-0.6705577, 0, -0.41962188, 0, 0.79103106, 0, 0.41962188, 0, -0.6705577, 62.659435, 1.2023431, 101.7313)
 
-[node name="@Node3D@81286" type="Node3D" parent="Scatterer/Bushs" index="10" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81286" parent="Scatterer/Bushs" index="10" instance=ExtResource("24_n15fv")]
 transform = Transform3D(-0.8535423, 0, -0.39319235, 0, 0.93975246, 0, 0.39319235, 0, -0.8535423, 232.3767, 3.3301873, 211.63518)
 
-[node name="@Node3D@81287" type="Node3D" parent="Scatterer/Bushs" index="11" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81287" parent="Scatterer/Bushs" index="11" instance=ExtResource("24_n15fv")]
 transform = Transform3D(-0.4127596, 0, -1.0231502, 0, 1.103271, 0, 1.0231502, 0, -0.4127596, 241.3446, 2.3204846, 59.05619)
 
-[node name="@Node3D@81288" type="Node3D" parent="Scatterer/Bushs" index="12" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81288" parent="Scatterer/Bushs" index="12" instance=ExtResource("24_n15fv")]
 transform = Transform3D(0.34273812, 0, -0.8179021, 0, 0.8868107, 0, 0.8179021, 0, 0.34273812, 178.01936, 5.60255, 140.72119)
 
-[node name="@Node3D@81289" type="Node3D" parent="Scatterer/Bushs" index="13" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81289" parent="Scatterer/Bushs" index="13" instance=ExtResource("24_n15fv")]
 transform = Transform3D(1.1904584, 0, 0.030960312, 0, 1.190861, 0, -0.030960312, 0, 1.1904584, 58.038456, 1.1815132, 101.056915)
 
-[node name="@Node3D@81290" type="Node3D" parent="Scatterer/Bushs" index="14" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81290" parent="Scatterer/Bushs" index="14" instance=ExtResource("24_n15fv")]
 transform = Transform3D(0.91313773, 0, -0.639786, 0, 1.1149648, 0, 0.639786, 0, 0.91313773, 239.29655, 2.0573363, 123.844185)
 
-[node name="@Node3D@81291" type="Node3D" parent="Scatterer/Bushs" index="15" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81291" parent="Scatterer/Bushs" index="15" instance=ExtResource("24_n15fv")]
 transform = Transform3D(-1.0632783, 0, 0.513772, 0, 1.180899, 0, -0.513772, 0, -1.0632783, 75.29895, 2.2655973, 22.36716)
 
-[node name="@Node3D@81292" type="Node3D" parent="Scatterer/Bushs" index="16" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81292" parent="Scatterer/Bushs" index="16" instance=ExtResource("24_n15fv")]
 transform = Transform3D(0.11850762, 0, -0.79659754, 0, 0.8053643, 0, 0.79659754, 0, 0.11850762, 56.929256, 3.8377566, 147.01988)
 
-[node name="@Node3D@81293" type="Node3D" parent="Scatterer/Bushs" index="17" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81293" parent="Scatterer/Bushs" index="17" instance=ExtResource("24_n15fv")]
 transform = Transform3D(0.97241443, 0, -0.12094779, 0, 0.9799072, 0, 0.12094779, 0, 0.97241443, 43.731327, 2.606286, 133.403)
 
-[node name="@Node3D@81294" type="Node3D" parent="Scatterer/Bushs" index="18" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81294" parent="Scatterer/Bushs" index="18" instance=ExtResource("24_n15fv")]
 transform = Transform3D(0.5905422, 0, 0.71937686, 0, 0.9307218, 0, -0.71937686, 0, 0.5905422, 49.63325, 1.3123602, 102.152336)
 
-[node name="@Node3D@81295" type="Node3D" parent="Scatterer/Bushs" index="19" instance=ExtResource("24_n15fv")]
+[node name="@Node3D@81295" parent="Scatterer/Bushs" index="19" instance=ExtResource("24_n15fv")]
 transform = Transform3D(0.45482627, 0, -0.9190637, 0, 1.0254487, 0, 0.9190637, 0, 0.45482627, 228.66885, 3.2138445, 127.34705)
-
-[node name="Shotgun" parent="." index="14" instance=ExtResource("19_cmkxe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 4.4037724, 178)
 
 [editable path="WorldEnvironment"]

@@ -79,7 +79,6 @@ func _physics_process(delta):
 
 
 func reset_stats() -> void:
-	state = states.walk
 	inventory = starting_inventory.duplicate(true)
 	inventory.equipment_kit.remove_all()
 	#equipped_guns[guns[0].slot] = guns[0]
@@ -159,6 +158,7 @@ func go_to_sleep():
 
 
 func _on_scene_changed():
+	state = states.walk
 	if Globals.player:
 		hp = Globals.player.hitbox.hp
 

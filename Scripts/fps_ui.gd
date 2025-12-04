@@ -57,7 +57,10 @@ func _process(delta: float) -> void:
 	# crosshair
 	if get_tree().current_scene == Globals.overworld:
 		return
-	if !show_crosshair or !Globals.player.gun or Globals.player.gun_state == Globals.player.gun_states.ads or Globals.player.gun_state == Globals.player.gun_states.no_gun:
+	if (!show_crosshair or !Globals.player.gun or 
+	Globals.player.gun_state == Globals.player.gun_states.ads or 
+	Globals.player.gun_state == Globals.player.gun_states.no_gun or 
+	(UiController.current_ui and UiController.current_ui.name.to_lower().contains("inventory"))):
 		crosshair.hide()
 		return
 	else:

@@ -548,14 +548,6 @@ func exit_gun_state_point_up() -> void:
 	await tween.finished
 
 
-#func enter_gun_state_pump() -> void:
-	#pass
-#
-#
-#func exit_gun_state_pump() -> void:
-	#pass
-
-
 func change_gun_slot(slot_index: int) -> void:
 	var kit = PlayerStats.inventory.equipment_kit
 	var g = kit.equipment[kit.gun_slots[slot_index]]

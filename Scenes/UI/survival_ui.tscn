@@ -1,9 +1,8 @@
-[gd_scene load_steps=27 format=3 uid="uid://cc458wgoeu6t4"]
+[gd_scene load_steps=26 format=3 uid="uid://cc458wgoeu6t4"]
 
 [ext_resource type="Script" uid="uid://dr73ivowve6xe" path="res://Scripts/survival_ui.gd" id="1_e5c6o"]
 [ext_resource type="Script" uid="uid://bclh5yhrpmkxf" path="res://Scripts/stat_visual.gd" id="2_k4cvi"]
 [ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="3_1kfkr"]
-[ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="3_1lobq"]
 [ext_resource type="Theme" uid="uid://lg0ktyb6xeoh" path="res://Art/Themes/hp_bar.tres" id="4_1kfkr"]
 [ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="5_jtf3n"]
 [ext_resource type="StyleBox" uid="uid://bcg5bax3erc8w" path="res://Art/Themes/style_box.tres" id="6_8egi5"]
@@ -312,7 +311,7 @@ offset_left = -5.0
 offset_top = -18.0
 offset_right = 6.0
 offset_bottom = 5.0
-theme = ExtResource("3_1lobq")
+theme = ExtResource("3_1kfkr")
 text = "N"
 
 [node name="ColorRect7" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
@@ -329,7 +328,7 @@ offset_left = -10.0
 offset_top = -18.0
 offset_right = 11.0
 offset_bottom = 5.0
-theme = ExtResource("3_1lobq")
+theme = ExtResource("3_1kfkr")
 text = "NE"
 horizontal_alignment = 1
 
@@ -347,7 +346,7 @@ offset_left = -5.0
 offset_top = -18.0
 offset_right = 6.0
 offset_bottom = 5.0
-theme = ExtResource("3_1lobq")
+theme = ExtResource("3_1kfkr")
 text = "E"
 
 [node name="ColorRect8" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
@@ -364,7 +363,7 @@ offset_left = -10.0
 offset_top = -18.0
 offset_right = 11.0
 offset_bottom = 5.0
-theme = ExtResource("3_1lobq")
+theme = ExtResource("3_1kfkr")
 text = "SE"
 horizontal_alignment = 1
 
@@ -382,7 +381,7 @@ offset_left = -5.0
 offset_top = -18.0
 offset_right = 6.0
 offset_bottom = 5.0
-theme = ExtResource("3_1lobq")
+theme = ExtResource("3_1kfkr")
 text = "S"
 
 [node name="ColorRect9" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
@@ -399,7 +398,7 @@ offset_left = -10.0
 offset_top = -18.0
 offset_right = 11.0
 offset_bottom = 5.0
-theme = ExtResource("3_1lobq")
+theme = ExtResource("3_1kfkr")
 text = "SW"
 horizontal_alignment = 1
 
@@ -417,7 +416,7 @@ offset_left = -5.0
 offset_top = -18.0
 offset_right = 6.0
 offset_bottom = 5.0
-theme = ExtResource("3_1lobq")
+theme = ExtResource("3_1kfkr")
 text = "W"
 
 [node name="ColorRect10" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
@@ -434,7 +433,7 @@ offset_left = -10.0
 offset_top = -18.0
 offset_right = 11.0
 offset_bottom = 5.0
-theme = ExtResource("3_1lobq")
+theme = ExtResource("3_1kfkr")
 text = "NW"
 horizontal_alignment = 1
 
@@ -459,7 +458,7 @@ offset_left = -5.0
 offset_top = -18.0
 offset_right = 6.0
 offset_bottom = 5.0
-theme = ExtResource("3_1lobq")
+theme = ExtResource("3_1kfkr")
 text = "N"
 
 [node name="ColorRect6" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
@@ -781,21 +780,10 @@ theme = ExtResource("5_jtf3n")
 layout_mode = 2
 
 [node name="PauseMenu" parent="." instance=ExtResource("19_oq622")]
+mouse_filter = 2
 
 [node name="PanelContainer" parent="PauseMenu" index="0"]
 visible = false
-
-[node name="SettingsMenu" parent="PauseMenu" index="1"]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 687.0
-offset_bottom = 647.0
-grow_horizontal = 1
-grow_vertical = 1
 
 [node name="DeathMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("item_container")]
 visible = false
@@ -864,6 +852,7 @@ offset_right = 521.0919
 offset_bottom = 297.375
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("11_0pkni")
 script = ExtResource("24_guqia")
 item_container = NodePath("MarginContainer/VBoxContainer2")
@@ -941,6 +930,7 @@ text = "Quit to Desktop"
 [connection signal="pressed" from="TransferInventory/Inventory/Control/Button" to="." method="close_transfer_inventory"]
 [connection signal="exit" from="Journal" to="." method="_on_menu_exit"]
 [connection signal="pressed" from="Journal/PanelContainer/Control/Button" to="Journal" method="close"]
+[connection signal="visibility_changed" from="PauseMenu" to="PauseMenu" method="_on_visibility_changed"]
 [connection signal="pressed" from="DeathMenu/MarginContainer/VBoxContainer/VBoxContainer/Continue" to="DeathMenu" method="_on_continue_pressed"]
 [connection signal="pressed" from="DeathMenu/MarginContainer/VBoxContainer/VBoxContainer/Quit" to="DeathMenu" method="_on_quit_pressed"]
 [connection signal="pressed" from="DeathMenu/MarginContainer/VBoxContainer/VBoxContainer/Quit2" to="DeathMenu" method="_on_quit_2_pressed"]

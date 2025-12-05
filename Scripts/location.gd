@@ -7,13 +7,16 @@ class_name Location
 @export var town: Town
 @export var shop: Shop
 @export var dialogue_tree: DialogueTree
+@export var can_stealth_start: bool
 var title: String
+var alert_enemies: bool
 var transition_started: bool 
 var can_transition: bool = true
 var shops_base_inventory: Dictionary
 var shops_max_money: Dictionary
 @onready var point_of_interest: PointOfInterest = $PointOfInterest
-
+signal encounter_started
+signal encounter_ended
 
 #func _enter_tree() -> void:
 	#if !Globals.overworld:
@@ -49,16 +52,23 @@ func _ready() -> void:
 
 func start_encounter() -> void:
 	Globals.overworld.current_encounter = self
-	if encounter_scene != null:
-		var player_vector: Vector3 = (global_position - Globals.player.global_position).normalized().rotated(Vector3.UP, -global_rotation.y)
-		Globals.overworld.player_spawn_vector = player_vector
-		SceneManager.start_scene_transition(encounter_scene.resource_path, true)
+	if can_stealth_start and encounter_scene and Globals.get_dot(self, Globals.player) > -0.25:
+		transition_to_level()
+		return
+	encounter_started.emit()
+	Globals.overworld.current_encounter = self
+	if dialogue_tree != null:
+		Globals.ui.start_dialogue(dialogue_tree)
+		point_of_interest.location_card.hide()
+	elif encounter_scene != null:
+		transition_to_level() 
 	elif town != null:
 		Globals.ui.town.create_town(town)
 		point_of_interest.location_card.hide()
 	elif shop != null:
 		Globals.ui.job_board.shop = shop
 		Globals.ui.start_dialogue(shop.dialogue, shop)
+		point_of_interest.location_card.hide()
 
 
 func stock_shops() -> void:
@@ -79,6 +89,13 @@ func stock_shops() -> void:
 				var quest = i.random_quest.generate_quest()
 				quest.return_location = point_of_interest.title
 				i.quests.append(quest)
+
+
+func transition_to_level(start_alert = alert_enemies) -> void:
+	alert_enemies = start_alert
+	var player_vector: Vector3 = (global_position - Globals.player.global_position).normalized().rotated(Vector3.UP, -global_rotation.y)
+	Globals.overworld.player_spawn_vector = player_vector
+	SceneManager.start_scene_transition(encounter_scene.resource_path, true)
 
 
 func save() -> Dictionary:

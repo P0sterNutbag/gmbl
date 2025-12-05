@@ -12,6 +12,10 @@ signal night_start
 signal day_start
 
 
+func _ready() -> void:
+	SceneManager.new_game_start.connect(reset_cycle)
+
+
 func _process(delta: float) -> void:
 	var was_night = is_night
 	time += time_speed * delta
@@ -31,3 +35,17 @@ func _process(delta: float) -> void:
 		sun_time += abs(time_speed / 2) * delta
 	else:
 		sun_time = 0
+
+
+func reset_cycle() -> void:
+	time = 1.0
+	time_speed = -0.01
+	sun_time = 0.5
+
+
+func save() -> Dictionary: 
+	return {
+		"time": time,
+		"time_speed": time_speed,
+		"sun_time": sun_time
+	}

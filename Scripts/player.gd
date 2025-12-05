@@ -69,6 +69,7 @@ var grenade = preload("res://Scenes/Bullets/grenade.tscn")
 @onready var spot_light: SpotLight3D = $CameraAnchor/Camera3D/SpotLight3D
 @onready var gun_collision_cast: RayCast3D = $CameraAnchor/Camera3D/GunOffset/RayCast3D
 @onready var loot_area: Area3D = $LootArea
+@onready var aim_positions: Node3D = $AimPositions
 
 
 func _enter_tree() -> void:

@@ -38,6 +38,7 @@ func save_data_to_file():
 			print("persistent node '%s' is missing a save() function, skipped" % node.name)
 			continue
 		var node_data = node.call("save")
+		node_data["path"] = node.get_scene_file_path()
 		data[str(node.get_path())] = node_data
 	var save_file = FileAccess.open(save_path, FileAccess.WRITE)
 	var json_string = JSON.stringify(data)
@@ -61,7 +62,8 @@ func load_data_from_file():
 	for node_path in data.keys():
 		var node = get_tree().root.get_node_or_null(node_path)
 		if !node:
-			continue
+			node = load(data[node_path]["path"]).instantiate()
+			get_tree().current_scene.add_child(node)
 		for node_data in data[node_path]:
 			var value = data[node_path][node_data]
 			if node_data == "pos_x": 

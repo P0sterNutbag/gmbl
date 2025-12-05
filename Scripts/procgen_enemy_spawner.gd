@@ -1,7 +1,6 @@
 extends Node3D
 
 @export var enemies_to_spawn: Array[SpawnChance]
-#@export var enemy_amount: int = 5
 var spawn_radius: float = 8
 var enemy_amount: int
 var enemy_destination: Vector3
@@ -10,7 +9,11 @@ var enemies: Array
 
 func _ready():
 	enemy_amount = randi_range(get_parent().location_data.min_population, get_parent().location_data.max_population)
-	enemy_destination = position + Vector3(0, 0, -115)
+	var dest = position + Vector3(0, 0, -115)
+	var start_alert = Globals.overworld.current_encounter.alert_enemies
+	if start_alert:
+		dest = Globals.player.current_position
+	enemy_destination = dest
 	await get_tree().process_frame
 	# spawn enemies
 	for i in enemy_amount:
@@ -28,6 +31,9 @@ func _ready():
 		inst.look_at_position(inst.destination)
 		inst.is_starting_squad = true
 		enemies.append(inst)
-	#await get_tree().create_timer(1).timeout
 	for enemy in enemies:
-		enemy.change_state(enemy.states.walk)
+		if start_alert:
+			enemy.last_seen_position = Globals.player.position
+			enemy.change_state(enemy.states.search)
+		else:
+			enemy.change_state(enemy.states.walk)

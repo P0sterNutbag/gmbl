@@ -31,6 +31,8 @@ const text_style = preload("res://Art/Themes/text_small.tres")
 @onready var stats: HBoxContainer = %Stats
 @onready var stats_panel: PanelContainer = $MarginContainer/VBoxContainer/Panel
 @onready var description: Label = %Label
+@onready var use_controls: HBoxContainer = $Controls/HBoxContainer
+@onready var loot_controls: HBoxContainer = $Controls/HBoxContainer2
 
 
 func _ready() -> void:

@@ -69,12 +69,16 @@ func _physics_process(delta):
 		velocity += get_gravity() * delta
 	
 	# zoom camera
-	if PlayerStats.state != PlayerStats.states.pause:
-		if Input.is_action_just_pressed("next_gun"):
-			camera_target_zoom = clamp(camera_target_zoom - camera_zoom_incrament, camera_min_zoom, camera_max_zoom)
-		elif Input.is_action_just_pressed("last_gun"):
-			camera_target_zoom = clamp(camera_target_zoom + camera_zoom_incrament, camera_min_zoom, camera_max_zoom)
+	#if PlayerStats.state != PlayerStats.states.pause:
+	if Input.is_action_just_pressed("next_gun"):
+		camera_target_zoom = clamp(camera_target_zoom - camera_zoom_incrament, camera_min_zoom, camera_max_zoom)
+	elif Input.is_action_just_pressed("last_gun"):
+		camera_target_zoom = clamp(camera_target_zoom + camera_zoom_incrament, camera_min_zoom, camera_max_zoom)
 	camera.position.z = lerp(camera.position.z, camera_target_zoom, delta * 10)
+	
+	# clamp position
+	position.x = clamp(position.x, 1, 511)
+	position.z = clamp(position.z, 1, 511)
 
 
 func state_walk(delta) -> void:

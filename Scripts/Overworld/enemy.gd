@@ -6,6 +6,7 @@ var walk_speed := 2
 var path_index := 0
 var max_enemies := 6
 var min_enemies := 3
+var can_move: bool
 var destination: Location
 var guns_dict: Dictionary = {
 	0 : [preload("res://Scenes/Guns/shotgun.tscn"), preload("res://Scenes/Items/Guns/shotgun.tscn")],
@@ -21,11 +22,19 @@ var guns_dict: Dictionary = {
 @onready var enemy_model: Node3D = $EnemyModel
 
 
+func _enter_tree() -> void:
+	can_move = true
+
+
 func _ready() -> void:
 	detection.targets.append(Globals.player)
 	var gun = guns_dict[gun_index][0].instantiate()
 	gun_holder.add_child(gun)
 	location.location_data.population = randi_range(min_enemies, max_enemies)
+	location.encounter_started.connect(_on_encounter_started)
+	location.encounter_ended.connect(_on_encounter_ended)
+	if location.dialogue_tree != null:
+		location.dialogue_tree.npc_style = enemy_model.current_style
 
 
 func _process(_delta: float) -> void:
@@ -38,7 +47,7 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	# move towards destination
-	if navigation_agent.target_position != Vector3.ZERO:
+	if navigation_agent.target_position != Vector3.ZERO and can_move:
 		follow_path()
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -75,6 +84,23 @@ func die():
 	queue_free()
 
 
+func save() -> Dictionary:
+	return {
+		"pos_x": global_position.x,
+		"pos_y": global_position.y,
+		"pos_z": global_position.z,
+	}
+
+
 func _on_navigation_agent_3d_navigation_finished() -> void:
 	destination.location_data.change_population(location.location_data.population)
 	queue_free()
+
+
+func _on_encounter_started() -> void:
+	can_move = false
+	velocity = Vector3.ZERO
+
+
+func _on_encounter_ended() -> void:
+	can_move = true

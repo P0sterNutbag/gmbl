@@ -1,0 +1,139 @@
+[gd_scene load_steps=37 format=3 uid="uid://b0cqkj1fgouo2"]
+
+[ext_resource type="Script" uid="uid://dq5ymww0igewb" path="res://Scripts/Overworld/enemy.gd" id="1_ldcoh"]
+[ext_resource type="PackedScene" uid="uid://cdr3k44ro53a1" path="res://Scenes/Overworld/Locations/location_base.tscn" id="2_jf2yb"]
+[ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="3_f2atc"]
+[ext_resource type="PackedScene" uid="uid://c3p7tbg7t42b1" path="res://Scenes/Levels/procgen_encounter.tscn" id="4_w8t3j"]
+[ext_resource type="Script" uid="uid://de6rxup5nru4w" path="res://Scripts/dialogue.gd" id="5_c01de"]
+[ext_resource type="Script" uid="uid://but6ijlpfowbx" path="res://Scripts/detection_component.gd" id="5_eaoej"]
+[ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="5_jpogg"]
+[ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/npc.tscn" id="6_c01de"]
+[ext_resource type="Script" uid="uid://ctb2g10cnu2sg" path="res://Scripts/dialogue_option.gd" id="6_q4nvy"]
+[ext_resource type="Resource" uid="uid://glkl1ugkvv6m" path="res://Resources/Items/Survival/water.tres" id="6_yyftb"]
+[ext_resource type="Resource" uid="uid://dfkmfm7wu8mw4" path="res://Resources/Items/Survival/beans.tres" id="7_fyaxn"]
+[ext_resource type="Script" uid="uid://cnu4xeujmgk51" path="res://Scripts/dialogue_options.gd" id="7_o7rut"]
+[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="8_nv6bg"]
+[ext_resource type="Resource" uid="uid://nm0e00c2fx4" path="res://Resources/NpcStyles/npc_styles.tres" id="8_olcnh"]
+[ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="8_q4nvy"]
+[ext_resource type="Script" uid="uid://6ucyr0petjnx" path="res://Scripts/inventory.gd" id="9_jn6y6"]
+[ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="9_t7vrw"]
+[ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="10_7npny"]
+[ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="11_w00nu"]
+[ext_resource type="Script" uid="uid://cef5ia3i8kusx" path="res://Scripts/navigation_agent.gd" id="19_yyftb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hf0oe"]
+radius = 0.434372
+
+[sub_resource type="Resource" id="Resource_ndpai"]
+script = ExtResource("3_f2atc")
+population = 3
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
+
+[sub_resource type="Resource" id="Resource_e46jk"]
+script = ExtResource("5_jpogg")
+item = ExtResource("6_yyftb")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_fjuww"]
+script = ExtResource("5_jpogg")
+item = ExtResource("7_fyaxn")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_s8dvv"]
+script = ExtResource("5_jpogg")
+item = ExtResource("8_nv6bg")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_5j08b"]
+script = ExtResource("9_jn6y6")
+item_slots = Array[ExtResource("5_jpogg")]([SubResource("Resource_e46jk"), SubResource("Resource_fjuww"), SubResource("Resource_s8dvv")])
+money = 50
+title = "Trader"
+metadata/_custom_type_script = "uid://6ucyr0petjnx"
+
+[sub_resource type="Resource" id="Resource_p0jri"]
+script = ExtResource("11_w00nu")
+title = "Traveler"
+inventory = SubResource("Resource_5j08b")
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+
+[sub_resource type="Resource" id="Resource_ux3d7"]
+script = ExtResource("5_c01de")
+lines = Array[String](["Hello stranger."])
+speaker = 1
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_o7rut"]
+script = ExtResource("6_q4nvy")
+text = "Trade"
+destination = 2
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
+[sub_resource type="Resource" id="Resource_olcnh"]
+script = ExtResource("6_q4nvy")
+text = "Attack"
+destination = 3
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
+[sub_resource type="Resource" id="Resource_yyftb"]
+script = ExtResource("6_q4nvy")
+text = "Leave"
+destination = 4
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
+[sub_resource type="Resource" id="Resource_dksrw"]
+script = ExtResource("7_o7rut")
+options = Array[ExtResource("6_q4nvy")]([SubResource("Resource_o7rut"), SubResource("Resource_olcnh"), SubResource("Resource_yyftb")])
+metadata/_custom_type_script = "uid://cnu4xeujmgk51"
+
+[sub_resource type="Resource" id="Resource_t7vrw"]
+script = ExtResource("8_q4nvy")
+method = "enter_shop"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_jpogg"]
+script = ExtResource("8_q4nvy")
+method = "start_level"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_fyaxn"]
+script = ExtResource("8_q4nvy")
+method = "exit_to_game"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_xv57w"]
+script = ExtResource("9_t7vrw")
+bubbles = Array[ExtResource("5_c01de")]([SubResource("Resource_ux3d7"), SubResource("Resource_dksrw"), SubResource("Resource_t7vrw"), SubResource("Resource_jpogg"), SubResource("Resource_fyaxn")])
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+
+[node name="Npc" type="CharacterBody3D" groups=["persist"]]
+collision_layer = 0
+script = ExtResource("1_ldcoh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.143, 1, 0)
+shape = SubResource("CapsuleShape3D_hf0oe")
+
+[node name="Location" parent="." instance=ExtResource("2_jf2yb")]
+location_data = SubResource("Resource_ndpai")
+encounter_scene = ExtResource("4_w8t3j")
+shop = SubResource("Resource_p0jri")
+dialogue_tree = SubResource("Resource_xv57w")
+can_stealth_start = true
+
+[node name="PointOfInterest" parent="Location" index="2"]
+title = "Trader"
+
+[node name="Detection" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89564, 0)
+target_position = Vector3(0, 0, -50)
+script = ExtResource("5_eaoej")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." groups=["persist"]]
+script = ExtResource("19_yyftb")
+
+[node name="EnemyModel" parent="." instance=ExtResource("6_c01de")]
+
+[connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]
+
+[editable path="Location"]

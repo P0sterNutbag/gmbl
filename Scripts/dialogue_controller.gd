@@ -84,7 +84,7 @@ func on_option_selected(option: Control) -> void:
 func exit_to_game() -> void:
 	Globals.ui.portraits.hide()
 	UiController.close_interface(self)
-
+	Globals.overworld.current_encounter.encounter_ended.emit()
 
 
 #func exit_dialogue() -> void:
@@ -94,6 +94,8 @@ func exit_to_game() -> void:
 
 func enter_shop() -> void:
 	hide()
+	if !shop:
+		shop = Globals.overworld.current_encounter.shop
 	Globals.ui.enter_shop(shop)
 
 
@@ -145,4 +147,12 @@ func leave_shop() -> void:
 	UiController.open_interface(self)
 	advance_dialogue(index)
 	#get_child(-1).option_container.get_child(0).grab_focus()
-	
+
+
+func start_level() -> void:
+	Globals.overworld.current_encounter.transition_to_level(true)
+
+
+func pay_fee(amount: int) -> void:
+	PlayerStats.inventory.money -= amount
+	exit_to_game()

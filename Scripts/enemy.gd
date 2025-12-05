@@ -228,7 +228,7 @@ func _physics_process(delta: float) -> void:
 				last_seen_position = target.global_position
 				look_at_position(last_seen_position)
 				if gun.firepoint != null:
-					gun.firepoint.look_at(target.global_position + Vector3.UP * 1)
+					gun.firepoint.look_at(detection.target_pos)
 			
 			# get into range
 			#if target and global_position.distance_to(target.global_position) > range:

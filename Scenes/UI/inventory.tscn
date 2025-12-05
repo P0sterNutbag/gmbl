@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dvwo5rcugthhe"]
+[gd_scene load_steps=15 format=3 uid="uid://dvwo5rcugthhe"]
 
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_osrsm"]
 [ext_resource type="Script" uid="uid://cggchd80ddnc1" path="res://Scripts/inventory_ui.gd" id="2_yyv02"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="4_ic2qw"]
 [ext_resource type="Texture2D" uid="uid://d08xeomlxj5wh" path="res://Art/Textures/arrow_small_left.png" id="5_d513x"]
 [ext_resource type="Texture2D" uid="uid://byvpghxprlvv3" path="res://Art/Textures/arrow_small.png" id="6_2lqwa"]
+[ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="8_d513x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_osrsm"]
 bg_color = Color(0, 0, 0, 0.784314)
@@ -160,6 +161,50 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 32
+
+[node name="Controls" type="Control" parent="."]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls"]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="Controls/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_d513x")
+text = "LMB: Use/Equip"
+
+[node name="Label2" type="Label" parent="Controls/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_d513x")
+text = "X: Drop"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Controls"]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="Controls/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("8_d513x")
+text = "LMB: Trasnfer"
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_focus_exited"]

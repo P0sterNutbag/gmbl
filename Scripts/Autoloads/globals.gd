@@ -9,6 +9,7 @@ var npc_controller: Node3D
 var survival_ui: CanvasLayer
 #const PAUSE_MENU = preload("res://Scenes/UI/pause_menu.tscn")
 
+
 func _ready() -> void:
 	particle_manager = Node.new()
 	particle_manager.name = "ParticleManager"
@@ -74,3 +75,9 @@ func find_item(items: Array, item_name: String) -> Resource:
 		if i != null and (i.resource_name == item_name or i.title.to_lower() == item_name.to_lower()):
 			return i
 	return null
+
+
+func get_dot(from_node: Node3D, to_node: Node3D) -> float:
+	var forward = from_node.global_transform.basis.z.normalized()
+	var to = (to_node.global_transform.origin - from_node.global_transform.origin).normalized()
+	return forward.dot(to)

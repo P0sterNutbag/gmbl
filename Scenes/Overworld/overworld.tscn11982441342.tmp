@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=4 uid="uid://doydk513gm02l"]
+[gd_scene load_steps=124 format=4 uid="uid://doydk513gm02l"]
 
 [ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_6y65m"]
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="2_gw0hx"]
@@ -25,7 +25,6 @@
 [ext_resource type="Texture2D" uid="uid://oamh8tah7tlw" path="res://Art/Textures/grass and dirt.png" id="27_8cq34"]
 [ext_resource type="Script" uid="uid://cp50dadh73l3f" path="res://Scripts/snap_to_terrain.gd" id="27_oapb8"]
 [ext_resource type="Script" uid="uid://ejdyuf8c7kui" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="28_8cq34"]
-[ext_resource type="PackedScene" uid="uid://dhc6a3k8wyk4x" path="res://Scenes/Overworld/NPCs/enemy.tscn" id="28_72l67"]
 [ext_resource type="Script" uid="uid://bxtcknb4rx5h2" path="res://Scripts/random_timer.gd" id="29_72l67"]
 [ext_resource type="Texture2D" uid="uid://d3rtqe0gurf4e" path="res://Art/Textures/grass.png" id="29_i1n2v"]
 [ext_resource type="ArrayMesh" uid="uid://dpef2d0qcn5d4" path="res://addons/zylann.hterrain/models/grass_quad_x2.obj" id="30_8cq34"]
@@ -109,11 +108,6 @@ _surfaces = [{
 [sub_resource type="Resource" id="Resource_adm71"]
 script = ExtResource("27_4xsnl")
 object_to_spawn = ExtResource("20_7t5fg")
-metadata/_custom_type_script = "uid://3uypo1jqxswc"
-
-[sub_resource type="Resource" id="Resource_8yg51"]
-script = ExtResource("27_4xsnl")
-object_to_spawn = ExtResource("28_72l67")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [sub_resource type="Resource" id="Resource_6lldf"]
@@ -513,13 +507,13 @@ skeleton = NodePath("../..")
 
 [node name="NpcController" type="Node3D" parent="."]
 script = ExtResource("26_5q0os")
-npcs = Array[ExtResource("27_4xsnl")]([SubResource("Resource_adm71"), SubResource("Resource_8yg51")])
+npcs = Array[ExtResource("27_4xsnl")]([SubResource("Resource_adm71")])
 
 [node name="Timer" type="Timer" parent="NpcController"]
 autostart = true
 script = ExtResource("29_72l67")
-min_wait_time = 1.0
-max_wait_time = 5.0
+min_wait_time = 5.0
+max_wait_time = 30.0
 
 [node name="Scatterer" type="Node3D" parent="."]
 script = ExtResource("42_1k2ge")

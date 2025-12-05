@@ -8,6 +8,8 @@ const CHARACTER_CREATION = preload("uid://s4g2uyw4yjm5")
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if Globals.overworld:
+		Globals.overworld.queue_free()
 	if !SaveController.save_file_exists():
 		resume_button.visible = false
 	activate()
@@ -15,7 +17,7 @@ func _ready() -> void:
 
 func _on_menu_item_pressed() -> void:
 	SceneManager.load_on_enter = true
-	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld.tscn", true)
+	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld.tscn")
 
 
 func _on_menu_item_2_pressed() -> void:

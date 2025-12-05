@@ -7,7 +7,9 @@ var path_index := 0
 var max_enemies := 6
 var min_enemies := 3
 var can_move: bool
+#var target_position: Vector3
 var destination: Location
+var destination_path: NodePath
 var guns_dict: Dictionary = {
 	0 : [preload("res://Scenes/Guns/shotgun.tscn"), preload("res://Scenes/Items/Guns/shotgun.tscn")],
 	1 : [preload("res://Scenes/Guns/ak47.tscn"), preload("res://Scenes/Items/Guns/ak47.tscn")],
@@ -35,6 +37,7 @@ func _ready() -> void:
 	location.encounter_ended.connect(_on_encounter_ended)
 	if location.dialogue_tree != null:
 		location.dialogue_tree.npc_style = enemy_model.current_style
+	SaveController.load.connect(_on_load)
 
 
 func _process(_delta: float) -> void:
@@ -89,7 +92,16 @@ func save() -> Dictionary:
 		"pos_x": global_position.x,
 		"pos_y": global_position.y,
 		"pos_z": global_position.z,
+		#"target_position": navigation_agent.target_position,
+		"destination_path": destination.get_path(),
 	}
+
+
+func _on_load() -> void:
+	await get_tree().process_frame
+	destination = get_tree().root.get_node(destination_path)
+	var pos = destination.global_position
+	navigation_agent.set_target_position(pos)
 
 
 func _on_navigation_agent_3d_navigation_finished() -> void:

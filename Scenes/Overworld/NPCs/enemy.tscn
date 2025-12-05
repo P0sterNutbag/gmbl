@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dhc6a3k8wyk4x"]
+[gd_scene load_steps=38 format=3 uid="uid://dhc6a3k8wyk4x"]
 
 [ext_resource type="Script" uid="uid://dq5ymww0igewb" path="res://Scripts/Overworld/enemy.gd" id="1_11nfp"]
 [ext_resource type="PackedScene" uid="uid://cdr3k44ro53a1" path="res://Scenes/Overworld/Locations/location_base.tscn" id="2_riojr"]
@@ -27,7 +27,6 @@
 [ext_resource type="Texture2D" uid="uid://x3spqeyiq8cr" path="res://Art/Textures/npc shirt white.png" id="23_x4chs"]
 [ext_resource type="Texture2D" uid="uid://whgiy4tx5l5g" path="res://Art/Textures/npc brown jacket.png" id="24_swbri"]
 [ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="25_70g7b"]
-[ext_resource type="Script" uid="uid://cef5ia3i8kusx" path="res://Scripts/navigation_agent.gd" id="27_aa4gy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hf0oe"]
 radius = 0.434372
@@ -107,8 +106,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89564, 0)
 target_position = Vector3(0, 0, -50)
 script = ExtResource("4_73otn")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." groups=["persist"]]
-script = ExtResource("27_aa4gy")
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="EnemyModel" parent="." instance=ExtResource("5_i7slr")]
 

@@ -79,6 +79,7 @@ func _process(_delta: float) -> void:
 
 
 func set_items():
+	title.text = source_inventory.title
 	if item_container.get_child_count() > 0:
 		for child in item_container.get_children():
 			item_container.remove_child(child)

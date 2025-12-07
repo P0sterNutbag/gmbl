@@ -27,18 +27,15 @@ func change_scene() -> void:
 		var inst = load(next_scene).instantiate()
 		get_tree().root.add_child(inst)
 		get_tree().current_scene = inst
-		MusicManager.on_scene_transition(next_scene)
 	else:
 		if next_scene is String:
 			get_tree().change_scene_to_packed(ResourceLoader.load_threaded_get(next_scene))
-			MusicManager.on_scene_transition(next_scene)
 			if next_scene == "res://Scenes/UI/Levels/character_creation.tscn":
 				new_game_start.emit()
 		elif next_scene is Node3D:
 			get_tree().root.remove_child(get_tree().current_scene)
 			get_tree().root.add_child(next_scene)
 			get_tree().current_scene = next_scene
-			MusicManager.on_scene_transition(next_scene.name)
 	scene_transition.transition_out()
 	UiController.reset_list()
 	get_tree().paused = false

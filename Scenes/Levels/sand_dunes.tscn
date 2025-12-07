@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://f0rhw338g0ni"]
+[gd_scene load_steps=19 format=4 uid="uid://f0rhw338g0ni"]
 
 [ext_resource type="PackedScene" uid="uid://r4ktdn26psb3" path="res://Scenes/Levels/encounter_base.tscn" id="1_0ls2j"]
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_rgd3n"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cdo0acn1lkrd5" path="res://Scenes/Environment/Prefabs With Spawning/Old/wooden_crates.tscn" id="10_aooer"]
 [ext_resource type="PackedScene" uid="uid://bqui4egb4d3em" path="res://Scenes/Environment/Prefabs With Spawning/Old/barrels.tscn" id="11_wsj4s"]
 [ext_resource type="PackedScene" uid="uid://di3h341sotn78" path="res://Scenes/Environment/Prefabs With Spawning/Old/mixed_trash.tscn" id="12_hsdkj"]
+[ext_resource type="PackedScene" uid="uid://ljhoishdi1mg" path="res://Scenes/Environment/Props/radio.tscn" id="15_fac1s"]
 
 [sub_resource type="Resource" id="Resource_6gt5v"]
 script = ExtResource("2_rgd3n")
@@ -91,6 +92,9 @@ transform = Transform3D(-0.7514829, 0, -0.65975255, 0, 1, 0, 0.65975255, 0, -0.7
 [node name="TireStacks2" parent="NavigationRegion3D" index="7" node_paths=PackedStringArray("terrain") instance=ExtResource("5_6gt5v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 187.0842, 4.925697, 79.30299)
 terrain = NodePath("../../Terrain")
+
+[node name="Radio" parent="NavigationRegion3D/TireStacks2" index="11" instance=ExtResource("15_fac1s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8832092, 0.091600895, -0.51444244)
 
 [node name="WoodenCrates3" parent="NavigationRegion3D" index="8" node_paths=PackedStringArray("terrain") instance=ExtResource("10_aooer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150.22774, 14.191353, 51.65103)

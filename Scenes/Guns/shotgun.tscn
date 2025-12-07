@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dts12bmvycipb"]
+[gd_scene load_steps=10 format=3 uid="uid://dts12bmvycipb"]
 
 [ext_resource type="PackedScene" uid="uid://de0b6aj1eplv5" path="res://Scenes/Guns/gun_parent.tscn" id="1_mej0h"]
 [ext_resource type="PackedScene" uid="uid://cwq84n8f24jwt" path="res://Scenes/Bullets/bullet.tscn" id="2_7cdj6"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/hitmarker.tscn" id="3_58v0y"]
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="4_hufxr"]
 [ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="5_58v0y"]
+[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="6_hufxr"]
 
 [sub_resource type="Resource" id="Resource_x1ctg"]
 script = ExtResource("4_hufxr")
@@ -27,6 +28,7 @@ metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 [node name="Gun" instance=ExtResource("1_mej0h")]
 bullet_stats = SubResource("Resource_x1ctg")
 gun_stats = SubResource("Resource_hufxr")
+ammo_item = ExtResource("6_hufxr")
 fire_type = 2
 shoot_cooldown = 0.5
 

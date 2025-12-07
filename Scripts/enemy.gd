@@ -224,7 +224,7 @@ func _physics_process(delta: float) -> void:
 				#return
 			
 			# look at target
-			if target:
+			if target and gun:
 				last_seen_position = target.global_position
 				look_at_position(last_seen_position)
 				if gun.firepoint != null:

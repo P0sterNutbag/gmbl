@@ -28,11 +28,13 @@ func _on_settings_pressed() -> void:
 
 
 func _on_quit_pressed() -> void:
-	SaveController.save_data_to_file()
+	if get_tree().current_scene == Globals.overworld:
+		SaveController.save_data_to_file()
 	SceneManager.start_scene_transition("res://Scenes/UI/main_menu.tscn")
 
 
 func _on_quit_2_pressed() -> void:
+	#SaveController.save_data_to_file()
 	get_tree().quit()
 
 

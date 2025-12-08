@@ -19,6 +19,7 @@ func apply_progress() -> void:
 	awards.clear()
 	var old_level = progress_data.level
 	progress_data.add_xp(kills * 5)
+	progress_data.add_xp(quests_completed * 10)
 	var new_level = progress_data.level
 	if old_level < progress_data.level:
 		var saved_gear

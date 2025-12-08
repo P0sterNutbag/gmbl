@@ -4,6 +4,7 @@ extends Menu
 @onready var level: Label = $MarginContainer/VBoxContainer/HBoxContainer/Level
 @onready var progress_bar: ProgressBar = $MarginContainer/VBoxContainer/HBoxContainer/ProgressBar
 @onready var v_box_container: VBoxContainer = $MarginContainer/VBoxContainer
+@onready var time: Label = $MarginContainer/VBoxContainer/Time
 const TUTORIAL_MESSAGE = preload("uid://cftuqp2dc7t7b")
 
 
@@ -16,8 +17,8 @@ func activate():
 	var new_level = ProgressManager.progress_data.level
 	#tween.tween_property(kills, "text", "Kills: " + str(ProgressManager.kills), 1)
 	#tween.tween_property(level, "text", "Level: " + str(ProgressManager.progress_data.level))
-	kills.text = "Kills: " + str(ProgressManager.kills)
-	level.text = "Level: " + str(old_level)
+	#kills.text = "Kills: " + str(ProgressManager.kills)
+	#level.text = "Level: " + str(old_level)
 	progress_bar.value = old_xp
 	var level_ups = 0
 	for i in range(old_level, new_level+1):

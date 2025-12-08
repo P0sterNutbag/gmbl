@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://c3wywlngou3jc"]
+[gd_scene load_steps=20 format=4 uid="uid://c3wywlngou3jc"]
 
 [ext_resource type="PackedScene" uid="uid://r4ktdn26psb3" path="res://Scenes/Levels/encounter_base.tscn" id="1_wyyf0"]
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_ghiyu"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://brrtfg5jynxnd" path="res://Scenes/Environment/Nature/rock.tscn" id="14_d8exc"]
 [ext_resource type="PackedScene" uid="uid://cmliu4dakvqq" path="res://Scenes/Environment/Nature/bush.tscn" id="15_dpfif"]
 [ext_resource type="ArrayMesh" uid="uid://dpef2d0qcn5d4" path="res://addons/zylann.hterrain/models/grass_quad_x2.obj" id="16_be54w"]
+[ext_resource type="PackedScene" uid="uid://ljhoishdi1mg" path="res://Scenes/Environment/Props/radio.tscn" id="16_o2sg6"]
 [ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="17_iwifo"]
 
 [sub_resource type="Resource" id="Resource_oy5nx"]
@@ -219,5 +220,11 @@ transform = Transform3D(-0.29948825, 0, -1.1010975, 0, 1.1410998, 0, 1.1010975, 
 
 [node name="@Node3D@63610" parent="Scatterer/brushs" index="19" instance=ExtResource("15_dpfif")]
 transform = Transform3D(1.0234286, 0, -0.6125037, 0, 1.1927141, 0, 0.6125037, 0, 1.0234286, 211.80838, 4.1173334, 25.382717)
+
+[node name="Radio" parent="." index="14" instance=ExtResource("16_o2sg6")]
+transform = Transform3D(0.8609552, 0, -0.5086808, 0, 1, 0, 0.5086808, 0, 0.8609552, 90.1077, 2.3439436, 187.60782)
+
+[node name="Radio2" parent="." index="15" instance=ExtResource("16_o2sg6")]
+transform = Transform3D(-0.85038894, 0, -0.52615464, 0, 1, 0, 0.52615464, 0, -0.85038894, 138.03204, 6.830633, 78.11424)
 
 [editable path="WorldEnvironment"]

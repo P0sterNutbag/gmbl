@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://y7epyw5i4ifp"]
+[gd_scene load_steps=29 format=4 uid="uid://y7epyw5i4ifp"]
 
 [ext_resource type="PackedScene" uid="uid://r4ktdn26psb3" path="res://Scenes/Levels/encounter_base.tscn" id="1_o4pf0"]
 [ext_resource type="Resource" uid="uid://bo526no3os8wr" path="res://addons/zylann.hterrain/data/bandit_camp/data.hterrain" id="2_kabbc"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cj5jci52r3cnn" path="res://Scenes/Environment/Prefabs With Spawning/Old/shack3.tscn" id="14_ytiro"]
 [ext_resource type="PackedScene" uid="uid://b25ik5iwp3sgi" path="res://Scenes/Environment/Prefabs With Spawning/Old/shack_tin_gray.tscn" id="15_fui2k"]
 [ext_resource type="PackedScene" uid="uid://ciydkkvue7fu2" path="res://Scenes/Environment/Prefabs With Spawning/Old/shipping_container.tscn" id="16_cmkxe"]
+[ext_resource type="PackedScene" uid="uid://ljhoishdi1mg" path="res://Scenes/Environment/Props/radio.tscn" id="16_i5jua"]
 [ext_resource type="PackedScene" uid="uid://bb1xt6row3akg" path="res://Scenes/Environment/Nature/rock_large_orange.tscn" id="18_fui2k"]
 [ext_resource type="PackedScene" uid="uid://7ckg1cl2oun2" path="res://Scenes/Environment/Prefabs With Spawning/trash.tscn" id="18_i5jua"]
 [ext_resource type="PackedScene" uid="uid://bf3gw6c3ye46j" path="res://Scenes/Environment/Prefabs With Spawning/drum_barrels.tscn" id="19_mr0ka"]
@@ -124,6 +125,12 @@ transform = Transform3D(0.79097795, 0, -0.61184466, 0, 1, 0, 0.61184466, 0, 0.79
 [node name="Shack3" parent="NavigationRegion3D" index="15" instance=ExtResource("14_ytiro")]
 transform = Transform3D(0.8100007, 0, 0.5864289, 0, 1, 0, -0.5864289, 0, 0.8100007, 136.37071, 5.7062273, 123.62678)
 
+[node name="Radio" parent="NavigationRegion3D/Shack3" index="5" instance=ExtResource("16_i5jua")]
+transform = Transform3D(0.8100007, 0, -0.5864289, 0, 1, 0, 0.5864289, 0, 0.8100007, -2.9973145, 3.1838999, -3.2540894)
+
+[node name="Radio2" parent="NavigationRegion3D/Shack3" index="6" instance=ExtResource("16_i5jua")]
+transform = Transform3D(-0.7868381, 0, 0.6171594, 0, 1, 0, -0.6171594, 0, -0.7868381, 19.017212, -0.22371578, 101.15021)
+
 [node name="Shack2" parent="NavigationRegion3D" index="16" instance=ExtResource("15_fui2k")]
 transform = Transform3D(-0.8973277, 0, -0.44136485, 0, 1, 0, 0.44136485, 0, -0.8973277, 111.45936, 4.0949907, 91.03283)
 
@@ -149,6 +156,8 @@ terrain = NodePath("../../Terrain")
 [node name="WoodenCrates" parent="NavigationRegion3D" index="22" node_paths=PackedStringArray("terrain") instance=ExtResource("21_6f6bu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.28477, 5.6831083, 177.80186)
 terrain = NodePath("../../Terrain")
+
+[node name="Radio" parent="NavigationRegion3D/WoodenCrates" index="9" instance=ExtResource("16_i5jua")]
 
 [node name="PrefabBase" parent="NavigationRegion3D" index="23" node_paths=PackedStringArray("terrain") instance=ExtResource("22_df0gs")]
 transform = Transform3D(0.94049585, 0, 0.3398051, 0, 1, 0, -0.3398051, 0, 0.94049585, 38.56035, 2.4974918, 51.26371)

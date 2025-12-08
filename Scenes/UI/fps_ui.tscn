@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://y6civk4251ei"]
+[gd_scene load_steps=22 format=3 uid="uid://y6civk4251ei"]
 
 [ext_resource type="Script" uid="uid://cl7b5tsk5cpy3" path="res://Scripts/fps_ui.gd" id="1_27ipd"]
 [ext_resource type="Texture2D" uid="uid://b7o6p645d7r1q" path="res://Art/Textures/scope.png" id="2_ed1w8"]
@@ -14,6 +14,7 @@
 [ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="11_ettqu"]
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="12_e0hn7"]
 [ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="13_8v68b"]
+[ext_resource type="Theme" uid="uid://dcnijc3hjurqk" path="res://Art/Themes/text_mediun_outline.tres" id="13_hkj58"]
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="14_hkj58"]
 [ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="15_6gmlr"]
 
@@ -569,8 +570,22 @@ offset_right = 151.0
 offset_bottom = 12.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("6_8v68b")
+theme = ExtResource("13_hkj58")
 text = "Leave Area? Press 'F'"
+
+[node name="Tooltip" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -14.5
+offset_right = 67.5
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("13_hkj58")
 
 [node name="DeathUI" type="PanelContainer" parent="."]
 visible = false

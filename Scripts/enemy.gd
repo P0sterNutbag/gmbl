@@ -11,7 +11,7 @@ var gun_item: EquipmentGun
 enum teams {enemies, allies}
 @export var team: teams = teams.enemies
 @export var follow_target: Node3D
-@export var potential_items: Array[SpawnChanceResource]
+#@export var potential_items: Array[SpawnChanceResource]
 var items:
 	get():
 		return inventory.items
@@ -85,8 +85,8 @@ func _ready() -> void:
 	DayNightCycle.day_start.connect(on_day_start)
 	
 	# add items
-	for i in randi_range(min_items, max_items):
-		inventory.add_item(potential_items[Globals.get_weighted_index(potential_items)].object_to_spawn)
+	#for i in randi_range(min_items, max_items):
+		#inventory.add_item(potential_items[Globals.get_weighted_index(potential_items)].object_to_spawn)
 	
 	await get_tree().create_timer(0.5).timeout
 	if team == teams.allies:

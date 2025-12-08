@@ -119,6 +119,7 @@ func return_bounties() -> void:
 		PlayerStats.inventory.add_item(quest.reward)
 		reward += quest.reward.amount
 		PlayerStats.quests.erase(quest)
+		ProgressManager.quests_completed += 1
 	dialogue_tree.bubbles[5].lines[0] += "($" +  str(reward) + ")"
 	advance_dialogue(5)
 

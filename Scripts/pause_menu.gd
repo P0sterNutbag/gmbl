@@ -50,3 +50,4 @@ func _on_panel_container_visibility_changed() -> void:
 			save_quit_button.show()
 		else:
 			save_quit_button.hide()
+		get_tree().paused = true

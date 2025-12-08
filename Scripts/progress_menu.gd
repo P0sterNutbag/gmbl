@@ -3,6 +3,8 @@ extends Menu
 @onready var kills: Label = $MarginContainer/VBoxContainer/Kills
 @onready var level: Label = $MarginContainer/VBoxContainer/HBoxContainer/Level
 @onready var progress_bar: ProgressBar = $MarginContainer/VBoxContainer/HBoxContainer/ProgressBar
+@onready var v_box_container: VBoxContainer = $MarginContainer/VBoxContainer
+const TUTORIAL_MESSAGE = preload("uid://cftuqp2dc7t7b")
 
 
 func activate():
@@ -17,6 +19,7 @@ func activate():
 	kills.text = "Kills: " + str(ProgressManager.kills)
 	level.text = "Level: " + str(old_level)
 	progress_bar.value = old_xp
+	var level_ups = 0
 	for i in range(old_level, new_level+1):
 		progress_bar.value = old_xp
 		var target_xp = new_xp
@@ -28,6 +31,11 @@ func activate():
 			tween.tween_property(level, "text", "Level: " + str(i+1), 0)
 		await tween.finished
 		old_xp = 0
+		if ProgressManager.awards.size() > 0:
+			var inst = TUTORIAL_MESSAGE.instantiate()
+			v_box_container.add_child(inst)
+			inst.text = ProgressManager.awards[level_ups].title + "+ added to starting gear."
+			level_ups += 1
 	#progress_bar.value = ProgressManager.progress_data.xp
 
 

@@ -19,6 +19,7 @@ var show_crosshair: bool = true
 @onready var death_ui: PanelContainer = $DeathUI
 @onready var load_save: Button = $DeathUI/MarginContainer/VBoxContainer/VBoxContainer/LoadSave
 @onready var bottom_right: Control = $BottomRight
+@onready var tooltip: Label = $Tooltip
 
 #@onready var compass: ColorRect = $TopCenter/Compass/ColorRect
 
@@ -60,6 +61,7 @@ func _process(delta: float) -> void:
 	if (!show_crosshair or !Globals.player.gun or 
 	Globals.player.gun_state == Globals.player.gun_states.ads or 
 	Globals.player.gun_state == Globals.player.gun_states.no_gun or 
+	tooltip.text != "" or
 	(UiController.current_ui and UiController.current_ui.name.to_lower().contains("inventory"))):
 		crosshair.hide()
 		return

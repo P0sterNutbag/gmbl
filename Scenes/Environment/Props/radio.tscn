@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://ljhoishdi1mg"]
+[gd_scene load_steps=11 format=3 uid="uid://ljhoishdi1mg"]
 
 [ext_resource type="AudioStream" uid="uid://4o168jg6fhxm" path="res://Audio/Music/Iliaque - Adage.mp3" id="1_eartp"]
 [ext_resource type="Script" uid="uid://b1gc2ondhfh1p" path="res://Scripts/radio.gd" id="1_tbxjr"]
 [ext_resource type="PackedScene" uid="uid://bv2esaqoe4ep7" path="res://Art/Models/boombox.glb" id="2_w1x2l"]
 [ext_resource type="Texture2D" uid="uid://xki1jiyj1h6r" path="res://Art/Textures/boombox.png" id="3_k3q2m"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="4_k3q2m"]
+[ext_resource type="AudioStream" uid="uid://ddps5ui6g65g0" path="res://Audio/Music/test_song1.wav" id="5_dd2xw"]
+[ext_resource type="AudioStream" uid="uid://b18wbcvn0ras3" path="res://Audio/Music/JPEGMAFIA - REBOUND! (Official Instrumental).mp3" id="7_ie8ad"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btt8d"]
 albedo_texture = ExtResource("3_k3q2m")
@@ -12,6 +14,12 @@ texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_btt8d"]
 size = Vector3(0.25394288, 0.6043701, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2g7sn"]
+streams_count = 3
+stream_0/stream = ExtResource("5_dd2xw")
+stream_1/stream = ExtResource("1_eartp")
+stream_2/stream = ExtResource("7_ie8ad")
 
 [node name="Radio" type="Node3D"]
 script = ExtResource("1_tbxjr")
@@ -34,8 +42,7 @@ shape = SubResource("BoxShape3D_btt8d")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18191028, 0)
-stream = ExtResource("1_eartp")
+stream = SubResource("AudioStreamRandomizer_2g7sn")
 max_distance = 200.0
-parameters/looping = false
 
 [editable path="boombox"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://jcqxm885cpyd"]
+[gd_scene load_steps=11 format=3 uid="uid://jcqxm885cpyd"]
 
 [ext_resource type="Script" uid="uid://bdnspnib5hs5s" path="res://Scripts/progress_manager.gd" id="1_yrcct"]
 [ext_resource type="Resource" uid="uid://lrml50x6ifrj" path="res://Resources/Items/Guns/sawed_off.tres" id="2_wb6la"]
@@ -7,7 +7,14 @@
 [ext_resource type="Resource" uid="uid://ixc4pv5vjlno" path="res://Resources/Items/Guns/ak47.tres" id="5_ueg7g"]
 [ext_resource type="Resource" uid="uid://de20gnenmrrxa" path="res://Resources/Items/Guns/shotgun.tres" id="6_5k0qf"]
 [ext_resource type="Resource" uid="uid://bhs8tbv5iox6e" path="res://Resources/Items/Guns/sniper_rifle.tres" id="7_27qps"]
+[ext_resource type="Resource" uid="uid://brmi40g2jr38s" path="res://Resources/Items/money.tres" id="8_5k0qf"]
+[ext_resource type="Script" uid="uid://h75f74ubyudu" path="res://Scripts/item_money.gd" id="9_27qps"]
+
+[sub_resource type="Resource" id="Resource_wr2pe"]
+script = ExtResource("9_27qps")
+price = 100
+metadata/_custom_type_script = "uid://h75f74ubyudu"
 
 [node name="ProgressManager" type="Node" groups=["persist"]]
 script = ExtResource("1_yrcct")
-level_rewards = Array[Resource]([ExtResource("2_wb6la"), ExtResource("3_sniod"), ExtResource("4_unjia"), ExtResource("5_ueg7g"), ExtResource("6_5k0qf"), ExtResource("7_27qps")])
+level_rewards = Array[Resource]([ExtResource("2_wb6la"), ExtResource("3_sniod"), ExtResource("4_unjia"), ExtResource("5_ueg7g"), ExtResource("6_5k0qf"), ExtResource("7_27qps"), ExtResource("8_5k0qf"), SubResource("Resource_wr2pe")])

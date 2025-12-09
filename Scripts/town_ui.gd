@@ -14,18 +14,26 @@ var current_town: Town
 
 func _enter_tree() -> void:
 	Globals.ui = self
+	UiController.close_all()
 
 
 func _ready() -> void:
 	for child in get_children():
 		if child is Control:
 			child.hide()
+	job_board.exit.connect(dialogue.leave_shop)
 
 
 func _process(_delta: float) -> void:
 	# opening things
-	if shop.visible and Input.is_action_just_pressed("ui_cancel"):
-		close_shop()
+	if Input.is_action_just_pressed("ui_cancel"):
+		if shop.visible:
+			close_shop()
+		if job_board.visible:
+			UiController.close_interface(job_board)
+			dialogue.leave_shop()
+			UiController.open_interface(dialogue)
+
 
 
 func start_dialogue(dialogue_data: DialogueTree, _shop: Shop = null) -> void:

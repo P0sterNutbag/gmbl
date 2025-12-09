@@ -17,6 +17,7 @@ func _ready() -> void:
 func on_scene_changed() -> void:
 	var scene_name = get_tree().current_scene.get_scene_file_path()
 	if !tracks.has(scene_name):
+		audio_stream_player.stop()
 		return
 	var track = tracks[scene_name]
 	if audio_stream_player.stream == track:

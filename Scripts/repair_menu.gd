@@ -9,6 +9,7 @@ func _on_visibility_changed() -> void:
 	money.text = "$" + str(PlayerStats.inventory.money)
 	var guns = PlayerStats.inventory.items.filter(func(i): return i is EquipmentGun)
 	open(guns)
+	await get_tree().process_frame
 	for i in item_container.get_child_count():
 		var menu_item = item_container.get_child(i)
 		var resource = guns[i]

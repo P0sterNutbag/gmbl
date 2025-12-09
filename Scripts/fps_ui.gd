@@ -76,6 +76,12 @@ func _process(delta: float) -> void:
 			target_pos.x = sign(child.position.x) * (base_pos * clamp(Globals.player.velocity.length(), 1, 2) * Globals.player.gun.spread)
 		child.position = lerp(child.position, target_pos, delta * 20)
 	
+	# tooltip
+	if UiController.current_ui and UiController.current_ui:
+		tooltip.hide()
+	else:
+		tooltip.show()
+	
 
 
 func show_scope(scope_texture: Texture2D = scope.texture) -> void:

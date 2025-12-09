@@ -83,6 +83,7 @@ func _physics_process(delta):
 
 func reset_stats() -> void:
 	inventory = starting_inventory.duplicate(true)
+	inventory.money = ProgressManager.progress_data.starting_money
 	inventory.equipment_kit.remove_all()
 	#equipped_guns[guns[0].slot] = guns[0]
 	#for i in equipped_guns:
@@ -96,6 +97,8 @@ func reset_stats() -> void:
 
 
 func change_state(new_state):
+	if !Globals.player:
+		return
 	if Globals.player.exit_functions.has(PlayerStats.state):
 		await Globals.player.exit_functions[PlayerStats.state].call()
 	PlayerStats.state = new_state

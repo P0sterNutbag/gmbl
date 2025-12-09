@@ -14,4 +14,4 @@ func _on_death():
 	get_tree().current_scene.add_child(inst)
 	inst.global_position = global_position
 	inst.emitting = true
-	queue_free()
+	audio_stream_player_3d.stop()

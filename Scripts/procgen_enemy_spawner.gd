@@ -12,7 +12,7 @@ func _ready():
 	var dest = position + Vector3(0, 0, -115)
 	var start_alert = Globals.overworld.current_encounter.alert_enemies
 	if start_alert:
-		dest = Globals.player.current_position
+		dest = Globals.player.global_position
 	enemy_destination = dest
 	await get_tree().process_frame
 	# spawn enemies

@@ -27,4 +27,4 @@ func equip() -> void:
 
 
 func get_modified_price() -> int:
-	return round(price * gun_stats.condition / 100)
+	return round(price * (gun_stats.condition / 125))

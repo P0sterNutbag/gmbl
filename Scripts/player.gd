@@ -278,6 +278,8 @@ func state_walk(delta):
 	# interact tooltip
 	if interact_cast.is_colliding():
 		var collider = interact_cast.get_collider(0)
+		if !collider:
+			return
 		if collider.is_in_group("lootable") or collider is PhysicalBone3D:
 			Globals.ui.tooltip.text = "F: Loot"
 		elif collider is ItemPickup:

@@ -27,7 +27,7 @@ func set_materials(style: NpcStyle = style_data) -> void:
 	var face = get_texture_modified_skin(face_texture, skin_color, Vector2(face_texture.get_image().get_width()-1, face_texture.get_image().get_height()-1))
 	face_material.set("shader_parameter/base_texture", face)
 	var shirt_texture = style.shirts[randi() % style.shirts.size()]
-	var shirt = get_texture_modified_skin(shirt_texture, skin_color, Vector2(face_texture.get_image().get_width()/2, 0))
+	var shirt = get_texture_modified_skin(shirt_texture, skin_color, Vector2(face_texture.get_image().get_width()/3, 0))
 	shirt_material.set("shader_parameter/base_texture", shirt)
 	var pants = style.pants_colors[randi() % style.pants_colors.size()]
 	pants_material.set("shader_parameter/color", pants)

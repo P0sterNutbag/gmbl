@@ -237,7 +237,6 @@ layout_mode = 2
 text = "Back"
 
 [node name="Repair" type="PanelContainer" parent="." node_paths=PackedStringArray("item_container")]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -251,7 +250,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_anjm7")
 script = ExtResource("14_yov6g")
-item_container = NodePath("MarginContainer/VBoxContainer/VBoxContainer")
+item_container = NodePath("")
 
 [node name="MarginContainer" type="MarginContainer" parent="Repair"]
 layout_mode = 2
@@ -276,7 +275,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Repair/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="ScrollContainer" parent="Repair/MarginContainer/VBoxContainer"]
 layout_mode = 2
 script = ExtResource("5_747ce")
 

@@ -61,10 +61,12 @@ func _process(delta: float) -> void:
 	#if fire_type == fire_types.semi_auto:
 		#if has_released and time_since_shot > fire_timer:
 			#can_shoot = true
+	if gun_stats.condition <= 0:
+		can_shoot = false
 	if Input.is_action_just_released("shoot"):
 		has_released = true
 	if Input.is_action_just_pressed("shoot"):
-		if gun_stats.ammo == 0:
+		if gun_stats.ammo == 0 and UiController.is_canvas_layer_open(Globals.survival_ui):
 			empty_click.play()
 	
 	# spread
@@ -119,6 +121,7 @@ func shoot(is_ads: bool = false, movement_speed = Vector3.ZERO) -> void:
 		var v_angle_variance = randf_range(-variance.y, variance.y)
 		inst.rotate_x(deg_to_rad(v_angle_variance))
 		inst.bullet_stats = bullet_stats
+		#inst.bullet_stats.damage *= gun_stats.condition / 100
 		inst.gun_stats = gun_stats
 		get_tree().current_scene.add_child(inst)
 	gun_stats.ammo -= 1

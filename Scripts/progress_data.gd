@@ -3,7 +3,7 @@ class_name ProgressData
 
 @export var xp := 0
 @export var level := 1
-@export var starting_money = 100
+@export var starting_money = 200
 
 
 func add_xp(xp_to_add: int) -> void: 

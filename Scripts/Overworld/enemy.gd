@@ -111,6 +111,7 @@ func die():
 	anim_player.play("Die")
 	anim_player.seek(4.4)
 	await tree_entered
+	UiController.close_interface(Globals.ui.dialogue)
 	await get_tree().create_timer(10).timeout
 	queue_free()
 

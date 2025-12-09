@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Town" load_steps=81 format=3 uid="uid://c5kpuww7x3qfl"]
+[gd_resource type="Resource" script_class="Town" load_steps=83 format=3 uid="uid://c5kpuww7x3qfl"]
 
 [ext_resource type="Script" uid="uid://bbi3gcsb33muk" path="res://Scripts/town.gd" id="1_boc7n"]
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="2_60f61"]
@@ -40,7 +40,7 @@ metadata/_custom_type_script = "uid://de6rxup5nru4w"
 
 [sub_resource type="Resource" id="Resource_lyof2"]
 script = ExtResource("4_6lldf")
-text = "Show me your wares."
+text = "Trade"
 destination = 2
 metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
 
@@ -132,9 +132,15 @@ lines = Array[String](["Let's make this quick, I got places to be."])
 speaker = 1
 metadata/_custom_type_script = "uid://de6rxup5nru4w"
 
+[sub_resource type="Resource" id="Resource_txphe"]
+script = ExtResource("4_6lldf")
+text = "Repair"
+destination = 4
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
 [sub_resource type="Resource" id="Resource_6cih4"]
 script = ExtResource("4_t35h1")
-options = Array[ExtResource("4_6lldf")]([SubResource("Resource_lyof2"), SubResource("Resource_375gu")])
+options = Array[ExtResource("4_6lldf")]([SubResource("Resource_lyof2"), SubResource("Resource_txphe"), SubResource("Resource_375gu")])
 metadata/_custom_type_script = "uid://cnu4xeujmgk51"
 
 [sub_resource type="Resource" id="Resource_im0yk"]
@@ -147,9 +153,14 @@ script = ExtResource("6_6lldf")
 method = "enter_town"
 metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
+[sub_resource type="Resource" id="Resource_rkg8l"]
+script = ExtResource("6_6lldf")
+method = "enter_repair_menu"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
 [sub_resource type="Resource" id="Resource_q1nwr"]
 script = ExtResource("4_qjbs6")
-bubbles = Array[ExtResource("3_0o5nu")]([SubResource("Resource_nn0b0"), SubResource("Resource_6cih4"), SubResource("Resource_im0yk"), SubResource("Resource_2fanp")])
+bubbles = Array[ExtResource("3_0o5nu")]([SubResource("Resource_nn0b0"), SubResource("Resource_6cih4"), SubResource("Resource_im0yk"), SubResource("Resource_2fanp"), SubResource("Resource_rkg8l")])
 npc_name = "Axel"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 

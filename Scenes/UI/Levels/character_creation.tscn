@@ -1,10 +1,12 @@
-[gd_scene load_steps=72 format=3 uid="uid://blwe17vmld3s"]
+[gd_scene load_steps=86 format=3 uid="uid://blwe17vmld3s"]
 
 [ext_resource type="Script" uid="uid://b7gndoluwck72" path="res://Scripts/character_creation.gd" id="1_v05k5"]
 [ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/npc.tscn" id="1_wnp2j"]
 [ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="2_yggav"]
 [ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="3_eda0b"]
 [ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand3.png" id="4_j8a2e"]
+[ext_resource type="Texture2D" uid="uid://bi1onaha6gj3k" path="res://Art/Textures/player_face2.png" id="11_j4b5t"]
+[ext_resource type="Texture2D" uid="uid://cduy4mfd152jt" path="res://Art/Textures/player_face3.png" id="12_sb010"]
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="21_8ky2f"]
 [ext_resource type="PackedScene" uid="uid://bj7gyfau2dx5w" path="res://Scenes/UI/menu_button.tscn" id="21_73w0w"]
 [ext_resource type="Theme" uid="uid://djqipqwy5toiu" path="res://Art/Themes/VBoxContainer.tres" id="22_36mat"]
@@ -12,7 +14,6 @@
 [ext_resource type="Theme" uid="uid://cdtfcbhvps3m1" path="res://Art/Themes/text_mediun.tres" id="22_gx4n8"]
 [ext_resource type="PackedScene" uid="uid://dnl56ggtju325" path="res://Scenes/UI/option_button.tscn" id="22_l0gxb"]
 [ext_resource type="Script" uid="uid://ba4324tncpb5w" path="res://Scripts/string_resource_pair.gd" id="24_36mat"]
-[ext_resource type="Texture2D" uid="uid://cdy46hgsd08s6" path="res://Art/Textures/npc_face2.png" id="24_e4cpa"]
 [ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="25_011oh"]
 [ext_resource type="Resource" uid="uid://b4ypcwfcexyed" path="res://Resources/NpcStyles/player_style.tres" id="25_j6ghl"]
 [ext_resource type="Shader" uid="uid://de6l4w30bo7u6" path="res://Art/Shaders/cel-shader-base.gdshader" id="26_bq3xa"]
@@ -34,35 +35,68 @@
 
 [sub_resource type="Resource" id="Resource_j4b5t"]
 script = ExtResource("31_kgbab")
-color = Color(0.4087343, 0.20213121, 1.4439226e-07, 1)
+color = Color(0.9372549, 0.7607843, 0.6039216, 1)
 metadata/_custom_type_script = "uid://blxosgrxl33hh"
 
 [sub_resource type="Resource" id="Resource_sb010"]
 script = ExtResource("24_36mat")
-string = "Skin 1"
+string = "Skin 2"
 resource = SubResource("Resource_j4b5t")
 metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
 [sub_resource type="Resource" id="Resource_r8q12"]
 script = ExtResource("31_kgbab")
-color = Color(0, 0.41, 0.027333306, 1)
+color = Color(0.8117647, 0.5882353, 0.3764706, 1)
 metadata/_custom_type_script = "uid://blxosgrxl33hh"
 
 [sub_resource type="Resource" id="Resource_5loco"]
 script = ExtResource("24_36mat")
-string = "Skin 2"
+string = "Skin 3"
 resource = SubResource("Resource_r8q12")
 metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
 [sub_resource type="Resource" id="Resource_j6ghl"]
 script = ExtResource("31_kgbab")
-color = Color(0.31433323, 0, 0.41, 1)
+color = Color(0.5764706, 0.37254903, 0.21568628, 1)
 metadata/_custom_type_script = "uid://blxosgrxl33hh"
 
 [sub_resource type="Resource" id="Resource_fuobc"]
 script = ExtResource("24_36mat")
-string = "Skin 3"
+string = "Skin 4"
 resource = SubResource("Resource_j6ghl")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
+[sub_resource type="Resource" id="Resource_wahcg"]
+script = ExtResource("31_kgbab")
+color = Color(0.37254903, 0.2, 0.0627451, 1)
+metadata/_custom_type_script = "uid://blxosgrxl33hh"
+
+[sub_resource type="Resource" id="Resource_bq3xa"]
+script = ExtResource("24_36mat")
+string = "Skin 5"
+resource = SubResource("Resource_wahcg")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
+[sub_resource type="Resource" id="Resource_l0gxb"]
+script = ExtResource("31_kgbab")
+color = Color(0.27, 0.15066001, 0.05940001, 1)
+metadata/_custom_type_script = "uid://blxosgrxl33hh"
+
+[sub_resource type="Resource" id="Resource_36mat"]
+script = ExtResource("24_36mat")
+string = "Skin 6"
+resource = SubResource("Resource_l0gxb")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
+[sub_resource type="Resource" id="Resource_232fn"]
+script = ExtResource("31_kgbab")
+color = Color(0.94, 0.8397333, 0.75200003, 1)
+metadata/_custom_type_script = "uid://blxosgrxl33hh"
+
+[sub_resource type="Resource" id="Resource_gm0mx"]
+script = ExtResource("24_36mat")
+string = "Skin 1"
+resource = SubResource("Resource_232fn")
 metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
 [sub_resource type="Resource" id="Resource_e4cpa"]
@@ -74,7 +108,13 @@ metadata/_custom_type_script = "uid://ba4324tncpb5w"
 [sub_resource type="Resource" id="Resource_miwqf"]
 script = ExtResource("24_36mat")
 string = "Face 2"
-resource = ExtResource("24_e4cpa")
+resource = ExtResource("11_j4b5t")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
+[sub_resource type="Resource" id="Resource_dubmj"]
+script = ExtResource("24_36mat")
+string = "Face 3"
+resource = ExtResource("12_sb010")
 metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
 [sub_resource type="Resource" id="Resource_5527h"]
@@ -103,6 +143,7 @@ metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
 [sub_resource type="Resource" id="Resource_vr1p2"]
 script = ExtResource("31_kgbab")
+color = Color(0.54901963, 0.34509805, 0.23529412, 1)
 metadata/_custom_type_script = "uid://blxosgrxl33hh"
 
 [sub_resource type="Resource" id="Resource_t3ngt"]
@@ -111,18 +152,42 @@ string = "Pants 1"
 resource = SubResource("Resource_vr1p2")
 metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
+[sub_resource type="Resource" id="Resource_7thdm"]
+script = ExtResource("31_kgbab")
+color = Color(0.31, 0.18910001, 0.12399999, 1)
+metadata/_custom_type_script = "uid://blxosgrxl33hh"
+
+[sub_resource type="Resource" id="Resource_an7qh"]
+script = ExtResource("24_36mat")
+string = "Pants 2"
+resource = SubResource("Resource_7thdm")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
 [sub_resource type="Resource" id="Resource_oheva"]
 script = ExtResource("31_kgbab")
+color = Color(0.32156864, 0.5372549, 0.67058825, 1)
 metadata/_custom_type_script = "uid://blxosgrxl33hh"
 
 [sub_resource type="Resource" id="Resource_1rftj"]
 script = ExtResource("24_36mat")
-string = "Pants 2"
+string = "Pants 3"
 resource = SubResource("Resource_oheva")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
+[sub_resource type="Resource" id="Resource_fdmw8"]
+script = ExtResource("31_kgbab")
+color = Color(0.08640001, 0.14412, 0.18, 1)
+metadata/_custom_type_script = "uid://blxosgrxl33hh"
+
+[sub_resource type="Resource" id="Resource_fr1du"]
+script = ExtResource("24_36mat")
+string = "Pants 4"
+resource = SubResource("Resource_fdmw8")
 metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
 [sub_resource type="Resource" id="Resource_8cblx"]
 script = ExtResource("31_kgbab")
+color = Color(0.23137255, 0.23137255, 0.23137255, 1)
 metadata/_custom_type_script = "uid://blxosgrxl33hh"
 
 [sub_resource type="Resource" id="Resource_pthfa"]
@@ -133,6 +198,7 @@ metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
 [sub_resource type="Resource" id="Resource_fat0s"]
 script = ExtResource("31_kgbab")
+color = Color(0.101960786, 0.101960786, 0.101960786, 1)
 metadata/_custom_type_script = "uid://blxosgrxl33hh"
 
 [sub_resource type="Resource" id="Resource_renkc"]
@@ -141,7 +207,18 @@ string = "Shoes 2"
 resource = SubResource("Resource_fat0s")
 metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j4b5t"]
+[sub_resource type="Resource" id="Resource_rueh3"]
+script = ExtResource("31_kgbab")
+color = Color(0.3, 0.18960002, 0.156, 1)
+metadata/_custom_type_script = "uid://blxosgrxl33hh"
+
+[sub_resource type="Resource" id="Resource_l4r3l"]
+script = ExtResource("24_36mat")
+string = "Shoes 3"
+resource = SubResource("Resource_rueh3")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sb010"]
 render_priority = 0
 shader = ExtResource("26_bq3xa")
 shader_parameter/color = Color(0.85882354, 0.85882354, 0.85882354, 1)
@@ -151,7 +228,7 @@ shader_parameter/fresnel = Color(0, 0, 0, 0)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sb010"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r8q12"]
 render_priority = 0
 shader = ExtResource("26_bq3xa")
 shader_parameter/color = Color(0.86, 0.86, 0.86, 1)
@@ -161,7 +238,7 @@ shader_parameter/fresnel = Color(0, 0, 0, 0)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_r8q12"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5loco"]
 render_priority = 0
 shader = ExtResource("26_bq3xa")
 shader_parameter/color = Color(0.54901963, 0.34509805, 0.23529412, 1)
@@ -170,7 +247,7 @@ shader_parameter/fresnel = Color(0, 0, 0, 0)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5loco"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gtnlk"]
 render_priority = 0
 shader = ExtResource("26_bq3xa")
 shader_parameter/color = Color(0.23137255, 0.23137255, 0.23137255, 1)
@@ -415,12 +492,12 @@ text = "Appearance"
 [node name="SkinOptions" parent="CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer" instance=ExtResource("22_l0gxb")]
 layout_mode = 2
 text = "Skin"
-options = Array[ExtResource("24_36mat")]([SubResource("Resource_sb010"), SubResource("Resource_5loco"), SubResource("Resource_fuobc")])
+options = Array[ExtResource("24_36mat")]([SubResource("Resource_sb010"), SubResource("Resource_5loco"), SubResource("Resource_fuobc"), SubResource("Resource_bq3xa"), SubResource("Resource_36mat"), SubResource("Resource_gm0mx")])
 
 [node name="FaceOptions" parent="CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer" instance=ExtResource("22_l0gxb")]
 layout_mode = 2
 text = "Face"
-options = Array[ExtResource("24_36mat")]([SubResource("Resource_e4cpa"), SubResource("Resource_miwqf")])
+options = Array[ExtResource("24_36mat")]([SubResource("Resource_e4cpa"), SubResource("Resource_miwqf"), SubResource("Resource_dubmj")])
 
 [node name="ShirtOptions" parent="CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer" instance=ExtResource("22_l0gxb")]
 layout_mode = 2
@@ -430,12 +507,12 @@ options = Array[ExtResource("24_36mat")]([SubResource("Resource_5527h"), SubReso
 [node name="PantsOptions" parent="CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer" instance=ExtResource("22_l0gxb")]
 layout_mode = 2
 text = "Legs"
-options = Array[ExtResource("24_36mat")]([SubResource("Resource_t3ngt"), SubResource("Resource_1rftj")])
+options = Array[ExtResource("24_36mat")]([SubResource("Resource_t3ngt"), SubResource("Resource_an7qh"), SubResource("Resource_1rftj"), SubResource("Resource_fr1du")])
 
 [node name="ShoesOptions" parent="CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer" instance=ExtResource("22_l0gxb")]
 layout_mode = 2
 text = "Feet"
-options = Array[ExtResource("24_36mat")]([SubResource("Resource_pthfa"), SubResource("Resource_renkc")])
+options = Array[ExtResource("24_36mat")]([SubResource("Resource_pthfa"), SubResource("Resource_renkc"), SubResource("Resource_l4r3l")])
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Inventories/VBoxContainer"]
 layout_mode = 2
@@ -454,18 +531,47 @@ size_flags_horizontal = 8
 text = "Confirm"
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.7823573, 1.3521742, -2.4915352)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.9867702, 1.5761027, -2.5483298)
 
 [node name="EnemyModel" parent="." instance=ExtResource("1_wnp2j")]
 style_data = ExtResource("25_j6ghl")
 
+[node name="Skeleton3D" parent="EnemyModel/PersonAnimated/Armature" index="0"]
+bones/0/position = Vector3(0.016312813, -2.1827873e-14, -1.0499488)
+bones/0/rotation = Quaternion(-0.70710677, 0, 0, 0.70710677)
+bones/1/rotation = Quaternion(0, 0, 0.016034238, 0.99987143)
+bones/2/rotation = Quaternion(3.559868e-18, 2.2198751e-16, 5.960465e-08, 1)
+bones/3/rotation = Quaternion(3.5598615e-18, 2.2198751e-16, -2.9802326e-08, 1)
+bones/4/rotation = Quaternion(2.0682175e-25, 2.220731e-16, -0.016034264, 0.99987143)
+bones/5/rotation = Quaternion(0, 0, -3.7269383e-09, 1)
+bones/7/rotation = Quaternion(0.0030505452, -0.56488883, 0.82515746, 0.0025335245)
+bones/8/rotation = Quaternion(-0.1779504, -0.0024121704, 0.013338037, 0.98394614)
+bones/9/rotation = Quaternion(0.028895311, -0.0005202912, -0.017992679, 0.99942034)
+bones/11/rotation = Quaternion(0.8250599, -0.0049651004, 0.006534931, 0.56498563)
+bones/12/rotation = Quaternion(-0.17788076, 0.002715235, -0.015020229, 0.9839337)
+bones/13/rotation = Quaternion(0.028902318, 0.00049701246, 0.017187487, 0.99943435)
+bones/15/rotation = Quaternion(8.347435e-06, -0.021064622, 0.9997781, 0.0003932597)
+bones/16/rotation = Quaternion(0.010779458, -2.7438962e-05, -0.0025047057, 0.9999387)
+bones/17/rotation = Quaternion(0.29526323, -0.69450545, 0.3870804, 0.5297648)
+bones/18/rotation = Quaternion(0.28115767, -0.18016556, 0.053826913, 0.9410597)
+bones/20/rotation = Quaternion(3.000273e-05, 0.0210646, 0.99977714, -0.0014206785)
+bones/21/rotation = Quaternion(-0.010779201, 5.325154e-05, -0.004911327, 0.99992985)
+bones/22/rotation = Quaternion(0.38532326, -0.529138, 0.292465, 0.69713926)
+bones/23/rotation = Quaternion(0.28454596, 0.1756305, -0.05311193, 0.94093925)
+
 [node name="Cube_001" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="0"]
-surface_material_override/0 = SubResource("ShaderMaterial_j4b5t")
+surface_material_override/0 = SubResource("ShaderMaterial_sb010")
 
 [node name="Cube_002" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="1"]
-surface_material_override/0 = SubResource("ShaderMaterial_sb010")
-surface_material_override/1 = SubResource("ShaderMaterial_r8q12")
-surface_material_override/2 = SubResource("ShaderMaterial_5loco")
+surface_material_override/0 = SubResource("ShaderMaterial_r8q12")
+surface_material_override/1 = SubResource("ShaderMaterial_5loco")
+surface_material_override/2 = SubResource("ShaderMaterial_gtnlk")
+
+[node name="RightHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.9988741, -0.019314049, 0.043323185, 0.022317203, 0.9973013, -0.06994307, -0.04185539, 0.0708311, 0.9966095, -0.00433814, 0.86249936, -1.4620905)
+
+[node name="Node3D" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand" index="0"]
+transform = Transform3D(0.997414, 0.042404767, 0.05802061, -0.055360083, -0.061430074, 0.9965749, 0.045823645, -0.99721, -0.058923714, 0.18827757, 0.14336085, -0.041855216)
 
 [node name="ak_47" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="0"]
 visible = false
@@ -476,6 +582,7 @@ visible = false
 ammo_item = SubResource("Resource_kgbab")
 
 [node name="pistol" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="2" instance=ExtResource("28_wahcg")]
+transform = Transform3D(1.3100002, 4.4703484e-08, 1.1920929e-07, -2.9773219e-08, 1.3100002, 8.8475645e-08, 1.1920929e-07, 6.053597e-08, 1.3099998, -0.10415375, 0.04311204, -0.04065168)
 visible = false
 ammo_item = SubResource("Resource_ktceq")
 
@@ -497,65 +604,98 @@ ammo_item = SubResource("Resource_ygrfb")
 visible = false
 ammo_item = SubResource("Resource_y7a80")
 
+[node name="LeftHand" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" index="3"]
+transform = Transform3D(-0.9989983, -0.015706727, 0.041890766, 0.018622061, -0.9973637, 0.07013681, 0.0406787, 0.07084655, 0.99665725, 0.0005441634, -0.8624995, -1.4620878)
+
 [node name="Physical Bone mixamorig_Hips" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="0"]
-transform = Transform3D(0.8327417, -0.5447718, -0.09881769, 0.5452914, 0.83790106, -0.024064153, 0.09590891, -0.033845212, 0.99481463, 0.015945042, 0.012816122, -0.93820345)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00017120132, 0.00069417234, 0.04382448)
-body_offset = Transform3D(-0.00042837858, 0.99950004, 0.03161601, 1.6080216e-05, 0.03161608, -0.99950016, -0.9999999, -0.00042787194, -2.9562041e-05, -0.002079307, 0.043780625, 0.00017279387)
+transform = Transform3D(-0.00042932614, 0.99950355, 0.031504247, -0.99999994, -0.00042860716, -2.957475e-05, -1.6057122e-05, -0.03150426, 0.9995036, 0.014233506, 0.00017228103, -1.0919366)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00017071412, 0.00075555075, 0.04203257)
+body_offset = Transform3D(-0.0004293261, 0.99950355, 0.031504255, 1.6057122e-05, 0.031504262, -0.99950355, -0.9999999, -0.00042860708, -2.9574752e-05, -0.002079307, 0.041987896, 0.00017228103)
 
 [node name="Physical Bone mixamorig_Spine" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="1"]
-transform = Transform3D(-0.5828663, -0.8113282, 0.044872444, 0.7958522, -0.5811482, -0.16995902, 0.16397008, -0.06335155, 0.984429, 0.019926446, 0.023176186, -1.0509676)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00043638292, -6.49249e-05, 0.050516646)
-body_offset = Transform3D(0.9999998, -0.00036489964, 6.939471e-05, 6.937981e-05, -2.8900802e-05, -0.9999999, 0.00036484003, 0.9999999, -2.8803945e-05, -0.00043991208, 0.050516605, 6.622076e-05)
+transform = Transform3D(0.9994835, -0.000362926, 0.032133173, 0.00036404157, 0.99999994, -2.886704e-05, -0.03213316, 4.0549945e-05, 0.9994836, 0.010817566, 6.6095985e-05, -1.2047021)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0005270844, -6.490964e-05, 0.047744185)
+body_offset = Transform3D(1.0000001, -0.0003640397, 6.8858266e-05, 6.884338e-05, -2.8892113e-05, -1.0000002, 0.00036404163, 1, -2.8867045e-05, -0.00053039566, 0.047744155, 6.609599e-05)
 
 [node name="Physical Bone mixamorig_Spine1" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="2"]
-transform = Transform3D(-0.5821079, -0.7654099, 0.27440506, 0.7048501, -0.64325213, -0.2990202, 0.40538466, 0.019352395, 0.9139413, -0.0008642126, 0.054960832, -1.1814367)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.227182e-05, -3.8374663e-05, 0.06267572)
-body_offset = Transform3D(0.9999999, -0.00038325787, 2.014637e-05, 2.0071864e-05, 9.405613e-05, -0.99999994, 0.00038322806, 1, 9.4115734e-05, 3.0994415e-05, 0.062675714, 3.2488257e-05)
+transform = Transform3D(0.99948514, -0.0003860488, 0.03208449, 0.00038322812, 0.99999994, 9.4063806e-05, -0.03208453, -8.171969e-05, 0.9994852, 0.006923111, 3.243567e-05, -1.3426083)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.076287e-07, -3.8149956e-05, 0.060750227)
+body_offset = Transform3D(1.0000001, -0.00038323007, 2.0030879e-05, 2.0071882e-05, 9.405614e-05, -1.0000002, 0.00038322815, 1, 9.4063806e-05, -9.23872e-07, 0.060750246, 3.2435673e-05)
 
 [node name="Physical Bone mixamorig_Spine2" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="3"]
-transform = Transform3D(-0.50707304, -0.713106, 0.4841042, 0.5960391, -0.695839, -0.4006813, 0.6225868, 0.085370354, 0.77788013, -0.06027769, 0.10986078, -1.3145198)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0001862999, -7.370084e-05, 0.07707938)
-body_offset = Transform3D(1, -0.00017356873, 0.00013716519, 0.00013713539, 0.00010192394, -1.0000001, 0.00017344952, 1, 0.00010210276, 0.0001757145, 0.077079415, 6.586313e-05)
+transform = Transform3D(0.9994815, -0.00017642976, 0.0321997, 0.00017323498, 1, 0.000102007776, -0.032199718, -9.6376774e-05, 0.99948144, 0.001997134, 6.5755856e-05, -1.5016674)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00018622044, -7.35863e-05, 0.07707937)
+body_offset = Transform3D(1.0000002, -0.00017324883, 0.00013536213, 0.00013538079, 0.000101984355, -1.0000002, 0.00017323499, 1, 0.00010200777, 0.0001757741, 0.077079415, 6.575586e-05)
+
+[node name="Physical Bone mixamorig_Neck" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="4"]
+transform = Transform3D(0.00015783898, -0.9979675, -0.06372522, 1, 0.00014551454, 0.000198041, -0.00018836552, -0.06372525, 0.9979675, 0.0012088164, 0.000121949284, -1.6046051)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00012593184, 0.00082601275, 0.019502858)
+body_offset = Transform3D(0.00015783902, -0.99796784, -0.06372525, 0.00018836558, 0.06372527, -0.9979678, 1, 0.0001455145, 0.00019804102, 0.0020671785, 0.01941061, 0.000121949284)
 
 [node name="Physical Bone mixamorig_Head" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="5"]
-transform = Transform3D(-0.9774606, 0.1095441, 0.18047409, -0.1669947, -0.9241898, -0.3434909, 0.1291649, -0.36588708, 0.9216524, -0.15509151, 0.22949204, -1.6118646)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00033967686, 0.00067528675, 0.19653814)
-body_offset = Transform3D(0.00052048266, -0.99794966, -0.06400442, 0.00047887862, 0.06400481, -0.99794966, 0.99999964, 0.0004887432, 0.0005112551, 0.013253391, 0.19609213, 0.00023886561)
+transform = Transform3D(0.00052049744, -0.99795663, -0.06389343, 0.99999976, 0.00048886315, 0.0005107431, -0.00047846432, -0.06389368, 0.99795663, 0.016107375, 0.000238817, -1.8369429)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0003386807, 0.0008117348, 0.19474916)
+body_offset = Transform3D(0.0005204976, -0.997957, -0.06389346, 0.0004784645, 0.0638937, -0.99795693, 0.9999998, 0.00048886315, 0.0005107432, 0.01325345, 0.19429958, 0.00023881701)
 
 [node name="Physical Bone mixamorig_LeftShoulder" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="6"]
-transform = Transform3D(0.6048422, 0.26701948, -0.75024444, -0.41888776, -0.69456285, -0.5849064, -0.67727333, 0.6680442, -0.30824968, 0.04785444, 0.2461856, -1.3347203)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00023406408, -0.0009113391, 0.093576215)
-body_offset = Transform3D(1, 7.1823597e-06, 4.3347478e-05, 4.3168664e-05, -3.2305717e-05, -0.99999964, -7.2717667e-06, 0.9999999, -3.2037497e-05, 0.00023001432, 0.09357616, 0.00091433525)
+transform = Transform3D(-0.999478, 0.03205582, -0.004021056, 0.007853805, 0.3618127, 0.9322177, 0.031337872, 0.9316995, -0.36187562, -0.00031657764, -0.17512205, -1.5201986)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00023404471, -0.00091154105, 0.09357664)
+body_offset = Transform3D(1.0000002, 7.3404517e-06, 4.3142587e-05, 4.314352e-05, -3.2186508e-05, -0.99999994, -7.3406845e-06, 1.0000001, -3.2424927e-05, 0.00023001432, 0.09357661, 0.00091457367)
 
 [node name="Physical Bone mixamorig_LeftArm" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="7"]
-transform = Transform3D(0.8209798, -0.55661917, -0.127151, -0.50567585, -0.6054469, -0.61459416, 0.26511174, 0.56886655, -0.7785286, 0.13483831, 0.38949034, -1.1911391)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0005896082, -0.002225898, 0.14651294)
-body_offset = Transform3D(0.99999964, 0.0001526475, 3.322959e-05, 3.325939e-05, -0.0013503134, -0.99999875, -0.00015240908, 0.9999989, -0.0013503134, 0.0005850792, 0.14650977, 0.002423644)
+transform = Transform3D(-0.99900883, 0.040732265, -0.017953113, -0.017406149, 0.013743459, 0.9997541, 0.040968988, 0.9990756, -0.013020845, 0.0023857164, -0.4079306, -1.4823292)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0006258094, -0.0032832052, 0.14620215)
+body_offset = Transform3D(1.0000005, 0.00015733793, 2.8440729e-05, 2.8640032e-05, -0.001350414, -0.9999988, -0.00015729612, 0.9999991, -0.0013505267, 0.0006221682, 0.14619756, 0.0034805536)
 
 [node name="Physical Bone mixamorig_LeftForeArm" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="8"]
-transform = Transform3D(-0.53126395, -0.098385885, 0.8414743, -0.8018426, -0.2622601, -0.5369062, 0.27350911, -0.9599687, 0.060439352, 0.023018029, 0.5630408, -1.0903523)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00017747586, -6.149431e-06, 0.15563744)
-body_offset = Transform3D(0.9999999, 2.6747584e-05, -9.745359e-06, -9.953976e-06, 4.5210123e-05, -1, -2.7000904e-05, 0.9999998, 4.5225024e-05, 0.00017899275, 0.15563744, -8.940697e-07)
+transform = Transform3D(-0.99899983, 0.04186013, 0.015718186, 0.018629465, 0.070091456, 0.9973666, 0.040648185, 0.9966619, -0.07080118, 0.002814729, -0.70704293, -1.4730647)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00017851588, -6.305563e-05, 0.15561858)
+body_offset = Transform3D(1.0000005, 3.0406169e-05, -9.56282e-06, -9.538606e-06, 4.6022236e-05, -0.9999998, -3.041199e-05, 1, 4.5888126e-05, 0.00018000603, 0.15561855, 5.5909157e-05)
 
 [node name="Physical Bone mixamorig_RightShoulder" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="9"]
-transform = Transform3D(-0.20411956, 0.7988036, 0.56590456, 0.6997683, -0.28519535, 0.65497166, 0.68458706, 0.5296947, -0.5007635, -0.20083155, 0.0078024156, -1.302433)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.87609e-05, -0.00028172668, 0.093378134)
-body_offset = Transform3D(1.0000002, 1.8969178e-05, -9.9271536e-05, -9.933114e-05, -6.516278e-05, -1.0000002, -1.8969178e-05, 1, -6.5386295e-05, 8.803606e-05, 0.09337813, 0.00028783083)
+transform = Transform3D(0.99937695, 0.035082426, 0.0038754179, 0.01630717, -0.36155754, -0.93220717, -0.031302907, 0.9316895, -0.36190435, -0.0015018553, 0.17516628, -1.5208614)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.88156e-05, -0.0002819164, 0.09337736)
+body_offset = Transform3D(1.0000004, 1.630513e-05, -9.9292956e-05, -9.929761e-05, -6.5118074e-05, -1.0000002, -1.6307458e-05, 1.0000002, -6.5267086e-05, 8.809194e-05, 0.09337735, 0.00028800964)
 
 [node name="Physical Bone mixamorig_RightArm" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="10"]
-transform = Transform3D(0.2636906, 0.7924496, 0.5499918, 0.9622741, -0.25573832, -0.09287938, 0.067051746, 0.5537342, -0.8299895, -0.33106536, -0.040583078, -1.1338209)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0003121431, -0.0031737383, 0.14533001)
-body_offset = Transform3D(1.0000002, -0.00024302304, -2.7410686e-05, -2.7544796e-05, -0.00017564371, -1.0000001, 0.00024285913, 1.0000002, -0.00017585419, -0.00030893087, 0.14532948, 0.0031992197)
+transform = Transform3D(0.99904305, 0.041881688, -0.012607805, -0.012099616, -0.012365301, -0.9998504, -0.042031318, 0.9990461, -0.011846716, -0.0003756793, 0.40692693, -1.4805201)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00045948432, -0.0052891206, 0.14521928)
+body_offset = Transform3D(1.0000004, -0.00025103142, -2.740603e-05, -2.745539e-05, -0.00017523859, -1.0000002, 0.0002510249, 1.0000004, -0.00017533638, -0.00045683235, 0.14521839, 0.0053144693)
+
+[node name="Physical Bone mixamorig_RightForeArm" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="11"]
+transform = Transform3D(0.99887496, 0.04330398, 0.019330185, 0.02233006, -0.06989799, -0.9973042, -0.041836098, 0.9966138, -0.07078633, -0.0019264739, 0.70685214, -1.4722147)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0006385023, -0.00090938486, 0.15551688)
+body_offset = Transform3D(1.0000004, -1.8328778e-05, 1.4152378e-05, 1.414679e-05, 4.5634806e-05, -1.0000001, 1.8329825e-05, 1.0000005, 4.5515597e-05, -0.0006407201, 0.15551692, 0.0009022951)
+
+[node name="Physical Bone mixamorig_LeftUpLeg" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="12"]
+transform = Transform3D(-0.99999976, 1.3002748e-05, 0.0007848099, 4.604171e-05, 0.9991129, 0.04211272, -0.0007835661, 0.042112745, -0.9991126, 6.402397e-09, -0.110187806, -0.770169)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00027191217, -2.1914342e-05, 0.22039366)
+body_offset = Transform3D(1.0000001, -1.28736865e-05, 1.8866158e-06, 1.8864655e-06, -7.171184e-06, -1.0000006, 1.28736865e-05, 0.99999934, -7.174909e-06, 0.00027149613, 0.22039378, 2.3499131e-05)
 
 [node name="Physical Bone mixamorig_LeftLeg" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="13"]
-transform = Transform3D(0.04580153, -0.99027866, -0.13134116, -0.36330235, -0.13898845, 0.92124575, -0.9305448, 0.0055220914, -0.36613646, 0.1128781, 0.105908446, -0.3861709)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00012660329, -5.7585385e-05, 0.2121712)
-body_offset = Transform3D(1.0000002, 1.033023e-05, 0.00047042966, 0.00047048926, -6.107986e-05, -1, -1.0151416e-05, 0.9999993, -6.121397e-05, 2.6792288e-05, 0.21217126, 7.05719e-05)
+transform = Transform3D(-0.9999859, 0.00011614404, 0.005322941, 0.0002252956, 0.99978966, 0.020509865, -0.00531944, 0.020510774, -0.99977547, -0.0011624001, -0.123753525, -0.33757484)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00012682787, -8.44358e-05, 0.21307428)
+body_offset = Transform3D(1, 1.0165881e-05, 0.000472073, 0.0004720695, -6.108172e-05, -1.0000005, -1.0136937e-05, 0.9999994, -6.103143e-05, 2.6242109e-05, 0.21307445, 9.743869e-05)
+
+[node name="Physical Bone mixamorig_LeftFoot" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="14"]
+transform = Transform3D(0.26437882, 0.5121806, -0.8171749, 0.964183, -0.12163042, 0.23570575, 0.021330588, -0.8502219, -0.52599233, 0.09814472, -0.15714541, -0.0689357)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00011582418, 0.0002224069, 0.1231144)
+body_offset = Transform3D(0.9999994, 8.106232e-06, -8.8348985e-05, -8.8095665e-05, 9.799376e-06, -1.0000001, -7.890165e-06, 1.0000005, 1.0237098e-05, -0.00010494888, 0.12311442, -0.00022366643)
+
+[node name="Physical Bone mixamorig_RightUpLeg" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="15"]
+transform = Transform3D(-0.9999962, -9.993285e-05, -0.0027634718, 1.6519605e-05, 0.9991131, -0.042107813, 0.002765229, -0.042107698, -0.99910927, 0.0018241174, 0.110291265, -0.76852924)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7211746e-05, -1.3442718e-05, 0.2220368)
+body_offset = Transform3D(1, 0.00010010719, -7.8515564e-05, -7.851673e-05, 1.1924654e-05, -1.0000002, -0.00010010616, 0.9999992, 1.19283795e-05, 7.4646436e-05, 0.22203684, 1.0788441e-05)
 
 [node name="Physical Bone mixamorig_RightLeg" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="16"]
-transform = Transform3D(0.28704157, -0.9209356, -0.26359987, -0.9311726, -0.3328262, 0.1488099, -0.22477725, 0.20274234, -0.9530849, -0.07740728, 0.21316028, -0.332276)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1367416e-05, 0.00021510273, 0.20897038)
-body_offset = Transform3D(1, 3.6150217e-05, 3.1381845e-05, 3.1247735e-05, -9.729713e-05, -0.9999998, -3.620982e-05, 0.9999991, -9.7200274e-05, -7.793307e-05, 0.20897037, -0.00019478798)
+transform = Transform3D(-0.99997586, -0.0001861959, 0.0069444976, -0.00032967588, 0.9997864, -0.020665543, -0.0069391658, -0.020667333, -0.99976236, 0.0011405214, 0.12334802, -0.34165037)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.305534e-05, 0.00043839868, 0.20898794)
+body_offset = Transform3D(1, 3.5885838e-05, 3.5108395e-05, 3.5110537e-05, -9.472668e-05, -1.0000001, -3.5882636e-05, 0.9999993, -9.477697e-05, -8.0408296e-05, 0.20898801, -0.00041858852)
+
+[node name="Physical Bone mixamorig_RightFoot" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="17"]
+transform = Transform3D(-0.26903245, 0.51827425, -0.8117964, 0.9628871, 0.12576003, -0.23881564, -0.021680454, -0.84591746, -0.5328731, 0.098204486, 0.15494269, -0.06798203)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0020513092, 0.0012556288, 0.121574625)
+body_offset = Transform3D(0.9999994, -2.4847686e-05, 5.9217215e-05, 5.8874488e-05, 1.5854836e-05, -1.0000002, 2.4594367e-05, 1.0000001, 1.6029924e-05, -0.0020584762, 0.12157451, -0.0012576282)
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("3_eda0b")]
 

@@ -2,7 +2,7 @@ extends Control
 
 @export var stat_name: String
 @onready var progress_bar: ProgressBar = $ProgressBar
-var show_treshold = 0.5
+var show_treshold = 0.75
 
 
 func _process(delta: float) -> void: 

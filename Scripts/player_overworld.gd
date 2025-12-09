@@ -218,3 +218,5 @@ func _on_damaged(_hit_position: Vector3, _hit_direction: Vector3) -> void:
 func _on_death() -> void:
 	PlayerStats.change_state(PlayerStats.states.dead)
 	animation_player.play("Die")
+	await animation_player.animation_finished
+	UiController.open_interface(Globals.survival_ui.progress_menu, false)

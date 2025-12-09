@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://pfvownh6oavj" path="res://Scripts/town_ui.gd" id="1_405pq"]
 [ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="5_f6css"]
-[ext_resource type="PackedScene" uid="uid://cdexqegkymx2g" path="res://Scenes/Overworld/UI/location_card.tscn" id="8_wr7yp"]
 [ext_resource type="Script" uid="uid://dav6t8b5brx1o" path="res://Scripts/inventory_controller.gd" id="9_y2gp4"]
 [ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="10_3gb70"]
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="11_rkx7j"]
 [ext_resource type="Script" uid="uid://catvngsdo62hm" path="res://Scripts/town_menu.gd" id="12_nsyyh"]
 [ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="13_tokue"]
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="14_q0snl"]
+[ext_resource type="Script" uid="uid://ds8qenbnf3wip" path="res://Scripts/repair_menu.gd" id="14_r6bo2"]
 [ext_resource type="Script" uid="uid://bjmtcugcvwfgq" path="res://Scripts/job_board.gd" id="15_cnohn"]
 [ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="16_okk7v"]
 [ext_resource type="Theme" uid="uid://efo20xxcf1e5" path="res://Art/Themes/vbox_container.tres" id="17_cttt6"]
@@ -17,8 +17,6 @@
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_405pq")
-
-[node name="LocationCard" parent="." instance=ExtResource("8_wr7yp")]
 
 [node name="Town" type="PanelContainer" parent="."]
 visible = false
@@ -200,6 +198,48 @@ text = "Accept"
 layout_mode = 2
 text = "Back"
 
+[node name="Dialogue" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -463.0
+offset_top = -1085.0
+offset_right = 463.0
+offset_bottom = -427.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 32
+alignment = 2
+script = ExtResource("20_caolh")
+
+[node name="Repair" type="PanelContainer" parent="." node_paths=PackedStringArray("item_container")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.5
+offset_top = -226.0
+offset_right = 200.5
+offset_bottom = 226.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_rkx7j")
+script = ExtResource("14_r6bo2")
+item_container = NodePath("MarginContainer/VBoxContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="Repair"]
+layout_mode = 2
+theme = ExtResource("16_okk7v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Repair/MarginContainer"]
+layout_mode = 2
+script = ExtResource("14_q0snl")
+
 [node name="Portraits" type="HBoxContainer" parent="."]
 visible = false
 anchors_preset = 15
@@ -220,27 +260,11 @@ size_flags_vertical = 8
 stretch_mode = 2
 flip_h = true
 
-[node name="Dialogue" type="VBoxContainer" parent="."]
-visible = false
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -463.0
-offset_top = -1085.0
-offset_right = 463.0
-offset_bottom = -427.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/separation = 32
-alignment = 2
-script = ExtResource("20_caolh")
-
 [connection signal="exit" from="Shop" to="Dialogue" method="_on_shop_exit"]
 [connection signal="exit" from="BountyBoard" to="Dialogue" method="_on_shop_exit"]
 [connection signal="pressed" from="BountyBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MenuItem" to="BountyBoard" method="_on_menu_item_pressed"]
 [connection signal="pressed" from="BountyBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MenuItem2" to="BountyBoard" method="_on_menu_item_2_pressed"]
 [connection signal="pressed" from="BountyBoard/PanelContainer/MarginContainer/VBoxContainer/MenuItem2" to="BountyBoard" method="close"]
+[connection signal="visibility_changed" from="Repair" to="Repair" method="_on_visibility_changed"]
 
 [editable path="Shop/Inventory"]

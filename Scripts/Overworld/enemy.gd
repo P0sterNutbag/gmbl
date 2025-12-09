@@ -1,13 +1,18 @@
 extends CharacterBody3D
 
 enum guns {shotgun, ak47, sniper, pistol}
+enum states {walk, chase}
 @export var gun_index: guns
+@export var chase_player: bool
+var state = states.chase
+var speed := 2
 var walk_speed := 2
+var run_speed := 3
 var path_index := 0
 var max_enemies := 6
 var min_enemies := 3
 var can_move: bool
-#var target_position: Vector3
+var target: Node3D
 var destination: Location
 var destination_path: NodePath
 var guns_dict: Dictionary = {
@@ -41,17 +46,40 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	# animate
-	if velocity != Vector3.ZERO:
-		anim_player.play("Walk")
-	else:
-		anim_player.play("Idle")
+	match (state):
+		states.walk:
+			speed = walk_speed
+			# detect player
+			if (chase_player and detection.can_see_target() and 
+			Globals.get_dot(self, Globals.player) < -0.25 and
+			global_position.distance_to(Globals.player.global_position) < 15 and
+			PlayerStats.state != PlayerStats.states.pause):
+				state = states.chase
+			# animate
+			if velocity != Vector3.ZERO:
+				anim_player.play("Walk")
+			else:
+				anim_player.play("Idle")
+		states.chase:
+			speed = run_speed
+			# chase after player
+			if detection.can_see_target(Globals.player) and PlayerStats.state != PlayerStats.states.pause:
+				navigation_agent.set_target_position(Globals.player.global_position)
+			else:
+				navigation_agent.set_target_position(destination.global_position)
+				state = states.walk
+			# animate
+			if velocity != Vector3.ZERO:
+				anim_player.play("Run")
+			else:
+				anim_player.play("Idle")
+			
 
 
 func _physics_process(delta: float) -> void:
 	# move towards destination
 	if navigation_agent.target_position != Vector3.ZERO and can_move:
-		follow_path()
+		follow_path(speed)
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	move_and_slide()

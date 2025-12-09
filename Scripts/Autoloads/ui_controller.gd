@@ -3,6 +3,7 @@ extends Node
 var ui_nodes: Array[Control]
 var current_ui: Control
 
+
 func open_interface(node_to_open: Control, pause_player: bool = true) -> void:
 	if !ui_nodes.has(node_to_open):
 		ui_nodes.append(node_to_open)

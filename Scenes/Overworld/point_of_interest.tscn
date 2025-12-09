@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_3kl7u"]
 [ext_resource type="Script" uid="uid://bocymopxj1vj7" path="res://Scripts/point_of_interest.gd" id="1_wb1da"]
-[ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="2_wb1da"]
+[ext_resource type="Theme" uid="uid://dcnijc3hjurqk" path="res://Art/Themes/text_mediun_outline.tres" id="3_avo8c"]
 [ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="4_5twat"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cpnmm"]
@@ -23,21 +23,18 @@ shape = SubResource("SphereShape3D_cpnmm")
 [node name="CardOffset" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/CardOffset"]
+visible = false
 layout_mode = 0
-offset_left = -197.0
-offset_top = -364.0
+offset_left = -33.0
+offset_top = -322.0
 offset_right = 199.0
 offset_bottom = -225.0
 theme = ExtResource("1_3kl7u")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CardOffset/PanelContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
@@ -47,23 +44,35 @@ theme_override_constants/margin_bottom = 32
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Title" type="Label" parent="CanvasLayer/CardOffset/PanelContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(328, 0)
-layout_mode = 2
-size_flags_vertical = 6
-theme = ExtResource("2_wb1da")
-text = "Location Name"
-horizontal_alignment = 1
-autowrap_mode = 2
-
 [node name="Description" type="Label" parent="CanvasLayer/CardOffset/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(328, 0)
 layout_mode = 2
 size_flags_vertical = 6
 theme = ExtResource("4_5twat")
 text = "Location Name"
+autowrap_mode = 2
+
+[node name="Title" type="Label" parent="CanvasLayer/CardOffset"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.5
+offset_top = -175.0
+offset_right = 112.5
+offset_bottom = -146.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 6
+theme = ExtResource("3_avo8c")
+text = "Enemy"
+horizontal_alignment = 1
 autowrap_mode = 2
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

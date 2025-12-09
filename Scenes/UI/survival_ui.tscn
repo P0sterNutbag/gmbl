@@ -69,12 +69,12 @@ grow_vertical = 0
 scale = Vector2(2, 2)
 mouse_filter = 2
 
-[node name="TopLeft" type="Control" parent="ScaleOffset"]
-layout_mode = 1
+[node name="TopLeft" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
 
-[node name="Stats" type="VBoxContainer" parent="ScaleOffset/TopLeft"]
+[node name="Stats" type="VBoxContainer" parent="TopLeft"]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 32.0
@@ -82,15 +82,14 @@ offset_right = 155.0
 offset_bottom = 100.0
 mouse_filter = 2
 theme_override_constants/separation = 20
-alignment = 2
 
-[node name="Health" type="Control" parent="ScaleOffset/TopLeft/Stats"]
+[node name="Health" type="Control" parent="TopLeft/Stats"]
 layout_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "hp"
 metadata/_edit_group_ = true
 
-[node name="ColorRect4" type="ColorRect" parent="ScaleOffset/TopLeft/Stats/Health"]
+[node name="ColorRect4" type="ColorRect" parent="TopLeft/Stats/Health"]
 layout_mode = 0
 offset_left = 108.0
 offset_top = 1.0
@@ -100,7 +99,7 @@ rotation = -0.0471239
 scale = Vector2(-0.810944, 0.690912)
 color = Color(0, 0, 0, 1)
 
-[node name="GunName" type="Label" parent="ScaleOffset/TopLeft/Stats/Health"]
+[node name="GunName" type="Label" parent="TopLeft/Stats/Health"]
 layout_mode = 0
 offset_left = 9.13538
 offset_top = 0.5
@@ -109,7 +108,7 @@ offset_bottom = 28.5
 theme = ExtResource("3_1kfkr")
 text = "Health"
 
-[node name="ProgressBar" type="ProgressBar" parent="ScaleOffset/TopLeft/Stats/Health"]
+[node name="ProgressBar" type="ProgressBar" parent="TopLeft/Stats/Health"]
 layout_mode = 0
 offset_left = 90.0
 offset_top = 6.0
@@ -120,13 +119,13 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="Hunger" type="Control" parent="ScaleOffset/TopLeft/Stats"]
+[node name="Hunger" type="Control" parent="TopLeft/Stats"]
 layout_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "hunger"
 metadata/_edit_group_ = true
 
-[node name="ColorRect5" type="ColorRect" parent="ScaleOffset/TopLeft/Stats/Hunger"]
+[node name="ColorRect5" type="ColorRect" parent="TopLeft/Stats/Hunger"]
 layout_mode = 0
 offset_left = 109.0
 offset_top = 1.0
@@ -136,7 +135,7 @@ rotation = -0.0471239
 scale = Vector2(-0.810944, 0.690912)
 color = Color(0, 0, 0, 1)
 
-[node name="GunName" type="Label" parent="ScaleOffset/TopLeft/Stats/Hunger"]
+[node name="GunName" type="Label" parent="TopLeft/Stats/Hunger"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 9.13538
@@ -146,7 +145,7 @@ offset_bottom = 28.5
 theme = ExtResource("3_1kfkr")
 text = "Hunger"
 
-[node name="ProgressBar" type="ProgressBar" parent="ScaleOffset/TopLeft/Stats/Hunger"]
+[node name="ProgressBar" type="ProgressBar" parent="TopLeft/Stats/Hunger"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 90.0
@@ -158,13 +157,13 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="Water" type="Control" parent="ScaleOffset/TopLeft/Stats"]
+[node name="Water" type="Control" parent="TopLeft/Stats"]
 layout_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "thirst"
 metadata/_edit_group_ = true
 
-[node name="ColorRect4" type="ColorRect" parent="ScaleOffset/TopLeft/Stats/Water"]
+[node name="ColorRect4" type="ColorRect" parent="TopLeft/Stats/Water"]
 layout_mode = 0
 offset_left = 108.0
 offset_top = 1.0
@@ -174,7 +173,7 @@ rotation = -0.0471239
 scale = Vector2(-0.810944, 0.690912)
 color = Color(0, 0, 0, 1)
 
-[node name="GunName" type="Label" parent="ScaleOffset/TopLeft/Stats/Water"]
+[node name="GunName" type="Label" parent="TopLeft/Stats/Water"]
 layout_mode = 0
 offset_left = 9.13538
 offset_top = 0.5
@@ -183,7 +182,7 @@ offset_bottom = 28.5
 theme = ExtResource("3_1kfkr")
 text = "Thirst"
 
-[node name="ProgressBar" type="ProgressBar" parent="ScaleOffset/TopLeft/Stats/Water"]
+[node name="ProgressBar" type="ProgressBar" parent="TopLeft/Stats/Water"]
 layout_mode = 0
 offset_left = 90.0
 offset_top = 6.0
@@ -194,13 +193,13 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="Sleep" type="Control" parent="ScaleOffset/TopLeft/Stats"]
+[node name="Sleep" type="Control" parent="TopLeft/Stats"]
 layout_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "sleep"
 metadata/_edit_group_ = true
 
-[node name="ColorRect4" type="ColorRect" parent="ScaleOffset/TopLeft/Stats/Sleep"]
+[node name="ColorRect4" type="ColorRect" parent="TopLeft/Stats/Sleep"]
 layout_mode = 0
 offset_left = 103.0
 offset_top = 1.0
@@ -210,7 +209,7 @@ rotation = -0.0471239
 scale = Vector2(-0.810944, 0.690912)
 color = Color(0, 0, 0, 1)
 
-[node name="GunName" type="Label" parent="ScaleOffset/TopLeft/Stats/Sleep"]
+[node name="GunName" type="Label" parent="TopLeft/Stats/Sleep"]
 layout_mode = 0
 offset_left = 9.13538
 offset_top = 0.5
@@ -219,7 +218,7 @@ offset_bottom = 28.5
 theme = ExtResource("3_1kfkr")
 text = "Sleep"
 
-[node name="ProgressBar" type="ProgressBar" parent="ScaleOffset/TopLeft/Stats/Sleep"]
+[node name="ProgressBar" type="ProgressBar" parent="TopLeft/Stats/Sleep"]
 layout_mode = 0
 offset_left = 90.0
 offset_top = 6.0

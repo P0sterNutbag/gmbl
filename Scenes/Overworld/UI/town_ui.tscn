@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://djj4qtaqbuthn"]
+[gd_scene load_steps=21 format=3 uid="uid://djj4qtaqbuthn"]
 
 [ext_resource type="Script" uid="uid://pfvownh6oavj" path="res://Scripts/town_ui.gd" id="1_fvsxv"]
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="2_anjm7"]
@@ -14,7 +14,10 @@
 [ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="12_er26y"]
 [ext_resource type="Script" uid="uid://gep7hf1s50y2" path="res://Scripts/dialogue_controller.gd" id="13_mf2v8"]
 [ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/npc.tscn" id="14_747ce"]
+[ext_resource type="Script" uid="uid://ds8qenbnf3wip" path="res://Scripts/repair_menu.gd" id="14_yov6g"]
+[ext_resource type="Theme" uid="uid://cdtfcbhvps3m1" path="res://Art/Themes/text_mediun.tres" id="15_747ce"]
 [ext_resource type="Resource" uid="uid://b4ypcwfcexyed" path="res://Resources/NpcStyles/player_style.tres" id="15_ssrtp"]
+[ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="16_6ir2b"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_vrhs1"]
 viewport_path = NodePath("PlayerPortrait")
@@ -233,6 +236,78 @@ text = "Accept"
 layout_mode = 2
 text = "Back"
 
+[node name="Repair" type="PanelContainer" parent="." node_paths=PackedStringArray("item_container")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -270.5
+offset_top = -226.0
+offset_right = 270.5
+offset_bottom = 226.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_anjm7")
+script = ExtResource("14_yov6g")
+item_container = NodePath("MarginContainer/VBoxContainer/VBoxContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="Repair"]
+layout_mode = 2
+theme = ExtResource("9_uo1c6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Repair/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Repair/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("15_747ce")
+text = "Repair"
+
+[node name="Money" type="Label" parent="Repair/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("16_6ir2b")
+text = "$100"
+
+[node name="Control" type="Control" parent="Repair/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Repair/MarginContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("5_747ce")
+
+[node name="Control" type="Control" parent="Repair"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" parent="Repair/Control" instance=ExtResource("7_otkb8")]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 0.0
+offset_right = 22.0
+offset_bottom = 24.0
+
+[node name="Dialogue" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -3797.0
+offset_right = 320.0
+offset_bottom = -333.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 32
+alignment = 2
+script = ExtResource("13_mf2v8")
+
 [node name="PortraitHolder" type="Control" parent="."]
 visible = false
 z_index = -1
@@ -306,23 +381,6 @@ text = "Player"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Dialogue" type="VBoxContainer" parent="."]
-visible = false
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -320.0
-offset_top = -3797.0
-offset_right = 320.0
-offset_bottom = -333.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/separation = 32
-alignment = 2
-script = ExtResource("13_mf2v8")
-
 [node name="PlayerPortrait" type="SubViewport" parent="."]
 transparent_bg = true
 handle_input_locally = false
@@ -356,3 +414,6 @@ transform = Transform3D(-1, 1.15222285e-08, -1.4836748e-07, -1.6240486e-08, 0.98
 [connection signal="pressed" from="JobBoard/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MenuItem2" to="JobBoard" method="_on_menu_item_2_pressed"]
 [connection signal="pressed" from="JobBoard/PanelContainer/MarginContainer/VBoxContainer/MenuItem2" to="JobBoard" method="close"]
 [connection signal="pressed" from="JobBoard/PanelContainer/Control/Button" to="JobBoard" method="close"]
+[connection signal="exit" from="Repair" to="Dialogue" method="leave_shop"]
+[connection signal="visibility_changed" from="Repair" to="Repair" method="_on_visibility_changed"]
+[connection signal="pressed" from="Repair/Control/Button" to="Dialogue" method="leave_shop"]

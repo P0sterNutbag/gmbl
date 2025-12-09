@@ -1,52 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://8b6qdfcaah2t"]
+[gd_scene load_steps=5 format=3 uid="uid://8b6qdfcaah2t"]
 
 [ext_resource type="PackedScene" uid="uid://m12xhyrtsknj" path="res://Art/Models/chest.glb" id="1_nwg42"]
 [ext_resource type="Script" uid="uid://dqdp6l81o8ei8" path="res://Scripts/item_container.gd" id="2_ckcp7"]
-[ext_resource type="Script" uid="uid://3e36ru1e7k78" path="res://Scripts/spawn_chance_resource.gd" id="3_j44si"]
-[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="4_l6mvo"]
-[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="5_y1q1n"]
-[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="6_j2ajx"]
-[ext_resource type="Resource" uid="uid://c4vot4kh7bffi" path="res://Resources/Items/Survival/bandage.tres" id="7_lgaq7"]
-[ext_resource type="Resource" uid="uid://ccm2c5fc8xn15" path="res://Resources/Items/Survival/medkit.tres" id="8_00k8r"]
 [ext_resource type="Material" uid="uid://cwhba100ef4q3" path="res://Art/Materials/chest.tres" id="10_4yghy"]
-[ext_resource type="Script" uid="uid://h75f74ubyudu" path="res://Scripts/item_money.gd" id="10_j44si"]
-
-[sub_resource type="Resource" id="Resource_ch7bk"]
-script = ExtResource("3_j44si")
-object_to_spawn = ExtResource("4_l6mvo")
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_gxu6n"]
-script = ExtResource("3_j44si")
-object_to_spawn = ExtResource("5_y1q1n")
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_ri1rp"]
-script = ExtResource("3_j44si")
-object_to_spawn = ExtResource("6_j2ajx")
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_yrsgs"]
-script = ExtResource("3_j44si")
-object_to_spawn = ExtResource("7_lgaq7")
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_kgl22"]
-script = ExtResource("3_j44si")
-object_to_spawn = ExtResource("8_00k8r")
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_l6mvo"]
-script = ExtResource("10_j44si")
-amount = 50
-title = "Dollars (10)"
-metadata/_custom_type_script = "uid://h75f74ubyudu"
-
-[sub_resource type="Resource" id="Resource_sg1i2"]
-script = ExtResource("3_j44si")
-object_to_spawn = SubResource("Resource_l6mvo")
-spawn_chance = 10.0
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i8ls8"]
 size = Vector3(2, 1, 1.5)
@@ -54,9 +10,6 @@ size = Vector3(2, 1, 1.5)
 [node name="chest" instance=ExtResource("1_nwg42")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("2_ckcp7")
-item_chances = Array[ExtResource("3_j44si")]([SubResource("Resource_ch7bk"), SubResource("Resource_gxu6n"), SubResource("Resource_ri1rp"), SubResource("Resource_yrsgs"), SubResource("Resource_kgl22"), SubResource("Resource_sg1i2")])
-min_items = 2
-max_items = 5
 
 [node name="Cube" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 0.75, 0, 0.5, 0)

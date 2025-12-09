@@ -8,8 +8,8 @@ var dialogue_bubble = preload("res://Scenes/Overworld/UI/dialogue_bubble.tscn")
 var option_bubble = preload("res://Scenes/Overworld/UI/dialogue_options_bubble.tscn")
 var menu_item = preload("res://Scenes/UI/menu_item.tscn")
 @onready var label: Label = $"../PortraitHolder/HBoxContainer/NpcName"
+@onready var repair_menu: PanelContainer = $"../Repair"
 signal exit
-
 
 #func _ready() -> void:
 	#visibility_changed.connect(_on_visibility_changed)
@@ -156,4 +156,9 @@ func start_level() -> void:
 
 func pay_fee(amount: int) -> void:
 	PlayerStats.inventory.money -= amount
+	Globals.overworld.current_encounter.get_parent().chase_player = false
 	exit_to_game()
+
+
+func enter_repair_menu() -> void:
+	UiController.open_interface(repair_menu)

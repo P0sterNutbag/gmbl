@@ -9,6 +9,7 @@ var current_town: Town
 @onready var dialogue: VBoxContainer = $Dialogue
 @onready var job_board: HBoxContainer = $JobBoard
 @onready var npc_portrait_model: Node3D = $ShopkeeperPortrait/Offset/EnemyModel
+@onready var repair_menu: PanelContainer = $Repair
 
 
 func _enter_tree() -> void:

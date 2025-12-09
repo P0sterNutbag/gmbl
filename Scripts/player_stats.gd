@@ -7,6 +7,8 @@ var hp: float = 8:
 		hp = value
 		if Globals.player and "hitbox" in Globals.player and Globals.player.hitbox:
 			Globals.player.hitbox.hp = value
+	get():
+		return Globals.player.hitbox.hp
 var max_hp := 8
 var ammo: int:
 	set(value):
@@ -19,9 +21,6 @@ var ammo: int:
 		else:
 			return 0
 var flashlight_on: bool
-#var items:
-	#get():
-		#return inventory.items
 @export var starting_inventory: Inventory
 var inventory: Inventory = Inventory.new()
 var quests: Array[Quest]
@@ -30,27 +29,31 @@ var quests: Array[Quest]
 		return inventory.items.filter(func(i): return i is EquipmentGun)
 var gun: EquipmentGun
 var gun_index := 0
-var sleep := 100.0:
+var sleep := 1.0:
 	set(value):
 		sleep = clamp(value, 0, max_sleep)
-var hunger := 100.0:
+var hunger := 1.0:
 	set(value):
 		hunger = clamp(value, 0, max_hunger)
-var thirst := 100.0:
+var thirst := 1.0:
 	set(value):
 		thirst = clamp(value, 0, max_thirst)
-var max_sleep := 100.0
-var max_hunger := 100.0
-var max_thirst = 100.0
-var sleep_decrease_rate := 0.05
-var hunger_decrease_rate := 0.1
-var thirst_decrease_rate := 0.1
+var max_sleep := 1.0
+var max_hunger := 1.0
+var max_thirst = 1.0
+var sleep_decrease_rate = 5
+var hunger_decrease_rate = 6
+var thirst_decrease_rate = 4
 
 
 func _ready() -> void:
 	reset_stats()
 	SceneManager.scene_changed.connect(_on_scene_changed)
 	SaveController.load.connect(_on_load)
+	await get_tree().process_frame
+	sleep_decrease_rate = DayNightCycle.time_speed / sleep_decrease_rate
+	hunger_decrease_rate = DayNightCycle.time_speed / hunger_decrease_rate
+	thirst_decrease_rate = DayNightCycle.time_speed / thirst_decrease_rate
 
 
 func _process(delta: float) -> void:
@@ -59,7 +62,7 @@ func _process(delta: float) -> void:
 	hunger -= delta * hunger_decrease_rate
 	thirst -= delta * thirst_decrease_rate
 	if hunger <= 0 or thirst <= 0:
-		Globals.player.hitbox.damage(0.1 * delta)
+		Globals.player.hitbox.damage(0.25 * delta)
 	# gun management
 	#if !guns.has(gun):
 		#gun = null

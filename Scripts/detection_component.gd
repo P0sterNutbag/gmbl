@@ -15,12 +15,20 @@ func get_visible_target() -> Node:
 	return null
 
 
-func can_see_target(target: Node3D) -> bool:
+func can_see_target(target: Node3D = targets[0]) -> bool:
 	# point at target
 	if !target:
 		return false
-	for child in target.aim_positions.get_children():
-		target_pos = child.global_position
+	var target_positions = []
+	if "aim_position" in target:
+		target_positions = target.aim_positions.get_children()
+	else:
+		target_positions.append(target.global_position + Vector3.UP * 1.5)
+	for i in target_positions:
+		if i is Node3D:
+			target_pos = i.global_position
+		elif i is Vector3:
+			target_pos = i
 		look_at(target_pos)
 		target_position.z = -global_position.distance_to(target_pos)
 		# check for collisions

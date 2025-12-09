@@ -84,3 +84,7 @@ func _on_skin_options_option_changed(resource: Variant) -> void:
 				#img.set_pixel(x, y, replace_color)
 	#var new_texture = ImageTexture.create_from_image(img)
 	#material.set("shader_parameter/base_texture", new_texture)
+
+
+func _on_back_button_pressed() -> void:
+	SceneManager.start_scene_transition("res://Scenes/UI/main_menu.tscn")

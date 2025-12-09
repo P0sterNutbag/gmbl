@@ -3,10 +3,15 @@ extends Menu
 @onready var resume_button: MenuItem = $PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem
 @onready var settings_menu: PanelContainer = $SettingsMenu
 @onready var main_menu: PanelContainer = $PanelContainer
-const CHARACTER_CREATION = preload("uid://s4g2uyw4yjm5")
+#const CHARACTER_CREATION = preload("uid://s4g2uyw4yjm5")
+@onready var color_rect: ColorRect = $ColorRect
 
 
 func _ready() -> void:
+	color_rect.show()
+	var tween = create_tween()
+	tween.tween_interval(0.1)
+	tween.tween_property(color_rect, "modulate:a", 0, 0.5)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if Globals.overworld:
 		Globals.overworld.queue_free()

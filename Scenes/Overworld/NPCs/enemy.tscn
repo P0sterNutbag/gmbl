@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dhc6a3k8wyk4x"]
+[gd_scene load_steps=41 format=3 uid="uid://dhc6a3k8wyk4x"]
 
 [ext_resource type="Script" uid="uid://dq5ymww0igewb" path="res://Scripts/Overworld/enemy.gd" id="1_11nfp"]
 [ext_resource type="PackedScene" uid="uid://cdr3k44ro53a1" path="res://Scenes/Overworld/Locations/location_base.tscn" id="2_riojr"]
@@ -70,6 +70,17 @@ script = ExtResource("8_13cyy")
 method = "start_level"
 metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
+[sub_resource type="Resource" id="Resource_vti20"]
+script = ExtResource("5_vti20")
+lines = Array[String](["Get ready for a world of hurt!"])
+speaker = 1
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_aa4gy"]
+script = ExtResource("8_13cyy")
+method = "start_level"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
 [sub_resource type="Resource" id="Resource_tntug"]
 script = ExtResource("13_65kj7")
 faces = Array[Texture]([ExtResource("9_biujs"), ExtResource("10_il44e"), ExtResource("11_2n7ln"), ExtResource("12_klaf7")])
@@ -78,11 +89,14 @@ pants_colors = Array[Color]([Color(0.48, 0.21888001, 0.15359999, 1), Color(0.321
 shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1), Color(0.133333, 0.12549, 0.203922, 1), Color(0.4, 0.19146667, 0.128, 1)])
 metadata/_custom_type_script = "uid://b80ipr8q70gqm"
 
-[sub_resource type="Resource" id="Resource_1ltpy"]
+[sub_resource type="Resource" id="Resource_ieqv6"]
 script = ExtResource("25_70g7b")
-bubbles = Array[ExtResource("5_vti20")]([SubResource("Resource_xyp70"), SubResource("Resource_qfguv"), SubResource("Resource_s0ake"), SubResource("Resource_jpogg")])
+bubbles = Array[ExtResource("5_vti20")]([SubResource("Resource_xyp70"), SubResource("Resource_qfguv"), SubResource("Resource_s0ake"), SubResource("Resource_jpogg"), SubResource("Resource_vti20"), SubResource("Resource_aa4gy")])
 npc_style = SubResource("Resource_tntug")
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vti20"]
+radius = 1.0
 
 [node name="Enemy" type="CharacterBody3D" groups=["persist"]]
 collision_layer = 0
@@ -96,8 +110,11 @@ shape = SubResource("CapsuleShape3D_hf0oe")
 [node name="Location" parent="." instance=ExtResource("2_riojr")]
 location_data = SubResource("Resource_ndpai")
 encounter_scene = ExtResource("4_ndpai")
-dialogue_tree = SubResource("Resource_1ltpy")
+dialogue_tree = SubResource("Resource_ieqv6")
 can_stealth_start = true
+
+[node name="CollisionShape3D" parent="Location" index="0"]
+shape = SubResource("SphereShape3D_vti20")
 
 [node name="PointOfInterest" parent="Location" index="2"]
 title = "Bandit Squad"

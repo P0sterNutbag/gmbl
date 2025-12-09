@@ -154,10 +154,13 @@ func start_level() -> void:
 	Globals.overworld.current_encounter.transition_to_level(true)
 
 
-func pay_fee(amount: int) -> void:
-	PlayerStats.inventory.money -= amount
-	Globals.overworld.current_encounter.get_parent().chase_player = false
-	exit_to_game()
+func pay_fee(amount: int, fail_index: int) -> void:
+	if PlayerStats.inventory.money - amount >= 0:
+		PlayerStats.inventory.money -= amount
+		Globals.overworld.current_encounter.get_parent().chase_player = false
+		exit_to_game()
+	else:
+		advance_dialogue(fail_index)
 
 
 func enter_repair_menu() -> void:

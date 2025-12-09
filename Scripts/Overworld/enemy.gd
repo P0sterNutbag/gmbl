@@ -52,7 +52,7 @@ func _process(_delta: float) -> void:
 			# detect player
 			if (chase_player and detection.can_see_target() and 
 			Globals.get_dot(self, Globals.player) < -0.25 and
-			global_position.distance_to(Globals.player.global_position) < 15 and
+			global_position.distance_to(Globals.player.global_position) < 5 and
 			PlayerStats.state != PlayerStats.states.pause):
 				state = states.chase
 			# animate

@@ -45,25 +45,42 @@ func _on_menu_button_pressed() -> void:
 
 func _on_face_button_option_changed(resource: Variant) -> void:
 	var faces: Array = player_model.style_data.faces
-	set_player_style(faces, resource.resource)
+	set_player_style(faces, resource)
 
 
 func _on_shirt_options_option_changed(resource: Variant) -> void:
 	var shirts: Array = player_model.style_data.shirts
-	set_player_style(shirts, resource.resource)
+	set_player_style(shirts, resource)
 
 
 func _on_pants_options_option_changed(resource: Variant) -> void:
 	var pants: Array = player_model.style_data.pants_colors
-	set_player_style(pants, resource.resource.color)
+	set_player_style(pants, resource.color)
 
 
 func _on_shoes_options_option_changed(resource: Variant) -> void:
 	var shoes: Array = player_model.style_data.shoe_colors
-	set_player_style(shoes, resource.resource.color)
+	set_player_style(shoes, resource.color)
 
 
-func set_player_style(array: Array, new_resource: Resource) -> void:
+func set_player_style(array: Array, new_resource) -> void:
 	array.clear()
 	array.append(new_resource)
 	player_model.set_materials()
+
+
+func _on_skin_options_option_changed(resource: Variant) -> void:
+	var skin: Array = player_model.style_data.skin_colors
+	set_player_style(skin, resource.color)
+	#var material: Material = player_model.cube.get_surface_override_material(0)
+	#var texture: Texture2D = material.get("shader_parameter/base_texture")
+	#var img := texture.get_image().duplicate()
+	#var target_color = img.get_pixel(img.get_height()-1, img.get_width()-1)
+	#var replace_color = resource.color
+	#for x in img.get_width():
+		#for y in img.get_height():
+			#var c = img.get_pixel(x, y)
+			#if c.is_equal_approx(target_color):
+				#img.set_pixel(x, y, replace_color)
+	#var new_texture = ImageTexture.create_from_image(img)
+	#material.set("shader_parameter/base_texture", new_texture)

@@ -33,10 +33,12 @@ func _ready() -> void:
 		audio_stream_player = $AudioStreamPlayer3D
 
 
-func damage(dmg: float, hit_position: Vector3 = Vector3.ZERO, hit_direction: Vector3 = Vector3.ZERO) -> void:
+func damage(dmg: float, hit_position: Vector3 = Vector3.ZERO, hit_direction: Vector3 = Vector3.ZERO, allow_damage_mod: bool = true) -> void:
 	damaged.emit(hit_position, hit_direction)
 	if is_dead:
 		return
+	if !allow_damage_mod:
+		damage_modifier = 1
 	hp -= dmg * damage_modifier
 	if audio_stream_player:
 		audio_stream_player.play()

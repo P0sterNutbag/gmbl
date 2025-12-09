@@ -62,7 +62,7 @@ func _process(delta: float) -> void:
 	hunger -= delta * hunger_decrease_rate
 	thirst -= delta * thirst_decrease_rate
 	if hunger <= 0 or thirst <= 0:
-		Globals.player.hitbox.damage(0.25 * delta)
+		Globals.player.hitbox.damage(0.25 * delta, Vector3.ZERO, Vector3.ZERO, false)
 	# gun management
 	#if !guns.has(gun):
 		#gun = null

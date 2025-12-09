@@ -20,9 +20,14 @@ func set_materials(style: NpcStyle = style_data) -> void:
 	var shoes_material = cube2.get_surface_override_material(2).duplicate()
 	
 	# Set the materials
-	var face = style.faces[randi() % style.faces.size()]
+	var skin_color = Color()
+	if style.skin_colors.size() > 0:
+		skin_color = style.skin_colors[randi() % style.skin_colors.size()]
+	var face_texture = style.faces[randi() % style.faces.size()]
+	var face = get_texture_modified_skin(face_texture, skin_color, Vector2(face_texture.get_image().get_width()-1, face_texture.get_image().get_height()-1))
 	face_material.set("shader_parameter/base_texture", face)
-	var shirt = style.shirts[randi() % style.shirts.size()]
+	var shirt_texture = style.shirts[randi() % style.shirts.size()]
+	var shirt = get_texture_modified_skin(shirt_texture, skin_color, Vector2(face_texture.get_image().get_width()/2, 0))
 	shirt_material.set("shader_parameter/base_texture", shirt)
 	var pants = style.pants_colors[randi() % style.pants_colors.size()]
 	pants_material.set("shader_parameter/color", pants)
@@ -44,3 +49,18 @@ func set_materials(style: NpcStyle = style_data) -> void:
 	current_style.pants_colors.append(pants)
 	current_style.shoe_colors.clear()
 	current_style.shoe_colors.append(shoes)
+
+
+func get_texture_modified_skin(texture: Texture, replace_color: Color = Color(), target_position: Vector2 = Vector2.ZERO) -> Texture:
+	if replace_color == Color():
+		return texture
+	var img = texture.get_image().duplicate()
+	img.decompress()
+	var target_color = img.get_pixel(target_position.x, target_position.y)
+	for x in img.get_width():
+		for y in img.get_height():
+			var c = img.get_pixel(x, y)
+			if c.is_equal_approx(target_color):
+				img.set_pixel(x, y, replace_color)
+	var new_texture = ImageTexture.create_from_image(img)
+	return new_texture

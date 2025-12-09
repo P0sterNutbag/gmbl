@@ -2,7 +2,7 @@ extends Node
 
 @export var time_curve: Curve
 var total_cycle_seconds: float = 600
-var time: float = 0.0
+var time: float = 0.25
 var sun_time: float = 0.5
 var time_speed: float
 var sky_progress: float
@@ -21,7 +21,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var was_night = is_night
 	time += time_speed * delta
-	print(time)
 	if time >= time_curve.max_domain:
 		time = time_curve.max_domain - 0.01
 		time_speed *= -1

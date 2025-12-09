@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://blwe17vmld3s"]
+[gd_scene load_steps=72 format=3 uid="uid://blwe17vmld3s"]
 
 [ext_resource type="Script" uid="uid://b7gndoluwck72" path="res://Scripts/character_creation.gd" id="1_v05k5"]
 [ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/npc.tscn" id="1_wnp2j"]
@@ -31,6 +31,39 @@
 [ext_resource type="Script" uid="uid://blxosgrxl33hh" path="res://Scripts/color_export.gd" id="31_kgbab"]
 [ext_resource type="PackedScene" uid="uid://dkmenaf8dxpyr" path="res://Scenes/Guns/sniper.tscn" id="32_e4cpa"]
 [ext_resource type="PackedScene" uid="uid://cmgrxwiw6y3kg" path="res://Scenes/Guns/uzi.tscn" id="33_miwqf"]
+
+[sub_resource type="Resource" id="Resource_j4b5t"]
+script = ExtResource("31_kgbab")
+color = Color(0.4087343, 0.20213121, 1.4439226e-07, 1)
+metadata/_custom_type_script = "uid://blxosgrxl33hh"
+
+[sub_resource type="Resource" id="Resource_sb010"]
+script = ExtResource("24_36mat")
+string = "Skin 1"
+resource = SubResource("Resource_j4b5t")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
+[sub_resource type="Resource" id="Resource_r8q12"]
+script = ExtResource("31_kgbab")
+color = Color(0, 0.41, 0.027333306, 1)
+metadata/_custom_type_script = "uid://blxosgrxl33hh"
+
+[sub_resource type="Resource" id="Resource_5loco"]
+script = ExtResource("24_36mat")
+string = "Skin 2"
+resource = SubResource("Resource_r8q12")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
+[sub_resource type="Resource" id="Resource_j6ghl"]
+script = ExtResource("31_kgbab")
+color = Color(0.31433323, 0, 0.41, 1)
+metadata/_custom_type_script = "uid://blxosgrxl33hh"
+
+[sub_resource type="Resource" id="Resource_fuobc"]
+script = ExtResource("24_36mat")
+string = "Skin 3"
+resource = SubResource("Resource_j6ghl")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
 [sub_resource type="Resource" id="Resource_e4cpa"]
 script = ExtResource("24_36mat")
@@ -111,7 +144,7 @@ metadata/_custom_type_script = "uid://ba4324tncpb5w"
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j4b5t"]
 render_priority = 0
 shader = ExtResource("26_bq3xa")
-shader_parameter/color = Color(0.86, 0.86, 0.86, 1)
+shader_parameter/color = Color(0.85882354, 0.85882354, 0.85882354, 1)
 shader_parameter/base_texture = ExtResource("27_l0gxb")
 shader_parameter/specular = Color(0, 0, 0, 0)
 shader_parameter/fresnel = Color(0, 0, 0, 0)
@@ -224,6 +257,28 @@ resource_local_to_scene = true
 script = ExtResource("30_l0gxb")
 ammo = 5
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
+[sub_resource type="Resource" id="Resource_gtnlk"]
+script = ExtResource("25_011oh")
+values = Dictionary[String, Variant]({
+"ammo": 1
+})
+add = true
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[sub_resource type="Resource" id="Resource_011oh"]
+resource_local_to_scene = true
+resource_name = "shotgun_ammo"
+script = ExtResource("26_j6ghl")
+effects = Array[ExtResource("25_011oh")]([SubResource("Resource_gtnlk")])
+method = "reload_gun"
+custom_path = "PlayerStats"
+usable_in_menu = false
+title = "Shotgun Shell"
+category = 1
+price = 5
+description = "Usable in: Shotgun"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
 [sub_resource type="Resource" id="Resource_ygrfb"]
 resource_local_to_scene = true
@@ -357,6 +412,11 @@ layout_mode = 2
 theme = ExtResource("22_gx4n8")
 text = "Appearance"
 
+[node name="SkinOptions" parent="CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer" instance=ExtResource("22_l0gxb")]
+layout_mode = 2
+text = "Skin"
+options = Array[ExtResource("24_36mat")]([SubResource("Resource_sb010"), SubResource("Resource_5loco"), SubResource("Resource_fuobc")])
+
 [node name="FaceOptions" parent="CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer" instance=ExtResource("22_l0gxb")]
 layout_mode = 2
 text = "Face"
@@ -427,6 +487,7 @@ ammo_item = SubResource("Resource_n31ri")
 [node name="shotgun" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="4" instance=ExtResource("31_36mat")]
 visible = false
 gun_stats = SubResource("Resource_yj43v")
+ammo_item = SubResource("Resource_011oh")
 
 [node name="sniper_rifle" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="5" instance=ExtResource("32_e4cpa")]
 visible = false
@@ -508,6 +569,7 @@ cast_shadow = 0
 extra_cull_margin = 16237.3
 mesh = SubResource("QuadMesh_2qjs2")
 
+[connection signal="option_changed" from="CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/SkinOptions" to="." method="_on_skin_options_option_changed"]
 [connection signal="option_changed" from="CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/FaceOptions" to="." method="_on_face_button_option_changed"]
 [connection signal="option_changed" from="CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/ShirtOptions" to="." method="_on_shirt_options_option_changed"]
 [connection signal="option_changed" from="CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/PantsOptions" to="." method="_on_pants_options_option_changed"]

@@ -158,6 +158,7 @@ func pay_fee(amount: int, fail_index: int) -> void:
 	if PlayerStats.inventory.money - amount >= 0:
 		PlayerStats.inventory.money -= amount
 		Globals.overworld.current_encounter.get_parent().chase_player = false
+		Globals.player.create_notification("-50 Dollars")
 		exit_to_game()
 	else:
 		advance_dialogue(fail_index)

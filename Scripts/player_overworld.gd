@@ -22,6 +22,7 @@ var model_rotation: float:
 var state_functions: Dictionary
 var exit_functions: Dictionary
 var enter_functions: Dictionary
+const NOTIFICATION = preload("uid://cwrg7ta5jg5yj")
 @onready var camera_anchor: Node3D = $CameraAnchor
 @onready var model: Node3D = $EnemyModel
 @onready var animation_player: AnimationPlayer = $EnemyModel/PersonAnimated/AnimationPlayer
@@ -39,6 +40,7 @@ var enter_functions: Dictionary
 @onready var skeleton: Skeleton3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D
 @onready var physical_bone_simulator_3d: PhysicalBoneSimulator3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D
 @onready var loot_area: Area3D = $EnemyModel/LootArea
+@onready var notification_position: Node3D = $NotificationPosition
 var gun: Node3D: 
 	get: 
 		if !PlayerStats.gun:
@@ -180,6 +182,13 @@ func unequip_gun() -> void:
 	idle_animation = "IdleNoGun"
 
 
+func create_notification(string: String) -> void:
+	var inst = NOTIFICATION.instantiate()
+	inst.global_position = camera.unproject_position(notification_position.global_position)
+	get_tree().current_scene.add_child(inst)
+	inst.label.text = string
+
+
 func _input(event):
 	if PlayerStats.state != PlayerStats.states.walk:
 		return
@@ -191,15 +200,6 @@ func _input(event):
 				camera_anchor.rotate_y(-event.relative.x * mouse_sensitivity)
 				camera.rotate_x(-event.relative.y * mouse_sensitivity)
 				camera.rotation.x = clampf(camera.rotation.x, -deg_to_rad(70), deg_to_rad(70))
-
-
-#func _on_area_3d_area_entered(area: Area3D) -> void:
-	##if velocity.length() > 0:
-	#Globals.ui.show_location_info(area)
-
-
-#func _on_area_3d_area_exited(area: Area3D) -> void:
-	#Globals.ui.hide_location_info()
 
 
 func save() -> Dictionary:

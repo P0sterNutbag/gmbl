@@ -28,7 +28,8 @@ func create_menu_items(array: Array, on_pressed = null, on_focus = null, loop_fo
 	if loop_focus:
 		set_menu_item_focus()
 	await get_tree().process_frame
-	get_child(0).grab_focus()
+	if Input.get_connected_joypads().size() > 0:
+		get_child(0).grab_focus()
 	return get_children()
 
 

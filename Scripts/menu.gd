@@ -7,10 +7,11 @@ class_name Menu
 
 func activate():
 	visible = true
-	for child in item_container.get_children():
-		if child.visible:
-			child.grab_focus()
-			return
+	if Input.get_connected_joypads().size() > 0:
+		for child in item_container.get_children():
+			if child.visible:
+				child.grab_focus()
+				return
 
 
 func close() -> void:

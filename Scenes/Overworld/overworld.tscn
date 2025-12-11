@@ -1,4 +1,4 @@
-[gd_scene load_steps=163 format=4 uid="uid://doydk513gm02l"]
+[gd_scene load_steps=165 format=4 uid="uid://doydk513gm02l"]
 
 [ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_6y65m"]
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="2_gw0hx"]
@@ -344,6 +344,7 @@ metadata/_custom_type_script = "uid://cnu4xeujmgk51"
 [sub_resource type="Resource" id="Resource_r3o7g"]
 script = ExtResource("51_v8snn")
 method = "enter_job_board"
+arguments = [9]
 metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
 [sub_resource type="Resource" id="Resource_clt0f"]
@@ -383,6 +384,17 @@ script = ExtResource("72_6l6oi")
 next_index = 1
 metadata/_custom_type_script = "uid://px5dr31pd885"
 
+[sub_resource type="Resource" id="Resource_c2v6x"]
+script = ExtResource("48_i627v")
+lines = Array[String](["No more jobs left, come back later."])
+speaker = 1
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_ua8uw"]
+script = ExtResource("72_6l6oi")
+next_index = 1
+metadata/_custom_type_script = "uid://px5dr31pd885"
+
 [sub_resource type="Resource" id="Resource_ptrkr"]
 script = ExtResource("31_xp1ub")
 faces = Array[Texture]([ExtResource("73_ptrkr")])
@@ -393,7 +405,7 @@ metadata/_custom_type_script = "uid://b80ipr8q70gqm"
 
 [sub_resource type="Resource" id="Resource_v7uwj"]
 script = ExtResource("53_ccrpr")
-bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_5oaiu"), SubResource("Resource_bsumm"), SubResource("Resource_r3o7g"), SubResource("Resource_rtygk"), SubResource("Resource_cvr5w"), SubResource("Resource_4o6vd"), SubResource("Resource_5yx2b"), SubResource("Resource_ksfoy"), SubResource("Resource_6l6oi")])
+bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_5oaiu"), SubResource("Resource_bsumm"), SubResource("Resource_r3o7g"), SubResource("Resource_rtygk"), SubResource("Resource_cvr5w"), SubResource("Resource_4o6vd"), SubResource("Resource_5yx2b"), SubResource("Resource_ksfoy"), SubResource("Resource_6l6oi"), SubResource("Resource_c2v6x"), SubResource("Resource_ua8uw")])
 npc_style = SubResource("Resource_ptrkr")
 npc_name = "Duster"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"

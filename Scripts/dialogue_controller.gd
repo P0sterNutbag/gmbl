@@ -48,7 +48,8 @@ func advance_dialogue(next_index: int) -> void:
 			inst2.pressed.connect(on_option_selected.bind(inst2))
 			inst2.pressed.connect(advance_dialogue.bind(option.destination))
 		inst.option_container.set_menu_item_focus()
-		inst.option_container.get_child(0).grab_focus()
+		if Input.get_connected_joypads().size() > 0:
+			inst.option_container.get_child(0).grab_focus()
 	if bubble is DialogueLoop:
 		advance_dialogue(bubble.next_index)
 	elif bubble is Dialogue:
@@ -104,9 +105,12 @@ func enter_town() -> void:
 	Globals.ui.town.re_enter_town()
 
 
-func enter_job_board() -> void:
-	hide()
-	Globals.ui.town.enter_job_board()
+func enter_job_board(no_jobs_index: int = -1) -> void:
+	if shop.quests.size() > 0:
+		hide()
+		Globals.ui.town.enter_job_board()
+	elif no_jobs_index != -1:
+		advance_dialogue(no_jobs_index)
 
 
 func return_bounties() -> void:

@@ -88,3 +88,8 @@ func _on_skin_options_option_changed(resource: Variant) -> void:
 
 func _on_back_button_pressed() -> void:
 	SceneManager.start_scene_transition("res://Scenes/UI/main_menu.tscn")
+
+
+func _on_hair_option_changed(resource: Variant) -> void:
+	var hair: Array = player_model.style_data.hair_colors
+	set_player_style(hair, resource.color)

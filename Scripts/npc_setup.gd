@@ -20,14 +20,17 @@ func set_materials(style: NpcStyle = style_data) -> void:
 	var shoes_material = cube2.get_surface_override_material(2).duplicate()
 	
 	# Set the materials
-	var skin_color = Color()
+	var skin_color = Color(0.937, 0.761, 0.604, 1.0)
+	var hair_color = Color()
 	if style.skin_colors.size() > 0:
 		skin_color = style.skin_colors[randi() % style.skin_colors.size()]
 	var face_texture = style.faces[randi() % style.faces.size()]
-	var face = get_texture_modified_skin(face_texture, skin_color, Vector2(face_texture.get_image().get_width()-1, face_texture.get_image().get_height()-1))
-	face_material.set("shader_parameter/base_texture", face)
+	face_texture = get_texture_modified_skin(face_texture, skin_color, Color.YELLOW)
+	face_texture = get_texture_modified_skin(face_texture, hair_color, Color.RED)
+	#face = get_texture_modified_skin(face, skin_color.blend(Color(0.453, 0.22, 0.001, 0.588)), Color.BLUE)
+	face_material.set("shader_parameter/base_texture", face_texture)
 	var shirt_texture = style.shirts[randi() % style.shirts.size()]
-	var shirt = get_texture_modified_skin(shirt_texture, skin_color, Vector2(face_texture.get_image().get_width()/3, 0))
+	var shirt = get_texture_modified_skin(shirt_texture, skin_color, Color.YELLOW)
 	shirt_material.set("shader_parameter/base_texture", shirt)
 	var pants = style.pants_colors[randi() % style.pants_colors.size()]
 	pants_material.set("shader_parameter/color", pants)
@@ -42,7 +45,7 @@ func set_materials(style: NpcStyle = style_data) -> void:
 	
 	# Set current style
 	current_style.faces.clear()
-	current_style.faces.append(face)
+	current_style.faces.append(face_texture)
 	current_style.shirts.clear()
 	current_style.shirts.append(shirt)
 	current_style.pants_colors.clear()
@@ -51,12 +54,9 @@ func set_materials(style: NpcStyle = style_data) -> void:
 	current_style.shoe_colors.append(shoes)
 
 
-func get_texture_modified_skin(texture: Texture, replace_color: Color = Color(), target_position: Vector2 = Vector2.ZERO) -> Texture:
-	if replace_color == Color():
-		return texture
+func get_texture_modified_skin(texture: Texture, replace_color: Color, target_color: Color) -> Texture:
 	var img = texture.get_image().duplicate()
 	img.decompress()
-	var target_color = img.get_pixel(target_position.x, target_position.y)
 	for x in img.get_width():
 		for y in img.get_height():
 			var c = img.get_pixel(x, y)

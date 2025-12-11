@@ -136,7 +136,8 @@ func _on_transfer_inventory_exit() -> void:
 func open_death_ui() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	death_ui.show()
-	load_save.grab_focus()
+	if Input.get_connected_joypads().size() > 0:
+		load_save.grab_focus()
 
 
 func _on_load_save_pressed() -> void:

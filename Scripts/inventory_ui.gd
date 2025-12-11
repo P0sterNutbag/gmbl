@@ -123,7 +123,8 @@ func set_items():
 	if item_container.get_child_count() > 0:
 		item_container.sort_menu_items()
 		item_container.set_menu_item_focus()
-		item_container.get_child(0).grab_focus()
+		if Input.get_connected_joypads().size() > 0:
+			item_container.get_child(0).grab_focus()
 
 
 func transfer_item(menu_item: Control):

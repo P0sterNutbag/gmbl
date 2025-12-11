@@ -84,7 +84,8 @@ func loot(target: Inventory) -> void:
 	player_transfer_inventory.target_inventory = target
 	loot_transfer_inventory.source_inventory = target
 	loot_transfer_inventory.target_inventory = PlayerStats.inventory
-	loot_transfer_inventory.grab_focus()
+	if Input.get_connected_joypads().size() > 0:
+		loot_transfer_inventory.grab_focus()
 	player_transfer_inventory.show_price = false
 	loot_transfer_inventory.show_price = false
 	UiController.open_interface(transfer_inventory_holder)

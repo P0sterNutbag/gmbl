@@ -1,5 +1,5 @@
 extends Resource
-class_name StringResourcePair
+class_name StringValuePair
 
 @export var string: String
-@export var resource: Resource
+@export var value: Variant

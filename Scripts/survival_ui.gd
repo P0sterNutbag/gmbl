@@ -8,7 +8,6 @@ extends CanvasLayer
 @onready var compass: Control = $TopCenter/Compass
 @onready var pause_menu: Control = $PauseMenu/PanelContainer
 @onready var player_inventory: InventoryUI = $PlayerInventory/Inventory
-@onready var death_menu: PanelContainer = $DeathMenu
 @onready var progress_menu: PanelContainer = $ProgressMenu
 
 

@@ -6,6 +6,8 @@ var current_style := NpcStyle.new()
 @onready var cube: MeshInstance3D = $PersonAnimated/Armature/Skeleton3D/Cube_001
 @onready var cube2: MeshInstance3D = $PersonAnimated/Armature/Skeleton3D/Cube_002
 @onready var skeleton_3d: Skeleton3D = $PersonAnimated/Armature/Skeleton3D
+@onready var gun_holder: Node3D = $PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
+@onready var animation_player: AnimationPlayer = $PersonAnimated/AnimationPlayer
 
 
 func _ready() -> void:
@@ -24,13 +26,14 @@ func set_materials(style: NpcStyle = style_data) -> void:
 	var hair_color = Color()
 	if style.skin_colors.size() > 0:
 		skin_color = style.skin_colors[randi() % style.skin_colors.size()]
+	if style.hair_colors.size() > 0:
+		hair_color = style.hair_colors[randi() % style.hair_colors.size()]
 	var face_texture = style.faces[randi() % style.faces.size()]
-	face_texture = get_texture_modified_skin(face_texture, skin_color, Color.YELLOW)
-	face_texture = get_texture_modified_skin(face_texture, hair_color, Color.RED)
-	#face = get_texture_modified_skin(face, skin_color.blend(Color(0.453, 0.22, 0.001, 0.588)), Color.BLUE)
+	face_texture = get_texture_modified_skin(face_texture, skin_color, Color(0.933, 0.769, 0.6, 1.0))
+	face_texture = get_texture_modified_skin(face_texture, hair_color, Color(0.133, 0.125, 0.208, 1.0))
 	face_material.set("shader_parameter/base_texture", face_texture)
 	var shirt_texture = style.shirts[randi() % style.shirts.size()]
-	var shirt = get_texture_modified_skin(shirt_texture, skin_color, Color.YELLOW)
+	var shirt = get_texture_modified_skin(shirt_texture, skin_color, Color(0.933, 0.769, 0.6, 1.0))
 	shirt_material.set("shader_parameter/base_texture", shirt)
 	var pants = style.pants_colors[randi() % style.pants_colors.size()]
 	pants_material.set("shader_parameter/color", pants)
@@ -59,8 +62,11 @@ func get_texture_modified_skin(texture: Texture, replace_color: Color, target_co
 	img.decompress()
 	for x in img.get_width():
 		for y in img.get_height():
-			var c = img.get_pixel(x, y)
-			if c.is_equal_approx(target_color):
+			var c: Color = img.get_pixel(x, y)
+			#if c.is_equal_approx(target_color):
+			if (abs(c.r - target_color.r) < 0.1 and 
+			abs(c.g - target_color.g) < 0.1 and 
+			abs(c.b - target_color.b) < 0.1):
 				img.set_pixel(x, y, replace_color)
 	var new_texture = ImageTexture.create_from_image(img)
 	return new_texture

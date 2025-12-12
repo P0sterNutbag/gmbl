@@ -48,17 +48,18 @@ func exit():
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	#PlayerStats.change_state(PlayerStats.states.walk)
 	UiController.close_interface(self)
-	item_container.delete_children()
+	#item_container.delete_children()
 	#hide()
 
 
 func enter_shop():
-	item_container.delete_children()
+	#item_container.delete_children()
 	hide()
 
 
 func re_enter_town() -> void:
-	create_town(town_resource)
+	#create_town(town_resource)
+	show()
 	get_parent().portraits.hide()
 
 

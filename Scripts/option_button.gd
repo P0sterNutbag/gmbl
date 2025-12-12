@@ -1,9 +1,9 @@
 extends UiButton
 
-@export var options: Array[StringResourcePair]
+@export var options: Array[StringValuePair]
 var index: int
 @onready var option_label: Label = %Label
-signal option_changed(resource)
+signal option_changed(value)
 
 
 func _ready() -> void:
@@ -24,4 +24,4 @@ func change_index(new_index: int):
 	index = new_index
 	var option_text = options[index].string
 	option_label.text = option_text
-	option_changed.emit(options[index].resource)
+	option_changed.emit(options[index].value)

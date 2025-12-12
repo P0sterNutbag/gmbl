@@ -1,4 +1,6 @@
 extends Node
+
+var mouse_velocity: Vector2
 const starting_gear = preload("uid://dpjy0ettwaiyp")
 @onready var inventories: Control = $CanvasLayer/Inventories
 @onready var cosmetics: PanelContainer = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics
@@ -25,7 +27,11 @@ func _ready() -> void:
 	player_inventory.set_items()
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	# spin character
+	player_model.rotate_y(mouse_velocity.x * 0.001)
+	mouse_velocity = lerp(mouse_velocity, Vector2.ZERO, delta * 10)
+	# set gun and animation
 	if PlayerStats.guns.size() <= 0:
 		animation_player.play("IdleNoGun")
 		for node in node_3d.get_children():
@@ -43,24 +49,24 @@ func _on_menu_button_pressed() -> void:
 	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld.tscn")
 
 
-func _on_face_button_option_changed(resource: Variant) -> void:
+func _on_face_button_option_changed(value: Variant) -> void:
 	var faces: Array = player_model.style_data.faces
-	set_player_style(faces, resource)
+	set_player_style(faces, value)
 
 
-func _on_shirt_options_option_changed(resource: Variant) -> void:
+func _on_shirt_options_option_changed(value: Variant) -> void:
 	var shirts: Array = player_model.style_data.shirts
-	set_player_style(shirts, resource)
+	set_player_style(shirts, value)
 
 
-func _on_pants_options_option_changed(resource: Variant) -> void:
+func _on_pants_options_option_changed(value: Variant) -> void:
 	var pants: Array = player_model.style_data.pants_colors
-	set_player_style(pants, resource.color)
+	set_player_style(pants, value)
 
 
-func _on_shoes_options_option_changed(resource: Variant) -> void:
+func _on_shoes_options_option_changed(value: Variant) -> void:
 	var shoes: Array = player_model.style_data.shoe_colors
-	set_player_style(shoes, resource.color)
+	set_player_style(shoes, value)
 
 
 func set_player_style(array: Array, new_resource) -> void:
@@ -69,9 +75,9 @@ func set_player_style(array: Array, new_resource) -> void:
 	player_model.set_materials()
 
 
-func _on_skin_options_option_changed(resource: Variant) -> void:
+func _on_skin_options_option_changed(value: Variant) -> void:
 	var skin: Array = player_model.style_data.skin_colors
-	set_player_style(skin, resource.color)
+	set_player_style(skin, value)
 	#var material: Material = player_model.cube.get_surface_override_material(0)
 	#var texture: Texture2D = material.get("shader_parameter/base_texture")
 	#var img := texture.get_image().duplicate()
@@ -90,6 +96,11 @@ func _on_back_button_pressed() -> void:
 	SceneManager.start_scene_transition("res://Scenes/UI/main_menu.tscn")
 
 
-func _on_hair_option_changed(resource: Variant) -> void:
+func _on_hair_option_changed(value: Variant) -> void:
 	var hair: Array = player_model.style_data.hair_colors
-	set_player_style(hair, resource.color)
+	set_player_style(hair, value)
+
+
+func _on_spin_character_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion and Input.is_action_pressed("shoot"):
+		mouse_velocity = Input.get_last_mouse_velocity()

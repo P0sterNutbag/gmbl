@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dvwo5rcugthhe"]
+[gd_scene load_steps=13 format=3 uid="uid://dvwo5rcugthhe"]
 
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_osrsm"]
 [ext_resource type="Script" uid="uid://cggchd80ddnc1" path="res://Scripts/inventory_ui.gd" id="2_yyv02"]
@@ -8,14 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://d08xeomlxj5wh" path="res://Art/Textures/arrow_small_left.png" id="5_d513x"]
 [ext_resource type="Texture2D" uid="uid://byvpghxprlvv3" path="res://Art/Textures/arrow_small.png" id="6_2lqwa"]
 [ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="8_d513x"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_osrsm"]
-bg_color = Color(0, 0, 0, 0.784314)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d513x"]
 bg_color = Color(1, 1, 0, 1)
@@ -31,14 +23,6 @@ VScrollBar/styles/grabber = SubResource("StyleBoxFlat_d513x")
 VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_2lqwa")
 VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_v8bd3")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ic2qw"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 0, 1)
-
 [node name="Inventory" type="PanelContainer"]
 offset_left = 64.0
 offset_top = 64.0
@@ -47,7 +31,6 @@ offset_bottom = 879.0
 focus_mode = 2
 mouse_filter = 2
 theme = ExtResource("1_osrsm")
-theme_override_styles/panel = SubResource("StyleBoxFlat_osrsm")
 script = ExtResource("2_yyv02")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -135,7 +118,7 @@ visible = false
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ic2qw")
+theme = ExtResource("1_osrsm")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel"]
 layout_mode = 2

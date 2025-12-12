@@ -62,7 +62,10 @@ func _enter_tree() -> void:
 	global_position.y = Globals.get_heightmap_position(global_position)
 	await get_tree().process_frame
 	hitbox.hp = PlayerStats.hp
-	change_gun(PlayerStats.gun)
+	if PlayerStats.gun:
+		change_gun(PlayerStats.gun)
+	else:
+		unequip_gun()
 
 
 func _physics_process(delta):

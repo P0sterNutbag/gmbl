@@ -1,12 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://cc458wgoeu6t4"]
+[gd_scene load_steps=23 format=3 uid="uid://cc458wgoeu6t4"]
 
 [ext_resource type="Script" uid="uid://dr73ivowve6xe" path="res://Scripts/survival_ui.gd" id="1_e5c6o"]
 [ext_resource type="Script" uid="uid://bclh5yhrpmkxf" path="res://Scripts/stat_visual.gd" id="2_k4cvi"]
 [ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="3_1kfkr"]
 [ext_resource type="Theme" uid="uid://lg0ktyb6xeoh" path="res://Art/Themes/hp_bar.tres" id="4_1kfkr"]
 [ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="5_jtf3n"]
-[ext_resource type="StyleBox" uid="uid://bcg5bax3erc8w" path="res://Art/Themes/style_box.tres" id="6_8egi5"]
-[ext_resource type="Texture2D" uid="uid://cvly0bfjs24or" path="res://Art/Textures/sun-moon.png" id="7_guqia"]
 [ext_resource type="Script" uid="uid://d34nt8desp71" path="res://Scripts/compass.gd" id="8_2dyl4"]
 [ext_resource type="PackedScene" uid="uid://dht8msbc26v1q" path="res://Scenes/UI/quest_marker.tscn" id="9_e5c6o"]
 [ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="9_to4rm"]
@@ -21,7 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="16_1lobq"]
 [ext_resource type="Script" uid="uid://eo5omrsmkx27" path="res://Scripts/equipment_button.gd" id="19_jtf3n"]
 [ext_resource type="PackedScene" uid="uid://bos3d7nxhdnc5" path="res://Scenes/UI/pause_menu.tscn" id="19_oq622"]
-[ext_resource type="Script" uid="uid://bbbs0n5jbnghm" path="res://Scripts/death_menu.gd" id="23_1kfkr"]
 [ext_resource type="Theme" uid="uid://djqipqwy5toiu" path="res://Art/Themes/VBoxContainer.tres" id="24_8egi5"]
 [ext_resource type="Script" uid="uid://c5mc2tmhveupn" path="res://Scripts/progress_menu.gd" id="24_guqia"]
 
@@ -31,43 +28,6 @@ border_color = Color(1, 1, 0, 1)
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_e5c6o")
-
-[node name="ScaleOffset" type="Control" parent="."]
-modulate = Color(1, 1, 0, 1)
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-metadata/_edit_lock_ = true
-
-[node name="Bottom Center" type="Control" parent="ScaleOffset"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 480.0
-offset_top = 540.0
-offset_right = 480.0
-offset_bottom = 540.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(2, 2)
-mouse_filter = 2
-
-[node name="BottomLeft" type="Control" parent="ScaleOffset"]
-modulate = Color(1, 1, 0, 1)
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-grow_vertical = 0
-scale = Vector2(2, 2)
-mouse_filter = 2
 
 [node name="TopLeft" type="Control" parent="."]
 layout_mode = 3
@@ -237,35 +197,6 @@ anchor_left = 0.5
 anchor_right = 0.5
 grow_horizontal = 2
 mouse_filter = 2
-
-[node name="Label" type="Label" parent="TopCenter"]
-layout_mode = 0
-offset_left = -100.0
-offset_right = 100.0
-offset_bottom = 25.0
-theme = ExtResource("5_jtf3n")
-horizontal_alignment = 1
-
-[node name="Time" type="Panel" parent="TopCenter"]
-visible = false
-clip_contents = true
-layout_mode = 0
-offset_left = -170.0
-offset_top = 22.0
-offset_right = -123.0
-offset_bottom = 69.0
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("6_8egi5")
-
-[node name="TextureRect" type="TextureRect" parent="TopCenter/Time"]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 56.0
-offset_bottom = 17.0
-scale = Vector2(3, 3)
-mouse_filter = 2
-texture = ExtResource("7_guqia")
 
 [node name="Compass" type="Control" parent="TopCenter"]
 clip_contents = true
@@ -784,60 +715,6 @@ mouse_filter = 2
 [node name="PanelContainer" parent="PauseMenu" index="0"]
 visible = false
 
-[node name="DeathMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("item_container")]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -343.0
-offset_top = -167.0
-offset_right = 344.0
-offset_bottom = 140.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("11_0pkni")
-script = ExtResource("23_1kfkr")
-item_container = NodePath("MarginContainer/VBoxContainer/VBoxContainer")
-
-[node name="MarginContainer" type="MarginContainer" parent="DeathMenu"]
-layout_mode = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="VBoxContainer" type="VBoxContainer" parent="DeathMenu/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="DeathMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("14_e5c6o")
-text = "You Died"
-horizontal_alignment = 1
-
-[node name="Control" type="Control" parent="DeathMenu/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 16)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="DeathMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("15_k4cvi")
-
-[node name="Continue" parent="DeathMenu/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Create New Character"
-
-[node name="Quit" parent="DeathMenu/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Quit to Main Menu"
-
-[node name="Quit2" parent="DeathMenu/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Quit to Desktop"
-
 [node name="ProgressMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("item_container")]
 visible = false
 anchors_preset = 8
@@ -846,55 +723,63 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -521.0919
-offset_top = -297.375
+offset_top = -173.5
 offset_right = 521.0919
-offset_bottom = 297.375
+offset_bottom = 173.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("11_0pkni")
 script = ExtResource("24_guqia")
-item_container = NodePath("MarginContainer/VBoxContainer2")
+item_container = NodePath("MarginContainer/VBoxContainer3/VBoxContainer2")
 
 [node name="MarginContainer" type="MarginContainer" parent="ProgressMenu"]
 layout_mode = 2
 theme = ExtResource("12_2dyl4")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ProgressMenu/MarginContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="ProgressMenu/MarginContainer"]
 layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ProgressMenu/MarginContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("24_8egi5")
 
-[node name="Label" type="Label" parent="ProgressMenu/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("14_e5c6o")
 text = "You had a good run"
 horizontal_alignment = 1
 
-[node name="Control" type="Control" parent="ProgressMenu/MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer"]
 layout_mode = 2
 
-[node name="Time" type="Label" parent="ProgressMenu/MarginContainer/VBoxContainer"]
+[node name="Time" type="Label" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("5_jtf3n")
 text = "Time: 0:00"
 
-[node name="Kills" type="Label" parent="ProgressMenu/MarginContainer/VBoxContainer"]
+[node name="Kills" type="Label" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("5_jtf3n")
 text = "Kills: 0"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ProgressMenu/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="Level" type="Label" parent="ProgressMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Level" type="Label" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("5_jtf3n")
 text = "Level: 1"
 
-[node name="ProgressBar" type="ProgressBar" parent="ProgressMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="LevelBar" type="ProgressBar" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -903,20 +788,20 @@ theme = ExtResource("4_1kfkr")
 value = 50.0
 show_percentage = false
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="ProgressMenu/MarginContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="ProgressMenu/MarginContainer/VBoxContainer3"]
 layout_mode = 2
 alignment = 2
 script = ExtResource("15_k4cvi")
 
-[node name="Continue" parent="ProgressMenu/MarginContainer/VBoxContainer2" instance=ExtResource("16_1lobq")]
+[node name="Continue" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2" instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Create New Character"
 
-[node name="Quit" parent="ProgressMenu/MarginContainer/VBoxContainer2" instance=ExtResource("16_1lobq")]
+[node name="Quit" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2" instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Quit to Main Menu"
 
-[node name="Quit2" parent="ProgressMenu/MarginContainer/VBoxContainer2" instance=ExtResource("16_1lobq")]
+[node name="Quit2" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2" instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Quit to Desktop"
 
@@ -932,12 +817,9 @@ text = "Quit to Desktop"
 [connection signal="exit" from="Journal" to="." method="_on_menu_exit"]
 [connection signal="pressed" from="Journal/PanelContainer/Control/Button" to="Journal" method="close"]
 [connection signal="visibility_changed" from="PauseMenu" to="PauseMenu" method="_on_visibility_changed"]
-[connection signal="pressed" from="DeathMenu/MarginContainer/VBoxContainer/VBoxContainer/Continue" to="DeathMenu" method="_on_continue_pressed"]
-[connection signal="pressed" from="DeathMenu/MarginContainer/VBoxContainer/VBoxContainer/Quit" to="DeathMenu" method="_on_quit_pressed"]
-[connection signal="pressed" from="DeathMenu/MarginContainer/VBoxContainer/VBoxContainer/Quit2" to="DeathMenu" method="_on_quit_2_pressed"]
 [connection signal="visibility_changed" from="ProgressMenu" to="ProgressMenu" method="_on_visibility_changed"]
-[connection signal="pressed" from="ProgressMenu/MarginContainer/VBoxContainer2/Continue" to="ProgressMenu" method="_on_continue_pressed"]
-[connection signal="pressed" from="ProgressMenu/MarginContainer/VBoxContainer2/Quit" to="ProgressMenu" method="_on_quit_pressed"]
-[connection signal="pressed" from="ProgressMenu/MarginContainer/VBoxContainer2/Quit2" to="ProgressMenu" method="_on_quit_2_pressed"]
+[connection signal="pressed" from="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2/Continue" to="ProgressMenu" method="_on_continue_pressed"]
+[connection signal="pressed" from="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2/Quit" to="ProgressMenu" method="_on_quit_pressed"]
+[connection signal="pressed" from="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2/Quit2" to="ProgressMenu" method="_on_quit_2_pressed"]
 
 [editable path="PauseMenu"]

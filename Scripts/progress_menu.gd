@@ -1,11 +1,11 @@
 extends Menu
 
-@onready var kills: Label = $MarginContainer/VBoxContainer/Kills
-@onready var level: Label = $MarginContainer/VBoxContainer/HBoxContainer/Level
-@onready var progress_bar: ProgressBar = $MarginContainer/VBoxContainer/HBoxContainer/ProgressBar
-@onready var v_box_container: VBoxContainer = $MarginContainer/VBoxContainer
-@onready var time: Label = $MarginContainer/VBoxContainer/Time
-const TUTORIAL_MESSAGE = preload("uid://cftuqp2dc7t7b")
+@onready var kills: Label = %Kills
+@onready var level: Label = %Level
+@onready var progress_bar: ProgressBar = %LevelBar
+@onready var v_box_container: VBoxContainer = $MarginContainer/VBoxContainer3/VBoxContainer
+@onready var time: Label = %Time
+const PROGRESS_AWARD_MESSAGE = preload("uid://yjunk2cfke0y")
 
 
 func activate():
@@ -33,9 +33,9 @@ func activate():
 		await tween.finished
 		old_xp = 0
 		if ProgressManager.awards.size() > 0:
-			var inst = TUTORIAL_MESSAGE.instantiate()
+			var inst = PROGRESS_AWARD_MESSAGE.instantiate()
 			v_box_container.add_child(inst)
-			inst.text = ProgressManager.awards[level_ups].title + "+ added to starting gear."
+			inst.text = "+" + ProgressManager.awards[level_ups].title + " added to starting gear."
 			level_ups += 1
 	#progress_bar.value = ProgressManager.progress_data.xp
 

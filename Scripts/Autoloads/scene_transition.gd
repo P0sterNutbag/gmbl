@@ -25,6 +25,7 @@ func _on_animation_player_animation_finished(anim_name: String) -> void:
 		timer.start()
 	elif anim_name == "transition_out":
 		transition_out_done.emit()
+		label.hide()
 		timer.stop()
 
 

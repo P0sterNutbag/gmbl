@@ -10,6 +10,7 @@ var current_town: Town
 @onready var job_board: HBoxContainer = $JobBoard
 @onready var npc_portrait_model: Node3D = $ShopkeeperPortrait/Offset/EnemyModel
 @onready var repair_menu: PanelContainer = $Repair
+@onready var player_model: Node3D = $PlayerPortrait/Offset/EnemyModel
 
 
 func _enter_tree() -> void:
@@ -39,8 +40,9 @@ func _process(_delta: float) -> void:
 func start_dialogue(dialogue_data: DialogueTree, _shop: Shop = null) -> void:
 	dialogue.shop = _shop
 	#dialogue.show()
-	UiController.open_interface(dialogue)
 	dialogue.start_dialogue(dialogue_data)
+	UiController.open_interface(dialogue)
+	await get_tree().create_timer(0.05).timeout
 	portraits.show()
 
 
@@ -62,3 +64,17 @@ func enter_shop(shop_data: Shop) -> void:
 func close_shop() -> void:
 	UiController.close_interface(shop)
 	dialogue.leave_shop()
+
+
+func _on_portrait_holder_visibility_changed() -> void:
+	if !visible:
+		return
+	if !PlayerStats.gun:
+		player_model.animation_player.play("IdleNoGun")
+		return
+	for child in player_model.gun_holder.get_children():
+		if child.name == PlayerStats.gun.title:
+			child.visible = true
+			player_model.animation_player.play("Idle")
+		else:
+			child.visible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://f0rhw338g0ni"]
+[gd_scene load_steps=25 format=4 uid="uid://f0rhw338g0ni"]
 
 [ext_resource type="PackedScene" uid="uid://r4ktdn26psb3" path="res://Scenes/Levels/encounter_base.tscn" id="1_0ls2j"]
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_rgd3n"]
@@ -15,6 +15,12 @@
 [ext_resource type="PackedScene" uid="uid://bqui4egb4d3em" path="res://Scenes/Environment/Prefabs With Spawning/Old/barrels.tscn" id="11_wsj4s"]
 [ext_resource type="PackedScene" uid="uid://di3h341sotn78" path="res://Scenes/Environment/Prefabs With Spawning/Old/mixed_trash.tscn" id="12_hsdkj"]
 [ext_resource type="PackedScene" uid="uid://ljhoishdi1mg" path="res://Scenes/Environment/Props/radio.tscn" id="15_fac1s"]
+[ext_resource type="Script" uid="uid://chxn6jj2cv0p3" path="res://Scripts/scatterer.gd" id="16_gy2qf"]
+[ext_resource type="PackedScene" uid="uid://21yqxj5xl8cv" path="res://Scenes/Environment/Props/Physics/drum_barrel_blue.tscn" id="17_pp208"]
+[ext_resource type="PackedScene" uid="uid://dvpgm7keysw0" path="res://Scenes/Environment/Props/Physics/drum_barrel_rust.tscn" id="18_gsocy"]
+[ext_resource type="PackedScene" uid="uid://caaninc7023am" path="res://Scenes/Environment/Props/Physics/barrel.tscn" id="19_sbsq4"]
+[ext_resource type="PackedScene" uid="uid://b3f0jcvvcldns" path="res://Scenes/Environment/Props/Physics/crate.tscn" id="20_6hxrv"]
+[ext_resource type="PackedScene" uid="uid://bjama3lmb5mct" path="res://Scenes/Environment/Props/Physics/tire_stack.tscn" id="21_q7ina"]
 
 [sub_resource type="Resource" id="Resource_6gt5v"]
 script = ExtResource("2_rgd3n")
@@ -102,6 +108,104 @@ transform = Transform3D(0.8498559, 0, 0.52701515, 0, 1, 0, -0.52701515, 0, 0.849
 [node name="WoodenCrates3" parent="NavigationRegion3D" index="8" node_paths=PackedStringArray("terrain") instance=ExtResource("10_aooer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150.22774, 14.191353, 51.65103)
 terrain = NodePath("../../Terrain")
+
+[node name="RandomCover" type="Node3D" parent="NavigationRegion3D" index="9" node_paths=PackedStringArray("terrain")]
+script = ExtResource("16_gy2qf")
+scenes = Array[PackedScene]([ExtResource("17_pp208"), ExtResource("18_gsocy"), ExtResource("19_sbsq4"), ExtResource("20_6hxrv"), ExtResource("21_q7ina")])
+count = 30
+terrain = NodePath("../../Terrain")
+random_rotate_y = true
+delete_children = true
+
+[node name="Crate" type="Node3D" parent="NavigationRegion3D/RandomCover" index="0" instance=ExtResource("20_6hxrv")]
+transform = Transform3D(-0.7343167, 0, 0.678807, 0, 1, 0, -0.678807, 0, -0.7343167, 190.37454, 10.340118, 167.36206)
+
+[node name="Barrel" type="Node3D" parent="NavigationRegion3D/RandomCover" index="1" instance=ExtResource("19_sbsq4")]
+transform = Transform3D(-0.27777746, 0, 0.96064544, 0, 1, 0, -0.96064544, 0, -0.27777746, 227.43481, 8.290634, 72.258385)
+
+[node name="@Node3D@45941" type="Node3D" parent="NavigationRegion3D/RandomCover" index="2" instance=ExtResource("17_pp208")]
+transform = Transform3D(-0.99763316, 0, -0.06876126, 0, 1, 0, 0.06876126, 0, -0.99763316, 76.135506, 3.2172604, 80.39464)
+
+[node name="@Node3D@45942" type="Node3D" parent="NavigationRegion3D/RandomCover" index="3" instance=ExtResource("18_gsocy")]
+transform = Transform3D(0.9378096, 0, 0.34715012, 0, 1, 0, -0.34715012, 0, 0.9378096, 187.56613, 5.4801025, 250.03677)
+
+[node name="@Node3D@45943" type="Node3D" parent="NavigationRegion3D/RandomCover" index="4" instance=ExtResource("19_sbsq4")]
+transform = Transform3D(0.6610842, 0, 0.75031173, 0, 1, 0, -0.75031173, 0, 0.6610842, 139.05534, 12.482205, 60.1745)
+
+[node name="@Node3D@45944" type="Node3D" parent="NavigationRegion3D/RandomCover" index="5" instance=ExtResource("18_gsocy")]
+transform = Transform3D(-0.6087548, 0, 0.7933584, 0, 1, 0, -0.7933584, 0, -0.6087548, 240.2181, 7.696266, 58.078346)
+
+[node name="@Node3D@45945" type="Node3D" parent="NavigationRegion3D/RandomCover" index="6" instance=ExtResource("18_gsocy")]
+transform = Transform3D(-0.3472653, 0, -0.9377669, 0, 1, 0, 0.9377669, 0, -0.3472653, 222.65942, 12.562115, 126.688896)
+
+[node name="TireStack" type="Node3D" parent="NavigationRegion3D/RandomCover" index="7" instance=ExtResource("21_q7ina")]
+transform = Transform3D(-0.11767239, 0, -0.9930525, 0, 1, 0, 0.9930525, 0, -0.11767239, 76.948875, 8.958834, 33.270565)
+
+[node name="@Node3D@45946" type="Node3D" parent="NavigationRegion3D/RandomCover" index="8" instance=ExtResource("21_q7ina")]
+transform = Transform3D(0.20626572, 0, 0.978496, 0, 1, 0, -0.978496, 0, 0.20626572, 141.23035, 8.3068285, 8.901379)
+
+[node name="@Node3D@45947" type="Node3D" parent="NavigationRegion3D/RandomCover" index="9" instance=ExtResource("19_sbsq4")]
+transform = Transform3D(-0.845828, 0, 0.53345567, 0, 1, 0, -0.53345567, 0, -0.845828, 23.989973, 12.004673, 36.086357)
+
+[node name="@Node3D@45948" type="Node3D" parent="NavigationRegion3D/RandomCover" index="10" instance=ExtResource("19_sbsq4")]
+transform = Transform3D(-0.82705253, 0, -0.56212467, 0, 1, 0, 0.56212467, 0, -0.82705253, 44.429783, 8.12727, 251.50467)
+
+[node name="@Node3D@45949" type="Node3D" parent="NavigationRegion3D/RandomCover" index="11" instance=ExtResource("19_sbsq4")]
+transform = Transform3D(-0.63854223, 0, 0.7695868, 0, 1, 0, -0.7695868, 0, -0.63854223, 35.86958, 14.408149, 97.85652)
+
+[node name="@Node3D@45950" type="Node3D" parent="NavigationRegion3D/RandomCover" index="12" instance=ExtResource("19_sbsq4")]
+transform = Transform3D(0.8951829, 0, -0.44569895, 0, 1, 0, 0.44569895, 0, 0.8951829, 254.58226, 10.957891, 243.86453)
+
+[node name="@Node3D@45951" type="Node3D" parent="NavigationRegion3D/RandomCover" index="13" instance=ExtResource("20_6hxrv")]
+transform = Transform3D(-0.005984259, 0, -0.9999821, 0, 1, 0, 0.9999821, 0, -0.005984259, 166.61153, 3.3641517, 140.96275)
+
+[node name="@Node3D@45952" type="Node3D" parent="NavigationRegion3D/RandomCover" index="14" instance=ExtResource("21_q7ina")]
+transform = Transform3D(0.89337486, 0, -0.44931206, 0, 1, 0, 0.44931206, 0, 0.89337486, 34.739258, 14.683457, 36.339916)
+
+[node name="@Node3D@45953" type="Node3D" parent="NavigationRegion3D/RandomCover" index="15" instance=ExtResource("20_6hxrv")]
+transform = Transform3D(0.85232025, 0, 0.5230202, 0, 1, 0, -0.5230202, 0, 0.85232025, 77.5516, 8.840794, 15.571875)
+
+[node name="@Node3D@45954" type="Node3D" parent="NavigationRegion3D/RandomCover" index="16" instance=ExtResource("21_q7ina")]
+transform = Transform3D(-0.7409074, 0, -0.6716072, 0, 1, 0, 0.6716072, 0, -0.7409074, 69.82522, 6.2999353, 175.86932)
+
+[node name="@Node3D@45955" type="Node3D" parent="NavigationRegion3D/RandomCover" index="17" instance=ExtResource("18_gsocy")]
+transform = Transform3D(-0.33869138, 0, -0.9408975, 0, 1, 0, 0.9408975, 0, -0.33869138, 116.571846, 6.081689, 245.26372)
+
+[node name="@Node3D@45956" type="Node3D" parent="NavigationRegion3D/RandomCover" index="18" instance=ExtResource("17_pp208")]
+transform = Transform3D(0.0363341, 0, 0.9993397, 0, 1, 0, -0.9993397, 0, 0.0363341, 203.87918, 14.212418, 111.66634)
+
+[node name="@Node3D@45957" type="Node3D" parent="NavigationRegion3D/RandomCover" index="19" instance=ExtResource("18_gsocy")]
+transform = Transform3D(0.1794586, 0, 0.98376554, 0, 1, 0, -0.98376554, 0, 0.1794586, 137.32901, 8.83621, 16.330805)
+
+[node name="@Node3D@45958" type="Node3D" parent="NavigationRegion3D/RandomCover" index="20" instance=ExtResource("17_pp208")]
+transform = Transform3D(-0.36922875, 0, 0.9293385, 0, 1, 0, -0.9293385, 0, -0.36922875, 145.7635, 13.499051, 220.2018)
+
+[node name="@Node3D@45959" type="Node3D" parent="NavigationRegion3D/RandomCover" index="21" instance=ExtResource("21_q7ina")]
+transform = Transform3D(0.7653248, 0, 0.6436443, 0, 1, 0, -0.6436443, 0, 0.7653248, 231.57843, 7.352771, 138.50163)
+
+[node name="@Node3D@45960" type="Node3D" parent="NavigationRegion3D/RandomCover" index="22" instance=ExtResource("17_pp208")]
+transform = Transform3D(0.12472253, 0, -0.9921917, 0, 1, 0, 0.9921917, 0, 0.12472253, 123.45511, 8.134724, 74.53026)
+
+[node name="@Node3D@45961" type="Node3D" parent="NavigationRegion3D/RandomCover" index="23" instance=ExtResource("19_sbsq4")]
+transform = Transform3D(0.84068084, 0, 0.5415309, 0, 1, 0, -0.5415309, 0, 0.84068084, 190.71579, 7.1131544, 207.33116)
+
+[node name="@Node3D@45962" type="Node3D" parent="NavigationRegion3D/RandomCover" index="24" instance=ExtResource("18_gsocy")]
+transform = Transform3D(-0.37120953, 0, 0.9285491, 0, 1, 0, -0.9285491, 0, -0.37120953, 253.15967, 2.4313724, 133.93791)
+
+[node name="@Node3D@45963" type="Node3D" parent="NavigationRegion3D/RandomCover" index="25" instance=ExtResource("20_6hxrv")]
+transform = Transform3D(-0.45386913, 0, -0.89106834, 0, 1, 0, 0.89106834, 0, -0.45386913, 39.35781, 5.9157896, 144.35153)
+
+[node name="@Node3D@45964" type="Node3D" parent="NavigationRegion3D/RandomCover" index="26" instance=ExtResource("20_6hxrv")]
+transform = Transform3D(-0.90480965, 0, -0.4258162, 0, 1, 0, 0.4258162, 0, -0.90480965, 232.67609, 4.918886, 230.57071)
+
+[node name="@Node3D@45965" type="Node3D" parent="NavigationRegion3D/RandomCover" index="27" instance=ExtResource("19_sbsq4")]
+transform = Transform3D(-0.56097406, 0, -0.82783335, 0, 1, 0, 0.82783335, 0, -0.56097406, 225.51274, 10.669926, 201.83203)
+
+[node name="@Node3D@45966" type="Node3D" parent="NavigationRegion3D/RandomCover" index="28" instance=ExtResource("18_gsocy")]
+transform = Transform3D(0.07500941, 0, -0.99718285, 0, 1, 0, 0.99718285, 0, 0.07500941, 246.28427, 1.8585062, 152.17685)
+
+[node name="@Node3D@45967" type="Node3D" parent="NavigationRegion3D/RandomCover" index="29" instance=ExtResource("21_q7ina")]
+transform = Transform3D(-0.9270778, 0, 0.37486908, 0, 1, 0, -0.37486908, 0, -0.9270778, 248.83263, 8.855032, 237.76773)
 
 [node name="ShippingContainer" parent="." index="11" instance=ExtResource("3_jb7xi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.24895, 4.122055, 185.00766)

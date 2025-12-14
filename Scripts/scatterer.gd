@@ -3,14 +3,15 @@ extends Node3D
 
 @export var scenes: Array[PackedScene]
 @export var count := 100
-@export var area_size := Vector2(50, 50)
+@export var area_size := Vector2(257.0, 257.0)
+@export var terrain: Node3D
 @export var min_size := 1.0
 @export var max_size := 1.0
-@export var rotate_x: bool
-@export var rotate_y: bool
-@export var rotate_z: bool
+@export var random_rotate_x: bool
+@export var random_rotate_y: bool
+@export var random_rotate_z: bool
+@export var delete_children: bool 
 @export var scatter_button := false : set = _on_scatter_button_pressed
-@onready var terrain: Node3D = $"../Terrain"
 
 
 func _on_scatter_button_pressed(value):
@@ -22,15 +23,19 @@ func _on_scatter_button_pressed(value):
 	
 	if scenes.size() == 0:
 		return
+	
+	if delete_children:
+		for child in get_children():
+			child.queue_free()
 
-	var container = Node3D.new()
-	add_child(container)
-	var inst = scenes[0].instantiate()
-	container.name = inst.name + "s"
-	inst.queue_free()
+	#var container = Node3D.new()
+	#add_child(container)
+	#var inst = scenes[0].instantiate()
+	#container.name = inst.name + "s"
+	#inst.queue_free()
 
 	var scene_owner = get_tree().edited_scene_root
-	container.set_owner(scene_owner)
+	#container.set_owner(scene_owner)
 
 	randomize()
 	for i in count:
@@ -38,11 +43,11 @@ func _on_scatter_button_pressed(value):
 		var bush = pc.instantiate()
 		var pos = Vector3(randf_range(0, area_size.x), 0.0, position.z + randf_range(0, area_size.y))
 		bush.position = get_position_on_heightmap(pos)
-		if rotate_x: bush.rotation.x = randf_range(0, TAU)
-		if rotate_y: bush.rotation.y = randf_range(0, TAU)
-		if rotate_z: bush.rotation.z = randf_range(0, TAU)
+		if random_rotate_x: bush.rotation.x = randf_range(0, TAU)
+		if random_rotate_y: bush.rotation.y = randf_range(0, TAU)
+		if random_rotate_z: bush.rotation.z = randf_range(0, TAU)
 		bush.scale = Vector3.ONE * randf_range(min_size, max_size)
-		container.add_child(bush)
+		add_child(bush)
 		bush.set_owner(scene_owner) 
 
 	# Reset the button

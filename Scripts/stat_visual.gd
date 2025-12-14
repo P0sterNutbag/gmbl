@@ -1,11 +1,12 @@
 extends Control
 
 @export var stat_name: String
+@export var show_on_fps_level: bool = true
 @onready var progress_bar: ProgressBar = $ProgressBar
 var show_treshold = 0.75
 
 
-func _process(delta: float) -> void: 
+func _process(_delta: float) -> void: 
 	# make sure stat exists
 	if !stat_name in PlayerStats:
 		return
@@ -16,7 +17,7 @@ func _process(delta: float) -> void:
 	progress_bar.value = stat_value / stat_max
 	
 	# make the bar visible or not
-	if progress_bar.value < show_treshold:
+	if progress_bar.value < show_treshold and show_on_fps_level:
 		visible = true
 	else:
 		visible = false

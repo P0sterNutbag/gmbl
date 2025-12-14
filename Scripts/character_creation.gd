@@ -29,7 +29,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# spin character
-	player_model.rotate_y(mouse_velocity.x * 0.001)
+	player_model.rotate_y(mouse_velocity.x * delta * 0.01)
 	mouse_velocity = lerp(mouse_velocity, Vector2.ZERO, delta * 10)
 	# set gun and animation
 	if PlayerStats.guns.size() <= 0:

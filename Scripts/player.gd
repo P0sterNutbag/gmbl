@@ -47,6 +47,7 @@ var gun: Node3D:
 		var gun_name = PlayerStats.gun.resource_name
 		return get(gun_name)
 var grenade = preload("res://Scenes/Bullets/grenade.tscn")
+const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var camera = $CameraAnchor/Camera3D
 @onready var gun_anchor: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor
 @onready var gun_offset: Node3D = $CameraAnchor/Camera3D/GunOffset
@@ -120,8 +121,13 @@ func _ready() -> void:
 		gun_states.no_gun: exit_gun_state_no_gun,
 		gun_states.point_up: exit_gun_state_point_up,
 	}
-
-
+	# set skin color
+	#for gun in gun_anchor.get_children():
+	var arm = gun_anchor.get_child(0).get_node("ArmLAnchor/armL/Cube_001")
+	var material = arm.mesh.surface_get_material(0)
+	material.set("shader_parameter/color", PLAYER_STYLE.skin_colors[0])
+	#arm.get_surface_override_material(0).set("shader_parameter/color", PLAYER_STYLE.skin_colors[0])
+	#arm.mesh.surface_set_material(0, )
 func _physics_process(delta):
 	# apply gravity
 	velocity.y += -gravity * delta
@@ -243,7 +249,10 @@ func state_walk(delta):
 	# shooting and aiming
 	if gun_state == gun_states.ads or gun_state == gun_states.point and gun.rotation.y == 0:
 		if Input.is_action_pressed("shoot"):
-			if gun.ammo <= 0 or !gun.can_shoot:
+			if gun.ammo <= 0:
+				gun.empty_click.play()
+				return
+			if !gun.can_shoot:
 				return
 			gun.shoot(Input.is_action_pressed("aim"), velocity)
 			#camera.screen_shake()
@@ -280,7 +289,7 @@ func state_walk(delta):
 		var collider = interact_cast.get_collider(0)
 		if !collider:
 			return
-		if collider.is_in_group("lootable") or collider is PhysicalBone3D:
+		if collider.is_in_group("lootable") or (collider is PhysicalBone3D and collider.health_component and collider.health_component.is_dead):
 			Globals.ui.tooltip.text = "F: Loot"
 		elif collider is ItemPickup:
 			Globals.ui.tooltip.text = "F: Pick Up"

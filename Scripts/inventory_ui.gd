@@ -98,8 +98,9 @@ func set_items():
 			if opposing_ui.shop != null:
 				price_modifier = opposing_ui.shop.price_modifiers[categories[item.category]]
 			if item is EquipmentGun:
-				inst.price = item.get_modified_price()
-			inst.price = round(float(item.price) * price_modifier)
+				inst.price = round(item.get_modified_price() * price_modifier)
+			else:
+				inst.price = round(float(item.price) * price_modifier)
 		inst.focus_entered.connect(_on_item_focus_entered.bind(inst))
 		inst.focus_exited.connect(_on_item_focus_exited.bind(inst))
 		if item is Equipment:
@@ -117,7 +118,7 @@ func set_items():
 			inst.pressed.connect(item.on_pressed)
 		elif mode == modes.loot:
 			inst.pressed.connect(transfer_item.bind(inst))
-			if item is Equipment and item.equipped:
+			if item is Equipment and item.equipped and source_inventory == PlayerStats.inventory:
 				inst.text += " (equipped)"
 	filter(category_index)
 	if item_container.get_child_count() > 0:
@@ -144,6 +145,8 @@ func transfer_item(menu_item: Control):
 	var amount_to_move = 1
 	if Input.is_action_pressed("shift") or item is ItemMoney:
 		amount_to_move = item.amount
+	if item is EquipmentGun and item.equipped:
+		item.equip()
 	if target_inventory.add_item(item, amount_to_move):
 		source_inventory.remove_item(item, amount_to_move)
 	set_items()

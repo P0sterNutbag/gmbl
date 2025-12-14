@@ -22,6 +22,10 @@ func equip() -> void:
 	var kit = PlayerStats.inventory.equipment_kit
 	equipped = !equipped
 	if equipped:
+		var previous_equip = kit.equipment[slot]
+		if previous_equip:
+			previous_equip.equipped = false
+			previous_equip.equipped_changed.emit()
 		kit.equipment[slot] = self
 	else:
 		kit.equipment[slot] = null

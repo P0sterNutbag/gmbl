@@ -65,9 +65,6 @@ func _process(delta: float) -> void:
 		can_shoot = false
 	if Input.is_action_just_released("shoot"):
 		has_released = true
-	if Input.is_action_just_pressed("shoot"):
-		if gun_stats.ammo == 0 and UiController.is_canvas_layer_open(Globals.survival_ui):
-			empty_click.play()
 	
 	# spread
 	time_shooting -= delta * 2

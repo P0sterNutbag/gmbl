@@ -14,7 +14,7 @@ class_name HealthComponent
 				hp_bar.text = "HP:" + str(int((hp / max_hp) * 100))
 @export var hp_bar: Control
 @export var otherHitboxes: Array[HealthComponent]
-@export var blood_on_hit: bool = true
+#@export var blood_on_hit: bool = true
 @onready var max_hp: float = hp
 var audio_stream_player: AudioStreamPlayer3D
 var damage_modifier: float = 1.0
@@ -33,14 +33,14 @@ func _ready() -> void:
 		audio_stream_player = $AudioStreamPlayer3D
 
 
-func damage(dmg: float, hit_position: Vector3 = Vector3.ZERO, hit_direction: Vector3 = Vector3.ZERO, allow_damage_mod: bool = true) -> void:
+func damage(dmg: float, hit_position: Vector3 = Vector3.ZERO, hit_direction: Vector3 = Vector3.ZERO, allow_damage_mod: bool = true, blood_on_hit: bool = true, play_audio: bool = true) -> void:
 	damaged.emit(hit_position, hit_direction)
 	if is_dead:
 		return
 	if !allow_damage_mod:
 		damage_modifier = 1
 	hp -= dmg * damage_modifier
-	if audio_stream_player:
+	if audio_stream_player and play_audio:
 		audio_stream_player.play()
 	if hp <= 0:
 		death.emit()

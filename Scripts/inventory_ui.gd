@@ -46,14 +46,14 @@ func _process(_delta: float) -> void:
 		return
 	
 	# take all
-	if Input.is_action_just_pressed("reload") and mode == modes.loot:
-		for item in item_container.get_children():
-			for amount in item.amount:
-				source_inventory.items.erase(item.item)
-				target_inventory.items.append(item.item)
-				item_container.remove_child(item)
-		set_items()
-		target_inventory.set_items()
+	#if Input.is_action_just_pressed("reload") and mode == modes.loot:
+		#for item in item_container.get_children():
+			#for amount in item.amount:
+				#source_inventory.items.erase(item.item)
+				#target_inventory.items.append(item.item)
+				#item_container.remove_child(item)
+		#set_items()
+		#target_inventory.set_items()
 	
 	# drop
 	if Input.is_action_just_pressed("drop_item"):
@@ -143,8 +143,8 @@ func transfer_item(menu_item: Control):
 			tween.tween_property(opposing_ui.money_label, "modulate", Color.WHITE, 1)
 			return
 	var amount_to_move = 1
-	if Input.is_action_pressed("shift") or item is ItemMoney:
-		amount_to_move = item.amount
+	#if Input.is_action_pressed("shift") or item is ItemMoney:
+		#amount_to_move = item.amount
 	if item is EquipmentGun and item.equipped:
 		item.equip()
 	if target_inventory.add_item(item, amount_to_move):

@@ -29,7 +29,6 @@ var aim_rotation: Vector3
 var ammo: int:
 	get():
 		return gun.gun_stats.ammo
-var firepoint: Node3D
 var object_to_place: Node3D
 var gun_tween: Tween
 var walk_tween: Tween
@@ -40,12 +39,18 @@ var enter_functions: Dictionary
 var gun_state_functions: Dictionary
 var gun_exit_functions: Dictionary
 var gun_enter_functions: Dictionary
-var gun: Node3D: 
-	get: 
-		if !PlayerStats.gun:
-			return null
-		var gun_name = PlayerStats.gun.resource_name
-		return get(gun_name)
+var gun: Node3D
+	#get: 
+		#if !PlayerStats.gun:
+			#return null
+		#var gun_name = PlayerStats.gun.resource_name
+		#return get(gun_name)
+		#var kit = PlayerStats.inventory.equipment_kit
+		#var current_gun = kit.equipment.get(PlayerStats.gun_index)
+		#if current_gun:
+			#var gun_name = current_gun.resource_name
+			#return get(gun_name)
+		#return null
 var grenade = preload("res://Scenes/Bullets/grenade.tscn")
 const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var camera = $CameraAnchor/Camera3D
@@ -122,12 +127,13 @@ func _ready() -> void:
 		gun_states.point_up: exit_gun_state_point_up,
 	}
 	# set skin color
-	#for gun in gun_anchor.get_children():
 	var arm = gun_anchor.get_child(0).get_node("ArmLAnchor/armL/Cube_001")
 	var material = arm.mesh.surface_get_material(0)
 	material.set("shader_parameter/color", PLAYER_STYLE.skin_colors[0])
-	#arm.get_surface_override_material(0).set("shader_parameter/color", PLAYER_STYLE.skin_colors[0])
-	#arm.mesh.surface_set_material(0, )
+	# signals
+	PlayerStats.gun_changed.connect(_on_gun_changed)
+
+
 func _physics_process(delta):
 	# apply gravity
 	velocity.y += -gravity * delta
@@ -261,7 +267,7 @@ func state_walk(delta):
 			tween.tween_property(gun, "position:z", 0, 0.2)
 			var tween2 = create_tween().set_ease(Tween.EASE_OUT)
 			tween2.tween_property(self, "aim_rotation:x", aim_rotation.x + deg_to_rad(gun.kickback_magnitude) / 3, 0.01)
-			Globals.noise_controller.create_noise_event(firepoint.global_position, self, gun.bullet_stats.noise_radius)
+			Globals.noise_controller.create_noise_event(gun.firepoint.global_position, self, gun.bullet_stats.noise_radius)
 			if gun.fire_type == gun.fire_types.pump:
 				gun.shoot_cooldown_timer.stop()
 				await get_tree().create_timer(0.25).timeout
@@ -571,6 +577,7 @@ func exit_gun_state_point_up() -> void:
 
 
 func change_gun_slot(slot_index: int) -> void:
+	#PlayerStats.gun_index = slot_index
 	var kit = PlayerStats.inventory.equipment_kit
 	var g = kit.equipment[kit.gun_slots[slot_index]]
 	if slot_index == PlayerStats.gun_index:
@@ -580,7 +587,6 @@ func change_gun_slot(slot_index: int) -> void:
 			change_gun(null)
 	else:
 		change_gun(g)
-	PlayerStats.gun_index = slot_index
 
 
 func change_gun(new_gun: EquipmentGun) -> void:
@@ -592,14 +598,13 @@ func change_gun(new_gun: EquipmentGun) -> void:
 		#if gun:
 			#unequip_gun()
 		return
-	PlayerStats.gun = new_gun
+	#PlayerStats.gun = new_gun
 	for i in gun_anchor.get_children():
 		if i != gun:
 			i.visible = false
 		else:
 			gun.gun_stats = PlayerStats.gun.gun_stats
 			gun.rotation = Vector3.ZERO
-			firepoint = gun.get_node("GunAnchor/FirePoint")
 			await get_tree().create_timer(0.05).timeout
 			gun.visible = true
 	Globals.ui.set_gun_name(PlayerStats.gun.title.to_upper())
@@ -679,7 +684,14 @@ func _on_death() -> void:
 	PlayerStats.reset_stats()
 	gun_state = gun_states.point
 	SaveController.delete_save_data()
-	
+
+
+func _on_gun_changed() -> void:
+	if PlayerStats.gun:
+		gun = get(PlayerStats.gun.resource_name)
+		change_gun(PlayerStats.gun)
+	else:
+		unequip_gun()
 
 
 func _on_step_timer_timeout() -> void:

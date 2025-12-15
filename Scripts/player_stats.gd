@@ -44,12 +44,14 @@ var max_thirst = 1.0
 var sleep_decrease_rate = 5
 var hunger_decrease_rate = 6
 var thirst_decrease_rate = 4
+signal gun_changed
 
 
 func _ready() -> void:
 	reset_stats()
 	SceneManager.scene_changed.connect(_on_scene_changed)
 	SaveController.load.connect(_on_load)
+	gun_changed.connect(_on_gun_changed)
 	await get_tree().process_frame
 	sleep_decrease_rate = DayNightCycle.time_speed / sleep_decrease_rate
 	hunger_decrease_rate = DayNightCycle.time_speed / hunger_decrease_rate
@@ -161,6 +163,10 @@ func go_to_sleep():
 	tween.tween_property(self, "state", states.walk, 0)
 	await tween.finished
 	DayNightCycle.time_speed *= 0.1
+
+
+func _on_gun_changed():
+	gun = inventory.equipment_kit.equipment[gun_index]
 
 
 func _on_scene_changed():

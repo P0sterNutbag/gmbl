@@ -44,8 +44,6 @@ func _process(delta: float) -> void:
 
 
 func _on_menu_button_pressed() -> void:
-	#inventories.hide()
-	#UiController.open_interface(cosmetics)
 	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld.tscn")
 
 
@@ -78,18 +76,6 @@ func set_player_style(array: Array, new_resource) -> void:
 func _on_skin_options_option_changed(value: Variant) -> void:
 	var skin: Array = player_model.style_data.skin_colors
 	set_player_style(skin, value)
-	#var material: Material = player_model.cube.get_surface_override_material(0)
-	#var texture: Texture2D = material.get("shader_parameter/base_texture")
-	#var img := texture.get_image().duplicate()
-	#var target_color = img.get_pixel(img.get_height()-1, img.get_width()-1)
-	#var replace_color = resource.color
-	#for x in img.get_width():
-		#for y in img.get_height():
-			#var c = img.get_pixel(x, y)
-			#if c.is_equal_approx(target_color):
-				#img.set_pixel(x, y, replace_color)
-	#var new_texture = ImageTexture.create_from_image(img)
-	#material.set("shader_parameter/base_texture", new_texture)
 
 
 func _on_back_button_pressed() -> void:

@@ -12,5 +12,7 @@ func _setup_local_to_scene() -> void:
 
 func generate_inventory() -> void:
 	for i in randi_range(min_amount, max_amount):
-		var item = potential_slots[Globals.get_weighted_index(potential_slots)].object_to_spawn
-		add_item(item)
+		var spawn_resource = potential_slots[Globals.get_weighted_index(potential_slots)]
+		var item = spawn_resource.object_to_spawn
+		for y in randi_range(spawn_resource.min_amount, spawn_resource.max_amount):
+			add_item(item)

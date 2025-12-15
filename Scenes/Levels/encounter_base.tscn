@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://r4ktdn26psb3"]
+[gd_scene load_steps=35 format=3 uid="uid://r4ktdn26psb3"]
 
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="1_0pe3w"]
 [ext_resource type="Script" uid="uid://ysmfpedeqrtw" path="res://Scripts/encounter.gd" id="1_afsqo"]
@@ -39,34 +39,13 @@ shader_parameter/normal_edge_threshold = 1.0000000149012
 shader_parameter/line_color = Color(0, 0, 0, 1)
 shader_parameter/line_width = 2.0
 shader_parameter/fog_color = Color(0.48235294, 0.7176471, 1, 1)
-shader_parameter/fog_start = 0.0
-shader_parameter/fog_end = 400.0
+shader_parameter/fog_start = 500.0
+shader_parameter/fog_end = 2000.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_dhle1"]
 material = SubResource("ShaderMaterial_ctfa7")
 flip_faces = true
 size = Vector2(2, 2)
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_06vt4"]
-sky_top_color = Color(0, 0.389097, 0.741599, 1)
-sky_horizon_color = Color(0.486486, 0.716971, 0.999999, 1)
-ground_bottom_color = Color(0.486275, 0.717647, 1, 1)
-ground_horizon_color = Color(0.486275, 0.717647, 1, 1)
-ground_curve = 0.15
-
-[sub_resource type="Sky" id="Sky_3f870"]
-sky_material = SubResource("ProceduralSkyMaterial_06vt4")
-
-[sub_resource type="Environment" id="Environment_cael4"]
-background_mode = 2
-sky = SubResource("Sky_3f870")
-ambient_light_source = 2
-ambient_light_color = Color(0.556153, 0.556153, 0.556153, 1)
-fog_mode = 1
-fog_density = 1.0
-fog_aerial_perspective = 1.0
-fog_sky_affect = 0.0
-fog_depth_end = 210.0
 
 [sub_resource type="Resource" id="Resource_my2y4"]
 script = ExtResource("34_khkok")
@@ -120,7 +99,6 @@ extra_cull_margin = 16237.3
 mesh = SubResource("QuadMesh_dhle1")
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_os0xi")]
-environment = SubResource("Environment_cael4")
 
 [node name="DirectionalLight3D" parent="WorldEnvironment" index="0"]
 shadow_normal_bias = 10.0
@@ -251,10 +229,8 @@ script = ExtResource("21_lsls5")
 script = ExtResource("11_wttml")
 scenes = Array[PackedScene]([null, null])
 count = 45
-area_size = Vector2(257, 257)
 min_size = 0.75
 max_size = 1.25
-rotate_y = true
 
 [connection signal="body_entered" from="Border/Area3D" to="Border/Area3D" method="_on_body_entered"]
 [connection signal="body_exited" from="Border/Area3D" to="Border/Area3D" method="_on_body_exited"]

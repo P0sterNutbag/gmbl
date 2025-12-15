@@ -16,13 +16,15 @@ var stats := {
 func equip() -> void:
 	super.equip()
 	if equipped:
-		if PlayerStats.gun_index == slot:
-			Globals.player.change_gun(self)
-		else:
-			Globals.player.change_gun_slot(slot)
-	else:
-		if PlayerStats.gun == self and PlayerStats.gun_index == slot:
-			Globals.player.unequip_gun()
+		PlayerStats.gun_index = slot
+	PlayerStats.gun_changed.emit()
+		#if PlayerStats.gun_index == slot:
+			#Globals.player.change_gun(self)
+		#else:
+			#Globals.player.change_gun_slot(slot)
+	#else:
+		#if PlayerStats.gun == self and PlayerStats.gun_index == slot:
+			#Globals.player.unequip_gun()
 
 
 func get_modified_price() -> int:

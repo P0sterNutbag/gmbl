@@ -41,15 +41,16 @@ const NOTIFICATION = preload("uid://dl0pidlmm5dwh")
 @onready var physical_bone_simulator_3d: PhysicalBoneSimulator3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D
 @onready var loot_area: Area3D = $EnemyModel/LootArea
 @onready var notification_position: Node3D = $NotificationPosition
-var gun: Node3D: 
-	get: 
-		if !PlayerStats.gun:
-			return null
-		return get(PlayerStats.gun.resource_name)
+var gun: Node3D
+	#get: 
+		#if !PlayerStats.gun:
+			#return null
+		#return get(PlayerStats.gun.resource_name)
 
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	PlayerStats.gun_changed.connect(_on_gun_changed)
 	state_functions = {
 		PlayerStats.states.walk: state_walk,
 		PlayerStats.states.pause: state_pause,
@@ -212,6 +213,14 @@ func save() -> Dictionary:
 		"pos_z": global_position.z,
 		"model_rotation": model_rotation,
 	}
+
+
+func _on_gun_changed() -> void:
+	if PlayerStats.gun:
+		gun = get(PlayerStats.gun.resource_name)
+		change_gun(PlayerStats.gun)
+	else:
+		unequip_gun()
 
 
 func _on_damaged(_hit_position: Vector3, _hit_direction: Vector3) -> void:

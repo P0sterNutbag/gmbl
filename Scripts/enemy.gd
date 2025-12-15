@@ -79,8 +79,6 @@ func _ready() -> void:
 	gun.bullet_stats.collision_mask = 4
 	shoot_timer.wait_time = gun.shoot_cooldown
 	items_to_drop.append(gun_item.physical_item)
-	#shoot.connect($ShootComponent._on_shoot)
-	#shoot.connect(gun._on_shoot)
 	DayNightCycle.night_start.connect(on_night_start)
 	DayNightCycle.day_start.connect(on_day_start)
 	

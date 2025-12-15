@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_ghiyu"]
 [ext_resource type="Resource" uid="uid://cfuo7lbkf1m0v" path="res://addons/zylann.hterrain/data/rock_canyon2/data.hterrain" id="2_w380c"]
 [ext_resource type="Shader" uid="uid://d2kaduike2hk7" path="res://addons/zylann.hterrain/shaders/detail_edit.gdshader" id="6_35bk4"]
-[ext_resource type="PackedScene" uid="uid://cj5jci52r3cnn" path="res://Scenes/Environment/Prefabs With Spawning/Old/shack3.tscn" id="8_ghiyu"]
 [ext_resource type="PackedScene" uid="uid://gjf0h1sobon8" path="res://Scenes/Environment/Prefabs With Spawning/shack_windows.tscn" id="9_6l2im"]
-[ext_resource type="PackedScene" uid="uid://d25jtyba6hs61" path="res://Scenes/Environment/Prefabs With Spawning/Old/shack4.tscn" id="9_oy5nx"]
+[ext_resource type="PackedScene" uid="uid://yqj3iccq8ppb" path="res://Scenes/Environment/Prefabs With Spawning/shack_stairs.tscn" id="10_a3k0e"]
+[ext_resource type="PackedScene" uid="uid://b162lqo3bagvq" path="res://Scenes/Environment/Prefabs With Spawning/shack_two_stories.tscn" id="11_316ir"]
 [ext_resource type="PackedScene" uid="uid://c8837t6cigbtp" path="res://Scenes/Environment/Prefabs With Spawning/wooden_crates.tscn" id="11_d8exc"]
 [ext_resource type="PackedScene" uid="uid://bxxs6ujnftm71" path="res://Scenes/Environment/Prefabs With Spawning/tire_stacks.tscn" id="12_dpfif"]
 [ext_resource type="Script" uid="uid://ejdyuf8c7kui" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="13_euisr"]
@@ -50,7 +50,7 @@ _surfaces = [{
 location_data = SubResource("Resource_oy5nx")
 
 [node name="DirectionalLight3D" parent="WorldEnvironment" index="0"]
-transform = Transform3D(0.9999999, 0, 0, 0, -4.371139e-08, 1.0000001, 0, -1, -4.3711392e-08, 0, 0, 0)
+transform = Transform3D(0.3949844, -4.0157122e-08, 0.91868806, -0.9186876, -1.7265318e-08, 0.3949844, 0, -1, -4.371139e-08, 0, 0, 0)
 
 [node name="Terrain" parent="." index="5"]
 _terrain_data = ExtResource("2_w380c")
@@ -80,10 +80,10 @@ skeleton = NodePath("../..")
 [node name="ShackWindows" parent="NavigationRegion3D" index="1" instance=ExtResource("9_6l2im")]
 transform = Transform3D(-0.79805744, 0, -0.6025814, 0, 1, 0, 0.6025814, 0, -0.79805744, 78.551476, 1.4146488, 209.46017)
 
-[node name="Shack3" parent="NavigationRegion3D" index="2" instance=ExtResource("8_ghiyu")]
+[node name="ShackStairs" parent="NavigationRegion3D" index="2" instance=ExtResource("10_a3k0e")]
 transform = Transform3D(-0.003892098, 0, 0.99999243, 0, 1, 0, -0.99999243, 0, -0.003892098, 141.73216, 3.6467342, 80.94959)
 
-[node name="Shack4" parent="NavigationRegion3D" index="3" instance=ExtResource("9_oy5nx")]
+[node name="ShackTwo" parent="NavigationRegion3D" index="3" instance=ExtResource("11_316ir")]
 transform = Transform3D(0.29395688, 0, 0.95581865, 0, 1, 0, -0.95581865, 0, 0.29395688, 140.50208, 3.3093152, 94.26734)
 
 [node name="WoodenCrates" parent="NavigationRegion3D" index="4" node_paths=PackedStringArray("terrain") instance=ExtResource("11_d8exc")]

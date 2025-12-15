@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://dkdmdcbv1thv3"]
+[gd_scene load_steps=7 format=4 uid="uid://dkdmdcbv1thv3"]
 
 [ext_resource type="Material" uid="uid://brr5rgo0swhv5" path="res://Art/Materials/wood_triplanar.tres" id="1_jmp64"]
 [ext_resource type="Texture2D" uid="uid://bkxsoff507nnd" path="res://Art/Textures/tin roof.png" id="2_rknvb"]
+[ext_resource type="Material" uid="uid://b4aard1qnyqin" path="res://Art/Materials/tin_triplanar_gray.tres" id="3_45nn7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ohuf"]
 albedo_texture = ExtResource("2_rknvb")
@@ -37,6 +38,7 @@ data = PackedVector3Array(-4.0091, 0.0034, -4.0016, -4.0089, 0.0034, -3.7547, -4
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_jmp64")
+surface_material_override/0 = ExtResource("3_45nn7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="CSGBakedMeshInstance3D"]
 

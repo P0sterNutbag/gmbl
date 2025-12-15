@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=4 uid="uid://yqj3iccq8ppb"]
+[gd_scene load_steps=12 format=4 uid="uid://yqj3iccq8ppb"]
 
 [ext_resource type="PackedScene" uid="uid://bqjryb6et7jsj" path="res://Scenes/Environment/Prefabs With Spawning/prefab_base.tscn" id="1_ayl86"]
 [ext_resource type="Material" uid="uid://brr5rgo0swhv5" path="res://Art/Materials/wood_triplanar.tres" id="2_5cr6v"]
 [ext_resource type="Texture2D" uid="uid://bkxsoff507nnd" path="res://Art/Textures/tin roof.png" id="3_s1jgh"]
 [ext_resource type="Texture2D" uid="uid://btcjptj2uk7im" path="res://Art/Textures/wood horizontal.png" id="4_xjq8m"]
+[ext_resource type="Material" uid="uid://b4aard1qnyqin" path="res://Art/Materials/tin_triplanar_gray.tres" id="5_5cr6v"]
 [ext_resource type="PackedScene" uid="uid://c4oumjgjpl4tq" path="res://Scenes/Environment/Props/staircase.tscn" id="5_f28cm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ohuf"]
@@ -120,6 +121,9 @@ process_mode = 4
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="." index="3"]
 mesh = SubResource("ArrayMesh_bls38")
+surface_material_override/0 = ExtResource("5_5cr6v")
+surface_material_override/2 = ExtResource("5_5cr6v")
+surface_material_override/3 = ExtResource("5_5cr6v")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="CSGBakedMeshInstance3D" index="0"]
 
@@ -128,3 +132,8 @@ shape = SubResource("ConcavePolygonShape3D_r8wpn")
 
 [node name="Stairs" parent="." index="4" instance=ExtResource("5_f28cm")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.75, 0, -1)
+
+[node name="CSGBakedMeshInstance3D" parent="Stairs" index="1"]
+surface_material_override/0 = ExtResource("5_5cr6v")
+
+[editable path="Stairs"]

@@ -29,6 +29,7 @@ var aim_rotation: Vector3
 var ammo: int:
 	get():
 		return gun.gun_stats.ammo
+var gun: Node3D
 var object_to_place: Node3D
 var gun_tween: Tween
 var walk_tween: Tween
@@ -39,18 +40,6 @@ var enter_functions: Dictionary
 var gun_state_functions: Dictionary
 var gun_exit_functions: Dictionary
 var gun_enter_functions: Dictionary
-var gun: Node3D
-	#get: 
-		#if !PlayerStats.gun:
-			#return null
-		#var gun_name = PlayerStats.gun.resource_name
-		#return get(gun_name)
-		#var kit = PlayerStats.inventory.equipment_kit
-		#var current_gun = kit.equipment.get(PlayerStats.gun_index)
-		#if current_gun:
-			#var gun_name = current_gun.resource_name
-			#return get(gun_name)
-		#return null
 var grenade = preload("res://Scenes/Bullets/grenade.tscn")
 const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var camera = $CameraAnchor/Camera3D
@@ -107,7 +96,6 @@ func _ready() -> void:
 		PlayerStats.states.dead: enter_dead,
 	}
 	gun_state_functions = {
-		#gun_states.point: gun_state_point,
 		gun_states.ads: gun_state_ads,
 		gun_states.no_gun: gun_state_no_gun,
 		gun_states.point_up: gun_state_point_up,
@@ -152,14 +140,6 @@ func _process(delta: float) -> void:
 	# state machine
 	if gun_state_functions.has(gun_state):
 		gun_state_functions[gun_state].call(delta)
-
-
-#func change_state(new_state):
-	#if exit_functions.has(PlayerStats.state):
-		#await exit_functions[PlayerStats.state].call()
-	#PlayerStats.state = new_state
-	#if enter_functions.has(PlayerStats.state):
-		#await enter_functions[PlayerStats.state].call()
 
 
 func change_gun_state(new_state):
@@ -253,7 +233,7 @@ func state_walk(delta):
 			step_timer.start()
 	
 	# shooting and aiming
-	if gun_state == gun_states.ads or gun_state == gun_states.point and gun.rotation.y == 0:
+	if (gun_state == gun_states.ads or gun_state == gun_states.point) and gun.rotation.y == 0:
 		if Input.is_action_pressed("shoot"):
 			if gun.ammo <= 0:
 				gun.empty_click.play()
@@ -385,16 +365,12 @@ func state_walk(delta):
 						walk_tween.kill()
 					walk_tween = create_tween()
 					walk_tween.tween_property(gun, "rotation:y", deg_to_rad(45), 0.2)
-				#gun.rotation.y = deg_to_rad(45)
-				#gun.position.x = 0.1
 			else:
 				if gun.rotation.y > 0 and !walk_tween.is_running():
 					if walk_tween:
 						walk_tween.kill()
 					walk_tween = create_tween()
 					walk_tween.tween_property(gun, "rotation:y", 0, 0.2)
-				#gun.rotation.y = deg_to_rad(0)
-				#gun.position.x = 0
 			var bob = cos(walk_time * 20) * 0.25
 			gun.position.y += bob * delta
 			var sway = cos(walk_time * 10) * 0.25
@@ -406,7 +382,6 @@ func state_walk(delta):
 			walk_tween = create_tween().set_parallel()
 			walk_tween.tween_property(gun, "position", Vector3.ZERO, 0.1)
 			walk_tween.tween_property(gun, "rotation:y", 0, 0.1)
-			#await tween.finished
 	
 	# walking sfx
 	if (input.x or input.y) and is_on_floor():
@@ -423,8 +398,6 @@ func state_walk(delta):
 
 func enter_pause():
 	pass
-	#var tween = create_tween()
-	#tween.tween_property(gun, "position:y", 0, 0.1)
 
 
 func state_pause(_delta):
@@ -437,10 +410,8 @@ func enter_dead():
 	var tween = create_tween().set_ease(Tween.EASE_OUT)
 	tween.tween_property(camera, "position:y", -1, 0.5)
 	tween.tween_property(camera, "rotation:z", deg_to_rad(45), 1)
-	#tween.tween_property(PlayerStats, "state", PlayerStats.states.walk, 0)
 	tween.tween_callback(Globals.survival_ui.hide_all_ui)
 	tween.tween_callback(UiController.open_interface.bind(Globals.survival_ui.progress_menu))
-	#tween.tween_callback(SaveController.load_data_from_file).set_delay(5)
 
 
 func state_dead(_delta):
@@ -577,16 +548,17 @@ func exit_gun_state_point_up() -> void:
 
 
 func change_gun_slot(slot_index: int) -> void:
-	#PlayerStats.gun_index = slot_index
 	var kit = PlayerStats.inventory.equipment_kit
-	var g = kit.equipment[kit.gun_slots[slot_index]]
+	var new_gun = kit.equipment[kit.gun_slots[slot_index]]
+	PlayerStats.gun = new_gun
 	if slot_index == PlayerStats.gun_index:
 		if gun_state == gun_states.no_gun:
-			change_gun(g)
+			change_gun(new_gun)
 		else:
 			change_gun(null)
 	else:
-		change_gun(g)
+		change_gun(new_gun)
+	PlayerStats.gun_index = slot_index
 
 
 func change_gun(new_gun: EquipmentGun) -> void:
@@ -595,10 +567,9 @@ func change_gun(new_gun: EquipmentGun) -> void:
 	else:
 		gun_anchor.position.y = -0.3
 	if !new_gun:
-		#if gun:
-			#unequip_gun()
+		gun = null
 		return
-	#PlayerStats.gun = new_gun
+	gun = get(PlayerStats.gun.resource_name)
 	for i in gun_anchor.get_children():
 		if i != gun:
 			i.visible = false
@@ -617,6 +588,7 @@ func change_gun(new_gun: EquipmentGun) -> void:
 func unequip_gun() -> void:
 	await change_gun_state(gun_states.no_gun)
 	PlayerStats.gun = null
+	gun = null
 
 
 func start_place_item(item_to_place: String):
@@ -643,9 +615,6 @@ func use_item(item_name: String, item_id = null, target = null):
 	if item is ItemUsable:
 		item.use(target)
 	PlayerStats.inventory.remove_item(item)
-	#item.amount -= 1
-	#if item.amount <= 0:
-		#PlayerStats.items.erase(item)
 
 
 func find_item(item_name: String) -> Resource:
@@ -688,7 +657,6 @@ func _on_death() -> void:
 
 func _on_gun_changed() -> void:
 	if PlayerStats.gun:
-		gun = get(PlayerStats.gun.resource_name)
 		change_gun(PlayerStats.gun)
 	else:
 		unequip_gun()

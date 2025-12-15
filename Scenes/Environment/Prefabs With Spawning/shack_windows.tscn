@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://gjf0h1sobon8"]
+[gd_scene load_steps=8 format=4 uid="uid://gjf0h1sobon8"]
 
 [ext_resource type="PackedScene" uid="uid://bqjryb6et7jsj" path="res://Scenes/Environment/Prefabs With Spawning/prefab_base.tscn" id="1_uaeiv"]
 [ext_resource type="Material" uid="uid://brr5rgo0swhv5" path="res://Art/Materials/wood_triplanar.tres" id="2_wlrwl"]
 [ext_resource type="Texture2D" uid="uid://bkxsoff507nnd" path="res://Art/Textures/tin roof.png" id="3_yogr1"]
+[ext_resource type="Material" uid="uid://b4aard1qnyqin" path="res://Art/Materials/tin_triplanar_gray.tres" id="4_wlrwl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ohuf"]
 albedo_texture = ExtResource("3_yogr1")
@@ -75,6 +76,7 @@ process_mode = 4
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="." index="3"]
 mesh = SubResource("ArrayMesh_rsoc8")
+surface_material_override/0 = ExtResource("4_wlrwl")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="CSGBakedMeshInstance3D" index="0"]
 

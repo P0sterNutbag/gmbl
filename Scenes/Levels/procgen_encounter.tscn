@@ -1,13 +1,12 @@
-[gd_scene load_steps=30 format=4 uid="uid://c3p7tbg7t42b1"]
+[gd_scene load_steps=29 format=4 uid="uid://c3p7tbg7t42b1"]
 
 [ext_resource type="Script" uid="uid://bge81dgb3rx2t" path="res://Scripts/procedural_environment.gd" id="1_n2q0j"]
 [ext_resource type="PackedScene" uid="uid://r4ktdn26psb3" path="res://Scenes/Levels/encounter_base.tscn" id="1_xg5g1"]
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_em3rq"]
-[ext_resource type="PackedScene" uid="uid://d1ic5q83d2oe6" path="res://Scenes/Environment/Prefabs With Spawning/Old/shack.tscn" id="5_oftcu"]
-[ext_resource type="PackedScene" uid="uid://b48xbl6fohkm4" path="res://Scenes/Environment/Prefabs With Spawning/Old/shack2.tscn" id="6_cyu4r"]
-[ext_resource type="PackedScene" uid="uid://cj5jci52r3cnn" path="res://Scenes/Environment/Prefabs With Spawning/Old/shack3.tscn" id="7_2tynf"]
-[ext_resource type="PackedScene" uid="uid://ciydkkvue7fu2" path="res://Scenes/Environment/Prefabs With Spawning/Old/shipping_container.tscn" id="9_jsbij"]
-[ext_resource type="PackedScene" uid="uid://d25jtyba6hs61" path="res://Scenes/Environment/Prefabs With Spawning/Old/shack4.tscn" id="10_h2sp1"]
+[ext_resource type="PackedScene" uid="uid://cueu704ip2q8t" path="res://Scenes/Environment/Prefabs With Spawning/shack_no_windows.tscn" id="6_okfcf"]
+[ext_resource type="PackedScene" uid="uid://yqj3iccq8ppb" path="res://Scenes/Environment/Prefabs With Spawning/shack_stairs.tscn" id="7_nfhko"]
+[ext_resource type="PackedScene" uid="uid://b162lqo3bagvq" path="res://Scenes/Environment/Prefabs With Spawning/shack_two_stories.tscn" id="8_dardl"]
+[ext_resource type="PackedScene" uid="uid://wrpi151kscmq" path="res://Scenes/Environment/Prefabs With Spawning/shipping_container.tscn" id="9_87mr3"]
 [ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="12_n5v1j"]
 [ext_resource type="Script" uid="uid://gw7xclj5260y" path="res://Scripts/procgen_enemy_spawner.gd" id="14_nfhko"]
 [ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/NPCs/enemy.tscn" id="15_dardl"]
@@ -42,32 +41,32 @@ _surfaces = [{
 
 [sub_resource type="Resource" id="Resource_c4jsb"]
 script = ExtResource("12_n5v1j")
-object_to_spawn = ExtResource("6_cyu4r")
+object_to_spawn = ExtResource("6_okfcf")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [sub_resource type="Resource" id="Resource_gvimo"]
 script = ExtResource("12_n5v1j")
-object_to_spawn = ExtResource("7_2tynf")
+object_to_spawn = ExtResource("7_nfhko")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [sub_resource type="Resource" id="Resource_n2q0j"]
 script = ExtResource("12_n5v1j")
-object_to_spawn = ExtResource("10_h2sp1")
-metadata/_custom_type_script = "uid://3uypo1jqxswc"
-
-[sub_resource type="Resource" id="Resource_du1od"]
-script = ExtResource("12_n5v1j")
-object_to_spawn = ExtResource("5_oftcu")
+object_to_spawn = ExtResource("8_dardl")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [sub_resource type="Resource" id="Resource_40vji"]
 script = ExtResource("12_n5v1j")
-object_to_spawn = ExtResource("9_jsbij")
+object_to_spawn = ExtResource("7_nfhko")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_y8qdn"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("9_87mr3")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [sub_resource type="Resource" id="Resource_4531t"]
 script = ExtResource("16_wy85s")
-objects = Array[ExtResource("12_n5v1j")]([SubResource("Resource_c4jsb"), SubResource("Resource_gvimo"), SubResource("Resource_n2q0j"), SubResource("Resource_du1od"), SubResource("Resource_40vji")])
+objects = Array[ExtResource("12_n5v1j")]([SubResource("Resource_c4jsb"), SubResource("Resource_gvimo"), SubResource("Resource_n2q0j"), SubResource("Resource_40vji"), SubResource("Resource_y8qdn")])
 max_amount = 4
 metadata/_custom_type_script = "uid://yjtjuxrauvya"
 

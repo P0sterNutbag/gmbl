@@ -578,7 +578,7 @@ func change_gun(new_gun: EquipmentGun) -> void:
 			gun.rotation = Vector3.ZERO
 			await get_tree().create_timer(0.05).timeout
 			gun.visible = true
-	Globals.ui.set_gun_name(PlayerStats.gun.title.to_upper())
+	Globals.ui.set_gun_name(PlayerStats.gun.title)
 	if Input.is_action_pressed("aim"):
 		await change_gun_state(gun_states.ads)
 	else:
@@ -643,9 +643,9 @@ func check_reload_ammo(time_to_skip_to: float):
 		gun.get_node("AnimationPlayer").seek(time_to_skip_to, true, true)
 
 
-func _on_damaged(_hit_position: Vector3, _hit_direction: Vector3) -> void:
+func _on_damaged(_hit_position: Vector3, hit_direction: Vector3) -> void:
 	hitbox.damage_modifier = PlayerStats.inventory.equipment_kit.get_damage_modifier()
-	Globals.ui.play_hit_effect()
+	Globals.ui.play_hit_effect(hit_direction)
 
 
 func _on_death() -> void:

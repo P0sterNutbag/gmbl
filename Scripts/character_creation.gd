@@ -10,6 +10,7 @@ const starting_gear = preload("uid://dpjy0ettwaiyp")
 @onready var animation_player: AnimationPlayer = $EnemyModel/PersonAnimated/AnimationPlayer
 @onready var player_model: Node3D = $EnemyModel
 @onready var appearance_options: VBoxContainer = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer
+@onready var camera_3d: Camera3D = $Camera3D
 
 
 func _ready() -> void:
@@ -28,6 +29,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	# move camera
+	camera_3d.position.y = lerp(camera_3d.position.y, 1.6, delta)
 	# spin character
 	player_model.rotate_y(mouse_velocity.x * delta * 0.01)
 	mouse_velocity = lerp(mouse_velocity, Vector2.ZERO, delta * 10)

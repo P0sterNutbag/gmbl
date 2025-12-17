@@ -45,9 +45,9 @@ func _on_settings_menu_hidden() -> void:
 func _on_panel_container_visibility_changed() -> void:
 	if !is_inside_tree():
 		return
-	if visible:
-		if Globals.overworld and get_tree().current_scene == Globals.overworld:
-			save_quit_button.show()
-		else:
-			save_quit_button.hide()
+	#if visible:
+		#if Globals.overworld and get_tree().current_scene == Globals.overworld:
+			#save_quit_button.show()
+		#else:
+			#save_quit_button.hide()
 		#get_tree().paused = true

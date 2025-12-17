@@ -271,17 +271,17 @@ borders = [NodePath("../Border/Area3D"), NodePath("../Border/Area3D4")]
 [node name="SnapToTerrain" parent="." index="12" node_paths=PackedStringArray("objects_to_snap")]
 objects_to_snap = [null, null, null]
 
-[node name="Scatterer" parent="." index="13" node_paths=PackedStringArray("terrain")]
+[node name="Radio" parent="." index="13" instance=ExtResource("16_o2sg6")]
+transform = Transform3D(0.8609552, 0, -0.5086808, 0, 1, 0, 0.5086808, 0, 0.8609552, 90.1077, 2.3439436, 187.60782)
+
+[node name="Radio2" parent="." index="14" instance=ExtResource("16_o2sg6")]
+transform = Transform3D(-0.85038894, 0, -0.52615464, 0, 1, 0, 0.52615464, 0, -0.85038894, 138.03204, 6.830633, 78.11424)
+
+[node name="Scatterer" parent="." index="15" node_paths=PackedStringArray("terrain")]
 scenes = Array[PackedScene]([ExtResource("14_d8exc")])
 count = 20
 terrain = NodePath("../Terrain")
 min_size = 0.5
 max_size = 2.0
-
-[node name="Radio" parent="." index="14" instance=ExtResource("16_o2sg6")]
-transform = Transform3D(0.8609552, 0, -0.5086808, 0, 1, 0, 0.5086808, 0, 0.8609552, 90.1077, 2.3439436, 187.60782)
-
-[node name="Radio2" parent="." index="15" instance=ExtResource("16_o2sg6")]
-transform = Transform3D(-0.85038894, 0, -0.52615464, 0, 1, 0, 0.52615464, 0, -0.85038894, 138.03204, 6.830633, 78.11424)
 
 [editable path="WorldEnvironment"]

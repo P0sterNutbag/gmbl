@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvcwp0tjcf7x8"]
+
+[ext_resource type="Texture2D" uid="uid://bd2tdmgo141yn" path="res://Art/Textures/smoke_01.png" id="1_kde1b"]
+
+[sub_resource type="Gradient" id="Gradient_kde1b"]
+offsets = PackedFloat32Array(0, 0.5123457, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gpnai"]
+gradient = SubResource("Gradient_kde1b")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gpnai"]
+emission_shape_scale = Vector3(50, 1, 50)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 2.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+angle_min = -179.99998
+angle_max = 180.00002
+spread = 10.0
+initial_velocity_min = 5.0
+initial_velocity_max = 7.0
+gravity = Vector3(0, 0, 0)
+scale_max = 3.0
+color_ramp = SubResource("GradientTexture1D_gpnai")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kde1b"]
+transparency = 1
+cull_mode = 2
+depth_draw_mode = 1
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.64, 0.5632, 0.44799998, 0.54901963)
+albedo_texture = ExtResource("1_kde1b")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gpnai"]
+material = SubResource("StandardMaterial3D_kde1b")
+size = Vector2(3, 3)
+orientation = 2
+
+[node name="Wind" type="GPUParticles3D"]
+amount = 32
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_gpnai")
+draw_pass_1 = SubResource("PlaneMesh_gpnai")

@@ -1,14 +1,12 @@
-[gd_scene load_steps=23 format=3 uid="uid://y6civk4251ei"]
+[gd_scene load_steps=21 format=3 uid="uid://y6civk4251ei"]
 
 [ext_resource type="Script" uid="uid://cl7b5tsk5cpy3" path="res://Scripts/fps_ui.gd" id="1_27ipd"]
 [ext_resource type="Texture2D" uid="uid://b7o6p645d7r1q" path="res://Art/Textures/scope.png" id="2_ed1w8"]
 [ext_resource type="Theme" uid="uid://lg0ktyb6xeoh" path="res://Art/Themes/hp_bar.tres" id="3_8ucm7"]
-[ext_resource type="Texture2D" uid="uid://bdcy6j83ie2fb" path="res://Art/Textures/hp_bar_lock.png" id="4_epllx"]
+[ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="5_8v68b"]
 [ext_resource type="Texture2D" uid="uid://r08gms0nyjju" path="res://Art/Textures/hp icon.png" id="5_e0hn7"]
 [ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="6_8v68b"]
-[ext_resource type="Texture2D" uid="uid://b1voy3waf4rwu" path="res://Art/Textures/medkits.png" id="7_hkj58"]
 [ext_resource type="Texture2D" uid="uid://btsqo4a5f5fw8" path="res://Art/Textures/mag icon sheet.png" id="8_6gmlr"]
-[ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="8_hkj58"]
 [ext_resource type="StyleBox" uid="uid://bcg5bax3erc8w" path="res://Art/Themes/style_box.tres" id="9_6gmlr"]
 [ext_resource type="Shader" uid="uid://clx8i8jbtbgo3" path="res://Art/Shaders/retro.gdshader" id="9_a1pox"]
 [ext_resource type="Texture2D" uid="uid://cvly0bfjs24or" path="res://Art/Textures/sun-moon.png" id="10_a1pox"]
@@ -19,17 +17,12 @@
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="14_hkj58"]
 [ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="15_6gmlr"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ovyiq"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
+[sub_resource type="Gradient" id="Gradient_8v68b"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 0, 0, 1)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_imxu1"]
-texture = ExtResource("4_epllx")
-axis_stretch_horizontal = 1
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hkj58"]
+gradient = SubResource("Gradient_8v68b")
+width = 50
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3lnm2"]
 bg_color = Color(0, 0, 0, 0.784314)
@@ -43,6 +36,38 @@ shader_parameter/dither_size = 1
 
 [node name="FpsUI" type="CanvasLayer"]
 script = ExtResource("1_27ipd")
+
+[node name="Center" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HitIndicatorOffset" type="Control" parent="Center"]
+anchors_preset = 0
+
+[node name="HitIndicator" type="TextureRect" parent="Center/HitIndicatorOffset"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -200.0
+offset_right = 25.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5707964
+pivot_offset = Vector2(25, 50)
+texture = SubResource("GradientTexture1D_hkj58")
 
 [node name="Crosshair" type="Control" parent="."]
 layout_mode = 3
@@ -165,9 +190,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -202.0
-offset_top = -202.0
+offset_top = -205.0
 offset_right = 202.0
-offset_bottom = 202.0
+offset_bottom = 199.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ed1w8")
@@ -186,89 +211,33 @@ scale = Vector2(2, 2)
 layout_mode = 0
 offset_left = 17.0
 offset_top = -39.0
-offset_right = 190.0
-offset_bottom = -19.0
-rotation = -0.0464826
+offset_right = 130.73166
+offset_bottom = -23.0
+rotation = -0.035973407
 scale = Vector2(1.14879, 1)
-color = Color(0, 0, 0, 1)
-
-[node name="ProgressBar2" type="ProgressBar" parent="BottomLeft"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 62.0
-offset_top = -44.0
-offset_right = 203.0
-offset_bottom = -25.0
-theme = ExtResource("3_8ucm7")
-theme_override_styles/background = SubResource("StyleBoxFlat_ovyiq")
-theme_override_styles/fill = SubResource("StyleBoxTexture_imxu1")
-max_value = 1.0
-fill_mode = 1
-show_percentage = false
-
-[node name="ColorRect" type="ColorRect" parent="BottomLeft/ProgressBar2"]
-layout_mode = 0
-offset_left = 139.0
-offset_right = 141.0
-offset_bottom = 19.0
-color = Color(0, 0, 0, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="BottomLeft/ProgressBar2"]
-layout_mode = 0
-offset_right = 2.0
-offset_bottom = 19.0
 color = Color(0, 0, 0, 1)
 
 [node name="ProgressBar" type="ProgressBar" parent="BottomLeft"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 62.0
-offset_top = -44.0
-offset_right = 203.0
-offset_bottom = -25.0
+offset_left = 26.0
+offset_top = -42.5
+offset_right = 137.5
+offset_bottom = -26.5
 theme = ExtResource("3_8ucm7")
 max_value = 1.0
 value = 1.0
 show_percentage = false
 
 [node name="TextureRect3" type="TextureRect" parent="BottomLeft"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 0
-offset_left = 26.0
-offset_top = -49.0
-offset_right = 54.0
-offset_bottom = -21.0
+offset_left = 30.5
+offset_top = -38.0
+offset_right = 38.0
+offset_bottom = -30.5
 texture = ExtResource("5_e0hn7")
-
-[node name="ColorRect3" type="ColorRect" parent="BottomLeft"]
-visible = false
-layout_mode = 0
-offset_left = 12.0
-offset_top = -75.0
-offset_right = 81.0
-offset_bottom = -55.0
-rotation = -0.0464826
-scale = Vector2(1.14879, 1)
-color = Color(0, 0, 0, 1)
-
-[node name="MedkitsLeft" type="Label" parent="BottomLeft"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 0
-offset_left = 65.0
-offset_top = -81.0
-offset_right = 145.0
-offset_bottom = -56.0
-theme = ExtResource("6_8v68b")
-text = "0"
-
-[node name="TextureRect5" type="TextureRect" parent="BottomLeft"]
-visible = false
-layout_mode = 0
-offset_left = 26.0
-offset_top = -85.0
-offset_right = 54.0
-offset_bottom = -57.0
-texture = ExtResource("7_hkj58")
+expand_mode = 1
 
 [node name="BottomRight" type="Control" parent="."]
 modulate = Color(1, 1, 0, 1)
@@ -283,48 +252,59 @@ grow_vertical = 0
 scale = Vector2(2, 2)
 
 [node name="ColorRect2" type="ColorRect" parent="BottomRight"]
+visible = false
 layout_mode = 0
 offset_left = -21.0
-offset_top = -40.0
-offset_right = 125.0
-offset_bottom = -20.0
+offset_top = -38.5
+offset_right = 104.068726
+offset_bottom = -22.5
 rotation = 0.0471239
 scale = Vector2(-0.810944, 1)
 color = Color(0, 0, 0, 1)
-
-[node name="ColorRect4" type="ColorRect" parent="BottomRight"]
-layout_mode = 0
-offset_left = -13.0
-offset_top = -71.0
-offset_right = 89.0
-offset_bottom = -51.0
-rotation = 0.0471239
-scale = Vector2(-0.810944, 1)
-color = Color(0, 0, 0, 1)
-
-[node name="MagsLeft" type="Label" parent="BottomRight"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = -52.0
-offset_top = -76.0
-offset_right = 124.0
-offset_bottom = -48.0
-theme = ExtResource("8_hkj58")
-text = "0"
 
 [node name="GunName" type="Label" parent="BottomRight"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_left = -188.0
-offset_top = -46.0
+offset_top = -42.5
 offset_right = -37.0
-offset_bottom = -18.0
-theme = ExtResource("8_hkj58")
+offset_bottom = -14.5
+theme = ExtResource("5_8v68b")
 text = "AK-47"
 horizontal_alignment = 2
 
-[node name="Sprite" type="Sprite2D" parent="BottomRight"]
-position = Vector2(-75.5001, -65.1636)
+[node name="AmmoCount" type="Control" parent="BottomRight"]
+anchors_preset = 0
+offset_left = -21.5
+offset_top = -25.0
+offset_right = -21.5
+offset_bottom = -25.0
+
+[node name="ColorRect4" type="ColorRect" parent="BottomRight/AmmoCount"]
+layout_mode = 0
+offset_left = 0.61157227
+offset_top = -13.916687
+offset_right = 62.161133
+offset_bottom = 2.083313
+rotation = 0.0471239
+scale = Vector2(-0.810944, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="MagsLeft" type="Label" parent="BottomRight/AmmoCount"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -22.451782
+offset_top = -15.500061
+offset_right = 153.54822
+offset_bottom = 12.499939
+theme = ExtResource("5_8v68b")
+text = "0"
+
+[node name="MagIcon" type="Sprite2D" parent="BottomRight/AmmoCount"]
+unique_name_in_owner = true
+position = Vector2(-37.499977, -6.9518137)
+scale = Vector2(0.6428566, 0.6428566)
 texture = ExtResource("8_6gmlr")
 region_enabled = true
 region_rect = Rect2(0, 0, 28, 28)

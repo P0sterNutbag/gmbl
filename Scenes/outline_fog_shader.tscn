@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyumojcinahde"]
+
+[ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="1_hoqac"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ctfa7"]
+render_priority = 0
+shader = ExtResource("1_hoqac")
+shader_parameter/depth_edge_threshold_lower = 0.999999977648
+shader_parameter/depth_edge_threshold_upper = 1.0
+shader_parameter/normal_edge_threshold = 1.0000000149012
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_width = 2.0
+shader_parameter/fog_color = Color(0.63529414, 0.5568628, 0.44313726, 1)
+shader_parameter/fog_start = 0.0
+shader_parameter/fog_end = 100.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_2uctf"]
+material = SubResource("ShaderMaterial_ctfa7")
+flip_faces = true
+size = Vector2(2, 2)
+
+[node name="Shader" type="MeshInstance3D"]
+cast_shadow = 0
+extra_cull_margin = 16237.3
+mesh = SubResource("QuadMesh_2uctf")

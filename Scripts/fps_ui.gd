@@ -4,24 +4,17 @@ var show_crosshair: bool = true
 @onready var middle_pos = get_tree().root.get_viewport().size / 8
 @onready var crosshair = $Crosshair
 @onready var player_hp_bar: ProgressBar = %ProgressBar
-@onready var player_hp_bar2: ProgressBar = %ProgressBar2
 @onready var hit_effect: Control = $HitEffect
 @onready var scope: TextureRect = $Scope
 @onready var mags_left: Label = %MagsLeft
-@onready var medkits_left: Label = %MedkitsLeft
 @onready var gun_name: Label = %GunName
 @onready var exit_area: Label = $Label
-#@onready var inventory_container: HBoxContainer = $PlayerInventory
-#@onready var inventory_container2: HBoxContainer = $TransferInventory
-#@onready var inventory: PanelContainer = %Inventory
-#@onready var inventory2: PanelContainer = %Inventory2
-@onready var mag_icon: Sprite2D = $BottomRight/Sprite
+@onready var mag_icon: Sprite2D = %MagIcon
 @onready var death_ui: PanelContainer = $DeathUI
 @onready var load_save: Button = $DeathUI/MarginContainer/VBoxContainer/VBoxContainer/LoadSave
 @onready var bottom_right: Control = $BottomRight
 @onready var tooltip: Label = $Tooltip
-
-#@onready var compass: ColorRect = $TopCenter/Compass/ColorRect
+@onready var hit_indicator: TextureRect = %HitIndicator
 
 
 func _ready() -> void:
@@ -44,17 +37,7 @@ func _process(delta: float) -> void:
 			mag_icon.region_rect = Rect2(sprite_index * 28, 0, 28, mag_icon.region_rect.size.y)
 	else:
 		bottom_right.visible = false
-	
-	# inventory
-	#if Input.is_action_just_pressed("inventory"):
-		#inventory_container.visible = !inventory_container.visible
-		#if inventory_container.visible:
-			#PlayerStats.change_state(PlayerStats.states.pause)
-			#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		#else:
-			#PlayerStats.change_state(PlayerStats.states.walk)
-			#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
+
 	# crosshair
 	if get_tree().current_scene == Globals.overworld:
 		return
@@ -93,36 +76,36 @@ func set_mag_count(amount: int) -> void:
 	mags_left.text = str(amount)
 
 
-func set_medit_count(amount: int) -> void:
-	medkits_left.text = str(amount)
-
-
 func set_gun_name(new_name: String) -> void:
 	gun_name.text = new_name
 
 
-func play_hit_effect() -> void:
-	hit_effect.visible = true
+func play_hit_effect(hit_direction: Vector3) -> void:
+	# red flash
+	hit_effect.show()
 	hit_effect.modulate.a = 1
 	var tween = create_tween()
 	tween.tween_property(hit_effect, "modulate:a", 0, 0.25)
 	tween.tween_property(hit_effect, "visible", false, 0)
-
-
-#func loot(target) -> void:
-	#PlayerStats.change_state(PlayerStats.states.pause)
-	#inventory.mode = inventory.modes.loot
-	#inventory2.mode = inventory2.modes.loot
-	#inventory.target2 = target
-	#inventory2.target = target
-	#inventory2.target2 = PlayerStats
-	#inventory2.grab_focus()
-	#inventory_container2.show()
-#
-#
-#func reset_inventoryies() -> void:
-	#inventory.set_items()
-	#inventory2.set_items()
+	# hit indicator
+	hit_indicator.show()
+	hit_indicator.modulate.a = 1
+	var b_basis = Basis.from_euler(hit_direction)
+	var b_fwd = -b_basis.z
+	b_fwd.y = 0.0
+	b_fwd = b_fwd.normalized()
+	var bullet_yaw = atan2(b_fwd.x, b_fwd.z)
+	bullet_yaw = wrapf(bullet_yaw + PI, -PI, PI)
+	var c_basis = Basis.from_euler(Globals.player.global_rotation)
+	var c_fwd = -c_basis.z
+	c_fwd.y = 0.0
+	c_fwd = c_fwd.normalized()
+	var cam_yaw = atan2(c_fwd.x, c_fwd.z)
+	var delta_yaw = wrapf(bullet_yaw - cam_yaw, -PI, PI)
+	hit_indicator.get_parent().rotation = -delta_yaw
+	var tween2 = create_tween()
+	tween2.tween_property(hit_indicator, "modulate:a", 0, 1)
+	tween2.tween_property(hit_indicator, "visible", false, 0)
 
 
 func _on_player_inventory_exit() -> void:

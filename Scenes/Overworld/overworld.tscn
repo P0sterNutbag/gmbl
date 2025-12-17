@@ -1,7 +1,7 @@
-[gd_scene load_steps=165 format=4 uid="uid://doydk513gm02l"]
+[gd_scene load_steps=163 format=4 uid="uid://doydk513gm02l"]
 
 [ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_6y65m"]
-[ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="2_gw0hx"]
+[ext_resource type="PackedScene" uid="uid://dyumojcinahde" path="res://Scenes/outline_fog_shader.tscn" id="3_2uctf"]
 [ext_resource type="PackedScene" uid="uid://cc458wgoeu6t4" path="res://Scenes/UI/survival_ui.tscn" id="3_4xsnl"]
 [ext_resource type="PackedScene" uid="uid://cl4glsi76vapy" path="res://Scenes/Overworld/player.tscn" id="3_c84f5"]
 [ext_resource type="Theme" uid="uid://djqipqwy5toiu" path="res://Art/Themes/VBoxContainer.tres" id="5_7t5fg"]
@@ -69,23 +69,6 @@
 [ext_resource type="Texture2D" uid="uid://25baqqag6lrp" path="res://Art/Textures/npc_face4.png" id="73_ptrkr"]
 [ext_resource type="Texture2D" uid="uid://whgiy4tx5l5g" path="res://Art/Textures/npc brown jacket.png" id="74_rsj15"]
 [ext_resource type="PackedScene" uid="uid://csjsfdmnghtqx" path="res://Scenes/Overworld/Locations/scrapyard.tscn" id="80_nggm6"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t2t4p"]
-render_priority = 0
-shader = ExtResource("2_gw0hx")
-shader_parameter/depth_edge_threshold_lower = 0.999999977648
-shader_parameter/depth_edge_threshold_upper = 0.3
-shader_parameter/normal_edge_threshold = 1.0000000149012
-shader_parameter/line_color = Color(0, 0, 0, 1)
-shader_parameter/line_width = 2.0
-shader_parameter/fog_color = Color(0.8509804, 0.2901961, 0.30980393, 1)
-shader_parameter/fog_start = 30.0
-shader_parameter/fog_end = 300.0
-
-[sub_resource type="QuadMesh" id="QuadMesh_phy3g"]
-material = SubResource("ShaderMaterial_t2t4p")
-flip_faces = true
-size = Vector2(2, 2)
 
 [sub_resource type="Resource" id="Resource_0e3xm"]
 script = ExtResource("15_rvg24")
@@ -655,11 +638,8 @@ script = ExtResource("1_6y65m")
 [node name="DirectionalLight3D" parent="WorldEnvironment" index="0"]
 transform = Transform3D(1, 0, 0, 0, -0.53365904, 0.84569997, 0, -0.84569997, -0.53365904, 0, 0, 0)
 
-[node name="Shader" type="MeshInstance3D" parent="."]
+[node name="Shader" parent="." instance=ExtResource("3_2uctf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.492066, 0, 0)
-cast_shadow = 0
-extra_cull_margin = 16237.3
-mesh = SubResource("QuadMesh_phy3g")
 
 [node name="CanvasLayer" parent="." instance=ExtResource("3_4xsnl")]
 

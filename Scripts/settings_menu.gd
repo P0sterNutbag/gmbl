@@ -1,11 +1,11 @@
 extends Menu
 
 
-#func _process(_delta: float) -> void:
-	#if !visible:
-		#return
-	#if Input.is_action_just_pressed("ui_cancel"):
-		#hide()
+var overlay: CanvasLayer
+
+
+func _ready() -> void:
+	overlay = get_tree().root.get_node("Overlay")
 
 
 func _on_volume_pressed() -> void:
@@ -29,3 +29,19 @@ func _on_sfx_h_slider_value_changed(value: float) -> void:
 
 func _on_back_pressed() -> void:
 	hide()
+
+
+func _on_warp_toggled(toggled_on: bool) -> void:
+	overlay.toggle_warp(toggled_on)
+
+
+func _on_crt_toggled(toggled_on: bool) -> void:
+	overlay.toggle_crt(toggled_on)
+
+
+func _on_crosshair_option_changed(value: Variant) -> void:
+	call("change_crosshair", value)
+
+
+func change_crosshair(index: int) -> void:
+	Globals.crosshair_type = index as Globals.crosshairs

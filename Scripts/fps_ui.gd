@@ -39,17 +39,17 @@ func _process(delta: float) -> void:
 		bottom_right.visible = false
 
 	# crosshair
-	if get_tree().current_scene == Globals.overworld:
-		return
 	if (!show_crosshair or !Globals.player.gun or 
 	Globals.player.gun_state == Globals.player.gun_states.ads or 
 	Globals.player.gun_state == Globals.player.gun_states.no_gun or 
-	tooltip.text != "" or
+	tooltip.text != "" or Globals.crosshair_type == Globals.crosshairs.none or
 	(UiController.current_ui and UiController.current_ui.name.to_lower().contains("inventory"))):
 		crosshair.hide()
 		return
 	else:
 		crosshair.show()
+	if Globals.crosshair_type == Globals.crosshairs.dot:
+		return
 	var base_pos = clamp(Globals.player.gun.bullet_stats.h_angle_variance_hip * 20, 1, 100)
 	for child in crosshair.get_children():
 		var target_pos = child.position

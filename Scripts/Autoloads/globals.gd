@@ -7,6 +7,8 @@ var overworld: Node3D
 var particle_manager: Node
 var npc_controller: Node3D
 var survival_ui: CanvasLayer
+enum crosshairs {standard, dot, none}
+var crosshair_type = crosshairs.standard
 #const PAUSE_MENU = preload("res://Scenes/UI/pause_menu.tscn")
 
 

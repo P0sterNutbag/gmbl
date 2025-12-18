@@ -1,5 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://yrogoe1spda5"]
+[gd_scene load_steps=6 format=3 uid="uid://yrogoe1spda5"]
 
+[ext_resource type="Script" uid="uid://ctc5ynr5as16v" path="res://Scripts/overlay.gd" id="1_64of3"]
+[ext_resource type="Shader" uid="uid://ctrmuaf68vbgo" path="res://Art/Shaders/lens_distortion.gdshader" id="3_8wgra"]
 [ext_resource type="Shader" uid="uid://ur7ounp8t8w" path="res://Art/Shaders/crt.gdshader" id="5_woari"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8ypfs"]
@@ -19,7 +21,12 @@ shader_parameter/roll_speed = 3.7999999946691787e-07
 shader_parameter/scan_line_strength = -8.0
 shader_parameter/pixel_strength = -2.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ac3tm"]
+shader = ExtResource("3_8wgra")
+shader_parameter/strength = 0.005000001750989996
+
 [node name="Overlay" type="CanvasLayer"]
+script = ExtResource("1_64of3")
 
 [node name="CRT" type="ColorRect" parent="."]
 z_index = 10
@@ -29,3 +36,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="Warp" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_ac3tm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

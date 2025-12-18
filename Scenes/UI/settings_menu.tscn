@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4m6uckxpd6d8"]
+[gd_scene load_steps=13 format=3 uid="uid://c4m6uckxpd6d8"]
 
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_ynxh7"]
 [ext_resource type="Script" uid="uid://cxkoa2hl7kp5s" path="res://Scripts/settings_menu.gd" id="2_n6o6n"]
@@ -6,6 +6,27 @@
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="4_oadur"]
 [ext_resource type="PackedScene" uid="uid://bdxd0o243hn4c" path="res://Scenes/UI/slider_button.tscn" id="5_n6o6n"]
 [ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="5_sv08j"]
+[ext_resource type="PackedScene" uid="uid://cg16jkn12mu6s" path="res://Scenes/UI/toggle_button.tscn" id="6_cs2gm"]
+[ext_resource type="PackedScene" uid="uid://dnl56ggtju325" path="res://Scenes/UI/option_button.tscn" id="7_sv08j"]
+[ext_resource type="Script" uid="uid://ba4324tncpb5w" path="res://Scripts/string_resource_pair.gd" id="8_w0jc6"]
+
+[sub_resource type="Resource" id="Resource_8t2tk"]
+script = ExtResource("8_w0jc6")
+string = "Standard"
+value = 0
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
+[sub_resource type="Resource" id="Resource_gqlue"]
+script = ExtResource("8_w0jc6")
+string = "Dot"
+value = 1
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
+[sub_resource type="Resource" id="Resource_7vbwh"]
+script = ExtResource("8_w0jc6")
+string = "None"
+value = 2
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
 [node name="SettingsMenu" type="PanelContainer" node_paths=PackedStringArray("item_container")]
 anchors_preset = 8
@@ -65,6 +86,18 @@ text = "Music Volume"
 layout_mode = 2
 text = "SFX Volume"
 
+[node name="CRT" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_cs2gm")]
+layout_mode = 2
+
+[node name="Warp" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_cs2gm")]
+layout_mode = 2
+text = "Screen Warp"
+
+[node name="Crosshair" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("7_sv08j")]
+layout_mode = 2
+text = "Crosshair"
+options = Array[ExtResource("8_w0jc6")]([SubResource("Resource_8t2tk"), SubResource("Resource_gqlue"), SubResource("Resource_7vbwh")])
+
 [node name="Back" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("5_sv08j")]
 layout_mode = 2
 text = "Back"
@@ -72,6 +105,9 @@ text = "Back"
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/Volume/HBoxContainer/HSlider" to="." method="_on_master_h_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/MusicVolume/HBoxContainer/HSlider" to="." method="_on_music_h_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/SfxVolume/HBoxContainer/HSlider" to="." method="_on_sfx_h_slider_value_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/VBoxContainer/CRT" to="." method="_on_crt_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/VBoxContainer/Warp" to="." method="_on_warp_toggled"]
+[connection signal="option_changed" from="MarginContainer/VBoxContainer/VBoxContainer/Crosshair" to="." method="_on_crosshair_option_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
 
 [editable path="MarginContainer/VBoxContainer/VBoxContainer/Volume"]

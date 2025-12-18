@@ -9,6 +9,7 @@ extends Menu
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	main_menu.hide()
 	if Globals.overworld:
 		Globals.overworld.queue_free()
 	if !SaveController.save_file_exists():
@@ -22,7 +23,13 @@ func _ready() -> void:
 		tween.tween_interval(0.25)
 		tween.tween_property(color_rect, "modulate:a", 0, 0.75)
 		await tween.finished
-	activate()
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey or event is InputEventMouseButton or event is InputEventJoypadButton:
+		if !main_menu.visible and color_rect.modulate.a <= 0:
+			main_menu.show()
+			activate()
 
 
 func _on_menu_item_pressed() -> void:

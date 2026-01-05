@@ -14,7 +14,7 @@ class_name HealthComponent
 				hp_bar.text = "HP:" + str(int((hp / max_hp) * 100))
 @export var hp_bar: Control
 @export var otherHitboxes: Array[HealthComponent]
-#@export var blood_on_hit: bool = true
+@export var blood_on_hit: bool = true
 @onready var max_hp: float = hp
 var audio_stream_player: AudioStreamPlayer3D
 var damage_modifier: float = 1.0
@@ -33,7 +33,7 @@ func _ready() -> void:
 		audio_stream_player = $AudioStreamPlayer3D
 
 
-func damage(dmg: float, hit_position: Vector3 = Vector3.ZERO, hit_direction: Vector3 = Vector3.ZERO, allow_damage_mod: bool = true, blood_on_hit: bool = true, play_audio: bool = true) -> void:
+func damage(dmg: float, hit_position: Vector3 = Vector3.ZERO, hit_direction: Vector3 = Vector3.ZERO, allow_damage_mod: bool = true, blood: bool = true, play_audio: bool = true) -> void:
 	damaged.emit(hit_position, hit_direction)
 	if is_dead:
 		return
@@ -50,7 +50,7 @@ func damage(dmg: float, hit_position: Vector3 = Vector3.ZERO, hit_direction: Vec
 		for child in get_children():
 			if child is CollisionShape3D:
 				child.set_deferred("disabled", true)
-	if !blood_on_hit:
+	if !blood_on_hit or !blood:
 		return
 	var inst = blood_spatter.instantiate()
 	var spawn_pos = get_parent().global_position + Vector3(randf_range(-1, 1), 0, randf_range(-1, 1))

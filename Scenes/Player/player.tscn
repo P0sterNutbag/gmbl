@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://c055smn111au7"]
+[gd_scene load_steps=78 format=3 uid="uid://c055smn111au7"]
 
 [ext_resource type="Script" uid="uid://cslnx4rw32guw" path="res://Scripts/player.gd" id="1_ur3l4"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_2ahak"]
@@ -45,8 +45,8 @@ radius = 0.2
 [sub_resource type="Resource" id="Resource_l6n3p"]
 script = ExtResource("8_enij7")
 speed = 200.0
-h_angle_variance_hip = 2.0
-v_angle_variance_hip = 2.0
+h_angle_variance_hip = 1.5
+v_angle_variance_hip = 1.5
 noise_radius = 75.0
 is_hitscan = false
 metadata/_custom_type_script = "uid://c338ifvm4duar"
@@ -764,6 +764,16 @@ _data = {
 &"reload": SubResource("Animation_83xs0")
 }
 
+[sub_resource type="Resource" id="Resource_rukb4"]
+script = ExtResource("8_enij7")
+speed = 200.0
+damage = 3.0
+h_angle_variance_hip = 1.5
+v_angle_variance_hip = 1.5
+noise_radius = 75.0
+is_hitscan = false
+metadata/_custom_type_script = "uid://c338ifvm4duar"
+
 [sub_resource type="Resource" id="Resource_8gxox"]
 resource_local_to_scene = true
 resource_name = "rifle_ammo"
@@ -1193,6 +1203,7 @@ libraries = {
 }
 
 [node name="HuntingRifle" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("26_5omc3")]
+bullet_stats = SubResource("Resource_rukb4")
 ammo_item = SubResource("Resource_8gxox")
 
 [node name="MeshInstance3D6" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/HuntingRifle/GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3" index="2"]

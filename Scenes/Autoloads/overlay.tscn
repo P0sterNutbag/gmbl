@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://yrogoe1spda5"]
+[gd_scene load_steps=7 format=3 uid="uid://yrogoe1spda5"]
 
 [ext_resource type="Script" uid="uid://ctc5ynr5as16v" path="res://Scripts/overlay.gd" id="1_64of3"]
 [ext_resource type="Shader" uid="uid://ctrmuaf68vbgo" path="res://Art/Shaders/lens_distortion.gdshader" id="3_8wgra"]
+[ext_resource type="Texture2D" uid="uid://cpuqxwinvw514" path="res://Art/Textures/cursor.png" id="4_ac3tm"]
 [ext_resource type="Shader" uid="uid://ur7ounp8t8w" path="res://Art/Shaders/crt.gdshader" id="5_woari"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8ypfs"]
@@ -9,9 +10,9 @@ shader = ExtResource("5_woari")
 shader_parameter/resolution = Vector2(960, 540)
 shader_parameter/scan_line_amount = 0.0
 shader_parameter/warp_amount = 0.0050000002375
-shader_parameter/noise_amount = 0.03
+shader_parameter/noise_amount = 0.02000000095
 shader_parameter/interference_amount = 0.2
-shader_parameter/grille_amount = 0.1
+shader_parameter/grille_amount = 0.0
 shader_parameter/grille_size = 1.0
 shader_parameter/vignette_amount = 0.0
 shader_parameter/vignette_intensity = 0.0
@@ -23,10 +24,16 @@ shader_parameter/pixel_strength = -2.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ac3tm"]
 shader = ExtResource("3_8wgra")
-shader_parameter/strength = 0.005000001750989996
+shader_parameter/strength = 0.00500000175098999
 
 [node name="Overlay" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_64of3")
+
+[node name="Mouse" type="TextureRect" parent="."]
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("4_ac3tm")
 
 [node name="CRT" type="ColorRect" parent="."]
 z_index = 10

@@ -21,10 +21,15 @@ var walk_time := 0.0
 var push_force := 20
 var sway_time := 0.0
 var sway_speed = 0.1
+var sway_speed_hold_breath = 0.01
 var footstep_timer := 0.0
 var sway_intensity = 3
+var max_breath = 3.0
+var current_breath = 3.0
 var is_crouching: bool
 var on_ladder: bool
+var can_hold_breath: bool = true
+var is_holding_breath: bool
 var aim_rotation: Vector3
 var ammo: int:
 	get():
@@ -113,6 +118,7 @@ func _ready() -> void:
 		gun_states.ammo_check: exit_gun_state_ammo_check,
 		gun_states.no_gun: exit_gun_state_no_gun,
 		gun_states.point_up: exit_gun_state_point_up,
+		gun_states.ads: exit_gun_state_ads,
 	}
 	# set skin color
 	var arm = gun_anchor.get_child(0).get_node("ArmLAnchor/armL/Cube_001")
@@ -333,6 +339,12 @@ func state_walk(delta):
 	else:
 		spot_light.visible = false
 	
+	# breath
+	if is_holding_breath:
+		current_breath -= delta
+	elif current_breath < max_breath:
+		current_breath += delta
+	
 	# ui
 	if gun:
 		if Input.is_action_just_pressed("aim"):
@@ -437,11 +449,29 @@ func enter_gun_state_ads():
 
 
 func gun_state_ads(delta: float) -> void:
-	sway_time += delta * sway_speed
+	var current_sway_speed = sway_speed
+	if Input.is_action_just_pressed("hold_breath") and current_breath > 0.0 and can_hold_breath:
+		is_holding_breath = true
+	if Input.is_action_just_released("hold_breath"):
+		is_holding_breath = false
+	if is_holding_breath:
+		current_sway_speed = sway_speed_hold_breath
+		if current_breath <= 0:
+			can_hold_breath = false
+			is_holding_breath = false
+	elif current_breath < max_breath:
+		if !can_hold_breath and current_breath > 1:
+			can_hold_breath = true
+	sway_time += delta * current_sway_speed
 	var x_offset = sway_noise.get_noise_2d(sway_time, 0.0) * sway_intensity
 	var y_offset = sway_noise.get_noise_2d(0.0, sway_time) * sway_intensity
 	rotation.y += deg_to_rad(y_offset)
 	camera.rotation.x += deg_to_rad(x_offset)
+
+
+func exit_gun_state_ads() -> void:
+	is_holding_breath = false
+	can_hold_breath = true
 
 
 func enter_gun_state_reload() -> void:
@@ -576,7 +606,7 @@ func change_gun(new_gun: EquipmentGun) -> void:
 		else:
 			gun.gun_stats = PlayerStats.gun.gun_stats
 			gun.rotation = Vector3.ZERO
-			await get_tree().create_timer(0.05).timeout
+			#await get_tree().create_timer(0.05).timeout
 			gun.visible = true
 	Globals.ui.set_gun_name(PlayerStats.gun.title)
 	if Input.is_action_pressed("aim"):
@@ -624,7 +654,10 @@ func find_item(item_name: String) -> Resource:
 func step_noise_event():
 	if !Globals.noise_controller:
 		return
-	Globals.noise_controller.create_noise_event(global_position, self)
+	var step_radius = 20
+	if speed == walk_speed:
+		step_radius = 30
+	Globals.noise_controller.create_noise_event(global_position, self, step_radius)
 
 
 func face_center(vector: Vector3 = Vector3(0, camera.position.y, 0)):
@@ -684,3 +717,7 @@ func _on_bullet_listener_area_entered(_area: Area3D) -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "pump":
 		gun.can_shoot = true
+
+
+func _on_breath_timer_timeout() -> void:
+	pass # Replace with function body.

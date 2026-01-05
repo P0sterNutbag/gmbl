@@ -1,0 +1,66 @@
+[gd_scene load_steps=12 format=3 uid="uid://3tebjfciggjr"]
+
+[ext_resource type="PackedScene" uid="uid://7ckg1cl2oun2" path="res://Scenes/Environment/Prefabs With Spawning/trash.tscn" id="8_lnapd"]
+[ext_resource type="PackedScene" uid="uid://bf3gw6c3ye46j" path="res://Scenes/Environment/Prefabs With Spawning/drum_barrels.tscn" id="9_31so8"]
+[ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="9_50q3m"]
+[ext_resource type="PackedScene" uid="uid://bxxs6ujnftm71" path="res://Scenes/Environment/Prefabs With Spawning/tire_stacks.tscn" id="10_ga0ok"]
+[ext_resource type="PackedScene" uid="uid://dyumojcinahde" path="res://Scenes/outline_fog_shader.tscn" id="10_pnqyo"]
+[ext_resource type="Script" uid="uid://bokxkydc5jmf" path="res://addons/zylann.hterrain/hterrain.gd" id="11_6bpxg"]
+[ext_resource type="Resource" uid="uid://dgdan75tyg2v7" path="res://addons/zylann.hterrain/data/main_menu/data.hterrain" id="12_g10a6"]
+[ext_resource type="Script" uid="uid://b8f4u7je7ufby" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="13_6lbnv"]
+[ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand.png" id="14_lb26w"]
+[ext_resource type="Texture2D" uid="uid://cfsov1xtejnen" path="res://Art/Textures/gravel.png" id="15_lq71c"]
+
+[sub_resource type="Resource" id="Resource_oslnl"]
+script = ExtResource("13_6lbnv")
+mode = 0
+textures = [[ExtResource("14_lb26w"), ExtResource("15_lq71c")], [null, null]]
+
+[node name="MainMenu" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, -1.5614963e-15, -8.7422784e-08, 2.0449981e-08, 0.9722557, -0.23392051, 8.499729e-08, -0.23392051, -0.9722557, 256.961, 0, 0)
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("9_50q3m")]
+
+[node name="DirectionalLight3D" parent="WorldEnvironment" index="0"]
+transform = Transform3D(0.24868995, 0.69202644, 0.6776823, 0, -0.69966346, 0.7144729, 0.96858317, -0.17768222, -0.17399926, 0, 0, 0)
+
+[node name="Shader" parent="." instance=ExtResource("10_pnqyo")]
+
+[node name="HTerrain" type="Node3D" parent="."]
+script = ExtResource("11_6bpxg")
+_terrain_data = ExtResource("12_g10a6")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_oslnl")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 2.0
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+metadata/_custom_type_script = "uid://bokxkydc5jmf"
+
+[node name="Screenshot" type="Node" parent="."]
+
+[node name="Trash" parent="." node_paths=PackedStringArray("terrain") instance=ExtResource("8_lnapd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 261.43134, -1.6498963, 11.449986)
+visible = false
+terrain = NodePath("../HTerrain")
+
+[node name="DrumBarrels" parent="." node_paths=PackedStringArray("terrain", "nodes_to_exclude") instance=ExtResource("9_31so8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 251.96722, -1.2021319, 10.70676)
+terrain = NodePath("../HTerrain")
+nodes_to_exclude = [NodePath("NpcSpawns"), NodePath("LootSpawns"), null]
+
+[node name="TireStacks" parent="." node_paths=PackedStringArray("terrain") instance=ExtResource("10_ga0ok")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 262.8043, -2.0510345, 15.055206)
+terrain = NodePath("../HTerrain")
+
+[editable path="WorldEnvironment"]

@@ -4,6 +4,12 @@ var crt_on: bool = true
 var warp_on: bool = true
 @onready var crt: ColorRect = $CRT
 @onready var warp: ColorRect = $Warp
+@onready var mouse: TextureRect = $Mouse
+
+
+func _process(_delta: float) -> void:
+	mouse.visible = Input.mouse_mode == Input.MOUSE_MODE_HIDDEN
+	mouse.global_position = get_viewport().get_mouse_position()
 
 
 func toggle_warp(value: bool) -> void:

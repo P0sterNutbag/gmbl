@@ -46,9 +46,11 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="HitIndicatorOffset" type="Control" parent="Center"]
 anchors_preset = 0
+mouse_filter = 2
 
 [node name="HitIndicator" type="TextureRect" parent="Center/HitIndicatorOffset"]
 unique_name_in_owner = true
@@ -67,6 +69,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -1.5707964
 pivot_offset = Vector2(25, 50)
+mouse_filter = 2
 texture = SubResource("GradientTexture1D_hkj58")
 
 [node name="Crosshair" type="Control" parent="."]
@@ -78,6 +81,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Control" type="Control" parent="Crosshair"]
@@ -171,12 +175,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(1, 1, 0, 1)
 
 [node name="DotCrosshair2" type="ColorRect" parent="DotCrosshair"]
@@ -187,10 +192,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -3.0
-offset_right = 4.0
-offset_bottom = 5.0
+offset_left = -2.0
+offset_top = -1.0
+offset_right = 2.0
+offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
@@ -203,6 +208,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="HitEffect"]
 layout_mode = 1
@@ -211,6 +217,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(1, 0, 0, 0.427451)
 
 [node name="Scope" type="TextureRect" parent="."]
@@ -334,11 +341,26 @@ text = "0"
 
 [node name="MagIcon" type="Sprite2D" parent="BottomRight/AmmoCount"]
 unique_name_in_owner = true
-position = Vector2(-37.499977, -6.9518137)
-scale = Vector2(0.6428566, 0.6428566)
+position = Vector2(-38.999973, -6.9999743)
+scale = Vector2(0.9642849, 0.9642849)
 texture = ExtResource("8_6gmlr")
 region_enabled = true
 region_rect = Rect2(0, 0, 28, 28)
+
+[node name="Breath" type="ProgressBar" parent="."]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 52.0
+offset_top = -122.0
+offset_right = 163.5
+offset_bottom = -106.0
+grow_vertical = 0
+theme = ExtResource("3_8ucm7")
+max_value = 1.0
+value = 1.0
+show_percentage = false
 
 [node name="TopCenter" type="Control" parent="."]
 modulate = Color(1, 1, 0, 1)

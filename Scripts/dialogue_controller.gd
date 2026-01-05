@@ -11,15 +11,17 @@ var menu_item = preload("res://Scenes/UI/menu_item.tscn")
 @onready var repair_menu: PanelContainer = $"../Repair"
 signal exit
 
-#func _ready() -> void:
-	#visibility_changed.connect(_on_visibility_changed)
-
 
 func _process(_delta: float) -> void:
 	if !visible:
 		return
 	if (Input.is_action_just_pressed("select") or Input.is_action_just_pressed("shoot")) and dialogue_tree.bubbles[index] is not DialogueOptions and can_advance:
 		advance_dialogue(index + 1)
+	if Input.is_action_just_pressed("ui_cancel") and dialogue_tree.bubbles[index] is DialogueOptions:
+		if Globals.overworld.current_encounter.town:
+			enter_town()
+		else:
+			exit_to_game()
 
 
 func start_dialogue(tree: DialogueTree) -> void:

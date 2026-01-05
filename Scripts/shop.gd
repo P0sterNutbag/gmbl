@@ -9,6 +9,7 @@ class_name Shop
 @export var price_modifiers: Dictionary = {
 	"Survival" : 0.75,
 	"Guns" : 0.75,
+	"Armor" : 0.75,
 	"Ammo" : 0.75,
 	"Junk" : 0.75,
 }

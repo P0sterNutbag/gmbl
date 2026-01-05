@@ -6,7 +6,7 @@ extends CanvasLayer
 @onready var loot_transfer_inventory: InventoryUI = %Inventory2
 @onready var journal: HBoxContainer = $Journal
 @onready var compass: Control = $TopCenter/Compass
-@onready var pause_menu: Control = $PauseMenu/PanelContainer
+@onready var pause_menu: Control = $PauseMenu
 @onready var player_inventory: InventoryUI = $PlayerInventory/Inventory
 @onready var progress_menu: PanelContainer = $ProgressMenu
 
@@ -63,7 +63,7 @@ func _process(_delta: float) -> void:
 
 
 #func open_menu(menu: Control, array: Array = []) -> void:
-	#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	#Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	#menu.show()
 	#if menu is MenuList:
 		#menu.open(array)

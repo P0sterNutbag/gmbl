@@ -14,7 +14,7 @@ const starting_gear = preload("uid://dpjy0ettwaiyp")
 
 
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	var saved_gear
 	if ResourceLoader.exists("user://starting_gear.res"):
 		saved_gear = ResourceLoader.load("user://starting_gear.res")

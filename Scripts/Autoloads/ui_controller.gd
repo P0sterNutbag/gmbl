@@ -15,7 +15,7 @@ func open_interface(node_to_open: Control, pause_player: bool = true) -> void:
 			node.hide()
 	if pause_player:
 		PlayerStats.change_state(PlayerStats.states.pause)
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 
 func close_interface(node_to_close: Control, activate_player: bool = true) -> void:

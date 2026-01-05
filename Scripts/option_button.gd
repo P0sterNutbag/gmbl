@@ -8,7 +8,7 @@ signal option_changed(value)
 
 func _ready() -> void:
 	super._ready()
-	await get_tree().current_scene.ready
+	#await get_tree().current_scene.ready
 	option_label.text = options[index].string
 
 

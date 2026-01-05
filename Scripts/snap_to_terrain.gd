@@ -12,7 +12,7 @@ func position_on_heightmap(_value) -> void:
 	for inst in objects_to_snap:
 		var height = terrain.get_data().get_height_at(inst.global_position.x, inst.global_position.z)
 		inst.global_position.y = height
-		terrain.get_data().get_normal_at
+		#terrain.get_data().get_normal_at
 
 
 func rotate_objects(_value) -> void:

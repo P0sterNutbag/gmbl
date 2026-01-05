@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dqnmrknu73rsn"]
+[gd_scene load_steps=20 format=3 uid="uid://dqnmrknu73rsn"]
 
 [ext_resource type="Script" uid="uid://ba3gw1buyi5y1" path="res://Scripts/main_menu.gd" id="1_n45e2"]
 [ext_resource type="Texture2D" uid="uid://fdqhgbou1nix" path="res://Art/Textures/logo.png" id="2_jewm6"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://c4m6uckxpd6d8" path="res://Scenes/UI/settings_menu.tscn" id="7_gih0s"]
 [ext_resource type="Script" uid="uid://coca4kpvs4ro0" path="res://Scripts/main_menu_camera.gd" id="9_cejvf"]
 [ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="9_jewm6"]
+[ext_resource type="Texture2D" uid="uid://cik1pupsca6tb" path="res://Art/Textures/title2.png" id="9_oslnl"]
+[ext_resource type="Script" uid="uid://c3e4uxlyfja8s" path="res://Scripts/juicy_movement.gd" id="10_3h8o7"]
 [ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand.png" id="10_cejvf"]
 [ext_resource type="PackedScene" uid="uid://dyumojcinahde" path="res://Scenes/outline_fog_shader.tscn" id="11_jewm6"]
 [ext_resource type="Script" uid="uid://bokxkydc5jmf" path="res://addons/zylann.hterrain/hterrain.gd" id="13_1yfdm"]
@@ -39,6 +41,7 @@ script = ExtResource("1_n45e2")
 item_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/VBoxContainer")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/MainMenu"]
+visible = false
 z_index = 2
 layout_mode = 1
 anchors_preset = 15
@@ -49,7 +52,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/MainMenu/ColorRect"]
-modulate = Color(1, 1, 0, 1)
+modulate = Color(1, 0, 0.2509804, 1)
 z_index = 3
 layout_mode = 1
 anchors_preset = 8
@@ -170,7 +173,21 @@ offset_top = -152.5
 offset_right = 341.5
 offset_bottom = 152.5
 
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MainMenu"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 344.0
+offset_right = 1887.0
+offset_bottom = 755.0
+pivot_offset = Vector2(923, 205.5)
+mouse_filter = 2
+texture = ExtResource("9_oslnl")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("10_3h8o7")
+
 [node name="Label" type="Label" parent="CanvasLayer/MainMenu"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -185,11 +202,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_cp0ys")
 theme_override_colors/font_color = Color(1, 0, 0.2509804, 1)
+theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 359
 text = "SLUGMOUTH"
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 256.961, 0, 0)
+transform = Transform3D(-1, -1.5614963e-15, -8.7422784e-08, 2.0449981e-08, 0.9722557, -0.23392051, 8.499729e-08, -0.23392051, -0.9722557, 256.961, 0, 0)
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("9_jewm6")]
 
@@ -256,8 +274,10 @@ shader_params/u_triplanar = null
 shader_params/u_tile_reduction = null
 metadata/_custom_type_script = "uid://bokxkydc5jmf"
 
+[node name="Screenshot" type="Node" parent="."]
+
 [connection signal="pressed" from="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="CanvasLayer/MainMenu" method="_on_menu_item_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" to="CanvasLayer/MainMenu" method="_on_menu_item_2_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem3" to="CanvasLayer/MainMenu" method="_on_menu_item_3_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem4" to="CanvasLayer/MainMenu" method="_on_menu_item_4_pressed"]
-[connection signal="hidden" from="CanvasLayer/MainMenu/SettingsMenu" to="." method="_on_settings_menu_hidden"]
+[connection signal="visibility_changed" from="CanvasLayer/MainMenu/SettingsMenu" to="CanvasLayer/MainMenu" method="_on_settings_menu_visibility_changed"]

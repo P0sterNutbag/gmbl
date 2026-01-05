@@ -13,7 +13,7 @@ func _process(_delta: float) -> void:
 
 
 func create_town(town_data: Town) -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	PlayerStats.change_state(PlayerStats.states.pause)
 	if town_data.shops.size() == 1:
 		var shop = town_data.shops[0]

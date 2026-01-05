@@ -15,6 +15,8 @@ var show_crosshair: bool = true
 @onready var bottom_right: Control = $BottomRight
 @onready var tooltip: Label = $Tooltip
 @onready var hit_indicator: TextureRect = %HitIndicator
+@onready var dot_crosshair: ColorRect = $DotCrosshair
+@onready var breath: ProgressBar = $Breath
 
 
 func _ready() -> void:
@@ -22,6 +24,12 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	# tooltip
+	if UiController.current_ui != null:
+		tooltip.hide()
+	else:
+		tooltip.show()
+	
 	# magazine/medkits
 	if Globals.player.gun:
 		bottom_right.visible = true
@@ -37,18 +45,28 @@ func _process(delta: float) -> void:
 			mag_icon.region_rect = Rect2(sprite_index * 28, 0, 28, mag_icon.region_rect.size.y)
 	else:
 		bottom_right.visible = false
+	
+	# breath
+	#if Globals.player.gun_state == Globals.player.gun_states.ads and Globals.player.current_breath < Globals.player.max_breath:
+		#breath.visible = true
+		#breath.value = Globals.player.current_breath / Globals.player.max_breath
+	#else:
+		#breath.visible = false
 
+	
 	# crosshair
 	if (!show_crosshair or !Globals.player.gun or 
 	Globals.player.gun_state == Globals.player.gun_states.ads or 
 	Globals.player.gun_state == Globals.player.gun_states.no_gun or 
 	tooltip.text != "" or Globals.crosshair_type == Globals.crosshairs.none or
-	(UiController.current_ui and UiController.current_ui.name.to_lower().contains("inventory"))):
+	UiController.current_ui):
 		crosshair.hide()
 		return
 	else:
 		crosshair.show()
 	if Globals.crosshair_type == Globals.crosshairs.dot:
+		dot_crosshair.show()
+		crosshair.hide()
 		return
 	var base_pos = clamp(Globals.player.gun.bullet_stats.h_angle_variance_hip * 20, 1, 100)
 	for child in crosshair.get_children():
@@ -58,12 +76,6 @@ func _process(delta: float) -> void:
 		elif child.position.y == 0:
 			target_pos.x = sign(child.position.x) * (base_pos * clamp(Globals.player.velocity.length(), 1, 2) * Globals.player.gun.spread)
 		child.position = lerp(child.position, target_pos, delta * 20)
-	
-	# tooltip
-	if UiController.current_ui and UiController.current_ui:
-		tooltip.hide()
-	else:
-		tooltip.show()
 	
 
 
@@ -117,7 +129,7 @@ func _on_transfer_inventory_exit() -> void:
 
 
 func open_death_ui() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	death_ui.show()
 	if Input.get_connected_joypads().size() > 0:
 		load_save.grab_focus()

@@ -8,10 +8,15 @@ var current_style := NpcStyle.new()
 @onready var skeleton_3d: Skeleton3D = $PersonAnimated/Armature/Skeleton3D
 @onready var gun_holder: Node3D = $PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
 @onready var animation_player: AnimationPlayer = $PersonAnimated/AnimationPlayer
+@export var set_style := false : set = set_materials_editor
 
 
 func _ready() -> void:
 	set_materials(style_data)
+
+
+func set_materials_editor(_b: bool) -> void:
+	set_materials()
 
 
 func set_materials(style: NpcStyle = style_data) -> void:

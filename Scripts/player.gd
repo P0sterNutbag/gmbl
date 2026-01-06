@@ -13,6 +13,7 @@ var crouch_speed := 3.0
 var speed = base_speed
 var jump_speed := 6.5
 var mouse_sensitivity := 0.004
+var controller_sensitivity := 0.04
 var lean_angle := 0.0
 var gun_index := -1
 var crouch_height := 0.65
@@ -206,6 +207,11 @@ func state_walk(delta):
 		if c.get_collider() is RigidBody3D:
 			c.get_collider().apply_central_impulse(-c.get_normal() * push_force * delta)
 	
+	# controller camera movement
+	var controller_vector = Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down", 0.25)
+	aim_rotation.y += -controller_vector.x * controller_sensitivity
+	aim_rotation.x += -controller_vector.y * controller_sensitivity
+	
 	# change gun
 	var kit = PlayerStats.inventory.equipment_kit
 	if Input.is_action_just_released("next_gun"):
@@ -270,7 +276,7 @@ func state_walk(delta):
 		inst.apply_force((Vector3.UP * 500) + -camera.global_transform.basis.z * 750)
 	
 	# reload
-	if Input.is_action_just_pressed("reload") and gun_state != gun_states.reload:
+	if Input.is_action_just_pressed("reload") and gun_state != gun_states.reload and gun:
 		var _ammo = PlayerStats.inventory.find_item(gun.ammo_item.title)
 		if !_ammo or ammo == gun.max_ammo:
 			return
@@ -321,13 +327,15 @@ func state_walk(delta):
 		zoom_levels.regular:
 			target_fov = base_fov
 			mouse_sensitivity = 0.004
+			controller_sensitivity = 0.04
 		zoom_levels.ads:
-			mouse_sensitivity = 0.002
 			target_fov = base_fov / gun.zoom_amount
 			mouse_sensitivity = 0.003 * ((base_fov / gun.zoom_amount) / base_fov)
+			controller_sensitivity = 0.02 * ((base_fov / gun.zoom_amount) / base_fov)
 		zoom_levels.zoom:
 			target_fov = 10.0
 			mouse_sensitivity = 0.0005
+			controller_sensitivity = 0.005
 	camera.fov = lerp(camera.fov, target_fov, 30.0 * delta)
 	
 	# light

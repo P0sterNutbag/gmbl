@@ -45,6 +45,8 @@ func _process(_delta: float) -> void:
 				return
 			if UiController.is_canvas_layer_open(Globals.ui):
 				return
+	if Input.is_action_just_pressed("pause"):
+		if !pause_menu.visible:
 			UiController.open_interface(pause_menu)
 		else:
 			UiController.close_interface(pause_menu)
@@ -88,6 +90,10 @@ func loot(target: Inventory) -> void:
 	player_transfer_inventory.show_price = false
 	loot_transfer_inventory.show_price = false
 	UiController.open_interface(transfer_inventory_holder)
+
+
+func close_inventory() -> void:
+	UiController.close_interface(player_inventory_holder)
 
 
 func close_transfer_inventory() -> void:

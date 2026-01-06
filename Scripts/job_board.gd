@@ -15,8 +15,8 @@ func on_button_pressed(button: Control, resource: Resource) -> void:
 	Globals.survival_ui.compass.set_quest_markers()
 	shop.quests.erase(resource)
 	button.queue_free()
-	if item_container.get_child_count() == 0:
-		exit_button.grab_focus()
+	#if item_container.get_child_count() == 0:
+		#exit_button.grab_focus()
 	name_label.text = ""
 	description_label.text = ""
 	reward_label.text = ""

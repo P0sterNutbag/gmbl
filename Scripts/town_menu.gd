@@ -41,7 +41,7 @@ func create_town(town_data: Town) -> void:
 	inst.pressed.connect(exit)
 	await Engine.get_main_loop().process_frame
 	#item_container.get_child(0).grab_focus()
-	item_container.set_menu_item_focus()
+	#item_container.set_menu_item_focus()
 
 
 func exit():

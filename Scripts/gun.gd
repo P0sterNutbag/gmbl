@@ -1,6 +1,7 @@
 extends Node3D
 class_name Gun
 
+@export var uses_input: bool
 @export var bullet_stats: BulletStats
 @export var gun_stats: GunStats = GunStats.new()
 @export var ammo_item: ItemUsable
@@ -50,21 +51,22 @@ func _ready() -> void:
 	anim_player = get_node_or_null("AnimationPlayer")
 	#muzzle_flash.hide()
 	#add_child(shoot_timer)
-	if !cast_shadow:
-		for child in gun_model.get_child(0).get_children():
-			if child is MeshInstance3D:
-				child.cast_shadow = false
+	#if !cast_shadow:
+		#for child in gun_model.get_child(0).get_children():
+			#if child is MeshInstance3D:
+				#child.cast_shadow = false
 
 
 func _process(delta: float) -> void:
-	#time_since_shot += delta
-	#if fire_type == fire_types.semi_auto:
-		#if has_released and time_since_shot > fire_timer:
-			#can_shoot = true
+	if uses_input:
+		time_since_shot += delta
+		if fire_type == fire_types.semi_auto:
+			if has_released and time_since_shot > shoot_cooldown:
+				can_shoot = true
+		if Input.is_action_just_released("shoot"):
+			has_released = true
 	if gun_stats.condition <= 0:
 		can_shoot = false
-	if Input.is_action_just_released("shoot"):
-		has_released = true
 	
 	# spread
 	time_shooting -= delta * 2
@@ -135,4 +137,5 @@ func shoot(is_ads: bool = false, movement_speed = Vector3.ZERO) -> void:
 
 
 func _on_shoot_cooldown_timeout() -> void:
-	can_shoot = true
+	if fire_type == fire_types.auto or !uses_input:
+		can_shoot = true

@@ -2,6 +2,14 @@ extends Node
 
 var ui_nodes: Array[Control]
 var current_ui: Control
+var mouse_speed := 800.0
+
+
+func _process(delta: float) -> void:
+	if Input.mouse_mode == Input.MOUSE_MODE_HIDDEN and Input.get_connected_joypads().size() > 0:
+		var controller_vector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down", 0.25)
+		var mouse_pos = get_viewport().get_mouse_position()
+		get_viewport().warp_mouse(mouse_pos + controller_vector * mouse_speed * delta)
 
 
 func open_interface(node_to_open: Control, pause_player: bool = true) -> void:

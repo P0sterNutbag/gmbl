@@ -7,7 +7,7 @@ var has_player: bool
 
 func _process(delta: float) -> void:
 	if has_player:
-		if Input.is_action_just_pressed("interact"):
+		if Input.is_action_just_pressed("select"):
 			leave_encounter()
 			SceneManager.start_scene_transition(Globals.overworld)
 

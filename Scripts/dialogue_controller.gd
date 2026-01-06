@@ -50,8 +50,8 @@ func advance_dialogue(next_index: int) -> void:
 			inst2.pressed.connect(on_option_selected.bind(inst2))
 			inst2.pressed.connect(advance_dialogue.bind(option.destination))
 		inst.option_container.set_menu_item_focus()
-		if Input.get_connected_joypads().size() > 0:
-			inst.option_container.get_child(0).grab_focus()
+		#if Input.get_connected_joypads().size() > 0:
+			#inst.option_container.get_child(0).grab_focus()
 	if bubble is DialogueLoop:
 		advance_dialogue(bubble.next_index)
 	elif bubble is Dialogue:

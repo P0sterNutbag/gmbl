@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 	if !visible:
 		return
 	global_position = get_viewport().get_camera_3d().unproject_position(target.global_transform.origin)
-	if Input.is_action_just_pressed("interact"):
+	if Input.is_action_just_pressed("select"):
 		inventory.visible = ! inventory.visible
 		button_prompt.visible = !inventory.visible
 	if inventory.visible:

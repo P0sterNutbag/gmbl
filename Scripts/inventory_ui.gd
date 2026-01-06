@@ -64,9 +64,9 @@ func _process(_delta: float) -> void:
 			if item_slot:
 				current_menu_item.amount = item_slot.amount
 			else:
-				var new_index = clamp(current_menu_item.get_index() + 1, 0, 1000)
+				#var new_index = clamp(current_menu_item.get_index() + 1, 0, 1000)
 				current_menu_item.queue_free()
-				item_container.get_child(new_index).grab_focus()
+				#item_container.get_child(new_index).grab_focus()
 	
 	# set money
 	if money_label.visible:
@@ -124,8 +124,8 @@ func set_items():
 	if item_container.get_child_count() > 0:
 		item_container.sort_menu_items()
 		item_container.set_menu_item_focus()
-		if Input.get_connected_joypads().size() > 0:
-			item_container.get_child(0).grab_focus()
+		#if Input.get_connected_joypads().size() > 0:
+			#item_container.get_child(0).grab_focus()
 
 
 func transfer_item(menu_item: Control):
@@ -144,7 +144,7 @@ func transfer_item(menu_item: Control):
 			return
 	var amount_to_move = 1
 	if Input.is_action_pressed("shift") or item is ItemMoney:
-		amount_to_move = menu_item.resource.amount
+		amount_to_move = menu_item.resource.amount		
 	if item is EquipmentGun and item.equipped:
 		item.equip()
 	if target_inventory.add_item(item, amount_to_move):
@@ -213,8 +213,8 @@ func _on_use_item(menu_item) -> void:
 	var item = menu_item.resource
 	item.amount -= 1
 	if item.amount <= 0:
-		if menu_item.get_index() == item_container.get_child_count() - 1:
-			item_container.get_child(-2).grab_focus()
+		#if menu_item.get_index() == item_container.get_child_count() - 1:
+			#item_container.get_child(-2).grab_focus()
 		menu_item.queue_free()
 
 

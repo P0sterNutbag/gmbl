@@ -31,10 +31,13 @@ fire_type = 2
 shoot_cooldown = 0.5
 
 [node name="GunAnchor" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.24534644, -0.18834412)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.16403906, -0.3313584)
 
 [node name="FirePoint" parent="GunAnchor" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00265765, 0.24716188, -0.6819357)
+
+[node name="RayCast3D" parent="GunAnchor/FirePoint" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0021505114, 0)
 
 [node name="Model" parent="GunAnchor" index="1" instance=ExtResource("6_anhr3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22452728, 0)

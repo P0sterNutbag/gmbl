@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Inventory" load_steps=13 format=3 uid="uid://dpjy0ettwaiyp"]
+[gd_resource type="Resource" script_class="Inventory" load_steps=17 format=3 uid="uid://dpjy0ettwaiyp"]
 
 [ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="1_gifll"]
 [ext_resource type="Script" uid="uid://6ucyr0petjnx" path="res://Scripts/inventory.gd" id="2_0kk57"]
@@ -7,6 +7,8 @@
 [ext_resource type="Resource" uid="uid://dfkmfm7wu8mw4" path="res://Resources/Items/Survival/beans.tres" id="4_yh1cm"]
 [ext_resource type="Resource" uid="uid://ccm2c5fc8xn15" path="res://Resources/Items/Survival/medkit.tres" id="5_no4hw"]
 [ext_resource type="Resource" uid="uid://glkl1ugkvv6m" path="res://Resources/Items/Survival/water.tres" id="6_areri"]
+[ext_resource type="Resource" uid="uid://m28p1phfm50g" path="res://Resources/Items/Survival/compass.tres" id="7_yh1cm"]
+[ext_resource type="Resource" uid="uid://fioag0fe2wqb" path="res://Resources/Items/Survival/flashlight.tres" id="8_no4hw"]
 
 [sub_resource type="Resource" id="Resource_2xu7k"]
 script = ExtResource("1_gifll")
@@ -37,8 +39,18 @@ item = ExtResource("6_areri")
 amount = 3
 metadata/_custom_type_script = "uid://cfuex8bm4d62j"
 
+[sub_resource type="Resource" id="Resource_uj3ux"]
+script = ExtResource("1_gifll")
+item = ExtResource("7_yh1cm")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_7nhum"]
+script = ExtResource("1_gifll")
+item = ExtResource("8_no4hw")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
 [resource]
 script = ExtResource("2_0kk57")
-item_slots = Array[ExtResource("1_gifll")]([SubResource("Resource_2xu7k"), SubResource("Resource_a7yvq"), SubResource("Resource_ov6eg"), SubResource("Resource_x3xbf"), SubResource("Resource_rh8oq")])
+item_slots = Array[ExtResource("1_gifll")]([SubResource("Resource_2xu7k"), SubResource("Resource_a7yvq"), SubResource("Resource_ov6eg"), SubResource("Resource_x3xbf"), SubResource("Resource_rh8oq"), SubResource("Resource_uj3ux"), SubResource("Resource_7nhum")])
 title = "Starting Gear"
 metadata/_custom_type_script = "uid://6ucyr0petjnx"

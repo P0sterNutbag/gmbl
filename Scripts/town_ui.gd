@@ -56,8 +56,8 @@ func enter_shop(shop_data: Shop) -> void:
 	shop_inventory2.shop = shop_data
 	shop_inventory2.show_price = true
 	shop_inventory2.set_items()
-	if Input.get_connected_joypads().size() > 0:
-		shop_inventory2.grab_focus()
+	#if Input.get_connected_joypads().size() > 0:
+		#shop_inventory2.grab_focus()
 	UiController.open_interface(shop)
 
 

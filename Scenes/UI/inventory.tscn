@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dvwo5rcugthhe"]
+[gd_scene load_steps=14 format=3 uid="uid://dvwo5rcugthhe"]
 
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_osrsm"]
 [ext_resource type="Script" uid="uid://cggchd80ddnc1" path="res://Scripts/inventory_ui.gd" id="2_yyv02"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="4_ic2qw"]
 [ext_resource type="Texture2D" uid="uid://d08xeomlxj5wh" path="res://Art/Textures/arrow_small_left.png" id="5_d513x"]
 [ext_resource type="Texture2D" uid="uid://byvpghxprlvv3" path="res://Art/Textures/arrow_small.png" id="6_2lqwa"]
+[ext_resource type="Script" uid="uid://c47qqa8oxrofj" path="res://Scripts/menu_button.gd" id="6_v8bd3"]
 [ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="8_d513x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d513x"]
@@ -69,6 +70,8 @@ theme = ExtResource("4_14o23")
 icon = ExtResource("5_d513x")
 flat = true
 expand_icon = true
+script = ExtResource("6_v8bd3")
+show_icon_on_focus = false
 
 [node name="Category" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Control3"]
 unique_name_in_owner = true
@@ -84,6 +87,8 @@ layout_mode = 2
 icon = ExtResource("6_2lqwa")
 flat = true
 expand_icon = true
+script = ExtResource("6_v8bd3")
+show_icon_on_focus = false
 
 [node name="Size" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2

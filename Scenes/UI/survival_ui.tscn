@@ -819,7 +819,7 @@ text = "Quit to Main Menu"
 layout_mode = 2
 text = "Quit to Desktop"
 
-[connection signal="pressed" from="PlayerInventory/Inventory/Control/Button" to="PlayerInventory" method="close"]
+[connection signal="pressed" from="PlayerInventory/Inventory/Control/Button" to="." method="close_inventory"]
 [connection signal="pressed" from="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" method="_on_pressed"]
 [connection signal="pressed" from="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" to="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" method="_on_pressed"]
 [connection signal="pressed" from="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" method="_on_pressed"]

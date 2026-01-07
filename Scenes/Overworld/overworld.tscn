@@ -1,4 +1,4 @@
-[gd_scene load_steps=165 format=4 uid="uid://doydk513gm02l"]
+[gd_scene load_steps=172 format=4 uid="uid://doydk513gm02l"]
 
 [ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_6y65m"]
 [ext_resource type="PackedScene" uid="uid://dyumojcinahde" path="res://Scenes/outline_fog_shader.tscn" id="3_2uctf"]
@@ -32,7 +32,8 @@
 [ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="30_hmgos"]
 [ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="31_xp1ub"]
 [ext_resource type="Script" uid="uid://bbi3gcsb33muk" path="res://Scripts/town.gd" id="32_2uctf"]
-[ext_resource type="Resource" uid="uid://nm0e00c2fx4" path="res://Resources/NpcStyles/npc_styles.tres" id="38_2gpn5"]
+[ext_resource type="Texture2D" uid="uid://bi1onaha6gj3k" path="res://Art/Textures/player_face2.png" id="38_ua8uw"]
+[ext_resource type="Texture2D" uid="uid://x3spqeyiq8cr" path="res://Art/Textures/npc shirt white.png" id="40_jvu1d"]
 [ext_resource type="Resource" uid="uid://dfkmfm7wu8mw4" path="res://Resources/Items/Survival/beans.tres" id="41_8vmc3"]
 [ext_resource type="Script" uid="uid://chxn6jj2cv0p3" path="res://Scripts/scatterer.gd" id="42_1k2ge"]
 [ext_resource type="Resource" uid="uid://m28p1phfm50g" path="res://Resources/Items/Survival/compass.tres" id="42_c2v6x"]
@@ -46,7 +47,9 @@
 [ext_resource type="Script" uid="uid://cnu4xeujmgk51" path="res://Scripts/dialogue_options.gd" id="50_nggm6"]
 [ext_resource type="Resource" uid="uid://oaklo016ku8w" path="res://Resources/Items/Guns/pistol.tres" id="50_xt1pr"]
 [ext_resource type="Resource" uid="uid://de20gnenmrrxa" path="res://Resources/Items/Guns/shotgun.tres" id="51_i627v"]
+[ext_resource type="Texture2D" uid="uid://p00q4gotdeie" path="res://Art/Textures/player_face4.png" id="51_lf2le"]
 [ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="51_v8snn"]
+[ext_resource type="Texture2D" uid="uid://b4d58y5scbpqf" path="res://Art/Textures/npc shirt blue.png" id="52_1qd3k"]
 [ext_resource type="Resource" uid="uid://bhs8tbv5iox6e" path="res://Resources/Items/Guns/sniper_rifle.tres" id="52_opo3i"]
 [ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="53_ccrpr"]
 [ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="54_nggm6"]
@@ -60,13 +63,15 @@
 [ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="62_xkckx"]
 [ext_resource type="Script" uid="uid://c6knlgr6wx0i1" path="res://Scripts/quest_fetch.gd" id="63_2uctf"]
 [ext_resource type="Texture2D" uid="uid://clppfghpuoaip" path="res://Art/Textures/under_construction.png" id="63_7t5fg"]
+[ext_resource type="Texture2D" uid="uid://cduy4mfd152jt" path="res://Art/Textures/player_face3.png" id="63_xt1pr"]
 [ext_resource type="Resource" uid="uid://6c7s1e0y4ekq" path="res://Resources/Items/Junk/cigarettes.tres" id="64_2gpn5"]
 [ext_resource type="Resource" uid="uid://du57k1x7scpfk" path="res://Resources/Items/Junk/metal_scraps.tres" id="65_8vmc3"]
 [ext_resource type="Resource" uid="uid://cw12h3yyn5tgy" path="res://Resources/Items/Junk/playing cards.tres" id="66_c2v6x"]
 [ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="67_bqxwu"]
+[ext_resource type="Texture2D" uid="uid://oacru53rac71" path="res://Art/Textures/player_face.png" id="68_jvu1d"]
 [ext_resource type="Script" uid="uid://bicpdyf13vj1j" path="res://Scripts/quest_fetch_random.gd" id="69_2gpn5"]
+[ext_resource type="Texture2D" uid="uid://dl34xibpmsig8" path="res://Art/Textures/npc shirt white sleeve.png" id="69_lf2le"]
 [ext_resource type="Script" uid="uid://px5dr31pd885" path="res://Scripts/dialogue_loop.gd" id="72_6l6oi"]
-[ext_resource type="Texture2D" uid="uid://25baqqag6lrp" path="res://Art/Textures/npc_face4.png" id="73_ptrkr"]
 [ext_resource type="Texture2D" uid="uid://whgiy4tx5l5g" path="res://Art/Textures/npc brown jacket.png" id="74_rsj15"]
 [ext_resource type="PackedScene" uid="uid://csjsfdmnghtqx" path="res://Scenes/Overworld/Locations/scrapyard.tscn" id="80_nggm6"]
 
@@ -137,9 +142,20 @@ script = ExtResource("51_v8snn")
 method = "enter_town"
 metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
+[sub_resource type="Resource" id="Resource_rkewd"]
+script = ExtResource("31_xp1ub")
+skin_colors = Array[Color]([Color(0.8117647, 0.5882353, 0.3764706, 1)])
+hair_colors = Array[Color]([Color(0.2901961, 0.09803922, 0, 1)])
+faces = Array[Texture]([ExtResource("38_ua8uw")])
+shirts = Array[Texture]([ExtResource("40_jvu1d")])
+pants_colors = Array[Color]([Color(0.14509805, 0.21568628, 0.4117647, 1)])
+shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1)])
+metadata/_custom_type_script = "uid://b80ipr8q70gqm"
+
 [sub_resource type="Resource" id="Resource_sj5y1"]
 script = ExtResource("53_ccrpr")
 bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_6lldf"), SubResource("Resource_8pniq"), SubResource("Resource_xa6dy"), SubResource("Resource_26jmx")])
+npc_style = SubResource("Resource_rkewd")
 npc_name = "Durk"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
@@ -230,9 +246,20 @@ script = ExtResource("51_v8snn")
 method = "enter_repair_menu"
 metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
+[sub_resource type="Resource" id="Resource_me12r"]
+script = ExtResource("31_xp1ub")
+skin_colors = Array[Color]([Color(0.37254903, 0.2, 0.0627451, 1)])
+hair_colors = Array[Color]([Color(0.8, 0.6745098, 0.25490198, 1)])
+faces = Array[Texture]([ExtResource("51_lf2le")])
+shirts = Array[Texture]([ExtResource("52_1qd3k")])
+pants_colors = Array[Color]([Color(0.48, 0.21888001, 0.15359999, 1)])
+shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1)])
+metadata/_custom_type_script = "uid://b80ipr8q70gqm"
+
 [sub_resource type="Resource" id="Resource_q1nwr"]
 script = ExtResource("53_ccrpr")
 bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_nn0b0"), SubResource("Resource_6cih4"), SubResource("Resource_im0yk"), SubResource("Resource_2fanp"), SubResource("Resource_rkg8l")])
+npc_style = SubResource("Resource_me12r")
 npc_name = "Axel"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
@@ -378,18 +405,20 @@ script = ExtResource("72_6l6oi")
 next_index = 1
 metadata/_custom_type_script = "uid://px5dr31pd885"
 
-[sub_resource type="Resource" id="Resource_ptrkr"]
+[sub_resource type="Resource" id="Resource_bqxwu"]
 script = ExtResource("31_xp1ub")
-faces = Array[Texture]([ExtResource("73_ptrkr")])
+skin_colors = Array[Color]([Color(0.9372549, 0.7607843, 0.6039216, 1)])
+hair_colors = Array[Color]([Color(0.2901961, 0.09803922, 0, 1)])
+faces = Array[Texture]([ExtResource("63_xt1pr")])
 shirts = Array[Texture]([ExtResource("74_rsj15")])
-pants_colors = Array[Color]([Color(0.48, 0.21888001, 0.15359999, 1)])
-shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1), Color(0.133333, 0.12549, 0.203922, 1), Color(0.4, 0.19146667, 0.128, 1)])
+pants_colors = Array[Color]([Color(0.14509805, 0.21568628, 0.4117647, 1)])
+shoe_colors = Array[Color]([Color(0.16862746, 0.08627451, 0, 1)])
 metadata/_custom_type_script = "uid://b80ipr8q70gqm"
 
 [sub_resource type="Resource" id="Resource_v7uwj"]
 script = ExtResource("53_ccrpr")
 bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_5oaiu"), SubResource("Resource_bsumm"), SubResource("Resource_r3o7g"), SubResource("Resource_rtygk"), SubResource("Resource_cvr5w"), SubResource("Resource_4o6vd"), SubResource("Resource_5yx2b"), SubResource("Resource_ksfoy"), SubResource("Resource_6l6oi"), SubResource("Resource_c2v6x"), SubResource("Resource_ua8uw")])
-npc_style = SubResource("Resource_ptrkr")
+npc_style = SubResource("Resource_bqxwu")
 npc_name = "Duster"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
@@ -509,18 +538,20 @@ script = ExtResource("72_6l6oi")
 next_index = 1
 metadata/_custom_type_script = "uid://px5dr31pd885"
 
-[sub_resource type="Resource" id="Resource_yld1c"]
+[sub_resource type="Resource" id="Resource_1qd3k"]
 script = ExtResource("31_xp1ub")
-faces = Array[Texture]([ExtResource("73_ptrkr")])
-shirts = Array[Texture]([ExtResource("74_rsj15")])
-pants_colors = Array[Color]([Color(0.48, 0.21888001, 0.15359999, 1)])
-shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1), Color(0.133333, 0.12549, 0.203922, 1), Color(0.4, 0.19146667, 0.128, 1)])
+skin_colors = Array[Color]([Color(0.5764706, 0.37254903, 0.21568628, 1)])
+hair_colors = Array[Color]([Color(0, 0, 0, 1)])
+faces = Array[Texture]([ExtResource("68_jvu1d")])
+shirts = Array[Texture]([ExtResource("69_lf2le")])
+pants_colors = Array[Color]([Color(0.14509805, 0.21568628, 0.4117647, 1)])
+shoe_colors = Array[Color]([Color(0.16862746, 0.08627451, 0, 1)])
 metadata/_custom_type_script = "uid://b80ipr8q70gqm"
 
 [sub_resource type="Resource" id="Resource_pc4vu"]
 script = ExtResource("53_ccrpr")
 bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_ri526"), SubResource("Resource_p80om"), SubResource("Resource_n62ny"), SubResource("Resource_rp2u8"), SubResource("Resource_x85w1"), SubResource("Resource_r4dmk"), SubResource("Resource_fm8tw"), SubResource("Resource_kx8k2"), SubResource("Resource_n3yag"), SubResource("Resource_lfi40"), SubResource("Resource_do23q")])
-npc_style = SubResource("Resource_yld1c")
+npc_style = SubResource("Resource_1qd3k")
 npc_name = "Duster"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 

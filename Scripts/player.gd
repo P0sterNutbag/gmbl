@@ -28,6 +28,7 @@ var sway_intensity = 3
 var max_breath = 3.0
 var current_breath = 3.0
 var is_crouching: bool
+var is_sprinting: bool
 var on_ladder: bool
 var can_hold_breath: bool = true
 var is_holding_breath: bool
@@ -179,10 +180,18 @@ func state_walk(delta):
 	else:
 		if gun_state == gun_states.ads:
 			speed = walk_speed
-		elif Input.is_action_pressed("sprint") and input.y < 0 and (!gun or (gun.shoot_cooldown_timer.time_left == 0 and !Input.is_action_pressed("shoot"))):
+		elif is_sprinting: #Input.is_action_pressed("sprint") and input.y < 0 and (!gun or (gun.shoot_cooldown_timer.time_left == 0 and !Input.is_action_pressed("shoot"))):
 			speed = run_speed
 		else:
 			speed = base_speed
+	
+	# sprint
+	if !is_sprinting:
+		if Input.is_action_just_pressed("sprint"):
+			is_sprinting = true
+	else:
+		if Input.is_action_just_pressed("sprint") or input.y >= 0:# or (gun and gun.shoot_cooldown_timer.time_left == 0 and Input.is_action_pressed("shoot")):
+			is_sprinting = false
 	
 	# jump
 	if is_on_floor() and Input.is_action_just_pressed("jump"):

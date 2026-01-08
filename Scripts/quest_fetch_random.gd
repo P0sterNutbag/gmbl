@@ -2,9 +2,7 @@ extends QuestRandom
 class_name QuestFetchRandom
 
 @export var required_items: Array[ItemSlot]
-#var rewards: Array[Item] = [
-	#ItemMoney.new()
-#]
+
 
 func generate_quest() -> Quest:
 	var quest = QuestFetch.new()

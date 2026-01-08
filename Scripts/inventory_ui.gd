@@ -211,11 +211,8 @@ func _on_use_item(menu_item) -> void:
 	if !menu_item:
 		return
 	var item = menu_item.resource
-	item.amount -= 1
-	if item.amount <= 0:
-		#if menu_item.get_index() == item_container.get_child_count() - 1:
-			#item_container.get_child(-2).grab_focus()
-		menu_item.queue_free()
+	source_inventory.remove_item(item)
+	set_items()
 
 
 func _on_item_focus_entered(menu_item: MenuItem):

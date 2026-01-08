@@ -137,6 +137,12 @@ func _physics_process(delta):
 	# stay in boundaries
 	position.x = clamp(position.x, 2, 255)
 	position.z = clamp(position.z, 2, 255)
+	
+	# make sure you don't fall under the world
+	if global_position.y < 0:
+		var terrain_y = Globals.get_heightmap_position(global_position)
+		if global_position.y < terrain_y:
+			global_position.y = terrain_y
 
 
 func _process(delta: float) -> void:
@@ -162,8 +168,8 @@ func _input(event):
 	if PlayerStats.state != PlayerStats.states.walk:
 		return
 	if event is InputEventMouseMotion:
-		aim_rotation.y += -event.relative.x * mouse_sensitivity
-		aim_rotation.x += -event.relative.y * mouse_sensitivity
+		aim_rotation.y += -event.relative.x * mouse_sensitivity * PlayerStats.sensitivity_modifier
+		aim_rotation.x += -event.relative.y * mouse_sensitivity * PlayerStats.sensitivity_modifier
 		aim_rotation.x = clampf(aim_rotation.x, -deg_to_rad(70), deg_to_rad(70))
 
 

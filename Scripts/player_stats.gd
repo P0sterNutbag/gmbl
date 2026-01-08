@@ -10,6 +10,7 @@ var hp: float = 8:
 	get():
 		return Globals.player.hitbox.hp
 var max_hp := 8
+var sensitivity_modifier := 1.0
 var ammo: int:
 	set(value):
 		ammo = value
@@ -29,15 +30,9 @@ var quests: Array[Quest]
 		return inventory.items.filter(func(i): return i is EquipmentGun)
 var gun: EquipmentGun
 var gun_index := 0
-var sleep := 1.0:
-	set(value):
-		sleep = clamp(value, 0, max_sleep)
-var hunger := 1.0:
-	set(value):
-		hunger = clamp(value, 0, max_hunger)
-var thirst := 1.0:
-	set(value):
-		thirst = clamp(value, 0, max_thirst)
+var sleep := 1.0
+var hunger := 1.0
+var thirst := 1.0
 var max_sleep := 1.0
 var max_hunger := 1.0
 var max_thirst = 1.0
@@ -60,9 +55,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# survival stats
-	sleep -= delta * sleep_decrease_rate
-	hunger -= delta * hunger_decrease_rate
-	thirst -= delta * thirst_decrease_rate
+	sleep = clamp(sleep - delta * sleep_decrease_rate, 0, max_sleep)
+	hunger = clamp(hunger - delta * hunger_decrease_rate, 0, max_hunger)
+	thirst = clamp(thirst - delta * thirst_decrease_rate, 0, max_thirst)
 	if hunger <= 0 or thirst <= 0:
 		Globals.player.hitbox.damage(0.25 * delta, Vector3.ZERO, Vector3.ZERO, false, false, false)
 	# gun management

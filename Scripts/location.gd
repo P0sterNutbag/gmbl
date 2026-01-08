@@ -14,6 +14,11 @@ var transition_started: bool
 var can_transition: bool = true
 var shops_base_inventory: Dictionary
 var shops_max_money: Dictionary
+var population: int:
+	get():
+		return location_data.population
+	set(value):
+		location_data.population = value
 @onready var point_of_interest: PointOfInterest = $PointOfInterest
 signal encounter_started
 signal encounter_ended
@@ -29,6 +34,7 @@ signal encounter_ended
 
 
 func _ready() -> void:
+	DayNightCycle.day_start.connect(_on_day_start)
 	var parent = get_parent()
 	if parent is PointOfInterest:
 		title = parent.title
@@ -100,8 +106,12 @@ func transition_to_level(start_alert = alert_enemies) -> void:
 
 func save() -> Dictionary:
 	return {
-		"location_data.population" : location_data.population,
+		"population" : population,
 	}
+
+
+func _on_day_start() -> void:
+	location_data.population = location_data.min_population
 
 
 func _on_body_entered(_body: Node3D) -> void:

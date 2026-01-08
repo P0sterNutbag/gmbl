@@ -86,6 +86,13 @@ text = "Music Volume"
 layout_mode = 2
 text = "SFX Volume"
 
+[node name="AimSensitivity" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("5_n6o6n")]
+layout_mode = 2
+text = "Aim Sensitivity"
+
+[node name="HSlider" parent="MarginContainer/VBoxContainer/VBoxContainer/AimSensitivity/HBoxContainer" index="0"]
+value = 50.0
+
 [node name="CRT" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_cs2gm")]
 layout_mode = 2
 
@@ -104,7 +111,8 @@ text = "Back"
 
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/Volume/HBoxContainer/HSlider" to="." method="_on_master_h_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/MusicVolume/HBoxContainer/HSlider" to="." method="_on_music_h_slider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/SfxVolume/HBoxContainer/HSlider" to="." method="_on_sfx_h_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/SfxVolume/HBoxContainer/HSlider" to="." method="_on_aim_sensitivity_h_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/AimSensitivity/HBoxContainer/HSlider" to="." method="_on_sfx_h_slider_value_changed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/VBoxContainer/CRT" to="." method="_on_crt_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/VBoxContainer/Warp" to="." method="_on_warp_toggled"]
 [connection signal="option_changed" from="MarginContainer/VBoxContainer/VBoxContainer/Crosshair" to="." method="_on_crosshair_option_changed"]
@@ -113,3 +121,4 @@ text = "Back"
 [editable path="MarginContainer/VBoxContainer/VBoxContainer/Volume"]
 [editable path="MarginContainer/VBoxContainer/VBoxContainer/MusicVolume"]
 [editable path="MarginContainer/VBoxContainer/VBoxContainer/SfxVolume"]
+[editable path="MarginContainer/VBoxContainer/VBoxContainer/AimSensitivity"]

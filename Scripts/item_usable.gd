@@ -34,6 +34,6 @@ func use(target_node):
 				target.set(key, effect.values[key])
 	if method != "":
 		Callable(target, method).call()
-	#uses -= 1
-	#if uses <= 0:
-		#used_up.emit()
+	uses -= 1
+	if uses <= 0:
+		used_up.emit()

@@ -45,3 +45,7 @@ func _on_crosshair_option_changed(value: Variant) -> void:
 
 func change_crosshair(index: int) -> void:
 	Globals.crosshair_type = index as Globals.crosshairs
+
+
+func _on_aim_sensitivity_h_slider_value_changed(value: float) -> void:
+	PlayerStats.sensitivity_modifier = value / 50

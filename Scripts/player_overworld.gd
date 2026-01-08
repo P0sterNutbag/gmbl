@@ -85,6 +85,12 @@ func _physics_process(delta):
 	# clamp position
 	position.x = clamp(position.x, 1, 511)
 	position.z = clamp(position.z, 1, 511)
+	
+	# make sure you don't fall under the world
+	if global_position.y < 0:
+		var terrain_y = Globals.get_heightmap_position(global_position)
+		if global_position.y < terrain_y:
+			global_position.y = terrain_y
 
 
 func state_walk(delta) -> void:

@@ -19,10 +19,13 @@ func _ready() -> void:
 		return "target" in i and quest_location == encounter_location)
 	
 	# get enemy amount
-	get_parent().location_data.min_population = clamp(get_parent().location_data.min_population, quests.size(), 1000)
-	get_parent().location_data.min_population = clamp(get_parent().location_data.max_population, quests.size(), 1000)
-	var enemy_amount = randi_range(get_parent().location_data.min_population, get_parent().location_data.max_population)
-	enemy_amount = clamp(enemy_amount, 0, spawn_points.size())
+	var location_data = get_parent().location_data
+	var enemy_amount: int
+	if location_data.population < location_data.min_population:
+		enemy_amount = location_data.population
+	else: 
+		enemy_amount = randi_range(location_data.min_population, location_data.max_population)
+	enemy_amount = clamp(enemy_amount, quests.size(), spawn_points.size())
 	await get_tree().process_frame
 	
 	# spawn quest enemy

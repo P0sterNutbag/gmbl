@@ -1,7 +1,7 @@
 extends Node3D
 class_name Location
 
-@export var location_data: LocationData = LocationData.new()
+@export var location_data: LocationData# = LocationData.new()
 @export var target_distance := 0.0
 @export var encounter_scene: PackedScene
 @export var town: Town

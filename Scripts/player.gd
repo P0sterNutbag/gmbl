@@ -667,7 +667,7 @@ func use_item(item_name: String, item_id = null, target = null):
 		return
 	if item is ItemUsable:
 		item.use(target)
-	PlayerStats.inventory.remove_item(item)
+	#PlayerStats.inventory.remove_item(item)
 
 
 func find_item(item_name: String) -> Resource:

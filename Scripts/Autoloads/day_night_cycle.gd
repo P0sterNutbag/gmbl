@@ -1,7 +1,7 @@
 extends Node
 
 @export var time_curve: Curve
-var total_cycle_seconds: float = 600
+var total_cycle_seconds: float = 1000
 var time: float = 0.25
 var sun_time: float = 0.25
 var time_speed: float

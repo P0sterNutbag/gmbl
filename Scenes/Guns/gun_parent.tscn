@@ -62,7 +62,6 @@ stream_0/stream = ExtResource("7_xws2q")
 [node name="Gun" type="Node3D"]
 script = ExtResource("1_4wfcx")
 bullet_stats = SubResource("Resource_gymyn")
-ammo_type = "rifle_ammo"
 fire_type = 1
 ads_vector = Vector3(-0.192, 0.045, 0.07)
 
@@ -81,21 +80,25 @@ visible = false
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="GunAnchor/FirePoint/MuzzleFlash"]
 transform = Transform3D(2.448e-15, 4.37114e-08, 1, 1, -4.37114e-08, -5.37314e-16, 4.37114e-08, 1, -4.37114e-08, 4.6264e-08, -3.91968e-16, -0.0100421)
+cast_shadow = 0
 mesh = SubResource("PlaneMesh_l6n3p")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3"]
 transform = Transform3D(0.910366, 0, -0.413804, 0, 1, 0, 0.413804, 0, 0.910366, 0, 0, 0)
+cast_shadow = 0
 mesh = SubResource("PlaneMesh_wpjfl")
 skeleton = NodePath("../../..")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3"]
 transform = Transform3D(0.5, 4.23658e-23, 0, 0, -4.37114e-08, 1.25, 0, -1, -5.46392e-08, 1.49012e-08, -0.218581, 9.77889e-09)
+cast_shadow = 0
 mesh = SubResource("PlaneMesh_bpsw6")
 skeleton = NodePath("../../..")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3"]
 transform = Transform3D(-2.18557e-08, -1, 5.46393e-08, 0, 4.37114e-08, 1.25, -0.5, 4.37114e-08, 3.55271e-15, 1.49012e-08, -0.218581, 1.00117e-08)
+cast_shadow = 0
 mesh = SubResource("PlaneMesh_bpsw6")
 skeleton = NodePath("../../..")
 

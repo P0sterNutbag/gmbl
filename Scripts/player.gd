@@ -60,6 +60,7 @@ const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var sawed_off: Gun = $CameraAnchor/Camera3D/GunOffset/GunAnchor/SawedOff
 @onready var uzi: Gun = $CameraAnchor/Camera3D/GunOffset/GunAnchor/Uzi
 @onready var hunting_rifle: Gun = $CameraAnchor/Camera3D/GunOffset/GunAnchor/HuntingRifle
+@onready var knife: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor/Knife
 @onready var step_timer: Timer = $StepTimer
 @onready var interact_cast: = $CameraAnchor/Camera3D/RayCast3D
 @onready var hitbox: HealthComponent = $Hitbox
@@ -262,26 +263,29 @@ func state_walk(delta):
 	# shooting and aiming
 	if (gun_state == gun_states.ads or gun_state == gun_states.point) and gun.rotation.y == 0:
 		if Input.is_action_pressed("shoot"):
-			if gun.ammo <= 0:
-				gun.empty_click.play()
+			#if gun.ammo <= 0:
+				#gun.empty_click.play()
+				#return
+			#if !gun.can_shoot:
+				#return
+			#gun.shoot(Input.is_action_pressed("aim"), velocity)
+			var did_shoot = gun.use()
+			if !did_shoot:
 				return
-			if !gun.can_shoot:
-				return
-			gun.shoot(Input.is_action_pressed("aim"), velocity)
-			#camera.screen_shake()
-			var tween = create_tween().set_ease(Tween.EASE_OUT)
-			tween.tween_property(gun, "position:z", 0.1, 0.01)
-			tween.tween_property(gun, "position:z", 0, 0.2)
-			var tween2 = create_tween().set_ease(Tween.EASE_OUT)
-			tween2.tween_property(self, "aim_rotation:x", aim_rotation.x + deg_to_rad(gun.kickback_magnitude) / 3, 0.01)
-			Globals.noise_controller.create_noise_event(gun.firepoint.global_position, self, gun.bullet_stats.noise_radius)
-			if gun.fire_type == gun.fire_types.pump:
-				gun.shoot_cooldown_timer.stop()
-				await get_tree().create_timer(0.25).timeout
-				gun.anim_player.play("pump")
-		if Input.is_action_pressed("aim") and gun_state != gun_states.ads and gun:
+			if gun is Gun:
+				var tween = create_tween().set_ease(Tween.EASE_OUT)
+				tween.tween_property(gun, "position:z", 0.1, 0.01)
+				tween.tween_property(gun, "position:z", 0, 0.2)
+				var tween2 = create_tween().set_ease(Tween.EASE_OUT)
+				tween2.tween_property(self, "aim_rotation:x", aim_rotation.x + deg_to_rad(gun.kickback_magnitude) / 3, 0.01)
+				Globals.noise_controller.create_noise_event(gun.firepoint.global_position, self, gun.bullet_stats.noise_radius)
+				if gun.fire_type == gun.fire_types.pump:
+					gun.shoot_cooldown_timer.stop()
+					await get_tree().create_timer(0.25).timeout
+					gun.anim_player.play("pump")
+		if Input.is_action_pressed("aim") and gun_state != gun_states.ads and gun and gun is Gun:
 			change_gun_state(gun_states.ads)
-	if !Input.is_action_pressed("aim") and gun_state == gun_states.ads:
+	if !Input.is_action_pressed("aim") and gun_state == gun_states.ads and gun is Gun:
 		change_gun_state(gun_states.point)
 	
 	# throw grenade
@@ -291,7 +295,7 @@ func state_walk(delta):
 		inst.apply_force((Vector3.UP * 500) + -camera.global_transform.basis.z * 750)
 	
 	# reload
-	if Input.is_action_just_pressed("reload") and gun_state != gun_states.reload and gun:
+	if Input.is_action_just_pressed("reload") and gun_state != gun_states.reload and gun and gun is Gun:
 		var _ammo = PlayerStats.inventory.find_item(gun.ammo_item.title)
 		if !_ammo or ammo == gun.max_ammo:
 			return
@@ -369,14 +373,14 @@ func state_walk(delta):
 		current_breath += delta
 	
 	# ui
-	if gun:
-		if Input.is_action_just_pressed("aim"):
-			if gun.scope_texture != null:
-				Globals.ui.show_scope(gun.scope_texture)
-				gun.hide()
-		elif Input.is_action_just_released("aim"):
-			Globals.ui.scope.hide()
-			gun.show()
+	#if gun and gun is Gun:
+		#if Input.is_action_just_pressed("aim"):
+			#if gun.scope_texture != null:
+				#Globals.ui.show_scope(gun.scope_texture)
+				#gun.hide()
+		#elif Input.is_action_just_released("aim"):
+			#Globals.ui.scope.hide()
+			#gun.show()
 	
 	# point gun up if colliding
 	if gun_collision_cast.is_colliding():
@@ -469,6 +473,9 @@ func enter_gun_state_ads():
 	camera_zoom = zoom_levels.ads
 	sway_noise.seed = randi()
 	sway_time = 0
+	if gun.scope_texture:
+		Globals.ui.show_scope(gun.scope_texture)
+		gun.hide()
 
 
 func gun_state_ads(delta: float) -> void:
@@ -495,6 +502,9 @@ func gun_state_ads(delta: float) -> void:
 func exit_gun_state_ads() -> void:
 	is_holding_breath = false
 	can_hold_breath = true
+	if gun.scope_texture:
+		Globals.ui.scope.hide()
+		gun.show()
 
 
 func enter_gun_state_reload() -> void:
@@ -627,12 +637,12 @@ func change_gun(new_gun: EquipmentGun) -> void:
 		if i != gun:
 			i.visible = false
 		else:
-			gun.gun_stats = PlayerStats.gun.gun_stats
+			if i is Gun:
+				gun.gun_stats = PlayerStats.gun.gun_stats
 			gun.rotation = Vector3.ZERO
-			#await get_tree().create_timer(0.05).timeout
 			gun.visible = true
 	Globals.ui.set_gun_name(PlayerStats.gun.title)
-	if Input.is_action_pressed("aim"):
+	if Input.is_action_pressed("aim") and gun is Gun:
 		await change_gun_state(gun_states.ads)
 	else:
 		await change_gun_state(gun_states.point)

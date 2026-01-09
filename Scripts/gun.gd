@@ -37,7 +37,7 @@ var spread_curve := (preload("res://Resources/bullet_spread.tres"))
 @onready var audio_player: AudioStreamPlayer3D = $GunAnchor/FirePoint/AudioStreamPlayer3D
 @onready var chamber: Node3D = $GunAnchor/Chamber
 @onready var empty_click: AudioStreamPlayer3D = $EmptyClick
-@onready var shoot_cooldown_timer: Timer = $ShootCooldown
+@onready var shoot_cooldown_timer: Timer = $Cooldown
 @onready var firepoint: Node3D = $GunAnchor/FirePoint
 
 
@@ -79,29 +79,45 @@ func aim_fire_point(pos: Vector3) -> void:
 	fire_point.look_at(pos)
 
 
-func _on_shoot() -> void:
-	gun_stats.ammo -= 1
-	gun_stats.condition -= 0.05
-	can_shoot = false
-	has_released = false
-	flash_texture.rotate_z(deg_to_rad(randf_range(0, 360)))
-	muzzle_flash.visible = true
-	audio_player.play()
-	var tween = create_tween()
-	tween.tween_property(muzzle_flash, "visible", false, 0.1)
-	#if fire_type == fire_types.pump:
-		#await get_tree().create_timer(0.25).timeout
-		#if anim_player:
-			#anim_player.play("pump")
-	#else:
-	shoot_cooldown_timer.start()
-	#var shell_instance = Globals.create_particle(shell, chamber.global_position, chamber)
-	#if shell_instance != null:
-		#shell_instance.apply_impulse(global_transform.basis.x * randf_range(2, 4) + global_transform.basis.y * randf_range(2, 3))
-		#shell_instance.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
+#func _on_shoot() -> void:
+	#gun_stats.ammo -= 1
+	#gun_stats.condition -= 0.05
+	#can_shoot = false
+	#has_released = false
+	#flash_texture.rotate_z(deg_to_rad(randf_range(0, 360)))
+	#muzzle_flash.visible = true
+	#audio_player.play()
+	#var tween = create_tween()
+	#tween.tween_property(muzzle_flash, "visible", false, 0.1)
+	##if fire_type == fire_types.pump:
+		##await get_tree().create_timer(0.25).timeout
+		##if anim_player:
+			##anim_player.play("pump")
+	##else:
+	#shoot_cooldown_timer.start()
+	##var shell_instance = Globals.create_particle(shell, chamber.global_position, chamber)
+	##if shell_instance != null:
+		##shell_instance.apply_impulse(global_transform.basis.x * randf_range(2, 4) + global_transform.basis.y * randf_range(2, 3))
+		##shell_instance.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
 
 
-func shoot(is_ads: bool = false, movement_speed = Vector3.ZERO) -> void:
+func use() -> bool:
+	if !can_shoot:
+		return false
+	if ammo <= 0:
+		empty_click.play()
+		return false
+	shoot()
+	return true
+	
+
+
+func shoot() -> void:#is_ads: bool = false, movement_speed = Vector3.ZERO) -> void:
+	var is_ads = false
+	var movement_speed = Vector3.ZERO
+	if uses_input:
+		is_ads = Globals.player.gun_state == Globals.player.gun_states.ads
+		movement_speed = Globals.player.velocity
 	time_shooting += 0.4
 	for i in bullet_stats.amount:
 		var inst = bullet_stats.bullet_scene.instantiate()

@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 		tooltip.show()
 	
 	# magazine/medkits
-	if Globals.player.gun:
+	if Globals.player.gun and Globals.player.gun is Gun:
 		bottom_right.visible = true
 		set_mag_count(PlayerStats.inventory.get_item_amount(Globals.player.gun.ammo_item))
 		#set_medit_count(PlayerStats.inventory.get_item_amount("medkit"))
@@ -55,7 +55,7 @@ func _process(delta: float) -> void:
 
 	
 	# crosshair
-	if (!show_crosshair or !Globals.player.gun or 
+	if (!show_crosshair or !Globals.player.gun or Globals.player.gun != Gun or
 	Globals.player.gun_state == Globals.player.gun_states.ads or 
 	Globals.player.gun_state == Globals.player.gun_states.no_gun or 
 	tooltip.text != "" or Globals.crosshair_type == Globals.crosshairs.none or

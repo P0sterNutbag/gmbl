@@ -34,7 +34,8 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	detection.targets.append(Globals.player)
+	if chase_player:
+		detection.targets.append(Globals.player)
 	var gun = guns_dict[gun_index][0].instantiate()
 	gun_holder.add_child(gun)
 	location.location_data.population = randi_range(min_enemies, max_enemies)

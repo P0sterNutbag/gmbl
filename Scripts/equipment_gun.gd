@@ -1,7 +1,7 @@
 extends Equipment
 class_name EquipmentGun
 
-@export var gun_stats: GunStats = GunStats.new()
+@export var gun_stats: GunStats# = GunStats.new()
 @export var gun_object: PackedScene
 var ammo: 
 	get(): return gun_stats.ammo

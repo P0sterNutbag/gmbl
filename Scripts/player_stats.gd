@@ -27,7 +27,7 @@ var inventory: Inventory = Inventory.new()
 var quests: Array[Quest]
 @onready var guns: Array[Item]:
 	get(): 
-		return inventory.items.filter(func(i): return i is EquipmentGun)
+		return inventory.items.filter(func(i): return i is EquipmentGun and i.gun_stats.ammo > 0)
 var gun: EquipmentGun
 var gun_index := 0
 var sleep := 1.0

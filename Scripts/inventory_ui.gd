@@ -16,7 +16,7 @@ var current_menu_item: MenuItem
 var categories = {
 	-1 : "All" ,
 	Item.categories.survival : "Survival",
-	Item.categories.guns : "Guns", 
+	Item.categories.guns : "Weapons", 
 	Item.categories.ammo : "Ammo",
 	Item.categories.armor: "Armor",
 	Item.categories.junk : "Junk",

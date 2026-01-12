@@ -1,7 +1,7 @@
 extends Node
 
 @export var time_curve: Curve
-var total_cycle_seconds: float = 1000
+var total_cycle_seconds: float = 1200
 var time: float = 0.25
 var sun_time: float = 0.25
 var time_speed: float
@@ -16,9 +16,15 @@ signal day_start
 func _ready() -> void:
 	SceneManager.new_game_start.connect(reset_cycle)
 	time_speed = 2 / total_cycle_seconds
+	sky_progress = (time + 1) / 2
 
 
 func _process(delta: float) -> void:
+	if !get_tree().current_scene:
+		return
+	var scene_name = get_tree().current_scene.name
+	if !Globals.overworld or scene_name == "CharacterCreation" or scene_name == "MainMenu":
+		return
 	var was_night = is_night
 	time += time_speed * delta
 	if time >= time_curve.max_domain:

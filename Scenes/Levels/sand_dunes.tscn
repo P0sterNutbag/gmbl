@@ -73,44 +73,163 @@ visible = false
 mesh = SubResource("ArrayMesh_3wcgy")
 skeleton = NodePath("../..")
 
-[node name="ShippingContainerPrefab" parent="NavigationRegion3D" index="1" node_paths=PackedStringArray("terrain") instance=ExtResource("9_pp208")]
-transform = Transform3D(0.9728567, 0, -0.23140833, -0.06337314, 0.96177, -0.2664251, 0.22256158, 0.27385852, 0.9356644, 120.57104, 8.904156, 102.46731)
+[node name="ShackWindows" parent="NavigationRegion3D" index="1" node_paths=PackedStringArray("terrain") instance=ExtResource("14_pp208")]
+transform = Transform3D(-0.7514829, 0, -0.65975255, 0, 1, 0, 0.65975255, 0, -0.7514829, 86.290306, 0.45354098, 63.80847)
 terrain = NodePath("../../Terrain")
+metadata/_edit_group_ = true
 
-[node name="TireStacks" parent="NavigationRegion3D" index="2" node_paths=PackedStringArray("terrain") instance=ExtResource("10_gsocy")]
+[node name="ShippingContainerPrefab" parent="NavigationRegion3D" index="2" node_paths=PackedStringArray("terrain") instance=ExtResource("9_pp208")]
+transform = Transform3D(0.9728567, 0, -0.23140833, -0.06337314, 0.96177, -0.2664251, 0.22256158, 0.27385852, 0.9356644, 120.57104, 9.754725, 102.46731)
+terrain = NodePath("../../Terrain")
+metadata/_edit_group_ = true
+
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab" index="4"]
+transform = Transform3D(0.9994697, 0.031664517, 0.007590592, -0.03256161, 0.9719338, 0.23299077, 0, -0.23311436, 0.97244936, 0, 0, 0)
+
+[node name="TireStacks" parent="NavigationRegion3D" index="3" node_paths=PackedStringArray("terrain") instance=ExtResource("10_gsocy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 164.71802, 5.2282023, 182.03934)
 terrain = NodePath("../../Terrain")
+metadata/_edit_group_ = true
 
-[node name="WoodenCrates" parent="NavigationRegion3D" index="3" node_paths=PackedStringArray("terrain") instance=ExtResource("11_sbsq4")]
+[node name="TireStack" parent="NavigationRegion3D/TireStacks" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8609161, -0.0048508644, 3.171112)
+
+[node name="TireStack2" parent="NavigationRegion3D/TireStacks" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2381897, 0.54951906, -6.1231384)
+
+[node name="TireStack3" parent="NavigationRegion3D/TireStacks" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.645813, -0.03178644, 0.8349762)
+
+[node name="Tire" parent="NavigationRegion3D/TireStacks" index="7"]
+transform = Transform3D(0.99647355, -0.08362566, 0.006874349, 0.08390773, 0.9931237, -0.08163856, 0, 0.08192748, 0.99663824, 4.5533752, 0.42131853, -3.6593933)
+
+[node name="Tire2" parent="NavigationRegion3D/TireStacks" index="8"]
+transform = Transform3D(0.9964757, -0.083623596, 0.0065763057, 0.08388178, 0.9934086, -0.07812339, 0, 0.078399695, 0.99692196, 4.5693665, 0.5007334, -4.4878845)
+
+[node name="Tire3" parent="NavigationRegion3D/TireStacks" index="9"]
+transform = Transform3D(0.9959593, 0.08974893, -0.0031891584, -0.089805566, 0.9953311, -0.035368316, 0, 0.03551181, 0.9993692, -3.0496826, -0.05335617, 4.821472)
+
+[node name="Tire4" parent="NavigationRegion3D/TireStacks" index="10"]
+transform = Transform3D(0.9924618, 0.12248557, -0.0041020955, -0.122554235, 0.99190575, -0.03321936, 0, 0.033471674, 0.9994397, -4.9449005, 0.17711926, 4.0201263)
+
+[node name="Tire5" parent="NavigationRegion3D/TireStacks" index="11"]
+transform = Transform3D(0.999989, -0.004705363, 1.1595272e-05, 0.0047053774, 0.99998593, -0.0024642325, 0, 0.0024642597, 0.99999696, 2.2528534, -0.38313627, 7.362915)
+
+[node name="Tire6" parent="NavigationRegion3D/TireStacks" index="12"]
+transform = Transform3D(0.9962511, 0.08622769, -0.0069636535, -0.08650842, 0.99301815, -0.08019505, 0, 0.080496825, 0.9967548, -3.1925354, 0.53652906, -3.9657135)
+
+[node name="WoodenCrates" parent="NavigationRegion3D" index="4" node_paths=PackedStringArray("terrain") instance=ExtResource("11_sbsq4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.495167, 1.2031609, 151.41495)
 terrain = NodePath("../../Terrain")
+metadata/_edit_group_ = true
 
-[node name="DrumBarrels" parent="NavigationRegion3D" index="4" node_paths=PackedStringArray("terrain", "nodes_to_exclude") instance=ExtResource("12_gy2qf")]
+[node name="Crate" parent="NavigationRegion3D/WoodenCrates" index="4"]
+transform = Transform3D(0.9717931, 0.0347316, 0.23326357, -0.04107334, 0.9989054, 0.022383299, -0.23223084, -0.03133285, 0.9721559, -0.7415848, 0.047746897, 1.1982727)
+
+[node name="CrateTall" parent="NavigationRegion3D/WoodenCrates" index="5"]
+transform = Transform3D(0.84934086, 0.042303342, -0.5261468, -0.040275954, 0.9990713, 0.015311385, 0.52630585, 0.00818648, 0.8502559, -2.8899994, 0.14650857, 0.4880066)
+
+[node name="Crate2" parent="NavigationRegion3D/WoodenCrates" index="6"]
+transform = Transform3D(0.88278145, 0.06764336, -0.46488842, -0.091330536, 0.99541014, -0.028591871, 0.4608206, 0.06769889, 0.8849075, 0.05109787, 0.13088226, -3.3720245)
+
+[node name="Crate3" parent="NavigationRegion3D/WoodenCrates" index="7"]
+transform = Transform3D(0.92929417, 0.046379913, 0.36641672, -0.043173466, 0.9989239, -0.01694559, -0.36680835, -7.204433e-05, 0.93029654, 2.8608208, -0.13684571, -1.0287476)
+
+[node name="Node3D" parent="NavigationRegion3D/WoodenCrates" index="8"]
+transform = Transform3D(0.9980012, 0.06297952, -0.005207318, -0.063194424, 0.99460727, -0.082236834, 0, 0.08240153, 0.99659926, -3.0559998, 0.3419987, -2.4149933)
+
+[node name="DrumBarrels" parent="NavigationRegion3D" index="5" node_paths=PackedStringArray("terrain", "nodes_to_exclude") instance=ExtResource("12_gy2qf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 91.91208, 0.07818997, 65.76545)
 terrain = NodePath("../../Terrain")
 nodes_to_exclude = [NodePath("NpcSpawns"), NodePath("LootSpawns"), null]
+metadata/_edit_group_ = true
 
-[node name="Trash" parent="NavigationRegion3D" index="5" node_paths=PackedStringArray("terrain") instance=ExtResource("13_6hxrv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150.86809, 1.0710237, 130.39857)
-terrain = NodePath("../../Terrain")
+[node name="RigidBody3D" parent="NavigationRegion3D/DrumBarrels" index="3"]
+transform = Transform3D(0.9989883, -0.044935565, -0.0017930506, 0.044971325, 0.9981939, 0.039830636, 0, -0.039870974, 0.9992048, -0.04324341, -0.011444986, 2.39328)
 
-[node name="ShackWindows" parent="NavigationRegion3D" index="6" node_paths=PackedStringArray("terrain") instance=ExtResource("14_pp208")]
-transform = Transform3D(-0.7514829, 0, -0.65975255, 0, 1, 0, 0.65975255, 0, -0.7514829, 86.290306, 0.45354098, 63.80847)
+[node name="RigidBody3D2" parent="NavigationRegion3D/DrumBarrels" index="4"]
+transform = Transform3D(0.99758136, -0.069493234, -0.0014745413, 0.06950887, 0.9973569, 0.021162404, 0, -0.021213712, 0.99977493, 0.88768005, 0.011900365, 1.5213165)
+
+[node name="RigidBody3D3" parent="NavigationRegion3D/DrumBarrels" index="5"]
+transform = Transform3D(0.9988294, 0.048351184, -0.0013807311, -0.048370894, 0.99842244, -0.028511254, 0, 0.028544668, 0.9995925, -3.4010239, 0.069093704, -0.13964081)
+
+[node name="RigidBody3D4" parent="NavigationRegion3D/DrumBarrels" index="6"]
+transform = Transform3D(0.99630183, -0.08581287, 0.0043354975, 0.085922316, 0.9950327, -0.050271742, 0, 0.05045834, 0.9987262, 1.7905884, 0.18329263, -2.6799164)
+
+[node name="RigidBody3D5" parent="NavigationRegion3D/DrumBarrels" index="7"]
+transform = Transform3D(0.9983332, -0.057633474, 0.003034445, 0.0577133, 0.99695235, -0.052490275, 0, 0.05257791, 0.9986169, 0.6919327, 0.12510926, -2.5818825)
+
+[node name="RigidBody3D6" parent="NavigationRegion3D/DrumBarrels" index="8"]
+transform = Transform3D(0.9960706, -0.08850641, 0.0031459492, 0.088562295, 0.99544203, -0.035382863, 0, 0.035522442, 0.99936885, 1.39608, 0.1325354, -1.235527)
+
+[node name="RigidBody3D7" parent="NavigationRegion3D/DrumBarrels" index="9"]
+transform = Transform3D(0.99807256, 0.061925046, 0.0040533547, -0.06205756, 0.99594134, 0.06519015, 0, -0.065316044, 0.9978646, -4.659546, 0.16838461, 4.3487167)
+
+[node name="RigidBody3D8" parent="NavigationRegion3D/DrumBarrels" index="10"]
+transform = Transform3D(0.9862944, -0.16491993, 0.0049822624, 0.16499516, 0.9858446, -0.029782554, 0, 0.030196413, 0.999544, 4.1351776, 0.4788354, -1.3772354)
+
+[node name="SpawnBuffer" parent="NavigationRegion3D/DrumBarrels" index="11"]
+transform = Transform3D(0.96481305, -0.26293615, 0.00060017325, 0.2629368, 0.9648106, -0.0022022591, 0, 0.0022825757, 0.99999744, 10, 1.5145451, 0)
+
+[node name="Trash" parent="NavigationRegion3D" index="6" node_paths=PackedStringArray("terrain") instance=ExtResource("13_6hxrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150.86809, 0.84223986, 130.39857)
 terrain = NodePath("../../Terrain")
+metadata/_edit_group_ = true
+
+[node name="Crate" parent="NavigationRegion3D/Trash" index="4"]
+transform = Transform3D(0.86415565, 0.06946943, -0.49840653, -0.038626693, 0.99666035, 0.0719452, 0.50174, -0.042920057, 0.86395305, -3.380005, 0.16159678, 3.0829926)
+
+[node name="CrateTall" parent="NavigationRegion3D/Trash" index="5"]
+transform = Transform3D(0.8499581, 0.0069732927, -0.52680403, -0.013058285, 0.99988407, -0.0078331055, 0.5266884, 0.01353697, 0.8499507, 0, 0, 0)
+
+[node name="CrateTall2" parent="NavigationRegion3D/Trash" index="6"]
+transform = Transform3D(0.89149314, -0.10295453, -0.44118062, 0.08631938, 0.9945967, -0.057675004, 0.44473466, 0.013334432, 0.89556307, 4.574997, 0.18678522, 0.42399597)
+
+[node name="Barrel" parent="NavigationRegion3D/Trash" index="7"]
+transform = Transform3D(0.9958822, 0.09065643, 0.00019567997, -0.09065664, 0.9958799, 0.0021495854, 0, -0.0021584737, 0.9999977, -3.8860016, 0.22999382, 0.8919983)
+
+[node name="RigidBody3D" parent="NavigationRegion3D/Trash" index="8"]
+transform = Transform3D(0.99991596, -0.012948048, 0.00062695995, 0.012963219, 0.99874586, -0.048360463, 0, 0.048364528, 0.9988297, 0.16395569, 0.07174462, -1.938797)
+
+[node name="RigidBody3D2" parent="NavigationRegion3D/Trash" index="9"]
+transform = Transform3D(0.9994539, 0.03300022, -0.0016863032, -0.033043273, 0.9981516, -0.0510053, 0, 0.05103317, 0.998697, -1.5507202, 0.11500031, -1.8583984)
+
+[node name="TireStack" parent="NavigationRegion3D/Trash" index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7630005, 0.14701605, -3.0429993)
+
+[node name="Tire" parent="NavigationRegion3D/Trash" index="11"]
+transform = Transform3D(0.9972072, 0.07463614, -0.0026920016, -0.07468467, 0.9965592, -0.035944235, 0, 0.0360449, 0.9993502, -3.1320038, 0.19246197, -1.1880035)
 
 [node name="TireStacks2" parent="NavigationRegion3D" index="7" node_paths=PackedStringArray("terrain") instance=ExtResource("10_gsocy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 187.0842, 4.925697, 79.30299)
 terrain = NodePath("../../Terrain")
+metadata/_edit_group_ = true
 
 [node name="Radio" parent="NavigationRegion3D/TireStacks2" index="13" instance=ExtResource("15_fac1s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8832092, 0.060157776, -0.51444244)
+transform = Transform3D(0.9987236, 0.050489146, 0.0014088078, -0.050508797, 0.99833506, 0.027856722, 0, -0.027892325, 0.9996109, -2.8832092, 0.060157776, -0.51444244)
 
 [node name="Radio2" parent="NavigationRegion3D/TireStacks2" index="14" instance=ExtResource("15_fac1s")]
-transform = Transform3D(0.8498559, 0, 0.52701515, 0, 1, 0, -0.52701515, 0, 0.8498559, -123.34763, -3.5670195, 75.717026)
+transform = Transform3D(0.84737176, 0.020636002, 0.53059894, -0.07640325, 0.9935851, 0.08337433, -0.5254747, -0.11118853, 0.84351254, -123.34763, -3.5670195, 75.717026)
 
 [node name="WoodenCrates2" parent="NavigationRegion3D" index="8" node_paths=PackedStringArray("terrain") instance=ExtResource("11_sbsq4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150.22774, 14.191353, 51.65103)
 terrain = NodePath("../../Terrain")
+metadata/_edit_group_ = true
+
+[node name="Crate" parent="NavigationRegion3D/WoodenCrates2" index="4"]
+transform = Transform3D(0.9726136, 0.012454944, 0.23209414, 0.0007446092, 0.99839115, -0.056697346, -0.2324269, 0.05531743, 0.9710395, -0.7415924, -0.030023575, 1.1982689)
+
+[node name="CrateTall" parent="NavigationRegion3D/WoodenCrates2" index="5"]
+transform = Transform3D(0.8499918, -0.04011459, -0.52526635, 0.009551635, 0.9981062, -0.0607688, 0.52670926, 0.04663583, 0.84876525, -2.8899994, -0.08587837, 0.48799896)
+
+[node name="Crate2" parent="NavigationRegion3D/WoodenCrates2" index="6"]
+transform = Transform3D(0.8863899, 0.023763316, -0.46232915, -0.014756031, 0.99962455, 0.02308917, 0.4627042, -0.013643863, 0.88640773, 0.051101685, 0.0139017105, -3.3720245)
+
+[node name="Crate3" parent="NavigationRegion3D/WoodenCrates2" index="7"]
+transform = Transform3D(0.92731506, 0.096108586, 0.36173198, -0.07817292, 0.99488777, -0.06393225, -0.36602718, 0.031007694, 0.93008745, 2.8608246, -0.13225746, -1.0287476)
+
+[node name="Node3D" parent="NavigationRegion3D/WoodenCrates2" index="8"]
+transform = Transform3D(0.9989316, -0.046214256, -2.4434577e-05, 0.046214264, 0.99893147, 0.00052815885, 0, -0.0005287237, 0.9999999, -3.0559998, -0.0389328, -2.415001)
 
 [node name="RandomCover" type="Node3D" parent="NavigationRegion3D" index="9" node_paths=PackedStringArray("terrain")]
 script = ExtResource("16_gy2qf")
@@ -214,3 +333,64 @@ transform = Transform3D(-0.9270778, 0, 0.37486908, 0, 1, 0, -0.37486908, 0, -0.9
 objects_to_snap = [null, null, null, null, null, null, null, null, null]
 
 [editable path="WorldEnvironment"]
+[editable path="NavigationRegion3D/ShippingContainerPrefab"]
+[editable path="NavigationRegion3D/TireStacks"]
+[editable path="NavigationRegion3D/TireStacks/TireStack"]
+[editable path="NavigationRegion3D/TireStacks/TireStack2"]
+[editable path="NavigationRegion3D/TireStacks/TireStack3"]
+[editable path="NavigationRegion3D/TireStacks/Tire"]
+[editable path="NavigationRegion3D/TireStacks/Tire/RigidBody3D/tire"]
+[editable path="NavigationRegion3D/TireStacks/Tire2"]
+[editable path="NavigationRegion3D/TireStacks/Tire2/RigidBody3D/tire"]
+[editable path="NavigationRegion3D/TireStacks/Tire3"]
+[editable path="NavigationRegion3D/TireStacks/Tire3/RigidBody3D/tire"]
+[editable path="NavigationRegion3D/TireStacks/Tire4"]
+[editable path="NavigationRegion3D/TireStacks/Tire4/RigidBody3D/tire"]
+[editable path="NavigationRegion3D/TireStacks/Tire5"]
+[editable path="NavigationRegion3D/TireStacks/Tire5/RigidBody3D/tire"]
+[editable path="NavigationRegion3D/TireStacks/Tire6"]
+[editable path="NavigationRegion3D/TireStacks/Tire6/RigidBody3D/tire"]
+[editable path="NavigationRegion3D/WoodenCrates"]
+[editable path="NavigationRegion3D/WoodenCrates/Crate"]
+[editable path="NavigationRegion3D/WoodenCrates/CrateTall"]
+[editable path="NavigationRegion3D/WoodenCrates/Crate2"]
+[editable path="NavigationRegion3D/WoodenCrates/Crate3"]
+[editable path="NavigationRegion3D/DrumBarrels"]
+[editable path="NavigationRegion3D/DrumBarrels/RigidBody3D"]
+[editable path="NavigationRegion3D/DrumBarrels/RigidBody3D/RigidBody3D/drum barrel2"]
+[editable path="NavigationRegion3D/DrumBarrels/RigidBody3D2"]
+[editable path="NavigationRegion3D/DrumBarrels/RigidBody3D2/RigidBody3D/drum barrel2"]
+[editable path="NavigationRegion3D/DrumBarrels/RigidBody3D3"]
+[editable path="NavigationRegion3D/DrumBarrels/RigidBody3D3/RigidBody3D/drum barrel2"]
+[editable path="NavigationRegion3D/DrumBarrels/RigidBody3D4"]
+[editable path="NavigationRegion3D/DrumBarrels/RigidBody3D4/RigidBody3D/drum barrel2"]
+[editable path="NavigationRegion3D/DrumBarrels/RigidBody3D5"]
+[editable path="NavigationRegion3D/DrumBarrels/RigidBody3D5/RigidBody3D/drum barrel2"]
+[editable path="NavigationRegion3D/DrumBarrels/RigidBody3D6"]
+[editable path="NavigationRegion3D/DrumBarrels/RigidBody3D6/RigidBody3D/drum barrel2"]
+[editable path="NavigationRegion3D/DrumBarrels/RigidBody3D7"]
+[editable path="NavigationRegion3D/DrumBarrels/RigidBody3D7/RigidBody3D/drum barrel2"]
+[editable path="NavigationRegion3D/DrumBarrels/RigidBody3D8"]
+[editable path="NavigationRegion3D/DrumBarrels/RigidBody3D8/RigidBody3D/drum barrel2"]
+[editable path="NavigationRegion3D/Trash"]
+[editable path="NavigationRegion3D/Trash/Crate"]
+[editable path="NavigationRegion3D/Trash/CrateTall"]
+[editable path="NavigationRegion3D/Trash/CrateTall2"]
+[editable path="NavigationRegion3D/Trash/Barrel"]
+[editable path="NavigationRegion3D/Trash/Barrel/RigidBody3D/barrel"]
+[editable path="NavigationRegion3D/Trash/RigidBody3D"]
+[editable path="NavigationRegion3D/Trash/RigidBody3D/RigidBody3D/drum barrel2"]
+[editable path="NavigationRegion3D/Trash/RigidBody3D2"]
+[editable path="NavigationRegion3D/Trash/RigidBody3D2/RigidBody3D/drum barrel2"]
+[editable path="NavigationRegion3D/Trash/TireStack"]
+[editable path="NavigationRegion3D/Trash/Tire"]
+[editable path="NavigationRegion3D/Trash/Tire/RigidBody3D/tire"]
+[editable path="NavigationRegion3D/TireStacks2/Radio"]
+[editable path="NavigationRegion3D/TireStacks2/Radio/boombox"]
+[editable path="NavigationRegion3D/TireStacks2/Radio2"]
+[editable path="NavigationRegion3D/TireStacks2/Radio2/boombox"]
+[editable path="NavigationRegion3D/WoodenCrates2"]
+[editable path="NavigationRegion3D/WoodenCrates2/Crate"]
+[editable path="NavigationRegion3D/WoodenCrates2/CrateTall"]
+[editable path="NavigationRegion3D/WoodenCrates2/Crate2"]
+[editable path="NavigationRegion3D/WoodenCrates2/Crate3"]

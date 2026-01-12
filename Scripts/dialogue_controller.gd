@@ -157,6 +157,8 @@ func leave_shop() -> void:
 
 
 func start_level() -> void:
+	Globals.ui.portraits.hide()
+	UiController.close_interface(self)
 	Globals.overworld.current_encounter.transition_to_level(true)
 
 

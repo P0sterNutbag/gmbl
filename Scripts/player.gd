@@ -83,6 +83,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	Globals.player = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	change_gun_slot(PlayerStats.gun_index)
 	hitbox.hp = PlayerStats.hp
 	hitbox.hp_bar = Globals.ui.player_hp_bar
 	sway_noise.seed = randi()

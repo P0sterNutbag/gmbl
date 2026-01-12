@@ -55,7 +55,7 @@ func _process(delta: float) -> void:
 
 	
 	# crosshair
-	if (!show_crosshair or !Globals.player.gun or Globals.player.gun != Gun or
+	if (!show_crosshair or !Globals.player.gun or Globals.player.gun is not Gun or
 	Globals.player.gun_state == Globals.player.gun_states.ads or 
 	Globals.player.gun_state == Globals.player.gun_states.no_gun or 
 	tooltip.text != "" or Globals.crosshair_type == Globals.crosshairs.none or

@@ -41,6 +41,8 @@ func add_item(item: Item, amount: int = 1) -> bool:
 
 func remove_item(item: Item, amount: int = 1) -> void:
 	var slot = find_item_slot(item)
+	if !slot:
+		return
 	slot.amount -= amount
 	if slot.amount <= 0:
 		item_slots.erase(slot)

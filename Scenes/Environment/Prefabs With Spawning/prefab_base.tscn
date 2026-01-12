@@ -26,7 +26,7 @@ metadata/_custom_type_script = "uid://3uypo1jqxswc"
 script = ExtResource("1_a3e38")
 spawn_npcs = true
 spawn_loot = true
-nodes_to_exclude = [NodePath("NpcSpawns"), NodePath("LootSpawns"), NodePath("TrapSpawns")]
+nodes_to_exclude = [NodePath("NpcSpawns"), NodePath("LootSpawns"), NodePath("TrapSpawns"), NodePath("SpawnBuffer")]
 
 [node name="NpcSpawns" type="Node3D" parent="." groups=["spawn points"]]
 script = ExtResource("2_eiwgt")
@@ -40,6 +40,7 @@ spawn_on_ready = true
 location_data_variable = "loot_spawn_chance"
 
 [node name="TrapSpawns" type="Node3D" parent="."]
+process_mode = 4
 script = ExtResource("2_eiwgt")
 possible_spawns = Array[ExtResource("3_6acor")]([SubResource("Resource_2gyk4")])
 location_data_variable = "trap_spawn_chance"

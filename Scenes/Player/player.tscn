@@ -904,6 +904,21 @@ _data = {
 &"reload": SubResource("Animation_ypfnu")
 }
 
+[sub_resource type="Animation" id="Animation_rukb4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.043370992, -0.11607134, -0.1489332)]
+}
+
 [sub_resource type="Animation" id="Animation_2ahak"]
 resource_name = "stab"
 length = 0.35
@@ -919,21 +934,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(-0.043370992, -0.11607134, -0.1489332), Vector3(-0.043, -0.116, -0.539), Vector3(-0.043370992, -0.11607134, -0.1489332)]
-}
-
-[sub_resource type="Animation" id="Animation_rukb4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.043370992, -0.11607134, -0.1489332)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4no11"]
@@ -999,7 +999,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.111368775, -0.061341286, -0
 [node name="GunAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset"]
 
 [node name="AK47" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("5_fcwna")]
-visible = false
 uses_input = true
 bullet_stats = SubResource("Resource_l6n3p")
 gun_stats = SubResource("Resource_igrcy")
@@ -1353,15 +1352,16 @@ libraries = {
 }
 
 [node name="Knife" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("27_2ahak")]
+visible = false
 
 [node name="MeshInstance3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Knife" index="0"]
 transform = Transform3D(1.9106855e-15, 4.371139e-08, -1, 1, -4.371139e-08, 0, -4.371139e-08, -1, -4.371139e-08, -0.043370992, -0.11607134, -0.1489332)
 
 [node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Knife/MeshInstance3D" index="1"]
-transform = Transform3D(1.9106855e-15, 1, -4.371139e-08, 4.371139e-08, -4.371139e-08, -1, -1, 0, -4.371139e-08, 0.014830589, -0.20378855, -0.06580834)
+transform = Transform3D(1.9106855e-15, 1, -4.371139e-08, 4.371139e-08, -4.371139e-08, -1, -1, 0, -4.371139e-08, 0.014830589, -0.20378855, -0.026899494)
 
 [node name="armR" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Knife/MeshInstance3D/ArmRAnchor" instance=ExtResource("12_ogmfp")]
-transform = Transform3D(0.758646, -1.57586e-08, 0.651503, 5.96047e-08, 1, -4.52188e-08, -0.651503, 7.31377e-08, 0.758646, 0, 4.76837e-07, -2.38419e-07)
+transform = Transform3D(0.758646, -1.57586e-08, 0.651503, 5.96047e-08, 1, -4.52188e-08, -0.651503, 7.31377e-08, 0.758646, 0, 4.7683716e-07, -0.059857428)
 
 [node name="AnimationPlayer" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Knife" index="2"]
 libraries = {

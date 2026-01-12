@@ -2,20 +2,15 @@
 
 [ext_resource type="Script" uid="uid://dmhkld52ble6j" path="res://Scripts/knife.gd" id="1_wqjf8"]
 [ext_resource type="AudioStream" uid="uid://cg1ead7veeqpv" path="res://Audio/Guns/antitank_empty.wav" id="2_lf1a8"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_wqjf8"]
-top_radius = 0.05
-bottom_radius = 0.05
-height = 0.5
+[ext_resource type="PackedScene" uid="uid://ct0yri7k6jh4c" path="res://Scenes/Guns/Models/knife.tscn" id="3_v45xk"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wqjf8"]
 
 [node name="Knife" type="Node3D"]
 script = ExtResource("1_wqjf8")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="Node3D" parent="."]
 transform = Transform3D(1.9106855e-15, 4.371139e-08, -1, 1, -4.371139e-08, 0, -4.371139e-08, -1, -4.371139e-08, 0, 0, 0)
-mesh = SubResource("CylinderMesh_wqjf8")
 
 [node name="Hitbox" type="Area3D" parent="MeshInstance3D"]
 transform = Transform3D(1.9106855e-15, 1, -4.371139e-08, 4.371139e-08, -4.371139e-08, -1, -1, 0, -4.371139e-08, 0, 0, 0)
@@ -26,6 +21,9 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Hitbox"]
 shape = SubResource("SphereShape3D_wqjf8")
+
+[node name="knife" parent="MeshInstance3D" instance=ExtResource("3_v45xk")]
+transform = Transform3D(-1.3113417e-08, 0.3, 0, -0.3, -1.3113417e-08, 0, 0, 0, 0.3, 0, 0, 0)
 
 [node name="Stab" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_lf1a8")

@@ -74,7 +74,6 @@ func _process(_delta: float) -> void:
 				anim_player.play("Run")
 			else:
 				anim_player.play("Idle")
-			
 
 
 func _physics_process(delta: float) -> void:

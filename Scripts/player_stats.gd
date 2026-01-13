@@ -51,6 +51,7 @@ func _ready() -> void:
 	sleep_decrease_rate = DayNightCycle.time_speed / sleep_decrease_rate
 	hunger_decrease_rate = DayNightCycle.time_speed / hunger_decrease_rate
 	thirst_decrease_rate = DayNightCycle.time_speed / thirst_decrease_rate
+	#sensitivity_modifier = 
 
 
 func _process(delta: float) -> void:

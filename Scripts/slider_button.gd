@@ -1,4 +1,5 @@
 extends UiButton
+class_name SliderButton
 
 @onready var label: Label = $HBoxContainer/Label
 @onready var h_slider: HSlider = $HBoxContainer/HSlider

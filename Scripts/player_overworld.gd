@@ -205,10 +205,10 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		match camera_type:
 			camera_types.overhead:
-				camera_anchor.rotate_y(-event.relative.x * mouse_sensitivity)
+				camera_anchor.rotate_y(-event.relative.x * mouse_sensitivity * PlayerStats.sensitivity_modifier)
 			camera_types.fps:
-				camera_anchor.rotate_y(-event.relative.x * mouse_sensitivity)
-				camera.rotate_x(-event.relative.y * mouse_sensitivity)
+				camera_anchor.rotate_y(-event.relative.x * mouse_sensitivity * PlayerStats.sensitivity_modifier)
+				camera.rotate_x(-event.relative.y * mouse_sensitivity * PlayerStats.sensitivity_modifier)
 				camera.rotation.x = clampf(camera.rotation.x, -deg_to_rad(70), deg_to_rad(70))
 
 

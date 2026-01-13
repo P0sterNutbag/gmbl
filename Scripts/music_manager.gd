@@ -5,7 +5,21 @@ extends Node
 
 
 func _ready() -> void:
+	# signals
 	SceneManager.scene_changed.connect(on_scene_changed)
+	
+	# get volume from settings
+	#var master_index = AudioServer.get_bus_index("Master")
+	#var value = ConfigManager.file.get_value("settings", "master_volume", 100)
+	#AudioServer.set_bus_volume_db(master_index, linear_to_db(value / 100))
+	#var music_index = AudioServer.get_bus_index("Music")
+	#value = ConfigManager.file.get_value("settings", "music_volume", 100)
+	#AudioServer.set_bus_volume_db(music_index, linear_to_db(value / 100))
+	#var sfx_index= AudioServer.get_bus_index("Master")
+	#value = ConfigManager.file.get_value("settings", "sfx_volume", 100)
+	#AudioServer.set_bus_volume_db(sfx_index, linear_to_db(value / 100))
+	
+	# start playing music
 	var path = get_tree().current_scene.get_scene_file_path()
 	if tracks.has(path):
 		var track = tracks[path]

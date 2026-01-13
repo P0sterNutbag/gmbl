@@ -2,17 +2,42 @@ extends Menu
 
 
 var overlay: CanvasLayer
+@onready var resolution: Button = $MarginContainer/VBoxContainer/VBoxContainer/Resolution
+@onready var fullscreen: Button = $MarginContainer/VBoxContainer/VBoxContainer/Fullscreen
+@onready var volume: SliderButton = $MarginContainer/VBoxContainer/VBoxContainer/Volume
+@onready var music_volume: SliderButton = $MarginContainer/VBoxContainer/VBoxContainer/MusicVolume
+@onready var sfx_volume: SliderButton = $MarginContainer/VBoxContainer/VBoxContainer/SfxVolume
+@onready var aim_sensitivity: SliderButton = $MarginContainer/VBoxContainer/VBoxContainer/AimSensitivity
+@onready var crt: Button = $MarginContainer/VBoxContainer/VBoxContainer/CRT
+@onready var warp: Button = $MarginContainer/VBoxContainer/VBoxContainer/Warp
+@onready var crosshair: Button = $MarginContainer/VBoxContainer/VBoxContainer/Crosshair
 
 
 func _ready() -> void:
 	overlay = get_tree().root.get_node("Overlay")
-	#_on_master_h_slider_value_changed(config.get_value("settings", "master_volume", 50))
-	#_on_music_h_slider_value_changed(config.get_value("settings", "music_volume", 50))
-	#_on_sfx_h_slider_value_changed(config.get_value("settings", "sfx_volume", 50))
-	#_on_warp_toggled(config.get_value("settings", "warp_on", true))
-	#_on_crt_toggled(config.get_value("settings", "crt_on", true))
-	#_on_crosshair_option_changed(config.get_value("settings", "crosshair_type", 0))
-	#_on_aim_sensitivity_h_slider_value_changed(config.get_value("settings", "mouse_sensitivity", 0.5))
+	if !Globals.overworld:
+		set_all_settings()
+
+
+func set_all_settings() -> void:
+	var res = ConfigManager.file.get_value("settings", "resolution", Vector2i(1920, 1080))
+	resolution.set_index_by_value(res)
+	var is_fullscreen = ConfigManager.file.get_value("settings", "fullscreen", true)
+	fullscreen.toggled.emit(is_fullscreen)
+	var vol = ConfigManager.file.get_value("settings", "master_volume", 50)
+	volume.h_slider.value = vol
+	var mv = ConfigManager.file.get_value("settings", "music_volume", 50)
+	music_volume.h_slider.value = mv
+	var sv = ConfigManager.file.get_value("settings", "sfx_volume", 50)
+	sfx_volume.h_slider.value = sv
+	var sens = ConfigManager.file.get_value("settings", "mouse_sensitivity", 50)
+	aim_sensitivity.h_slider.value = sens
+	var crt_on = ConfigManager.file.get_value("settings", "crt_on", true)
+	crt.toggled.emit(crt_on)
+	var warp_on = ConfigManager.file.get_value("settings", "warp_on", true)
+	warp.toggled.emit(warp_on)
+	var cross = ConfigManager.file.get_value("settings", "crosshair_type", 0)
+	crosshair.set_index_by_value(cross)
 
 
 func _on_master_h_slider_value_changed(value: float) -> void:
@@ -63,6 +88,24 @@ func change_crosshair(index: int) -> void:
 
 
 func _on_aim_sensitivity_h_slider_value_changed(value: float) -> void:
-	PlayerStats.sensitivity_modifier = value / 50
-	ConfigManager.file.set_value("settings", "mouse_sensitivity", value / 50)
+	var modifier = clamp(value / 50, 0.1, 2)
+	PlayerStats.sensitivity_modifier = modifier
+	ConfigManager.file.set_value("settings", "mouse_sensitivity", value)
+	ConfigManager.save()
+
+
+func _on_resolution_option_changed(value: Variant) -> void:
+	DisplayServer.window_set_size(Vector2i(value))
+	DisplayServer.window_set_position(DisplayServer.screen_get_position() + (DisplayServer.screen_get_size() - Vector2i(value)) / 2)
+	ConfigManager.file.set_value("settings", "resolution", Vector2i(value))
+	ConfigManager.save()
+
+
+func _on_fullscreen_toggled(toggled_on: bool) -> void:
+	var window = get_window()
+	if toggled_on:
+		window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN
+	else:
+		window.mode = Window.MODE_WINDOWED
+	ConfigManager.file.set_value("settings", "fullscreen", toggled_on)
 	ConfigManager.save()

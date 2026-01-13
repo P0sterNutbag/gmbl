@@ -25,3 +25,10 @@ func change_index(new_index: int):
 	var option_text = options[index].string
 	option_label.text = option_text
 	option_changed.emit(options[index].value)
+
+
+func set_index_by_value(value) -> void:
+	for i in options.size():
+		var option = options[i]
+		if option.value == value:
+			change_index(i)

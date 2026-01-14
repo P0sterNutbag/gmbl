@@ -2,7 +2,7 @@ extends Node
 
 enum states {walk, pause, dead}
 var state = states.walk
-var hp: float = 3:
+var hp: float = 3.5:
 	set(value):
 		hp = value
 		if Globals.player and "hitbox" in Globals.player and Globals.player.hitbox:
@@ -12,7 +12,7 @@ var hp: float = 3:
 			return Globals.player.hitbox.hp
 		else:
 			return hp
-var max_hp := 3
+var max_hp := 3.5
 var sensitivity_modifier := 1.0
 var ammo: int:
 	set(value):

@@ -35,7 +35,9 @@ var is_holding_breath: bool
 var aim_rotation: Vector3
 var ammo: int:
 	get():
-		return gun.gun_stats.ammo
+		if gun and "gun_stats" in gun:
+			return gun.gun_stats.ammo
+		return 0
 var gun: Node3D
 var object_to_place: Node3D
 var gun_tween: Tween
@@ -679,7 +681,7 @@ func throw_grenade() -> void:
 	PlayerStats.inventory.remove_item(grenade_item)
 	if PlayerStats.inventory.get_item_amount(grenade_item) <= 0:
 		PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.secondary_gun] = null
-		change_gun_state(gun_states.no_gun)
+		unequip_gun()
 
 
 func start_place_item(item_to_place: String):

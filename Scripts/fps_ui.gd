@@ -31,18 +31,25 @@ func _process(delta: float) -> void:
 		tooltip.show()
 	
 	# magazine/medkits
-	if Globals.player.gun and Globals.player.gun is Gun:
-		bottom_right.visible = true
-		set_mag_count(PlayerStats.inventory.get_item_amount(Globals.player.gun.ammo_item))
-		#set_medit_count(PlayerStats.inventory.get_item_amount("medkit"))
-		if Globals.player.gun.max_ammo > 0:
-			var current_ammo = float(Globals.player.gun.ammo)
-			var max_ammo = float(Globals.player.gun.max_ammo)
-			var ammo_percentage = current_ammo / max_ammo
-			var sprite_index = int(ammo_percentage * 20)
-			if sprite_index == 0 and current_ammo > 0:
-				sprite_index = 1
-			mag_icon.region_rect = Rect2(sprite_index * 28, 0, 28, mag_icon.region_rect.size.y)
+	if Globals.player.gun:
+		if Globals.player.gun is Gun:
+			bottom_right.visible = true
+			mag_icon.visible = true
+			set_mag_count(PlayerStats.inventory.get_item_amount(Globals.player.gun.ammo_item))
+			#set_medit_count(PlayerStats.inventory.get_item_amount("medkit"))
+			if Globals.player.gun.max_ammo > 0:
+				var current_ammo = float(Globals.player.gun.ammo)
+				var max_ammo = float(Globals.player.gun.max_ammo)
+				var ammo_percentage = current_ammo / max_ammo
+				var sprite_index = int(ammo_percentage * 20)
+				if sprite_index == 0 and current_ammo > 0:
+					sprite_index = 1
+				mag_icon.region_rect = Rect2(sprite_index * 28, 0, 28, mag_icon.region_rect.size.y)
+		elif PlayerStats.gun and PlayerStats.gun.stackable:
+			bottom_right.visible = true
+			mag_icon.visible = false
+			var weapon_count = PlayerStats.inventory.get_item_amount(PlayerStats.gun)
+			set_mag_count(weapon_count)
 	else:
 		bottom_right.visible = false
 	

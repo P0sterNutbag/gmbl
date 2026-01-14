@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cc458wgoeu6t4"]
+[gd_scene load_steps=25 format=3 uid="uid://cc458wgoeu6t4"]
 
 [ext_resource type="Script" uid="uid://dr73ivowve6xe" path="res://Scripts/survival_ui.gd" id="1_e5c6o"]
 [ext_resource type="Script" uid="uid://bclh5yhrpmkxf" path="res://Scripts/stat_visual.gd" id="2_k4cvi"]
@@ -19,6 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="16_1lobq"]
 [ext_resource type="Script" uid="uid://eo5omrsmkx27" path="res://Scripts/equipment_button.gd" id="19_jtf3n"]
 [ext_resource type="PackedScene" uid="uid://bos3d7nxhdnc5" path="res://Scenes/UI/pause_menu.tscn" id="19_oq622"]
+[ext_resource type="Script" uid="uid://bbbs0n5jbnghm" path="res://Scripts/death_menu.gd" id="20_1kfkr"]
+[ext_resource type="PackedScene" uid="uid://bj7gyfau2dx5w" path="res://Scenes/UI/menu_button.tscn" id="22_jtf3n"]
 [ext_resource type="Theme" uid="uid://djqipqwy5toiu" path="res://Art/Themes/VBoxContainer.tres" id="24_8egi5"]
 [ext_resource type="Script" uid="uid://c5mc2tmhveupn" path="res://Scripts/progress_menu.gd" id="24_guqia"]
 
@@ -729,6 +731,62 @@ offset_bottom = 152.5
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="DeathMenu" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -312.04596
+offset_top = -125.25
+offset_right = 312.04596
+offset_bottom = 125.25
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("11_0pkni")
+script = ExtResource("20_1kfkr")
+
+[node name="MarginContainer" type="MarginContainer" parent="DeathMenu"]
+layout_mode = 2
+theme = ExtResource("12_2dyl4")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="DeathMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DeathMenu/MarginContainer/VBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("14_e5c6o")
+text = "You are dying"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="DeathMenu/MarginContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathMenu/MarginContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("24_8egi5")
+script = ExtResource("15_k4cvi")
+
+[node name="TourniquetButton" parent="DeathMenu/MarginContainer/VBoxContainer3/VBoxContainer" instance=ExtResource("22_jtf3n")]
+layout_mode = 2
+disabled = true
+text = "Tourniquet"
+
+[node name="MorphineButton" parent="DeathMenu/MarginContainer/VBoxContainer3/VBoxContainer" instance=ExtResource("22_jtf3n")]
+layout_mode = 2
+disabled = true
+text = "Morphine"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="DeathMenu/MarginContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="GiveUpButton" parent="DeathMenu/MarginContainer/VBoxContainer3/VBoxContainer2" instance=ExtResource("22_jtf3n")]
+layout_mode = 2
+text = "Give up"
+
 [node name="ProgressMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("item_container")]
 visible = false
 anchors_preset = 8
@@ -831,6 +889,10 @@ text = "Quit to Desktop"
 [connection signal="exit" from="Journal" to="." method="_on_menu_exit"]
 [connection signal="pressed" from="Journal/PanelContainer/Control/Button" to="Journal" method="close"]
 [connection signal="visibility_changed" from="PauseMenu" to="PauseMenu" method="_on_visibility_changed"]
+[connection signal="visibility_changed" from="DeathMenu" to="DeathMenu" method="_on_visibility_changed"]
+[connection signal="pressed" from="DeathMenu/MarginContainer/VBoxContainer3/VBoxContainer/TourniquetButton" to="DeathMenu" method="_on_tourniquet_button_pressed"]
+[connection signal="pressed" from="DeathMenu/MarginContainer/VBoxContainer3/VBoxContainer/MorphineButton" to="DeathMenu" method="_on_morphine_button_pressed"]
+[connection signal="pressed" from="DeathMenu/MarginContainer/VBoxContainer3/VBoxContainer2/GiveUpButton" to="DeathMenu" method="_on_give_up_button_pressed"]
 [connection signal="visibility_changed" from="ProgressMenu" to="ProgressMenu" method="_on_visibility_changed"]
 [connection signal="pressed" from="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2/Continue" to="ProgressMenu" method="_on_continue_pressed"]
 [connection signal="pressed" from="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2/Quit" to="ProgressMenu" method="_on_quit_pressed"]

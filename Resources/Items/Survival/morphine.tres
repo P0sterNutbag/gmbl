@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemUsable" load_steps=4 format=3 uid="uid://bbx4x21dta7e7"]
+
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="1_skjof"]
+[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="2_dpil1"]
+
+[sub_resource type="Resource" id="Resource_skjof"]
+script = ExtResource("1_skjof")
+values = Dictionary[String, Variant]({
+"hp": 8
+})
+add = true
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[resource]
+script = ExtResource("2_dpil1")
+effects = Array[ExtResource("1_skjof")]([SubResource("Resource_skjof")])
+is_health_item = true
+title = "Morphine"
+price = 100
+description = "Use to revive with full health when knocked out."
+metadata/_custom_type_script = "uid://dd1ly8qocexg4"

@@ -2,14 +2,17 @@ extends Node
 
 enum states {walk, pause, dead}
 var state = states.walk
-var hp: float = 8:
+var hp: float = 3:
 	set(value):
 		hp = value
 		if Globals.player and "hitbox" in Globals.player and Globals.player.hitbox:
 			Globals.player.hitbox.hp = value
 	get():
-		return Globals.player.hitbox.hp
-var max_hp := 8
+		if Globals.player and "hitbox" in Globals.player and Globals.player.hitbox:
+			return Globals.player.hitbox.hp
+		else:
+			return hp
+var max_hp := 3
 var sensitivity_modifier := 1.0
 var ammo: int:
 	set(value):
@@ -102,6 +105,11 @@ func change_state(new_state):
 	PlayerStats.state = new_state
 	if Globals.player.enter_functions.has(PlayerStats.state):
 		await Globals.player.enter_functions[PlayerStats.state].call()
+
+
+func give_up() -> void:
+	PlayerStats.reset_stats()
+	SaveController.delete_save_data()
 
 
 #func find_item(item_name: String) -> Resource:

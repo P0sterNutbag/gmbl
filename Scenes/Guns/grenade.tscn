@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://j2m6pd4rb0jy"]
+
+[ext_resource type="Script" uid="uid://u6dmp52iup4a" path="res://Scripts/grenade_weapon.gd" id="1_l5s68"]
+[ext_resource type="PackedScene" uid="uid://ebenhodrn8bk" path="res://Scenes/Bullets/grenade.tscn" id="2_85ueg"]
+[ext_resource type="Material" uid="uid://cuiwmfj20a7tt" path="res://Art/Materials/metal.tres" id="2_w5q7m"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_v0dxf"]
+radius = 0.05
+height = 0.12
+radial_segments = 16
+rings = 16
+
+[node name="Grenade" type="Node3D"]
+script = ExtResource("1_l5s68")
+grenade = ExtResource("2_85ueg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_v0dxf")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_w5q7m")

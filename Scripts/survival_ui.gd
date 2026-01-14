@@ -9,6 +9,7 @@ extends CanvasLayer
 @onready var pause_menu: Control = $PauseMenu
 @onready var player_inventory: InventoryUI = $PlayerInventory/Inventory
 @onready var progress_menu: PanelContainer = $ProgressMenu
+@onready var death_menu: PanelContainer = $DeathMenu
 
 
 func _enter_tree() -> void:
@@ -24,7 +25,7 @@ func _process(_delta: float) -> void:
 	# opening things
 	if Input.is_action_just_pressed("inventory"):
 		if !player_inventory_holder.visible:
-			if UiController.is_canvas_layer_open(Globals.ui):
+			if UiController.is_canvas_layer_open(Globals.ui) or PlayerStats.state != PlayerStats.states.walk:
 				return
 			player_inventory_holder.get_child(0).source_inventory = PlayerStats.inventory
 			UiController.open_interface(player_inventory_holder)
@@ -103,6 +104,11 @@ func close_transfer_inventory() -> void:
 func hide_all_ui() -> void:
 	for child in get_children():
 		child.hide()
+
+
+func show_ui() -> void:
+	get_child(0).show()
+	get_child(1).show()
 
 #func _on_menu_exit() -> void:
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

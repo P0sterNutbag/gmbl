@@ -20,10 +20,10 @@ func _ready() -> void:
 
 
 func set_all_settings() -> void:
-	var res = ConfigManager.file.get_value("settings", "resolution", Vector2i(1920, 1080))
-	resolution.set_index_by_value(res)
 	var is_fullscreen = ConfigManager.file.get_value("settings", "fullscreen", true)
 	fullscreen.toggled.emit(is_fullscreen)
+	var res = ConfigManager.file.get_value("settings", "resolution", Vector2i(1920, 1080))
+	resolution.set_index_by_value(res)
 	var vol = ConfigManager.file.get_value("settings", "master_volume", 50)
 	volume.h_slider.value = vol
 	var mv = ConfigManager.file.get_value("settings", "music_volume", 50)
@@ -88,13 +88,15 @@ func change_crosshair(index: int) -> void:
 
 
 func _on_aim_sensitivity_h_slider_value_changed(value: float) -> void:
-	var modifier = clamp(value / 50, 0.1, 2)
+	var modifier = value / 50
 	PlayerStats.sensitivity_modifier = modifier
 	ConfigManager.file.set_value("settings", "mouse_sensitivity", value)
 	ConfigManager.save()
 
 
 func _on_resolution_option_changed(value: Variant) -> void:
+	if !resolution.visible:
+		return
 	DisplayServer.window_set_size(Vector2i(value))
 	DisplayServer.window_set_position(DisplayServer.screen_get_position() + (DisplayServer.screen_get_size() - Vector2i(value)) / 2)
 	ConfigManager.file.set_value("settings", "resolution", Vector2i(value))
@@ -105,7 +107,9 @@ func _on_fullscreen_toggled(toggled_on: bool) -> void:
 	var window = get_window()
 	if toggled_on:
 		window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN
+		resolution.hide()
 	else:
 		window.mode = Window.MODE_WINDOWED
+		resolution.show()
 	ConfigManager.file.set_value("settings", "fullscreen", toggled_on)
 	ConfigManager.save()

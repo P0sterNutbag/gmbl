@@ -1,4 +1,4 @@
-extends Node3D
+extends Area3D
 
 var damage: float = 3.0
 var force: float = 1000
@@ -6,7 +6,7 @@ var collision_lifetime: float = 0
 var damaged_objects: Array
 const DUST = preload("uid://bxwa7hpni4yxi")
 @onready var explosion: GPUParticles3D = $Explosion
-@onready var area_3d: Area3D = $Area3D
+#@onready var area_3d: Area3D = $Area3D
 
 
 func _ready() -> void:
@@ -21,8 +21,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	collision_lifetime += delta
 	if collision_lifetime > 0.1:
-		area_3d.monitoring = false
-		area_3d.monitorable = false
+		monitoring = false
+		monitorable = false
 
 
 func _on_area_3d_area_entered(area: Area3D) -> void:

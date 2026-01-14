@@ -12,7 +12,7 @@ func _process(delta: float) -> void:
 		get_viewport().warp_mouse(mouse_pos + controller_vector * mouse_speed * delta)
 
 
-func open_interface(node_to_open: Control, pause_player: bool = true) -> void:
+func open_interface(node_to_open: Control, pause_player: bool = true, show_mouse: bool = true) -> void:
 	if !ui_nodes.has(node_to_open):
 		ui_nodes.append(node_to_open)
 	for node in ui_nodes:
@@ -23,6 +23,8 @@ func open_interface(node_to_open: Control, pause_player: bool = true) -> void:
 			node.hide()
 	if pause_player:
 		PlayerStats.change_state(PlayerStats.states.pause)
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	elif show_mouse:
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=180 format=4 uid="uid://doydk513gm02l"]
+[gd_scene load_steps=182 format=4 uid="uid://doydk513gm02l"]
 
 [ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_6y65m"]
 [ext_resource type="PackedScene" uid="uid://dyumojcinahde" path="res://Scenes/outline_fog_shader.tscn" id="3_2uctf"]
@@ -43,6 +43,7 @@
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="47_xt1pr"]
 [ext_resource type="Script" uid="uid://de6rxup5nru4w" path="res://Scripts/dialogue.gd" id="48_i627v"]
 [ext_resource type="Resource" uid="uid://ixc4pv5vjlno" path="res://Resources/Items/Guns/ak47.tres" id="49_1qd3k"]
+[ext_resource type="Resource" uid="uid://c7nqsvb4lasw1" path="res://Resources/Items/Armor/kevlar_vest.tres" id="49_nggm6"]
 [ext_resource type="Script" uid="uid://ctb2g10cnu2sg" path="res://Scripts/dialogue_option.gd" id="49_opo3i"]
 [ext_resource type="Script" uid="uid://cnu4xeujmgk51" path="res://Scripts/dialogue_options.gd" id="50_nggm6"]
 [ext_resource type="Resource" uid="uid://oaklo016ku8w" path="res://Resources/Items/Guns/pistol.tres" id="50_xt1pr"]
@@ -197,9 +198,14 @@ item = ExtResource("46_lf2le")
 amount = 5
 metadata/_custom_type_script = "uid://cfuex8bm4d62j"
 
+[sub_resource type="Resource" id="Resource_pay3g"]
+script = ExtResource("54_rkewd")
+item = ExtResource("49_nggm6")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
 [sub_resource type="Resource" id="Resource_usrj7"]
 script = ExtResource("61_n62ny")
-item_slots = Array[ExtResource("54_rkewd")]([SubResource("Resource_lc1ko"), SubResource("Resource_vnl05"), SubResource("Resource_dh8ic"), SubResource("Resource_2uctf"), SubResource("Resource_2gpn5"), SubResource("Resource_8vmc3")])
+item_slots = Array[ExtResource("54_rkewd")]([SubResource("Resource_lc1ko"), SubResource("Resource_vnl05"), SubResource("Resource_dh8ic"), SubResource("Resource_2uctf"), SubResource("Resource_2gpn5"), SubResource("Resource_8vmc3"), SubResource("Resource_pay3g")])
 space = 100
 money = 1000
 title = "General Store"

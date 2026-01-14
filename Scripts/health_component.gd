@@ -3,10 +3,9 @@ class_name HealthComponent
 
 @export var hp: float:
 	set(value):
-		if value > hp and hp != 0:
-			hp = value
-		else:
-			hp = value
+		hp = value #clamp(value, 0, max_hp)
+		if max_hp > 0 and hp > max_hp:
+			hp = max_hp
 		if hp_bar:
 			if hp_bar is ProgressBar:
 				hp_bar.value = hp / max_hp
@@ -45,9 +44,11 @@ func damage(dmg: float, hit_position: Vector3 = Vector3.ZERO, hit_direction: Vec
 	if hp <= 0:
 		death.emit()
 		is_dead = true
+		var all_children := []
+		all_children.append_array(get_children())
 		for inst in otherHitboxes:
-			inst.queue_free()
-		for child in get_children():
+			all_children.append_array(inst.get_children())
+		for child in all_children:
 			if child is CollisionShape3D:
 				child.set_deferred("disabled", true)
 	if !blood_on_hit or !blood:
@@ -57,3 +58,15 @@ func damage(dmg: float, hit_position: Vector3 = Vector3.ZERO, hit_direction: Vec
 	inst.set_deferred("global_position", spawn_pos)
 	inst.rotate_y(deg_to_rad(randf_range(-180, 180)))
 	get_tree().current_scene.add_child(inst)
+
+
+func revive() -> void:
+	await get_tree().create_timer(5).timeout
+	is_dead = false
+	var all_children := []
+	all_children.append_array(get_children())
+	for inst in otherHitboxes:
+		all_children.append_array(inst.get_children())
+	for child in all_children:
+		if child is CollisionShape3D:
+			child.set_deferred("disabled", false)

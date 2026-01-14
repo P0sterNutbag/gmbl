@@ -47,7 +47,7 @@ var enter_functions: Dictionary
 var gun_state_functions: Dictionary
 var gun_exit_functions: Dictionary
 var gun_enter_functions: Dictionary
-var grenade = preload("res://Scenes/Bullets/grenade.tscn")
+var grenade_object = preload("res://Scenes/Bullets/grenade.tscn")
 const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var camera = $CameraAnchor/Camera3D
 @onready var gun_anchor: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor
@@ -61,6 +61,7 @@ const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var uzi: Gun = $CameraAnchor/Camera3D/GunOffset/GunAnchor/Uzi
 @onready var hunting_rifle: Gun = $CameraAnchor/Camera3D/GunOffset/GunAnchor/HuntingRifle
 @onready var knife: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor/Knife
+@onready var grenade: Node3D = $CameraAnchor/Camera3D/GunOffset/GunAnchor/Grenade
 @onready var step_timer: Timer = $StepTimer
 @onready var interact_cast: = $CameraAnchor/Camera3D/RayCast3D
 @onready var hitbox: HealthComponent = $Hitbox
@@ -85,6 +86,7 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	change_gun_slot(PlayerStats.gun_index)
 	hitbox.hp = PlayerStats.hp
+	#hitbox.max_hp = PlayerStats.hp
 	hitbox.hp_bar = Globals.ui.player_hp_bar
 	sway_noise.seed = randi()
 	sway_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
@@ -103,6 +105,9 @@ func _ready() -> void:
 	enter_functions = {
 		PlayerStats.states.pause: enter_pause,
 		PlayerStats.states.dead: enter_dead,
+	}
+	exit_functions = {
+		PlayerStats.states.dead: exit_dead
 	}
 	gun_state_functions = {
 		gun_states.ads: gun_state_ads,
@@ -290,10 +295,10 @@ func state_walk(delta):
 		change_gun_state(gun_states.point)
 	
 	# throw grenade
-	if Input.is_action_just_pressed("grenade"):
-		var inst = Globals.create_instance(grenade, grenade_spawn.global_position)
-		inst.rotation = camera.rotation
-		inst.apply_force((Vector3.UP * 500) + -camera.global_transform.basis.z * 750)
+	#if Input.is_action_just_pressed("grenade"):
+		#var inst = Globals.create_instance(grenade, grenade_spawn.global_position)
+		#inst.rotation = camera.rotation
+		#inst.apply_force((Vector3.UP * 500) + -camera.global_transform.basis.z * 750)
 	
 	# reload
 	if Input.is_action_just_pressed("reload") and gun_state != gun_states.reload and gun and gun is Gun:
@@ -333,11 +338,11 @@ func state_walk(delta):
 					collider.pickup()
 	
 	# heal
-	if Input.is_action_just_pressed("heal"):
-		var medkit = find_item("medkit")
-		if medkit:
-			use_item("", medkit, hitbox)
-			hitbox.hp = clamp(hitbox.hp, 0, hitbox.max_hp - hitbox.unhealable_hp)
+	#if Input.is_action_just_pressed("heal"):
+		#var medkit = find_item("medkit")
+		#if medkit:
+			#use_item("", medkit, hitbox)
+			#hitbox.hp = clamp(hitbox.hp, 0, hitbox.max_hp - hitbox.unhealable_hp)
 	
 	# camera zoom
 	var target_fov
@@ -445,17 +450,25 @@ func state_pause(_delta):
 
 
 func enter_dead():
-	if Globals.overworld != null:
-		Globals.overworld.load_on_enter = true
+	#if Globals.overworld != null:
+		#Globals.overworld.load_on_enter = true
 	var tween = create_tween().set_ease(Tween.EASE_OUT)
 	tween.tween_property(camera, "position:y", -1, 0.5)
 	tween.tween_property(camera, "rotation:z", deg_to_rad(45), 1)
 	tween.tween_callback(Globals.survival_ui.hide_all_ui)
-	tween.tween_callback(UiController.open_interface.bind(Globals.survival_ui.progress_menu))
+	tween.tween_callback(UiController.open_interface.bind(Globals.survival_ui.death_menu, false))
 
 
 func state_dead(_delta):
 	pass
+
+
+func exit_dead():
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
+	tween.tween_property(camera, "position:y", 0, 0.25)
+	tween.tween_property(camera, "rotation:z", deg_to_rad(0), 0.25)
+	tween.tween_callback(Globals.survival_ui.show_ui)
+	hitbox.revive()
 
 
 func enter_gun_state_point():
@@ -655,6 +668,20 @@ func unequip_gun() -> void:
 	gun = null
 
 
+func throw_grenade() -> void:
+	#var inst = Globals.create_instance(grenade_object, grenade.get_child(0).global_position)
+	var inst = grenade_object.instantiate()
+	get_tree().current_scene.add_child(inst)
+	inst.global_position = grenade.get_child(0).global_position
+	inst.rotation = camera.rotation
+	inst.apply_force((Vector3.UP * 500) + -camera.global_transform.basis.z * 750)
+	var grenade_item = PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.secondary_gun]
+	PlayerStats.inventory.remove_item(grenade_item)
+	if PlayerStats.inventory.get_item_amount(grenade_item) <= 0:
+		PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.secondary_gun] = null
+		change_gun_state(gun_states.no_gun)
+
+
 func start_place_item(item_to_place: String):
 	if gun != null:
 		await unequip_gun()
@@ -677,6 +704,8 @@ func use_item(item_name: String, item_id = null, target = null):
 	if item == null:
 		return
 	if item is ItemUsable:
+		if !item.used_up.is_connected(PlayerStats.inventory.remove_item):
+			item.used_up.connect(PlayerStats.inventory.remove_item.bind(item))
 		item.use(target)
 	#PlayerStats.inventory.remove_item(item)
 
@@ -717,9 +746,8 @@ func _on_damaged(_hit_position: Vector3, hit_direction: Vector3) -> void:
 
 func _on_death() -> void:
 	PlayerStats.change_state(PlayerStats.states.dead)
-	PlayerStats.reset_stats()
-	gun_state = gun_states.point
-	SaveController.delete_save_data()
+	if gun:
+		gun_state = gun_states.point
 
 
 func _on_gun_changed() -> void:

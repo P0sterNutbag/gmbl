@@ -8,6 +8,7 @@ var equipment: Equipment
 func _ready() -> void:
 	super._ready()
 	original_text = text
+	PlayerStats.gun_changed.connect(_on_gun_changed)
 
 
 func _process(_delta: float) -> void:
@@ -33,3 +34,7 @@ func _on_focus_entered() -> void:
 func _on_focus_exited() -> void:
 	super._on_focus_exited()
 	Globals.survival_ui.player_inventory.set_description()
+
+
+func _on_gun_changed() -> void:
+	amount = resource.amount

@@ -113,8 +113,8 @@ func set_items():
 				if item.used_up.is_connected(_on_use_item):
 					item.used_up.disconnect(_on_use_item)
 				item.used_up.connect(_on_use_item.bind(inst))
-				if !item.used_up.is_connected(source_inventory.items.erase):
-					item.used_up.connect(source_inventory.items.erase.bind(item))
+				if !item.used_up.is_connected(source_inventory.remove_item):
+					item.used_up.connect(source_inventory.remove_item.bind(item))
 			inst.pressed.connect(item.on_pressed)
 		elif mode == modes.loot:
 			inst.pressed.connect(transfer_item.bind(inst))

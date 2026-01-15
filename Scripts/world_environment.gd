@@ -24,10 +24,10 @@ func _process(_delta: float) -> void:
 	environment.sky.sky_material.sky_horizon_color = horizon_color
 	environment.sky.sky_material.ground_bottom_color = horizon_color
 	environment.sky.sky_material.ground_horizon_color = horizon_color
-	if DayNightCycle.time > 0:
+	if DayNightCycle.normalized_time > 0:
 		sun.rotation.x = lerp(deg_to_rad(10), deg_to_rad(-190), DayNightCycle.sun_time)
-	sun.light_energy = sun_energy_curve.sample(DayNightCycle.time)
-	environment.ambient_light_energy = sky_energy_curve.sample(DayNightCycle.time)
-	environment.sky.sky_material.energy_multiplier = sky_energy_curve.sample(DayNightCycle.time)
+	sun.light_energy = sun_energy_curve.sample(DayNightCycle.normalized_time)
+	environment.ambient_light_energy = sky_energy_curve.sample(DayNightCycle.normalized_time)
+	environment.sky.sky_material.energy_multiplier = sky_energy_curve.sample(DayNightCycle.normalized_time)
 	if shader:
 		shader.mesh.material.set_shader_parameter("fog_color", horizon_color)

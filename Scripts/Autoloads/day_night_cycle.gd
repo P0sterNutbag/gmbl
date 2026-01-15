@@ -2,9 +2,11 @@ extends Node
 
 @export var time_curve: Curve
 var total_cycle_seconds: float = 1200
+var day_length = 600
 var time: float = 0.25
 var sun_time: float = 0.25
 var time_speed: float
+var normalized_time: float
 var sky_progress: float
 var is_night: bool:
 	get():
@@ -26,19 +28,20 @@ func _process(delta: float) -> void:
 	if !Globals.overworld or scene_name == "CharacterCreation" or scene_name == "MainMenu":
 		return
 	var was_night = is_night
-	time += time_speed * delta
-	if time >= time_curve.max_domain:
-		time = time_curve.max_domain - 0.01
+	time += delta
+	if time >= day_length:
+		time = day_length - 0.01
 		time_speed *= -1
-	if time <= time_curve.min_domain:
-		time = time_curve.min_domain + 0.01
+	if time <= -day_length:
+		time = day_length + 0.01
 		time_speed *= -1
 	if was_night != is_night:
 		if time_speed < 0:
 			night_start.emit()
 		else:
 			day_start.emit()
-	sky_progress = (time + 1) / 2
+	normalized_time = time / day_length
+	sky_progress = (normalized_time + 1) / 2
 	if time > 0:
 		sun_time += abs(time_speed / 2) * delta
 	else:
@@ -46,7 +49,7 @@ func _process(delta: float) -> void:
 
 
 func reset_cycle() -> void:
-	time = 1.0
+	time = day_length
 	time_speed = -0.01
 	sun_time = 0.5
 

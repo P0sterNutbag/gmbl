@@ -11,6 +11,12 @@ const starting_gear = preload("uid://dpjy0ettwaiyp")
 @onready var player_model: Node3D = $EnemyModel
 @onready var appearance_options: VBoxContainer = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer
 @onready var camera_3d: Camera3D = $Camera3D
+@onready var skin_options: Button = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/SkinOptions
+@onready var hair_options: Button = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/HairOptions
+@onready var face_options: Button = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/FaceOptions
+@onready var shirt_options: Button = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/ShirtOptions
+@onready var pants_options: Button = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/PantsOptions
+@onready var shoes_options: Button = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/ShoesOptions
 
 
 func _ready() -> void:
@@ -93,3 +99,25 @@ func _on_hair_option_changed(value: Variant) -> void:
 func _on_spin_character_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.is_action_pressed("shoot"):
 		mouse_velocity = Input.get_last_mouse_velocity()
+
+
+func _on_randomize_button_pressed() -> void:
+	var skin = skin_options.get_random_option()
+	player_model.style_data.skin_colors.clear()
+	player_model.style_data.skin_colors.append(skin)
+	var hair = hair_options.get_random_option()
+	player_model.style_data.hair_colors.clear()
+	player_model.style_data.hair_colors.append(hair)
+	var face = face_options.get_random_option()
+	player_model.style_data.faces.clear()
+	player_model.style_data.faces.append(face)
+	var shirt = shirt_options.get_random_option()
+	player_model.style_data.shirts.clear()
+	player_model.style_data.shirts.append(shirt)
+	var pant = pants_options.get_random_option()
+	player_model.style_data.pants_colors.clear()
+	player_model.style_data.pants_colors.append(pant)
+	var shoe_color = shoes_options.get_random_option()
+	player_model.style_data.shoe_colors.clear()
+	player_model.style_data.shoe_colors.append(shoe_color)
+	player_model.set_materials()

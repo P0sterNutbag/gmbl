@@ -4,7 +4,7 @@ var crt_on: bool = true
 var warp_on: bool = true
 @onready var crt: ColorRect = $CRT
 @onready var warp: ColorRect = $Warp
-@onready var mouse: TextureRect = $Mouse
+@onready var mouse: Sprite2D = $Mouse
 
 
 func _process(_delta: float) -> void:

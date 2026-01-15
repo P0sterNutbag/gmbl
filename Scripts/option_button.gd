@@ -32,3 +32,8 @@ func set_index_by_value(value) -> void:
 		var option = options[i]
 		if option.value == value:
 			change_index(i)
+
+
+func get_random_option():
+	var option = options[randi_range(0, options.size() - 1)]
+	return option.value

@@ -36,7 +36,6 @@ func _process(_delta: float) -> void:
 			UiController.open_interface(dialogue)
 
 
-
 func start_dialogue(dialogue_data: DialogueTree, _shop: Shop = null) -> void:
 	dialogue.shop = _shop
 	#dialogue.show()

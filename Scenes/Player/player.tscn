@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://c055smn111au7"]
+[gd_scene load_steps=89 format=3 uid="uid://c055smn111au7"]
 
 [ext_resource type="Script" uid="uid://cslnx4rw32guw" path="res://Scripts/player.gd" id="1_ur3l4"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="2_2ahak"]
@@ -30,6 +30,7 @@
 [ext_resource type="AudioStream" uid="uid://b88hp6hc2yyuq" path="res://Audio/Bullets/weapon_bullet_flyby_02.wav" id="27_pcwjh"]
 [ext_resource type="AudioStream" uid="uid://ddrjpnastg7jv" path="res://Audio/CharacterActions/footstep-74321.wav" id="28_ejxfg"]
 [ext_resource type="PackedScene" uid="uid://j2m6pd4rb0jy" path="res://Scenes/Guns/grenade.tscn" id="28_rukb4"]
+[ext_resource type="Material" uid="uid://cuiwmfj20a7tt" path="res://Art/Materials/metal.tres" id="29_4no11"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kgvud"]
 
@@ -943,44 +944,50 @@ _data = {
 &"stab": SubResource("Animation_2ahak")
 }
 
+[sub_resource type="SphereMesh" id="SphereMesh_v0dxf"]
+radius = 0.05
+height = 0.12
+radial_segments = 16
+rings = 16
+
 [sub_resource type="Animation" id="Animation_fcwna"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -0.034817457, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_4no11"]
 resource_name = "throw"
-length = 0.3
+length = 0.4
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/path = NodePath("ArmRAnchor:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, -0.034817457, 0), Vector3(0, -0.035, -0.5), Vector3(0, -0.034817457, 0)]
+"values": [Vector3(0, -0.034817457, 0), Vector3(0, 0.16, 0.209), Vector3(0, 0.24, -0.2), Vector3(0, -0.285, 0), Vector3(0, -0.034817457, 0)]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../../../..")
+tracks/1/path = NodePath("ArmRAnchor/MeshInstance3D2:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../../..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0.15),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -1424,11 +1431,21 @@ libraries = {
 
 [node name="Grenade" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" instance=ExtResource("28_rukb4")]
 
-[node name="MeshInstance3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Grenade" index="0"]
+[node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Grenade"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.034817457, 0)
 
-[node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Grenade/MeshInstance3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06044334, 0.012905002, 0.08592844)
+[node name="armR" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Grenade/ArmRAnchor" instance=ExtResource("12_ogmfp")]
+transform = Transform3D(0.758646, -1.57586e-08, 0.651503, 5.96047e-08, 1, -4.52188e-08, -0.651503, 7.31377e-08, 0.758646, 0, 4.7683716e-07, -0.059857428)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Grenade/ArmRAnchor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.045, -0.014971733, -0.075)
+mesh = SubResource("SphereMesh_v0dxf")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("29_4no11")
+
+[node name="MeshInstance3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Grenade" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.034817457, 0)
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Grenade"]
 libraries = {

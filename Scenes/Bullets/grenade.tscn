@@ -1,16 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://ebenhodrn8bk"]
+[gd_scene load_steps=6 format=3 uid="uid://ebenhodrn8bk"]
 
 [ext_resource type="Script" uid="uid://bonl158sskj1q" path="res://Scripts/grenade.gd" id="1_v0dxf"]
+[ext_resource type="Material" uid="uid://cuiwmfj20a7tt" path="res://Art/Materials/metal.tres" id="2_8oksu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v0dxf"]
 bounce = 0.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bgc3b"]
-radius = 0.25
+radius = 0.08532336
 
-[sub_resource type="SphereMesh" id="SphereMesh_v0dxf"]
-radius = 0.25
-height = 0.5
+[sub_resource type="SphereMesh" id="SphereMesh_ufis0"]
+radius = 0.05
+height = 0.12
+radial_segments = 16
+rings = 16
 
 [node name="Grenade" type="RigidBody3D"]
 collision_layer = 0
@@ -24,8 +27,10 @@ script = ExtResource("1_v0dxf")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_bgc3b")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_v0dxf")
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_ufis0")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_8oksu")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0

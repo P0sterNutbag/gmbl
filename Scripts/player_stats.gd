@@ -33,15 +33,15 @@ var quests: Array[Quest]
 		return inventory.items.filter(func(i): return i is EquipmentGun and i.gun_stats.ammo > 0)
 var gun: EquipmentGun
 var gun_index := 0
-var sleep := 1.0
-var hunger := 1.0
-var thirst := 1.0
-var max_sleep := 1.0
-var max_hunger := 1.0
-var max_thirst = 1.0
-var sleep_decrease_rate = 5
-var hunger_decrease_rate = 6
-var thirst_decrease_rate = 4
+var sleep: float
+var hunger: float
+var thirst: float
+var max_sleep: float
+var max_hunger: float
+var max_thirst: float
+var sleep_decrease_rate := 1.0
+var hunger_decrease_rate := 2.0
+var thirst_decrease_rate := 3.0
 signal gun_changed
 
 
@@ -51,18 +51,26 @@ func _ready() -> void:
 	SaveController.load.connect(_on_load)
 	gun_changed.connect(_on_gun_changed)
 	await get_tree().process_frame
-	sleep_decrease_rate = DayNightCycle.time_speed / sleep_decrease_rate
-	hunger_decrease_rate = DayNightCycle.time_speed / hunger_decrease_rate
-	thirst_decrease_rate = DayNightCycle.time_speed / thirst_decrease_rate
+	max_sleep = DayNightCycle.day_length / sleep_decrease_rate
+	max_hunger = DayNightCycle.day_length / hunger_decrease_rate
+	max_thirst = DayNightCycle.day_length / thirst_decrease_rate
+	sleep = max_sleep
+	hunger = max_hunger
+	thirst = max_thirst
 	#sensitivity_modifier = ConfigManager.file.get_value("settings", "mouse_sensitivity", sensitivity_modifier)
 
 
 func _process(delta: float) -> void:
+	if !get_tree().current_scene:
+		return
+	var scene_name = get_tree().current_scene.name
+	if !Globals.overworld or scene_name == "CharacterCreation" or scene_name == "MainMenu":
+		return
 	# survival stats
-	sleep = clamp(sleep - delta * sleep_decrease_rate, 0, max_sleep)
-	hunger = clamp(hunger - delta * hunger_decrease_rate, 0, max_hunger)
-	thirst = clamp(thirst - delta * thirst_decrease_rate, 0, max_thirst)
-	if hunger <= 0 or thirst <= 0:
+	sleep = clamp(sleep - delta, 0, max_sleep)
+	hunger = clamp(hunger - delta, 0, max_hunger)
+	thirst = clamp(thirst - delta , 0, max_thirst)
+	if Globals.player and (hunger <= 0 or thirst <= 0):
 		Globals.player.hitbox.damage(0.25 * delta, Vector3.ZERO, Vector3.ZERO, false, false, false)
 	# gun management
 	#if !guns.has(gun):

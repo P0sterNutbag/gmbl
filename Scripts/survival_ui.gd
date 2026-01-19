@@ -10,10 +10,18 @@ extends CanvasLayer
 @onready var player_inventory: InventoryUI = $PlayerInventory/Inventory
 @onready var progress_menu: PanelContainer = $ProgressMenu
 @onready var death_menu: PanelContainer = $DeathMenu
+@onready var stats_anchor: Control = $StatsAnchor
 
 
 func _enter_tree() -> void:
 	Globals.survival_ui = self
+	await get_tree().process_frame
+	if Globals.overworld and Globals.overworld == get_tree().current_scene:
+		stats_anchor.show()
+		stats_anchor.process_mode = Node.PROCESS_MODE_INHERIT
+	else:
+		stats_anchor.hide()
+		stats_anchor.process_mode = Node.PROCESS_MODE_DISABLED
 
 
 #func _ready() -> void:
@@ -58,6 +66,14 @@ func _process(_delta: float) -> void:
 		compass.visible = true
 	else:
 		compass.visible = false
+	
+	# overworld health and status effects
+	if Globals.overworld == get_tree().current_scene:
+		stats_anchor.global_position.y = Globals.player.camera.unproject_position(Globals.player.hud_anchor.global_position).y
+		stats_anchor.global_position.y -= stats_anchor.size.y
+	
+	if UiController.current_ui and stats_anchor.visible:
+		stats_anchor.hide()
 	
 	# open pause menu
 	#if Input.is_action_just_pressed("ui_cancel"):

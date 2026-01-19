@@ -2,7 +2,7 @@ extends Node
 
 @export var time_curve: Curve
 var day_length := 480.0
-var time: float = 150.0
+var time: float = 240.0
 var sun_time: float = 0.25
 var time_speed: float = 1.0
 var normalized_time: float
@@ -53,6 +53,15 @@ func reset_cycle() -> void:
 	time = half_day_length / 2
 	#time_speed = -0.01
 	sun_time = 0.25
+
+
+func skip_to_time(amount_to_skip: float) -> void:
+	normalized_time += amount_to_skip * time_speed
+	if abs(normalized_time) > 1:
+		var overtime = abs(normalized_time) - 1
+		normalized_time += overtime * -time_speed
+		time_speed *= 1
+		time = half_day_length * normalized_time
 
 
 func save() -> Dictionary: 

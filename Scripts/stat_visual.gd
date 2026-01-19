@@ -1,23 +1,30 @@
 extends Control
 
 @export var stat_name: String
-@export var show_on_fps_level: bool = true
-@onready var progress_bar: ProgressBar = $ProgressBar
-var show_treshold = 0.75
+@export var show_treshold = 0.5
+@export var progress_bar: ProgressBar
 
 
 func _process(_delta: float) -> void: 
-	# make sure stat exists
-	if !stat_name in PlayerStats:
-		return
-	
-	# set value
+	# get stat data
 	var stat_value = PlayerStats.get(stat_name)
 	var stat_max = PlayerStats.get("max_" + stat_name)
-	progress_bar.value = stat_value / stat_max
+	var value = stat_value / stat_max
 	
-	# make the bar visible or not
-	if progress_bar.value < show_treshold and show_on_fps_level:
+	# set visibility
+	if value < show_treshold:
 		visible = true
 	else:
 		visible = false
+		return
+	
+	# set color
+	if value <= 0:
+		modulate = Color(1.0, 0.051, 0.271, 1.0)
+	else:
+		modulate = Color.WHITE
+	
+	# set value
+	if !progress_bar:
+		return
+	progress_bar.value = value

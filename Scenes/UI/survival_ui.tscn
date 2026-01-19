@@ -1,9 +1,12 @@
-[gd_scene load_steps=25 format=3 uid="uid://cc458wgoeu6t4"]
+[gd_scene load_steps=28 format=3 uid="uid://cc458wgoeu6t4"]
 
 [ext_resource type="Script" uid="uid://dr73ivowve6xe" path="res://Scripts/survival_ui.gd" id="1_e5c6o"]
+[ext_resource type="Texture2D" uid="uid://bcuhfb0bfkqh0" path="res://Art/Textures/hunger icon.png" id="2_guqia"]
 [ext_resource type="Script" uid="uid://bclh5yhrpmkxf" path="res://Scripts/stat_visual.gd" id="2_k4cvi"]
 [ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="3_1kfkr"]
 [ext_resource type="Theme" uid="uid://lg0ktyb6xeoh" path="res://Art/Themes/hp_bar.tres" id="4_1kfkr"]
+[ext_resource type="Texture2D" uid="uid://dwyciilo4eqwy" path="res://Art/Textures/thirst icon.png" id="4_k64vs"]
+[ext_resource type="Texture2D" uid="uid://c3hs8nxqqu881" path="res://Art/Textures/sleep icon.png" id="5_13ham"]
 [ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="5_jtf3n"]
 [ext_resource type="Script" uid="uid://d34nt8desp71" path="res://Scripts/compass.gd" id="8_2dyl4"]
 [ext_resource type="PackedScene" uid="uid://dht8msbc26v1q" path="res://Scenes/UI/quest_marker.tscn" id="9_e5c6o"]
@@ -32,7 +35,90 @@ border_color = Color(1, 1, 0, 1)
 process_mode = 3
 script = ExtResource("1_e5c6o")
 
+[node name="StatsAnchor" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -20.0
+offset_right = 48.5
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+
+[node name="VBoxContainer" type="HBoxContainer" parent="StatsAnchor"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+
+[node name="Hunger" type="TextureRect" parent="StatsAnchor/VBoxContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+texture = ExtResource("2_guqia")
+expand_mode = 2
+script = ExtResource("2_k4cvi")
+stat_name = "hunger"
+
+[node name="Thirst" type="TextureRect" parent="StatsAnchor/VBoxContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+texture = ExtResource("4_k64vs")
+expand_mode = 2
+script = ExtResource("2_k4cvi")
+stat_name = "thirst"
+
+[node name="Sleep" type="TextureRect" parent="StatsAnchor/VBoxContainer"]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+texture = ExtResource("5_13ham")
+expand_mode = 2
+script = ExtResource("2_k4cvi")
+stat_name = "sleep"
+
+[node name="Health" type="Control" parent="StatsAnchor" node_paths=PackedStringArray("progress_bar")]
+custom_minimum_size = Vector2(97, 20)
+layout_mode = 2
+script = ExtResource("2_k4cvi")
+stat_name = "hp"
+show_treshold = 1.0
+progress_bar = NodePath("ProgressBar")
+metadata/_edit_group_ = true
+
+[node name="ColorRect4" type="ColorRect" parent="StatsAnchor/Health"]
+visible = false
+layout_mode = 0
+offset_left = 108.0
+offset_top = 1.0
+offset_right = 242.0
+offset_bottom = 16.0
+rotation = -0.0471239
+scale = Vector2(-0.810944, 0.690912)
+color = Color(0, 0, 0, 1)
+
+[node name="GunName" type="Label" parent="StatsAnchor/Health"]
+layout_mode = 0
+offset_right = 150.99962
+offset_bottom = 28.0
+theme = ExtResource("3_1kfkr")
+text = "HP"
+
+[node name="ProgressBar" type="ProgressBar" parent="StatsAnchor/Health"]
+layout_mode = 0
+offset_left = 30.5
+offset_top = 4.0
+offset_right = 96.5
+offset_bottom = 17.0
+theme = ExtResource("4_1kfkr")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
 [node name="TopLeft" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
@@ -44,46 +130,9 @@ offset_top = 32.0
 offset_right = 155.0
 offset_bottom = 100.0
 mouse_filter = 2
-theme_override_constants/separation = 20
-
-[node name="Health" type="Control" parent="TopLeft/Stats"]
-layout_mode = 2
-script = ExtResource("2_k4cvi")
-stat_name = "hp"
-show_on_fps_level = false
-metadata/_edit_group_ = true
-
-[node name="ColorRect4" type="ColorRect" parent="TopLeft/Stats/Health"]
-layout_mode = 0
-offset_left = 108.0
-offset_top = 1.0
-offset_right = 242.0
-offset_bottom = 16.0
-rotation = -0.0471239
-scale = Vector2(-0.810944, 0.690912)
-color = Color(0, 0, 0, 1)
-
-[node name="GunName" type="Label" parent="TopLeft/Stats/Health"]
-layout_mode = 0
-offset_left = 9.13538
-offset_top = 0.5
-offset_right = 160.135
-offset_bottom = 28.5
-theme = ExtResource("3_1kfkr")
-text = "Health"
-
-[node name="ProgressBar" type="ProgressBar" parent="TopLeft/Stats/Health"]
-layout_mode = 0
-offset_left = 90.0
-offset_top = 6.0
-offset_right = 150.0
-offset_bottom = 17.0
-theme = ExtResource("4_1kfkr")
-max_value = 1.0
-value = 1.0
-show_percentage = false
 
 [node name="Hunger" type="Control" parent="TopLeft/Stats"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "hunger"
@@ -122,6 +171,7 @@ value = 1.0
 show_percentage = false
 
 [node name="Water" type="Control" parent="TopLeft/Stats"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "thirst"
@@ -158,6 +208,7 @@ value = 1.0
 show_percentage = false
 
 [node name="Sleep" type="Control" parent="TopLeft/Stats"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "sleep"

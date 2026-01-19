@@ -165,16 +165,33 @@ func reload_gun() -> void:
 	Globals.player.gun.ammo = Globals.player.gun.max_ammo
 
 
+func decrease_hunger(new_value: float) -> void:
+	var hunger_amount = hunger / max_hunger
+	var new_amount = clamp(hunger_amount + new_value, 0, max_hunger)
+	hunger = max_hunger * new_amount
+
+
+func decrease_thirst(new_value: float) -> void:
+	var thirst_amount = thirst / max_thirst
+	var new_amount = clamp(thirst_amount + new_value, 0, max_thirst)
+	thirst = max_thirst * new_amount
+
+
+func decrease_sleep(new_value: float) -> void:
+	var sleep_amount = sleep / max_sleep
+	var new_amount = clamp(sleep_amount + new_value, 0, max_sleep)
+	sleep = max_sleep * new_amount
+
+
 func go_to_sleep():
 	UiController.close_interface(Globals.survival_ui.player_inventory_holder)
 	change_state(states.pause)
 	var tween = create_tween()
 	tween.tween_callback(SceneManager.animation_player.play.bind("fade_in"))
+	tween.tween_callback(DayNightCycle.skip_to_time.bind(0.75))
 	tween.tween_callback(SceneManager.animation_player.play.bind("fade_out")).set_delay(2)
 	tween.tween_property(self, "sleep", max_sleep, 0)
 	tween.tween_property(self, "state", states.walk, 0)
-	await tween.finished
-	DayNightCycle.time_speed *= 0.1
 
 
 func _on_gun_changed():

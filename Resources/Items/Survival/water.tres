@@ -1,20 +1,13 @@
-[gd_resource type="Resource" script_class="ItemUsable" load_steps=4 format=3 uid="uid://glkl1ugkvv6m"]
+[gd_resource type="Resource" script_class="ItemUsable" load_steps=3 format=3 uid="uid://glkl1ugkvv6m"]
 
 [ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="1_7pven"]
 [ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="2_sw8tj"]
 
-[sub_resource type="Resource" id="Resource_sw8tj"]
-script = ExtResource("1_7pven")
-values = Dictionary[String, Variant]({
-"thirst": 50.0
-})
-add = true
-metadata/_custom_type_script = "uid://4c6own63hs8c"
-
 [resource]
 resource_local_to_scene = true
 script = ExtResource("2_sw8tj")
-effects = Array[ExtResource("1_7pven")]([SubResource("Resource_sw8tj")])
+method = "decrease_thirst"
+arguments = [0.5]
 custom_path = "PlayerStats"
 title = "Water"
 price = 10

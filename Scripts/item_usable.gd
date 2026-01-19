@@ -4,6 +4,7 @@ class_name ItemUsable
 @export var uses: int = 1
 @export var effects: Array[ChangeVariable]
 @export var method: String
+@export var arguments: Array
 @export var custom_path: String
 @export var is_health_item: bool
 @export var usable_in_menu: bool = true
@@ -33,7 +34,7 @@ func use(target_node):
 			else:
 				target.set(key, effect.values[key])
 	if method != "":
-		Callable(target, method).call()
+		Callable(target, method).callv(arguments)
 	uses -= 1
 	if uses <= 0:
 		used_up.emit()

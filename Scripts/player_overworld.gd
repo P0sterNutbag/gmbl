@@ -41,6 +41,7 @@ const NOTIFICATION = preload("uid://dl0pidlmm5dwh")
 @onready var physical_bone_simulator_3d: PhysicalBoneSimulator3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D
 @onready var loot_area: Area3D = $EnemyModel/LootArea
 @onready var notification_position: Node3D = $NotificationPosition
+@onready var hud_anchor: Node3D = $HudAnchor
 var gun: Node3D
 	#get: 
 		#if !PlayerStats.gun:

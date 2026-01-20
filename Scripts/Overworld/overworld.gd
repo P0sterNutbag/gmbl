@@ -16,6 +16,7 @@ func _enter_tree() -> void:
 			current_encounter.get_parent().die()
 		var encounter_pos = current_encounter.global_position
 		var player_spawn_position = encounter_pos + (player_spawn_vector * 3)
+		player_spawn_position.y = Globals.get_heightmap_position(player_spawn_position)
 		var player = get_node("Player")
 		player.global_position = player_spawn_position
 		player.look_at(current_encounter.global_position)

@@ -15,7 +15,8 @@ signal exit
 func _process(_delta: float) -> void:
 	if !visible:
 		return
-	if (Input.is_action_just_pressed("select") or Input.is_action_just_pressed("shoot")) and dialogue_tree.bubbles[index] is not DialogueOptions and can_advance:
+	if ((Input.is_action_just_pressed("select") or Input.is_action_just_pressed("shoot")) and dialogue_tree.bubbles[index] is not DialogueOptions and can_advance
+	and get_child(-1).can_proceed):
 		advance_dialogue(index + 1)
 	if Input.is_action_just_pressed("ui_cancel") and dialogue_tree.bubbles[index] is DialogueOptions:
 		if Globals.overworld.current_encounter.town:

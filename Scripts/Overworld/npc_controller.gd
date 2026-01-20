@@ -1,10 +1,18 @@
 extends Node3D
 
 @export var npcs: Array[SpawnChance]
+var starting_enemy_count := 7
 
 
 func _ready() -> void:
 	Globals.npc_controller = self
+	for i in starting_enemy_count:
+		var inst = npcs[1].object_to_spawn.instantiate()
+		get_tree().current_scene.add_child.call_deferred(inst)
+		var enemy_pos = global_position + Vector3(randf_range(-50, 50), 0, randf_range(-50, 50))
+		enemy_pos.y = Globals.get_heightmap_position(enemy_pos)
+		inst.set_deferred("global_position", enemy_pos)
+		inst.look_at.call_deferred(enemy_pos + Vector3(randf_range(-1, 1), 0, randf_range(-1, 1)))
 
 
 func _on_timer_timeout() -> void:

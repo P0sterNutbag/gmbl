@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 enum guns {shotgun, ak47, sniper, pistol}
-enum states {walk, chase}
+enum states {walk, chase, patrol}
 @export var gun_index: guns
 @export var chase_player: bool
 var state = states.chase
@@ -12,6 +12,8 @@ var path_index := 0
 var max_enemies := 6
 var min_enemies := 3
 var can_move: bool
+var original_position: Vector3
+var original_rotation: Vector3
 var target: Node3D
 var destination: Location
 var destination_path: NodePath
@@ -44,6 +46,9 @@ func _ready() -> void:
 	if location.dialogue_tree != null:
 		location.dialogue_tree.npc_style = enemy_model.current_style
 	SaveController.load.connect(_on_load)
+	await get_tree().process_frame
+	original_position = global_position
+	original_rotation = global_rotation
 
 
 func _process(_delta: float) -> void:
@@ -51,24 +56,26 @@ func _process(_delta: float) -> void:
 		states.walk:
 			speed = walk_speed
 			# detect player
-			if (chase_player and detection.can_see_target() and 
-			Globals.get_dot(self, Globals.player) < -0.25 and
-			global_position.distance_to(Globals.player.global_position) < 5 and
-			PlayerStats.state != PlayerStats.states.pause):
+			if can_see_player():
 				state = states.chase
 			# animate
 			if velocity != Vector3.ZERO:
 				anim_player.play("Walk")
 			else:
 				anim_player.play("Idle")
+		
 		states.chase:
 			speed = run_speed
 			# chase after player
 			if detection.can_see_target(Globals.player) and PlayerStats.state != PlayerStats.states.pause:
 				navigation_agent.set_target_position(Globals.player.global_position)
 			else:
-				navigation_agent.set_target_position(destination.global_position)
-				state = states.walk
+				if destination:
+					navigation_agent.set_target_position(destination.global_position)
+					state = states.walk
+				else:
+					navigation_agent.set_target_position(original_position)
+					state = states.walk
 			# animate
 			if velocity != Vector3.ZERO:
 				anim_player.play("Run")
@@ -101,6 +108,13 @@ func look_at_position(pos: Vector3):
 	look_at(target_pos, Vector3.UP)
 
 
+func can_see_player() -> bool:
+	return (chase_player and detection.can_see_target() and 
+#	Globals.get_dot(self, Globals.player) < -0.25 and
+	global_position.distance_to(Globals.player.global_position) < 7.5 and
+	!UiController.is_canvas_layer_open(Globals.ui))
+
+
 func die():
 	set_collision_layer_value(1, false)
 	location.monitoring = false
@@ -117,16 +131,24 @@ func die():
 
 
 func save() -> Dictionary:
-	return {
-		"pos_x": global_position.x,
+	var dic = {"pos_x": global_position.x,
 		"pos_y": global_position.y,
-		"pos_z": global_position.z,
-		#"target_position": navigation_agent.target_position,
-		"destination_path": destination.get_path(),
-	}
+		"pos_z": global_position.z}
+	if destination:
+		dic["destination_path"] = destination.get_path()
+	return dic
+	#return {
+		#"pos_x": global_position.x,
+		#"pos_y": global_position.y,
+		#"pos_z": global_position.z,
+		##"target_position": navigation_agent.target_position,
+		#"destination_path": destination.get_path(),
+	#}
 
 
 func _on_load() -> void:
+	if !destination_path:
+		return
 	await get_tree().process_frame
 	destination = get_tree().root.get_node(destination_path)
 	var pos = destination.global_position
@@ -134,8 +156,16 @@ func _on_load() -> void:
 
 
 func _on_navigation_agent_3d_navigation_finished() -> void:
-	destination.location_data.change_population(location.location_data.population)
-	queue_free()
+	if destination:
+		destination.location_data.change_population(location.location_data.population)
+		queue_free()
+	else:
+		velocity = Vector3.ZERO
+		await get_tree().create_timer(randf_range(1, 3)).timeout
+		var pos = global_position + Vector3(randf_range(-3, 3), 0, randf_range(-3, 3))
+		pos.y = Globals.get_heightmap_position(pos)
+		navigation_agent.set_target_position(pos)
+		#rotation = original_rotation
 
 
 func _on_encounter_started() -> void:

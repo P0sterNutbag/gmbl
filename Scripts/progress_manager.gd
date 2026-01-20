@@ -19,12 +19,12 @@ func apply_progress() -> void:
 	awards.clear()
 	var old_level = progress_data.level
 	progress_data.add_xp(kills * 5)
-	progress_data.add_xp(quests_completed * 10)
+	progress_data.add_xp(110)#quests_completed * 10)
 	var new_level = progress_data.level
 	if old_level < progress_data.level:
 		var saved_gear
 		if ResourceLoader.exists(gear_path):
-			saved_gear = ResourceLoader.load(gear_path)
+			saved_gear = ResourceLoader.load(gear_path).duplicate(true)
 		else:
 			saved_gear = starting_gear.duplicate(true)
 		for i in range(old_level, new_level):
@@ -33,7 +33,13 @@ func apply_progress() -> void:
 			if item is ItemMoney:
 				progress_data.starting_money += item.amount
 				continue
-			saved_gear.add_item(level_rewards[i - 1])
+			if item is EquipmentGun:
+				var ammo_item = Globals.player.get(item.resource_name).ammo_item
+				for ii in 3:
+					awards.append(ammo_item)
+				pass
+			for award in awards:
+				saved_gear.add_item(award)
 		ResourceSaver.save(saved_gear, gear_path)
 	save_progress_data()
 

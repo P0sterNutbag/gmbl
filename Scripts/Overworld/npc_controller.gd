@@ -2,17 +2,24 @@ extends Node3D
 
 @export var npcs: Array[SpawnChance]
 var starting_enemy_count := 7
+var has_spawned_enemies: bool
 
 
 func _ready() -> void:
 	Globals.npc_controller = self
+	if has_spawned_enemies:
+		return
 	for i in starting_enemy_count:
 		var inst = npcs[1].object_to_spawn.instantiate()
 		get_tree().current_scene.add_child.call_deferred(inst)
-		var enemy_pos = global_position + Vector3(randf_range(-50, 50), 0, randf_range(-50, 50))
+		#var enemy_pos = global_position + Vector3(randf_range(-50, 50), 0, randf_range(-50, 50))
+		var spawn_points = get_tree().get_nodes_in_group("spawn points")
+		var enemy_pos = spawn_points[randi() % spawn_points.size()].global_position
 		enemy_pos.y = Globals.get_heightmap_position(enemy_pos)
 		inst.set_deferred("global_position", enemy_pos)
 		inst.look_at.call_deferred(enemy_pos + Vector3(randf_range(-1, 1), 0, randf_range(-1, 1)))
+	has_spawned_enemies = true
+
 
 
 func _on_timer_timeout() -> void:
@@ -42,3 +49,9 @@ func get_destination() -> Location:
 	# return location instead and factor in target distance
 	var nodes = get_tree().get_nodes_in_group("location")
 	return nodes[randi() % nodes.size()]
+
+
+func save() -> Dictionary:
+	return {
+		"has_spawned_enemies" = has_spawned_enemies
+	}

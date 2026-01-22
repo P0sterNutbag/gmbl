@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://b162lqo3bagvq"]
+[gd_scene load_steps=12 format=4 uid="uid://b162lqo3bagvq"]
 
 [ext_resource type="PackedScene" uid="uid://bqjryb6et7jsj" path="res://Scenes/Environment/Prefabs With Spawning/prefab_base.tscn" id="1_sx5xl"]
 [ext_resource type="Material" uid="uid://brr5rgo0swhv5" path="res://Art/Materials/wood_triplanar.tres" id="2_g3rjm"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bkxsoff507nnd" path="res://Art/Textures/tin roof.png" id="4_mcja6"]
 [ext_resource type="PackedScene" uid="uid://c4oumjgjpl4tq" path="res://Scenes/Environment/Props/staircase.tscn" id="5_g2gv0"]
 [ext_resource type="Material" uid="uid://b4aard1qnyqin" path="res://Art/Materials/tin_triplanar_gray.tres" id="5_g3rjm"]
+[ext_resource type="Script" uid="uid://e8g2mqdrdath" path="res://Scripts/building_positioner.gd" id="6_1x0s8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nmr47"]
 albedo_texture = ExtResource("3_1x0s8")
@@ -112,23 +113,21 @@ transform = Transform3D(-0.909918, 0, -0.414789, 0, 1, 0, 0.414789, 0, -0.909918
 [node name="Node3D6" type="Node3D" parent="LootSpawns" index="5"]
 transform = Transform3D(-0.889982, 0, 0.455995, 0, 1, 0, -0.455995, 0, -0.889982, 2.50409, 3.20923, -2.46088)
 
-[node name="TrapSpawns" parent="." index="2"]
-process_mode = 4
-
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="." index="4"]
 mesh = SubResource("ArrayMesh_hoo2j")
 surface_material_override/0 = ExtResource("5_g3rjm")
 surface_material_override/1 = ExtResource("5_g3rjm")
+script = ExtResource("6_1x0s8")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="CSGBakedMeshInstance3D" index="0"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBakedMeshInstance3D/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_kouqn")
 
-[node name="Stairs" parent="." index="5" instance=ExtResource("5_g2gv0")]
+[node name="Stairs" parent="CSGBakedMeshInstance3D" index="1" instance=ExtResource("5_g2gv0")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.75, 0, -1)
 
-[node name="CSGBakedMeshInstance3D" parent="Stairs" index="1"]
+[node name="CSGBakedMeshInstance3D" parent="CSGBakedMeshInstance3D/Stairs" index="1"]
 surface_material_override/0 = ExtResource("5_g3rjm")
 
-[editable path="Stairs"]
+[editable path="CSGBakedMeshInstance3D/Stairs"]

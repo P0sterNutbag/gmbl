@@ -10,7 +10,9 @@ var enemies: Array
 func _ready():
 	enemy_amount = randi_range(get_parent().location_data.min_population, get_parent().location_data.max_population)
 	var dest = position + Vector3(0, 0, -115)
-	var start_alert = Globals.overworld.current_encounter.alert_enemies
+	var start_alert = false
+	if Globals.overworld:
+		start_alert = Globals.overworld.current_encounter.alert_enemies
 	if start_alert:
 		dest = Globals.player.global_position
 	enemy_destination = dest

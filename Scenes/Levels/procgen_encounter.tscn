@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://c3p7tbg7t42b1"]
+[gd_scene load_steps=49 format=4 uid="uid://c3p7tbg7t42b1"]
 
 [ext_resource type="Script" uid="uid://bge81dgb3rx2t" path="res://Scripts/procedural_environment.gd" id="1_n2q0j"]
 [ext_resource type="PackedScene" uid="uid://r4ktdn26psb3" path="res://Scenes/Levels/encounter_base.tscn" id="1_xg5g1"]
@@ -7,13 +7,21 @@
 [ext_resource type="PackedScene" uid="uid://yqj3iccq8ppb" path="res://Scenes/Environment/Prefabs With Spawning/shack_stairs.tscn" id="7_nfhko"]
 [ext_resource type="PackedScene" uid="uid://b162lqo3bagvq" path="res://Scenes/Environment/Prefabs With Spawning/shack_two_stories.tscn" id="8_dardl"]
 [ext_resource type="PackedScene" uid="uid://wrpi151kscmq" path="res://Scenes/Environment/Prefabs With Spawning/shipping_container.tscn" id="9_87mr3"]
+[ext_resource type="PackedScene" uid="uid://bf3gw6c3ye46j" path="res://Scenes/Environment/Prefabs With Spawning/drum_barrels.tscn" id="10_y8qdn"]
+[ext_resource type="PackedScene" uid="uid://bxxs6ujnftm71" path="res://Scenes/Environment/Prefabs With Spawning/tire_stacks.tscn" id="11_2c4gj"]
 [ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="12_n5v1j"]
+[ext_resource type="PackedScene" uid="uid://7ckg1cl2oun2" path="res://Scenes/Environment/Prefabs With Spawning/trash.tscn" id="12_pgyq3"]
+[ext_resource type="PackedScene" uid="uid://c8837t6cigbtp" path="res://Scenes/Environment/Prefabs With Spawning/wooden_crates.tscn" id="13_0fst8"]
 [ext_resource type="Script" uid="uid://gw7xclj5260y" path="res://Scripts/procgen_enemy_spawner.gd" id="14_nfhko"]
 [ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/NPCs/enemy.tscn" id="15_dardl"]
 [ext_resource type="Script" uid="uid://yjtjuxrauvya" path="res://Scripts/procgen_map.gd" id="16_wy85s"]
+[ext_resource type="PackedScene" uid="uid://btjp27ft7kaqr" path="res://Scenes/Environment/Props/Physics/crate_tall.tscn" id="17_2ous2"]
+[ext_resource type="PackedScene" uid="uid://wubvthultu6w" path="res://Scenes/Environment/Props/Physics/crate_tall_horizontal.tscn" id="18_jm6d2"]
+[ext_resource type="PackedScene" uid="uid://21yqxj5xl8cv" path="res://Scenes/Environment/Props/Physics/drum_barrel_blue.tscn" id="19_kwi83"]
+[ext_resource type="PackedScene" uid="uid://bjama3lmb5mct" path="res://Scenes/Environment/Props/Physics/tire_stack.tscn" id="20_lbujv"]
+[ext_resource type="PackedScene" uid="uid://dvpgm7keysw0" path="res://Scenes/Environment/Props/Physics/drum_barrel_rust.tscn" id="21_m745e"]
 [ext_resource type="PackedScene" uid="uid://b6nrlkb5wnbsg" path="res://Scenes/Environment/Nature/rock_large.tscn" id="22_4531t"]
 [ext_resource type="PackedScene" uid="uid://brrtfg5jynxnd" path="res://Scenes/Environment/Nature/rock.tscn" id="25_uxntf"]
-[ext_resource type="PackedScene" uid="uid://due2b4mvg6l3b" path="res://Scenes/Environment/Nature/rock_gray.tscn" id="26_wy85s"]
 
 [sub_resource type="Resource" id="Resource_40f7q"]
 script = ExtResource("2_em3rq")
@@ -64,32 +72,94 @@ script = ExtResource("12_n5v1j")
 object_to_spawn = ExtResource("9_87mr3")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
+[sub_resource type="Resource" id="Resource_x5mmi"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("10_y8qdn")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_2ous2"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("11_2c4gj")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_jm6d2"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("12_pgyq3")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_kwi83"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("13_0fst8")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
 [sub_resource type="Resource" id="Resource_4531t"]
 script = ExtResource("16_wy85s")
-objects = Array[ExtResource("12_n5v1j")]([SubResource("Resource_c4jsb"), SubResource("Resource_gvimo"), SubResource("Resource_n2q0j"), SubResource("Resource_40vji"), SubResource("Resource_y8qdn")])
-max_amount = 4
+objects = Array[ExtResource("12_n5v1j")]([SubResource("Resource_c4jsb"), SubResource("Resource_gvimo"), SubResource("Resource_n2q0j"), SubResource("Resource_40vji"), SubResource("Resource_y8qdn"), SubResource("Resource_x5mmi"), SubResource("Resource_2ous2"), SubResource("Resource_jm6d2"), SubResource("Resource_kwi83")])
+min_amount = 1
+max_amount = 6
 metadata/_custom_type_script = "uid://yjtjuxrauvya"
 
 [sub_resource type="Resource" id="Resource_mjrdb"]
 script = ExtResource("12_n5v1j")
 object_to_spawn = ExtResource("25_uxntf")
+spawn_chance = 5.0
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
-[sub_resource type="Resource" id="Resource_5i41r"]
+[sub_resource type="Resource" id="Resource_lbujv"]
 script = ExtResource("12_n5v1j")
-object_to_spawn = ExtResource("26_wy85s")
+object_to_spawn = ExtResource("21_m745e")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_m745e"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("19_kwi83")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_xfuh7"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("20_lbujv")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [sub_resource type="Resource" id="Resource_oftcu"]
 script = ExtResource("16_wy85s")
-objects = Array[ExtResource("12_n5v1j")]([SubResource("Resource_mjrdb"), SubResource("Resource_5i41r")])
-min_amount = 25
-max_amount = 50
+objects = Array[ExtResource("12_n5v1j")]([SubResource("Resource_mjrdb"), SubResource("Resource_lbujv"), SubResource("Resource_m745e"), SubResource("Resource_xfuh7")])
+min_amount = 15
+max_amount = 35
 metadata/_custom_type_script = "uid://yjtjuxrauvya"
 
-[sub_resource type="Resource" id="Resource_n5v1j"]
+[sub_resource type="Resource" id="Resource_upawx"]
 script = ExtResource("12_n5v1j")
 object_to_spawn = ExtResource("22_4531t")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_4mg1g"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("17_2ous2")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_suwvc"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("18_jm6d2")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_i3cni"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("19_kwi83")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_7gbaa"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("20_lbujv")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_m74pn"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("21_m745e")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_kj7rs"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("25_uxntf")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [sub_resource type="Resource" id="Resource_87mr3"]
@@ -115,10 +185,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 75)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 60)
 
 [node name="Environment" type="Node3D" parent="." index="10"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 128)
 script = ExtResource("1_n2q0j")
 maps = Array[ExtResource("16_wy85s")]([SubResource("Resource_4531t"), SubResource("Resource_oftcu")])
-cover = Array[ExtResource("12_n5v1j")]([SubResource("Resource_n5v1j")])
+cover_objects = Array[ExtResource("12_n5v1j")]([SubResource("Resource_upawx"), SubResource("Resource_4mg1g"), SubResource("Resource_suwvc"), SubResource("Resource_i3cni"), SubResource("Resource_7gbaa"), SubResource("Resource_m74pn"), SubResource("Resource_kj7rs")])
 
 [node name="StartingSquadSpawner" type="Node3D" parent="." index="11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 128)

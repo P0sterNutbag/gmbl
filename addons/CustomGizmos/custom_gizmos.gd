@@ -8,7 +8,7 @@ const ENEMY_SPAWN_GIZMO = preload("uid://cmisg4mqlo6xf")
 
 func _init():
 	create_material("main", Color(1,0,0))
-	create_handle_material("handle")
+	#create_handle_material("handle")
 
 
 func _get_gizmo_name():
@@ -21,7 +21,7 @@ func _has_gizmo(node):
 
 func _redraw(gizmo: EditorNode3DGizmo):
 	gizmo.clear()
-	gizmo.add_unscaled_billboard(ENEMY_SPAWN_GIZMO, 0.05)
+	gizmo.add_unscaled_billboard(ENEMY_SPAWN_GIZMO, 0.025)
 	
 	#gizmo.add_handles(PackedVector3Array(), get_material("handles", gizmo), [])
 

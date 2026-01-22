@@ -11,6 +11,7 @@ extends Node3D
 @export var snap_to_terrain := false : set = position_on_terrain
 @export var spin := false : set = rotate_objects
 @export var align_normal := false : set = align_to_normal
+@export var align_on_procgen := false 
 #@export_tool_button("snap", "Area2D") var action = position_on_terrain
 @onready var npc_spawns: Node3D = $NpcSpawns
 @onready var loot_spawns: Node3D = $LootSpawns

@@ -141,10 +141,11 @@ func transfer_item(menu_item: Control):
 			opposing_ui.money_label.modulate = Color.RED
 			var tween = create_tween()
 			tween.tween_property(opposing_ui.money_label, "modulate", Color.WHITE, 1)
-			return
+			returnd
 	var amount_to_move = 1
 	if Input.is_action_pressed("shift") or item is ItemMoney:
-		amount_to_move = menu_item.resource.amount
+		var item_slot = source_inventory.find_item_slot(item)
+		amount_to_move = item_slot.amount
 	if item is EquipmentGun and item.equipped:
 		item.equip()
 	if target_inventory.add_item(item, amount_to_move):

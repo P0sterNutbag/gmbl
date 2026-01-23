@@ -72,8 +72,11 @@ func _process(_delta: float) -> void:
 		stats_anchor.global_position.y = Globals.player.camera.unproject_position(Globals.player.hud_anchor.global_position).y
 		stats_anchor.global_position.y -= stats_anchor.size.y
 	
-	if UiController.current_ui and stats_anchor.visible:
-		stats_anchor.hide()
+	if UiController.current_ui:
+		if stats_anchor.visible:
+			stats_anchor.hide()
+	elif stats_anchor.process_mode == PROCESS_MODE_INHERIT:
+		stats_anchor.show()
 	
 	# open pause menu
 	#if Input.is_action_just_pressed("ui_cancel"):

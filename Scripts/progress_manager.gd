@@ -31,7 +31,7 @@ func apply_progress() -> void:
 			var item = level_rewards[i - 1]
 			awards.append(item)
 			if item is ItemMoney:
-				progress_data.starting_money += item.amount
+				progress_data.starting_money += item.price
 				continue
 			if item is EquipmentGun:
 				var ammo_item = Globals.player.get(item.resource_name).ammo_item

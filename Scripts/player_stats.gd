@@ -2,17 +2,18 @@ extends Node
 
 enum states {walk, pause, dead}
 var state = states.walk
-var hp: float = 3.5:
-	set(value):
-		hp = value
-		if Globals.player and "hitbox" in Globals.player and Globals.player.hitbox:
-			Globals.player.hitbox.hp = value
+var hp: float = 3.5#:
+var current_hp: float:
 	get():
 		if Globals.player and "hitbox" in Globals.player and Globals.player.hitbox:
 			return Globals.player.hitbox.hp
 		else:
 			return hp
-var max_hp := 3.5
+	#set(value):
+		#hp = value
+		#if Globals.player and "hitbox" in Globals.player and Globals.player.hitbox:
+			#Globals.player.hitbox.hp = value
+var max_current_hp := 3.5
 var sensitivity_modifier := 1.0
 var ammo: int:
 	set(value):
@@ -40,14 +41,15 @@ var max_sleep: float
 var max_hunger: float
 var max_thirst: float
 var sleep_decrease_rate := 1.0
-var hunger_decrease_rate := 2.0
-var thirst_decrease_rate := 3.0
+var hunger_decrease_rate := 1.5
+var thirst_decrease_rate := 2
 signal gun_changed
 
 
 func _ready() -> void:
 	reset_stats()
 	SceneManager.scene_changed.connect(_on_scene_changed)
+	SceneManager.scene_leaving.connect(_on_scene_leaving)
 	SaveController.load.connect(_on_load)
 	gun_changed.connect(_on_gun_changed)
 	await get_tree().process_frame
@@ -70,8 +72,8 @@ func _process(delta: float) -> void:
 	sleep = clamp(sleep - delta, 0, max_sleep)
 	hunger = clamp(hunger - delta, 0, max_hunger)
 	thirst = clamp(thirst - delta , 0, max_thirst)
-	if Globals.player and (hunger <= 0 or thirst <= 0):
-		Globals.player.hitbox.damage(0.25 * delta, Vector3.ZERO, Vector3.ZERO, false, false, false)
+	if Globals.player and (hunger <= 0 or thirst <= 0) and Globals.player.hitbox.hp > 0.1:
+		Globals.player.hitbox.damage(0.025 * delta, Vector3.ZERO, Vector3.ZERO, false, false, false)
 	# gun management
 	#if !guns.has(gun):
 		#gun = null
@@ -99,7 +101,7 @@ func reset_stats() -> void:
 		#if i:
 			#i.gun_stats.reset()
 	quests.clear()
-	hp = max_hp
+	hp = max_current_hp
 	sleep = max_sleep
 	hunger = max_hunger
 	thirst = max_thirst
@@ -200,6 +202,9 @@ func _on_gun_changed():
 
 func _on_scene_changed():
 	state = states.walk
+
+
+func _on_scene_leaving():
 	if Globals.player:
 		hp = Globals.player.hitbox.hp
 

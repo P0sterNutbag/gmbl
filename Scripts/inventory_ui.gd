@@ -144,7 +144,7 @@ func transfer_item(menu_item: Control):
 			return
 	var amount_to_move = 1
 	if Input.is_action_pressed("shift") or item is ItemMoney:
-		amount_to_move = menu_item.resource.amount		
+		amount_to_move = menu_item.resource.amount
 	if item is EquipmentGun and item.equipped:
 		item.equip()
 	if target_inventory.add_item(item, amount_to_move):

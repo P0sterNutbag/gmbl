@@ -7,6 +7,7 @@ var remove_from_tree: bool
 var load_on_enter: bool
 signal scene_changed
 signal new_game_start
+signal scene_leaving
 
 
 func _ready():
@@ -22,6 +23,7 @@ func start_scene_transition(scene, remove_current: bool = false) -> void:
 
 
 func change_scene() -> void:
+	scene_leaving.emit()
 	if remove_from_tree:
 		get_tree().root.remove_child(get_tree().current_scene)
 		var inst = load(next_scene).instantiate()

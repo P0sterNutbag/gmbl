@@ -15,7 +15,7 @@ func get_visible_target() -> Node:
 	return null
 
 
-func can_see_target(target: Node3D = targets[0]) -> bool:
+func can_see_target(target: Node3D = targets[0], check_direction: bool = true) -> bool:
 	# point at target
 	if !target:
 		return false
@@ -29,6 +29,9 @@ func can_see_target(target: Node3D = targets[0]) -> bool:
 			target_pos = i.global_position
 		elif i is Vector3:
 			target_pos = i
+		var dis_to_target = global_position.distance_to(target_pos)
+		if dis_to_target > range:
+			continue
 		look_at(target_pos)
 		target_position.z = -global_position.distance_to(target_pos)
 		# check for collisions
@@ -36,10 +39,11 @@ func can_see_target(target: Node3D = targets[0]) -> bool:
 		if collider:
 			continue
 		# check dot to target
+		if !check_direction:
+			return true
 		var forward = get_parent().global_transform.basis.z.normalized()
 		var to_player = (target.global_transform.origin - get_parent().global_transform.origin).normalized()
 		var dot_product = forward.dot(to_player)
-		var dis_to_target = global_position.distance_to(target.position)
-		if dot_product < -0.25 and dis_to_target <= range:
+		if dot_product < -0.25:
 			return true
 	return false

@@ -37,7 +37,7 @@ func generate_level() -> void:
 			navigation_region_3d.add_child(inst)
 			if "align_on_procgen" in inst and inst.align_on_procgen:
 				inst.align_to_normal(true)
-
+	
 	# create cover for player
 	for i in randi_range(cover_amount_min, cover_amount_max):
 		var cover = cover_objects[Globals.get_weighted_index(cover_objects)].object_to_spawn.instantiate()

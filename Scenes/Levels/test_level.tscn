@@ -1,0 +1,180 @@
+[gd_scene load_steps=46 format=3 uid="uid://ct31dse0cfd02"]
+
+[ext_resource type="Script" uid="uid://ysmfpedeqrtw" path="res://Scripts/encounter.gd" id="1_7rivk"]
+[ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="1_npfmg"]
+[ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_hyk2w"]
+[ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand.png" id="2_k8g1k"]
+[ext_resource type="PackedScene" uid="uid://cueu704ip2q8t" path="res://Scenes/Environment/Prefabs With Spawning/shack_no_windows.tscn" id="3_x4x4f"]
+[ext_resource type="PackedScene" uid="uid://c055smn111au7" path="res://Scenes/Player/player.tscn" id="5_7rivk"]
+[ext_resource type="PackedScene" uid="uid://y6civk4251ei" path="res://Scenes/UI/fps_ui.tscn" id="6_x4x4f"]
+[ext_resource type="PackedScene" uid="uid://cc458wgoeu6t4" path="res://Scenes/UI/survival_ui.tscn" id="7_l7ek2"]
+[ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/NPCs/enemy.tscn" id="9_lqheo"]
+[ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="10_akmmg"]
+[ext_resource type="Script" uid="uid://3e36ru1e7k78" path="res://Scripts/spawn_chance_resource.gd" id="11_avjiw"]
+[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="12_4v231"]
+[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="13_j1jhc"]
+[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="14_kklc1"]
+[ext_resource type="Resource" uid="uid://dgo34up8hytn6" path="res://Resources/Items/Ammo/smg_ammo.tres" id="15_tfomm"]
+[ext_resource type="Resource" uid="uid://bkae25scq6c12" path="res://Resources/Items/Ammo/sniper_ammo.tres" id="16_t6ttu"]
+[ext_resource type="Resource" uid="uid://6c7s1e0y4ekq" path="res://Resources/Items/Junk/cigarettes.tres" id="17_fktm2"]
+[ext_resource type="Resource" uid="uid://du57k1x7scpfk" path="res://Resources/Items/Junk/metal_scraps.tres" id="18_0ep85"]
+[ext_resource type="Resource" uid="uid://cw12h3yyn5tgy" path="res://Resources/Items/Junk/playing cards.tres" id="19_c72m8"]
+[ext_resource type="Resource" uid="uid://dfkmfm7wu8mw4" path="res://Resources/Items/Survival/beans.tres" id="20_gyxwp"]
+[ext_resource type="Resource" uid="uid://ccm2c5fc8xn15" path="res://Resources/Items/Survival/medkit.tres" id="21_l843e"]
+[ext_resource type="Resource" uid="uid://glkl1ugkvv6m" path="res://Resources/Items/Survival/water.tres" id="22_etqpt"]
+[ext_resource type="Resource" uid="uid://dvooyj5cqcclc" path="res://Resources/Items/Survival/sleeping_bag.tres" id="23_wlfjt"]
+[ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="24_srwfw"]
+[ext_resource type="PackedScene" uid="uid://dyumojcinahde" path="res://Scenes/outline_fog_shader.tscn" id="25_avjiw"]
+[ext_resource type="PackedScene" uid="uid://p1limlnykapp" path="res://Scenes/noise_controller.tscn" id="26_4v231"]
+
+[sub_resource type="Resource" id="Resource_mvu5i"]
+script = ExtResource("2_hyk2w")
+min_population = 0
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_sufl4"]
+vertices = PackedVector3Array(0.5, 0.5, 49.5, 49, 0.5, 49.5, 49, 0.5, 47.75, 48.75, 0.5, 0.5, 0.5, 0.5, 0.5, 52.75, 0.5, 47.25, 53, 0.5, 48, 54.25, 0.5, 48, 54.5, 0.5, 47.25, 58.5, 0.5, 0.5, 49.25, 0.5, 47.25, 58, 0.5, 47.25, 58.25, 0.5, 47.75, 58.25, 0.5, 49, 99.5, 0.5, 48.75, 99.5, 0.5, 0.5, 49.25, 3.5, 47.75, 49.25, 3.5, 56.25, 57.75, 3.5, 56.25, 57.75, 3.5, 47.75, 52.75, 0.5, 48.75, 54.5, 0.5, 48.75, 50.5, 0.5, 55, 56.75, 0.5, 55, 50.5, 0.5, 48.75, 56.75, 0.5, 48.75, 58.25, 0.5, 54.75, 99.5, 0.5, 55, 0.5, 0.5, 54.25, 49, 0.5, 54.25, 51.25, 0.5, 99.5, 51.25, 0.5, 56.5, 49, 0.5, 56.25, 0.5, 0.5, 99.5, 58, 0.5, 56.5, 56, 0.5, 99.5, 99.5, 0.5, 99.5, 56, 0.5, 56.5)
+polygons = [PackedInt32Array(2, 1, 3), PackedInt32Array(3, 1, 4), PackedInt32Array(4, 1, 0), PackedInt32Array(6, 5, 7), PackedInt32Array(7, 5, 8), PackedInt32Array(8, 5, 3), PackedInt32Array(8, 3, 9), PackedInt32Array(5, 10, 3), PackedInt32Array(9, 12, 11), PackedInt32Array(10, 2, 3), PackedInt32Array(9, 11, 8), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 9), PackedInt32Array(14, 9, 15), PackedInt32Array(19, 18, 16), PackedInt32Array(16, 18, 17), PackedInt32Array(7, 21, 6), PackedInt32Array(6, 21, 20), PackedInt32Array(21, 23, 20), PackedInt32Array(20, 23, 22), PackedInt32Array(22, 24, 20), PackedInt32Array(21, 25, 23), PackedInt32Array(13, 14, 26), PackedInt32Array(26, 14, 27), PackedInt32Array(0, 1, 28), PackedInt32Array(28, 1, 29), PackedInt32Array(31, 30, 32), PackedInt32Array(32, 30, 33), PackedInt32Array(32, 33, 28), PackedInt32Array(28, 29, 32), PackedInt32Array(26, 27, 34), PackedInt32Array(34, 27, 36), PackedInt32Array(34, 36, 35), PackedInt32Array(35, 37, 34), PackedInt32Array(31, 37, 30), PackedInt32Array(30, 37, 35)]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hyk2w"]
+size = Vector2(100, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mvu5i"]
+albedo_texture = ExtResource("2_k8g1k")
+uv1_triplanar = true
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xxcax"]
+data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50)
+
+[sub_resource type="Resource" id="Resource_3jrad"]
+script = ExtResource("11_avjiw")
+object_to_spawn = ExtResource("12_4v231")
+spawn_chance = 5.0
+max_amount = 2
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_e1mr1"]
+script = ExtResource("11_avjiw")
+object_to_spawn = ExtResource("13_j1jhc")
+spawn_chance = 5.0
+max_amount = 2
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_ildup"]
+script = ExtResource("11_avjiw")
+object_to_spawn = ExtResource("14_kklc1")
+spawn_chance = 3.0
+min_amount = 5
+max_amount = 10
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_fhb31"]
+script = ExtResource("11_avjiw")
+object_to_spawn = ExtResource("15_tfomm")
+spawn_chance = 3.0
+max_amount = 2
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_2cu0c"]
+script = ExtResource("11_avjiw")
+object_to_spawn = ExtResource("16_t6ttu")
+max_amount = 2
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_ktgl8"]
+script = ExtResource("11_avjiw")
+object_to_spawn = ExtResource("17_fktm2")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_3md2n"]
+script = ExtResource("11_avjiw")
+object_to_spawn = ExtResource("18_0ep85")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_2hm72"]
+script = ExtResource("11_avjiw")
+object_to_spawn = ExtResource("19_c72m8")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_fxmgv"]
+script = ExtResource("11_avjiw")
+object_to_spawn = ExtResource("20_gyxwp")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_s0qxi"]
+script = ExtResource("11_avjiw")
+object_to_spawn = ExtResource("21_l843e")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_f140h"]
+script = ExtResource("11_avjiw")
+object_to_spawn = ExtResource("22_etqpt")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_ftq36"]
+script = ExtResource("11_avjiw")
+object_to_spawn = ExtResource("23_wlfjt")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_0n5l5"]
+resource_local_to_scene = true
+script = ExtResource("24_srwfw")
+min_amount = 1
+max_amount = 3
+potential_slots = Array[ExtResource("11_avjiw")]([SubResource("Resource_3jrad"), SubResource("Resource_e1mr1"), SubResource("Resource_ildup"), SubResource("Resource_fhb31"), SubResource("Resource_2cu0c"), SubResource("Resource_ktgl8"), SubResource("Resource_3md2n"), SubResource("Resource_2hm72"), SubResource("Resource_fxmgv"), SubResource("Resource_s0qxi"), SubResource("Resource_f140h"), SubResource("Resource_ftq36")])
+title = "Enemy"
+metadata/_custom_type_script = "uid://b34kwea65we13"
+
+[sub_resource type="Resource" id="Resource_0xgmu"]
+resource_local_to_scene = true
+script = ExtResource("24_srwfw")
+min_amount = 1
+max_amount = 3
+potential_slots = Array[ExtResource("11_avjiw")]([SubResource("Resource_3jrad"), SubResource("Resource_e1mr1"), SubResource("Resource_ildup"), SubResource("Resource_fhb31"), SubResource("Resource_2cu0c"), SubResource("Resource_ktgl8"), SubResource("Resource_3md2n"), SubResource("Resource_2hm72"), SubResource("Resource_fxmgv"), SubResource("Resource_s0qxi"), SubResource("Resource_f140h"), SubResource("Resource_ftq36")])
+title = "Enemy"
+metadata/_custom_type_script = "uid://b34kwea65we13"
+
+[node name="TestLevel" type="Node3D"]
+script = ExtResource("1_7rivk")
+location_data = SubResource("Resource_mvu5i")
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("1_npfmg")]
+
+[node name="Shader" parent="." instance=ExtResource("25_avjiw")]
+
+[node name="FpsUI" parent="." instance=ExtResource("6_x4x4f")]
+
+[node name="CanvasLayer" parent="." instance=ExtResource("7_l7ek2")]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_sufl4")
+
+[node name="ShackNoWindows" parent="NavigationRegion3D" instance=ExtResource("3_x4x4f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.533348, 0, 51.94473)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 50)
+mesh = SubResource("PlaneMesh_hyk2w")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_mvu5i")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_xxcax")
+
+[node name="Player" parent="." instance=ExtResource("5_7rivk")]
+transform = Transform3D(-0.9709048, 0, -0.23946568, 0, 1, 0, 0.23946568, 0, -0.9709048, 49.908348, 0, 41.83473)
+
+[node name="Enemy" parent="." instance=ExtResource("9_lqheo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 61.487305, 0.6331854, 52.233818)
+inventory = SubResource("Resource_0n5l5")
+
+[node name="Enemy2" parent="." instance=ExtResource("9_lqheo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.90235, 0.93068695, 52.620728)
+inventory = SubResource("Resource_0xgmu")
+
+[node name="NoiseController" parent="." instance=ExtResource("26_4v231")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000435829, 0.0134783, 0.00178146)
+
+[editable path="NavigationRegion3D/ShackNoWindows"]

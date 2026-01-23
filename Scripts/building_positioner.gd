@@ -11,7 +11,7 @@ func _ready() -> void:
 	]
 	var largest_gap := 0.0
 	for i in local_corners:
-		var gap = Globals.get_heightmap_position(global_position + i) - global_position.y
+		var gap = global_position.y - Globals.get_heightmap_position(global_position + i)
 		if gap > largest_gap:
 			largest_gap = gap
 	global_position.y -= largest_gap

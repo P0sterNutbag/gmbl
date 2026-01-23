@@ -86,7 +86,13 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	Globals.player = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	change_gun_slot(PlayerStats.gun_index)
+	PlayerStats.gun_index = -1
+	if PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.primary_gun]:
+		change_gun_slot(0)
+	elif PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.secondary_gun]:
+		change_gun_slot(1)
+	else:
+		gun_state = gun_states.no_gun
 	hitbox.hp = PlayerStats.hp
 	#hitbox.max_hp = PlayerStats.hp
 	hitbox.hp_bar = Globals.ui.player_hp_bar
@@ -95,10 +101,10 @@ func _ready() -> void:
 	sway_noise.frequency = 0.5
 	for i in gun_anchor.get_children():
 		i.visible = false
-	if gun:
-		change_gun(PlayerStats.gun)
-	else:
-		gun_state = gun_states.no_gun
+	#if gun:
+		#change_gun(PlayerStats.gun)
+	#else:
+		#gun_state = gun_states.no_gun
 	state_functions = {
 		PlayerStats.states.walk: state_walk,
 		PlayerStats.states.pause: state_pause,
@@ -747,6 +753,7 @@ func _on_damaged(_hit_position: Vector3, hit_direction: Vector3) -> void:
 
 
 func _on_death() -> void:
+	UiController.close_all()
 	PlayerStats.change_state(PlayerStats.states.dead)
 	if gun:
 		gun_state = gun_states.point

@@ -18,7 +18,7 @@ var items:
 @export var inventory: Inventory
 @export var max_items: int
 @export var min_items: int
-enum states {idle, investigate, shoot, search, strafe, hurt, reload, camp, dead, aim, walk, standby, supress}
+enum states {idle, investigate, shoot, search, strafe, hurt, reload, camp, dead, aim, walk, standby, supress, find_cover}
 var state = states.idle
 var walk_speed := 1.5
 var run_speed := 3.0
@@ -26,7 +26,7 @@ var time_to_detect_max := 1.5
 var camp_chance := 0.1
 var supress_change := 0.25
 var camp_time := 5
-var camp_time_min := 5
+var camp_time_min := 2.5
 var camp_time_max := 10
 var time_to_detect: float = time_to_detect_max
 var time_since_bleed: float
@@ -180,7 +180,10 @@ func _physics_process(delta: float) -> void:
 				var dis_to_target = global_position.distance_to(target.global_position)
 				time_to_detect -= (20 / dis_to_target) * delta
 				if time_to_detect <= 0 or on_alert:
-					change_state(states.aim)
+					if randf() > 0.5:
+						change_state(states.find_cover)
+					else:
+						change_state(states.aim)
 			else:
 				if return_to_idle_timer.time_left <= 0:
 					return_to_idle_timer.start()
@@ -324,6 +327,33 @@ func _physics_process(delta: float) -> void:
 			if velocity.length() < 0.1:
 				look_at_position(last_seen_position)
 				change_state(states.aim)
+			
+			# animate
+			if velocity == Vector3.ZERO:
+				anim_player.play("Idle")
+			else:
+				anim_player.play("Run")
+		
+		states.find_cover:
+			if is_new_state:
+				var potential_cover = get_tree().get_nodes_in_group("cover")
+				potential_cover = potential_cover.filter(func(a): 
+					return global_position.distance_to(a.global_position) < 15)
+				potential_cover = potential_cover.filter(func(a): 
+					detection.global_position.x = a.global_position.x
+					detection.global_position.z = a.global_position.z
+					detection.force_raycast_update()
+					return !detection.can_see_target(detection.targets[0], false))
+				detection.position = Vector3(0, 1, 0)
+				if potential_cover.size() == 0:
+					change_state(states.strafe)
+				potential_cover.sort_custom(func(a, b): return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position))
+				var cover_pos = potential_cover[0].global_position
+				navigation_agent.set_target_position(cover_pos)
+				is_new_state = false
+			
+			# run to new position
+			follow_path(run_speed)
 			
 			# animate
 			if velocity == Vector3.ZERO:
@@ -485,6 +515,9 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 	elif state == states.walk:
 		change_state(states.idle)
 		new_destination_timer.start()
+	elif state == states.find_cover:
+		look_at(Globals.player.global_position)
+		change_state(states.camp)
 
 
 func _on_return_to_idle_timer_timeout() -> void:
@@ -509,7 +542,10 @@ func _on_path_wait_timer_timeout() -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name.contains("HitReaction"):
 		look_at_position(damage_position)
-		change_state(states.aim)
+		if randf() > 0.5:
+			change_state(states.aim)
+		else:
+			change_state(states.find_cover)
 	elif anim_name == "Fire":
 		#emit_shoot()
 		gun.gun_stats.ammo -= 1
@@ -518,7 +554,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			change_state(states.reload)
 			return
 		if state == states.shoot and randf_range(0, 1) <= strafe_change:
-			change_state(states.strafe)
+			#change_state(states.strafe)
+			change_state(states.find_cover)
 		else:
 			shoot_timer.start()
 			await shoot_timer.timeout

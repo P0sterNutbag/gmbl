@@ -125,15 +125,15 @@ func state_walk(delta) -> void:
 		model.look_at(global_position + direction)
 	
 	# change gun
-	var kit = PlayerStats.inventory.equipment_kit.gun_slots
-	if Input.is_action_just_released("next_gun"):
-		change_gun_slot(wrap(PlayerStats.gun_index - 1, 0, kit.size()))
-	elif Input.is_action_just_released("last_gun"):
-		change_gun_slot(wrap(PlayerStats.gun_index + 1, 0, kit.size()))
-	elif Input.is_action_just_pressed("slot_1"):
-		change_gun_slot(0)
-	elif Input.is_action_just_pressed("slot_2"):
-		change_gun_slot(1)
+	#var kit = PlayerStats.inventory.equipment_kit.gun_slots
+	#if Input.is_action_just_released("next_gun"):
+		#change_gun_slot(wrap(PlayerStats.gun_index - 1, 0, kit.size()))
+	#elif Input.is_action_just_released("last_gun"):
+		#change_gun_slot(wrap(PlayerStats.gun_index + 1, 0, kit.size()))
+	#elif Input.is_action_just_pressed("slot_1"):
+		#change_gun_slot(0)
+	#elif Input.is_action_just_pressed("slot_2"):
+		#change_gun_slot(1)
 	
 	# light
 	var flashlight = PlayerStats.inventory.find_item("flashlight")
@@ -225,8 +225,12 @@ func save() -> Dictionary:
 
 func _on_gun_changed() -> void:
 	if PlayerStats.gun:
-		gun = get(PlayerStats.gun.resource_name)
-		change_gun(PlayerStats.gun)
+		if PlayerStats.gun == PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.primary_gun]:
+			gun = get(PlayerStats.gun.resource_name)
+			change_gun(PlayerStats.gun)
+		elif !PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.primary_gun]:
+			gun = get(PlayerStats.gun.resource_name)
+			change_gun(PlayerStats.gun)
 	else:
 		unequip_gun()
 

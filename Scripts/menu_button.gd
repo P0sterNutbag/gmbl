@@ -29,6 +29,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_focus_entered() -> void:
+	UiController.hover_sfx.play()
 	if !disabled and show_icon_on_focus:
 		icon = icon_texture
 
@@ -44,3 +45,7 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	release_focus()
+
+
+func _on_pressed() -> void:
+	UiController.click_sfx.play()

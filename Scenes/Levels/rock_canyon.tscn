@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://c3wywlngou3jc"]
+[gd_scene load_steps=56 format=4 uid="uid://c3wywlngou3jc"]
 
 [ext_resource type="PackedScene" uid="uid://r4ktdn26psb3" path="res://Scenes/Levels/encounter_base.tscn" id="1_wyyf0"]
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_ghiyu"]
@@ -22,10 +22,27 @@
 [ext_resource type="PackedScene" uid="uid://caaninc7023am" path="res://Scenes/Environment/Props/Physics/barrel.tscn" id="20_r7u4n"]
 [ext_resource type="PackedScene" uid="uid://b3f0jcvvcldns" path="res://Scenes/Environment/Props/Physics/crate.tscn" id="21_bhded"]
 [ext_resource type="PackedScene" uid="uid://bjama3lmb5mct" path="res://Scenes/Environment/Props/Physics/tire_stack.tscn" id="22_euisr"]
+[ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/NPCs/enemy.tscn" id="23_n8nni"]
+[ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="24_frq20"]
+[ext_resource type="Script" uid="uid://3e36ru1e7k78" path="res://Scripts/spawn_chance_resource.gd" id="25_ano4a"]
+[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="26_5kg8i"]
+[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="27_bi7sh"]
+[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="28_xmwqh"]
+[ext_resource type="Resource" uid="uid://dgo34up8hytn6" path="res://Resources/Items/Ammo/smg_ammo.tres" id="29_bisrs"]
+[ext_resource type="Resource" uid="uid://bkae25scq6c12" path="res://Resources/Items/Ammo/sniper_ammo.tres" id="30_r2hh2"]
+[ext_resource type="Resource" uid="uid://6c7s1e0y4ekq" path="res://Resources/Items/Junk/cigarettes.tres" id="31_cfepy"]
+[ext_resource type="Resource" uid="uid://du57k1x7scpfk" path="res://Resources/Items/Junk/metal_scraps.tres" id="32_i6fay"]
+[ext_resource type="Resource" uid="uid://cw12h3yyn5tgy" path="res://Resources/Items/Junk/playing cards.tres" id="33_2dysg"]
+[ext_resource type="Resource" uid="uid://dfkmfm7wu8mw4" path="res://Resources/Items/Survival/beans.tres" id="34_vwy3g"]
+[ext_resource type="Resource" uid="uid://ccm2c5fc8xn15" path="res://Resources/Items/Survival/medkit.tres" id="35_lih5b"]
+[ext_resource type="Resource" uid="uid://glkl1ugkvv6m" path="res://Resources/Items/Survival/water.tres" id="36_w0oih"]
+[ext_resource type="Resource" uid="uid://dvooyj5cqcclc" path="res://Resources/Items/Survival/sleeping_bag.tres" id="37_rqdus"]
+[ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="38_fissc"]
 
 [sub_resource type="Resource" id="Resource_oy5nx"]
 script = ExtResource("2_ghiyu")
-population = 2
+min_population = 0
+max_population = 0
 npc_spawn_chance = 0.25
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
@@ -45,6 +62,94 @@ _surfaces = [{
 "vertex_count": 441,
 "vertex_data": PackedByteArray("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")
 }]
+
+[sub_resource type="Resource" id="Resource_3jrad"]
+script = ExtResource("25_ano4a")
+object_to_spawn = ExtResource("26_5kg8i")
+spawn_chance = 5.0
+max_amount = 2
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_e1mr1"]
+script = ExtResource("25_ano4a")
+object_to_spawn = ExtResource("27_bi7sh")
+spawn_chance = 5.0
+max_amount = 2
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_ildup"]
+script = ExtResource("25_ano4a")
+object_to_spawn = ExtResource("28_xmwqh")
+spawn_chance = 3.0
+min_amount = 5
+max_amount = 10
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_fhb31"]
+script = ExtResource("25_ano4a")
+object_to_spawn = ExtResource("29_bisrs")
+spawn_chance = 3.0
+max_amount = 2
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_2cu0c"]
+script = ExtResource("25_ano4a")
+object_to_spawn = ExtResource("30_r2hh2")
+max_amount = 2
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_ktgl8"]
+script = ExtResource("25_ano4a")
+object_to_spawn = ExtResource("31_cfepy")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_3md2n"]
+script = ExtResource("25_ano4a")
+object_to_spawn = ExtResource("32_i6fay")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_2hm72"]
+script = ExtResource("25_ano4a")
+object_to_spawn = ExtResource("33_2dysg")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_fxmgv"]
+script = ExtResource("25_ano4a")
+object_to_spawn = ExtResource("34_vwy3g")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_s0qxi"]
+script = ExtResource("25_ano4a")
+object_to_spawn = ExtResource("35_lih5b")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_f140h"]
+script = ExtResource("25_ano4a")
+object_to_spawn = ExtResource("36_w0oih")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_ftq36"]
+script = ExtResource("25_ano4a")
+object_to_spawn = ExtResource("37_rqdus")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_l1k82"]
+resource_local_to_scene = true
+script = ExtResource("38_fissc")
+min_amount = 1
+max_amount = 3
+potential_slots = Array[ExtResource("25_ano4a")]([SubResource("Resource_3jrad"), SubResource("Resource_e1mr1"), SubResource("Resource_ildup"), SubResource("Resource_fhb31"), SubResource("Resource_2cu0c"), SubResource("Resource_ktgl8"), SubResource("Resource_3md2n"), SubResource("Resource_2hm72"), SubResource("Resource_fxmgv"), SubResource("Resource_s0qxi"), SubResource("Resource_f140h"), SubResource("Resource_ftq36")])
+title = "Enemy"
+metadata/_custom_type_script = "uid://b34kwea65we13"
+
+[sub_resource type="Resource" id="Resource_jjajk"]
+resource_local_to_scene = true
+script = ExtResource("38_fissc")
+min_amount = 1
+max_amount = 3
+potential_slots = Array[ExtResource("25_ano4a")]([SubResource("Resource_3jrad"), SubResource("Resource_e1mr1"), SubResource("Resource_ildup"), SubResource("Resource_fhb31"), SubResource("Resource_2cu0c"), SubResource("Resource_ktgl8"), SubResource("Resource_3md2n"), SubResource("Resource_2hm72"), SubResource("Resource_fxmgv"), SubResource("Resource_s0qxi"), SubResource("Resource_f140h"), SubResource("Resource_ftq36")])
+title = "Enemy"
+metadata/_custom_type_script = "uid://b34kwea65we13"
 
 [node name="Encounter" instance=ExtResource("1_wyyf0")]
 location_data = SubResource("Resource_oy5nx")
@@ -374,6 +479,14 @@ count = 20
 terrain = NodePath("../Terrain")
 min_size = 0.5
 max_size = 2.0
+
+[node name="Enemy" parent="." index="16" instance=ExtResource("23_n8nni")]
+transform = Transform3D(-0.78194493, 0, -0.6233475, 0, 1, 0, 0.6233475, 0, -0.78194493, 88.16, 3.6772947, 209.104)
+inventory = SubResource("Resource_l1k82")
+
+[node name="Enemy2" parent="." index="17" instance=ExtResource("23_n8nni")]
+transform = Transform3D(-0.6561381, 0, -0.7546408, 0, 1, 0, 0.7546408, 0, -0.6561381, 83.02837, 3.7696872, 218.0447)
+inventory = SubResource("Resource_jjajk")
 
 [editable path="WorldEnvironment"]
 [editable path="NavigationRegion3D/ShackWindows"]

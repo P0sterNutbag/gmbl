@@ -3,7 +3,13 @@ extends Node
 var ui_nodes: Array[Control]
 var current_ui: Control
 var mouse_speed := 800.0
-
+#region SFX
+@onready var click_sfx: AudioStreamPlayer = $Click
+@onready var hover_sfx: AudioStreamPlayer = $Hover
+@onready var tab_sfx: AudioStreamPlayer = $Tab
+@onready var error_sfx: AudioStreamPlayer = $Error
+@onready var voice_sfx: AudioStreamPlayer = $Voice
+#endregion
 
 func _process(delta: float) -> void:
 	if Input.mouse_mode == Input.MOUSE_MODE_HIDDEN and Input.get_connected_joypads().size() > 0:
@@ -54,3 +60,9 @@ func is_canvas_layer_open(canvas_layer: CanvasLayer) -> bool:
 
 func reset_list():
 	ui_nodes.clear()
+
+
+func stop_audio() -> void:
+	for child in get_children():
+		if child is AudioStreamPlayer:
+			child.stop()

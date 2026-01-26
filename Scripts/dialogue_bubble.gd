@@ -16,13 +16,17 @@ func _process(_delta: float) -> void:
 		if !can_proceed:
 			can_proceed = true
 			label.text = text
+			UiController.click_sfx.play()
 
 
 func start_typewriter(new_text: String) -> void:
 	label.text = ""
-	for i in new_text:
+	for i in new_text.length():
 		if can_proceed:
 			return
-		label.text += i
+		var character = new_text[i]
+		label.text += character
+		if character != "" and i % 2 == 0:
+			UiController.voice_sfx.play()
 		await get_tree().create_timer(0.05).timeout
 	can_proceed = true

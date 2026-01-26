@@ -48,13 +48,13 @@ func _process(_delta: float) -> void:
 		else:
 			UiController.close_interface(journal)
 	if Input.is_action_just_pressed("ui_cancel"):
-		if !pause_menu.visible:
+		if !pause_menu.visible and PlayerStats.state != PlayerStats.states.dead:
 			if UiController.is_canvas_layer_open(self):
 				UiController.close_all()
 				return
 			if UiController.is_canvas_layer_open(Globals.ui):
 				return
-	if Input.is_action_just_pressed("pause"):
+	if Input.is_action_just_pressed("pause") and PlayerStats.state == PlayerStats.states.walk:
 		if !pause_menu.visible:
 			UiController.open_interface(pause_menu)
 		else:
@@ -122,7 +122,8 @@ func close_transfer_inventory() -> void:
 
 func hide_all_ui() -> void:
 	for child in get_children():
-		child.hide()
+		if child.process_mode == PROCESS_MODE_INHERIT:
+			child.hide()
 
 
 func show_ui() -> void:

@@ -56,7 +56,7 @@ modulate = Color(1, 1, 0, 1)
 layout_mode = 2
 
 [node name="Hunger" type="TextureRect" parent="StatsAnchor/VBoxContainer"]
-custom_minimum_size = Vector2(15, 15)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 texture = ExtResource("2_guqia")
 expand_mode = 2
@@ -65,7 +65,7 @@ stat_name = "hunger"
 show_treshold = 0.75
 
 [node name="Thirst" type="TextureRect" parent="StatsAnchor/VBoxContainer"]
-custom_minimum_size = Vector2(15, 15)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 texture = ExtResource("4_k64vs")
 expand_mode = 2
@@ -74,7 +74,7 @@ stat_name = "thirst"
 show_treshold = 0.75
 
 [node name="Sleep" type="TextureRect" parent="StatsAnchor/VBoxContainer"]
-custom_minimum_size = Vector2(15, 15)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 texture = ExtResource("5_13ham")
 expand_mode = 2
@@ -931,13 +931,6 @@ layout_mode = 2
 text = "Quit to Desktop"
 
 [connection signal="pressed" from="PlayerInventory/Inventory/Control/Button" to="." method="close_inventory"]
-[connection signal="pressed" from="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" method="_on_pressed"]
-[connection signal="pressed" from="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" to="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" method="_on_pressed"]
-[connection signal="pressed" from="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" method="_on_pressed"]
-[connection signal="pressed" from="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" to="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" method="_on_pressed"]
-[connection signal="pressed" from="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" method="_on_pressed"]
-[connection signal="pressed" from="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" to="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" method="_on_pressed"]
-[connection signal="pressed" from="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem3" to="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer/MenuItem3" method="_on_pressed"]
 [connection signal="pressed" from="TransferInventory/Inventory/Control/Button" to="." method="close_transfer_inventory"]
 [connection signal="exit" from="Journal" to="." method="_on_menu_exit"]
 [connection signal="pressed" from="Journal/PanelContainer/Control/Button" to="Journal" method="close"]

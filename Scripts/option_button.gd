@@ -13,10 +13,12 @@ func _ready() -> void:
 
 
 func _on_left_category_pressed() -> void:
+	UiController.tab_sfx.play()
 	change_index(wrapi(index - 1, 0, options.size()))
 
 
 func _on_right_category_pressed() -> void:
+	UiController.tab_sfx.play()
 	change_index(wrapi(index + 1, 0, options.size())) 
 
 

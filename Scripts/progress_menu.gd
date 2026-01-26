@@ -20,7 +20,6 @@ func activate():
 	#kills.text = "Kills: " + str(ProgressManager.kills)
 	#level.text = "Level: " + str(old_level)
 	progress_bar.value = old_xp
-	var level_ups = 0
 	for i in range(old_level, new_level+1):
 		progress_bar.value = old_xp
 		var target_xp = new_xp
@@ -32,11 +31,10 @@ func activate():
 			tween.tween_property(level, "text", "Level: " + str(i+1), 0)
 		await tween.finished
 		old_xp = 0
-		if ProgressManager.awards.size() > 0:
-			var inst = PROGRESS_AWARD_MESSAGE.instantiate()
-			v_box_container.add_child(inst)
-			inst.text = "+" + ProgressManager.awards[level_ups].title + " added to starting gear."
-			level_ups += 1
+	for award in ProgressManager.awards:
+		var inst = PROGRESS_AWARD_MESSAGE.instantiate()
+		v_box_container.add_child(inst)
+		inst.text = "+" + award.title + " added to starting gear."
 	#progress_bar.value = ProgressManager.progress_data.xp
 
 

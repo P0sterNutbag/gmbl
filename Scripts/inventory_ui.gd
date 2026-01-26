@@ -141,17 +141,21 @@ func transfer_item(menu_item: Control):
 			opposing_ui.money_label.modulate = Color.RED
 			var tween = create_tween()
 			tween.tween_property(opposing_ui.money_label, "modulate", Color.WHITE, 1)
-			returnd
+			UiController.stop_audio()
+			UiController.error_sfx.play()
+			return
 	var amount_to_move = 1
 	if Input.is_action_pressed("shift") or item is ItemMoney:
-		var item_slot = source_inventory.find_item_slot(item)
-		amount_to_move = item_slot.amount
+		amount_to_move = menu_item.resource.amount		
 	if item is EquipmentGun and item.equipped:
 		item.equip()
 	if target_inventory.add_item(item, amount_to_move):
 		source_inventory.remove_item(item, amount_to_move)
-	set_items()
-	opposing_ui.set_items()
+		set_items()
+		opposing_ui.set_items()
+	else:
+		UiController.stop_audio()
+		UiController.error_sfx.play()
 
 
 func set_description(item: Item = null):
@@ -237,11 +241,13 @@ func _on_item_equipped_changed(menu_item: MenuItem) -> void:
 func _on_left_category_pressed() -> void:
 	category_index = wrapi(category_index - 1, -1, categories.size() - 1)
 	filter(category_index)
+	UiController.tab_sfx.play()
 
 
 func _on_right_category_pressed() -> void:
 	category_index = wrapi(category_index + 1, -1, categories.size() - 1)
 	filter(category_index)
+	UiController.tab_sfx.play()
 
 
 #func create_physical_item(physical_item: PackedScene = null) -> void:

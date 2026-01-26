@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://5tewrogcx53w"]
+
+[ext_resource type="Script" uid="uid://bo0n1hq3eq7hh" path="res://Scripts/Autoloads/ui_controller.gd" id="1_jjmka"]
+[ext_resource type="AudioStream" uid="uid://b4mo2ebryfk4u" path="res://Audio/UI/switch2.ogg" id="2_4jrrv"]
+[ext_resource type="AudioStream" uid="uid://bhr3o81be84aq" path="res://Audio/UI/rollover4.ogg" id="3_5vgki"]
+[ext_resource type="AudioStream" uid="uid://bwhtrccig4jfa" path="res://Audio/UI/error_008.ogg" id="3_uu5g8"]
+[ext_resource type="AudioStream" uid="uid://bpq71g1diu655" path="res://Audio/UI/rollover1.ogg" id="4_s1d8c"]
+[ext_resource type="AudioStream" uid="uid://c3d4hqaiwohxq" path="res://Audio/UI/bong_001.ogg" id="6_hpss3"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_nkm5x"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("6_hpss3")
+
+[node name="UiController" type="Node"]
+script = ExtResource("1_jjmka")
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_4jrrv")
+bus = &"SFX"
+
+[node name="Error" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_uu5g8")
+pitch_scale = 0.5
+bus = &"SFX"
+
+[node name="Hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5vgki")
+volume_db = -10.0
+pitch_scale = 2.19
+
+[node name="Tab" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_s1d8c")
+
+[node name="Voice" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_nkm5x")
+pitch_scale = 0.79

@@ -543,7 +543,7 @@ func _on_path_wait_timer_timeout() -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name.contains("HitReaction"):
 		look_at_position(damage_position)
-		if randf() > 0.5:
+		if randf() > 0.75:
 			change_state(states.aim)
 		else:
 			change_state(states.find_cover)

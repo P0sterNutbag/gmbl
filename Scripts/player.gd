@@ -460,9 +460,11 @@ func state_pause(_delta):
 func enter_dead():
 	#if Globals.overworld != null:
 		#Globals.overworld.load_on_enter = true
-	var tween = create_tween().set_ease(Tween.EASE_OUT)
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
+	tween.tween_property(gun_anchor, "position", Vector3.DOWN, 0.25)
 	tween.tween_property(camera, "position:y", -1, 0.5)
 	tween.tween_property(camera, "rotation:z", deg_to_rad(45), 1)
+	tween.set_parallel(false)
 	tween.tween_callback(Globals.survival_ui.hide_all_ui)
 	tween.tween_callback(UiController.open_interface.bind(Globals.survival_ui.death_menu, false))
 
@@ -475,6 +477,7 @@ func exit_dead():
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
 	tween.tween_property(camera, "position:y", 0, 0.25)
 	tween.tween_property(camera, "rotation:z", deg_to_rad(0), 0.25)
+	tween.tween_property(gun_anchor, "position", Vector3.ZERO, 0.25)
 	tween.tween_callback(Globals.survival_ui.show_ui)
 	hitbox.revive()
 
@@ -761,7 +764,8 @@ func _on_death() -> void:
 
 func _on_gun_changed() -> void:
 	if PlayerStats.gun:
-		change_gun(PlayerStats.gun)
+		if gun_state == gun_states.point or gun == null:
+			change_gun(PlayerStats.gun)
 	else:
 		unequip_gun()
 

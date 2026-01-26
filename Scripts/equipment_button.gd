@@ -22,6 +22,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_pressed() -> void:
+	super._on_pressed()
 	if equipment:
 		equipment.equip()
 

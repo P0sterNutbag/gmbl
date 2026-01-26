@@ -324,6 +324,8 @@ func state_walk(delta):
 			Globals.ui.tooltip.text = "F: Loot"
 		elif collider is ItemPickup:
 			Globals.ui.tooltip.text = "F: Pick Up"
+		elif collider is InteractableObject:
+			Globals.ui.tooltip.text = collider.tooltip_text
 	else:
 		Globals.ui.tooltip.text = ""
 	
@@ -337,6 +339,8 @@ func state_walk(delta):
 		elif collider is PhysicalBone3D:
 			if collider.health_component and collider.health_component.is_dead:
 				Globals.survival_ui.loot(collider.health_component.get_parent().inventory)
+		elif collider is InteractableObject:
+			collider.interact()
 		else:
 			if collider is ItemPickup:
 				collider.pickup()

@@ -2,6 +2,10 @@ extends MeshInstance3D
 
 
 func _ready() -> void:
+	align_aabb()
+
+
+func align_aabb() -> void:
 	var aabb = get_aabb()
 	var local_corners = [
 		Vector3(aabb.position.x, aabb.position.y, aabb.position.z),

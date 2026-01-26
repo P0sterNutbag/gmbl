@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://ct31dse0cfd02"]
+[gd_scene load_steps=47 format=3 uid="uid://ct31dse0cfd02"]
 
 [ext_resource type="Script" uid="uid://ysmfpedeqrtw" path="res://Scripts/encounter.gd" id="1_7rivk"]
 [ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="1_npfmg"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="24_srwfw"]
 [ext_resource type="PackedScene" uid="uid://dyumojcinahde" path="res://Scenes/outline_fog_shader.tscn" id="25_avjiw"]
 [ext_resource type="PackedScene" uid="uid://p1limlnykapp" path="res://Scenes/noise_controller.tscn" id="26_4v231"]
+[ext_resource type="PackedScene" uid="uid://m7oajasjyoq2" path="res://Scenes/Environment/Props/Physics/glass_bottle.tscn" id="27_4v231"]
 
 [sub_resource type="Resource" id="Resource_mvu5i"]
 script = ExtResource("2_hyk2w")
@@ -176,5 +177,8 @@ inventory = SubResource("Resource_0xgmu")
 
 [node name="NoiseController" parent="." instance=ExtResource("26_4v231")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000435829, 0.0134783, 0.00178146)
+
+[node name="GlassBottle" parent="." instance=ExtResource("27_4v231")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 51.641483, 0.19999988, 45.93937)
 
 [editable path="NavigationRegion3D/ShackNoWindows"]

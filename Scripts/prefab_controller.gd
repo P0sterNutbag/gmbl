@@ -114,3 +114,9 @@ func align_with_y(xform, new_y):
 	xform.basis.x = -xform.basis.z.cross(new_y)
 	xform.basis = xform.basis.orthonormalized()
 	return xform
+
+
+func align_to_aabb(_value) -> void:
+	for child in get_children():
+		if child.has_method("align_aabb"):
+			child.align_aabb()

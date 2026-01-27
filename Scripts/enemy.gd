@@ -8,8 +8,6 @@ class_name Enemy
 #@export var gun_index: guns
 @export var potential_gun_items: Array[SpawnChanceResource]
 var gun_item: EquipmentGun
-enum teams {enemies, allies}
-@export var team: teams = teams.enemies
 @export var follow_target: Node3D
 #@export var potential_items: Array[SpawnChanceResource]
 var items:
@@ -47,6 +45,7 @@ var last_seen_position: Vector3
 var destination: Vector3
 var target: Node3D
 var bounty: Quest
+var faction: FactionManager.factions
 #var guns_dict: Dictionary = {
 	#0 : [preload("res://Scenes/Guns/shotgun.tscn"), preload("res://Resources/Items/Guns/shotgun.tres")],
 	#1 : [preload("res://Scenes/Guns/ak47.tscn"), preload("res://Resources/Items/Guns/ak47.tres")],
@@ -81,18 +80,22 @@ func _ready() -> void:
 	items_to_drop.append(gun_item.physical_item)
 	DayNightCycle.night_start.connect(on_night_start)
 	DayNightCycle.day_start.connect(on_day_start)
+	# set affinity to player
+	await get_tree().process_frame
+	set_detection_targets()
 	
 	# add items
 	#for i in randi_range(min_items, max_items):
 		#inventory.add_item(potential_items[Globals.get_weighted_index(potential_items)].object_to_spawn)
 	
-	await get_tree().create_timer(0.5).timeout
-	if team == teams.allies:
-		detection.targets = get_tree().get_nodes_in_group("enemies")
-		gun.bullet_stats.collision_mask = 3
-	elif team == teams.enemies:
-		detection.targets = get_tree().get_nodes_in_group("allies")
-		gun.bullet_stats.collision_mask = 4
+	#await get_tree().create_timer(0.5).timeout
+#	
+	#if team == teams.allies:
+		#detection.targets = get_tree().get_nodes_in_group("enemies")
+		#gun.bullet_stats.collision_mask = 3
+	#elif team == teams.enemies:
+		#detection.targets = get_tree().get_nodes_in_group("allies")
+		#gun.bullet_stats.collision_mask = 4
 	
 
 
@@ -415,10 +418,8 @@ func look_at_position(pos: Vector3):
 
 
 func set_detection_targets():
-	if team == teams.allies:
-		detection.targets = get_tree().get_nodes_in_group("enemies").filter(func(i): return i.state != states.dead)
-	elif team == teams.enemies:
-		detection.targets = get_tree().get_nodes_in_group("allies").filter(func(i): return i.state != states.dead)
+	if FactionManager.get_faction_relation(faction, PlayerStats.faction) <= -1.0:
+		detection.targets.append(Globals.player)
 
 
 func emit_shoot() -> void:
@@ -429,8 +430,7 @@ func emit_shoot() -> void:
 
 
 func on_noise_heard(noise_position: Vector3, event_creator):
-	pass
-	if event_creator and event_creator.is_in_group(get_groups()[0]):
+	if event_creator and FactionManager.get_faction_relation(faction, event_creator.faction) > -1.0:
 		return
 	if state == states.dead or state == states.hurt:
 		return
@@ -451,6 +451,10 @@ func _on_damaged(hit_position: Vector3, hit_direction: Vector3) -> void:
 	velocity = Vector3.ZERO
 	damage_position = hit_position
 	damage_direction = hit_direction
+	if PlayerStats.faction == faction:
+		PlayerStats.faction = FactionManager.factions.no_faction
+	FactionManager.change_faction_ration(faction, PlayerStats.faction, -1)
+	get_tree().call_group("enemies", "set_detection_targets")
 	#if time_since_bleed < 0.1:
 		#return
 	#time_since_bleed = 0
@@ -494,10 +498,10 @@ func _on_death() -> void:
 	change_state(states.dead)
 	shoot_timer.stop()
 	aim_timer.stop()
-	if team == teams.allies:
-		get_tree().call_group("enemies", "set_detection_targets")
-	if team == teams.enemies:
-		get_tree().call_group("allies", "set_detection_targets")
+	#if team == teams.allies:
+		#get_tree().call_group("enemies", "set_detection_targets")
+	#if team == teams.enemies:
+		#get_tree().call_group("allies", "set_detection_targets")
 	if has_node("Sprite3D"):
 		$Sprite3D.hide()
 

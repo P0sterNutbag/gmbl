@@ -49,6 +49,7 @@ var enter_functions: Dictionary
 var gun_state_functions: Dictionary
 var gun_exit_functions: Dictionary
 var gun_enter_functions: Dictionary
+var faction: FactionManager.factions
 var grenade_object = preload("res://Scenes/Bullets/grenade.tscn")
 const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var camera = $CameraAnchor/Camera3D
@@ -87,6 +88,8 @@ func _ready() -> void:
 	Globals.player = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	PlayerStats.gun_index = -1
+	if PlayerStats.faction:
+		faction = PlayerStats.faction
 	if PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.primary_gun]:
 		change_gun_slot(0)
 	elif PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.secondary_gun]:

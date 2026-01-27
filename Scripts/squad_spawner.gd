@@ -9,13 +9,14 @@ var enemies: Array
 
 
 func _ready() -> void:
-	await get_tree().process_frame
-	for i in enemy_amount:
-		var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
-		var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
-		get_tree().current_scene.add_child.call_deferred(inst)
-		inst.change_state(inst.states.standby)
-		enemies.append(inst)
+	pass
+	#await get_tree().process_frame
+	#for i in enemy_amount:
+		#var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
+		#var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
+		#get_tree().current_scene.add_child.call_deferred(inst)
+		#inst.change_state(inst.states.standby)
+		#enemies.append(inst)
 
 
 func spawn_squad() -> void:
@@ -42,10 +43,11 @@ func spawn_squad() -> void:
 		inst.change_state(inst.states.walk)
 		inst.visible = true
 		#enemies.append(inst)
-	#await get_tree().create_timer(1).timeout
-	#for enemy in enemies:
-		#enemy.change_state(enemy.states.walk)
+		#await get_tree().create_timer(1).timeout
+		#for enemy in enemies:
+			#enemy.change_state(enemy.states.walk)
 
 
 func _on_timer_timeout() -> void:
-	spawn_squad()
+	pass
+	#spawn_squad()

@@ -3,7 +3,7 @@ extends CharacterBody3D
 enum guns {shotgun, ak47, sniper, pistol}
 enum states {walk, chase, patrol}
 @export var gun_index: guns
-@export var chase_player: bool
+@export var chase_targets: bool
 var state = states.chase
 var speed := 2
 var walk_speed := 2
@@ -17,6 +17,7 @@ var original_rotation: Vector3
 var target: Node3D
 var destination: Location
 var destination_path: NodePath
+var faction: FactionManager.factions
 var guns_dict: Dictionary = {
 	0 : [preload("res://Scenes/Guns/shotgun.tscn"), preload("res://Scenes/Items/Guns/shotgun.tscn")],
 	1 : [preload("res://Scenes/Guns/ak47.tscn"), preload("res://Scenes/Items/Guns/ak47.tscn")],
@@ -33,11 +34,11 @@ var guns_dict: Dictionary = {
 
 func _enter_tree() -> void:
 	can_move = true
+	await get_tree().create_timer(0.1).timeout
+	set_detection_targets()
 
 
 func _ready() -> void:
-	if chase_player:
-		detection.targets.append(Globals.player)
 	var gun = guns_dict[gun_index][0].instantiate()
 	gun_holder.add_child(gun)
 	location.location_data.population = randi_range(min_enemies, max_enemies)
@@ -56,7 +57,7 @@ func _process(_delta: float) -> void:
 		states.walk:
 			speed = walk_speed
 			# detect player
-			if can_see_player():
+			if chase_targets and detection.targets.size() > 0 and can_see_player():
 				state = states.chase
 			# animate
 			if velocity != Vector3.ZERO:
@@ -108,9 +109,13 @@ func look_at_position(pos: Vector3):
 	look_at(target_pos, Vector3.UP)
 
 
+func set_detection_targets():
+	if FactionManager.get_faction_relation(faction, PlayerStats.faction) <= -1.0:
+		detection.targets.append(Globals.player)
+
+
 func can_see_player() -> bool:
-	return (chase_player and detection.can_see_target() and 
-#	Globals.get_dot(self, Globals.player) < -0.25 and
+	return (detection.can_see_target() and 
 	global_position.distance_to(Globals.player.global_position) < 7.5 and
 	!UiController.is_canvas_layer_open(Globals.ui))
 

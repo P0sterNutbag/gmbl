@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://o5r7ocg722wg"]
+[gd_scene format=3 uid="uid://o5r7ocg722wg"]
 
 [ext_resource type="PackedScene" uid="uid://cdr3k44ro53a1" path="res://Scenes/Overworld/Locations/location_base.tscn" id="1_j53tr"]
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="3_r83r7"]
@@ -7,6 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_vkcj2"]
 script = ExtResource("3_r83r7")
+faction = 3
 population = 2
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
@@ -21,39 +22,42 @@ cap_bottom = false
 albedo_texture = ExtResource("5_76qbg")
 uv1_scale = Vector3(5, 5, 5)
 
-[node name="Location" groups=["location"] instance=ExtResource("1_j53tr")]
+[node name="SandDunes" unique_id=1660246295 groups=["location"] instance=ExtResource("1_j53tr")]
 location_data = SubResource("Resource_vkcj2")
 encounter_scene = ExtResource("4_3vsq3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes" index="0"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="0" unique_id=728756574]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6011953, 0)
 mesh = SubResource("CylinderMesh_xjrgu")
 surface_material_override/0 = SubResource("StandardMaterial3D_816vo")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Meshes" index="1"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="1" unique_id=1942981581]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.745441, -1.3835626, -0.25244617)
 mesh = SubResource("CylinderMesh_xjrgu")
 surface_material_override/0 = SubResource("StandardMaterial3D_816vo")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Meshes" index="2"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="2" unique_id=57368531]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6849232, 0, 8.836093)
 mesh = SubResource("CylinderMesh_xjrgu")
 surface_material_override/0 = SubResource("StandardMaterial3D_816vo")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Meshes" index="3"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="3" unique_id=689735190]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.83029, -4.7683716e-07, -5.6068954)
 mesh = SubResource("CylinderMesh_xjrgu")
 surface_material_override/0 = SubResource("StandardMaterial3D_816vo")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="Meshes" index="4"]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="4" unique_id=981072133]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2411776, -1.334033, 4.263791)
 mesh = SubResource("CylinderMesh_xjrgu")
 surface_material_override/0 = SubResource("StandardMaterial3D_816vo")
 
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="Meshes" index="5"]
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="5" unique_id=1185489473]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4867399, 0.9135566, -8.540308)
 mesh = SubResource("CylinderMesh_xjrgu")
 surface_material_override/0 = SubResource("StandardMaterial3D_816vo")
 
-[node name="PointOfInterest" parent="." index="2"]
+[node name="Flagpole" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="6" unique_id=800258272]
+transform = Transform3D(-8.742278e-08, 0, -2, 0, 2, 0, 2, 0, -8.742278e-08, 0, 3.7607365, 0)
+
+[node name="PointOfInterest" parent="." index="2" unique_id=2144080138]
 title = "Sand Dunes"

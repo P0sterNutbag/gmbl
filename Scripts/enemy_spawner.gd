@@ -41,6 +41,7 @@ func _ready() -> void:
 		used_spawns.append(spawn_index)
 		inst.set_deferred("global_transform", spawn_points[spawn_index].global_transform)
 		inst.bounty = quest
+		inst.faction = location_data.faction
 		enemy_amount -= 1
 		quest.target_node = inst
 	
@@ -49,6 +50,7 @@ func _ready() -> void:
 		# get random enemy and spawn it
 		var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
 		var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
+		inst.faction = location_data.faction
 		get_tree().current_scene.add_child.call_deferred(inst)
 		
 		# position enemy at spawn point

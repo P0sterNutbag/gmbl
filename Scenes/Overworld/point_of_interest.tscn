@@ -1,79 +1,87 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqnwuiew1q2il"]
+[gd_scene format=3 uid="uid://cqnwuiew1q2il"]
 
-[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_3kl7u"]
 [ext_resource type="Script" uid="uid://bocymopxj1vj7" path="res://Scripts/point_of_interest.gd" id="1_wb1da"]
+[ext_resource type="Theme" uid="uid://djqipqwy5toiu" path="res://Art/Themes/VBoxContainer.tres" id="3_5twat"]
 [ext_resource type="Theme" uid="uid://dcnijc3hjurqk" path="res://Art/Themes/text_mediun_outline.tres" id="3_avo8c"]
-[ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="4_5twat"]
+[ext_resource type="Texture2D" uid="uid://brs4ktd7wgyno" path="res://Art/Textures/faction icon.png" id="4_e2awd"]
+[ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="5_e2awd"]
+[ext_resource type="Texture2D" uid="uid://d2ukjid6oonnl" path="res://Art/Textures/population icon.png" id="6_6ax13"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cpnmm"]
 radius = 6.021006
 
-[node name="PointOfInterest" type="Node3D"]
+[node name="PointOfInterest" type="Node3D" unique_id=2014583324]
 script = ExtResource("1_wb1da")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=1869803366]
 collision_layer = 0
 collision_mask = 32
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2133373798]
 shape = SubResource("SphereShape3D_cpnmm")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1632069402]
 
-[node name="CardOffset" type="Control" parent="CanvasLayer"]
+[node name="CardOffset" type="Control" parent="CanvasLayer" unique_id=155479337]
 layout_mode = 3
 anchors_preset = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/CardOffset"]
-visible = false
-layout_mode = 0
-offset_left = -33.0
-offset_top = -322.0
-offset_right = 199.0
-offset_bottom = -225.0
-theme = ExtResource("1_3kl7u")
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CardOffset" unique_id=1870797330]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -112.5
+offset_top = -101.0
+offset_right = 112.5
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("3_5twat")
+alignment = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/CardOffset/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CardOffset/PanelContainer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="Description" type="Label" parent="CanvasLayer/CardOffset/PanelContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(328, 0)
-layout_mode = 2
-size_flags_vertical = 6
-theme = ExtResource("4_5twat")
-text = "Location Name"
-autowrap_mode = 2
-
-[node name="Title" type="Label" parent="CanvasLayer/CardOffset"]
+[node name="Title" type="Label" parent="CanvasLayer/CardOffset/VBoxContainer" unique_id=1297630741]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(225, 0)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -112.5
-offset_top = -175.0
-offset_right = 112.5
-offset_bottom = -146.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 6
+layout_mode = 2
 theme = ExtResource("3_avo8c")
 text = "Enemy"
 horizontal_alignment = 1
+vertical_alignment = 2
 autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CardOffset/VBoxContainer" unique_id=379623766]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CardOffset/VBoxContainer/HBoxContainer" unique_id=1732315125]
+layout_mode = 2
+texture = ExtResource("4_e2awd")
+
+[node name="Faction" type="Label" parent="CanvasLayer/CardOffset/VBoxContainer/HBoxContainer" unique_id=1418799481]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_e2awd")
+text = "Faction"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/CardOffset/VBoxContainer" unique_id=1783460872]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CardOffset/VBoxContainer/HBoxContainer2" unique_id=2007288668]
+layout_mode = 2
+texture = ExtResource("6_6ax13")
+
+[node name="Population" type="Label" parent="CanvasLayer/CardOffset/VBoxContainer/HBoxContainer2" unique_id=596984599]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_e2awd")
+text = "Population"
+
+[node name="TextAnchor" type="Node3D" parent="." unique_id=2046222566]
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

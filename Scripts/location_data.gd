@@ -2,6 +2,7 @@ extends Resource
 class_name LocationData
 
 enum rarity_level {junk, common, rare, supreme}
+@export var faction: FactionManager.factions 
 @export var population: int
 @export var min_population: int = 2
 @export var max_population: int = 4

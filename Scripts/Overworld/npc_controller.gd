@@ -36,6 +36,8 @@ func _on_timer_timeout() -> void:
 	spawn_location.location_data.population = clamp(spawn_location.location_data.population - inst.location.location_data.population, 0, spawn_location.location_data.max_population)
 	inst.global_position = spawn_location.global_position
 	inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
+	inst.location.location_data.faction = spawn_location.location_data.faction
+	inst.faction = spawn_location.location_data.faction
 	# determine desination
 	var dest = get_destination()
 	while dest == spawn_location:

@@ -5,7 +5,7 @@ render_mode cull_disabled;
 uniform bool display_dampening = false;
 uniform bool display_deformation = false;
 
-uniform vec4 flag_color: source_color = vec4(1.0);
+instance uniform vec4 flag_color: source_color = vec4(1.0);
 uniform float wave_size: hint_range(0.0, 2.0) = 0.5;
 uniform float face_distortion: hint_range(0.0, 1.0) = 0.5;
 uniform float time_scale: hint_range(0.0, 1.0) = 0.3;

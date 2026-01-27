@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dhc6a3k8wyk4x"]
+[gd_scene format=3 uid="uid://dhc6a3k8wyk4x"]
 
 [ext_resource type="Script" uid="uid://dq5ymww0igewb" path="res://Scripts/Overworld/enemy.gd" id="1_11nfp"]
 [ext_resource type="PackedScene" uid="uid://cdr3k44ro53a1" path="res://Scenes/Overworld/Locations/location_base.tscn" id="2_riojr"]
@@ -99,36 +99,39 @@ metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 [sub_resource type="SphereShape3D" id="SphereShape3D_vti20"]
 radius = 1.0
 
-[node name="Enemy" type="CharacterBody3D"]
+[node name="Enemy" type="CharacterBody3D" unique_id=384465541]
 collision_layer = 0
 floor_max_angle = 0.34906584
 script = ExtResource("1_11nfp")
-chase_player = true
+chase_targets = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1049381295]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.143, 1, 0)
 shape = SubResource("CapsuleShape3D_hf0oe")
 
-[node name="Location" parent="." instance=ExtResource("2_riojr")]
+[node name="Location" parent="." unique_id=2112754146 instance=ExtResource("2_riojr")]
 location_data = SubResource("Resource_ndpai")
 encounter_scene = ExtResource("4_ndpai")
 dialogue_tree = SubResource("Resource_ieqv6")
 can_stealth_start = true
 
-[node name="CollisionShape3D" parent="Location" index="0"]
+[node name="CollisionShape3D" parent="Location" index="0" unique_id=1772758538]
 shape = SubResource("SphereShape3D_vti20")
 
-[node name="PointOfInterest" parent="Location" index="2"]
-title = "Bandit Squad"
+[node name="Flagpole" parent="Location/Meshes" parent_id_path=PackedInt32Array(2112754146, 354222542) index="0" unique_id=800258272]
+visible = false
 
-[node name="Detection" type="RayCast3D" parent="."]
+[node name="PointOfInterest" parent="Location" index="2" unique_id=2144080138]
+title = "Wandering Squad"
+
+[node name="Detection" type="RayCast3D" parent="." unique_id=1023908887]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89564, 0)
 target_position = Vector3(0, 0, -50)
 script = ExtResource("4_73otn")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=994067713]
 
-[node name="EnemyModel" parent="." instance=ExtResource("5_i7slr")]
+[node name="EnemyModel" parent="." unique_id=1602721277 instance=ExtResource("5_i7slr")]
 
 [connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]
 

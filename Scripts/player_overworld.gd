@@ -22,6 +22,7 @@ var model_rotation: float:
 var state_functions: Dictionary
 var exit_functions: Dictionary
 var enter_functions: Dictionary
+var faction: FactionManager.factions
 const NOTIFICATION = preload("uid://dl0pidlmm5dwh")
 @onready var camera_anchor: Node3D = $CameraAnchor
 @onready var model: Node3D = $EnemyModel
@@ -62,6 +63,8 @@ func _ready() -> void:
 func _enter_tree() -> void:
 	Globals.player = self
 	global_position.y = Globals.get_heightmap_position(global_position)
+	if PlayerStats.faction:
+		faction = PlayerStats.faction
 	await get_tree().process_frame
 	hitbox.hp = PlayerStats.hp
 	#hitbox.max_hp = PlayerStats.hp

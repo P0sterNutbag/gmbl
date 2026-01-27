@@ -16,6 +16,8 @@ var shops_base_inventory: Dictionary
 var shops_max_money: Dictionary
 var save_population: int = -1
 @onready var point_of_interest: PointOfInterest = $PointOfInterest
+@onready var flag: MeshInstance3D = $Meshes/Flagpole/MeshInstance3D
+@onready var flagpole: Node3D = $Meshes/Flagpole
 signal encounter_started
 signal encounter_ended
 
@@ -28,9 +30,15 @@ signal encounter_ended
 		#show_difficulty = true
 		#show_resources = true
 
+func _enter_tree() -> void:
+	await get_tree().process_frame
+	var color = FactionManager.faction_colors[location_data.faction]
+	flag.set_instance_shader_parameter("flag_color", color)
+
 
 func _ready() -> void:
 	DayNightCycle.day_start.connect(_on_day_start)
+	flagpole.global_rotation_degrees = Vector3(0, 0, 0)
 	if save_population > -1:
 		location_data.population = save_population
 	var parent = get_parent()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://b0cqkj1fgouo2"]
+[gd_scene format=3 uid="uid://b0cqkj1fgouo2"]
 
 [ext_resource type="Script" uid="uid://dq5ymww0igewb" path="res://Scripts/Overworld/enemy.gd" id="1_ldcoh"]
 [ext_resource type="PackedScene" uid="uid://cdr3k44ro53a1" path="res://Scenes/Overworld/Locations/location_base.tscn" id="2_jf2yb"]
@@ -148,35 +148,38 @@ metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 [sub_resource type="SphereShape3D" id="SphereShape3D_e46jk"]
 radius = 1.0
 
-[node name="Npc" type="CharacterBody3D"]
+[node name="Npc" type="CharacterBody3D" unique_id=907079178]
 collision_layer = 0
 script = ExtResource("1_ldcoh")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1640265759]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.143, 1, 0)
 shape = SubResource("CapsuleShape3D_hf0oe")
 
-[node name="Location" parent="." instance=ExtResource("2_jf2yb")]
+[node name="Location" parent="." unique_id=361678620 instance=ExtResource("2_jf2yb")]
 location_data = SubResource("Resource_ndpai")
 encounter_scene = ExtResource("4_w8t3j")
 shop = SubResource("Resource_w00nu")
 dialogue_tree = SubResource("Resource_xv57w")
 can_stealth_start = true
 
-[node name="CollisionShape3D" parent="Location" index="0"]
+[node name="CollisionShape3D" parent="Location" index="0" unique_id=1772758538]
 shape = SubResource("SphereShape3D_e46jk")
 
-[node name="PointOfInterest" parent="Location" index="2"]
+[node name="Flagpole" parent="Location/Meshes" parent_id_path=PackedInt32Array(361678620, 354222542) index="0" unique_id=800258272]
+visible = false
+
+[node name="PointOfInterest" parent="Location" index="2" unique_id=2144080138]
 title = "Trader"
 
-[node name="Detection" type="RayCast3D" parent="."]
+[node name="Detection" type="RayCast3D" parent="." unique_id=1923791290]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89564, 0)
 target_position = Vector3(0, 0, -50)
 script = ExtResource("5_eaoej")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=266136752]
 
-[node name="EnemyModel" parent="." instance=ExtResource("6_c01de")]
+[node name="EnemyModel" parent="." unique_id=299130526 instance=ExtResource("6_c01de")]
 
 [connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]
 

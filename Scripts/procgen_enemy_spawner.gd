@@ -32,6 +32,7 @@ func _ready():
 		inst.destination.y = Globals.get_heightmap_position(inst.destination)
 		inst.look_at_position(inst.destination)
 		inst.is_starting_squad = true
+		inst.faction = get_parent().location_data.faction
 		enemies.append(inst)
 	for enemy in enemies:
 		if start_alert:

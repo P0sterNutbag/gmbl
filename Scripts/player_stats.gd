@@ -2,6 +2,11 @@ extends Node
 
 enum states {walk, pause, dead}
 var state = states.walk
+var faction: 
+	set(value):
+		faction = value
+		if Globals.player:
+			Globals.player.faction = value
 var hp: float = 3.5#:
 var current_hp: float:
 	get():
@@ -59,6 +64,7 @@ func _ready() -> void:
 	sleep = max_sleep
 	hunger = max_hunger
 	thirst = max_thirst
+	faction = FactionManager.factions.no_faction
 	#sensitivity_modifier = ConfigManager.file.get_value("settings", "mouse_sensitivity", sensitivity_modifier)
 
 

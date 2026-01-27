@@ -453,8 +453,11 @@ func _on_damaged(hit_position: Vector3, hit_direction: Vector3) -> void:
 	damage_direction = hit_direction
 	if PlayerStats.faction == faction:
 		PlayerStats.faction = FactionManager.factions.no_faction
+	var previous_relation = FactionManager.get_faction_relation(faction, PlayerStats.faction)
 	FactionManager.change_faction_ration(faction, PlayerStats.faction, -1)
-	get_tree().call_group("enemies", "set_detection_targets")
+	var current_relation = FactionManager.get_faction_relation(faction, PlayerStats.faction)
+	if current_relation < previous_relation:
+		get_tree().call_group("enemies", "set_detection_targets")
 	#if time_since_bleed < 0.1:
 		#return
 	#time_since_bleed = 0

@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var npcs: Array[SpawnChance]
-var starting_enemy_count := 7
+var starting_enemy_count := 0
 var has_spawned_enemies: bool
 
 

@@ -1,12 +1,13 @@
 extends Node3D
 
+@export var spawn_relative: bool = true
 @onready var player: Player = $"../Player"
 @onready var player_spawn: Node3D = $PlayerSpawn
 @onready var cover_spawn: Node3D = $CoverSpawn
 
 
 func _ready() -> void:
-	if Globals.overworld:
+	if Globals.overworld and spawn_relative:
 		var dis = player_spawn.position.z
 		player_spawn.position = -Globals.overworld.player_spawn_vector * dis
 		player_spawn.position_on_heightmap()

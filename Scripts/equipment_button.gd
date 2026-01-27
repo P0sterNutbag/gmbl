@@ -19,6 +19,8 @@ func _process(_delta: float) -> void:
 	if equipment:
 		equipment_name = equipment.title
 	text = original_text + equipment_name
+	if Input.is_action_just_pressed("drop_item") and has_focus():
+		pressed.emit()
 
 
 func _on_pressed() -> void:

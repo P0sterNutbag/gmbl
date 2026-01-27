@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dvwo5rcugthhe"]
+[gd_scene load_steps=17 format=3 uid="uid://dvwo5rcugthhe"]
 
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_osrsm"]
 [ext_resource type="Script" uid="uid://cggchd80ddnc1" path="res://Scripts/inventory_ui.gd" id="2_yyv02"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://byvpghxprlvv3" path="res://Art/Textures/arrow_small.png" id="6_2lqwa"]
 [ext_resource type="Script" uid="uid://c47qqa8oxrofj" path="res://Scripts/menu_button.gd" id="6_v8bd3"]
 [ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="8_d513x"]
+[ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="10_m06hg"]
+[ext_resource type="PackedScene" uid="uid://bj7gyfau2dx5w" path="res://Scenes/UI/menu_button.tscn" id="11_mnhd3"]
+[ext_resource type="Theme" uid="uid://bfjgfeibxk7i0" path="res://Art/Themes/slider.tres" id="11_or60b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d513x"]
 bg_color = Color(1, 1, 0, 1)
@@ -197,9 +200,75 @@ layout_mode = 2
 theme = ExtResource("8_d513x")
 text = "LMB: Trasnfer"
 
+[node name="DropMenu" type="Control" parent="."]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="DropMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -97.0
+offset_right = 200.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_osrsm")
+
+[node name="MarginContainer" type="MarginContainer" parent="DropMenu/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("10_m06hg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DropMenu/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(332, 0)
+layout_mode = 2
+theme = ExtResource("3_yyv02")
+text = "Drop Item?"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Control" type="Control" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("11_or60b")
+value = 100.0
+
+[node name="Label" type="Label" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_yyv02")
+text = "1"
+
+[node name="DropItem" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("11_mnhd3")]
+layout_mode = 2
+text = "Yes"
+
+[node name="DontDrop" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("11_mnhd3")]
+layout_mode = 2
+text = "No"
+
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Control3/LeftCategory" to="." method="_on_left_category_pressed"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/HBoxContainer/Control3/RightCategory" to="." method="_on_right_category_button_down"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Control3/RightCategory" to="." method="_on_right_category_pressed"]
 [connection signal="visibility_changed" from="MarginContainer/VBoxContainer/ScrollContainer/Items" to="." method="_on_v_box_container_visibility_changed"]
+[connection signal="visibility_changed" from="DropMenu" to="." method="_on_drop_menu_visibility_changed"]
+[connection signal="value_changed" from="DropMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="DropMenu/PanelContainer/MarginContainer/VBoxContainer/DropItem" to="." method="_on_drop_item_pressed"]
+[connection signal="pressed" from="DropMenu/PanelContainer/MarginContainer/VBoxContainer/DontDrop" to="." method="_on_dont_drop_pressed"]

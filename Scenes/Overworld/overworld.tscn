@@ -1,4 +1,4 @@
-[gd_scene load_steps=208 format=4 uid="uid://doydk513gm02l"]
+[gd_scene format=4 uid="uid://doydk513gm02l"]
 
 [ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_6y65m"]
 [ext_resource type="PackedScene" uid="uid://dyumojcinahde" path="res://Scenes/outline_fog_shader.tscn" id="3_2uctf"]
@@ -81,6 +81,7 @@
 [ext_resource type="Script" uid="uid://px5dr31pd885" path="res://Scripts/dialogue_loop.gd" id="72_6l6oi"]
 [ext_resource type="Texture2D" uid="uid://whgiy4tx5l5g" path="res://Art/Textures/npc brown jacket.png" id="74_rsj15"]
 [ext_resource type="PackedScene" uid="uid://csjsfdmnghtqx" path="res://Scenes/Overworld/Locations/scrapyard.tscn" id="80_nggm6"]
+[ext_resource type="PackedScene" uid="uid://bhgbffwr1sop1" path="res://Scenes/Overworld/Locations/shooting_range.tscn" id="82_jdigv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jdigv"]
 render_priority = 0
@@ -132,12 +133,6 @@ metadata/_custom_type_script = "uid://3uypo1jqxswc"
 script = ExtResource("27_4xsnl")
 object_to_spawn = ExtResource("28_72l67")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_nggm6"]
-radius = 1.0
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_v8snn"]
-radius = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jdigv"]
 radius = 1.0
@@ -212,6 +207,12 @@ radius = 1.0
 radius = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lgnbj"]
+radius = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rp2u8"]
+radius = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_aj0wn"]
 radius = 1.0
 
 [sub_resource type="Resource" id="Resource_6lldf"]
@@ -579,7 +580,7 @@ random_quest = SubResource("Resource_u0s17")
 minimum_quests = 3
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
-[sub_resource type="Resource" id="Resource_t56bl"]
+[sub_resource type="Resource" id="Resource_3le6t"]
 resource_local_to_scene = true
 script = ExtResource("32_2uctf")
 title = "Small Town"
@@ -792,21 +793,23 @@ _surfaces = [{
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_2uctf"]
 data = PackedVector3Array(-70.7107, -10, -70.7107, -98.6691, -10, 1.1895, -70.8443, -10, -65.985695, -70.7107, -10, -70.7107, -100, -10, 0, -98.6691, -10, 1.1895, -70.7107, -10, -70.7107, -70.7107, 10, -70.7107, -100, -10, 0, -70.7107, -10, -70.7107, -70.8443, -10, -65.985695, 0, -10, -100, 0, -10, -100, -70.8443, -10, -65.985695, -3.6690998, -10, -93.8105, -70.7107, -10, -70.7107, 0, -10, -100, 0, 10, -100, -100, -10, 0, -70.8443, -10, 68.3646, -98.6691, -10, 1.1895, -100, -10, 0, -70.7107, -10, 70.7107, -70.8443, -10, 68.3646, -100, -10, 0, -100, 10, 0, -70.7107, -10, 70.7107, -70.7107, -10, 70.7107, -3.6690998, -10, 96.1895, -70.8443, -10, 68.3646, -70.7107, -10, 70.7107, 0, -10, 100, -3.6690998, -10, 96.1895, -70.7107, -10, 70.7107, -70.7107, 10, 70.7107, 0, -10, 100, -100, -10, 0, -70.7107, 10, -70.7107, -100, 10, 0, -70.7107, 10, -70.7107, -70.8443, 10, -65.985695, -100, 10, 0, -100, 10, 0, -70.8443, 10, -65.985695, -98.6691, 10, 1.1895, -70.7107, -10, -70.7107, 0, 10, -100, -70.7107, 10, -70.7107, -70.7107, 10, -70.7107, -3.6690998, 10, -93.8105, -70.8443, 10, -65.985695, -70.7107, 10, -70.7107, 0, 10, -100, -3.6690998, 10, -93.8105, -70.7107, -10, 70.7107, -100, 10, 0, -70.7107, 10, 70.7107, -100, 10, 0, -98.6691, 10, 1.1895, -70.7107, 10, 70.7107, -70.7107, 10, 70.7107, -98.6691, 10, 1.1895, -70.8443, 10, 68.3646, 0, -10, 100, -70.7107, 10, 70.7107, 0, 10, 100, -70.7107, 10, 70.7107, -70.8443, 10, 68.3646, 0, 10, 100, 0, 10, 100, -70.8443, 10, 68.3646, -3.6690998, 10, 96.1895, 0, -10, -100, -3.6690998, -10, -93.8105, 70.7107, -10, -70.7107, 70.7107, -10, -70.7107, -3.6690998, -10, -93.8105, 63.505997, -10, -65.985695, 0, -10, -100, 70.7107, -10, -70.7107, 70.7107, 10, -70.7107, 70.7107, -10, -70.7107, 63.505997, -10, -65.985695, 100, -10, 0, 100, -10, 0, 63.505997, -10, -65.985695, 91.330894, -10, 1.1895, 70.7107, -10, -70.7107, 100, -10, 0, 100, 10, 0, 0, -10, 100, 63.505997, -10, 68.3646, -3.6690998, -10, 96.1895, 0, -10, 100, 70.7107, -10, 70.7107, 63.505997, -10, 68.3646, 0, -10, 100, 0, 10, 100, 70.7107, -10, 70.7107, 100, -10, 0, 91.330894, -10, 1.1895, 70.7107, -10, 70.7107, 70.7107, -10, 70.7107, 91.330894, -10, 1.1895, 63.505997, -10, 68.3646, 100, -10, 0, 70.7107, -10, 70.7107, 70.7107, 10, 70.7107, 0, -10, -100, 70.7107, 10, -70.7107, 0, 10, -100, 0, 10, -100, 63.505997, 10, -65.985695, -3.6690998, 10, -93.8105, 0, 10, -100, 70.7107, 10, -70.7107, 63.505997, 10, -65.985695, 70.7107, -10, -70.7107, 100, 10, 0, 70.7107, 10, -70.7107, 70.7107, 10, -70.7107, 91.330894, 10, 1.1895, 63.505997, 10, -65.985695, 70.7107, 10, -70.7107, 100, 10, 0, 91.330894, 10, 1.1895, 0, 10, 100, 70.7107, 10, 70.7107, 70.7107, -10, 70.7107, 0, 10, 100, -3.6690998, 10, 96.1895, 70.7107, 10, 70.7107, 70.7107, 10, 70.7107, -3.6690998, 10, 96.1895, 63.505997, 10, 68.3646, 100, -10, 0, 70.7107, 10, 70.7107, 100, 10, 0, 100, 10, 0, 63.505997, 10, 68.3646, 91.330894, 10, 1.1895, 100, 10, 0, 70.7107, 10, 70.7107, 63.505997, 10, 68.3646, -98.6691, -10, 1.1895, -70.8443, 10, -65.985695, -70.8443, -10, -65.985695, -70.8443, -10, -65.985695, -3.6690998, 10, -93.8105, -3.6690998, -10, -93.8105, -70.8443, -10, 68.3646, -98.6691, 10, 1.1895, -98.6691, -10, 1.1895, -3.6690998, -10, 96.1895, -70.8443, 10, 68.3646, -70.8443, -10, 68.3646, -70.8443, 10, -65.985695, -98.6691, -10, 1.1895, -98.6691, 10, 1.1895, -3.6690998, 10, -93.8105, -70.8443, -10, -65.985695, -70.8443, 10, -65.985695, -70.8443, -10, 68.3646, -70.8443, 10, 68.3646, -98.6691, 10, 1.1895, -3.6690998, -10, 96.1895, -3.6690998, 10, 96.1895, -70.8443, 10, 68.3646, -3.6690998, -10, -93.8105, 63.505997, 10, -65.985695, 63.505997, -10, -65.985695, 63.505997, -10, -65.985695, 91.330894, 10, 1.1895, 91.330894, -10, 1.1895, 63.505997, -10, 68.3646, -3.6690998, 10, 96.1895, -3.6690998, -10, 96.1895, 91.330894, -10, 1.1895, 63.505997, 10, 68.3646, 63.505997, -10, 68.3646, 63.505997, 10, -65.985695, -3.6690998, -10, -93.8105, -3.6690998, 10, -93.8105, 91.330894, 10, 1.1895, 63.505997, -10, -65.985695, 63.505997, 10, -65.985695, 63.505997, -10, 68.3646, 63.505997, 10, 68.3646, -3.6690998, 10, 96.1895, 91.330894, -10, 1.1895, 91.330894, 10, 1.1895, 63.505997, 10, 68.3646)
 
-[node name="Overworld" type="Node3D"]
+[node name="Overworld" type="Node3D" unique_id=1106168526]
 script = ExtResource("1_6y65m")
 
-[node name="WorldEnvironment" parent="." instance=ExtResource("6_c84f5")]
+[node name="WorldEnvironment" parent="." unique_id=920486063 instance=ExtResource("6_c84f5")]
 
 [node name="DirectionalLight3D" parent="WorldEnvironment" index="0"]
 transform = Transform3D(1, 0, 0, 0, -0.53365904, 0.84569997, 0, -0.84569997, -0.53365904, 0, 0, 0)
 
-[node name="Shader" parent="." instance=ExtResource("3_2uctf")]
+[node name="Shader" parent="." unique_id=1454895553 instance=ExtResource("3_2uctf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.492066, 0, 0)
 mesh = SubResource("QuadMesh_ccrpr")
 
-[node name="CanvasLayer" parent="." instance=ExtResource("3_4xsnl")]
+[node name="CanvasLayer" parent="." unique_id=670440090 instance=ExtResource("3_4xsnl")]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=557798602]
+process_mode = 4
+visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -818,23 +821,23 @@ grow_horizontal = 0
 theme = ExtResource("5_7t5fg")
 script = ExtResource("6_gqxbg")
 
-[node name="Label" parent="CanvasLayer/VBoxContainer" instance=ExtResource("6_jhm1l")]
+[node name="Label" parent="CanvasLayer/VBoxContainer" unique_id=1729099577 instance=ExtResource("6_jhm1l")]
 layout_mode = 2
 text = "Press WASD to move"
 
-[node name="Label2" parent="CanvasLayer/VBoxContainer" instance=ExtResource("6_jhm1l")]
+[node name="Label2" parent="CanvasLayer/VBoxContainer" unique_id=363595722 instance=ExtResource("6_jhm1l")]
 layout_mode = 2
 text = "Press Tab to open Inventory"
 input_action = "inventory"
 
-[node name="Label3" parent="CanvasLayer/VBoxContainer" instance=ExtResource("6_jhm1l")]
+[node name="Label3" parent="CanvasLayer/VBoxContainer" unique_id=494299698 instance=ExtResource("6_jhm1l")]
 layout_mode = 2
 text = "Press J to see current Jobs"
 input_action = "journal"
 
-[node name="CanvasLayer2" parent="." instance=ExtResource("5_gqxbg")]
+[node name="CanvasLayer2" parent="." unique_id=1471028037 instance=ExtResource("5_gqxbg")]
 
-[node name="Terrain" type="Node3D" parent="."]
+[node name="Terrain" type="Node3D" parent="." unique_id=796832909]
 script = ExtResource("13_8owou")
 _terrain_data = ExtResource("6_0e3xm")
 chunk_size = 32
@@ -853,7 +856,7 @@ shader_params/u_triplanar = null
 shader_params/u_tile_reduction = null
 metadata/_custom_type_script = "uid://bokxkydc5jmf"
 
-[node name="HTerrainDetailLayer" type="Node3D" parent="Terrain"]
+[node name="HTerrainDetailLayer" type="Node3D" parent="Terrain" unique_id=644578798]
 script = ExtResource("28_8cq34")
 texture = ExtResource("29_i1n2v")
 density = 0.0
@@ -866,357 +869,360 @@ shader_params/u_instance_scale = Vector3(0.5, 0.5, 0.5)
 shader_params/u_roughness = null
 metadata/_editor_icon = ExtResource("30_hmgos")
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=721806720]
 navigation_mesh = SubResource("NavigationMesh_phy3g")
 metadata/_edit_lock_ = true
 
-[node name="Terrain_FullMesh2" type="MeshInstance3D" parent="NavigationRegion3D"]
+[node name="Terrain_FullMesh2" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=290178188]
 visible = false
 mesh = SubResource("ArrayMesh_2gpn5")
 skeleton = NodePath("../..")
 
-[node name="NpcController" type="Node3D" parent="." groups=["persist"]]
+[node name="NpcController" type="Node3D" parent="." unique_id=728501775 groups=["persist"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 217.901, 0, 261.498)
 script = ExtResource("26_5q0os")
 npcs = Array[ExtResource("27_4xsnl")]([SubResource("Resource_adm71"), SubResource("Resource_8yg51")])
 
-[node name="Timer" type="Timer" parent="NpcController"]
+[node name="Timer" type="Timer" parent="NpcController" unique_id=801200554]
 autostart = true
 script = ExtResource("29_72l67")
 min_wait_time = 5.0
 max_wait_time = 20.0
 
-[node name="Node3D" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D" type="Node3D" parent="NpcController" unique_id=1989234194 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.294998, 0.3486, 42.83664)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@27978" type="StaticBody3D" parent="NpcController/Node3D"]
+[node name="@StaticBody3D@21446" type="StaticBody3D" parent="NpcController/Node3D" unique_id=186180392]
 
-[node name="@CollisionShape3D@27979" type="CollisionShape3D" parent="NpcController/Node3D/@StaticBody3D@27978"]
-shape = SubResource("SphereShape3D_nggm6")
+[node name="@CollisionShape3D@21447" type="CollisionShape3D" parent="NpcController/Node3D/@StaticBody3D@21446" unique_id=1299137179]
+shape = SubResource("SphereShape3D_jdigv")
 
-[node name="Node3D2" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D2" type="Node3D" parent="NpcController" unique_id=600874684 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.615204, 0.3161412, 48.90915)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@27980" type="StaticBody3D" parent="NpcController/Node3D2"]
+[node name="@StaticBody3D@21448" type="StaticBody3D" parent="NpcController/Node3D2" unique_id=1056578616]
 
-[node name="@CollisionShape3D@27981" type="CollisionShape3D" parent="NpcController/Node3D2/@StaticBody3D@27980"]
-shape = SubResource("SphereShape3D_v8snn")
+[node name="@CollisionShape3D@21449" type="CollisionShape3D" parent="NpcController/Node3D2/@StaticBody3D@21448" unique_id=6441909]
+shape = SubResource("SphereShape3D_ccrpr")
 
-[node name="Node3D3" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D3" type="Node3D" parent="NpcController" unique_id=1402283389 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.115204, 1.0607092, 57.40915)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@27982" type="StaticBody3D" parent="NpcController/Node3D3"]
+[node name="@StaticBody3D@21450" type="StaticBody3D" parent="NpcController/Node3D3" unique_id=1076645895]
 
-[node name="@CollisionShape3D@27983" type="CollisionShape3D" parent="NpcController/Node3D3/@StaticBody3D@27982"]
-shape = SubResource("SphereShape3D_jdigv")
+[node name="@CollisionShape3D@21451" type="CollisionShape3D" parent="NpcController/Node3D3/@StaticBody3D@21450" unique_id=1828489829]
+shape = SubResource("SphereShape3D_rkewd")
 
-[node name="Node3D4" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D4" type="Node3D" parent="NpcController" unique_id=1976130685 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.115204, 1.4690987, 51.90915)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@27984" type="StaticBody3D" parent="NpcController/Node3D4"]
+[node name="@StaticBody3D@21452" type="StaticBody3D" parent="NpcController/Node3D4" unique_id=252939467]
 
-[node name="@CollisionShape3D@27985" type="CollisionShape3D" parent="NpcController/Node3D4/@StaticBody3D@27984"]
-shape = SubResource("SphereShape3D_ccrpr")
+[node name="@CollisionShape3D@21453" type="CollisionShape3D" parent="NpcController/Node3D4/@StaticBody3D@21452" unique_id=1532739091]
+shape = SubResource("SphereShape3D_ri526")
 
-[node name="Node3D5" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D5" type="Node3D" parent="NpcController" unique_id=1744012613 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.115204, 1.1865778, 40.90915)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@27986" type="StaticBody3D" parent="NpcController/Node3D5"]
+[node name="@StaticBody3D@21454" type="StaticBody3D" parent="NpcController/Node3D5" unique_id=947291872]
 
-[node name="@CollisionShape3D@27987" type="CollisionShape3D" parent="NpcController/Node3D5/@StaticBody3D@27986"]
-shape = SubResource("SphereShape3D_rkewd")
+[node name="@CollisionShape3D@21455" type="CollisionShape3D" parent="NpcController/Node3D5/@StaticBody3D@21454" unique_id=1864110675]
+shape = SubResource("SphereShape3D_g1wl1")
 
-[node name="Node3D6" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D6" type="Node3D" parent="NpcController" unique_id=1695242915 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.615204, 0.5389546, 16.90915)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@27988" type="StaticBody3D" parent="NpcController/Node3D6"]
+[node name="@StaticBody3D@21456" type="StaticBody3D" parent="NpcController/Node3D6" unique_id=2042092212]
 
-[node name="@CollisionShape3D@27989" type="CollisionShape3D" parent="NpcController/Node3D6/@StaticBody3D@27988"]
-shape = SubResource("SphereShape3D_ri526")
+[node name="@CollisionShape3D@21457" type="CollisionShape3D" parent="NpcController/Node3D6/@StaticBody3D@21456" unique_id=1109218630]
+shape = SubResource("SphereShape3D_tqcp0")
 
-[node name="Node3D7" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D7" type="Node3D" parent="NpcController" unique_id=57586904 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.615204, 1.6439178, 11.409149)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@27990" type="StaticBody3D" parent="NpcController/Node3D7"]
+[node name="@StaticBody3D@21458" type="StaticBody3D" parent="NpcController/Node3D7" unique_id=1990204113]
 
-[node name="@CollisionShape3D@27991" type="CollisionShape3D" parent="NpcController/Node3D7/@StaticBody3D@27990"]
-shape = SubResource("SphereShape3D_g1wl1")
+[node name="@CollisionShape3D@21459" type="CollisionShape3D" parent="NpcController/Node3D7/@StaticBody3D@21458" unique_id=1321159986]
+shape = SubResource("SphereShape3D_nmfa1")
 
-[node name="Node3D8" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D8" type="Node3D" parent="NpcController" unique_id=1223507548 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.115204, 0.7724389, -1.5908508)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@27992" type="StaticBody3D" parent="NpcController/Node3D8"]
+[node name="@StaticBody3D@21460" type="StaticBody3D" parent="NpcController/Node3D8" unique_id=1001851259]
 
-[node name="@CollisionShape3D@27993" type="CollisionShape3D" parent="NpcController/Node3D8/@StaticBody3D@27992"]
-shape = SubResource("SphereShape3D_tqcp0")
+[node name="@CollisionShape3D@21461" type="CollisionShape3D" parent="NpcController/Node3D8/@StaticBody3D@21460" unique_id=626782975]
+shape = SubResource("SphereShape3D_2063u")
 
-[node name="Node3D9" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D9" type="Node3D" parent="NpcController" unique_id=343292455 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.615204, 0.641352, 11.409149)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@27994" type="StaticBody3D" parent="NpcController/Node3D9"]
+[node name="@StaticBody3D@21462" type="StaticBody3D" parent="NpcController/Node3D9" unique_id=1312767182]
 
-[node name="@CollisionShape3D@27995" type="CollisionShape3D" parent="NpcController/Node3D9/@StaticBody3D@27994"]
-shape = SubResource("SphereShape3D_nmfa1")
+[node name="@CollisionShape3D@21463" type="CollisionShape3D" parent="NpcController/Node3D9/@StaticBody3D@21462" unique_id=2073266374]
+shape = SubResource("SphereShape3D_p80om")
 
-[node name="Node3D10" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D10" type="Node3D" parent="NpcController" unique_id=1689193358 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80.115204, 0.7170991, 26.40915)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@27996" type="StaticBody3D" parent="NpcController/Node3D10"]
+[node name="@StaticBody3D@21464" type="StaticBody3D" parent="NpcController/Node3D10" unique_id=393911310]
 
-[node name="@CollisionShape3D@27997" type="CollisionShape3D" parent="NpcController/Node3D10/@StaticBody3D@27996"]
-shape = SubResource("SphereShape3D_2063u")
+[node name="@CollisionShape3D@21465" type="CollisionShape3D" parent="NpcController/Node3D10/@StaticBody3D@21464" unique_id=1893637404]
+shape = SubResource("SphereShape3D_n62ny")
 
-[node name="Node3D11" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D11" type="Node3D" parent="NpcController" unique_id=279073922 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.115204, 0.67576355, -29.09085)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@27998" type="StaticBody3D" parent="NpcController/Node3D11"]
+[node name="@StaticBody3D@21466" type="StaticBody3D" parent="NpcController/Node3D11" unique_id=2138355733]
 
-[node name="@CollisionShape3D@27999" type="CollisionShape3D" parent="NpcController/Node3D11/@StaticBody3D@27998"]
-shape = SubResource("SphereShape3D_p80om")
+[node name="@CollisionShape3D@21467" type="CollisionShape3D" parent="NpcController/Node3D11/@StaticBody3D@21466" unique_id=854618621]
+shape = SubResource("SphereShape3D_xkckx")
 
-[node name="Node3D12" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D12" type="Node3D" parent="NpcController" unique_id=421114996 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.115204, 0.56309634, -36.59085)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@28000" type="StaticBody3D" parent="NpcController/Node3D12"]
+[node name="@StaticBody3D@21468" type="StaticBody3D" parent="NpcController/Node3D12" unique_id=642840896]
 
-[node name="@CollisionShape3D@28001" type="CollisionShape3D" parent="NpcController/Node3D12/@StaticBody3D@28000"]
-shape = SubResource("SphereShape3D_n62ny")
+[node name="@CollisionShape3D@21469" type="CollisionShape3D" parent="NpcController/Node3D12/@StaticBody3D@21468" unique_id=1405791709]
+shape = SubResource("SphereShape3D_ku0d1")
 
-[node name="Node3D13" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D13" type="Node3D" parent="NpcController" unique_id=1788989066 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.615204, 0.93624246, -62.59085)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@28002" type="StaticBody3D" parent="NpcController/Node3D13"]
+[node name="@StaticBody3D@21470" type="StaticBody3D" parent="NpcController/Node3D13" unique_id=915859735]
 
-[node name="@CollisionShape3D@28003" type="CollisionShape3D" parent="NpcController/Node3D13/@StaticBody3D@28002"]
-shape = SubResource("SphereShape3D_xkckx")
+[node name="@CollisionShape3D@21471" type="CollisionShape3D" parent="NpcController/Node3D13/@StaticBody3D@21470" unique_id=236355444]
+shape = SubResource("SphereShape3D_jby7l")
 
-[node name="Node3D14" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D14" type="Node3D" parent="NpcController" unique_id=1104872178 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.884796, 0.8170924, -68.59085)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@28004" type="StaticBody3D" parent="NpcController/Node3D14"]
+[node name="@StaticBody3D@21472" type="StaticBody3D" parent="NpcController/Node3D14" unique_id=2043591923]
 
-[node name="@CollisionShape3D@28005" type="CollisionShape3D" parent="NpcController/Node3D14/@StaticBody3D@28004"]
-shape = SubResource("SphereShape3D_ku0d1")
+[node name="@CollisionShape3D@21473" type="CollisionShape3D" parent="NpcController/Node3D14/@StaticBody3D@21472" unique_id=505061698]
+shape = SubResource("SphereShape3D_t56bl")
 
-[node name="Node3D15" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D15" type="Node3D" parent="NpcController" unique_id=2064898781 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.005493, 0.11477071, -39.52365)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@28006" type="StaticBody3D" parent="NpcController/Node3D15"]
+[node name="@StaticBody3D@21474" type="StaticBody3D" parent="NpcController/Node3D15" unique_id=2136619146]
 
-[node name="@CollisionShape3D@28007" type="CollisionShape3D" parent="NpcController/Node3D15/@StaticBody3D@28006"]
-shape = SubResource("SphereShape3D_jby7l")
+[node name="@CollisionShape3D@21475" type="CollisionShape3D" parent="NpcController/Node3D15/@StaticBody3D@21474" unique_id=1933517475]
+shape = SubResource("SphereShape3D_me12r")
 
-[node name="Node3D16" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D16" type="Node3D" parent="NpcController" unique_id=369052976 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.661331, 0.15853381, -42.493958)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@28008" type="StaticBody3D" parent="NpcController/Node3D16"]
+[node name="@StaticBody3D@21476" type="StaticBody3D" parent="NpcController/Node3D16" unique_id=2039880484]
 
-[node name="@CollisionShape3D@28009" type="CollisionShape3D" parent="NpcController/Node3D16/@StaticBody3D@28008"]
-shape = SubResource("SphereShape3D_t56bl")
+[node name="@CollisionShape3D@21477" type="CollisionShape3D" parent="NpcController/Node3D16/@StaticBody3D@21476" unique_id=35597929]
+shape = SubResource("SphereShape3D_bqxwu")
 
-[node name="Node3D17" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D17" type="Node3D" parent="NpcController" unique_id=1544818305 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5101776, 0.30579734, -33.385147)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@28010" type="StaticBody3D" parent="NpcController/Node3D17"]
+[node name="@StaticBody3D@21478" type="StaticBody3D" parent="NpcController/Node3D17" unique_id=1113081049]
 
-[node name="@CollisionShape3D@28011" type="CollisionShape3D" parent="NpcController/Node3D17/@StaticBody3D@28010"]
-shape = SubResource("SphereShape3D_me12r")
+[node name="@CollisionShape3D@21479" type="CollisionShape3D" parent="NpcController/Node3D17/@StaticBody3D@21478" unique_id=1897314879]
+shape = SubResource("SphereShape3D_cvr5w")
 
-[node name="Node3D18" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D18" type="Node3D" parent="NpcController" unique_id=1741674091 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.010178, 0.12758017, 32.11487)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@28012" type="StaticBody3D" parent="NpcController/Node3D18"]
+[node name="@StaticBody3D@21480" type="StaticBody3D" parent="NpcController/Node3D18" unique_id=258758786]
 
-[node name="@CollisionShape3D@28013" type="CollisionShape3D" parent="NpcController/Node3D18/@StaticBody3D@28012"]
-shape = SubResource("SphereShape3D_bqxwu")
+[node name="@CollisionShape3D@21481" type="CollisionShape3D" parent="NpcController/Node3D18/@StaticBody3D@21480" unique_id=142542298]
+shape = SubResource("SphereShape3D_4o6vd")
 
-[node name="Node3D19" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D19" type="Node3D" parent="NpcController" unique_id=355168820 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0101776, 0.3229996, 50.11487)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@28014" type="StaticBody3D" parent="NpcController/Node3D19"]
+[node name="@StaticBody3D@21482" type="StaticBody3D" parent="NpcController/Node3D19" unique_id=1147097843]
 
-[node name="@CollisionShape3D@28015" type="CollisionShape3D" parent="NpcController/Node3D19/@StaticBody3D@28014"]
-shape = SubResource("SphereShape3D_cvr5w")
+[node name="@CollisionShape3D@21483" type="CollisionShape3D" parent="NpcController/Node3D19/@StaticBody3D@21482" unique_id=1958597620]
+shape = SubResource("SphereShape3D_5yx2b")
 
-[node name="Node3D20" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D20" type="Node3D" parent="NpcController" unique_id=2076414871 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5101776, 1.2046307, 65.61487)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@28016" type="StaticBody3D" parent="NpcController/Node3D20"]
+[node name="@StaticBody3D@21484" type="StaticBody3D" parent="NpcController/Node3D20" unique_id=871860660]
 
-[node name="@CollisionShape3D@28017" type="CollisionShape3D" parent="NpcController/Node3D20/@StaticBody3D@28016"]
-shape = SubResource("SphereShape3D_4o6vd")
+[node name="@CollisionShape3D@21485" type="CollisionShape3D" parent="NpcController/Node3D20/@StaticBody3D@21484" unique_id=1819658337]
+shape = SubResource("SphereShape3D_ksfoy")
 
-[node name="Node3D21" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D21" type="Node3D" parent="NpcController" unique_id=1645916928 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0101776, 1.0714946, 80.61487)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@28018" type="StaticBody3D" parent="NpcController/Node3D21"]
+[node name="@StaticBody3D@21486" type="StaticBody3D" parent="NpcController/Node3D21" unique_id=641817956]
 
-[node name="@CollisionShape3D@28019" type="CollisionShape3D" parent="NpcController/Node3D21/@StaticBody3D@28018"]
-shape = SubResource("SphereShape3D_5yx2b")
+[node name="@CollisionShape3D@21487" type="CollisionShape3D" parent="NpcController/Node3D21/@StaticBody3D@21486" unique_id=246932162]
+shape = SubResource("SphereShape3D_6l6oi")
 
-[node name="Node3D22" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D22" type="Node3D" parent="NpcController" unique_id=533117896 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.510193, 0.034770753, 76.61487)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@28020" type="StaticBody3D" parent="NpcController/Node3D22"]
+[node name="@StaticBody3D@21488" type="StaticBody3D" parent="NpcController/Node3D22" unique_id=1113850411]
 
-[node name="@CollisionShape3D@28021" type="CollisionShape3D" parent="NpcController/Node3D22/@StaticBody3D@28020"]
-shape = SubResource("SphereShape3D_ksfoy")
+[node name="@CollisionShape3D@21489" type="CollisionShape3D" parent="NpcController/Node3D22/@StaticBody3D@21488" unique_id=1708245899]
+shape = SubResource("SphereShape3D_ptrkr")
 
-[node name="Node3D23" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D23" type="Node3D" parent="NpcController" unique_id=1782506883 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.51019, 0.3786048, 44.11487)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@28022" type="StaticBody3D" parent="NpcController/Node3D23"]
+[node name="@StaticBody3D@21490" type="StaticBody3D" parent="NpcController/Node3D23" unique_id=1529556505]
 
-[node name="@CollisionShape3D@28023" type="CollisionShape3D" parent="NpcController/Node3D23/@StaticBody3D@28022"]
-shape = SubResource("SphereShape3D_6l6oi")
+[node name="@CollisionShape3D@21491" type="CollisionShape3D" parent="NpcController/Node3D23/@StaticBody3D@21490" unique_id=172608173]
+shape = SubResource("SphereShape3D_rsj15")
 
-[node name="Node3D24" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D24" type="Node3D" parent="NpcController" unique_id=58586930 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.01019, 0.76658887, 26.114868)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@28024" type="StaticBody3D" parent="NpcController/Node3D24"]
+[node name="@StaticBody3D@21492" type="StaticBody3D" parent="NpcController/Node3D24" unique_id=18765752]
 
-[node name="@CollisionShape3D@28025" type="CollisionShape3D" parent="NpcController/Node3D24/@StaticBody3D@28024"]
-shape = SubResource("SphereShape3D_ptrkr")
+[node name="@CollisionShape3D@21493" type="CollisionShape3D" parent="NpcController/Node3D24/@StaticBody3D@21492" unique_id=109210101]
+shape = SubResource("SphereShape3D_3k4bo")
 
-[node name="Node3D25" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D25" type="Node3D" parent="NpcController" unique_id=1473923857 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.010193, 1.3918898, -7.385147)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@28026" type="StaticBody3D" parent="NpcController/Node3D25"]
+[node name="@StaticBody3D@21494" type="StaticBody3D" parent="NpcController/Node3D25" unique_id=2119466157]
 
-[node name="@CollisionShape3D@28027" type="CollisionShape3D" parent="NpcController/Node3D25/@StaticBody3D@28026"]
-shape = SubResource("SphereShape3D_rsj15")
+[node name="@CollisionShape3D@21495" type="CollisionShape3D" parent="NpcController/Node3D25/@StaticBody3D@21494" unique_id=1892115182]
+shape = SubResource("SphereShape3D_lgnbj")
 
-[node name="Node3D26" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D26" type="Node3D" parent="NpcController" unique_id=1721027451 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.802414, 0.9873436, -23.932816)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@28028" type="StaticBody3D" parent="NpcController/Node3D26"]
+[node name="@StaticBody3D@21496" type="StaticBody3D" parent="NpcController/Node3D26" unique_id=1412052637]
 
-[node name="@CollisionShape3D@28029" type="CollisionShape3D" parent="NpcController/Node3D26/@StaticBody3D@28028"]
-shape = SubResource("SphereShape3D_3k4bo")
+[node name="@CollisionShape3D@21497" type="CollisionShape3D" parent="NpcController/Node3D26/@StaticBody3D@21496" unique_id=803518224]
+shape = SubResource("SphereShape3D_rp2u8")
 
-[node name="Node3D27" type="Node3D" parent="NpcController" groups=["spawn points"]]
+[node name="Node3D27" type="Node3D" parent="NpcController" unique_id=914838487 groups=["spawn points"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.35681, 0.63812095, -36.38153)
 script = ExtResource("23_nggm6")
 metadata/_edit_group_ = true
 
-[node name="@StaticBody3D@28030" type="StaticBody3D" parent="NpcController/Node3D27"]
+[node name="@StaticBody3D@21498" type="StaticBody3D" parent="NpcController/Node3D27" unique_id=1064587161]
 
-[node name="@CollisionShape3D@28031" type="CollisionShape3D" parent="NpcController/Node3D27/@StaticBody3D@28030"]
-shape = SubResource("SphereShape3D_lgnbj")
+[node name="@CollisionShape3D@21499" type="CollisionShape3D" parent="NpcController/Node3D27/@StaticBody3D@21498" unique_id=346615564]
+shape = SubResource("SphereShape3D_aj0wn")
 
-[node name="Scatterer" type="Node3D" parent="." node_paths=PackedStringArray("terrain")]
+[node name="Scatterer" type="Node3D" parent="." unique_id=1103219093 node_paths=PackedStringArray("terrain")]
 script = ExtResource("42_1k2ge")
 count = 5000
 area_size = Vector2(1000, 1000)
 terrain = NodePath("../Terrain")
 
-[node name="SnapToTerrain" type="Node3D" parent="." node_paths=PackedStringArray("objects_to_snap")]
+[node name="SnapToTerrain" type="Node3D" parent="." unique_id=1726042150 node_paths=PackedStringArray("objects_to_snap")]
 script = ExtResource("27_oapb8")
 objects_to_snap = [NodePath("../NpcController/Node3D"), NodePath("../NpcController/Node3D2"), NodePath("../NpcController/Node3D3"), NodePath("../NpcController/Node3D4"), NodePath("../NpcController/Node3D5"), NodePath("../NpcController/Node3D6"), NodePath("../NpcController/Node3D7"), NodePath("../NpcController/Node3D8"), NodePath("../NpcController/Node3D9"), NodePath("../NpcController/Node3D10"), NodePath("../NpcController/Node3D11"), NodePath("../NpcController/Node3D12"), NodePath("../NpcController/Node3D13"), NodePath("../NpcController/Node3D14"), NodePath("../NpcController/Node3D15"), NodePath("../NpcController/Node3D16"), NodePath("../NpcController/Node3D17"), NodePath("../NpcController/Node3D18"), NodePath("../NpcController/Node3D19"), NodePath("../NpcController/Node3D20"), NodePath("../NpcController/Node3D21"), NodePath("../NpcController/Node3D22"), NodePath("../NpcController/Node3D23"), NodePath("../NpcController/Node3D24"), NodePath("../NpcController/Node3D25"), NodePath("../NpcController/Node3D26"), NodePath("../NpcController/Node3D27")]
 
-[node name="Player" parent="." instance=ExtResource("3_c84f5")]
+[node name="Player" parent="." unique_id=478361653 instance=ExtResource("3_c84f5")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 218.73747, 0.13828449, 261.1541)
 
-[node name="Location" parent="." instance=ExtResource("14_vrhs1")]
+[node name="Location" parent="." unique_id=1355807378 instance=ExtResource("14_vrhs1")]
 transform = Transform3D(-0.89596, 0, -0.44413477, 0, 1, 0, 0.44413477, 0, -0.89596, 199.43953, 0.2252055, 218.45338)
 
-[node name="Location2" parent="." instance=ExtResource("15_857re")]
+[node name="Location2" parent="." unique_id=819969554 instance=ExtResource("15_857re")]
 transform = Transform3D(-0.36455172, 0, -0.93118316, 0, 1, 0, 0.93118316, 0, -0.36455172, 278.45483, 1.5315418, 245.33095)
 
-[node name="Location3" parent="." instance=ExtResource("16_swbn6")]
+[node name="Location3" parent="." unique_id=311193564 instance=ExtResource("16_swbn6")]
 transform = Transform3D(0.5219926, 0, -0.8529501, 0, 1, 0, 0.8529501, 0, 0.5219926, 141.06975, 0.13133597, 269.45157)
 
-[node name="Location4" parent="." instance=ExtResource("17_7fbp6")]
+[node name="Location4" parent="." unique_id=2040333333 instance=ExtResource("17_7fbp6")]
 transform = Transform3D(-0.5328762, 0, -0.84619325, 0, 1, 0, 0.84619325, 0, -0.5328762, 235.39699, 0.97760963, 280.67645)
 
-[node name="Location5" parent="." instance=ExtResource("18_oedh7")]
+[node name="Location5" parent="." unique_id=73567733 instance=ExtResource("18_oedh7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 191.0236, 1.7648737, 314.45203)
 
-[node name="Location6" parent="." instance=ExtResource("19_5q0os")]
+[node name="Location6" parent="." unique_id=1920182238 instance=ExtResource("19_5q0os")]
 transform = Transform3D(0.0452235, 0, 0.9989769, 0, 1, 0, -0.9989769, 0, 0.0452235, 219.46066, 0.32858157, 273.61743)
-town = SubResource("Resource_t56bl")
+town = SubResource("Resource_3le6t")
 
-[node name="Location7" parent="." instance=ExtResource("80_nggm6")]
+[node name="Location7" parent="." unique_id=1638857313 instance=ExtResource("80_nggm6")]
 transform = Transform3D(-0.99983275, 0, 0.018290073, 0, 1, 0, -0.018290073, 0, -0.99983275, 244.15323, 1.366055, 315.90103)
 shop = SubResource("Resource_ht31n")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+[node name="ShootingRange" parent="." unique_id=1679221925 instance=ExtResource("82_jdigv")]
+transform = Transform3D(0.808514, 0, -0.58847696, 0, 1, 0, 0.58847696, 0, 0.808514, 210.52142, 0.3103776, 268.89465)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=125402377]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 217.90141, 8.798317, 261.49838)
 visible = false
 radius = 100.0
 height = 20.0
 material = SubResource("StandardMaterial3D_gqxbg")
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSGCylinder3D"]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSGCylinder3D" unique_id=179098791]
 operation = 2
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCylinder3D/CSGCombiner3D"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCylinder3D/CSGCombiner3D" unique_id=192628996]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6691132, 3.977581, 1.1894836)
 radius = 95.0
 height = 100.0
 material = SubResource("StandardMaterial3D_gqxbg")
 
-[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="." unique_id=1785772133]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 217.90141, 8.798317, 261.49838)
 mesh = SubResource("ArrayMesh_2uctf")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="CSGBakedMeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="CSGBakedMeshInstance3D" unique_id=428206863]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBakedMeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBakedMeshInstance3D/StaticBody3D" unique_id=1227320533]
 shape = SubResource("ConcavePolygonShape3D_2uctf")
 
 [connection signal="timeout" from="NpcController/Timer" to="NpcController" method="_on_timer_timeout"]

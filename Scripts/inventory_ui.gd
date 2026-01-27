@@ -7,12 +7,14 @@ enum modes {use, loot}
 @export var show_price: bool
 @export var show_money: bool = true
 @export var show_space: bool = true
+@export var can_drop_items: bool
 @export var opposing_ui: Control
 var is_ready: bool
 var source_inventory: Inventory = PlayerStats.inventory
 var target_inventory: Inventory
 var shop: Shop
 var current_menu_item: MenuItem
+var menu_item_to_drop: MenuItem
 var categories = {
 	-1 : "All" ,
 	Item.categories.survival : "Survival",
@@ -33,6 +35,10 @@ const text_style = preload("res://Art/Themes/text_small.tres")
 @onready var description: Label = %Label
 @onready var use_controls: HBoxContainer = $Controls/HBoxContainer
 @onready var loot_controls: HBoxContainer = $Controls/HBoxContainer2
+@onready var drop_menu: Control = $DropMenu
+@onready var drop_item_text: Label = $DropMenu/PanelContainer/MarginContainer/VBoxContainer/Label
+@onready var drop_amount_h_slider: HSlider = $DropMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/HSlider
+@onready var drop_amount_label: Label = $DropMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Label
 
 
 func _ready() -> void:
@@ -56,17 +62,10 @@ func _process(_delta: float) -> void:
 		#target_inventory.set_items()
 	
 	# drop
-	if Input.is_action_just_pressed("drop_item"):
+	if Input.is_action_just_pressed("drop_item") and can_drop_items:
 		if current_menu_item:
-			var item = current_menu_item.resource
-			source_inventory.remove_item(item)
-			var item_slot = source_inventory.find_item_slot(item)
-			if item_slot:
-				current_menu_item.amount = item_slot.amount
-			else:
-				#var new_index = clamp(current_menu_item.get_index() + 1, 0, 1000)
-				current_menu_item.queue_free()
-				#item_container.get_child(new_index).grab_focus()
+			menu_item_to_drop = current_menu_item
+			drop_menu.show()
 	
 	# set money
 	if money_label.visible:
@@ -204,12 +203,24 @@ func item_is_in_category(item: Item) -> bool:
 	return false
 
 
+func drop_item():
+	var item = menu_item_to_drop.resource
+	source_inventory.remove_item(item, int(drop_amount_h_slider.value))
+	var item_slot = source_inventory.find_item_slot(item)
+	if item_slot:
+		menu_item_to_drop.amount = item_slot.amount
+	else:
+		menu_item_to_drop.queue_free()
+
+
 func _on_v_box_container_visibility_changed() -> void:
 	if visible and get_parent().visible:
 		if !is_ready:
 			await ready
 		set_items()
 		title.text = source_inventory.title
+	else:
+		drop_menu.hide()
 
 
 func _on_use_item(menu_item) -> void:
@@ -286,3 +297,26 @@ func _on_right_category_pressed() -> void:
 	#inst.item = resource
 	#if inst.item is EquipmentGun:
 		#inst.item.gun_stats = resource.gun_stats
+
+
+func _on_drop_item_pressed() -> void:
+	drop_item()
+	drop_menu.hide()
+
+
+func _on_dont_drop_pressed() -> void:
+	drop_menu.hide()
+
+
+func _on_drop_menu_visibility_changed() -> void:
+	if drop_menu.visible:
+		var item = menu_item_to_drop.resource
+		drop_item_text.text = "Drop " + item.title + "?"
+		drop_amount_h_slider.max_value = PlayerStats.inventory.get_item_amount(item)
+		drop_menu.mouse_filter = Control.MOUSE_FILTER_STOP
+	else:
+		drop_menu.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+
+func _on_h_slider_value_changed(value: float) -> void:
+	drop_amount_label.text = str(int(value))

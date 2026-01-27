@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://3jmw8pof6fd"]
+
+[ext_resource type="Script" uid="uid://day5la7ibuxqh" path="res://Scripts/signpost.gd" id="1_5ywrl"]
+[ext_resource type="Material" uid="uid://b7o8it6syh74a" path="res://Art/Materials/wood_plain.tres" id="2_w7el2"]
+[ext_resource type="FontFile" uid="uid://d0fpgnwmxa37x" path="res://Art/Fonts/bedstead-bold.otf" id="3_hlpnf"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hs7lb"]
+radius = 1.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ial7w"]
+size = Vector3(0.5, 1.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5ywrl"]
+size = Vector3(0.2, 1.6, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wsme8"]
+size = Vector3(1, 0.5, 0.2)
+
+[node name="Signpost" type="Node3D"]
+script = ExtResource("1_5ywrl")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.666712)
+collision_layer = 0
+collision_mask = 40
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_hs7lb")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_ial7w")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = ExtResource("2_w7el2")
+mesh = SubResource("BoxMesh_5ywrl")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.451, -0.2)
+material_override = ExtResource("2_w7el2")
+mesh = SubResource("BoxMesh_wsme8")
+skeleton = NodePath("../..")
+
+[node name="Label3D" type="Label3D" parent="StaticBody3D/MeshInstance3D2"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.022867858, -0.13261929)
+modulate = Color(1, 1, 0, 1)
+text = "hello"
+font = ExtResource("3_hlpnf")
+font_size = 16
+outline_size = 16
+autowrap_mode = 2
+width = 300.0
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]

@@ -9,9 +9,15 @@ var current_style := NpcStyle.new()
 @onready var gun_holder: Node3D = $PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
 @onready var animation_player: AnimationPlayer = $PersonAnimated/AnimationPlayer
 @export var set_style := false : set = set_materials_editor
-
+var faction_colors := {
+	0 : Color(1.0, 1.0, 1.0, 1.0),
+	1: Color(0.0, 0.0, 1.0, 1.0),
+	2: Color(0.702, 0.0, 1.0, 1.0),
+	3: Color(0.866, 0.0, 0.0, 1.0)
+}
 
 func _ready() -> void:
+	#await get_tree().create_timer(1).timeout
 	set_materials(style_data)
 
 
@@ -38,8 +44,11 @@ func set_materials(style: NpcStyle = style_data) -> void:
 	face_texture = get_texture_modified_skin(face_texture, hair_color, Color(0.133, 0.125, 0.208, 1.0))
 	face_material.set("shader_parameter/base_texture", face_texture)
 	var shirt_texture = style.shirts[randi() % style.shirts.size()]
-	var shirt = get_texture_modified_skin(shirt_texture, skin_color, Color(0.933, 0.769, 0.6, 1.0))
-	shirt_material.set("shader_parameter/base_texture", shirt)
+	shirt_texture = get_texture_modified_skin(shirt_texture, skin_color, Color(0.933, 0.769, 0.6, 1.0))
+	var faction = get_parent().faction
+	var faction_color = faction_colors[faction]
+	shirt_texture = get_texture_modified_skin(shirt_texture, faction_color, Color(0.957, 0.957, 0.957, 1.0))
+	shirt_material.set("shader_parameter/base_texture", shirt_texture)
 	var pants = style.pants_colors[randi() % style.pants_colors.size()]
 	pants_material.set("shader_parameter/color", pants)
 	var shoes = style.shoe_colors[randi() % style.shoe_colors.size()]
@@ -55,7 +64,7 @@ func set_materials(style: NpcStyle = style_data) -> void:
 	current_style.faces.clear()
 	current_style.faces.append(face_texture)
 	current_style.shirts.clear()
-	current_style.shirts.append(shirt)
+	current_style.shirts.append(shirt_texture)
 	current_style.pants_colors.clear()
 	current_style.pants_colors.append(pants)
 	current_style.shoe_colors.clear()

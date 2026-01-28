@@ -21,6 +21,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if !can_damage:
 		return
-	body.health_component.damage(damage)
+	body.health_component.damage(damage, global_position, rotation, Globals.player)
 	can_damage = false
 	hitbox.set_deferred("monitoring", false)

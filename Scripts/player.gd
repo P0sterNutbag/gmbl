@@ -68,6 +68,7 @@ const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var step_timer: Timer = $StepTimer
 @onready var interact_cast: = $CameraAnchor/Camera3D/RayCast3D
 @onready var hitbox: HealthComponent = $Hitbox
+@onready var health_component: HealthComponent = $Hitbox
 @onready var grenade_spawn: Node3D = $CameraAnchor/Camera3D/GrenadeSpawn
 @onready var place_position: Node3D = $PlacePosition
 @onready var placer_raycast: RayCast3D = $PlacePosition/PlacerRaycast3D
@@ -76,7 +77,6 @@ const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var spot_light: SpotLight3D = $CameraAnchor/Camera3D/SpotLight3D
 @onready var gun_collision_cast: RayCast3D = $CameraAnchor/Camera3D/GunOffset/RayCast3D
 @onready var loot_area: Area3D = $LootArea
-@onready var aim_positions: Node3D = $AimPositions
 
 
 func _enter_tree() -> void:
@@ -286,7 +286,7 @@ func state_walk(delta):
 			#if !gun.can_shoot:
 				#return
 			#gun.shoot(Input.is_action_pressed("aim"), velocity)
-			var did_shoot = gun.use()
+			var did_shoot = gun.use(self)
 			if !did_shoot:
 				return
 			if gun is Gun:
@@ -758,7 +758,7 @@ func check_reload_ammo(time_to_skip_to: float):
 		gun.get_node("AnimationPlayer").seek(time_to_skip_to, true, true)
 
 
-func _on_damaged(_hit_position: Vector3, hit_direction: Vector3) -> void:
+func _on_damaged(_hit_position: Vector3, hit_direction: Vector3, _shooter: Node3D) -> void:
 	hitbox.damage_modifier = PlayerStats.inventory.equipment_kit.get_damage_modifier()
 	Globals.ui.play_hit_effect(hit_direction)
 

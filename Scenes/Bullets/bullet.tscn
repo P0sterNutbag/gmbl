@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwq84n8f24jwt"]
+[gd_scene format=3 uid="uid://cwq84n8f24jwt"]
 
 [ext_resource type="Script" uid="uid://bpukt2hanaqid" path="res://Scripts/bullet.gd" id="1_tcy0y"]
 [ext_resource type="AudioStream" uid="uid://bjgw8wy3ah1es" path="res://Audio/Bullets/bullet_hit.wav" id="2_qngn8"]
@@ -21,32 +21,31 @@ random_pitch = 1.2
 streams_count = 1
 stream_0/stream = ExtResource("2_qngn8")
 
-[node name="Bullet" type="Node3D"]
+[node name="Bullet" type="Node3D" unique_id=1242417503]
 script = ExtResource("1_tcy0y")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=744376100]
 transform = Transform3D(-4.37114e-08, 8.74228e-08, -1, 1, -8.74228e-08, -4.37114e-08, -4.37114e-08, -2, -4.37114e-08, -0.000230463, 0.00245798, -0.490138)
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_oduel")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1712272386]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.958255)
 target_position = Vector3(0, 0, 1)
-collision_mask = 513
-hit_from_inside = true
+collision_mask = 525
 collide_with_areas = true
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=470502991]
 collision_layer = 256
 collision_mask = 0
 monitoring = false
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=696266837]
 shape = SubResource("SphereShape3D_tcy0y")
 disabled = true
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=331507099]
 stream = SubResource("AudioStreamRandomizer_510l0")
 volume_db = 12.0
 bus = &"SFX"

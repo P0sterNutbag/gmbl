@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://r4ktdn26psb3"]
+[gd_scene format=3 uid="uid://r4ktdn26psb3"]
 
 [ext_resource type="Script" uid="uid://ysmfpedeqrtw" path="res://Scripts/encounter.gd" id="1_afsqo"]
 [ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/world_environment.tscn" id="2_os0xi"]
@@ -67,25 +67,25 @@ script = ExtResource("16_52w5m")
 object_to_spawn = ExtResource("17_48aj5")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
-[node name="Encounter" type="Node3D"]
+[node name="Encounter" type="Node3D" unique_id=699194105]
 script = ExtResource("1_afsqo")
 location_data = SubResource("Resource_fwcaj")
 
-[node name="CanvasLayer2" parent="." instance=ExtResource("4_2a2fa")]
+[node name="CanvasLayer2" parent="." unique_id=1308287398 instance=ExtResource("4_2a2fa")]
 
-[node name="CanvasLayer" parent="." instance=ExtResource("3_12h26")]
+[node name="CanvasLayer" parent="." unique_id=703292076 instance=ExtResource("3_12h26")]
 
-[node name="WorldEnvironment" parent="." instance=ExtResource("2_os0xi")]
+[node name="WorldEnvironment" parent="." unique_id=836606963 instance=ExtResource("2_os0xi")]
 
 [node name="DirectionalLight3D" parent="WorldEnvironment" index="0"]
 shadow_normal_bias = 10.0
 
-[node name="Shader" parent="." instance=ExtResource("6_21ixx")]
+[node name="Shader" parent="." unique_id=580484789 instance=ExtResource("6_21ixx")]
 
-[node name="NoiseController" parent="." instance=ExtResource("10_07x41")]
+[node name="NoiseController" parent="." unique_id=1998278142 instance=ExtResource("10_07x41")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000435829, 0.0134783, 0.00178146)
 
-[node name="Terrain" type="Node3D" parent="." groups=["ground"]]
+[node name="Terrain" type="Node3D" parent="." unique_id=1995643304 groups=["ground"]]
 script = ExtResource("32_f4nmr")
 _terrain_data = ExtResource("6_afsqo")
 chunk_size = 32
@@ -104,107 +104,107 @@ shader_params/u_triplanar = true
 shader_params/u_tile_reduction = Vector4(0, 0, 0, 0)
 metadata/_custom_type_script = "uid://bokxkydc5jmf"
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=2110071702]
 navigation_mesh = SubResource("NavigationMesh_6cq5c")
 
-[node name="Player" parent="." instance=ExtResource("16_6tord")]
+[node name="Player" parent="." unique_id=1999782353 instance=ExtResource("16_6tord")]
 
-[node name="Border" type="Node3D" parent="."]
+[node name="Border" type="Node3D" parent="." unique_id=232497281]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 128)
 
-[node name="Area3D" type="Area3D" parent="Border"]
+[node name="Area3D" type="Area3D" parent="Border" unique_id=1336319242]
 transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, -125.5)
 collision_layer = 0
 collision_mask = 32
 script = ExtResource("14_3f870")
 overworld_point = "SpawnS"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Border/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Border/Area3D" unique_id=1541799131]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47292, 0)
 shape = SubResource("BoxShape3D_8ianw")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Border/Area3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Border/Area3D" unique_id=1370495092]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.55, 0)
 cast_shadow = 0
 mesh = SubResource("BoxMesh_wgdbt")
 
-[node name="Area3D4" type="Area3D" parent="Border"]
-transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 0, 125.5)
-collision_layer = 0
-collision_mask = 32
-script = ExtResource("14_3f870")
-overworld_point = "SpawnN"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Border/Area3D4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47292, 0)
-shape = SubResource("BoxShape3D_8ianw")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Border/Area3D4"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.55, 0)
-cast_shadow = 0
-mesh = SubResource("BoxMesh_wgdbt")
-
-[node name="Area3D2" type="Area3D" parent="Border"]
+[node name="Area3D2" type="Area3D" parent="Border" unique_id=949026452]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -125.5, 0, 0)
 collision_layer = 0
 collision_mask = 32
 script = ExtResource("14_3f870")
 overworld_point = "SpawnE"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Border/Area3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Border/Area3D2" unique_id=2116307238]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47292, 0)
 shape = SubResource("BoxShape3D_8ianw")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Border/Area3D2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Border/Area3D2" unique_id=1983347532]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.55, 0)
 cast_shadow = 0
 mesh = SubResource("BoxMesh_wgdbt")
 
-[node name="Area3D3" type="Area3D" parent="Border"]
+[node name="Area3D4" type="Area3D" parent="Border" unique_id=337746418]
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 0, 125.5)
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("14_3f870")
+overworld_point = "SpawnN"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Border/Area3D4" unique_id=927569359]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47292, 0)
+shape = SubResource("BoxShape3D_8ianw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Border/Area3D4" unique_id=2026107626]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.55, 0)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_wgdbt")
+
+[node name="Area3D3" type="Area3D" parent="Border" unique_id=883872261]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 125.5, 0, 0)
 collision_layer = 0
 collision_mask = 32
 script = ExtResource("14_3f870")
 overworld_point = "SpawnW"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Border/Area3D3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Border/Area3D3" unique_id=557286175]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47292, 0)
 shape = SubResource("BoxShape3D_8ianw")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Border/Area3D3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Border/Area3D3" unique_id=320225416]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.55, 0)
 cast_shadow = 0
 mesh = SubResource("BoxMesh_wgdbt")
 
-[node name="PlayerAnchor" type="Node3D" parent="."]
+[node name="PlayerAnchor" type="Node3D" parent="." unique_id=27956626]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 128)
 script = ExtResource("15_mydnv")
 
-[node name="PlayerSpawn" type="Node3D" parent="PlayerAnchor"]
+[node name="PlayerSpawn" type="Node3D" parent="PlayerAnchor" unique_id=353026264]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 115)
 script = ExtResource("15_52w5m")
 
-[node name="CoverSpawn" type="Node3D" parent="PlayerAnchor"]
+[node name="CoverSpawn" type="Node3D" parent="PlayerAnchor" unique_id=1214533446]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 95)
 
-[node name="EnemySpawner" type="Node3D" parent="."]
+[node name="EnemySpawner" type="Node3D" parent="." unique_id=2109086568]
 script = ExtResource("19_21ixx")
 enemies_to_spawn = Array[ExtResource("16_52w5m")]([SubResource("Resource_21ixx")])
 
-[node name="SquadSpawner" type="Node3D" parent="." node_paths=PackedStringArray("borders")]
+[node name="SquadSpawner" type="Node3D" parent="." unique_id=2106031368 node_paths=PackedStringArray("borders")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 128)
 script = ExtResource("19_2a2fa")
 enemies_to_spawn = Array[ExtResource("16_52w5m")]([SubResource("Resource_qrsnk")])
 borders = [NodePath("../Border/Area3D"), NodePath("../Border/Area3D4"), NodePath("../Border/Area3D2"), NodePath("../Border/Area3D3")]
 
-[node name="Timer" type="Timer" parent="SquadSpawner"]
+[node name="Timer" type="Timer" parent="SquadSpawner" unique_id=1075835918]
 wait_time = 2.0
 one_shot = true
 
-[node name="SnapToTerrain" type="Node3D" parent="."]
+[node name="SnapToTerrain" type="Node3D" parent="." unique_id=196337249]
 script = ExtResource("21_lsls5")
 
-[node name="Scatterer" type="Node3D" parent="."]
+[node name="Scatterer" type="Node3D" parent="." unique_id=520392373]
 script = ExtResource("11_wttml")
 scenes = Array[PackedScene]([null, null])
 count = 45
@@ -213,10 +213,10 @@ max_size = 1.25
 
 [connection signal="body_entered" from="Border/Area3D" to="Border/Area3D" method="_on_body_entered"]
 [connection signal="body_exited" from="Border/Area3D" to="Border/Area3D" method="_on_body_exited"]
-[connection signal="body_entered" from="Border/Area3D4" to="Border/Area3D4" method="_on_body_entered"]
-[connection signal="body_exited" from="Border/Area3D4" to="Border/Area3D4" method="_on_body_exited"]
 [connection signal="body_entered" from="Border/Area3D2" to="Border/Area3D2" method="_on_body_entered"]
 [connection signal="body_exited" from="Border/Area3D2" to="Border/Area3D2" method="_on_body_exited"]
+[connection signal="body_entered" from="Border/Area3D4" to="Border/Area3D4" method="_on_body_entered"]
+[connection signal="body_exited" from="Border/Area3D4" to="Border/Area3D4" method="_on_body_exited"]
 [connection signal="body_entered" from="Border/Area3D3" to="Border/Area3D3" method="_on_body_entered"]
 [connection signal="body_exited" from="Border/Area3D3" to="Border/Area3D3" method="_on_body_exited"]
 [connection signal="timeout" from="SquadSpawner/Timer" to="SquadSpawner" method="_on_timer_timeout"]

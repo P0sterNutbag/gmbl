@@ -2,6 +2,7 @@ extends Node3D
 
 var last_position: Vector3
 var tracer_firepoint: Node3D
+var creator: Node3D
 var bullet_stats: BulletStats
 var gun_stats: GunStats
 var tracer: PackedScene = preload("res://Scenes/Bullets/tracer.tscn")
@@ -13,7 +14,7 @@ var blood_spatter: PackedScene = preload("res://Scenes/Particles/bloodspatter.ts
 
 
 func _ready() -> void:
-	raycast.set_collision_mask_value(bullet_stats.collision_mask, true)
+	#raycast.set_collision_mask_value(bullet_stats.collision_mask, true)
 	if bullet_stats.is_hitscan:
 		raycast.target_position.z = -100
 	raycast.force_raycast_update()
@@ -39,10 +40,12 @@ func _physics_process(delta: float) -> void:
 func hit():
 	# damage collider if enemy
 	var collider = raycast.get_collider()
+	if collider is PhysicalBone3D and collider.health_component == creator.health_component:#collider.owner == creator:
+		return
 	var damage = bullet_stats.damage * (0.5 + min(0.5 * (gun_stats.condition / gun_stats.max_condition) / 0.75, 0.5))
 	if collider is PhysicalBone3D:
 		if collider.health_component:
-			collider.health_component.damage(bullet_stats.damage * collider.damage_modifier, raycast.get_collision_point(), rotation)
+			collider.health_component.damage(bullet_stats.damage * collider.damage_modifier, raycast.get_collision_point(), rotation, creator)
 		var decal = blood_spatter.instantiate()
 		decal.set_deferred("global_position", raycast.get_collision_point())
 		collider.add_child(decal)
@@ -50,7 +53,7 @@ func hit():
 		#collider.apply_impulse(rotation * 50, raycast.get_collision_point())
 		#collider.turn_off_simulation()
 	elif collider is HealthComponent:
-		collider.damage(bullet_stats.damage, raycast.get_collision_point(), rotation)
+		collider.damage(bullet_stats.damage, raycast.get_collision_point(), rotation, creator)
 		if !bullet_stats.is_hitscan:
 			queue_free()
 	elif collider.get_parent() is Trap:

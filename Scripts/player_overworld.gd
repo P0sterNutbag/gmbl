@@ -239,7 +239,7 @@ func _on_gun_changed() -> void:
 		unequip_gun()
 
 
-func _on_damaged(_hit_position: Vector3, _hit_direction: Vector3) -> void:
+func _on_damaged(_hit_position: Vector3, _hit_direction: Vector3, _shooter: Node3D) -> void:
 	pass
 
 

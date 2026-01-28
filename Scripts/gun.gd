@@ -101,18 +101,18 @@ func aim_fire_point(pos: Vector3) -> void:
 		##shell_instance.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
 
 
-func use() -> bool:
+func use(shot_owner: Node3D = null) -> bool:
 	if !can_shoot:
 		return false
 	if ammo <= 0:
 		empty_click.play()
 		return false
-	shoot()
+	shoot(shot_owner)
 	return true
 	
 
 
-func shoot() -> void:#is_ads: bool = false, movement_speed = Vector3.ZERO) -> void:
+func shoot(shot_owner: Node3D = null) -> void:#is_ads: bool = false, movement_speed = Vector3.ZERO) -> void:
 	var is_ads = false
 	var movement_speed = Vector3.ZERO
 	if uses_input:
@@ -136,6 +136,7 @@ func shoot() -> void:#is_ads: bool = false, movement_speed = Vector3.ZERO) -> vo
 		var v_angle_variance = randf_range(-variance.y, variance.y)
 		inst.rotate_x(deg_to_rad(v_angle_variance))
 		inst.bullet_stats = bullet_stats
+		inst.creator = shot_owner
 		#inst.bullet_stats.damage *= gun_stats.condition / 100
 		inst.gun_stats = gun_stats
 		get_tree().current_scene.add_child(inst)

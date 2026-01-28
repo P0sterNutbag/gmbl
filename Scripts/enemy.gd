@@ -16,6 +16,7 @@ var items:
 @export var inventory: Inventory
 @export var max_items: int
 @export var min_items: int
+@export var faction: FactionManager.factions
 enum states {idle, investigate, shoot, search, strafe, hurt, reload, camp, dead, aim, walk, standby, supress, find_cover}
 var state = states.idle
 var walk_speed := 1.5
@@ -36,7 +37,6 @@ var night_range := 25
 var path_index: int
 var is_new_state: bool
 var on_alert: bool
-var free_on_destination: bool
 var is_starting_squad: bool
 var gun: Node3D
 var damage_position: Vector3
@@ -45,7 +45,6 @@ var last_seen_position: Vector3
 var destination: Vector3
 var target: Node3D
 var bounty: Quest
-var faction: FactionManager.factions
 #var guns_dict: Dictionary = {
 	#0 : [preload("res://Scenes/Guns/shotgun.tscn"), preload("res://Resources/Items/Guns/shotgun.tres")],
 	#1 : [preload("res://Scenes/Guns/ak47.tscn"), preload("res://Resources/Items/Guns/ak47.tres")],
@@ -60,7 +59,6 @@ var faction: FactionManager.factions
 @onready var right_hand: Node3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
 @onready var gun_holder: Node3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
 @onready var shoot_timer: Timer = $ShootTimer
-@onready var loot_area: Area3D = $Loot
 @onready var health_component: HealthComponent = $Hitbox
 @onready var aim_timer: Timer = $AimTimer
 @onready var physical_bone_simulator: PhysicalBoneSimulator3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D
@@ -75,7 +73,7 @@ func _ready() -> void:
 	gun = gun_item.gun_object.instantiate()
 	gun.gun_stats.condition = randf_range(10, 20)
 	gun_holder.add_child(gun)
-	gun.bullet_stats.collision_mask = 4
+	#gun.bullet_stats.collision_mask = 4
 	shoot_timer.wait_time = gun.shoot_cooldown
 	items_to_drop.append(gun_item.physical_item)
 	DayNightCycle.night_start.connect(on_night_start)
@@ -100,6 +98,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	target = detection.get_visible_target()
 	if state == states.standby:
 		if is_new_state:
 			visible = false
@@ -213,10 +212,9 @@ func _physics_process(delta: float) -> void:
 				if !target:
 					if randf() <= camp_chance:
 						change_state(states.camp)
-					elif randf() <= supress_change:
-						change_state(states.supress)
+					#elif randf() <= supress_change:
+						#change_state(states.supress)
 					else:
-						#navigation_agent.set_target_position(last_seen_position)
 						change_state(states.search)
 					return
 				velocity = Vector3.ZERO
@@ -247,10 +245,9 @@ func _physics_process(delta: float) -> void:
 				if time_since_detect >= 3:
 					if randf() <= camp_chance:
 						change_state(states.camp)
-					elif randf() <= supress_change:
-						change_state(states.supress)
+					#elif randf() <= supress_change:
+						#change_state(states.supress)
 					else:
-						#navigation_agent.set_target_position(last_seen_position)
 						change_state(states.search)
 			else:
 				time_since_detect = 0
@@ -287,7 +284,7 @@ func _physics_process(delta: float) -> void:
 				is_new_state = false
 			
 			if target:
-				change_state(states.aim)
+				change_state(states.shoot)
 			
 			time_since_detect += delta
 			if time_since_detect > camp_time:
@@ -343,10 +340,12 @@ func _physics_process(delta: float) -> void:
 				potential_cover = potential_cover.filter(func(a): 
 					return global_position.distance_to(a.global_position) < 15)
 				potential_cover = potential_cover.filter(func(a): 
-					detection.global_position.x = a.global_position.x
-					detection.global_position.z = a.global_position.z
-					detection.force_raycast_update()
-					return !detection.can_see_target(detection.targets[0], false))
+					for target in detection.targets:
+						if target == null: continue
+						detection.global_position.x = a.global_position.x
+						detection.global_position.z = a.global_position.z
+						detection.force_shapecast_update()
+						return !detection.can_see_target(target, false))
 				detection.position = Vector3(0, 1, 0)
 				if potential_cover.size() == 0:
 					change_state(states.strafe)
@@ -376,11 +375,11 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	move_and_slide()
 	
-	if state != states.dead:
-		if PlayerStats.state == PlayerStats.states.dead:
-			target = null
-		else:
-			target = detection.get_visible_target()
+	#if state != states.dead:
+		#if PlayerStats.state == PlayerStats.states.dead:
+			#target = null
+		#else:
+			#target = detection.get_visible_target()
 
 
 
@@ -418,15 +417,21 @@ func look_at_position(pos: Vector3):
 
 
 func set_detection_targets():
-	if FactionManager.get_faction_relation(faction, PlayerStats.faction) <= -1.0:
+	detection.targets.clear()
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		if FactionManager.get_faction_relation(faction, enemy.faction) <= -1.0:
+			detection.targets.append(enemy)
+	if Globals.player and FactionManager.get_faction_relation(faction, PlayerStats.faction) <= -1.0:
 		detection.targets.append(Globals.player)
 
 
 func emit_shoot() -> void:
 	if !gun:
 		return
-	gun.shoot()
+	gun.shoot(self)
 	shoot_timer.start()
+	Globals.noise_controller.create_noise_event(gun.firepoint.global_position, self, gun.bullet_stats.noise_radius)
+
 
 
 func on_noise_heard(noise_position: Vector3, event_creator):
@@ -447,17 +452,18 @@ func on_noise_heard(noise_position: Vector3, event_creator):
 	look_at_position(noise_position)
 
 
-func _on_damaged(hit_position: Vector3, hit_direction: Vector3) -> void:
+func _on_damaged(hit_position: Vector3, hit_direction: Vector3, shooter: Node3D) -> void:
 	velocity = Vector3.ZERO
 	damage_position = hit_position
 	damage_direction = hit_direction
-	if PlayerStats.faction == faction:
+	if shooter == PlayerStats and PlayerStats.faction == faction:
 		PlayerStats.faction = FactionManager.factions.no_faction
-	var previous_relation = FactionManager.get_faction_relation(faction, PlayerStats.faction)
-	FactionManager.change_faction_ration(faction, PlayerStats.faction, -1)
-	var current_relation = FactionManager.get_faction_relation(faction, PlayerStats.faction)
-	if current_relation < previous_relation:
-		get_tree().call_group("enemies", "set_detection_targets")
+	if faction != shooter.faction:
+		var previous_relation = FactionManager.get_faction_relation(faction, shooter.faction)
+		FactionManager.change_faction_ration(faction, shooter.faction, -1)
+		var current_relation = FactionManager.get_faction_relation(faction, shooter.faction)
+		if current_relation < previous_relation:
+			get_tree().call_group("enemies", "set_detection_targets")
 	#if time_since_bleed < 0.1:
 		#return
 	#time_since_bleed = 0
@@ -510,8 +516,6 @@ func _on_death() -> void:
 
 
 func _on_navigation_agent_3d_navigation_finished() -> void:
-	if free_on_destination:
-		queue_free()
 	if state == states.idle:
 		path_wait_timer.start()
 		velocity = Vector3.ZERO
@@ -519,12 +523,12 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 		change_state(states.investigate)
 	elif state == states.strafe:
 		look_at_position(last_seen_position)
-		change_state(states.aim)
+		change_state(states.shoot)
 	elif state == states.walk:
 		change_state(states.idle)
 		new_destination_timer.start()
 	elif state == states.find_cover:
-		look_at(Globals.player.global_position)
+		look_at(last_seen_position)
 		change_state(states.camp)
 
 
@@ -550,7 +554,7 @@ func _on_path_wait_timer_timeout() -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name.contains("HitReaction"):
 		look_at_position(damage_position)
-		if randf() > 0.75:
+		if randf() > 0.5:
 			change_state(states.aim)
 		else:
 			change_state(states.find_cover)
@@ -571,7 +575,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	elif anim_name == "Reload":
 		if target:
 			look_at_position(target.global_position)
-		change_state(states.aim)
+		change_state(states.shoot)
 
 
 func _on_shoot_timer_timeout() -> void:

@@ -4,6 +4,7 @@ extends Node3D
 @export var enemy_move_chance: float = 0.25 
 var spawn_points: Array[Node3D]
 var used_spawns: Array[int]
+@onready var border_parent: Node3D = $"../Border"
 
 
 func _ready() -> void:
@@ -50,20 +51,51 @@ func _ready() -> void:
 		# get random enemy and spawn it
 		var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
 		var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
+		# assign faction
 		inst.faction = location_data.faction
+		# add to scene
 		get_tree().current_scene.add_child.call_deferred(inst)
-		
 		# position enemy at spawn point
 		var spawn_index = randi_range(0, spawn_points.size() - 1)
 		while used_spawns.has(spawn_index):
 			spawn_index = randi_range(0, spawn_points.size() - 1)
 		used_spawns.append(spawn_index)
 		inst.set_deferred("global_transform", spawn_points[spawn_index].global_transform)
-		
 		# assign enemy a destination
 		if randf() <= enemy_move_chance:
 			var dest = get_destination(spawn_points[spawn_index].global_position)
 			inst.destination = dest
+			inst.change_state(inst.states.walk)
+	
+	# spawn squads
+	if randf() <= 1.0:# location_data.npc_spawn_chance:
+		# get spawn and destination positions
+		var borders = border_parent.get_children()
+		var border_index = randi_range(0, borders.size() - 1)
+		#while borders[border_index].global_position.distance_to(Globals.player.global_position) < 50:
+			#border_index = randi_range(0, borders.size() - 1)
+		var border = borders[border_index]
+		var spawn_point = border.global_position
+		var border_index2 = wrap(border_index + 2, 0, borders.size())
+		while border_index2 == border_index:
+			border_index2 = randi_range(0, borders.size() - 1)
+		var destination = borders[border_index2].global_position
+		# get faction
+		var faction = randi() % FactionManager.factions.size()
+		# spawn enemies
+		for i in randf_range(1, 4):
+			var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
+			var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
+			inst.faction = faction
+			get_tree().current_scene.add_child.call_deferred(inst)
+			var offset = Vector3(randf_range(-5, 5), 0, randf_range(-5, 5))
+			var pos = spawn_point + offset
+			pos.x = clamp(pos.x, 1.0, 255.0)
+			pos.z = clamp(pos.z, 1.0, 255.0)
+			pos.y = Globals.get_heightmap_position(pos) + 1
+			inst.set_deferred("global_position", pos)
+			inst.destination = destination + offset
+			inst.look_at_position(inst.destination)
 			inst.change_state(inst.states.walk)
 
 

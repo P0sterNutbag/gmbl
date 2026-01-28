@@ -1,4 +1,4 @@
-extends RayCast3D
+extends ShapeCast3D
 
 @export var view_angle: float = -0.25
 @export var range: float = 50
@@ -7,8 +7,13 @@ var target_pos: Vector3
 
 
 func get_visible_target() -> Node:
-	for target in targets:
-		if can_see_target(target):
+	var in_range_targets = targets.filter(func(a): return global_position.distance_to(a.global_position) <= range)
+	in_range_targets.sort_custom(func(a, b): return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position))
+	for target in in_range_targets:
+		if "states" in target and target.state == target.states.dead:
+			targets.erase(target)
+			continue
+		if target and can_see_target(target):
 			return target
 		else:
 			continue
@@ -16,34 +21,19 @@ func get_visible_target() -> Node:
 
 
 func can_see_target(target: Node3D = targets[0], check_direction: bool = true) -> bool:
-	# point at target
-	if !target:
+	# check for collision
+	target_pos = target.global_position + Vector3.UP * 1.5
+	look_at(target_pos)
+	target_position.z = -global_position.distance_to(target_pos)
+	force_shapecast_update() 
+	if is_colliding():
 		return false
-	var target_positions = []
-	if "aim_position" in target:
-		target_positions = target.aim_positions.get_children()
-	else:
-		target_positions.append(target.global_position + Vector3.UP * 1.5)
-	for i in target_positions:
-		if i is Node3D:
-			target_pos = i.global_position
-		elif i is Vector3:
-			target_pos = i
-		var dis_to_target = global_position.distance_to(target_pos)
-		if dis_to_target > range:
-			continue
-		look_at(target_pos)
-		target_position.z = -global_position.distance_to(target_pos)
-		# check for collisions
-		var collider = get_collider()
-		if collider:
-			continue
-		# check dot to target
-		if !check_direction:
-			return true
-		var forward = get_parent().global_transform.basis.z.normalized()
-		var to_player = (target.global_transform.origin - get_parent().global_transform.origin).normalized()
-		var dot_product = forward.dot(to_player)
-		if dot_product < -0.25:
-			return true
+	# check dot to target
+	if !check_direction:
+		return true
+	var forward = get_parent().global_transform.basis.z.normalized()
+	var to_player = (target.global_transform.origin - get_parent().global_transform.origin).normalized()
+	var dot_product = forward.dot(to_player)
+	if dot_product < -0.25:
+		return true
 	return false

@@ -3,8 +3,8 @@ extends Node
 enum factions {no_faction, jackals, ragers, bandits}
 @export var faction_relations := {
 	factions.no_faction : {factions.no_faction : 1.0, factions.jackals : 0.0, factions.ragers : 0.0, factions.bandits : -1.0},
-	factions.jackals : {factions.no_faction : 0.0, factions.jackals : 1.0, factions.ragers : 0.0, factions.bandits : -1.0},
-	factions.ragers : {factions.no_faction : 0.0, factions.jackals : 0.0, factions.ragers : 1.0, factions.bandits : -1.0},
+	factions.jackals : {factions.no_faction : 0.0, factions.jackals : 1.0, factions.ragers : -1.0, factions.bandits : -1.0},
+	factions.ragers : {factions.no_faction : -1.0, factions.jackals : -1.0, factions.ragers : 1.0, factions.bandits : -1.0},
 	factions.bandits : {factions.no_faction : -1.0, factions.jackals : -1.0, factions.ragers : -1.0, factions.bandits : 1.0}
 }
 var faction_display_names := {

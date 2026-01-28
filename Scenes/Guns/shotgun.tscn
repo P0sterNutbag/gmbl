@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dts12bmvycipb"]
+[gd_scene format=3 uid="uid://dts12bmvycipb"]
 
 [ext_resource type="PackedScene" uid="uid://de0b6aj1eplv5" path="res://Scenes/Guns/gun_parent.tscn" id="1_mej0h"]
 [ext_resource type="PackedScene" uid="uid://cwq84n8f24jwt" path="res://Scenes/Bullets/bullet.tscn" id="2_7cdj6"]
@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/hitmarker.tscn" id="3_58v0y"]
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="4_hufxr"]
 [ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="5_58v0y"]
-[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="6_hufxr"]
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="6_x1ctg"]
+[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="7_qdpfn"]
 
 [sub_resource type="Resource" id="Resource_x1ctg"]
 script = ExtResource("4_hufxr")
@@ -19,16 +20,37 @@ v_angle_variance_ads = 3.0
 is_hitscan = false
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
-[sub_resource type="Resource" id="Resource_hufxr"]
+[sub_resource type="Resource" id="Resource_7x6n1"]
 resource_local_to_scene = true
 script = ExtResource("5_58v0y")
 ammo = 5
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
-[node name="Gun" instance=ExtResource("1_mej0h")]
+[sub_resource type="Resource" id="Resource_08fje"]
+script = ExtResource("6_x1ctg")
+values = Dictionary[String, Variant]({
+"ammo": 1
+})
+add = true
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[sub_resource type="Resource" id="Resource_hk1h3"]
+resource_local_to_scene = true
+resource_name = "shotgun_ammo"
+script = ExtResource("7_qdpfn")
+effects = Array[ExtResource("6_x1ctg")]([SubResource("Resource_08fje")])
+custom_path = "PlayerStats"
+usable_in_menu = false
+title = "Shotgun Shell"
+category = 1
+price = 6
+description = "Usable in: Shotgun, Sawed-off Shotgun"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
+
+[node name="Gun" unique_id=60030670 instance=ExtResource("1_mej0h")]
 bullet_stats = SubResource("Resource_x1ctg")
-gun_stats = SubResource("Resource_hufxr")
-ammo_item = ExtResource("6_hufxr")
+gun_stats = SubResource("Resource_7x6n1")
+ammo_item = SubResource("Resource_hk1h3")
 fire_type = 2
 shoot_cooldown = 0.5
 
@@ -41,7 +63,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00265765, 0.241867, -0.6653
 [node name="RayCast3D" parent="GunAnchor/FirePoint" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.029448777, 0)
 
-[node name="Model" parent="GunAnchor" index="1" instance=ExtResource("2_s1qc3")]
+[node name="Model" parent="GunAnchor" index="1" unique_id=1018765225 instance=ExtResource("2_s1qc3")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="Chamber" parent="GunAnchor" index="2"]

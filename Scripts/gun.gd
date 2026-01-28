@@ -25,7 +25,6 @@ var spread := 1.0
 var can_shoot: bool = true
 var has_released: bool = true
 var sway_vector: Vector3
-#var shoot_timer: Timer
 var anim_player: AnimationPlayer
 var shell: PackedScene = preload("res://Scenes/Particles/shell.tscn")
 var smoke: PackedScene = preload("res://Scenes/Particles/gun_smoke.tscn")

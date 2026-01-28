@@ -28,6 +28,8 @@ func apply_progress() -> void:
 		else:
 			saved_gear = starting_gear.duplicate(true)
 		for i in range(old_level, new_level):
+			if level_rewards.size() < i:
+				continue
 			var item = level_rewards[i - 1]
 			awards.append(item)
 			if item is ItemMoney:

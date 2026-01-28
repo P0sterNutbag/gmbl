@@ -11,9 +11,9 @@ var current_style := NpcStyle.new()
 @export var set_style := false : set = set_materials_editor
 var faction_colors := {
 	0 : Color(1.0, 1.0, 1.0, 1.0),
-	1: Color(0.0, 0.0, 1.0, 1.0),
-	2: Color(0.702, 0.0, 1.0, 1.0),
-	3: Color(0.866, 0.0, 0.0, 1.0)
+	1: Color(0.0, 0.396, 0.325, 1.0),
+	2: Color(0.22, 0.0, 0.851, 1.0),
+	3: Color(0.569, 0.102, 0.122, 1.0)
 }
 
 func _ready() -> void:
@@ -45,9 +45,14 @@ func set_materials(style: NpcStyle = style_data) -> void:
 	face_material.set("shader_parameter/base_texture", face_texture)
 	var shirt_texture = style.shirts[randi() % style.shirts.size()]
 	shirt_texture = get_texture_modified_skin(shirt_texture, skin_color, Color(0.933, 0.769, 0.6, 1.0))
-	var faction = get_parent().faction
-	var faction_color = faction_colors[faction]
-	shirt_texture = get_texture_modified_skin(shirt_texture, faction_color, Color(0.957, 0.957, 0.957, 1.0))
+	var faction = 0
+	if "faction" in get_parent():
+		faction = get_parent().faction
+	if faction > 0:
+		var faction_color = faction_colors[faction]
+		shirt_texture = get_texture_modified_skin(shirt_texture, faction_color, Color(1.0, 0.0, 0.0, 1.0))
+	else:
+		shirt_texture = get_texture_modified_skin(shirt_texture, skin_color, Color(1.0, 0.0, 0.0, 1.0))
 	shirt_material.set("shader_parameter/base_texture", shirt_texture)
 	var pants = style.pants_colors[randi() % style.pants_colors.size()]
 	pants_material.set("shader_parameter/color", pants)

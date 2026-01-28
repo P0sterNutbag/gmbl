@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://r4ktdn26psb3" path="res://Scenes/Levels/encounter_base.tscn" id="1_wyyf0"]
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_ghiyu"]
-[ext_resource type="Resource" uid="uid://cfuo7lbkf1m0v" path="res://addons/zylann.hterrain/data/rock_canyon2/data.hterrain" id="2_w380c"]
+[ext_resource type="Resource" path="res://addons/zylann.hterrain/data/rock_canyon2/data.hterrain" id="2_w380c"]
 [ext_resource type="Shader" uid="uid://d2kaduike2hk7" path="res://addons/zylann.hterrain/shaders/detail_edit.gdshader" id="6_35bk4"]
 [ext_resource type="PackedScene" uid="uid://gjf0h1sobon8" path="res://Scenes/Environment/Prefabs With Spawning/shack_windows.tscn" id="9_6l2im"]
 [ext_resource type="PackedScene" uid="uid://yqj3iccq8ppb" path="res://Scenes/Environment/Prefabs With Spawning/shack_stairs.tscn" id="10_a3k0e"]
@@ -25,8 +25,8 @@
 
 [sub_resource type="Resource" id="Resource_oy5nx"]
 script = ExtResource("2_ghiyu")
-min_population = 0
-max_population = 0
+faction = 3
+population = 2
 npc_spawn_chance = 0.25
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
@@ -50,10 +50,10 @@ _surfaces = [{
 [node name="Encounter" unique_id=1013516177 instance=ExtResource("1_wyyf0")]
 location_data = SubResource("Resource_oy5nx")
 
-[node name="DirectionalLight3D" parent="WorldEnvironment" index="0"]
+[node name="DirectionalLight3D" parent="WorldEnvironment" parent_id_path=PackedInt32Array(836606963) index="0"]
 transform = Transform3D(0.99999976, 0, 0, 0, -4.371139e-08, 1.0000002, 0, -1, -4.37114e-08, 0, 0, 0)
 
-[node name="Terrain" parent="." index="5"]
+[node name="Terrain" parent="." index="5" unique_id=1995643304]
 _terrain_data = ExtResource("2_w380c")
 
 [node name="HTerrainDetailLayer" type="Node3D" parent="Terrain" index="0" unique_id=1297731855]
@@ -70,7 +70,7 @@ shader_params/u_instance_scale = Vector3(0.5, 0.5, 0.5)
 shader_params/u_roughness = -3.55
 metadata/_editor_icon = ExtResource("17_iwifo")
 
-[node name="NavigationRegion3D" parent="." index="6"]
+[node name="NavigationRegion3D" parent="." index="6" unique_id=2110071702]
 navigation_mesh = SubResource("NavigationMesh_ghiyu")
 
 [node name="Terrain_FullMesh" type="MeshInstance3D" parent="NavigationRegion3D" index="0" unique_id=1055336124]
@@ -357,10 +357,16 @@ transform = Transform3D(-0.7883692, -0.8941865, 1.3712752, 1.3918118, -1.1674052
 [node name="@Node3D@75439" parent="NavigationRegion3D/Rocks" index="25" unique_id=986432768 instance=ExtResource("14_d8exc")]
 transform = Transform3D(-0.781908, 1.6074624, -0.31144607, 0.19785981, -0.24984539, -1.786265, -1.6253572, -0.8037138, -0.067620784, 111.4518, 2.5251012, 157.9197)
 
-[node name="SquadSpawner" parent="." index="11" node_paths=PackedStringArray("borders")]
+[node name="Area3D2" parent="Border" parent_id_path=PackedInt32Array(232497281) index="1" unique_id=949026452]
+process_mode = 4
+
+[node name="Area3D3" parent="Border" parent_id_path=PackedInt32Array(232497281) index="3" unique_id=883872261]
+process_mode = 4
+
+[node name="SquadSpawner" parent="." index="11" unique_id=2106031368 node_paths=PackedStringArray("borders")]
 borders = [NodePath("../Border/Area3D"), NodePath("../Border/Area3D4")]
 
-[node name="SnapToTerrain" parent="." index="12" node_paths=PackedStringArray("objects_to_snap")]
+[node name="SnapToTerrain" parent="." index="12" unique_id=196337249 node_paths=PackedStringArray("objects_to_snap")]
 objects_to_snap = [null, null, null]
 
 [node name="Radio" parent="." index="13" unique_id=1126708802 instance=ExtResource("16_o2sg6")]
@@ -369,7 +375,7 @@ transform = Transform3D(0.8609552, 0, -0.5086808, 0, 1, 0, 0.5086808, 0, 0.86095
 [node name="Radio2" parent="." index="14" unique_id=1872311497 instance=ExtResource("16_o2sg6")]
 transform = Transform3D(-0.85038894, 0, -0.52615464, 0, 1, 0, 0.52615464, 0, -0.85038894, 138.03204, 6.830633, 78.11424)
 
-[node name="Scatterer" parent="." index="15" node_paths=PackedStringArray("terrain")]
+[node name="Scatterer" parent="." index="15" unique_id=520392373 node_paths=PackedStringArray("terrain")]
 scenes = Array[PackedScene]([ExtResource("14_d8exc")])
 count = 20
 terrain = NodePath("../Terrain")

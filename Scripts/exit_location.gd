@@ -5,7 +5,7 @@ var has_player: bool
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if has_player:
 		if Input.is_action_just_pressed("select"):
 			leave_encounter()
@@ -29,13 +29,13 @@ func leave_encounter() -> void:
 	SceneManager.start_scene_transition(Globals.overworld)
 
 
-func _on_body_entered(body: Node3D) -> void:
+func _on_body_entered(_body: Node3D) -> void:
 	has_player = true
 	mesh_instance_3d.get_active_material(0).cull_mode = 1
 	Globals.ui.exit_area.show()
 
 
-func _on_body_exited(body: Node3D) -> void:
+func _on_body_exited(_body: Node3D) -> void:
 	has_player = false
 	mesh_instance_3d.get_active_material(0).cull_mode = 0
 	Globals.ui.exit_area.hide()

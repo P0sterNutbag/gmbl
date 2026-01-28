@@ -425,6 +425,10 @@ func set_detection_targets():
 		detection.targets.append(Globals.player)
 
 
+func target_player():
+	detection.targets.append(Globals.player) 
+
+
 func emit_shoot() -> void:
 	if !gun:
 		return
@@ -464,6 +468,8 @@ func _on_damaged(hit_position: Vector3, hit_direction: Vector3, shooter: Node3D)
 		var current_relation = FactionManager.get_faction_relation(faction, shooter.faction)
 		if current_relation < previous_relation:
 			get_tree().call_group("enemies", "set_detection_targets")
+	elif shooter == Globals.player:
+		get_tree().call_group("enemies", "target_player")
 	#if time_since_bleed < 0.1:
 		#return
 	#time_since_bleed = 0

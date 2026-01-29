@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://y6civk4251ei"]
+[gd_scene format=3 uid="uid://y6civk4251ei"]
 
 [ext_resource type="Script" uid="uid://cl7b5tsk5cpy3" path="res://Scripts/fps_ui.gd" id="1_27ipd"]
 [ext_resource type="Texture2D" uid="uid://b7o6p645d7r1q" path="res://Art/Textures/scope.png" id="2_ed1w8"]
@@ -38,10 +38,10 @@ shader_parameter/enabled = true
 shader_parameter/dithering = true
 shader_parameter/dither_size = 1
 
-[node name="FpsUI" type="CanvasLayer"]
+[node name="FpsUI" type="CanvasLayer" unique_id=1392304047]
 script = ExtResource("1_27ipd")
 
-[node name="Center" type="Control" parent="."]
+[node name="Center" type="Control" parent="." unique_id=1945201609]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -52,11 +52,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="HitIndicatorOffset" type="Control" parent="Center"]
+[node name="HitIndicatorOffset" type="Control" parent="Center" unique_id=941254087]
 anchors_preset = 0
 mouse_filter = 2
 
-[node name="HitIndicator" type="TextureRect" parent="Center/HitIndicatorOffset"]
+[node name="HitIndicator" type="TextureRect" parent="Center/HitIndicatorOffset" unique_id=919535670]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -76,7 +76,7 @@ pivot_offset = Vector2(25, 50)
 mouse_filter = 2
 texture = SubResource("GradientTexture1D_hkj58")
 
-[node name="Crosshair" type="Control" parent="."]
+[node name="Crosshair" type="Control" parent="." unique_id=100154078]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -88,12 +88,12 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Control" type="Control" parent="Crosshair"]
+[node name="Control" type="Control" parent="Crosshair" unique_id=1287342028]
 anchors_preset = 0
 offset_top = -20.0
 offset_bottom = -20.0
 
-[node name="ColorRect2" type="ColorRect" parent="Crosshair/Control"]
+[node name="ColorRect2" type="ColorRect" parent="Crosshair/Control" unique_id=1729857858]
 layout_mode = 0
 offset_left = -2.0
 offset_top = -19.0
@@ -101,19 +101,19 @@ offset_right = 2.0
 offset_bottom = 1.0
 color = Color(0, 0, 0, 1)
 
-[node name="ColorRect" type="ColorRect" parent="Crosshair/Control"]
+[node name="ColorRect" type="ColorRect" parent="Crosshair/Control" unique_id=27282416]
 layout_mode = 0
 offset_left = -2.0
 offset_top = -25.0
 offset_right = 2.0
 color = Color(1, 1, 0, 1)
 
-[node name="Control2" type="Control" parent="Crosshair"]
+[node name="Control2" type="Control" parent="Crosshair" unique_id=93658081]
 anchors_preset = 0
 offset_top = 20.0
 offset_bottom = 20.0
 
-[node name="ColorRect3" type="ColorRect" parent="Crosshair/Control2"]
+[node name="ColorRect3" type="ColorRect" parent="Crosshair/Control2" unique_id=941337993]
 layout_mode = 0
 offset_left = -2.0
 offset_top = 1.0
@@ -121,19 +121,19 @@ offset_right = 2.0
 offset_bottom = 26.0
 color = Color(0, 0, 0, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="Crosshair/Control2"]
+[node name="ColorRect2" type="ColorRect" parent="Crosshair/Control2" unique_id=105797589]
 layout_mode = 0
 offset_left = -2.0
 offset_right = 2.0
 offset_bottom = 25.0
 color = Color(1, 1, 0, 1)
 
-[node name="Control3" type="Control" parent="Crosshair"]
+[node name="Control3" type="Control" parent="Crosshair" unique_id=113157709]
 anchors_preset = 0
 offset_left = -20.0
 offset_right = -20.0
 
-[node name="ColorRect" type="ColorRect" parent="Crosshair/Control3"]
+[node name="ColorRect" type="ColorRect" parent="Crosshair/Control3" unique_id=1128839656]
 layout_mode = 0
 offset_top = -1.0
 offset_right = 4.0
@@ -141,7 +141,7 @@ offset_bottom = 24.0
 rotation = 1.5708
 color = Color(0, 0, 0, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="Crosshair/Control3"]
+[node name="ColorRect2" type="ColorRect" parent="Crosshair/Control3" unique_id=1824753002]
 layout_mode = 0
 offset_top = -2.0
 offset_right = 4.0
@@ -149,12 +149,12 @@ offset_bottom = 23.0
 rotation = 1.5708
 color = Color(1, 1, 0, 1)
 
-[node name="Control4" type="Control" parent="Crosshair"]
+[node name="Control4" type="Control" parent="Crosshair" unique_id=936952574]
 anchors_preset = 0
 offset_left = 20.0
 offset_right = 20.0
 
-[node name="ColorRect" type="ColorRect" parent="Crosshair/Control4"]
+[node name="ColorRect" type="ColorRect" parent="Crosshair/Control4" unique_id=1170923976]
 layout_mode = 0
 offset_left = 25.0
 offset_top = -1.0
@@ -163,7 +163,7 @@ offset_bottom = 24.0
 rotation = 1.5708
 color = Color(0, 0, 0, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="Crosshair/Control4"]
+[node name="ColorRect2" type="ColorRect" parent="Crosshair/Control4" unique_id=1527127479]
 layout_mode = 0
 offset_left = 25.0
 offset_top = -2.0
@@ -172,7 +172,7 @@ offset_bottom = 23.0
 rotation = 1.5708
 color = Color(1, 1, 0, 1)
 
-[node name="DotCrosshair" type="ColorRect" parent="."]
+[node name="DotCrosshair" type="ColorRect" parent="." unique_id=159556159]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -188,7 +188,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 0, 1)
 
-[node name="DotCrosshair2" type="ColorRect" parent="DotCrosshair"]
+[node name="DotCrosshair2" type="ColorRect" parent="DotCrosshair" unique_id=233034912]
 z_index = -1
 layout_mode = 1
 anchors_preset = 8
@@ -204,7 +204,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="HitEffect" type="Control" parent="."]
+[node name="BinocularOverlay" type="Control" parent="." unique_id=1253461453]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -214,7 +214,57 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ColorRect" type="ColorRect" parent="HitEffect"]
+[node name="ColorRect" type="ColorRect" parent="BinocularOverlay" unique_id=242710387]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 200.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="BinocularOverlay" unique_id=1778946238]
+visible = false
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 200.0
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="BinocularOverlay" unique_id=1098373948]
+visible = false
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="BinocularOverlay" unique_id=1470589171]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="HitEffect" type="Control" parent="." unique_id=941024171]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="HitEffect" unique_id=45684532]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -224,7 +274,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 0, 0, 0.427451)
 
-[node name="Scope" type="TextureRect" parent="."]
+[node name="Scope" type="TextureRect" parent="." unique_id=906160690]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -240,7 +290,7 @@ grow_vertical = 2
 texture = ExtResource("2_ed1w8")
 expand_mode = 1
 
-[node name="BottomLeft" type="Control" parent="."]
+[node name="BottomLeft" type="Control" parent="." unique_id=848986944]
 modulate = Color(1, 1, 0, 1)
 layout_mode = 3
 anchors_preset = 2
@@ -249,7 +299,7 @@ anchor_bottom = 1.0
 grow_vertical = 0
 scale = Vector2(2, 2)
 
-[node name="ColorRect" type="ColorRect" parent="BottomLeft"]
+[node name="ColorRect" type="ColorRect" parent="BottomLeft" unique_id=857889129]
 layout_mode = 0
 offset_left = 17.0
 offset_top = -36.0
@@ -259,7 +309,7 @@ rotation = -0.090757124
 scale = Vector2(1.14879, 1)
 color = Color(0, 0, 0, 1)
 
-[node name="ProgressBar" type="ProgressBar" parent="BottomLeft"]
+[node name="ProgressBar" type="ProgressBar" parent="BottomLeft" unique_id=1542038271]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 26.0
@@ -271,7 +321,7 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="TextureRect3" type="TextureRect" parent="BottomLeft"]
+[node name="TextureRect3" type="TextureRect" parent="BottomLeft" unique_id=1888957424]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = 30.5
@@ -281,7 +331,7 @@ offset_bottom = -30.5
 texture = ExtResource("5_e0hn7")
 expand_mode = 1
 
-[node name="VBoxContainer" type="HBoxContainer" parent="BottomLeft"]
+[node name="VBoxContainer" type="HBoxContainer" parent="BottomLeft" unique_id=1178255411]
 modulate = Color(1, 1, 0, 1)
 layout_mode = 0
 offset_left = 26.0
@@ -289,7 +339,7 @@ offset_top = -65.0
 offset_right = 79.0
 offset_bottom = -50.0
 
-[node name="Hunger" type="TextureRect" parent="BottomLeft/VBoxContainer"]
+[node name="Hunger" type="TextureRect" parent="BottomLeft/VBoxContainer" unique_id=1621319139]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 texture = ExtResource("5_ettqu")
@@ -298,7 +348,7 @@ script = ExtResource("6_a1pox")
 stat_name = "hunger"
 show_treshold = 0.75
 
-[node name="Thirst" type="TextureRect" parent="BottomLeft/VBoxContainer"]
+[node name="Thirst" type="TextureRect" parent="BottomLeft/VBoxContainer" unique_id=483925916]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 texture = ExtResource("7_3lnm2")
@@ -307,7 +357,7 @@ script = ExtResource("6_a1pox")
 stat_name = "thirst"
 show_treshold = 0.75
 
-[node name="Sleep" type="TextureRect" parent="BottomLeft/VBoxContainer"]
+[node name="Sleep" type="TextureRect" parent="BottomLeft/VBoxContainer" unique_id=1676319920]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 texture = ExtResource("8_jr5wk")
@@ -315,7 +365,7 @@ expand_mode = 2
 script = ExtResource("6_a1pox")
 stat_name = "sleep"
 
-[node name="BottomRight" type="Control" parent="."]
+[node name="BottomRight" type="Control" parent="." unique_id=574358321]
 modulate = Color(1, 1, 0, 1)
 layout_mode = 3
 anchors_preset = 3
@@ -327,7 +377,7 @@ grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(2, 2)
 
-[node name="ColorRect2" type="ColorRect" parent="BottomRight"]
+[node name="ColorRect2" type="ColorRect" parent="BottomRight" unique_id=790087429]
 visible = false
 layout_mode = 0
 offset_left = -21.0
@@ -338,7 +388,7 @@ rotation = 0.0471239
 scale = Vector2(-0.810944, 1)
 color = Color(0, 0, 0, 1)
 
-[node name="GunName" type="Label" parent="BottomRight"]
+[node name="GunName" type="Label" parent="BottomRight" unique_id=1706831180]
 unique_name_in_owner = true
 visible = false
 layout_mode = 0
@@ -350,14 +400,14 @@ theme = ExtResource("5_8v68b")
 text = "AK-47"
 horizontal_alignment = 2
 
-[node name="AmmoCount" type="Control" parent="BottomRight"]
+[node name="AmmoCount" type="Control" parent="BottomRight" unique_id=1549461220]
 anchors_preset = 0
 offset_left = -21.5
 offset_top = -25.0
 offset_right = -21.5
 offset_bottom = -25.0
 
-[node name="ColorRect4" type="ColorRect" parent="BottomRight/AmmoCount"]
+[node name="ColorRect4" type="ColorRect" parent="BottomRight/AmmoCount" unique_id=378211267]
 layout_mode = 0
 offset_left = 0.61157227
 offset_top = -12.416687
@@ -367,7 +417,7 @@ rotation = 0.09064086
 scale = Vector2(-0.810944, 1)
 color = Color(0, 0, 0, 1)
 
-[node name="MagsLeft" type="Label" parent="BottomRight/AmmoCount"]
+[node name="MagsLeft" type="Label" parent="BottomRight/AmmoCount" unique_id=1237370696]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = -22.451782
@@ -377,7 +427,7 @@ offset_bottom = 12.499939
 theme = ExtResource("5_8v68b")
 text = "0"
 
-[node name="MagIcon" type="Sprite2D" parent="BottomRight/AmmoCount"]
+[node name="MagIcon" type="Sprite2D" parent="BottomRight/AmmoCount" unique_id=1631488394]
 unique_name_in_owner = true
 position = Vector2(-38.999973, -6.9999743)
 scale = Vector2(0.9642849, 0.9642849)
@@ -385,7 +435,7 @@ texture = ExtResource("8_6gmlr")
 region_enabled = true
 region_rect = Rect2(0, 0, 28, 28)
 
-[node name="Breath" type="ProgressBar" parent="."]
+[node name="Breath" type="ProgressBar" parent="." unique_id=547902577]
 visible = false
 anchors_preset = 2
 anchor_top = 1.0
@@ -400,7 +450,7 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="TopCenter" type="Control" parent="."]
+[node name="TopCenter" type="Control" parent="." unique_id=862190757]
 modulate = Color(1, 1, 0, 1)
 layout_mode = 3
 anchors_preset = 5
@@ -408,7 +458,7 @@ anchor_left = 0.5
 anchor_right = 0.5
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="TopCenter"]
+[node name="Label" type="Label" parent="TopCenter" unique_id=1788283015]
 layout_mode = 0
 offset_left = -100.0
 offset_right = 100.0
@@ -416,7 +466,7 @@ offset_bottom = 25.0
 theme = ExtResource("6_8v68b")
 horizontal_alignment = 1
 
-[node name="Time" type="Panel" parent="TopCenter"]
+[node name="Time" type="Panel" parent="TopCenter" unique_id=750786964]
 visible = false
 clip_contents = true
 layout_mode = 0
@@ -426,7 +476,7 @@ offset_right = -123.0
 offset_bottom = 69.0
 theme_override_styles/panel = ExtResource("9_6gmlr")
 
-[node name="TextureRect" type="TextureRect" parent="TopCenter/Time"]
+[node name="TextureRect" type="TextureRect" parent="TopCenter/Time" unique_id=1518821763]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 4.0
@@ -435,7 +485,7 @@ offset_bottom = 17.0
 scale = Vector2(3, 3)
 texture = ExtResource("10_a1pox")
 
-[node name="Compass" type="Control" parent="TopCenter"]
+[node name="Compass" type="Control" parent="TopCenter" unique_id=952971532]
 visible = false
 clip_contents = true
 anchors_preset = 0
@@ -444,7 +494,7 @@ offset_top = 25.0
 offset_right = 415.0
 offset_bottom = 53.0
 
-[node name="Panel" type="Panel" parent="TopCenter/Compass"]
+[node name="Panel" type="Panel" parent="TopCenter/Compass" unique_id=1397896021]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -455,20 +505,20 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3lnm2")
 
-[node name="ColorRect" type="ColorRect" parent="TopCenter/Compass"]
+[node name="ColorRect" type="ColorRect" parent="TopCenter/Compass" unique_id=1954352479]
 layout_mode = 0
 offset_top = 21.0
 offset_right = 3840.0
 offset_bottom = 23.0
 
-[node name="ColorRect2" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect2" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=1681008536]
 layout_mode = 0
 offset_left = 480.0
 offset_top = -2.0
 offset_right = 482.0
 offset_bottom = 4.0
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect2"]
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect2" unique_id=1779006321]
 layout_mode = 0
 offset_left = -5.0
 offset_top = -18.0
@@ -477,14 +527,14 @@ offset_bottom = 5.0
 theme = ExtResource("11_ettqu")
 text = "N"
 
-[node name="ColorRect7" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect7" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=1706349967]
 layout_mode = 0
 offset_left = 960.0
 offset_top = -2.0
 offset_right = 962.0
 offset_bottom = 4.0
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect7"]
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect7" unique_id=191668215]
 layout_mode = 0
 offset_left = -10.0
 offset_top = -18.0
@@ -494,14 +544,14 @@ theme = ExtResource("11_ettqu")
 text = "NE"
 horizontal_alignment = 1
 
-[node name="ColorRect3" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect3" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=1661783044]
 layout_mode = 0
 offset_left = 1440.0
 offset_top = -2.0
 offset_right = 1442.0
 offset_bottom = 4.0
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect3"]
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect3" unique_id=691508050]
 layout_mode = 0
 offset_left = -5.0
 offset_top = -18.0
@@ -510,14 +560,14 @@ offset_bottom = 5.0
 theme = ExtResource("11_ettqu")
 text = "E"
 
-[node name="ColorRect8" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect8" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=1476621490]
 layout_mode = 0
 offset_left = 1920.0
 offset_top = -2.0
 offset_right = 1922.0
 offset_bottom = 4.0
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect8"]
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect8" unique_id=386416128]
 layout_mode = 0
 offset_left = -10.0
 offset_top = -18.0
@@ -527,14 +577,14 @@ theme = ExtResource("11_ettqu")
 text = "SE"
 horizontal_alignment = 1
 
-[node name="ColorRect4" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect4" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=1513610140]
 layout_mode = 0
 offset_left = 2400.0
 offset_top = -2.0
 offset_right = 2402.0
 offset_bottom = 4.0
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect4"]
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect4" unique_id=418809364]
 layout_mode = 0
 offset_left = -5.0
 offset_top = -18.0
@@ -543,14 +593,14 @@ offset_bottom = 5.0
 theme = ExtResource("11_ettqu")
 text = "S"
 
-[node name="ColorRect9" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect9" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=792961414]
 layout_mode = 0
 offset_left = 2880.0
 offset_top = -2.0
 offset_right = 2882.0
 offset_bottom = 4.0
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect9"]
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect9" unique_id=1450874595]
 layout_mode = 0
 offset_left = -10.0
 offset_top = -18.0
@@ -560,14 +610,14 @@ theme = ExtResource("11_ettqu")
 text = "SW"
 horizontal_alignment = 1
 
-[node name="ColorRect5" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect5" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=1086765235]
 layout_mode = 0
 offset_left = 3360.0
 offset_top = -2.0
 offset_right = 3362.0
 offset_bottom = 4.0
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect5"]
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect5" unique_id=603375555]
 layout_mode = 0
 offset_left = -5.0
 offset_top = -18.0
@@ -576,14 +626,14 @@ offset_bottom = 5.0
 theme = ExtResource("11_ettqu")
 text = "W"
 
-[node name="ColorRect10" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect10" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=1128041174]
 layout_mode = 0
 offset_left = 3840.0
 offset_top = -2.0
 offset_right = 3842.0
 offset_bottom = 4.0
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect10"]
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect10" unique_id=751530822]
 layout_mode = 0
 offset_left = -10.0
 offset_top = -18.0
@@ -593,20 +643,20 @@ theme = ExtResource("11_ettqu")
 text = "NW"
 horizontal_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=489443034]
 layout_mode = 0
 offset_left = 3842.0
 offset_right = 4842.0
 offset_bottom = 2.0
 
-[node name="ColorRect2" type="ColorRect" parent="TopCenter/Compass/ColorRect/ColorRect"]
+[node name="ColorRect2" type="ColorRect" parent="TopCenter/Compass/ColorRect/ColorRect" unique_id=1089015558]
 layout_mode = 0
 offset_left = 478.0
 offset_top = -2.0
 offset_right = 480.0
 offset_bottom = 4.0
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect/ColorRect2"]
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect/ColorRect2" unique_id=1691100214]
 layout_mode = 0
 offset_left = -5.0
 offset_top = -18.0
@@ -615,12 +665,12 @@ offset_bottom = 5.0
 theme = ExtResource("11_ettqu")
 text = "N"
 
-[node name="ColorRect6" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect6" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=563775431]
 layout_mode = 0
 offset_left = -20.0
 offset_bottom = 2.0
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=270374956]
 visible = false
 material = SubResource("ShaderMaterial_pl43u")
 anchors_preset = 15
@@ -629,7 +679,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=407392284]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -645,7 +695,7 @@ grow_vertical = 2
 theme = ExtResource("13_hkj58")
 text = "Leave Area? Press 'F'"
 
-[node name="Tooltip" type="Label" parent="."]
+[node name="Tooltip" type="Label" parent="." unique_id=439765106]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -659,7 +709,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("13_hkj58")
 
-[node name="DeathUI" type="PanelContainer" parent="."]
+[node name="DeathUI" type="PanelContainer" parent="." unique_id=1105711246]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -674,43 +724,44 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("12_e0hn7")
 
-[node name="MarginContainer" type="MarginContainer" parent="DeathUI"]
+[node name="MarginContainer" type="MarginContainer" parent="DeathUI" unique_id=1583900716]
 layout_mode = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DeathUI/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathUI/MarginContainer" unique_id=1085511585]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="DeathUI/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="DeathUI/MarginContainer/VBoxContainer" unique_id=782091510]
 layout_mode = 2
 theme = ExtResource("13_8v68b")
 text = "You Died"
 horizontal_alignment = 1
 
-[node name="Control" type="Control" parent="DeathUI/MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="DeathUI/MarginContainer/VBoxContainer" unique_id=521500131]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DeathUI/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathUI/MarginContainer/VBoxContainer" unique_id=671877610]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("14_hkj58")
 
-[node name="LoadSave" parent="DeathUI/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("15_6gmlr")]
+[node name="LoadSave" parent="DeathUI/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1295250927 instance=ExtResource("15_6gmlr")]
 layout_mode = 2
 text = "Create New Character"
 
-[node name="Quit" parent="DeathUI/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("15_6gmlr")]
+[node name="Quit" parent="DeathUI/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2038295884 instance=ExtResource("15_6gmlr")]
 layout_mode = 2
 text = "Quit to Main Menu"
 
-[node name="Quit2" parent="DeathUI/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("15_6gmlr")]
+[node name="Quit2" parent="DeathUI/MarginContainer/VBoxContainer/VBoxContainer" unique_id=898834578 instance=ExtResource("15_6gmlr")]
 layout_mode = 2
 text = "Quit to Desktop"
 
+[connection signal="visibility_changed" from="BinocularOverlay" to="." method="_on_binocular_overlay_visibility_changed"]
 [connection signal="pressed" from="DeathUI/MarginContainer/VBoxContainer/VBoxContainer/LoadSave" to="." method="_on_load_save_pressed"]
 [connection signal="pressed" from="DeathUI/MarginContainer/VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="DeathUI/MarginContainer/VBoxContainer/VBoxContainer/Quit2" to="." method="_on_quit_2_pressed"]

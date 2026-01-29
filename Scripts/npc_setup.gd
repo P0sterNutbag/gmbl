@@ -11,9 +11,10 @@ var current_style := NpcStyle.new()
 @export var set_style := false : set = set_materials_editor
 var faction_colors := {
 	0 : Color(1.0, 1.0, 1.0, 1.0),
-	1: Color(0.0, 0.396, 0.325, 1.0),
-	2: Color(0.22, 0.0, 0.851, 1.0),
-	3: Color(0.569, 0.102, 0.122, 1.0)
+	1 : Color(1.0, 1.0, 1.0, 1.0),
+	2: Color(0.0, 0.396, 0.325, 1.0),
+	3: Color(0.22, 0.0, 0.851, 1.0),
+	4: Color(0.569, 0.102, 0.122, 1.0)
 }
 
 func _ready() -> void:

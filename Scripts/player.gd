@@ -49,7 +49,7 @@ var enter_functions: Dictionary
 var gun_state_functions: Dictionary
 var gun_exit_functions: Dictionary
 var gun_enter_functions: Dictionary
-var faction: FactionManager.factions
+var faction := FactionManager.factions.player
 var grenade_object = preload("res://Scenes/Bullets/grenade.tscn")
 const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var camera = $CameraAnchor/Camera3D
@@ -361,8 +361,15 @@ func state_walk(delta):
 	
 	# camera zoom
 	var target_fov
-	if Input.is_action_pressed("camera_zoom") and !Input.is_action_pressed("aim") and gun:
+	if Input.is_action_pressed("aim") and gun_state == gun_states.no_gun and PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.vision]:
 		camera_zoom = zoom_levels.zoom
+		Globals.ui.binocular_overlay.show()
+	elif gun_state == gun_states.ads:
+		camera_zoom = zoom_levels.ads
+	else:
+		camera_zoom = zoom_levels.regular
+		Globals.ui.binocular_overlay.hide()
+		
 	match (camera_zoom):
 		zoom_levels.regular:
 			target_fov = base_fov

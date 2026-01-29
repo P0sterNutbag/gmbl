@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cc458wgoeu6t4"]
+[gd_scene format=3 uid="uid://cc458wgoeu6t4"]
 
 [ext_resource type="Script" uid="uid://dr73ivowve6xe" path="res://Scripts/survival_ui.gd" id="1_e5c6o"]
 [ext_resource type="Texture2D" uid="uid://bcuhfb0bfkqh0" path="res://Art/Textures/hunger icon.png" id="2_guqia"]
@@ -31,101 +31,17 @@
 bg_color = Color(0, 0, 0, 0.784314)
 border_color = Color(1, 1, 0, 1)
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="CanvasLayer" type="CanvasLayer" unique_id=691466196]
 process_mode = 3
 script = ExtResource("1_e5c6o")
 
-[node name="StatsAnchor" type="VBoxContainer" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -48.5
-offset_top = -20.0
-offset_right = 48.5
-offset_bottom = 19.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 2
-
-[node name="VBoxContainer" type="HBoxContainer" parent="StatsAnchor"]
-modulate = Color(1, 1, 0, 1)
-layout_mode = 2
-
-[node name="Hunger" type="TextureRect" parent="StatsAnchor/VBoxContainer"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-texture = ExtResource("2_guqia")
-expand_mode = 2
-script = ExtResource("2_k4cvi")
-stat_name = "hunger"
-show_treshold = 0.75
-
-[node name="Thirst" type="TextureRect" parent="StatsAnchor/VBoxContainer"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-texture = ExtResource("4_k64vs")
-expand_mode = 2
-script = ExtResource("2_k4cvi")
-stat_name = "thirst"
-show_treshold = 0.75
-
-[node name="Sleep" type="TextureRect" parent="StatsAnchor/VBoxContainer"]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-texture = ExtResource("5_13ham")
-expand_mode = 2
-script = ExtResource("2_k4cvi")
-stat_name = "sleep"
-
-[node name="Health" type="Control" parent="StatsAnchor" node_paths=PackedStringArray("progress_bar")]
-custom_minimum_size = Vector2(97, 20)
-layout_mode = 2
-script = ExtResource("2_k4cvi")
-stat_name = "current_hp"
-show_treshold = 1.0
-progress_bar = NodePath("ProgressBar")
-metadata/_edit_group_ = true
-
-[node name="ColorRect4" type="ColorRect" parent="StatsAnchor/Health"]
-visible = false
-layout_mode = 0
-offset_left = 108.0
-offset_top = 1.0
-offset_right = 242.0
-offset_bottom = 16.0
-rotation = -0.0471239
-scale = Vector2(-0.810944, 0.690912)
-color = Color(0, 0, 0, 1)
-
-[node name="GunName" type="Label" parent="StatsAnchor/Health"]
-layout_mode = 0
-offset_right = 150.99962
-offset_bottom = 28.0
-theme = ExtResource("3_1kfkr")
-text = "HP"
-
-[node name="ProgressBar" type="ProgressBar" parent="StatsAnchor/Health"]
-layout_mode = 0
-offset_left = 30.5
-offset_top = 4.0
-offset_right = 96.5
-offset_bottom = 17.0
-theme = ExtResource("4_1kfkr")
-max_value = 1.0
-value = 1.0
-show_percentage = false
-
-[node name="TopLeft" type="Control" parent="."]
+[node name="TopLeft" type="Control" parent="." unique_id=470543974]
 visible = false
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
 
-[node name="Stats" type="VBoxContainer" parent="TopLeft"]
+[node name="Stats" type="VBoxContainer" parent="TopLeft" unique_id=567579693]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 32.0
@@ -133,14 +49,14 @@ offset_right = 155.0
 offset_bottom = 100.0
 mouse_filter = 2
 
-[node name="Hunger" type="Control" parent="TopLeft/Stats"]
+[node name="Hunger" type="Control" parent="TopLeft/Stats" unique_id=1017928516]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "hunger"
 metadata/_edit_group_ = true
 
-[node name="ColorRect5" type="ColorRect" parent="TopLeft/Stats/Hunger"]
+[node name="ColorRect5" type="ColorRect" parent="TopLeft/Stats/Hunger" unique_id=1225194941]
 layout_mode = 0
 offset_left = 109.0
 offset_top = 1.0
@@ -150,7 +66,7 @@ rotation = -0.0471239
 scale = Vector2(-0.810944, 0.690912)
 color = Color(0, 0, 0, 1)
 
-[node name="GunName" type="Label" parent="TopLeft/Stats/Hunger"]
+[node name="GunName" type="Label" parent="TopLeft/Stats/Hunger" unique_id=1247534153]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 9.13538
@@ -160,7 +76,7 @@ offset_bottom = 28.5
 theme = ExtResource("3_1kfkr")
 text = "Hunger"
 
-[node name="ProgressBar" type="ProgressBar" parent="TopLeft/Stats/Hunger"]
+[node name="ProgressBar" type="ProgressBar" parent="TopLeft/Stats/Hunger" unique_id=497089911]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 90.0
@@ -172,14 +88,14 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="Water" type="Control" parent="TopLeft/Stats"]
+[node name="Water" type="Control" parent="TopLeft/Stats" unique_id=124366791]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "thirst"
 metadata/_edit_group_ = true
 
-[node name="ColorRect4" type="ColorRect" parent="TopLeft/Stats/Water"]
+[node name="ColorRect4" type="ColorRect" parent="TopLeft/Stats/Water" unique_id=770281527]
 layout_mode = 0
 offset_left = 108.0
 offset_top = 1.0
@@ -189,7 +105,7 @@ rotation = -0.0471239
 scale = Vector2(-0.810944, 0.690912)
 color = Color(0, 0, 0, 1)
 
-[node name="GunName" type="Label" parent="TopLeft/Stats/Water"]
+[node name="GunName" type="Label" parent="TopLeft/Stats/Water" unique_id=544401606]
 layout_mode = 0
 offset_left = 9.13538
 offset_top = 0.5
@@ -198,7 +114,7 @@ offset_bottom = 28.5
 theme = ExtResource("3_1kfkr")
 text = "Thirst"
 
-[node name="ProgressBar" type="ProgressBar" parent="TopLeft/Stats/Water"]
+[node name="ProgressBar" type="ProgressBar" parent="TopLeft/Stats/Water" unique_id=69228372]
 layout_mode = 0
 offset_left = 90.0
 offset_top = 6.0
@@ -209,14 +125,14 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="Sleep" type="Control" parent="TopLeft/Stats"]
+[node name="Sleep" type="Control" parent="TopLeft/Stats" unique_id=1766688199]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "sleep"
 metadata/_edit_group_ = true
 
-[node name="ColorRect4" type="ColorRect" parent="TopLeft/Stats/Sleep"]
+[node name="ColorRect4" type="ColorRect" parent="TopLeft/Stats/Sleep" unique_id=843225441]
 layout_mode = 0
 offset_left = 103.0
 offset_top = 1.0
@@ -226,7 +142,7 @@ rotation = -0.0471239
 scale = Vector2(-0.810944, 0.690912)
 color = Color(0, 0, 0, 1)
 
-[node name="GunName" type="Label" parent="TopLeft/Stats/Sleep"]
+[node name="GunName" type="Label" parent="TopLeft/Stats/Sleep" unique_id=1204628396]
 layout_mode = 0
 offset_left = 9.13538
 offset_top = 0.5
@@ -235,7 +151,7 @@ offset_bottom = 28.5
 theme = ExtResource("3_1kfkr")
 text = "Sleep"
 
-[node name="ProgressBar" type="ProgressBar" parent="TopLeft/Stats/Sleep"]
+[node name="ProgressBar" type="ProgressBar" parent="TopLeft/Stats/Sleep" unique_id=1665732271]
 layout_mode = 0
 offset_left = 90.0
 offset_top = 6.0
@@ -246,7 +162,7 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="TopCenter" type="Control" parent="."]
+[node name="TopCenter" type="Control" parent="." unique_id=1690383952]
 modulate = Color(1, 1, 0, 1)
 layout_mode = 3
 anchors_preset = 5
@@ -255,7 +171,7 @@ anchor_right = 0.5
 grow_horizontal = 2
 mouse_filter = 2
 
-[node name="Compass" type="Control" parent="TopCenter"]
+[node name="Compass" type="Control" parent="TopCenter" unique_id=1584721456]
 clip_contents = true
 anchors_preset = 0
 offset_left = -414.0
@@ -265,7 +181,7 @@ offset_bottom = 70.0
 mouse_filter = 2
 script = ExtResource("8_2dyl4")
 
-[node name="Panel" type="Panel" parent="TopCenter/Compass"]
+[node name="Panel" type="Panel" parent="TopCenter/Compass" unique_id=1581310652]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -277,14 +193,14 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_agdr0")
 
-[node name="ColorRect" type="ColorRect" parent="TopCenter/Compass"]
+[node name="ColorRect" type="ColorRect" parent="TopCenter/Compass" unique_id=630727920]
 layout_mode = 0
 offset_top = 21.0
 offset_right = 3840.0
 offset_bottom = 23.0
 mouse_filter = 2
 
-[node name="ColorRect2" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect2" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=1388339958]
 layout_mode = 0
 offset_left = 480.0
 offset_top = -2.0
@@ -292,7 +208,7 @@ offset_right = 482.0
 offset_bottom = 4.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect2"]
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect2" unique_id=1197349776]
 layout_mode = 0
 offset_left = -5.0
 offset_top = -18.0
@@ -301,7 +217,7 @@ offset_bottom = 5.0
 theme = ExtResource("3_1kfkr")
 text = "N"
 
-[node name="ColorRect7" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect7" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=352579803]
 layout_mode = 0
 offset_left = 960.0
 offset_top = -2.0
@@ -309,7 +225,7 @@ offset_right = 962.0
 offset_bottom = 4.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect7"]
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect7" unique_id=1643508389]
 layout_mode = 0
 offset_left = -10.0
 offset_top = -18.0
@@ -319,7 +235,7 @@ theme = ExtResource("3_1kfkr")
 text = "NE"
 horizontal_alignment = 1
 
-[node name="ColorRect3" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect3" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=222245213]
 layout_mode = 0
 offset_left = 1440.0
 offset_top = -2.0
@@ -327,7 +243,7 @@ offset_right = 1442.0
 offset_bottom = 4.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect3"]
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect3" unique_id=1803490159]
 layout_mode = 0
 offset_left = -5.0
 offset_top = -18.0
@@ -336,7 +252,7 @@ offset_bottom = 5.0
 theme = ExtResource("3_1kfkr")
 text = "E"
 
-[node name="ColorRect8" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect8" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=721377248]
 layout_mode = 0
 offset_left = 1920.0
 offset_top = -2.0
@@ -344,7 +260,7 @@ offset_right = 1922.0
 offset_bottom = 4.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect8"]
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect8" unique_id=1475237338]
 layout_mode = 0
 offset_left = -10.0
 offset_top = -18.0
@@ -354,7 +270,7 @@ theme = ExtResource("3_1kfkr")
 text = "SE"
 horizontal_alignment = 1
 
-[node name="ColorRect4" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect4" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=465390647]
 layout_mode = 0
 offset_left = 2400.0
 offset_top = -2.0
@@ -362,7 +278,7 @@ offset_right = 2402.0
 offset_bottom = 4.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect4"]
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect4" unique_id=1919258290]
 layout_mode = 0
 offset_left = -5.0
 offset_top = -18.0
@@ -371,7 +287,7 @@ offset_bottom = 5.0
 theme = ExtResource("3_1kfkr")
 text = "S"
 
-[node name="ColorRect9" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect9" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=1690198561]
 layout_mode = 0
 offset_left = 2880.0
 offset_top = -2.0
@@ -379,7 +295,7 @@ offset_right = 2882.0
 offset_bottom = 4.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect9"]
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect9" unique_id=1071677931]
 layout_mode = 0
 offset_left = -10.0
 offset_top = -18.0
@@ -389,7 +305,7 @@ theme = ExtResource("3_1kfkr")
 text = "SW"
 horizontal_alignment = 1
 
-[node name="ColorRect5" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect5" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=466393616]
 layout_mode = 0
 offset_left = 3360.0
 offset_top = -2.0
@@ -397,7 +313,7 @@ offset_right = 3362.0
 offset_bottom = 4.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect5"]
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect5" unique_id=794979202]
 layout_mode = 0
 offset_left = -5.0
 offset_top = -18.0
@@ -406,7 +322,7 @@ offset_bottom = 5.0
 theme = ExtResource("3_1kfkr")
 text = "W"
 
-[node name="ColorRect10" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect10" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=812909518]
 layout_mode = 0
 offset_left = 3840.0
 offset_top = -2.0
@@ -414,7 +330,7 @@ offset_right = 3842.0
 offset_bottom = 4.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect10"]
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect10" unique_id=421347480]
 layout_mode = 0
 offset_left = -10.0
 offset_top = -18.0
@@ -424,14 +340,14 @@ theme = ExtResource("3_1kfkr")
 text = "NW"
 horizontal_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=272971]
 layout_mode = 0
 offset_left = 3842.0
 offset_right = 4842.0
 offset_bottom = 2.0
 mouse_filter = 2
 
-[node name="ColorRect2" type="ColorRect" parent="TopCenter/Compass/ColorRect/ColorRect"]
+[node name="ColorRect2" type="ColorRect" parent="TopCenter/Compass/ColorRect/ColorRect" unique_id=2095436774]
 layout_mode = 0
 offset_left = 478.0
 offset_top = -2.0
@@ -439,7 +355,7 @@ offset_right = 480.0
 offset_bottom = 4.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect/ColorRect2"]
+[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect/ColorRect2" unique_id=1711857735]
 layout_mode = 0
 offset_left = -5.0
 offset_top = -18.0
@@ -448,23 +364,108 @@ offset_bottom = 5.0
 theme = ExtResource("3_1kfkr")
 text = "N"
 
-[node name="ColorRect6" type="ColorRect" parent="TopCenter/Compass/ColorRect"]
+[node name="ColorRect6" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=929589932]
 layout_mode = 0
 offset_left = -20.0
 offset_bottom = 2.0
 mouse_filter = 2
 
-[node name="Markers" type="Control" parent="TopCenter/Compass"]
+[node name="Markers" type="Control" parent="TopCenter/Compass" unique_id=1979270960]
 anchors_preset = 0
 offset_top = 22.0
 offset_bottom = 22.0
 
-[node name="QuestMarker" parent="TopCenter/Compass/Markers" instance=ExtResource("9_e5c6o")]
+[node name="QuestMarker" parent="TopCenter/Compass/Markers" unique_id=542182474 instance=ExtResource("9_e5c6o")]
 layout_mode = 0
 offset_left = 829.0
 offset_right = 829.0
 
-[node name="PlayerInventory" type="HBoxContainer" parent="."]
+[node name="StatsAnchor" type="VBoxContainer" parent="." unique_id=287376221]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = -27.5
+offset_right = 49.0
+offset_bottom = 26.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+
+[node name="VBoxContainer" type="HBoxContainer" parent="StatsAnchor" unique_id=77679806]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+
+[node name="Hunger" type="TextureRect" parent="StatsAnchor/VBoxContainer" unique_id=177523521]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_guqia")
+expand_mode = 2
+script = ExtResource("2_k4cvi")
+stat_name = "hunger"
+show_treshold = 0.75
+
+[node name="Thirst" type="TextureRect" parent="StatsAnchor/VBoxContainer" unique_id=141843956]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("4_k64vs")
+expand_mode = 2
+script = ExtResource("2_k4cvi")
+stat_name = "thirst"
+show_treshold = 0.75
+
+[node name="Sleep" type="TextureRect" parent="StatsAnchor/VBoxContainer" unique_id=1847932044]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("5_13ham")
+expand_mode = 2
+script = ExtResource("2_k4cvi")
+stat_name = "sleep"
+
+[node name="Health" type="Control" parent="StatsAnchor" unique_id=227173842 node_paths=PackedStringArray("progress_bar")]
+custom_minimum_size = Vector2(97, 20)
+layout_mode = 2
+script = ExtResource("2_k4cvi")
+stat_name = "current_hp"
+show_treshold = 1.0
+progress_bar = NodePath("ProgressBar")
+metadata/_edit_group_ = true
+
+[node name="ColorRect4" type="ColorRect" parent="StatsAnchor/Health" unique_id=1138805042]
+visible = false
+layout_mode = 0
+offset_left = 108.0
+offset_top = 1.0
+offset_right = 242.0
+offset_bottom = 16.0
+rotation = -0.0471239
+scale = Vector2(-0.810944, 0.690912)
+color = Color(0, 0, 0, 1)
+
+[node name="GunName" type="Label" parent="StatsAnchor/Health" unique_id=359737324]
+layout_mode = 0
+offset_right = 150.99962
+offset_bottom = 28.0
+theme = ExtResource("3_1kfkr")
+text = "HP"
+
+[node name="ProgressBar" type="ProgressBar" parent="StatsAnchor/Health" unique_id=429155260]
+layout_mode = 0
+offset_left = 30.5
+offset_top = 4.0
+offset_right = 96.5
+offset_bottom = 17.0
+theme = ExtResource("4_1kfkr")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="PlayerInventory" type="HBoxContainer" parent="." unique_id=1944515002]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -479,27 +480,27 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 64
 
-[node name="Inventory" parent="PlayerInventory" instance=ExtResource("9_to4rm")]
+[node name="Inventory" parent="PlayerInventory" unique_id=1175272954 instance=ExtResource("9_to4rm")]
 layout_mode = 2
 size_flags_horizontal = 3
 can_drop_items = true
 
-[node name="Control" type="Control" parent="PlayerInventory/Inventory"]
+[node name="Control" type="Control" parent="PlayerInventory/Inventory" unique_id=1931966580]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Button" parent="PlayerInventory/Inventory/Control" instance=ExtResource("10_0pkni")]
+[node name="Button" parent="PlayerInventory/Inventory/Control" unique_id=1989934339 instance=ExtResource("10_0pkni")]
 layout_mode = 0
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 24.0
 offset_bottom = 24.0
 
-[node name="EquipmentSlots" type="VBoxContainer" parent="PlayerInventory"]
+[node name="EquipmentSlots" type="VBoxContainer" parent="PlayerInventory" unique_id=412714387]
 layout_mode = 2
 theme_override_constants/separation = 48
 
-[node name="Equipment" type="PanelContainer" parent="PlayerInventory/EquipmentSlots"]
+[node name="Equipment" type="PanelContainer" parent="PlayerInventory/EquipmentSlots" unique_id=1298358113]
 custom_minimum_size = Vector2(497, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -507,42 +508,42 @@ size_flags_vertical = 0
 mouse_filter = 2
 theme = ExtResource("11_0pkni")
 
-[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/EquipmentSlots/Equipment"]
+[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/EquipmentSlots/Equipment" unique_id=399500045]
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("12_2dyl4")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer" unique_id=2001729442]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer" unique_id=1143779541]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/HBoxContainer" unique_id=157979190]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("15_1lobq")
 text = "Weapons"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer" unique_id=1443266804]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="MenuItem" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
+[node name="MenuItem" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=278589346 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Primary: "
 script = ExtResource("19_jtf3n")
 slot = 0
 
-[node name="MenuItem2" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
+[node name="MenuItem2" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2089455132 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Secondary: "
 script = ExtResource("19_jtf3n")
 slot = 1
 
-[node name="Equipment2" type="PanelContainer" parent="PlayerInventory/EquipmentSlots"]
+[node name="Equipment2" type="PanelContainer" parent="PlayerInventory/EquipmentSlots" unique_id=721082901]
 custom_minimum_size = Vector2(497, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -550,42 +551,42 @@ size_flags_vertical = 0
 mouse_filter = 2
 theme = ExtResource("11_0pkni")
 
-[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/EquipmentSlots/Equipment2"]
+[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/EquipmentSlots/Equipment2" unique_id=804099000]
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("12_2dyl4")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer" unique_id=956206984]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer" unique_id=312672737]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1654762986]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("15_1lobq")
 text = "Armor"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer" unique_id=1511113137]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="MenuItem" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
+[node name="MenuItem" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1239746556 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Head: "
 script = ExtResource("19_jtf3n")
 slot = 2
 
-[node name="MenuItem2" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
+[node name="MenuItem2" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1772212904 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Body: "
 script = ExtResource("19_jtf3n")
 slot = 3
 
-[node name="Equipment3" type="PanelContainer" parent="PlayerInventory/EquipmentSlots"]
+[node name="Equipment3" type="PanelContainer" parent="PlayerInventory/EquipmentSlots" unique_id=635198306]
 custom_minimum_size = Vector2(497, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -593,49 +594,48 @@ size_flags_vertical = 0
 mouse_filter = 2
 theme = ExtResource("11_0pkni")
 
-[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/EquipmentSlots/Equipment3"]
+[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/EquipmentSlots/Equipment3" unique_id=1246217342]
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("12_2dyl4")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer" unique_id=2105875397]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer" unique_id=495543939]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1773777356]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("15_1lobq")
 text = "Utility"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer" unique_id=968152748]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="MenuItem" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
+[node name="MenuItem" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2011610297 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Nav: "
 script = ExtResource("19_jtf3n")
 slot = 4
 
-[node name="MenuItem2" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
+[node name="MenuItem2" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=711745494 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Light: "
 script = ExtResource("19_jtf3n")
 slot = 5
 
-[node name="MenuItem3" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("16_1lobq")]
-visible = false
+[node name="MenuItem3" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1213479984 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Vision: "
 script = ExtResource("19_jtf3n")
 slot = 6
 
-[node name="TransferInventory" type="HBoxContainer" parent="."]
+[node name="TransferInventory" type="HBoxContainer" parent="." unique_id=483947959]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -650,7 +650,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 64
 
-[node name="Inventory" parent="TransferInventory" node_paths=PackedStringArray("opposing_ui") instance=ExtResource("9_to4rm")]
+[node name="Inventory" parent="TransferInventory" unique_id=1473971546 node_paths=PackedStringArray("opposing_ui") instance=ExtResource("9_to4rm")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -658,25 +658,25 @@ mode = 1
 can_drop_items = true
 opposing_ui = NodePath("../Inventory2")
 
-[node name="Control" type="Control" parent="TransferInventory/Inventory"]
+[node name="Control" type="Control" parent="TransferInventory/Inventory" unique_id=656685976]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Button" parent="TransferInventory/Inventory/Control" instance=ExtResource("10_0pkni")]
+[node name="Button" parent="TransferInventory/Inventory/Control" unique_id=1870459299 instance=ExtResource("10_0pkni")]
 layout_mode = 0
 offset_left = -2.0
 offset_top = 0.0
 offset_right = 22.0
 offset_bottom = 24.0
 
-[node name="Inventory2" parent="TransferInventory" node_paths=PackedStringArray("opposing_ui") instance=ExtResource("9_to4rm")]
+[node name="Inventory2" parent="TransferInventory" unique_id=515701084 node_paths=PackedStringArray("opposing_ui") instance=ExtResource("9_to4rm")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mode = 1
 opposing_ui = NodePath("../Inventory")
 
-[node name="Journal" type="HBoxContainer" parent="." node_paths=PackedStringArray("item_container")]
+[node name="Journal" type="HBoxContainer" parent="." unique_id=68908754 node_paths=PackedStringArray("item_container")]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -692,83 +692,83 @@ script = ExtResource("10_vghdt")
 item_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/ItemContainer")
 pause_on_open = true
 
-[node name="PanelContainer" type="PanelContainer" parent="Journal"]
+[node name="PanelContainer" type="PanelContainer" parent="Journal" unique_id=517280929]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme = ExtResource("11_0pkni")
 
-[node name="MarginContainer" type="MarginContainer" parent="Journal/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Journal/PanelContainer" unique_id=152674551]
 layout_mode = 2
 theme = ExtResource("12_2dyl4")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Journal/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Journal/PanelContainer/MarginContainer" unique_id=1718536604]
 layout_mode = 2
 theme = ExtResource("13_oq622")
 
-[node name="Label" type="Label" parent="Journal/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Journal/PanelContainer/MarginContainer/VBoxContainer" unique_id=1523094280]
 layout_mode = 2
 theme = ExtResource("14_e5c6o")
 text = "Jobs"
 
-[node name="Control" type="Control" parent="Journal/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="Journal/PanelContainer/MarginContainer/VBoxContainer" unique_id=1482878524]
 layout_mode = 2
 
-[node name="ItemContainer" type="VBoxContainer" parent="Journal/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ItemContainer" type="VBoxContainer" parent="Journal/PanelContainer/MarginContainer/VBoxContainer" unique_id=215257019]
 layout_mode = 2
 theme = ExtResource("13_oq622")
 script = ExtResource("15_k4cvi")
 
-[node name="Control2" type="Control" parent="Journal/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Control2" type="Control" parent="Journal/PanelContainer/MarginContainer/VBoxContainer" unique_id=2000527007]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Control" type="Control" parent="Journal/PanelContainer"]
+[node name="Control" type="Control" parent="Journal/PanelContainer" unique_id=612097283]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Button" parent="Journal/PanelContainer/Control" instance=ExtResource("10_0pkni")]
+[node name="Button" parent="Journal/PanelContainer/Control" unique_id=1714172230 instance=ExtResource("10_0pkni")]
 layout_mode = 0
 offset_left = -2.0
 offset_top = 0.0
 offset_right = 22.0
 offset_bottom = 24.0
 
-[node name="PanelContainer2" type="PanelContainer" parent="Journal"]
+[node name="PanelContainer2" type="PanelContainer" parent="Journal" unique_id=1580735764]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("11_0pkni")
 
-[node name="MarginContainer" type="MarginContainer" parent="Journal/PanelContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="Journal/PanelContainer2" unique_id=1149821387]
 layout_mode = 2
 theme = ExtResource("12_2dyl4")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Journal/PanelContainer2/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Journal/PanelContainer2/MarginContainer" unique_id=1483235939]
 layout_mode = 2
 theme = ExtResource("13_oq622")
 
-[node name="PanelContainer" type="PanelContainer" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer" unique_id=697803810]
 visible = false
 custom_minimum_size = Vector2(0, 560)
 layout_mode = 2
 
-[node name="Title" type="Label" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer" unique_id=903097414]
 layout_mode = 2
 theme = ExtResource("5_jtf3n")
 
-[node name="Description" type="Label" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+[node name="Description" type="Label" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1681317309]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 theme = ExtResource("5_jtf3n")
 autowrap_mode = 2
 
-[node name="Reward" type="Label" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+[node name="Reward" type="Label" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1628463805]
 layout_mode = 2
 theme = ExtResource("5_jtf3n")
 
-[node name="Control" type="Control" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer" unique_id=735309877]
 layout_mode = 2
 
-[node name="PauseMenu" parent="." instance=ExtResource("19_oq622")]
+[node name="PauseMenu" parent="." unique_id=74152501 instance=ExtResource("19_oq622")]
 visible = false
 mouse_filter = 2
 
@@ -786,7 +786,7 @@ offset_bottom = 152.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DeathMenu" type="PanelContainer" parent="."]
+[node name="DeathMenu" type="PanelContainer" parent="." unique_id=1292729525]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -803,46 +803,46 @@ mouse_filter = 2
 theme = ExtResource("11_0pkni")
 script = ExtResource("20_1kfkr")
 
-[node name="MarginContainer" type="MarginContainer" parent="DeathMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="DeathMenu" unique_id=54190674]
 layout_mode = 2
 theme = ExtResource("12_2dyl4")
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="DeathMenu/MarginContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="DeathMenu/MarginContainer" unique_id=672444887]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="DeathMenu/MarginContainer/VBoxContainer3"]
+[node name="Label" type="Label" parent="DeathMenu/MarginContainer/VBoxContainer3" unique_id=93651665]
 layout_mode = 2
 theme = ExtResource("14_e5c6o")
 text = "You are dying"
 horizontal_alignment = 1
 
-[node name="Control" type="Control" parent="DeathMenu/MarginContainer/VBoxContainer3"]
+[node name="Control" type="Control" parent="DeathMenu/MarginContainer/VBoxContainer3" unique_id=231117147]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DeathMenu/MarginContainer/VBoxContainer3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathMenu/MarginContainer/VBoxContainer3" unique_id=1030493009]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("24_8egi5")
 script = ExtResource("15_k4cvi")
 
-[node name="TourniquetButton" parent="DeathMenu/MarginContainer/VBoxContainer3/VBoxContainer" instance=ExtResource("22_jtf3n")]
+[node name="TourniquetButton" parent="DeathMenu/MarginContainer/VBoxContainer3/VBoxContainer" unique_id=702260284 instance=ExtResource("22_jtf3n")]
 layout_mode = 2
 disabled = true
 text = "Tourniquet"
 
-[node name="MorphineButton" parent="DeathMenu/MarginContainer/VBoxContainer3/VBoxContainer" instance=ExtResource("22_jtf3n")]
+[node name="MorphineButton" parent="DeathMenu/MarginContainer/VBoxContainer3/VBoxContainer" unique_id=1151149509 instance=ExtResource("22_jtf3n")]
 layout_mode = 2
 disabled = true
 text = "Morphine"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="DeathMenu/MarginContainer/VBoxContainer3"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="DeathMenu/MarginContainer/VBoxContainer3" unique_id=1829121551]
 layout_mode = 2
 
-[node name="GiveUpButton" parent="DeathMenu/MarginContainer/VBoxContainer3/VBoxContainer2" instance=ExtResource("22_jtf3n")]
+[node name="GiveUpButton" parent="DeathMenu/MarginContainer/VBoxContainer3/VBoxContainer2" unique_id=1138729477 instance=ExtResource("22_jtf3n")]
 layout_mode = 2
 text = "Give up"
 
-[node name="ProgressMenu" type="PanelContainer" parent="." node_paths=PackedStringArray("item_container")]
+[node name="ProgressMenu" type="PanelContainer" parent="." unique_id=2103221503 node_paths=PackedStringArray("item_container")]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -860,52 +860,52 @@ theme = ExtResource("11_0pkni")
 script = ExtResource("24_guqia")
 item_container = NodePath("MarginContainer/VBoxContainer3/VBoxContainer2")
 
-[node name="MarginContainer" type="MarginContainer" parent="ProgressMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="ProgressMenu" unique_id=1695793538]
 layout_mode = 2
 theme = ExtResource("12_2dyl4")
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="ProgressMenu/MarginContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="ProgressMenu/MarginContainer" unique_id=1502263668]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ProgressMenu/MarginContainer/VBoxContainer3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ProgressMenu/MarginContainer/VBoxContainer3" unique_id=146640785]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("24_8egi5")
 
-[node name="Label" type="Label" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer"]
+[node name="Label" type="Label" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer" unique_id=16818332]
 layout_mode = 2
 theme = ExtResource("14_e5c6o")
 text = "You had a good run"
 horizontal_alignment = 1
 
-[node name="Control" type="Control" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer"]
+[node name="Control" type="Control" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer" unique_id=609614771]
 layout_mode = 2
 
-[node name="Time" type="Label" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer"]
+[node name="Time" type="Label" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer" unique_id=1718056652]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("5_jtf3n")
 text = "Time: 0:00"
 
-[node name="Kills" type="Label" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer"]
+[node name="Kills" type="Label" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer" unique_id=114548956]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("5_jtf3n")
 text = "Kills: 0"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer" unique_id=194906573]
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="Level" type="Label" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer"]
+[node name="Level" type="Label" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer" unique_id=1824986482]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("5_jtf3n")
 text = "Level: 1"
 
-[node name="LevelBar" type="ProgressBar" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer"]
+[node name="LevelBar" type="ProgressBar" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer/HBoxContainer" unique_id=289185360]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
@@ -915,22 +915,305 @@ theme = ExtResource("4_1kfkr")
 value = 50.0
 show_percentage = false
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="ProgressMenu/MarginContainer/VBoxContainer3"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="ProgressMenu/MarginContainer/VBoxContainer3" unique_id=1235512260]
 layout_mode = 2
 alignment = 2
 script = ExtResource("15_k4cvi")
 
-[node name="Continue" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2" instance=ExtResource("16_1lobq")]
+[node name="Continue" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2" unique_id=1136655063 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Create New Character"
 
-[node name="Quit" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2" instance=ExtResource("16_1lobq")]
+[node name="Quit" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2" unique_id=615324257 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Quit to Main Menu"
 
-[node name="Quit2" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2" instance=ExtResource("16_1lobq")]
+[node name="Quit2" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2" unique_id=915267220 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Quit to Desktop"
+
+[node name="Menus" type="Control" parent="." unique_id=1904849120]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus" unique_id=380085495]
+custom_minimum_size = Vector2(0, 878)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -551.0
+offset_top = -433.0
+offset_right = 551.0
+offset_bottom = 433.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("13_oq622")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menus/VBoxContainer" unique_id=523538809]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Tabs" type="PanelContainer" parent="Menus/VBoxContainer/HBoxContainer" unique_id=1672038289]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("11_0pkni")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menus/VBoxContainer/HBoxContainer/Tabs" unique_id=337412086]
+layout_mode = 2
+theme = ExtResource("12_2dyl4")
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menus/VBoxContainer/HBoxContainer/Tabs/MarginContainer" unique_id=1565238932]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="InventoryTab" parent="Menus/VBoxContainer/HBoxContainer/Tabs/MarginContainer/HBoxContainer" unique_id=1697876949 instance=ExtResource("22_jtf3n")]
+layout_mode = 2
+size_flags_horizontal = 1
+text = "Inventory"
+
+[node name="JournalTab" parent="Menus/VBoxContainer/HBoxContainer/Tabs/MarginContainer/HBoxContainer" unique_id=1399101072 instance=ExtResource("22_jtf3n")]
+layout_mode = 2
+size_flags_horizontal = 1
+text = "Joural"
+
+[node name="ExitMenu" parent="Menus/VBoxContainer/HBoxContainer" unique_id=1880150906 instance=ExtResource("10_0pkni")]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+script = null
+
+[node name="PlayerInventory" type="HBoxContainer" parent="Menus/VBoxContainer" unique_id=2000109519]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="Inventory" parent="Menus/VBoxContainer/PlayerInventory" unique_id=41064814 instance=ExtResource("9_to4rm")]
+layout_mode = 2
+size_flags_horizontal = 3
+can_drop_items = true
+
+[node name="EquipmentSlots" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory" unique_id=992338017]
+layout_mode = 2
+theme_override_constants/separation = 48
+
+[node name="Equipment" type="PanelContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots" unique_id=1897544360]
+custom_minimum_size = Vector2(497, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("11_0pkni")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment" unique_id=377642546]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("12_2dyl4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment/MarginContainer" unique_id=792834766]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer" unique_id=1504109530]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/HBoxContainer" unique_id=522672607]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("15_1lobq")
+text = "Weapons"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer" unique_id=809566310]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MenuItem" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=691497777 instance=ExtResource("16_1lobq")]
+layout_mode = 2
+text = "Primary: "
+script = ExtResource("19_jtf3n")
+slot = 0
+
+[node name="MenuItem2" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2102063767 instance=ExtResource("16_1lobq")]
+layout_mode = 2
+text = "Secondary: "
+script = ExtResource("19_jtf3n")
+slot = 1
+
+[node name="Equipment2" type="PanelContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots" unique_id=283930891]
+custom_minimum_size = Vector2(497, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("11_0pkni")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment2" unique_id=103339116]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("12_2dyl4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer" unique_id=1365533328]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer" unique_id=428010743]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=35236870]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("15_1lobq")
+text = "Armor"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer" unique_id=1655033096]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MenuItem" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1534086002 instance=ExtResource("16_1lobq")]
+layout_mode = 2
+text = "Head: "
+script = ExtResource("19_jtf3n")
+slot = 2
+
+[node name="MenuItem2" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1989053881 instance=ExtResource("16_1lobq")]
+layout_mode = 2
+text = "Body: "
+script = ExtResource("19_jtf3n")
+slot = 3
+
+[node name="Equipment3" type="PanelContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots" unique_id=505820610]
+custom_minimum_size = Vector2(497, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("11_0pkni")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3" unique_id=70000994]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("12_2dyl4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer" unique_id=294180792]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer" unique_id=1739025953]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1256762960]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("15_1lobq")
+text = "Utility"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer" unique_id=939226072]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MenuItem" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=621179552 instance=ExtResource("16_1lobq")]
+layout_mode = 2
+text = "Nav: "
+script = ExtResource("19_jtf3n")
+slot = 4
+
+[node name="MenuItem2" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1367459867 instance=ExtResource("16_1lobq")]
+layout_mode = 2
+text = "Light: "
+script = ExtResource("19_jtf3n")
+slot = 5
+
+[node name="MenuItem3" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1362184908 instance=ExtResource("16_1lobq")]
+layout_mode = 2
+text = "Vision: "
+script = ExtResource("19_jtf3n")
+slot = 6
+
+[node name="Journal" type="HBoxContainer" parent="Menus/VBoxContainer" unique_id=858249551 node_paths=PackedStringArray("item_container")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 64
+script = ExtResource("10_vghdt")
+item_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/ItemContainer")
+pause_on_open = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Menus/VBoxContainer/Journal" unique_id=1871983518]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme = ExtResource("11_0pkni")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menus/VBoxContainer/Journal/PanelContainer" unique_id=1440391093]
+layout_mode = 2
+theme = ExtResource("12_2dyl4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/Journal/PanelContainer/MarginContainer" unique_id=989344914]
+layout_mode = 2
+theme = ExtResource("13_oq622")
+
+[node name="Label" type="Label" parent="Menus/VBoxContainer/Journal/PanelContainer/MarginContainer/VBoxContainer" unique_id=77434872]
+layout_mode = 2
+theme = ExtResource("14_e5c6o")
+text = "Jobs"
+
+[node name="Control" type="Control" parent="Menus/VBoxContainer/Journal/PanelContainer/MarginContainer/VBoxContainer" unique_id=502828914]
+layout_mode = 2
+
+[node name="ItemContainer" type="VBoxContainer" parent="Menus/VBoxContainer/Journal/PanelContainer/MarginContainer/VBoxContainer" unique_id=1848412247]
+layout_mode = 2
+theme = ExtResource("13_oq622")
+script = ExtResource("15_k4cvi")
+
+[node name="Control2" type="Control" parent="Menus/VBoxContainer/Journal/PanelContainer/MarginContainer/VBoxContainer" unique_id=297087394]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="Menus/VBoxContainer/Journal" unique_id=1382662716]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("11_0pkni")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menus/VBoxContainer/Journal/PanelContainer2" unique_id=2111096779]
+layout_mode = 2
+theme = ExtResource("12_2dyl4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/Journal/PanelContainer2/MarginContainer" unique_id=408879395]
+layout_mode = 2
+theme = ExtResource("13_oq622")
+
+[node name="PanelContainer" type="PanelContainer" parent="Menus/VBoxContainer/Journal/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1845084914]
+visible = false
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Menus/VBoxContainer/Journal/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1986982747]
+layout_mode = 2
+theme = ExtResource("5_jtf3n")
+
+[node name="Description" type="Label" parent="Menus/VBoxContainer/Journal/PanelContainer2/MarginContainer/VBoxContainer" unique_id=860515549]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+theme = ExtResource("5_jtf3n")
+autowrap_mode = 2
+
+[node name="Reward" type="Label" parent="Menus/VBoxContainer/Journal/PanelContainer2/MarginContainer/VBoxContainer" unique_id=2080700279]
+layout_mode = 2
+theme = ExtResource("5_jtf3n")
+
+[node name="Control" type="Control" parent="Menus/VBoxContainer/Journal/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1668113218]
+layout_mode = 2
 
 [connection signal="pressed" from="PlayerInventory/Inventory/Control/Button" to="." method="close_inventory"]
 [connection signal="pressed" from="TransferInventory/Inventory/Control/Button" to="." method="close_transfer_inventory"]
@@ -945,5 +1228,8 @@ text = "Quit to Desktop"
 [connection signal="pressed" from="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2/Continue" to="ProgressMenu" method="_on_continue_pressed"]
 [connection signal="pressed" from="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2/Quit" to="ProgressMenu" method="_on_quit_pressed"]
 [connection signal="pressed" from="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2/Quit2" to="ProgressMenu" method="_on_quit_2_pressed"]
+[connection signal="pressed" from="Menus/VBoxContainer/HBoxContainer/Tabs/MarginContainer/HBoxContainer/InventoryTab" to="." method="_on_inventory_tab_pressed"]
+[connection signal="pressed" from="Menus/VBoxContainer/HBoxContainer/Tabs/MarginContainer/HBoxContainer/JournalTab" to="." method="_on_journal_tab_pressed"]
+[connection signal="pressed" from="Menus/VBoxContainer/HBoxContainer/ExitMenu" to="." method="_on_exit_menu_pressed"]
 
 [editable path="PauseMenu"]

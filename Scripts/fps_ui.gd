@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 var show_crosshair: bool = true
+var starting_fog: float
 @onready var middle_pos = get_tree().root.get_viewport().size / 8
 @onready var crosshair = $Crosshair
 @onready var player_hp_bar: ProgressBar = %ProgressBar
@@ -17,10 +18,13 @@ var show_crosshair: bool = true
 @onready var hit_indicator: TextureRect = %HitIndicator
 @onready var dot_crosshair: ColorRect = $DotCrosshair
 @onready var breath: ProgressBar = $Breath
+@onready var binocular_overlay: Control = $BinocularOverlay
 
 
 func _ready() -> void:
 	Globals.ui = self
+	var shader = get_tree().current_scene.get_node("Shader").mesh.material
+	starting_fog = shader.get_shader_parameter("fog_end")
 
 
 func _process(delta: float) -> void:
@@ -156,3 +160,11 @@ func _on_quit_pressed() -> void:
 
 func _on_quit_2_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_binocular_overlay_visibility_changed() -> void:
+	var shader = get_tree().current_scene.get_node("Shader").mesh.material
+	if binocular_overlay.visible:
+		shader.set_shader_parameter("fog_end", starting_fog * 1.75)
+	else:
+		shader.set_shader_parameter("fog_end", starting_fog)

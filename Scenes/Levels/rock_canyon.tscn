@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://r4ktdn26psb3" path="res://Scenes/Levels/encounter_base.tscn" id="1_wyyf0"]
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_ghiyu"]
-[ext_resource type="Resource" path="res://addons/zylann.hterrain/data/rock_canyon2/data.hterrain" id="2_w380c"]
+[ext_resource type="Resource" uid="uid://cfuo7lbkf1m0v" path="res://addons/zylann.hterrain/data/rock_canyon2/data.hterrain" id="2_w380c"]
 [ext_resource type="Shader" uid="uid://d2kaduike2hk7" path="res://addons/zylann.hterrain/shaders/detail_edit.gdshader" id="6_35bk4"]
 [ext_resource type="PackedScene" uid="uid://gjf0h1sobon8" path="res://Scenes/Environment/Prefabs With Spawning/shack_windows.tscn" id="9_6l2im"]
 [ext_resource type="PackedScene" uid="uid://yqj3iccq8ppb" path="res://Scenes/Environment/Prefabs With Spawning/shack_stairs.tscn" id="10_a3k0e"]
@@ -79,7 +79,7 @@ mesh = SubResource("ArrayMesh_a3k0e")
 skeleton = NodePath("../..")
 
 [node name="ShackWindows" parent="NavigationRegion3D" index="1" unique_id=700777435 instance=ExtResource("9_6l2im")]
-transform = Transform3D(-0.79805744, 0, -0.6025814, 0, 1, 0, 0.6025814, 0, -0.79805744, 78.551476, 1.456744, 209.46017)
+transform = Transform3D(0.75448054, 0, -0.6563224, 0, 1, 0, 0.6563224, 0, 0.75448054, 78.551476, 1.456744, 209.46017)
 metadata/_edit_group_ = true
 
 [node name="SpawnBuffer" parent="NavigationRegion3D/ShackWindows" index="4"]
@@ -363,24 +363,21 @@ process_mode = 4
 [node name="Area3D3" parent="Border" parent_id_path=PackedInt32Array(232497281) index="3" unique_id=883872261]
 process_mode = 4
 
-[node name="SquadSpawner" parent="." index="11" unique_id=2106031368 node_paths=PackedStringArray("borders")]
-borders = [NodePath("../Border/Area3D"), NodePath("../Border/Area3D4")]
-
-[node name="SnapToTerrain" parent="." index="12" unique_id=196337249 node_paths=PackedStringArray("objects_to_snap")]
+[node name="SnapToTerrain" parent="." index="11" unique_id=196337249 node_paths=PackedStringArray("objects_to_snap")]
 objects_to_snap = [null, null, null]
+
+[node name="Scatterer" parent="." index="12" unique_id=520392373 node_paths=PackedStringArray("terrain")]
+scenes = Array[PackedScene]([ExtResource("14_d8exc")])
+count = 20
+terrain = NodePath("../Terrain")
+min_size = 0.5
+max_size = 2.0
 
 [node name="Radio" parent="." index="13" unique_id=1126708802 instance=ExtResource("16_o2sg6")]
 transform = Transform3D(0.8609552, 0, -0.5086808, 0, 1, 0, 0.5086808, 0, 0.8609552, 90.1077, 2.3439436, 187.60782)
 
 [node name="Radio2" parent="." index="14" unique_id=1872311497 instance=ExtResource("16_o2sg6")]
 transform = Transform3D(-0.85038894, 0, -0.52615464, 0, 1, 0, 0.52615464, 0, -0.85038894, 138.03204, 6.830633, 78.11424)
-
-[node name="Scatterer" parent="." index="15" unique_id=520392373 node_paths=PackedStringArray("terrain")]
-scenes = Array[PackedScene]([ExtResource("14_d8exc")])
-count = 20
-terrain = NodePath("../Terrain")
-min_size = 0.5
-max_size = 2.0
 
 [editable path="WorldEnvironment"]
 [editable path="NavigationRegion3D/ShackWindows"]

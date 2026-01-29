@@ -2,7 +2,7 @@ extends Node
 
 enum states {walk, pause, dead}
 var state = states.walk
-var faction: 
+var faction := FactionManager.factions.player: 
 	set(value):
 		faction = value
 		if Globals.player:

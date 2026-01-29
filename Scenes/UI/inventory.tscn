@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dvwo5rcugthhe"]
+[gd_scene format=3 uid="uid://dvwo5rcugthhe"]
 
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_osrsm"]
 [ext_resource type="Script" uid="uid://cggchd80ddnc1" path="res://Scripts/inventory_ui.gd" id="2_yyv02"]
@@ -27,7 +27,7 @@ VScrollBar/styles/grabber = SubResource("StyleBoxFlat_d513x")
 VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_2lqwa")
 VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_v8bd3")
 
-[node name="Inventory" type="PanelContainer"]
+[node name="Inventory" type="PanelContainer" unique_id=692215425]
 offset_left = 64.0
 offset_top = 64.0
 offset_right = 605.0
@@ -37,7 +37,7 @@ mouse_filter = 2
 theme = ExtResource("1_osrsm")
 script = ExtResource("2_yyv02")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1123705555]
 custom_minimum_size = Vector2(0, 813)
 layout_mode = 2
 mouse_filter = 2
@@ -46,27 +46,27 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1980342413]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=408906963]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_yyv02")
 text = "Inventory"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=840342050]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 18
 
-[node name="Control3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Control3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1413893579]
 custom_minimum_size = Vector2(136, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="LeftCategory" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Control3"]
+[node name="LeftCategory" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Control3" unique_id=663832567]
 modulate = Color(1, 1, 0, 1)
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
@@ -77,7 +77,7 @@ expand_icon = true
 script = ExtResource("6_v8bd3")
 show_icon_on_focus = false
 
-[node name="Category" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Control3"]
+[node name="Category" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Control3" unique_id=1581399649]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -85,7 +85,7 @@ theme = ExtResource("4_14o23")
 text = "Survival"
 horizontal_alignment = 1
 
-[node name="RightCategory" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Control3"]
+[node name="RightCategory" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Control3" unique_id=695472778]
 modulate = Color(1, 1, 0, 1)
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
@@ -95,27 +95,23 @@ expand_icon = true
 script = ExtResource("6_v8bd3")
 show_icon_on_focus = false
 
-[node name="Size" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Size" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1372619807]
 layout_mode = 2
 theme = ExtResource("4_14o23")
 text = "20/20"
 
-[node name="Money" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Money" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=2122339366]
 layout_mode = 2
 theme = ExtResource("4_14o23")
 text = "$100"
 
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 8)
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=384005126]
+custom_minimum_size = Vector2(473, 0)
 layout_mode = 2
-mouse_filter = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(473, 596)
-layout_mode = 2
+size_flags_vertical = 3
 theme = SubResource("Theme_m06hg")
 
-[node name="Items" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="Items" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer" unique_id=803621427]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(473, 0)
 layout_mode = 2
@@ -123,14 +119,14 @@ size_flags_vertical = 3
 theme_override_constants/separation = 8
 script = ExtResource("4_ic2qw")
 
-[node name="Panel" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(0, 80)
+[node name="Panel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=1814885161]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+size_flags_vertical = 10
 mouse_filter = 2
 theme = ExtResource("1_osrsm")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel" unique_id=82993363]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 16
@@ -138,30 +134,30 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer" unique_id=60447760]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=1949194704]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("4_14o23")
 autowrap_mode = 2
 
-[node name="Stats" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="Stats" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=508532780]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 32
 
-[node name="Controls" type="Control" parent="."]
+[node name="Controls" type="Control" parent="." unique_id=1027290449]
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Controls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls" unique_id=240085402]
 visible = false
 layout_mode = 1
 anchors_preset = 12
@@ -173,17 +169,17 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 32
 
-[node name="Label" type="Label" parent="Controls/HBoxContainer"]
+[node name="Label" type="Label" parent="Controls/HBoxContainer" unique_id=1396113207]
 layout_mode = 2
 theme = ExtResource("8_d513x")
 text = "LMB: Use/Equip"
 
-[node name="Label2" type="Label" parent="Controls/HBoxContainer"]
+[node name="Label2" type="Label" parent="Controls/HBoxContainer" unique_id=816332132]
 layout_mode = 2
 theme = ExtResource("8_d513x")
 text = "X: Drop"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Controls"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Controls" unique_id=839689602]
 visible = false
 layout_mode = 1
 anchors_preset = 12
@@ -195,17 +191,17 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 32
 
-[node name="Label" type="Label" parent="Controls/HBoxContainer2"]
+[node name="Label" type="Label" parent="Controls/HBoxContainer2" unique_id=1228165828]
 layout_mode = 2
 theme = ExtResource("8_d513x")
 text = "LMB: Trasnfer"
 
-[node name="DropMenu" type="Control" parent="."]
+[node name="DropMenu" type="Control" parent="." unique_id=1363426560]
 visible = false
 layout_mode = 2
 mouse_filter = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="DropMenu"]
+[node name="PanelContainer" type="PanelContainer" parent="DropMenu" unique_id=474816011]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -220,14 +216,14 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_osrsm")
 
-[node name="MarginContainer" type="MarginContainer" parent="DropMenu/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="DropMenu/PanelContainer" unique_id=1920624947]
 layout_mode = 2
 theme = ExtResource("10_m06hg")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DropMenu/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DropMenu/PanelContainer/MarginContainer" unique_id=248180645]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=2035534985]
 custom_minimum_size = Vector2(332, 0)
 layout_mode = 2
 theme = ExtResource("3_yyv02")
@@ -235,30 +231,30 @@ text = "Drop Item?"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Control" type="Control" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=218653395]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1428276076]
 layout_mode = 2
 
-[node name="HSlider" type="HSlider" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="HSlider" type="HSlider" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1724665853]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme = ExtResource("11_or60b")
 value = 100.0
 
-[node name="Label" type="Label" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1221115612]
 layout_mode = 2
 theme = ExtResource("3_yyv02")
 text = "1"
 
-[node name="DropItem" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("11_mnhd3")]
+[node name="DropItem" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=2140297426 instance=ExtResource("11_mnhd3")]
 layout_mode = 2
 text = "Yes"
 
-[node name="DontDrop" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("11_mnhd3")]
+[node name="DontDrop" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=375805092 instance=ExtResource("11_mnhd3")]
 layout_mode = 2
 text = "No"
 

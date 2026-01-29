@@ -460,16 +460,17 @@ func _on_damaged(hit_position: Vector3, hit_direction: Vector3, shooter: Node3D)
 	velocity = Vector3.ZERO
 	damage_position = hit_position
 	damage_direction = hit_direction
-	if shooter == PlayerStats and PlayerStats.faction == faction:
-		PlayerStats.faction = FactionManager.factions.no_faction
 	if faction != shooter.faction:
 		var previous_relation = FactionManager.get_faction_relation(faction, shooter.faction)
 		FactionManager.change_faction_ration(faction, shooter.faction, -1)
 		var current_relation = FactionManager.get_faction_relation(faction, shooter.faction)
 		if current_relation < previous_relation:
 			get_tree().call_group("enemies", "set_detection_targets")
-	elif shooter == Globals.player:
-		get_tree().call_group("enemies", "target_player")
+	#elif shooter == Globals.player:
+		#var faction_enemies = get_tree().get_nodes_in_group("enemies").filter(func(a): return a.faction == faction)
+		#for enemy in faction_enemies:
+			#enemy.target_player()
+		#get_tree().call_group("enemies", "target_player")
 	#if time_since_bleed < 0.1:
 		#return
 	#time_since_bleed = 0

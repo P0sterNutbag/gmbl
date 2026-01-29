@@ -22,7 +22,7 @@ var model_rotation: float:
 var state_functions: Dictionary
 var exit_functions: Dictionary
 var enter_functions: Dictionary
-var faction: FactionManager.factions
+var faction := FactionManager.factions.player 
 const NOTIFICATION = preload("uid://dl0pidlmm5dwh")
 @onready var camera_anchor: Node3D = $CameraAnchor
 @onready var model: Node3D = $EnemyModel

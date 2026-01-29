@@ -10,6 +10,7 @@ enum fire_types {semi_auto, auto, pump}
 @export var shoot_cooldown: float = 0.1
 @export var zoom_amount: float = 1.25
 @export var kickback_magnitude: float = 1
+@export var spread_curve := (preload("res://Resources/bullet_spread.tres"))
 @export var ads_vector: Vector3
 @export var scope_texture: Texture2D
 @export var cast_shadow: bool = true
@@ -28,7 +29,6 @@ var sway_vector: Vector3
 var anim_player: AnimationPlayer
 var shell: PackedScene = preload("res://Scenes/Particles/shell.tscn")
 var smoke: PackedScene = preload("res://Scenes/Particles/gun_smoke.tscn")
-var spread_curve := (preload("res://Resources/bullet_spread.tres"))
 @onready var gun_model: Node3D = $GunAnchor/Model
 @onready var muzzle_flash: Node3D = $GunAnchor/FirePoint/MuzzleFlash
 @onready var flash_texture: MeshInstance3D = $GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3
@@ -68,7 +68,7 @@ func _process(delta: float) -> void:
 		can_shoot = false
 	
 	# spread
-	time_shooting -= delta * 2
+	time_shooting -= delta
 	time_shooting = clamp(time_shooting, 0, 1)
 	spread = lerp(1, 2, spread_curve.sample(time_shooting))
 

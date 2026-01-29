@@ -1,16 +1,17 @@
 extends CanvasLayer
 
-@onready var player_inventory_holder: HBoxContainer = $PlayerInventory
+@onready var player_inventory_holder: HBoxContainer = $Menus/VBoxContainer/PlayerInventory
 @onready var transfer_inventory_holder: HBoxContainer = $TransferInventory
 @onready var player_transfer_inventory: InventoryUI = %Inventory
 @onready var loot_transfer_inventory: InventoryUI = %Inventory2
-@onready var journal: HBoxContainer = $Journal
+@onready var journal: HBoxContainer = $Menus/VBoxContainer/Journal
 @onready var compass: Control = $TopCenter/Compass
 @onready var pause_menu: Control = $PauseMenu
 @onready var player_inventory: InventoryUI = $PlayerInventory/Inventory
 @onready var progress_menu: PanelContainer = $ProgressMenu
 @onready var death_menu: PanelContainer = $DeathMenu
 @onready var stats_anchor: Control = $StatsAnchor
+@onready var menu_holder: Control = $Menus
 
 
 func _enter_tree() -> void:
@@ -36,20 +37,25 @@ func _process(_delta: float) -> void:
 			if UiController.is_canvas_layer_open(Globals.ui) or PlayerStats.state != PlayerStats.states.walk:
 				return
 			player_inventory_holder.get_child(0).source_inventory = PlayerStats.inventory
+			menu_holder.show()
 			UiController.open_interface(player_inventory_holder)
 		else:
+			menu_holder.hide()
 			UiController.close_interface(player_inventory_holder)
 	if Input.is_action_just_pressed("journal"):
 		if !journal.visible:
 			if UiController.is_canvas_layer_open(Globals.ui):
 				return
+			menu_holder.show()
 			UiController.open_interface(journal)
 			journal.open(PlayerStats.quests)
 		else:
+			menu_holder.hide()
 			UiController.close_interface(journal)
 	if Input.is_action_just_pressed("ui_cancel"):
 		if !pause_menu.visible and PlayerStats.state != PlayerStats.states.dead:
 			if UiController.is_canvas_layer_open(self):
+				menu_holder.hide()
 				UiController.close_all()
 				return
 			if UiController.is_canvas_layer_open(Globals.ui):
@@ -133,3 +139,16 @@ func show_ui() -> void:
 #func _on_menu_exit() -> void:
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	#PlayerStats.change_state(PlayerStats.states.walk)
+
+
+func _on_inventory_tab_pressed() -> void:
+	UiController.open_interface(player_inventory_holder)
+
+
+func _on_journal_tab_pressed() -> void:
+	UiController.open_interface(journal)
+
+
+func _on_exit_menu_pressed() -> void:
+	UiController.close_all()
+	menu_holder.hide()

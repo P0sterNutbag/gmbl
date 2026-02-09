@@ -9,3 +9,7 @@ class_name Quest
 @export var reward: ItemSlot
 @export var completed: bool
 var target_node: Node3D
+
+
+func finish_quest(faction: FactionManager.factions) -> void:
+	FactionManager.change_faction_relation(faction, FactionManager.factions.player, 0.25, true)

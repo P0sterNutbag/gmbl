@@ -27,8 +27,8 @@ var can_shoot: bool = true
 var has_released: bool = true
 var sway_vector: Vector3
 var anim_player: AnimationPlayer
-var shell: PackedScene = preload("res://Scenes/Particles/shell.tscn")
-var smoke: PackedScene = preload("res://Scenes/Particles/gun_smoke.tscn")
+var shell: PackedScene = preload("res://Scenes/Effects/Particles/shell.tscn")
+var smoke: PackedScene = preload("res://Scenes/Effects/Particles/gun_smoke.tscn")
 @onready var gun_model: Node3D = $GunAnchor/Model
 @onready var muzzle_flash: Node3D = $GunAnchor/FirePoint/MuzzleFlash
 @onready var flash_texture: MeshInstance3D = $GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3

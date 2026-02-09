@@ -18,7 +18,7 @@ class_name HealthComponent
 var audio_stream_player: AudioStreamPlayer3D
 var damage_modifier: float = 1.0
 var is_dead: bool
-var blood_spatter: PackedScene = preload("res://Scenes/Particles/bloodspatter_ground.tscn")
+var blood_spatter: PackedScene = preload("res://Scenes/Effects/Decals/bloodspatter_ground.tscn")
 signal damaged(hit_position: Vector3, hit_direction: Vector3)
 signal death
 
@@ -33,12 +33,12 @@ func _ready() -> void:
 
 
 func damage(dmg: float, hit_position: Vector3 = Vector3.ZERO, hit_direction: Vector3 = Vector3.ZERO, shooter: Node3D = null, allow_damage_mod: bool = true, blood: bool = true, play_audio: bool = true) -> void:
-	damaged.emit(hit_position, hit_direction, shooter)
 	if is_dead:
 		return
 	if !allow_damage_mod:
 		damage_modifier = 1
 	hp -= dmg * damage_modifier
+	damaged.emit(hit_position, hit_direction, shooter)
 	if audio_stream_player and play_audio:
 		audio_stream_player.play()
 	if hp <= 0:

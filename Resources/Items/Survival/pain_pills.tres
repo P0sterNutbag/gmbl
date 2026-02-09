@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemUsable" format=3 uid="uid://clu1tx111108g"]
+
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="1_4cnb1"]
+[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="2_dbop7"]
+
+[sub_resource type="Resource" id="Resource_4cnb1"]
+script = ExtResource("1_4cnb1")
+values = Dictionary[String, Variant]({
+"hp": 4
+})
+add = true
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[resource]
+script = ExtResource("2_dbop7")
+effects = Array[ExtResource("1_4cnb1")]([SubResource("Resource_4cnb1")])
+is_health_item = true
+title = "Pain Pills"
+price = 125
+metadata/_custom_type_script = "uid://dd1ly8qocexg4"

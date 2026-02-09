@@ -462,19 +462,12 @@ func _on_damaged(hit_position: Vector3, hit_direction: Vector3, shooter: Node3D)
 	damage_direction = hit_direction
 	if faction != shooter.faction:
 		var previous_relation = FactionManager.get_faction_relation(faction, shooter.faction)
-		FactionManager.change_faction_ration(faction, shooter.faction, -1)
+		var show_notificaition = health_component.hp <= 0
+		FactionManager.change_faction_relation(faction, shooter.faction, -1, show_notificaition)
 		var current_relation = FactionManager.get_faction_relation(faction, shooter.faction)
 		if current_relation < previous_relation:
 			get_tree().call_group("enemies", "set_detection_targets")
-	#elif shooter == Globals.player:
-		#var faction_enemies = get_tree().get_nodes_in_group("enemies").filter(func(a): return a.faction == faction)
-		#for enemy in faction_enemies:
-			#enemy.target_player()
-		#get_tree().call_group("enemies", "target_player")
-	#if time_since_bleed < 0.1:
-		#return
-	#time_since_bleed = 0
-	var blood_scene = load("res://Scenes/Particles/bloodspray.tscn")
+	var blood_scene = load("res://Scenes/Effects/Particles/bloodspray.tscn")
 	var blood = Globals.create_particle(blood_scene, hit_position)
 	if blood != null:
 		blood.set_deferred("rotation", Vector3(0, hit_direction.y, 0))

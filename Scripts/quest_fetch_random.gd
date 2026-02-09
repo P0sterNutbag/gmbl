@@ -7,7 +7,7 @@ class_name QuestFetchRandom
 func generate_quest() -> Quest:
 	var quest = QuestFetch.new()
 	quest.type = "Fetch"
-	quest.required_items.append(required_items[randi() % required_items.size() - 1])
+	quest.required_items.append(required_items[randi() % required_items.size()])
 	quest.title = "Find " + str(quest.required_items[0].amount) + " " + quest.required_items[0].item.title
 	quest.description = ""
 	#quest.reward = rewards[randi_range(0, rewards.size()-1)]

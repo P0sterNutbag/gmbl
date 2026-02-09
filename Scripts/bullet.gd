@@ -6,8 +6,8 @@ var creator: Node3D
 var bullet_stats: BulletStats
 var gun_stats: GunStats
 var tracer: PackedScene = preload("res://Scenes/Bullets/tracer.tscn")
-var dust: PackedScene = preload("res://Scenes/Particles/dust.tscn")
-var blood_spatter: PackedScene = preload("res://Scenes/Particles/bloodspatter.tscn")
+var dust: PackedScene = preload("res://Scenes/Effects/Particles/dust.tscn")
+var blood_spatter: PackedScene = preload("res://Scenes/Effects/Decals/bloodspatter.tscn")
 @onready var bullet_mesh = $MeshInstance3D
 @onready var raycast = $RayCast3D
 @onready var audio_stream_player_3d: AudioStreamPlayer3D = $AudioStreamPlayer3D

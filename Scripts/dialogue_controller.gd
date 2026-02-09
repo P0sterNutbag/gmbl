@@ -141,6 +141,7 @@ func return_quests(quest_type: Quest, success_index: int, fail_index: int) -> vo
 		return
 	var reward = 0
 	for quest in complete_quests:
+		quest.finish_quest(shop.faction)
 		if quest.has_method("remove_items"):
 			quest.remove_items()
 		PlayerStats.inventory.add_item(quest.reward.item, quest.reward.amount)
@@ -166,8 +167,8 @@ func start_level() -> void:
 func pay_fee(amount: int, fail_index: int) -> void:
 	if PlayerStats.inventory.money - amount >= 0:
 		PlayerStats.inventory.money -= amount
-		Globals.overworld.current_encounter.get_parent().chase_player = false
-		Globals.player.create_notification("-50 Dollars")
+		Globals.overworld.current_encounter.get_parent().chase_targets = false
+		Globals.survival_ui.create_notification("-50 Dollars")
 		exit_to_game()
 	else:
 		advance_dialogue(fail_index)

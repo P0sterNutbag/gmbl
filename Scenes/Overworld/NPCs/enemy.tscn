@@ -33,6 +33,7 @@ radius = 0.434372
 
 [sub_resource type="Resource" id="Resource_ndpai"]
 script = ExtResource("3_o6ebo")
+faction = null
 population = 3
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
@@ -99,6 +100,8 @@ metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 [sub_resource type="SphereShape3D" id="SphereShape3D_vti20"]
 radius = 1.0
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_aa4gy"]
+
 [node name="Enemy" type="CharacterBody3D" unique_id=384465541]
 collision_layer = 0
 floor_max_angle = 0.34906584
@@ -118,14 +121,12 @@ can_stealth_start = true
 [node name="CollisionShape3D" parent="Location" index="0" unique_id=1772758538]
 shape = SubResource("SphereShape3D_vti20")
 
-[node name="Flagpole" parent="Location/Meshes" parent_id_path=PackedInt32Array(2112754146, 354222542) index="0" unique_id=800258272]
-visible = false
-
 [node name="PointOfInterest" parent="Location" index="2" unique_id=2144080138]
 title = "Wandering Squad"
 
-[node name="Detection" type="RayCast3D" parent="." unique_id=1023908887]
+[node name="Detection" type="ShapeCast3D" parent="." unique_id=910038654]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89564, 0)
+shape = SubResource("SphereShape3D_aa4gy")
 target_position = Vector3(0, 0, -50)
 script = ExtResource("4_73otn")
 
@@ -136,3 +137,4 @@ script = ExtResource("4_73otn")
 [connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]
 
 [editable path="Location"]
+[editable path="Location/PointOfInterest"]

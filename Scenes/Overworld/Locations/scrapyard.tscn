@@ -28,8 +28,9 @@
 [ext_resource type="Resource" uid="uid://fioag0fe2wqb" path="res://Resources/Items/Survival/flashlight.tres" id="18_upb1b"]
 [ext_resource type="Script" uid="uid://bicpdyf13vj1j" path="res://Scripts/quest_fetch_random.gd" id="24_qd4ri"]
 
-[sub_resource type="Resource" id="Resource_vcknj"]
+[sub_resource type="Resource" id="Resource_533gp"]
 script = ExtResource("2_h750r")
+faction = 2
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="Resource" id="Resource_xk40u"]
@@ -197,13 +198,20 @@ metadata/_custom_type_script = "uid://bicpdyf13vj1j"
 script = ExtResource("17_d403n")
 title = "Scrapyard"
 inventory = SubResource("Resource_rsj15")
+price_modifiers = {
+"Ammo": 0.5,
+"Armor": 0.5,
+"Junk": 0.5,
+"Survival": 0.75,
+"Weapons": 0.75
+}
 dialogue = SubResource("Resource_pc4vu")
 random_quest = SubResource("Resource_upb1b")
 minimum_quests = 3
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [node name="Location" unique_id=1018595986 groups=["location"] instance=ExtResource("1_enopj")]
-location_data = SubResource("Resource_vcknj")
+location_data = SubResource("Resource_533gp")
 shop = SubResource("Resource_hr5f0")
 
 [node name="Flagpole2" type="Node3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="0" unique_id=1111622930]

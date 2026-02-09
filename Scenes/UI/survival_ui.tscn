@@ -26,10 +26,15 @@
 [ext_resource type="PackedScene" uid="uid://bj7gyfau2dx5w" path="res://Scenes/UI/menu_button.tscn" id="22_jtf3n"]
 [ext_resource type="Theme" uid="uid://djqipqwy5toiu" path="res://Art/Themes/VBoxContainer.tres" id="24_8egi5"]
 [ext_resource type="Script" uid="uid://c5mc2tmhveupn" path="res://Scripts/progress_menu.gd" id="24_guqia"]
+[ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="27_13ham"]
+[ext_resource type="Script" uid="uid://pcx3b5tjvijq" path="res://Scripts/faction_ui_box.gd" id="27_k64vs"]
+[ext_resource type="Script" uid="uid://dlnug53qsfaf6" path="res://Scripts/faction_ui.gd" id="27_o0jpn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_agdr0"]
 bg_color = Color(0, 0, 0, 0.784314)
 border_color = Color(1, 1, 0, 1)
+
+[sub_resource type="Theme" id="Theme_guqia"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=691466196]
 process_mode = 3
@@ -42,6 +47,7 @@ anchors_preset = 0
 mouse_filter = 2
 
 [node name="Stats" type="VBoxContainer" parent="TopLeft" unique_id=567579693]
+visible = false
 layout_mode = 0
 offset_left = 32.0
 offset_top = 32.0
@@ -465,176 +471,6 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="PlayerInventory" type="HBoxContainer" parent="." unique_id=1944515002]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -551.0
-offset_top = -382.5
-offset_right = 551.0
-offset_bottom = 382.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 64
-
-[node name="Inventory" parent="PlayerInventory" unique_id=1175272954 instance=ExtResource("9_to4rm")]
-layout_mode = 2
-size_flags_horizontal = 3
-can_drop_items = true
-
-[node name="Control" type="Control" parent="PlayerInventory/Inventory" unique_id=1931966580]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Button" parent="PlayerInventory/Inventory/Control" unique_id=1989934339 instance=ExtResource("10_0pkni")]
-layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 24.0
-offset_bottom = 24.0
-
-[node name="EquipmentSlots" type="VBoxContainer" parent="PlayerInventory" unique_id=412714387]
-layout_mode = 2
-theme_override_constants/separation = 48
-
-[node name="Equipment" type="PanelContainer" parent="PlayerInventory/EquipmentSlots" unique_id=1298358113]
-custom_minimum_size = Vector2(497, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-mouse_filter = 2
-theme = ExtResource("11_0pkni")
-
-[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/EquipmentSlots/Equipment" unique_id=399500045]
-layout_mode = 2
-mouse_filter = 2
-theme = ExtResource("12_2dyl4")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer" unique_id=2001729442]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer" unique_id=1143779541]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/HBoxContainer" unique_id=157979190]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("15_1lobq")
-text = "Weapons"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer" unique_id=1443266804]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="MenuItem" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=278589346 instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Primary: "
-script = ExtResource("19_jtf3n")
-slot = 0
-
-[node name="MenuItem2" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2089455132 instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Secondary: "
-script = ExtResource("19_jtf3n")
-slot = 1
-
-[node name="Equipment2" type="PanelContainer" parent="PlayerInventory/EquipmentSlots" unique_id=721082901]
-custom_minimum_size = Vector2(497, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-mouse_filter = 2
-theme = ExtResource("11_0pkni")
-
-[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/EquipmentSlots/Equipment2" unique_id=804099000]
-layout_mode = 2
-mouse_filter = 2
-theme = ExtResource("12_2dyl4")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer" unique_id=956206984]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer" unique_id=312672737]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1654762986]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("15_1lobq")
-text = "Armor"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer" unique_id=1511113137]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="MenuItem" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1239746556 instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Head: "
-script = ExtResource("19_jtf3n")
-slot = 2
-
-[node name="MenuItem2" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1772212904 instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Body: "
-script = ExtResource("19_jtf3n")
-slot = 3
-
-[node name="Equipment3" type="PanelContainer" parent="PlayerInventory/EquipmentSlots" unique_id=635198306]
-custom_minimum_size = Vector2(497, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-mouse_filter = 2
-theme = ExtResource("11_0pkni")
-
-[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/EquipmentSlots/Equipment3" unique_id=1246217342]
-layout_mode = 2
-mouse_filter = 2
-theme = ExtResource("12_2dyl4")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer" unique_id=2105875397]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer" unique_id=495543939]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1773777356]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("15_1lobq")
-text = "Utility"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer" unique_id=968152748]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="MenuItem" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2011610297 instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Nav: "
-script = ExtResource("19_jtf3n")
-slot = 4
-
-[node name="MenuItem2" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=711745494 instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Light: "
-script = ExtResource("19_jtf3n")
-slot = 5
-
-[node name="MenuItem3" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1213479984 instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Vision: "
-script = ExtResource("19_jtf3n")
-slot = 6
-
 [node name="TransferInventory" type="HBoxContainer" parent="." unique_id=483947959]
 visible = false
 anchors_preset = 8
@@ -675,98 +511,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 mode = 1
 opposing_ui = NodePath("../Inventory")
-
-[node name="Journal" type="HBoxContainer" parent="." unique_id=68908754 node_paths=PackedStringArray("item_container")]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 399.0
-offset_top = 266.0
-offset_right = -389.0
-offset_bottom = -277.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 64
-script = ExtResource("10_vghdt")
-item_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/ItemContainer")
-pause_on_open = true
-
-[node name="PanelContainer" type="PanelContainer" parent="Journal" unique_id=517280929]
-custom_minimum_size = Vector2(400, 0)
-layout_mode = 2
-theme = ExtResource("11_0pkni")
-
-[node name="MarginContainer" type="MarginContainer" parent="Journal/PanelContainer" unique_id=152674551]
-layout_mode = 2
-theme = ExtResource("12_2dyl4")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Journal/PanelContainer/MarginContainer" unique_id=1718536604]
-layout_mode = 2
-theme = ExtResource("13_oq622")
-
-[node name="Label" type="Label" parent="Journal/PanelContainer/MarginContainer/VBoxContainer" unique_id=1523094280]
-layout_mode = 2
-theme = ExtResource("14_e5c6o")
-text = "Jobs"
-
-[node name="Control" type="Control" parent="Journal/PanelContainer/MarginContainer/VBoxContainer" unique_id=1482878524]
-layout_mode = 2
-
-[node name="ItemContainer" type="VBoxContainer" parent="Journal/PanelContainer/MarginContainer/VBoxContainer" unique_id=215257019]
-layout_mode = 2
-theme = ExtResource("13_oq622")
-script = ExtResource("15_k4cvi")
-
-[node name="Control2" type="Control" parent="Journal/PanelContainer/MarginContainer/VBoxContainer" unique_id=2000527007]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Control" type="Control" parent="Journal/PanelContainer" unique_id=612097283]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Button" parent="Journal/PanelContainer/Control" unique_id=1714172230 instance=ExtResource("10_0pkni")]
-layout_mode = 0
-offset_left = -2.0
-offset_top = 0.0
-offset_right = 22.0
-offset_bottom = 24.0
-
-[node name="PanelContainer2" type="PanelContainer" parent="Journal" unique_id=1580735764]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("11_0pkni")
-
-[node name="MarginContainer" type="MarginContainer" parent="Journal/PanelContainer2" unique_id=1149821387]
-layout_mode = 2
-theme = ExtResource("12_2dyl4")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Journal/PanelContainer2/MarginContainer" unique_id=1483235939]
-layout_mode = 2
-theme = ExtResource("13_oq622")
-
-[node name="PanelContainer" type="PanelContainer" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer" unique_id=697803810]
-visible = false
-custom_minimum_size = Vector2(0, 560)
-layout_mode = 2
-
-[node name="Title" type="Label" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer" unique_id=903097414]
-layout_mode = 2
-theme = ExtResource("5_jtf3n")
-
-[node name="Description" type="Label" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1681317309]
-custom_minimum_size = Vector2(600, 0)
-layout_mode = 2
-theme = ExtResource("5_jtf3n")
-autowrap_mode = 2
-
-[node name="Reward" type="Label" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1628463805]
-layout_mode = 2
-theme = ExtResource("5_jtf3n")
-
-[node name="Control" type="Control" parent="Journal/PanelContainer2/MarginContainer/VBoxContainer" unique_id=735309877]
-layout_mode = 2
 
 [node name="PauseMenu" parent="." unique_id=74152501 instance=ExtResource("19_oq622")]
 visible = false
@@ -933,6 +677,7 @@ layout_mode = 2
 text = "Quit to Desktop"
 
 [node name="Menus" type="Control" parent="." unique_id=1904849120]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -988,6 +733,11 @@ layout_mode = 2
 size_flags_horizontal = 1
 text = "Joural"
 
+[node name="FactionTab" parent="Menus/VBoxContainer/HBoxContainer/Tabs/MarginContainer/HBoxContainer" unique_id=1594223131 instance=ExtResource("22_jtf3n")]
+layout_mode = 2
+size_flags_horizontal = 1
+text = "Factions"
+
 [node name="ExitMenu" parent="Menus/VBoxContainer/HBoxContainer" unique_id=1880150906 instance=ExtResource("10_0pkni")]
 custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
@@ -995,6 +745,7 @@ theme_override_font_sizes/font_size = 32
 script = null
 
 [node name="PlayerInventory" type="HBoxContainer" parent="Menus/VBoxContainer" unique_id=2000109519]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 64
 
@@ -1215,10 +966,493 @@ theme = ExtResource("5_jtf3n")
 [node name="Control" type="Control" parent="Menus/VBoxContainer/Journal/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1668113218]
 layout_mode = 2
 
-[connection signal="pressed" from="PlayerInventory/Inventory/Control/Button" to="." method="close_inventory"]
+[node name="Factions" type="PanelContainer" parent="Menus/VBoxContainer" unique_id=56908324]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("11_0pkni")
+script = ExtResource("27_o0jpn")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menus/VBoxContainer/Factions" unique_id=1528793307]
+layout_mode = 2
+theme = ExtResource("12_2dyl4")
+
+[node name="GridContainer" type="GridContainer" parent="Menus/VBoxContainer/Factions/MarginContainer" unique_id=618805739]
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_guqia")
+theme_override_constants/v_separation = 32
+columns = 6
+
+[node name="Label" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1942238097]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_jtf3n")
+
+[node name="Label6" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=958600393]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_jtf3n")
+text = "Player"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1569124404]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_jtf3n")
+text = "Unnafiliated"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1054753006]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_jtf3n")
+text = "Bandits"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=637703615]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_jtf3n")
+text = "Jackals"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1958165173]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_jtf3n")
+text = "Ragers"
+horizontal_alignment = 1
+
+[node name="Label7" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1202582645]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_jtf3n")
+text = "Player"
+horizontal_alignment = 1
+
+[node name="Label8" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1196249654]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 1
+faction_horizontal = 1
+
+[node name="Label9" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1383916379]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_horizontal = 1
+
+[node name="Label10" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1157860511]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 4
+faction_horizontal = 1
+
+[node name="Label11" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=620768936]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 2
+faction_horizontal = 1
+
+[node name="Label12" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1884349251]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 3
+faction_horizontal = 1
+
+[node name="Label13" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1570346923]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_jtf3n")
+text = "Unnafiliated"
+horizontal_alignment = 1
+
+[node name="Label14" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=586412021]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 1
+
+[node name="Label15" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1017104691]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+
+[node name="Label16" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1204803385]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 4
+
+[node name="Label17" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1938076592]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 2
+
+[node name="Label18" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=2091760312]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 3
+
+[node name="Label19" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1371263495]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_jtf3n")
+text = "Bandits"
+horizontal_alignment = 1
+
+[node name="Label20" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=2856780]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 1
+faction_horizontal = 4
+
+[node name="Label21" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=922925158]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_horizontal = 4
+
+[node name="Label22" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=808991067]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 4
+faction_horizontal = 4
+
+[node name="Label23" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1379547194]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 2
+faction_horizontal = 4
+
+[node name="Label24" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1907998343]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 3
+faction_horizontal = 4
+
+[node name="Label25" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=565247828]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_jtf3n")
+text = "Jackals"
+horizontal_alignment = 1
+
+[node name="Label26" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1677167353]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 1
+faction_horizontal = 2
+
+[node name="Label27" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1019309282]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_horizontal = 2
+
+[node name="Label28" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=868384770]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 4
+faction_horizontal = 2
+
+[node name="Label29" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=140574949]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 2
+faction_horizontal = 2
+
+[node name="Label30" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1194906627]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 3
+faction_horizontal = 2
+
+[node name="Label31" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1418883168]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_jtf3n")
+text = "Ragers"
+horizontal_alignment = 1
+
+[node name="Label32" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1928318212]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 1
+faction_horizontal = 3
+
+[node name="Label33" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1579680681]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_horizontal = 3
+
+[node name="Label34" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=125072056]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 4
+faction_horizontal = 3
+
+[node name="Label35" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=220830598]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 2
+faction_horizontal = 3
+
+[node name="Label36" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1971402567]
+layout_mode = 2
+theme = ExtResource("27_13ham")
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("27_k64vs")
+faction_vertical = 3
+faction_horizontal = 3
+
+[node name="Log" type="VBoxContainer" parent="." unique_id=669236471]
+custom_minimum_size = Vector2(497, 0)
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 513.0
+offset_bottom = 56.0
+
+[node name="PlayerInventory" type="HBoxContainer" parent="." unique_id=1944515002]
+process_mode = 4
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -551.0
+offset_top = -408.5
+offset_right = 551.0
+offset_bottom = 408.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 64
+
+[node name="Inventory" parent="PlayerInventory" unique_id=1175272954 instance=ExtResource("9_to4rm")]
+layout_mode = 2
+size_flags_horizontal = 3
+can_drop_items = true
+
+[node name="Control" type="Control" parent="PlayerInventory/Inventory" unique_id=1931966580]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" parent="PlayerInventory/Inventory/Control" unique_id=1989934339 instance=ExtResource("10_0pkni")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 24.0
+offset_bottom = 24.0
+
+[node name="EquipmentSlots" type="VBoxContainer" parent="PlayerInventory" unique_id=412714387]
+layout_mode = 2
+theme_override_constants/separation = 48
+
+[node name="Equipment" type="PanelContainer" parent="PlayerInventory/EquipmentSlots" unique_id=1298358113]
+custom_minimum_size = Vector2(497, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("11_0pkni")
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/EquipmentSlots/Equipment" unique_id=399500045]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("12_2dyl4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer" unique_id=2001729442]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer" unique_id=1143779541]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/HBoxContainer" unique_id=157979190]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("15_1lobq")
+text = "Weapons"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer" unique_id=1443266804]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MenuItem" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=278589346 instance=ExtResource("16_1lobq")]
+layout_mode = 2
+text = "Primary: "
+script = ExtResource("19_jtf3n")
+slot = 0
+
+[node name="MenuItem2" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2089455132 instance=ExtResource("16_1lobq")]
+layout_mode = 2
+text = "Secondary: "
+script = ExtResource("19_jtf3n")
+slot = 1
+
+[node name="Equipment2" type="PanelContainer" parent="PlayerInventory/EquipmentSlots" unique_id=721082901]
+custom_minimum_size = Vector2(497, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("11_0pkni")
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/EquipmentSlots/Equipment2" unique_id=804099000]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("12_2dyl4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer" unique_id=956206984]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer" unique_id=312672737]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1654762986]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("15_1lobq")
+text = "Armor"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer" unique_id=1511113137]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MenuItem" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1239746556 instance=ExtResource("16_1lobq")]
+layout_mode = 2
+text = "Head: "
+script = ExtResource("19_jtf3n")
+slot = 2
+
+[node name="MenuItem2" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1772212904 instance=ExtResource("16_1lobq")]
+layout_mode = 2
+text = "Body: "
+script = ExtResource("19_jtf3n")
+slot = 3
+
+[node name="Equipment3" type="PanelContainer" parent="PlayerInventory/EquipmentSlots" unique_id=635198306]
+custom_minimum_size = Vector2(497, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("11_0pkni")
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/EquipmentSlots/Equipment3" unique_id=1246217342]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("12_2dyl4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer" unique_id=2105875397]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer" unique_id=495543939]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1773777356]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("15_1lobq")
+text = "Utility"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer" unique_id=968152748]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MenuItem" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2011610297 instance=ExtResource("16_1lobq")]
+layout_mode = 2
+text = "Nav: "
+script = ExtResource("19_jtf3n")
+slot = 4
+
+[node name="MenuItem2" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=711745494 instance=ExtResource("16_1lobq")]
+layout_mode = 2
+text = "Light: "
+script = ExtResource("19_jtf3n")
+slot = 5
+
+[node name="MenuItem3" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1213479984 instance=ExtResource("16_1lobq")]
+layout_mode = 2
+text = "Vision: "
+script = ExtResource("19_jtf3n")
+slot = 6
+
 [connection signal="pressed" from="TransferInventory/Inventory/Control/Button" to="." method="close_transfer_inventory"]
-[connection signal="exit" from="Journal" to="." method="_on_menu_exit"]
-[connection signal="pressed" from="Journal/PanelContainer/Control/Button" to="Journal" method="close"]
 [connection signal="visibility_changed" from="PauseMenu" to="PauseMenu" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="DeathMenu" to="DeathMenu" method="_on_visibility_changed"]
 [connection signal="pressed" from="DeathMenu/MarginContainer/VBoxContainer3/VBoxContainer/TourniquetButton" to="DeathMenu" method="_on_tourniquet_button_pressed"]
@@ -1230,6 +1464,9 @@ layout_mode = 2
 [connection signal="pressed" from="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2/Quit2" to="ProgressMenu" method="_on_quit_2_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/HBoxContainer/Tabs/MarginContainer/HBoxContainer/InventoryTab" to="." method="_on_inventory_tab_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/HBoxContainer/Tabs/MarginContainer/HBoxContainer/JournalTab" to="." method="_on_journal_tab_pressed"]
+[connection signal="pressed" from="Menus/VBoxContainer/HBoxContainer/Tabs/MarginContainer/HBoxContainer/FactionTab" to="." method="_on_faction_tab_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/HBoxContainer/ExitMenu" to="." method="_on_exit_menu_pressed"]
+[connection signal="visibility_changed" from="Menus/VBoxContainer/Factions" to="Menus/VBoxContainer/Factions" method="_on_visibility_changed"]
+[connection signal="pressed" from="PlayerInventory/Inventory/Control/Button" to="." method="close_inventory"]
 
 [editable path="PauseMenu"]

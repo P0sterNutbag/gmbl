@@ -1,23 +1,20 @@
 extends Node
 
+@export var starting_inventory: Inventory
 enum states {walk, pause, dead}
 var state = states.walk
-var faction := FactionManager.factions.player: 
+var faction: FactionManager.factions: 
 	set(value):
 		faction = value
 		if Globals.player:
 			Globals.player.faction = value
-var hp: float = 3.5#:
+var hp: float = 3.5
 var current_hp: float:
 	get():
 		if Globals.player and "hitbox" in Globals.player and Globals.player.hitbox:
 			return Globals.player.hitbox.hp
 		else:
 			return hp
-	#set(value):
-		#hp = value
-		#if Globals.player and "hitbox" in Globals.player and Globals.player.hitbox:
-			#Globals.player.hitbox.hp = value
 var max_current_hp := 3.5
 var sensitivity_modifier := 1.0
 var ammo: int:
@@ -31,12 +28,8 @@ var ammo: int:
 		else:
 			return 0
 var flashlight_on: bool
-@export var starting_inventory: Inventory
 var inventory: Inventory = Inventory.new()
 var quests: Array[Quest]
-@onready var guns: Array[Item]:
-	get(): 
-		return inventory.items.filter(func(i): return i is EquipmentGun and i.gun_stats.ammo > 0)
 var gun: EquipmentGun
 var gun_index := 0
 var sleep: float
@@ -48,6 +41,9 @@ var max_thirst: float
 var sleep_decrease_rate := 1.0
 var hunger_decrease_rate := 1.5
 var thirst_decrease_rate := 2
+@onready var guns: Array[Item]:
+	get(): 
+		return inventory.items.filter(func(i): return i is EquipmentGun and i.gun_stats.ammo > 0)
 signal gun_changed
 
 
@@ -64,7 +60,7 @@ func _ready() -> void:
 	sleep = max_sleep
 	hunger = max_hunger
 	thirst = max_thirst
-	faction = FactionManager.factions.no_faction
+	faction = FactionManager.factions.player
 	#sensitivity_modifier = ConfigManager.file.get_value("settings", "mouse_sensitivity", sensitivity_modifier)
 
 
@@ -80,12 +76,6 @@ func _process(delta: float) -> void:
 	thirst = clamp(thirst - delta , 0, max_thirst)
 	if Globals.player and (hunger <= 0 or thirst <= 0) and Globals.player.hitbox.hp > 0.1:
 		Globals.player.hitbox.damage(0.025 * delta, Vector3.ZERO, Vector3.ZERO, false, false, false)
-	# gun management
-	#if !guns.has(gun):
-		#gun = null
-	#for i in equipped_guns.size() - 1:
-		#if !guns.has(equipped_guns[i]):
-			#equipped_guns[i] = null
 
 
 func _physics_process(delta):
@@ -126,23 +116,6 @@ func change_state(new_state):
 func give_up() -> void:
 	PlayerStats.reset_stats()
 	SaveController.delete_save_data()
-
-
-#func find_item(item_name: String) -> Resource:
-	#for i in items:
-		#if i != null and i.resource_name == item_name:
-			#return i
-	#return null
-
-
-#func get_item_amount(item_name: String) -> int:
-	#var item = inventory.find_item_slot(item_name).item
-	#if item:
-		#return item.amount
-	#return 0
-	#if items.size() <= 0:
-		#return 0
-	#return items.filter(func(i): return i != null and i.resource_name == item_name).size()
 
 
 func save() -> Dictionary:

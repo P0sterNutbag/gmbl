@@ -16,4 +16,4 @@ class_name BulletStats
 @export var is_hitscan: bool = true
 @export var bullet_drop: bool = false
 @export var collision_mask := 3
-@export var hitmarker = preload("res://Scenes/hitmarker.tscn")
+@export var hitmarker = preload("res://Scenes/Effects/Decals/hitmarker.tscn")

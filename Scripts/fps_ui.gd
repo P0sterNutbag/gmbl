@@ -23,7 +23,7 @@ var starting_fog: float
 
 func _ready() -> void:
 	Globals.ui = self
-	var shader = get_tree().current_scene.get_node("Shader").mesh.material
+	var shader = get_tree().root.get_node("Encounter/Shader").mesh.material
 	starting_fog = shader.get_shader_parameter("fog_end")
 
 

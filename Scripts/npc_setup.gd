@@ -49,7 +49,7 @@ func set_materials(style: NpcStyle = style_data) -> void:
 	var faction = 0
 	if "faction" in get_parent():
 		faction = get_parent().faction
-	if faction > 0:
+	if faction > 1:
 		var faction_color = faction_colors[faction]
 		shirt_texture = get_texture_modified_skin(shirt_texture, faction_color, Color(1.0, 0.0, 0.0, 1.0))
 	else:

@@ -9,6 +9,7 @@ enum modes {use, loot}
 @export var show_space: bool = true
 @export var can_drop_items: bool
 @export var opposing_ui: Control
+var faction_discount := 0.2
 var is_ready: bool
 var source_inventory: Inventory = PlayerStats.inventory
 var target_inventory: Inventory
@@ -51,16 +52,6 @@ func _process(_delta: float) -> void:
 	if !visible or !get_parent().visible:
 		return
 	
-	# take all
-	#if Input.is_action_just_pressed("reload") and mode == modes.loot:
-		#for item in item_container.get_children():
-			#for amount in item.amount:
-				#source_inventory.items.erase(item.item)
-				#target_inventory.items.append(item.item)
-				#item_container.remove_child(item)
-		#set_items()
-		#target_inventory.set_items()
-	
 	# drop
 	if Input.is_action_just_pressed("drop_item") and can_drop_items:
 		if current_menu_item:
@@ -94,6 +85,9 @@ func set_items():
 		inst.owner = self
 		if show_price:
 			var price_modifier = 1.0
+			if shop:
+				var faction_rating = FactionManager.get_faction_relation(shop.faction, FactionManager.factions.player)
+				price_modifier += faction_rating * faction_discount
 			if opposing_ui.shop != null:
 				price_modifier = opposing_ui.shop.price_modifiers[categories[item.category]]
 			if item is EquipmentGun:

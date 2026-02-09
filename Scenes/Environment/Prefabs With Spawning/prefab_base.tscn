@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bqjryb6et7jsj"]
+[gd_scene format=3 uid="uid://bqjryb6et7jsj"]
 
 [ext_resource type="Script" uid="uid://bf1yc1wrj6qoi" path="res://Scripts/prefab_controller.gd" id="1_a3e38"]
 [ext_resource type="Script" uid="uid://bdayrcr4af73n" path="res://Scripts/spawner.gd" id="2_eiwgt"]
@@ -22,28 +22,28 @@ script = ExtResource("3_6acor")
 object_to_spawn = ExtResource("6_kynkf")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
-[node name="PrefabBase" type="Node3D" node_paths=PackedStringArray("nodes_to_exclude")]
+[node name="PrefabBase" type="Node3D" unique_id=786734237 node_paths=PackedStringArray("nodes_to_exclude")]
 script = ExtResource("1_a3e38")
 spawn_npcs = true
 spawn_loot = true
 nodes_to_exclude = [NodePath("NpcSpawns"), NodePath("LootSpawns"), NodePath("TrapSpawns"), NodePath("SpawnBuffer")]
 
-[node name="NpcSpawns" type="Node3D" parent="." groups=["spawn points"]]
+[node name="NpcSpawns" type="Node3D" parent="." unique_id=834589650 groups=["spawn points"]]
 script = ExtResource("2_eiwgt")
 possible_spawns = Array[ExtResource("3_6acor")]([SubResource("Resource_kn4lb")])
 location_data_variable = "npc_spawn_chance"
 
-[node name="LootSpawns" type="Node3D" parent="."]
+[node name="LootSpawns" type="Node3D" parent="." unique_id=1921764103]
 script = ExtResource("2_eiwgt")
 possible_spawns = Array[ExtResource("3_6acor")]([SubResource("Resource_rt3de")])
 spawn_on_ready = true
 location_data_variable = "loot_spawn_chance"
 
-[node name="TrapSpawns" type="Node3D" parent="."]
+[node name="TrapSpawns" type="Node3D" parent="." unique_id=2046467491]
 process_mode = 4
 script = ExtResource("2_eiwgt")
 possible_spawns = Array[ExtResource("3_6acor")]([SubResource("Resource_2gyk4")])
 location_data_variable = "trap_spawn_chance"
 
-[node name="SpawnBuffer" type="Node3D" parent="."]
+[node name="SpawnBuffer" type="Node3D" parent="." unique_id=1513824489]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)

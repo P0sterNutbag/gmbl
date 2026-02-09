@@ -1,0 +1,237 @@
+[gd_scene format=3 uid="uid://cemkkubm7a1qc"]
+
+[ext_resource type="PackedScene" uid="uid://cdr3k44ro53a1" path="res://Scenes/Overworld/Locations/location_base.tscn" id="1_x317r"]
+[ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_k1gww"]
+[ext_resource type="Script" uid="uid://de6rxup5nru4w" path="res://Scripts/dialogue.gd" id="3_ol2qc"]
+[ext_resource type="Script" uid="uid://ctb2g10cnu2sg" path="res://Scripts/dialogue_option.gd" id="4_o7pm5"]
+[ext_resource type="Script" uid="uid://cnu4xeujmgk51" path="res://Scripts/dialogue_options.gd" id="5_gkq58"]
+[ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="6_0wvw7"]
+[ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="7_inajc"]
+[ext_resource type="Script" uid="uid://c6knlgr6wx0i1" path="res://Scripts/quest_fetch.gd" id="8_te7rf"]
+[ext_resource type="Script" uid="uid://px5dr31pd885" path="res://Scripts/dialogue_loop.gd" id="9_qwjv1"]
+[ext_resource type="Texture2D" uid="uid://bi1onaha6gj3k" path="res://Art/Textures/player_face2.png" id="10_7t7n5"]
+[ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="10_mkt2b"]
+[ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="11_7t7n5"]
+[ext_resource type="Texture2D" uid="uid://b4d58y5scbpqf" path="res://Art/Textures/npc shirt blue.png" id="12_7jsld"]
+[ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="12_dckhe"]
+[ext_resource type="Resource" uid="uid://6c7s1e0y4ekq" path="res://Resources/Items/Junk/cigarettes.tres" id="12_inajc"]
+[ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="13_7jsld"]
+[ext_resource type="Resource" uid="uid://jb6lsvgonmut" path="res://Resources/Items/Junk/ecstacy.tres" id="13_te7rf"]
+[ext_resource type="PackedScene" uid="uid://l1eb7nix2iki" path="res://Scenes/Environment/Buildings/shack.tscn" id="14_8sm2v"]
+[ext_resource type="Resource" uid="uid://b0ujp3jyr8ll6" path="res://Resources/Items/Junk/joint.tres" id="14_qwjv1"]
+[ext_resource type="PackedScene" uid="uid://di4qmk466fnrk" path="res://Scenes/Environment/Buildings/shipping_container.tscn" id="15_bnevc"]
+[ext_resource type="Resource" uid="uid://clu1tx111108g" path="res://Resources/Items/Survival/pain_pills.tres" id="15_mkt2b"]
+[ext_resource type="Resource" uid="uid://bbx4x21dta7e7" path="res://Resources/Items/Survival/morphine.tres" id="16_7t7n5"]
+[ext_resource type="Script" uid="uid://6ucyr0petjnx" path="res://Scripts/inventory.gd" id="17_dckhe"]
+[ext_resource type="Script" uid="uid://bicpdyf13vj1j" path="res://Scripts/quest_fetch_random.gd" id="19_te7rf"]
+
+[sub_resource type="Resource" id="Resource_0jat8"]
+script = ExtResource("2_k1gww")
+faction = 3
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
+
+[sub_resource type="Resource" id="Resource_ogcrv"]
+script = ExtResource("3_ol2qc")
+lines = Array[String](["You here to buy or sell?"])
+speaker = 1
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_84y0d"]
+script = ExtResource("4_o7pm5")
+text = "Trade"
+destination = 9
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
+[sub_resource type="Resource" id="Resource_it00d"]
+script = ExtResource("4_o7pm5")
+text = "Take jobs"
+destination = 2
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
+[sub_resource type="Resource" id="Resource_rocs7"]
+script = ExtResource("4_o7pm5")
+text = "Return jobs"
+destination = 3
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
+[sub_resource type="Resource" id="Resource_k764k"]
+script = ExtResource("4_o7pm5")
+text = "Leave"
+destination = 4
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
+[sub_resource type="Resource" id="Resource_3vihp"]
+script = ExtResource("5_gkq58")
+options = Array[ExtResource("4_o7pm5")]([SubResource("Resource_84y0d"), SubResource("Resource_it00d"), SubResource("Resource_rocs7"), SubResource("Resource_k764k")])
+metadata/_custom_type_script = "uid://cnu4xeujmgk51"
+
+[sub_resource type="Resource" id="Resource_wji5k"]
+script = ExtResource("6_0wvw7")
+method = "enter_job_board"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_i588a"]
+script = ExtResource("8_te7rf")
+metadata/_custom_type_script = "uid://c6knlgr6wx0i1"
+
+[sub_resource type="Resource" id="Resource_la7xj"]
+script = ExtResource("6_0wvw7")
+method = "return_quests"
+arguments = [SubResource("Resource_i588a"), 5, 7]
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_lkrnr"]
+script = ExtResource("6_0wvw7")
+method = "exit_to_game"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_eqpsa"]
+script = ExtResource("3_ol2qc")
+lines = Array[String](["Nice work! Here's the reward."])
+speaker = 1
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_h1sig"]
+script = ExtResource("9_qwjv1")
+next_index = 1
+metadata/_custom_type_script = "uid://px5dr31pd885"
+
+[sub_resource type="Resource" id="Resource_24kub"]
+script = ExtResource("3_ol2qc")
+lines = Array[String](["Looks like you haven't completed any jobs."])
+speaker = 1
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_7pdxe"]
+script = ExtResource("9_qwjv1")
+next_index = 1
+metadata/_custom_type_script = "uid://px5dr31pd885"
+
+[sub_resource type="Resource" id="Resource_panqy"]
+script = ExtResource("6_0wvw7")
+method = "enter_shop"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_ydedg"]
+script = ExtResource("9_qwjv1")
+next_index = 1
+metadata/_custom_type_script = "uid://px5dr31pd885"
+
+[sub_resource type="Resource" id="Resource_5faom"]
+script = ExtResource("10_mkt2b")
+skin_colors = Array[Color]([Color(0.8117647, 0.5882353, 0.3764706, 1)])
+hair_colors = Array[Color]([Color(0.2901961, 0.09803922, 0, 1)])
+faces = Array[Texture]([ExtResource("10_7t7n5")])
+shirts = Array[Texture]([ExtResource("12_7jsld")])
+pants_colors = Array[Color]([Color(0.16862746, 0.13333334, 0.13333334, 1)])
+shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1)])
+metadata/_custom_type_script = "uid://b80ipr8q70gqm"
+
+[sub_resource type="Resource" id="Resource_ym52c"]
+script = ExtResource("11_7t7n5")
+bubbles = Array[ExtResource("3_ol2qc")]([SubResource("Resource_ogcrv"), SubResource("Resource_3vihp"), SubResource("Resource_wji5k"), SubResource("Resource_la7xj"), SubResource("Resource_lkrnr"), SubResource("Resource_eqpsa"), SubResource("Resource_h1sig"), SubResource("Resource_24kub"), SubResource("Resource_7pdxe"), SubResource("Resource_panqy"), SubResource("Resource_ydedg")])
+npc_style = SubResource("Resource_5faom")
+npc_name = "Duster"
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+
+[sub_resource type="Resource" id="Resource_7jsld"]
+script = ExtResource("7_inajc")
+item = ExtResource("12_inajc")
+amount = 5
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_8sm2v"]
+script = ExtResource("7_inajc")
+item = ExtResource("13_te7rf")
+amount = 2
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_bnevc"]
+script = ExtResource("7_inajc")
+item = ExtResource("14_qwjv1")
+amount = 3
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_7ervs"]
+script = ExtResource("7_inajc")
+item = ExtResource("15_mkt2b")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_bd2jn"]
+script = ExtResource("7_inajc")
+item = ExtResource("16_7t7n5")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_ibe1q"]
+script = ExtResource("17_dckhe")
+item_slots = Array[ExtResource("7_inajc")]([SubResource("Resource_7jsld"), SubResource("Resource_8sm2v"), SubResource("Resource_bnevc"), SubResource("Resource_7ervs"), SubResource("Resource_bd2jn")])
+money = 1000
+title = "Drug Den"
+metadata/_custom_type_script = "uid://6ucyr0petjnx"
+
+[sub_resource type="Resource" id="Resource_qwjv1"]
+script = ExtResource("7_inajc")
+item = ExtResource("13_te7rf")
+amount = 4
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_mkt2b"]
+script = ExtResource("7_inajc")
+item = ExtResource("14_qwjv1")
+amount = 4
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_7t7n5"]
+script = ExtResource("7_inajc")
+item = ExtResource("16_7t7n5")
+amount = 3
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_dckhe"]
+script = ExtResource("7_inajc")
+item = ExtResource("15_mkt2b")
+amount = 3
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_hocrx"]
+script = ExtResource("19_te7rf")
+required_items = Array[ExtResource("7_inajc")]([SubResource("Resource_qwjv1"), SubResource("Resource_mkt2b"), SubResource("Resource_7t7n5"), SubResource("Resource_dckhe")])
+metadata/_custom_type_script = "uid://bicpdyf13vj1j"
+
+[sub_resource type="Resource" id="Resource_6rs7t"]
+script = ExtResource("13_7jsld")
+title = "Drug Den"
+inventory = SubResource("Resource_ibe1q")
+price_modifiers = {
+"Ammo": 0.5,
+"Armor": 0.5,
+"Junk": 0.75,
+"Survival": 0.75,
+"Weapons": 0.5
+}
+dialogue = SubResource("Resource_ym52c")
+random_quest = SubResource("Resource_hocrx")
+minimum_quests = 1
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+
+[node name="DrugDen" unique_id=1342811121 instance=ExtResource("1_x317r")]
+location_data = SubResource("Resource_0jat8")
+shop = SubResource("Resource_6rs7t")
+
+[node name="Flagpole" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="0" unique_id=800258272]
+transform = Transform3D(-8.742278e-08, 0, -2, 0, 2, 0, 2, 0, -8.742278e-08, 0, 0, -8)
+visible = true
+
+[node name="Shack" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="1" unique_id=85709090 instance=ExtResource("14_8sm2v")]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -4, 0, 0)
+
+[node name="ShippingContainer" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="2" unique_id=610350900 instance=ExtResource("15_bnevc")]
+transform = Transform3D(-0.47105807, 0, 0.8821022, 0, 1, 0, -0.8821022, 0, -0.47105807, 8, 0, 0)
+
+[node name="ShippingContainer2" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="3" unique_id=343602886 instance=ExtResource("15_bnevc")]
+transform = Transform3D(0.4122459, 0, 0.9110726, 0, 1, 0, -0.9110726, 0, 0.4122459, 8, 3.143, 0)
+
+[node name="PointOfInterest" parent="." index="2" unique_id=2144080138]
+title = "Drug Den"
+
+[editable path="PointOfInterest"]

@@ -2,9 +2,6 @@ extends Resource
 class_name Shop
 
 @export var title: String
-#@export var all_items: Array[Item]
-#var items: Array[Item] = all_items.duplicate_deep()
-#@export var money: int = 100
 @export var inventory: Inventory
 @export var price_modifiers: Dictionary = {
 	"Survival" : 0.75,
@@ -17,3 +14,4 @@ class_name Shop
 @export var quests: Array[Quest]
 @export var random_quest: QuestRandom
 @export var minimum_quests: int
+var faction: FactionManager.factions

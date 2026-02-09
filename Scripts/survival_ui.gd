@@ -1,17 +1,20 @@
 extends CanvasLayer
 
 @onready var player_inventory_holder: HBoxContainer = $Menus/VBoxContainer/PlayerInventory
+@onready var player_inventory = $Menus/VBoxContainer/PlayerInventory/Inventory
 @onready var transfer_inventory_holder: HBoxContainer = $TransferInventory
 @onready var player_transfer_inventory: InventoryUI = %Inventory
 @onready var loot_transfer_inventory: InventoryUI = %Inventory2
 @onready var journal: HBoxContainer = $Menus/VBoxContainer/Journal
 @onready var compass: Control = $TopCenter/Compass
 @onready var pause_menu: Control = $PauseMenu
-@onready var player_inventory: InventoryUI = $PlayerInventory/Inventory
 @onready var progress_menu: PanelContainer = $ProgressMenu
 @onready var death_menu: PanelContainer = $DeathMenu
 @onready var stats_anchor: Control = $StatsAnchor
 @onready var menu_holder: Control = $Menus
+@onready var factions: PanelContainer = $Menus/VBoxContainer/Factions
+@onready var log: VBoxContainer = $Log
+const LOG_NOTIFICATION = preload("uid://im7vaordnyrq")
 
 
 func _enter_tree() -> void:
@@ -23,11 +26,6 @@ func _enter_tree() -> void:
 	else:
 		stats_anchor.hide()
 		stats_anchor.process_mode = Node.PROCESS_MODE_DISABLED
-
-
-#func _ready() -> void:
-	#for child in get_children():
-		#child.hide()
 
 
 func _process(_delta: float) -> void:
@@ -65,43 +63,21 @@ func _process(_delta: float) -> void:
 			UiController.open_interface(pause_menu)
 		else:
 			UiController.close_interface(pause_menu)
-	
 	# compass
 	var compass_item = PlayerStats.inventory.find_item("compass")
 	if compass_item and compass_item.equipped:
 		compass.visible = true
 	else:
 		compass.visible = false
-	
 	# overworld health and status effects
 	if Globals.overworld == get_tree().current_scene:
 		stats_anchor.global_position.y = Globals.player.camera.unproject_position(Globals.player.hud_anchor.global_position).y
 		stats_anchor.global_position.y -= stats_anchor.size.y
-	
 	if UiController.current_ui:
 		if stats_anchor.visible:
 			stats_anchor.hide()
 	elif stats_anchor.process_mode == PROCESS_MODE_INHERIT:
 		stats_anchor.show()
-	
-	# open pause menu
-	#if Input.is_action_just_pressed("ui_cancel"):
-		#if PlayerStats.state != PlayerStats.states.pause:
-			#Globals.pause_game()
-
-
-#func open_menu(menu: Control, array: Array = []) -> void:
-	#Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-	#menu.show()
-	#if menu is MenuList:
-		#menu.open(array)
-	#PlayerStats.change_state(PlayerStats.states.pause)
-#
-#
-#func close_menu(menu: Control) -> void:
-	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	#menu.hide()
-	#PlayerStats.change_state(PlayerStats.states.walk)
 
 
 func loot(target: Inventory) -> void:
@@ -116,6 +92,16 @@ func loot(target: Inventory) -> void:
 	player_transfer_inventory.show_price = false
 	loot_transfer_inventory.show_price = false
 	UiController.open_interface(transfer_inventory_holder)
+
+
+func create_notification(notification_text: String) -> void:
+	var inst = LOG_NOTIFICATION.instantiate()
+	log.add_child(inst)
+	inst.text = notification_text
+	var tween = create_tween()
+	tween.tween_interval(3)
+	tween.tween_property(inst, "modulate:a", 0.0, 1)
+	tween.tween_callback(inst.queue_free)
 
 
 func close_inventory() -> void:
@@ -136,10 +122,6 @@ func show_ui() -> void:
 	get_child(0).show()
 	get_child(1).show()
 
-#func _on_menu_exit() -> void:
-	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	#PlayerStats.change_state(PlayerStats.states.walk)
-
 
 func _on_inventory_tab_pressed() -> void:
 	UiController.open_interface(player_inventory_holder)
@@ -152,3 +134,7 @@ func _on_journal_tab_pressed() -> void:
 func _on_exit_menu_pressed() -> void:
 	UiController.close_all()
 	menu_holder.hide()
+
+
+func _on_faction_tab_pressed() -> void:
+	UiController.open_interface(factions)

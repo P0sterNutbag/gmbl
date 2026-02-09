@@ -23,7 +23,6 @@ var state_functions: Dictionary
 var exit_functions: Dictionary
 var enter_functions: Dictionary
 var faction := FactionManager.factions.player 
-const NOTIFICATION = preload("uid://dl0pidlmm5dwh")
 @onready var camera_anchor: Node3D = $CameraAnchor
 @onready var model: Node3D = $EnemyModel
 @onready var animation_player: AnimationPlayer = $EnemyModel/PersonAnimated/AnimationPlayer
@@ -196,13 +195,6 @@ func unequip_gun() -> void:
 	PlayerStats.gun = null
 	run_animation = "RunNoGun"
 	idle_animation = "IdleNoGun"
-
-
-func create_notification(string: String) -> void:
-	var inst = NOTIFICATION.instantiate()
-	inst.global_position = camera.unproject_position(notification_position.global_position)
-	get_tree().current_scene.add_child(inst)
-	inst.label.text = string
 
 
 func _input(event):

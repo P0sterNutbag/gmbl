@@ -32,8 +32,9 @@ signal encounter_ended
 
 func _enter_tree() -> void:
 	await get_tree().process_frame
-	var color = FactionManager.faction_colors[location_data.faction]
-	flag.set_instance_shader_parameter("flag_color", color)
+	if location_data:
+		var color = FactionManager.faction_colors[location_data.faction]
+		flag.set_instance_shader_parameter("flag_color", color)
 
 
 func _ready() -> void:
@@ -54,11 +55,13 @@ func _ready() -> void:
 		for i in town.shops:
 			shops_base_inventory[i.title] = i.inventory.items
 			shops_max_money[i.title] = i.inventory.money
+			i.faction = location_data.faction
 		stock_shops()
 		DayNightCycle.day_start.connect(stock_shops)
 	if shop != null:
 		shops_base_inventory[shop.title] = shop.inventory.items
 		shops_max_money[shop.title] = shop.inventory.money
+		shop.faction = location_data.faction
 		stock_shops()
 
 

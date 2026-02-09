@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d24cwcumucxfb"]
+[gd_scene format=3 uid="uid://d24cwcumucxfb"]
 
 [ext_resource type="Script" uid="uid://vxmg7be0kyok" path="res://Scripts/dialogue_bubble.gd" id="2_bxbg0"]
 [ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="2_hllnk"]
@@ -13,7 +13,7 @@ border_color = Color(1, 1, 0, 1)
 [sub_resource type="Theme" id="Theme_vifsl"]
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_utpw1")
 
-[node name="DialogueBubble" type="PanelContainer"]
+[node name="DialogueBubble" type="PanelContainer" unique_id=1132815401]
 custom_minimum_size = Vector2(384, 0)
 offset_right = 500.0
 offset_bottom = 57.0
@@ -21,7 +21,7 @@ size_flags_vertical = 8
 theme = SubResource("Theme_vifsl")
 script = ExtResource("2_bxbg0")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=3978744]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 16
@@ -29,7 +29,7 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Label" type="Label" parent="MarginContainer"]
+[node name="Label" type="Label" parent="MarginContainer" unique_id=1488809745]
 custom_minimum_size = Vector2(384, 24)
 layout_mode = 2
 size_flags_vertical = 0
@@ -38,16 +38,16 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
 text = "Hello!"
 autowrap_mode = 2
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1407304345]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="Polygon2D" type="Polygon2D" parent="Control"]
+[node name="Polygon2D" type="Polygon2D" parent="Control" unique_id=995837485]
 color = Color(0, 0, 0, 0.78431374)
 polygon = PackedVector2Array(0, 0, 0, 20, -25, 0)
 
-[node name="Line2D" type="Line2D" parent="Control"]
+[node name="Line2D" type="Line2D" parent="Control" unique_id=1812156511]
 points = PackedVector2Array(1, 0, 1, 20, -25, 0, -498, 0)
 width = 2.0
 default_color = Color(1, 1, 0, 1)

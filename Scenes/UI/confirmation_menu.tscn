@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://cvqg8c4yvypa1"]
+
+[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_fpjlb"]
+[ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="2_skyqr"]
+[ext_resource type="Theme" uid="uid://cdtfcbhvps3m1" path="res://Art/Themes/text_mediun.tres" id="3_aad7u"]
+[ext_resource type="PackedScene" uid="uid://bj7gyfau2dx5w" path="res://Scenes/UI/menu_button.tscn" id="4_ao7kj"]
+
+[node name="ConfirmationMenu" type="Control" unique_id=42619159]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1715864982]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -97.0
+offset_right = 200.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_fpjlb")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=26345484]
+layout_mode = 2
+theme = ExtResource("2_skyqr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=791748064]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=19737580]
+custom_minimum_size = Vector2(332, 0)
+layout_mode = 2
+theme = ExtResource("3_aad7u")
+text = "Delete Quest"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2009617104]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Yes" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=608493549 instance=ExtResource("4_ao7kj")]
+layout_mode = 2
+text = "Yes"
+
+[node name="No" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1204034950 instance=ExtResource("4_ao7kj")]
+layout_mode = 2
+text = "No"

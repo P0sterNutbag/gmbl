@@ -76,6 +76,8 @@ func _ready() -> void:
 	#gun.bullet_stats.collision_mask = 4
 	shoot_timer.wait_time = gun.shoot_cooldown
 	items_to_drop.append(gun_item.physical_item)
+	for i in randi() % 4:
+		inventory.add_item(gun.ammo_item)
 	DayNightCycle.night_start.connect(on_night_start)
 	DayNightCycle.day_start.connect(on_day_start)
 	# set affinity to player
@@ -499,18 +501,14 @@ func _on_death() -> void:
 	physical_bone_simulator.physical_bones_start_simulation()
 	var bones = physical_bone_simulator.get_children()
 	bones.sort_custom(func(a, b): return a.global_position.distance_to(damage_position) < b.global_position.distance_to(damage_position))
-	#var head = physical_bone_simulator.get_node("Physical Bone mixamorig_Head")
 	bones[0].apply_impulse(damage_direction.normalized() * 35)
 	if bounty:
 		bounty.completed = true
 		bounty.location = bounty.return_location
+		Globals.survival_ui.create_notification("Bounty target killed")
 	change_state(states.dead)
 	shoot_timer.stop()
 	aim_timer.stop()
-	#if team == teams.allies:
-		#get_tree().call_group("enemies", "set_detection_targets")
-	#if team == teams.enemies:
-		#get_tree().call_group("allies", "set_detection_targets")
 	if has_node("Sprite3D"):
 		$Sprite3D.hide()
 

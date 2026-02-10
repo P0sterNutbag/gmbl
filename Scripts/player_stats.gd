@@ -39,8 +39,8 @@ var max_sleep: float
 var max_hunger: float
 var max_thirst: float
 var sleep_decrease_rate := 1.0
-var hunger_decrease_rate := 1.5
-var thirst_decrease_rate := 2
+var hunger_decrease_rate := 1.25
+var thirst_decrease_rate := 1.5
 @onready var guns: Array[Item]:
 	get(): 
 		return inventory.items.filter(func(i): return i is EquipmentGun and i.gun_stats.ammo > 0)
@@ -75,7 +75,8 @@ func _process(delta: float) -> void:
 	hunger = clamp(hunger - delta, 0, max_hunger)
 	thirst = clamp(thirst - delta , 0, max_thirst)
 	if Globals.player and (hunger <= 0 or thirst <= 0) and Globals.player.hitbox.hp > 0.1:
-		Globals.player.hitbox.damage(0.025 * delta, Vector3.ZERO, Vector3.ZERO, false, false, false)
+		#Globals.player.hitbox.damage(0.025 * delta, Vector3.ZERO, Vector3.ZERO, false, false, false)
+		Globals.player.hitbox.hp -= 0.025 * delta
 
 
 func _physics_process(delta):

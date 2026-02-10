@@ -9,7 +9,6 @@ var player_place: NodePath
 
 func _enter_tree() -> void:
 	await get_tree().process_frame
-	SaveController.save_data_to_file()
 	process_mode = Node.PROCESS_MODE_INHERIT
 	if current_encounter:
 		if current_encounter.location_data.population <= 0 and current_encounter.get_parent().has_method("die"):
@@ -23,6 +22,7 @@ func _enter_tree() -> void:
 		player.rotate_y(deg_to_rad(180))
 		player.rotation.x = 0
 		player.rotation.y = 0
+	SaveController.save_data_to_file()
 
 
 func _ready() -> void:

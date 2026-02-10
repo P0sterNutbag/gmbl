@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-var show_crosshair: bool = true
 var starting_fog: float
 @onready var middle_pos = get_tree().root.get_viewport().size / 8
 @onready var crosshair = $Crosshair
@@ -63,31 +62,37 @@ func _process(delta: float) -> void:
 		#breath.value = Globals.player.current_breath / Globals.player.max_breath
 	#else:
 		#breath.visible = false
-
 	
 	# crosshair
-	if (!show_crosshair or !Globals.player.gun or Globals.player.gun is not Gun or
-	Globals.player.gun_state == Globals.player.gun_states.ads or 
-	Globals.player.gun_state == Globals.player.gun_states.no_gun or 
-	tooltip.text != "" or Globals.crosshair_type == Globals.crosshairs.none or
-	UiController.current_ui):
-		crosshair.hide()
-		return
-	else:
-		crosshair.show()
-	if Globals.crosshair_type == Globals.crosshairs.dot:
-		dot_crosshair.show()
-		crosshair.hide()
-		return
-	var base_pos = clamp(Globals.player.gun.bullet_stats.h_angle_variance_hip * 20, 1, 100)
-	for child in crosshair.get_children():
-		var target_pos = child.position
-		if child.position.x == 0:
-			target_pos.y = sign(child.position.y) * (base_pos * clamp(Globals.player.velocity.length(), 1, 2) * Globals.player.gun.spread)
-		elif child.position.y == 0:
-			target_pos.x = sign(child.position.x) * (base_pos * clamp(Globals.player.velocity.length(), 1, 2) * Globals.player.gun.spread)
-		child.position = lerp(child.position, target_pos, delta * 20)
-	
+	match Globals.crosshair_type:
+		Globals.crosshairs.standard:
+			crosshair.show()
+			dot_crosshair.hide()
+			if (!Globals.player.gun or Globals.player.gun is not Gun or
+			Globals.player.gun_state == Globals.player.gun_states.ads or 
+			Globals.player.gun_state == Globals.player.gun_states.no_gun):
+				crosshair.hide()
+				dot_crosshair.show()
+			if (tooltip.text != "" or Globals.crosshair_type == Globals.crosshairs.none or UiController.current_ui):
+				crosshair.hide()
+				dot_crosshair.hide()
+			if crosshair.visible:
+				var base_pos = clamp(Globals.player.gun.bullet_stats.h_angle_variance_hip * 20, 1, 100)
+				for child in crosshair.get_children():
+					var target_pos = child.position
+					if child.position.x == 0:
+						target_pos.y = sign(child.position.y) * (base_pos * clamp(Globals.player.velocity.length(), 1, 2) * Globals.player.gun.spread)
+					elif child.position.y == 0:
+						target_pos.x = sign(child.position.x) * (base_pos * clamp(Globals.player.velocity.length(), 1, 2) * Globals.player.gun.spread)
+					child.position = lerp(child.position, target_pos, delta * 20)
+		Globals.crosshairs.dot:
+			dot_crosshair.show()
+			crosshair.hide()
+			if UiController.current_ui and tooltip.text != "" :
+				dot_crosshair.hide()
+		Globals.crosshairs.none:
+			crosshair.hide()
+			dot_crosshair.hide()
 
 
 func show_scope(scope_texture: Texture2D = scope.texture) -> void:

@@ -21,6 +21,7 @@ const starting_gear = preload("uid://dpjy0ettwaiyp")
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	# get starting gear
 	var saved_gear
 	if ResourceLoader.exists("user://starting_gear.res"):
 		saved_gear = ResourceLoader.load("user://starting_gear.res")
@@ -32,6 +33,12 @@ func _ready() -> void:
 	player_inventory.target_inventory = starting_inventory.source_inventory
 	starting_inventory.set_items()
 	player_inventory.set_items()
+	# get starting money
+	var starting_money = 200
+	if ResourceLoader.exists("user://progress_data.res"):
+		var progress_data = ResourceLoader.load("user://progress_data.res")
+		starting_money = progress_data.starting_money
+	PlayerStats.inventory.money = starting_money
 
 
 func _process(delta: float) -> void:

@@ -6,7 +6,9 @@
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="4_l6qq8"]
 [ext_resource type="PackedScene" uid="uid://dpffikxirjfnq" path="res://Scenes/Models/Guns/pistol_model.tscn" id="5_l6qq8"]
 [ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="5_nwufo"]
-[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="6_l6qq8"]
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="6_3cuqt"]
+[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="7_mpuu0"]
+[ext_resource type="AudioStream" uid="uid://baylryxodu5ig" path="res://Audio/Guns/handgun_A_shot_single_01.wav" id="8_sqv2m"]
 
 [sub_resource type="Resource" id="Resource_nfi5v"]
 script = ExtResource("4_l6qq8")
@@ -21,10 +23,28 @@ metadata/_custom_type_script = "uid://c338ifvm4duar"
 script = ExtResource("5_nwufo")
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
-[node name="Pistol" instance=ExtResource("1_mfn4u")]
+[sub_resource type="Resource" id="Resource_i0bgb"]
+resource_local_to_scene = true
+resource_name = "pistol_ammo"
+script = ExtResource("7_mpuu0")
+method = "reload_gun"
+custom_path = "PlayerStats"
+usable_in_menu = false
+title = "9mm Magazine"
+category = 1
+price = 25
+description = "Usable in: Pistol"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3cuqt"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("8_sqv2m")
+
+[node name="Pistol" unique_id=1838172339 instance=ExtResource("1_mfn4u")]
 bullet_stats = SubResource("Resource_nfi5v")
 gun_stats = SubResource("Resource_l6qq8")
-ammo_item = ExtResource("6_l6qq8")
+ammo_item = SubResource("Resource_i0bgb")
 
 [node name="GunAnchor" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0117090605, 0.0050429404)
@@ -38,7 +58,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.033363923, 0)
 [node name="MuzzleFlash" parent="GunAnchor/FirePoint" index="1"]
 transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 0, 0, 0)
 
-[node name="Model" parent="GunAnchor" index="1" instance=ExtResource("5_l6qq8")]
+[node name="AudioStreamPlayer3D" parent="GunAnchor/FirePoint" index="2"]
+stream = SubResource("AudioStreamRandomizer_3cuqt")
+
+[node name="Model" parent="GunAnchor" index="1" unique_id=169569318 instance=ExtResource("5_l6qq8")]
 
 [node name="Chamber" parent="GunAnchor" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0174474, 0.0364762, 0.0380221)

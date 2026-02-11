@@ -17,14 +17,14 @@ func on_pressed():
 		use(target_node)
 
 
-func use(target_node):
+func use(_target_node):
 	var target
 	if is_health_item:
 		target = Globals.player.get_node("Hitbox")
 	elif custom_path != "":
 		target = Globals.get_tree().root.get_node(custom_path)
 	else:
-		target = target_node
+		target = _target_node
 	for effect in effects:
 		for key in effect.values:
 			if effect.add:

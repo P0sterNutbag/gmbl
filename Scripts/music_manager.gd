@@ -2,6 +2,7 @@ extends Node
 
 @export var tracks: Dictionary[String, AudioStream]
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var ambient_sounds: AudioStreamPlayer = $AmbientSounds
 
 
 func _ready() -> void:
@@ -29,11 +30,17 @@ func _ready() -> void:
 
 
 func on_scene_changed() -> void:
-	var scene_name = get_tree().current_scene.get_scene_file_path()
-	if !tracks.has(scene_name):
+	# set ambient sounds
+	ambient_sounds.stop()
+	var scene_name = get_tree().current_scene.name
+	if scene_name == "Encounter":
+		ambient_sounds.play()
+	# set music
+	var scene_file_name = get_tree().current_scene.get_scene_file_path()
+	if !tracks.has(scene_file_name):
 		audio_stream_player.stop()
 		return
-	var track = tracks[scene_name]
+	var track = tracks[scene_file_name]
 	if audio_stream_player.stream == track:
 		return
 	audio_stream_player.stream = track

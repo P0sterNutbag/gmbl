@@ -68,34 +68,20 @@ var bounty: Quest
 
 func _ready() -> void:
 	gun_holder.get_child(0).queue_free()
-	#gun = guns_dict[gun_index][0].instantiate()
 	gun_item = potential_gun_items[Globals.get_weighted_index(potential_gun_items)].object_to_spawn
 	gun = gun_item.gun_object.instantiate()
 	gun.gun_stats.condition = randf_range(10, 20)
 	gun_holder.add_child(gun)
-	#gun.bullet_stats.collision_mask = 4
 	shoot_timer.wait_time = gun.shoot_cooldown
 	items_to_drop.append(gun_item.physical_item)
 	for i in randi() % 4:
 		inventory.add_item(gun.ammo_item)
 	DayNightCycle.night_start.connect(on_night_start)
 	DayNightCycle.day_start.connect(on_day_start)
+	time_to_see_max += randf_range(-0.25, 0.25)
 	# set affinity to player
 	await get_tree().process_frame
 	set_detection_targets()
-	
-	# add items
-	#for i in randi_range(min_items, max_items):
-		#inventory.add_item(potential_items[Globals.get_weighted_index(potential_items)].object_to_spawn)
-	
-	#await get_tree().create_timer(0.5).timeout
-#	
-	#if team == teams.allies:
-		#detection.targets = get_tree().get_nodes_in_group("enemies")
-		#gun.bullet_stats.collision_mask = 3
-	#elif team == teams.enemies:
-		#detection.targets = get_tree().get_nodes_in_group("allies")
-		#gun.bullet_stats.collision_mask = 4
 	
 
 

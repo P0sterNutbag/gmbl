@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="5_vhdqu"]
 [ext_resource type="Resource" uid="uid://dgo34up8hytn6" path="res://Resources/Items/Ammo/smg_ammo.tres" id="6_c0m27"]
 [ext_resource type="PackedScene" uid="uid://bcqk17amj56df" path="res://Scenes/Models/Guns/uzi_model.tscn" id="7_f4idb"]
+[ext_resource type="AudioStream" uid="uid://b55utbl22kuql" path="res://Audio/Guns/submngun_B_shTL_single_01.wav" id="7_qdpo4"]
 
 [sub_resource type="Resource" id="Resource_5eyec"]
 script = ExtResource("4_qdpo4")
@@ -23,6 +24,11 @@ metadata/_custom_type_script = "uid://c338ifvm4duar"
 script = ExtResource("5_vhdqu")
 ammo = 24
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vhdqu"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("7_qdpo4")
 
 [node name="Uzi" unique_id=1870037493 instance=ExtResource("1_5eyec")]
 bullet_stats = SubResource("Resource_5eyec")
@@ -41,6 +47,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04401934, 0)
 
 [node name="MuzzleFlash" parent="GunAnchor/FirePoint" index="1"]
 transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 0, 0, 0)
+
+[node name="AudioStreamPlayer3D" parent="GunAnchor/FirePoint" index="2"]
+stream = SubResource("AudioStreamRandomizer_vhdqu")
 
 [node name="Model" parent="GunAnchor" index="1" unique_id=894667141 instance=ExtResource("7_f4idb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.036380768, 0.060748264)

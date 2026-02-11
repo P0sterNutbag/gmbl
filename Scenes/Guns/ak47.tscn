@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/Effects/Decals/hitmarker.tscn" id="3_7hf8y"]
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="4_ywb2m"]
 [ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="5_7hf8y"]
-[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="6_ywb2m"]
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="6_rtl1f"]
+[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="7_48urk"]
+[ext_resource type="AudioStream" uid="uid://dh8aqylwf7m42" path="res://Audio/Guns/assault_A_shot_single_01.wav" id="8_48urk"]
 
 [sub_resource type="Resource" id="Resource_rtl1f"]
 script = ExtResource("4_ywb2m")
@@ -22,10 +24,33 @@ script = ExtResource("5_7hf8y")
 ammo = 24
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
-[node name="AK47" instance=ExtResource("1_y3opf")]
+[sub_resource type="Resource" id="Resource_q7l5h"]
+script = ExtResource("6_rtl1f")
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[sub_resource type="Resource" id="Resource_e4l5w"]
+resource_local_to_scene = true
+resource_name = "rifle_ammo"
+script = ExtResource("7_48urk")
+effects = Array[ExtResource("6_rtl1f")]([SubResource("Resource_q7l5h")])
+method = "reload_gun"
+custom_path = "PlayerStats"
+usable_in_menu = false
+title = "7.62×39mm Magazine"
+category = 1
+price = 35
+description = "Usable in: AK-47, Hunting Rifle"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_48urk"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("8_48urk")
+
+[node name="AK47" unique_id=1046860869 instance=ExtResource("1_y3opf")]
 bullet_stats = SubResource("Resource_rtl1f")
 gun_stats = SubResource("Resource_ywb2m")
-ammo_item = ExtResource("6_ywb2m")
+ammo_item = SubResource("Resource_e4l5w")
 
 [node name="FirePoint" parent="GunAnchor" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00265765, 0.12846725, -0.8650912)
@@ -33,7 +58,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00265765, 0.12846725, -0.86
 [node name="RayCast3D" parent="GunAnchor/FirePoint" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.059772924, 0)
 
-[node name="Model" parent="GunAnchor" index="1" instance=ExtResource("2_p5lgt")]
+[node name="AudioStreamPlayer3D" parent="GunAnchor/FirePoint" index="2"]
+stream = SubResource("AudioStreamRandomizer_48urk")
+
+[node name="Model" parent="GunAnchor" index="1" unique_id=913908235 instance=ExtResource("2_p5lgt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.091873154, -0.24007307)
 
 [node name="Chamber" parent="GunAnchor" index="2"]

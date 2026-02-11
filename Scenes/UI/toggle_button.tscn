@@ -3,9 +3,9 @@
 [ext_resource type="Theme" uid="uid://tivwhtwiofll" path="res://Art/Themes/button.tres" id="1_5trl5"]
 [ext_resource type="Texture2D" uid="uid://djj6aa5nkatda" path="res://Art/Textures/arrow.png" id="2_qxey7"]
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="3_5q1wp"]
-[ext_resource type="Script" uid="uid://mv25rt7ybwxe" path="res://Scripts/toggle_button.gd" id="3_qxey7"]
+[ext_resource type="Script" path="res://Scripts/toggle_button.gd" id="3_qxey7"]
 
-[node name="Button" type="Button"]
+[node name="Button" type="Button" unique_id=377695594]
 offset_right = 263.0
 offset_bottom = 25.0
 theme = ExtResource("1_5trl5")
@@ -16,7 +16,7 @@ icon = ExtResource("2_qxey7")
 alignment = 0
 script = ExtResource("3_qxey7")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=437163557]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,19 +25,19 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer" unique_id=460398699]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 theme = ExtResource("3_5q1wp")
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/PanelContainer" unique_id=349641988]
 layout_mode = 2
 theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 3
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/PanelContainer/MarginContainer"]
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/PanelContainer/MarginContainer" unique_id=1122202323]
 layout_mode = 2
 mouse_filter = 2
 color = Color(1, 1, 0, 1)

@@ -13,8 +13,8 @@ extends CanvasLayer
 @onready var stats_anchor: Control = $StatsAnchor
 @onready var menu_holder: Control = $Menus
 @onready var factions: PanelContainer = $Menus/VBoxContainer/Factions
-@onready var log: VBoxContainer = $Log
-const LOG_NOTIFICATION = preload("uid://im7vaordnyrq")
+@onready var log_box: VBoxContainer = $Log
+const LOG_NOTIFICATION = preload("res://Scenes/UI/log_notification.tscn")
 
 
 func _enter_tree() -> void:
@@ -96,7 +96,7 @@ func loot(target: Inventory) -> void:
 
 func create_notification(notification_text: String) -> void:
 	var inst = LOG_NOTIFICATION.instantiate()
-	log.add_child(inst)
+	log_box.add_child(inst)
 	inst.text = notification_text
 	var tween = create_tween()
 	tween.tween_interval(3)

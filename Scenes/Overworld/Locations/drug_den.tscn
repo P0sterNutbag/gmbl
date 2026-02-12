@@ -14,15 +14,15 @@
 [ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="11_7t7n5"]
 [ext_resource type="Texture2D" uid="uid://b4d58y5scbpqf" path="res://Art/Textures/npc shirt blue.png" id="12_7jsld"]
 [ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="12_dckhe"]
-[ext_resource type="Resource" uid="uid://6c7s1e0y4ekq" path="res://Resources/Items/Junk/cigarettes.tres" id="12_inajc"]
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="13_7jsld"]
 [ext_resource type="Resource" uid="uid://jb6lsvgonmut" path="res://Resources/Items/Junk/ecstacy.tres" id="13_te7rf"]
 [ext_resource type="PackedScene" uid="uid://l1eb7nix2iki" path="res://Scenes/Environment/Buildings/shack.tscn" id="14_8sm2v"]
+[ext_resource type="Script" uid="uid://3e36ru1e7k78" path="res://Scripts/spawn_chance_resource.gd" id="14_mkt2b"]
 [ext_resource type="Resource" uid="uid://b0ujp3jyr8ll6" path="res://Resources/Items/Junk/joint.tres" id="14_qwjv1"]
 [ext_resource type="PackedScene" uid="uid://di4qmk466fnrk" path="res://Scenes/Environment/Buildings/shipping_container.tscn" id="15_bnevc"]
 [ext_resource type="Resource" uid="uid://clu1tx111108g" path="res://Resources/Items/Survival/pain_pills.tres" id="15_mkt2b"]
 [ext_resource type="Resource" uid="uid://bbx4x21dta7e7" path="res://Resources/Items/Survival/morphine.tres" id="16_7t7n5"]
-[ext_resource type="Script" uid="uid://6ucyr0petjnx" path="res://Scripts/inventory.gd" id="17_dckhe"]
+[ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="19_7t7n5"]
 [ext_resource type="Script" uid="uid://bicpdyf13vj1j" path="res://Scripts/quest_fetch_random.gd" id="19_te7rf"]
 
 [sub_resource type="Resource" id="Resource_0jat8"]
@@ -131,43 +131,35 @@ metadata/_custom_type_script = "uid://b80ipr8q70gqm"
 script = ExtResource("11_7t7n5")
 bubbles = Array[ExtResource("3_ol2qc")]([SubResource("Resource_ogcrv"), SubResource("Resource_3vihp"), SubResource("Resource_wji5k"), SubResource("Resource_la7xj"), SubResource("Resource_lkrnr"), SubResource("Resource_eqpsa"), SubResource("Resource_h1sig"), SubResource("Resource_24kub"), SubResource("Resource_7pdxe"), SubResource("Resource_panqy"), SubResource("Resource_ydedg")])
 npc_style = SubResource("Resource_5faom")
-npc_name = "Duster"
+npc_name = "Speed"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
 [sub_resource type="Resource" id="Resource_7jsld"]
-script = ExtResource("7_inajc")
-item = ExtResource("12_inajc")
-amount = 5
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+script = ExtResource("14_mkt2b")
+object_to_spawn = ExtResource("13_te7rf")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_8sm2v"]
-script = ExtResource("7_inajc")
-item = ExtResource("13_te7rf")
-amount = 2
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+script = ExtResource("14_mkt2b")
+object_to_spawn = ExtResource("14_qwjv1")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_bnevc"]
-script = ExtResource("7_inajc")
-item = ExtResource("14_qwjv1")
-amount = 3
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+script = ExtResource("14_mkt2b")
+object_to_spawn = ExtResource("16_7t7n5")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_7ervs"]
-script = ExtResource("7_inajc")
-item = ExtResource("15_mkt2b")
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+script = ExtResource("14_mkt2b")
+object_to_spawn = ExtResource("15_mkt2b")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_bd2jn"]
-script = ExtResource("7_inajc")
-item = ExtResource("16_7t7n5")
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_ibe1q"]
-script = ExtResource("17_dckhe")
-item_slots = Array[ExtResource("7_inajc")]([SubResource("Resource_7jsld"), SubResource("Resource_8sm2v"), SubResource("Resource_bnevc"), SubResource("Resource_7ervs"), SubResource("Resource_bd2jn")])
-money = 1000
-title = "Drug Den"
-metadata/_custom_type_script = "uid://6ucyr0petjnx"
+script = ExtResource("19_7t7n5")
+min_amount = 3
+max_amount = 5
+potential_slots = Array[ExtResource("14_mkt2b")]([SubResource("Resource_7jsld"), SubResource("Resource_8sm2v"), SubResource("Resource_bnevc"), SubResource("Resource_7ervs")])
+metadata/_custom_type_script = "uid://b34kwea65we13"
 
 [sub_resource type="Resource" id="Resource_qwjv1"]
 script = ExtResource("7_inajc")
@@ -201,7 +193,7 @@ metadata/_custom_type_script = "uid://bicpdyf13vj1j"
 [sub_resource type="Resource" id="Resource_6rs7t"]
 script = ExtResource("13_7jsld")
 title = "Drug Den"
-inventory = SubResource("Resource_ibe1q")
+inventory = SubResource("Resource_bd2jn")
 price_modifiers = {
 "Ammo": 0.5,
 "Armor": 0.5,
@@ -211,7 +203,8 @@ price_modifiers = {
 }
 dialogue = SubResource("Resource_ym52c")
 random_quest = SubResource("Resource_hocrx")
-minimum_quests = 1
+min_quests = 1
+max_quests = 3
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [node name="DrugDen" unique_id=1342811121 instance=ExtResource("1_x317r")]

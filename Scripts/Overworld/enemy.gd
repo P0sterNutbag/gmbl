@@ -46,6 +46,7 @@ func _ready() -> void:
 	location.encounter_ended.connect(_on_encounter_ended)
 	if location.dialogue_tree != null:
 		location.dialogue_tree.npc_style = enemy_model.current_style
+		location.dialogue_tree.npc_name = FactionManager.faction_display_names[faction] + location.dialogue_tree.npc_name
 	SaveController.load.connect(_on_load)
 	await get_tree().process_frame
 	original_position = global_position

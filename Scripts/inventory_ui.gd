@@ -87,7 +87,7 @@ func set_items():
 			var price_modifier = 1.0
 			if shop:
 				var faction_rating = FactionManager.get_faction_relation(shop.faction, FactionManager.factions.player)
-				price_modifier += faction_rating * faction_discount
+				price_modifier -= sign(faction_rating) * faction_discount
 			if opposing_ui.shop != null:
 				price_modifier = opposing_ui.shop.price_modifiers[categories[item.category]]
 			if item is EquipmentGun:

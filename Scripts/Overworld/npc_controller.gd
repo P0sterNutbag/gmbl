@@ -1,25 +1,27 @@
 extends Node3D
 
-@export var npcs: Array[SpawnChance]
+#@export var npcs: Array[SpawnChance]
+const NPC = preload("uid://b0cqkj1fgouo2")
 var starting_enemy_count := 0
 var has_spawned_enemies: bool
+const NPC_ENEMY_DIALOGUE = preload("uid://d20coly46ve2b")
+const NPC_FRIENDLY_DIALOGUE = preload("uid://cm4ovx7pecfjd")
 
 
 func _ready() -> void:
 	Globals.npc_controller = self
-	if has_spawned_enemies:
-		return
-	for i in starting_enemy_count:
-		var inst = npcs[1].object_to_spawn.instantiate()
-		get_tree().current_scene.add_child.call_deferred(inst)
-		#var enemy_pos = global_position + Vector3(randf_range(-50, 50), 0, randf_range(-50, 50))
-		var spawn_points = get_tree().get_nodes_in_group("spawn points")
-		var enemy_pos = spawn_points[randi() % spawn_points.size()].global_position
-		enemy_pos.y = Globals.get_heightmap_position(enemy_pos)
-		inst.set_deferred("global_position", enemy_pos)
-		inst.look_at.call_deferred(enemy_pos + Vector3(randf_range(-1, 1), 0, randf_range(-1, 1)))
-	has_spawned_enemies = true
-
+	#if has_spawned_enemies:
+		#return
+	#for i in starting_enemy_count:
+		#var inst = npcs[1].object_to_spawn.instantiate()
+		#get_tree().current_scene.add_child.call_deferred(inst)
+		##var enemy_pos = global_position + Vector3(randf_range(-50, 50), 0, randf_range(-50, 50))
+		#var spawn_points = get_tree().get_nodes_in_group("spawn points")
+		#var enemy_pos = spawn_points[randi() % spawn_points.size()].global_position
+		#enemy_pos.y = Globals.get_heightmap_position(enemy_pos)
+		#inst.set_deferred("global_position", enemy_pos)
+		#inst.look_at.call_deferred(enemy_pos + Vector3(randf_range(-1, 1), 0, randf_range(-1, 1)))
+	#has_spawned_enemies = true
 
 
 func _on_timer_timeout() -> void:
@@ -28,8 +30,7 @@ func _on_timer_timeout() -> void:
 	#if locations.filter(func(i): return i.location_data.population > 0).size() <= 1:
 		#return
 	# create enemy
-	var npc_to_spawn = npcs[Globals.get_weighted_index(npcs)].object_to_spawn
-	var inst = npc_to_spawn.instantiate()
+	var inst = NPC.instantiate()
 	Globals.overworld.add_child(inst)
 	# determine spawn location
 	var spawn_location = get_destination()
@@ -38,6 +39,11 @@ func _on_timer_timeout() -> void:
 	inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
 	inst.location.location_data.faction = spawn_location.location_data.faction
 	inst.faction = spawn_location.location_data.faction
+	var standing = FactionManager.get_faction_relation(inst.faction, FactionManager.factions.player)
+	if standing < 0.0:
+		inst.location.dialogue_tree = NPC_ENEMY_DIALOGUE
+	else:
+		inst.location.dialogue_tree = NPC_FRIENDLY_DIALOGUE
 	# determine desination
 	var dest = get_destination()
 	while dest == spawn_location:

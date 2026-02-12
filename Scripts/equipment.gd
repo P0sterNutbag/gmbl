@@ -20,14 +20,17 @@ func drop(target_node: Node) -> void:
 
 func equip() -> void:
 	var kit = PlayerStats.inventory.equipment_kit
-	equipped = !equipped
+	equipped = true
 	if equipped:
 		var previous_equip = kit.equipment[slot]
 		if previous_equip:
-			previous_equip.equipped = false
-			previous_equip.equipped_changed.emit()
+			previous_equip.unquip()
 		kit.equipment[slot] = self
-	else:
-		kit.equipment[slot] = null
 	PlayerStats.inventory.equipment_kit = kit
 	equipped_changed.emit()
+
+
+func unquip() -> void:
+	equipped = false
+	equipped_changed.emit()
+	PlayerStats.inventory.equipment_kit.equipment[slot] = null

@@ -87,15 +87,16 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	Globals.player = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	PlayerStats.gun_index = -1
 	if PlayerStats.faction:
 		faction = PlayerStats.faction
+	PlayerStats.gun_index = -1
+	gun_state = gun_states.no_gun
 	if PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.primary_gun]:
 		change_gun_slot(0)
 	elif PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.secondary_gun]:
 		change_gun_slot(1)
 	else:
-		gun_state = gun_states.no_gun
+		change_gun_state(gun_states.no_gun)
 	hitbox.hp = PlayerStats.hp
 	#hitbox.max_hp = PlayerStats.hp
 	hitbox.hp_bar = Globals.ui.player_hp_bar

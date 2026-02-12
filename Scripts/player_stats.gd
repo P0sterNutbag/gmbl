@@ -166,11 +166,11 @@ func decrease_sleep(new_value: float) -> void:
 
 
 func go_to_sleep():
-	UiController.close_interface(Globals.survival_ui.player_inventory_holder)
+	UiController.close_interface(Globals.survival_ui.menu_holder)
 	change_state(states.pause)
 	var tween = create_tween()
 	tween.tween_callback(SceneManager.animation_player.play.bind("fade_in"))
-	tween.tween_callback(DayNightCycle.skip_to_time.bind(0.75))
+	tween.tween_callback(DayNightCycle.skip_to_time.bind(1.5))
 	tween.tween_callback(SceneManager.animation_player.play.bind("fade_out")).set_delay(2)
 	tween.tween_property(self, "sleep", max_sleep, 0)
 	tween.tween_property(self, "state", states.walk, 0)

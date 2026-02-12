@@ -74,7 +74,10 @@ func _ready() -> void:
 	gun_holder.add_child(gun)
 	shoot_timer.wait_time = gun.shoot_cooldown
 	items_to_drop.append(gun_item.physical_item)
-	for i in randi() % 4:
+	var rng = RandomNumberGenerator.new()
+	var ammo_amount = [0, 1, 2, 3]
+	var weights = PackedFloat32Array([1.0, 0.5, 0.1, 0.05])
+	for i in ammo_amount[rng.rand_weighted(weights)]:
 		inventory.add_item(gun.ammo_item)
 	DayNightCycle.night_start.connect(on_night_start)
 	DayNightCycle.day_start.connect(on_day_start)

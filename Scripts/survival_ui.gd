@@ -58,8 +58,9 @@ func _process(_delta: float) -> void:
 				return
 			if UiController.is_canvas_layer_open(Globals.ui):
 				return
-	if Input.is_action_just_pressed("pause") and PlayerStats.state == PlayerStats.states.walk:
+	if Input.is_action_just_pressed("pause") and PlayerStats.state != PlayerStats.states.dead:
 		if !pause_menu.visible:
+			menu_holder.hide()
 			UiController.open_interface(pause_menu)
 		else:
 			UiController.close_interface(pause_menu)

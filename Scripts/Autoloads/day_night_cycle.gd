@@ -56,12 +56,15 @@ func reset_cycle() -> void:
 
 
 func skip_to_time(amount_to_skip: float) -> void:
+	var starting_norm_time = normalized_time
 	normalized_time += amount_to_skip * time_speed
 	if abs(normalized_time) > 1:
 		var overtime = abs(normalized_time) - 1
-		normalized_time += overtime * -time_speed
+		normalized_time += overtime * -time_speed * 2
 		time_speed *= 1
-		time = half_day_length * normalized_time
+	time = half_day_length * normalized_time
+	if starting_norm_time < 0.0 and normalized_time >= 0:
+		day_start.emit()
 
 
 func save() -> Dictionary: 

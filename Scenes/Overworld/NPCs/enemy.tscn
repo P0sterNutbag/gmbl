@@ -5,28 +5,8 @@
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="3_o6ebo"]
 [ext_resource type="Script" uid="uid://but6ijlpfowbx" path="res://Scripts/detection_component.gd" id="4_73otn"]
 [ext_resource type="PackedScene" uid="uid://c3p7tbg7t42b1" path="res://Scenes/Levels/procgen_encounter.tscn" id="4_ndpai"]
+[ext_resource type="Resource" uid="uid://d20coly46ve2b" path="res://Resources/Dialogue/npc_enemy.tres" id="5_gd1fx"]
 [ext_resource type="PackedScene" uid="uid://y38oa3aalokc" path="res://Scenes/Models/Characters/npc.tscn" id="5_i7slr"]
-[ext_resource type="Script" uid="uid://de6rxup5nru4w" path="res://Scripts/dialogue.gd" id="5_vti20"]
-[ext_resource type="Script" uid="uid://ctb2g10cnu2sg" path="res://Scripts/dialogue_option.gd" id="6_aa4gy"]
-[ext_resource type="Script" uid="uid://cnu4xeujmgk51" path="res://Scripts/dialogue_options.gd" id="7_ieqv6"]
-[ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="8_13cyy"]
-[ext_resource type="Texture2D" uid="uid://bo7tofhok4iw1" path="res://Art/Textures/npc_face1.png" id="9_biujs"]
-[ext_resource type="Texture2D" uid="uid://cdy46hgsd08s6" path="res://Art/Textures/npc_face2.png" id="10_il44e"]
-[ext_resource type="Texture2D" uid="uid://25baqqag6lrp" path="res://Art/Textures/npc_face4.png" id="11_2n7ln"]
-[ext_resource type="Texture2D" uid="uid://oacru53rac71" path="res://Art/Textures/player_face.png" id="12_klaf7"]
-[ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="13_65kj7"]
-[ext_resource type="Texture2D" uid="uid://b4d58y5scbpqf" path="res://Art/Textures/npc shirt blue.png" id="14_vmcx5"]
-[ext_resource type="Texture2D" uid="uid://c7ele6asl40c4" path="res://Art/Textures/npc shirt bluesleeve.png" id="15_mjv4b"]
-[ext_resource type="Texture2D" uid="uid://1xvaybl7sxs0" path="res://Art/Textures/npc shirt gray sleeve.png" id="16_n2gwr"]
-[ext_resource type="Texture2D" uid="uid://bl0ffxu4fdk20" path="res://Art/Textures/npc shirt gray.png" id="17_wuadn"]
-[ext_resource type="Texture2D" uid="uid://goputnp33yds" path="res://Art/Textures/npc shirt green sleeve.png" id="18_5eh4j"]
-[ext_resource type="Texture2D" uid="uid://bxwwj6o80psth" path="res://Art/Textures/npc shirt green.png" id="19_hgo5d"]
-[ext_resource type="Texture2D" uid="uid://cs2j1ok7u1avc" path="res://Art/Textures/npc shirt red sleeve.png" id="20_hl0uu"]
-[ext_resource type="Texture2D" uid="uid://c1xie2e2lk41r" path="res://Art/Textures/npc shirt red.png" id="21_61swl"]
-[ext_resource type="Texture2D" uid="uid://dl34xibpmsig8" path="res://Art/Textures/npc shirt white sleeve.png" id="22_ajkin"]
-[ext_resource type="Texture2D" uid="uid://x3spqeyiq8cr" path="res://Art/Textures/npc shirt white.png" id="23_x4chs"]
-[ext_resource type="Texture2D" uid="uid://whgiy4tx5l5g" path="res://Art/Textures/npc brown jacket.png" id="24_swbri"]
-[ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="25_70g7b"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hf0oe"]
 radius = 0.434372
@@ -36,66 +16,6 @@ script = ExtResource("3_o6ebo")
 faction = null
 population = 3
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
-
-[sub_resource type="Resource" id="Resource_xyp70"]
-script = ExtResource("5_vti20")
-lines = Array[String](["You got a death wish? Pay up and we'll let you live."])
-speaker = 1
-metadata/_custom_type_script = "uid://de6rxup5nru4w"
-
-[sub_resource type="Resource" id="Resource_bqr7l"]
-script = ExtResource("6_aa4gy")
-text = "Pay fee (50)"
-destination = 2
-metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
-
-[sub_resource type="Resource" id="Resource_olcnh"]
-script = ExtResource("6_aa4gy")
-text = "Attack"
-destination = 3
-metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
-
-[sub_resource type="Resource" id="Resource_qfguv"]
-script = ExtResource("7_ieqv6")
-options = Array[ExtResource("6_aa4gy")]([SubResource("Resource_bqr7l"), SubResource("Resource_olcnh")])
-metadata/_custom_type_script = "uid://cnu4xeujmgk51"
-
-[sub_resource type="Resource" id="Resource_s0ake"]
-script = ExtResource("8_13cyy")
-method = "pay_fee"
-arguments = [50, 4]
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
-
-[sub_resource type="Resource" id="Resource_jpogg"]
-script = ExtResource("8_13cyy")
-method = "start_level"
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
-
-[sub_resource type="Resource" id="Resource_vti20"]
-script = ExtResource("5_vti20")
-lines = Array[String](["Get ready for a world of hurt!"])
-speaker = 1
-metadata/_custom_type_script = "uid://de6rxup5nru4w"
-
-[sub_resource type="Resource" id="Resource_aa4gy"]
-script = ExtResource("8_13cyy")
-method = "start_level"
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
-
-[sub_resource type="Resource" id="Resource_tntug"]
-script = ExtResource("13_65kj7")
-faces = Array[Texture]([ExtResource("9_biujs"), ExtResource("10_il44e"), ExtResource("11_2n7ln"), ExtResource("12_klaf7")])
-shirts = Array[Texture]([ExtResource("14_vmcx5"), ExtResource("15_mjv4b"), ExtResource("16_n2gwr"), ExtResource("17_wuadn"), ExtResource("18_5eh4j"), ExtResource("19_hgo5d"), ExtResource("20_hl0uu"), ExtResource("21_61swl"), ExtResource("22_ajkin"), ExtResource("23_x4chs"), ExtResource("24_swbri")])
-pants_colors = Array[Color]([Color(0.48, 0.21888001, 0.15359999, 1), Color(0.32160002, 0.53644663, 0.67, 1)])
-shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1), Color(0.133333, 0.12549, 0.203922, 1), Color(0.4, 0.19146667, 0.128, 1)])
-metadata/_custom_type_script = "uid://b80ipr8q70gqm"
-
-[sub_resource type="Resource" id="Resource_ieqv6"]
-script = ExtResource("25_70g7b")
-bubbles = Array[ExtResource("5_vti20")]([SubResource("Resource_xyp70"), SubResource("Resource_qfguv"), SubResource("Resource_s0ake"), SubResource("Resource_jpogg"), SubResource("Resource_vti20"), SubResource("Resource_aa4gy")])
-npc_style = SubResource("Resource_tntug")
-npc_name = "Bandit"
-metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vti20"]
 radius = 1.0
@@ -115,7 +35,7 @@ shape = SubResource("CapsuleShape3D_hf0oe")
 [node name="Location" parent="." unique_id=2112754146 instance=ExtResource("2_riojr")]
 location_data = SubResource("Resource_ndpai")
 encounter_scene = ExtResource("4_ndpai")
-dialogue_tree = SubResource("Resource_ieqv6")
+dialogue_tree = ExtResource("5_gd1fx")
 can_stealth_start = true
 
 [node name="CollisionShape3D" parent="Location" index="0" unique_id=1772758538]

@@ -1,7 +1,7 @@
 extends Resource
 class_name EquipmentKit
 
-enum slots {primary_gun, secondary_gun, head_armor, body_armor, navigation, light, vision}
+enum slots {primary_gun, secondary_gun, head_armor, body_armor, navigation, light, vision, storage}
 var equipment := {
 	slots.primary_gun: null,
 	slots.secondary_gun: null,
@@ -10,6 +10,7 @@ var equipment := {
 	slots.navigation: null,
 	slots.light: null,
 	slots.vision: null,
+	slots.storage: null,
 }
 var gun_slots := [slots.primary_gun, slots.secondary_gun]
 

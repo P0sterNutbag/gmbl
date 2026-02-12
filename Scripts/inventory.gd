@@ -75,6 +75,8 @@ func get_space_left(item_to_add: Item = null) -> int:
 	var used_space = 0
 	for slot in item_slots:
 		var item = slot.item
+		if !item.takes_space:
+			continue
 		if item.stackable:
 			if !item_to_add or item.title != item_to_add.title:
 				used_space += 1

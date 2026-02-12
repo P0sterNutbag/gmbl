@@ -96,14 +96,16 @@ func stock_shops() -> void:
 		return
 	for i in shops:
 		if i.inventory:
-			var inventory = i.inventory
-			inventory.money = shops_max_money[i.title]
-			inventory.items = shops_base_inventory[i.title].duplicate_deep()
-		if i.minimum_quests > 0 and i.random_quest:
-			for n in i.minimum_quests - i.quests.size():
-				var quest = i.random_quest.generate_quest()
-				quest.return_location = point_of_interest.title
-				i.quests.append(quest)
+			if i.inventory is InventoryRandom:
+				i.inventory.restock_inventory()
+			else:
+				var inventory = i.inventory
+				inventory.money = shops_max_money[i.title]
+				inventory.items = shops_base_inventory[i.title].duplicate_deep()
+		if i.min_quests > 0 and i.random_quest:
+			i.restock_quests()
+			for q in i.quests:
+				q.return_location = point_of_interest.title
 
 
 func transition_to_level(start_alert = alert_enemies) -> void:

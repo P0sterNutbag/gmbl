@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ljhoishdi1mg"]
+[gd_scene format=3 uid="uid://ljhoishdi1mg"]
 
 [ext_resource type="Script" uid="uid://b1gc2ondhfh1p" path="res://Scripts/radio.gd" id="1_tbxjr"]
 [ext_resource type="PackedScene" uid="uid://bv2esaqoe4ep7" path="res://Art/Models/boombox.glb" id="2_w1x2l"]
@@ -25,29 +25,29 @@ stream_2/stream = ExtResource("8_2g7sn")
 stream_3/stream = ExtResource("9_nbtwm")
 stream_4/stream = ExtResource("9_2g7sn")
 
-[node name="Radio" type="Node3D"]
+[node name="Radio" type="Node3D" unique_id=1475804740]
 script = ExtResource("1_tbxjr")
 
-[node name="boombox" parent="." instance=ExtResource("2_w1x2l")]
+[node name="boombox" parent="." unique_id=2036217920 instance=ExtResource("2_w1x2l")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.3, 0)
 
-[node name="Cube" parent="boombox" index="0"]
+[node name="Cube" parent="boombox" index="0" unique_id=2006758029]
 surface_material_override/0 = SubResource("StandardMaterial3D_btt8d")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=1523723127]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 script = ExtResource("4_k3q2m")
 hp = 1.0
 blood_on_hit = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=462567533]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0022522062, 0.0014038086, 0)
 shape = SubResource("BoxShape3D_btt8d")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=2029416592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18191028, 0)
 stream = SubResource("AudioStreamRandomizer_2g7sn")
-max_distance = 200.0
+max_distance = 50.0
 bus = &"Music"
 
 [editable path="boombox"]

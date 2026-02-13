@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="ItemUsable" format=3 uid="uid://dvooyj5cqcclc"]
 
-[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="1_pwqtp"]
-[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="2_nxhho"]
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="1_6w434"]
+[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="2_rgnb0"]
 
 [sub_resource type="Resource" id="Resource_nxhho"]
-script = ExtResource("1_pwqtp")
+script = ExtResource("1_6w434")
 values = Dictionary[String, Variant]({
 "sleep": 50.0
 })
@@ -12,12 +12,13 @@ metadata/_custom_type_script = "uid://4c6own63hs8c"
 
 [resource]
 resource_local_to_scene = true
-script = ExtResource("2_nxhho")
+script = ExtResource("2_rgnb0")
 uses = 1000
-effects = Array[ExtResource("1_pwqtp")]([SubResource("Resource_nxhho")])
+effects = Array[ExtResource("1_6w434")]([SubResource("Resource_nxhho")])
 method = "go_to_sleep"
 custom_path = "PlayerStats"
 title = "Sleeping Bag"
+category = 5
 price = 10
 description = "Go to sleep."
 metadata/_custom_type_script = "uid://dd1ly8qocexg4"

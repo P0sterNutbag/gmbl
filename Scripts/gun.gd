@@ -112,44 +112,51 @@ func use(shot_owner: Node3D = null) -> bool:
 
 
 func shoot(shot_owner: Node3D = null) -> void:#is_ads: bool = false, movement_speed = Vector3.ZERO) -> void:
+	# determine modifiers
 	var is_ads = false
 	var movement_speed = Vector3.ZERO
 	if uses_input:
 		is_ads = Globals.player.gun_state == Globals.player.gun_states.ads
 		movement_speed = Globals.player.velocity
-	time_shooting += 0.4
+	# create the bullets
 	for i in bullet_stats.amount:
-		var inst = bullet_stats.bullet_scene.instantiate()
-		inst.global_transform = firepoint.global_transform
-		inst.scale = Vector3.ONE
-		inst.visible = false
-		var variance = Vector2(bullet_stats.h_angle_variance_hip, bullet_stats.v_angle_variance_hip)
-		if is_ads:
-			variance = Vector2(bullet_stats.h_angle_variance_ads, bullet_stats.v_angle_variance_ads)
-		if movement_speed:
-			var magnitude = clamp(movement_speed.length(), 1, 2)
-			variance *= magnitude
-		variance *= spread
-		var h_angle_variance = randf_range(-variance.x, variance.x * 1.1)
-		inst.rotate_y(deg_to_rad(h_angle_variance))
-		var v_angle_variance = randf_range(-variance.y, variance.y)
-		inst.rotate_x(deg_to_rad(v_angle_variance))
-		inst.bullet_stats = bullet_stats
-		inst.creator = shot_owner
-		#inst.bullet_stats.damage *= gun_stats.condition / 100
-		inst.gun_stats = gun_stats
-		get_tree().current_scene.add_child(inst)
+		create_bullet(shot_owner, is_ads, movement_speed)
+	# adjust variables
 	gun_stats.ammo -= 1
 	gun_stats.condition -= 0.05
+	time_shooting += 0.4
 	can_shoot = false
 	has_released = false
+	shoot_cooldown_timer.start()
+	# effects
 	flash_texture.rotate_z(deg_to_rad(randf_range(0, 360)))
 	muzzle_flash.visible = true
 	audio_player.play()
 	var tween = create_tween()
 	tween.tween_property(muzzle_flash, "visible", false, 0.1)
-	shoot_cooldown_timer.start()
+	if uses_input and gun_stats.condition <= 0.0:
+		Globals.survival_ui.create_notification(PlayerStats.gun.title + " has broken")
 
+
+func create_bullet(shot_owner: Node3D, is_ads: bool, movement_speed: Vector3) -> void:
+	var inst = bullet_stats.bullet_scene.instantiate()
+	inst.global_transform = firepoint.global_transform
+	inst.scale = Vector3.ONE
+	inst.visible = false
+	var variance = Vector2(bullet_stats.h_angle_variance_hip, bullet_stats.v_angle_variance_hip)
+	if is_ads:
+		variance = Vector2(bullet_stats.h_angle_variance_ads, bullet_stats.v_angle_variance_ads)
+	if movement_speed:
+		var magnitude = clamp(movement_speed.length(), 1, 2)
+		variance *= magnitude
+	variance *= spread
+	var h_angle_variance = randf_range(-variance.x, variance.x * 1.1)
+	inst.rotate_y(deg_to_rad(h_angle_variance))
+	var v_angle_variance = randf_range(-variance.y, variance.y)
+	inst.rotate_x(deg_to_rad(v_angle_variance))
+	inst.bullet_stats = bullet_stats
+	inst.creator = shot_owner
+	get_tree().current_scene.add_child(inst)
 
 
 func _on_shoot_cooldown_timeout() -> void:

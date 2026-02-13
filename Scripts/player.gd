@@ -89,6 +89,8 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if PlayerStats.faction:
 		faction = PlayerStats.faction
+	for i in gun_anchor.get_children():
+		i.visible = false
 	PlayerStats.gun_index = -1
 	gun_state = gun_states.no_gun
 	if PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.primary_gun]:
@@ -103,8 +105,6 @@ func _ready() -> void:
 	sway_noise.seed = randi()
 	sway_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	sway_noise.frequency = 0.5
-	for i in gun_anchor.get_children():
-		i.visible = false
 	#if gun:
 		#change_gun(PlayerStats.gun)
 	#else:

@@ -24,13 +24,13 @@ func equip() -> void:
 	if equipped:
 		var previous_equip = kit.equipment[slot]
 		if previous_equip:
-			previous_equip.unquip()
+			previous_equip.unequip()
 		kit.equipment[slot] = self
 	PlayerStats.inventory.equipment_kit = kit
 	equipped_changed.emit()
 
 
-func unquip() -> void:
+func unequip() -> void:
 	equipped = false
 	equipped_changed.emit()
 	PlayerStats.inventory.equipment_kit.equipment[slot] = null

@@ -14,7 +14,7 @@ func _enter_tree() -> void:
 		if current_encounter.location_data.population <= 0 and current_encounter.get_parent().has_method("die"):
 			current_encounter.get_parent().die()
 		var encounter_pos = current_encounter.global_position
-		var player_spawn_position = encounter_pos + (player_spawn_vector * 3).rotated(Vector3.UP, current_encounter.rotation.y)
+		var player_spawn_position = encounter_pos + (player_spawn_vector * 4).rotated(Vector3.UP, current_encounter.rotation.y)
 		player_spawn_position.y = Globals.get_heightmap_position(player_spawn_position)
 		var player = get_node("Player")
 		player.global_position = player_spawn_position

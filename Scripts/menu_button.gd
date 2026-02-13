@@ -1,15 +1,16 @@
 extends Button
 class_name UiButton
 
-var icon_texture: Texture2D
+var icon_texture_focus: Texture2D = preload("uid://djj6aa5nkatda")
+var icon_texture_unfocus: Texture2D
 var can_press: bool
 @export var show_icon_on_focus: bool = true
 
 
 func _ready() -> void:
 	if show_icon_on_focus:
-		icon_texture = icon
-		icon = null
+		#icon_texture_focus = icon
+		icon = icon_texture_unfocus
 	if !mouse_entered.is_connected(_on_mouse_entered):
 		mouse_entered.connect(_on_mouse_entered)
 	if !mouse_exited.is_connected(_on_mouse_exited):
@@ -31,12 +32,12 @@ func _process(_delta: float) -> void:
 func _on_focus_entered() -> void:
 	UiController.hover_sfx.play()
 	if !disabled and show_icon_on_focus:
-		icon = icon_texture
+		icon = icon_texture_focus
 
 
 func _on_focus_exited() -> void:
 	if !disabled and show_icon_on_focus:
-		icon = null
+		icon = icon_texture_unfocus
 
 
 func _on_mouse_entered() -> void:

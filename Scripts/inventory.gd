@@ -83,3 +83,8 @@ func get_space_left(item_to_add: Item = null) -> int:
 		elif item.takes_space:
 			used_space += slot.amount
 	return space - used_space
+
+
+func equip_item(item_to_equip: Equipment) -> void:
+	equipment_kit.equipment[item_to_equip.slot] = item_to_equip
+	

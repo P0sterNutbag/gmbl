@@ -68,7 +68,7 @@ func _ready() -> void:
 			inst.change_state(inst.states.walk)
 	
 	# spawn squads
-	if randf() <= 1.0:# location_data.npc_spawn_chance:
+	if randf() <= location_data.squad_spawn_chance:
 		# get spawn and destination positions
 		var borders = border_parent.get_children().filter(func(a): return a.process_mode == PROCESS_MODE_INHERIT)
 		var border_index = randi_range(0, borders.size() - 1)
@@ -81,7 +81,7 @@ func _ready() -> void:
 			border_index2 = randi_range(0, borders.size() - 1)
 		var destination = borders[border_index2].global_position
 		# get faction
-		var faction = 0#randi() % FactionManager.factions.size()
+		var faction = randi() % FactionManager.factions.size()
 		# spawn enemies
 		for i in randf_range(1, 4):
 			var enemy_index = Globals.get_weighted_index(enemies_to_spawn)

@@ -129,7 +129,7 @@ func save() -> Dictionary:
 	}
 
 
-func unquip_current_item():
+func unequip_current_item():
 	for slot in inventory.items_slots:
 		var item = slot.item
 		if item is Equipment:

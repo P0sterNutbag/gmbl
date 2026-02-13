@@ -4,7 +4,6 @@ var last_position: Vector3
 var tracer_firepoint: Node3D
 var creator: Node3D
 var bullet_stats: BulletStats
-var gun_stats: GunStats
 var tracer: PackedScene = preload("res://Scenes/Bullets/tracer.tscn")
 var dust: PackedScene = preload("res://Scenes/Effects/Particles/dust.tscn")
 var blood_spatter: PackedScene = preload("res://Scenes/Effects/Decals/bloodspatter.tscn")
@@ -42,7 +41,7 @@ func hit():
 	var collider = raycast.get_collider()
 	if collider is PhysicalBone3D and collider.health_component == creator.health_component:#collider.owner == creator:
 		return
-	var damage = bullet_stats.damage * (0.5 + min(0.5 * (gun_stats.condition / gun_stats.max_condition) / 0.75, 0.5))
+	#var damage = bullet_stats.damage * (0.5 + min(0.5 * (gun_stats.condition / gun_stats.max_condition) / 0.75, 0.5))
 	if collider is PhysicalBone3D:
 		if collider.health_component:
 			collider.health_component.damage(bullet_stats.damage * collider.damage_modifier, raycast.get_collision_point(), rotation, creator)

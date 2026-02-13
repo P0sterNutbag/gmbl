@@ -9,6 +9,7 @@ class_name Shop
 	"Armor" : 0.75,
 	"Ammo" : 0.75,
 	"Junk" : 0.75,
+	"Gear" : 0.75,
 }
 @export var dialogue: DialogueTree
 @export var quests: Array[Quest]

@@ -18,12 +18,21 @@ var current_menu_item: MenuItem
 var menu_item_to_drop: MenuItem
 var categories = {
 	-1 : "All" ,
-	Item.categories.survival : "Survival",
-	Item.categories.guns : "Weapons", 
+	Item.categories.guns : "Weapons",
 	Item.categories.ammo : "Ammo",
+	Item.categories.consumable : "Consumable",
+	Item.categories.gear : "Gear",
 	Item.categories.armor: "Armor",
 	Item.categories.junk : "Junk",
 	}
+var category_icons := {
+	Item.categories.consumable : preload("uid://d255ivp8epdww"),
+	Item.categories.guns : preload("uid://bawi5rh4k705r"),
+	Item.categories.ammo : preload("uid://cfaqpxn6m5qtm"),
+	Item.categories.armor: preload("uid://blmj1u6o3d12r"),
+	Item.categories.junk : preload("uid://dchj1pn34qgj6"),
+	Item.categories.gear : preload("uid://bhmodnqjb2gkx"),
+}
 var category_index = -1
 const text_style = preload("res://Art/Themes/text_small.tres")
 @onready var item_container: MenuController = %Items
@@ -51,17 +60,14 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if !visible or !get_parent().visible:
 		return
-	
 	# drop
 	if Input.is_action_just_pressed("drop_item") and can_drop_items:
 		if current_menu_item:
 			menu_item_to_drop = current_menu_item
 			drop_menu.show()
-	
 	# set money
 	if money_label.visible:
 		money_label.text = "$" + str(source_inventory.money)
-	
 	# set size
 	if show_size:
 		var space_left = source_inventory.get_space_left()
@@ -83,6 +89,8 @@ func set_items():
 		inst.resource = item
 		inst.amount = slot.amount
 		inst.owner = self
+		inst.icon_texture_unfocus = category_icons[item.category]
+		inst.icon = inst.icon_texture_unfocus
 		if show_price:
 			var price_modifier = 1.0
 			if shop:
@@ -115,28 +123,20 @@ func set_items():
 				inst.text += " (equipped)"
 	filter(category_index)
 	if item_container.get_child_count() > 0:
-		item_container.sort_menu_items()
-		item_container.set_menu_item_focus()
-		#if Input.get_connected_joypads().size() > 0:
-			#item_container.get_child(0).grab_focus()
+		#item_container.sort_menu_items()
+		sort_by_category()
 
 
 func transfer_item(menu_item: Control):
 	var item = menu_item.resource
 	# check money
-	if show_price:
-		if target_inventory.money >= menu_item.price:
-			source_inventory.money += menu_item.price
-			target_inventory.money -= menu_item.price
-			#money_label.text = str(source_inventory.money)
-			#opposing_ui.money_label.text = str(opposing_ui.source_inventory.money)
-		else:
-			opposing_ui.money_label.modulate = Color.RED
-			var tween = create_tween()
-			tween.tween_property(opposing_ui.money_label, "modulate", Color.WHITE, 1)
-			UiController.stop_audio()
-			UiController.error_sfx.play()
-			return
+	if show_price and target_inventory.money < menu_item.price:
+		opposing_ui.money_label.modulate = Color.RED
+		var tween = create_tween()
+		tween.tween_property(opposing_ui.money_label, "modulate", Color.WHITE, 1)
+		UiController.stop_audio()
+		UiController.error_sfx.play()
+		return
 	var amount_to_move = 1
 	if Input.is_action_pressed("shift") or item is ItemMoney:
 		amount_to_move = menu_item.resource.amount		
@@ -146,6 +146,9 @@ func transfer_item(menu_item: Control):
 		source_inventory.remove_item(item, amount_to_move)
 		set_items()
 		opposing_ui.set_items()
+		if show_price:
+			source_inventory.money += menu_item.price
+			target_inventory.money -= menu_item.price
 	else:
 		UiController.stop_audio()
 		UiController.error_sfx.play()
@@ -184,11 +187,27 @@ func filter(category: int) -> void:
 		var item = child.resource
 		if item_is_in_category(item):
 			if mode == modes.use and item is Equipment and item.equipped:
+				source_inventory.equip_item(child.resource)
 				child.hide()
 				continue
 			child.show()
 		else:
 			child.hide()
+
+
+func sort_by_category() -> void:
+	var sorted_children = []
+	for category in categories:
+		var filtered_children = item_container.get_children()
+		filtered_children = filtered_children.filter(func(a): return a.resource.category == category) 
+		filtered_children.sort_custom(func(a, b): return a.text.naturalnocasecmp_to(b.text) < 0)
+		sorted_children.append_array(filtered_children)
+	for child in item_container.get_children():
+		item_container.move_child.call_deferred(child, sorted_children.find(child))
+		#child.focus_neighbor_top = NodePath("")
+		#child.focus_neighbor_bottom = NodePath("")
+	item_container.set_menu_item_focus()
+
 
 
 func item_is_in_category(item: Item) -> bool:

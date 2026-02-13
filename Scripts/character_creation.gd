@@ -31,8 +31,8 @@ func _ready() -> void:
 	player_inventory.source_inventory = PlayerStats.inventory
 	starting_inventory.target_inventory = player_inventory.source_inventory
 	player_inventory.target_inventory = starting_inventory.source_inventory
-	starting_inventory.set_items()
-	player_inventory.set_items()
+	starting_inventory.show()
+	player_inventory.show()
 	# get starting money
 	var starting_money = 200
 	if ResourceLoader.exists("user://progress_data.res"):

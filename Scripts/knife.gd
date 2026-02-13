@@ -5,8 +5,8 @@ extends Weapon
 var can_damage: bool
 
 
-func use():
-	if super.use():
+func use(shot_owner: Node3D = null):
+	if super.use(shot_owner):
 		if anim_player and !anim_player.is_playing():
 			anim_player.play("stab")
 			can_damage = true

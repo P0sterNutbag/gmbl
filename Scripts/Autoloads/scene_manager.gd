@@ -35,8 +35,7 @@ func change_scene() -> void:
 			if next_scene == "res://Scenes/UI/Levels/character_creation.tscn":
 				new_game_start.emit()
 		elif next_scene is Node3D:
-			get_tree().root.remove_child(get_tree().current_scene)
-			get_tree().root.add_child(next_scene)
+			get_tree().change_scene_to_node(next_scene)
 			get_tree().current_scene = next_scene
 	scene_transition.transition_out()
 	UiController.reset_list()

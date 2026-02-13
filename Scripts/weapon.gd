@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 		has_released = true	
 
 
-func use() -> bool:
+func use(shot_owner: Node3D) -> bool:
 	if !can_use:
 		return false
 	if cooldown_timer:

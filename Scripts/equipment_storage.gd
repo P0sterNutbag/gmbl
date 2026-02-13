@@ -10,7 +10,7 @@ func equip() -> void:
 	PlayerStats.inventory.space += space
 
 
-func unquip() -> void:
-	super.unquip()
+func unequip() -> void:
+	super.unequip()
 	takes_space = true
 	PlayerStats.inventory.space -= space

@@ -28,10 +28,14 @@ func _enter_tree() -> void:
 		stats_anchor.process_mode = Node.PROCESS_MODE_DISABLED
 
 
+func _ready() -> void:
+	SaveController.save.connect(_on_game_saved)
+
+
 func _process(_delta: float) -> void:
 	# opening things
 	if Input.is_action_just_pressed("inventory"):
-		if !player_inventory_holder.visible:
+		if !menu_holder.visible:
 			if UiController.is_canvas_layer_open(Globals.ui) or PlayerStats.state != PlayerStats.states.walk:
 				return
 			player_inventory_holder.get_child(0).source_inventory = PlayerStats.inventory
@@ -40,6 +44,8 @@ func _process(_delta: float) -> void:
 		else:
 			menu_holder.hide()
 			UiController.close_interface(player_inventory_holder)
+		if transfer_inventory_holder.visible:
+			UiController.close_interface(transfer_inventory_holder)
 	if Input.is_action_just_pressed("journal"):
 		if !journal.visible:
 			if UiController.is_canvas_layer_open(Globals.ui):
@@ -139,3 +145,7 @@ func _on_exit_menu_pressed() -> void:
 
 func _on_faction_tab_pressed() -> void:
 	UiController.open_interface(factions)
+
+
+func _on_game_saved() -> void:
+	create_notification("Game saved")

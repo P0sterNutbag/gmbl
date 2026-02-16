@@ -18,27 +18,21 @@ var save_population: int = -1
 @onready var point_of_interest: PointOfInterest = $PointOfInterest
 @onready var flag: MeshInstance3D = $Meshes/Flagpole/MeshInstance3D
 @onready var flagpole: Node3D = $Meshes/Flagpole
+@onready var battle_timer: Timer = $BattleTimer
+@onready var animation_player: AnimationPlayer = $BattleEffects/AnimationPlayer
 signal encounter_started
+@warning_ignore("unused_signal")
 signal encounter_ended
 
-#func _enter_tree() -> void:
-	#if !Globals.overworld:
-		#return
-	#if Globals.overworld.current_encounter == self:
-		#show_title = true
-		#show_faction = true
-		#show_difficulty = true
-		#show_resources = true
 
 func _enter_tree() -> void:
 	await get_tree().process_frame
 	if location_data:
-		var color = FactionManager.faction_colors[location_data.faction]
+		var color = FactionManager.faction_data[location_data.faction].color
 		flag.set_instance_shader_parameter("flag_color", color)
 
 
 func _ready() -> void:
-	DayNightCycle.day_start.connect(_on_day_start)
 	flagpole.global_rotation_degrees = Vector3(0, 0, 0)
 	if save_population > -1:
 		location_data.population = save_population
@@ -74,16 +68,16 @@ func start_encounter() -> void:
 	Globals.overworld.current_encounter = self
 	if dialogue_tree != null:
 		Globals.ui.start_dialogue(dialogue_tree)
-		point_of_interest.location_card.hide()
+		point_of_interest.canvas_layer.hide()
 	elif encounter_scene != null:
 		transition_to_level() 
 	elif town != null:
 		Globals.ui.town.create_town(town)
-		point_of_interest.location_card.hide()
+		point_of_interest.canvas_layer.hide()
 	elif shop != null:
 		Globals.ui.job_board.shop = shop
 		Globals.ui.start_dialogue(shop.dialogue, shop)
-		point_of_interest.location_card.hide()
+		point_of_interest.canvas_layer.hide()
 
 
 func stock_shops() -> void:
@@ -115,14 +109,32 @@ func transition_to_level(start_alert = alert_enemies) -> void:
 	SceneManager.start_scene_transition(encounter_scene.resource_path, true)
 
 
+func start_battle(attacking_location: LocationData):
+	if location_data.population == 0:
+		location_data.faction = attacking_location.faction
+		location_data.population = location_data.min_population
+		Globals.survival_ui.create_notification(point_of_interest.title + " taken by " + FactionManager.faction_data[location_data.faction].name)
+		print(point_of_interest.title + " taken by " + FactionManager.faction_data[location_data.faction].name)
+		return
+	location_data.attacking_locations.append(attacking_location)
+	if battle_timer.time_left > 0:
+		return
+	var total_population = location_data.population
+	for location in location_data.attacking_locations:
+		total_population += location.population
+	battle_timer.wait_time = total_population * 2
+	battle_timer.start()
+	animation_player.play("battle")
+	point_of_interest.status_holder.show()
+	point_of_interest.status_label.text = "Under Attack by " + FactionManager.faction_data[attacking_location.faction].name
+	Globals.survival_ui.create_notification(point_of_interest.title + " under attack by " + FactionManager.faction_data[attacking_location.faction].name)
+	print(point_of_interest.title + " under attack by " + FactionManager.faction_data[attacking_location.faction].name)
+
+
 func save() -> Dictionary:
 	return {
 		"save_population" : save_population,
 	}
-
-
-func _on_day_start() -> void:
-	location_data.population = location_data.min_population
 
 
 func _on_body_entered(_body: Node3D) -> void:
@@ -135,3 +147,29 @@ func _on_body_entered(_body: Node3D) -> void:
 func _on_body_exited(_body: Node3D) -> void:
 	if Globals.overworld.process_mode == PROCESS_MODE_INHERIT:
 		can_transition = true
+
+
+func _on_battle_timer_timeout() -> void:
+	var factions = []
+	for i in location_data.population:
+		factions.append(location_data.faction)
+	for location in location_data.attacking_locations:
+		for i in location.population:
+			factions.append(location.faction)
+	var original_faction = location_data.faction
+	location_data.faction = factions[randi() % factions.size()]
+	if location_data.faction == FactionManager.factions.no_faction:
+		location_data.population = 0
+		location_data.faction = original_faction
+		location_data.attacking_locations = location_data.attacking_locations.filter(func(a): return a.faction != FactionManager.factions.no_faction)
+	else:
+		location_data.population = randi() % factions.filter(func(a): return a == location_data.faction).size()
+		location_data.population = clampi(location_data.population, 1, location_data.max_population)
+		location_data.attacking_locations.clear()
+	animation_player.stop()
+	point_of_interest.status_holder.hide()
+	if location_data.faction != original_faction:
+		Globals.survival_ui.create_notification(point_of_interest.title + " taken by " + FactionManager.faction_data[location_data.faction].name)
+		print(point_of_interest.title + " taken by " + FactionManager.faction_data[location_data.faction].name + ". Population is now: " + str(location_data.population))
+	else:
+		print(point_of_interest.title + " successfuly defended by " + FactionManager.faction_data[location_data.faction].name + ". Population is now: " + str(location_data.population))

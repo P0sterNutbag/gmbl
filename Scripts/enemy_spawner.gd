@@ -48,24 +48,12 @@ func _ready() -> void:
 	
 	# spawn enemies
 	for i in enemy_amount:
-		# get random enemy and spawn it
-		var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
-		var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
-		# assign faction
-		inst.faction = location_data.faction
-		# add to scene
-		get_tree().current_scene.add_child.call_deferred(inst)
-		# position enemy at spawn point
-		var spawn_index = randi_range(0, spawn_points.size() - 1)
-		while used_spawns.has(spawn_index) or spawn_points[spawn_index].process_mode == PROCESS_MODE_DISABLED:
-			spawn_index = randi_range(0, spawn_points.size() - 1)
-		used_spawns.append(spawn_index)
-		inst.set_deferred("global_transform", spawn_points[spawn_index].global_transform)
-		# assign enemy a destination
-		if randf() <= enemy_move_chance:
-			var dest = get_destination(spawn_points[spawn_index].global_position)
-			inst.destination = dest
-			inst.change_state(inst.states.walk)
+		spawn_enemy(location_data.faction)
+	
+	# spawn enemies for battle
+	for attacker in location_data.attacking_locations:
+		for i in attacker.population:
+			spawn_enemy(attacker.faction)
 	
 	# spawn squads
 	if randf() <= location_data.squad_spawn_chance:
@@ -106,3 +94,24 @@ func get_destination(position_from: Vector3) -> Vector3:
 		dest_index = randi_range(0, spawn_points.size() - 1)
 		dis = position_from.distance_to(spawn_points[dest_index].global_position)
 	return spawn_points[dest_index].global_position
+
+
+func spawn_enemy(faction: FactionManager.factions):
+	# get random enemy and spawn it
+	var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
+	var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
+	# assign faction
+	inst.faction = faction
+	# add to scene
+	get_tree().current_scene.add_child.call_deferred(inst)
+	# position enemy at spawn point
+	var spawn_index = randi_range(0, spawn_points.size() - 1)
+	while used_spawns.has(spawn_index) or spawn_points[spawn_index].process_mode == PROCESS_MODE_DISABLED:
+		spawn_index = randi_range(0, spawn_points.size() - 1)
+	used_spawns.append(spawn_index)
+	inst.set_deferred("global_transform", spawn_points[spawn_index].global_transform)
+	# assign enemy a destination
+	if randf() <= enemy_move_chance:
+		var dest = get_destination(spawn_points[spawn_index].global_position)
+		inst.destination = dest
+		inst.change_state(inst.states.walk)

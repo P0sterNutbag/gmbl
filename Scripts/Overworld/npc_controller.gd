@@ -33,30 +33,67 @@ func _on_timer_timeout() -> void:
 	var inst = NPC.instantiate()
 	Globals.overworld.add_child(inst)
 	# determine spawn location
-	var spawn_location = get_destination()
-	spawn_location.location_data.population = clamp(spawn_location.location_data.population - inst.location.location_data.population, 0, spawn_location.location_data.max_population)
+	var spawn_location = get_spawn_location()
+	spawn_location.location_data.population = clamp(spawn_location.location_data.population - inst.location.location_data.population, spawn_location.location_data.min_population, spawn_location.location_data.max_population)
 	inst.global_position = spawn_location.global_position
 	inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
 	inst.location.location_data.faction = spawn_location.location_data.faction
 	inst.faction = spawn_location.location_data.faction
 	var standing = FactionManager.get_faction_relation(inst.faction, FactionManager.factions.player)
 	if standing < 0.0:
-		inst.location.dialogue_tree = NPC_ENEMY_DIALOGUE
+		inst.location.dialogue_tree = NPC_ENEMY_DIALOGUE.duplicate(true)
+		inst.chase_targets = true
 	else:
-		inst.location.dialogue_tree = NPC_FRIENDLY_DIALOGUE
+		inst.location.dialogue_tree = NPC_FRIENDLY_DIALOGUE.duplicate(true)
 	# determine desination
-	var dest = get_destination()
-	while dest == spawn_location:
-		dest = get_destination()
+	var dest = get_destination(inst.faction, spawn_location)
 	var pos = dest.global_position# + Vector3.RIGHT.rotated(Vector3.UP, deg_to_rad(randf_range(0, 360))) * dest.target_distance
 	inst.navigation_agent.set_target_position(pos)
 	inst.destination = dest
 
 
-func get_destination() -> Location:
-	# return location instead and factor in target distance
+func get_spawn_location() -> Location:
 	var nodes = get_tree().get_nodes_in_group("location")
 	return nodes[randi() % nodes.size()]
+
+
+func get_destination(faction: FactionManager.factions, spawn_location: Node3D) -> Location:
+	# get goal
+	var faction_data = FactionManager.faction_data[faction]
+	var rng = RandomNumberGenerator.new()
+	var objectives = [0, 1, 2] # 0 = self, 1 = enemy, 2 = ally
+	var weights = PackedFloat32Array([faction_data.defense, faction_data.agression, faction_data.enterprising])
+	var goal = objectives[rng.rand_weighted(weights)]
+	# get locaitons
+	var all_nodes = get_tree().get_nodes_in_group("location")
+	if goal != 2:
+		all_nodes = all_nodes.filter(func(a): return a.encounter_scene != null)
+	var target_nodes = []
+	for f in FactionManager.factions.size():
+		var score = FactionManager.get_faction_relation(faction, f)
+		if goal == 0:
+			if f != faction:
+				continue
+		elif goal == 1:
+			if score >= 0.0:
+				continue
+		elif goal == 2:
+			if score < 0.0:
+				continue
+		var faction_locations = all_nodes.filter(func(a): return a.location_data.faction == f)
+		target_nodes.append_array(faction_locations)
+	target_nodes.erase(spawn_location)
+	if target_nodes.size() == 0:
+		target_nodes = all_nodes
+	target_nodes.sort_custom(func(a, b): return spawn_location.global_position.distance_to(a.global_position) < spawn_location.global_position.distance_to(b.global_position))
+	target_nodes.sort_custom(func(a, b): return a.location_data.population < b.location_data.population)
+	rng.randomize()
+	weights.clear()
+	for i in target_nodes.size():
+		weights.append(target_nodes.size() - i)
+	var destination = target_nodes[rng.rand_weighted(weights)]
+	print(faction_data.name + " squad spawned at " + spawn_location.point_of_interest.title + " en route to " + destination.point_of_interest.title + ". Objective: " + str(goal))
+	return destination
 
 
 func save() -> Dictionary:

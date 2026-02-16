@@ -8,19 +8,11 @@ enum factions {no_faction, player, jackals, ragers, bandits}
 	factions.ragers : {factions.player : 0.0, factions.no_faction : 0.0, factions.jackals : -1.0, factions.bandits : -1.0},
 	factions.bandits : {factions.player : -1.0, factions.no_faction : -1.0, factions.jackals : -1.0, factions.ragers : -1.0}
 }
-var faction_display_names := {
-	factions.no_faction : "Unaffiliated",
-	factions.player : "Player",
-	factions.jackals : "Jackals",
-	factions.ragers : "Ragers",
-	factions.bandits : "Bandits",
-}
-var faction_colors := {
-	factions.no_faction : Color(1.0, 1.0, 1.0, 1.0),
-	factions.player : Color(1.0, 1.0, 1.0, 0.0),
-	factions.jackals: Color(0.0, 0.0, 1.0, 1.0),
-	factions.ragers: Color(0.702, 0.0, 1.0, 1.0),
-	factions.bandits: Color(0.866, 0.0, 0.0, 1.0)
+var faction_data := {
+	factions.no_faction : preload("uid://cutkkksdpwkir"),
+	factions.jackals : preload("uid://bgd28xhfo6e42"),
+	factions.ragers : preload("uid://m1c0c8i8udgu"),
+	factions.bandits : preload("uid://b3tbvkwwoh4lq"),
 }
 var max_score := 10.0
 
@@ -39,4 +31,4 @@ func change_faction_relation(faction1: factions, faction2: factions, amount: flo
 		var change = " decreased"
 		if sign(amount) == 1:
 			change = " increased"
-		Globals.survival_ui.create_notification("Standing with " + faction_display_names[faction1] + change)
+		Globals.survival_ui.create_notification("Standing with " + faction_data[faction1].name + change)

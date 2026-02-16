@@ -39,8 +39,8 @@ var max_sleep: float
 var max_hunger: float
 var max_thirst: float
 var sleep_decrease_rate := 1.0
-var hunger_decrease_rate := 1.25
-var thirst_decrease_rate := 1.5
+var hunger_decrease_rate := 1.1
+var thirst_decrease_rate := 1.2
 @onready var guns: Array[Item]:
 	get(): 
 		return inventory.items.filter(func(i): return i is EquipmentGun and i.gun_stats.ammo > 0)

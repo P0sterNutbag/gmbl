@@ -4,7 +4,7 @@ enum guns {shotgun, ak47, sniper, pistol}
 enum states {walk, chase, patrol}
 @export var gun_index: guns
 @export var chase_targets: bool
-var state = states.chase
+var state = states.walk
 var speed := 2
 var walk_speed := 2
 var run_speed := 3
@@ -44,11 +44,14 @@ func _ready() -> void:
 	location.location_data.population = randi_range(min_enemies, max_enemies)
 	location.encounter_started.connect(_on_encounter_started)
 	location.encounter_ended.connect(_on_encounter_ended)
-	if location.dialogue_tree != null:
-		location.dialogue_tree.npc_style = enemy_model.current_style
-		location.dialogue_tree.npc_name = FactionManager.faction_display_names[faction] + location.dialogue_tree.npc_name
 	SaveController.load.connect(_on_load)
 	await get_tree().process_frame
+	if location.dialogue_tree != null:
+		location.dialogue_tree.npc_style = enemy_model.current_style
+		var faction_name = FactionManager.faction_data[faction].name
+		if faction_name[-1] == "s":
+			faction_name[-1] = ""
+		location.dialogue_tree.npc_name = faction_name + " " + location.dialogue_tree.npc_name
 	original_position = global_position
 	original_rotation = global_rotation
 
@@ -163,7 +166,12 @@ func _on_load() -> void:
 
 func _on_navigation_agent_3d_navigation_finished() -> void:
 	if destination:
-		destination.location_data.change_population(location.location_data.population)
+		if destination.encounter_scene != null:
+			if FactionManager.get_faction_relation(location.location_data.faction, destination.location_data.faction) < 0.0:
+				destination.start_battle(location.location_data)
+			else:
+				destination.location_data.change_population(location.location_data.population)
+				print(destination.point_of_interest.title + " population is now " + str(destination.location_data.population))
 		queue_free()
 	else:
 		velocity = Vector3.ZERO
@@ -171,7 +179,6 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 		var pos = global_position + Vector3(randf_range(-3, 3), 0, randf_range(-3, 3))
 		pos.y = Globals.get_heightmap_position(pos)
 		navigation_agent.set_target_position(pos)
-		#rotation = original_rotation
 
 
 func _on_encounter_started() -> void:

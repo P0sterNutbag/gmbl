@@ -14,6 +14,8 @@ func _process(_delta: float) -> void:
 
 func leave_encounter() -> void:
 	var enemy_count: int = 0
+	var factions = []
+	var location_data = Globals.overworld.current_encounter.location_data
 	if Globals.overworld.current_encounter.get_node_or_null("StartingSquadSpawner"):
 		for enemy in get_tree().get_nodes_in_group("enemies"):
 			if enemy.is_starting_squad and enemy.state != enemy.states.dead and enemy.state != enemy.states.standby:
@@ -22,10 +24,17 @@ func leave_encounter() -> void:
 		for enemy in get_tree().get_nodes_in_group("enemies"):
 			if enemy.state != enemy.states.dead and enemy.state != enemy.states.standby:
 				enemy_count += 1
-	Globals.overworld.current_encounter.location_data.population = enemy_count
+				if !factions.has(enemy.faction):
+					factions.append(enemy.faction)
+	if factions.size() == 0:
+		location_data.faction = FactionManager.factions.no_faction
+		location_data.attacking_locations.clear()
+	elif factions.size() == 1:
+		location_data.faction = factions[0]
+		location_data.attacking_locations.clear()
+	location_data.population = enemy_count
 	var player_vector: Vector3 = (get_parent().global_position - Globals.player.global_position).normalized().rotated(Vector3.UP, -rotation.y)
 	Globals.overworld.player_spawn_vector = player_vector
-	#Globals.overworld.player_place = NodePath(overworld_point)
 	SceneManager.start_scene_transition(Globals.overworld)
 
 

@@ -9,13 +9,13 @@ var current_style := NpcStyle.new()
 @onready var gun_holder: Node3D = $PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
 @onready var animation_player: AnimationPlayer = $PersonAnimated/AnimationPlayer
 @export var set_style := false : set = set_materials_editor
-var faction_colors := {
-	0 : Color(1.0, 1.0, 1.0, 1.0),
-	1 : Color(1.0, 1.0, 1.0, 1.0),
-	2: Color(0.0, 0.396, 0.325, 1.0),
-	3: Color(0.22, 0.0, 0.851, 1.0),
-	4: Color(0.569, 0.102, 0.122, 1.0)
-}
+#var faction_colors := {
+	#0 : Color(1.0, 1.0, 1.0, 1.0),
+	#1 : Color(1.0, 1.0, 1.0, 1.0),
+	#2: Color(0.0, 0.396, 0.325, 1.0),
+	#3: Color(0.22, 0.0, 0.851, 1.0),
+	#4: Color(0.569, 0.102, 0.122, 1.0)
+#}
 
 func _ready() -> void:
 	#await get_tree().create_timer(1).timeout
@@ -50,7 +50,7 @@ func set_materials(style: NpcStyle = style_data) -> void:
 	if "faction" in get_parent():
 		faction = get_parent().faction
 	if faction > 1:
-		var faction_color = faction_colors[faction]
+		var faction_color = FactionManager.faction_data[faction].color
 		shirt_texture = get_texture_modified_skin(shirt_texture, faction_color, Color(1.0, 0.0, 0.0, 1.0))
 	else:
 		shirt_texture = get_texture_modified_skin(shirt_texture, skin_color, Color(1.0, 0.0, 0.0, 1.0))

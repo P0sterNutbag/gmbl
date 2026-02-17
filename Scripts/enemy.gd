@@ -331,12 +331,12 @@ func _physics_process(delta: float) -> void:
 				potential_cover = potential_cover.filter(func(a): 
 					return global_position.distance_to(a.global_position) < 15)
 				potential_cover = potential_cover.filter(func(a): 
-					for target in detection.targets:
-						if target == null: continue
+					for _target in detection.targets:
+						if _target == null: continue
 						detection.global_position.x = a.global_position.x
 						detection.global_position.z = a.global_position.z
 						detection.force_shapecast_update()
-						return !detection.can_see_target(target, false))
+						return !detection.can_see_target(_target))
 				detection.position = Vector3(0, 1, 0)
 				if potential_cover.size() == 0:
 					change_state(states.strafe)

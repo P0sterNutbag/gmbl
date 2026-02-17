@@ -1,14 +1,22 @@
 extends ShapeCast3D
 
 @export var view_angle: float = -0.25
-@export var range: float = 50
+@export var detection_range: float = 50
 var targets: Array[Node]
 var target_pos: Vector3
+var priority_targets: Array
 
 
 func get_visible_target() -> Node:
-	var in_range_targets = targets.filter(func(a): return global_position.distance_to(a.global_position) <= range)
-	in_range_targets.sort_custom(func(a, b): return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position))
+	var in_range_targets = targets.filter(func(a): return global_position.distance_to(a.global_position) <= detection_range)
+	in_range_targets = in_range_targets.filter(func(a): return target_is_ahead(a))
+	in_range_targets.sort_custom(func(a, b):
+		return (global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position)
+		or priority_targets.has(a)))
+	#for target in priority_targets:
+		#in_range_targets.push_front(target)
+	#if prioritize_player and in_range_targets.has(Globals.player):
+		#in_range_targets.push_front(Globals.player)
 	for target in in_range_targets:
 		if "states" in target and target.state == target.states.dead:
 			targets.erase(target)
@@ -20,7 +28,7 @@ func get_visible_target() -> Node:
 	return null
 
 
-func can_see_target(target: Node3D = targets[0], check_direction: bool = true) -> bool:
+func can_see_target(target: Node3D = targets[0]) -> bool:
 	# check for collision
 	target_pos = target.global_position + Vector3.UP * 1.5
 	look_at(target_pos)
@@ -28,6 +36,10 @@ func can_see_target(target: Node3D = targets[0], check_direction: bool = true) -
 	force_shapecast_update() 
 	if is_colliding():
 		return false
+	return true
+	
+
+func target_is_ahead(target: Node3D, check_direction: bool = true) -> bool:
 	# check dot to target
 	if !check_direction:
 		return true

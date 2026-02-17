@@ -91,24 +91,12 @@ func _ready() -> void:
 		faction = PlayerStats.faction
 	for i in gun_anchor.get_children():
 		i.visible = false
-	PlayerStats.gun_index = -1
-	gun_state = gun_states.no_gun
-	if PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.primary_gun]:
-		change_gun_slot(0)
-	elif PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.secondary_gun]:
-		change_gun_slot(1)
-	else:
-		change_gun_state(gun_states.no_gun)
 	hitbox.hp = PlayerStats.hp
-	#hitbox.max_hp = PlayerStats.hp
 	hitbox.hp_bar = Globals.ui.player_hp_bar
 	sway_noise.seed = randi()
 	sway_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	sway_noise.frequency = 0.5
-	#if gun:
-		#change_gun(PlayerStats.gun)
-	#else:
-		#gun_state = gun_states.no_gun
+	# state machine functions
 	state_functions = {
 		PlayerStats.states.walk: state_walk,
 		PlayerStats.states.pause: state_pause,
@@ -141,6 +129,15 @@ func _ready() -> void:
 		gun_states.point_up: exit_gun_state_point_up,
 		gun_states.ads: exit_gun_state_ads,
 	}
+	# set gun
+	PlayerStats.gun_index = -1
+	gun_state = gun_states.no_gun
+	if PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.primary_gun]:
+		change_gun_slot(0)
+	elif PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.secondary_gun]:
+		change_gun_slot(1)
+	else:
+		change_gun_state(gun_states.no_gun)
 	# set skin color
 	var arm = gun_anchor.get_child(0).get_node("ArmLAnchor/armL/Cube_001")
 	var material = arm.mesh.surface_get_material(0)

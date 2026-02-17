@@ -171,7 +171,7 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 				destination.start_battle(location.location_data)
 			else:
 				destination.location_data.change_population(location.location_data.population)
-				print(destination.point_of_interest.title + " population is now " + str(destination.location_data.population))
+				print(destination.title + " population is now " + str(destination.location_data.population))
 		queue_free()
 	else:
 		velocity = Vector3.ZERO

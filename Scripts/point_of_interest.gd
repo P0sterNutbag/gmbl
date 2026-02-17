@@ -1,7 +1,6 @@
 extends Node3D
 class_name PointOfInterest
 
-@export_multiline var title: String
 @export var show_faction: bool = true
 @export var show_population: bool = true
 @onready var title_label: Label = %Title
@@ -15,9 +14,9 @@ class_name PointOfInterest
 
 
 func _ready() -> void:
-	title_label.text = title
-	if title_label.text == "":
-		title_label.hide()
+	#title_label.text = title
+	#if title_label.text == "":
+		#title_label.hide()
 	canvas_layer.hide()
 
 
@@ -26,6 +25,7 @@ func _process(_delta: float) -> void:
 		return
 	location_card.global_position = get_viewport().get_camera_3d().unproject_position(text_anchor.global_position)
 	var location_data = get_parent().location_data
+	title_label.text = get_parent().title
 	if show_faction:
 		var faction = location_data.faction
 		var faction_name = FactionManager.faction_data[faction].name

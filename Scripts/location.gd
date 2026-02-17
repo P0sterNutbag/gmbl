@@ -1,6 +1,7 @@
 extends Node3D
 class_name Location
 
+@export var title: String
 @export var location_data: LocationData# = LocationData.new()
 @export var target_distance := 0.0
 @export var encounter_scene: PackedScene
@@ -8,7 +9,6 @@ class_name Location
 @export var shop: Shop
 @export var dialogue_tree: DialogueTree
 @export var can_stealth_start: bool
-var title: String
 var alert_enemies: bool
 var transition_started: bool 
 var can_transition: bool = true
@@ -36,14 +36,14 @@ func _ready() -> void:
 	flagpole.global_rotation_degrees = Vector3(0, 0, 0)
 	if save_population > -1:
 		location_data.population = save_population
-	var parent = get_parent()
-	if parent is PointOfInterest:
-		title = parent.title
-	if "style_data" in parent:
-		if shop:
-			shop.dialogue.npc_style = parent.current_style
-		elif dialogue_tree:
-			dialogue_tree.npc_style = parent.current_style
+	#var parent = get_parent()
+	#if parent is PointOfInterest:
+		#title = parent.title
+	#if "style_data" in parent:
+		#if shop:
+			#shop.dialogue.npc_style = parent.current_style
+		#elif dialogue_tree:
+			#dialogue_tree.npc_style = parent.current_style
 	# shop timer
 	if town != null:
 		for i in town.shops:
@@ -99,7 +99,7 @@ func stock_shops() -> void:
 		if i.min_quests > 0 and i.random_quest:
 			i.restock_quests()
 			for q in i.quests:
-				q.return_location = point_of_interest.title
+				q.return_location = title
 
 
 func transition_to_level(start_alert = alert_enemies) -> void:
@@ -113,8 +113,8 @@ func start_battle(attacking_location: LocationData):
 	if location_data.population == 0:
 		location_data.faction = attacking_location.faction
 		location_data.population = location_data.min_population
-		Globals.survival_ui.create_notification(point_of_interest.title + " taken by " + FactionManager.faction_data[location_data.faction].name)
-		print(point_of_interest.title + " taken by " + FactionManager.faction_data[location_data.faction].name)
+		Globals.survival_ui.create_notification(title + " taken by " + FactionManager.faction_data[location_data.faction].name)
+		print(title + " taken by " + FactionManager.faction_data[location_data.faction].name)
 		return
 	location_data.attacking_locations.append(attacking_location)
 	if battle_timer.time_left > 0:
@@ -127,8 +127,8 @@ func start_battle(attacking_location: LocationData):
 	animation_player.play("battle")
 	point_of_interest.status_holder.show()
 	point_of_interest.status_label.text = "Under Attack by " + FactionManager.faction_data[attacking_location.faction].name
-	Globals.survival_ui.create_notification(point_of_interest.title + " under attack by " + FactionManager.faction_data[attacking_location.faction].name)
-	print(point_of_interest.title + " under attack by " + FactionManager.faction_data[attacking_location.faction].name)
+	Globals.survival_ui.create_notification(title + " under attack by " + FactionManager.faction_data[attacking_location.faction].name)
+	print(title + " under attack by " + FactionManager.faction_data[attacking_location.faction].name)
 
 
 func save() -> Dictionary:
@@ -169,7 +169,7 @@ func _on_battle_timer_timeout() -> void:
 	animation_player.stop()
 	point_of_interest.status_holder.hide()
 	if location_data.faction != original_faction:
-		Globals.survival_ui.create_notification(point_of_interest.title + " taken by " + FactionManager.faction_data[location_data.faction].name)
-		print(point_of_interest.title + " taken by " + FactionManager.faction_data[location_data.faction].name + ". Population is now: " + str(location_data.population))
+		Globals.survival_ui.create_notification(title + " taken by " + FactionManager.faction_data[location_data.faction].name)
+		print(title + " taken by " + FactionManager.faction_data[location_data.faction].name + ". Population is now: " + str(location_data.population))
 	else:
-		print(point_of_interest.title + " successfuly defended by " + FactionManager.faction_data[location_data.faction].name + ". Population is now: " + str(location_data.population))
+		print(title + " successfuly defended by " + FactionManager.faction_data[location_data.faction].name + ". Population is now: " + str(location_data.population))

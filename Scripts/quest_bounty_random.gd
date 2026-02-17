@@ -29,8 +29,8 @@ class_name QuestBountyRandom
 	"Zylan",
 ]
 @export var locations: Array[String] =[
-	"Bandit Camp",
-	"Bandit Town",
+	"Roadside Stop",
+	"Ghost Town",
 	"Crateyard",
 	"Rock Canyon",
 	"Sand Dunes",
@@ -51,7 +51,7 @@ func generate_quest() -> Quest:
 	quest.reward = ItemSlot.new()
 	quest.reward.item = rewards[randi_range(0, rewards.size()-1)]
 	if quest.reward.item is ItemMoney:
-		var location_data = Globals.get_tree().get_nodes_in_group("location").filter(func(i): return i.get_child(-1).title == quest.location)[0].location_data
+		var location_data = Globals.get_tree().get_nodes_in_group("location").filter(func(i): return i.title == quest.location)[0].location_data
 		quest.reward.amount = location_data.min_population * 25
 	quest.target = preload("res://Scenes/NPCs/enemy.tscn")
 	return quest

@@ -458,6 +458,8 @@ func _on_damaged(hit_position: Vector3, hit_direction: Vector3, shooter: Node3D)
 		var current_relation = FactionManager.get_faction_relation(faction, shooter.faction)
 		if current_relation < previous_relation:
 			get_tree().call_group("enemies", "set_detection_targets")
+	if !detection.priority_targets.has(shooter):
+		detection.priority_targets.append(shooter)
 	var blood_scene = load("res://Scenes/Effects/Particles/bloodspray.tscn")
 	var blood = Globals.create_particle(blood_scene, hit_position)
 	if blood != null:
@@ -576,11 +578,11 @@ func _on_aim_timer_timeout() -> void:
 
 
 func on_night_start() -> void:
-	detection.range = night_range
+	detection.detection_range = night_range
 
 
 func on_day_start() -> void:
-	detection.range = day_range
+	detection.detection_range = day_range
 
 
 func _on_supress_timer_timeout() -> void:

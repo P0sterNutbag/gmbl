@@ -38,7 +38,7 @@ func _process(_delta: float) -> void:
 		var quest_object = null
 		if get_tree().current_scene == Globals.overworld:
 			for location in get_tree().get_nodes_in_group("location"):
-				if quest.location.to_lower() == location.point_of_interest.title.to_lower():
+				if quest.location.to_lower() == location.title.to_lower():
 					quest_object = location
 		else:
 			if !quest.target_node:
@@ -68,7 +68,7 @@ func set_quest_markers():
 	else:
 		quests = PlayerStats.quests.filter(func(i): 
 			var quest_location = i.location
-			var encounter_location = Globals.overworld.current_encounter.point_of_interest.title
+			var encounter_location = Globals.overworld.current_encounter.title
 			return quest_location == encounter_location)
 	for quest in quests:
 		var inst = quest_marker.instantiate()

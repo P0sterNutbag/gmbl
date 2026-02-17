@@ -34,10 +34,10 @@ func _on_timer_timeout() -> void:
 	Globals.overworld.add_child(inst)
 	# determine spawn location
 	var spawn_location = get_spawn_location()
-	spawn_location.location_data.population = clamp(spawn_location.location_data.population - inst.location.location_data.population, spawn_location.location_data.min_population, spawn_location.location_data.max_population)
 	inst.global_position = spawn_location.global_position
 	inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
 	inst.location.location_data.faction = spawn_location.location_data.faction
+	inst.location.location_data.population = randi_range(spawn_location.location_data.min_population, spawn_location.location_data.max_population)
 	inst.faction = spawn_location.location_data.faction
 	var standing = FactionManager.get_faction_relation(inst.faction, FactionManager.factions.player)
 	if standing < 0.0:
@@ -46,7 +46,7 @@ func _on_timer_timeout() -> void:
 	else:
 		inst.location.dialogue_tree = NPC_FRIENDLY_DIALOGUE.duplicate(true)
 	# determine desination
-	var dest = get_destination(inst.faction, spawn_location)
+	var dest = get_destination(inst.faction, spawn_location, inst.location.location_data)
 	var pos = dest.global_position# + Vector3.RIGHT.rotated(Vector3.UP, deg_to_rad(randf_range(0, 360))) * dest.target_distance
 	inst.navigation_agent.set_target_position(pos)
 	inst.destination = dest
@@ -57,7 +57,7 @@ func get_spawn_location() -> Location:
 	return nodes[randi() % nodes.size()]
 
 
-func get_destination(faction: FactionManager.factions, spawn_location: Node3D) -> Location:
+func get_destination(faction: FactionManager.factions, spawn_location: Node3D, npc_location_data: LocationData) -> Location:
 	# get goal
 	var faction_data = FactionManager.faction_data[faction]
 	var rng = RandomNumberGenerator.new()
@@ -66,6 +66,7 @@ func get_destination(faction: FactionManager.factions, spawn_location: Node3D) -
 	var goal = objectives[rng.rand_weighted(weights)]
 	# get locaitons
 	var all_nodes = get_tree().get_nodes_in_group("location")
+	all_nodes.erase(spawn_location)
 	if goal != 2:
 		all_nodes = all_nodes.filter(func(a): return a.encounter_scene != null)
 	var target_nodes = []
@@ -82,17 +83,22 @@ func get_destination(faction: FactionManager.factions, spawn_location: Node3D) -
 				continue
 		var faction_locations = all_nodes.filter(func(a): return a.location_data.faction == f)
 		target_nodes.append_array(faction_locations)
-	target_nodes.erase(spawn_location)
 	if target_nodes.size() == 0:
 		target_nodes = all_nodes
 	target_nodes.sort_custom(func(a, b): return spawn_location.global_position.distance_to(a.global_position) < spawn_location.global_position.distance_to(b.global_position))
-	target_nodes.sort_custom(func(a, b): return a.location_data.population < b.location_data.population)
+	#target_nodes.sort_custom(func(a, b): return a.location_data.population < b.location_data.population)
 	rng.randomize()
 	weights.clear()
 	for i in target_nodes.size():
-		weights.append(target_nodes.size() - i)
+		var weight = max(target_nodes.size() - i, 1)
+		if goal == 0 or goal == 1:
+			var npc_population = npc_location_data.population
+			var location_population = target_nodes[i].location_data.population
+			var mult = float(npc_population) / maxf(1, location_population)
+			weight *= mult
+		weights.append(weight)
 	var destination = target_nodes[rng.rand_weighted(weights)]
-	print(faction_data.name + " squad spawned at " + spawn_location.point_of_interest.title + " en route to " + destination.point_of_interest.title + ". Objective: " + str(goal))
+	print(faction_data.name + " squad spawned at " + spawn_location.title + " en route to " + destination.title + ". Objective: " + str(goal))
 	return destination
 
 

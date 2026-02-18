@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	global_translate(-global_transform.basis.z.normalized() * bullet_stats.speed * delta)
 	#if bullet_stats.bullet_drop:
 	global_translate(global_transform.basis.y.normalized() * -bullet_stats.drop_speed * delta)
-	bullet_stats.drop_speed = move_toward(bullet_stats.drop_speed, bullet_stats.max_drop_speed, delta * 50)
+	bullet_stats.drop_speed = move_toward(bullet_stats.drop_speed, bullet_stats.max_drop_speed, delta)
 	visible = true
 
 

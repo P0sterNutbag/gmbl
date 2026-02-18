@@ -28,26 +28,20 @@ class_name QuestBountyRandom
 	"Xander",
 	"Zylan",
 ]
-@export var locations: Array[String] =[
-	"Roadside Stop",
-	"Ghost Town",
-	"Crateyard",
-	"Rock Canyon",
-	"Sand Dunes",
-]
 @export var rewards: Array[Item] = [
 	ItemMoney.new()
 ]
 @export var targets: Array[PackedScene]
+@export var target_factions: Array[FactionManager.factions]
 
 
 func generate_quest() -> Quest:
 	var quest = QuestBounty.new()
 	quest.type = type
 	quest.title = "Kill " + titles[randi_range(0, titles.size()-1)]
-	quest.location = locations[randi_range(0, locations.size()-1)]
+	var locations = Globals.get_tree().get_nodes_in_group("location").filter(func(i): return target_factions.has(i.location_data.faction))
+	quest.location = locations[randi_range(0, locations.size()-1)].title
 	quest.description = "Location: " + quest.location + ""
-	#quest.reward = rewards[randi_range(0, rewards.size()-1)]
 	quest.reward = ItemSlot.new()
 	quest.reward.item = rewards[randi_range(0, rewards.size()-1)]
 	if quest.reward.item is ItemMoney:

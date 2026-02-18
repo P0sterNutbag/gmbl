@@ -173,6 +173,8 @@ func _process(delta: float) -> void:
 
 
 func change_gun_state(new_state):
+	if new_state == gun_state:
+		return
 	if gun_exit_functions.has(gun_state):
 		await gun_exit_functions[gun_state].call()
 	gun_state = new_state

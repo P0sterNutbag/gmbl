@@ -6,3 +6,4 @@ class_name Faction
 @export var agression: float
 @export var defense: float
 @export var enterprising: float
+@export var style: NpcStyle

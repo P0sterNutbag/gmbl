@@ -5,13 +5,17 @@
 [ext_resource type="PackedScene" uid="uid://brrtfg5jynxnd" path="res://Scenes/Environment/Nature/rock.tscn" id="3_0yhq7"]
 [ext_resource type="PackedScene" uid="uid://gjf0h1sobon8" path="res://Scenes/Environment/Prefabs With Spawning/shack_windows.tscn" id="3_2w81c"]
 [ext_resource type="PackedScene" uid="uid://dvpgm7keysw0" path="res://Scenes/Environment/Props/Physics/drum_barrel_rust.tscn" id="3_khwl6"]
-[ext_resource type="Resource" uid="uid://b4nf7foewatof" path="res://addons/zylann.hterrain/data/practice_stage/data.hterrain" id="3_rq7j8"]
+[ext_resource type="Resource" path="res://addons/zylann.hterrain/data/practice_stage/data.hterrain" id="3_rq7j8"]
 [ext_resource type="PackedScene" uid="uid://m7oajasjyoq2" path="res://Scenes/Environment/Props/Physics/glass_bottle.tscn" id="4_0yhq7"]
 [ext_resource type="PackedScene" uid="uid://21yqxj5xl8cv" path="res://Scenes/Environment/Props/Physics/drum_barrel_blue.tscn" id="4_jp1bk"]
 [ext_resource type="Script" uid="uid://4hsufju1omso" path="res://Scripts/interactable_object.gd" id="5_2w81c"]
 [ext_resource type="PackedScene" uid="uid://wubvthultu6w" path="res://Scenes/Environment/Props/Physics/crate_tall_horizontal.tscn" id="9_jp1bk"]
+[ext_resource type="PackedScene" uid="uid://caqt1huuf8r1j" path="res://Art/Models/barrel.glb" id="9_rurut"]
 [ext_resource type="PackedScene" uid="uid://3jmw8pof6fd" path="res://Scenes/Environment/Props/signpost.tscn" id="11_5gmc4"]
 [ext_resource type="PackedScene" uid="uid://btjp27ft7kaqr" path="res://Scenes/Environment/Props/Physics/crate_tall.tscn" id="11_ojxr8"]
+[ext_resource type="Texture2D" uid="uid://c7n13j84gb5d" path="res://Art/Models/barrel_wood.png" id="11_tai5o"]
+[ext_resource type="Shader" uid="uid://de6l4w30bo7u6" path="res://Art/Shaders/cel-shader-base.gdshader" id="11_uca0u"]
+[ext_resource type="Material" uid="uid://glgkpsq6v2xd" path="res://Art/Materials/rock_gray.tres" id="12_c3ui8"]
 
 [sub_resource type="Resource" id="Resource_7dkwq"]
 script = ExtResource("2_440xd")
@@ -19,10 +23,19 @@ min_population = 0
 max_population = 0
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
-[sub_resource type="BoxMesh" id="BoxMesh_440xd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hqxg6"]
+render_priority = 0
+shader = ExtResource("11_uca0u")
+shader_parameter/color = Color(0.86, 0.86, 0.86, 1)
+shader_parameter/base_texture = ExtResource("11_tai5o")
+shader_parameter/specular = Color(0, 0, 0, 0)
+shader_parameter/fresnel = Color(0, 0, 0, 0)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_2w81c"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2wwon"]
+height = 1.6113281
+radius = 0.6044922
 
 [node name="Encounter" unique_id=1063982651 instance=ExtResource("1_hcqj2")]
 location_data = SubResource("Resource_7dkwq")
@@ -262,7 +275,7 @@ spawn_relative = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
 
 [node name="SnapToTerrain" parent="." index="11" unique_id=196337249 node_paths=PackedStringArray("objects_to_snap")]
-objects_to_snap = [NodePath("../PlayerAnchor/PlayerSpawn")]
+objects_to_snap = [NodePath("../ShootingRange/ShackWindows"), NodePath("../ShootingRange/ShackWindows2"), NodePath("../ShootingRange/ShackWindows3")]
 
 [node name="Scatterer" parent="." index="12" unique_id=520392373 node_paths=PackedStringArray("terrain")]
 scenes = Array[PackedScene]([ExtResource("3_0yhq7")])
@@ -273,90 +286,103 @@ terrain = NodePath("../Terrain")
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 127.29141, 3.4152098, 46.576553)
 
 [node name="ShackWindows" parent="ShootingRange" index="0" unique_id=1757084879 node_paths=PackedStringArray("terrain") instance=ExtResource("3_2w81c")]
-transform = Transform3D(0.9066615, 0, 0.42185885, 0, 1, 0, -0.42185885, 0, 0.9066615, -12.364403, 1.2552032, -2.324112)
+transform = Transform3D(0.9066615, 0, 0.42185885, 0, 1, 0, -0.42185885, 0, 0.9066615, -18.810448, 0.47418833, -16.178009)
 terrain = NodePath("../../Terrain")
 
+[node name="GlassBottle" parent="ShootingRange/ShackWindows" index="5" unique_id=1944653084 instance=ExtResource("4_0yhq7")]
+transform = Transform3D(-0.2719985, 0, 0.12655763, 0, 0.3, 0, -0.12655763, 0, -0.2719985, -1.9829559, 1.5499997, 3.8635406)
+
+[node name="GlassBottle2" parent="ShootingRange/ShackWindows" index="6" unique_id=1685849869 instance=ExtResource("4_0yhq7")]
+transform = Transform3D(-0.2719985, 0, 0.12655763, 0, 0.3, 0, -0.12655763, 0, -0.2719985, 1.9995804, 1.5499997, 3.9323425)
+
+[node name="GlassBottle3" parent="ShootingRange/ShackWindows" index="7" unique_id=1957458425 instance=ExtResource("4_0yhq7")]
+transform = Transform3D(-0.2719985, 0, 0.12655763, 0, 0.3, 0, -0.12655763, 0, -0.2719985, 3.85569, 3.5339003, 3.8765564)
+
 [node name="ShackWindows2" parent="ShootingRange" index="1" unique_id=1028122476 node_paths=PackedStringArray("terrain") instance=ExtResource("3_2w81c")]
-transform = Transform3D(0.9999959, 0, -0.0028797388, 0, 1, 0, 0.0028797388, 0, 0.9999959, -0.14564514, 0.4510312, -19.069813)
+transform = Transform3D(0.9999959, 0, -0.0028797388, 0, 1, 0, 0.0028797388, 0, 0.9999959, -0.08103943, -0.6154957, -41.503193)
 terrain = NodePath("../../Terrain")
+
+[node name="GlassBottle4" parent="ShootingRange/ShackWindows2" index="5" unique_id=2077321461 instance=ExtResource("4_0yhq7")]
+transform = Transform3D(-0.29999873, 0, -0.0008639478, 0, 0.3, 0, 0.0008639478, 0, -0.29999873, -1.9960327, 1.5499997, 3.9443016)
+
+[node name="GlassBottle5" parent="ShootingRange/ShackWindows2" index="6" unique_id=2138939769 instance=ExtResource("4_0yhq7")]
+transform = Transform3D(-0.29999873, 0, -0.0008639478, 0, 0.3, 0, 0.0008639478, 0, -0.29999873, 1.9393921, 1.5499997, 3.9670296)
+
+[node name="GlassBottle6" parent="ShootingRange/ShackWindows2" index="7" unique_id=1025874172 instance=ExtResource("4_0yhq7")]
+transform = Transform3D(-0.29999873, 0, -0.0008639478, 0, 0.3, 0, 0.0008639478, 0, -0.29999873, -0.033615112, 3.5339003, 4.296379)
 
 [node name="ShackWindows3" parent="ShootingRange" index="2" unique_id=354457829 node_paths=PackedStringArray("terrain") instance=ExtResource("3_2w81c")]
 transform = Transform3D(0.9647139, 0, -0.2633006, 0, 1, 0, 0.2633006, 0, 0.9647139, 9.58609, 1.8500905, -4.935562)
 terrain = NodePath("../../Terrain")
 
+[node name="GlassBottle7" parent="ShootingRange/ShackWindows3" index="5" unique_id=15915975 instance=ExtResource("4_0yhq7")]
+transform = Transform3D(-0.28941414, 0, -0.0789902, 0, 0.3, 0, 0.0789902, 0, -0.28941414, -2.187622, 1.5499997, 3.8508854)
+
+[node name="GlassBottle8" parent="ShootingRange/ShackWindows3" index="6" unique_id=1506203877 instance=ExtResource("4_0yhq7")]
+transform = Transform3D(-0.28941414, 0, -0.0789902, 0, 0.3, 0, 0.0789902, 0, -0.28941414, -3.5555115, 3.5339007, 4.3983517)
+
+[node name="GlassBottle9" parent="ShootingRange/ShackWindows3" index="7" unique_id=2037132221 instance=ExtResource("4_0yhq7")]
+transform = Transform3D(-0.28941414, 0, -0.0789902, 0, 0.3, 0, 0.0789902, 0, -0.28941414, 1.778183, 1.5499997, 3.7814808)
+
+[node name="GlassBottle10" parent="ShootingRange/ShackWindows3" index="8" unique_id=1189992752 instance=ExtResource("4_0yhq7")]
+transform = Transform3D(-0.28941414, 0, -0.0789902, 0, 0.3, 0, 0.0789902, 0, -0.28941414, 2.2953644, 1.5499997, 3.8831387)
+
 [node name="BulletStash" type="Node3D" parent="ShootingRange" index="3" unique_id=934999992]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1377945, 1.8570027, 17.968262)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7863235, 2.4692354, 17.80974)
 metadata/_edit_group_ = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ShootingRange/BulletStash" index="0" unique_id=1978490269]
-mesh = SubResource("BoxMesh_440xd")
+[node name="barrel" parent="ShootingRange/BulletStash" index="0" unique_id=1258185646 instance=ExtResource("9_rurut")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="ShootingRange/BulletStash/MeshInstance3D" index="0" unique_id=791461139]
+[node name="Barrel" type="Node3D" parent="ShootingRange/BulletStash" index="1" unique_id=389534420]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.6469612, 0)
+
+[node name="barrel" parent="ShootingRange/BulletStash/Barrel" index="0" unique_id=539718864 instance=ExtResource("9_rurut")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.625, 0)
+
+[node name="Cylinder" parent="ShootingRange/BulletStash/Barrel/barrel" index="0" unique_id=966608550]
+surface_material_override/0 = SubResource("ShaderMaterial_hqxg6")
+surface_material_override/1 = ExtResource("12_c3ui8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ShootingRange/BulletStash/Barrel" index="1" unique_id=791461139]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.6469612, 0)
 collision_layer = 17
 collision_mask = 0
 script = ExtResource("5_2w81c")
 tooltip_text = "F: Refill Ammo"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ShootingRange/BulletStash/MeshInstance3D/StaticBody3D" index="0" unique_id=1281905370]
-shape = SubResource("ConcavePolygonShape3D_2w81c")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ShootingRange/BulletStash/Barrel/StaticBody3D" index="0" unique_id=1281905370]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.19433594, 0)
+shape = SubResource("CylinderShape3D_2wwon")
 
 [node name="CrateTall" parent="ShootingRange" index="4" unique_id=896498262 instance=ExtResource("9_jp1bk")]
-transform = Transform3D(0.96638954, 0, 0.2570822, 0, 1, 0, -0.2570822, 0, 0.96638954, -2.9531937, 2.0729055, 14.029144)
+transform = Transform3D(0.96638954, 0, 0.2570822, 0, 1, 0, -0.2570822, 0, 0.96638954, -4.3043165, 2.0729055, 14.388575)
 
 [node name="CrateTall2" parent="ShootingRange" index="5" unique_id=596406716 instance=ExtResource("9_jp1bk")]
-transform = Transform3D(0.99686366, 0, -0.079137675, 0, 1, 0, 0.079137675, 0, 0.99686366, 1.1626892, 2.187727, 13.317474)
+transform = Transform3D(0.99686366, 0, -0.079137675, 0, 1, 0, 0.079137675, 0, 0.99686366, 2.7594986, 2.187727, 13.317474)
 
 [node name="Signpost2" parent="ShootingRange" index="6" unique_id=589000202 instance=ExtResource("11_5gmc4")]
-transform = Transform3D(-0.96524495, 0, 0.26134688, 0, 1, 0, -0.26134688, 0, -0.96524495, 2.9405365, 2.2021875, 14.291931)
+transform = Transform3D(-0.96524495, 0, 0.26134688, 0, 1, 0, -0.26134688, 0, -0.96524495, 4.537346, 2.2021875, 14.291931)
 text = "Press 'Tab' to open your inventory and equip guns"
 
 [node name="Signpost3" parent="ShootingRange" index="7" unique_id=306406293 instance=ExtResource("11_5gmc4")]
-transform = Transform3D(-0.99065995, 0, -0.1363554, 0, 1, 0, 0.1363554, 0, -0.99065995, -0.9768448, 2.12919, 14.504608)
+transform = Transform3D(-0.99065995, 0, -0.1363554, 0, 1, 0, 0.1363554, 0, -0.99065995, -0.65740204, 2.12919, 14.548706)
 text = "Press 'LMB' to fire your gun, 'RMB' to aim down sights, and 'Shift' to hold your breath while aiming."
 
 [node name="Signpost5" parent="ShootingRange" index="8" unique_id=476390736 instance=ExtResource("11_5gmc4")]
-transform = Transform3D(-0.83428055, 0, -0.55134016, 0, 1, 0, 0.55134016, 0, -0.83428055, -4.3158493, 2.0166955, 15.528488)
+transform = Transform3D(-0.83428055, 0, -0.55134016, 0, 1, 0, 0.55134016, 0, -0.83428055, -5.7373886, 1.8472652, 15.414749)
 text = "Press '1' or '2' to switch between primary and secondary weapon"
 
 [node name="Signpost" parent="ShootingRange" index="9" unique_id=1388444195 instance=ExtResource("11_5gmc4")]
-transform = Transform3D(-0.69064254, 0, 0.72319627, 0, 1, 0, -0.72319627, 0, -0.69064254, 8.389008, 2.2425876, 15.463438)
+transform = Transform3D(-0.69064254, 0, 0.72319627, 0, 1, 0, -0.72319627, 0, -0.69064254, 9.855347, 2.2425876, 15.463438)
 text = "Press 'Q' or 'E' to lean left or right."
 
 [node name="Signpost4" parent="ShootingRange" index="10" unique_id=1394898392 instance=ExtResource("11_5gmc4")]
-transform = Transform3D(0.2811022, 0, -0.9596778, 0, 1, 0, 0.9596778, 0, 0.2811022, -6.0869675, 1.8221784, 18.860535)
+transform = Transform3D(0.32226568, 0, -0.9466491, 0, 1, 0, 0.9466491, 0, 0.32226568, -6.8311996, 1.7260485, 19.085337)
 text = "Press 'R' to reload. Any unused ammo will be lost. Grab a magazine from the crate if you run out."
 
 [node name="CrateTall3" parent="ShootingRange" index="11" unique_id=500988765 instance=ExtResource("11_ojxr8")]
-transform = Transform3D(0.98041236, 0, -0.19695581, 0, 1, 0, 0.19695581, 0, 0.98041236, 7.3707886, 2.260189, 14.40329)
-
-[node name="GlassBottle" parent="ShootingRange" index="12" unique_id=1944653084 instance=ExtResource("4_0yhq7")]
-transform = Transform3D(-0.3, 0, -2.6226834e-08, 0, 0.3, 0, 2.6226834e-08, 0, -0.3, -12.532417, 2.805203, 2.0153313)
-
-[node name="GlassBottle2" parent="ShootingRange" index="13" unique_id=1685849869 instance=ExtResource("4_0yhq7")]
-transform = Transform3D(-0.3, 0, -2.6226834e-08, 0, 0.3, 0, 2.6226834e-08, 0, -0.3, -8.8925705, 2.805203, 0.39764404)
-
-[node name="GlassBottle3" parent="ShootingRange" index="14" unique_id=1957458425 instance=ExtResource("4_0yhq7")]
-transform = Transform3D(-0.3, 0, -2.6226834e-08, 0, 0.3, 0, 2.6226834e-08, 0, -0.3, -7.2332535, 4.7891035, -0.43594742)
-
-[node name="GlassBottle4" parent="ShootingRange" index="15" unique_id=2077321461 instance=ExtResource("4_0yhq7")]
-transform = Transform3D(-0.3, 0, -2.6226834e-08, 0, 0.3, 0, 2.6226834e-08, 0, -0.3, -2.153038, 2.001031, -15.131271)
-
-[node name="GlassBottle5" parent="ShootingRange" index="16" unique_id=2138939769 instance=ExtResource("4_0yhq7")]
-transform = Transform3D(-0.3, 0, -2.6226834e-08, 0, 0.3, 0, 2.6226834e-08, 0, -0.3, 1.7823181, 2.001031, -15.09721)
-
-[node name="GlassBottle6" parent="ShootingRange" index="17" unique_id=1025874172 instance=ExtResource("4_0yhq7")]
-transform = Transform3D(-0.3, 0, -2.6226834e-08, 0, 0.3, 0, 2.6226834e-08, 0, -0.3, -0.19163513, 3.9849315, -14.773548)
-
-[node name="GlassBottle7" parent="ShootingRange" index="18" unique_id=15915975 instance=ExtResource("4_0yhq7")]
-transform = Transform3D(-0.3, 0, -2.6226834e-08, 0, 0.3, 0, 2.6226834e-08, 0, -0.3, 6.4617233, 3.4000902, -1.7965622)
-
-[node name="GlassBottle8" parent="ShootingRange" index="19" unique_id=1506203877 instance=ExtResource("4_0yhq7")]
-transform = Transform3D(-0.3, 0, -2.6226834e-08, 0, 0.3, 0, 2.6226834e-08, 0, -0.3, 4.9979553, 5.3839912, -1.6285782)
-
-[node name="GlassBottle9" parent="ShootingRange" index="20" unique_id=2037132221 instance=ExtResource("4_0yhq7")]
-transform = Transform3D(-0.3, 0, -2.6226834e-08, 0, 0.3, 0, 2.6226834e-08, 0, -0.3, 10.305862, 3.4000902, -0.8193207)
-
-[node name="GlassBottle10" parent="ShootingRange" index="21" unique_id=1189992752 instance=ExtResource("4_0yhq7")]
-transform = Transform3D(-0.3, 0, -2.6226834e-08, 0, 0.3, 0, 2.6226834e-08, 0, -0.3, 10.77803, 3.4000902, -0.5850754)
+transform = Transform3D(0.98041236, 0, -0.19695581, 0, 1, 0, 0.19695581, 0, 0.98041236, 8.837128, 2.260189, 14.40329)
 
 [editable path="WorldEnvironment"]
+[editable path="ShootingRange/BulletStash/Barrel/barrel"]

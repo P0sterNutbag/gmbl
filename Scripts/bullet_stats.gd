@@ -5,7 +5,6 @@ class_name BulletStats
 @export var amount = 1
 @export var speed = 250.0
 @export var max_drop_speed = 3.0
-@export var min_drop_speed = 0.0
 @export var drop_speed = 0.0
 @export var damage = 1.0
 @export var h_angle_variance_hip = 0.0

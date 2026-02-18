@@ -1,4 +1,4 @@
-@tool
+#@tool
 extends Node3D
 
 @export var style_data: NpcStyle
@@ -8,17 +8,14 @@ var current_style := NpcStyle.new()
 @onready var skeleton_3d: Skeleton3D = $PersonAnimated/Armature/Skeleton3D
 @onready var gun_holder: Node3D = $PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
 @onready var animation_player: AnimationPlayer = $PersonAnimated/AnimationPlayer
-@export var set_style := false : set = set_materials_editor
-#var faction_colors := {
-	#0 : Color(1.0, 1.0, 1.0, 1.0),
-	#1 : Color(1.0, 1.0, 1.0, 1.0),
-	#2: Color(0.0, 0.396, 0.325, 1.0),
-	#3: Color(0.22, 0.0, 0.851, 1.0),
-	#4: Color(0.569, 0.102, 0.122, 1.0)
-#}
+#@export var set_style := false : set = set_materials_editor
+
 
 func _ready() -> void:
-	#await get_tree().create_timer(1).timeout
+	var parent = get_parent()
+	await get_tree().process_frame
+	if "faction" in parent and parent != Globals.player:
+		style_data = FactionManager.faction_data[parent.faction].style
 	set_materials(style_data)
 
 
@@ -32,7 +29,6 @@ func set_materials(style: NpcStyle = style_data) -> void:
 	var shirt_material = cube2.get_surface_override_material(0).duplicate()
 	var pants_material = cube2.get_surface_override_material(1).duplicate()
 	var shoes_material = cube2.get_surface_override_material(2).duplicate()
-	
 	# Set the materials
 	var skin_color = Color(0.937, 0.761, 0.604, 1.0)
 	var hair_color = Color()
@@ -46,26 +42,24 @@ func set_materials(style: NpcStyle = style_data) -> void:
 	face_material.set("shader_parameter/base_texture", face_texture)
 	var shirt_texture = style.shirts[randi() % style.shirts.size()]
 	shirt_texture = get_texture_modified_skin(shirt_texture, skin_color, Color(0.933, 0.769, 0.6, 1.0))
-	var faction = 0
-	if "faction" in get_parent():
-		faction = get_parent().faction
-	if faction > 1:
-		var faction_color = FactionManager.faction_data[faction].color
-		shirt_texture = get_texture_modified_skin(shirt_texture, faction_color, Color(1.0, 0.0, 0.0, 1.0))
-	else:
-		shirt_texture = get_texture_modified_skin(shirt_texture, skin_color, Color(1.0, 0.0, 0.0, 1.0))
+	#var faction = 0
+	#if "faction" in get_parent():
+		#faction = get_parent().faction
+	#if faction > 1:
+		#var faction_color = FactionManager.faction_data[faction].color
+		#shirt_texture = get_texture_modified_skin(shirt_texture, faction_color, Color(1.0, 0.0, 0.0, 1.0))
+	#else:
+		#shirt_texture = get_texture_modified_skin(shirt_texture, skin_color, Color(1.0, 0.0, 0.0, 1.0))
 	shirt_material.set("shader_parameter/base_texture", shirt_texture)
 	var pants = style.pants_colors[randi() % style.pants_colors.size()]
 	pants_material.set("shader_parameter/color", pants)
 	var shoes = style.shoe_colors[randi() % style.shoe_colors.size()]
 	shoes_material.set("shader_parameter/color", shoes)
-	
 	# Apply the unique materials
 	cube.set_surface_override_material(0, face_material)
 	cube2.set_surface_override_material(0, shirt_material)
 	cube2.set_surface_override_material(1, pants_material)
 	cube2.set_surface_override_material(2, shoes_material)
-	
 	# Set current style
 	current_style.faces.clear()
 	current_style.faces.append(face_texture)

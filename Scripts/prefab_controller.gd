@@ -11,7 +11,8 @@ extends Node3D
 @export var snap_to_terrain := false : set = position_on_terrain
 @export var spin := false : set = rotate_objects
 @export var align_normal := false : set = align_to_normal
-@export var align_on_procgen := false 
+@export var auto_snap_to_terrain := true 
+@export var auto_align_to_normal := false
 #@export_tool_button("snap", "Area2D") var action = position_on_terrain
 @onready var npc_spawns: Node3D = $NpcSpawns
 @onready var loot_spawns: Node3D = $LootSpawns
@@ -29,8 +30,14 @@ func _enter_tree() -> void:
 		if !spawn_traps: trap_spawns.process_mode = Node.PROCESS_MODE_DISABLED
 		else: trap_spawns.process_mode = Node.PROCESS_MODE_INHERIT
 
+func _ready() -> void:
+	if auto_snap_to_terrain:
+		position_on_terrain()
+	if auto_align_to_normal:
+		align_to_normal()
 
-func position_on_terrain(_value) -> void:
+
+func position_on_terrain(_value = false) -> void:
 	if !terrain:
 		return
 	var height = terrain.get_data().get_height_at(global_position.x, global_position.z)
@@ -73,7 +80,7 @@ func rotate_objects(_value) -> void:
 		#add_child(ray_cast_3d)
 
 
-func align_to_normal(_value) -> void:
+func align_to_normal(_value = false) -> void:
 	if !is_inside_tree():
 		return
 	var space_state := get_world_3d().direct_space_state

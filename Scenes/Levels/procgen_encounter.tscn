@@ -1,6 +1,6 @@
-[gd_scene load_steps=49 format=4 uid="uid://c3p7tbg7t42b1"]
+[gd_scene format=4 uid="uid://c3p7tbg7t42b1"]
 
-[ext_resource type="Script" uid="uid://bge81dgb3rx2t" path="res://Scripts/procedural_environment.gd" id="1_n2q0j"]
+[ext_resource type="Script" uid="uid://bge81dgb3rx2t" path="res://Scripts/procedural_environment_runtime.gd" id="1_n2q0j"]
 [ext_resource type="PackedScene" uid="uid://r4ktdn26psb3" path="res://Scenes/Levels/encounter_base.tscn" id="1_xg5g1"]
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_em3rq"]
 [ext_resource type="PackedScene" uid="uid://cueu704ip2q8t" path="res://Scenes/Environment/Prefabs With Spawning/shack_no_windows.tscn" id="6_okfcf"]
@@ -21,13 +21,12 @@
 [ext_resource type="PackedScene" uid="uid://bjama3lmb5mct" path="res://Scenes/Environment/Props/Physics/tire_stack.tscn" id="20_lbujv"]
 [ext_resource type="PackedScene" uid="uid://dvpgm7keysw0" path="res://Scenes/Environment/Props/Physics/drum_barrel_rust.tscn" id="21_m745e"]
 [ext_resource type="PackedScene" uid="uid://b6nrlkb5wnbsg" path="res://Scenes/Environment/Nature/rock_large.tscn" id="22_4531t"]
+[ext_resource type="Script" uid="uid://dc3rt20oacl4v" path="res://Scripts/procedural_environment_editor.gd" id="23_2ous2"]
 [ext_resource type="PackedScene" uid="uid://brrtfg5jynxnd" path="res://Scenes/Environment/Nature/rock.tscn" id="25_uxntf"]
 
 [sub_resource type="Resource" id="Resource_40f7q"]
 script = ExtResource("2_em3rq")
 population = 2
-loot_spawn_chance = 0.5
-npc_spawn_chance = 1.0
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_nfhko"]
@@ -167,31 +166,116 @@ script = ExtResource("12_n5v1j")
 object_to_spawn = ExtResource("15_dardl")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
-[node name="Encounter" instance=ExtResource("1_xg5g1")]
+[sub_resource type="Resource" id="Resource_gn7td"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("6_okfcf")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_tt5wn"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("7_nfhko")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_bc1a7"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("8_dardl")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_ec77s"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("7_nfhko")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_rqwpg"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("9_87mr3")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_dmrxp"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("10_y8qdn")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_84rc2"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("11_2c4gj")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_upa2k"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("12_pgyq3")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_w8m5o"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("13_0fst8")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_2i6m4"]
+script = ExtResource("16_wy85s")
+objects = Array[ExtResource("12_n5v1j")]([SubResource("Resource_gn7td"), SubResource("Resource_tt5wn"), SubResource("Resource_bc1a7"), SubResource("Resource_ec77s"), SubResource("Resource_rqwpg"), SubResource("Resource_dmrxp"), SubResource("Resource_84rc2"), SubResource("Resource_upa2k"), SubResource("Resource_w8m5o")])
+min_amount = 3
+max_amount = 5
+metadata/_custom_type_script = "uid://yjtjuxrauvya"
+
+[sub_resource type="Resource" id="Resource_g6kfl"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("21_m745e")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_kojol"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("19_kwi83")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_0xi4s"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("20_lbujv")
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_df5lb"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("25_uxntf")
+spawn_chance = 5.0
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_hu4jt"]
+script = ExtResource("16_wy85s")
+objects = Array[ExtResource("12_n5v1j")]([SubResource("Resource_g6kfl"), SubResource("Resource_kojol"), SubResource("Resource_0xi4s"), SubResource("Resource_df5lb"), SubResource("Resource_df5lb"), SubResource("Resource_df5lb")])
+min_amount = 25
+max_amount = 35
+metadata/_custom_type_script = "uid://yjtjuxrauvya"
+
+[node name="Encounter" unique_id=1332188981 instance=ExtResource("1_xg5g1")]
 location_data = SubResource("Resource_40f7q")
 
-[node name="NavigationRegion3D" parent="." index="6"]
+[node name="NavigationRegion3D" parent="." index="6" unique_id=2110071702]
 navigation_mesh = SubResource("NavigationMesh_nfhko")
 
-[node name="Terrain_FullMesh" type="MeshInstance3D" parent="NavigationRegion3D" index="0"]
+[node name="Terrain_FullMesh" type="MeshInstance3D" parent="NavigationRegion3D" index="0" unique_id=1561292299]
 visible = false
 mesh = SubResource("ArrayMesh_dardl")
 skeleton = NodePath("../..")
 
-[node name="PlayerSpawn" parent="PlayerAnchor" index="0"]
+[node name="PlayerSpawn" parent="PlayerAnchor" parent_id_path=PackedInt32Array(27956626) index="0" unique_id=353026264]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 75)
 
-[node name="CoverSpawn" parent="PlayerAnchor" index="1"]
+[node name="CoverSpawn" parent="PlayerAnchor" parent_id_path=PackedInt32Array(27956626) index="1" unique_id=1214533446]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 60)
 
-[node name="Environment" type="Node3D" parent="." index="10"]
+[node name="Environment" type="Node3D" parent="." index="10" unique_id=1536350896]
 script = ExtResource("1_n2q0j")
 maps = Array[ExtResource("16_wy85s")]([SubResource("Resource_4531t"), SubResource("Resource_oftcu")])
 cover_objects = Array[ExtResource("12_n5v1j")]([SubResource("Resource_upawx"), SubResource("Resource_4mg1g"), SubResource("Resource_suwvc"), SubResource("Resource_i3cni"), SubResource("Resource_7gbaa"), SubResource("Resource_m74pn"), SubResource("Resource_kj7rs")])
 
-[node name="StartingSquadSpawner" type="Node3D" parent="." index="11"]
+[node name="StartingSquadSpawner" type="Node3D" parent="." index="11" unique_id=1019129059]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 128)
 script = ExtResource("14_nfhko")
 enemies_to_spawn = Array[ExtResource("12_n5v1j")]([SubResource("Resource_87mr3")])
+
+[node name="EnvironmentGenerator" type="Node3D" parent="." index="15" unique_id=454662154 node_paths=PackedStringArray("terrain")]
+script = ExtResource("23_2ous2")
+maps = Array[ExtResource("16_wy85s")]([SubResource("Resource_2i6m4"), SubResource("Resource_hu4jt")])
+terrain = NodePath("")
 
 [editable path="WorldEnvironment"]

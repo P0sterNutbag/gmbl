@@ -17,7 +17,15 @@ func _setup_local_to_scene() -> void:
 
 func generate_inventory() -> void:
 	potential_slots = original_slots.duplicate_deep(true)
-	var amount_to_add = randi_range(min_amount, max_amount)
+	var rng = RandomNumberGenerator.new()
+	var amounts := []
+	var weights: PackedFloat32Array
+	var count = abs(min_amount - max_amount) + 1
+	for i in range(min_amount, max_amount+1):
+		amounts.append(i)
+		weights.append(count)
+		count -= 1
+	var amount_to_add = amounts[rng.rand_weighted(weights)]
 	for i in amount_to_add:
 		add_random_item()
 

@@ -125,7 +125,10 @@ func save() -> Dictionary:
 	return {
 		"hp": hp,
 		"ammo": ammo,
-		"inventory.item_slots" : inventory.item_slots
+		"inventory.item_slots" : inventory.item_slots,
+		"sleep" : sleep,
+		"hunger" : hunger,
+		"thirst" : thirst,
 	}
 
 

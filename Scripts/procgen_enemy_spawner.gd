@@ -8,7 +8,12 @@ var enemies: Array
 
 
 func _ready():
-	enemy_amount = randi_range(get_parent().location_data.min_population, get_parent().location_data.max_population)
+	var location_data
+	if Globals.overworld:
+		location_data = Globals.overworld.current_encounter.location_data
+	else:
+		location_data = get_parent().location_data
+	enemy_amount = randi_range(location_data.min_population, location_data.max_population)
 	var dest = position + Vector3(0, 0, -115)
 	var start_alert = false
 	if Globals.overworld:
@@ -32,7 +37,7 @@ func _ready():
 		inst.destination.y = Globals.get_heightmap_position(inst.destination)
 		inst.look_at_position(inst.destination)
 		inst.is_starting_squad = true
-		inst.faction = get_parent().location_data.faction
+		inst.faction = location_data.faction
 		enemies.append(inst)
 	for enemy in enemies:
 		if start_alert:

@@ -52,6 +52,7 @@ func _ready() -> void:
 		if faction_name[-1] == "s":
 			faction_name[-1] = ""
 		location.dialogue_tree.npc_name = faction_name + " " + location.dialogue_tree.npc_name
+	location.location_data.faction = faction
 	original_position = global_position
 	original_rotation = global_rotation
 

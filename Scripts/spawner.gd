@@ -28,8 +28,13 @@ func _ready() -> void:
 		return
 	await get_tree().process_frame
 	var spawn_chance
-	if "location_data" in get_tree().current_scene:
-		spawn_chance = get_tree().current_scene.location_data.get(location_data_variable)
+	var location_data
+	if Globals.overworld:
+		location_data = Globals.overworld.current_encounter.location_data
+	else:
+		location_data = get_tree().current_scene.location_data
+	#if "location_data" in get_tree().current_scene:
+	spawn_chance = location_data.get(location_data_variable)
 	var spawn_amount = randi_range(spawn_amount_min, spawn_amount_max)
 	if randf() <= spawn_chance:
 		for i in spawn_amount:

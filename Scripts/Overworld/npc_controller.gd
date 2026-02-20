@@ -37,12 +37,11 @@ func _on_timer_timeout() -> void:
 	inst.global_position = spawn_location.global_position
 	inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
 	inst.location.location_data.faction = spawn_location.location_data.faction
-	inst.location.location_data.population = randi_range(spawn_location.location_data.min_population, spawn_location.location_data.max_population)
+	inst.location.location_data.population = max(spawn_location.location_data.population / 2, 1)#randi_range(spawn_location.location_data.min_population, spawn_location.location_data.max_population)
 	inst.faction = spawn_location.location_data.faction
 	var standing = FactionManager.get_faction_relation(inst.faction, FactionManager.factions.player)
 	if standing < 0.0:
 		inst.location.dialogue_tree = NPC_ENEMY_DIALOGUE.duplicate(true)
-		inst.chase_targets = true
 	else:
 		inst.location.dialogue_tree = NPC_FRIENDLY_DIALOGUE.duplicate(true)
 	# determine desination

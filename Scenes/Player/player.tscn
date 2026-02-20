@@ -1013,9 +1013,6 @@ random_pitch = 1.2
 streams_count = 1
 stream_0/stream = ExtResource("28_ejxfg")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_2ijsl"]
-radius = 1.0
-
 [node name="Player" type="CharacterBody3D" unique_id=1261776682 groups=["allies"]]
 collision_layer = 32
 slide_on_ceiling = false
@@ -1146,7 +1143,6 @@ outline_size = 8
 libraries/ = SubResource("AnimationLibrary_2ijsl")
 
 [node name="Pistol" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" unique_id=492546656 instance=ExtResource("16_h5u0x")]
-visible = false
 uses_input = true
 bullet_stats = SubResource("Resource_fd4e3")
 gun_stats = SubResource("Resource_wpjfl")
@@ -1158,16 +1154,16 @@ cast_shadow = false
 [node name="GunAnchor" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.14631093, -0.15492183)
 
-[node name="Cube" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="0" unique_id=157454980]
+[node name="Cube" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="0" unique_id=746981911]
 cast_shadow = 0
 
-[node name="Cube_003" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="1" unique_id=652595237]
+[node name="Cube_003" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="1" unique_id=136810366]
 cast_shadow = 0
 
-[node name="Cube_004" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="2" unique_id=1213733039]
+[node name="Cube_004" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="2" unique_id=1159444594]
 cast_shadow = 0
 
-[node name="Cube_001" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="3" unique_id=1323807946]
+[node name="Cube_001" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="3" unique_id=1833511950]
 cast_shadow = 0
 
 [node name="ArmLAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Pistol" unique_id=632983340]
@@ -1414,6 +1410,7 @@ transform = Transform3D(0.758646, -1.57586e-08, 0.651503, 5.96047e-08, 1, -4.521
 libraries/ = SubResource("AnimationLibrary_4no11")
 
 [node name="Grenade" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor" unique_id=939383847 instance=ExtResource("28_rukb4")]
+visible = false
 
 [node name="MeshInstance3D" parent="CameraAnchor/Camera3D/GunOffset/GunAnchor/Grenade" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.034817457, 0)
@@ -1491,15 +1488,6 @@ one_shot = true
 stream = SubResource("AudioStreamRandomizer_bi64h")
 volume_db = -5.0
 bus = &"SFX"
-
-[node name="LootArea" type="Area3D" parent="." unique_id=1151419329]
-collision_layer = 0
-collision_mask = 16
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LootArea" unique_id=1928302489]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9665127)
-shape = SubResource("SphereShape3D_2ijsl")
 
 [connection signal="animation_finished" from="CameraAnchor/Camera3D/GunOffset/GunAnchor/Shotgun/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="CameraAnchor/Camera3D/GunOffset/GunAnchor/HuntingRifle/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

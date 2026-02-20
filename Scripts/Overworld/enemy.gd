@@ -1,9 +1,8 @@
 extends CharacterBody3D
 
 enum guns {shotgun, ak47, sniper, pistol}
-enum states {walk, chase, patrol}
+enum states {walk, chase, battle, dead}
 @export var gun_index: guns
-@export var chase_targets: bool
 var state = states.walk
 var speed := 2
 var walk_speed := 2
@@ -11,13 +10,15 @@ var run_speed := 3
 var path_index := 0
 var max_enemies := 6
 var min_enemies := 3
+var save_population: int = -1
+var chase_player: bool = true
 var can_move: bool
 var original_position: Vector3
 var original_rotation: Vector3
 var target: Node3D
 var destination: Location
 var destination_path: NodePath
-var faction: FactionManager.factions
+@export var faction: FactionManager.factions
 var guns_dict: Dictionary = {
 	0 : [preload("res://Scenes/Guns/shotgun.tscn"), preload("res://Scenes/Items/Guns/shotgun.tscn")],
 	1 : [preload("res://Scenes/Guns/ak47.tscn"), preload("res://Scenes/Items/Guns/ak47.tscn")],
@@ -35,7 +36,7 @@ var guns_dict: Dictionary = {
 func _enter_tree() -> void:
 	can_move = true
 	await get_tree().create_timer(0.1).timeout
-	set_detection_targets()
+	get_tree().call_group("overworld npcs", "set_detection_targets")
 
 
 func _ready() -> void:
@@ -44,6 +45,7 @@ func _ready() -> void:
 	location.location_data.population = randi_range(min_enemies, max_enemies)
 	location.encounter_started.connect(_on_encounter_started)
 	location.encounter_ended.connect(_on_encounter_ended)
+	location.remove_from_group("persist")
 	SaveController.load.connect(_on_load)
 	await get_tree().process_frame
 	if location.dialogue_tree != null:
@@ -52,6 +54,7 @@ func _ready() -> void:
 		if faction_name[-1] == "s":
 			faction_name[-1] = ""
 		location.dialogue_tree.npc_name = faction_name + " " + location.dialogue_tree.npc_name
+		location.title = faction_name + " " + location.title
 	location.location_data.faction = faction
 	original_position = global_position
 	original_rotation = global_rotation
@@ -62,8 +65,11 @@ func _process(_delta: float) -> void:
 		states.walk:
 			speed = walk_speed
 			# detect player
-			if chase_targets and detection.targets.size() > 0 and can_see_player():
+			target = detection.get_visible_target()
+			if target:
 				state = states.chase
+				if target == Globals.player and !chase_player:
+					state = states.walk
 			# animate
 			if velocity != Vector3.ZERO:
 				anim_player.play("Walk")
@@ -73,8 +79,8 @@ func _process(_delta: float) -> void:
 		states.chase:
 			speed = run_speed
 			# chase after player
-			if detection.can_see_target(Globals.player) and PlayerStats.state != PlayerStats.states.pause:
-				navigation_agent.set_target_position(Globals.player.global_position)
+			if detection.can_see_target(target):
+				navigation_agent.set_target_position(target.global_position)
 			else:
 				if destination:
 					navigation_agent.set_target_position(destination.global_position)
@@ -87,12 +93,20 @@ func _process(_delta: float) -> void:
 				anim_player.play("Run")
 			else:
 				anim_player.play("Idle")
+		
+		states.battle:
+			velocity = Vector3.ZERO
+			anim_player.play("IdleAim")
 
 
 func _physics_process(delta: float) -> void:
 	# move towards destination
 	if navigation_agent.target_position != Vector3.ZERO and can_move:
-		follow_path(speed)
+		match state:
+			states.walk:
+				follow_path(speed)
+			states.chase:
+				follow_path(speed)
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	move_and_slide()
@@ -115,17 +129,16 @@ func look_at_position(pos: Vector3):
 
 
 func set_detection_targets():
-	if FactionManager.get_faction_relation(faction, PlayerStats.faction) <= -1.0:
+	detection.targets.clear()
+	for npc in get_tree().get_nodes_in_group("overworld npcs"):
+		if FactionManager.get_faction_relation(faction, npc.faction) <= -1.0:
+			detection.targets.append(npc)
+	if Globals.player and FactionManager.get_faction_relation(faction, PlayerStats.faction) <= -1.0:
 		detection.targets.append(Globals.player)
 
 
-func can_see_player() -> bool:
-	return (detection.can_see_target() and 
-	global_position.distance_to(Globals.player.global_position) < 7.5 and
-	!UiController.is_canvas_layer_open(Globals.ui))
-
-
 func die():
+	state = states.dead
 	set_collision_layer_value(1, false)
 	location.monitoring = false
 	location.monitorable = false
@@ -133,7 +146,6 @@ func die():
 	set_process(false)
 	set_physics_process(false)
 	anim_player.play("Die")
-	anim_player.seek(4.4)
 	await tree_entered
 	UiController.close_interface(Globals.ui.dialogue)
 	await get_tree().create_timer(10).timeout
@@ -143,26 +155,24 @@ func die():
 func save() -> Dictionary:
 	var dic = {"pos_x": global_position.x,
 		"pos_y": global_position.y,
-		"pos_z": global_position.z}
+		"pos_z": global_position.z,
+		"faction" : faction,
+		"save_population" : location.location_data.population
+	}
 	if destination:
 		dic["destination_path"] = destination.get_path()
 	return dic
-	#return {
-		#"pos_x": global_position.x,
-		#"pos_y": global_position.y,
-		#"pos_z": global_position.z,
-		##"target_position": navigation_agent.target_position,
-		#"destination_path": destination.get_path(),
-	#}
 
 
 func _on_load() -> void:
+	location.location_data.population = save_population
 	if !destination_path:
 		return
 	await get_tree().process_frame
 	destination = get_tree().root.get_node(destination_path)
 	var pos = destination.global_position
 	navigation_agent.set_target_position(pos)
+	state = states.walk
 
 
 func _on_navigation_agent_3d_navigation_finished() -> void:
@@ -189,3 +199,23 @@ func _on_encounter_started() -> void:
 
 func _on_encounter_ended() -> void:
 	can_move = true
+
+
+func _on_battle_timer_timeout() -> void:
+	if location.location_data.population <= 0:
+		die()
+	else:
+		can_move = true
+		state = states.walk
+
+
+func _on_location_area_entered(area: Area3D) -> void:
+	if area.encounter_scene == location.encounter_scene:
+		if FactionManager.get_faction_relation(faction, area.location_data.faction) >= 0.0:
+			return
+		if area.battle_timer.time_left <= 0:
+			area.location_data.attacking_locations.append(location.location_data)
+		else:
+			area.start_battle(location.location_data)
+		state = states.battle
+		look_at(area.global_position)

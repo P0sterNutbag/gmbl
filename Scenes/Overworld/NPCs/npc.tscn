@@ -27,7 +27,7 @@ radius = 0.434372
 [sub_resource type="Resource" id="Resource_yyftb"]
 resource_local_to_scene = true
 script = ExtResource("3_f2atc")
-population = 2
+population = 4
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="Resource" id="Resource_kx6ku"]
@@ -99,7 +99,7 @@ radius = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fjuww"]
 
-[node name="Npc" type="CharacterBody3D" unique_id=907079178]
+[node name="Npc" type="CharacterBody3D" unique_id=907079178 groups=["overworld npcs", "persist"]]
 collision_layer = 0
 script = ExtResource("1_ldcoh")
 
@@ -108,6 +108,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.143, 1, 0)
 shape = SubResource("CapsuleShape3D_hf0oe")
 
 [node name="Location" parent="." unique_id=361678620 instance=ExtResource("2_jf2yb")]
+collision_mask = 96
+title = "Squad"
 location_data = SubResource("Resource_yyftb")
 encounter_scene = ExtResource("4_w8t3j")
 shop = SubResource("Resource_fyaxn")
@@ -122,11 +124,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89564, 0)
 shape = SubResource("SphereShape3D_fjuww")
 target_position = Vector3(0, 0, -50)
 script = ExtResource("5_eaoej")
+detection_range = 10.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=266136752]
 
 [node name="EnemyModel" parent="." unique_id=299130526 instance=ExtResource("6_c01de")]
 
+[connection signal="area_entered" from="Location" to="." method="_on_location_area_entered"]
+[connection signal="timeout" from="Location/BattleTimer" to="." method="_on_battle_timer_timeout"]
 [connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]
 
 [editable path="Location"]

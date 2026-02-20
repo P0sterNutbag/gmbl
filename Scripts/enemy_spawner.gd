@@ -1,7 +1,8 @@
 extends Node3D
 
 @export var enemies_to_spawn: Array[SpawnChance]
-@export var enemy_move_chance: float = 0.25 
+@export var enemy_move_chance: float = 0.25
+@export var spawn_on_start: bool = true
 var spawn_points: Array[Node3D]
 var used_spawns: Array[int]
 @onready var border_parent: Node3D = $"../Border"
@@ -19,6 +20,9 @@ func _ready() -> void:
 		var encounter_location = Globals.overworld.current_encounter.title
 		return "target" in i and quest_location == encounter_location)
 	
+	if !spawn_on_start:
+		return
+	
 	await get_tree().process_frame
 	
 	# get enemy amount
@@ -28,10 +32,10 @@ func _ready() -> void:
 	else:
 		location_data = get_parent().location_data
 	var enemy_amount: int
-	if location_data.population < location_data.min_population:
-		enemy_amount = location_data.population
-	else: 
-		enemy_amount = randi_range(location_data.min_population, location_data.max_population)
+	#if location_data.population < location_data.min_population:
+	enemy_amount = location_data.population
+	#else: 
+	#	enemy_amount = randi_range(location_data.min_population, location_data.max_population)
 	enemy_amount = clamp(enemy_amount, quests.size(), spawn_points.size())
 	
 	# spawn quest enemy

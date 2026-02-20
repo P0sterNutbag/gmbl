@@ -15,6 +15,7 @@ var can_transition: bool = true
 var shops_base_inventory: Dictionary
 var shops_max_money: Dictionary
 var save_population: int = -1
+var save_faction: FactionManager.factions
 @onready var point_of_interest: PointOfInterest = $PointOfInterest
 @onready var flag: MeshInstance3D = $Meshes/Flagpole/MeshInstance3D
 @onready var flagpole: Node3D = $Meshes/Flagpole
@@ -33,9 +34,10 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+	SaveController.load.connect(_on_load)
 	flagpole.global_rotation_degrees = Vector3(0, 0, 0)
-	if save_population > -1:
-		location_data.population = save_population
+	#if save_population > -1 and location_data:
+	#	location_data.population = save_population
 	#var parent = get_parent()
 	#if parent is PointOfInterest:
 		#title = parent.title
@@ -112,7 +114,7 @@ func transition_to_level(start_alert = alert_enemies) -> void:
 func start_battle(attacking_location: LocationData):
 	if location_data.population == 0:
 		location_data.faction = attacking_location.faction
-		location_data.population = location_data.min_population
+		location_data.population = 1#location_data.min_population
 		Globals.survival_ui.create_notification(title + " taken by " + FactionManager.faction_data[location_data.faction].name)
 		print(title + " taken by " + FactionManager.faction_data[location_data.faction].name)
 		return
@@ -127,14 +129,24 @@ func start_battle(attacking_location: LocationData):
 	animation_player.play("battle")
 	point_of_interest.status_holder.show()
 	point_of_interest.status_label.text = "Under Attack by " + FactionManager.faction_data[attacking_location.faction].name
-	Globals.survival_ui.create_notification(title + " under attack by " + FactionManager.faction_data[attacking_location.faction].name)
+	if get_parent() is CharacterBody3D:
+		Globals.survival_ui.create_notification(title + " under attack by " + FactionManager.faction_data[attacking_location.faction].name)
 	print(title + " under attack by " + FactionManager.faction_data[attacking_location.faction].name)
 
 
 func save() -> Dictionary:
+	save_population = location_data.population
+	save_faction = location_data.faction
 	return {
 		"save_population" : save_population,
+		"save_faction" : save_faction,
 	}
+
+
+func _on_load() -> void:
+	if save_population > -1:
+		location_data.population = save_population
+	location_data.faction = save_faction
 
 
 func _on_body_entered(_body: Node3D) -> void:

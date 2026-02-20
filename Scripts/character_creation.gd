@@ -21,6 +21,7 @@ const starting_gear = preload("uid://dpjy0ettwaiyp")
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	PlayerStats.reset_stats()
 	# get starting gear
 	var saved_gear
 	if ResourceLoader.exists("user://starting_gear.res"):

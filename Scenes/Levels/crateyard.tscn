@@ -1,8 +1,8 @@
-[gd_scene load_steps=21 format=4 uid="uid://dwnxniisp8nr2"]
+[gd_scene format=4 uid="uid://dwnxniisp8nr2"]
 
 [ext_resource type="PackedScene" uid="uid://r4ktdn26psb3" path="res://Scenes/Levels/encounter_base.tscn" id="1_qo84g"]
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_f2t4n"]
-[ext_resource type="Resource" uid="uid://cw5vgabhb1br" path="res://addons/zylann.hterrain/data/crateyard/data.hterrain" id="3_j8qiv"]
+[ext_resource type="Resource" path="res://addons/zylann.hterrain/data/crateyard/data.hterrain" id="3_j8qiv"]
 [ext_resource type="Script" uid="uid://ejdyuf8c7kui" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="4_ay258"]
 [ext_resource type="Texture2D" uid="uid://d3rtqe0gurf4e" path="res://Art/Textures/grass.png" id="5_gvafb"]
 [ext_resource type="ArrayMesh" uid="uid://dpef2d0qcn5d4" path="res://addons/zylann.hterrain/models/grass_quad_x2.obj" id="6_d68e1"]
@@ -19,9 +19,9 @@
 [ext_resource type="PackedScene" uid="uid://bjama3lmb5mct" path="res://Scenes/Environment/Props/Physics/tire_stack.tscn" id="15_qukqc"]
 
 [sub_resource type="Resource" id="Resource_ux4qu"]
+resource_local_to_scene = true
 script = ExtResource("2_f2t4n")
 population = 5
-npc_spawn_chance = 0.5
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_ux4qu"]
@@ -41,13 +41,13 @@ _surfaces = [{
 "vertex_data": PackedByteArray("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AAA0QwjlAEEAAPBCAABAQ9WMv0AAAPBCAABMQ11yeEAAAPBCAABYQy6L6D8AAPBCAABkQ/PXGD8AAPBCAABwQ5TCFD4AAPBCAAAAACTrM0AAAARDAABAQUDjYEAAAARDAADAQezejkAAAARDAAAQQk4tskAAAARDAABAQmIl1kAAAARDAABwQnop7kAAAARDAACQQmHT7kAAAARDAACoQj1Mz0AAAARDAADAQlx+rUAAAARDAADYQmjsiUAAAARDAADwQujEV0AAAARDAAAEQyZKVUAAAARDAAAQQ4pikUAAAARDAAAcQ2lOwUAAAARDAAAoQ7IA5kAAAARDAAA0Qz1U20AAAARDAABAQxDco0AAAARDAABMQ+oFUEAAAARDAABYQ1xCuD8AAARDAABkQ+h6qz4AAARDAABwQ7BsNT4AAARDAAAAAECQHEAAABBDAABAQXBaQ0AAABBDAADAQRLqbkAAABBDAAAQQpbTlUAAABBDAABAQnJOuEAAABBDAABwQklkz0AAABBDAACQQqIWzUAAABBDAACoQjiArkAAABBDAADAQr5GhkAAABBDAADYQiRiREAAABBDAADwQlIL/z8AABBDAAAEQ6cbEUAAABBDAAAQQzgvVEAAABBDAAAcQ7YElEAAABBDAAAoQxHptEAAABBDAAA0Q1pCsUAAABBDAABAQwIrgkAAABBDAABMQ7rMGkAAABBDAABYQ1NofT8AABBDAABkQ0xBJD4AABBDAABwQ6LSgD4AABBDAAAAAJwM0T8AABxDAABAQekOC0AAABxDAADAQZAgNkAAABxDAAAQQrSGcUAAABxDAABAQrI1m0AAABxDAABwQt4xtEAAABxDAACQQiY3vEAAABxDAACoQuAtnUAAABxDAADAQqZeaEAAABxDAADYQu3vJEAAABxDAADwQra5yT8AABxDAAAEQ/Wm5T8AABxDAAAQQwClMUAAABxDAAAcQ2xxbUAAABxDAAAoQxzYi0AAABxDAAA0Q4gsiUAAABxDAABAQ4mxP0AAABxDAABMQ2Mq2z8AABxDAABYQ+txMT8AABxDAABkQ3CzgT4AABxDAABwQ/2iKj8AABxDAAAAAP0WkT8AAChDAABAQTxe2D8AAChDAADAQaogGkAAAChDAAAQQizuTUAAAChDAABAQrX/hUAAAChDAABwQsNLoEAAAChD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")
 }]
 
-[node name="Encounter" instance=ExtResource("1_qo84g")]
+[node name="Encounter" unique_id=224074342 instance=ExtResource("1_qo84g")]
 location_data = SubResource("Resource_ux4qu")
 
-[node name="Terrain" parent="." index="5"]
+[node name="Terrain" parent="." index="5" unique_id=1995643304]
 _terrain_data = ExtResource("3_j8qiv")
 
-[node name="HTerrainDetailLayer" type="Node3D" parent="Terrain" index="0"]
+[node name="HTerrainDetailLayer" type="Node3D" parent="Terrain" index="0" unique_id=1541795110]
 script = ExtResource("4_ay258")
 texture = ExtResource("5_gvafb")
 density = 0.0
@@ -60,517 +60,517 @@ shader_params/u_instance_scale = Vector3(0.5, 0.5, 0.5)
 shader_params/u_roughness = null
 metadata/_editor_icon = ExtResource("7_aqbia")
 
-[node name="NavigationRegion3D" parent="." index="6"]
+[node name="NavigationRegion3D" parent="." index="6" unique_id=2110071702]
 navigation_mesh = SubResource("NavigationMesh_ux4qu")
 
-[node name="Terrain_FullMesh" type="MeshInstance3D" parent="NavigationRegion3D" index="0"]
+[node name="Terrain_FullMesh" type="MeshInstance3D" parent="NavigationRegion3D" index="0" unique_id=530243836]
 visible = false
 mesh = SubResource("ArrayMesh_ux4qu")
 skeleton = NodePath("../..")
 
-[node name="ShippingContainerPrefab" parent="NavigationRegion3D" index="1" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab" parent="NavigationRegion3D" index="1" unique_id=649223655 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 135.99553, 4.6639466, 122.48496)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab" index="0" unique_id=834589650]
 transform = Transform3D(0.3673582, 0, 0.9300795, 0, 1, 0, -0.9300795, 0, 0.3673582, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab" index="1" unique_id=1921764103]
 transform = Transform3D(0.44373542, 0, 0.89615786, 0, 1, 0, -0.89615786, 0, 0.44373542, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab" index="2" unique_id=2046467491]
 transform = Transform3D(0.77271783, 0, -0.6347495, 0, 1, 0, 0.6347495, 0, 0.77271783, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab" index="3" unique_id=1513824489]
 transform = Transform3D(-0.9721025, -0.1470034, 0.1827748, -0.12152039, 0.9821451, 0.14361042, -0.20062257, 0.11739319, -0.97260964, 10, 1, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab" index="4"]
-transform = Transform3D(0.9957659, -0.09142553, 0.00956785, 0.09192481, 0.9903576, -0.10364273, -9.3132246e-10, 0.10408343, 0.9945686, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab" index="4" unique_id=264868068]
+transform = Transform3D(0.9957659, -0.09142553, 0.009567851, 0.09192481, 0.9903576, -0.10364273, -1.8626449e-09, 0.10408343, 0.9945686, 0, 0, 0)
 
-[node name="ShippingContainerPrefab2" parent="NavigationRegion3D" index="2" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab2" parent="NavigationRegion3D" index="2" unique_id=2046310081 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140.40826, 3.3968687, 138.399)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab2" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab2" index="0" unique_id=834589650]
 transform = Transform3D(-0.0924823, 0, -0.9957143, 0, 1, 0, 0.9957143, 0, -0.0924823, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab2" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab2" index="1" unique_id=1921764103]
 transform = Transform3D(0.99994624, 0, -0.010370371, 0, 1, 0, 0.010370371, 0, 0.99994624, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab2" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab2" index="2" unique_id=2046467491]
 transform = Transform3D(-0.47786972, 0, 0.8784307, 0, 1, 0, -0.8784307, 0, -0.47786972, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab2" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab2" index="3" unique_id=1513824489]
 transform = Transform3D(0.8235722, -0.11369127, -0.55570054, 0.034525733, 0.9879376, -0.15095441, 0.56615967, 0.10513589, 0.81756324, 10, 1, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab2" index="4"]
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab2" index="4" unique_id=264868068]
 transform = Transform3D(0.9934334, -0.10297498, 0.049862966, 0.107112184, 0.9902567, -0.08898683, -0.04021372, 0.09374341, 0.99478394, 0, 0, 0)
 
-[node name="ShippingContainerPrefab3" parent="NavigationRegion3D" index="3" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab3" parent="NavigationRegion3D" index="3" unique_id=979233388 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 119.951294, 3.5818589, 131.9211)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab3" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab3" index="0" unique_id=834589650]
 transform = Transform3D(0.025983226, 0, 0.9996624, 0, 1, 0, -0.9996624, 0, 0.025983226, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab3" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab3" index="1" unique_id=1921764103]
 transform = Transform3D(0.005719166, 0, -0.99998367, 0, 1, 0, 0.99998367, 0, 0.005719166, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab3" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab3" index="2" unique_id=2046467491]
 transform = Transform3D(-0.99971175, 0, -0.024008438, 0, 1, 0, 0.024008438, 0, -0.99971175, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab3" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab3" index="3" unique_id=1513824489]
 transform = Transform3D(0.038968626, 0.10674586, -0.9935224, -0.05713588, 0.9928889, 0.10443678, 0.9976055, 0.052696023, 0.044790544, 10, -2.3841858e-07, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab3" index="4"]
-transform = Transform3D(-0.45938793, 0.064603, -0.88588333, -0.09459443, 0.9881214, 0.121112056, 0.8831843, 0.13943705, -0.44781998, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab3" index="4" unique_id=264868068]
+transform = Transform3D(-0.45938796, 0.064603, -0.88588333, -0.09459443, 0.9881214, 0.121112056, 0.8831843, 0.13943705, -0.44782, 0, 0, 0)
 
-[node name="ShippingContainerPrefab4" parent="NavigationRegion3D" index="4" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab4" parent="NavigationRegion3D" index="4" unique_id=112230491 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 125.728, 4.7111053, 118.43216)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab4" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab4" index="0" unique_id=834589650]
 transform = Transform3D(0.7143931, 0, -0.69974464, 0, 1, 0, 0.69974464, 0, 0.7143931, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab4" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab4" index="1" unique_id=1921764103]
 transform = Transform3D(0.5672516, 0, 0.82354456, 0, 1, 0, -0.82354456, 0, 0.5672516, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab4" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab4" index="2" unique_id=2046467491]
 transform = Transform3D(-0.17033447, 0, 0.9853863, 0, 1, 0, -0.9853863, 0, -0.17033447, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab4" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab4" index="3" unique_id=1513824489]
 transform = Transform3D(-0.94190294, -0.09905373, -0.32094732, -0.11891187, 0.9919809, 0.04282334, 0.3141318, 0.078499876, -0.9461284, 10, 0, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab4" index="4"]
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab4" index="4" unique_id=264868068]
 transform = Transform3D(0.9507657, 0.026324416, 0.30879056, -0.0008810889, 0.9966115, -0.08224832, -0.30990937, 0.07792681, 0.9475672, 0, 0, 0)
 
-[node name="ShippingContainerPrefab5" parent="NavigationRegion3D" index="5" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab5" parent="NavigationRegion3D" index="5" unique_id=1987413660 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 124.36652, 1.9912595, 143.02898)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab5" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab5" index="0" unique_id=834589650]
 transform = Transform3D(-0.5707888, 0, -0.8210969, 0, 1, 0, 0.8210969, 0, -0.5707888, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab5" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab5" index="1" unique_id=1921764103]
 transform = Transform3D(0.58550537, 0, 0.8106685, 0, 1, 0, -0.8106685, 0, 0.58550537, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab5" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab5" index="2" unique_id=2046467491]
 transform = Transform3D(0.93735564, 0, -0.34837386, 0, 1, 0, 0.34837386, 0, 0.93735564, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab5" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab5" index="3" unique_id=1513824489]
 transform = Transform3D(-0.10151985, -0.076746024, -0.9918688, -0.06577759, 0.995356, -0.07028336, 0.9926565, 0.058107592, -0.106096566, 9.999992, 0, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab5" index="4"]
-transform = Transform3D(-0.3603425, -0.0118501745, -0.9327448, -0.07268779, 0.9972357, 0.015411596, 0.92998374, 0.07335262, -0.36020777, -0.1894989, -0.08143544, 1.2885742)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab5" index="4" unique_id=264868068]
+transform = Transform3D(-0.36034253, -0.0118501745, -0.9327448, -0.0726878, 0.9972357, 0.015411598, 0.9299838, 0.07335262, -0.36020777, -0.1894989, -0.08143544, 1.2885742)
 
-[node name="ShippingContainerPrefab6" parent="NavigationRegion3D" index="6" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab6" parent="NavigationRegion3D" index="6" unique_id=606996679 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.19976, 4.6025395, 205.1303)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab6" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab6" index="0" unique_id=834589650]
 transform = Transform3D(0.8939485, 0, 0.44816968, 0, 1, 0, -0.44816968, 0, 0.8939485, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab6" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab6" index="1" unique_id=1921764103]
 transform = Transform3D(-0.92762804, 0, 0.37350535, 0, 1, 0, -0.37350535, 0, -0.92762804, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab6" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab6" index="2" unique_id=2046467491]
 transform = Transform3D(0.9310347, 0, -0.3649307, 0, 1, 0, 0.3649307, 0, 0.9310347, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab6" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab6" index="3" unique_id=1513824489]
 transform = Transform3D(0.72475654, -0.037208185, -0.68799967, 0.054538574, 0.9985057, 0.003451459, 0.68684316, -0.040023986, 0.7257028, 10, 0, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab6" index="4"]
-transform = Transform3D(0.47557753, -0.03277058, -0.8790632, 0.06439286, 0.9979219, -0.0023646539, 0.87731385, -0.055480823, 0.47669938, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab6" index="4" unique_id=264868068]
+transform = Transform3D(0.47557756, -0.032770578, -0.8790632, 0.06439286, 0.9979219, -0.0023646501, 0.87731385, -0.05548082, 0.47669938, 0, 0, 0)
 
-[node name="ShippingContainerPrefab7" parent="NavigationRegion3D" index="7" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab7" parent="NavigationRegion3D" index="7" unique_id=324553581 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.288036, 4.4475203, 189.61772)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab7" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab7" index="0" unique_id=834589650]
 transform = Transform3D(-0.0059070126, 0, -0.99998254, 0, 1, 0, 0.99998254, 0, -0.0059070126, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab7" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab7" index="1" unique_id=1921764103]
 transform = Transform3D(-0.9780786, 0, 0.208236, 0, 1, 0, -0.208236, 0, -0.9780786, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab7" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab7" index="2" unique_id=2046467491]
 transform = Transform3D(-0.6729014, 0, 0.7397322, 0, 1, 0, -0.7397322, 0, -0.6729014, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab7" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab7" index="3" unique_id=1513824489]
 transform = Transform3D(-0.97592264, -0.0027138775, -0.21810006, 0.0024686512, 0.9997211, -0.02348616, 0.21810296, -0.02345909, -0.97564375, 10, 0, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab7" index="4"]
-transform = Transform3D(-0.8102049, -0.052381285, 0.5838015, -0.064953625, 0.99788815, -0.00060823373, -0.5825367, -0.038412817, -0.8118962, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab7" index="4" unique_id=264868068]
+transform = Transform3D(-0.810205, -0.052381285, 0.5838015, -0.064953625, 0.99788815, -0.0006082338, -0.5825367, -0.038412817, -0.8118962, 0, 0, 0)
 
-[node name="ShippingContainerPrefab8" parent="NavigationRegion3D" index="8" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab8" parent="NavigationRegion3D" index="8" unique_id=1912589052 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.508114, 5.085308, 201.85898)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab8" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab8" index="0" unique_id=834589650]
 transform = Transform3D(0.98639077, 0, 0.164418, 0, 1, 0, -0.164418, 0, 0.98639077, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab8" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab8" index="1" unique_id=1921764103]
 transform = Transform3D(-0.14740345, 0, -0.98907644, 0, 1, 0, 0.98907644, 0, -0.14740345, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab8" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab8" index="2" unique_id=2046467491]
 transform = Transform3D(0.7151903, 0, 0.6989298, 0, 1, 0, -0.6989298, 0, 0.7151903, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab8" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab8" index="3" unique_id=1513824489]
 transform = Transform3D(0.3230686, 0.02979115, 0.9459065, -0.040218387, 0.9990337, -0.017728034, -0.9455206, -0.032315467, 0.32395455, 10.000004, 0, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab8" index="4"]
-transform = Transform3D(-0.054684505, -0.020749757, -0.9982881, 0.032851703, 0.9992054, -0.022568384, 0.99796313, -0.034029603, -0.05395939, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab8" index="4" unique_id=264868068]
+transform = Transform3D(-0.0546845, -0.020749757, -0.9982881, 0.0328517, 0.9992054, -0.022568382, 0.9979631, -0.034029603, -0.05395939, 0, 0, 0)
 
-[node name="ShippingContainerPrefab9" parent="NavigationRegion3D" index="9" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab9" parent="NavigationRegion3D" index="9" unique_id=1237886866 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.317932, 4.043339, 194.1365)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab9" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab9" index="0" unique_id=834589650]
 transform = Transform3D(0.7654666, 0, -0.64347565, 0, 1, 0, 0.64347565, 0, 0.7654666, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab9" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab9" index="1" unique_id=1921764103]
 transform = Transform3D(-0.95881915, 0, 0.28401735, 0, 1, 0, -0.28401735, 0, -0.95881915, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab9" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab9" index="2" unique_id=2046467491]
 transform = Transform3D(0.49099478, 0, -0.87116253, 0, 1, 0, 0.87116253, 0, 0.49099478, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab9" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab9" index="3" unique_id=1513824489]
 transform = Transform3D(-0.7562606, -0.047593214, 0.6525373, -0.06254578, 0.9980421, 0.00030515087, -0.65127414, -0.040582675, -0.7577566, 10, 0, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab9" index="4"]
-transform = Transform3D(-0.92111695, -0.053723343, -0.38556102, -0.02691466, 0.9968504, -0.0745993, 0.38835433, -0.058337428, -0.91966176, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab9" index="4" unique_id=264868068]
+transform = Transform3D(-0.92111707, -0.05372335, -0.38556105, -0.02691467, 0.9968504, -0.074599296, 0.38835436, -0.058337428, -0.91966176, 0, 0, 0)
 
-[node name="ShippingContainerPrefab10" parent="NavigationRegion3D" index="10" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab10" parent="NavigationRegion3D" index="10" unique_id=1868169828 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.476334, 6.2536936, 126.119415)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab10" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab10" index="0" unique_id=834589650]
 transform = Transform3D(0.8880785, 0, -0.45969176, 0, 1, 0, 0.45969176, 0, 0.8880785, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab10" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab10" index="1" unique_id=1921764103]
 transform = Transform3D(-0.25073776, 0, -0.96805507, 0, 1, 0, 0.96805507, 0, -0.25073776, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab10" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab10" index="2" unique_id=2046467491]
 transform = Transform3D(-0.12569109, 0, 0.9920694, 0, 1, 0, -0.9920694, 0, -0.12569109, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab10" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab10" index="3" unique_id=1513824489]
 transform = Transform3D(0.3252769, -0.08268582, -0.9419968, -0.04547306, 0.9936495, -0.10292185, 0.94452477, 0.07631358, 0.31945127, 10, 1, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab10" index="4"]
-transform = Transform3D(-0.2759078, -0.10708334, -0.9552005, -0.086780064, 0.9924914, -0.086197615, 0.95725864, 0.05910977, -0.28312883, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab10" index="4" unique_id=264868068]
+transform = Transform3D(-0.2759078, -0.10708334, -0.95520055, -0.086780064, 0.9924914, -0.086197615, 0.95725864, 0.05910977, -0.28312886, 0, 0, 0)
 
-[node name="ShippingContainerPrefab11" parent="NavigationRegion3D" index="11" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab11" parent="NavigationRegion3D" index="11" unique_id=1820739876 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.682137, 4.902661, 52.440254)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab11" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab11" index="0" unique_id=834589650]
 transform = Transform3D(0.9610993, 0, -0.27620307, 0, 1, 0, 0.27620307, 0, 0.9610993, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab11" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab11" index="1" unique_id=1921764103]
 transform = Transform3D(0.9689521, 0, -0.24724855, 0, 1, 0, 0.24724855, 0, 0.9689521, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab11" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab11" index="2" unique_id=2046467491]
 transform = Transform3D(-0.81246847, 0, 0.5830052, 0, 1, 0, -0.5830052, 0, -0.81246847, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab11" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab11" index="3" unique_id=1513824489]
 transform = Transform3D(0.6575987, 0.02803347, -0.75284666, 0.05995649, 0.99419034, 0.08939127, 0.7509788, -0.10392162, 0.65209746, 10, 0, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab11" index="4"]
-transform = Transform3D(-0.8714869, -0.007775492, 0.49035716, -0.05693924, 0.9947166, -0.08542221, -0.48710218, -0.102364905, -0.8673251, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab11" index="4" unique_id=264868068]
+transform = Transform3D(-0.8714869, -0.007775489, 0.4903572, -0.05693924, 0.9947166, -0.0854222, -0.4871022, -0.102364905, -0.8673251, 0, 0, 0)
 
-[node name="ShippingContainerPrefab12" parent="NavigationRegion3D" index="12" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab12" parent="NavigationRegion3D" index="12" unique_id=526661259 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 172.40984, 5.502263, 64.7169)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab12" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab12" index="0" unique_id=834589650]
 transform = Transform3D(-0.7602762, 0, 0.6495999, 0, 1, 0, -0.6495999, 0, -0.7602762, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab12" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab12" index="1" unique_id=1921764103]
 transform = Transform3D(-0.50119656, 0, -0.86533344, 0, 1, 0, 0.86533344, 0, -0.50119656, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab12" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab12" index="2" unique_id=2046467491]
 transform = Transform3D(-0.84725106, 0, -0.53119266, 0, 1, 0, 0.53119266, 0, -0.84725106, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab12" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab12" index="3" unique_id=1513824489]
 transform = Transform3D(-0.0019286324, 0.062143862, -0.99806535, 0.094900355, 0.9935741, 0.061680835, 0.9954849, -0.0945978, -0.007813714, 10, 0, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab12" index="4"]
-transform = Transform3D(-0.9160614, 0.022880903, -0.40038487, 0.079038404, 0.9890902, -0.12431226, 0.39317238, -0.14552344, -0.9078758, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab12" index="4" unique_id=264868068]
+transform = Transform3D(-0.9160614, 0.022880895, -0.40038487, 0.0790384, 0.9890902, -0.124312274, 0.39317238, -0.14552344, -0.9078758, 0, 0, 0)
 
-[node name="ShippingContainerPrefab13" parent="NavigationRegion3D" index="13" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab13" parent="NavigationRegion3D" index="13" unique_id=787323995 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176.06523, 7.527853, 129.73784)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab13" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab13" index="0" unique_id=834589650]
 transform = Transform3D(-0.312795, 0, -0.94982064, 0, 1, 0, 0.94982064, 0, -0.312795, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab13" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab13" index="1" unique_id=1921764103]
 transform = Transform3D(0.29042163, 0, 0.95689875, 0, 1, 0, -0.95689875, 0, 0.29042163, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab13" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab13" index="2" unique_id=2046467491]
 transform = Transform3D(0.9552909, 0, 0.29566747, 0, 1, 0, -0.29566747, 0, 0.9552909, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab13" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab13" index="3" unique_id=1513824489]
 transform = Transform3D(-0.9858312, 0.15692873, -0.05924763, 0.15021312, 0.9831113, 0.1045381, 0.074652046, 0.094157144, -0.9927545, 10, 0, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab13" index="4"]
-transform = Transform3D(-0.40258446, 0.06430186, -0.9131216, -0.085314676, 0.99055207, 0.10736874, 0.9113985, 0.12112766, -0.39329496, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab13" index="4" unique_id=264868068]
+transform = Transform3D(-0.40258446, 0.06430186, -0.91312164, -0.085314676, 0.99055207, 0.10736874, 0.9113985, 0.12112766, -0.393295, 0, 0, 0)
 
-[node name="ShippingContainerPrefab14" parent="NavigationRegion3D" index="14" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab14" parent="NavigationRegion3D" index="14" unique_id=743856642 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 205.70131, 3.1328773, 209.788)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab14" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab14" index="0" unique_id=834589650]
 transform = Transform3D(-0.22899187, 0, -0.9734283, 0, 1, 0, 0.9734283, 0, -0.22899187, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab14" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab14" index="1" unique_id=1921764103]
 transform = Transform3D(0.9430875, 0, -0.33254465, 0, 1, 0, 0.33254465, 0, 0.9430875, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab14" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab14" index="2" unique_id=2046467491]
 transform = Transform3D(0.41153017, 0, -0.91139615, 0, 1, 0, 0.91139615, 0, 0.41153017, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab14" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab14" index="3" unique_id=1513824489]
 transform = Transform3D(0.3081599, 0.008855513, -0.9512934, 0.027553584, 0.9994541, 0.018229486, 0.9509355, -0.031829137, 0.30774763, 10, 0, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab14" index="4"]
-transform = Transform3D(0.7272475, 0.021957627, 0.686024, -0.03509941, 0.99937016, 0.005221626, -0.6854773, -0.027876453, 0.72756016, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab14" index="4" unique_id=264868068]
+transform = Transform3D(0.72724754, 0.021957627, 0.686024, -0.035099413, 0.99937016, 0.0052216277, -0.6854773, -0.027876453, 0.72756016, 0, 0, 0)
 
-[node name="ShippingContainerPrefab15" parent="NavigationRegion3D" index="15" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab15" parent="NavigationRegion3D" index="15" unique_id=19527682 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192.89668, 3.446887, 193.45734)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab15" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab15" index="0" unique_id=834589650]
 transform = Transform3D(-0.91686124, 0, -0.39920613, 0, 1, 0, 0.39920613, 0, -0.91686124, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab15" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab15" index="1" unique_id=1921764103]
 transform = Transform3D(0.9409607, 0, -0.3385158, 0, 1, 0, 0.3385158, 0, 0.9409607, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab15" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab15" index="2" unique_id=2046467491]
 transform = Transform3D(0.49985537, 0, -0.8661089, 0, 1, 0, 0.8661089, 0, 0.49985537, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab15" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab15" index="3" unique_id=1513824489]
 transform = Transform3D(0.9767029, 0.044677667, -0.20989329, -0.04060964, 0.9988951, 0.023653656, 0.21071815, -0.014578905, 0.97743815, 10, 0, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab15" index="4"]
-transform = Transform3D(0.5217599, 0.04866658, -0.85170305, -0.013370901, 0.9987154, 0.04887579, 0.8529876, -0.014113391, 0.5217404, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab15" index="4" unique_id=264868068]
+transform = Transform3D(0.5217599, 0.04866658, -0.8517031, -0.0133709, 0.9987154, 0.04887579, 0.8529876, -0.014113392, 0.5217403, 0, 0, 0)
 
-[node name="ShippingContainerPrefab16" parent="NavigationRegion3D" index="16" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab16" parent="NavigationRegion3D" index="16" unique_id=467671636 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 173.52867, 4.2281365, 205.10483)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab16" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab16" index="0" unique_id=834589650]
 transform = Transform3D(0.97865915, 0, -0.20549043, 0, 1, 0, 0.20549043, 0, 0.97865915, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab16" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab16" index="1" unique_id=1921764103]
 transform = Transform3D(-0.21259235, 0, -0.97714096, 0, 1, 0, 0.97714096, 0, -0.21259235, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab16" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab16" index="2" unique_id=2046467491]
 transform = Transform3D(0.70001835, 0, 0.71412486, 0, 1, 0, -0.71412486, 0, 0.70001835, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab16" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab16" index="3" unique_id=1513824489]
 transform = Transform3D(0.9992736, 0.031671755, -0.021194363, -0.031472877, 0.999458, 0.009652327, 0.021488583, -0.008978266, 0.9997288, 10, 0, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab16" index="4"]
-transform = Transform3D(0.6759856, 0.006694325, -0.7368844, 0.009843921, 0.9997875, 0.018113088, 0.73684907, -0.019498019, 0.67577606, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab16" index="4" unique_id=264868068]
+transform = Transform3D(0.67598563, 0.006694324, -0.7368844, 0.009843922, 0.9997875, 0.018113086, 0.73684907, -0.019498019, 0.67577606, 0, 0, 0)
 
-[node name="ShippingContainerPrefab17" parent="NavigationRegion3D" index="17" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab17" parent="NavigationRegion3D" index="17" unique_id=647486463 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 194.04669, 3.524652, 49.082)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab17" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab17" index="0" unique_id=834589650]
 transform = Transform3D(-0.71417624, 0, 0.6999659, 0, 1, 0, -0.6999659, 0, -0.71417624, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab17" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab17" index="1" unique_id=1921764103]
 transform = Transform3D(-0.54924214, 0, 0.83566326, 0, 1, 0, -0.83566326, 0, -0.54924214, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab17" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab17" index="2" unique_id=2046467491]
 transform = Transform3D(-0.47591665, 0, -0.8794904, 0, 1, 0, 0.8794904, 0, -0.47591665, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab17" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab17" index="3" unique_id=1513824489]
 transform = Transform3D(-0.82746196, 0.04658064, -0.55958635, 0.045597028, 0.9988362, 0.015719865, 0.5596674, -0.012507886, -0.82862294, 10, 0, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab17" index="4"]
-transform = Transform3D(-0.13745028, 0.04966551, 0.98926276, -0.04018769, 0.99764013, -0.05566986, -0.98969305, -0.047408022, -0.13512997, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab17" index="4" unique_id=264868068]
+transform = Transform3D(-0.1374503, 0.04966551, 0.98926276, -0.040187687, 0.99764013, -0.055669855, -0.9896931, -0.047408015, -0.13512997, 0, 0, 0)
 
-[node name="ShippingContainerPrefab18" parent="NavigationRegion3D" index="18" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab18" parent="NavigationRegion3D" index="18" unique_id=962983633 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 169.08896, 9.033208, 115.94053)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab18" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab18" index="0" unique_id=834589650]
 transform = Transform3D(0.9763931, 0, -0.21600108, 0, 1, 0, 0.21600108, 0, 0.9763931, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab18" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab18" index="1" unique_id=1921764103]
 transform = Transform3D(0.89161706, 0, 0.45279026, 0, 1, 0, -0.45279026, 0, 0.89161706, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab18" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab18" index="2" unique_id=2046467491]
 transform = Transform3D(0.089765206, 0, -0.995963, 0, 1, 0, 0.995963, 0, 0.089765206, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab18" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab18" index="3" unique_id=1513824489]
 transform = Transform3D(0.5766722, 0.13629813, 0.8055259, -0.05439138, 0.99020284, -0.12860766, -0.81516296, 0.030350795, 0.5784359, 10, 0, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab18" index="4"]
-transform = Transform3D(0.75781065, -0.007497384, -0.65243155, -0.029118845, 0.9985491, -0.04529683, 0.6518245, 0.05332447, 0.7564928, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab18" index="4" unique_id=264868068]
+transform = Transform3D(0.7578106, -0.007497387, -0.6524316, -0.029118847, 0.9985491, -0.04529683, 0.6518246, 0.053324465, 0.75649273, 0, 0, 0)
 
-[node name="ShippingContainerPrefab19" parent="NavigationRegion3D" index="19" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab19" parent="NavigationRegion3D" index="19" unique_id=1013096921 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(0.74337834, 0, 0.66887116, 0, 1, 0, -0.66887116, 0, 0.74337834, 115.18255, 4.6737394, 78.978836)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab19" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab19" index="0" unique_id=834589650]
 transform = Transform3D(-0.36471415, 0, -0.93111944, 0, 1, 0, 0.93111944, 0, -0.36471415, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab19" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab19" index="1" unique_id=1921764103]
 transform = Transform3D(0.4620479, 0, 0.88685495, 0, 1, 0, -0.88685495, 0, 0.4620479, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab19" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab19" index="2" unique_id=2046467491]
 transform = Transform3D(0.9641819, 0, -0.26524195, 0, 1, 0, 0.26524195, 0, 0.9641819, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab19" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab19" index="3" unique_id=1513824489]
 transform = Transform3D(0.79783404, 0.01998276, 0.60254586, -0.05628288, 0.9975545, 0.04144169, -0.60024416, -0.0669766, 0.7970077, 10.000004, 0, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab19" index="4"]
-transform = Transform3D(0.45438012, 0.06052775, -0.8887491, 0.0072707874, 0.99740374, 0.07164486, 0.8907782, -0.039015904, 0.45276025, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab19" index="4" unique_id=264868068]
+transform = Transform3D(0.45438007, 0.060527753, -0.88874924, 0.0072707892, 0.99740374, 0.07164486, 0.89077824, -0.0390159, 0.45276028, 0, 0, 0)
 
-[node name="ShippingContainerPrefab20" parent="NavigationRegion3D" index="20" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab20" parent="NavigationRegion3D" index="20" unique_id=134929025 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106.078186, 3.2185884, 171.86302)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab20" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab20" index="0" unique_id=834589650]
 transform = Transform3D(-0.026436273, 0, 0.9996505, 0, 1, 0, -0.9996505, 0, -0.026436273, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab20" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab20" index="1" unique_id=1921764103]
 transform = Transform3D(-0.9905611, 0, -0.13707176, 0, 1, 0, 0.13707176, 0, -0.9905611, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab20" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab20" index="2" unique_id=2046467491]
 transform = Transform3D(-0.25848505, 0, -0.9660153, 0, 1, 0, 0.9660153, 0, -0.25848505, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab20" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab20" index="3" unique_id=1513824489]
 transform = Transform3D(-0.7470255, 0.06744955, -0.66136485, 0.09245495, 0.99571276, -0.0028816736, 0.65833503, -0.06329914, -0.7500588, 10, 0, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab20" index="4"]
-transform = Transform3D(0.45056814, 0.04656545, 0.89152676, -0.06124491, 0.9978983, -0.021168828, -0.89063877, -0.045063477, 0.45247304, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab20" index="4" unique_id=264868068]
+transform = Transform3D(0.45056814, 0.04656545, 0.8915268, -0.061244905, 0.9978983, -0.021168828, -0.89063877, -0.045063477, 0.45247307, 0, 0, 0)
 
-[node name="ShippingContainerPrefab21" parent="NavigationRegion3D" index="21" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab21" parent="NavigationRegion3D" index="21" unique_id=1527761450 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.47924, 6.0078945, 115.358406)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab21" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab21" index="0" unique_id=834589650]
 transform = Transform3D(0.7774365, 0, -0.62896144, 0, 1, 0, 0.62896144, 0, 0.7774365, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab21" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab21" index="1" unique_id=1921764103]
 transform = Transform3D(0.678639, 0, 0.73447204, 0, 1, 0, -0.73447204, 0, 0.678639, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab21" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab21" index="2" unique_id=2046467491]
 transform = Transform3D(0.39582777, 0, -0.91832477, 0, 1, 0, 0.91832477, 0, 0.39582777, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab21" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab21" index="3" unique_id=1513824489]
 transform = Transform3D(-0.63708615, -0.049490005, -0.769202, -0.07744846, 0.99699634, -3.7252903e-09, 0.7668916, 0.059573513, -0.63900554, 10, 1, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab21" index="4"]
-transform = Transform3D(0.012854552, -0.14330575, -0.989595, 0.010282166, 0.9896434, -0.14317921, 0.9998645, -0.008334676, 0.014194916, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab21" index="4" unique_id=264868068]
+transform = Transform3D(0.012854553, -0.14330575, -0.989595, 0.010282167, 0.9896434, -0.14317918, 0.9998646, -0.008334676, 0.014194916, 0, 0, 0)
 
-[node name="ShippingContainerPrefab22" parent="NavigationRegion3D" index="22" node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
+[node name="ShippingContainerPrefab22" parent="NavigationRegion3D" index="22" unique_id=1303752447 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 228.07463, 1.1267695, 92.22165)
 terrain = NodePath("../../Terrain")
 metadata/_edit_group_ = true
 
-[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab22" index="0"]
+[node name="NpcSpawns" parent="NavigationRegion3D/ShippingContainerPrefab22" index="0" unique_id=834589650]
 transform = Transform3D(-0.45226288, 0, 0.8918847, 0, 1, 0, -0.8918847, 0, -0.45226288, 0, 0, 0)
 
-[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab22" index="1"]
+[node name="LootSpawns" parent="NavigationRegion3D/ShippingContainerPrefab22" index="1" unique_id=1921764103]
 transform = Transform3D(-0.7332311, 0, 0.6799795, 0, 1, 0, -0.6799795, 0, -0.7332311, 0, 0, 0)
 
-[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab22" index="2"]
+[node name="TrapSpawns" parent="NavigationRegion3D/ShippingContainerPrefab22" index="2" unique_id=2046467491]
 transform = Transform3D(0.037876084, 0, 0.9992824, 0, 1, 0, -0.9992824, 0, 0.037876084, 0, 0, 0)
 
-[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab22" index="3"]
+[node name="SpawnBuffer" parent="NavigationRegion3D/ShippingContainerPrefab22" index="3" unique_id=1513824489]
 transform = Transform3D(-0.90030617, -0.020594643, 0.4347697, 0.0057190997, 0.99823403, 0.059128348, -0.43521965, 0.055720106, -0.89859843, 10, 0, 0)
 
-[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab22" index="4"]
-transform = Transform3D(0.91559076, 0.026052287, 0.40126655, -0.010096724, 0.99907386, -0.041826792, -0.4019846, 0.034244742, 0.91500586, 0, 0, 0)
+[node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab22" index="4" unique_id=264868068]
+transform = Transform3D(0.9155908, 0.026052285, 0.40126655, -0.010096725, 0.99907386, -0.041826785, -0.4019846, 0.034244742, 0.91500586, 0, 0, 0)
 
-[node name="Rocks" type="Node3D" parent="NavigationRegion3D" index="23"]
+[node name="Rocks" type="Node3D" parent="NavigationRegion3D" index="23" unique_id=1317557797]
 
-[node name="Rock" parent="NavigationRegion3D/Rocks" index="0" instance=ExtResource("9_4hy17")]
+[node name="Rock" parent="NavigationRegion3D/Rocks" index="0" unique_id=74801183 instance=ExtResource("9_4hy17")]
 transform = Transform3D(1.3304319, -0.6021066, -0.06393388, 0.02123297, 0.20064364, -1.4477432, 0.605119, 1.3167683, 0.19136657, 47.38061, 5.9834557, 140.53612)
 
-[node name="@Node3D@115887" parent="NavigationRegion3D/Rocks" index="1" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115887" parent="NavigationRegion3D/Rocks" index="1" unique_id=469334697 instance=ExtResource("9_4hy17")]
 transform = Transform3D(-1.7661211, 1.2983469, -0.4094954, 1.1994071, 1.1665998, -1.4741242, -0.6440602, -1.3877735, -1.6222966, 137.85168, 2.9891272, 250.12874)
 
-[node name="@Node3D@115888" parent="NavigationRegion3D/Rocks" index="2" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115888" parent="NavigationRegion3D/Rocks" index="2" unique_id=1069595932 instance=ExtResource("9_4hy17")]
 transform = Transform3D(-1.03242, 0.03559652, -0.06749849, -0.06753562, 8.208754e-05, 1.0330311, 0.035526045, 1.0346242, 0.0022403423, 195.6645, 5.0201993, 90.39814)
 
-[node name="@Node3D@115889" parent="NavigationRegion3D/Rocks" index="3" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115889" parent="NavigationRegion3D/Rocks" index="3" unique_id=1330317088 instance=ExtResource("9_4hy17")]
 transform = Transform3D(0.16657989, -2.2370753, 0.84300786, -1.491409, 0.56319755, 1.7892526, -1.8683864, -0.6490143, -1.3530816, 199.86165, 4.3403997, 127.33449)
 
-[node name="@Node3D@115890" parent="NavigationRegion3D/Rocks" index="4" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115890" parent="NavigationRegion3D/Rocks" index="4" unique_id=1008332934 instance=ExtResource("9_4hy17")]
 transform = Transform3D(0.9933906, -0.8870446, -0.24565691, -0.3439989, -0.69304943, 1.1114709, -0.85373306, -0.75289756, -0.733693, 52.818665, 7.013628, 90.84588)
 
-[node name="@Node3D@115891" parent="NavigationRegion3D/Rocks" index="5" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115891" parent="NavigationRegion3D/Rocks" index="5" unique_id=87346066 instance=ExtResource("9_4hy17")]
 transform = Transform3D(-0.395136, -1.3335541, 1.8968903, 0.4216059, -1.9334799, -1.271454, 2.2800894, 0.12641226, 0.5638297, 228.61243, 1.7619, 77.15942)
 
-[node name="@Node3D@115892" parent="NavigationRegion3D/Rocks" index="6" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115892" parent="NavigationRegion3D/Rocks" index="6" unique_id=978292928 instance=ExtResource("9_4hy17")]
 transform = Transform3D(-0.4011639, -1.9385732, 0.44688106, 0.03337981, 0.44925302, 1.9788276, -1.9891341, 0.3985058, -0.056919057, 225.84554, 1.8786659, 180.139)
 
-[node name="@Node3D@115893" parent="NavigationRegion3D/Rocks" index="7" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115893" parent="NavigationRegion3D/Rocks" index="7" unique_id=867115254 instance=ExtResource("9_4hy17")]
 transform = Transform3D(-0.34064794, -0.9251376, -0.44460765, 0.5763089, 0.21525452, -0.8894549, 0.84936655, -0.5170904, 0.42519462, 244.11304, 2.7611775, 252.60785)
 
-[node name="@Node3D@115894" parent="NavigationRegion3D/Rocks" index="8" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115894" parent="NavigationRegion3D/Rocks" index="8" unique_id=723121235 instance=ExtResource("9_4hy17")]
 transform = Transform3D(2.148193, -0.99442625, -0.3961152, -1.0260855, -2.1659973, -0.12699597, -0.30485964, 0.2830121, -2.363787, 18.491344, 3.8405042, 30.946772)
 
-[node name="@Node3D@115895" parent="NavigationRegion3D/Rocks" index="9" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115895" parent="NavigationRegion3D/Rocks" index="9" unique_id=1991012351 instance=ExtResource("9_4hy17")]
 transform = Transform3D(-1.0747732, -0.28739864, -0.21716583, -0.037797846, -0.589622, 0.9673745, -0.3582322, 0.92446965, 0.5494741, 188.55981, 3.859769, 212.3163)
 
-[node name="@Node3D@115896" parent="NavigationRegion3D/Rocks" index="10" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115896" parent="NavigationRegion3D/Rocks" index="10" unique_id=1593832680 instance=ExtResource("9_4hy17")]
 transform = Transform3D(-1.0683969, -1.7812424, -0.7906695, -0.76516104, -0.44588208, 2.038424, -1.792348, 1.252126, -0.39890343, 9.901431, 2.8417416, 7.376456)
 
-[node name="@Node3D@115897" parent="NavigationRegion3D/Rocks" index="11" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115897" parent="NavigationRegion3D/Rocks" index="11" unique_id=932973107 instance=ExtResource("9_4hy17")]
 transform = Transform3D(-0.49830553, -2.0206757, -1.1236116, 1.7509181, -1.0804532, 1.1665536, -1.5099399, -0.58603096, 1.7235402, 137.14893, 5.0796385, 72.080925)
 
-[node name="@Node3D@115898" parent="NavigationRegion3D/Rocks" index="12" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115898" parent="NavigationRegion3D/Rocks" index="12" unique_id=2057172078 instance=ExtResource("9_4hy17")]
 transform = Transform3D(1.9045986, 0.41221073, -0.048266195, 0.08397032, -0.60474074, -1.8512107, -0.4064435, 1.806686, -0.6086319, 91.94755, 2.4739292, 4.3108883)
 
-[node name="@Node3D@115899" parent="NavigationRegion3D/Rocks" index="13" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115899" parent="NavigationRegion3D/Rocks" index="13" unique_id=1712624081 instance=ExtResource("9_4hy17")]
 transform = Transform3D(-0.2646608, 0.29688773, -1.5725952, 0.8739584, 1.3621033, 0.11006599, 1.3406696, -0.8293224, -0.38219514, 114.73903, 5.002835, 82.628174)
 
-[node name="@Node3D@115900" parent="NavigationRegion3D/Rocks" index="14" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115900" parent="NavigationRegion3D/Rocks" index="14" unique_id=1226420842 instance=ExtResource("9_4hy17")]
 transform = Transform3D(0.25771534, 0.82655525, 0.05469443, -0.27988428, 0.14079759, -0.8089766, -0.7796472, 0.22267623, 0.3084926, 185.43553, 4.361567, 240.00993)
 
-[node name="@Node3D@115901" parent="NavigationRegion3D/Rocks" index="15" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115901" parent="NavigationRegion3D/Rocks" index="15" unique_id=148621070 instance=ExtResource("9_4hy17")]
 transform = Transform3D(-0.4727567, 1.9479114, 0.08487622, -1.7900459, -0.39900127, -0.81338525, -0.772851, -0.26739645, 1.8320104, 254.09064, 3.217342, 73.945076)
 
-[node name="@Node3D@115902" parent="NavigationRegion3D/Rocks" index="16" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115902" parent="NavigationRegion3D/Rocks" index="16" unique_id=291525501 instance=ExtResource("9_4hy17")]
 transform = Transform3D(-0.041335832, 2.1359172, 0.5602859, 0.16502053, 0.5618051, -2.1295338, -2.2020059, 0.0020069312, -0.170107, 47.30345, 5.56009, 65.68317)
 
-[node name="@Node3D@115903" parent="NavigationRegion3D/Rocks" index="17" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115903" parent="NavigationRegion3D/Rocks" index="17" unique_id=831494607 instance=ExtResource("9_4hy17")]
 transform = Transform3D(-1.1907086, 0.3487904, 0.45631388, -0.48027062, -0.028634433, -1.2313344, -0.31498766, -1.2748293, 0.15250392, 149.83484, 7.207291, 112.72878)
 
-[node name="@Node3D@115904" parent="NavigationRegion3D/Rocks" index="18" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115904" parent="NavigationRegion3D/Rocks" index="18" unique_id=433023871 instance=ExtResource("9_4hy17")]
 transform = Transform3D(1.2224613, 0.9611473, -0.05777343, 0.92922825, -1.1531402, 0.4778659, 0.25234243, -0.40989864, -1.4798175, 34.79169, 5.127869, 136.52225)
 
-[node name="@Node3D@115905" parent="NavigationRegion3D/Rocks" index="19" instance=ExtResource("9_4hy17")]
+[node name="@Node3D@115905" parent="NavigationRegion3D/Rocks" index="19" unique_id=1835247624 instance=ExtResource("9_4hy17")]
 transform = Transform3D(-0.7537307, 1.2870271, 0.34361407, -0.3090587, 0.21507911, -1.483524, -1.2957594, -0.79995114, 0.15396647, 109.06782, 3.6652076, 62.081547)
 
-[node name="RandomCover" type="Node3D" parent="NavigationRegion3D" index="24" node_paths=PackedStringArray("terrain")]
+[node name="RandomCover" type="Node3D" parent="NavigationRegion3D" index="24" unique_id=31395035 node_paths=PackedStringArray("terrain")]
 script = ExtResource("10_1rgqx")
 scenes = Array[PackedScene]([ExtResource("11_m0wpy"), ExtResource("12_n6sno"), ExtResource("13_mrioi"), ExtResource("14_xg6vn"), ExtResource("15_qukqc")])
 count = 30
@@ -578,111 +578,111 @@ terrain = NodePath("../../Terrain")
 random_rotate_y = true
 delete_children = true
 
-[node name="@Node3D@43375" parent="NavigationRegion3D/RandomCover" index="0" instance=ExtResource("11_m0wpy")]
+[node name="@Node3D@43375" parent="NavigationRegion3D/RandomCover" index="0" unique_id=1873681737 instance=ExtResource("11_m0wpy")]
 transform = Transform3D(-0.9240471, 0, -0.38227856, 0, 1, 0, 0.38227856, 0, -0.9240471, 174.28578, 4.2089853, 161.26962)
 
-[node name="TireStack" parent="NavigationRegion3D/RandomCover" index="1" instance=ExtResource("15_qukqc")]
+[node name="TireStack" parent="NavigationRegion3D/RandomCover" index="1" unique_id=5259438 instance=ExtResource("15_qukqc")]
 transform = Transform3D(0.76235074, 0, 0.6471641, 0, 1, 0, -0.6471641, 0, 0.76235074, 87.75193, 2.3820875, 26.206839)
 
-[node name="Crate" parent="NavigationRegion3D/RandomCover" index="2" instance=ExtResource("14_xg6vn")]
+[node name="Crate" parent="NavigationRegion3D/RandomCover" index="2" unique_id=2048179119 instance=ExtResource("14_xg6vn")]
 transform = Transform3D(-0.39768398, 0, 0.91752243, 0, 1, 0, -0.91752243, 0, -0.39768398, 95.93801, 3.823176, 54.705093)
 
-[node name="@Node3D@43376" parent="NavigationRegion3D/RandomCover" index="3" instance=ExtResource("12_n6sno")]
+[node name="@Node3D@43376" parent="NavigationRegion3D/RandomCover" index="3" unique_id=1923438728 instance=ExtResource("12_n6sno")]
 transform = Transform3D(0.90099454, 0, -0.43383047, 0, 1, 0, 0.43383047, 0, 0.90099454, 69.94886, 3.8092673, 40.712574)
 
-[node name="Barrel" parent="NavigationRegion3D/RandomCover" index="4" instance=ExtResource("13_mrioi")]
+[node name="Barrel" parent="NavigationRegion3D/RandomCover" index="4" unique_id=235729401 instance=ExtResource("13_mrioi")]
 transform = Transform3D(-0.18660706, 0, -0.98243463, 0, 1, 0, 0.98243463, 0, -0.18660706, 104.636795, 4.317972, 203.21704)
 
-[node name="@Node3D@43377" parent="NavigationRegion3D/RandomCover" index="5" instance=ExtResource("13_mrioi")]
+[node name="@Node3D@43377" parent="NavigationRegion3D/RandomCover" index="5" unique_id=1884770974 instance=ExtResource("13_mrioi")]
 transform = Transform3D(0.7678762, 0, 0.64059824, 0, 1, 0, -0.64059824, 0, 0.7678762, 8.255527, 4.796109, 235.61499)
 
-[node name="@Node3D@43378" parent="NavigationRegion3D/RandomCover" index="6" instance=ExtResource("14_xg6vn")]
+[node name="@Node3D@43378" parent="NavigationRegion3D/RandomCover" index="6" unique_id=1041582176 instance=ExtResource("14_xg6vn")]
 transform = Transform3D(-0.9848088, 0, -0.17364213, 0, 1, 0, 0.17364213, 0, -0.9848088, 146.87761, 2.8278065, 164.41278)
 
-[node name="@Node3D@43379" parent="NavigationRegion3D/RandomCover" index="7" instance=ExtResource("15_qukqc")]
+[node name="@Node3D@43379" parent="NavigationRegion3D/RandomCover" index="7" unique_id=510128585 instance=ExtResource("15_qukqc")]
 transform = Transform3D(0.03881238, 0, 0.99924654, 0, 1, 0, -0.99924654, 0, 0.03881238, 7.882773, 3.8522983, 50.569195)
 
-[node name="@Node3D@43380" parent="NavigationRegion3D/RandomCover" index="8" instance=ExtResource("12_n6sno")]
+[node name="@Node3D@43380" parent="NavigationRegion3D/RandomCover" index="8" unique_id=1667312542 instance=ExtResource("12_n6sno")]
 transform = Transform3D(0.80715907, 0, 0.590334, 0, 1, 0, -0.590334, 0, 0.80715907, 172.1375, 6.3737135, 139.47673)
 
-[node name="@Node3D@43381" parent="NavigationRegion3D/RandomCover" index="9" instance=ExtResource("14_xg6vn")]
+[node name="@Node3D@43381" parent="NavigationRegion3D/RandomCover" index="9" unique_id=1781156638 instance=ExtResource("14_xg6vn")]
 transform = Transform3D(0.9527763, 0, -0.30367306, 0, 1, 0, 0.30367306, 0, 0.9527763, 60.49975, 6.088173, 149.83426)
 
-[node name="@Node3D@43382" parent="NavigationRegion3D/RandomCover" index="10" instance=ExtResource("15_qukqc")]
+[node name="@Node3D@43382" parent="NavigationRegion3D/RandomCover" index="10" unique_id=1017040285 instance=ExtResource("15_qukqc")]
 transform = Transform3D(0.8143706, 0, 0.58034515, 0, 1, 0, -0.58034515, 0, 0.8143706, 222.57944, 3.105342, 246.19788)
 
-[node name="@Node3D@43383" parent="NavigationRegion3D/RandomCover" index="11" instance=ExtResource("12_n6sno")]
+[node name="@Node3D@43383" parent="NavigationRegion3D/RandomCover" index="11" unique_id=1372139560 instance=ExtResource("12_n6sno")]
 transform = Transform3D(0.99812365, 0, -0.061230306, 0, 1, 0, 0.061230306, 0, 0.99812365, 221.20065, 3.3907068, 237.20819)
 
-[node name="@Node3D@43384" parent="NavigationRegion3D/RandomCover" index="12" instance=ExtResource("12_n6sno")]
+[node name="@Node3D@43384" parent="NavigationRegion3D/RandomCover" index="12" unique_id=1937175988 instance=ExtResource("12_n6sno")]
 transform = Transform3D(-0.93391114, 0, -0.3575052, 0, 1, 0, 0.3575052, 0, -0.93391114, 48.373608, 6.2943144, 137.92099)
 
-[node name="@Node3D@43385" parent="NavigationRegion3D/RandomCover" index="13" instance=ExtResource("13_mrioi")]
+[node name="@Node3D@43385" parent="NavigationRegion3D/RandomCover" index="13" unique_id=1130677071 instance=ExtResource("13_mrioi")]
 transform = Transform3D(-0.56776446, 0, 0.82319105, 0, 1, 0, -0.82319105, 0, -0.56776446, 87.97519, 6.6951256, 127.1839)
 
-[node name="@Node3D@43386" parent="NavigationRegion3D/RandomCover" index="14" instance=ExtResource("15_qukqc")]
+[node name="@Node3D@43386" parent="NavigationRegion3D/RandomCover" index="14" unique_id=735739615 instance=ExtResource("15_qukqc")]
 transform = Transform3D(-0.6726135, 0, 0.73999393, 0, 1, 0, -0.73999393, 0, -0.6726135, 54.771126, 2.9085255, 0.13339427)
 
-[node name="@Node3D@43387" parent="NavigationRegion3D/RandomCover" index="15" instance=ExtResource("13_mrioi")]
+[node name="@Node3D@43387" parent="NavigationRegion3D/RandomCover" index="15" unique_id=439607883 instance=ExtResource("13_mrioi")]
 transform = Transform3D(0.7770009, 0, 0.6294995, 0, 1, 0, -0.6294995, 0, 0.7770009, 45.63221, 4.2973604, 192.17343)
 
-[node name="@Node3D@43388" parent="NavigationRegion3D/RandomCover" index="16" instance=ExtResource("14_xg6vn")]
+[node name="@Node3D@43388" parent="NavigationRegion3D/RandomCover" index="16" unique_id=1937903764 instance=ExtResource("14_xg6vn")]
 transform = Transform3D(0.97091365, 0, -0.23942995, 0, 1, 0, 0.23942995, 0, 0.97091365, 65.75883, 5.605326, 161.93945)
 
-[node name="@Node3D@43389" parent="NavigationRegion3D/RandomCover" index="17" instance=ExtResource("13_mrioi")]
+[node name="@Node3D@43389" parent="NavigationRegion3D/RandomCover" index="17" unique_id=1877352916 instance=ExtResource("13_mrioi")]
 transform = Transform3D(0.45596984, 0, -0.8899952, 0, 1, 0, 0.8899952, 0, 0.45596984, 199.69653, 2.4310634, 174.00581)
 
-[node name="@Node3D@43390" parent="NavigationRegion3D/RandomCover" index="18" instance=ExtResource("12_n6sno")]
+[node name="@Node3D@43390" parent="NavigationRegion3D/RandomCover" index="18" unique_id=1454160737 instance=ExtResource("12_n6sno")]
 transform = Transform3D(-0.37174058, 0, 0.9283367, 0, 1, 0, -0.9283367, 0, -0.37174058, 91.86653, 6.5357404, 125.86834)
 
-[node name="@Node3D@43391" parent="NavigationRegion3D/RandomCover" index="19" instance=ExtResource("12_n6sno")]
+[node name="@Node3D@43391" parent="NavigationRegion3D/RandomCover" index="19" unique_id=145106786 instance=ExtResource("12_n6sno")]
 transform = Transform3D(0.9650991, 0, -0.26188505, 0, 1, 0, 0.26188505, 0, 0.9650991, 128.21709, 2.5497568, 256.9175)
 
-[node name="@Node3D@43392" parent="NavigationRegion3D/RandomCover" index="20" instance=ExtResource("15_qukqc")]
+[node name="@Node3D@43392" parent="NavigationRegion3D/RandomCover" index="20" unique_id=1203046227 instance=ExtResource("15_qukqc")]
 transform = Transform3D(-0.8493526, 0, 0.5278259, 0, 1, 0, -0.5278259, 0, -0.8493526, 128.69878, 4.995024, 80.392265)
 
-[node name="@Node3D@43393" parent="NavigationRegion3D/RandomCover" index="21" instance=ExtResource("14_xg6vn")]
+[node name="@Node3D@43393" parent="NavigationRegion3D/RandomCover" index="21" unique_id=658050712 instance=ExtResource("14_xg6vn")]
 transform = Transform3D(0.82601714, 0, -0.56364495, 0, 1, 0, 0.56364495, 0, 0.82601714, 5.231852, 2.8879058, 92.75255)
 
-[node name="@Node3D@43394" parent="NavigationRegion3D/RandomCover" index="22" instance=ExtResource("11_m0wpy")]
+[node name="@Node3D@43394" parent="NavigationRegion3D/RandomCover" index="22" unique_id=69881222 instance=ExtResource("11_m0wpy")]
 transform = Transform3D(-0.143904, 0, -0.98959166, 0, 1, 0, 0.98959166, 0, -0.143904, 20.605358, 4.2253275, 120.753555)
 
-[node name="@Node3D@43395" parent="NavigationRegion3D/RandomCover" index="23" instance=ExtResource("13_mrioi")]
+[node name="@Node3D@43395" parent="NavigationRegion3D/RandomCover" index="23" unique_id=1001792141 instance=ExtResource("13_mrioi")]
 transform = Transform3D(0.5624373, 0, -0.8268399, 0, 1, 0, 0.8268399, 0, 0.5624373, 174.36566, 8.747549, 118.031624)
 
-[node name="@Node3D@43396" parent="NavigationRegion3D/RandomCover" index="24" instance=ExtResource("12_n6sno")]
+[node name="@Node3D@43396" parent="NavigationRegion3D/RandomCover" index="24" unique_id=1501018150 instance=ExtResource("12_n6sno")]
 transform = Transform3D(0.69286686, 0, 0.7210656, 0, 1, 0, -0.7210656, 0, 0.69286686, 114.40693, 3.8709283, 193.786)
 
-[node name="@Node3D@43397" parent="NavigationRegion3D/RandomCover" index="25" instance=ExtResource("12_n6sno")]
+[node name="@Node3D@43397" parent="NavigationRegion3D/RandomCover" index="25" unique_id=94439738 instance=ExtResource("12_n6sno")]
 transform = Transform3D(0.7198447, 0, 0.6941351, 0, 1, 0, -0.6941351, 0, 0.7198447, 56.551147, 7.322207, 131.06828)
 
-[node name="@Node3D@43398" parent="NavigationRegion3D/RandomCover" index="26" instance=ExtResource("14_xg6vn")]
+[node name="@Node3D@43398" parent="NavigationRegion3D/RandomCover" index="26" unique_id=950820272 instance=ExtResource("14_xg6vn")]
 transform = Transform3D(-0.85202813, 0, -0.523496, 0, 1, 0, 0.523496, 0, -0.85202813, 151.28662, 7.415817, 93.94464)
 
-[node name="@Node3D@43399" parent="NavigationRegion3D/RandomCover" index="27" instance=ExtResource("13_mrioi")]
+[node name="@Node3D@43399" parent="NavigationRegion3D/RandomCover" index="27" unique_id=979712232 instance=ExtResource("13_mrioi")]
 transform = Transform3D(-0.5301444, 0, 0.8479074, 0, 1, 0, -0.8479074, 0, -0.5301444, 63.00489, 6.086523, 64.60502)
 
-[node name="@Node3D@43400" parent="NavigationRegion3D/RandomCover" index="28" instance=ExtResource("15_qukqc")]
+[node name="@Node3D@43400" parent="NavigationRegion3D/RandomCover" index="28" unique_id=512291005 instance=ExtResource("15_qukqc")]
 transform = Transform3D(0.16207561, 0, 0.9867783, 0, 1, 0, -0.9867783, 0, 0.16207561, 74.81535, 4.061142, 44.660946)
 
-[node name="@Node3D@43401" parent="NavigationRegion3D/RandomCover" index="29" instance=ExtResource("13_mrioi")]
+[node name="@Node3D@43401" parent="NavigationRegion3D/RandomCover" index="29" unique_id=823620383 instance=ExtResource("13_mrioi")]
 transform = Transform3D(-0.15722899, 0, -0.9875622, 0, 1, 0, 0.9875622, 0, -0.15722899, 102.49657, 3.180911, 164.66727)
 
-[node name="SnapToTerrain" parent="." index="12" node_paths=PackedStringArray("objects_to_snap")]
+[node name="SnapToTerrain" parent="." index="11" unique_id=196337249 node_paths=PackedStringArray("objects_to_snap")]
 objects_to_snap = [NodePath("../Radio")]
 
-[node name="Scatterer" parent="." index="13"]
+[node name="Scatterer" parent="." index="12" unique_id=520392373]
 scenes = Array[PackedScene]([ExtResource("10_ay258")])
 count = 30
 max_size = 2.5
 
-[node name="Radio" parent="." index="14" instance=ExtResource("11_ay258")]
+[node name="Radio" parent="." index="14" unique_id=189718682 instance=ExtResource("11_ay258")]
 transform = Transform3D(0.6149736, 0.10448146, 0.7815953, 0, 0.9911832, -0.13249859, -0.7885477, 0.08148313, 0.60955155, 123.55817, 3.0861592, 132.86745)
 
-[node name="Radio2" parent="." index="15" instance=ExtResource("11_ay258")]
+[node name="Radio2" parent="." index="15" unique_id=1637252264 instance=ExtResource("11_ay258")]
 transform = Transform3D(0.55417633, 0, 0.8323993, 0, 1, 0, -0.8323993, 0, 0.55417633, 49.262802, 4.8679214, 200.38052)
 
-[node name="Radio3" parent="." index="16" instance=ExtResource("11_ay258")]
+[node name="Radio3" parent="." index="16" unique_id=892156739 instance=ExtResource("11_ay258")]
 transform = Transform3D(-0.48427522, 0, 0.8749157, 0, 1, 0, -0.8749157, 0, -0.48427522, 197.60057, 3.366741, 204.96329)
 
 [editable path="WorldEnvironment"]

@@ -39,8 +39,9 @@
 [ext_resource type="PackedScene" uid="uid://brrtfg5jynxnd" path="res://Scenes/Environment/Nature/rock.tscn" id="37_4cbj3"]
 
 [sub_resource type="Resource" id="Resource_fwcaj"]
+resource_local_to_scene = true
 script = ExtResource("2_yd52q")
-population = 5
+population = 4
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="Resource" id="Resource_my2y4"]
@@ -293,10 +294,9 @@ count = 45
 min_size = 0.75
 max_size = 1.25
 
-[node name="EnvironmentGenerator" type="Node3D" parent="." unique_id=320658876 node_paths=PackedStringArray("terrain")]
+[node name="EnvironmentGenerator" type="Node3D" parent="." unique_id=320658876]
 script = ExtResource("24_10w7y")
 maps = Array[ExtResource("25_gppfo")]([SubResource("Resource_2i6m4"), SubResource("Resource_hu4jt")])
-terrain = NodePath("")
 
 [connection signal="body_entered" from="Border/Area3D" to="Border/Area3D" method="_on_body_entered"]
 [connection signal="body_exited" from="Border/Area3D" to="Border/Area3D" method="_on_body_exited"]

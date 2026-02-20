@@ -90,9 +90,9 @@ func _physics_process(delta):
 
 
 func reset_stats() -> void:
+	inventory.equipment_kit.remove_all()
 	inventory = starting_inventory.duplicate(true)
 	inventory.money = ProgressManager.progress_data.starting_money
-	inventory.equipment_kit.remove_all()
 	#equipped_guns[guns[0].slot] = guns[0]
 	#for i in equipped_guns:
 		#if i:

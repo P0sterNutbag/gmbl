@@ -167,7 +167,7 @@ func start_level() -> void:
 func pay_fee(amount: int, fail_index: int) -> void:
 	if PlayerStats.inventory.money - amount >= 0:
 		PlayerStats.inventory.money -= amount
-		Globals.overworld.current_encounter.get_parent().chase_targets = false
+		Globals.overworld.current_encounter.get_parent().chase_player = false
 		Globals.survival_ui.create_notification("-50 Dollars")
 		exit_to_game()
 	else:

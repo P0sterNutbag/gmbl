@@ -36,7 +36,7 @@ func _process(_delta: float) -> void:
 		if location_data.population == 0:
 			population_label.text = "0"
 		else:
-			population_label.text = str(location_data.min_population) + "-" + str(location_data.max_population)
+			population_label.text = str(location_data.population)#str(location_data.min_population) + "-" + str(location_data.max_population)
 	else:
 		population_label.get_parent().hide()
 

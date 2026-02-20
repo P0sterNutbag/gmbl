@@ -76,7 +76,6 @@ const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var footstep_sfx: AudioStreamPlayer3D = $FootstepPlayer
 @onready var spot_light: SpotLight3D = $CameraAnchor/Camera3D/SpotLight3D
 @onready var gun_collision_cast: RayCast3D = $CameraAnchor/Camera3D/GunOffset/RayCast3D
-@onready var loot_area: Area3D = $LootArea
 
 
 func _enter_tree() -> void:

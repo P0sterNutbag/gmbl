@@ -18,17 +18,12 @@ func equip() -> void:
 	if equipped:
 		PlayerStats.gun_index = slot
 	PlayerStats.gun_changed.emit()
-		#if PlayerStats.gun_index == slot:
-			#Globals.player.change_gun(self)
-		#else:
-			#Globals.player.change_gun_slot(slot)
-	#else:
-		#if PlayerStats.gun == self and PlayerStats.gun_index == slot:
-			#Globals.player.unequip_gun()
+
 
 func unequip() -> void:
 	super.unequip()
 	PlayerStats.gun_changed.emit()
+
 
 func get_modified_price() -> int:
 	return round(price * (gun_stats.condition / 125))

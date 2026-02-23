@@ -24,6 +24,8 @@
 [ext_resource type="Resource" uid="uid://bbx4x21dta7e7" path="res://Resources/Items/Survival/morphine.tres" id="16_7t7n5"]
 [ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="19_7t7n5"]
 [ext_resource type="Script" uid="uid://bicpdyf13vj1j" path="res://Scripts/quest_fetch_random.gd" id="19_te7rf"]
+[ext_resource type="Script" uid="uid://g1k0736rje3q" path="res://Scripts/quest_random.gd" id="21_dckhe"]
+[ext_resource type="Script" uid="uid://ds2br0dh5ir38" path="res://Scripts/quest_bounty_random.gd" id="23_7jsld"]
 
 [sub_resource type="Resource" id="Resource_0jat8"]
 script = ExtResource("2_k1gww")
@@ -163,34 +165,40 @@ potential_slots = Array[ExtResource("14_mkt2b")]([SubResource("Resource_7jsld"),
 repeat_entries = false
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
-[sub_resource type="Resource" id="Resource_qwjv1"]
+[sub_resource type="Resource" id="Resource_ibe1q"]
 script = ExtResource("7_inajc")
 item = ExtResource("13_te7rf")
-amount = 4
+amount = 3
 metadata/_custom_type_script = "uid://cfuex8bm4d62j"
 
-[sub_resource type="Resource" id="Resource_mkt2b"]
-script = ExtResource("7_inajc")
-item = ExtResource("14_qwjv1")
-amount = 4
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_7t7n5"]
+[sub_resource type="Resource" id="Resource_hocrx"]
 script = ExtResource("7_inajc")
 item = ExtResource("16_7t7n5")
 amount = 3
 metadata/_custom_type_script = "uid://cfuex8bm4d62j"
 
-[sub_resource type="Resource" id="Resource_dckhe"]
+[sub_resource type="Resource" id="Resource_j3mqp"]
 script = ExtResource("7_inajc")
 item = ExtResource("15_mkt2b")
 amount = 3
 metadata/_custom_type_script = "uid://cfuex8bm4d62j"
 
-[sub_resource type="Resource" id="Resource_hocrx"]
+[sub_resource type="Resource" id="Resource_ex6c5"]
+script = ExtResource("7_inajc")
+item = ExtResource("14_qwjv1")
+amount = 3
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_l1i85"]
 script = ExtResource("19_te7rf")
-required_items = Array[ExtResource("7_inajc")]([SubResource("Resource_qwjv1"), SubResource("Resource_mkt2b"), SubResource("Resource_7t7n5"), SubResource("Resource_dckhe")])
+required_items = Array[ExtResource("7_inajc")]([SubResource("Resource_ibe1q"), SubResource("Resource_hocrx"), SubResource("Resource_j3mqp"), SubResource("Resource_ex6c5")])
 metadata/_custom_type_script = "uid://bicpdyf13vj1j"
+
+[sub_resource type="Resource" id="Resource_etgqd"]
+script = ExtResource("23_7jsld")
+rewards = null
+target_factions = Array[int]([4, 2])
+metadata/_custom_type_script = "uid://ds2br0dh5ir38"
 
 [sub_resource type="Resource" id="Resource_6rs7t"]
 script = ExtResource("13_7jsld")
@@ -206,7 +214,7 @@ price_modifiers = {
 "Weapons": 0.5
 }
 dialogue = SubResource("Resource_ym52c")
-random_quest = SubResource("Resource_hocrx")
+random_quests = Array[ExtResource("21_dckhe")]([SubResource("Resource_l1i85"), SubResource("Resource_etgqd")])
 min_quests = 1
 max_quests = 3
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"

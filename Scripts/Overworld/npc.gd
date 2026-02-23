@@ -78,7 +78,13 @@ func _process(_delta: float) -> void:
 		
 		states.chase:
 			speed = run_speed
-			# chase after player
+			# stop chasing player
+			if target == Globals.player and UiController.is_canvas_layer_open(Globals.ui):
+				detection.targets.erase(target)
+				state = states.walk
+			if global_position.distance_to(target.global_position) > detection.detection_range:
+				state = states.walk
+			# chase after target
 			if detection.can_see_target(target):
 				navigation_agent.set_target_position(target.global_position)
 			else:
@@ -133,7 +139,7 @@ func set_detection_targets():
 	for npc in get_tree().get_nodes_in_group("overworld npcs"):
 		if FactionManager.get_faction_relation(faction, npc.faction) <= -1.0:
 			detection.targets.append(npc)
-	if Globals.player and FactionManager.get_faction_relation(faction, PlayerStats.faction) <= -1.0:
+	if Globals.player and FactionManager.get_faction_relation(faction, PlayerStats.faction) <= -1.0 and !UiController.is_canvas_layer_open(Globals.ui):
 		detection.targets.append(Globals.player)
 
 

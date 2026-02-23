@@ -10,7 +10,7 @@ enum fire_types {semi_auto, auto, pump}
 @export var shoot_cooldown: float = 0.1
 @export var zoom_amount: float = 1.25
 @export var kickback_magnitude: float = 1
-@export var spread_curve := (preload("res://Resources/bullet_spread.tres"))
+@export var spread_curve := (preload("res://Resources/Curves/bullet_spread.tres"))
 @export var ads_vector: Vector3
 @export var scope_texture: Texture2D
 @export var cast_shadow: bool = true

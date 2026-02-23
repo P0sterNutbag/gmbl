@@ -3,32 +3,15 @@ extends Node3D
 #@export var npcs: Array[SpawnChance]
 const NPC = preload("uid://b0cqkj1fgouo2")
 var starting_enemy_count := 0
-var has_spawned_enemies: bool
 const NPC_ENEMY_DIALOGUE = preload("uid://d20coly46ve2b")
 const NPC_FRIENDLY_DIALOGUE = preload("uid://cm4ovx7pecfjd")
 
 
 func _ready() -> void:
 	Globals.npc_controller = self
-	#if has_spawned_enemies:
-		#return
-	#for i in starting_enemy_count:
-		#var inst = npcs[1].object_to_spawn.instantiate()
-		#get_tree().current_scene.add_child.call_deferred(inst)
-		##var enemy_pos = global_position + Vector3(randf_range(-50, 50), 0, randf_range(-50, 50))
-		#var spawn_points = get_tree().get_nodes_in_group("spawn points")
-		#var enemy_pos = spawn_points[randi() % spawn_points.size()].global_position
-		#enemy_pos.y = Globals.get_heightmap_position(enemy_pos)
-		#inst.set_deferred("global_position", enemy_pos)
-		#inst.look_at.call_deferred(enemy_pos + Vector3(randf_range(-1, 1), 0, randf_range(-1, 1)))
-	#has_spawned_enemies = true
 
 
 func _on_timer_timeout() -> void:
-	# make sure there are at least two usable locations
-	#locations = Globals.overworld.get_children().filter(func(i): return i is Location)
-	#if locations.filter(func(i): return i.location_data.population > 0).size() <= 1:
-		#return
 	# create enemy
 	var inst = NPC.instantiate()
 	Globals.overworld.add_child(inst)
@@ -37,7 +20,7 @@ func _on_timer_timeout() -> void:
 	inst.global_position = spawn_location.global_position
 	inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
 	inst.location.location_data.faction = spawn_location.location_data.faction
-	inst.location.location_data.population = max(spawn_location.location_data.population / 2, 1)#randi_range(spawn_location.location_data.min_population, spawn_location.location_data.max_population)
+	inst.location.location_data.population = min(4, spawn_location.location_data.population) #max(spawn_location.location_data.population / 2, 1)
 	inst.faction = spawn_location.location_data.faction
 	var standing = FactionManager.get_faction_relation(inst.faction, FactionManager.factions.player)
 	if standing < 0.0:
@@ -99,9 +82,3 @@ func get_destination(faction: FactionManager.factions, spawn_location: Node3D, n
 	var destination = target_nodes[rng.rand_weighted(weights)]
 	print(faction_data.name + " squad spawned at " + spawn_location.title + " en route to " + destination.title + ". Objective: " + str(goal))
 	return destination
-
-
-func save() -> Dictionary:
-	return {
-		"has_spawned_enemies" = has_spawned_enemies
-	}

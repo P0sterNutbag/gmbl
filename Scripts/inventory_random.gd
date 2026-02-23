@@ -35,8 +35,8 @@ func add_random_item() -> void:
 		return
 	var spawn_resource = potential_slots[Globals.get_weighted_index(potential_slots)]
 	var item = spawn_resource.object_to_spawn.duplicate_deep()
-	if "condition" in item:
-		item.condition = randf_range(min_condition, max_condition)
+	if "gun_stats" in item:
+		item.gun_stats.condition = randf_range(min_condition, max_condition)
 	for i in randi_range(spawn_resource.min_amount, spawn_resource.max_amount):
 		add_item(item)
 	if !repeat_entries:

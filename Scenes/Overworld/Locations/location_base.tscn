@@ -105,7 +105,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_gqlbv"]
 resource_name = "battle"
-length = 5.0
+length = 6.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -114,7 +114,7 @@ tracks/0/path = NodePath("Dust:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.33333334, 2.2964523),
+"times": PackedFloat32Array(0.33333334, 2.6333334),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, true]
@@ -150,7 +150,7 @@ tracks/3/path = NodePath("AudioStreamPlayer3D:playing")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.16666667, 1.8277885, 2.214436, 2.5776503, 3.8313258, 4.2999897),
+"times": PackedFloat32Array(0, 0.26666668, 0.6666667, 2.5776503, 3.3666666, 4.3333335),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [true, true, true, true, true, true]
@@ -192,18 +192,22 @@ one_shot = true
 
 [node name="Dust" parent="BattleEffects" unique_id=823910162 instance=ExtResource("4_hpxtj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37905502, 0, 0.35599488)
-destroy_on_finish = false
+lifetime = 1.0
+script = null
 
 [node name="Dust2" parent="BattleEffects" unique_id=686249689 instance=ExtResource("4_hpxtj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42458105, 0, -0.70119756)
-destroy_on_finish = false
+lifetime = 1.0
+script = null
 
 [node name="Dust3" parent="BattleEffects" unique_id=24138226 instance=ExtResource("4_hpxtj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8469384, -2.3841858e-07, -0.17645293)
-destroy_on_finish = false
+lifetime = 0.5
+script = null
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="BattleEffects" unique_id=1496575253]
 stream = SubResource("AudioStreamRandomizer_25pt0")
+max_distance = 10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BattleEffects" unique_id=157663737]
 libraries/ = SubResource("AnimationLibrary_24t6m")

@@ -98,7 +98,7 @@ func stock_shops() -> void:
 				var inventory = i.inventory
 				inventory.money = shops_max_money[i.title]
 				inventory.items = shops_base_inventory[i.title].duplicate_deep()
-		if i.min_quests > 0 and i.random_quest:
+		if i.min_quests > 0 and i.random_quests.size() > 0:
 			i.restock_quests()
 			for q in i.quests:
 				q.return_location = title

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://5tewrogcx53w"]
+[gd_scene format=3 uid="uid://5tewrogcx53w"]
 
 [ext_resource type="Script" uid="uid://bo0n1hq3eq7hh" path="res://Scripts/Autoloads/ui_controller.gd" id="1_jjmka"]
 [ext_resource type="AudioStream" uid="uid://b4mo2ebryfk4u" path="res://Audio/UI/switch2.ogg" id="2_4jrrv"]
@@ -12,26 +12,27 @@ random_pitch = 1.1
 streams_count = 1
 stream_0/stream = ExtResource("6_hpss3")
 
-[node name="UiController" type="Node"]
+[node name="UiController" type="Node" unique_id=1689719976]
 script = ExtResource("1_jjmka")
 
-[node name="Click" type="AudioStreamPlayer" parent="."]
+[node name="Click" type="AudioStreamPlayer" parent="." unique_id=38158708]
 stream = ExtResource("2_4jrrv")
+volume_db = -10.0
 bus = &"SFX"
 
-[node name="Error" type="AudioStreamPlayer" parent="."]
+[node name="Error" type="AudioStreamPlayer" parent="." unique_id=703444910]
 stream = ExtResource("3_uu5g8")
 pitch_scale = 0.5
 bus = &"SFX"
 
-[node name="Hover" type="AudioStreamPlayer" parent="."]
+[node name="Hover" type="AudioStreamPlayer" parent="." unique_id=355730143]
 stream = ExtResource("3_5vgki")
 volume_db = -10.0
 pitch_scale = 2.19
 
-[node name="Tab" type="AudioStreamPlayer" parent="."]
+[node name="Tab" type="AudioStreamPlayer" parent="." unique_id=903508877]
 stream = ExtResource("4_s1d8c")
 
-[node name="Voice" type="AudioStreamPlayer" parent="."]
+[node name="Voice" type="AudioStreamPlayer" parent="." unique_id=691239863]
 stream = SubResource("AudioStreamRandomizer_nkm5x")
 pitch_scale = 0.79

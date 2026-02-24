@@ -84,7 +84,7 @@ func _ready() -> void:
 			var pos = spawn_point + offset
 			pos.x = clamp(pos.x, 1.0, 255.0)
 			pos.z = clamp(pos.z, 1.0, 255.0)
-			pos.y = Globals.get_heightmap_position(pos) + 1
+			pos.y = Globals.get_heightmap_position(pos)
 			inst.set_deferred("global_position", pos)
 			inst.destination = destination + offset
 			inst.look_at_position(inst.destination)

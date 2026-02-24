@@ -16,7 +16,7 @@ var can_move: bool
 var original_position: Vector3
 var original_rotation: Vector3
 var target: Node3D
-var destination: Location
+@export var destination: Location
 var destination_path: NodePath
 @export var faction: FactionManager.factions
 var guns_dict: Dictionary = {
@@ -68,8 +68,8 @@ func _process(_delta: float) -> void:
 			target = detection.get_visible_target()
 			if target:
 				state = states.chase
-				if target == Globals.player and !chase_player:
-					state = states.walk
+				#if target == Globals.player and !chase_player:
+					#state = states.walk
 			# animate
 			if velocity != Vector3.ZERO:
 				anim_player.play("Walk")
@@ -79,7 +79,11 @@ func _process(_delta: float) -> void:
 		states.chase:
 			speed = run_speed
 			# stop chasing player
-			if target == Globals.player and UiController.is_canvas_layer_open(Globals.ui):
+			if target == Globals.player:
+				if (UiController.is_canvas_layer_open(Globals.ui) or !chase_player):
+					detection.targets.erase(target)
+					state = states.walk
+			elif target.state == target.states.dead:
 				detection.targets.erase(target)
 				state = states.walk
 			if global_position.distance_to(target.global_position) > detection.detection_range:
@@ -102,6 +106,7 @@ func _process(_delta: float) -> void:
 		
 		states.battle:
 			velocity = Vector3.ZERO
+			location.can_transition = false
 			anim_player.play("IdleAim")
 
 
@@ -139,22 +144,28 @@ func set_detection_targets():
 	for npc in get_tree().get_nodes_in_group("overworld npcs"):
 		if FactionManager.get_faction_relation(faction, npc.faction) <= -1.0:
 			detection.targets.append(npc)
-	if Globals.player and FactionManager.get_faction_relation(faction, PlayerStats.faction) <= -1.0 and !UiController.is_canvas_layer_open(Globals.ui):
+	if Globals.player and chase_player and FactionManager.get_faction_relation(faction, PlayerStats.faction) <= -1.0 and !UiController.is_canvas_layer_open(Globals.ui):
 		detection.targets.append(Globals.player)
+
+
+func return_to_path() -> void:
+	state = states.walk
+	location.can_transition = true
+	if destination:
+		navigation_agent.set_target_position(destination.global_position)
 
 
 func die():
 	state = states.dead
 	set_collision_layer_value(1, false)
-	location.monitoring = false
-	location.monitorable = false
+	location.queue_free()
 	velocity = Vector3.ZERO
 	set_process(false)
 	set_physics_process(false)
 	anim_player.play("Die")
-	await tree_entered
+	#await tree_entered
 	UiController.close_interface(Globals.ui.dialogue)
-	await get_tree().create_timer(10).timeout
+	await get_tree().create_timer(5).timeout
 	queue_free()
 
 
@@ -185,11 +196,14 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 	if destination:
 		if destination.encounter_scene != null:
 			if FactionManager.get_faction_relation(location.location_data.faction, destination.location_data.faction) < 0.0:
-				destination.start_battle(location.location_data)
+				BattleManager.start_battle(destination, location)
+				state = states.battle
 			else:
 				destination.location_data.change_population(location.location_data.population)
 				print(destination.title + " population is now " + str(destination.location_data.population))
-		queue_free()
+				queue_free()
+		else:
+			queue_free()
 	else:
 		velocity = Vector3.ZERO
 		await get_tree().create_timer(randf_range(1, 3)).timeout
@@ -216,12 +230,11 @@ func _on_battle_timer_timeout() -> void:
 
 
 func _on_location_area_entered(area: Area3D) -> void:
+	if area is not Location:
+		return
 	if area.encounter_scene == location.encounter_scene:
 		if FactionManager.get_faction_relation(faction, area.location_data.faction) >= 0.0:
 			return
-		if area.battle_timer.time_left <= 0:
-			area.location_data.attacking_locations.append(location.location_data)
-		else:
-			area.start_battle(location.location_data)
+		BattleManager.start_battle(area, location)
 		state = states.battle
 		look_at(area.global_position)

@@ -19,12 +19,13 @@
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="11_w00nu"]
 [ext_resource type="Resource" uid="uid://ccm2c5fc8xn15" path="res://Resources/Items/Survival/medkit.tres" id="12_5j08b"]
 [ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="14_p0jri"]
+[ext_resource type="Script" uid="uid://g1k0736rje3q" path="res://Scripts/quest_random.gd" id="17_fyaxn"]
 [ext_resource type="Resource" uid="uid://cm4ovx7pecfjd" path="res://Resources/Dialogue/npc_friendly.tres" id="18_yyftb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hf0oe"]
 radius = 0.434372
 
-[sub_resource type="Resource" id="Resource_yyftb"]
+[sub_resource type="Resource" id="Resource_nv6bg"]
 resource_local_to_scene = true
 script = ExtResource("3_f2atc")
 population = 4
@@ -78,7 +79,7 @@ potential_slots = Array[ExtResource("5_7npny")]([SubResource("Resource_kx6ku"), 
 money = 500
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
-[sub_resource type="Resource" id="Resource_fyaxn"]
+[sub_resource type="Resource" id="Resource_jn6y6"]
 resource_local_to_scene = true
 script = ExtResource("11_w00nu")
 title = "Traveler"
@@ -110,9 +111,9 @@ shape = SubResource("CapsuleShape3D_hf0oe")
 [node name="Location" parent="." unique_id=361678620 instance=ExtResource("2_jf2yb")]
 collision_mask = 96
 title = "Squad"
-location_data = SubResource("Resource_yyftb")
+location_data = SubResource("Resource_nv6bg")
 encounter_scene = ExtResource("4_w8t3j")
-shop = SubResource("Resource_fyaxn")
+shop = SubResource("Resource_jn6y6")
 dialogue_tree = ExtResource("18_yyftb")
 can_stealth_start = true
 

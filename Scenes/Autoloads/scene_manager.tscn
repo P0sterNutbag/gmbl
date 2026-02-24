@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxn2w0eeltovy"]
+[gd_scene format=3 uid="uid://cxn2w0eeltovy"]
 
 [ext_resource type="Script" uid="uid://digkdunkqyhf4" path="res://Scripts/Autoloads/scene_manager.gd" id="1_f1i8l"]
 [ext_resource type="Script" uid="uid://d2guveclyykbc" path="res://Scripts/Autoloads/scene_transition.gd" id="2_5xiqd"]
@@ -92,11 +92,11 @@ _data = {
 &"transition_out": SubResource("Animation_vin40")
 }
 
-[node name="SceneManager" type="CanvasLayer"]
+[node name="SceneManager" type="CanvasLayer" unique_id=2112974408]
 layer = 2
 script = ExtResource("1_f1i8l")
 
-[node name="SceneTransition" type="Control" parent="."]
+[node name="SceneTransition" type="Control" parent="." unique_id=1250484150]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -106,7 +106,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_5xiqd")
 
-[node name="ColorRect" type="ColorRect" parent="SceneTransition"]
+[node name="ColorRect" type="ColorRect" parent="SceneTransition" unique_id=341669965]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -116,7 +116,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
-[node name="Label" type="Label" parent="SceneTransition/ColorRect"]
+[node name="Label" type="Label" parent="SceneTransition/ColorRect" unique_id=488486552]
 visible = false
 layout_mode = 1
 anchors_preset = 3
@@ -133,12 +133,10 @@ grow_vertical = 0
 theme = ExtResource("3_5xiqd")
 text = "Loading"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="SceneTransition"]
-libraries = {
-&"": SubResource("AnimationLibrary_sd3nk")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SceneTransition" unique_id=1255270110]
+libraries/ = SubResource("AnimationLibrary_sd3nk")
 
-[node name="Timer" type="Timer" parent="SceneTransition"]
+[node name="Timer" type="Timer" parent="SceneTransition" unique_id=1495927616]
 wait_time = 0.5
 
 [connection signal="transition_in_done" from="SceneTransition" to="." method="start_load"]

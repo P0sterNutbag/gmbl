@@ -11,8 +11,8 @@ func get_visible_target() -> Node:
 	var in_range_targets = targets.filter(func(a): return a != null and global_position.distance_to(a.global_position) <= detection_range)
 	in_range_targets = in_range_targets.filter(func(a): return target_is_ahead(a))
 	in_range_targets.sort_custom(func(a, b):
-		return (global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position)
-		or priority_targets.has(a)))
+		return (global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position)))
+		#or priority_targets.has(a)))
 	for target in in_range_targets:
 		if "states" in target and target.state == target.states.dead:
 			targets.erase(target)

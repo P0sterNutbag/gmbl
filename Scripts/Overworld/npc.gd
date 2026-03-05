@@ -3,6 +3,7 @@ extends CharacterBody3D
 enum guns {shotgun, ak47, sniper, pistol}
 enum states {walk, chase, battle, dead}
 @export var gun_index: guns
+@export var destination: Location
 var state = states.walk
 var speed := 2
 var walk_speed := 2
@@ -16,7 +17,6 @@ var can_move: bool
 var original_position: Vector3
 var original_rotation: Vector3
 var target: Node3D
-@export var destination: Location
 var destination_path: NodePath
 @export var faction: FactionManager.factions
 var guns_dict: Dictionary = {
@@ -106,7 +106,6 @@ func _process(_delta: float) -> void:
 		
 		states.battle:
 			velocity = Vector3.ZERO
-			location.can_transition = false
 			anim_player.play("IdleAim")
 
 
@@ -174,7 +173,8 @@ func save() -> Dictionary:
 		"pos_y": global_position.y,
 		"pos_z": global_position.z,
 		"faction" : faction,
-		"save_population" : location.location_data.population
+		"save_population" : location.location_data.population,
+		"state" : state
 	}
 	if destination:
 		dic["destination_path"] = destination.get_path()
@@ -198,6 +198,7 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 			if FactionManager.get_faction_relation(location.location_data.faction, destination.location_data.faction) < 0.0:
 				BattleManager.start_battle(destination, location)
 				state = states.battle
+				location.can_transition = false
 			else:
 				destination.location_data.change_population(location.location_data.population)
 				print(destination.title + " population is now " + str(destination.location_data.population))

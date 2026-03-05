@@ -13,9 +13,12 @@ func _ready():
 		location_data = Globals.overworld.current_encounter.location_data
 	else:
 		location_data = get_parent().location_data
-	squads.append(location_data)
-	for attacker in location_data.attacking_locations:
-		squads.append(attacker)
+	var battle = BattleManager.get_battle(Globals.overworld.current_encounter)
+	if battle:
+		for location in battle.get_all_locations():
+			squads.append(location.location_data)
+	else:
+		squads.append(location_data)
 	await get_tree().process_frame
 	var start_alert = false
 	for squad in squads:

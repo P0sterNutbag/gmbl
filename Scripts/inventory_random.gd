@@ -5,8 +5,8 @@ class_name InventoryRandom
 @export var max_amount: int
 @export var potential_slots: Array[SpawnChanceResource]
 @export var repeat_entries: bool = true
-@export var min_condition: float = 0.1
-@export var max_condition: float = 0.3
+@export var min_condition: float = 5
+@export var max_condition: float = 30
 var original_slots: Array[SpawnChanceResource]
 
 

@@ -18,7 +18,7 @@ var gun_slots := [slots.primary_gun, slots.secondary_gun]
 func remove_all() -> void:
 	for i in equipment:
 		if equipment[i]:
-			equipment[i].unqeuip()
+			equipment[i].unequip()
 		equipment[i] = null
 
 

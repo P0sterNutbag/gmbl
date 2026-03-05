@@ -80,7 +80,15 @@ func end_battle() -> void:
 	delete()
 
 
+func get_all_locations() -> Array:
+	var array = []
+	array.append(battle_location)
+	array.append_array(attacker_locations)
+	return array
+
+
 func delete() -> void:
+	battle_timer.queue_free()
 	BattleManager.battles.erase(self)
 	#free()
 

@@ -20,7 +20,14 @@ func start_battle(location, attacking_location):
 func end_battle_at_location(location: Location):
 	for battle in battles:
 		if battle.battle_location == location or battle.attacker_locations.has(location):
-			battle.battle_timer.wait_time = 0.1
+			battle.battle_timer.wait_time = 1.0
+
+
+func get_battle(location: Location) -> Battle:
+	for battle in battles:
+		if battle.battle_location == location or battle.attacker_locations.has(location):
+			return battle
+	return null
 
 
 func _on_scene_changed() -> void:

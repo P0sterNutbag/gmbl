@@ -33,6 +33,8 @@ func leave_encounter() -> void:
 		location_data.faction = factions[0]
 		location_data.attacking_locations.clear()
 	location_data.population = enemy_count
+	BattleManager.end_battle_at_location(Globals.overworld.current_encounter)
+	
 	var player_vector: Vector3 = (get_parent().global_position - Globals.player.global_position).normalized().rotated(Vector3.UP, -rotation.y)
 	Globals.overworld.player_spawn_vector = player_vector
 	SceneManager.start_scene_transition(Globals.overworld)

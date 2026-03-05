@@ -26,7 +26,7 @@
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="17_d403n"]
 [ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="17_st61y"]
 [ext_resource type="Resource" uid="uid://fioag0fe2wqb" path="res://Resources/Items/Utility/flashlight.tres" id="18_upb1b"]
-[ext_resource type="Script" uid="uid://bicpdyf13vj1j" path="res://Scripts/quest_fetch_random.gd" id="24_qd4ri"]
+[ext_resource type="Script" uid="uid://g1k0736rje3q" path="res://Scripts/quest_random.gd" id="21_c1xm0"]
 
 [sub_resource type="Resource" id="Resource_533gp"]
 script = ExtResource("2_h750r")
@@ -172,45 +172,23 @@ item_slots = Array[ExtResource("7_olmbu")]([SubResource("Resource_c1xm0"), SubRe
 space = 50
 metadata/_custom_type_script = "uid://6ucyr0petjnx"
 
-[sub_resource type="Resource" id="Resource_u4vgk"]
-script = ExtResource("7_olmbu")
-item = ExtResource("14_qd4ri")
-amount = 5
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_1cwge"]
-script = ExtResource("7_olmbu")
-item = ExtResource("15_u4vgk")
-amount = 5
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_st61y"]
-script = ExtResource("7_olmbu")
-item = ExtResource("16_1cwge")
-amount = 5
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
-
-[sub_resource type="Resource" id="Resource_upb1b"]
-script = ExtResource("24_qd4ri")
-required_items = Array[ExtResource("7_olmbu")]([SubResource("Resource_u4vgk"), SubResource("Resource_1cwge"), SubResource("Resource_st61y")])
-metadata/_custom_type_script = "uid://bicpdyf13vj1j"
-
 [sub_resource type="Resource" id="Resource_hr5f0"]
 script = ExtResource("17_d403n")
 title = "Scrapyard"
 inventory = SubResource("Resource_rsj15")
 price_modifiers = {
 "Ammo": 0.5,
-"Armor": 0.5,
-"Junk": 0.5,
+"Armor": 0.75,
+"Consumable": 0.75,
+"Gear": 0.75,
+"Junk": 0.75,
 "Survival": 0.75,
-"Weapons": 0.75
+"Weapons": 0.5
 }
 dialogue = SubResource("Resource_pc4vu")
-random_quest = SubResource("Resource_upb1b")
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
-[node name="Location" unique_id=1018595986 groups=["location"] instance=ExtResource("1_enopj")]
+[node name="Location" unique_id=1018595986 instance=ExtResource("1_enopj")]
 title = "Scrap Yard"
 location_data = SubResource("Resource_533gp")
 shop = SubResource("Resource_hr5f0")

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dv3u5v1n33nor"]
 
 [ext_resource type="Script" uid="uid://dicpd1oojgte2" path="res://Scripts/music_manager.gd" id="1_16sca"]
-[ext_resource type="AudioStream" uid="uid://cwgj7gob8apba" path="res://Audio/Music/Big Bass Bonanza.wav" id="2_16sca"]
+[ext_resource type="AudioStream" uid="uid://bvv1bhopaqmg4" path="res://Audio/Music/Cowboy Boombap.mp3" id="2_v36pn"]
 [ext_resource type="AudioStream" uid="uid://b6c4tk5e2brv0" path="res://Audio/SFX/freesound_community-wind-ambience-14720.mp3" id="3_v36pn"]
 
 [node name="MusicManager" type="Node" unique_id=1854292778]
@@ -9,12 +9,11 @@ process_mode = 3
 script = ExtResource("1_16sca")
 tracks = Dictionary[String, AudioStream]({
 "res://Scenes/Overworld/overworld.tscn": null,
-"res://Scenes/UI/Levels/character_creation.tscn": ExtResource("2_16sca"),
-"res://Scenes/UI/main_menu.tscn": ExtResource("2_16sca")
+"res://Scenes/UI/Levels/character_creation.tscn": ExtResource("2_v36pn"),
+"res://Scenes/UI/main_menu.tscn": ExtResource("2_v36pn")
 })
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1548422201]
-volume_db = -10.0
 bus = &"Music"
 
 [node name="AmbientSounds" type="AudioStreamPlayer" parent="." unique_id=856763279]

@@ -55,9 +55,13 @@ func _ready() -> void:
 		spawn_enemy(location_data.faction)
 	
 	# spawn enemies for battle
-	for attacker in location_data.attacking_locations:
-		for i in attacker.population:
-			spawn_enemy(attacker.faction)
+	var battle
+	if Globals.overworld:
+		battle = BattleManager.get_battle(Globals.overworld.current_encounter)
+	if battle:
+		for attacker in battle.attacker_locations:
+			for i in attacker.location_data.population:
+				spawn_enemy(attacker.location_data.faction)
 	
 	# spawn squads
 	if randf() <= location_data.squad_spawn_chance:
@@ -74,6 +78,8 @@ func _ready() -> void:
 		var destination = borders[border_index2].global_position
 		# get faction
 		var faction = randi() % FactionManager.factions.size()
+		while faction == FactionManager.factions.player:
+			faction = randi() % FactionManager.factions.size()
 		# spawn enemies
 		for i in randf_range(1, 4):
 			var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
@@ -84,7 +90,7 @@ func _ready() -> void:
 			var pos = spawn_point + offset
 			pos.x = clamp(pos.x, 1.0, 255.0)
 			pos.z = clamp(pos.z, 1.0, 255.0)
-			pos.y = Globals.get_heightmap_position(pos)
+			pos.y = Globals.get_heightmap_position(pos) + 0.25
 			inst.set_deferred("global_position", pos)
 			inst.destination = destination + offset
 			inst.look_at_position(inst.destination)

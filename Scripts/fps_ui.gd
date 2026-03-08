@@ -124,7 +124,7 @@ func play_hit_effect(hit_direction: Vector3) -> void:
 	b_fwd = b_fwd.normalized()
 	var bullet_yaw = atan2(b_fwd.x, b_fwd.z)
 	bullet_yaw = wrapf(bullet_yaw + PI, -PI, PI)
-	var c_basis = Basis.from_euler(Globals.player.global_rotation)
+	var c_basis = Basis.from_euler(Globals.player.camera.global_rotation)
 	var c_fwd = -c_basis.z
 	c_fwd.y = 0.0
 	c_fwd = c_fwd.normalized()

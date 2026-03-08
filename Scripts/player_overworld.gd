@@ -19,6 +19,7 @@ var model_rotation: float:
 			return model.rotation.y
 		else:
 			return 0.0
+var can_enter_location: bool = true
 var state_functions: Dictionary
 var exit_functions: Dictionary
 var enter_functions: Dictionary

@@ -33,9 +33,11 @@ func revive_player() -> void:
 
 
 func _on_give_up_button_pressed() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	PlayerStats.give_up()
 	UiController.open_interface(Globals.survival_ui.progress_menu, false, true)
+	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	#Globals.overworld.player_died = true
+	#SceneManager.start_scene_transition(Globals.overworld)
 
 
 func _on_visibility_changed() -> void:

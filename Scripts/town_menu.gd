@@ -32,29 +32,19 @@ func create_town(town_data: Town) -> void:
 		if shop.quests.size() > 0:
 			menu.pressed.connect(Globals.ui.job_board.set.bind("shop", shop))
 			menu.pressed.connect(Globals.ui.start_dialogue.bind(shop.dialogue, shop))
-		else:
+		elif shop.dialogue:
 			menu.pressed.connect(Globals.ui.start_dialogue.bind(shop.dialogue, shop))
-		menu.pressed.connect(enter_shop)
+		else:
+			menu.pressed.connect(Globals.ui.enter_shop.bind(shop))
+		menu.pressed.connect(hide)
 	var inst = item_container.create_menu_item()
 	inst.text = "Leave"
 	inst.alignment = BoxContainer.ALIGNMENT_CENTER 
 	inst.pressed.connect(exit)
-	await Engine.get_main_loop().process_frame
-	#item_container.get_child(0).grab_focus()
-	#item_container.set_menu_item_focus()
 
 
 func exit():
-	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	#PlayerStats.change_state(PlayerStats.states.walk)
 	UiController.close_interface(self)
-	#item_container.delete_children()
-	#hide()
-
-
-func enter_shop():
-	#item_container.delete_children()
-	hide()
 
 
 func re_enter_town() -> void:

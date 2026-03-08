@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 var current_town: Town
+var current_shop: Shop
 @onready var town: PanelContainer = $Town
 @onready var shop: HBoxContainer = $Shop
 @onready var shop_inventory: PanelContainer = $Shop/Inventory
@@ -46,14 +47,15 @@ func start_dialogue(dialogue_data: DialogueTree, _shop: Shop = null) -> void:
 
 
 func enter_shop(shop_data: Shop) -> void:
+	current_shop = shop_data
 	shop_inventory.source_inventory = PlayerStats.inventory
 	shop_inventory.target_inventory = shop_data.inventory
-	shop_inventory.show_price = true
+	shop_inventory.show_price = shop_data.uses_money
 	shop_inventory.set_items()
 	shop_inventory2.source_inventory = shop_data.inventory
 	shop_inventory2.target_inventory = PlayerStats.inventory
 	shop_inventory2.shop = shop_data
-	shop_inventory2.show_price = true
+	shop_inventory2.show_price = shop_data.uses_money
 	shop_inventory2.set_items()
 	#if Input.get_connected_joypads().size() > 0:
 		#shop_inventory2.grab_focus()
@@ -61,8 +63,12 @@ func enter_shop(shop_data: Shop) -> void:
 
 
 func close_shop() -> void:
-	UiController.close_interface(shop)
-	dialogue.leave_shop()
+	UiController.close_interface(shop, false)
+	if current_shop.dialogue:
+		dialogue.leave_shop()
+	else:
+		await get_tree().process_frame
+		UiController.open_interface(Globals.ui.town)#.re_enter_town()
 
 
 func _on_portrait_holder_visibility_changed() -> void:

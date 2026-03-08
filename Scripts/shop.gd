@@ -16,6 +16,7 @@ class_name Shop
 @export var random_quests: Array[QuestRandom]
 @export var min_quests: int
 @export var max_quests: int
+@export var uses_money: bool = true
 var faction: FactionManager.factions
 
 

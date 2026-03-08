@@ -44,9 +44,11 @@ func _on_visibility_changed() -> void:
 
 
 func _on_continue_pressed() -> void:
-	if Globals.overworld:
-		Globals.overworld.queue_free()
+	#if Globals.overworld:
+		#Globals.overworld.queue_free()
 	SceneManager.start_scene_transition("res://Scenes/UI/Levels/character_creation.tscn")
+	Globals.overworld.player_died = true
+	#SceneManager.start_scene_transition(Globals.overworld)
 
 
 func _on_quit_pressed() -> void:

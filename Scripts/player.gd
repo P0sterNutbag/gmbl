@@ -14,9 +14,10 @@ var speed = base_speed
 var jump_speed := 6.5
 var mouse_sensitivity := 0.004
 var controller_sensitivity := 0.04
-var lean_angle := 0.0
+var lean_angle := 20.0
+var lean_interp := 0.0
 var gun_index := -1
-var crouch_height := 0.65
+var crouch_height := 0.50
 var base_fov := 75.0
 var walk_time := 0.0
 var push_force := 20
@@ -255,13 +256,10 @@ func state_walk(delta):
 		change_gun_slot(1)
 	
 	# leaning
-	if is_on_floor():
-		lean_angle = 20.0 * Input.get_axis("lean_right", "lean_left")
-	else:
-		lean_angle = 0.0
-	#camera.rotation_degrees.z = lerp(camera.rotation_degrees.z, lean_angle, 10 * delta)
-	rotation_degrees = lerp(rotation_degrees, Vector3(0.0, 0.0, lean_angle).rotated(Vector3.UP, camera.rotation.y), 10 * delta)
-	print(rotation_degrees)
+	var target_interp = sign(Input.get_axis("lean_right", "lean_left"))
+	lean_interp = lerp(lean_interp, target_interp, 10 * delta)
+	rotation_degrees.x = lerp(0.0, Vector3(0.0, 0.0, lean_angle).rotated(Vector3.UP, camera.rotation.y).x, lean_interp)
+	rotation_degrees.z = lerp(0.0, Vector3(0.0, 0.0, lean_angle).rotated(Vector3.UP, camera.rotation.y).z, lean_interp)
 	
 	# crouching
 	if Input.is_action_just_pressed("crouch") and is_on_floor():
@@ -278,9 +276,13 @@ func state_walk(delta):
 			step_timer.start()
 	
 	# point gun forward
-	gun_rotation.rotation.x = lerp_angle(gun_rotation.rotation.x, camera.rotation.x, 25 * delta)
-	gun_rotation.rotation.y = lerp_angle(gun_rotation.rotation.y, camera.rotation.y, 25 * delta)
-	gun_rotation.rotation.z = lerp_angle(gun_rotation.rotation.z, camera.rotation.z, 25 * delta)
+	var lerp_weight = 20 * delta
+	if gun_state == gun_states.ads:
+		lerp_weight = 35 * delta
+	#gun_rotation.rotation = gun_rotation.rotation.cubic_interpolate(camera.rotation, gun_rotation.rotation, camera.rotation, 100 * delta)
+	gun_rotation.rotation.x = lerp_angle(gun_rotation.rotation.x, camera.rotation.x, lerp_weight)
+	gun_rotation.rotation.y = lerp_angle(gun_rotation.rotation.y, camera.rotation.y, lerp_weight)
+	gun_rotation.rotation.z = lerp_angle(gun_rotation.rotation.z, camera.rotation.z, lerp_weight)
 	gun_rotation.global_position.y = camera.global_position.y
 	
 	# shooting and aiming
@@ -291,7 +293,7 @@ func state_walk(delta):
 				return
 			if gun is Gun:
 				var tween = create_tween().set_ease(Tween.EASE_OUT)
-				tween.tween_property(gun, "position", Vector3(randf_range(-0.005, 0.005), randf_range(-0.005, 0.005), 0.1), 0.01)
+				tween.tween_property(gun, "position", Vector3(0, 0, 0.1), 0.01)
 				tween.tween_property(gun, "position", Vector3.ZERO, 0.2)
 				var tween2 = create_tween().set_ease(Tween.EASE_OUT)
 				tween2.tween_property(self, "aim_rotation:x", aim_rotation.x + deg_to_rad(gun.kickback_magnitude) / 3, 0.01)
@@ -473,8 +475,6 @@ func state_pause(_delta):
 
 
 func enter_dead():
-	#if Globals.overworld != null:
-		#Globals.overworld.load_on_enter = true
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
 	tween.tween_property(gun_anchor, "position", Vector3.DOWN, 0.25)
 	tween.tween_property(camera, "position:y", -1, 0.5)

@@ -92,7 +92,7 @@ func _physics_process(delta):
 func reset_stats() -> void:
 	inventory.equipment_kit.remove_all()
 	inventory = starting_inventory.duplicate(true)
-	inventory.money = ProgressManager.progress_data.starting_money
+	#inventory.money = ProgressManager.progress_data.starting_money
 	#equipped_guns[guns[0].slot] = guns[0]
 	#for i in equipped_guns:
 		#if i:
@@ -116,7 +116,7 @@ func change_state(new_state):
 
 func give_up() -> void:
 	PlayerStats.reset_stats()
-	SaveController.delete_save_data()
+	#SaveController.delete_save_data()
 
 
 func save() -> Dictionary:

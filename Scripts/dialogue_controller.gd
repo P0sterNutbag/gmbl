@@ -105,6 +105,7 @@ func enter_shop() -> void:
 
 func enter_town() -> void:
 	hide()
+	Globals.ui.portraits.hide()
 	Globals.ui.town.re_enter_town()
 
 

@@ -11,6 +11,7 @@ var mouse_speed := 800.0
 @onready var voice_sfx: AudioStreamPlayer = $Voice
 #endregion
 
+
 func _process(delta: float) -> void:
 	if Input.mouse_mode == Input.MOUSE_MODE_HIDDEN and Input.get_connected_joypads().size() > 0:
 		var controller_vector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down", 0.25)

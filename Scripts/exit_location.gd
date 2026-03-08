@@ -13,28 +13,29 @@ func _process(_delta: float) -> void:
 
 
 func leave_encounter() -> void:
-	var enemy_count: int = 0
 	var factions = []
 	var location_data = Globals.overworld.current_encounter.location_data
-	if Globals.overworld.current_encounter.get_node_or_null("StartingSquadSpawner"):
-		for enemy in get_tree().get_nodes_in_group("enemies"):
-			if enemy.is_starting_squad and enemy.state != enemy.states.dead and enemy.state != enemy.states.standby:
-				enemy_count += 1
+	var enemies = get_tree().get_nodes_in_group("enemies")
+	for enemy in enemies:
+		if enemy.state != enemy.states.dead:
+			if !factions.has(enemy.faction):
+				factions.append(enemy.faction)
+	var battle = BattleManager.get_battle(Globals.overworld.current_encounter)
+	if battle:
+		for location in battle.all_locations:
+			var data = location.location_data
+			var population = enemies.filter(func(a): return a.state != a.states.dead and a.faction == data.faction).size()
+			data.population = population
 	else:
-		for enemy in get_tree().get_nodes_in_group("enemies"):
-			if enemy.state != enemy.states.dead and enemy.state != enemy.states.standby:
-				enemy_count += 1
-				if !factions.has(enemy.faction):
-					factions.append(enemy.faction)
+		location_data.population = enemies.filter(func(a): return a.state != a.states.dead and a.faction == location_data.faction).size()
 	if factions.size() == 0:
 		location_data.faction = FactionManager.factions.no_faction
-		location_data.attacking_locations.clear()
+		if battle: 
+			battle.end_battle(Globals.overworld.current_encounter)
 	elif factions.size() == 1:
-		location_data.faction = factions[0]
-		location_data.attacking_locations.clear()
-	location_data.population = enemy_count
-	BattleManager.end_battle_at_location(Globals.overworld.current_encounter)
-	
+		if battle:
+			var winner = battle.all_locations.filter(func(a): return a.location_data.population > 0)[0]
+			battle.end_battle(winner)
 	var player_vector: Vector3 = (get_parent().global_position - Globals.player.global_position).normalized().rotated(Vector3.UP, -rotation.y)
 	Globals.overworld.player_spawn_vector = player_vector
 	SceneManager.start_scene_transition(Globals.overworld)

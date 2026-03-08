@@ -28,9 +28,9 @@ signal encounter_ended
 
 func _enter_tree() -> void:
 	await get_tree().process_frame
-	if location_data:
-		var color = FactionManager.faction_data[location_data.faction].color
-		flag.set_instance_shader_parameter("flag_color", color)
+	#if location_data:
+		#var color = FactionManager.faction_data[location_data.faction].color
+		#flag.set_instance_shader_parameter("flag_color", color)
 
 
 func _ready() -> void:
@@ -151,15 +151,17 @@ func _on_load() -> void:
 
 
 func _on_body_entered(_body: Node3D) -> void:
-	if !can_transition or PlayerStats.state != PlayerStats.states.walk:
+	if !can_transition or PlayerStats.state != PlayerStats.states.walk or !Globals.player.can_enter_location:
 		return
 	can_transition = false
+	Globals.player.can_enter_location = false
 	start_encounter()
 
 
 func _on_body_exited(_body: Node3D) -> void:
 	if Globals.overworld.process_mode == PROCESS_MODE_INHERIT:
 		can_transition = true
+		Globals.player.can_enter_location = true
 
 
 func _on_battle_timer_timeout() -> void:

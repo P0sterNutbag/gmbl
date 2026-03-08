@@ -93,6 +93,7 @@
 [ext_resource type="PackedScene" uid="uid://c2ch548rglx0" path="res://Scenes/Levels/desert4.tscn" id="90_me12r"]
 [ext_resource type="PackedScene" uid="uid://ckk7ngs5hgesp" path="res://Scenes/Levels/desert5.tscn" id="91_bqxwu"]
 [ext_resource type="PackedScene" uid="uid://bhnlai8o6lxh0" path="res://Scenes/Levels/desert6.tscn" id="92_cvr5w"]
+[ext_resource type="PackedScene" uid="uid://camjoalnob06k" path="res://Scenes/Overworld/Locations/home.tscn" id="97_bqxwu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jdigv"]
 render_priority = 0
@@ -879,8 +880,11 @@ terrain = NodePath("../Terrain")
 script = ExtResource("27_oapb8")
 objects_to_snap = [NodePath("../BanditCamp"), NodePath("../BanditTown"), NodePath("../Crateyard"), NodePath("../RockCanyon"), NodePath("../SandDunes"), NodePath("../SmallTown"), NodePath("../Scrapyard"), NodePath("../DrugDen"), NodePath("../Location"), NodePath("../Location2"), NodePath("../Location3"), NodePath("../Location4"), NodePath("../Location5"), NodePath("../Location6")]
 
+[node name="PlayerStart" type="Node3D" parent="." unique_id=136712645]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 224.1743, 0.13828449, 259.5883)
+
 [node name="Player" parent="." unique_id=1763906924 instance=ExtResource("3_c84f5")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 218.73747, 0.13828449, 261.1541)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 224.1743, 0.13828449, 259.5883)
 
 [node name="BoundaryWall" type="MeshInstance3D" parent="." unique_id=1785772133]
 process_mode = 4
@@ -912,7 +916,7 @@ transform = Transform3D(-0.5328762, 0, -0.84619325, 0, 1, 0, 0.84619325, 0, -0.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 191.0236, 1.7648737, 314.45203)
 
 [node name="SmallTown" parent="." unique_id=1920182238 instance=ExtResource("19_5q0os")]
-transform = Transform3D(0.0452235, 0, 0.9989769, 0, 1, 0, -0.9989769, 0, 0.0452235, 219.46066, 0.32858363, 273.61743)
+transform = Transform3D(0.34438077, 0, 0.93883, 0, 1, 0, -0.93883, 0, 0.34438077, 211.61537, 0.32858363, 275.9877)
 town = SubResource("Resource_1wc3g")
 
 [node name="Scrapyard" parent="." unique_id=1638857313 groups=["location"] instance=ExtResource("80_nggm6")]
@@ -957,6 +961,9 @@ transform = Transform3D(0.16391137, 0, 0.9864751, 0, 1, 0, -0.9864751, 0, 0.1639
 title = "Wasteland 6"
 location_data = SubResource("Resource_qw144")
 encounter_scene = ExtResource("92_cvr5w")
+
+[node name="Home" parent="." unique_id=1047620238 instance=ExtResource("97_bqxwu")]
+transform = Transform3D(0.29030132, 0, 0.9569353, 0, 1, 0, -0.9569353, 0, 0.29030132, 229.23297, 0.44255623, 263.01108)
 
 [connection signal="timeout" from="NpcController/Timer" to="NpcController" method="_on_timer_timeout"]
 [connection signal="timeout" from="NpcController/Timer" to="NpcController/Timer" method="_on_timeout"]

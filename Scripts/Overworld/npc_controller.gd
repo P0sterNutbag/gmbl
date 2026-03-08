@@ -36,6 +36,9 @@ func _on_timer_timeout() -> void:
 
 func get_spawn_location() -> Location:
 	var nodes = get_tree().get_nodes_in_group("location")
+	var node = nodes[randi() % nodes.size()]
+	while BattleManager.get_battle(node) != null:
+		node = nodes[randi() % nodes.size()]
 	return nodes[randi() % nodes.size()]
 
 

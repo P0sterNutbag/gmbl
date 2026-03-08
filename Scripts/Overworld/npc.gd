@@ -58,6 +58,8 @@ func _ready() -> void:
 	location.location_data.faction = faction
 	original_position = global_position
 	original_rotation = global_rotation
+	if destination:
+		navigation_agent.set_target_position(destination.global_position)
 
 
 func _process(_delta: float) -> void:
@@ -162,7 +164,8 @@ func die():
 	set_process(false)
 	set_physics_process(false)
 	anim_player.play("Die")
-	#await tree_entered
+	if !is_inside_tree():
+		await tree_entered
 	UiController.close_interface(Globals.ui.dialogue)
 	await get_tree().create_timer(5).timeout
 	queue_free()

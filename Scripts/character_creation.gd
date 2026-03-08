@@ -61,7 +61,10 @@ func _process(delta: float) -> void:
 
 
 func _on_menu_button_pressed() -> void:
-	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld.tscn")
+	if Globals.overworld:
+		SceneManager.start_scene_transition(Globals.overworld)
+	else:
+		SceneManager.start_scene_transition("res://Scenes/Overworld/overworld.tscn")
 
 
 func _on_face_button_option_changed(value: Variant) -> void:

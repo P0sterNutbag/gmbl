@@ -26,7 +26,7 @@ func _ready():
 		var spawn_pos = Vector3.ZERO
 		var dest = position + Vector3(0, 0, -115)
 		if squads.find(squad) > 0:
-			spawn_pos = Vector3(-32, 0.0, 0.0)#.rotated(Vector3.UP, deg_to_rad(randf_range(0, 360)))
+			spawn_pos = Vector3(-64, 0.0, 0.0)#.rotated(Vector3.UP, deg_to_rad(randf_range(0, 360)))
 			dest = position
 		enemy_destination = dest
 		if Globals.overworld:

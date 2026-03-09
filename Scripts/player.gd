@@ -54,19 +54,19 @@ var faction := FactionManager.factions.player
 var grenade_object = preload("res://Scenes/Bullets/grenade.tscn")
 const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var camera = $CameraAnchor/Camera3D
-@onready var gun_rotation: Node3D = $CameraAnchor/GunRotation
-@onready var gun_anchor: Node3D = $CameraAnchor/GunRotation/GunOffset/GunAnchor
-@onready var gun_offset: Node3D = $CameraAnchor/GunRotation/GunOffset
+@onready var gun_rotation: Node3D = %GunRotation
+@onready var gun_anchor: Node3D = %GunRotation/GunOffset/GunAnchor
+@onready var gun_offset: Node3D = %GunRotation/GunOffset
 @onready var ads_position: Node3D = $CameraAnchor/Camera3D/AdsOffset/AdsPosition
-@onready var pistol: Node3D = $CameraAnchor/GunRotation/GunOffset/GunAnchor/Pistol
-@onready var ak_47: Node3D = $CameraAnchor/GunRotation/GunOffset/GunAnchor/AK47
-@onready var sniper_rifle: Node3D = $CameraAnchor/GunRotation/GunOffset/GunAnchor/SniperRifle
-@onready var shotgun: Node3D = $CameraAnchor/GunRotation/GunOffset/GunAnchor/Shotgun
-@onready var sawed_off: Gun = $CameraAnchor/GunRotation/GunOffset/GunAnchor/SawedOff
-@onready var uzi: Gun = $CameraAnchor/GunRotation/GunOffset/GunAnchor/Uzi
-@onready var hunting_rifle: Gun = $CameraAnchor/GunRotation/GunOffset/GunAnchor/HuntingRifle
-@onready var knife: Node3D = $CameraAnchor/GunRotation/GunOffset/GunAnchor/Knife
-@onready var grenade: Node3D = $CameraAnchor/GunRotation/GunOffset/GunAnchor/Grenade
+@onready var pistol: Node3D = %GunRotation/GunOffset/GunAnchor/Pistol
+@onready var ak_47: Node3D = %GunRotation/GunOffset/GunAnchor/AK47
+@onready var sniper_rifle: Node3D = %GunRotation/GunOffset/GunAnchor/SniperRifle
+@onready var shotgun: Node3D = %GunRotation/GunOffset/GunAnchor/Shotgun
+@onready var sawed_off: Gun = %GunRotation/GunOffset/GunAnchor/SawedOff
+@onready var uzi: Gun = %GunRotation/GunOffset/GunAnchor/Uzi
+@onready var hunting_rifle: Gun = %GunRotation/GunOffset/GunAnchor/HuntingRifle
+@onready var knife: Node3D = %GunRotation/GunOffset/GunAnchor/Knife
+@onready var grenade: Node3D = %GunRotation/GunOffset/GunAnchor/Grenade
 @onready var step_timer: Timer = $StepTimer
 @onready var interact_cast: = $CameraAnchor/Camera3D/RayCast3D
 @onready var hitbox: HealthComponent = $Hitbox
@@ -77,7 +77,7 @@ const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var bullet_flyby_sfx: AudioStreamPlayer3D = $CameraAnchor/BulletListener/AudioStreamPlayer3D
 @onready var footstep_sfx: AudioStreamPlayer3D = $FootstepPlayer
 @onready var spot_light: SpotLight3D = $CameraAnchor/Camera3D/SpotLight3D
-@onready var gun_collision_cast: RayCast3D = $CameraAnchor/GunRotation/GunOffset/RayCast3D
+@onready var gun_collision_cast: RayCast3D = %GunRotation/GunOffset/RayCast3D
 
 
 func _enter_tree() -> void:
@@ -163,7 +163,7 @@ func _physics_process(delta):
 func _process(delta: float) -> void:
 	# control camera
 	if PlayerStats.state == PlayerStats.states.walk:
-		camera.rotation.y = aim_rotation.y
+		rotation.y = aim_rotation.y
 		camera.rotation.x = aim_rotation.x
 	# state machine
 	if gun_state_functions.has(gun_state):
@@ -193,7 +193,7 @@ func state_walk(delta):
 	# get and apply inputs
 	var input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var movement_dir = transform.basis * Vector3(input.x, 0, input.y)
-	movement_dir = movement_dir.rotated(Vector3.UP, camera.rotation.y)
+	#movement_dir = movement_dir.rotated(Vector3.UP, camera.rotation.y)
 	velocity.x = movement_dir.x * speed
 	velocity.z = movement_dir.z * speed
 	
@@ -276,12 +276,15 @@ func state_walk(delta):
 			step_timer.start()
 	
 	# point gun forward
-	var lerp_weight = 20 * delta
-	if gun_state == gun_states.ads:
-		lerp_weight = 35 * delta
-	gun_rotation.rotation.x = lerp_angle(gun_rotation.rotation.x, camera.rotation.x, lerp_weight)
-	gun_rotation.rotation.y = lerp_angle(gun_rotation.rotation.y, camera.rotation.y, lerp_weight)
+	#if gun_state == gun_states.ads:
+		#gun_rotation.rotation.x = camera.rotation.x
+		#gun_rotation.rotation.y = camera.rotation.y
+	#else:
+		#gun_rotation.rotation.x = lerp_angle(gun_rotation.rotation.x, camera.rotation.x, 20 * delta)
+		#gun_rotation.rotation.y = lerp_angle(gun_rotation.rotation.y, camera.rotation.y, 20 * delta)
 	var target_z = deg_to_rad(-sign(Input.get_last_mouse_velocity().x) * 2.5)
+	if target_z == 0.0:
+		target_z = deg_to_rad(-sign(input.x) * 2.5)
 	gun_rotation.rotation.z = lerp_angle(gun_rotation.rotation.z, target_z, 5 * delta)
 	gun_rotation.global_position.y = camera.global_position.y
 	
@@ -528,7 +531,7 @@ func gun_state_ads(delta: float) -> void:
 	sway_time += delta * current_sway_speed
 	var x_offset = sway_noise.get_noise_2d(sway_time, 0.0) * sway_intensity
 	var y_offset = sway_noise.get_noise_2d(0.0, sway_time) * sway_intensity
-	camera.rotation.y += deg_to_rad(y_offset)
+	rotation.y += deg_to_rad(y_offset)
 	camera.rotation.x += deg_to_rad(x_offset)
 
 

@@ -128,7 +128,8 @@ func follow_path(spd: float = walk_speed):
 	if navigation_agent.is_navigation_finished():
 		return
 	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
-	velocity = global_position.direction_to(next_path_position) * spd
+	var path_velocity = global_position.direction_to(next_path_position) * spd
+	velocity = Vector3(path_velocity.x, velocity.y, path_velocity.z)
 	look_at_position(next_path_position)
 
 

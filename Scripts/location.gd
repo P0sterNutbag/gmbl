@@ -54,7 +54,7 @@ func start_encounter() -> void:
 		return
 	encounter_started.emit()
 	Globals.overworld.current_encounter = self
-	if dialogue_tree != null:
+	if dialogue_tree != null and !BattleManager.get_battle(self):
 		Globals.ui.start_dialogue(dialogue_tree)
 		point_of_interest.canvas_layer.hide()
 	elif encounter_scene != null:

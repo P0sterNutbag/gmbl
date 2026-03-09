@@ -279,10 +279,10 @@ func state_walk(delta):
 	var lerp_weight = 20 * delta
 	if gun_state == gun_states.ads:
 		lerp_weight = 35 * delta
-	#gun_rotation.rotation = gun_rotation.rotation.cubic_interpolate(camera.rotation, gun_rotation.rotation, camera.rotation, 100 * delta)
 	gun_rotation.rotation.x = lerp_angle(gun_rotation.rotation.x, camera.rotation.x, lerp_weight)
 	gun_rotation.rotation.y = lerp_angle(gun_rotation.rotation.y, camera.rotation.y, lerp_weight)
-	gun_rotation.rotation.z = lerp_angle(gun_rotation.rotation.z, camera.rotation.z, lerp_weight)
+	var target_z = deg_to_rad(-sign(Input.get_last_mouse_velocity().x) * 2.5)
+	gun_rotation.rotation.z = lerp_angle(gun_rotation.rotation.z, target_z, 5 * delta)
 	gun_rotation.global_position.y = camera.global_position.y
 	
 	# shooting and aiming
@@ -353,13 +353,6 @@ func state_walk(delta):
 				collider = collider.get_parent()
 				if collider is ItemPickup:
 					collider.pickup()
-	
-	# heal
-	#if Input.is_action_just_pressed("heal"):
-		#var medkit = find_item("medkit")
-		#if medkit:
-			#use_item("", medkit, hitbox)
-			#hitbox.hp = clamp(hitbox.hp, 0, hitbox.max_hp - hitbox.unhealable_hp)
 	
 	# camera zoom
 	var target_fov

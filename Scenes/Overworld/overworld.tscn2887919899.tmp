@@ -27,7 +27,6 @@
 [ext_resource type="Texture2D" uid="uid://d3rtqe0gurf4e" path="res://Art/Textures/grass.png" id="29_i1n2v"]
 [ext_resource type="ArrayMesh" uid="uid://dpef2d0qcn5d4" path="res://addons/zylann.hterrain/models/grass_quad_x2.obj" id="30_8cq34"]
 [ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="30_hmgos"]
-[ext_resource type="Script" uid="uid://dsdpmpehomy6m" path="res://Scripts/town_option.gd" id="31_t56bl"]
 [ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="31_xp1ub"]
 [ext_resource type="Script" uid="uid://bbi3gcsb33muk" path="res://Scripts/town.gd" id="32_2uctf"]
 [ext_resource type="Texture2D" uid="uid://bi1onaha6gj3k" path="res://Art/Textures/player_face2.png" id="38_ua8uw"]
@@ -84,7 +83,6 @@
 [ext_resource type="Script" uid="uid://bicpdyf13vj1j" path="res://Scripts/quest_fetch_random.gd" id="69_2gpn5"]
 [ext_resource type="Script" uid="uid://px5dr31pd885" path="res://Scripts/dialogue_loop.gd" id="72_6l6oi"]
 [ext_resource type="Resource" uid="uid://nm0e00c2fx4" path="res://Resources/NpcStyles/npc_styles.tres" id="78_g1wl1"]
-[ext_resource type="Script" uid="uid://r3prw1636vsp" path="res://Scripts/quest_giver.gd" id="78_me12r"]
 [ext_resource type="PackedScene" uid="uid://cemkkubm7a1qc" path="res://Scenes/Overworld/Locations/drug_den.tscn" id="79_nggm6"]
 [ext_resource type="PackedScene" uid="uid://csjsfdmnghtqx" path="res://Scenes/Overworld/Locations/scrapyard.tscn" id="80_nggm6"]
 [ext_resource type="PackedScene" uid="uid://fdwv5bddxs7i" path="res://Scenes/Overworld/Locations/generic_location.tscn" id="86_xkckx"]
@@ -569,20 +567,20 @@ rewards = null
 target_factions = Array[int]([4])
 metadata/_custom_type_script = "uid://ds2br0dh5ir38"
 
-[sub_resource type="Resource" id="Resource_1wc3g"]
-script = ExtResource("78_me12r")
+[sub_resource type="Resource" id="Resource_pv0ty"]
+script = ExtResource("47_xt1pr")
 dialogue = SubResource("Resource_v7uwj")
 random_quests = Array[ExtResource("57_rkewd")]([SubResource("Resource_x5gxg")])
 min_quests = 1
 max_quests = 3
 title = "Bounty Board"
-metadata/_custom_type_script = "uid://r3prw1636vsp"
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
-[sub_resource type="Resource" id="Resource_dfqls"]
+[sub_resource type="Resource" id="Resource_1wc3g"]
 resource_local_to_scene = true
 script = ExtResource("32_2uctf")
 title = "Small Town"
-shops = Array[ExtResource("31_t56bl")]([SubResource("Resource_61ge7"), SubResource("Resource_r7b6r"), SubResource("Resource_1wc3g")])
+shops = Array[ExtResource("47_xt1pr")]([SubResource("Resource_61ge7"), SubResource("Resource_r7b6r"), SubResource("Resource_pv0ty")])
 metadata/_custom_type_script = "uid://bbi3gcsb33muk"
 
 [sub_resource type="Resource" id="Resource_ri526"]
@@ -912,7 +910,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 191.0236, 1.7648737, 314.4520
 
 [node name="SmallTown" parent="." unique_id=1920182238 instance=ExtResource("19_5q0os")]
 transform = Transform3D(0.34438077, 0, 0.93883, 0, 1, 0, -0.93883, 0, 0.34438077, 211.61537, 0.32858363, 275.9877)
-town = SubResource("Resource_dfqls")
+town = SubResource("Resource_1wc3g")
 
 [node name="Scrapyard" parent="." unique_id=1638857313 groups=["location"] instance=ExtResource("80_nggm6")]
 transform = Transform3D(-0.99983275, 0, 0.018290073, 0, 1, 0, -0.018290073, 0, -0.99983275, 244.15323, 1.366055, 315.90103)

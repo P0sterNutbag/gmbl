@@ -1,7 +1,7 @@
-extends Resource
+extends TownOption
 class_name Shop
 
-@export var title: String
+#@export var title: String
 @export var inventory: Inventory
 @export var price_modifiers: Dictionary = {
 	"Survival" : 0.75,
@@ -18,6 +18,13 @@ class_name Shop
 @export var max_quests: int
 @export var uses_money: bool = true
 var faction: FactionManager.factions
+var max_money: int
+
+
+func restock_items():
+	inventory.money = max_money
+	if inventory.has_method("restock_inventory"):
+		inventory.restock_inventory()
 
 
 func restock_quests() -> void:

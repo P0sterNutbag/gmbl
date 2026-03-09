@@ -29,13 +29,16 @@ func create_town(town_data: Town) -> void:
 		var menu = item_container.create_menu_item()
 		menu.text = shop.title
 		menu.alignment = BoxContainer.ALIGNMENT_CENTER
-		if shop.quests.size() > 0:
-			menu.pressed.connect(Globals.ui.job_board.set.bind("shop", shop))
-			menu.pressed.connect(Globals.ui.start_dialogue.bind(shop.dialogue, shop))
-		elif shop.dialogue:
-			menu.pressed.connect(Globals.ui.start_dialogue.bind(shop.dialogue, shop))
-		else:
-			menu.pressed.connect(Globals.ui.enter_shop.bind(shop))
+		if shop is Shop:
+			if shop.quests.size() > 0:
+				menu.pressed.connect(Globals.ui.job_board.set.bind("shop", shop))
+				menu.pressed.connect(Globals.ui.start_dialogue.bind(shop.dialogue, shop))
+			elif shop.dialogue:
+				menu.pressed.connect(Globals.ui.start_dialogue.bind(shop.dialogue, shop))
+			else:
+				menu.pressed.connect(Globals.ui.enter_shop.bind(shop))
+		elif shop is TownAction:
+			menu.pressed.connect(shop.do_action)
 		menu.pressed.connect(hide)
 	var inst = item_container.create_menu_item()
 	inst.text = "Leave"

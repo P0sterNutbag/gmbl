@@ -6,7 +6,7 @@ extends Node
 var time_shooting := 0.0
 var spread := 1.0
 var gun_stats: GunStats
-var spread_curve := (preload("res://Resources/bullet_spread.tres"))
+var spread_curve := (preload("res://Resources/Curves/bullet_spread.tres"))
 
 
 func _process(delta: float) -> void:

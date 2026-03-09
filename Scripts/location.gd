@@ -36,28 +36,14 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	SaveController.load.connect(_on_load)
 	flagpole.global_rotation_degrees = Vector3(0, 0, 0)
-	#if save_population > -1 and location_data:
-	#	location_data.population = save_population
-	#var parent = get_parent()
-	#if parent is PointOfInterest:
-		#title = parent.title
-	#if "style_data" in parent:
-		#if shop:
-			#shop.dialogue.npc_style = parent.current_style
-		#elif dialogue_tree:
-			#dialogue_tree.npc_style = parent.current_style
 	# shop timer
 	if town != null:
 		for i in town.shops:
-			shops_base_inventory[i.title] = i.inventory.items
-			shops_max_money[i.title] = i.inventory.money
-			i.faction = location_data.faction
-		stock_shops()
+			if i is Shop:
+				if i.inventory:
+					i.max_money = i.inventory.money
+				i.faction = location_data.faction
 		DayNightCycle.day_start.connect(stock_shops)
-	if shop != null:
-		shops_base_inventory[shop.title] = shop.inventory.items
-		shops_max_money[shop.title] = shop.inventory.money
-		shop.faction = location_data.faction
 		stock_shops()
 
 
@@ -91,17 +77,13 @@ func stock_shops() -> void:
 	if shops.size() == 0:
 		return
 	for i in shops:
-		if i.inventory:
-			if i.inventory is InventoryRandom:
-				i.inventory.restock_inventory()
-			else:
-				var inventory = i.inventory
-				inventory.money = shops_max_money[i.title]
-				inventory.items = shops_base_inventory[i.title].duplicate_deep()
-		if i.min_quests > 0 and i.random_quests.size() > 0:
-			i.restock_quests()
-			for q in i.quests:
-				q.return_location = title
+		if i is Shop:
+			i.restock_items()
+		if i.has_method("restock_quests"):
+			if i.min_quests > 0 and i.random_quests.size() > 0:
+				i.restock_quests()
+				for q in i.quests:
+					q.return_location = title
 
 
 func transition_to_level(start_alert = alert_enemies) -> void:

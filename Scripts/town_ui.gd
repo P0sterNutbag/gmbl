@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 var current_town: Town
-var current_shop: Shop
+var current_shop: TownOption
 @onready var town: PanelContainer = $Town
 @onready var shop: HBoxContainer = $Shop
 @onready var shop_inventory: PanelContainer = $Shop/Inventory

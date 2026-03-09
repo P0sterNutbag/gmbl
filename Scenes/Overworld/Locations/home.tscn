@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_pja8p"]
 [ext_resource type="Shader" uid="uid://t0rbtq4muofy" path="res://Art/Shaders/flag.gdshader" id="3_byq8e"]
 [ext_resource type="Script" uid="uid://bbi3gcsb33muk" path="res://Scripts/town.gd" id="3_h6gkv"]
+[ext_resource type="Script" uid="uid://dsdpmpehomy6m" path="res://Scripts/town_option.gd" id="4_3et51"]
 [ext_resource type="Material" uid="uid://brr5rgo0swhv5" path="res://Art/Materials/wood_triplanar.tres" id="4_2116q"]
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="4_qcuoc"]
 [ext_resource type="Texture2D" uid="uid://bkxsoff507nnd" path="res://Art/Textures/tin roof.png" id="5_0wea3"]
@@ -16,6 +17,7 @@
 [ext_resource type="Script" uid="uid://g1k0736rje3q" path="res://Scripts/quest_random.gd" id="8_drdin"]
 [ext_resource type="AudioStream" uid="uid://baylryxodu5ig" path="res://Audio/Guns/handgun_A_shot_single_01.wav" id="8_pja8p"]
 [ext_resource type="AudioStream" uid="uid://gsdbj01b6ork" path="res://Audio/Guns/shotgun_B_shot_single_04.wav" id="9_h6gkv"]
+[ext_resource type="Script" uid="uid://cdjlwglvj2lmy" path="res://Scripts/town_action.gd" id="10_82lwf"]
 [ext_resource type="AudioStream" uid="uid://b55utbl22kuql" path="res://Audio/Guns/submngun_B_shTL_single_01.wav" id="10_qcuoc"]
 [ext_resource type="PackedScene" uid="uid://cqnwuiew1q2il" path="res://Scenes/Overworld/Locations/point_of_interest.tscn" id="11_3et51"]
 
@@ -35,25 +37,22 @@ metadata/_custom_type_script = "uid://6ucyr0petjnx"
 
 [sub_resource type="Resource" id="Resource_wdrso"]
 script = ExtResource("4_qcuoc")
-title = "Stash"
 inventory = SubResource("Resource_jxacl")
 uses_money = false
+title = "Your Stash"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
-[sub_resource type="Resource" id="Resource_pja8p"]
-script = ExtResource("6_82lwf")
-metadata/_custom_type_script = "uid://6ucyr0petjnx"
-
-[sub_resource type="Resource" id="Resource_h6gkv"]
-script = ExtResource("4_qcuoc")
-title = "Rest"
-inventory = SubResource("Resource_pja8p")
-metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+[sub_resource type="Resource" id="Resource_eojqs"]
+script = ExtResource("10_82lwf")
+node_path = "PlayerStats"
+method = "go_to_sleep"
+title = "Sleep"
+metadata/_custom_type_script = "uid://cdjlwglvj2lmy"
 
 [sub_resource type="Resource" id="Resource_l7mb3"]
 script = ExtResource("3_h6gkv")
 title = "Home Base"
-shops = Array[ExtResource("4_qcuoc")]([SubResource("Resource_wdrso"), SubResource("Resource_h6gkv")])
+shops = Array[ExtResource("4_3et51")]([SubResource("Resource_wdrso"), SubResource("Resource_eojqs")])
 metadata/_custom_type_script = "uid://bbi3gcsb33muk"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hwnis"]

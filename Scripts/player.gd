@@ -42,6 +42,7 @@ var ammo: int:
 var gun: Node3D
 var object_to_place: Node3D
 var gun_tween: Tween
+var unequip_tween: Tween
 var walk_tween: Tween
 var sway_noise := FastNoiseLite.new()
 var state_functions: Dictionary
@@ -54,19 +55,19 @@ var faction := FactionManager.factions.player
 var grenade_object = preload("res://Scenes/Bullets/grenade.tscn")
 const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var camera = $CameraAnchor/Camera3D
-@onready var gun_rotation: Node3D = %GunRotation
-@onready var gun_anchor: Node3D = %GunRotation/GunOffset/GunAnchor
-@onready var gun_offset: Node3D = %GunRotation/GunOffset
+@onready var gun_pivot: Node3D = %GunPivot
+@onready var gun_offset: Node3D = %GunPivot/GunOffset
+@onready var gun_anchor: Node3D = %GunPivot/GunOffset/GunAnchor
 @onready var ads_position: Node3D = $CameraAnchor/Camera3D/AdsOffset/AdsPosition
-@onready var pistol: Node3D = %GunRotation/GunOffset/GunAnchor/Pistol
-@onready var ak_47: Node3D = %GunRotation/GunOffset/GunAnchor/AK47
-@onready var sniper_rifle: Node3D = %GunRotation/GunOffset/GunAnchor/SniperRifle
-@onready var shotgun: Node3D = %GunRotation/GunOffset/GunAnchor/Shotgun
-@onready var sawed_off: Gun = %GunRotation/GunOffset/GunAnchor/SawedOff
-@onready var uzi: Gun = %GunRotation/GunOffset/GunAnchor/Uzi
-@onready var hunting_rifle: Gun = %GunRotation/GunOffset/GunAnchor/HuntingRifle
-@onready var knife: Node3D = %GunRotation/GunOffset/GunAnchor/Knife
-@onready var grenade: Node3D = %GunRotation/GunOffset/GunAnchor/Grenade
+@onready var pistol: Node3D = %GunPivot/GunOffset/GunAnchor/Pistol
+@onready var ak_47: Node3D = %GunPivot/GunOffset/GunAnchor/AK47
+@onready var sniper_rifle: Node3D = %GunPivot/GunOffset/GunAnchor/SniperRifle
+@onready var shotgun: Node3D = %GunPivot/GunOffset/GunAnchor/Shotgun
+@onready var sawed_off: Gun = %GunPivot/GunOffset/GunAnchor/SawedOff
+@onready var uzi: Gun = %GunPivot/GunOffset/GunAnchor/Uzi
+@onready var hunting_rifle: Gun = %GunPivot/GunOffset/GunAnchor/HuntingRifle
+@onready var knife: Node3D = %GunPivot/GunOffset/GunAnchor/Knife
+@onready var grenade: Node3D = %GunPivot/GunOffset/GunAnchor/Grenade
 @onready var step_timer: Timer = $StepTimer
 @onready var interact_cast: = $CameraAnchor/Camera3D/RayCast3D
 @onready var hitbox: HealthComponent = $Hitbox
@@ -77,7 +78,7 @@ const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var bullet_flyby_sfx: AudioStreamPlayer3D = $CameraAnchor/BulletListener/AudioStreamPlayer3D
 @onready var footstep_sfx: AudioStreamPlayer3D = $FootstepPlayer
 @onready var spot_light: SpotLight3D = $CameraAnchor/Camera3D/SpotLight3D
-@onready var gun_collision_cast: RayCast3D = %GunRotation/GunOffset/RayCast3D
+@onready var gun_collision_cast: RayCast3D = %GunPivot/GunOffset/RayCast3D
 
 
 func _enter_tree() -> void:
@@ -275,18 +276,19 @@ func state_walk(delta):
 			step_noise_event()
 			step_timer.start()
 	
-	# point gun forward
-	#if gun_state == gun_states.ads:
-		#gun_rotation.rotation.x = camera.rotation.x
-		#gun_rotation.rotation.y = camera.rotation.y
-	#else:
-		#gun_rotation.rotation.x = lerp_angle(gun_rotation.rotation.x, camera.rotation.x, 20 * delta)
-		#gun_rotation.rotation.y = lerp_angle(gun_rotation.rotation.y, camera.rotation.y, 20 * delta)
-	var target_z = deg_to_rad(-sign(Input.get_last_mouse_velocity().x) * 2.5)
-	if target_z == 0.0:
-		target_z = deg_to_rad(-sign(input.x) * 2.5)
-	gun_rotation.rotation.z = lerp_angle(gun_rotation.rotation.z, target_z, 5 * delta)
-	gun_rotation.global_position.y = camera.global_position.y
+	# gun direction/movement
+	var target_rot: Vector3
+	target_rot.z = deg_to_rad(-sign(input.x) * 2.5)
+	if gun_state == gun_states.point:
+		var mouse_velocity = Input.get_last_mouse_velocity()
+		if mouse_velocity.x != 0:
+			target_rot.z = deg_to_rad(-sign(mouse_velocity.x) * 2.5)
+		target_rot = Vector3(deg_to_rad(mouse_velocity.y * 0.01), deg_to_rad(mouse_velocity.x * 0.01), target_rot.z)
+	else:
+		target_rot = Vector3.ZERO
+	gun_pivot.rotation.x = lerp_angle(gun_pivot.rotation.x, target_rot.x, 20 * delta)
+	gun_pivot.rotation.y = lerp_angle(gun_pivot.rotation.y, target_rot.y, 20 * delta)
+	gun_pivot.rotation.z = lerp_angle(gun_pivot.rotation.z, target_rot.z, 5 * delta)
 	
 	# shooting and aiming
 	if (gun_state == gun_states.ads or gun_state == gun_states.point) and gun.rotation.y == 0:
@@ -300,7 +302,7 @@ func state_walk(delta):
 				tween.tween_property(gun, "position", Vector3.ZERO, 0.2)
 				var tween2 = create_tween().set_ease(Tween.EASE_OUT)
 				tween2.tween_property(self, "aim_rotation:x", aim_rotation.x + deg_to_rad(gun.kickback_magnitude) / 3, 0.01)
-				Globals.noise_controller.create_noise_event(gun.firepoint.global_position, self, gun.bullet_stats.noise_radius)
+				Globals.noise_controller.create_noise_event(gun.fire_point.global_position, self, gun.bullet_stats.noise_radius)
 				if gun.fire_type == gun.fire_types.pump:
 					gun.shoot_cooldown_timer.stop()
 					await get_tree().create_timer(0.25).timeout
@@ -498,6 +500,7 @@ func enter_gun_state_point():
 		gun_tween.kill()
 	gun_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	gun_tween.tween_property(gun_anchor, "position", Vector3.ZERO, 0.25)
+	gun_tween.tween_property(gun, "visible", true, 0)
 	camera_zoom = zoom_levels.regular
 
 
@@ -506,6 +509,7 @@ func enter_gun_state_ads():
 		gun_tween.kill()
 	gun_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	gun_tween.tween_property(gun_anchor, "position", ads_position.position, 0.15)
+	#gun_tween.tween_property(gun, "visible", true, 0)
 	camera_zoom = zoom_levels.ads
 	sway_noise.seed = randi()
 	sway_time = 0
@@ -585,11 +589,15 @@ func enter_gun_state_no_gun():
 	if !gun:
 		for g in gun_anchor.get_children():
 			g.visible = false
-	var tween = create_tween()
-	tween.tween_property(gun_anchor, "position:y", -0.3, 0.25)
+	if gun_tween:
+		gun_tween.kill()
+	gun_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel()
+	gun_tween.tween_property(gun_anchor, "position", Vector3(0, -0.3, 0.3), 0.25)
+	gun_tween.tween_property(gun_pivot, "rotation_degrees", Vector3(-45, 0, 0), 0.25)
+	gun_tween.set_parallel(false)
 	if gun:
-		tween.tween_property(gun, "visible", false, 0)
-	await tween.finished
+		gun_tween.tween_property(gun, "visible", false, 0)
+	await gun_tween.finished
 
 
 func gun_state_no_gun(_delta: float):
@@ -613,11 +621,16 @@ func gun_state_no_gun(_delta: float):
 
 func exit_gun_state_no_gun():
 	placer_raycast.enabled = false
-	var tween = create_tween()
-	tween.tween_property(gun_anchor, "position:y", 0, 0.25)
-	tween.tween_property(gun, "visible", true, 0)
-	tween.tween_property(gun, "process_mode", PROCESS_MODE_ALWAYS, 0)
-	await tween.finished
+	gun_pivot.rotation_degrees = Vector3(-45, 0, 0)
+	if gun_tween:
+		gun_tween.kill()
+	gun_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel()
+	gun_tween.tween_property(gun_anchor, "position", Vector3.ZERO, 0.25)
+	gun_tween.tween_property(gun_pivot, "rotation_degrees", Vector3.ZERO, 0.25)
+	gun_tween.set_parallel(false)
+	gun_tween.tween_property(gun, "visible", true, 0)
+	gun_tween.tween_property(gun, "process_mode", PROCESS_MODE_ALWAYS, 0)
+	await gun_tween.finished
 
 
 func enter_gun_state_point_up() -> void:
@@ -664,6 +677,8 @@ func change_gun(new_gun: EquipmentGun) -> void:
 	if gun and gun_state != gun_states.no_gun:
 		await change_gun_state(gun_states.no_gun)
 	else:
+		if gun_tween and gun_tween.is_running():
+			await gun_tween.finished
 		gun_anchor.position.y = -0.3
 	if !new_gun:
 		gun = null
@@ -685,9 +700,10 @@ func change_gun(new_gun: EquipmentGun) -> void:
 
 
 func unequip_gun() -> void:
-	await change_gun_state(gun_states.no_gun)
+	change_gun_state(gun_states.no_gun)
 	PlayerStats.gun = null
 	gun = null
+
 
 
 func throw_grenade() -> void:
@@ -775,7 +791,7 @@ func _on_death() -> void:
 
 func _on_gun_changed() -> void:
 	if PlayerStats.gun:
-		if gun_state == gun_states.point or gun == null:
+		if gun_state == gun_states.point or gun_state == gun_states.no_gun or gun == null:
 			change_gun(PlayerStats.gun)
 	else:
 		unequip_gun()

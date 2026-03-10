@@ -1,6 +1,6 @@
 extends MenuList
 
-var shop: Shop
+var shop: TownOption
 @onready var name_label: Label = $PanelContainer2/MarginContainer/VBoxContainer/Title
 @onready var description_label: Label = $PanelContainer2/MarginContainer/VBoxContainer/Description
 @onready var reward_label: Label = $PanelContainer2/MarginContainer/VBoxContainer/Reward

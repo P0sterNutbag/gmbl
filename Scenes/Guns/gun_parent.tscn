@@ -59,65 +59,60 @@ random_pitch = 1.1
 streams_count = 1
 stream_0/stream = ExtResource("7_xws2q")
 
-[node name="Gun" type="Node3D"]
+[node name="Gun" type="Node3D" unique_id=661242307]
 script = ExtResource("1_4wfcx")
 bullet_stats = SubResource("Resource_gymyn")
 fire_type = 1
 ads_vector = Vector3(-0.192, 0.045, 0.07)
 
-[node name="GunAnchor" type="Node3D" parent="."]
+[node name="GunAnchor" type="Node3D" parent="." unique_id=1970548578]
 
-[node name="FirePoint" type="Node3D" parent="GunAnchor"]
+[node name="FirePoint" type="Node3D" parent="GunAnchor" unique_id=1901170218]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00265765, 0.223656, -0.631615)
 
-[node name="RayCast3D" type="RayCast3D" parent="GunAnchor/FirePoint"]
-target_position = Vector3(0, 0, -100)
-collision_mask = 5
-collide_with_areas = true
-
-[node name="MuzzleFlash" type="Node3D" parent="GunAnchor/FirePoint"]
+[node name="MuzzleFlash" type="Node3D" parent="GunAnchor/FirePoint" unique_id=540190188]
 visible = false
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="GunAnchor/FirePoint/MuzzleFlash"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="GunAnchor/FirePoint/MuzzleFlash" unique_id=1265223842]
 transform = Transform3D(2.448e-15, 4.37114e-08, 1, 1, -4.37114e-08, -5.37314e-16, 4.37114e-08, 1, -4.37114e-08, 4.6264e-08, -3.91968e-16, -0.0100421)
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_l6n3p")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3" unique_id=697458870]
 transform = Transform3D(0.910366, 0, -0.413804, 0, 1, 0, 0.413804, 0, 0.910366, 0, 0, 0)
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_wpjfl")
 skeleton = NodePath("../../..")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3"]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3" unique_id=1614232085]
 transform = Transform3D(0.5, 4.23658e-23, 0, 0, -4.37114e-08, 1.25, 0, -1, -5.46392e-08, 1.49012e-08, -0.218581, 9.77889e-09)
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_bpsw6")
 skeleton = NodePath("../../..")
 
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3"]
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3" unique_id=1914905470]
 transform = Transform3D(-2.18557e-08, -1, 5.46393e-08, 0, 4.37114e-08, 1.25, -0.5, 4.37114e-08, 3.55271e-15, 1.49012e-08, -0.218581, 1.00117e-08)
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_bpsw6")
 skeleton = NodePath("../../..")
 
-[node name="OmniLight3D" type="SpotLight3D" parent="GunAnchor/FirePoint/MuzzleFlash"]
+[node name="OmniLight3D" type="SpotLight3D" parent="GunAnchor/FirePoint/MuzzleFlash" unique_id=1189634295]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0270571, -0.0166076)
 spot_range = 10.0
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="GunAnchor/FirePoint"]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="GunAnchor/FirePoint" unique_id=382067649]
 stream = SubResource("AudioStreamRandomizer_l6n3p")
 unit_size = 20.0
 bus = &"SFX"
 
-[node name="Chamber" type="Node3D" parent="GunAnchor"]
+[node name="Chamber" type="Node3D" parent="GunAnchor" unique_id=1534345481]
 
-[node name="EmptyClick" type="AudioStreamPlayer3D" parent="."]
+[node name="EmptyClick" type="AudioStreamPlayer3D" parent="." unique_id=1612168282]
 stream = ExtResource("8_xws2q")
 bus = &"SFX"
 
-[node name="Cooldown" type="Timer" parent="."]
+[node name="Cooldown" type="Timer" parent="." unique_id=1667352037]
 one_shot = true
 
 [connection signal="timeout" from="Cooldown" to="." method="_on_shoot_cooldown_timeout"]

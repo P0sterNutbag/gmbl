@@ -25,7 +25,7 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hf0oe"]
 radius = 0.434372
 
-[sub_resource type="Resource" id="Resource_nv6bg"]
+[sub_resource type="Resource" id="Resource_fyaxn"]
 resource_local_to_scene = true
 script = ExtResource("3_f2atc")
 population = 4
@@ -79,10 +79,9 @@ potential_slots = Array[ExtResource("5_7npny")]([SubResource("Resource_kx6ku"), 
 money = 500
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
-[sub_resource type="Resource" id="Resource_jn6y6"]
+[sub_resource type="Resource" id="Resource_nv6bg"]
 resource_local_to_scene = true
 script = ExtResource("11_w00nu")
-title = "Traveler"
 inventory = SubResource("Resource_6nrh4")
 price_modifiers = {
 "Ammo": 0.5,
@@ -93,6 +92,7 @@ price_modifiers = {
 "Survival": 0.75,
 "Weapons": 0.5
 }
+title = "Traveler"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_e46jk"]
@@ -100,7 +100,7 @@ radius = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fjuww"]
 
-[node name="Npc" type="CharacterBody3D" unique_id=907079178 groups=["overworld npcs", "persist"]]
+[node name="Npc" type="CharacterBody3D" unique_id=907079178 groups=["overworld npcs"]]
 collision_layer = 0
 script = ExtResource("1_ldcoh")
 
@@ -111,9 +111,9 @@ shape = SubResource("CapsuleShape3D_hf0oe")
 [node name="Location" parent="." unique_id=361678620 instance=ExtResource("2_jf2yb")]
 collision_mask = 96
 title = "Squad"
-location_data = SubResource("Resource_nv6bg")
+location_data = SubResource("Resource_fyaxn")
 encounter_scene = ExtResource("4_w8t3j")
-shop = SubResource("Resource_jn6y6")
+shop = SubResource("Resource_nv6bg")
 dialogue_tree = ExtResource("18_yyftb")
 can_stealth_start = true
 

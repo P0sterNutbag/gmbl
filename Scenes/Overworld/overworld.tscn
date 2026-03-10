@@ -94,7 +94,6 @@
 [ext_resource type="PackedScene" uid="uid://c2ch548rglx0" path="res://Scenes/Levels/desert4.tscn" id="90_me12r"]
 [ext_resource type="PackedScene" uid="uid://ckk7ngs5hgesp" path="res://Scenes/Levels/desert5.tscn" id="91_bqxwu"]
 [ext_resource type="PackedScene" uid="uid://bhnlai8o6lxh0" path="res://Scenes/Levels/desert6.tscn" id="92_cvr5w"]
-[ext_resource type="PackedScene" uid="uid://b0cqkj1fgouo2" path="res://Scenes/Overworld/NPCs/npc.tscn" id="96_me12r"]
 [ext_resource type="PackedScene" uid="uid://camjoalnob06k" path="res://Scenes/Overworld/Locations/home.tscn" id="97_bqxwu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jdigv"]
@@ -732,6 +731,7 @@ metadata/_custom_type_script = "uid://cfuex8bm4d62j"
 [sub_resource type="Resource" id="Resource_afbx0"]
 script = ExtResource("69_2gpn5")
 required_items = Array[ExtResource("54_rkewd")]([SubResource("Resource_vrfhn"), SubResource("Resource_lxg12"), SubResource("Resource_1jhmm")])
+reward_multiplier = 2.0
 metadata/_custom_type_script = "uid://bicpdyf13vj1j"
 
 [sub_resource type="Resource" id="Resource_3uqk4"]
@@ -880,7 +880,7 @@ objects_to_snap = [NodePath("../BanditCamp"), NodePath("../BanditTown"), NodePat
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 209.23575, 0.7160551, 205.48468)
 
 [node name="Player" parent="." unique_id=1763906924 instance=ExtResource("3_c84f5")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 209.23575, 0.7160551, 205.48468)
+transform = Transform3D(-0.9999692, -0.007853901, 8.742278e-08, -0.007853901, 0.9999692, 0, -8.7420084e-08, -6.866098e-10, -1, 209.23575, 0.7160551, 203.77374)
 
 [node name="BoundaryWall" type="MeshInstance3D" parent="." unique_id=1785772133]
 process_mode = 4
@@ -960,14 +960,7 @@ encounter_scene = ExtResource("92_cvr5w")
 
 [node name="Home" parent="." unique_id=1047620238 instance=ExtResource("97_bqxwu")]
 transform = Transform3D(0.29030132, 0, 0.9569353, 0, 1, 0, -0.9569353, 0, 0.29030132, 214.29442, 0.49500558, 208.90747)
-
-[node name="Npc" parent="." unique_id=907079178 instance=ExtResource("96_me12r")]
-transform = Transform3D(0.15583114, 0, 0.98778373, 0, 1, 0, -0.98778373, 0, 0.15583114, 210.52792, 7.7811713, 221.1323)
-faction = 3
-
-[node name="Npc2" parent="." unique_id=1447653522 instance=ExtResource("96_me12r")]
-transform = Transform3D(-0.41086215, 0, -0.91169745, 0, 1, 0, 0.91169745, 0, -0.41086215, 204.63878, 7.7811713, 220.20323)
-faction = 2
+can_spawn_npcs = false
 
 [connection signal="timeout" from="NpcController/Timer" to="NpcController" method="_on_timer_timeout"]
 [connection signal="timeout" from="NpcController/Timer" to="NpcController/Timer" method="_on_timeout"]

@@ -17,16 +17,16 @@ var items:
 @export var max_items: int
 @export var min_items: int
 @export var faction: FactionManager.factions
-enum states {idle, investigate, shoot, search, strafe, hurt, reload, camp, dead, aim, walk, standby, supress, find_cover}
+enum states {idle, investigate, shoot, search, strafe, hurt, reload, camp, dead, aim, walk, supress, find_cover}
 var state = states.idle
 var walk_speed := 1.5
 var run_speed := 3.0
 var time_to_detect_max := 1.5
 var camp_chance := 0.1
 var supress_change := 0.25
-var camp_time := 5
+var camp_time := 5.0
 var camp_time_min := 2.5
-var camp_time_max := 10
+var camp_time_max := 10.0
 var time_to_detect: float = time_to_detect_max
 var time_since_bleed: float
 var time_since_detect: float
@@ -45,12 +45,7 @@ var last_seen_position: Vector3
 var destination: Vector3
 var target: Node3D
 var bounty: Quest
-#var guns_dict: Dictionary = {
-	#0 : [preload("res://Scenes/Guns/shotgun.tscn"), preload("res://Resources/Items/Guns/shotgun.tres")],
-	#1 : [preload("res://Scenes/Guns/ak47.tscn"), preload("res://Resources/Items/Guns/ak47.tres")],
-	#2 : [preload("res://Scenes/Guns/sniper.tscn"), preload("res://Resources/Items/Guns/sniper_rifle.tres")],
-	#3 : [preload("res://Scenes/Guns/pistol.tscn"), preload("res://Resources/Items/Guns/pistol.tres")],
-#}
+var state_functions: Dictionary
 @onready var detection = $Detection
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var anim_player: AnimationPlayer = $EnemyModel/PersonAnimated/AnimationPlayer
@@ -82,6 +77,22 @@ func _ready() -> void:
 	DayNightCycle.night_start.connect(on_night_start)
 	DayNightCycle.day_start.connect(on_day_start)
 	time_to_see_max += randf_range(-0.25, 0.25)
+	# state machine
+	state_functions = {
+		states.idle: state_idle,
+		states.investigate: state_investigate,
+		states.shoot: state_shoot,
+		states.search: state_search,
+		states.strafe: state_strafe,
+		states.hurt: state_hurt,
+		states.reload: state_reload,  
+		states.camp: state_camp,  
+		states.dead: state_dead,
+		states.aim: state_aim,
+		states.walk: state_walk,
+		states.supress: state_supress,
+		states.find_cover: state_find_cover,
+	}
 	# set affinity to player
 	await get_tree().process_frame
 	set_detection_targets()
@@ -90,292 +101,254 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	target = detection.get_visible_target()
-	if state == states.standby:
-		if is_new_state:
-			visible = false
-			position = Vector3.ONE * 1000
-			is_new_state = false
-		return
 	$Label3D.text = str(state)
-	match state:
-		states.idle:
-			if is_new_state:
-				on_alert = false
-				velocity = Vector3.ZERO
-				if destination != Vector3.ZERO:
-					change_state(states.walk)
-				is_new_state = false
-			
-			# return to path
-			var parent = get_parent()
-			if parent is Path3D:
-				var next_point = parent.global_position + parent.curve.get_point_position(path_index)
-				if navigation_agent.target_position != next_point:
-					navigation_agent.set_target_position(next_point)
-				follow_path()
-			elif follow_target:
-				navigation_agent.set_target_position(follow_target.global_position)
-				follow_path(run_speed)
-			
-			# return to walk
-			if destination != Vector3.ZERO:
-				change_state(states.walk)
-			
-			# switch to investigate
-			if target != null:
-				time_to_see += delta
-				if time_to_see > time_to_see_max:
-					time_to_see = 0
-					change_state(states.investigate)
-			
-			# animate
-			if abs(velocity) == Vector3.ZERO:
-				anim_player.play("Idle")
-			elif velocity.length() >= run_speed-1:
-				anim_player.play("Run")
-			else:
-				anim_player.play("Walk")
-			
-		states.walk:
-			if is_new_state:
-				navigation_agent.set_target_position(destination)
-				anim_player.play("Walk")
-			
-			follow_path()
-			
-			# switch to investigate
-			if target != null:
-				time_to_see += delta
-				if time_to_see > time_to_see_max:
-					time_to_see = 0
-					change_state(states.investigate)
-			
-			# animate
-			if abs(velocity) == Vector3.ZERO:
-				anim_player.play("Idle")
-			elif velocity.length() >= run_speed-1:
-				anim_player.play("Run")
-			else:
-				anim_player.play("Walk")
-		
-		states.investigate:
-			if is_new_state:
-				time_to_detect = time_to_detect_max
-				velocity = Vector3.ZERO
-				is_new_state = false
-			
-			# stop moving
-			velocity = Vector3.ZERO
-			
-			# detect target
-			if target:
-				look_at_position(target.global_position)
-				var dis_to_target = global_position.distance_to(target.global_position)
-				time_to_detect -= (20 / dis_to_target) * delta
-				if time_to_detect <= 0 or on_alert:
-					if randf() > 0.5:
-						change_state(states.find_cover)
-					else:
-						change_state(states.aim)
-			else:
-				if return_to_idle_timer.time_left <= 0:
-					return_to_idle_timer.start()
-			anim_player.play("IdlePoint")
-		
-		states.aim:
-			if is_new_state:
-				on_alert = true
-				velocity = Vector3.ZERO
-				aim_timer.start()
-				anim_player.play("Aim")
-				#for enemy in get_tree().get_nodes_in_group("enemies"):
-					#if enemy.state == states.idle or enemy.state == states.walk:
-						#enemy.change_state(states.investigate)
-				is_new_state = false
-			
-			if target:
-				look_at_position(target.global_position)
-		
-		states.shoot:
-			if is_new_state:
-				on_alert = true
-				anim_player.play("Fire")
-				if !target:
-					if randf() <= camp_chance:
-						change_state(states.camp)
-					#elif randf() <= supress_change:
-						#change_state(states.supress)
-					else:
-						change_state(states.search)
-					return
-				velocity = Vector3.ZERO
-				is_new_state = false
-			
-			#if !target or target.state == states.dead:
-				#target = null
-				#change_state(states.investigate)
-				#return
-			
-			# look at target
-			if target and gun:
-				last_seen_position = target.global_position
-				look_at_position(last_seen_position)
-				if gun.firepoint != null:
-					gun.firepoint.look_at(detection.target_pos)
-			
-			# get into range
-			#if target and global_position.distance_to(target.global_position) > range:
-				#navigation_agent.set_target_position(target.global_position)
-				#follow_path(run_speed)
-			#else:
-				#velocity = Vector3.ZERO
-			
-			# switch to search
-			if !target: #!detection.can_see_target(target):
-				time_since_detect += delta
-				if time_since_detect >= 3:
-					if randf() <= camp_chance:
-						change_state(states.camp)
-					#elif randf() <= supress_change:
-						#change_state(states.supress)
-					else:
-						change_state(states.search)
-			else:
-				time_since_detect = 0
-			
-			# animate 
-			#if velocity == Vector3.ZERO:
-				#if gun.ammo > 0:
-					#anim_player.play("Fire")
-				#else:
-					#anim_player.play("Idle")
-			#else:
-				#anim_player.play("WalkPoint")
-		
-		states.supress:
-			if is_new_state:
-				look_at_position(last_seen_position)
-				anim_player.play("Fire")
-				velocity = Vector3.ZERO
-				supress_timer.start()
-				is_new_state = false
-			
-		
-		states.reload:
-			if is_new_state:
-				anim_player.play("Reload")
-				is_new_state = false
-		
-		states.camp:
-			if is_new_state:
-				velocity = Vector3.ZERO
-				time_since_detect = 0
-				camp_time = randf_range(camp_time_min, camp_time_max)
-				anim_player.play("IdlePoint")
-				is_new_state = false
-			
-			if target:
-				change_state(states.shoot)
-			
-			time_since_detect += delta
-			if time_since_detect > camp_time:
-				if last_seen_position != Vector3.ZERO:
-					#navigation_agent.set_target_position(last_seen_position)
-					change_state(states.search)
-				else:
-					change_state(states.investigate)
-			
-		states.search:
-			if is_new_state:
-				if last_seen_position == Vector3.ZERO:
-					change_state(states.investigate)
-					return
-				navigation_agent.set_target_position(last_seen_position)
-				is_new_state = false
-			
-			# go to last seen position
-			follow_path(run_speed)
-			
-			# return to shoot
-			if target:
-				change_state(states.aim)
-			
-			# animate
-			anim_player.play("WalkPoint")
-			
-		states.strafe:
-			# set new strafe position
-			if is_new_state:
-				var new_pos = global_position
-				new_pos = global_position + Vector3(randf_range(-4, 4), 0, randf_range(-4, 4))
-				navigation_agent.set_target_position(new_pos)
-				is_new_state = false
-			
-			# run to new position
-			follow_path(run_speed)
-			
-			# stop strafing
-			if velocity.length() < 0.1:
-				look_at_position(last_seen_position)
-				change_state(states.aim)
-			
-			# animate
-			if velocity == Vector3.ZERO:
-				anim_player.play("Idle")
-			else:
-				anim_player.play("Run")
-		
-		states.find_cover:
-			if is_new_state:
-				var potential_cover = get_tree().get_nodes_in_group("cover")
-				potential_cover = potential_cover.filter(func(a): 
-					return global_position.distance_to(a.global_position) < 15)
-				potential_cover = potential_cover.filter(func(a): 
-					for _target in detection.targets:
-						if _target == null: continue
-						detection.global_position.x = a.global_position.x
-						detection.global_position.z = a.global_position.z
-						detection.force_shapecast_update()
-						return !detection.can_see_target(_target))
-				detection.position = Vector3(0, 1, 0)
-				if potential_cover.size() == 0:
-					change_state(states.strafe)
-					return
-				potential_cover.sort_custom(func(a, b): return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position))
-				var cover_pos = potential_cover[0].global_position
-				navigation_agent.set_target_position(cover_pos)
-				is_new_state = false
-			
-			# run to new position
-			follow_path(run_speed)
-			
-			# animate
-			if velocity == Vector3.ZERO:
-				anim_player.play("Idle")
-			else:
-				anim_player.play("Run")
-		
-		states.hurt:
-			pass
-		
-		states.dead:
-			pass
-		
+	# state machine
+	if state_functions.has(state):
+		state_functions[state].call(delta)
 	# Add gravity and move
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	move_and_slide()
-	
-	#if state != states.dead:
-		#if PlayerStats.state == PlayerStats.states.dead:
-			#target = null
-		#else:
-			#target = detection.get_visible_target()
-
 
 
 func _process(delta: float) -> void:
 	time_since_bleed += delta
+
+
+func state_idle(delta) -> void:
+	if is_new_state:
+		on_alert = false
+		velocity = Vector3.ZERO
+		if destination != Vector3.ZERO:
+			change_state(states.walk)
+		is_new_state = false
+	var parent = get_parent()
+	if parent is Path3D:
+		var next_point = parent.global_position + parent.curve.get_point_position(path_index)
+		if navigation_agent.target_position != next_point:
+			navigation_agent.set_target_position(next_point)
+		follow_path()
+	elif follow_target:
+		navigation_agent.set_target_position(follow_target.global_position)
+		follow_path(run_speed)
+	# return to walk
+	if destination != Vector3.ZERO:
+		change_state(states.walk)
+	# switch to investigate
+	if target != null:
+		time_to_see += delta
+		if time_to_see > time_to_see_max:
+			time_to_see = 0
+			change_state(states.investigate)
+	# animate
+	if abs(velocity) == Vector3.ZERO:
+		anim_player.play("Idle")
+	elif velocity.length() >= run_speed-1:
+		anim_player.play("Run")
+	else:
+		anim_player.play("Walk")
+
+
+func state_walk(delta) -> void:
+	if is_new_state:
+		navigation_agent.set_target_position(destination)
+		anim_player.play("Walk")
+	# follow path
+	follow_path()
+	# switch to investigate
+	if target != null:
+		time_to_see += delta
+		if time_to_see > time_to_see_max:
+			time_to_see = 0
+			change_state(states.investigate)
+	# animate
+	if abs(velocity) == Vector3.ZERO:
+		anim_player.play("Idle")
+	elif velocity.length() >= run_speed-1:
+		anim_player.play("Run")
+	else:
+		anim_player.play("Walk")
+
+
+func state_investigate(delta) -> void:
+	if is_new_state:
+		time_to_detect = time_to_detect_max
+		velocity = Vector3.ZERO
+		is_new_state = false
+	# stop moving
+	velocity = Vector3.ZERO
+	# detect target
+	if target:
+		look_at_position(target.global_position)
+		var dis_to_target = global_position.distance_to(target.global_position)
+		time_to_detect -= (20 / dis_to_target) * delta
+		if time_to_detect <= 0 or on_alert:
+			if randf() > 0.5:
+				change_state(states.find_cover)
+			else:
+				change_state(states.aim)
+	else:
+		if return_to_idle_timer.time_left <= 0:
+			return_to_idle_timer.start()
+	# animate
+	anim_player.play("IdlePoint")
+
+
+func state_aim(_delta) -> void:
+	if is_new_state:
+		on_alert = true
+		velocity = Vector3.ZERO
+		aim_timer.start()
+		anim_player.play("Aim")
+		is_new_state = false
+	if target:
+		look_at_position(target.global_position)
+
+
+func state_shoot(delta) -> void:
+	if is_new_state:
+		on_alert = true
+		anim_player.play("Fire")
+		if !target:
+			if randf() <= camp_chance:
+				change_state(states.camp)
+			#elif randf() <= supress_change:
+				#change_state(states.supress)
+			else:
+				change_state(states.search)
+			return
+		velocity = Vector3.ZERO
+		is_new_state = false
+	#if !target or target.state == states.dead:
+		#target = null
+		#change_state(states.investigate)
+		#return
+	# look at target
+	if target and gun:
+		last_seen_position = target.global_position
+		look_at_position(last_seen_position)
+		if gun.fire_point != null:
+			gun.fire_point.look_at(detection.target_pos)
+	# switch to search
+	if !target: #!detection.can_see_target(target):
+		time_since_detect += delta
+		if time_since_detect >= 3:
+			if randf() <= camp_chance:
+				change_state(states.camp)
+			#elif randf() <= supress_change:
+				#change_state(states.supress)
+			else:
+				change_state(states.search)
+	else:
+		time_since_detect = 0
+
+
+func state_supress(_delta) -> void:
+	if is_new_state:
+		look_at_position(last_seen_position)
+		anim_player.play("Fire")
+		velocity = Vector3.ZERO
+		supress_timer.start()
+		is_new_state = false
+
+
+func state_reload(_delta) -> void:
+	if is_new_state:
+		anim_player.play("Reload")
+		is_new_state = false
+
+
+func state_camp(delta) -> void:
+	if is_new_state:
+		velocity = Vector3.ZERO
+		time_since_detect = 0
+		camp_time = randf_range(camp_time_min, camp_time_max)
+		anim_player.play("IdlePoint")
+		is_new_state = false
+	if target:
+		change_state(states.shoot)
+	time_since_detect += delta
+	if time_since_detect > camp_time:
+		if last_seen_position != Vector3.ZERO:
+			#navigation_agent.set_target_position(last_seen_position)
+			change_state(states.search)
+		else:
+			change_state(states.investigate)
+
+
+func state_search(_delta) -> void:
+	if is_new_state:
+		if last_seen_position == Vector3.ZERO:
+			change_state(states.investigate)
+			return
+		navigation_agent.set_target_position(last_seen_position)
+		is_new_state = false
+	# go to last seen position
+	follow_path(run_speed)
+	# return to shoot
+	if target:
+		change_state(states.aim)
+	# animate
+	anim_player.play("WalkPoint")
+
+
+func state_strafe(_delta) -> void:
+	# set new strafe position
+	if is_new_state:
+		var new_pos = global_position
+		new_pos = global_position + Vector3(randf_range(-4, 4), 0, randf_range(-4, 4))
+		navigation_agent.set_target_position(new_pos)
+		is_new_state = false
+	# run to new position
+	follow_path(run_speed)
+	# stop strafing
+	if velocity.length() < 0.1:
+		look_at_position(last_seen_position)
+		change_state(states.aim)
+	# animate
+	if velocity == Vector3.ZERO:
+		anim_player.play("Idle")
+	else:
+		anim_player.play("Run")
+
+
+func state_find_cover(_delta) -> void:
+	if is_new_state:
+		var potential_cover = get_tree().get_nodes_in_group("cover")
+		potential_cover = potential_cover.filter(func(a): 
+			return global_position.distance_to(a.global_position) < 15)
+		potential_cover = potential_cover.filter(func(a): 
+			for _target in detection.targets:
+				if _target == null: continue
+				detection.global_position.x = a.global_position.x
+				detection.global_position.z = a.global_position.z
+				detection.force_shapecast_update()
+				return !detection.can_see_target(_target))
+		detection.position = Vector3(0, 1, 0)
+		if potential_cover.size() == 0:
+			change_state(states.strafe)
+			return
+		potential_cover.sort_custom(func(a, b): return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position))
+		var cover_pos = potential_cover[0].global_position
+		navigation_agent.set_target_position(cover_pos)
+		is_new_state = false
+	
+	# run to new position
+	follow_path(run_speed)
+	
+	# animate
+	if velocity == Vector3.ZERO:
+		anim_player.play("Idle")
+	else:
+		anim_player.play("Run")
+
+
+func state_hurt(_delta) -> void:
+	pass
+
+
+func state_dead(_delta) -> void:
+	pass
 
 
 func change_state(new_state: states):
@@ -425,7 +398,7 @@ func emit_shoot() -> void:
 		return
 	gun.shoot(self)
 	shoot_timer.start()
-	Globals.noise_controller.create_noise_event(gun.firepoint.global_position, self, gun.bullet_stats.noise_radius)
+	Globals.noise_controller.create_noise_event(gun.fire_point.global_position, self, gun.bullet_stats.noise_radius)
 
 
 

@@ -2,25 +2,32 @@
 
 [ext_resource type="Script" uid="uid://bdvokalrlg1k6" path="res://Scripts/item_pickup.gd" id="1_hsks4"]
 [ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="2_0iuk2"]
-[ext_resource type="PackedScene" uid="uid://dpffikxirjfnq" path="res://Scenes/Models/Guns/pistol_model.tscn" id="3_rbj7w"]
+[ext_resource type="PackedScene" uid="uid://bcqk17amj56df" path="res://Scenes/Models/Guns/uzi_model.tscn" id="3_hsks4"]
 
 [sub_resource type="Resource" id="Resource_dwr3s"]
 script = ExtResource("2_0iuk2")
 metadata/_custom_type_script = "uid://cfuex8bm4d62j"
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_rk1p0"]
-size = Vector3(0.0542603, 0.23999, 0.37085)
+[sub_resource type="BoxShape3D" id="BoxShape3D_hsks4"]
+size = Vector3(0.08766176, 0.1004591, 0.45654392)
 
-[node name="Pistol" type="RigidBody3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_rk1p0"]
+size = Vector3(0.07191469, 0.14304733, 0.06275943)
+
+[node name="Pistol" type="RigidBody3D" unique_id=295953114]
 collision_layer = 16
 angular_damp = 5.0
 script = ExtResource("1_hsks4")
 item_slot = SubResource("Resource_dwr3s")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.0306396, -0.0101318)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=739759724]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0005264338, 0.119632214, -0.08359091)
+shape = SubResource("BoxShape3D_hsks4")
+debug_fill = false
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1803240145]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00095368014, 0.0016074553, 0.0026210174)
 shape = SubResource("BoxShape3D_rk1p0")
 debug_fill = false
 
-[node name="Pistol" parent="." instance=ExtResource("3_rbj7w")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.0195705, 0)
+[node name="UziModel" parent="." unique_id=134366364 instance=ExtResource("3_hsks4")]

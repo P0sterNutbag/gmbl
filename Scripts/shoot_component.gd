@@ -1,7 +1,7 @@
 extends Node
 
 @export var bullet_stats: BulletStats
-@export var firepoint: Node3D
+@export var fire_point: Node3D
 @export var tracer_firepoint: Node3D
 var time_shooting := 0.0
 var spread := 1.0
@@ -19,7 +19,7 @@ func _on_shoot(is_ads: bool = false, movement_speed = Vector3.ZERO) -> void:
 	time_shooting += 0.4
 	for i in bullet_stats.amount:
 		var inst = bullet_stats.bullet_scene.instantiate()
-		inst.global_transform = firepoint.global_transform
+		inst.global_transform = fire_point.global_transform
 		inst.scale = Vector3.ONE
 		inst.visible = false
 		var variance = Vector2(bullet_stats.h_angle_variance_hip, bullet_stats.v_angle_variance_hip)

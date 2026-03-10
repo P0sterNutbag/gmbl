@@ -1,6 +1,7 @@
 extends Node
 
 @export var starting_inventory: Inventory
+@export var allies: Array[PackedScene]
 enum states {walk, pause, dead}
 var state = states.walk
 var faction: FactionManager.factions: 
@@ -189,8 +190,10 @@ func _on_scene_changed():
 
 func _on_scene_leaving():
 	if Globals.player:
-		hp = Globals.player.hitbox.hp
+		var new_hp = Globals.player.hitbox.hp
+		hp = new_hp
 
 
 func _on_load():
 	inventory = ResourceLoader.load("user://inventory.res")
+	Globals.player.hitbox.hp = hp

@@ -63,10 +63,19 @@ func _ready() -> void:
 			for i in attacker.location_data.population:
 				spawn_enemy(attacker.location_data.faction)
 	
+	
+	# spawn player allies
+	for ally in PlayerStats.allies:
+		var inst = ally.instantiate()
+		get_tree().current_scene.add_child(inst)
+		inst.global_position = Globals.player.global_position + Vector3(randf_range(-5.0, 5.0), 0, randf_range(-5.0, 5.0))
+		inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
+		inst.state = inst.states.walk
+	
 	# spawn wandering squads
 	if randf() <= location_data.squad_spawn_chance:
 		if Globals.overworld:
-			if !BattleManager.get_battle(Globals.overworld.current_location):
+			if !BattleManager.get_battle(Globals.overworld.current_encounter):
 				return
 		# get spawn and destination positions
 		var borders = border_parent.get_children().filter(func(a): return a.process_mode == PROCESS_MODE_INHERIT)
@@ -100,7 +109,7 @@ func _ready() -> void:
 			inst.change_state(inst.states.walk)
 	
 	# make enemies fight if theres a battle
-	if Globals.overworld and BattleManager.get_battle(Globals.overworld.current_location):
+	if Globals.overworld and BattleManager.get_battle(Globals.overworld.current_encounter):
 		for enemy in get_tree().get_nodes_in_group("enemies"):
 			var all_enemies = get_tree().get_nodes_in_group("enemies")
 			all_enemies = all_enemies.filter(func(a): return FactionManager.get_faction_relation(enemy.faction, a.faction) < 0.0)

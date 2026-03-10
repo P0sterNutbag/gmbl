@@ -37,7 +37,6 @@ var smoke: PackedScene = preload("res://Scenes/Effects/Particles/gun_smoke.tscn"
 @onready var chamber: Node3D = $GunAnchor/Chamber
 @onready var empty_click: AudioStreamPlayer3D = $EmptyClick
 @onready var shoot_cooldown_timer: Timer = $Cooldown
-@onready var firepoint: Node3D = $GunAnchor/FirePoint
 
 
 func _ready() -> void:
@@ -140,7 +139,7 @@ func shoot(shot_owner: Node3D = null) -> void:#is_ads: bool = false, movement_sp
 
 func create_bullet(shot_owner: Node3D, is_ads: bool, movement_speed: Vector3) -> void:
 	var inst = bullet_stats.bullet_scene.instantiate()
-	inst.global_transform = firepoint.global_transform
+	inst.global_transform = fire_point.global_transform
 	inst.scale = Vector3.ONE
 	inst.visible = false
 	var variance = Vector2(bullet_stats.h_angle_variance_hip, bullet_stats.v_angle_variance_hip)
@@ -157,6 +156,9 @@ func create_bullet(shot_owner: Node3D, is_ads: bool, movement_speed: Vector3) ->
 	inst.bullet_stats = bullet_stats
 	inst.creator = shot_owner
 	get_tree().current_scene.add_child(inst)
+	if uses_input and is_ads:
+		inst.global_position = Globals.player.camera.global_position
+		#inst.global_position.z -= fire_point.position.z
 
 
 func _on_shoot_cooldown_timeout() -> void:

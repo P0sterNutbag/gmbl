@@ -2,49 +2,32 @@
 
 [ext_resource type="Script" uid="uid://bdvokalrlg1k6" path="res://Scripts/item_pickup.gd" id="1_lfedf"]
 [ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="2_viwo2"]
-[ext_resource type="PackedScene" uid="uid://rhtj73aayki" path="res://Scenes/Models/Guns/ak47_model.tscn" id="3_x6jg1"]
+[ext_resource type="PackedScene" uid="uid://bchh4kpr6j8ct" path="res://Scenes/Models/Guns/hunting_rifle_model.tscn" id="3_lfedf"]
 
 [sub_resource type="Resource" id="Resource_ibnff"]
 script = ExtResource("2_viwo2")
 metadata/_custom_type_script = "uid://cfuex8bm4d62j"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rk1p0"]
-size = Vector3(0.1, 0.178, 0.38)
+size = Vector3(0.1, 0.12250293, 0.891814)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2q4no"]
-size = Vector3(0.1, 0.127602, 0.471461)
+size = Vector3(0.1, 0.041666124, 0.39600882)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_6bf8n"]
-size = Vector3(0.1, 0.0620156, 0.317605)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_k4jng"]
-size = Vector3(0.1, 0.212, 0.173)
-
-[node name="HuntingRifle" type="RigidBody3D"]
+[node name="HuntingRifle" type="RigidBody3D" unique_id=1585680337]
 collision_layer = 16
 angular_damp = 5.0
 script = ExtResource("1_lfedf")
 item_slot = SubResource("Resource_ibnff")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, -0.00666812, 0.33604)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1977986420]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.014809612, -0.1564808)
 shape = SubResource("BoxShape3D_rk1p0")
 debug_fill = false
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.0673393, 0.00543653)
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=2105072530]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.055295303, -0.79763865)
 shape = SubResource("BoxShape3D_2q4no")
 debug_fill = false
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.0714918, -0.388725)
-shape = SubResource("BoxShape3D_6bf8n")
-debug_fill = false
-
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, -0.110099, 0.0341526)
-shape = SubResource("BoxShape3D_k4jng")
-debug_fill = false
-
-[node name="Ak47" parent="." instance=ExtResource("3_x6jg1")]
-transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, -0.122254, 0.016794)
+[node name="Model" parent="." unique_id=378871357 instance=ExtResource("3_lfedf")]

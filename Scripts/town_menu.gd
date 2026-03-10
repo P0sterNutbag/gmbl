@@ -39,6 +39,9 @@ func create_town(town_data: Town) -> void:
 				menu.pressed.connect(Globals.ui.enter_shop.bind(shop))
 		elif shop is TownAction:
 			menu.pressed.connect(shop.do_action)
+		elif shop is QuestGiver:
+			menu.pressed.connect(Globals.ui.job_board.set.bind("shop", shop))
+			menu.pressed.connect(Globals.ui.start_dialogue.bind(shop.dialogue, shop))
 		menu.pressed.connect(hide)
 	var inst = item_container.create_menu_item()
 	inst.text = "Leave"

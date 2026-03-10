@@ -2,7 +2,7 @@ extends VBoxContainer
 
 var index: int = -1
 var can_advance: bool
-var shop: Shop
+var shop: TownOption
 var dialogue_tree: DialogueTree
 var dialogue_bubble = preload("res://Scenes/Overworld/UI/dialogue_bubble.tscn")
 var option_bubble = preload("res://Scenes/Overworld/UI/dialogue_options_bubble.tscn")

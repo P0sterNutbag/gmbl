@@ -2,49 +2,24 @@
 
 [ext_resource type="Script" uid="uid://bdvokalrlg1k6" path="res://Scripts/item_pickup.gd" id="1_bftxy"]
 [ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="2_hvw61"]
-[ext_resource type="PackedScene" uid="uid://d1pi0mdullohm" path="res://Scenes/Models/Guns/shotgun_model.tscn" id="3_xv714"]
+[ext_resource type="PackedScene" uid="uid://bt07vvnr66rmp" path="res://Scenes/Models/Guns/sawed_off_model.tscn" id="4_hvw61"]
 
 [sub_resource type="Resource" id="Resource_2w57p"]
 script = ExtResource("2_hvw61")
 metadata/_custom_type_script = "uid://cfuex8bm4d62j"
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_rk1p0"]
-size = Vector3(0.075, 0.08324805, 0.394)
+[sub_resource type="BoxShape3D" id="BoxShape3D_bftxy"]
+size = Vector3(0.083984375, 0.10055542, 0.46624756)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_6u172"]
-size = Vector3(0.075, 0.10028418, 0.251)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_v1ktk"]
-size = Vector3(0.075, 0.09210547, 0.119)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_3xj32"]
-size = Vector3(0.075, 0.10978906, 0.23)
-
-[node name="SawedOff" type="RigidBody3D"]
+[node name="SawedOff" type="RigidBody3D" unique_id=1802182560]
 collision_layer = 16
 angular_damp = 5.0
 script = ExtResource("1_bftxy")
 item_slot = SubResource("Resource_2w57p")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.07589927, -0.19143677)
-shape = SubResource("BoxShape3D_rk1p0")
-debug_fill = false
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=641814474]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0069122314, 0.0069885254)
+shape = SubResource("BoxShape3D_bftxy")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.02941135, 0.37018788)
-shape = SubResource("BoxShape3D_6u172")
-debug_fill = false
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, -0.065614864, 0.44905257)
-shape = SubResource("BoxShape3D_v1ktk")
-debug_fill = false
-
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.04150533, 0.12363976)
-shape = SubResource("BoxShape3D_3xj32")
-debug_fill = false
-
-[node name="Node3D" parent="." instance=ExtResource("3_xv714")]
-transform = Transform3D(-3.27835e-08, 0, -0.75, 0, 0.75, 0, 0.75, 0, -3.27835e-08, 0, -0.104604, 0.123923)
+[node name="Model" parent="." unique_id=727210851 instance=ExtResource("4_hvw61")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.018093802, -0.062805064)

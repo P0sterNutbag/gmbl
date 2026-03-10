@@ -36,23 +36,20 @@ gun_stats = SubResource("Resource_c0m27")
 ammo_item = ExtResource("6_c0m27")
 kickback_magnitude = 2.0
 
-[node name="GunAnchor" parent="." index="0"]
+[node name="GunAnchor" parent="." index="0" unique_id=1970548578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.034088593, -0.06913826)
 
-[node name="FirePoint" parent="GunAnchor" index="0"]
+[node name="FirePoint" parent="GunAnchor" index="0" unique_id=1901170218]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00265765, 0.08010273, -0.29106316)
 
-[node name="RayCast3D" parent="GunAnchor/FirePoint" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.051209018, 0)
-
-[node name="MuzzleFlash" parent="GunAnchor/FirePoint" index="1"]
+[node name="MuzzleFlash" parent="GunAnchor/FirePoint" index="0" unique_id=540190188]
 transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 0, 0, 0)
 
-[node name="AudioStreamPlayer3D" parent="GunAnchor/FirePoint" index="2"]
+[node name="AudioStreamPlayer3D" parent="GunAnchor/FirePoint" index="1" unique_id=382067649]
 stream = SubResource("AudioStreamRandomizer_vhdqu")
 
 [node name="Model" parent="GunAnchor" index="1" unique_id=894667141 instance=ExtResource("7_f4idb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.036380768, 0.060748264)
 
-[node name="Chamber" parent="GunAnchor" index="2"]
+[node name="Chamber" parent="GunAnchor" index="2" unique_id=1534345481]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0174474, 0.0364762, 0.0380221)

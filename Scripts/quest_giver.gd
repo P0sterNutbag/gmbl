@@ -6,6 +6,7 @@ class_name QuestGiver
 @export var random_quests: Array[QuestRandom]
 @export var min_quests: int
 @export var max_quests: int
+@export var faction: FactionManager.factions
 
 
 func restock_quests() -> void:

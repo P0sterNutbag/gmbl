@@ -283,11 +283,11 @@ func state_walk(delta):
 		var mouse_velocity = Input.get_last_mouse_velocity()
 		if mouse_velocity.x != 0:
 			target_rot.z = deg_to_rad(-sign(mouse_velocity.x) * 2.5)
-		target_rot = Vector3(deg_to_rad(mouse_velocity.y * 0.01), deg_to_rad(mouse_velocity.x * 0.01), target_rot.z)
+		target_rot = Vector3(deg_to_rad(mouse_velocity.y * 0.001), deg_to_rad(mouse_velocity.x * 0.001), target_rot.z)
 	else:
 		target_rot = Vector3.ZERO
-	gun_pivot.rotation.x = lerp_angle(gun_pivot.rotation.x, target_rot.x, 20 * delta)
-	gun_pivot.rotation.y = lerp_angle(gun_pivot.rotation.y, target_rot.y, 20 * delta)
+	gun_pivot.rotation.x = lerp_angle(gun_pivot.rotation.x, target_rot.x, 10 * delta)
+	gun_pivot.rotation.y = lerp_angle(gun_pivot.rotation.y, target_rot.y, 10 * delta)
 	gun_pivot.rotation.z = lerp_angle(gun_pivot.rotation.z, target_rot.z, 5 * delta)
 	
 	# shooting and aiming
@@ -554,7 +554,7 @@ func enter_gun_state_reload() -> void:
 
 func exit_gun_state_reload() -> void:
 	gun.can_shoot = true
-	if gun.ammo_item.title.contains("shotgun"):
+	if gun.ammo_item.title.to_lower().contains("shotgun"):
 		return
 	var _ammo = find_item(gun.ammo_item.title)
 	use_item("", _ammo, gun.gun_stats)
@@ -742,8 +742,8 @@ func use_item(item_name: String, item_id = null, target = null):
 	if item == null:
 		return
 	if item is ItemUsable:
-		if !item.used_up.is_connected(PlayerStats.inventory.remove_item):
-			item.used_up.connect(PlayerStats.inventory.remove_item.bind(item))
+		#if !item.used_up.is_connected(PlayerStats.inventory._on_use_item):
+			#item.used_up.connect(PlayerStats.inventory._on_use_item.bind(item))
 		item.use(target)
 	#PlayerStats.inventory.remove_item(item)
 
@@ -819,6 +819,8 @@ func _on_bullet_listener_area_entered(_area: Area3D) -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "pump":
 		gun.can_shoot = true
+	if anim_name == "reload":
+		change_gun_state(gun_states.point)
 
 
 func _on_breath_timer_timeout() -> void:

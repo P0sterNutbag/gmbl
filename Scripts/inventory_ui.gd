@@ -114,8 +114,8 @@ func set_items():
 				if item.used_up.is_connected(_on_use_item):
 					item.used_up.disconnect(_on_use_item)
 				item.used_up.connect(_on_use_item.bind(inst))
-				if !item.used_up.is_connected(source_inventory.remove_item):
-					item.used_up.connect(source_inventory.remove_item.bind(item))
+				#if !item.used_up.is_connected(source_inventory.remove_item):
+					#item.used_up.connect(source_inventory.remove_item.bind(item))
 			inst.pressed.connect(item.on_pressed)
 		elif mode == modes.loot:
 			inst.pressed.connect(transfer_item.bind(inst))
@@ -139,7 +139,8 @@ func transfer_item(menu_item: Control):
 		return
 	var amount_to_move = 1
 	if Input.is_action_pressed("shift") or item is ItemMoney:
-		amount_to_move = menu_item.resource.amount		
+		var slot = source_inventory.find_item_slot(item)
+		amount_to_move = slot.amount
 	if item is EquipmentGun and item.equipped:
 		item.equip()
 	if target_inventory.add_item(item, amount_to_move):

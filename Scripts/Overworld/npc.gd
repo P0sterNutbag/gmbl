@@ -165,9 +165,9 @@ func die():
 	set_process(false)
 	set_physics_process(false)
 	anim_player.play("Die")
-	if !is_inside_tree():
-		await tree_entered
-	UiController.close_interface(Globals.ui.dialogue)
+	#if !is_inside_tree():
+		#await tree_entered
+	#UiController.close_interface(Globals.ui.dialogue)
 	await get_tree().create_timer(5).timeout
 	queue_free()
 

@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dht8msbc26v1q" path="res://Scenes/UI/quest_marker.tscn" id="9_e5c6o"]
 [ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="9_to4rm"]
 [ext_resource type="PackedScene" uid="uid://connpctdgiwij" path="res://Scenes/UI/exit_button.tscn" id="10_0pkni"]
+[ext_resource type="Texture2D" uid="uid://u7nrdkhha2eb" path="res://Art/Textures/drunk icon.png" id="10_c2wwi"]
 [ext_resource type="Script" uid="uid://b37bjjekoe1qe" path="res://Scripts/journal_menu.gd" id="10_vghdt"]
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="11_0pkni"]
 [ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="12_2dyl4"]
@@ -434,6 +435,15 @@ texture = ExtResource("5_13ham")
 expand_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "sleep"
+
+[node name="Alcohol" type="TextureRect" parent="StatsAnchor/VBoxContainer" unique_id=1722446149]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("10_c2wwi")
+expand_mode = 2
+script = ExtResource("2_k4cvi")
+stat_name = "soberness"
+show_treshold = 1.0
 
 [node name="Health" type="Control" parent="StatsAnchor" unique_id=227173842 node_paths=PackedStringArray("progress_bar")]
 custom_minimum_size = Vector2(97, 20)

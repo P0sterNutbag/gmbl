@@ -1,7 +1,8 @@
 extends Enemy
 class_name Ally
 
-var follow_speed = 5.9
+var follow_speed = 5.5
+
 
 func state_idle(_delta) -> void:
 	change_state(states.walk)
@@ -38,3 +39,9 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 		change_state(states.camp)
 	elif state == states.walk:
 		velocity = Vector3.ZERO
+
+
+func _on_death() -> void:
+	super._on_death()
+	PlayerStats.allies.remove_at(0)
+	Globals.survival_ui.create_notification("Ally has been killed")

@@ -278,7 +278,6 @@ func state_walk(delta):
 	
 	# gun direction/movement
 	var target_rot: Vector3
-	target_rot.z = deg_to_rad(-sign(input.x) * 2.5)
 	if gun_state == gun_states.point:
 		var mouse_velocity = Input.get_last_mouse_velocity()
 		if mouse_velocity.x != 0:
@@ -286,6 +285,7 @@ func state_walk(delta):
 		target_rot = Vector3(deg_to_rad(mouse_velocity.y * 0.001), deg_to_rad(mouse_velocity.x * 0.001), target_rot.z)
 	else:
 		target_rot = Vector3.ZERO
+		target_rot.z = deg_to_rad(-sign(input.x) * 2.5)
 	gun_pivot.rotation.x = lerp_angle(gun_pivot.rotation.x, target_rot.x, 10 * delta)
 	gun_pivot.rotation.y = lerp_angle(gun_pivot.rotation.y, target_rot.y, 10 * delta)
 	gun_pivot.rotation.z = lerp_angle(gun_pivot.rotation.z, target_rot.z, 5 * delta)
@@ -533,10 +533,13 @@ func gun_state_ads(delta: float) -> void:
 		if !can_hold_breath and current_breath > 1:
 			can_hold_breath = true
 	sway_time += delta * current_sway_speed
+	var sway_modifier: float = 1
+	if PlayerStats.soberness < PlayerStats.max_soberness:
+		sway_modifier = 2
 	var x_offset = sway_noise.get_noise_2d(sway_time, 0.0) * sway_intensity
 	var y_offset = sway_noise.get_noise_2d(0.0, sway_time) * sway_intensity
-	rotation.y += deg_to_rad(y_offset)
-	camera.rotation.x += deg_to_rad(x_offset)
+	rotation.y += deg_to_rad(y_offset * sway_modifier)
+	camera.rotation.x += deg_to_rad(x_offset * sway_modifier)
 
 
 func exit_gun_state_ads() -> void:

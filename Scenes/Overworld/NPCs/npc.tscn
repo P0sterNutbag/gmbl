@@ -72,11 +72,13 @@ object_to_spawn = ExtResource("6_yyftb")
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_6nrh4"]
+resource_local_to_scene = true
 script = ExtResource("14_p0jri")
 min_amount = 3
 max_amount = 8
 potential_slots = Array[ExtResource("5_7npny")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0")])
 money = 500
+title = "Squad Inventory"
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
 [sub_resource type="Resource" id="Resource_nv6bg"]
@@ -119,6 +121,10 @@ can_stealth_start = true
 
 [node name="CollisionShape3D" parent="Location" index="0" unique_id=1772758538]
 shape = SubResource("SphereShape3D_e46jk")
+
+[node name="PointOfInterest" parent="Location" index="4" unique_id=2144080138]
+show_faction = true
+show_population = true
 
 [node name="Detection" type="ShapeCast3D" parent="." unique_id=999843824]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89564, 0)

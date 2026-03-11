@@ -36,9 +36,11 @@ var gun_index := 0
 var sleep: float
 var hunger: float
 var thirst: float
+var soberness: float = 1.0
 var max_sleep: float
 var max_hunger: float
 var max_thirst: float
+var max_soberness: float = 1.0
 var sleep_decrease_rate := 0.5
 var hunger_decrease_rate := 0.75
 var thirst_decrease_rate := 0.8
@@ -69,7 +71,7 @@ func _process(delta: float) -> void:
 	if !get_tree().current_scene:
 		return
 	var scene_name = get_tree().current_scene.name
-	if !Globals.overworld or scene_name == "CharacterCreation" or scene_name == "MainMenu":
+	if scene_name == "CharacterCreation" or scene_name == "MainMenu":# or !Globals.overworld:
 		return
 	# survival stats
 	sleep = clamp(sleep - delta, 0, max_sleep)
@@ -78,6 +80,8 @@ func _process(delta: float) -> void:
 	if Globals.player and (hunger <= 0 or thirst <= 0) and Globals.player.hitbox.hp > 0.1:
 		#Globals.player.hitbox.damage(0.025 * delta, Vector3.ZERO, Vector3.ZERO, false, false, false)
 		Globals.player.hitbox.hp -= 0.025 * delta
+	if soberness < max_soberness:
+		soberness += delta * 0.01
 
 
 func _physics_process(delta):
@@ -170,6 +174,8 @@ func decrease_sleep(new_value: float) -> void:
 
 
 func go_to_sleep():
+	if get_tree().current_scene != Globals.overworld:
+		return
 	UiController.close_interface(Globals.survival_ui.menu_holder)
 	change_state(states.pause)
 	var tween = create_tween()
@@ -177,6 +183,8 @@ func go_to_sleep():
 	tween.tween_callback(DayNightCycle.skip_to_time.bind(1.5))
 	tween.tween_callback(SceneManager.animation_player.play.bind("fade_out")).set_delay(2)
 	tween.tween_property(self, "sleep", max_sleep, 0)
+	tween.tween_property(self, "soberness", max_soberness, 0)
+	tween.tween_property(Globals.player.hitbox, "hp", Globals.player.hitbox.hp + 0.5, 0)
 	tween.tween_property(self, "state", states.walk, 0)
 
 

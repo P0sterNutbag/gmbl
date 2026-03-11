@@ -3,7 +3,6 @@ class_name Location
 
 @export var title: String
 @export var location_data: LocationData# = LocationData.new()
-@export var target_distance := 0.0
 @export var encounter_scene: PackedScene
 @export var town: Town
 @export var shop: Shop
@@ -37,6 +36,13 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	SaveController.load.connect(_on_load)
 	flagpole.global_rotation_degrees = Vector3(0, 0, 0)
+	# randomized location data
+	if location_data is LocationDataRandom:
+		var starting_population = randi_range(location_data.min_starting_population, location_data.max_starting_population)
+		location_data.population = starting_population
+		location_data.max_population = starting_population
+		var starting_faction = location_data.possible_factions[randi() % location_data.possible_factions.size()]
+		location_data.faction = starting_faction
 	# shop timer
 	if town != null:
 		for i in town.shops:

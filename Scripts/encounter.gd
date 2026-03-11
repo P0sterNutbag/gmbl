@@ -11,6 +11,10 @@ func _init() -> void:
 
 
 func _exit_tree() -> void:
+	if Globals.overworld:
+		var poi = Globals.overworld.current_encounter.point_of_interest
+		poi.show_population = true
+		poi.show_faction = true
 	var factions = []
 	#var location_data = Globals.overworld.current_encounter.location_data
 	var enemies = get_tree().get_nodes_in_group("enemies")

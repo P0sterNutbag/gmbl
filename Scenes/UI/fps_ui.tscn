@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dwyciilo4eqwy" path="res://Art/Textures/thirst icon.png" id="7_3lnm2"]
 [ext_resource type="Texture2D" uid="uid://btsqo4a5f5fw8" path="res://Art/Textures/mag icon sheet.png" id="8_6gmlr"]
 [ext_resource type="Texture2D" uid="uid://c3hs8nxqqu881" path="res://Art/Textures/sleep icon.png" id="8_jr5wk"]
+[ext_resource type="Texture2D" uid="uid://u7nrdkhha2eb" path="res://Art/Textures/drunk icon.png" id="9_3lnm2"]
 [ext_resource type="StyleBox" uid="uid://bcg5bax3erc8w" path="res://Art/Themes/style_box.tres" id="9_6gmlr"]
 [ext_resource type="Shader" uid="uid://clx8i8jbtbgo3" path="res://Art/Shaders/retro.gdshader" id="9_a1pox"]
 [ext_resource type="Texture2D" uid="uid://cvly0bfjs24or" path="res://Art/Textures/sun-moon.png" id="10_a1pox"]
@@ -27,6 +28,14 @@ colors = PackedColorArray(0, 0, 0, 0, 1, 0, 0, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_hkj58"]
 gradient = SubResource("Gradient_8v68b")
 width = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jr5wk"]
+bg_color = Color(1, 1, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3lnm2"]
 bg_color = Color(0, 0, 0, 0.784314)
@@ -367,6 +376,15 @@ expand_mode = 2
 script = ExtResource("6_a1pox")
 stat_name = "sleep"
 
+[node name="Alcolhol" type="TextureRect" parent="BottomLeft/VBoxContainer" unique_id=1898660980]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+texture = ExtResource("9_3lnm2")
+expand_mode = 2
+script = ExtResource("6_a1pox")
+stat_name = "soberness"
+show_treshold = 1.0
+
 [node name="BottomRight" type="Control" parent="." unique_id=574358321]
 modulate = Color(1, 1, 0, 1)
 layout_mode = 3
@@ -439,16 +457,20 @@ region_enabled = true
 region_rect = Rect2(0, 0, 28, 28)
 
 [node name="Breath" type="ProgressBar" parent="." unique_id=547902577]
-visible = false
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 52.0
-offset_top = -122.0
-offset_right = 163.5
-offset_bottom = -106.0
-grow_vertical = 0
+modulate = Color(1, 1, 1, 0.6431373)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.75
+offset_top = -205.0
+offset_right = 55.75
+offset_bottom = -197.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("3_8ucm7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jr5wk")
 max_value = 1.0
 value = 1.0
 show_percentage = false

@@ -169,7 +169,7 @@ func pay_fee(amount: int, fail_index: int) -> void:
 	if PlayerStats.inventory.money - amount >= 0:
 		PlayerStats.inventory.money -= amount
 		Globals.overworld.current_encounter.get_parent().chase_player = false
-		Globals.survival_ui.create_notification("-50 Dollars")
+		Globals.survival_ui.create_notification("-$" + str(amount))
 		exit_to_game()
 	else:
 		advance_dialogue(fail_index)
@@ -177,3 +177,25 @@ func pay_fee(amount: int, fail_index: int) -> void:
 
 func enter_repair_menu() -> void:
 	UiController.open_interface(repair_menu)
+
+
+func set_recruit_price() -> void:
+	var location_data = Globals.overworld.current_encounter.location_data
+	var amount = 300
+	amount -= FactionManager.get_faction_relation(location_data.faction, FactionManager.factions.player) * 20
+	dialogue_tree.bubbles[index + 1].options[0].text = "Pay " + "($" + str(amount) + ")"
+
+
+func recruit_npc(amount:int, fail_index: int) -> void:
+	#var o = dialogue_tree.owner
+	var location_data = Globals.overworld.current_encounter.location_data
+	if PlayerStats.inventory.money - amount >= 0 and location_data.population > 1:
+		PlayerStats.inventory.money -= amount
+		location_data.population -= 1
+		PlayerStats.allies.append(load("res://Scenes/NPCs/ally.tscn"))
+		Globals.survival_ui.create_notification("-$" + str(amount))
+		Globals.survival_ui.create_notification("Ally added to party")
+		advance_dialogue(index + 1)
+		#exit_to_game()
+	else:
+		advance_dialogue(fail_index)

@@ -36,7 +36,7 @@ func change_scene() -> void:
 				new_game_start.emit()
 		elif next_scene is Node3D:
 			get_tree().change_scene_to_node(next_scene)
-			get_tree().current_scene = next_scene
+			#get_tree().current_scene = next_scene
 	scene_transition.transition_out()
 	UiController.reset_list()
 	get_tree().paused = false

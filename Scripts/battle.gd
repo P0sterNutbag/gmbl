@@ -41,6 +41,9 @@ func start_battle(location: Location, attacking_location: Location) -> void:
 
 
 func end_battle(winner_location: Location = null) -> void:
+	if !battle_location:
+		cleanup()
+		return
 	if !battle_location.is_inside_tree():
 		await battle_location.tree_entered
 	if !winner_location:

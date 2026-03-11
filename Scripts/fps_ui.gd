@@ -57,11 +57,11 @@ func _process(delta: float) -> void:
 		bottom_right.visible = false
 	
 	# breath
-	#if Globals.player.gun_state == Globals.player.gun_states.ads and Globals.player.current_breath < Globals.player.max_breath:
-		#breath.visible = true
-		#breath.value = Globals.player.current_breath / Globals.player.max_breath
-	#else:
-		#breath.visible = false
+	if Globals.player.gun_state == Globals.player.gun_states.ads and Globals.player.current_breath < Globals.player.max_breath:
+		breath.visible = true
+		breath.value = Globals.player.current_breath / Globals.player.max_breath
+	else:
+		breath.visible = false
 	
 	# crosshair
 	match Globals.crosshair_type:

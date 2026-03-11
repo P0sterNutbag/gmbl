@@ -26,7 +26,7 @@ func _ready():
 		var spawn_pos = Vector3.ZERO
 		var dest = position + Vector3(0, 0, -115)
 		if squads.find(squad) > 0:
-			spawn_pos = Vector3(-64, 0.0, 0.0)#.rotated(Vector3.UP, deg_to_rad(randf_range(0, 360)))
+			spawn_pos = Vector3(-64, 0.0, 0.0).rotated(Vector3.UP, deg_to_rad(randf_range(0, 360)))
 			dest = position
 		enemy_destination = dest
 		if Globals.overworld:
@@ -36,6 +36,13 @@ func _ready():
 		# spawn enemies
 		for i in enemy_amount:
 			spawn_enemy(spawn_pos, squad.faction)
+	# spawn player allies
+	for ally in PlayerStats.allies:
+		var inst = ally.instantiate()
+		get_tree().current_scene.add_child(inst)
+		inst.global_position = Globals.player.global_position + Vector3(randf_range(-5.0, 5.0), 0, randf_range(-5.0, 5.0))
+		inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
+		inst.state = inst.states.walk
 	await get_tree().process_frame
 	for enemy in enemies:
 		if start_alert:

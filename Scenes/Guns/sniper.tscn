@@ -5,8 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b722wimup3f3u" path="res://Scenes/Models/Guns/sniper_model.tscn" id="2_e0wvy"]
 [ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/Effects/Decals/hitmarker.tscn" id="3_4qdul"]
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="4_6weu4"]
-[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="5_32y7p"]
-[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="6_laxe5"]
+[ext_resource type="Resource" uid="uid://bkae25scq6c12" path="res://Resources/Items/Ammo/sniper_ammo.tres" id="5_6weu4"]
 [ext_resource type="AudioStream" uid="uid://dh8aqylwf7m42" path="res://Audio/Guns/assault_A_shot_single_01.wav" id="7_suc4n"]
 
 [sub_resource type="Resource" id="Resource_32y7p"]
@@ -18,19 +17,6 @@ is_hitscan = false
 bullet_drop = true
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
-[sub_resource type="Resource" id="Resource_laxe5"]
-resource_local_to_scene = true
-resource_name = "sniper_ammo"
-script = ExtResource("6_laxe5")
-method = "reload_gun"
-custom_path = "PlayerStats"
-usable_in_menu = false
-title = "7.62×51mm Magazine"
-category = 1
-price = 40
-description = "Usable in: Sniper Rifle"
-metadata/_custom_type_script = "uid://dd1ly8qocexg4"
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jlfvc"]
 random_pitch = 1.1
 streams_count = 1
@@ -38,7 +24,7 @@ stream_0/stream = ExtResource("7_suc4n")
 
 [node name="Sniper" unique_id=850489399 instance=ExtResource("1_5av3h")]
 bullet_stats = SubResource("Resource_32y7p")
-ammo_item = SubResource("Resource_laxe5")
+ammo_item = ExtResource("5_6weu4")
 fire_type = 0
 shoot_cooldown = 1.0
 

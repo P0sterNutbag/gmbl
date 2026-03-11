@@ -121,7 +121,7 @@ func change_state(new_state):
 
 func give_up() -> void:
 	PlayerStats.reset_stats()
-	#SaveController.delete_save_data()
+	SaveController.delete_save_data()
 
 
 func save() -> Dictionary:

@@ -1127,6 +1127,12 @@ cast_shadow = false
 [node name="GunAnchor" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol" index="0" unique_id=1970548578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.145, -0.155)
 
+[node name="FirePoint" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor" index="0" unique_id=1901170218]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.002657652, 0.10731208, -0.624524)
+
+[node name="MuzzleFlash" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/FirePoint" index="0" unique_id=540190188]
+transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 0, 0, 0.39554685)
+
 [node name="Cube" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="0" unique_id=790767181]
 cast_shadow = 0
 
@@ -1178,6 +1184,7 @@ outline_size = 8
 libraries/ = SubResource("AnimationLibrary_0gysh")
 
 [node name="Shotgun" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor" unique_id=1130233718 instance=ExtResource("18_v37cr")]
+visible = false
 uses_input = true
 bullet_stats = ExtResource("19_8d028")
 gun_stats = SubResource("Resource_qqcod")
@@ -1229,7 +1236,6 @@ outline_size = 8
 libraries/ = SubResource("AnimationLibrary_bi64h")
 
 [node name="SniperRifle" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor" unique_id=643760559 instance=ExtResource("21_gyc8k")]
-visible = false
 uses_input = true
 bullet_stats = SubResource("Resource_fs7ks")
 gun_stats = SubResource("Resource_olqyp")

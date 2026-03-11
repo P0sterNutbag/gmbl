@@ -158,6 +158,7 @@ func create_bullet(shot_owner: Node3D, is_ads: bool, movement_speed: Vector3) ->
 	get_tree().current_scene.add_child(inst)
 	if uses_input and is_ads:
 		inst.global_position = Globals.player.camera.global_position
+		#inst.position.z += 1
 		#inst.global_position.z -= fire_point.position.z
 
 

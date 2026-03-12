@@ -43,6 +43,9 @@ func set_materials(style: NpcStyle = style_data) -> void:
 	var head_texture = ImageTexture.create_from_image(head_image)
 	head_texture = get_texture_modified_skin(head_texture, skin_color, Color(0.933, 0.769, 0.6, 1.0))
 	head_texture = get_texture_modified_skin(head_texture, hair_color, Color(0.133, 0.125, 0.208, 1.0))
+	var nose_color = skin_color.darkened(0.5)
+	nose_color.h -= 0.075
+	head_texture = get_texture_modified_skin(head_texture, nose_color, Color("603535"))
 	face_material.set("shader_parameter/base_texture", head_texture)
 	var shirt_texture = style.shirts[randi() % style.shirts.size()]
 	shirt_texture = get_texture_modified_skin(shirt_texture, skin_color, Color(0.933, 0.769, 0.6, 1.0))

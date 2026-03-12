@@ -17,6 +17,7 @@ var current_hp: float:
 		else:
 			return hp
 var max_current_hp := 3.5
+var player_name: String = "Player"
 var sensitivity_modifier := 1.0
 var ammo: int:
 	set(value):
@@ -41,8 +42,8 @@ var max_sleep: float
 var max_hunger: float
 var max_thirst: float
 var max_soberness: float = 1.0
-var sleep_decrease_rate := 0.5
-var hunger_decrease_rate := 0.75
+var sleep_decrease_rate := 0.2
+var hunger_decrease_rate := 0.6
 var thirst_decrease_rate := 0.8
 @onready var guns: Array[Item]:
 	get(): 
@@ -134,6 +135,7 @@ func save() -> Dictionary:
 		"sleep" : sleep,
 		"hunger" : hunger,
 		"thirst" : thirst,
+		"player_name" : player_name,
 	}
 
 
@@ -182,10 +184,18 @@ func go_to_sleep():
 	tween.tween_callback(SceneManager.animation_player.play.bind("fade_in"))
 	tween.tween_callback(DayNightCycle.skip_to_time.bind(1.5))
 	tween.tween_callback(SceneManager.animation_player.play.bind("fade_out")).set_delay(2)
+	tween.tween_callback(kill_all_npcs)
 	tween.tween_property(self, "sleep", max_sleep, 0)
 	tween.tween_property(self, "soberness", max_soberness, 0)
 	tween.tween_property(Globals.player.hitbox, "hp", Globals.player.hitbox.hp + 0.5, 0)
 	tween.tween_property(self, "state", states.walk, 0)
+
+
+
+func kill_all_npcs() -> void:
+	BattleManager.delete_all_battles()
+	for npc in get_tree().get_nodes_in_group("overworld npcs"):
+		npc.queue_free()
 
 
 func _on_gun_changed():

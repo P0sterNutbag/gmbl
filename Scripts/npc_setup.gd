@@ -36,10 +36,14 @@ func set_materials(style: NpcStyle = style_data) -> void:
 		skin_color = style.skin_colors[randi() % style.skin_colors.size()]
 	if style.hair_colors.size() > 0:
 		hair_color = style.hair_colors[randi() % style.hair_colors.size()]
+	var hair_texture = style.hair_styles[randi() % style.hair_styles.size()]
 	var face_texture = style.faces[randi() % style.faces.size()]
-	face_texture = get_texture_modified_skin(face_texture, skin_color, Color(0.933, 0.769, 0.6, 1.0))
-	face_texture = get_texture_modified_skin(face_texture, hair_color, Color(0.133, 0.125, 0.208, 1.0))
-	face_material.set("shader_parameter/base_texture", face_texture)
+	var head_image = hair_texture.get_image()
+	head_image.blend_rect(face_texture.get_image(), Rect2i(0, 0, 64, 64), Vector2i(64, 64))
+	var head_texture = ImageTexture.create_from_image(head_image)
+	head_texture = get_texture_modified_skin(head_texture, skin_color, Color(0.933, 0.769, 0.6, 1.0))
+	head_texture = get_texture_modified_skin(head_texture, hair_color, Color(0.133, 0.125, 0.208, 1.0))
+	face_material.set("shader_parameter/base_texture", head_texture)
 	var shirt_texture = style.shirts[randi() % style.shirts.size()]
 	shirt_texture = get_texture_modified_skin(shirt_texture, skin_color, Color(0.933, 0.769, 0.6, 1.0))
 	#var faction = 0
@@ -61,6 +65,12 @@ func set_materials(style: NpcStyle = style_data) -> void:
 	cube2.set_surface_override_material(1, pants_material)
 	cube2.set_surface_override_material(2, shoes_material)
 	# Set current style
+	current_style.skin_colors.clear()
+	current_style.skin_colors.append(skin_color)
+	current_style.hair_colors.clear()
+	current_style.hair_colors.append(hair_color)
+	current_style.hair_styles.clear()
+	current_style.hair_styles.append(hair_texture)
 	current_style.faces.clear()
 	current_style.faces.append(face_texture)
 	current_style.shirts.clear()

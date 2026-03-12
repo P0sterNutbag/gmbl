@@ -51,7 +51,7 @@ var enter_functions: Dictionary
 var gun_state_functions: Dictionary
 var gun_exit_functions: Dictionary
 var gun_enter_functions: Dictionary
-var faction := FactionManager.factions.player
+var faction = FactionManager.factions.player
 var grenade_object = preload("res://Scenes/Bullets/grenade.tscn")
 const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var camera = $CameraAnchor/Camera3D

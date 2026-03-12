@@ -1,19 +1,19 @@
 [gd_scene format=4 uid="uid://dha43ahg1yfra"]
 
 [ext_resource type="PackedScene" uid="uid://cdr3k44ro53a1" path="res://Scenes/Overworld/Locations/location_base.tscn" id="1_emylm"]
-[ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="3_7t6bt"]
+[ext_resource type="Script" uid="uid://01ir68or13hi" path="res://Scripts/location_data_random.gd" id="2_f58ik"]
 [ext_resource type="PackedScene" uid="uid://blxue5sfnx7s" path="res://Scenes/Levels/bandit_town.tscn" id="4_ifw3f"]
 [ext_resource type="Material" uid="uid://brr5rgo0swhv5" path="res://Art/Materials/wood_triplanar.tres" id="5_7lgip"]
 [ext_resource type="Texture2D" uid="uid://bkxsoff507nnd" path="res://Art/Textures/tin roof.png" id="6_7t6bt"]
 [ext_resource type="Texture2D" uid="uid://btcjptj2uk7im" path="res://Art/Textures/wood horizontal.png" id="7_87hak"]
 [ext_resource type="Material" uid="uid://bfqtn7csb0xd" path="res://Art/Materials/tin_triplanar_rust.tres" id="8_033ar"]
 
-[sub_resource type="Resource" id="Resource_f58ik"]
-script = ExtResource("3_7t6bt")
-faction = 2
-population = 12
-max_population = 12
-metadata/_custom_type_script = "uid://csmjlx06mdps3"
+[sub_resource type="Resource" id="Resource_mqd1j"]
+script = ExtResource("2_f58ik")
+possible_factions = Array[int]([2])
+min_starting_population = 9
+max_starting_population = 12
+metadata/_custom_type_script = "uid://01ir68or13hi"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ohuf"]
 albedo_texture = ExtResource("6_7t6bt")
@@ -114,7 +114,7 @@ _surfaces = [{
 
 [node name="BanditTown" unique_id=143995200 groups=["location"] instance=ExtResource("1_emylm")]
 title = "Ghost Town"
-location_data = SubResource("Resource_f58ik")
+location_data = SubResource("Resource_mqd1j")
 encounter_scene = ExtResource("4_ifw3f")
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="0" unique_id=1320990648]

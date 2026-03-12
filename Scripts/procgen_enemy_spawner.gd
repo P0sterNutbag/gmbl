@@ -39,10 +39,12 @@ func _ready():
 	# spawn player allies
 	for ally in PlayerStats.allies:
 		var inst = ally.instantiate()
+		inst.faction = FactionManager.factions.player
 		get_tree().current_scene.add_child(inst)
 		inst.global_position = Globals.player.global_position + Vector3(randf_range(-5.0, 5.0), 0, randf_range(-5.0, 5.0))
 		inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
-		inst.state = inst.states.walk
+		inst.follow_target = Globals.player
+		inst.goal = inst.goals.follow
 	await get_tree().process_frame
 	for enemy in enemies:
 		if start_alert:
@@ -70,6 +72,7 @@ func spawn_enemy(spawn_position: Vector3, faction: FactionManager.factions) -> v
 	inst.set_deferred("global_position", spawn_point)
 	inst.destination = enemy_destination + spawn_offset
 	inst.destination.y = Globals.get_heightmap_position(inst.destination)
+	inst.goal = inst.goals.travel
 	inst.look_at_position(inst.destination)
 	inst.is_starting_squad = true
 	inst.faction = faction

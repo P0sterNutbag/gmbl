@@ -4,23 +4,17 @@ class_name Enemy
 @export var title: String = "Enemy"
 @export var strafe_change := 0.5
 @export var items_to_drop: Array[PackedScene]
-#enum guns {shotgun, ak47, sniper, pistol}
-#@export var gun_index: guns
 @export var potential_gun_items: Array[SpawnChanceResource]
-var gun_item: EquipmentGun
-@export var follow_target: Node3D
-#@export var potential_items: Array[SpawnChanceResource]
-var items:
-	get():
-		return inventory.items
 @export var inventory: Inventory
 @export var max_items: int
 @export var min_items: int
 @export var faction: FactionManager.factions
 enum states {idle, investigate, shoot, search, strafe, hurt, reload, camp, dead, aim, walk, supress, find_cover}
+enum goals {guard, travel, follow, none}
 var state = states.idle
+var goal = goals.guard
 var walk_speed := 1.5
-var run_speed := 3.0
+var run_speed := 4.5
 var time_to_detect_max := 1.5
 var camp_chance := 0.1
 var supress_change := 0.25
@@ -28,7 +22,6 @@ var camp_time := 5.0
 var camp_time_min := 2.5
 var camp_time_max := 10.0
 var time_to_detect: float = time_to_detect_max
-var time_since_bleed: float
 var time_since_detect: float
 var time_to_see_max: float = 1.0
 var time_to_see: float = 0.0
@@ -38,14 +31,16 @@ var path_index: int
 var is_new_state: bool
 var on_alert: bool
 var is_starting_squad: bool
-var gun: Node3D
 var damage_position: Vector3
 var damage_direction: Vector3
 var last_seen_position: Vector3
 var destination: Vector3
-var target: Node3D
-var bounty: Quest
 var state_functions: Dictionary
+var target: Node3D
+var gun: Node3D
+var follow_target: Node3D
+var bounty: Quest
+var gun_item: EquipmentGun
 @onready var detection = $Detection
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var anim_player: AnimationPlayer = $EnemyModel/PersonAnimated/AnimationPlayer
@@ -111,28 +106,15 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func _process(delta: float) -> void:
-	time_since_bleed += delta
-
-
 func state_idle(delta) -> void:
 	if is_new_state:
 		on_alert = false
 		velocity = Vector3.ZERO
-		if destination != Vector3.ZERO:
+		if goal == goals.travel and destination != Vector3.ZERO and global_position.distance_to(destination) > 1:
 			change_state(states.walk)
 		is_new_state = false
-	var parent = get_parent()
-	if parent is Path3D:
-		var next_point = parent.global_position + parent.curve.get_point_position(path_index)
-		if navigation_agent.target_position != next_point:
-			navigation_agent.set_target_position(next_point)
-		follow_path()
-	elif follow_target:
-		navigation_agent.set_target_position(follow_target.global_position)
-		follow_path(run_speed)
-	# return to walk
-	if destination != Vector3.ZERO:
+	# switch to walk
+	if goal == goals.follow and follow_target and global_position.distance_to(follow_target.global_position) > 3:
 		change_state(states.walk)
 	# switch to investigate
 	if target != null:
@@ -141,20 +123,23 @@ func state_idle(delta) -> void:
 			time_to_see = 0
 			change_state(states.investigate)
 	# animate
-	if abs(velocity) == Vector3.ZERO:
-		anim_player.play("Idle")
-	elif velocity.length() >= run_speed-1:
-		anim_player.play("Run")
-	else:
-		anim_player.play("Walk")
+	anim_player.play("Idle")
 
 
 func state_walk(delta) -> void:
 	if is_new_state:
-		navigation_agent.set_target_position(destination)
-		anim_player.play("Walk")
+		if goal == goals.travel:
+			navigation_agent.set_target_position(destination)
+		navigation_agent.path_desired_distance = 3.0
+	# follow target
+	if goal == goals.follow:
+		#if global_position.distance_to(follow_target.global_position) > 3:
+		navigation_agent.set_target_position(follow_target.global_position)
 	# follow path
-	follow_path()
+	var spd = walk_speed
+	if goal == goals.follow:
+		spd = run_speed
+	follow_path(spd)
 	# switch to investigate
 	if target != null:
 		time_to_see += delta
@@ -162,12 +147,10 @@ func state_walk(delta) -> void:
 			time_to_see = 0
 			change_state(states.investigate)
 	# animate
-	if abs(velocity) == Vector3.ZERO:
-		anim_player.play("Idle")
-	elif velocity.length() >= run_speed-1:
-		anim_player.play("Run")
-	else:
+	if spd == walk_speed:
 		anim_player.play("Walk")
+	elif spd == run_speed:
+		anim_player.play("Run")
 
 
 func state_investigate(delta) -> void:
@@ -282,6 +265,7 @@ func state_search(_delta) -> void:
 			change_state(states.investigate)
 			return
 		navigation_agent.set_target_position(last_seen_position)
+		navigation_agent.path_desired_distance = 1
 		is_new_state = false
 	# go to last seen position
 	follow_path(run_speed)
@@ -298,6 +282,7 @@ func state_strafe(_delta) -> void:
 		var new_pos = global_position
 		new_pos = global_position + Vector3(randf_range(-4, 4), 0, randf_range(-4, 4))
 		navigation_agent.set_target_position(new_pos)
+		navigation_agent.path_desired_distance = 0.5
 		is_new_state = false
 	# run to new position
 	follow_path(run_speed)
@@ -314,6 +299,7 @@ func state_strafe(_delta) -> void:
 
 func state_find_cover(_delta) -> void:
 	if is_new_state:
+		navigation_agent.path_desired_distance = 0.5
 		var potential_cover = get_tree().get_nodes_in_group("cover")
 		potential_cover = potential_cover.filter(func(a): 
 			return global_position.distance_to(a.global_position) < 15)
@@ -487,8 +473,11 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 		look_at_position(last_seen_position)
 		change_state(states.shoot)
 	elif state == states.walk:
-		change_state(states.idle)
-		new_destination_timer.start()
+		if goal == goals.travel:
+			change_state(states.idle)
+			new_destination_timer.start()
+		elif goal == goals.follow:
+			change_state(states.idle)
 	elif state == states.find_cover:
 		look_at(last_seen_position)
 		change_state(states.camp)

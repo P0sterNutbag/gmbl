@@ -54,3 +54,10 @@ func _on_area_3d_body_exited(_body: Node3D) -> void:
 
 func _exit_tree() -> void:
 	canvas_layer.hide()
+
+
+func save() -> Dictionary:
+	return {
+		"show_faction" : show_faction,
+		"show_population" : show_population,
+	}

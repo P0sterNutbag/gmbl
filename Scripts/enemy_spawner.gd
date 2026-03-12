@@ -63,14 +63,15 @@ func _ready() -> void:
 			for i in attacker.location_data.population:
 				spawn_enemy(attacker.location_data.faction)
 	
-	
 	# spawn player allies
 	for ally in PlayerStats.allies:
 		var inst = ally.instantiate()
+		inst.faction = FactionManager.factions.player
 		get_tree().current_scene.add_child(inst)
 		inst.global_position = Globals.player.global_position + Vector3(randf_range(-5.0, 5.0), 0, randf_range(-5.0, 5.0))
 		inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
-		inst.state = inst.states.walk
+		inst.follow_target = Globals.player
+		inst.goal = inst.goals.follow
 	
 	# spawn wandering squads
 	if randf() <= location_data.squad_spawn_chance:
@@ -104,6 +105,7 @@ func _ready() -> void:
 			pos.z = clamp(pos.z, 1.0, 255.0)
 			pos.y = Globals.get_heightmap_position(pos) + 0.25
 			inst.set_deferred("global_position", pos)
+			inst.goal = inst.goals.travel
 			inst.destination = destination + offset
 			inst.look_at_position(inst.destination)
 			inst.change_state(inst.states.walk)
@@ -144,5 +146,6 @@ func spawn_enemy(faction: FactionManager.factions):
 	# assign enemy a destination
 	if randf() <= enemy_move_chance:
 		var dest = get_destination(spawn_points[spawn_index].global_position)
+		inst.goal = inst.goals.travel
 		inst.destination = dest
 		inst.change_state(inst.states.walk)

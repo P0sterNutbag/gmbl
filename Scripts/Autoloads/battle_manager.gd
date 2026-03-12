@@ -31,6 +31,12 @@ func get_battle(location: Location) -> Battle:
 	return null
 
 
+func delete_all_battles() -> void:
+	for child in get_children():
+		child.queue_free()
+	battles.clear()
+
+
 func _on_scene_changed() -> void:
 	if get_tree().current_scene != Globals.overworld:
 		process_mode = Node.PROCESS_MODE_DISABLED
@@ -39,6 +45,4 @@ func _on_scene_changed() -> void:
 
 
 func _on_new_game_start() -> void:
-	for child in get_children():
-		child.queue_free()
-	battles.clear()
+	delete_all_battles()

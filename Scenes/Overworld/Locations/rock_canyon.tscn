@@ -1,15 +1,16 @@
 [gd_scene format=3 uid="uid://bmq0wn4dja58d"]
 
 [ext_resource type="PackedScene" uid="uid://cdr3k44ro53a1" path="res://Scenes/Overworld/Locations/location_base.tscn" id="1_272vu"]
-[ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_m4od3"]
+[ext_resource type="Script" uid="uid://01ir68or13hi" path="res://Scripts/location_data_random.gd" id="2_m4od3"]
 [ext_resource type="PackedScene" uid="uid://c3wywlngou3jc" path="res://Scenes/Levels/rock_canyon.tscn" id="3_6bmx8"]
 [ext_resource type="PackedScene" uid="uid://ccasv3bhe2jhu" path="res://Art/Models/rock.glb" id="5_6bmx8"]
 
 [sub_resource type="Resource" id="Resource_dgiub"]
 script = ExtResource("2_m4od3")
-faction = 4
-population = 4
-metadata/_custom_type_script = "uid://csmjlx06mdps3"
+possible_factions = Array[int]([4])
+min_starting_population = 2
+max_starting_population = 5
+metadata/_custom_type_script = "uid://01ir68or13hi"
 
 [node name="RockCanyon" unique_id=375779878 groups=["location"] instance=ExtResource("1_272vu")]
 title = "Rock Canyon"

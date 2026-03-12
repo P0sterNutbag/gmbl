@@ -12,6 +12,7 @@ var current_shop: TownOption
 @onready var npc_portrait_model: Node3D = $ShopkeeperPortrait/Offset/EnemyModel
 @onready var repair_menu: PanelContainer = $Repair
 @onready var player_model: Node3D = $PlayerPortrait/Offset/EnemyModel
+@onready var player_name: Label = $PortraitHolder/HBoxContainer/PlayerName
 
 
 func _enter_tree() -> void:
@@ -24,6 +25,7 @@ func _ready() -> void:
 		if child is Control:
 			child.hide()
 	job_board.exit.connect(dialogue.leave_shop)
+	player_name.text = PlayerStats.player_name
 
 
 func _process(_delta: float) -> void:

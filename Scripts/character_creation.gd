@@ -3,7 +3,7 @@ extends Node
 var mouse_velocity: Vector2
 const starting_gear = preload("uid://dpjy0ettwaiyp")
 @onready var inventories: Control = $CanvasLayer/Inventories
-@onready var cosmetics: PanelContainer = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics
+@onready var cosmetics: PanelContainer = %Cosmetics
 @onready var starting_inventory: InventoryUI = %Inventory
 @onready var player_inventory: InventoryUI = %Inventory2
 @onready var node_3d: Node3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
@@ -12,6 +12,7 @@ const starting_gear = preload("uid://dpjy0ettwaiyp")
 @onready var appearance_options: VBoxContainer = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer
 @onready var camera_3d: Camera3D = $Camera3D
 @onready var skin_options: Button = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/SkinOptions
+@onready var hair_color_options: Button = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/HairColorOptions
 @onready var hair_options: Button = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/HairOptions
 @onready var face_options: Button = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/FaceOptions
 @onready var shirt_options: Button = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/ShirtOptions
@@ -102,23 +103,26 @@ func _on_back_button_pressed() -> void:
 	SceneManager.start_scene_transition("res://Scenes/UI/main_menu.tscn")
 
 
-func _on_hair_option_changed(value: Variant) -> void:
-	var hair: Array = player_model.style_data.hair_colors
-	set_player_style(hair, value)
+func _on_hair_color_options_option_changed(value: Variant) -> void:
+	var hair_colors: Array = player_model.style_data.hair_colors
+	set_player_style(hair_colors, value)
 
 
-func _on_spin_character_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and Input.is_action_pressed("shoot"):
-		mouse_velocity = Input.get_last_mouse_velocity()
+func _on_hair_options_option_changed(value: Variant) -> void:
+	var hair_styles: Array = player_model.style_data.hair_styles
+	set_player_style(hair_styles, value)
 
 
 func _on_randomize_button_pressed() -> void:
 	var skin = skin_options.get_random_option()
 	player_model.style_data.skin_colors.clear()
 	player_model.style_data.skin_colors.append(skin)
+	var hair_color = hair_color_options.get_random_option()
+	player_model.style_data.hair_styles.clear()
+	player_model.style_data.hair_styles.append(hair_color)
 	var hair = hair_options.get_random_option()
-	player_model.style_data.hair_colors.clear()
-	player_model.style_data.hair_colors.append(hair)
+	player_model.style_data.hair_styles.clear()
+	player_model.style_data.hair_styles.append(hair)
 	var face = face_options.get_random_option()
 	player_model.style_data.faces.clear()
 	player_model.style_data.faces.append(face)
@@ -132,3 +136,12 @@ func _on_randomize_button_pressed() -> void:
 	player_model.style_data.shoe_colors.clear()
 	player_model.style_data.shoe_colors.append(shoe_color)
 	player_model.set_materials()
+
+
+func _on_spin_character_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion and Input.is_action_pressed("shoot"):
+		mouse_velocity = Input.get_last_mouse_velocity()
+
+
+func _on_line_edit_text_changed(new_text: String) -> void:
+	PlayerStats.player_name = new_text

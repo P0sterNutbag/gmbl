@@ -37,9 +37,9 @@ func _on_timer_timeout() -> void:
 func get_spawn_location() -> Location:
 	var nodes = get_tree().get_nodes_in_group("location")
 	var node = nodes[randi() % nodes.size()]
-	while !node.can_spawn_npcs and BattleManager.get_battle(node) != null:
+	while !node.can_spawn_npcs or BattleManager.get_battle(node) != null:
 		node = nodes[randi() % nodes.size()]
-	return nodes[randi() % nodes.size()]
+	return node
 
 
 func get_destination(faction: FactionManager.factions, spawn_location: Node3D, npc_location_data: LocationData) -> Location:

@@ -31,7 +31,7 @@ class_name QuestBountyRandom
 @export var rewards: Array[Item] = [
 	ItemMoney.new()
 ]
-@export var targets: Array[PackedScene]
+#@export var targets: Array[PackedScene]
 @export var target_factions: Array[FactionManager.factions]
 
 
@@ -47,5 +47,5 @@ func generate_quest() -> Quest:
 	if quest.reward.item is ItemMoney:
 		var location_data = Globals.get_tree().get_nodes_in_group("location").filter(func(i): return i.title == quest.location)[0].location_data
 		quest.reward.amount = location_data.population * 25
-	quest.target = preload("res://Scenes/NPCs/enemy.tscn")
+	quest.target = preload("res://Scenes/NPCs/npc.tscn")
 	return quest

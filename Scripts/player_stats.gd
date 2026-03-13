@@ -123,6 +123,7 @@ func change_state(new_state):
 func give_up() -> void:
 	PlayerStats.reset_stats()
 	SaveController.delete_save_data()
+	Globals.overworld.queue_free()
 
 
 func save() -> Dictionary:

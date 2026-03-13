@@ -317,6 +317,9 @@ func state_find_cover(_delta) -> void:
 		potential_cover.sort_custom(func(a, b): return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position))
 		var cover_pos = potential_cover[0].global_position
 		navigation_agent.set_target_position(cover_pos)
+		if !navigation_agent.is_target_reachable():
+			change_state(states.strafe)
+			return
 		is_new_state = false
 	
 	# run to new position

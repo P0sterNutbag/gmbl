@@ -100,7 +100,6 @@
 [ext_resource type="PackedScene" uid="uid://ckk7ngs5hgesp" path="res://Scenes/Levels/desert5.tscn" id="91_bqxwu"]
 [ext_resource type="PackedScene" uid="uid://bhnlai8o6lxh0" path="res://Scenes/Levels/desert6.tscn" id="92_cvr5w"]
 [ext_resource type="PackedScene" uid="uid://camjoalnob06k" path="res://Scenes/Overworld/Locations/home.tscn" id="97_bqxwu"]
-[ext_resource type="PackedScene" uid="uid://b0cqkj1fgouo2" path="res://Scenes/Overworld/NPCs/npc.tscn" id="97_cvr5w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jdigv"]
 render_priority = 0
@@ -786,42 +785,42 @@ metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [sub_resource type="Resource" id="Resource_un0bj"]
 script = ExtResource("90_bqxwu")
-possible_factions = Array[int]([3, 4])
+possible_factions = [3, 4]
 min_starting_population = 2
 max_starting_population = 10
 metadata/_custom_type_script = "uid://01ir68or13hi"
 
 [sub_resource type="Resource" id="Resource_or1fq"]
 script = ExtResource("90_bqxwu")
-possible_factions = Array[int]([4, 0])
+possible_factions = [4, 0]
 min_starting_population = 2
 max_starting_population = 10
 metadata/_custom_type_script = "uid://01ir68or13hi"
 
 [sub_resource type="Resource" id="Resource_dfqls"]
 script = ExtResource("90_bqxwu")
-possible_factions = Array[int]([4, 0])
+possible_factions = [4, 0]
 min_starting_population = 2
 max_starting_population = 10
 metadata/_custom_type_script = "uid://01ir68or13hi"
 
 [sub_resource type="Resource" id="Resource_3ppvp"]
 script = ExtResource("90_bqxwu")
-possible_factions = Array[int]([0, 4])
+possible_factions = [0, 4]
 min_starting_population = 2
 max_starting_population = 10
 metadata/_custom_type_script = "uid://01ir68or13hi"
 
 [sub_resource type="Resource" id="Resource_w3cp4"]
 script = ExtResource("90_bqxwu")
-possible_factions = Array[int]([0, 4])
+possible_factions = [0, 4]
 min_starting_population = 2
 max_starting_population = 10
 metadata/_custom_type_script = "uid://01ir68or13hi"
 
 [sub_resource type="Resource" id="Resource_8vomo"]
 script = ExtResource("90_bqxwu")
-possible_factions = Array[int]([0, 4])
+possible_factions = [0, 4]
 min_starting_population = 2
 max_starting_population = 10
 metadata/_custom_type_script = "uid://01ir68or13hi"
@@ -987,9 +986,6 @@ encounter_scene = ExtResource("92_cvr5w")
 [node name="Home" parent="." unique_id=1047620238 instance=ExtResource("97_bqxwu")]
 transform = Transform3D(0.29030132, 0, 0.9569353, 0, 1, 0, -0.9569353, 0, 0.29030132, 214.29442, 0.49500558, 208.90747)
 can_spawn_npcs = false
-
-[node name="Npc" parent="." unique_id=907079178 instance=ExtResource("97_cvr5w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 207.38383, 5.70299, 213.14253)
 
 [connection signal="timeout" from="NpcController/Timer" to="NpcController" method="_on_timer_timeout"]
 [connection signal="timeout" from="NpcController/Timer" to="NpcController/Timer" method="_on_timeout"]

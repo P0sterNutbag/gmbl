@@ -174,7 +174,6 @@ metadata/_custom_type_script = "uid://6ucyr0petjnx"
 
 [sub_resource type="Resource" id="Resource_hr5f0"]
 script = ExtResource("17_d403n")
-title = "Scrapyard"
 inventory = SubResource("Resource_rsj15")
 price_modifiers = {
 "Ammo": 0.5,
@@ -186,6 +185,7 @@ price_modifiers = {
 "Weapons": 0.5
 }
 dialogue = SubResource("Resource_pc4vu")
+title = "Scrapyard"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [node name="Location" unique_id=1018595986 instance=ExtResource("1_enopj")]
@@ -233,6 +233,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.847855, 0, 6.2083273)
 visible = true
 
 [node name="PointOfInterest" parent="." index="4" unique_id=2144080138]
-show_population = false
+show_faction = true
+
+[node name="HBoxContainer2" parent="PointOfInterest/CanvasLayer/CardOffset/VBoxContainer" parent_id_path=PackedInt32Array(2144080138, 1870797330) index="2" unique_id=1783460872]
+visible = false
 
 [editable path="PointOfInterest"]

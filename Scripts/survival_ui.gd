@@ -13,7 +13,8 @@ extends CanvasLayer
 @onready var stats_anchor: Control = $StatsAnchor
 @onready var menu_holder: Control = $Menus
 @onready var factions: PanelContainer = $Menus/VBoxContainer/Factions
-@onready var log_box: VBoxContainer = $Log
+@onready var log_box: VBoxContainer = %Log
+@onready var player_hp_bar: ProgressBar = %ProgressBar
 const LOG_NOTIFICATION = preload("res://Scenes/UI/log_notification.tscn")
 
 
@@ -77,14 +78,14 @@ func _process(_delta: float) -> void:
 	else:
 		compass.visible = false
 	# overworld health and status effects
-	if Globals.overworld == get_tree().current_scene:
-		stats_anchor.global_position.y = Globals.player.camera.unproject_position(Globals.player.hud_anchor.global_position).y
-		stats_anchor.global_position.y -= stats_anchor.size.y
-	if UiController.current_ui:
-		if stats_anchor.visible:
-			stats_anchor.hide()
-	elif stats_anchor.process_mode == PROCESS_MODE_INHERIT:
-		stats_anchor.show()
+	#if Globals.overworld == get_tree().current_scene:
+		#stats_anchor.global_position.y = Globals.player.camera.unproject_position(Globals.player.hud_anchor.global_position).y
+		#stats_anchor.global_position.y -= stats_anchor.size.y
+	#if UiController.current_ui:
+		#if stats_anchor.visible:
+			#stats_anchor.hide()
+	#elif stats_anchor.process_mode == PROCESS_MODE_INHERIT:
+		#stats_anchor.show()
 
 
 func loot(target: Inventory) -> void:
@@ -104,6 +105,7 @@ func loot(target: Inventory) -> void:
 func create_notification(notification_text: String) -> void:
 	var inst = LOG_NOTIFICATION.instantiate()
 	log_box.add_child(inst)
+	#log_box.move_child(inst, 1)
 	inst.text = notification_text
 	var tween = create_tween()
 	tween.tween_interval(3)

@@ -97,31 +97,7 @@ func transition_to_level(start_alert = alert_enemies) -> void:
 	alert_enemies = start_alert
 	var player_vector: Vector3 = (global_position - Globals.player.global_position).normalized().rotated(Vector3.UP, -global_rotation.y)
 	Globals.overworld.player_spawn_vector = player_vector
-	SceneManager.start_scene_transition(encounter_scene.resource_path, true)
-
-
-#func start_battle(attacking_location: LocationData):
-	#BattleManager.start_battle(self, attacking_location)
-	#if location_data.population == 0:
-		#location_data.faction = attacking_location.faction
-		#location_data.population = 1#location_data.min_population
-		#Globals.survival_ui.create_notification(title + " taken by " + FactionManager.faction_data[location_data.faction].name)
-		#print(title + " taken by " + FactionManager.faction_data[location_data.faction].name)
-		#return
-	#location_data.attacking_locations.append(attacking_location)
-	#if battle_timer.time_left > 0:
-		#return
-	#var total_population = location_data.population
-	#for location in location_data.attacking_locations:
-		#total_population += location.population
-	#battle_timer.wait_time = total_population * 2
-	#battle_timer.start()
-	#animation_player.play("battle")
-	#point_of_interest.status_holder.show()
-	#point_of_interest.status_label.text = "Under Attack by " + FactionManager.faction_data[attacking_location.faction].name
-	#if get_parent() is CharacterBody3D:
-		#Globals.survival_ui.create_notification(title + " under attack by " + FactionManager.faction_data[attacking_location.faction].name)
-	#print(title + " under attack by " + FactionManager.faction_data[attacking_location.faction].name)
+	SceneManager.start_encounter_transition(encounter_scene.resource_path)
 
 
 func save() -> Dictionary:

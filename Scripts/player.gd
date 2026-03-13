@@ -94,7 +94,7 @@ func _ready() -> void:
 	for i in gun_anchor.get_children():
 		i.visible = false
 	hitbox.hp = PlayerStats.hp
-	hitbox.hp_bar = Globals.ui.player_hp_bar
+	hitbox.hp_bar = Globals.survival_ui.player_hp_bar
 	sway_noise.seed = randi()
 	sway_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	sway_noise.frequency = 0.5

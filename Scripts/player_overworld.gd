@@ -44,34 +44,30 @@ var faction := FactionManager.factions.player
 @onready var notification_position: Node3D = $NotificationPosition
 @onready var hud_anchor: Node3D = $HudAnchor
 var gun: Node3D
-	#get: 
-		#if !PlayerStats.gun:
-			#return null
-		#return get(PlayerStats.gun.resource_name)
-
-
-func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	PlayerStats.gun_changed.connect(_on_gun_changed)
-	state_functions = {
-		PlayerStats.states.walk: state_walk,
-		PlayerStats.states.pause: state_pause,
-		PlayerStats.states.dead: state_dead,
-	}
 
 
 func _enter_tree() -> void:
 	Globals.player = self
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	global_position.y = Globals.get_heightmap_position(global_position)
 	if PlayerStats.faction:
 		faction = PlayerStats.faction
 	await get_tree().process_frame
 	hitbox.hp = PlayerStats.hp
-	#hitbox.max_hp = PlayerStats.hp
 	if PlayerStats.gun:
 		change_gun(PlayerStats.gun)
 	else:
 		unequip_gun()
+
+
+func _ready() -> void:
+	PlayerStats.gun_changed.connect(_on_gun_changed)
+	hitbox.hp_bar = Globals.survival_ui.player_hp_bar
+	state_functions = {
+		PlayerStats.states.walk: state_walk,
+		PlayerStats.states.pause: state_pause,
+		PlayerStats.states.dead: state_dead,
+	}
 
 
 func _physics_process(delta):
@@ -86,6 +82,12 @@ func _physics_process(delta):
 	elif Input.is_action_just_pressed("last_gun"):
 		camera_target_zoom = clamp(camera_target_zoom + camera_zoom_incrament, camera_min_zoom, camera_max_zoom)
 	camera.position.z = lerp(camera.position.z, camera_target_zoom, delta * 5)
+	
+	# turn camerea
+	if Input.is_action_pressed("lean_left"):
+		camera_anchor.rotate_y(2 * delta)
+	elif Input.is_action_pressed("lean_right"):
+		camera_anchor.rotate_y(-2 * delta)
 	
 	# clamp position
 	position.x = clamp(position.x, 1, 511)
@@ -201,7 +203,7 @@ func unequip_gun() -> void:
 func _input(event):
 	if PlayerStats.state != PlayerStats.states.walk:
 		return
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and Input.is_action_pressed("shoot"):
 		match camera_type:
 			camera_types.overhead:
 				camera_anchor.rotate_y(-event.relative.x * mouse_sensitivity * PlayerStats.sensitivity_modifier)

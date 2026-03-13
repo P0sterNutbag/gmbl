@@ -18,7 +18,7 @@ var original_position: Vector3
 var original_rotation: Vector3
 var target: Node3D
 var destination_path: NodePath
-@export var faction: FactionManager.factions
+@export var faction: FactionManager.factions = FactionManager.factions.no_faction
 var guns_dict: Dictionary = {
 	0 : [preload("res://Scenes/Guns/shotgun.tscn"), preload("res://Scenes/Items/Guns/shotgun.tscn")],
 	1 : [preload("res://Scenes/Guns/ak47.tscn"), preload("res://Scenes/Items/Guns/ak47.tscn")],

@@ -170,7 +170,7 @@ func pay_fee(amount: int, fail_index: int) -> void:
 		PlayerStats.inventory.money -= amount
 		var npc = Globals.overworld.current_encounter.get_parent()
 		npc.chase_player = false
-		npc.navigation_agent.set_target_position(npc.destination)
+		npc.navigation_agent.set_target_position(npc.destination.global_position)
 		Globals.survival_ui.create_notification("-$" + str(amount))
 		exit_to_game()
 	else:

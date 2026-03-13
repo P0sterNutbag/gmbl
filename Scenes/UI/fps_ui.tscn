@@ -16,6 +16,7 @@
 [ext_resource type="Shader" uid="uid://clx8i8jbtbgo3" path="res://Art/Shaders/retro.gdshader" id="9_a1pox"]
 [ext_resource type="Texture2D" uid="uid://cvly0bfjs24or" path="res://Art/Textures/sun-moon.png" id="10_a1pox"]
 [ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="11_ettqu"]
+[ext_resource type="Theme" uid="uid://crg6v3iu4nx3m" path="res://Art/Themes/text_header_outline.tres" id="11_jr5wk"]
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="12_e0hn7"]
 [ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="13_8v68b"]
 [ext_resource type="Theme" uid="uid://dcnijc3hjurqk" path="res://Art/Themes/text_mediun_outline.tres" id="13_hkj58"]
@@ -300,16 +301,15 @@ grow_vertical = 2
 texture = ExtResource("2_ed1w8")
 expand_mode = 1
 
-[node name="BottomLeft" type="Control" parent="." unique_id=848986944]
-modulate = Color(1, 1, 0, 1)
+[node name="BottomLeft" type="Control" parent="." unique_id=716754871]
+visible = false
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 grow_vertical = 0
-scale = Vector2(2, 2)
 
-[node name="ColorRect" type="ColorRect" parent="BottomLeft" unique_id=857889129]
+[node name="ColorRect" type="ColorRect" parent="BottomLeft" unique_id=1359582019]
 visible = false
 layout_mode = 0
 offset_left = 17.0
@@ -320,37 +320,48 @@ rotation = -0.090757124
 scale = Vector2(1.14879, 1)
 color = Color(0, 0, 0, 1)
 
-[node name="ProgressBar" type="ProgressBar" parent="BottomLeft" unique_id=1542038271]
+[node name="Control" type="Control" parent="BottomLeft" unique_id=1635936852]
+anchors_preset = 0
+offset_left = 64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = -64.0
+
+[node name="ProgressBar" type="ProgressBar" parent="BottomLeft/Control" unique_id=1354631701]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 26.0
-offset_top = -42.5
-offset_right = 137.5
-offset_bottom = -26.5
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
+offset_right = 223.0
+offset_bottom = -4.0
+grow_vertical = 0
 theme = ExtResource("3_8ucm7")
 max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="TextureRect3" type="TextureRect" parent="BottomLeft" unique_id=1888957424]
+[node name="TextureRect3" type="TextureRect" parent="BottomLeft/Control" unique_id=1361907267]
 modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = 30.5
-offset_top = -38.0
-offset_right = 38.0
-offset_bottom = -30.5
+layout_mode = 1
+offset_left = 8.0
+offset_top = -25.0
+offset_right = 15.5
+offset_bottom = -17.5
+scale = Vector2(2, 2)
 texture = ExtResource("5_e0hn7")
 expand_mode = 1
 
-[node name="VBoxContainer" type="HBoxContainer" parent="BottomLeft" unique_id=1178255411]
-modulate = Color(1, 1, 0, 1)
-layout_mode = 0
-offset_left = 26.0
-offset_top = -65.0
-offset_right = 79.0
-offset_bottom = -50.0
+[node name="VBoxContainer" type="HBoxContainer" parent="BottomLeft/Control" unique_id=898085467]
+layout_mode = 1
+offset_top = -70.0
+offset_right = 72.0
+offset_bottom = -55.0
+scale = Vector2(2, 2)
 
-[node name="Hunger" type="TextureRect" parent="BottomLeft/VBoxContainer" unique_id=1621319139]
+[node name="Hunger" type="TextureRect" parent="BottomLeft/Control/VBoxContainer" unique_id=1665310753]
+modulate = Color(1, 1, 0, 1)
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 texture = ExtResource("5_ettqu")
@@ -359,7 +370,8 @@ script = ExtResource("6_a1pox")
 stat_name = "hunger"
 show_treshold = 0.75
 
-[node name="Thirst" type="TextureRect" parent="BottomLeft/VBoxContainer" unique_id=483925916]
+[node name="Thirst" type="TextureRect" parent="BottomLeft/Control/VBoxContainer" unique_id=61517252]
+modulate = Color(1, 1, 0, 1)
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 texture = ExtResource("7_3lnm2")
@@ -368,7 +380,8 @@ script = ExtResource("6_a1pox")
 stat_name = "thirst"
 show_treshold = 0.75
 
-[node name="Sleep" type="TextureRect" parent="BottomLeft/VBoxContainer" unique_id=1676319920]
+[node name="Sleep" type="TextureRect" parent="BottomLeft/Control/VBoxContainer" unique_id=1292977411]
+modulate = Color(1, 1, 0, 1)
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 texture = ExtResource("8_jr5wk")
@@ -376,7 +389,8 @@ expand_mode = 2
 script = ExtResource("6_a1pox")
 stat_name = "sleep"
 
-[node name="Alcolhol" type="TextureRect" parent="BottomLeft/VBoxContainer" unique_id=1898660980]
+[node name="Alcolhol" type="TextureRect" parent="BottomLeft/Control/VBoxContainer" unique_id=1830040260]
+modulate = Color(1, 1, 0, 1)
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 texture = ExtResource("9_3lnm2")
@@ -395,7 +409,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
-scale = Vector2(2, 2)
 
 [node name="ColorRect2" type="ColorRect" parent="BottomRight" unique_id=790087429]
 visible = false
@@ -422,10 +435,10 @@ horizontal_alignment = 2
 
 [node name="AmmoCount" type="Control" parent="BottomRight" unique_id=1549461220]
 anchors_preset = 0
-offset_left = -21.5
-offset_top = -25.0
-offset_right = -21.5
-offset_bottom = -25.0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = -64.0
+offset_bottom = -64.0
 
 [node name="ColorRect4" type="ColorRect" parent="BottomRight/AmmoCount" unique_id=378211267]
 visible = false
@@ -441,17 +454,17 @@ color = Color(0, 0, 0, 1)
 [node name="MagsLeft" type="Label" parent="BottomRight/AmmoCount" unique_id=1237370696]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = -22.451782
-offset_top = -15.500061
-offset_right = 153.54822
-offset_bottom = 12.499939
-theme = ExtResource("5_8v68b")
+offset_left = -29.0
+offset_top = -37.0
+offset_right = 147.0
+offset_bottom = 6.0
+theme = ExtResource("11_jr5wk")
 text = "0"
 
 [node name="MagIcon" type="Sprite2D" parent="BottomRight/AmmoCount" unique_id=1631488394]
 unique_name_in_owner = true
-position = Vector2(-38.999973, -6.9999743)
-scale = Vector2(0.9642849, 0.9642849)
+position = Vector2(-59.999973, -17.999973)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_6gmlr")
 region_enabled = true
 region_rect = Rect2(0, 0, 28, 28)

@@ -31,6 +31,7 @@
 [ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="27_13ham"]
 [ext_resource type="Script" uid="uid://pcx3b5tjvijq" path="res://Scripts/faction_ui_box.gd" id="27_k64vs"]
 [ext_resource type="Script" uid="uid://dlnug53qsfaf6" path="res://Scripts/faction_ui.gd" id="27_o0jpn"]
+[ext_resource type="Texture2D" uid="uid://r08gms0nyjju" path="res://Art/Textures/hp icon.png" id="32_lboml"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_agdr0"]
 bg_color = Color(0, 0, 0, 0.784314)
@@ -40,137 +41,13 @@ border_color = Color(1, 1, 0, 1)
 
 [sub_resource type="Theme" id="Theme_guqia"]
 
+[sub_resource type="Theme" id="Theme_lboml"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oyp7w"]
+
 [node name="CanvasLayer" type="CanvasLayer" unique_id=691466196]
 process_mode = 3
 script = ExtResource("1_e5c6o")
-
-[node name="TopLeft" type="Control" parent="." unique_id=470543974]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-mouse_filter = 2
-
-[node name="Stats" type="VBoxContainer" parent="TopLeft" unique_id=567579693]
-visible = false
-layout_mode = 0
-offset_left = 32.0
-offset_top = 32.0
-offset_right = 155.0
-offset_bottom = 100.0
-mouse_filter = 2
-
-[node name="Hunger" type="Control" parent="TopLeft/Stats" unique_id=1017928516]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-script = ExtResource("2_k4cvi")
-stat_name = "hunger"
-metadata/_edit_group_ = true
-
-[node name="ColorRect5" type="ColorRect" parent="TopLeft/Stats/Hunger" unique_id=1225194941]
-layout_mode = 0
-offset_left = 109.0
-offset_top = 1.0
-offset_right = 245.0
-offset_bottom = 16.0
-rotation = -0.0471239
-scale = Vector2(-0.810944, 0.690912)
-color = Color(0, 0, 0, 1)
-
-[node name="GunName" type="Label" parent="TopLeft/Stats/Hunger" unique_id=1247534153]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 9.13538
-offset_top = 0.5
-offset_right = 160.135
-offset_bottom = 28.5
-theme = ExtResource("3_1kfkr")
-text = "Hunger"
-
-[node name="ProgressBar" type="ProgressBar" parent="TopLeft/Stats/Hunger" unique_id=497089911]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 90.0
-offset_top = 6.0
-offset_right = 150.0
-offset_bottom = 17.0
-theme = ExtResource("4_1kfkr")
-max_value = 1.0
-value = 1.0
-show_percentage = false
-
-[node name="Water" type="Control" parent="TopLeft/Stats" unique_id=124366791]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-script = ExtResource("2_k4cvi")
-stat_name = "thirst"
-metadata/_edit_group_ = true
-
-[node name="ColorRect4" type="ColorRect" parent="TopLeft/Stats/Water" unique_id=770281527]
-layout_mode = 0
-offset_left = 108.0
-offset_top = 1.0
-offset_right = 243.0
-offset_bottom = 16.0
-rotation = -0.0471239
-scale = Vector2(-0.810944, 0.690912)
-color = Color(0, 0, 0, 1)
-
-[node name="GunName" type="Label" parent="TopLeft/Stats/Water" unique_id=544401606]
-layout_mode = 0
-offset_left = 9.13538
-offset_top = 0.5
-offset_right = 160.135
-offset_bottom = 28.5
-theme = ExtResource("3_1kfkr")
-text = "Thirst"
-
-[node name="ProgressBar" type="ProgressBar" parent="TopLeft/Stats/Water" unique_id=69228372]
-layout_mode = 0
-offset_left = 90.0
-offset_top = 6.0
-offset_right = 150.0
-offset_bottom = 17.0
-theme = ExtResource("4_1kfkr")
-max_value = 1.0
-value = 1.0
-show_percentage = false
-
-[node name="Sleep" type="Control" parent="TopLeft/Stats" unique_id=1766688199]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-script = ExtResource("2_k4cvi")
-stat_name = "sleep"
-metadata/_edit_group_ = true
-
-[node name="ColorRect4" type="ColorRect" parent="TopLeft/Stats/Sleep" unique_id=843225441]
-layout_mode = 0
-offset_left = 103.0
-offset_top = 1.0
-offset_right = 231.0
-offset_bottom = 16.0
-rotation = -0.0471239
-scale = Vector2(-0.810944, 0.690912)
-color = Color(0, 0, 0, 1)
-
-[node name="GunName" type="Label" parent="TopLeft/Stats/Sleep" unique_id=1204628396]
-layout_mode = 0
-offset_left = 9.13538
-offset_top = 0.5
-offset_right = 160.135
-offset_bottom = 28.5
-theme = ExtResource("3_1kfkr")
-text = "Sleep"
-
-[node name="ProgressBar" type="ProgressBar" parent="TopLeft/Stats/Sleep" unique_id=1665732271]
-layout_mode = 0
-offset_left = 90.0
-offset_top = 6.0
-offset_right = 150.0
-offset_bottom = 17.0
-theme = ExtResource("4_1kfkr")
-max_value = 1.0
-value = 1.0
-show_percentage = false
 
 [node name="TopCenter" type="Control" parent="." unique_id=1690383952]
 modulate = Color(1, 1, 0, 1)
@@ -391,6 +268,7 @@ offset_left = 829.0
 offset_right = 829.0
 
 [node name="StatsAnchor" type="VBoxContainer" parent="." unique_id=287376221]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1245,183 +1123,132 @@ script = ExtResource("27_k64vs")
 faction_vertical = 3
 faction_horizontal = 3
 
-[node name="Log" type="VBoxContainer" parent="." unique_id=669236471]
-custom_minimum_size = Vector2(497, 0)
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 513.0
-offset_bottom = 56.0
+[node name="BottomLeft" type="Control" parent="." unique_id=1948965576]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
 
-[node name="PlayerInventory" type="HBoxContainer" parent="." unique_id=1944515002]
-process_mode = 4
+[node name="ColorRect" type="ColorRect" parent="BottomLeft" unique_id=900570422]
 visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -551.0
-offset_top = -408.5
-offset_right = 551.0
-offset_bottom = 408.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 64
-
-[node name="Inventory" parent="PlayerInventory" unique_id=1175272954 instance=ExtResource("9_to4rm")]
-layout_mode = 2
-size_flags_horizontal = 3
-can_drop_items = true
-
-[node name="Control" type="Control" parent="PlayerInventory/Inventory" unique_id=1931966580]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Button" parent="PlayerInventory/Inventory/Control" unique_id=1989934339 instance=ExtResource("10_0pkni")]
 layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 24.0
-offset_bottom = 24.0
+offset_left = 17.0
+offset_top = -36.0
+offset_right = 130.73166
+offset_bottom = -20.0
+rotation = -0.090757124
+scale = Vector2(1.14879, 1)
+color = Color(0, 0, 0, 1)
 
-[node name="EquipmentSlots" type="VBoxContainer" parent="PlayerInventory" unique_id=412714387]
-layout_mode = 2
-theme_override_constants/separation = 48
+[node name="Control" type="Control" parent="BottomLeft" unique_id=1342773347]
+anchors_preset = 0
+offset_left = 64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = -64.0
 
-[node name="Equipment" type="PanelContainer" parent="PlayerInventory/EquipmentSlots" unique_id=1298358113]
-custom_minimum_size = Vector2(497, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-mouse_filter = 2
-theme = ExtResource("11_0pkni")
+[node name="ProgressBar" type="ProgressBar" parent="BottomLeft/Control" unique_id=1917726440]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
+offset_right = 223.0
+offset_bottom = -4.0
+grow_vertical = 0
+theme = ExtResource("4_1kfkr")
+max_value = 1.0
+value = 1.0
+show_percentage = false
 
-[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/EquipmentSlots/Equipment" unique_id=399500045]
+[node name="TextureRect3" type="TextureRect" parent="BottomLeft/Control" unique_id=170569285]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+offset_left = 8.0
+offset_top = -25.0
+offset_right = 15.5
+offset_bottom = -17.5
+scale = Vector2(2, 2)
+texture = ExtResource("32_lboml")
+expand_mode = 1
+
+[node name="VBoxContainer" type="HBoxContainer" parent="BottomLeft/Control" unique_id=684823176]
+layout_mode = 1
+offset_top = -70.0
+offset_right = 72.0
+offset_bottom = -55.0
+scale = Vector2(2, 2)
+
+[node name="Thirst" type="TextureRect" parent="BottomLeft/Control/VBoxContainer" unique_id=1296685449]
+modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
-mouse_filter = 2
+texture = ExtResource("4_k64vs")
+expand_mode = 2
+script = ExtResource("2_k4cvi")
+stat_name = "thirst"
+show_treshold = 0.75
+
+[node name="Hunger" type="TextureRect" parent="BottomLeft/Control/VBoxContainer" unique_id=1407439282]
+modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+texture = ExtResource("2_guqia")
+expand_mode = 2
+script = ExtResource("2_k4cvi")
+stat_name = "hunger"
+show_treshold = 0.75
+
+[node name="Sleep" type="TextureRect" parent="BottomLeft/Control/VBoxContainer" unique_id=72998721]
+modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+texture = ExtResource("5_13ham")
+expand_mode = 2
+script = ExtResource("2_k4cvi")
+stat_name = "sleep"
+
+[node name="Alcolhol" type="TextureRect" parent="BottomLeft/Control/VBoxContainer" unique_id=1716683138]
+modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+texture = ExtResource("10_c2wwi")
+expand_mode = 2
+script = ExtResource("2_k4cvi")
+stat_name = "soberness"
+show_treshold = 1.0
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1491710996]
+custom_minimum_size = Vector2(360, 0)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -424.0
+offset_top = -104.0
+offset_right = -64.0
+offset_bottom = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = SubResource("Theme_lboml")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oyp7w")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1336669230]
+layout_mode = 2
 theme = ExtResource("12_2dyl4")
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer" unique_id=2001729442]
+[node name="Log" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=669236471]
+unique_name_in_owner = true
+clip_contents = true
 layout_mode = 2
-mouse_filter = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer" unique_id=1143779541]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/HBoxContainer" unique_id=157979190]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("15_1lobq")
-text = "Weapons"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer" unique_id=1443266804]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="MenuItem" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=278589346 instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Primary: "
-script = ExtResource("19_jtf3n")
-slot = 0
-
-[node name="MenuItem2" parent="PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2089455132 instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Secondary: "
-script = ExtResource("19_jtf3n")
-slot = 1
-
-[node name="Equipment2" type="PanelContainer" parent="PlayerInventory/EquipmentSlots" unique_id=721082901]
-custom_minimum_size = Vector2(497, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-mouse_filter = 2
 theme = ExtResource("11_0pkni")
-
-[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/EquipmentSlots/Equipment2" unique_id=804099000]
-layout_mode = 2
-mouse_filter = 2
-theme = ExtResource("12_2dyl4")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer" unique_id=956206984]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer" unique_id=312672737]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1654762986]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("15_1lobq")
-text = "Armor"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer" unique_id=1511113137]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="MenuItem" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1239746556 instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Head: "
-script = ExtResource("19_jtf3n")
-slot = 2
-
-[node name="MenuItem2" parent="PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1772212904 instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Body: "
-script = ExtResource("19_jtf3n")
-slot = 3
-
-[node name="Equipment3" type="PanelContainer" parent="PlayerInventory/EquipmentSlots" unique_id=635198306]
-custom_minimum_size = Vector2(497, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-mouse_filter = 2
-theme = ExtResource("11_0pkni")
-
-[node name="MarginContainer" type="MarginContainer" parent="PlayerInventory/EquipmentSlots/Equipment3" unique_id=1246217342]
-layout_mode = 2
-mouse_filter = 2
-theme = ExtResource("12_2dyl4")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer" unique_id=2105875397]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer" unique_id=495543939]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1773777356]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("15_1lobq")
-text = "Utility"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer" unique_id=968152748]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="MenuItem" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2011610297 instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Nav: "
-script = ExtResource("19_jtf3n")
-slot = 4
-
-[node name="MenuItem2" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=711745494 instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Light: "
-script = ExtResource("19_jtf3n")
-slot = 5
-
-[node name="MenuItem3" parent="PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1213479984 instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Vision: "
-script = ExtResource("19_jtf3n")
-slot = 6
 
 [connection signal="pressed" from="TransferInventory/Inventory/Control/Button" to="." method="close_transfer_inventory"]
 [connection signal="visibility_changed" from="PauseMenu" to="PauseMenu" method="_on_visibility_changed"]
@@ -1441,7 +1268,6 @@ slot = 6
 [connection signal="pressed" from="Menus/VBoxContainer/Journal/ConfirmationMenu/PanelContainer/MarginContainer/VBoxContainer/Yes" to="Menus/VBoxContainer/Journal" method="_on_yes_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Journal/ConfirmationMenu/PanelContainer/MarginContainer/VBoxContainer/No" to="Menus/VBoxContainer/Journal" method="_on_no_pressed"]
 [connection signal="visibility_changed" from="Menus/VBoxContainer/Factions" to="Menus/VBoxContainer/Factions" method="_on_visibility_changed"]
-[connection signal="pressed" from="PlayerInventory/Inventory/Control/Button" to="." method="close_inventory"]
 
 [editable path="PauseMenu"]
 [editable path="Menus/VBoxContainer/Journal/ConfirmationMenu"]

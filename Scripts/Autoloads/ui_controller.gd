@@ -40,7 +40,10 @@ func close_interface(node_to_close: Control, activate_player: bool = true) -> vo
 	current_ui = null
 	if activate_player:
 		PlayerStats.change_state(PlayerStats.states.walk)
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		if Globals.overworld and get_tree().current_scene == Globals.overworld:
+			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func close_all(activate_player: bool = true) -> void:

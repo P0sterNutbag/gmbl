@@ -37,8 +37,7 @@ func _process(_delta: float) -> void:
 	title_label.text = get_parent().title
 	if show_faction:
 		#faction_label.get_parent().show()
-		var faction = location_data.faction
-		var faction_name = FactionManager.faction_data[faction].name
+		var faction_name = FactionManager.faction_data[int(location_data.faction)].name
 		faction_label.text = faction_name
 	else:
 		faction_label.text = "???"

@@ -34,7 +34,7 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	SaveController.load.connect(_on_load)
+	#SaveController.load.connect(_on_load)
 	flagpole.global_rotation_degrees = Vector3(0, 0, 0)
 	# randomized location data
 	if location_data is LocationDataRandom:
@@ -100,21 +100,6 @@ func transition_to_level(start_alert = alert_enemies) -> void:
 	SceneManager.start_encounter_transition(encounter_scene.resource_path)
 
 
-func save() -> Dictionary:
-	save_population = location_data.population
-	save_faction = location_data.faction
-	return {
-		"save_population" : save_population,
-		"save_faction" : save_faction,
-	}
-
-
-func _on_load() -> void:
-	if save_population > -1:
-		location_data.population = save_population
-	location_data.faction = save_faction
-
-
 func _on_body_entered(_body: Node3D) -> void:
 	if !can_transition or PlayerStats.state != PlayerStats.states.walk or !Globals.player.can_enter_location:
 		return
@@ -153,3 +138,27 @@ func _on_battle_timer_timeout() -> void:
 		print(title + " taken by " + FactionManager.faction_data[location_data.faction].name + ". Population is now: " + str(location_data.population))
 	else:
 		print(title + " successfuly defended by " + FactionManager.faction_data[location_data.faction].name + ". Population is now: " + str(location_data.population))
+
+
+func save() -> Dictionary:
+	#var sr = ResourceLoader.load("user://saved_resources.res")
+	#sr.resources[name+"_location_data"] = location_data
+	#if town:
+		#for i in town.shops:
+			#if !sr:
+				#sr = SavedResources.new()
+			#sr.resources[name+"_"+i.title] = i
+	#ResourceSaver.save(sr, "user://saved_resources.res")
+	if town:
+		return {"town" : town}
+	else:
+		return {}
+
+
+#func _on_load() -> void:
+	#var sr = ResourceLoader.load("user://saved_resources.res")
+	#location_data = sr.resources[name+"_location_data"]
+	#if town:
+		#for i in town.shops.size():
+			#var saved_shop = sr.resources[name+"_"+town.shops[i].title]
+			#town.shops[i] = saved_shop

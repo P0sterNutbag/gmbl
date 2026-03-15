@@ -37,6 +37,7 @@ func _on_quit_pressed() -> void:
 
 func _on_quit_2_pressed() -> void:
 	#SaveController.save_data_to_file()
+	#await SaveController.save
 	get_tree().quit()
 
 

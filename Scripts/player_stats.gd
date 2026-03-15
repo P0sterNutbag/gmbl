@@ -126,20 +126,6 @@ func give_up() -> void:
 	Globals.overworld.queue_free()
 
 
-func save() -> Dictionary:
-	hp = Globals.player.hitbox.hp
-	ResourceSaver.save(inventory, "user://inventory.res")
-	return {
-		"hp": hp,
-		"ammo": ammo,
-		"inventory.item_slots" : inventory.item_slots,
-		"sleep" : sleep,
-		"hunger" : hunger,
-		"thirst" : thirst,
-		"player_name" : player_name,
-	}
-
-
 func unequip_current_item():
 	for slot in inventory.items_slots:
 		var item = slot.item
@@ -213,6 +199,28 @@ func _on_scene_leaving():
 		hp = new_hp
 
 
+func save() -> Dictionary:
+	hp = Globals.player.hitbox.hp
+	#ResourceSaver.save(inventory, "user://inventory.res")
+	#var save_quests = ArraySaver.new()
+	#save_quests.array.append_array(quests)
+	#ResourceSaver.save(save_quests, "user://quests.res")
+	return {
+		"hp": hp,
+		"ammo": ammo,
+		"sleep" : sleep,
+		"hunger" : hunger,
+		"thirst" : thirst,
+		"player_name" : player_name,
+		"quests" : quests,
+		"inventory" : inventory,
+	}
+
+
 func _on_load():
-	inventory = ResourceLoader.load("user://inventory.res")
+	#inventory = ResourceLoader.load("user://inventory.res")
+	#var save_quests = ResourceLoader.load("user://quests.res")
+	#if save_quests:
+		#quests.clear()
+		#quests.append_array(save_quests.array)
 	Globals.player.hitbox.hp = hp

@@ -32,6 +32,10 @@ func _exit_tree() -> void:
 			data.population = population
 	else:
 		location_data.population = enemies.filter(func(a): return a.state != a.states.dead and a.faction == location_data.faction).size()
+		var encounter_parent = Globals.overworld.current_encounter.get_parent()
+		if encounter_parent is CharacterBody3D:
+			if location_data.population == 0:
+				encounter_parent.die()
 	if factions.size() == 0:
 		location_data.faction = FactionManager.factions.no_faction
 		if battle: 

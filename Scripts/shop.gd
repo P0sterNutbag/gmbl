@@ -10,6 +10,7 @@ class_name Shop
 	"Ammo" : 0.75,
 	"Junk" : 0.75,
 	"Gear" : 0.75,
+	"Consumable" : 0.75,
 }
 @export var dialogue: DialogueTree
 @export var quests: Array[Quest]
@@ -17,7 +18,7 @@ class_name Shop
 @export var min_quests: int
 @export var max_quests: int
 @export var uses_money: bool = true
-var faction: FactionManager.factions
+@export var faction: FactionManager.factions
 var max_money: int
 
 

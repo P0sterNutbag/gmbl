@@ -3,12 +3,17 @@ var data = {}
 
 var save_dir = "user://"
 var save_path = "user://savegame.save"
+var resource_path = "user://resources.res"
+var saved_resources: SavedResources
 signal save
 signal load
 
 
 func _ready() -> void:
-	pass
+	saved_resources = ResourceLoader.load(resource_path)
+	if !saved_resources:
+		saved_resources = SavedResources.new()
+		ResourceSaver.save(saved_resources, resource_path)
 	#save_data_to_file()
 	#load_data_from_file()
 
@@ -38,11 +43,23 @@ func save_data_to_file():
 			print("persistent node '%s' is missing a save() function, skipped" % node.name)
 			continue
 		var node_data = node.call("save")
+		var resource_dict = {}
+		for key in node_data:
+			var value = node_data[key]
+			if value is Resource:
+				resource_dict[key] = value
+			elif value is Array:
+				var array = SavedArray.new()
+				array.array = value
+				resource_dict[key] = array
 		node_data["path"] = node.get_scene_file_path()
 		data[str(node.get_path())] = node_data
+		if resource_dict.size() > 0:
+			saved_resources.resources[str(node.get_path())] = resource_dict
 	var save_file = FileAccess.open(save_path, FileAccess.WRITE)
 	var json_string = JSON.stringify(data)
 	save_file.store_line(json_string)
+	ResourceSaver.save(saved_resources, resource_path)
 	save.emit()
 
 
@@ -76,6 +93,16 @@ func load_data_from_file():
 				node.global_rotation.y = value
 			else:
 				node.set(node_data, value)
+		if saved_resources.resources.has(node_path):
+			for key in saved_resources.resources[node_path]:
+				var value = saved_resources.resources[node_path][key]
+				if value is SavedArray:
+					#node.set(key, value.array)
+					var array = node.get(key)
+					array.clear()
+					array.append_array(value.array)
+				else:
+					node.set(key, value)
 	load.emit()
 
 

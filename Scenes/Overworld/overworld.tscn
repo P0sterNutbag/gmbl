@@ -788,6 +788,7 @@ script = ExtResource("90_bqxwu")
 possible_factions = [3, 4]
 min_starting_population = 2
 max_starting_population = 10
+faction = null
 metadata/_custom_type_script = "uid://01ir68or13hi"
 
 [sub_resource type="Resource" id="Resource_or1fq"]
@@ -795,6 +796,7 @@ script = ExtResource("90_bqxwu")
 possible_factions = [4, 0]
 min_starting_population = 2
 max_starting_population = 10
+faction = null
 metadata/_custom_type_script = "uid://01ir68or13hi"
 
 [sub_resource type="Resource" id="Resource_dfqls"]
@@ -802,6 +804,7 @@ script = ExtResource("90_bqxwu")
 possible_factions = [4, 0]
 min_starting_population = 2
 max_starting_population = 10
+faction = null
 metadata/_custom_type_script = "uid://01ir68or13hi"
 
 [sub_resource type="Resource" id="Resource_3ppvp"]
@@ -809,6 +812,7 @@ script = ExtResource("90_bqxwu")
 possible_factions = [0, 4]
 min_starting_population = 2
 max_starting_population = 10
+faction = null
 metadata/_custom_type_script = "uid://01ir68or13hi"
 
 [sub_resource type="Resource" id="Resource_w3cp4"]
@@ -816,6 +820,7 @@ script = ExtResource("90_bqxwu")
 possible_factions = [0, 4]
 min_starting_population = 2
 max_starting_population = 10
+faction = null
 metadata/_custom_type_script = "uid://01ir68or13hi"
 
 [sub_resource type="Resource" id="Resource_8vomo"]
@@ -823,6 +828,7 @@ script = ExtResource("90_bqxwu")
 possible_factions = [0, 4]
 min_starting_population = 2
 max_starting_population = 10
+faction = null
 metadata/_custom_type_script = "uid://01ir68or13hi"
 
 [node name="Overworld" type="Node3D" unique_id=1106168526]
@@ -900,7 +906,7 @@ terrain = NodePath("../Terrain")
 
 [node name="SnapToTerrain" type="Node3D" parent="." unique_id=1726042150 node_paths=PackedStringArray("objects_to_snap")]
 script = ExtResource("27_oapb8")
-objects_to_snap = [NodePath("../BanditCamp"), NodePath("../BanditTown"), NodePath("../Crateyard"), NodePath("../RockCanyon"), NodePath("../SandDunes"), NodePath("../SmallTown"), NodePath("../Scrapyard"), NodePath("../DrugDen"), null, null, null, null, null, null, NodePath("../PlayerStart"), NodePath("../Player"), null, NodePath("../Home")]
+objects_to_snap = [NodePath("../BanditCamp"), NodePath("../BanditTown"), NodePath("../Crateyard"), NodePath("../RockCanyon"), NodePath("../SandDunes"), NodePath("../SmallTown"), NodePath("../Scrapyard"), NodePath("../DrugDen"), null, null, null, null, null, null, NodePath("../PlayerStart"), NodePath("../Player"), null, null]
 
 [node name="PlayerStart" type="Node3D" parent="." unique_id=136712645]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 209.235, 0.81097287, 203.77374)
@@ -983,9 +989,8 @@ title = "Wasteland 6"
 location_data = SubResource("Resource_8vomo")
 encounter_scene = ExtResource("92_cvr5w")
 
-[node name="Home" parent="." unique_id=1047620238 instance=ExtResource("97_bqxwu")]
+[node name="Home" parent="." unique_id=496753311 instance=ExtResource("97_bqxwu")]
 transform = Transform3D(0.29030132, 0, 0.9569353, 0, 1, 0, -0.9569353, 0, 0.29030132, 214.29442, 0.49500558, 208.90747)
-can_spawn_npcs = false
 
 [connection signal="timeout" from="NpcController/Timer" to="NpcController" method="_on_timer_timeout"]
 [connection signal="timeout" from="NpcController/Timer" to="NpcController/Timer" method="_on_timeout"]

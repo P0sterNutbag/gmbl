@@ -1220,23 +1220,16 @@ script = ExtResource("2_k4cvi")
 stat_name = "soberness"
 show_treshold = 1.0
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1491710996]
+[node name="LogContainer" type="PanelContainer" parent="." unique_id=1491710996]
 custom_minimum_size = Vector2(360, 0)
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -424.0
-offset_top = -104.0
-offset_right = -64.0
-offset_bottom = -64.0
-grow_horizontal = 0
-grow_vertical = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 424.0
+offset_bottom = 104.0
 theme = SubResource("Theme_lboml")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_oyp7w")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1336669230]
+[node name="MarginContainer" type="MarginContainer" parent="LogContainer" unique_id=1336669230]
 layout_mode = 2
 theme = ExtResource("12_2dyl4")
 theme_override_constants/margin_left = 16
@@ -1244,7 +1237,7 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 8
 
-[node name="Log" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=669236471]
+[node name="Log" type="VBoxContainer" parent="LogContainer/MarginContainer" unique_id=669236471]
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 2

@@ -14,6 +14,7 @@ enum fire_types {semi_auto, auto, pump}
 @export var ads_vector: Vector3
 @export var scope_texture: Texture2D
 @export var cast_shadow: bool = true
+@export var slot: EquipmentKit.slots
 var ammo: int:
 	get(): return gun_stats.ammo
 	set(value): 
@@ -42,17 +43,7 @@ var smoke: PackedScene = preload("res://Scenes/Effects/Particles/gun_smoke.tscn"
 func _ready() -> void:
 	max_ammo = gun_stats.ammo
 	shoot_cooldown_timer.wait_time = shoot_cooldown
-	#shoot_timer = Timer.new()
-	#shoot_timer.wait_time = 0.1
-	#shoot_timer.one_shot = true
-	#shoot_timer.timeout.connect(_on_shoot_timer_timeout)
 	anim_player = get_node_or_null("AnimationPlayer")
-	#muzzle_flash.hide()
-	#add_child(shoot_timer)
-	#if !cast_shadow:
-		#for child in gun_model.get_child(0).get_children():
-			#if child is MeshInstance3D:
-				#child.cast_shadow = false
 
 
 func _process(delta: float) -> void:
@@ -65,7 +56,6 @@ func _process(delta: float) -> void:
 			has_released = true
 	if gun_stats.condition <= 0:
 		can_shoot = false
-	
 	# spread
 	time_shooting -= delta
 	time_shooting = clamp(time_shooting, 0, 1)
@@ -77,28 +67,6 @@ func aim_fire_point(pos: Vector3) -> void:
 	fire_point.look_at(pos)
 
 
-#func _on_shoot() -> void:
-	#gun_stats.ammo -= 1
-	#gun_stats.condition -= 0.05
-	#can_shoot = false
-	#has_released = false
-	#flash_texture.rotate_z(deg_to_rad(randf_range(0, 360)))
-	#muzzle_flash.visible = true
-	#audio_player.play()
-	#var tween = create_tween()
-	#tween.tween_property(muzzle_flash, "visible", false, 0.1)
-	##if fire_type == fire_types.pump:
-		##await get_tree().create_timer(0.25).timeout
-		##if anim_player:
-			##anim_player.play("pump")
-	##else:
-	#shoot_cooldown_timer.start()
-	##var shell_instance = Globals.create_particle(shell, chamber.global_position, chamber)
-	##if shell_instance != null:
-		##shell_instance.apply_impulse(global_transform.basis.x * randf_range(2, 4) + global_transform.basis.y * randf_range(2, 3))
-		##shell_instance.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
-
-
 func use(shot_owner: Node3D = null) -> bool:
 	if !can_shoot:
 		return false
@@ -107,7 +75,6 @@ func use(shot_owner: Node3D = null) -> bool:
 		return false
 	shoot(shot_owner)
 	return true
-	
 
 
 func shoot(shot_owner: Node3D = null) -> void:#is_ads: bool = false, movement_speed = Vector3.ZERO) -> void:
@@ -149,6 +116,16 @@ func create_bullet(shot_owner: Node3D, is_ads: bool, movement_speed: Vector3) ->
 		var magnitude = clamp(movement_speed.length(), 1, 2)
 		variance *= magnitude
 	variance *= spread
+	if "stats" in shot_owner or uses_input:
+		var stats: CharacterStats
+		if uses_input:
+			stats = PlayerStats.stats
+		else:
+			stats = shot_owner.stats
+		var modifier = Vector2.ONE * stats.light_guns
+		if slot == EquipmentKit.slots.primary_gun:
+			modifier = Vector2.ONE * stats.heavy_guns
+		variance = clamp(variance - (modifier * 0.1), Vector2.ZERO, Vector2.ONE * 360)
 	var h_angle_variance = randf_range(-variance.x, variance.x * 1.1)
 	inst.rotate_y(deg_to_rad(h_angle_variance))
 	var v_angle_variance = randf_range(-variance.y, variance.y)

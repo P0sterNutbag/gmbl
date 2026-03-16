@@ -5,6 +5,7 @@ extends Menu
 @onready var main_menu: PanelContainer = $PanelContainer
 @onready var color_rect: ColorRect = $ColorRect
 @onready var logo: TextureRect = $ColorRect/TextureRect
+@onready var confirmation_menu: Control = $ConfirmationMenu
 var logo_tween: Tween
 var skip_intro: bool
 
@@ -57,7 +58,11 @@ func _on_menu_item_pressed() -> void:
 
 
 func _on_menu_item_2_pressed() -> void:
-	SceneManager.start_scene_transition("res://Scenes/UI/Levels/character_creation.tscn")
+	if resume_button.visible:
+		confirmation_menu.show()
+		main_menu.hide()
+	else:
+		SceneManager.start_scene_transition("res://Scenes/UI/Levels/character_creation.tscn")
 
 
 func _on_menu_item_3_pressed() -> void:
@@ -73,3 +78,19 @@ func _on_settings_menu_visibility_changed() -> void:
 	if !settings_menu.visible:
 		main_menu.show()
 		activate()
+
+
+func _on_yes_pressed() -> void:
+	main_menu.show()
+	confirmation_menu.hide()
+	SceneManager.start_scene_transition("res://Scenes/UI/Levels/character_creation.tscn")
+
+
+func _on_no_pressed() -> void:
+	main_menu.show()
+	confirmation_menu.hide()
+
+
+func _on_wishlist_pressed() -> void:
+	var steam_url = "steam://store/4304500"
+	OS.shell_open(steam_url)

@@ -3,6 +3,7 @@ extends Control
 @export var stat_name: String
 @export var show_treshold = 0.5
 @export var progress_bar: ProgressBar
+var tooltip_theme = preload("res://Art/Themes/text_small_outline.tres")
 
 
 func _process(_delta: float) -> void: 
@@ -32,3 +33,10 @@ func _process(_delta: float) -> void:
 	if !progress_bar:
 		return
 	progress_bar.value = value
+
+
+func _make_custom_tooltip(for_text):
+	var label = Label.new()
+	label.text = for_text
+	label.theme = tooltip_theme
+	return label

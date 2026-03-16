@@ -2,6 +2,7 @@ extends Node
 
 @export var starting_inventory: Inventory
 @export var allies: Array[PackedScene]
+@export var stats = CharacterStats.new() 
 enum states {walk, pause, dead}
 var state = states.walk
 var faction: FactionManager.factions: 
@@ -65,6 +66,7 @@ func _ready() -> void:
 	hunger = max_hunger
 	thirst = max_thirst
 	faction = FactionManager.factions.player
+	inventory.space += stats.strength
 	#sensitivity_modifier = ConfigManager.file.get_value("settings", "mouse_sensitivity", sensitivity_modifier)
 
 
@@ -214,6 +216,7 @@ func save() -> Dictionary:
 		"player_name" : player_name,
 		"quests" : quests,
 		"inventory" : inventory,
+		"stats" : stats
 	}
 
 

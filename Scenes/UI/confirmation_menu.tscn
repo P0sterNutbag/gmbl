@@ -1,14 +1,16 @@
 [gd_scene format=3 uid="uid://cvqg8c4yvypa1"]
 
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_fpjlb"]
+[ext_resource type="Script" uid="uid://ccss3v22dr72q" path="res://Scripts/confirmation_menu.gd" id="1_skyqr"]
 [ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="2_skyqr"]
-[ext_resource type="Theme" uid="uid://cdtfcbhvps3m1" path="res://Art/Themes/text_mediun.tres" id="3_aad7u"]
 [ext_resource type="PackedScene" uid="uid://bj7gyfau2dx5w" path="res://Scenes/UI/menu_button.tscn" id="4_ao7kj"]
+[ext_resource type="Theme" uid="uid://dcnijc3hjurqk" path="res://Art/Themes/text_mediun_outline.tres" id="4_skyqr"]
 
 [node name="ConfirmationMenu" type="Control" unique_id=42619159]
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
+script = ExtResource("1_skyqr")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1715864982]
 layout_mode = 1
@@ -35,7 +37,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=19737580]
 custom_minimum_size = Vector2(332, 0)
 layout_mode = 2
-theme = ExtResource("3_aad7u")
+theme = ExtResource("4_skyqr")
 text = "Delete Quest"
 horizontal_alignment = 1
 autowrap_mode = 2

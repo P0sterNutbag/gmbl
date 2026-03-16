@@ -6,7 +6,7 @@ extends CanvasLayer
 @onready var player_transfer_inventory: InventoryUI = %Inventory
 @onready var loot_transfer_inventory: InventoryUI = %Inventory2
 @onready var journal: Control = $Menus/VBoxContainer/Journal
-@onready var compass: Control = $TopCenter/Compass
+@onready var compass: Control = $Compass
 @onready var pause_menu: Control = $PauseMenu
 @onready var progress_menu: PanelContainer = $ProgressMenu
 @onready var death_menu: PanelContainer = $DeathMenu
@@ -15,6 +15,7 @@ extends CanvasLayer
 @onready var factions: PanelContainer = $Menus/VBoxContainer/Factions
 @onready var log_box: VBoxContainer = %Log
 @onready var player_hp_bar: ProgressBar = %ProgressBar
+@onready var menu_buttons: Control = $MenuButtons
 const LOG_NOTIFICATION = preload("res://Scenes/UI/log_notification.tscn")
 
 
@@ -22,15 +23,15 @@ func _enter_tree() -> void:
 	Globals.survival_ui = self
 	await get_tree().process_frame
 	if Globals.overworld and Globals.overworld == get_tree().current_scene:
-		stats_anchor.show()
-		stats_anchor.process_mode = Node.PROCESS_MODE_INHERIT
+		menu_buttons.show()
 	else:
-		stats_anchor.hide()
-		stats_anchor.process_mode = Node.PROCESS_MODE_DISABLED
+		menu_buttons.hide()
 
 
 func _ready() -> void:
 	SaveController.save.connect(_on_game_saved)
+	UiController.ui_opened.connect(_on_ui_opened)
+	UiController.ui_closed.connect(_on_ui_closed)
 
 
 func _process(_delta: float) -> void:
@@ -40,10 +41,8 @@ func _process(_delta: float) -> void:
 			if UiController.is_canvas_layer_open(Globals.ui) or PlayerStats.state != PlayerStats.states.walk:
 				return
 			player_inventory_holder.get_child(0).source_inventory = PlayerStats.inventory
-			menu_holder.show()
 			UiController.open_interface(player_inventory_holder)
 		else:
-			menu_holder.hide()
 			UiController.close_interface(player_inventory_holder)
 		if transfer_inventory_holder.visible:
 			UiController.close_interface(transfer_inventory_holder)
@@ -51,26 +50,23 @@ func _process(_delta: float) -> void:
 		if !journal.visible:
 			if UiController.is_canvas_layer_open(Globals.ui):
 				return
-			menu_holder.show()
 			UiController.open_interface(journal)
 			journal.open(PlayerStats.quests)
 		else:
-			menu_holder.hide()
 			UiController.close_interface(journal)
 	if Input.is_action_just_pressed("ui_cancel"):
 		if !pause_menu.visible and PlayerStats.state != PlayerStats.states.dead:
 			if UiController.is_canvas_layer_open(self):
-				menu_holder.hide()
 				UiController.close_all()
 				return
 			if UiController.is_canvas_layer_open(Globals.ui):
 				return
 	if Input.is_action_just_pressed("pause") and PlayerStats.state != PlayerStats.states.dead:
 		if !pause_menu.visible:
-			menu_holder.hide()
 			UiController.open_interface(pause_menu)
 		else:
-			UiController.close_interface(pause_menu)
+			if pause_menu.pause_menu.visible:
+				UiController.close_interface(pause_menu)
 	# compass
 	var compass_item = PlayerStats.inventory.find_item("compass")
 	if compass_item and compass_item.equipped:
@@ -151,3 +147,34 @@ func _on_faction_tab_pressed() -> void:
 
 func _on_game_saved() -> void:
 	create_notification("Game saved")
+
+
+func _on_pause_pressed() -> void:
+	if pause_menu.visible:
+		UiController.close_interface(pause_menu)
+	else:
+		UiController.open_interface(pause_menu)
+
+
+func _on_ui_opened() -> void:
+	if UiController.current_ui.get_parent().get_parent() == menu_holder:
+		menu_holder.show()
+	else:
+		menu_holder.hide()
+
+
+func _on_ui_closed(closed_node: Control) -> void:
+	if closed_node.get_parent().get_parent() == menu_holder:
+		menu_holder.hide()
+
+
+func _on_inventory_button_pressed() -> void:
+	UiController.open_interface(player_inventory_holder)
+
+
+func _on_journal_button_pressed() -> void:
+	UiController.open_interface(journal)
+
+
+func _on_faction_button_pressed() -> void:
+	UiController.open_interface(factions)

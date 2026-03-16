@@ -1,13 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://dnl56ggtju325"]
+[gd_scene format=3 uid="uid://dnl56ggtju325"]
 
 [ext_resource type="Theme" uid="uid://tivwhtwiofll" path="res://Art/Themes/button.tres" id="1_l7vy8"]
 [ext_resource type="Texture2D" uid="uid://djj6aa5nkatda" path="res://Art/Textures/arrow.png" id="2_0gh2u"]
 [ext_resource type="Script" uid="uid://cjy4l58tth8ta" path="res://Scripts/option_button.gd" id="3_l7vy8"]
 [ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="4_7ia75"]
 [ext_resource type="Texture2D" uid="uid://d08xeomlxj5wh" path="res://Art/Textures/arrow_small_left.png" id="5_tyr7v"]
+[ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="6_7ia75"]
 [ext_resource type="Texture2D" uid="uid://byvpghxprlvv3" path="res://Art/Textures/arrow_small.png" id="6_qlpql"]
 
-[node name="MenuButton" type="Button"]
+[node name="MenuButton" type="Button" unique_id=237768494]
 z_index = 1
 offset_right = 280.0
 offset_bottom = 25.0
@@ -20,7 +21,7 @@ flat = true
 alignment = 0
 script = ExtResource("3_l7vy8")
 
-[node name="Control" type="HBoxContainer" parent="."]
+[node name="Control" type="HBoxContainer" parent="." unique_id=352099295]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -35,7 +36,7 @@ grow_vertical = 2
 mouse_filter = 0
 alignment = 1
 
-[node name="LeftScroll" type="Button" parent="Control"]
+[node name="LeftScroll" type="Button" parent="Control" unique_id=1028790535]
 modulate = Color(1, 1, 0, 1)
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
@@ -45,14 +46,14 @@ icon = ExtResource("5_tyr7v")
 flat = true
 expand_icon = true
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Label" type="Label" parent="Control" unique_id=1794891755]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("4_7ia75")
+theme = ExtResource("6_7ia75")
 text = "Option"
 horizontal_alignment = 1
 
-[node name="RightScroll" type="Button" parent="Control"]
+[node name="RightScroll" type="Button" parent="Control" unique_id=1244779748]
 modulate = Color(1, 1, 0, 1)
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2

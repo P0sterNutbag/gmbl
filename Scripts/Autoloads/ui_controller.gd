@@ -10,6 +10,8 @@ var mouse_speed := 800.0
 @onready var error_sfx: AudioStreamPlayer = $Error
 @onready var voice_sfx: AudioStreamPlayer = $Voice
 #endregion
+signal ui_opened
+signal ui_closed(closed_node)
 
 
 func _process(delta: float) -> void:
@@ -26,6 +28,7 @@ func open_interface(node_to_open: Control, pause_player: bool = true, show_mouse
 		if node == node_to_open:
 			node.show()
 			current_ui = node
+			ui_opened.emit()
 		else:
 			node.hide()
 	if pause_player:
@@ -36,6 +39,7 @@ func open_interface(node_to_open: Control, pause_player: bool = true, show_mouse
 
 
 func close_interface(node_to_close: Control, activate_player: bool = true) -> void:
+	ui_closed.emit(node_to_close)
 	node_to_close.hide()
 	current_ui = null
 	if activate_player:
@@ -50,9 +54,13 @@ func close_all(activate_player: bool = true) -> void:
 	for node in ui_nodes:
 		node.hide()
 	current_ui = null
+	ui_closed.emit()
 	if activate_player:
 		PlayerStats.change_state(PlayerStats.states.walk)
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		if Globals.overworld and get_tree().current_scene == Globals.overworld:
+			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func is_canvas_layer_open(canvas_layer: CanvasLayer) -> bool:

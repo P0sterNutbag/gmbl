@@ -16,7 +16,17 @@ class_name HealthComponent
 @export var blood_on_hit: bool = true
 @onready var max_hp: float = hp
 var audio_stream_player: AudioStreamPlayer3D
-var damage_modifier: float = 1.0
+var damage_modifier: float = 1.0:
+	get():
+		var stats: CharacterStats
+		if "stats" in get_parent():
+			stats = get_parent().stats
+		elif get_parent() == Globals.player:
+			stats = PlayerStats.stats
+		var modifier = 0.0
+		if stats:
+			modifier = stats.toughness * 0.03
+		return damage_modifier - modifier
 var is_dead: bool
 var blood_spatter: PackedScene = preload("res://Scenes/Effects/Decals/bloodspatter_ground.tscn")
 signal damaged(hit_position: Vector3, hit_direction: Vector3)

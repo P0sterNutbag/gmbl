@@ -18,7 +18,6 @@
 [ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="12_2dyl4"]
 [ext_resource type="Theme" uid="uid://efo20xxcf1e5" path="res://Art/Themes/vbox_container.tres" id="13_oq622"]
 [ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="14_e5c6o"]
-[ext_resource type="Theme" uid="uid://cdtfcbhvps3m1" path="res://Art/Themes/text_mediun.tres" id="15_1lobq"]
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="15_k4cvi"]
 [ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="16_1lobq"]
 [ext_resource type="Script" uid="uid://eo5omrsmkx27" path="res://Scripts/equipment_button.gd" id="19_jtf3n"]
@@ -27,11 +26,19 @@
 [ext_resource type="PackedScene" uid="uid://bj7gyfau2dx5w" path="res://Scenes/UI/menu_button.tscn" id="22_jtf3n"]
 [ext_resource type="Theme" uid="uid://djqipqwy5toiu" path="res://Art/Themes/VBoxContainer.tres" id="24_8egi5"]
 [ext_resource type="Script" uid="uid://c5mc2tmhveupn" path="res://Scripts/progress_menu.gd" id="24_guqia"]
+[ext_resource type="Theme" uid="uid://dcnijc3hjurqk" path="res://Art/Themes/text_mediun_outline.tres" id="25_6omgk"]
 [ext_resource type="PackedScene" uid="uid://cvqg8c4yvypa1" path="res://Scenes/UI/confirmation_menu.tscn" id="27_6h4e4"]
-[ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="27_13ham"]
 [ext_resource type="Script" uid="uid://pcx3b5tjvijq" path="res://Scripts/faction_ui_box.gd" id="27_k64vs"]
 [ext_resource type="Script" uid="uid://dlnug53qsfaf6" path="res://Scripts/faction_ui.gd" id="27_o0jpn"]
+[ext_resource type="Theme" uid="uid://crg6v3iu4nx3m" path="res://Art/Themes/text_header_outline.tres" id="28_8cvki"]
+[ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="31_kmwaq"]
 [ext_resource type="Texture2D" uid="uid://r08gms0nyjju" path="res://Art/Textures/hp icon.png" id="32_lboml"]
+[ext_resource type="Theme" uid="uid://tivwhtwiofll" path="res://Art/Themes/button.tres" id="33_ft4n5"]
+[ext_resource type="Texture2D" uid="uid://bbjp6yopufgca" path="res://Art/Textures/cog icon.png" id="33_ohwuk"]
+[ext_resource type="Texture2D" uid="uid://ldkaytpf1yhe" path="res://Art/Textures/inventory icon.png" id="34_m6fmc"]
+[ext_resource type="Texture2D" uid="uid://duhvnasnxpgc4" path="res://Art/Textures/journal icon.png" id="35_ft4n5"]
+[ext_resource type="Script" uid="uid://boi8n7i6gbf6a" path="res://Scripts/custom_tooltip.gd" id="36_8cvki"]
+[ext_resource type="Texture2D" uid="uid://brs4ktd7wgyno" path="res://Art/Textures/faction icon.png" id="36_m6fmc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_agdr0"]
 bg_color = Color(0, 0, 0, 0.784314)
@@ -49,26 +56,22 @@ border_color = Color(1, 1, 0, 1)
 process_mode = 3
 script = ExtResource("1_e5c6o")
 
-[node name="TopCenter" type="Control" parent="." unique_id=1690383952]
+[node name="Compass" type="Control" parent="." unique_id=1584721456]
 modulate = Color(1, 1, 0, 1)
+clip_contents = true
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
+offset_left = -414.5
+offset_top = 46.0
+offset_right = 414.5
+offset_bottom = 91.0
 grow_horizontal = 2
-mouse_filter = 2
-
-[node name="Compass" type="Control" parent="TopCenter" unique_id=1584721456]
-clip_contents = true
-anchors_preset = 0
-offset_left = -414.0
-offset_top = 25.0
-offset_right = 415.0
-offset_bottom = 70.0
 mouse_filter = 2
 script = ExtResource("8_2dyl4")
 
-[node name="Panel" type="Panel" parent="TopCenter/Compass" unique_id=1581310652]
+[node name="Panel" type="Panel" parent="Compass" unique_id=1581310652]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -80,14 +83,14 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_agdr0")
 
-[node name="ColorRect" type="ColorRect" parent="TopCenter/Compass" unique_id=630727920]
+[node name="ColorRect" type="ColorRect" parent="Compass" unique_id=630727920]
 layout_mode = 0
 offset_top = 21.0
 offset_right = 3840.0
 offset_bottom = 23.0
 mouse_filter = 2
 
-[node name="ColorRect2" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=1388339958]
+[node name="ColorRect2" type="ColorRect" parent="Compass/ColorRect" unique_id=1388339958]
 layout_mode = 0
 offset_left = 480.0
 offset_top = -2.0
@@ -95,7 +98,7 @@ offset_right = 482.0
 offset_bottom = 4.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect2" unique_id=1197349776]
+[node name="Label" type="Label" parent="Compass/ColorRect/ColorRect2" unique_id=1197349776]
 layout_mode = 0
 offset_left = -5.0
 offset_top = -18.0
@@ -104,7 +107,7 @@ offset_bottom = 5.0
 theme = ExtResource("3_1kfkr")
 text = "N"
 
-[node name="ColorRect7" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=352579803]
+[node name="ColorRect7" type="ColorRect" parent="Compass/ColorRect" unique_id=352579803]
 layout_mode = 0
 offset_left = 960.0
 offset_top = -2.0
@@ -112,7 +115,7 @@ offset_right = 962.0
 offset_bottom = 4.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect7" unique_id=1643508389]
+[node name="Label" type="Label" parent="Compass/ColorRect/ColorRect7" unique_id=1643508389]
 layout_mode = 0
 offset_left = -10.0
 offset_top = -18.0
@@ -122,7 +125,7 @@ theme = ExtResource("3_1kfkr")
 text = "NE"
 horizontal_alignment = 1
 
-[node name="ColorRect3" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=222245213]
+[node name="ColorRect3" type="ColorRect" parent="Compass/ColorRect" unique_id=222245213]
 layout_mode = 0
 offset_left = 1440.0
 offset_top = -2.0
@@ -130,7 +133,7 @@ offset_right = 1442.0
 offset_bottom = 4.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect3" unique_id=1803490159]
+[node name="Label" type="Label" parent="Compass/ColorRect/ColorRect3" unique_id=1803490159]
 layout_mode = 0
 offset_left = -5.0
 offset_top = -18.0
@@ -139,7 +142,7 @@ offset_bottom = 5.0
 theme = ExtResource("3_1kfkr")
 text = "E"
 
-[node name="ColorRect8" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=721377248]
+[node name="ColorRect8" type="ColorRect" parent="Compass/ColorRect" unique_id=721377248]
 layout_mode = 0
 offset_left = 1920.0
 offset_top = -2.0
@@ -147,7 +150,7 @@ offset_right = 1922.0
 offset_bottom = 4.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect8" unique_id=1475237338]
+[node name="Label" type="Label" parent="Compass/ColorRect/ColorRect8" unique_id=1475237338]
 layout_mode = 0
 offset_left = -10.0
 offset_top = -18.0
@@ -157,7 +160,7 @@ theme = ExtResource("3_1kfkr")
 text = "SE"
 horizontal_alignment = 1
 
-[node name="ColorRect4" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=465390647]
+[node name="ColorRect4" type="ColorRect" parent="Compass/ColorRect" unique_id=465390647]
 layout_mode = 0
 offset_left = 2400.0
 offset_top = -2.0
@@ -165,7 +168,7 @@ offset_right = 2402.0
 offset_bottom = 4.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect4" unique_id=1919258290]
+[node name="Label" type="Label" parent="Compass/ColorRect/ColorRect4" unique_id=1919258290]
 layout_mode = 0
 offset_left = -5.0
 offset_top = -18.0
@@ -174,7 +177,7 @@ offset_bottom = 5.0
 theme = ExtResource("3_1kfkr")
 text = "S"
 
-[node name="ColorRect9" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=1690198561]
+[node name="ColorRect9" type="ColorRect" parent="Compass/ColorRect" unique_id=1690198561]
 layout_mode = 0
 offset_left = 2880.0
 offset_top = -2.0
@@ -182,7 +185,7 @@ offset_right = 2882.0
 offset_bottom = 4.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect9" unique_id=1071677931]
+[node name="Label" type="Label" parent="Compass/ColorRect/ColorRect9" unique_id=1071677931]
 layout_mode = 0
 offset_left = -10.0
 offset_top = -18.0
@@ -192,7 +195,7 @@ theme = ExtResource("3_1kfkr")
 text = "SW"
 horizontal_alignment = 1
 
-[node name="ColorRect5" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=466393616]
+[node name="ColorRect5" type="ColorRect" parent="Compass/ColorRect" unique_id=466393616]
 layout_mode = 0
 offset_left = 3360.0
 offset_top = -2.0
@@ -200,7 +203,7 @@ offset_right = 3362.0
 offset_bottom = 4.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect5" unique_id=794979202]
+[node name="Label" type="Label" parent="Compass/ColorRect/ColorRect5" unique_id=794979202]
 layout_mode = 0
 offset_left = -5.0
 offset_top = -18.0
@@ -209,7 +212,7 @@ offset_bottom = 5.0
 theme = ExtResource("3_1kfkr")
 text = "W"
 
-[node name="ColorRect10" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=812909518]
+[node name="ColorRect10" type="ColorRect" parent="Compass/ColorRect" unique_id=812909518]
 layout_mode = 0
 offset_left = 3840.0
 offset_top = -2.0
@@ -217,7 +220,7 @@ offset_right = 3842.0
 offset_bottom = 4.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect10" unique_id=421347480]
+[node name="Label" type="Label" parent="Compass/ColorRect/ColorRect10" unique_id=421347480]
 layout_mode = 0
 offset_left = -10.0
 offset_top = -18.0
@@ -227,14 +230,14 @@ theme = ExtResource("3_1kfkr")
 text = "NW"
 horizontal_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=272971]
+[node name="ColorRect" type="ColorRect" parent="Compass/ColorRect" unique_id=272971]
 layout_mode = 0
 offset_left = 3842.0
 offset_right = 4842.0
 offset_bottom = 2.0
 mouse_filter = 2
 
-[node name="ColorRect2" type="ColorRect" parent="TopCenter/Compass/ColorRect/ColorRect" unique_id=2095436774]
+[node name="ColorRect2" type="ColorRect" parent="Compass/ColorRect/ColorRect" unique_id=2095436774]
 layout_mode = 0
 offset_left = 478.0
 offset_top = -2.0
@@ -242,7 +245,7 @@ offset_right = 480.0
 offset_bottom = 4.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TopCenter/Compass/ColorRect/ColorRect/ColorRect2" unique_id=1711857735]
+[node name="Label" type="Label" parent="Compass/ColorRect/ColorRect/ColorRect2" unique_id=1711857735]
 layout_mode = 0
 offset_left = -5.0
 offset_top = -18.0
@@ -251,18 +254,18 @@ offset_bottom = 5.0
 theme = ExtResource("3_1kfkr")
 text = "N"
 
-[node name="ColorRect6" type="ColorRect" parent="TopCenter/Compass/ColorRect" unique_id=929589932]
+[node name="ColorRect6" type="ColorRect" parent="Compass/ColorRect" unique_id=929589932]
 layout_mode = 0
 offset_left = -20.0
 offset_bottom = 2.0
 mouse_filter = 2
 
-[node name="Markers" type="Control" parent="TopCenter/Compass" unique_id=1979270960]
+[node name="Markers" type="Control" parent="Compass" unique_id=1979270960]
 anchors_preset = 0
 offset_top = 22.0
 offset_bottom = 22.0
 
-[node name="QuestMarker" parent="TopCenter/Compass/Markers" unique_id=542182474 instance=ExtResource("9_e5c6o")]
+[node name="QuestMarker" parent="Compass/Markers" unique_id=542182474 instance=ExtResource("9_e5c6o")]
 layout_mode = 0
 offset_left = 829.0
 offset_right = 829.0
@@ -362,10 +365,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -655.0
-offset_top = -382.5
-offset_right = 655.0
-offset_bottom = 382.5
+offset_left = -573.0
+offset_top = -408.5
+offset_right = 573.0
+offset_bottom = 408.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 64
@@ -400,19 +403,9 @@ opposing_ui = NodePath("../Inventory")
 visible = false
 mouse_filter = 2
 
-[node name="SettingsMenu" parent="PauseMenu" index="1"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -343.5
+[node name="SettingsMenu" parent="PauseMenu" index="1" unique_id=651300899]
 offset_top = -152.5
-offset_right = 343.5
 offset_bottom = 152.5
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="DeathMenu" type="PanelContainer" parent="." unique_id=1292729525]
 visible = false
@@ -667,7 +660,7 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/HBoxContainer" unique_id=522672607]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("15_1lobq")
+theme = ExtResource("25_6omgk")
 text = "Weapons"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer" unique_id=809566310]
@@ -710,7 +703,7 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=35236870]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("15_1lobq")
+theme = ExtResource("25_6omgk")
 text = "Armor"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer" unique_id=1655033096]
@@ -753,7 +746,7 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1256762960]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("15_1lobq")
+theme = ExtResource("25_6omgk")
 text = "Utility"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer" unique_id=939226072]
@@ -813,7 +806,7 @@ theme = ExtResource("13_oq622")
 
 [node name="Label" type="Label" parent="Menus/VBoxContainer/Journal/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=77434872]
 layout_mode = 2
-theme = ExtResource("14_e5c6o")
+theme = ExtResource("28_8cvki")
 text = "Jobs"
 
 [node name="Control" type="Control" parent="Menus/VBoxContainer/Journal/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=502828914]
@@ -887,46 +880,46 @@ columns = 5
 [node name="Label" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1942238097]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5_jtf3n")
+theme = ExtResource("31_kmwaq")
 
 [node name="Label2" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1569124404]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5_jtf3n")
+theme = ExtResource("31_kmwaq")
 text = "Unnafiliated"
 horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1054753006]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5_jtf3n")
+theme = ExtResource("31_kmwaq")
 text = "Bandits"
 horizontal_alignment = 1
 
 [node name="Label4" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=637703615]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5_jtf3n")
+theme = ExtResource("31_kmwaq")
 text = "Jackals"
 horizontal_alignment = 1
 
 [node name="Label5" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1958165173]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5_jtf3n")
+theme = ExtResource("31_kmwaq")
 text = "Ragers"
 horizontal_alignment = 1
 
 [node name="Label7" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1202582645]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5_jtf3n")
+theme = ExtResource("31_kmwaq")
 text = "Player"
 horizontal_alignment = 1
 
 [node name="Label9" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1383916379]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
@@ -934,7 +927,7 @@ faction_horizontal = 1
 
 [node name="Label10" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1157860511]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
@@ -943,7 +936,7 @@ faction_horizontal = 1
 
 [node name="Label11" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=620768936]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
@@ -952,7 +945,7 @@ faction_horizontal = 1
 
 [node name="Label12" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1884349251]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
@@ -962,20 +955,20 @@ faction_horizontal = 1
 [node name="Label13" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1570346923]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5_jtf3n")
+theme = ExtResource("31_kmwaq")
 text = "Unnafiliated"
 horizontal_alignment = 1
 
 [node name="Label15" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1017104691]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
 
 [node name="Label16" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1204803385]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
@@ -983,7 +976,7 @@ faction_vertical = 4
 
 [node name="Label17" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1938076592]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
@@ -991,7 +984,7 @@ faction_vertical = 2
 
 [node name="Label18" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=2091760312]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
@@ -1000,13 +993,13 @@ faction_vertical = 3
 [node name="Label19" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1371263495]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5_jtf3n")
+theme = ExtResource("31_kmwaq")
 text = "Bandits"
 horizontal_alignment = 1
 
 [node name="Label21" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=922925158]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
@@ -1014,7 +1007,7 @@ faction_horizontal = 4
 
 [node name="Label22" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=808991067]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
@@ -1023,7 +1016,7 @@ faction_horizontal = 4
 
 [node name="Label23" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1379547194]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
@@ -1032,7 +1025,7 @@ faction_horizontal = 4
 
 [node name="Label24" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1907998343]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
@@ -1042,13 +1035,13 @@ faction_horizontal = 4
 [node name="Label25" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=565247828]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5_jtf3n")
+theme = ExtResource("31_kmwaq")
 text = "Jackals"
 horizontal_alignment = 1
 
 [node name="Label27" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1019309282]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
@@ -1056,7 +1049,7 @@ faction_horizontal = 2
 
 [node name="Label28" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=868384770]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
@@ -1065,7 +1058,7 @@ faction_horizontal = 2
 
 [node name="Label29" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=140574949]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
@@ -1074,7 +1067,7 @@ faction_horizontal = 2
 
 [node name="Label30" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1194906627]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
@@ -1084,13 +1077,13 @@ faction_horizontal = 2
 [node name="Label31" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1418883168]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5_jtf3n")
+theme = ExtResource("31_kmwaq")
 text = "Ragers"
 horizontal_alignment = 1
 
 [node name="Label33" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1579680681]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
@@ -1098,7 +1091,7 @@ faction_horizontal = 3
 
 [node name="Label34" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=125072056]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
@@ -1107,7 +1100,7 @@ faction_horizontal = 3
 
 [node name="Label35" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=220830598]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
@@ -1116,39 +1109,25 @@ faction_horizontal = 3
 
 [node name="Label36" type="Label" parent="Menus/VBoxContainer/Factions/MarginContainer/GridContainer" unique_id=1971402567]
 layout_mode = 2
-theme = ExtResource("27_13ham")
+theme = ExtResource("31_kmwaq")
 text = "0"
 horizontal_alignment = 1
 script = ExtResource("27_k64vs")
 faction_vertical = 3
 faction_horizontal = 3
 
-[node name="BottomLeft" type="Control" parent="." unique_id=1948965576]
+[node name="PlayerHealth" type="Control" parent="." unique_id=1342773347]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-grow_vertical = 0
-
-[node name="ColorRect" type="ColorRect" parent="BottomLeft" unique_id=900570422]
-visible = false
-layout_mode = 0
-offset_left = 17.0
-offset_top = -36.0
-offset_right = 130.73166
-offset_bottom = -20.0
-rotation = -0.090757124
-scale = Vector2(1.14879, 1)
-color = Color(0, 0, 0, 1)
-
-[node name="Control" type="Control" parent="BottomLeft" unique_id=1342773347]
-anchors_preset = 0
 offset_left = 64.0
 offset_top = -64.0
 offset_right = 64.0
 offset_bottom = -64.0
+grow_vertical = 0
 
-[node name="ProgressBar" type="ProgressBar" parent="BottomLeft/Control" unique_id=1917726440]
+[node name="ProgressBar" type="ProgressBar" parent="PlayerHealth" unique_id=1917726440]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 2
@@ -1158,12 +1137,14 @@ offset_top = -32.0
 offset_right = 223.0
 offset_bottom = -4.0
 grow_vertical = 0
+tooltip_text = "Health"
 theme = ExtResource("4_1kfkr")
 max_value = 1.0
 value = 1.0
 show_percentage = false
+script = ExtResource("36_8cvki")
 
-[node name="TextureRect3" type="TextureRect" parent="BottomLeft/Control" unique_id=170569285]
+[node name="TextureRect3" type="TextureRect" parent="PlayerHealth" unique_id=170569285]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 offset_left = 8.0
@@ -1174,46 +1155,50 @@ scale = Vector2(2, 2)
 texture = ExtResource("32_lboml")
 expand_mode = 1
 
-[node name="VBoxContainer" type="HBoxContainer" parent="BottomLeft/Control" unique_id=684823176]
+[node name="VBoxContainer" type="HBoxContainer" parent="PlayerHealth" unique_id=684823176]
 layout_mode = 1
 offset_top = -70.0
 offset_right = 72.0
 offset_bottom = -55.0
 scale = Vector2(2, 2)
 
-[node name="Thirst" type="TextureRect" parent="BottomLeft/Control/VBoxContainer" unique_id=1296685449]
+[node name="Thirst" type="TextureRect" parent="PlayerHealth/VBoxContainer" unique_id=1296685449]
 modulate = Color(1, 1, 0, 1)
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
+tooltip_text = "Thirst"
 texture = ExtResource("4_k64vs")
 expand_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "thirst"
 show_treshold = 0.75
 
-[node name="Hunger" type="TextureRect" parent="BottomLeft/Control/VBoxContainer" unique_id=1407439282]
+[node name="Hunger" type="TextureRect" parent="PlayerHealth/VBoxContainer" unique_id=1407439282]
 modulate = Color(1, 1, 0, 1)
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
+tooltip_text = "Hunger"
 texture = ExtResource("2_guqia")
 expand_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "hunger"
 show_treshold = 0.75
 
-[node name="Sleep" type="TextureRect" parent="BottomLeft/Control/VBoxContainer" unique_id=72998721]
+[node name="Sleep" type="TextureRect" parent="PlayerHealth/VBoxContainer" unique_id=72998721]
 modulate = Color(1, 1, 0, 1)
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
+tooltip_text = "Sleepy"
 texture = ExtResource("5_13ham")
 expand_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "sleep"
 
-[node name="Alcolhol" type="TextureRect" parent="BottomLeft/Control/VBoxContainer" unique_id=1716683138]
+[node name="Alcolhol" type="TextureRect" parent="PlayerHealth/VBoxContainer" unique_id=1716683138]
 modulate = Color(1, 1, 0, 1)
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
+tooltip_text = "Drunk"
 texture = ExtResource("10_c2wwi")
 expand_mode = 2
 script = ExtResource("2_k4cvi")
@@ -1243,6 +1228,65 @@ clip_contents = true
 layout_mode = 2
 theme = ExtResource("11_0pkni")
 
+[node name="MenuButtons" type="VBoxContainer" parent="." unique_id=299956010]
+modulate = Color(1, 1, 0, 1)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -106.0
+offset_top = -250.0
+offset_right = -64.0
+offset_bottom = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 6
+
+[node name="PauseButton" type="Button" parent="MenuButtons" unique_id=1332550426]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+tooltip_text = "Pause"
+theme = ExtResource("33_ft4n5")
+theme_override_constants/icon_max_width = 42
+icon = ExtResource("33_ohwuk")
+flat = true
+expand_icon = true
+script = ExtResource("36_8cvki")
+
+[node name="InventoryButton" type="Button" parent="MenuButtons" unique_id=181181749]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+tooltip_text = "Inventory"
+theme = ExtResource("33_ft4n5")
+theme_override_constants/icon_max_width = 100
+icon = ExtResource("34_m6fmc")
+flat = true
+expand_icon = true
+script = ExtResource("36_8cvki")
+
+[node name="JournalButton" type="Button" parent="MenuButtons" unique_id=2063062016]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+tooltip_text = "Journal"
+theme = ExtResource("33_ft4n5")
+theme_override_constants/icon_max_width = 100
+icon = ExtResource("35_ft4n5")
+flat = true
+expand_icon = true
+script = ExtResource("36_8cvki")
+
+[node name="FactionButton" type="Button" parent="MenuButtons" unique_id=891720633]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+tooltip_text = "Factions"
+theme = ExtResource("33_ft4n5")
+theme_override_constants/icon_max_width = 100
+icon = ExtResource("36_m6fmc")
+flat = true
+expand_icon = true
+script = ExtResource("36_8cvki")
+
 [connection signal="pressed" from="TransferInventory/Inventory/Control/Button" to="." method="close_transfer_inventory"]
 [connection signal="visibility_changed" from="PauseMenu" to="PauseMenu" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="DeathMenu" to="DeathMenu" method="_on_visibility_changed"]
@@ -1261,6 +1305,12 @@ theme = ExtResource("11_0pkni")
 [connection signal="pressed" from="Menus/VBoxContainer/Journal/ConfirmationMenu/PanelContainer/MarginContainer/VBoxContainer/Yes" to="Menus/VBoxContainer/Journal" method="_on_yes_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Journal/ConfirmationMenu/PanelContainer/MarginContainer/VBoxContainer/No" to="Menus/VBoxContainer/Journal" method="_on_no_pressed"]
 [connection signal="visibility_changed" from="Menus/VBoxContainer/Factions" to="Menus/VBoxContainer/Factions" method="_on_visibility_changed"]
+[connection signal="pressed" from="MenuButtons/PauseButton" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="MenuButtons/InventoryButton" to="." method="_on_inventory_button_pressed"]
+[connection signal="pressed" from="MenuButtons/JournalButton" to="." method="_on_journal_button_pressed"]
+[connection signal="pressed" from="MenuButtons/FactionButton" to="." method="_on_faction_button_pressed"]
 
 [editable path="PauseMenu"]
+[editable path="PauseMenu/ConfirmationMenu"]
+[editable path="PauseMenu/ConfirmationMenu2"]
 [editable path="Menus/VBoxContainer/Journal/ConfirmationMenu"]

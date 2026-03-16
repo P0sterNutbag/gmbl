@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://c3e4uxlyfja8s" path="res://Scripts/juicy_movement.gd" id="10_3h8o7"]
 [ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/sand.png" id="10_cejvf"]
 [ext_resource type="PackedScene" uid="uid://dyumojcinahde" path="res://Scenes/Effects/Shaders/outline_fog_shader.tscn" id="11_jewm6"]
+[ext_resource type="PackedScene" uid="uid://cvqg8c4yvypa1" path="res://Scenes/UI/confirmation_menu.tscn" id="11_q6o50"]
 [ext_resource type="Script" uid="uid://bokxkydc5jmf" path="res://addons/zylann.hterrain/hterrain.gd" id="13_1yfdm"]
 [ext_resource type="Resource" path="res://addons/zylann.hterrain/data/main_menu/data.hterrain" id="14_3h8o7"]
 [ext_resource type="Script" uid="uid://b8f4u7je7ufby" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="15_q6o50"]
@@ -157,6 +158,13 @@ mouse_behavior_recursive = 2
 theme_override_constants/outline_size = 8
 text = "Settings"
 
+[node name="Wishlist" parent="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2022397610 instance=ExtResource("6_opfnp")]
+layout_mode = 2
+mouse_filter = 0
+mouse_behavior_recursive = 2
+theme_override_constants/outline_size = 8
+text = "Wishlist"
+
 [node name="MenuItem4" parent="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=780774862 instance=ExtResource("6_opfnp")]
 layout_mode = 2
 mouse_filter = 0
@@ -205,6 +213,26 @@ theme_override_colors/font_color = Color(1, 0, 0.2509804, 1)
 theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 359
 text = "SLUGMOUTH"
+
+[node name="ConfirmationMenu" parent="CanvasLayer/MainMenu" unique_id=42619159 instance=ExtResource("11_q6o50")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" parent="CanvasLayer/MainMenu/ConfirmationMenu" index="0" unique_id=1715864982]
+offset_left = -269.5
+offset_top = -111.0
+offset_right = 269.5
+offset_bottom = 111.0
+
+[node name="Label" parent="CanvasLayer/MainMenu/ConfirmationMenu/PanelContainer/MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(42619159, 791748064) index="0" unique_id=19737580]
+text = "Starting a new game will delete your current data. Proceed?"
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=918103074]
 transform = Transform3D(-1, -1.5614963e-15, -8.7422784e-08, 2.0449981e-08, 0.9722557, -0.23392051, 8.499729e-08, -0.23392051, -0.9722557, 256.961, 0, 0)
@@ -279,5 +307,10 @@ metadata/_custom_type_script = "uid://bokxkydc5jmf"
 [connection signal="pressed" from="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem" to="CanvasLayer/MainMenu" method="_on_menu_item_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem2" to="CanvasLayer/MainMenu" method="_on_menu_item_2_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem3" to="CanvasLayer/MainMenu" method="_on_menu_item_3_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Wishlist" to="CanvasLayer/MainMenu" method="_on_wishlist_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem4" to="CanvasLayer/MainMenu" method="_on_menu_item_4_pressed"]
 [connection signal="visibility_changed" from="CanvasLayer/MainMenu/SettingsMenu" to="CanvasLayer/MainMenu" method="_on_settings_menu_visibility_changed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/ConfirmationMenu/PanelContainer/MarginContainer/VBoxContainer/Yes" to="CanvasLayer/MainMenu" method="_on_yes_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/ConfirmationMenu/PanelContainer/MarginContainer/VBoxContainer/No" to="CanvasLayer/MainMenu" method="_on_no_pressed"]
+
+[editable path="CanvasLayer/MainMenu/ConfirmationMenu"]

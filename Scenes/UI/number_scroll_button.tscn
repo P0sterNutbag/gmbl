@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://24sgvi1t84r6"]
+
+[ext_resource type="Theme" uid="uid://tivwhtwiofll" path="res://Art/Themes/button.tres" id="1_1ss3u"]
+[ext_resource type="Texture2D" uid="uid://djj6aa5nkatda" path="res://Art/Textures/arrow.png" id="2_mewsa"]
+[ext_resource type="Script" uid="uid://dq0fy8r72vsgc" path="res://Scripts/number_scroll_button.gd" id="3_1ss3u"]
+[ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="4_o8fg4"]
+[ext_resource type="Texture2D" uid="uid://d08xeomlxj5wh" path="res://Art/Textures/arrow_small_left.png" id="5_0843v"]
+[ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="6_sfvas"]
+[ext_resource type="Texture2D" uid="uid://byvpghxprlvv3" path="res://Art/Textures/arrow_small.png" id="7_sced8"]
+
+[node name="MenuButton" type="Button" unique_id=237768494]
+z_index = 1
+offset_right = 280.0
+offset_bottom = 25.0
+size_flags_horizontal = 3
+mouse_filter = 1
+theme = ExtResource("1_1ss3u")
+text = "Name"
+icon = ExtResource("2_mewsa")
+flat = true
+alignment = 0
+script = ExtResource("3_1ss3u")
+
+[node name="Control" type="HBoxContainer" parent="." unique_id=352099295]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -10.0
+offset_bottom = 10.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 0
+alignment = 1
+
+[node name="LeftScroll" type="Button" parent="Control" unique_id=1028790535]
+modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("4_o8fg4")
+icon = ExtResource("5_0843v")
+flat = true
+expand_icon = true
+
+[node name="Label" type="Label" parent="Control" unique_id=1794891755]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("6_sfvas")
+text = "0"
+horizontal_alignment = 1
+
+[node name="RightScroll" type="Button" parent="Control" unique_id=1244779748]
+modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+icon = ExtResource("7_sced8")
+flat = true
+expand_icon = true
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="Control/LeftScroll" to="." method="_on_left_category_pressed"]
+[connection signal="pressed" from="Control/RightScroll" to="." method="_on_right_category_pressed"]

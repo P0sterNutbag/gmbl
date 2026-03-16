@@ -141,24 +141,9 @@ func _on_battle_timer_timeout() -> void:
 
 
 func save() -> Dictionary:
-	#var sr = ResourceLoader.load("user://saved_resources.res")
-	#sr.resources[name+"_location_data"] = location_data
-	#if town:
-		#for i in town.shops:
-			#if !sr:
-				#sr = SavedResources.new()
-			#sr.resources[name+"_"+i.title] = i
-	#ResourceSaver.save(sr, "user://saved_resources.res")
+	var dict = {
+		"location_data" : location_data
+	}
 	if town:
-		return {"town" : town}
-	else:
-		return {}
-
-
-#func _on_load() -> void:
-	#var sr = ResourceLoader.load("user://saved_resources.res")
-	#location_data = sr.resources[name+"_location_data"]
-	#if town:
-		#for i in town.shops.size():
-			#var saved_shop = sr.resources[name+"_"+town.shops[i].title]
-			#town.shops[i] = saved_shop
+		dict["town"] = town
+	return dict

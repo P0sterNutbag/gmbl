@@ -1,23 +1,29 @@
 extends Node
 
+var stat_points_left: float = 3.0
 var mouse_velocity: Vector2
 const starting_gear = preload("uid://dpjy0ettwaiyp")
-@onready var inventories: Control = $CanvasLayer/Inventories
 @onready var cosmetics: PanelContainer = %Cosmetics
 @onready var starting_inventory: InventoryUI = %Inventory
 @onready var player_inventory: InventoryUI = %Inventory2
 @onready var node_3d: Node3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
 @onready var animation_player: AnimationPlayer = $EnemyModel/PersonAnimated/AnimationPlayer
 @onready var player_model: Node3D = $EnemyModel
-@onready var appearance_options: VBoxContainer = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer
+@onready var appearance_options: VBoxContainer = %Cosmetics/MarginContainer/VBoxContainer
 @onready var camera_3d: Camera3D = $Camera3D
-@onready var skin_options: Button = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/SkinOptions
-@onready var hair_color_options: Button = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/HairColorOptions
-@onready var hair_options: Button = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/HairOptions
-@onready var face_options: Button = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/FaceOptions
-@onready var shirt_options: Button = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/ShirtOptions
-@onready var pants_options: Button = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/PantsOptions
-@onready var shoes_options: Button = $CanvasLayer/Inventories/VBoxContainer/HBoxContainer/Cosmetics/MarginContainer/VBoxContainer/ShoesOptions
+@onready var skin_options: Button = %Cosmetics/MarginContainer/VBoxContainer/SkinOptions
+@onready var hair_color_options: Button = %Cosmetics/MarginContainer/VBoxContainer/HairColorOptions
+@onready var hair_options: Button = %Cosmetics/MarginContainer/VBoxContainer/HairOptions
+@onready var face_options: Button = %Cosmetics/MarginContainer/VBoxContainer/FaceOptions
+@onready var shirt_options: Button = %Cosmetics/MarginContainer/VBoxContainer/ShirtOptions
+@onready var pants_options: Button = %Cosmetics/MarginContainer/VBoxContainer/PantsOptions
+@onready var shoes_options: Button = %Cosmetics/MarginContainer/VBoxContainer/ShoesOptions
+@onready var toughness_stat: Button = %Stats/MarginContainer/VBoxContainer/Toughness
+@onready var strength_stat: Button = %Stats/MarginContainer/VBoxContainer/Strength
+@onready var speed_stat: Button = %Stats/MarginContainer/VBoxContainer/Speed
+@onready var handguns_stat: Button = %Stats/MarginContainer/VBoxContainer/Handguns
+@onready var long_guns_stat: Button = %Stats/MarginContainer/VBoxContainer/LongGuns
+@onready var stat_points_label: Label = %StatPoints
 
 
 func _ready() -> void:
@@ -29,6 +35,8 @@ func _ready() -> void:
 		saved_gear = ResourceLoader.load("user://starting_gear.res")
 	else:
 		saved_gear = starting_gear.duplicate(true)
+	starting_inventory.hide()
+	player_inventory.hide()
 	starting_inventory.source_inventory = saved_gear
 	player_inventory.source_inventory = PlayerStats.inventory
 	starting_inventory.target_inventory = player_inventory.source_inventory
@@ -45,7 +53,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# move camera
-	camera_3d.position.y = lerp(camera_3d.position.y, 1.6, delta)
+	camera_3d.position.y = lerp(camera_3d.position.y, 1.3, delta)
 	# spin character
 	player_model.rotate_y(mouse_velocity.x * delta * 0.01)
 	mouse_velocity = lerp(mouse_velocity, Vector2.ZERO, delta * 10)
@@ -145,3 +153,57 @@ func _on_spin_character_gui_input(event: InputEvent) -> void:
 
 func _on_line_edit_text_changed(new_text: String) -> void:
 	PlayerStats.player_name = new_text
+
+
+func _on_toughness_value_changed(value: float, changed_by: float) -> void:
+	if stat_points_left > 0 or changed_by < 0:
+		PlayerStats.stats.toughness = value
+		stat_points_left = clamp(stat_points_left - changed_by, 0, 100)
+		stat_points_label.text = "Points Left: " + str(int(stat_points_left))
+	else:
+		toughness_stat.value -= changed_by
+		toughness_stat.value_label.text = str(int(toughness_stat.value))
+
+
+func _on_strength_value_changed(value: float, changed_by: float) -> void:
+	stat_points_left -= changed_by
+	if stat_points_left > 0 or changed_by < 0:
+		PlayerStats.stats.strength = value
+		stat_points_label.text = "Points Left: " + str(int(stat_points_left))
+	else:
+		stat_points_left += changed_by
+		strength_stat.value -= changed_by
+		strength_stat.value_label.text = str(int(strength_stat.value))
+
+
+func _on_speed_value_changed(value: float, changed_by: float) -> void:
+	stat_points_left -= changed_by
+	if stat_points_left > 0 or changed_by < 0:
+		PlayerStats.stats.speed = value
+		stat_points_label.text = "Points Left: " + str(int(stat_points_left))
+	else:
+		stat_points_left += changed_by
+		speed_stat.value -= changed_by
+		speed_stat.value_label.text = str(int(speed_stat.value))
+
+
+func _on_handguns_value_changed(value: float, changed_by: float) -> void:
+	stat_points_left -= changed_by
+	if stat_points_left > 0 or changed_by < 0:
+		PlayerStats.stats.light_guns = value
+		stat_points_label.text = "Points Left: " + str(int(stat_points_left))
+	else:
+		stat_points_left += changed_by
+		handguns_stat.value -= changed_by
+		handguns_stat.value_label.text = str(int(value))
+
+
+func _on_long_guns_value_changed(value: float, changed_by: float) -> void:
+	stat_points_left -= changed_by
+	if stat_points_left > 0 or changed_by < 0:
+		PlayerStats.stats.heavy_guns = value
+		stat_points_label.text = "Points Left: " + str(int(stat_points_left))
+	else:
+		stat_points_left += changed_by
+		long_guns_stat.value -= changed_by
+		long_guns_stat.value_label.text = str(int(value))

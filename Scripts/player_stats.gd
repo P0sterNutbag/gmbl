@@ -2,7 +2,7 @@ extends Node
 
 @export var starting_inventory: Inventory
 @export var allies: Array[PackedScene]
-@export var stats = CharacterStats.new() 
+@export var stats: CharacterStats
 enum states {walk, pause, dead}
 var state = states.walk
 var faction: FactionManager.factions: 

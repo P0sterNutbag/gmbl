@@ -28,6 +28,7 @@ radius = 0.434372
 [sub_resource type="Resource" id="Resource_fyaxn"]
 resource_local_to_scene = true
 script = ExtResource("3_f2atc")
+faction = null
 population = 4
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
@@ -71,7 +72,7 @@ script = ExtResource("5_7npny")
 object_to_spawn = ExtResource("6_yyftb")
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_6nrh4"]
+[sub_resource type="Resource" id="Resource_nv6bg"]
 resource_local_to_scene = true
 script = ExtResource("14_p0jri")
 min_amount = 3
@@ -81,10 +82,10 @@ money = 500
 title = "Squad Inventory"
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
-[sub_resource type="Resource" id="Resource_nv6bg"]
+[sub_resource type="Resource" id="Resource_jn6y6"]
 resource_local_to_scene = true
 script = ExtResource("11_w00nu")
-inventory = SubResource("Resource_6nrh4")
+inventory = SubResource("Resource_nv6bg")
 price_modifiers = {
 "Ammo": 0.5,
 "Armor": 0.5,
@@ -94,6 +95,7 @@ price_modifiers = {
 "Survival": 0.75,
 "Weapons": 0.5
 }
+faction = null
 title = "Traveler"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
@@ -115,7 +117,7 @@ collision_mask = 96
 title = "Squad"
 location_data = SubResource("Resource_fyaxn")
 encounter_scene = ExtResource("4_w8t3j")
-shop = SubResource("Resource_nv6bg")
+shop = SubResource("Resource_jn6y6")
 dialogue_tree = ExtResource("18_yyftb")
 can_stealth_start = true
 

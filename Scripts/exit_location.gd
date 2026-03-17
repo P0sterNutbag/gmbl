@@ -15,6 +15,7 @@ func _process(_delta: float) -> void:
 func leave_encounter() -> void:
 	var player_vector: Vector3 = (get_parent().global_position - Globals.player.global_position).normalized().rotated(Vector3.UP, -rotation.y)
 	Globals.overworld.player_spawn_vector = player_vector
+	get_tree().current_scene.update_location_data()
 	SceneManager.start_scene_transition(Globals.overworld)
 
 

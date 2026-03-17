@@ -46,7 +46,7 @@ var max_soberness: float = 1.0
 var sleep_decrease_rate := 0.2
 var hunger_decrease_rate := 0.6
 var thirst_decrease_rate := 0.8
-var stat_points = 3.0
+var stat_points = 6.0
 @onready var guns: Array[Item]:
 	get(): 
 		return inventory.items.filter(func(i): return i is EquipmentGun and i.gun_stats.ammo > 0)

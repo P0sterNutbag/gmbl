@@ -4,13 +4,13 @@ extends Node3D
 @export var spawn_parents: Array[Node3D]
 
 
-func _init() -> void:
+func _ready() -> void:
 	if Globals.overworld:
 		var current_data = Globals.overworld.current_encounter.location_data
 		location_data = current_data
 
 
-func _exit_tree() -> void:
+func update_location_data() -> void:
 	if Globals.overworld:
 		var poi = Globals.overworld.current_encounter.point_of_interest
 		poi.show_population = true
@@ -31,7 +31,8 @@ func _exit_tree() -> void:
 			var population = enemies.filter(func(a): return a.state != a.states.dead and a.faction == data.faction).size()
 			data.population = population
 	else:
-		location_data.population = enemies.filter(func(a): return a.state != a.states.dead and a.faction == location_data.faction).size()
+		var filtered_enemies = enemies.filter(func(a): return a.state != a.states.dead and a.faction == location_data.faction)
+		location_data.population = filtered_enemies.size()
 		if Globals.overworld:
 			var encounter_parent = Globals.overworld.current_encounter.get_parent()
 			if encounter_parent is CharacterBody3D:
@@ -45,3 +46,5 @@ func _exit_tree() -> void:
 		if battle:
 			var winner = battle.all_locations.filter(func(a): return a.location_data.population > 0)[0]
 			battle.end_battle(winner)
+	if Globals.overworld and Globals.overworld.current_encounter:
+		Globals.overworld.current_encounter.location_data = location_data

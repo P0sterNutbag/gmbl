@@ -64,7 +64,7 @@ func _process(delta: float) -> void:
 
 func _on_menu_button_pressed() -> void:
 	SaveController.delete_save_data()
-	PlayerStats.reset_stats()
+	SceneManager.save_on_enter = true
 	if Globals.overworld:
 		SceneManager.start_scene_transition(Globals.overworld)
 	else:

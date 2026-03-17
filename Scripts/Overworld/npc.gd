@@ -56,6 +56,7 @@ func _ready() -> void:
 		location.dialogue_tree.npc_name = faction_name + " " + location.dialogue_tree.npc_name
 		location.title = faction_name + " " + location.title
 	location.location_data.faction = faction
+	location.shop.faction = faction
 	original_position = global_position
 	original_rotation = global_rotation
 	if destination:

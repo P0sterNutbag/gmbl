@@ -5,6 +5,7 @@ extends Node
 var next_scene
 var remove_from_tree: bool
 var load_on_enter: bool
+var save_on_enter: bool
 signal scene_changed
 signal new_game_start
 signal scene_leaving
@@ -53,9 +54,9 @@ func change_scene() -> void:
 		load_on_enter = false
 		PlayerStats.state = PlayerStats.states.walk
 		SaveController.load_data_from_file()
-	else:
-		if get_tree().current_scene == Globals.overworld:
-			SaveController.save_data_to_file()
+	if save_on_enter:
+		save_on_enter = false
+		SaveController.save_data_to_file()
 
 
 func start_load() -> void:

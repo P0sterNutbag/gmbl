@@ -53,6 +53,9 @@ func change_scene() -> void:
 		load_on_enter = false
 		PlayerStats.state = PlayerStats.states.walk
 		SaveController.load_data_from_file()
+	else:
+		if get_tree().current_scene == Globals.overworld:
+			SaveController.save_data_to_file()
 
 
 func start_load() -> void:

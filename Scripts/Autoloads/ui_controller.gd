@@ -53,8 +53,8 @@ func close_interface(node_to_close: Control, activate_player: bool = true) -> vo
 func close_all(activate_player: bool = true) -> void:
 	for node in ui_nodes:
 		node.hide()
+	ui_closed.emit(current_ui)
 	current_ui = null
-	ui_closed.emit()
 	if activate_player:
 		PlayerStats.change_state(PlayerStats.states.walk)
 		if Globals.overworld and get_tree().current_scene == Globals.overworld:

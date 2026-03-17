@@ -46,6 +46,7 @@ var max_soberness: float = 1.0
 var sleep_decrease_rate := 0.2
 var hunger_decrease_rate := 0.6
 var thirst_decrease_rate := 0.8
+var stat_points = 3.0
 @onready var guns: Array[Item]:
 	get(): 
 		return inventory.items.filter(func(i): return i is EquipmentGun and i.gun_stats.ammo > 0)
@@ -71,6 +72,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("jump"):
+		stat_points += 1
 	if !get_tree().current_scene:
 		return
 	var scene_name = get_tree().current_scene.name
@@ -123,9 +126,10 @@ func change_state(new_state):
 
 
 func give_up() -> void:
-	PlayerStats.reset_stats()
-	SaveController.delete_save_data()
-	Globals.overworld.queue_free()
+	pass
+	#PlayerStats.reset_stats()
+	#SaveController.delete_save_data()
+	#Globals.overworld.queue_free()
 
 
 func unequip_current_item():
@@ -179,6 +183,10 @@ func go_to_sleep():
 	tween.tween_property(Globals.player.hitbox, "hp", Globals.player.hitbox.hp + 0.5, 0)
 	tween.tween_property(self, "state", states.walk, 0)
 
+
+func save_game() -> void:
+	SaveController.save_data_to_file()
+	Globals.survival_ui.create_notification("Game saved")
 
 
 func kill_all_npcs() -> void:

@@ -28,8 +28,8 @@ func _enter_tree() -> void:
 		player.rotation.x = 0
 		player.rotation.y = 0
 		player.can_enter_location = true
-	await get_tree().create_timer(0.1).timeout
-	SaveController.save_data_to_file()
+	#await get_tree().create_timer(0.1).timeout
+	#SaveController.save_data_to_file()
 
 
 func _ready() -> void:

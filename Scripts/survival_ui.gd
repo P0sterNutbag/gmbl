@@ -164,7 +164,7 @@ func _on_ui_opened() -> void:
 
 
 func _on_ui_closed(closed_node: Control) -> void:
-	if closed_node.get_parent().get_parent() == menu_holder:
+	if closed_node and closed_node.get_parent().get_parent() == menu_holder:
 		menu_holder.hide()
 
 

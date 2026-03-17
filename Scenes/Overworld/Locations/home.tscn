@@ -37,6 +37,7 @@ metadata/_custom_type_script = "uid://6ucyr0petjnx"
 script = ExtResource("4_qcuoc")
 inventory = SubResource("Resource_82lwf")
 uses_money = false
+faction = null
 title = "Stash"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
@@ -47,10 +48,17 @@ method = "go_to_sleep"
 title = "Sleep"
 metadata/_custom_type_script = "uid://cdjlwglvj2lmy"
 
+[sub_resource type="Resource" id="Resource_qcuoc"]
+script = ExtResource("10_82lwf")
+node_path = "PlayerStats"
+method = "save_game"
+title = "Save"
+metadata/_custom_type_script = "uid://cdjlwglvj2lmy"
+
 [sub_resource type="Resource" id="Resource_2b254"]
 script = ExtResource("3_h6gkv")
 title = "Your Stash"
-shops = Array[ExtResource("4_3et51")]([SubResource("Resource_eojqs"), SubResource("Resource_drdin")])
+shops = Array[ExtResource("4_3et51")]([SubResource("Resource_eojqs"), SubResource("Resource_drdin"), SubResource("Resource_qcuoc")])
 metadata/_custom_type_script = "uid://bbi3gcsb33muk"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hwnis"]

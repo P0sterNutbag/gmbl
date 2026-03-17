@@ -33,12 +33,13 @@
 [ext_resource type="Theme" uid="uid://crg6v3iu4nx3m" path="res://Art/Themes/text_header_outline.tres" id="28_8cvki"]
 [ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="31_kmwaq"]
 [ext_resource type="Texture2D" uid="uid://r08gms0nyjju" path="res://Art/Textures/hp icon.png" id="32_lboml"]
+[ext_resource type="PackedScene" uid="uid://cxxj4m44urb7y" path="res://Scenes/UI/stats_box.tscn" id="33_02qtm"]
 [ext_resource type="Theme" uid="uid://tivwhtwiofll" path="res://Art/Themes/button.tres" id="33_ft4n5"]
 [ext_resource type="Texture2D" uid="uid://bbjp6yopufgca" path="res://Art/Textures/cog icon.png" id="33_ohwuk"]
-[ext_resource type="Texture2D" uid="uid://ldkaytpf1yhe" path="res://Art/Textures/inventory icon.png" id="34_m6fmc"]
 [ext_resource type="Texture2D" uid="uid://duhvnasnxpgc4" path="res://Art/Textures/journal icon.png" id="35_ft4n5"]
 [ext_resource type="Script" uid="uid://boi8n7i6gbf6a" path="res://Scripts/custom_tooltip.gd" id="36_8cvki"]
 [ext_resource type="Texture2D" uid="uid://brs4ktd7wgyno" path="res://Art/Textures/faction icon.png" id="36_m6fmc"]
+[ext_resource type="Texture2D" uid="uid://d2ukjid6oonnl" path="res://Art/Textures/population icon.png" id="41_02qtm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_agdr0"]
 bg_color = Color(0, 0, 0, 0.784314)
@@ -403,6 +404,9 @@ opposing_ui = NodePath("../Inventory")
 visible = false
 mouse_filter = 2
 
+[node name="SaveGame" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" parent_id_path=PackedInt32Array(74152501, 1659528565) index="4" unique_id=1269823241]
+visible = false
+
 [node name="SettingsMenu" parent="PauseMenu" index="1" unique_id=651300899]
 offset_top = -152.5
 offset_bottom = 152.5
@@ -496,7 +500,7 @@ theme = ExtResource("24_8egi5")
 [node name="Label" type="Label" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer" unique_id=16818332]
 layout_mode = 2
 theme = ExtResource("14_e5c6o")
-text = "You had a good run"
+text = "You Died"
 horizontal_alignment = 1
 
 [node name="Control" type="Control" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer" unique_id=609614771]
@@ -544,11 +548,11 @@ script = ExtResource("15_k4cvi")
 
 [node name="Continue" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2" unique_id=1136655063 instance=ExtResource("16_1lobq")]
 layout_mode = 2
-text = "Create New Character"
+text = "Continue"
 
 [node name="Quit" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2" unique_id=615324257 instance=ExtResource("16_1lobq")]
 layout_mode = 2
-text = "Quit to Main Menu"
+text = "Return to Main Menu"
 
 [node name="Quit2" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2" unique_id=915267220 instance=ExtResource("16_1lobq")]
 layout_mode = 2
@@ -565,7 +569,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menus" unique_id=380085495]
-custom_minimum_size = Vector2(0, 878)
+custom_minimum_size = Vector2(0, 898)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -604,7 +608,7 @@ theme_override_constants/separation = 64
 [node name="InventoryTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" unique_id=1697876949 instance=ExtResource("22_jtf3n")]
 layout_mode = 2
 size_flags_horizontal = 1
-text = "Inventory"
+text = "Character"
 
 [node name="JournalTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" unique_id=1399101072 instance=ExtResource("22_jtf3n")]
 layout_mode = 2
@@ -615,6 +619,12 @@ text = "Joural"
 layout_mode = 2
 size_flags_horizontal = 1
 text = "Factions"
+
+[node name="CharacterTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" unique_id=409641333 instance=ExtResource("22_jtf3n")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 1
+text = "Character"
 
 [node name="ExitMenu" parent="Menus/VBoxContainer/Toolbar" unique_id=1880150906 instance=ExtResource("10_0pkni")]
 custom_minimum_size = Vector2(45, 45)
@@ -632,11 +642,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 can_drop_items = true
 
-[node name="EquipmentSlots" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory" unique_id=992338017]
+[node name="RightPanels" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory" unique_id=992338017]
 layout_mode = 2
-theme_override_constants/separation = 48
 
-[node name="Equipment" type="PanelContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots" unique_id=1897544360]
+[node name="Equipment" type="PanelContainer" parent="Menus/VBoxContainer/PlayerInventory/RightPanels" unique_id=1897544360]
 custom_minimum_size = Vector2(497, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -644,138 +653,91 @@ size_flags_vertical = 0
 mouse_filter = 2
 theme = ExtResource("11_0pkni")
 
-[node name="MarginContainer" type="MarginContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment" unique_id=377642546]
+[node name="MarginContainer" type="MarginContainer" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment" unique_id=377642546]
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("12_2dyl4")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment/MarginContainer" unique_id=792834766]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer" unique_id=792834766]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer" unique_id=1504109530]
+[node name="HBoxContainer" type="HBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer" unique_id=1504109530]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/HBoxContainer" unique_id=522672607]
+[node name="Label" type="Label" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/HBoxContainer" unique_id=522672607]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("25_6omgk")
 text = "Weapons"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer" unique_id=809566310]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer" unique_id=809566310]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="MenuItem" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=691497777 instance=ExtResource("16_1lobq")]
+[node name="MenuItem" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=691497777 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Primary: "
 script = ExtResource("19_jtf3n")
 slot = 0
 
-[node name="MenuItem2" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2102063767 instance=ExtResource("16_1lobq")]
+[node name="MenuItem2" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2102063767 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Secondary: "
 script = ExtResource("19_jtf3n")
 slot = 1
 
-[node name="Equipment2" type="PanelContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots" unique_id=283930891]
-custom_minimum_size = Vector2(497, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-mouse_filter = 2
-theme = ExtResource("11_0pkni")
-
-[node name="MarginContainer" type="MarginContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment2" unique_id=103339116]
-layout_mode = 2
-mouse_filter = 2
-theme = ExtResource("12_2dyl4")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer" unique_id=1365533328]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer" unique_id=428010743]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=35236870]
+[node name="Label" type="Label" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=915352403]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("25_6omgk")
 text = "Armor"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer" unique_id=1655033096]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="MenuItem" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1534086002 instance=ExtResource("16_1lobq")]
+[node name="MenuItem3" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2022397610 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Head: "
 script = ExtResource("19_jtf3n")
 slot = 2
 
-[node name="MenuItem2" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment2/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1989053881 instance=ExtResource("16_1lobq")]
+[node name="MenuItem4" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2070954494 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Body: "
 script = ExtResource("19_jtf3n")
 slot = 3
 
-[node name="Equipment3" type="PanelContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots" unique_id=505820610]
-custom_minimum_size = Vector2(497, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-mouse_filter = 2
-theme = ExtResource("11_0pkni")
-
-[node name="MarginContainer" type="MarginContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3" unique_id=70000994]
-layout_mode = 2
-mouse_filter = 2
-theme = ExtResource("12_2dyl4")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer" unique_id=294180792]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer" unique_id=1739025953]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1256762960]
+[node name="Label2" type="Label" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=983656834]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("25_6omgk")
 text = "Utility"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer" unique_id=939226072]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="MenuItem" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=621179552 instance=ExtResource("16_1lobq")]
+[node name="MenuItem5" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1018790349 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Nav: "
 script = ExtResource("19_jtf3n")
 slot = 4
 
-[node name="MenuItem2" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1367459867 instance=ExtResource("16_1lobq")]
+[node name="MenuItem6" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=577037208 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Light: "
 script = ExtResource("19_jtf3n")
 slot = 5
 
-[node name="MenuItem3" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1362184908 instance=ExtResource("16_1lobq")]
+[node name="MenuItem7" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=706524143 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Vision: "
 script = ExtResource("19_jtf3n")
 slot = 6
 
-[node name="MenuItem4" parent="Menus/VBoxContainer/PlayerInventory/EquipmentSlots/Equipment3/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2022397610 instance=ExtResource("16_1lobq")]
+[node name="MenuItem8" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=522861139 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Storage: "
 script = ExtResource("19_jtf3n")
 slot = 7
+
+[node name="Stats" parent="Menus/VBoxContainer/PlayerInventory/RightPanels" unique_id=2081239647 instance=ExtResource("33_02qtm")]
+layout_mode = 2
 
 [node name="Journal" type="PanelContainer" parent="Menus/VBoxContainer" unique_id=210546969 node_paths=PackedStringArray("item_container")]
 visible = false
@@ -862,7 +824,6 @@ layout_mode = 2
 [node name="Factions" type="PanelContainer" parent="Menus/VBoxContainer" unique_id=56908324]
 visible = false
 layout_mode = 2
-size_flags_vertical = 3
 theme = ExtResource("11_0pkni")
 script = ExtResource("27_o0jpn")
 
@@ -1243,24 +1204,13 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/separation = 6
 
-[node name="PauseButton" type="Button" parent="MenuButtons" unique_id=1332550426]
-custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
-tooltip_text = "Pause"
-theme = ExtResource("33_ft4n5")
-theme_override_constants/icon_max_width = 42
-icon = ExtResource("33_ohwuk")
-flat = true
-expand_icon = true
-script = ExtResource("36_8cvki")
-
 [node name="InventoryButton" type="Button" parent="MenuButtons" unique_id=181181749]
 custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
 tooltip_text = "Inventory"
 theme = ExtResource("33_ft4n5")
 theme_override_constants/icon_max_width = 100
-icon = ExtResource("34_m6fmc")
+icon = ExtResource("41_02qtm")
 flat = true
 expand_icon = true
 script = ExtResource("36_8cvki")
@@ -1287,6 +1237,29 @@ flat = true
 expand_icon = true
 script = ExtResource("36_8cvki")
 
+[node name="CharacterButton" type="Button" parent="MenuButtons" unique_id=1380920761]
+visible = false
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+tooltip_text = "Factions"
+theme = ExtResource("33_ft4n5")
+theme_override_constants/icon_max_width = 100
+icon = ExtResource("41_02qtm")
+flat = true
+expand_icon = true
+script = ExtResource("36_8cvki")
+
+[node name="PauseButton" type="Button" parent="MenuButtons" unique_id=1332550426]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+tooltip_text = "Pause"
+theme = ExtResource("33_ft4n5")
+theme_override_constants/icon_max_width = 42
+icon = ExtResource("33_ohwuk")
+flat = true
+expand_icon = true
+script = ExtResource("36_8cvki")
+
 [connection signal="pressed" from="TransferInventory/Inventory/Control/Button" to="." method="close_transfer_inventory"]
 [connection signal="visibility_changed" from="PauseMenu" to="PauseMenu" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="DeathMenu" to="DeathMenu" method="_on_visibility_changed"]
@@ -1300,15 +1273,17 @@ script = ExtResource("36_8cvki")
 [connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/InventoryTab" to="." method="_on_inventory_tab_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/JournalTab" to="." method="_on_journal_tab_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/FactionTab" to="." method="_on_faction_tab_pressed"]
+[connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/CharacterTab" to="." method="_on_character_tab_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Toolbar/ExitMenu" to="." method="_on_exit_menu_pressed"]
 [connection signal="visibility_changed" from="Menus/VBoxContainer/Journal" to="Menus/VBoxContainer/Journal" method="_on_visibility_changed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Journal/ConfirmationMenu/PanelContainer/MarginContainer/VBoxContainer/Yes" to="Menus/VBoxContainer/Journal" method="_on_yes_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Journal/ConfirmationMenu/PanelContainer/MarginContainer/VBoxContainer/No" to="Menus/VBoxContainer/Journal" method="_on_no_pressed"]
 [connection signal="visibility_changed" from="Menus/VBoxContainer/Factions" to="Menus/VBoxContainer/Factions" method="_on_visibility_changed"]
-[connection signal="pressed" from="MenuButtons/PauseButton" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="MenuButtons/InventoryButton" to="." method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="MenuButtons/JournalButton" to="." method="_on_journal_button_pressed"]
 [connection signal="pressed" from="MenuButtons/FactionButton" to="." method="_on_faction_button_pressed"]
+[connection signal="pressed" from="MenuButtons/CharacterButton" to="." method="_on_character_button_pressed"]
+[connection signal="pressed" from="MenuButtons/PauseButton" to="." method="_on_pause_pressed"]
 
 [editable path="PauseMenu"]
 [editable path="PauseMenu/ConfirmationMenu"]

@@ -18,12 +18,12 @@ func _ready() -> void:
 	#load_data_from_file()
 
 
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("ui_copy"):
-		#save_session_data()
-		save_data_to_file()
-	if Input.is_action_just_pressed("ui_paste"):
-		load_data_from_file()
+#func _process(_delta: float) -> void:
+	#if Input.is_action_just_pressed("ui_copy"):
+		##save_session_data()
+		#save_data_to_file()
+	#if Input.is_action_just_pressed("ui_paste"):
+		#load_data_from_file()
 
 
 #func save_session_data():

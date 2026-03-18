@@ -9,6 +9,7 @@ var option_bubble = preload("res://Scenes/Overworld/UI/dialogue_options_bubble.t
 var menu_item = preload("res://Scenes/UI/menu_item.tscn")
 @onready var label: Label = $"../PortraitHolder/HBoxContainer/NpcName"
 @onready var repair_menu: PanelContainer = $"../Repair"
+@onready var training_menu: PanelContainer = $"../Training"
 signal exit
 
 
@@ -153,6 +154,7 @@ func return_quests(quest_type: Quest, success_index: int, fail_index: int) -> vo
 
 
 func leave_shop() -> void:
+	await get_tree().process_frame
 	index = 1
 	UiController.open_interface(self)
 	advance_dialogue(index)
@@ -179,6 +181,10 @@ func pay_fee(amount: int, fail_index: int) -> void:
 
 func enter_repair_menu() -> void:
 	UiController.open_interface(repair_menu)
+
+
+func enter_training_menu() -> void:
+	UiController.open_interface(training_menu)
 
 
 func set_recruit_price() -> void:

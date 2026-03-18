@@ -1,5 +1,5 @@
 extends Resource
-class_name CharacterStats
+class_name CharacterSkills
 
 @export var toughness := 0.0
 @export var speed := 0.0

@@ -16,6 +16,7 @@ extends CanvasLayer
 @onready var log_box: VBoxContainer = %Log
 @onready var player_hp_bar: ProgressBar = %ProgressBar
 @onready var menu_buttons: Control = $MenuButtons
+@onready var skills_menu: Control = %Skills
 const LOG_NOTIFICATION = preload("res://Scenes/UI/log_notification.tscn")
 
 

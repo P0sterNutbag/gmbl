@@ -117,9 +117,9 @@ func create_bullet(shot_owner: Node3D, is_ads: bool, movement_speed: Vector3) ->
 		variance *= magnitude
 	variance *= spread
 	if "stats" in shot_owner or uses_input:
-		var stats: CharacterStats
+		var stats: CharacterSkills
 		if uses_input:
-			stats = PlayerStats.stats
+			stats = PlayerStats.skills
 		else:
 			stats = shot_owner.stats
 		var modifier = Vector2.ONE * stats.light_guns

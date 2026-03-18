@@ -2,7 +2,7 @@ extends Node
 
 @export var starting_inventory: Inventory
 @export var allies: Array[PackedScene]
-@export var stats: CharacterStats
+@export var skills: CharacterSkills
 enum states {walk, pause, dead}
 var state = states.walk
 var faction: FactionManager.factions: 
@@ -46,12 +46,12 @@ var max_soberness: float = 1.0
 var sleep_decrease_rate := 0.2
 var hunger_decrease_rate := 0.6
 var thirst_decrease_rate := 0.8
-var stat_points = 6.0
+var skill_points = 6.0
 @onready var guns: Array[Item]:
 	get(): 
 		return inventory.items.filter(func(i): return i is EquipmentGun and i.gun_stats.ammo > 0)
 signal gun_changed
-
+signal sleep_finished
 
 func _ready() -> void:
 	reset_stats()
@@ -67,13 +67,13 @@ func _ready() -> void:
 	hunger = max_hunger
 	thirst = max_thirst
 	faction = FactionManager.factions.player
-	inventory.space += stats.strength
+	inventory.space += skills.strength
 	#sensitivity_modifier = ConfigManager.file.get_value("settings", "mouse_sensitivity", sensitivity_modifier)
 
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
-		stat_points += 1
+		skill_points += 1
 	if !get_tree().current_scene:
 		return
 	var scene_name = get_tree().current_scene.name
@@ -168,20 +168,22 @@ func decrease_sleep(new_value: float) -> void:
 	sleep = max_sleep * new_amount
 
 
-func go_to_sleep():
+func go_to_sleep(time_to_skip: float = 1.5):
 	if get_tree().current_scene != Globals.overworld:
 		return
 	UiController.close_interface(Globals.survival_ui.menu_holder)
 	change_state(states.pause)
 	var tween = create_tween()
 	tween.tween_callback(SceneManager.animation_player.play.bind("fade_in"))
-	tween.tween_callback(DayNightCycle.skip_to_time.bind(1.5))
+	tween.tween_callback(DayNightCycle.skip_to_time.bind(time_to_skip))
 	tween.tween_callback(SceneManager.animation_player.play.bind("fade_out")).set_delay(2)
 	tween.tween_callback(kill_all_npcs)
 	tween.tween_property(self, "sleep", max_sleep, 0)
 	tween.tween_property(self, "soberness", max_soberness, 0)
 	tween.tween_property(Globals.player.hitbox, "hp", Globals.player.hitbox.hp + 0.5, 0)
 	tween.tween_property(self, "state", states.walk, 0)
+	await tween.finished
+	sleep_finished.emit()
 
 
 func save_game() -> void:
@@ -193,6 +195,12 @@ func kill_all_npcs() -> void:
 	BattleManager.delete_all_battles()
 	for npc in get_tree().get_nodes_in_group("overworld npcs"):
 		npc.queue_free()
+
+
+func add_skill_point() -> void:
+	skill_points += 1
+	if Globals.survival_ui.skills_menu.visible:
+		Globals.survival_ui.skills_menu.setup()
 
 
 func _on_gun_changed():
@@ -207,6 +215,11 @@ func _on_scene_leaving():
 	if Globals.player:
 		var new_hp = Globals.player.hitbox.hp
 		hp = new_hp
+
+
+func _on_skill_changed(skill_name: String) -> void:
+	if skill_name == "strength":
+		inventory.space_modifier = int(skills.strength)
 
 
 func save() -> Dictionary:
@@ -224,7 +237,7 @@ func save() -> Dictionary:
 		"player_name" : player_name,
 		"quests" : quests,
 		"inventory" : inventory,
-		"stats" : stats
+		"skills" : skills
 	}
 
 

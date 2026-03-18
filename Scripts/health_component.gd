@@ -18,11 +18,11 @@ class_name HealthComponent
 var audio_stream_player: AudioStreamPlayer3D
 var damage_modifier: float = 1.0:
 	get():
-		var stats: CharacterStats
+		var stats: CharacterSkills
 		if "stats" in get_parent():
 			stats = get_parent().stats
 		elif get_parent() == Globals.player:
-			stats = PlayerStats.stats
+			stats = PlayerStats.skills
 		var modifier = 0.0
 		if stats:
 			modifier = stats.toughness * 0.03

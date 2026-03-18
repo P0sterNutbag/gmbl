@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dq0fy8r72vsgc" path="res://Scripts/number_scroll_button.gd" id="3_1ss3u"]
 [ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="4_o8fg4"]
 [ext_resource type="Texture2D" uid="uid://d08xeomlxj5wh" path="res://Art/Textures/arrow_small_left.png" id="5_0843v"]
-[ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="6_1ss3u"]
+[ext_resource type="Theme" uid="uid://dcnijc3hjurqk" path="res://Art/Themes/text_mediun_outline.tres" id="6_1ss3u"]
 [ext_resource type="Texture2D" uid="uid://byvpghxprlvv3" path="res://Art/Textures/arrow_small.png" id="7_sced8"]
 
 [node name="MenuButton" type="Button" unique_id=237768494]
@@ -22,6 +22,7 @@ alignment = 0
 script = ExtResource("3_1ss3u")
 
 [node name="Control" type="HBoxContainer" parent="." unique_id=352099295]
+custom_minimum_size = Vector2(72, 0)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -34,13 +35,13 @@ offset_bottom = 10.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 0
-alignment = 1
+alignment = 2
 
 [node name="LeftScroll" type="Button" parent="Control" unique_id=1028790535]
 modulate = Color(1, 1, 0, 1)
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 0
 theme = ExtResource("4_o8fg4")
 icon = ExtResource("5_0843v")
 flat = true
@@ -58,7 +59,7 @@ horizontal_alignment = 1
 modulate = Color(1, 1, 0, 1)
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 8
 icon = ExtResource("7_sced8")
 flat = true
 expand_icon = true

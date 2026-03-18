@@ -5,36 +5,43 @@ extends PanelContainer
 @onready var speed_stat: Button = $MarginContainer/VBoxContainer/Speed
 @onready var handguns_stat: Button = $MarginContainer/VBoxContainer/Handguns
 @onready var long_guns_stat: Button = $MarginContainer/VBoxContainer/LongGuns
-@onready var stat_points_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/StatPoints
+@onready var skill_points_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/StatPoints
 @onready var vbox_container: VBoxContainer = $MarginContainer/VBoxContainer
+signal skill_changed(skill_name: String)
 
 
 func _ready() -> void:
 	setup()
+	skill_changed.connect(PlayerStats._on_skill_changed)
 
 
 func setup() -> void:
-	stat_points_label.text = "Points Left: " + str(int(PlayerStats.stat_points))
+	skill_points_label.text = "Points Left: " + str(int(PlayerStats.skill_points))
+	if PlayerStats.skill_points == 0:
+		skill_points_label.hide()
+	else:
+		skill_points_label.show()
 	for i in vbox_container.get_child_count():
 		var child = vbox_container.get_child(i)
 		if child is NumberScrollButton:
-			child.set_value(PlayerStats.stats.get(child.stat_name))
+			child.set_value(PlayerStats.skills.get(child.stat_name))
 			child.min_value = child.value
-			if PlayerStats.stat_points == 0:
+			if PlayerStats.skill_points == 0:
 				child.right_button.hide()
 				child.left_button.hide()
 
 
 func change_stat(node: Control, value: float, changed_by: float) -> void:
-	if PlayerStats.stat_points > 0 or changed_by < 0:
-		PlayerStats.stats.set(node.stat_name, value)
-		PlayerStats.stat_points = clamp(PlayerStats.stat_points - changed_by, 0, 100)
-		stat_points_label.text = "Points Left: " + str(int(PlayerStats.stat_points))
+	if PlayerStats.skill_points > 0 or changed_by < 0:
+		PlayerStats.skills.set(node.stat_name, value)
+		PlayerStats.skill_points = clamp(PlayerStats.skill_points - changed_by, 0, 100)
+		skill_points_label.text = "Points Left: " + str(int(PlayerStats.skill_points))
+		skill_changed.emit(node.stat_name)
 	else:
-		PlayerStats.stat_points += changed_by
+		PlayerStats.skill_points += changed_by
 		node.set_value(value - changed_by)
 		node.value_label.text = str(int(node.value))
-	if PlayerStats.stat_points <= 0:
+	if PlayerStats.skill_points <= 0:
 		for child in vbox_container.get_children():
 			if child is NumberScrollButton:
 				child.right_button.hide()

@@ -1,22 +1,22 @@
 [gd_scene format=3 uid="uid://cxxj4m44urb7y"]
 
-[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_65h82"]
-[ext_resource type="Script" uid="uid://3ibim3bgxsca" path="res://Scripts/stats_box.gd" id="2_qm7cp"]
-[ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="3_h6xl1"]
-[ext_resource type="Theme" uid="uid://dcnijc3hjurqk" path="res://Art/Themes/text_mediun_outline.tres" id="4_0ko88"]
-[ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="5_gx385"]
-[ext_resource type="PackedScene" uid="uid://24sgvi1t84r6" path="res://Scenes/UI/number_scroll_button.tscn" id="6_8e7sq"]
-[ext_resource type="Script" uid="uid://cbxdogeijdi1l" path="res://Scripts/stat_button.gd" id="7_qm7cp"]
+[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_2uxh6"]
+[ext_resource type="Script" uid="uid://3ibim3bgxsca" path="res://Scripts/stats_box.gd" id="2_jwufi"]
+[ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="3_3d6il"]
+[ext_resource type="Theme" uid="uid://dcnijc3hjurqk" path="res://Art/Themes/text_mediun_outline.tres" id="4_q2e3j"]
+[ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="5_lgpg3"]
+[ext_resource type="PackedScene" uid="uid://24sgvi1t84r6" path="res://Scenes/UI/number_scroll_button.tscn" id="6_ygj8n"]
+[ext_resource type="Script" uid="uid://cbxdogeijdi1l" path="res://Scripts/stat_button.gd" id="7_8oooa"]
 
-[node name="Stats" type="PanelContainer" unique_id=2081239647]
+[node name="Skills" type="PanelContainer" unique_id=2081239647]
 size_flags_horizontal = 3
 size_flags_vertical = 0
-theme = ExtResource("1_65h82")
-script = ExtResource("2_qm7cp")
+theme = ExtResource("1_2uxh6")
+script = ExtResource("2_jwufi")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=679270739]
 layout_mode = 2
-theme = ExtResource("3_h6xl1")
+theme = ExtResource("3_3d6il")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=235039647]
 layout_mode = 2
@@ -27,48 +27,48 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1399894795]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("4_0ko88")
-text = "Stats"
+theme = ExtResource("4_q2e3j")
+text = "Skills"
 
 [node name="StatPoints" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=685336001]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("5_gx385")
+theme = ExtResource("5_lgpg3")
 text = "Points Left: 3"
 
-[node name="Toughness" parent="MarginContainer/VBoxContainer" unique_id=237768494 instance=ExtResource("6_8e7sq")]
+[node name="Toughness" parent="MarginContainer/VBoxContainer" unique_id=237768494 instance=ExtResource("6_ygj8n")]
 layout_mode = 2
 tooltip_text = "Reduces damage taken"
 text = "Toughness"
-script = ExtResource("7_qm7cp")
+script = ExtResource("7_8oooa")
 stat_name = "toughness"
 
-[node name="Strength" parent="MarginContainer/VBoxContainer" unique_id=2004369348 instance=ExtResource("6_8e7sq")]
+[node name="Strength" parent="MarginContainer/VBoxContainer" unique_id=2004369348 instance=ExtResource("6_ygj8n")]
 layout_mode = 2
 tooltip_text = "Increases carrying capacity and melee stength"
 text = "Strength"
-script = ExtResource("7_qm7cp")
+script = ExtResource("7_8oooa")
 stat_name = "strength"
 
-[node name="Speed" parent="MarginContainer/VBoxContainer" unique_id=261604536 instance=ExtResource("6_8e7sq")]
+[node name="Speed" parent="MarginContainer/VBoxContainer" unique_id=261604536 instance=ExtResource("6_ygj8n")]
 layout_mode = 2
 tooltip_text = "Increases movement speed"
 text = "Speed"
-script = ExtResource("7_qm7cp")
+script = ExtResource("7_8oooa")
 stat_name = "speed"
 
-[node name="Handguns" parent="MarginContainer/VBoxContainer" unique_id=1130412460 instance=ExtResource("6_8e7sq")]
+[node name="Handguns" parent="MarginContainer/VBoxContainer" unique_id=1130412460 instance=ExtResource("6_ygj8n")]
 layout_mode = 2
 tooltip_text = "Increases accuracy with handguns"
 text = "Handguns"
-script = ExtResource("7_qm7cp")
+script = ExtResource("7_8oooa")
 stat_name = "light_guns"
 
-[node name="LongGuns" parent="MarginContainer/VBoxContainer" unique_id=1560769085 instance=ExtResource("6_8e7sq")]
+[node name="LongGuns" parent="MarginContainer/VBoxContainer" unique_id=1560769085 instance=ExtResource("6_ygj8n")]
 layout_mode = 2
 tooltip_text = "Increases accuracy with long guns"
 text = "Long Guns"
-script = ExtResource("7_qm7cp")
+script = ExtResource("7_8oooa")
 stat_name = "heavy_guns"
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

@@ -2,9 +2,12 @@ extends Resource
 class_name Inventory
 
 @export var item_slots: Array[ItemSlot]
-@export var space: int = 10
+@export var space: int = 10:
+	get():
+		return space + space_modifier
 @export var money: int
 @export var title: String
+var space_modifier: int = 0 
 var items: Array[Item]:
 	get():
 		var array: Array[Item] = []
@@ -13,11 +16,6 @@ var items: Array[Item]:
 			array.append(item)
 		return array
 var equipment_kit := EquipmentKit.new() 
-	#get():
-		#if !equipment_kit.has_equipment():
-			#for item in items.filter(func(i): return i is Equipment and i.equipped):
-				#equipment_kit.equipment[item.slot] = item
-		#return equipment_kit
 
 
 func add_item(item: Item, amount: int = 1) -> bool:

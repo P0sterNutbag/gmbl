@@ -51,6 +51,7 @@ func _ready() -> void:
 					i.max_money = i.inventory.money
 				i.faction = location_data.faction
 		DayNightCycle.day_start.connect(stock_shops)
+		await get_tree().process_frame
 		stock_shops()
 
 

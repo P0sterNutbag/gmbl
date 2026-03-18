@@ -86,3 +86,7 @@ func get_dot(from_node: Node3D, to_node: Node3D) -> float:
 	var forward = from_node.global_transform.basis.z.normalized()
 	var to = (to_node.global_transform.origin - from_node.global_transform.origin).normalized()
 	return forward.dot(to)
+
+
+func open_training_menu() -> void:
+	UiController.open_interface(ui.training_menu)

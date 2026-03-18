@@ -85,15 +85,16 @@ text = "Controls"
 
 [node name="SaveGame" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1269823241 instance=ExtResource("5_deree")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "Save"
 
-[node name="Quit" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=576973963 instance=ExtResource("5_deree")]
+[node name="MainMenu" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=576973963 instance=ExtResource("5_deree")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Return to Menu"
 
-[node name="Quit2" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1616430926 instance=ExtResource("5_deree")]
+[node name="Quit" parent="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1616430926 instance=ExtResource("5_deree")]
 layout_mode = 2
 text = "Quit game"
 
@@ -456,8 +457,8 @@ text = "Return to menu and lose unsaved progress?"
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/SaveGame" to="." method="_on_save_game_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Quit2" to="." method="_on_quit_2_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MainMenu" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_2_pressed"]
 [connection signal="hidden" from="SettingsMenu" to="." method="_on_settings_menu_hidden"]
 [connection signal="pressed" from="Controls/Control/ExitControls" to="." method="_on_exit_controls_pressed"]
 [connection signal="pressed" from="ConfirmationMenu/PanelContainer/MarginContainer/VBoxContainer/Yes" to="." method="_on_yes_pressed"]

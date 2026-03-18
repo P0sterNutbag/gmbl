@@ -8,16 +8,16 @@ var gun_state = gun_states.point
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var base_speed := 4.0:
 	get():
-		return base_speed + PlayerStats.stats.speed * 0.3
+		return base_speed + PlayerStats.skills.speed * 0.3
 var walk_speed := 2.0:
 	get():
-		return walk_speed + PlayerStats.stats.speed * 0.3
+		return walk_speed + PlayerStats.skills.speed * 0.3
 var run_speed := 7.0:
 	get():
-		return run_speed + PlayerStats.stats.speed * 0.3
+		return run_speed + PlayerStats.skills.speed * 0.3
 var crouch_speed := 2.0:
 	get():
-		return crouch_speed + PlayerStats.stats.speed * 0.3
+		return crouch_speed + PlayerStats.skills.speed * 0.3
 var speed = base_speed
 var jump_speed := 6.5
 var mouse_sensitivity := 0.004
@@ -34,7 +34,9 @@ var sway_speed = 0.1
 var sway_speed_hold_breath = 0.01
 var footstep_timer := 0.0
 var sway_intensity = 3
-var max_breath = 3.0
+var max_breath = 3.0:
+	get():
+		return max_breath + ((PlayerStats.skills.light_guns + PlayerStats.skills.heavy_guns) * 0.3)
 var current_breath = 3.0
 var is_crouching: bool
 var is_sprinting: bool
@@ -544,9 +546,9 @@ func gun_state_ads(delta: float) -> void:
 	var sway_modifier: float = 1
 	if PlayerStats.soberness < PlayerStats.max_soberness:
 		sway_modifier = 2
-	var stat_modifier = PlayerStats.stats.light_guns * 0.2
+	var stat_modifier = PlayerStats.skills.light_guns * 0.2
 	if gun.slot == EquipmentKit.slots.primary_gun:
-		stat_modifier = PlayerStats.stats.heavy_guns * 0.2
+		stat_modifier = PlayerStats.skills.heavy_guns * 0.2
 	var x_offset = sway_noise.get_noise_2d(sway_time, 0.0) * (sway_intensity - stat_modifier)
 	var y_offset = sway_noise.get_noise_2d(0.0, sway_time) * (sway_intensity - stat_modifier)
 	rotation.y += deg_to_rad(y_offset * sway_modifier)

@@ -33,7 +33,7 @@
 [ext_resource type="Theme" uid="uid://crg6v3iu4nx3m" path="res://Art/Themes/text_header_outline.tres" id="28_8cvki"]
 [ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="31_kmwaq"]
 [ext_resource type="Texture2D" uid="uid://r08gms0nyjju" path="res://Art/Textures/hp icon.png" id="32_lboml"]
-[ext_resource type="PackedScene" uid="uid://cxxj4m44urb7y" path="res://Scenes/UI/stats_box.tscn" id="33_02qtm"]
+[ext_resource type="PackedScene" uid="uid://cxxj4m44urb7y" path="res://Scenes/UI/skills_box.tscn" id="33_02qtm"]
 [ext_resource type="Theme" uid="uid://tivwhtwiofll" path="res://Art/Themes/button.tres" id="33_ft4n5"]
 [ext_resource type="Texture2D" uid="uid://bbjp6yopufgca" path="res://Art/Textures/cog icon.png" id="33_ohwuk"]
 [ext_resource type="Texture2D" uid="uid://duhvnasnxpgc4" path="res://Art/Textures/journal icon.png" id="35_ft4n5"]
@@ -404,9 +404,6 @@ opposing_ui = NodePath("../Inventory")
 visible = false
 mouse_filter = 2
 
-[node name="SaveGame" parent="PauseMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" parent_id_path=PackedInt32Array(74152501, 1659528565) index="4" unique_id=1269823241]
-visible = false
-
 [node name="SettingsMenu" parent="PauseMenu" index="1" unique_id=651300899]
 offset_top = -152.5
 offset_bottom = 152.5
@@ -618,7 +615,7 @@ text = "Joural"
 [node name="FactionTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" unique_id=1594223131 instance=ExtResource("22_jtf3n")]
 layout_mode = 2
 size_flags_horizontal = 1
-text = "Factions"
+text = "Clans"
 
 [node name="CharacterTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" unique_id=409641333 instance=ExtResource("22_jtf3n")]
 visible = false
@@ -736,7 +733,8 @@ text = "Storage: "
 script = ExtResource("19_jtf3n")
 slot = 7
 
-[node name="Stats" parent="Menus/VBoxContainer/PlayerInventory/RightPanels" unique_id=2081239647 instance=ExtResource("33_02qtm")]
+[node name="Skills" parent="Menus/VBoxContainer/PlayerInventory/RightPanels" unique_id=2081239647 instance=ExtResource("33_02qtm")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Journal" type="PanelContainer" parent="Menus/VBoxContainer" unique_id=210546969 node_paths=PackedStringArray("item_container")]
@@ -1229,7 +1227,7 @@ script = ExtResource("36_8cvki")
 [node name="FactionButton" type="Button" parent="MenuButtons" unique_id=891720633]
 custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
-tooltip_text = "Factions"
+tooltip_text = "Clans"
 theme = ExtResource("33_ft4n5")
 theme_override_constants/icon_max_width = 100
 icon = ExtResource("36_m6fmc")

@@ -2,7 +2,6 @@ extends Menu
 
 @onready var pause_menu: PanelContainer = $PanelContainer
 @onready var settings_menu: PanelContainer = $SettingsMenu
-@onready var save_quit_button: MenuItem = %Quit
 @onready var save_button: MenuItem = %SaveGame
 @onready var confirmation_menu = $ConfirmationMenu
 @onready var confirmation_menu2 = $ConfirmationMenu2

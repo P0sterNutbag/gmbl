@@ -77,9 +77,9 @@ func _process(delta: float) -> void:
 				crosshair.hide()
 				dot_crosshair.hide()
 			if crosshair.visible:
-				var modifier = PlayerStats.stats.light_guns * 0.1
+				var modifier = PlayerStats.skills.light_guns * 0.1
 				if PlayerStats.gun.slot == EquipmentKit.slots.primary_gun:
-					modifier = PlayerStats.stats.heavy_guns * 0.1
+					modifier = PlayerStats.skills.heavy_guns * 0.1
 				var base_pos = clamp((Globals.player.gun.bullet_stats.h_angle_variance_hip - modifier) * 20, 1, 100)
 				for child in crosshair.get_children():
 					var target_pos = child.position

@@ -1,11 +1,12 @@
 extends Menu
 
-@onready var resume_button: MenuItem = $PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MenuItem
+@onready var resume_button: MenuItem = $PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Continue
 @onready var settings_menu: PanelContainer = $SettingsMenu
 @onready var main_menu: PanelContainer = $PanelContainer
 @onready var color_rect: ColorRect = $ColorRect
 @onready var logo: TextureRect = $ColorRect/TextureRect
 @onready var confirmation_menu: Control = $ConfirmationMenu
+@onready var confirmation_menu2: Control = $ConfirmationMenu2
 var logo_tween: Tween
 var skip_intro: bool
 
@@ -71,7 +72,8 @@ func _on_menu_item_3_pressed() -> void:
 
 
 func _on_menu_item_4_pressed() -> void:
-	get_tree().quit()
+	confirmation_menu2.show()
+	main_menu.hide()
 
 
 func _on_settings_menu_visibility_changed() -> void:
@@ -91,6 +93,16 @@ func _on_no_pressed() -> void:
 	confirmation_menu.hide()
 
 
-func _on_wishlist_pressed() -> void:
+func _on_yes2_pressed() -> void:
 	var steam_url = "steam://store/4304500"
 	OS.shell_open(steam_url)
+	get_tree().quit()
+
+
+func _on_no2_pressed() -> void:
+	get_tree().quit()
+
+
+func _on_back_pressed() -> void:
+	main_menu.show()
+	confirmation_menu2.hide()

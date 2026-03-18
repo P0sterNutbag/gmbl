@@ -12,7 +12,7 @@ func _ready() -> void:
 		var dis = player_spawn.position.z
 		player_spawn.position = -Globals.overworld.player_spawn_vector * dis
 		player_spawn.position.x = clamp(player_spawn.position.x, spawn_clamp.x, 257 - spawn_clamp.x)
-		player_spawn.position.y = clamp(player_spawn.position.y, spawn_clamp.y, 257 - spawn_clamp.y)
+		player_spawn.position.z = clamp(player_spawn.position.z, spawn_clamp.y, 257 - spawn_clamp.y)
 		player_spawn.position_on_heightmap()
 		dis = cover_spawn.position.z
 		cover_spawn.position = -Globals.overworld.player_spawn_vector * dis

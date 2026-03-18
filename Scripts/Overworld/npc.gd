@@ -86,7 +86,7 @@ func _process(_delta: float) -> void:
 				if (UiController.is_canvas_layer_open(Globals.ui) or !chase_player):
 					detection.targets.erase(target)
 					state = states.walk
-			elif target.state == target.states.dead:
+			elif !target or target.state == target.states.dead:
 				detection.targets.erase(target)
 				state = states.walk
 			if global_position.distance_to(target.global_position) > detection.detection_range:

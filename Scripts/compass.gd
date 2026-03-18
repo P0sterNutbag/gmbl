@@ -22,7 +22,7 @@ func _process(_delta: float) -> void:
 	# compass movement
 	var cam_rot = rad_to_deg(compass_object.global_rotation.y)
 	var location_offset := 0.0
-	if Globals.overworld and get_tree().current_scene != Globals.overworld:
+	if Globals.overworld and get_tree().current_scene != Globals.overworld and Globals.overworld.current_encounter:
 		#location_offset = Vector3.BACK.angle_to(Globals.overworld.player_spawn_vector)
 		#location_offset = rad_to_deg(location_offset)
 		location_offset = rad_to_deg(Globals.overworld.current_encounter.rotation.y)

@@ -43,6 +43,7 @@ func _ready() -> void:
 		location_data.max_population = starting_population
 		var starting_faction = location_data.possible_factions[randi() % location_data.possible_factions.size()]
 		location_data.faction = starting_faction
+	await get_tree().process_frame
 	# shop timer
 	if town != null:
 		for i in town.shops:
@@ -51,7 +52,10 @@ func _ready() -> void:
 					i.max_money = i.inventory.money
 				i.faction = location_data.faction
 		DayNightCycle.day_start.connect(stock_shops)
-		await get_tree().process_frame
+	if shop:
+		shop.faction = location_data.faction
+		shop.max_money = shop.inventory.money
+	if town != null or shop != null:
 		stock_shops()
 
 

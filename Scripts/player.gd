@@ -6,16 +6,16 @@ enum gun_states {point, ads, reload, ammo_check, no_gun, point_up, pump}
 var camera_zoom = zoom_levels.regular
 var gun_state = gun_states.point
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var base_speed := 4.0:
+var base_speed := 4.5:
 	get():
 		return base_speed + PlayerStats.skills.speed * 0.3
-var walk_speed := 2.0:
+var walk_speed := 2.5:
 	get():
 		return walk_speed + PlayerStats.skills.speed * 0.3
 var run_speed := 7.0:
 	get():
 		return run_speed + PlayerStats.skills.speed * 0.3
-var crouch_speed := 2.0:
+var crouch_speed := 2.5:
 	get():
 		return crouch_speed + PlayerStats.skills.speed * 0.3
 var speed = base_speed
@@ -34,7 +34,7 @@ var sway_speed = 0.1
 var sway_speed_hold_breath = 0.01
 var footstep_timer := 0.0
 var sway_intensity = 3
-var max_breath = 3.0:
+var max_breath = 2.0:
 	get():
 		return max_breath + ((PlayerStats.skills.light_guns + PlayerStats.skills.heavy_guns) * 0.3)
 var current_breath = 3.0
@@ -153,7 +153,10 @@ func _ready() -> void:
 	# set skin color
 	var arm = gun_anchor.get_child(0).get_node("ArmLAnchor/armL/Cube_001")
 	var material = arm.mesh.surface_get_material(0)
-	material.set("shader_parameter/color", PLAYER_STYLE.skin_colors[0])
+	var style = PLAYER_STYLE
+	if "player_style" in PlayerStats:
+		style = PlayerStats.player_style
+	material.set("shader_parameter/color", style.skin_colors[0])
 	# signals
 	PlayerStats.gun_changed.connect(_on_gun_changed)
 

@@ -6,12 +6,13 @@ var current_encounter: Node3D
 var player_place: NodePath
 @onready var npc_controller: Node3D = $NpcController
 @onready var player_start: Node3D = $PlayerStart
+@onready var player: CharacterBody3D = $Player
 
 
 func _enter_tree() -> void:
 	await get_tree().process_frame
 	process_mode = Node.PROCESS_MODE_INHERIT
-	var player = get_node("Player")
+	#var player = get_node("Player")
 	if player_died:
 		player.transform = player_start.transform
 		player.camera_anchor.rotation = Vector3.ZERO

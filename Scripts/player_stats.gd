@@ -46,12 +46,14 @@ var max_soberness: float = 1.0
 var sleep_decrease_rate := 0.2
 var hunger_decrease_rate := 0.6
 var thirst_decrease_rate := 0.8
-var skill_points = 6.0
+var skill_points = 5.0
+var player_style: NpcStyle
 @onready var guns: Array[Item]:
 	get(): 
 		return inventory.items.filter(func(i): return i is EquipmentGun and i.gun_stats.ammo > 0)
 signal gun_changed
 signal sleep_finished
+
 
 func _ready() -> void:
 	reset_stats()
@@ -67,7 +69,7 @@ func _ready() -> void:
 	hunger = max_hunger
 	thirst = max_thirst
 	faction = FactionManager.factions.player
-	inventory.space += skills.strength
+	inventory.space_modifier = int(skills.strength)
 	#sensitivity_modifier = ConfigManager.file.get_value("settings", "mouse_sensitivity", sensitivity_modifier)
 
 
@@ -85,7 +87,7 @@ func _process(delta: float) -> void:
 	thirst = clamp(thirst - delta , 0, max_thirst)
 	if Globals.player and (hunger <= 0 or thirst <= 0) and Globals.player.hitbox.hp > 0.1:
 		#Globals.player.hitbox.damage(0.025 * delta, Vector3.ZERO, Vector3.ZERO, false, false, false)
-		Globals.player.hitbox.hp -= 0.025 * delta
+		Globals.player.hitbox.hp -= 0.01 * delta
 	if soberness < max_soberness:
 		soberness += delta * 0.01
 
@@ -103,11 +105,8 @@ func _physics_process(delta):
 func reset_stats() -> void:
 	inventory.equipment_kit.remove_all()
 	inventory = starting_inventory.duplicate(true)
-	#inventory.money = ProgressManager.progress_data.starting_money
-	#equipped_guns[guns[0].slot] = guns[0]
-	#for i in equipped_guns:
-		#if i:
-			#i.gun_stats.reset()
+	skills = CharacterSkills.new()
+	skill_points = 5
 	quests.clear()
 	hp = max_current_hp
 	sleep = max_sleep
@@ -180,8 +179,11 @@ func go_to_sleep(time_to_skip: float = 1.5):
 	tween.tween_callback(kill_all_npcs)
 	tween.tween_property(self, "sleep", max_sleep, 0)
 	tween.tween_property(self, "soberness", max_soberness, 0)
+	tween.tween_callback(decrease_thirst.bind(-0.3))
+	tween.tween_callback(decrease_hunger.bind(-0.3))
 	tween.tween_property(Globals.player.hitbox, "hp", Globals.player.hitbox.hp + 0.5, 0)
-	tween.tween_property(self, "state", states.walk, 0)
+	if !UiController.is_canvas_layer_open(Globals.ui):
+		tween.tween_property(self, "state", states.walk, 0)
 	await tween.finished
 	sleep_finished.emit()
 
@@ -237,7 +239,9 @@ func save() -> Dictionary:
 		"player_name" : player_name,
 		"quests" : quests,
 		"inventory" : inventory,
-		"skills" : skills
+		"skills" : skills,
+		"skill_points" : skill_points,
+		"player_style" : player_style,
 	}
 
 
@@ -248,3 +252,6 @@ func _on_load():
 		#quests.clear()
 		#quests.append_array(save_quests.array)
 	Globals.player.hitbox.hp = hp
+	if "model" in Globals.player:
+		Globals.player.model.style_data = player_style
+		Globals.player.model.set_materials()

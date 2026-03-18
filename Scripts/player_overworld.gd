@@ -2,7 +2,9 @@ extends CharacterBody3D
 
 enum camera_types {overhead, fps}
 var camera_type = camera_types.overhead
-const SPEED = 5.0
+var speed := 4.5:
+	get():
+		return speed + PlayerStats.skills.speed * 0.3
 var mouse_sensitivity := 0.004
 var camera_max_zoom: float = 20.0
 var camera_min_zoom: float = 2.0
@@ -110,11 +112,11 @@ func state_walk(delta) -> void:
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction := ((camera_anchor.transform.basis * transform.basis) * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
 	
 	if camera_type != camera_types.overhead:
 		return

@@ -437,6 +437,9 @@ grow_vertical = 2
 [node name="Label" parent="ConfirmationMenu/PanelContainer/MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(42619159, 791748064) index="0" unique_id=19737580]
 text = "Quit and lose unsaved progress?"
 
+[node name="Control" parent="ConfirmationMenu/PanelContainer/MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(42619159, 791748064) index="1" unique_id=2009617104]
+custom_minimum_size = Vector2(0, 16)
+
 [node name="ConfirmationMenu2" parent="." unique_id=1288801293 instance=ExtResource("7_qyryt")]
 visible = false
 layout_mode = 1
@@ -448,8 +451,15 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="PanelContainer" parent="ConfirmationMenu2" index="0" unique_id=1715864982]
+offset_top = -117.0
+offset_bottom = 117.0
+
 [node name="Label" parent="ConfirmationMenu2/PanelContainer/MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1288801293, 791748064) index="0" unique_id=19737580]
 text = "Return to menu and lose unsaved progress?"
+
+[node name="Control" parent="ConfirmationMenu2/PanelContainer/MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1288801293, 791748064) index="1" unique_id=2009617104]
+custom_minimum_size = Vector2(0, 16)
 
 [connection signal="visibility_changed" from="PanelContainer" to="." method="_on_panel_container_visibility_changed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]

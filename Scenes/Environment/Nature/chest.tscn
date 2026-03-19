@@ -23,6 +23,7 @@
 [ext_resource type="Resource" uid="uid://du57k1x7scpfk" path="res://Resources/Items/Junk/metal_scraps.tres" id="17_pxco1"]
 [ext_resource type="Resource" uid="uid://cw12h3yyn5tgy" path="res://Resources/Items/Junk/playing cards.tres" id="18_dh78f"]
 [ext_resource type="Resource" uid="uid://dfkmfm7wu8mw4" path="res://Resources/Items/Consumable/beans.tres" id="19_p17s1"]
+[ext_resource type="Resource" uid="uid://b531tc4pwfwel" path="res://Resources/Items/Consumable/crackers.tres" id="21_p17s1"]
 [ext_resource type="Resource" uid="uid://c4vot4kh7bffi" path="res://Resources/Items/Consumable/bandage.tres" id="21_pm71s"]
 [ext_resource type="Resource" uid="uid://glkl1ugkvv6m" path="res://Resources/Items/Consumable/water.tres" id="21_xtniw"]
 [ext_resource type="Resource" uid="uid://dvooyj5cqcclc" path="res://Resources/Items/Utility/sleeping_bag.tres" id="22_adlyc"]
@@ -33,6 +34,7 @@
 [ext_resource type="Resource" uid="uid://cf41qwurikia4" path="res://Resources/Items/Consumable/tourniquet.tres" id="28_p17s1"]
 [ext_resource type="Resource" uid="uid://bmllms5nonko8" path="res://Resources/Items/Consumable/beer.tres" id="29_xtniw"]
 [ext_resource type="Resource" uid="uid://c3usfn872wp1g" path="res://Resources/Items/Consumable/human_heart.tres" id="31_pxco1"]
+[ext_resource type="Resource" uid="uid://c0k65it1qtgn7" path="res://Resources/Items/Utility/journal.tres" id="32_dh78f"]
 
 [sub_resource type="Resource" id="Resource_3jrad"]
 script = ExtResource("3_nxxjw")
@@ -132,7 +134,13 @@ metadata/_custom_type_script = "uid://3e36ru1e7k78"
 [sub_resource type="Resource" id="Resource_fxmgv"]
 script = ExtResource("3_nxxjw")
 object_to_spawn = ExtResource("19_p17s1")
-spawn_chance = 2.0
+spawn_chance = 0.8
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_xtniw"]
+script = ExtResource("3_nxxjw")
+object_to_spawn = ExtResource("21_p17s1")
+spawn_chance = 1.2
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_pxco1"]
@@ -201,11 +209,17 @@ spawn_chance = 0.1
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_p17s1"]
+script = ExtResource("3_nxxjw")
+object_to_spawn = ExtResource("32_dh78f")
+spawn_chance = 0.5
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_8mq0c"]
 resource_local_to_scene = true
 script = ExtResource("5_urdfy")
 min_amount = 1
 max_amount = 5
-potential_slots = Array[ExtResource("3_nxxjw")]([SubResource("Resource_3jrad"), SubResource("Resource_e1mr1"), SubResource("Resource_ildup"), SubResource("Resource_fhb31"), SubResource("Resource_2cu0c"), SubResource("Resource_c1b8b"), SubResource("Resource_atcha"), SubResource("Resource_1ipjs"), SubResource("Resource_vqwww"), SubResource("Resource_7pmke"), SubResource("Resource_qr8nu"), SubResource("Resource_rqkl3"), SubResource("Resource_ktgl8"), SubResource("Resource_3md2n"), SubResource("Resource_2hm72"), SubResource("Resource_fxmgv"), SubResource("Resource_pxco1"), SubResource("Resource_s0qxi"), SubResource("Resource_ftq36"), SubResource("Resource_f140h"), SubResource("Resource_pm71s"), SubResource("Resource_ce5ce"), SubResource("Resource_m3og3"), SubResource("Resource_nb4j4"), SubResource("Resource_ol2yb"), SubResource("Resource_h25ep"), SubResource("Resource_dh78f")])
+potential_slots = Array[ExtResource("3_nxxjw")]([SubResource("Resource_3jrad"), SubResource("Resource_e1mr1"), SubResource("Resource_ildup"), SubResource("Resource_fhb31"), SubResource("Resource_2cu0c"), SubResource("Resource_c1b8b"), SubResource("Resource_atcha"), SubResource("Resource_1ipjs"), SubResource("Resource_vqwww"), SubResource("Resource_7pmke"), SubResource("Resource_qr8nu"), SubResource("Resource_rqkl3"), SubResource("Resource_ktgl8"), SubResource("Resource_3md2n"), SubResource("Resource_2hm72"), SubResource("Resource_fxmgv"), SubResource("Resource_xtniw"), SubResource("Resource_pxco1"), SubResource("Resource_s0qxi"), SubResource("Resource_ftq36"), SubResource("Resource_f140h"), SubResource("Resource_pm71s"), SubResource("Resource_ce5ce"), SubResource("Resource_m3og3"), SubResource("Resource_nb4j4"), SubResource("Resource_ol2yb"), SubResource("Resource_h25ep"), SubResource("Resource_dh78f"), SubResource("Resource_p17s1")])
 title = "Chest"
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
@@ -214,7 +228,7 @@ size = Vector3(1, 0.5, 0.75)
 
 [node name="chest" unique_id=322397117 groups=["persist"] instance=ExtResource("1_lewkn")]
 script = ExtResource("2_aceba")
-inventory = SubResource("Resource_p17s1")
+inventory = SubResource("Resource_8mq0c")
 
 [node name="Cube" parent="." index="0" unique_id=724951894]
 transform = Transform3D(0.5, 0, 0, 0, 0.25, 0, 0, 0, 0.375, 0, 0.25, 0)

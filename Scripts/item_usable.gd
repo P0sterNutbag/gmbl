@@ -8,12 +8,16 @@ class_name ItemUsable
 @export var custom_path: String
 @export var is_health_item: bool
 @export var usable_in_menu: bool = true
+@export var usable_in_fps: bool = true
 var target_node: Node
 
 
 func on_pressed():
 	super.on_pressed()
 	if usable_in_menu:
+		if Globals.get_tree().current_scene != Globals.overworld and !usable_in_fps:
+			Globals.survival_ui.create_notification("Only usable in overworld")
+			return
 		use(target_node)
 
 

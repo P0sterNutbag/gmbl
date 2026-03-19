@@ -37,5 +37,8 @@ func set_index_by_value(value) -> void:
 
 
 func get_random_option():
-	var option = options[randi_range(0, options.size() - 1)]
+	index = randi() % options.size()
+	var option = options[index]
+	var option_text = options[index].string
+	option_label.text = option_text
 	return option.value

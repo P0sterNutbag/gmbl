@@ -6,7 +6,6 @@ enum modes {use, loot}
 @export var show_size: bool = true
 @export var show_price: bool
 @export var show_money: bool = true
-@export var show_space: bool = true
 @export var can_drop_items: bool
 @export var opposing_ui: Control
 var faction_discount := 0.2
@@ -54,7 +53,7 @@ const text_style = preload("res://Art/Themes/text_small.tres")
 func _ready() -> void:
 	is_ready = true
 	money_label.visible = show_money
-	size_label.visible = show_space
+	size_label.visible = show_size
 
 
 func _process(_delta: float) -> void:
@@ -205,10 +204,7 @@ func sort_by_category() -> void:
 		sorted_children.append_array(filtered_children)
 	for child in item_container.get_children():
 		item_container.move_child.call_deferred(child, sorted_children.find(child))
-		#child.focus_neighbor_top = NodePath("")
-		#child.focus_neighbor_bottom = NodePath("")
 	item_container.set_menu_item_focus()
-
 
 
 func item_is_in_category(item: Item) -> bool:

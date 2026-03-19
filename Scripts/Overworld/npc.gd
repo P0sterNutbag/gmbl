@@ -85,12 +85,15 @@ func _process(_delta: float) -> void:
 			if target == Globals.player:
 				if (UiController.is_canvas_layer_open(Globals.ui) or !chase_player):
 					detection.targets.erase(target)
-					state = states.walk
+					return_to_path()
+					return
 			elif !target or target.state == target.states.dead:
 				detection.targets.erase(target)
-				state = states.walk
+				return_to_path()
+				return
 			if global_position.distance_to(target.global_position) > detection.detection_range:
-				state = states.walk
+				return_to_path()
+				return
 			# chase after target
 			if detection.can_see_target(target):
 				navigation_agent.set_target_position(target.global_position)
@@ -130,7 +133,7 @@ func follow_path(spd: float = walk_speed):
 		return
 	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
 	var path_velocity = global_position.direction_to(next_path_position) * spd
-	velocity = Vector3(path_velocity.x, velocity.y, path_velocity.z)
+	velocity = Vector3(path_velocity.x, path_velocity.y, path_velocity.z)
 	look_at_position(next_path_position)
 
 

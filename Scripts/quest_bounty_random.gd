@@ -9,24 +9,16 @@ class_name QuestBountyRandom
 	"Dino",
 	"Ernest",
 	"Frag",
-	"Gimp",
-	"Hemlock",
 	"Iggy",
 	"Jax",
-	"Kritter",
-	"Larry",
-	"Max",
-	"Nasty",
 	"Oscar",
 	"Percy",
 	"Quin",
 	"Rusty",
 	"Sully",
 	"Tony",
-	"Vice",
 	"Warren",
 	"Xander",
-	"Zylan",
 ]
 @export var rewards: Array[Item] = [
 	ItemMoney.new()
@@ -38,9 +30,11 @@ class_name QuestBountyRandom
 func generate_quest() -> Quest:
 	var quest = QuestBounty.new()
 	quest.type = type
-	quest.title = "Kill " + titles[randi_range(0, titles.size()-1)]
 	var locations = Globals.get_tree().get_nodes_in_group("location").filter(func(i): return target_factions.has(i.location_data.faction))
-	quest.location = locations[randi_range(0, locations.size()-1)].title
+	var location = locations[randi_range(0, locations.size()-1)]
+	quest.location = location.title
+	var faction_name: String = FactionManager.faction_data[location.location_data.faction].name
+	quest.title = "Kill " + faction_name.rstrip("s") #titles[randi_range(0, titles.size()-1)]
 	quest.description = "Location: " + quest.location + ""
 	quest.reward = ItemSlot.new()
 	quest.reward.item = ItemMoney.new()#rewards[randi_range(0, rewards.size()-1)]

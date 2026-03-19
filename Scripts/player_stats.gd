@@ -189,8 +189,8 @@ func go_to_sleep(time_to_skip: float = 1.5):
 
 
 func save_game() -> void:
+	await get_tree().create_timer(0.1).timeout
 	SaveController.save_data_to_file()
-	Globals.survival_ui.create_notification("Game saved")
 
 
 func kill_all_npcs() -> void:

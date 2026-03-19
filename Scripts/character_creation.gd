@@ -3,6 +3,7 @@ extends Node
 var mouse_velocity: Vector2
 const starting_gear = preload("uid://dpjy0ettwaiyp")
 @onready var cosmetics: PanelContainer = %Cosmetics
+@onready var skills: PanelContainer = %Skills
 @onready var starting_inventory: InventoryUI = %Inventory
 @onready var player_inventory: InventoryUI = %Inventory2
 @onready var node_3d: Node3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
@@ -22,6 +23,7 @@ const starting_gear = preload("uid://dpjy0ettwaiyp")
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	PlayerStats.reset_stats()
+	skills.setup()
 	# get starting gear
 	var saved_gear
 	if ResourceLoader.exists("user://starting_gear.res"):

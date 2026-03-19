@@ -10,8 +10,6 @@ var camera_max_zoom: float = 20.0
 var camera_min_zoom: float = 2.0
 var camera_target_zoom: float = 10.0
 var camera_zoom_incrament: float = 1
-var run_animation := "Run"
-var idle_animation := "Idle"
 var model_rotation: float:
 	set(value):
 		if model:
@@ -22,6 +20,8 @@ var model_rotation: float:
 		else:
 			return 0.0
 var can_enter_location: bool = true
+var run_animation := "Run"
+var idle_animation := "Idle"
 var state_functions: Dictionary
 var exit_functions: Dictionary
 var enter_functions: Dictionary

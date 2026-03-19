@@ -1,6 +1,11 @@
 extends Weapon
 
-@export var damage: float = 1.5
+@export var damage: float = 1.0:
+	get():
+		if uses_input:
+			return damage + PlayerStats.skills.strength * 0.2 
+		else:
+			return damage
 @onready var hitbox: Area3D = $MeshInstance3D/Hitbox
 var can_damage: bool
 

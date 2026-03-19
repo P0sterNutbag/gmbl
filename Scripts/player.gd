@@ -154,7 +154,7 @@ func _ready() -> void:
 	var arm = gun_anchor.get_child(0).get_node("ArmLAnchor/armL/Cube_001")
 	var material = arm.mesh.surface_get_material(0)
 	var style = PLAYER_STYLE
-	if "player_style" in PlayerStats:
+	if PlayerStats.player_style:
 		style = PlayerStats.player_style
 	material.set("shader_parameter/color", style.skin_colors[0])
 	# signals

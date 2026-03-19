@@ -53,8 +53,8 @@
 [ext_resource type="Resource" uid="uid://de20gnenmrrxa" path="res://Resources/Items/Guns/shotgun.tres" id="51_i627v"]
 [ext_resource type="Resource" uid="uid://byelqsyqj7y7y" path="res://Resources/Items/Utility/binoculars.tres" id="51_rkewd"]
 [ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="51_v8snn"]
-[ext_resource type="Texture2D" uid="uid://b4d58y5scbpqf" path="res://Art/Textures/npc shirt blue.png" id="52_1qd3k"]
 [ext_resource type="Resource" uid="uid://05plefgfm4x0" path="res://Resources/Items/Utility/backpack.tres" id="52_g1wl1"]
+[ext_resource type="Resource" uid="uid://b531tc4pwfwel" path="res://Resources/Items/Consumable/crackers.tres" id="52_ksfoy"]
 [ext_resource type="Resource" uid="uid://cf41qwurikia4" path="res://Resources/Items/Consumable/tourniquet.tres" id="52_n62ny"]
 [ext_resource type="Resource" uid="uid://bhs8tbv5iox6e" path="res://Resources/Items/Guns/sniper_rifle.tres" id="52_opo3i"]
 [ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="53_ccrpr"]
@@ -79,6 +79,7 @@
 [ext_resource type="Resource" uid="uid://6c7s1e0y4ekq" path="res://Resources/Items/Junk/cigarettes.tres" id="64_2gpn5"]
 [ext_resource type="Resource" uid="uid://dgo34up8hytn6" path="res://Resources/Items/Ammo/smg_ammo.tres" id="64_v8snn"]
 [ext_resource type="Resource" uid="uid://du57k1x7scpfk" path="res://Resources/Items/Junk/metal_scraps.tres" id="65_8vmc3"]
+[ext_resource type="Resource" uid="uid://c0k65it1qtgn7" path="res://Resources/Items/Utility/journal.tres" id="66_5yx2b"]
 [ext_resource type="Resource" uid="uid://cw12h3yyn5tgy" path="res://Resources/Items/Junk/playing cards.tres" id="66_c2v6x"]
 [ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="67_bqxwu"]
 [ext_resource type="Script" uid="uid://bicpdyf13vj1j" path="res://Scripts/quest_fetch_random.gd" id="69_2gpn5"]
@@ -90,7 +91,6 @@
 [ext_resource type="PackedScene" uid="uid://csjsfdmnghtqx" path="res://Scenes/Overworld/Locations/scrapyard.tscn" id="80_nggm6"]
 [ext_resource type="Texture2D" uid="uid://br2vhvcrcq8re" path="res://Art/Textures/player face4.png" id="83_ksfoy"]
 [ext_resource type="Texture2D" uid="uid://dl34xibpmsig8" path="res://Art/Textures/npc shirt white sleeve.png" id="84_6l6oi"]
-[ext_resource type="Texture2D" uid="uid://c7ele6asl40c4" path="res://Art/Textures/npc shirt bluesleeve.png" id="85_ptrkr"]
 [ext_resource type="PackedScene" uid="uid://lchk3aqiapch" path="res://Scenes/Levels/desert1.tscn" id="87_ku0d1"]
 [ext_resource type="PackedScene" uid="uid://dgowbmqkc0fer" path="res://Scenes/Levels/desert2.tscn" id="88_jby7l"]
 [ext_resource type="PackedScene" uid="uid://dxj8rbiqwok26" path="res://Scenes/Levels/desert3.tscn" id="89_t56bl"]
@@ -99,6 +99,7 @@
 [ext_resource type="PackedScene" uid="uid://c2ch548rglx0" path="res://Scenes/Levels/desert4.tscn" id="90_me12r"]
 [ext_resource type="PackedScene" uid="uid://ckk7ngs5hgesp" path="res://Scenes/Levels/desert5.tscn" id="91_bqxwu"]
 [ext_resource type="PackedScene" uid="uid://bhnlai8o6lxh0" path="res://Scenes/Levels/desert6.tscn" id="92_cvr5w"]
+[ext_resource type="Texture2D" uid="uid://bxwwj6o80psth" path="res://Art/Textures/npc shirt green.png" id="93_4o6vd"]
 [ext_resource type="PackedScene" uid="uid://camjoalnob06k" path="res://Scenes/Overworld/Locations/home.tscn" id="97_bqxwu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jdigv"]
@@ -272,7 +273,28 @@ metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 [sub_resource type="Resource" id="Resource_pay3g"]
 script = ExtResource("42_g1wl1")
 object_to_spawn = ExtResource("41_8vmc3")
+spawn_chance = 2.0
 max_amount = 3
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_rpeqt"]
+script = ExtResource("42_g1wl1")
+object_to_spawn = ExtResource("52_ksfoy")
+spawn_chance = 3.0
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_xe0o3"]
+script = ExtResource("42_g1wl1")
+object_to_spawn = ExtResource("45_nmfa1")
+spawn_chance = 3.0
+max_amount = 3
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_lnhnr"]
+script = ExtResource("42_g1wl1")
+object_to_spawn = ExtResource("46_lf2le")
+spawn_chance = 2.0
+max_amount = 2
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_8jwt6"]
@@ -321,22 +343,10 @@ object_to_spawn = ExtResource("52_n62ny")
 spawn_chance = 0.5
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_lnhnr"]
-script = ExtResource("42_g1wl1")
-object_to_spawn = ExtResource("46_lf2le")
-spawn_chance = 0.75
-max_amount = 2
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_xe0o3"]
-script = ExtResource("42_g1wl1")
-object_to_spawn = ExtResource("45_nmfa1")
-max_amount = 3
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
 [sub_resource type="Resource" id="Resource_bn22a"]
 script = ExtResource("42_g1wl1")
 object_to_spawn = ExtResource("51_rkewd")
+spawn_chance = 0.5
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_ckll4"]
@@ -356,13 +366,20 @@ script = ExtResource("42_g1wl1")
 object_to_spawn = ExtResource("54_tqcp0")
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
+[sub_resource type="Resource" id="Resource_p2c7a"]
+script = ExtResource("42_g1wl1")
+object_to_spawn = ExtResource("66_5yx2b")
+spawn_chance = 0.75
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
 [sub_resource type="Resource" id="Resource_7qwb0"]
 resource_local_to_scene = true
 script = ExtResource("54_xkckx")
 min_amount = 5
 max_amount = 10
-potential_slots = Array[ExtResource("42_g1wl1")]([SubResource("Resource_pay3g"), SubResource("Resource_8jwt6"), SubResource("Resource_tfd8k"), SubResource("Resource_g8jxq"), SubResource("Resource_yld1c"), SubResource("Resource_jy2tk"), SubResource("Resource_dhf1b"), SubResource("Resource_4ptoc"), SubResource("Resource_vqra6"), SubResource("Resource_lnhnr"), SubResource("Resource_xe0o3"), SubResource("Resource_bn22a"), SubResource("Resource_ckll4"), SubResource("Resource_ho87a"), SubResource("Resource_emdrq")])
+potential_slots = Array[ExtResource("42_g1wl1")]([SubResource("Resource_pay3g"), SubResource("Resource_rpeqt"), SubResource("Resource_xe0o3"), SubResource("Resource_lnhnr"), SubResource("Resource_8jwt6"), SubResource("Resource_tfd8k"), SubResource("Resource_g8jxq"), SubResource("Resource_yld1c"), SubResource("Resource_jy2tk"), SubResource("Resource_dhf1b"), SubResource("Resource_4ptoc"), SubResource("Resource_vqra6"), SubResource("Resource_bn22a"), SubResource("Resource_ckll4"), SubResource("Resource_ho87a"), SubResource("Resource_emdrq"), SubResource("Resource_p2c7a")])
 repeat_entries = false
+space = 50
 money = 1000
 title = "General Store"
 metadata/_custom_type_script = "uid://b34kwea65we13"
@@ -422,7 +439,7 @@ skin_colors = Array[Color]([Color(0.37254903, 0.2, 0.0627451, 1)])
 hair_colors = Array[Color]([Color(0.8, 0.6745098, 0.25490198, 1)])
 hair_styles = Array[Texture]([ExtResource("61_4o6vd")])
 faces = Array[Texture]([ExtResource("60_cvr5w")])
-shirts = Array[Texture]([ExtResource("52_1qd3k")])
+shirts = Array[Texture]([ExtResource("40_jvu1d")])
 pants_colors = Array[Color]([Color(0.48, 0.21888001, 0.15359999, 1)])
 shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1)])
 metadata/_custom_type_script = "uid://b80ipr8q70gqm"
@@ -502,6 +519,7 @@ potential_slots = Array[ExtResource("42_g1wl1")]([SubResource("Resource_jdigv"),
 repeat_entries = false
 min_condition = 100.0
 max_condition = 50.0
+space = 50
 money = 1000
 title = "Gunsmith"
 metadata/_custom_type_script = "uid://b34kwea65we13"
@@ -612,7 +630,7 @@ skin_colors = Array[Color]([Color(0.9372549, 0.7607843, 0.6039216, 1)])
 hair_colors = Array[Color]([Color(0.2901961, 0.09803922, 0, 1)])
 hair_styles = Array[Texture]([ExtResource("76_cvr5w")])
 faces = Array[Texture]([ExtResource("75_bqxwu")])
-shirts = Array[Texture]([ExtResource("52_1qd3k")])
+shirts = Array[Texture]([ExtResource("84_6l6oi")])
 pants_colors = Array[Color]([Color(0.14509805, 0.21568628, 0.4117647, 1)])
 shoe_colors = Array[Color]([Color(0.16862746, 0.08627451, 0, 1)])
 metadata/_custom_type_script = "uid://b80ipr8q70gqm"
@@ -739,7 +757,7 @@ skin_colors = Array[Color]([Color(0.8117647, 0.5882353, 0.3764706, 1)])
 hair_colors = Array[Color]([Color(0, 0, 0, 1)])
 hair_styles = Array[Texture]([ExtResource("76_cvr5w")])
 faces = Array[Texture]([ExtResource("83_ksfoy")])
-shirts = Array[Texture]([ExtResource("52_1qd3k"), ExtResource("40_jvu1d"), ExtResource("84_6l6oi"), ExtResource("85_ptrkr")])
+shirts = Array[Texture]([ExtResource("93_4o6vd")])
 pants_colors = Array[Color]([Color(0.48, 0.21888001, 0.15359999, 1), Color(0.44313726, 0.47058824, 0.54901963, 1), Color(0.14509805, 0.21568628, 0.4117647, 1), Color(0.7882353, 0.6901961, 0.53333336, 1), Color(0.11372549, 0.105882354, 0.12156863, 1)])
 shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1), Color(0.16862746, 0.08627451, 0, 1), Color(0.23921569, 0.23921569, 0.23921569, 1)])
 metadata/_custom_type_script = "uid://b80ipr8q70gqm"
@@ -769,18 +787,44 @@ metadata/_custom_type_script = "uid://3e36ru1e7k78"
 [sub_resource type="Resource" id="Resource_5dqkm"]
 script = ExtResource("42_g1wl1")
 object_to_spawn = ExtResource("49_nggm6")
+spawn_chance = 0.5
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_0avbt"]
+script = ExtResource("42_g1wl1")
+object_to_spawn = ExtResource("67_bqxwu")
+spawn_chance = 0.2
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_quwpe"]
+script = ExtResource("42_g1wl1")
+object_to_spawn = ExtResource("54_nggm6")
+spawn_chance = 0.2
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_eo6qm"]
+script = ExtResource("42_g1wl1")
+object_to_spawn = ExtResource("55_v8snn")
+spawn_chance = 0.2
+max_amount = 5
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_cc1w5"]
+script = ExtResource("42_g1wl1")
+object_to_spawn = ExtResource("64_v8snn")
 spawn_chance = 0.2
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_3jgu8"]
 resource_local_to_scene = true
 script = ExtResource("54_xkckx")
-min_amount = 3
-max_amount = 5
-potential_slots = Array[ExtResource("42_g1wl1")]([SubResource("Resource_jl4w7"), SubResource("Resource_4i57y"), SubResource("Resource_nu3le"), SubResource("Resource_5dqkm")])
+min_amount = 5
+max_amount = 10
+potential_slots = Array[ExtResource("42_g1wl1")]([SubResource("Resource_jl4w7"), SubResource("Resource_4i57y"), SubResource("Resource_nu3le"), SubResource("Resource_5dqkm"), SubResource("Resource_0avbt"), SubResource("Resource_quwpe"), SubResource("Resource_eo6qm"), SubResource("Resource_cc1w5")])
 repeat_entries = false
 min_condition = 50.0
 max_condition = 100.0
+space = 50
 title = "Scrapyard"
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
@@ -820,11 +864,11 @@ inventory = SubResource("Resource_3jgu8")
 price_modifiers = {
 "Ammo": 0.5,
 "Armor": 0.75,
-"Consumable": 0.5,
-"Gear": 0.5,
-"Guns": 0.5,
+"Consumable": 0.75,
+"Gear": 0.75,
 "Junk": 0.75,
-"Survival": 0.5
+"Survival": 0.5,
+"Weapons": 0.5
 }
 dialogue = SubResource("Resource_pc4vu")
 random_quests = Array[ExtResource("57_rkewd")]([SubResource("Resource_afbx0"), SubResource("Resource_3uqk4")])

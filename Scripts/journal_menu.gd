@@ -43,3 +43,5 @@ func _on_no_pressed() -> void:
 
 func _on_visibility_changed() -> void:
 	confirmation_menu.hide()
+	if visible:
+		open(PlayerStats.quests)

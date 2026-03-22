@@ -52,7 +52,6 @@ func _process(_delta: float) -> void:
 			if UiController.is_canvas_layer_open(Globals.ui):
 				return
 			UiController.open_interface(journal)
-			journal.open(PlayerStats.quests)
 		else:
 			UiController.close_interface(journal)
 	if Input.is_action_just_pressed("ui_cancel"):

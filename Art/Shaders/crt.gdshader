@@ -39,6 +39,10 @@ uniform float roll_line_amount :hint_range(0.0, 1.0) = 0.3;
 uniform float roll_speed :hint_range(-8.0, 8.0) = 1.0;
 uniform float scan_line_strength :hint_range(-12.0, -1.0) = -8.0;
 uniform float pixel_strength :hint_range(-4.0, 0.0) = -2.0;
+uniform int compression_on :hint_range(0, 1, 1);
+uniform float color_depth :hint_range(0.0, 255.0) = 100.0;
+uniform float color_number :hint_range(0.0, 50.0) = 20.0;
+
 
 float random(vec2 uv){
     return fract(cos(uv.x * 83.4827 + uv.y * 92.2842) * 43758.5453123);
@@ -152,6 +156,27 @@ float roll_line(vec2 uv){
 	return roll_line * roll_line_amount;
 }
 
+const mat3 rgb2ycbcr = mat3(
+    vec3(0.299, -0.168736, 0.5),
+    vec3(0.587, -0.331264, -0.418688),
+    vec3(0.114, 0.5, -0.081312)
+);
+const mat3 ycbcr2rgb = mat3(
+    vec3(1.0, 1.0, 1.0),
+    vec3(0.0, -0.344136, 1.772),
+    vec3(1.402, -0.714136, 0.0)
+);
+
+// simulating 8:4:4 compression ratio (16bit)
+vec3 compress_ycbcr_844 (vec3 rgb) {
+	vec3 ycbcr = rgb2ycbcr * rgb;
+	ycbcr.r = floor(ycbcr.r * color_depth + 0.5) / color_depth;
+	ycbcr.gb += 0.5;
+	ycbcr.gb = floor(ycbcr.gb * color_number + 0.5) / color_number;
+	ycbcr.gb -= 0.5;
+	return ycbcr2rgb * ycbcr;
+}
+
 void fragment(){
 	vec2 pix = FRAGCOORD.xy;
 	vec2 pos = warp(SCREEN_UV);
@@ -181,6 +206,10 @@ void fragment(){
 	if(grille_amount > 0.0)clr *= grille(pix);
 	clr *= 1.0 + scan_line_amount * 0.6 + line * 3.0 + grille_amount * 2.0;
 	if(vignette_amount > 0.0)clr *= vignette(pos);
+	
+	if(compression_on > 0){
+		clr = compress_ycbcr_844(clr);
+	}
 	
 	COLOR.rgb = clr;
 	COLOR.a = 1.0;

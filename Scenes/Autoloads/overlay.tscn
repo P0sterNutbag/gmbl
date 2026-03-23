@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://yrogoe1spda5"]
+[gd_scene format=3 uid="uid://yrogoe1spda5"]
 
 [ext_resource type="Script" uid="uid://ctc5ynr5as16v" path="res://Scripts/overlay.gd" id="1_64of3"]
 [ext_resource type="Shader" uid="uid://ctrmuaf68vbgo" path="res://Art/Shaders/lens_distortion.gdshader" id="3_8wgra"]
@@ -21,16 +21,19 @@ shader_parameter/roll_line_amount = 0.0
 shader_parameter/roll_speed = 3.7999999946691787e-07
 shader_parameter/scan_line_strength = -8.0
 shader_parameter/pixel_strength = -2.0
+shader_parameter/compression_on = 1
+shader_parameter/color_depth = 22.000001045
+shader_parameter/color_number = 30.000001425
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ac3tm"]
 shader = ExtResource("3_8wgra")
 shader_parameter/strength = 0.00500000175098999
 
-[node name="Overlay" type="CanvasLayer"]
+[node name="Overlay" type="CanvasLayer" unique_id=1992642108]
 process_mode = 3
 script = ExtResource("1_64of3")
 
-[node name="Mouse" type="TextureRect" parent="."]
+[node name="Mouse" type="TextureRect" parent="." unique_id=1297272277]
 z_index = -5
 offset_left = 7.0
 offset_top = 3.0
@@ -38,7 +41,7 @@ offset_right = 39.0
 offset_bottom = 35.0
 texture = ExtResource("4_ac3tm")
 
-[node name="CRT" type="ColorRect" parent="."]
+[node name="CRT" type="ColorRect" parent="." unique_id=333211842]
 z_index = 10
 material = SubResource("ShaderMaterial_8ypfs")
 anchors_preset = 15
@@ -48,7 +51,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Warp" type="ColorRect" parent="."]
+[node name="Warp" type="ColorRect" parent="." unique_id=192660043]
 visible = false
 material = SubResource("ShaderMaterial_ac3tm")
 anchors_preset = 15

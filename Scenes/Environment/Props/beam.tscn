@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bw6okypyfewrp"]
+
+[ext_resource type="PackedScene" uid="uid://d101nun7oig6i" path="res://Art/Models/detail-beam.glb" id="1_dy5vh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4340h"]
+size = Vector3(0.5, 0.5, 2)
+
+[node name="Beam" type="Node3D" unique_id=1581588939]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1400427206]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=423584433]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("BoxShape3D_4340h")
+
+[node name="detail-beam2" parent="StaticBody3D" unique_id=44666151 instance=ExtResource("1_dy5vh")]

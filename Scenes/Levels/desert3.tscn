@@ -13,6 +13,7 @@
 [sub_resource type="Resource" id="Resource_h2mpg"]
 resource_local_to_scene = true
 script = ExtResource("2_7to0x")
+faction = null
 population = 4
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
@@ -34,6 +35,13 @@ _surfaces = [{
 
 [node name="Encounter" unique_id=699194105 instance=ExtResource("1_3h2tk")]
 location_data = SubResource("Resource_h2mpg")
+
+[node name="Shader" parent="." index="3" unique_id=580484789]
+visible = true
+
+[node name="Terrain" parent="." index="5" unique_id=1995643304]
+shader_params/u_height_max = 5.0
+shader_params/u_blend_width = 0.2
 
 [node name="NavigationRegion3D" parent="." index="6" unique_id=2110071702]
 navigation_mesh = SubResource("NavigationMesh_3h2tk")

@@ -27,7 +27,7 @@
 
 [sub_resource type="Resource" id="Resource_mvu5i"]
 script = ExtResource("2_hyk2w")
-min_population = 0
+faction = null
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_sufl4"]
@@ -115,34 +115,34 @@ script = ExtResource("11_avjiw")
 object_to_spawn = ExtResource("23_wlfjt")
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
+[sub_resource type="Resource" id="Resource_lqheo"]
+resource_local_to_scene = true
+script = ExtResource("24_srwfw")
+min_amount = 1
+max_amount = 3
+potential_slots = Array[ExtResource("11_avjiw")]([SubResource("Resource_3jrad"), SubResource("Resource_e1mr1"), SubResource("Resource_ildup"), SubResource("Resource_fhb31"), SubResource("Resource_2cu0c"), SubResource("Resource_ktgl8"), SubResource("Resource_3md2n"), SubResource("Resource_2hm72"), SubResource("Resource_fxmgv"), SubResource("Resource_s0qxi"), SubResource("Resource_f140h"), SubResource("Resource_ftq36")])
+title = "Enemy"
+metadata/_custom_type_script = "uid://b34kwea65we13"
+
+[sub_resource type="Resource" id="Resource_akmmg"]
+resource_local_to_scene = true
+script = ExtResource("24_srwfw")
+min_amount = 1
+max_amount = 3
+potential_slots = Array[ExtResource("11_avjiw")]([SubResource("Resource_3jrad"), SubResource("Resource_e1mr1"), SubResource("Resource_ildup"), SubResource("Resource_fhb31"), SubResource("Resource_2cu0c"), SubResource("Resource_ktgl8"), SubResource("Resource_3md2n"), SubResource("Resource_2hm72"), SubResource("Resource_fxmgv"), SubResource("Resource_s0qxi"), SubResource("Resource_f140h"), SubResource("Resource_ftq36")])
+title = "Enemy"
+metadata/_custom_type_script = "uid://b34kwea65we13"
+
+[sub_resource type="Resource" id="Resource_avjiw"]
+resource_local_to_scene = true
+script = ExtResource("24_srwfw")
+min_amount = 1
+max_amount = 3
+potential_slots = Array[ExtResource("11_avjiw")]([SubResource("Resource_3jrad"), SubResource("Resource_e1mr1"), SubResource("Resource_ildup"), SubResource("Resource_fhb31"), SubResource("Resource_2cu0c"), SubResource("Resource_ktgl8"), SubResource("Resource_3md2n"), SubResource("Resource_2hm72"), SubResource("Resource_fxmgv"), SubResource("Resource_s0qxi"), SubResource("Resource_f140h"), SubResource("Resource_ftq36")])
+title = "Enemy"
+metadata/_custom_type_script = "uid://b34kwea65we13"
+
 [sub_resource type="Resource" id="Resource_4v231"]
-resource_local_to_scene = true
-script = ExtResource("24_srwfw")
-min_amount = 1
-max_amount = 3
-potential_slots = Array[ExtResource("11_avjiw")]([SubResource("Resource_3jrad"), SubResource("Resource_e1mr1"), SubResource("Resource_ildup"), SubResource("Resource_fhb31"), SubResource("Resource_2cu0c"), SubResource("Resource_ktgl8"), SubResource("Resource_3md2n"), SubResource("Resource_2hm72"), SubResource("Resource_fxmgv"), SubResource("Resource_s0qxi"), SubResource("Resource_f140h"), SubResource("Resource_ftq36")])
-title = "Enemy"
-metadata/_custom_type_script = "uid://b34kwea65we13"
-
-[sub_resource type="Resource" id="Resource_j1jhc"]
-resource_local_to_scene = true
-script = ExtResource("24_srwfw")
-min_amount = 1
-max_amount = 3
-potential_slots = Array[ExtResource("11_avjiw")]([SubResource("Resource_3jrad"), SubResource("Resource_e1mr1"), SubResource("Resource_ildup"), SubResource("Resource_fhb31"), SubResource("Resource_2cu0c"), SubResource("Resource_ktgl8"), SubResource("Resource_3md2n"), SubResource("Resource_2hm72"), SubResource("Resource_fxmgv"), SubResource("Resource_s0qxi"), SubResource("Resource_f140h"), SubResource("Resource_ftq36")])
-title = "Enemy"
-metadata/_custom_type_script = "uid://b34kwea65we13"
-
-[sub_resource type="Resource" id="Resource_kklc1"]
-resource_local_to_scene = true
-script = ExtResource("24_srwfw")
-min_amount = 1
-max_amount = 3
-potential_slots = Array[ExtResource("11_avjiw")]([SubResource("Resource_3jrad"), SubResource("Resource_e1mr1"), SubResource("Resource_ildup"), SubResource("Resource_fhb31"), SubResource("Resource_2cu0c"), SubResource("Resource_ktgl8"), SubResource("Resource_3md2n"), SubResource("Resource_2hm72"), SubResource("Resource_fxmgv"), SubResource("Resource_s0qxi"), SubResource("Resource_f140h"), SubResource("Resource_ftq36")])
-title = "Enemy"
-metadata/_custom_type_script = "uid://b34kwea65we13"
-
-[sub_resource type="Resource" id="Resource_tfomm"]
 resource_local_to_scene = true
 script = ExtResource("24_srwfw")
 min_amount = 1
@@ -179,23 +179,23 @@ shape = SubResource("ConcavePolygonShape3D_xxcax")
 [node name="Enemy" parent="." unique_id=1717248692 instance=ExtResource("9_lqheo")]
 transform = Transform3D(-0.15815806, 0, 0.9874138, 0, 1, 0, -0.9874138, 0, -0.15815806, 60.29496, 0.6331854, 41.84827)
 wall_min_slide_angle = 3.1415927
-inventory = SubResource("Resource_4v231")
+inventory = SubResource("Resource_lqheo")
 faction = 1
 
 [node name="Enemy2" parent="." unique_id=981408261 instance=ExtResource("9_lqheo")]
 transform = Transform3D(-0.15815806, 0, 0.9874138, 0, 1, 0, -0.9874138, 0, -0.15815806, 61.29739, 0.6331854, 44.079823)
 wall_min_slide_angle = 3.1415927
-inventory = SubResource("Resource_j1jhc")
+inventory = SubResource("Resource_akmmg")
 faction = 1
 
 [node name="Enemy4" parent="." unique_id=1962049348 instance=ExtResource("9_lqheo")]
 transform = Transform3D(0.4999849, 0, -0.86603415, 0, 1, 0, 0.86603415, 0, 0.4999849, 45.90235, 0.93068695, 42.80537)
-inventory = SubResource("Resource_kklc1")
+inventory = SubResource("Resource_avjiw")
 faction = 2
 
 [node name="Enemy5" parent="." unique_id=801318720 instance=ExtResource("9_lqheo")]
 transform = Transform3D(0.4999849, 0, -0.86603415, 0, 1, 0, 0.86603415, 0, 0.4999849, 43.371468, 0.93068695, 45.39471)
-inventory = SubResource("Resource_tfomm")
+inventory = SubResource("Resource_4v231")
 faction = 2
 
 [node name="NoiseController" parent="." unique_id=565897913 instance=ExtResource("26_4v231")]

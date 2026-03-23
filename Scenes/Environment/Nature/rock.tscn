@@ -1,21 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://brrtfg5jynxnd"]
+[gd_scene format=3 uid="uid://brrtfg5jynxnd"]
 
 [ext_resource type="PackedScene" uid="uid://ccasv3bhe2jhu" path="res://Art/Models/rock.glb" id="1_nv507"]
-[ext_resource type="Material" uid="uid://chpvjvrcm0t8k" path="res://Art/Materials/rock_brown.tres" id="2_3ig21"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_arvsk"]
 points = PackedVector3Array(-0.894425, -0.44739, -0.000166476, -0.27645, -0.44739, -0.85064, -7.9751e-05, -1, -0.000166476, -0.27645, -0.44739, 0.850474, -0.251022, 0.691694, 0.275109, -0.724149, 0.41486, -0.308748, 0.723463, -0.44739, -0.525738, -0.13353, 0.557087, -0.783528, 0.351871, -0.130131, 0.603342, 0.897071, 0.181414, 0.0714418, 0.496896, 0.486609, 0.750555, 0.129513, 1.16219, -0.18868)
 
-[node name="Rock" type="Node3D"]
+[node name="Rock" type="Node3D" unique_id=1729590188]
 
-[node name="rock" parent="." instance=ExtResource("1_nv507")]
+[node name="rock" parent="." unique_id=280562463 instance=ExtResource("1_nv507")]
 
-[node name="Icosphere" parent="rock" index="0"]
-surface_material_override/0 = ExtResource("2_3ig21")
+[node name="StaticBody3D2" type="StaticBody3D" parent="rock/Icosphere" parent_id_path=PackedInt32Array(280562463, 488907136) index="0" unique_id=332501000]
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="rock/Icosphere" index="0"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="rock/Icosphere/StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="rock/Icosphere/StaticBody3D2" unique_id=1782633603]
 shape = SubResource("ConvexPolygonShape3D_arvsk")
 
 [editable path="rock"]

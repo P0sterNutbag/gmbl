@@ -28,6 +28,7 @@
 [sub_resource type="Resource" id="Resource_vpadt"]
 resource_local_to_scene = true
 script = ExtResource("2_ytiro")
+faction = null
 loot_spawn_chance = 0.25
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
@@ -54,8 +55,14 @@ location_data = SubResource("Resource_vpadt")
 [node name="DirectionalLight3D" parent="WorldEnvironment" parent_id_path=PackedInt32Array(836606963) index="0" unique_id=2040729916]
 transform = Transform3D(1, 0, 0, 0, -0.53365904, 0.84569997, 0, -0.84569997, -0.53365904, 0, 0, 128)
 
+[node name="Shader" parent="." index="3" unique_id=580484789]
+visible = true
+
 [node name="Terrain" parent="." index="5" unique_id=1995643304]
 _terrain_data = ExtResource("2_kabbc")
+shader_params/u_height_min = null
+shader_params/u_height_max = 6.0
+shader_params/u_blend_width = 0.2
 
 [node name="HTerrainDetailLayer" type="Node3D" parent="Terrain" index="0" unique_id=1838049770]
 script = ExtResource("3_fui2k")
@@ -121,7 +128,7 @@ transform = Transform3D(-0.33675927, 0, 0.9415908, 0, 1, 0, -0.9415908, 0, -0.33
 transform = Transform3D(-0.3508347, 0, -0.9364374, 0, 1, 0, 0.9364374, 0, -0.3508347, 10, 0, 0)
 
 [node name="Node3D" parent="NavigationRegion3D/ShippingContainer" index="4" unique_id=264868068]
-transform = Transform3D(-0.015889317, 0.011784416, 0.9998044, 0.01100576, 0.9998721, -0.011610307, -0.9998132, 0.010819126, -0.01601702, 0, 0, 0)
+transform = Transform3D(-0.015889376, 0.011784416, 0.99980426, 0.011005761, 0.9998721, -0.011610305, -0.99981326, 0.010819126, -0.01601705, 0, 0, 0)
 
 [node name="ShippingContainer2" parent="NavigationRegion3D" index="11" unique_id=931276459 instance=ExtResource("22_df0gs")]
 transform = Transform3D(0.511623, 0, -0.85921, 0, 1, 0, 0.85921, 0, 0.511623, 117.400826, 4.377445, 152.19453)
@@ -170,7 +177,7 @@ transform = Transform3D(-0.06476405, -0.030985402, 0.9974195, 0.020598218, 0.999
 transform = Transform3D(0.5281297, -0.03219483, -0.8485532, 1.5819445e-05, 0.9992814, -0.037903737, 0.8491637, 0.020004667, 0.52775073, -3.8860016, -0.14951277, 0.8919983)
 
 [node name="RigidBody3D" parent="NavigationRegion3D/Trash" index="8" unique_id=539859645]
-transform = Transform3D(-0.82904816, -0.031559657, -0.55828583, -0.040441945, 0.99917555, 0.0035728822, 0.55771273, 0.02554026, -0.82964104, 0.16395569, 0.049118042, -1.938797)
+transform = Transform3D(-0.82904816, -0.031559657, -0.55828583, -0.040441945, 0.99917555, 0.0035728833, 0.55771273, 0.02554026, -0.82964104, 0.16395569, 0.049118042, -1.938797)
 
 [node name="RigidBody3D2" parent="NavigationRegion3D/Trash" index="9" unique_id=434694742]
 transform = Transform3D(0.96128666, -0.033259515, -0.27353585, 0.025325961, 0.99915135, -0.03248488, 0.27438414, 0.024299724, 0.9613131, -1.5507202, -0.017347336, -1.8583984)
@@ -208,10 +215,10 @@ transform = Transform3D(-0.69816613, 0.073620066, -0.7121406, 0.07409054, 0.9967
 transform = Transform3D(-0.931217, 0.055724524, -0.36018002, 0.061990228, 0.9980596, -0.00585808, 0.35915467, -0.027782785, -0.9328645, 1.7905884, -0.2084589, -2.6799164)
 
 [node name="RigidBody3D5" parent="NavigationRegion3D/DrumBarrels" index="7" unique_id=1584132960]
-transform = Transform3D(0.7006863, 0.05961436, -0.71097463, -0.02055899, 0.9977764, 0.06340086, 0.71317333, -0.029807186, 0.7003538, 0.69192505, -0.14813375, -2.5818825)
+transform = Transform3D(0.7006867, 0.059614364, -0.7109742, -0.02055903, 0.9977764, 0.06340084, 0.7131729, -0.029807184, 0.7003542, 0.69192505, -0.14813375, -2.5818825)
 
 [node name="RigidBody3D6" parent="NavigationRegion3D/DrumBarrels" index="8" unique_id=1540877575]
-transform = Transform3D(0.2542868, 0.06431706, -0.96498793, 0.005460148, 0.9976749, 0.06793449, 0.96711344, -0.022543821, 0.2533444, 1.3960724, -0.09172201, -1.235527)
+transform = Transform3D(0.2542869, 0.06431706, -0.96498793, 0.0054601426, 0.9976749, 0.06793449, 0.96711344, -0.022543821, 0.25334445, 1.3960724, -0.09172201, -1.235527)
 
 [node name="RigidBody3D7" parent="NavigationRegion3D/DrumBarrels" index="9" unique_id=472507377]
 transform = Transform3D(0.42364195, 0.08162784, 0.9021444, -0.061216563, 0.9962346, -0.06139435, -0.9037588, -0.029216956, 0.42704374, -4.659546, 0.5037093, 4.3487167)
@@ -248,7 +255,7 @@ transform = Transform3D(0.1312757, 0, -0.9913459, 0, 1, 0, 0.9913459, 0, 0.13127
 transform = Transform3D(0.8022479, 0, 0.59699106, 0, 1, 0, -0.59699106, 0, 0.8022479, 1.645813, -0.062791824, 0.8349762)
 
 [node name="Tire" parent="NavigationRegion3D/TireStacks" index="7" unique_id=1962248460]
-transform = Transform3D(0.9295062, 0.032129917, 0.36740437, -0.025939943, 0.99942636, -0.021774776, -0.36789325, 0.010709339, 0.92980635, 4.5533752, -0.027689934, -3.6593933)
+transform = Transform3D(0.92950624, 0.032129917, 0.36740422, -0.025939947, 0.99942636, -0.021774773, -0.36789307, 0.010709339, 0.9298065, 4.5533752, -0.027689934, -3.6593933)
 
 [node name="Tire2" parent="NavigationRegion3D/TireStacks" index="8" unique_id=1102463334]
 transform = Transform3D(0.74227107, 0.03131654, 0.6693676, -0.016625581, 0.9994605, -0.028323688, -0.6698935, 0.009895229, 0.7423913, 4.5693665, -0.027689934, -4.4878845)
@@ -257,13 +264,13 @@ transform = Transform3D(0.74227107, 0.03131654, 0.6693676, -0.016625581, 0.99946
 transform = Transform3D(0.8575027, -0.018641986, -0.51414174, -0.01792366, 0.99765426, -0.06606708, 0.5141673, 0.065868, 0.85515696, -3.0496864, -0.3054371, 4.821472)
 
 [node name="Tire4" parent="NavigationRegion3D/TireStacks" index="10" unique_id=1343922967]
-transform = Transform3D(-0.14728601, -0.03138978, -0.9885957, -0.06978045, 0.99733555, -0.02127104, 0.9866294, 0.06585171, -0.14908397, -4.9449043, -0.29221535, 4.0201263)
+transform = Transform3D(-0.14728603, -0.03138978, -0.9885957, -0.06978044, 0.99733555, -0.02127104, 0.98662937, 0.06585171, -0.14908399, -4.9449043, -0.29221535, 4.0201263)
 
 [node name="Tire5" parent="NavigationRegion3D/TireStacks" index="11" unique_id=1768295750]
-transform = Transform3D(-0.84100467, 0.011675451, 0.54090196, 0.042960443, 0.9980514, 0.04525262, -0.53931963, 0.061295047, -0.8398675, 2.252861, -0.38426495, 7.362915)
+transform = Transform3D(-0.84100467, 0.011675451, 0.54090196, 0.042960443, 0.9980514, 0.045252617, -0.53931963, 0.061295047, -0.8398675, 2.252861, -0.38426495, 7.362915)
 
 [node name="Tire6" parent="NavigationRegion3D/TireStacks" index="12" unique_id=1412977310]
-transform = Transform3D(-0.9308303, 0.000862502, -0.36545074, -0.004640716, 0.9998887, 0.014180091, 0.3654223, 0.014895212, -0.93072265, -3.192543, 0.11862135, -3.9657135)
+transform = Transform3D(-0.93083036, 0.00086250243, -0.36545056, -0.0046407133, 0.9998887, 0.014180092, 0.36542213, 0.014895212, -0.9307227, -3.192543, 0.11862135, -3.9657135)
 
 [node name="WoodenCrates" parent="NavigationRegion3D" index="15" unique_id=1894032959 node_paths=PackedStringArray("terrain") instance=ExtResource("21_6f6bu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.28477, 5.167331, 177.80186)
@@ -286,7 +293,7 @@ transform = Transform3D(-0.32308462, 0, -0.94637007, 0, 1, 0, 0.94637007, 0, -0.
 transform = Transform3D(0.72054726, 0, -0.69340587, 0, 1, 0, 0.69340587, 0, 0.72054726, 10, 0, 0)
 
 [node name="Node3D" parent="NavigationRegion3D/ShippingContainer3" index="4" unique_id=264868068]
-transform = Transform3D(0.38653615, 0.017099913, -0.92211586, -0.058174714, 0.99828917, -0.005873425, 0.92043775, 0.05591412, 0.38686964, 0, 0, 0)
+transform = Transform3D(0.38653615, 0.017099913, -0.92211586, -0.058174714, 0.99828917, -0.005873422, 0.92043775, 0.05591412, 0.38686964, 0, 0, 0)
 
 [node name="WoodenCrates2" parent="NavigationRegion3D" index="17" unique_id=278271993 node_paths=PackedStringArray("terrain") instance=ExtResource("21_6f6bu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 127.59343, 5.4087276, 121.363495)
@@ -308,7 +315,7 @@ transform = Transform3D(0.7348983, 0, -0.6781773, 0, 1, 0, 0.6781773, 0, 0.73489
 transform = Transform3D(-0.79137087, -0.09582719, -0.60377926, -0.091397576, 0.9950839, -0.038137645, 0.60446566, 0.025002938, -0.7962387, -0.7415848, -0.11927557, 1.1982651)
 
 [node name="CrateTall" parent="NavigationRegion3D/WoodenCrates2" index="5" unique_id=583299508]
-transform = Transform3D(-0.9336898, -0.095054425, -0.34523633, -0.09670297, 0.995235, -0.012486846, 0.34477818, 0.021726536, -0.9384328, -2.8899994, -0.28920794, 0.48799896)
+transform = Transform3D(-0.93368965, -0.095054425, -0.3452365, -0.096702956, 0.995235, -0.012486866, 0.3447784, 0.021726534, -0.9384327, -2.8899994, -0.28920794, 0.48799896)
 
 [node name="Crate2" parent="NavigationRegion3D/WoodenCrates2" index="6" unique_id=1665076031]
 transform = Transform3D(0.9950699, -0.09812687, 0.01438818, 0.09812728, 0.99517363, 0.0006792166, -0.014385387, 0.00073600496, 0.9998963, 0.051101685, 0.03576517, -3.3720245)

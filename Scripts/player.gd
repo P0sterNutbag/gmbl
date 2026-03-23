@@ -711,7 +711,6 @@ func change_gun(new_gun: EquipmentGun) -> void:
 				gun.gun_stats = PlayerStats.gun.gun_stats
 			gun.rotation = Vector3.ZERO
 			gun.visible = true
-	Globals.ui.set_gun_name(PlayerStats.gun.title)
 	if Input.is_action_pressed("aim") and gun is Gun:
 		await change_gun_state(gun_states.ads)
 	else:

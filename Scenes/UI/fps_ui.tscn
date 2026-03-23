@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cl7b5tsk5cpy3" path="res://Scripts/fps_ui.gd" id="1_27ipd"]
 [ext_resource type="Texture2D" uid="uid://b7o6p645d7r1q" path="res://Art/Textures/scope.png" id="2_ed1w8"]
 [ext_resource type="Theme" uid="uid://lg0ktyb6xeoh" path="res://Art/Themes/hp_bar.tres" id="3_8ucm7"]
-[ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="5_8v68b"]
 [ext_resource type="Texture2D" uid="uid://r08gms0nyjju" path="res://Art/Textures/hp icon.png" id="5_e0hn7"]
 [ext_resource type="Texture2D" uid="uid://bcuhfb0bfkqh0" path="res://Art/Textures/hunger icon.png" id="5_ettqu"]
 [ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="6_8v68b"]
@@ -399,48 +398,21 @@ script = ExtResource("6_a1pox")
 stat_name = "soberness"
 show_treshold = 1.0
 
-[node name="BottomRight" type="Control" parent="." unique_id=574358321]
-modulate = Color(1, 1, 0, 1)
+[node name="AmmoCount" type="Control" parent="." unique_id=1549461220]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = -32.0
+offset_bottom = -32.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="ColorRect2" type="ColorRect" parent="BottomRight" unique_id=790087429]
-visible = false
-layout_mode = 0
-offset_left = -21.0
-offset_top = -38.5
-offset_right = 104.068726
-offset_bottom = -22.5
-rotation = 0.0471239
-scale = Vector2(-0.810944, 1)
-color = Color(0, 0, 0, 1)
-
-[node name="GunName" type="Label" parent="BottomRight" unique_id=1706831180]
-unique_name_in_owner = true
-visible = false
-layout_mode = 0
-offset_left = -188.0
-offset_top = -42.5
-offset_right = -37.0
-offset_bottom = -14.5
-theme = ExtResource("5_8v68b")
-text = "AK-47"
-horizontal_alignment = 2
-
-[node name="AmmoCount" type="Control" parent="BottomRight" unique_id=1549461220]
-anchors_preset = 0
-offset_left = -64.0
-offset_top = -64.0
-offset_right = -64.0
-offset_bottom = -64.0
-
-[node name="ColorRect4" type="ColorRect" parent="BottomRight/AmmoCount" unique_id=378211267]
+[node name="ColorRect4" type="ColorRect" parent="AmmoCount" unique_id=378211267]
 visible = false
 layout_mode = 0
 offset_left = 0.61157227
@@ -451,7 +423,7 @@ rotation = 0.09064086
 scale = Vector2(-0.810944, 1)
 color = Color(0, 0, 0, 1)
 
-[node name="MagsLeft" type="Label" parent="BottomRight/AmmoCount" unique_id=1237370696]
+[node name="MagsLeft" type="Label" parent="AmmoCount" unique_id=1237370696]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = -29.0
@@ -461,8 +433,9 @@ offset_bottom = 6.0
 theme = ExtResource("11_jr5wk")
 text = "0"
 
-[node name="MagIcon" type="Sprite2D" parent="BottomRight/AmmoCount" unique_id=1631488394]
+[node name="MagIcon" type="Sprite2D" parent="AmmoCount" unique_id=1631488394]
 unique_name_in_owner = true
+modulate = Color(1, 1, 0, 1)
 position = Vector2(-59.999973, -17.999973)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("8_6gmlr")

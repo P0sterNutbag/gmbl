@@ -7,12 +7,11 @@ var starting_fog: float
 @onready var hit_effect: Control = $HitEffect
 @onready var scope: TextureRect = $Scope
 @onready var mags_left: Label = %MagsLeft
-@onready var gun_name: Label = %GunName
 @onready var exit_area: Label = $Label
 @onready var mag_icon: Sprite2D = %MagIcon
 @onready var death_ui: PanelContainer = $DeathUI
 @onready var load_save: Button = $DeathUI/MarginContainer/VBoxContainer/VBoxContainer/LoadSave
-@onready var bottom_right: Control = $BottomRight
+@onready var ammo_count: Control = $AmmoCount
 @onready var tooltip: Label = $Tooltip
 @onready var hit_indicator: TextureRect = %HitIndicator
 @onready var dot_crosshair: ColorRect = $DotCrosshair
@@ -36,7 +35,7 @@ func _process(delta: float) -> void:
 	# magazine/medkits
 	if Globals.player.gun:
 		if Globals.player.gun is Gun:
-			bottom_right.visible = true
+			ammo_count.visible = true
 			mag_icon.visible = true
 			set_mag_count(PlayerStats.inventory.get_item_amount(Globals.player.gun.ammo_item))
 			#set_medit_count(PlayerStats.inventory.get_item_amount("medkit"))
@@ -49,12 +48,12 @@ func _process(delta: float) -> void:
 					sprite_index = 1
 				mag_icon.region_rect = Rect2(sprite_index * 28, 0, 28, mag_icon.region_rect.size.y)
 		elif PlayerStats.gun and PlayerStats.gun.stackable:
-			bottom_right.visible = true
+			ammo_count.visible = true
 			mag_icon.visible = false
 			var weapon_count = PlayerStats.inventory.get_item_amount(PlayerStats.gun)
 			set_mag_count(weapon_count)
 	else:
-		bottom_right.visible = false
+		ammo_count.visible = false
 	
 	# breath
 	if Globals.player.gun_state == Globals.player.gun_states.ads and Globals.player.current_breath < Globals.player.max_breath:
@@ -105,10 +104,6 @@ func show_scope(scope_texture: Texture2D = scope.texture) -> void:
 
 func set_mag_count(amount: int) -> void:
 	mags_left.text = str(amount)
-
-
-func set_gun_name(new_name: String) -> void:
-	gun_name.text = new_name
 
 
 func play_hit_effect(hit_direction: Vector3) -> void:

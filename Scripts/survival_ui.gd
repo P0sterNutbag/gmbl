@@ -54,7 +54,7 @@ func _process(_delta: float) -> void:
 			UiController.open_interface(journal)
 		else:
 			UiController.close_interface(journal)
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("close"):
 		if !pause_menu.visible and PlayerStats.state != PlayerStats.states.dead:
 			if UiController.is_canvas_layer_open(self):
 				UiController.close_all()

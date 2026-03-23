@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://bge81dgb3rx2t" path="res://Scripts/procedural_environment_runtime.gd" id="1_n2q0j"]
 [ext_resource type="PackedScene" uid="uid://r4ktdn26psb3" path="res://Scenes/Levels/encounter_base.tscn" id="1_xg5g1"]
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_2ous2"]
+[ext_resource type="Script" uid="uid://ejdyuf8c7kui" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="3_xfuh7"]
+[ext_resource type="Texture2D" uid="uid://cuaddiwo4amfh" path="res://Art/Textures/grass green large.png" id="4_4mg1g"]
+[ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="5_suwvc"]
 [ext_resource type="PackedScene" uid="uid://cueu704ip2q8t" path="res://Scenes/Environment/Prefabs With Spawning/shack_no_windows.tscn" id="6_okfcf"]
 [ext_resource type="PackedScene" uid="uid://yqj3iccq8ppb" path="res://Scenes/Environment/Prefabs With Spawning/shack_stairs.tscn" id="7_nfhko"]
 [ext_resource type="PackedScene" uid="uid://b162lqo3bagvq" path="res://Scenes/Environment/Prefabs With Spawning/shack_two_stories.tscn" id="8_dardl"]
@@ -282,6 +285,18 @@ location_data = SubResource("Resource_47wr8")
 
 [node name="Shader" parent="." index="3" unique_id=580484789]
 visible = true
+
+[node name="HTerrainDetailLayer" type="Node3D" parent="Terrain" parent_id_path=PackedInt32Array(1995643304) index="1" unique_id=2087938831]
+script = ExtResource("3_xfuh7")
+texture = ExtResource("4_4mg1g")
+density = 0.1
+cast_shadow = 0
+shader_params/u_globalmap_tint_bottom = null
+shader_params/u_globalmap_tint_top = null
+shader_params/u_bottom_ao = null
+shader_params/u_instance_scale = null
+shader_params/u_roughness = 1.0
+metadata/_editor_icon = ExtResource("5_suwvc")
 
 [node name="NavigationRegion3D" parent="." index="6" unique_id=2110071702]
 navigation_mesh = SubResource("NavigationMesh_nfhko")

@@ -1,11 +1,11 @@
 [gd_scene format=4 uid="uid://y7epyw5i4ifp"]
 
 [ext_resource type="PackedScene" uid="uid://r4ktdn26psb3" path="res://Scenes/Levels/encounter_base.tscn" id="1_o4pf0"]
-[ext_resource type="Resource" path="res://addons/zylann.hterrain/data/bandit_camp/data.hterrain" id="2_kabbc"]
+[ext_resource type="Resource" uid="uid://bo526no3os8wr" path="res://addons/zylann.hterrain/data/bandit_camp/data.hterrain" id="2_kabbc"]
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_ytiro"]
 [ext_resource type="Script" uid="uid://ejdyuf8c7kui" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="3_fui2k"]
-[ext_resource type="Texture2D" uid="uid://d3rtqe0gurf4e" path="res://Art/Textures/grass.png" id="4_cmkxe"]
 [ext_resource type="ArrayMesh" uid="uid://dpef2d0qcn5d4" path="res://addons/zylann.hterrain/models/grass_quad_x2.obj" id="5_njei2"]
+[ext_resource type="Texture2D" uid="uid://cuaddiwo4amfh" path="res://Art/Textures/grass green large.png" id="5_vpadt"]
 [ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="6_43ap5"]
 [ext_resource type="PackedScene" uid="uid://bjama3lmb5mct" path="res://Scenes/Environment/Props/Physics/tire_stack.tscn" id="6_ytiro"]
 [ext_resource type="PackedScene" uid="uid://btve6xti75fn0" path="res://Scenes/Environment/Props/sandbags.tscn" id="7_fui2k"]
@@ -25,7 +25,7 @@
 [ext_resource type="Script" uid="uid://chxn6jj2cv0p3" path="res://Scripts/scatterer.gd" id="25_4gbpe"]
 [ext_resource type="PackedScene" uid="uid://caaninc7023am" path="res://Scenes/Environment/Props/Physics/barrel.tscn" id="26_6f6bu"]
 
-[sub_resource type="Resource" id="Resource_vpadt"]
+[sub_resource type="Resource" id="Resource_i5jua"]
 resource_local_to_scene = true
 script = ExtResource("2_ytiro")
 faction = null
@@ -50,7 +50,7 @@ _surfaces = [{
 }]
 
 [node name="Encounter" unique_id=53482666 instance=ExtResource("1_o4pf0")]
-location_data = SubResource("Resource_vpadt")
+location_data = SubResource("Resource_i5jua")
 
 [node name="DirectionalLight3D" parent="WorldEnvironment" parent_id_path=PackedInt32Array(836606963) index="0" unique_id=2040729916]
 transform = Transform3D(1, 0, 0, 0, -0.53365904, 0.84569997, 0, -0.84569997, -0.53365904, 0, 0, 128)
@@ -62,19 +62,18 @@ visible = true
 _terrain_data = ExtResource("2_kabbc")
 shader_params/u_height_min = null
 shader_params/u_height_max = 6.0
-shader_params/u_blend_width = 0.2
 
 [node name="HTerrainDetailLayer" type="Node3D" parent="Terrain" index="0" unique_id=1838049770]
 script = ExtResource("3_fui2k")
-texture = ExtResource("4_cmkxe")
-density = 0.0
+texture = ExtResource("5_vpadt")
+density = 0.1
 instance_mesh = ExtResource("5_njei2")
 cast_shadow = 0
 shader_params/u_globalmap_tint_bottom = null
 shader_params/u_globalmap_tint_top = null
 shader_params/u_bottom_ao = null
-shader_params/u_instance_scale = Vector3(0.5, 0.5, 0.5)
-shader_params/u_roughness = null
+shader_params/u_instance_scale = Vector3(1, 1, 1)
+shader_params/u_roughness = 1.0
 metadata/_editor_icon = ExtResource("6_43ap5")
 
 [node name="NavigationRegion3D" parent="." index="6" unique_id=2110071702]
@@ -177,7 +176,7 @@ transform = Transform3D(-0.06476405, -0.030985402, 0.9974195, 0.020598218, 0.999
 transform = Transform3D(0.5281297, -0.03219483, -0.8485532, 1.5819445e-05, 0.9992814, -0.037903737, 0.8491637, 0.020004667, 0.52775073, -3.8860016, -0.14951277, 0.8919983)
 
 [node name="RigidBody3D" parent="NavigationRegion3D/Trash" index="8" unique_id=539859645]
-transform = Transform3D(-0.82904816, -0.031559657, -0.55828583, -0.040441945, 0.99917555, 0.0035728833, 0.55771273, 0.02554026, -0.82964104, 0.16395569, 0.049118042, -1.938797)
+transform = Transform3D(-0.82904816, -0.031559657, -0.55828583, -0.040441945, 0.99917555, 0.0035728822, 0.55771273, 0.02554026, -0.82964104, 0.16395569, 0.049118042, -1.938797)
 
 [node name="RigidBody3D2" parent="NavigationRegion3D/Trash" index="9" unique_id=434694742]
 transform = Transform3D(0.96128666, -0.033259515, -0.27353585, 0.025325961, 0.99915135, -0.03248488, 0.27438414, 0.024299724, 0.9613131, -1.5507202, -0.017347336, -1.8583984)
@@ -215,7 +214,7 @@ transform = Transform3D(-0.69816613, 0.073620066, -0.7121406, 0.07409054, 0.9967
 transform = Transform3D(-0.931217, 0.055724524, -0.36018002, 0.061990228, 0.9980596, -0.00585808, 0.35915467, -0.027782785, -0.9328645, 1.7905884, -0.2084589, -2.6799164)
 
 [node name="RigidBody3D5" parent="NavigationRegion3D/DrumBarrels" index="7" unique_id=1584132960]
-transform = Transform3D(0.7006867, 0.059614364, -0.7109742, -0.02055903, 0.9977764, 0.06340084, 0.7131729, -0.029807184, 0.7003542, 0.69192505, -0.14813375, -2.5818825)
+transform = Transform3D(0.70068675, 0.059614364, -0.71097416, -0.020559035, 0.9977764, 0.06340084, 0.71317285, -0.029807184, 0.7003543, 0.69192505, -0.14813375, -2.5818825)
 
 [node name="RigidBody3D6" parent="NavigationRegion3D/DrumBarrels" index="8" unique_id=1540877575]
 transform = Transform3D(0.2542869, 0.06431706, -0.96498793, 0.0054601426, 0.9976749, 0.06793449, 0.96711344, -0.022543821, 0.25334445, 1.3960724, -0.09172201, -1.235527)
@@ -255,7 +254,7 @@ transform = Transform3D(0.1312757, 0, -0.9913459, 0, 1, 0, 0.9913459, 0, 0.13127
 transform = Transform3D(0.8022479, 0, 0.59699106, 0, 1, 0, -0.59699106, 0, 0.8022479, 1.645813, -0.062791824, 0.8349762)
 
 [node name="Tire" parent="NavigationRegion3D/TireStacks" index="7" unique_id=1962248460]
-transform = Transform3D(0.92950624, 0.032129917, 0.36740422, -0.025939947, 0.99942636, -0.021774773, -0.36789307, 0.010709339, 0.9298065, 4.5533752, -0.027689934, -3.6593933)
+transform = Transform3D(0.9295063, 0.032129917, 0.3674042, -0.025939949, 0.99942636, -0.02177477, -0.36789307, 0.010709339, 0.9298065, 4.5533752, -0.027689934, -3.6593933)
 
 [node name="Tire2" parent="NavigationRegion3D/TireStacks" index="8" unique_id=1102463334]
 transform = Transform3D(0.74227107, 0.03131654, 0.6693676, -0.016625581, 0.9994605, -0.028323688, -0.6698935, 0.009895229, 0.7423913, 4.5693665, -0.027689934, -4.4878845)
@@ -267,10 +266,10 @@ transform = Transform3D(0.8575027, -0.018641986, -0.51414174, -0.01792366, 0.997
 transform = Transform3D(-0.14728603, -0.03138978, -0.9885957, -0.06978044, 0.99733555, -0.02127104, 0.98662937, 0.06585171, -0.14908399, -4.9449043, -0.29221535, 4.0201263)
 
 [node name="Tire5" parent="NavigationRegion3D/TireStacks" index="11" unique_id=1768295750]
-transform = Transform3D(-0.84100467, 0.011675451, 0.54090196, 0.042960443, 0.9980514, 0.045252617, -0.53931963, 0.061295047, -0.8398675, 2.252861, -0.38426495, 7.362915)
+transform = Transform3D(-0.84100467, 0.011675451, 0.54090196, 0.042960443, 0.9980514, 0.04525262, -0.53931963, 0.061295047, -0.8398675, 2.252861, -0.38426495, 7.362915)
 
 [node name="Tire6" parent="NavigationRegion3D/TireStacks" index="12" unique_id=1412977310]
-transform = Transform3D(-0.93083036, 0.00086250243, -0.36545056, -0.0046407133, 0.9998887, 0.014180092, 0.36542213, 0.014895212, -0.9307227, -3.192543, 0.11862135, -3.9657135)
+transform = Transform3D(-0.93083036, 0.00086250243, -0.36545056, -0.004640713, 0.9998887, 0.014180093, 0.3654221, 0.014895212, -0.9307228, -3.192543, 0.11862135, -3.9657135)
 
 [node name="WoodenCrates" parent="NavigationRegion3D" index="15" unique_id=1894032959 node_paths=PackedStringArray("terrain") instance=ExtResource("21_6f6bu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.28477, 5.167331, 177.80186)
@@ -293,7 +292,7 @@ transform = Transform3D(-0.32308462, 0, -0.94637007, 0, 1, 0, 0.94637007, 0, -0.
 transform = Transform3D(0.72054726, 0, -0.69340587, 0, 1, 0, 0.69340587, 0, 0.72054726, 10, 0, 0)
 
 [node name="Node3D" parent="NavigationRegion3D/ShippingContainer3" index="4" unique_id=264868068]
-transform = Transform3D(0.38653615, 0.017099913, -0.92211586, -0.058174714, 0.99828917, -0.005873422, 0.92043775, 0.05591412, 0.38686964, 0, 0, 0)
+transform = Transform3D(0.38653615, 0.017099913, -0.92211586, -0.058174714, 0.99828917, -0.005873425, 0.92043775, 0.05591412, 0.38686964, 0, 0, 0)
 
 [node name="WoodenCrates2" parent="NavigationRegion3D" index="17" unique_id=278271993 node_paths=PackedStringArray("terrain") instance=ExtResource("21_6f6bu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 127.59343, 5.4087276, 121.363495)

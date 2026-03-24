@@ -562,7 +562,7 @@ func exit_gun_state_ads() -> void:
 	is_holding_breath = false
 	can_hold_breath = true
 	if gun.scope_texture:
-		Globals.ui.scope.hide()
+		Globals.ui.hide_scope()
 		gun.show()
 
 

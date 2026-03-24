@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://bmq0wn4dja58d" path="res://Scenes/Overworld/Locations/rock_canyon.tscn" id="17_7fbp6"]
 [ext_resource type="PackedScene" uid="uid://o5r7ocg722wg" path="res://Scenes/Overworld/Locations/sand_dunes.tscn" id="18_oedh7"]
 [ext_resource type="PackedScene" uid="uid://dojba73gmumuo" path="res://Scenes/Overworld/Locations/small_town.tscn" id="19_5q0os"]
+[ext_resource type="PackedScene" uid="uid://brrtfg5jynxnd" path="res://Scenes/Environment/Nature/rock.tscn" id="21_ptrkr"]
 [ext_resource type="Script" uid="uid://dq1csolov4xy" path="res://Scripts/Overworld/npc_controller.gd" id="26_5q0os"]
 [ext_resource type="Script" uid="uid://cp50dadh73l3f" path="res://Scripts/snap_to_terrain.gd" id="27_oapb8"]
 [ext_resource type="Script" uid="uid://ejdyuf8c7kui" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="28_8cq34"]
@@ -953,9 +954,15 @@ max_wait_time = 20.0
 
 [node name="Scatterer" type="Node3D" parent="." unique_id=1103219093 node_paths=PackedStringArray("terrain")]
 script = ExtResource("42_1k2ge")
-count = 5000
+scenes = Array[PackedScene]([ExtResource("21_ptrkr")])
+count = 500
 area_size = Vector2(1000, 1000)
 terrain = NodePath("../Terrain")
+min_size = 0.2
+max_size = 2.0
+random_rotate_x = true
+random_rotate_y = true
+random_rotate_z = true
 
 [node name="SnapToTerrain" type="Node3D" parent="." unique_id=1726042150 node_paths=PackedStringArray("objects_to_snap")]
 script = ExtResource("27_oapb8")

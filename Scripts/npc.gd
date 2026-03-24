@@ -43,6 +43,7 @@ var bounty: Quest
 var gun_item: EquipmentGun
 @onready var detection = $Detection
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
+@onready var model = $EnemyModel
 @onready var anim_player: AnimationPlayer = $EnemyModel/PersonAnimated/AnimationPlayer
 @onready var return_to_idle_timer: Timer = $ReturnToIdleTimer
 @onready var path_wait_timer: Timer = $PathWaitTimer

@@ -100,6 +100,14 @@ func _process(delta: float) -> void:
 func show_scope(scope_texture: Texture2D = scope.texture) -> void:
 	scope.texture = scope_texture
 	scope.show()
+	var shader = get_tree().current_scene.get_node("Shader").mesh.material
+	shader.set_shader_parameter("fog_end", starting_fog * 1.75)
+
+
+func hide_scope() -> void: 
+	scope.hide()
+	var shader = get_tree().current_scene.get_node("Shader").mesh.material
+	shader.set_shader_parameter("fog_end", starting_fog)
 
 
 func set_mag_count(amount: int) -> void:

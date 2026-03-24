@@ -9,6 +9,7 @@ var current_style := NpcStyle.new()
 @onready var gun_holder: Node3D = $PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
 @onready var animation_player: AnimationPlayer = $PersonAnimated/AnimationPlayer
 #@export var set_style := false : set = set_materials_editor
+const BALD_HAIR = preload("uid://cfmrww0wj003t")
 
 
 func _ready() -> void:
@@ -97,3 +98,13 @@ func get_texture_modified_skin(texture: Texture, replace_color: Color, target_co
 				img.set_pixel(x, y, replace_color)
 	var new_texture = ImageTexture.create_from_image(img)
 	return new_texture
+
+
+func get_scalped() -> void:
+	var face_material = cube.get_surface_override_material(0).duplicate()
+	var head_image = BALD_HAIR.get_image()
+	head_image.blend_rect(current_style.faces[0].get_image(), Rect2i(0, 0, 64, 64), Vector2i(64, 64))
+	var head_texture = ImageTexture.create_from_image(head_image)
+	head_texture = get_texture_modified_skin(head_texture, current_style.skin_colors[0], Color(0.933, 0.769, 0.6, 1.0))
+	face_material.set("shader_parameter/base_texture", head_texture)
+	cube.set_surface_override_material(0, face_material)

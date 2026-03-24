@@ -41,7 +41,9 @@ func align_to_normal(_value) -> void:
 			print("Ray did not hit terrain for ", child.name)
 			continue
 		var normal: Vector3 = result.normal.normalized()
+		var _scale = child.scale
 		child.global_transform = align_with_y(child.global_transform, normal)
+		child.scale = _scale
 		print(child.name + " aligned")
 		print(result.collider.name)
 		print(normal)

@@ -8,6 +8,7 @@ extends Weapon
 			return damage
 @onready var hitbox: Area3D = $MeshInstance3D/Hitbox
 var can_damage: bool
+const BLOODSPATTER = preload("uid://cqvgbxo1nn47e")
 
 
 func use(shot_owner: Node3D = null):
@@ -29,3 +30,10 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	body.health_component.damage(damage, global_position, rotation, Globals.player)
 	can_damage = false
 	hitbox.set_deferred("monitoring", false)
+
+
+func _on_hitbox_area_entered(area: Area3D) -> void:
+	area.owner.model.get_scalped()
+	var inst = BLOODSPATTER.instantiate()
+	area.add_child(inst)
+	#inst.global_position = area.global_position

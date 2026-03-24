@@ -313,13 +313,13 @@ func state_find_cover(_delta) -> void:
 				return !detection.can_see_target(_target))
 		detection.position = Vector3(0, 1, 0)
 		if potential_cover.size() == 0:
-			change_state(states.strafe)
+			change_state(states.aim)#states.strafe)
 			return
 		potential_cover.sort_custom(func(a, b): return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position))
 		var cover_pos = potential_cover[0].global_position
 		navigation_agent.set_target_position(cover_pos)
 		if !navigation_agent.is_target_reachable():
-			change_state(states.strafe)
+			change_state(states.aim)#states.strafe)
 			return
 		is_new_state = false
 	

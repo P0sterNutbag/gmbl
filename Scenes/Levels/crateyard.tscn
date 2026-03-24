@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://r4ktdn26psb3" path="res://Scenes/Levels/encounter_base.tscn" id="1_qo84g"]
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_f2t4n"]
-[ext_resource type="Resource" uid="uid://cw5vgabhb1br" path="res://addons/zylann.hterrain/data/crateyard/data.hterrain" id="3_j8qiv"]
+[ext_resource type="Resource" path="res://addons/zylann.hterrain/data/crateyard/data.hterrain" id="3_j8qiv"]
 [ext_resource type="Script" uid="uid://ejdyuf8c7kui" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="4_ay258"]
 [ext_resource type="Texture2D" uid="uid://cuaddiwo4amfh" path="res://Art/Textures/grass green large.png" id="5_d6gic"]
 [ext_resource type="ArrayMesh" uid="uid://dpef2d0qcn5d4" path="res://addons/zylann.hterrain/models/grass_quad_x2.obj" id="6_d68e1"]
@@ -17,10 +17,10 @@
 [ext_resource type="PackedScene" uid="uid://b3f0jcvvcldns" path="res://Scenes/Environment/Props/Physics/crate.tscn" id="14_xg6vn"]
 [ext_resource type="PackedScene" uid="uid://bjama3lmb5mct" path="res://Scenes/Environment/Props/Physics/tire_stack.tscn" id="15_qukqc"]
 
-[sub_resource type="Resource" id="Resource_1rgqx"]
+[sub_resource type="Resource" id="Resource_d6gic"]
 resource_local_to_scene = true
 script = ExtResource("2_f2t4n")
-faction = null
+faction = 4
 population = 5
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
@@ -42,7 +42,7 @@ _surfaces = [{
 }]
 
 [node name="Encounter" unique_id=224074342 instance=ExtResource("1_qo84g")]
-location_data = SubResource("Resource_1rgqx")
+location_data = SubResource("Resource_d6gic")
 
 [node name="Shader" parent="." index="3" unique_id=580484789]
 visible = true
@@ -131,7 +131,7 @@ transform = Transform3D(-0.99971175, 0, -0.024008438, 0, 1, 0, 0.024008438, 0, -
 transform = Transform3D(0.038968626, 0.10674586, -0.9935224, -0.05713588, 0.9928889, 0.10443678, 0.9976055, 0.052696023, 0.044790544, 10, -2.3841858e-07, 0)
 
 [node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab3" index="4" unique_id=264868068]
-transform = Transform3D(-0.45938826, 0.064603, -0.8858831, -0.0945944, 0.9881214, 0.121112086, 0.8831842, 0.13943705, -0.44782028, 0, 0, 0)
+transform = Transform3D(-0.45938832, 0.064603, -0.8858831, -0.09459439, 0.9881214, 0.121112086, 0.8831842, 0.13943705, -0.4478203, 0, 0, 0)
 
 [node name="ShippingContainerPrefab4" parent="NavigationRegion3D" index="4" unique_id=112230491 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 125.728, 4.7111053, 118.43216)
@@ -211,7 +211,7 @@ transform = Transform3D(-0.6729014, 0, 0.7397322, 0, 1, 0, -0.7397322, 0, -0.672
 transform = Transform3D(-0.97592264, -0.0027138775, -0.21810006, 0.0024686512, 0.9997211, -0.02348616, 0.21810296, -0.02345909, -0.97564375, 10, 0, 0)
 
 [node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab7" index="4" unique_id=264868068]
-transform = Transform3D(-0.810205, -0.052381285, 0.5838015, -0.064953625, 0.99788815, -0.0006082325, -0.5825367, -0.038412817, -0.8118962, 0, 0, 0)
+transform = Transform3D(-0.810205, -0.052381285, 0.5838015, -0.064953625, 0.99788815, -0.00060823257, -0.5825367, -0.038412817, -0.8118962, 0, 0, 0)
 
 [node name="ShippingContainerPrefab8" parent="NavigationRegion3D" index="8" unique_id=1912589052 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.508114, 5.085308, 201.85898)
@@ -451,7 +451,7 @@ transform = Transform3D(0.9641819, 0, -0.26524195, 0, 1, 0, 0.26524195, 0, 0.964
 transform = Transform3D(0.79783404, 0.01998276, 0.60254586, -0.05628288, 0.9975545, 0.04144169, -0.60024416, -0.0669766, 0.7970077, 10.000004, 0, 0)
 
 [node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab19" index="4" unique_id=264868068]
-transform = Transform3D(0.4543801, 0.06052775, -0.88874924, 0.007270788, 0.99740374, 0.07164486, 0.89077824, -0.039015904, 0.45276028, 0, 0, 0)
+transform = Transform3D(0.45438007, 0.060527753, -0.8887491, 0.007270788, 0.99740374, 0.07164485, 0.89077824, -0.0390159, 0.45276022, 0, 0, 0)
 
 [node name="ShippingContainerPrefab20" parent="NavigationRegion3D" index="20" unique_id=134929025 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106.078186, 3.2185884, 171.86302)
@@ -491,7 +491,7 @@ transform = Transform3D(0.39582777, 0, -0.91832477, 0, 1, 0, 0.91832477, 0, 0.39
 transform = Transform3D(-0.63708615, -0.049490005, -0.769202, -0.07744846, 0.99699634, -3.7252903e-09, 0.7668916, 0.059573513, -0.63900554, 10, 1, 0)
 
 [node name="Node3D" parent="NavigationRegion3D/ShippingContainerPrefab21" index="4" unique_id=264868068]
-transform = Transform3D(0.012854544, -0.14330575, -0.989595, 0.010282165, 0.9896434, -0.14317918, 0.9998646, -0.008334676, 0.014194907, 0, 0, 0)
+transform = Transform3D(0.0128545435, -0.14330575, -0.989595, 0.010282165, 0.9896434, -0.14317918, 0.9998646, -0.008334676, 0.014194906, 0, 0, 0)
 
 [node name="ShippingContainerPrefab22" parent="NavigationRegion3D" index="22" unique_id=1303752447 node_paths=PackedStringArray("terrain") instance=ExtResource("8_54835")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 228.07463, 1.1267695, 92.22165)

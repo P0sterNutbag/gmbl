@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dvpgm7keysw0" path="res://Scenes/Environment/Props/Physics/drum_barrel_rust.tscn" id="10_ksibt"]
 [ext_resource type="PackedScene" uid="uid://21yqxj5xl8cv" path="res://Scenes/Environment/Props/Physics/drum_barrel_blue.tscn" id="11_gd5m3"]
 
-[sub_resource type="Resource" id="Resource_kfoxf"]
+[sub_resource type="Resource" id="Resource_ydsf3"]
 resource_local_to_scene = true
 script = ExtResource("2_lh7il")
 faction = 4
@@ -40,12 +40,15 @@ _surfaces = [{
 }]
 
 [node name="Encounter" unique_id=699194105 instance=ExtResource("1_d1kxj")]
-location_data = SubResource("Resource_kfoxf")
+location_data = SubResource("Resource_ydsf3")
 
 [node name="Shader" parent="." index="3" unique_id=580484789]
 visible = true
 
-[node name="_Node3D_48312" type="Node3D" parent="Terrain" parent_id_path=PackedInt32Array(1995643304) index="1" unique_id=425080681]
+[node name="Terrain" parent="." index="5" unique_id=1995643304]
+shader_params/u_height_max = 4.5
+
+[node name="_Node3D_48312" type="Node3D" parent="Terrain" index="0" unique_id=425080681]
 script = ExtResource("3_ydsf3")
 texture = ExtResource("4_kuexq")
 custom_shader = ExtResource("5_jmki4")

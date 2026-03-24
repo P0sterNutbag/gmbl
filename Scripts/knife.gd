@@ -36,4 +36,6 @@ func _on_hitbox_area_entered(area: Area3D) -> void:
 	area.owner.model.get_scalped()
 	var inst = BLOODSPATTER.instantiate()
 	area.add_child(inst)
+	area.owner.health_component.audio_stream_player.play()
+	area.queue_free()
 	#inst.global_position = area.global_position

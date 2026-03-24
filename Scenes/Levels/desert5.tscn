@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bjama3lmb5mct" path="res://Scenes/Environment/Props/Physics/tire_stack.tscn" id="9_d68a6"]
 [ext_resource type="PackedScene" uid="uid://dvpgm7keysw0" path="res://Scenes/Environment/Props/Physics/drum_barrel_rust.tscn" id="9_wbje8"]
 
-[sub_resource type="Resource" id="Resource_ldvnb"]
+[sub_resource type="Resource" id="Resource_0wp26"]
 resource_local_to_scene = true
 script = ExtResource("2_n86gx")
 faction = null
@@ -40,15 +40,16 @@ _surfaces = [{
 }]
 
 [node name="Encounter" unique_id=699194105 instance=ExtResource("1_m6vkb")]
-location_data = SubResource("Resource_ldvnb")
+location_data = SubResource("Resource_0wp26")
 
 [node name="Shader" parent="." index="3" unique_id=580484789]
 visible = true
 
 [node name="Terrain" parent="." index="5" unique_id=1995643304]
+shader_params/u_height_max = 4.5
 shader_params/u_blend_width = null
 
-[node name="_Node3D_48312" type="Node3D" parent="Terrain" index="1" unique_id=100861521]
+[node name="_Node3D_48312" type="Node3D" parent="Terrain" index="0" unique_id=100861521]
 script = ExtResource("3_0wp26")
 texture = ExtResource("4_qm0y3")
 custom_shader = ExtResource("5_d68a6")

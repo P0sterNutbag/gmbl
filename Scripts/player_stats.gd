@@ -30,6 +30,9 @@ var ammo: int:
 			return gun.gun_stats.ammo
 		else:
 			return 0
+var money: int:
+	get():
+		return inventory.money
 var flashlight_on: bool
 var inventory: Inventory = Inventory.new()
 var quests: Array[Quest]

@@ -1,12 +1,8 @@
 [gd_scene format=3 uid="uid://ddobx7rgw7u28"]
 
 [ext_resource type="Material" uid="uid://db6sff320wjv6" path="res://Art/Materials/rock_triplanar.tres" id="1_0tsqq"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_aj0wn"]
-top_radius = 50.0
-bottom_radius = 55.0
-height = 100.0
-radial_segments = 12
+[ext_resource type="PackedScene" uid="uid://bflivx4nobl88" path="res://Art/Models/rock pillar.glb" id="2_ex27f"]
+[ext_resource type="Material" uid="uid://b0tvyonbb6ikn" path="res://Art/Materials/sand_triplanar.tres" id="3_ryfiv"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_rp2u8"]
 height = 100.0
@@ -14,9 +10,14 @@ radius = 55.0
 
 [node name="RockWall" type="StaticBody3D" unique_id=1982699201]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=642113865]
-material_override = ExtResource("1_0tsqq")
-mesh = SubResource("CylinderMesh_aj0wn")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=816897517]
 shape = SubResource("CylinderShape3D_rp2u8")
+
+[node name="rock pillar" parent="." unique_id=1680856482 instance=ExtResource("2_ex27f")]
+transform = Transform3D(54, 0, 0, 0, 54, 0, 0, 0, 54, 0, 0, 0)
+
+[node name="Cylinder" parent="rock pillar" index="0" unique_id=1943637025]
+surface_material_override/0 = ExtResource("3_ryfiv")
+surface_material_override/1 = ExtResource("1_0tsqq")
+
+[editable path="rock pillar"]

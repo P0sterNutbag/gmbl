@@ -911,7 +911,13 @@ metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="Resource" id="Resource_b4834"]
 script = ExtResource("48_i627v")
-lines = Array[String](["This canyon is not for the faint of heart. A weakling like you should just turn around while you still have the chance.", "But if you absolutely must pass through, it'll cost $2,000."])
+lines = Array[String](["This canyon is not for the faint of heart. A weakling like you should just turn around while you still have the chance."])
+speaker = 1
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_fgsb2"]
+script = ExtResource("48_i627v")
+lines = Array[String](["But if you absolutely must pass through, it'll cost ya $2,000."])
 speaker = 1
 metadata/_custom_type_script = "uid://de6rxup5nru4w"
 
@@ -922,13 +928,13 @@ comparison = 1
 value2 = 1999
 failue_message = "You don't have enough money"
 text = "Pass Through"
-destination = 2
+destination = 3
 metadata/_custom_type_script = "uid://bd7d8lpmtob24"
 
 [sub_resource type="Resource" id="Resource_k8xtr"]
 script = ExtResource("49_opo3i")
 text = "Leave"
-destination = 3
+destination = 5
 metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
 
 [sub_resource type="Resource" id="Resource_x02ax"]
@@ -944,11 +950,17 @@ metadata/_custom_type_script = "uid://de6rxup5nru4w"
 
 [sub_resource type="Resource" id="Resource_3le6t"]
 script = ExtResource("72_6l6oi")
+next_index = 2
 metadata/_custom_type_script = "uid://px5dr31pd885"
+
+[sub_resource type="Resource" id="Resource_ns634"]
+script = ExtResource("51_v8snn")
+method = "exit_to_game"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
 [sub_resource type="Resource" id="Resource_n8qb3"]
 script = ExtResource("53_ccrpr")
-bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_b4834"), SubResource("Resource_x02ax"), SubResource("Resource_e41e3"), SubResource("Resource_3le6t")])
+bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_b4834"), SubResource("Resource_fgsb2"), SubResource("Resource_x02ax"), SubResource("Resource_e41e3"), SubResource("Resource_3le6t"), SubResource("Resource_ns634")])
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
 [node name="Overworld" type="Node3D" unique_id=1106168526]
@@ -1036,7 +1048,7 @@ random_rotate_z = true
 
 [node name="SnapToTerrain" type="Node3D" parent="." unique_id=1726042150 node_paths=PackedStringArray("objects_to_snap")]
 script = ExtResource("27_oapb8")
-objects_to_snap = [NodePath("../BanditCamp"), NodePath("../BanditTown"), NodePath("../Crateyard"), NodePath("../RockCanyon"), NodePath("../SandDunes"), NodePath("../DirtTown"), NodePath("../Scrapyard"), NodePath("../DrugDen"), null, null, null, null, null, null, NodePath("../PlayerStart"), NodePath("../Player"), null, null]
+objects_to_snap = [NodePath("../BanditCamp"), NodePath("../BanditTown"), NodePath("../Crateyard"), NodePath("../RockCanyon"), NodePath("../SandDunes"), NodePath("../DirtTown"), NodePath("../Scrapyard"), NodePath("../DrugDen"), null, null, null, null, null, null, NodePath("../PlayerStart"), null, null, null]
 
 [node name="PlayerStart" type="Node3D" parent="." unique_id=136712645]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 209.235, 0.81097287, 203.77374)
@@ -1120,7 +1132,7 @@ town = SubResource("Resource_6j8iu")
 transform = Transform3D(-0.99983275, 0, 0.018290073, 0, 1, 0, -0.018290073, 0, -0.99983275, 244.15323, 1.366055, 315.90103)
 shop = SubResource("Resource_ht31n")
 
-[node name="DrugDen" parent="." unique_id=1342811121 groups=["location", "persist"] instance=ExtResource("79_nggm6")]
+[node name="DrugDen" parent="." unique_id=17477272 groups=["location", "persist"] instance=ExtResource("79_nggm6")]
 transform = Transform3D(-0.4736271, 0, -0.8807255, 0, 1, 0, 0.8807255, 0, -0.4736271, 151.14008, 0.45229244, 236.78027)
 
 [node name="Checkpoint" parent="." unique_id=1081176612 instance=ExtResource("107_pay3g")]
@@ -1132,50 +1144,50 @@ can_spawn_npcs = false
 
 [node name="Barrier" type="Node3D" parent="." unique_id=1387259195]
 
-[node name="RockWall" parent="Barrier" unique_id=1371347332 instance=ExtResource("109_3le6t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 244.5383, -5.232868, 423.21707)
+[node name="RockWall" parent="Barrier" unique_id=1982699201 instance=ExtResource("109_3le6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 244.35785, -28.613811, 423.22177)
 
-[node name="RockWall2" parent="Barrier" unique_id=1982699201 instance=ExtResource("109_3le6t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 126.82393, -15.16531, 399.78775)
+[node name="RockWall2" parent="Barrier" unique_id=1122919995 instance=ExtResource("109_3le6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120.22621, -38.546253, 399.79245)
 
-[node name="RockWall3" parent="Barrier" unique_id=572517429 instance=ExtResource("109_3le6t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.7121, -0.86031723, 373.791)
+[node name="RockWall3" parent="Barrier" unique_id=1191658092 instance=ExtResource("109_3le6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.53165, -24.24126, 373.7957)
 
-[node name="RockWall4" parent="Barrier" unique_id=381497399 instance=ExtResource("109_3le6t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 232.65353, -26.538116, 407.9574)
+[node name="RockWall4" parent="Barrier" unique_id=1276926755 instance=ExtResource("109_3le6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 232.47308, -42.419685, 407.9621)
 
-[node name="RockWall5" parent="Barrier" unique_id=1667638964 instance=ExtResource("109_3le6t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 303.52313, -21.645199, 404.95456)
+[node name="RockWall5" parent="Barrier" unique_id=1199662231 instance=ExtResource("109_3le6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 303.34268, -45.026142, 404.95926)
 
-[node name="RockWall6" parent="Barrier" unique_id=1411701578 instance=ExtResource("109_3le6t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 355.7445, -27.67683, 347.81766)
+[node name="RockWall6" parent="Barrier" unique_id=942787954 instance=ExtResource("109_3le6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 356.17392, -46.603798, 346.60272)
 
-[node name="RockWall7" parent="Barrier" unique_id=929953984 instance=ExtResource("109_3le6t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 382.88312, -10.402279, 298.63712)
+[node name="RockWall7" parent="Barrier" unique_id=1938810199 instance=ExtResource("109_3le6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 391.0368, -33.783222, 307.99234)
 
-[node name="RockWall8" parent="Barrier" unique_id=876135537 instance=ExtResource("109_3le6t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 382.88312, -15.91177, 250.70831)
+[node name="RockWall8" parent="Barrier" unique_id=2107535793 instance=ExtResource("109_3le6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 392.25647, -39.292713, 255.38828)
 
-[node name="RockWall9" parent="Barrier" unique_id=1331529696 instance=ExtResource("109_3le6t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 359.07648, -20.378483, 206.85379)
+[node name="RockWall9" parent="Barrier" unique_id=1056797974 instance=ExtResource("109_3le6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 376.37744, -43.759426, 199.33742)
 
-[node name="RockWall10" parent="Barrier" unique_id=70038517 instance=ExtResource("109_3le6t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 302.4766, -9.960667, 176.26622)
+[node name="RockWall10" parent="Barrier" unique_id=1455863565 instance=ExtResource("109_3le6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 318.96442, -33.34161, 152.8946)
 
-[node name="RockWall11" parent="Barrier" unique_id=1563277852 instance=ExtResource("109_3le6t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 243.95831, -19.26218, 138.43593)
+[node name="RockWall11" parent="Barrier" unique_id=554276418 instance=ExtResource("109_3le6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 243.77786, -42.643124, 120.75595)
 
-[node name="RockWall12" parent="Barrier" unique_id=1162346329 instance=ExtResource("109_3le6t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 165.1481, -15.373348, 129.69159)
+[node name="RockWall12" parent="Barrier" unique_id=1676921243 instance=ExtResource("109_3le6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150.74802, -38.410816, 129.05383)
 
-[node name="RockWall13" parent="Barrier" unique_id=413449301 instance=ExtResource("109_3le6t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104.153015, 3.5686684, 163.73642)
+[node name="RockWall13" parent="Barrier" unique_id=806023737 instance=ExtResource("109_3le6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 111.07799, -19.812275, 171.80836)
 
-[node name="RockWall14" parent="Barrier" unique_id=519836081 instance=ExtResource("109_3le6t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.168137, -4.597828, 227.23917)
+[node name="RockWall14" parent="Barrier" unique_id=31199092 instance=ExtResource("109_3le6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.30184, -32.277424, 227.24387)
 
-[node name="RockWall15" parent="Barrier" unique_id=1573552490 instance=ExtResource("109_3le6t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.03604, 0.058185577, 306.08203)
+[node name="RockWall15" parent="Barrier" unique_id=2031924465 instance=ExtResource("109_3le6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.85559, -37.980083, 306.08673)
 
 [connection signal="timeout" from="NpcController/Timer" to="NpcController" method="_on_timer_timeout"]
 [connection signal="timeout" from="NpcController/Timer" to="NpcController/Timer" method="_on_timeout"]

@@ -9,13 +9,13 @@
 [ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="7_inajc"]
 [ext_resource type="Script" uid="uid://c6knlgr6wx0i1" path="res://Scripts/quest_fetch.gd" id="8_te7rf"]
 [ext_resource type="Script" uid="uid://px5dr31pd885" path="res://Scripts/dialogue_loop.gd" id="9_qwjv1"]
-[ext_resource type="Texture2D" uid="uid://c7vuenymtwna4" path="res://Art/Textures/player face2.png" id="10_7jsld"]
+[ext_resource type="Texture2D" uid="uid://c7vuenymtwna4" path="res://Art/Textures/Character/player face2.png" id="10_7jsld"]
 [ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="10_mkt2b"]
 [ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="11_7t7n5"]
-[ext_resource type="Texture2D" uid="uid://caj6h4yuynkru" path="res://Art/Textures/player hair.png" id="11_8sm2v"]
+[ext_resource type="Texture2D" uid="uid://caj6h4yuynkru" path="res://Art/Textures/Character/player hair.png" id="11_8sm2v"]
 [ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="12_dckhe"]
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="13_7jsld"]
-[ext_resource type="Texture2D" uid="uid://cs2j1ok7u1avc" path="res://Art/Textures/npc shirt red sleeve.png" id="13_bnevc"]
+[ext_resource type="Texture2D" uid="uid://cs2j1ok7u1avc" path="res://Art/Textures/Character/npc shirt red sleeve.png" id="13_bnevc"]
 [ext_resource type="Resource" uid="uid://jb6lsvgonmut" path="res://Resources/Items/Junk/ecstacy.tres" id="13_te7rf"]
 [ext_resource type="Script" uid="uid://3e36ru1e7k78" path="res://Scripts/spawn_chance_resource.gd" id="14_mkt2b"]
 [ext_resource type="Resource" uid="uid://b0ujp3jyr8ll6" path="res://Resources/Items/Junk/joint.tres" id="14_qwjv1"]
@@ -30,9 +30,12 @@
 [ext_resource type="Script" uid="uid://ds2br0dh5ir38" path="res://Scripts/quest_bounty_random.gd" id="23_7jsld"]
 [ext_resource type="Resource" uid="uid://dgo34up8hytn6" path="res://Resources/Items/Ammo/smg_ammo.tres" id="23_wji5k"]
 [ext_resource type="Material" uid="uid://brr5rgo0swhv5" path="res://Art/Materials/wood_triplanar.tres" id="26_bnevc"]
-[ext_resource type="Texture2D" uid="uid://bkxsoff507nnd" path="res://Art/Textures/tin roof.png" id="27_ogcrv"]
+[ext_resource type="Texture2D" uid="uid://bkxsoff507nnd" path="res://Art/Textures/Environment/tin roof.png" id="27_ogcrv"]
+[ext_resource type="Script" uid="uid://dc15s83haevrb" path="res://Scripts/item_slot_random.gd" id="27_wji5k"]
 [ext_resource type="Material" uid="uid://b4aard1qnyqin" path="res://Art/Materials/tin_triplanar_gray.tres" id="28_84y0d"]
+[ext_resource type="Resource" uid="uid://6c7s1e0y4ekq" path="res://Resources/Items/Junk/cigarettes.tres" id="28_i588a"]
 [ext_resource type="Material" uid="uid://bfqtn7csb0xd" path="res://Art/Materials/tin_triplanar_rust.tres" id="29_it00d"]
+[ext_resource type="Resource" uid="uid://cis0ncoy87o3s" path="res://Resources/Items/Junk/scalp_jackal.tres" id="29_la7xj"]
 
 [sub_resource type="Resource" id="Resource_0jat8"]
 script = ExtResource("2_k1gww")
@@ -204,32 +207,36 @@ title = "Drug Den"
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
 [sub_resource type="Resource" id="Resource_ibe1q"]
-script = ExtResource("7_inajc")
-item = ExtResource("13_te7rf")
-amount = 3
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+script = ExtResource("27_wji5k")
+amount_min = 5
+amount_max = 10
+item = ExtResource("28_i588a")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
 
 [sub_resource type="Resource" id="Resource_hocrx"]
-script = ExtResource("7_inajc")
-item = ExtResource("16_7t7n5")
-amount = 3
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+script = ExtResource("27_wji5k")
+amount_min = 1
+amount_max = 3
+item = ExtResource("13_te7rf")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
 
 [sub_resource type="Resource" id="Resource_j3mqp"]
-script = ExtResource("7_inajc")
-item = ExtResource("15_mkt2b")
-amount = 3
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+script = ExtResource("27_wji5k")
+amount_min = 1
+amount_max = 3
+item = ExtResource("14_qwjv1")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
 
 [sub_resource type="Resource" id="Resource_ex6c5"]
-script = ExtResource("7_inajc")
-item = ExtResource("14_qwjv1")
-amount = 3
-metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+script = ExtResource("27_wji5k")
+amount_min = 5
+amount_max = 10
+item = ExtResource("29_la7xj")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
 
 [sub_resource type="Resource" id="Resource_l1i85"]
 script = ExtResource("19_te7rf")
-required_items = Array[ExtResource("7_inajc")]([SubResource("Resource_ibe1q"), SubResource("Resource_hocrx"), SubResource("Resource_j3mqp"), SubResource("Resource_ex6c5")])
+potential_items = Array[ExtResource("27_wji5k")]([SubResource("Resource_ibe1q"), SubResource("Resource_hocrx"), SubResource("Resource_j3mqp"), SubResource("Resource_ex6c5")])
 metadata/_custom_type_script = "uid://bicpdyf13vj1j"
 
 [sub_resource type="Resource" id="Resource_etgqd"]

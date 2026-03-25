@@ -11,6 +11,8 @@ func on_button_pressed(button: Control, resource: Resource) -> void:
 	super.on_button_pressed(button, resource)
 	#if PlayerStats.quests.has(resource):
 		#return
+	if "start_quest" in resource:
+		resource.start_quest()
 	PlayerStats.quests.append(resource)
 	Globals.survival_ui.compass.set_quest_markers()
 	shop.quests.erase(resource)

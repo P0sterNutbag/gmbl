@@ -38,4 +38,7 @@ func _on_hitbox_area_entered(area: Area3D) -> void:
 	area.add_child(inst)
 	area.owner.health_component.audio_stream_player.play()
 	area.queue_free()
+	var scalp = FactionManager.faction_data[area.owner.faction].scalp.duplicate()
+	PlayerStats.inventory.add_item(scalp)
+	Globals.survival_ui.create_notification(scalp.title + "added to inventory")
 	#inst.global_position = area.global_position

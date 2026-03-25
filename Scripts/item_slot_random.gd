@@ -1,4 +1,4 @@
-extends Resource
+extends ItemSlot
 class_name ItemSlotRandom
 
 @export var amount_min: int

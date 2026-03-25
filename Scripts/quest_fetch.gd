@@ -1,17 +1,15 @@
 extends Quest
 class_name QuestFetch
 
-@export var required_items: Array[ItemSlot]
+@export var required_item: ItemSlot
 
 
 func check_complete() -> void:
-	for slot in required_items:
-		var slot2 = PlayerStats.inventory.find_item_slot(slot.item)
-		if !slot2 or slot2.amount < slot.amount:
-			return
+	var slot2 = PlayerStats.inventory.find_item_slot(required_item.item)
+	if !slot2 or slot2.amount < required_item.amount:
+		return
 	completed = true
 
 
 func remove_items() -> void:
-	for slot in required_items:
-		PlayerStats.inventory.remove_item(slot.item, slot.amount)
+	PlayerStats.inventory.remove_item(required_item.item, required_item.amount)

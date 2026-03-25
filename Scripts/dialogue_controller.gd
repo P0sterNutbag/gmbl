@@ -49,8 +49,8 @@ func advance_dialogue(next_index: int) -> void:
 		for option in bubble.options:
 			var inst2 = inst.option_container.create_menu_item()
 			inst2.text = option.text
-			inst2.pressed.connect(on_option_selected.bind(inst2))
-			inst2.pressed.connect(advance_dialogue.bind(option.destination))
+			inst2.pressed.connect(on_option_selected.bind(option, inst2))
+			#inst2.pressed.connect(advance_dialogue.bind(option.destination))
 		inst.option_container.set_menu_item_focus()
 		#if Input.get_connected_joypads().size() > 0:
 			#inst.option_container.get_child(0).grab_focus()
@@ -66,9 +66,14 @@ func advance_dialogue(next_index: int) -> void:
 	can_advance = true
 
 
-func on_option_selected(option: Control) -> void:
+func on_option_selected(option: DialogueOption, option_button: Control) -> void:
+	if option is DialogueOptionCondition:
+		if !option.is_condition_true():
+			Globals.survival_ui.create_notification(option.failue_message)
+			return
+	advance_dialogue(option.destination)
 	for child in get_child(-1).option_container.get_children():
-		if child != option:
+		if child != option_button:
 			child.queue_free()
 		else:
 			child._on_focus_exited()

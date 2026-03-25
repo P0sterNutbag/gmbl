@@ -10,7 +10,8 @@ signal load
 
 
 func _ready() -> void:
-	saved_resources = ResourceLoader.load(resource_path)
+	if ResourceLoader.exists(resource_path):
+		saved_resources = ResourceLoader.load(resource_path)
 	if !saved_resources:
 		saved_resources = SavedResources.new()
 		ResourceSaver.save(saved_resources, resource_path)

@@ -85,7 +85,7 @@ func _on_no_pressed() -> void:
 
 
 func _on_yes_pressed2() -> void:
-	SceneManager.start_scene_transition("res://Scenes/UI/main_menu.tscn")
+	SceneManager.start_scene_transition("res://Scenes/UI/Levels/main_menu.tscn")
 
 
 func _on_no_pressed2() -> void:

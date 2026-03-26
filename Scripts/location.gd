@@ -66,17 +66,20 @@ func start_encounter() -> void:
 		return
 	encounter_started.emit()
 	Globals.overworld.current_encounter = self
-	if dialogue_tree != null and !BattleManager.get_battle(self):
+	if dialogue_tree != null and !BattleManager.get_battle(self) and location_data.population > 0:
 		Globals.ui.start_dialogue(dialogue_tree)
+		Globals.player.camera_type = Globals.player.camera_types.town
 		point_of_interest.canvas_layer.hide()
 	elif encounter_scene != null:
 		transition_to_level() 
 	elif town != null:
 		Globals.ui.town.create_town(town)
+		Globals.player.camera_type = Globals.player.camera_types.town
 		point_of_interest.canvas_layer.hide()
 	elif shop != null:
 		Globals.ui.job_board.shop = shop
 		Globals.ui.start_dialogue(shop.dialogue, shop)
+		Globals.player.camera_type = Globals.player.camera_types.town
 		point_of_interest.canvas_layer.hide()
 
 
@@ -117,6 +120,7 @@ func _on_body_exited(_body: Node3D) -> void:
 	if Globals.overworld.process_mode == PROCESS_MODE_INHERIT:
 		can_transition = true
 		Globals.player.can_enter_location = true
+	Globals.player.camera_type = Globals.player.camera_types.overhead
 
 
 func _on_battle_timer_timeout() -> void:

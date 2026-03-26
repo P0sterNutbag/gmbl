@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-enum camera_types {overhead, fps}
+enum camera_types {overhead, town}
 var camera_type = camera_types.overhead
 var speed := 4.5:
 	get():
@@ -29,7 +29,7 @@ var faction := FactionManager.factions.player
 @onready var camera_anchor: Node3D = $CameraAnchor
 @onready var model: Node3D = $EnemyModel
 @onready var animation_player: AnimationPlayer = $EnemyModel/PersonAnimated/AnimationPlayer
-@onready var camera: Camera3D = $CameraAnchor/RotationOffset/OverheadCamera
+@onready var camera: Camera3D = %OverheadCamera
 @onready var gun_anchor: Node3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
 @onready var ak_47: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/ak_47
 @onready var pistol: Gun = $EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D/Pistol
@@ -45,6 +45,9 @@ var faction := FactionManager.factions.player
 @onready var loot_area: Area3D = $EnemyModel/LootArea
 @onready var notification_position: Node3D = $NotificationPosition
 @onready var hud_anchor: Node3D = $HudAnchor
+@onready var town_shot: Node3D = %TownShot
+@onready var rotation_offset: Node3D = $CameraAnchor/RotationOffset
+@onready var position_offset: Node3D = $CameraAnchor/RotationOffset/PositionOffset
 var gun: Node3D
 
 
@@ -52,6 +55,7 @@ func _enter_tree() -> void:
 	Globals.player = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	global_position.y = Globals.get_heightmap_position(global_position)
+	camera_type = camera_types.overhead
 	if PlayerStats.faction:
 		faction = PlayerStats.faction
 	await get_tree().process_frame
@@ -78,18 +82,29 @@ func _physics_process(delta):
 		velocity += get_gravity() * delta
 	
 	# zoom camera
-	#if PlayerStats.state != PlayerStats.states.pause:
-	if Input.is_action_just_pressed("next_gun"):
-		camera_target_zoom = clamp(camera_target_zoom - camera_zoom_incrament, camera_min_zoom, camera_max_zoom)
-	elif Input.is_action_just_pressed("last_gun"):
-		camera_target_zoom = clamp(camera_target_zoom + camera_zoom_incrament, camera_min_zoom, camera_max_zoom)
-	camera.position.z = lerp(camera.position.z, camera_target_zoom, delta * 5)
+	if PlayerStats.state != PlayerStats.states.pause:
+		if Input.is_action_just_pressed("next_gun"):
+			camera_target_zoom = clamp(camera_target_zoom - camera_zoom_incrament, camera_min_zoom, camera_max_zoom)
+		elif Input.is_action_just_pressed("last_gun"):
+			camera_target_zoom = clamp(camera_target_zoom + camera_zoom_incrament, camera_min_zoom, camera_max_zoom)
+	position_offset.position.z = lerp(position_offset.position.z, camera_target_zoom, delta * 5)
 	
 	# turn camerea
 	if Input.is_action_pressed("lean_left"):
 		camera_anchor.rotate_y(2 * delta)
 	elif Input.is_action_pressed("lean_right"):
 		camera_anchor.rotate_y(-2 * delta)
+	
+	var camera_transform = position_offset.global_transform
+	model.show()
+	if camera_type == camera_types.town:
+		var rot = town_shot.rotation
+		town_shot.look_at(Globals.overworld.current_encounter.global_position)
+		town_shot.rotation = Vector3(rot.x, town_shot.rotation.y, rot.z)
+		camera_transform = town_shot.global_transform
+		model.hide()
+	camera.global_transform.origin = lerp(camera.global_transform.origin, camera_transform.origin, delta * 10)
+	camera.global_transform.basis = lerp(camera.global_transform.basis, camera_transform.basis, delta * 10)
 	
 	# clamp position
 	position.x = clamp(position.x, 1, 511)
@@ -106,7 +121,8 @@ func state_walk(delta) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+	# set camera
+	camera_type = camera_types.overhead
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -117,10 +133,8 @@ func state_walk(delta) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
-	
-	if camera_type != camera_types.overhead:
-		return
-	
+	#if camera_type != camera_types.overhead:
+		#return
 	move_and_slide()
 	
 	# animate
@@ -209,10 +223,10 @@ func _input(event):
 		match camera_type:
 			camera_types.overhead:
 				camera_anchor.rotate_y(-event.relative.x * mouse_sensitivity * PlayerStats.sensitivity_modifier)
-			camera_types.fps:
-				camera_anchor.rotate_y(-event.relative.x * mouse_sensitivity * PlayerStats.sensitivity_modifier)
-				camera.rotate_x(-event.relative.y * mouse_sensitivity * PlayerStats.sensitivity_modifier)
-				camera.rotation.x = clampf(camera.rotation.x, -deg_to_rad(70), deg_to_rad(70))
+			#camera_types.fps:
+				#camera_anchor.rotate_y(-event.relative.x * mouse_sensitivity * PlayerStats.sensitivity_modifier)
+				#camera.rotate_x(-event.relative.y * mouse_sensitivity * PlayerStats.sensitivity_modifier)
+				#camera.rotation.x = clampf(camera.rotation.x, -deg_to_rad(70), deg_to_rad(70))
 
 
 func save() -> Dictionary:

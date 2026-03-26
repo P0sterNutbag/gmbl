@@ -14,6 +14,7 @@ var current_shop: TownOption
 @onready var player_model: Node3D = $PlayerPortrait/Offset/EnemyModel
 @onready var player_name: Label = $PortraitHolder/HBoxContainer/PlayerName
 @onready var training_menu: PanelContainer = $Training
+@onready var bounty_viewport: SubViewport = $BountyPicture
 
 
 func _enter_tree() -> void:

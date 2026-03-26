@@ -28,6 +28,7 @@ func _enter_tree() -> void:
 		player.rotate_y(deg_to_rad(180))
 		player.rotation.x = 0
 		player.rotation.y = 0
+		await get_tree().create_timer(3).timeout
 		player.can_enter_location = true
 	#await get_tree().create_timer(0.1).timeout
 	#SaveController.save_data_to_file()
@@ -36,6 +37,6 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	Globals.overworld = self
 	#var cam_pos = Globals.player.camera.position.z
-	Globals.player.camera.position.z = 500
+	Globals.player.position_offset.position.z = 500
 	#var tween = create_tween()
 	#tween.tween_property(Globals.player.camera, "position:z", cam_pos, 1)

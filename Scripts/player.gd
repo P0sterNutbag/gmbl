@@ -359,6 +359,8 @@ func state_walk(delta):
 		var collider = interact_cast.get_collider(0)
 		if collider.is_in_group("lootable"):
 			Globals.survival_ui.loot(collider.get_parent().inventory)
+			if collider.get_parent() is ItemContainer:
+				collider.get_parent().open()
 		elif collider is PhysicalBone3D:
 			if collider.health_component and collider.health_component.is_dead:
 				Globals.survival_ui.loot(collider.health_component.get_parent().inventory)

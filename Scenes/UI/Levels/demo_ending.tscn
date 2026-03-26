@@ -1,0 +1,159 @@
+[gd_scene format=3 uid="uid://dhp7tvt0tj1vr"]
+
+[ext_resource type="Script" uid="uid://b3vlavck1kcg2" path="res://Scripts/demo_ending.gd" id="1_wghi3"]
+[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="2_fdhkm"]
+[ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="3_dkggi"]
+[ext_resource type="Theme" uid="uid://dcnijc3hjurqk" path="res://Art/Themes/text_mediun_outline.tres" id="4_lmpge"]
+[ext_resource type="PackedScene" uid="uid://bj7gyfau2dx5w" path="res://Scenes/UI/menu_button.tscn" id="5_dygdv"]
+[ext_resource type="PackedScene" uid="uid://chqydw4q66jmg" path="res://Scenes/Environment/Controllers/world_environment.tscn" id="6_udiih"]
+[ext_resource type="PackedScene" uid="uid://dyumojcinahde" path="res://Scenes/Effects/Shaders/outline_fog_shader.tscn" id="7_3wgjc"]
+[ext_resource type="Script" uid="uid://bokxkydc5jmf" path="res://addons/zylann.hterrain/hterrain.gd" id="8_jdy2q"]
+[ext_resource type="Resource" path="res://addons/zylann.hterrain/data/main_menu/data.hterrain" id="9_jeq5a"]
+[ext_resource type="Script" uid="uid://b8f4u7je7ufby" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="10_vgqtm"]
+[ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/Environment/sand.png" id="11_lq7rg"]
+[ext_resource type="Texture2D" uid="uid://cfsov1xtejnen" path="res://Art/Textures/Environment/gravel.png" id="12_yihgh"]
+
+[sub_resource type="Resource" id="Resource_mh6sl"]
+script = ExtResource("10_vgqtm")
+mode = 0
+textures = [[ExtResource("11_lq7rg"), ExtResource("12_yihgh")], [null, null]]
+
+[node name="DemoEnding" type="Node3D" unique_id=481381854]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2003601117]
+script = ExtResource("1_wghi3")
+
+[node name="Menu" type="Control" parent="CanvasLayer" unique_id=42619159]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Menu" unique_id=1715864982]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -264.5
+offset_top = -121.0
+offset_right = 264.5
+offset_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_fdhkm")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Menu/PanelContainer" unique_id=26345484]
+layout_mode = 2
+theme = ExtResource("3_dkggi")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Menu/PanelContainer/MarginContainer" unique_id=791748064]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Menu/PanelContainer/MarginContainer/VBoxContainer" unique_id=19737580]
+custom_minimum_size = Vector2(332, 0)
+layout_mode = 2
+theme = ExtResource("4_lmpge")
+text = "Thats all for now. Thanks for playing the SLUGMOUTH Demo!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/Menu/PanelContainer/MarginContainer/VBoxContainer" unique_id=2009617104]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Wishlist" parent="CanvasLayer/Menu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1204034950 instance=ExtResource("5_dygdv")]
+layout_mode = 2
+text = "Wishlist on Steam"
+
+[node name="BackToGame" parent="CanvasLayer/Menu/PanelContainer/MarginContainer/VBoxContainer" unique_id=608493549 instance=ExtResource("5_dygdv")]
+layout_mode = 2
+text = "Back to game"
+
+[node name="ExitToMenu" parent="CanvasLayer/Menu/PanelContainer/MarginContainer/VBoxContainer" unique_id=137206324 instance=ExtResource("5_dygdv")]
+layout_mode = 2
+text = "Return to menu"
+
+[node name="ExitGame" parent="CanvasLayer/Menu/PanelContainer/MarginContainer/VBoxContainer" unique_id=29677339 instance=ExtResource("5_dygdv")]
+layout_mode = 2
+text = "Exit to desktop"
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=434594851]
+transform = Transform3D(-1, -1.5614963e-15, -8.7422784e-08, 2.0449981e-08, 0.9722557, -0.23392051, 8.499729e-08, -0.23392051, -0.9722557, 256.961, 0, 0)
+
+[node name="WorldEnvironment" parent="." unique_id=167554450 instance=ExtResource("6_udiih")]
+
+[node name="Shader" parent="." unique_id=1923705672 instance=ExtResource("7_3wgjc")]
+
+[node name="TerrainOffset" type="Node3D" parent="." unique_id=1412956592]
+
+[node name="HTerrain" type="Node3D" parent="TerrainOffset" unique_id=199728461]
+script = ExtResource("8_jdy2q")
+_terrain_data = ExtResource("9_jeq5a")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_mh6sl")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 2.0
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+metadata/_custom_type_script = "uid://bokxkydc5jmf"
+
+[node name="HTerrain2" type="Node3D" parent="TerrainOffset" unique_id=2076210711]
+transform = Transform3D(1, 8.742278e-08, 0, -8.742278e-08, 1, 0, 0, 0, -1, 0, 0, 1024)
+script = ExtResource("8_jdy2q")
+_terrain_data = ExtResource("9_jeq5a")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_mh6sl")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 2.0
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+metadata/_custom_type_script = "uid://bokxkydc5jmf"
+
+[node name="HTerrain3" type="Node3D" parent="TerrainOffset" unique_id=17293221]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1024)
+script = ExtResource("8_jdy2q")
+_terrain_data = ExtResource("9_jeq5a")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_mh6sl")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 2.0
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+metadata/_custom_type_script = "uid://bokxkydc5jmf"
+
+[connection signal="pressed" from="CanvasLayer/Menu/PanelContainer/MarginContainer/VBoxContainer/Wishlist" to="CanvasLayer" method="_on_wishlist_pressed"]
+[connection signal="pressed" from="CanvasLayer/Menu/PanelContainer/MarginContainer/VBoxContainer/BackToGame" to="CanvasLayer" method="_on_back_to_game_pressed"]
+[connection signal="pressed" from="CanvasLayer/Menu/PanelContainer/MarginContainer/VBoxContainer/ExitToMenu" to="CanvasLayer" method="_on_exit_to_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/Menu/PanelContainer/MarginContainer/VBoxContainer/ExitGame" to="CanvasLayer" method="_on_exit_game_pressed"]

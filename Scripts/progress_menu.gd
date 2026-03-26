@@ -48,12 +48,11 @@ func _on_continue_pressed() -> void:
 		Globals.overworld.queue_free()
 	#SceneManager.start_scene_transition("res://Scenes/UI/Levels/character_creation.tscn")
 	#Globals.overworld.player_died = true
-	SceneManager.load_on_enter = true
-	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld.tscn")
+	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld.tscn", false, true)
 
 
 func _on_quit_pressed() -> void:
-	SceneManager.start_scene_transition("res://Scenes/UI/main_menu.tscn")
+	SceneManager.start_scene_transition("res://Scenes/UI/Levels/main_menu.tscn")
 
 
 func _on_quit_2_pressed() -> void:

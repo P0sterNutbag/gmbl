@@ -20,6 +20,7 @@ func create_menu_items(array: Array, on_pressed = null, on_focus = null, loop_fo
 	for i in array:
 		var inst = create_menu_item()
 		inst.text = i.title
+		inst.custom_minimum_size.x = size.x
 		if i is Resource:
 			if on_pressed and on_pressed is Callable:
 				inst.pressed.connect(on_pressed.bind(inst, i))

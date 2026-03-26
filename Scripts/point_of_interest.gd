@@ -22,6 +22,9 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if Globals.player.camera_type == Globals.player.camera_types.town:
+		canvas_layer.hide()
+		return
 	# mouse hover
 	var viewport = get_viewport()
 	var pos = Globals.player.camera.unproject_position(global_position)

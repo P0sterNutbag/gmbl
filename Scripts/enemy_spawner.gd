@@ -6,6 +6,7 @@ extends Node3D
 var spawn_points: Array[Node3D]
 var used_spawns: Array[int]
 @onready var border_parent: Node3D = $"../Border"
+const NPC = preload("uid://cb05x24r4r8im")
 
 
 func _ready() -> void:
@@ -47,6 +48,8 @@ func _ready() -> void:
 		inst.set_deferred("global_transform", spawn_points[spawn_index].global_transform)
 		inst.bounty = quest
 		inst.faction = location_data.faction
+		inst.get_node("EnemyModel").style_data = quest.target_style
+		inst.get_node("EnemyModel").get_style_from_faction = false
 		enemy_amount -= 1
 		quest.target_node = inst
 	
@@ -64,8 +67,9 @@ func _ready() -> void:
 				spawn_enemy(attacker.location_data.faction)
 	
 	# spawn player allies
-	for ally in PlayerStats.allies:
-		var inst = ally.instantiate()
+	for data in PlayerStats.allies:
+		var inst = NPC.instantiate()
+		inst.npc_data = data
 		inst.faction = FactionManager.factions.player
 		get_tree().current_scene.add_child(inst)
 		inst.global_position = Globals.player.global_position + Vector3(randf_range(-5.0, 5.0), 0, randf_range(-5.0, 5.0))

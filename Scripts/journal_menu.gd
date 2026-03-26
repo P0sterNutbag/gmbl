@@ -4,6 +4,7 @@ extends MenuList
 @onready var description_label: Label = $HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Description
 @onready var reward_label: Label = $HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Reward
 @onready var confirmation_menu: Control = $ConfirmationMenu
+@onready var bounty_picture: TextureRect = %BountyPicture
 var selected_button: Control
 var quest_array
 
@@ -29,6 +30,12 @@ func on_button_focus_entered(button: Control, resource: Resource) -> void:
 		description_label.hide()
 	else:
 		description_label.show()
+	if resource is QuestBounty:
+		bounty_picture.get_parent().show()
+		bounty_picture.texture = resource.target_texture
+	else:
+		bounty_picture.get_parent().hide()
+		bounty_picture.texture = null
 	reward_label.text = "Reward: $" + str(resource.reward.amount)
 
 
@@ -45,3 +52,4 @@ func _on_visibility_changed() -> void:
 	confirmation_menu.hide()
 	if visible:
 		open(PlayerStats.quests)
+		bounty_picture.get_parent().hide()

@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var spawn_relative: bool = true
-@export var spawn_clamp: Vector2
+@export var spawn_clamp: Vector4 = Vector4(0, 0, 257, 257)
 @onready var player: Player = $"../Player"
 @onready var player_spawn: Node3D = $PlayerSpawn
 @onready var cover_spawn: Node3D = $CoverSpawn
@@ -11,8 +11,8 @@ func _ready() -> void:
 	if Globals.overworld and spawn_relative:
 		var dis = player_spawn.position.z
 		player_spawn.position = -Globals.overworld.player_spawn_vector * dis
-		player_spawn.global_position.x = clamp(player_spawn.global_position.x, spawn_clamp.x, 257 - spawn_clamp.x)
-		player_spawn.global_position.z = clamp(player_spawn.global_position.z, spawn_clamp.y, 257 - spawn_clamp.y)
+		player_spawn.global_position.x = clamp(player_spawn.global_position.x, spawn_clamp.x, spawn_clamp.z)
+		player_spawn.global_position.z = clamp(player_spawn.global_position.z, spawn_clamp.y, spawn_clamp.w)
 		player_spawn.position_on_heightmap()
 		dis = cover_spawn.position.z
 		cover_spawn.position = -Globals.overworld.player_spawn_vector * dis

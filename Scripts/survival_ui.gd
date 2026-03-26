@@ -17,6 +17,7 @@ extends CanvasLayer
 @onready var player_hp_bar: ProgressBar = %ProgressBar
 @onready var menu_buttons: Control = $MenuButtons
 @onready var skills_menu: Control = %Skills
+@onready var squad: PanelContainer = $Menus/VBoxContainer/Squad
 const LOG_NOTIFICATION = preload("res://Scenes/UI/log_notification.tscn")
 
 
@@ -178,3 +179,7 @@ func _on_journal_button_pressed() -> void:
 
 func _on_faction_button_pressed() -> void:
 	UiController.open_interface(factions)
+
+
+func _on_squad_tab_pressed() -> void:
+	UiController.open_interface(squad)

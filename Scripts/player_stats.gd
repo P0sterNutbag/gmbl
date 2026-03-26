@@ -1,7 +1,7 @@
 extends Node
 
 @export var starting_inventory: Inventory
-@export var allies: Array[PackedScene]
+@export var allies: Array[NpcData]
 @export var skills: CharacterSkills
 enum states {walk, pause, dead}
 var state = states.walk

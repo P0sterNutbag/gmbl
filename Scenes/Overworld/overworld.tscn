@@ -111,6 +111,9 @@
 [ext_resource type="Resource" uid="uid://nm0e00c2fx4" path="res://Resources/NpcStyles/npc_styles.tres" id="108_61ge7"]
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="108_g8jxq"]
 [ext_resource type="PackedScene" uid="uid://ddobx7rgw7u28" path="res://Scenes/Overworld/Environment/rock_wall.tscn" id="109_3le6t"]
+[ext_resource type="PackedScene" uid="uid://br17p7dm5gs8a" path="res://Scenes/Levels/checkpoint.tscn" id="109_g8jxq"]
+[ext_resource type="Script" uid="uid://b232v7uxee5yt" path="res://Scripts/level_transition.gd" id="112_8jwt6"]
+[ext_resource type="PackedScene" uid="uid://b0cqkj1fgouo2" path="res://Scenes/Overworld/NPCs/npc.tscn" id="114_tfd8k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jdigv"]
 render_priority = 0
@@ -660,7 +663,7 @@ metadata/_custom_type_script = "uid://ds2br0dh5ir38"
 
 [sub_resource type="Resource" id="Resource_lxg12"]
 script = ExtResource("93_rsj15")
-amount_min = 5
+amount_min = 6
 amount_max = 10
 item = ExtResource("94_3k4bo")
 metadata/_custom_type_script = "uid://dc15s83haevrb"
@@ -668,6 +671,7 @@ metadata/_custom_type_script = "uid://dc15s83haevrb"
 [sub_resource type="Resource" id="Resource_a1t0b"]
 script = ExtResource("69_2gpn5")
 potential_items = Array[ExtResource("93_rsj15")]([SubResource("Resource_lxg12")])
+reward_multiplier = 2.0
 metadata/_custom_type_script = "uid://bicpdyf13vj1j"
 
 [sub_resource type="Resource" id="Resource_1wc3g"]
@@ -906,7 +910,9 @@ metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [sub_resource type="Resource" id="Resource_mdiyu"]
 script = ExtResource("108_g8jxq")
-faction = 0
+faction = 4
+population = 18
+max_population = 18
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="Resource" id="Resource_b4834"]
@@ -931,6 +937,12 @@ text = "Pass Through"
 destination = 3
 metadata/_custom_type_script = "uid://bd7d8lpmtob24"
 
+[sub_resource type="Resource" id="Resource_63r5x"]
+script = ExtResource("49_opo3i")
+text = "Attack"
+destination = 6
+metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+
 [sub_resource type="Resource" id="Resource_k8xtr"]
 script = ExtResource("49_opo3i")
 text = "Leave"
@@ -939,7 +951,7 @@ metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
 
 [sub_resource type="Resource" id="Resource_x02ax"]
 script = ExtResource("50_nggm6")
-options = Array[ExtResource("49_opo3i")]([SubResource("Resource_g61r0"), SubResource("Resource_k8xtr")])
+options = Array[ExtResource("49_opo3i")]([SubResource("Resource_g61r0"), SubResource("Resource_63r5x"), SubResource("Resource_k8xtr")])
 metadata/_custom_type_script = "uid://cnu4xeujmgk51"
 
 [sub_resource type="Resource" id="Resource_e41e3"]
@@ -958,10 +970,21 @@ script = ExtResource("51_v8snn")
 method = "exit_to_game"
 metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
+[sub_resource type="Resource" id="Resource_6b86h"]
+script = ExtResource("51_v8snn")
+method = "start_level"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
 [sub_resource type="Resource" id="Resource_n8qb3"]
 script = ExtResource("53_ccrpr")
-bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_b4834"), SubResource("Resource_fgsb2"), SubResource("Resource_x02ax"), SubResource("Resource_e41e3"), SubResource("Resource_3le6t"), SubResource("Resource_ns634")])
+bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_b4834"), SubResource("Resource_fgsb2"), SubResource("Resource_x02ax"), SubResource("Resource_e41e3"), SubResource("Resource_3le6t"), SubResource("Resource_ns634"), SubResource("Resource_6b86h")])
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g8jxq"]
+size = Vector3(17.467407, 5.022339, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g8jxq"]
+radius = 3.3432899
 
 [node name="Overworld" type="Node3D" unique_id=1106168526]
 script = ExtResource("1_6y65m")
@@ -1048,7 +1071,7 @@ random_rotate_z = true
 
 [node name="SnapToTerrain" type="Node3D" parent="." unique_id=1726042150 node_paths=PackedStringArray("objects_to_snap")]
 script = ExtResource("27_oapb8")
-objects_to_snap = [NodePath("../BanditCamp"), NodePath("../BanditTown"), NodePath("../Crateyard"), NodePath("../RockCanyon"), NodePath("../SandDunes"), NodePath("../DirtTown"), NodePath("../Scrapyard"), NodePath("../DrugDen"), null, null, null, null, null, null, NodePath("../PlayerStart"), null, null, null]
+objects_to_snap = [NodePath("../Checkpoint")]
 
 [node name="PlayerStart" type="Node3D" parent="." unique_id=136712645]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 209.235, 0.81097287, 203.77374)
@@ -1136,11 +1159,28 @@ shop = SubResource("Resource_ht31n")
 transform = Transform3D(-0.4736271, 0, -0.8807255, 0, 1, 0, 0.8807255, 0, -0.4736271, 151.14008, 0.45229244, 236.78027)
 
 [node name="Checkpoint" parent="." unique_id=1081176612 instance=ExtResource("107_pay3g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180.89359, 0.9566879, 380.62997)
+transform = Transform3D(0.99948496, 0, -0.032091096, 0, 1, 0, 0.032091096, 0, 0.99948496, 177.84828, 2.7232585, 387.87094)
 title = "Checkpoint"
 location_data = SubResource("Resource_mdiyu")
+encounter_scene = ExtResource("109_g8jxq")
 dialogue_tree = SubResource("Resource_n8qb3")
 can_spawn_npcs = false
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Checkpoint" unique_id=786218358]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoint/StaticBody3D" unique_id=255090771]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049041748, 0.91741943, 0)
+shape = SubResource("BoxShape3D_g8jxq")
+
+[node name="Area3D" type="Area3D" parent="Checkpoint" unique_id=1670856354]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.450581e-09, 0, 16.075987)
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("112_8jwt6")
+target_level = "res://Scenes/UI/Levels/demo_ending.tscn"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoint/Area3D" unique_id=451537025]
+shape = SubResource("SphereShape3D_g8jxq")
 
 [node name="Barrier" type="Node3D" parent="." unique_id=1387259195]
 
@@ -1189,7 +1229,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.30184, -32.277424, 227.243
 [node name="RockWall15" parent="Barrier" unique_id=2031924465 instance=ExtResource("109_3le6t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.85559, -37.980083, 306.08673)
 
+[node name="Npc" parent="." unique_id=907079178 instance=ExtResource("114_tfd8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 207.64294, 5.7633076, 212.28369)
+
 [connection signal="timeout" from="NpcController/Timer" to="NpcController" method="_on_timer_timeout"]
 [connection signal="timeout" from="NpcController/Timer" to="NpcController/Timer" method="_on_timeout"]
+[connection signal="body_entered" from="Checkpoint/Area3D" to="Checkpoint/Area3D" method="_on_body_entered"]
 
 [editable path="WorldEnvironment"]

@@ -71,13 +71,13 @@ func on_option_selected(option: DialogueOption, option_button: Control) -> void:
 		if !option.is_condition_true():
 			Globals.survival_ui.create_notification(option.failue_message)
 			return
-	advance_dialogue(option.destination)
 	for child in get_child(-1).option_container.get_children():
 		if child != option_button:
 			child.queue_free()
 		else:
 			child._on_focus_exited()
 			child.disabled = true
+	advance_dialogue(option.destination)
 	get_child(-1).size.y = 0
 
 
@@ -199,16 +199,16 @@ func set_recruit_price() -> void:
 	dialogue_tree.bubbles[index + 1].options[0].text = "Pay " + "($" + str(amount) + ")"
 
 
-func recruit_npc(amount:int, fail_index: int) -> void:
+func recruit_npc(amount:int) -> void:
 	#var o = dialogue_tree.owner
 	var location_data = Globals.overworld.current_encounter.location_data
-	if PlayerStats.inventory.money - amount >= 0 and location_data.population > 1:
-		PlayerStats.inventory.money -= amount
-		location_data.population -= 1
-		PlayerStats.allies.append(load("res://Scenes/NPCs/ally.tscn"))
-		Globals.survival_ui.create_notification("-$" + str(amount))
-		Globals.survival_ui.create_notification("Ally added to party")
-		advance_dialogue(index + 1)
+	#if PlayerStats.inventory.money - amount >= 0 and location_data.population > 1:
+	PlayerStats.inventory.money -= amount
+	#location_data.population -= 1
+	PlayerStats.allies.append(NpcData.new())
+	Globals.survival_ui.create_notification("-$" + str(amount))
+	Globals.survival_ui.create_notification("Ally added to party")
+	advance_dialogue(index + 1)
 		#exit_to_game()
-	else:
-		advance_dialogue(fail_index)
+	#else:
+		#advance_dialogue(fail_index)

@@ -6,6 +6,7 @@ var enemy_destination: Vector3
 var enemies: Array
 var location_data: LocationData
 var squads: Array[LocationData]
+const NPC = preload("uid://cb05x24r4r8im")
 
 
 func _ready():
@@ -37,8 +38,9 @@ func _ready():
 		for i in enemy_amount:
 			spawn_enemy(spawn_pos, squad.faction)
 	# spawn player allies
-	for ally in PlayerStats.allies:
-		var inst = ally.instantiate()
+	for data in PlayerStats.allies:
+		var inst = NPC.instantiate()
+		inst.npc_data = data
 		inst.faction = FactionManager.factions.player
 		get_tree().current_scene.add_child(inst)
 		inst.global_position = Globals.player.global_position + Vector3(randf_range(-5.0, 5.0), 0, randf_range(-5.0, 5.0))

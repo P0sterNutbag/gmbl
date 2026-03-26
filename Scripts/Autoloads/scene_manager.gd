@@ -16,17 +16,18 @@ func _ready():
 	set_process(false)
 
 
-func start_scene_transition(scene, remove_current: bool = false) -> void:
+func start_scene_transition(scene, remove_current: bool = false, load_save_data: bool = false) -> void:
 	get_tree().current_scene.set_deferred("process_mode", PROCESS_MODE_DISABLED)
 	scene_transition.transition_in()
 	next_scene = scene
 	remove_from_tree = remove_current
+	load_on_enter = load_save_data
 
 
 func start_encounter_transition(scene) -> void:
 	get_tree().current_scene.set_deferred("process_mode", PROCESS_MODE_DISABLED)
 	var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
-	tween.tween_property(Globals.player.camera, "position:z", 2, 1)
+	tween.tween_property(Globals.player.position_offset, "position:z", 2, 1)
 	tween.tween_callback(start_scene_transition.bind(scene, true))
 
 

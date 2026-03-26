@@ -54,8 +54,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_menu_item_pressed() -> void:
-	SceneManager.load_on_enter = true
-	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld.tscn")
+	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld.tscn", false, true)
 
 
 func _on_menu_item_2_pressed() -> void:

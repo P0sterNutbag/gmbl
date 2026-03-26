@@ -36,6 +36,7 @@
 [ext_resource type="PackedScene" uid="uid://cxxj4m44urb7y" path="res://Scenes/UI/skills_box.tscn" id="33_02qtm"]
 [ext_resource type="Theme" uid="uid://tivwhtwiofll" path="res://Art/Themes/button.tres" id="33_ft4n5"]
 [ext_resource type="Texture2D" uid="uid://bbjp6yopufgca" path="res://Art/Textures/UI/cog icon.png" id="33_ohwuk"]
+[ext_resource type="Script" uid="uid://dhklj12kndwr7" path="res://Scripts/squad_ui.gd" id="34_02qtm"]
 [ext_resource type="Texture2D" uid="uid://duhvnasnxpgc4" path="res://Art/Textures/UI/journal icon.png" id="35_ft4n5"]
 [ext_resource type="Script" uid="uid://boi8n7i6gbf6a" path="res://Scripts/custom_tooltip.gd" id="36_8cvki"]
 [ext_resource type="Texture2D" uid="uid://brs4ktd7wgyno" path="res://Art/Textures/UI/faction icon.png" id="36_m6fmc"]
@@ -617,6 +618,11 @@ layout_mode = 2
 size_flags_horizontal = 1
 text = "Clans"
 
+[node name="SquadTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" unique_id=214550987 instance=ExtResource("22_jtf3n")]
+layout_mode = 2
+size_flags_horizontal = 1
+text = "Squad"
+
 [node name="CharacterTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" unique_id=409641333 instance=ExtResource("22_jtf3n")]
 visible = false
 layout_mode = 2
@@ -798,8 +804,10 @@ visible = false
 layout_mode = 2
 
 [node name="Title" type="Label" parent="Menus/VBoxContainer/Journal/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1986982747]
+custom_minimum_size = Vector2(670, 0)
 layout_mode = 2
 theme = ExtResource("5_jtf3n")
+autowrap_mode = 2
 
 [node name="Description" type="Label" parent="Menus/VBoxContainer/Journal/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=860515549]
 custom_minimum_size = Vector2(600, 0)
@@ -810,6 +818,17 @@ autowrap_mode = 2
 [node name="Reward" type="Label" parent="Menus/VBoxContainer/Journal/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=2080700279]
 layout_mode = 2
 theme = ExtResource("5_jtf3n")
+
+[node name="PanelContainer2" type="PanelContainer" parent="Menus/VBoxContainer/Journal/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=2023987]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="BountyPicture" type="TextureRect" parent="Menus/VBoxContainer/Journal/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer2" unique_id=1031239079]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+size_flags_horizontal = 0
+expand_mode = 2
 
 [node name="Control" type="Control" parent="Menus/VBoxContainer/Journal/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1668113218]
 layout_mode = 2
@@ -1074,6 +1093,20 @@ script = ExtResource("27_k64vs")
 faction_vertical = 3
 faction_horizontal = 3
 
+[node name="Squad" type="PanelContainer" parent="Menus/VBoxContainer" unique_id=42983910]
+visible = false
+layout_mode = 2
+theme = ExtResource("11_0pkni")
+script = ExtResource("34_02qtm")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menus/VBoxContainer/Squad" unique_id=779325665]
+layout_mode = 2
+theme = ExtResource("12_2dyl4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/Squad/MarginContainer" unique_id=1809378092]
+layout_mode = 2
+script = ExtResource("15_k4cvi")
+
 [node name="PlayerHealth" type="Control" parent="." unique_id=1342773347]
 layout_mode = 3
 anchors_preset = 2
@@ -1270,12 +1303,14 @@ script = ExtResource("36_8cvki")
 [connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/InventoryTab" to="." method="_on_inventory_tab_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/JournalTab" to="." method="_on_journal_tab_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/FactionTab" to="." method="_on_faction_tab_pressed"]
+[connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/SquadTab" to="." method="_on_squad_tab_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/CharacterTab" to="." method="_on_character_tab_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Toolbar/ExitMenu" to="." method="_on_exit_menu_pressed"]
 [connection signal="visibility_changed" from="Menus/VBoxContainer/Journal" to="Menus/VBoxContainer/Journal" method="_on_visibility_changed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Journal/ConfirmationMenu/PanelContainer/MarginContainer/VBoxContainer/Yes" to="Menus/VBoxContainer/Journal" method="_on_yes_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Journal/ConfirmationMenu/PanelContainer/MarginContainer/VBoxContainer/No" to="Menus/VBoxContainer/Journal" method="_on_no_pressed"]
 [connection signal="visibility_changed" from="Menus/VBoxContainer/Factions" to="Menus/VBoxContainer/Factions" method="_on_visibility_changed"]
+[connection signal="visibility_changed" from="Menus/VBoxContainer/Squad" to="Menus/VBoxContainer/Squad" method="_on_visibility_changed"]
 [connection signal="pressed" from="MenuButtons/InventoryButton" to="." method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="MenuButtons/JournalButton" to="." method="_on_journal_button_pressed"]
 [connection signal="pressed" from="MenuButtons/FactionButton" to="." method="_on_faction_button_pressed"]

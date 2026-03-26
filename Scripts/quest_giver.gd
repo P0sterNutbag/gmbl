@@ -13,4 +13,4 @@ func restock_quests() -> void:
 	var amount_to_add = randi_range(min_quests, max_quests)
 	amount_to_add -= quests.size()
 	for i in amount_to_add:
-		quests.append(random_quests[randi() % random_quests.size()].generate_quest())
+		quests.append(await random_quests[randi() % random_quests.size()].generate_quest())

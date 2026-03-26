@@ -106,7 +106,7 @@ func _on_skin_options_option_changed(value: Variant) -> void:
 
 
 func _on_back_button_pressed() -> void:
-	SceneManager.start_scene_transition("res://Scenes/UI/main_menu.tscn")
+	SceneManager.start_scene_transition("res://Scenes/UI/Levels/main_menu.tscn")
 
 
 func _on_hair_color_options_option_changed(value: Variant) -> void:

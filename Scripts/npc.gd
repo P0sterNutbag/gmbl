@@ -1,6 +1,7 @@
 extends CharacterBody3D
 class_name Enemy
 
+@export var npc_data: NpcData
 @export var title: String = "Enemy"
 @export var strafe_change := 0.5
 @export var items_to_drop: Array[PackedScene]
@@ -92,7 +93,6 @@ func _ready() -> void:
 	# set affinity to player
 	await get_tree().process_frame
 	set_detection_targets()
-	
 
 
 func _physics_process(delta: float) -> void:

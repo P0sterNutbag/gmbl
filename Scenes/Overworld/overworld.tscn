@@ -114,6 +114,8 @@
 [ext_resource type="PackedScene" uid="uid://br17p7dm5gs8a" path="res://Scenes/Levels/checkpoint.tscn" id="109_g8jxq"]
 [ext_resource type="Script" uid="uid://b232v7uxee5yt" path="res://Scripts/level_transition.gd" id="112_8jwt6"]
 [ext_resource type="PackedScene" uid="uid://b0cqkj1fgouo2" path="res://Scenes/Overworld/NPCs/npc.tscn" id="114_tfd8k"]
+[ext_resource type="Resource" uid="uid://bf23ua6ic8mo4" path="res://Resources/Items/Ammo/shotgun_ammo_box.tres" id="115_r4dmk"]
+[ext_resource type="Resource" uid="uid://bkae25scq6c12" path="res://Resources/Items/Ammo/sniper_ammo.tres" id="116_fm8tw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jdigv"]
 render_priority = 0
@@ -986,6 +988,80 @@ size = Vector3(17.467407, 5.022339, 1)
 [sub_resource type="SphereShape3D" id="SphereShape3D_g8jxq"]
 radius = 3.3432899
 
+[sub_resource type="Resource" id="Resource_c7oi0"]
+resource_local_to_scene = true
+script = ExtResource("108_g8jxq")
+faction = null
+population = 4
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
+
+[sub_resource type="Resource" id="Resource_kx6ku"]
+script = ExtResource("42_g1wl1")
+object_to_spawn = ExtResource("67_bqxwu")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_0h4u7"]
+script = ExtResource("42_g1wl1")
+object_to_spawn = ExtResource("54_nggm6")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_a75c0"]
+script = ExtResource("42_g1wl1")
+object_to_spawn = ExtResource("115_r4dmk")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_vljco"]
+script = ExtResource("42_g1wl1")
+object_to_spawn = ExtResource("64_v8snn")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_mchvl"]
+script = ExtResource("42_g1wl1")
+object_to_spawn = ExtResource("116_fm8tw")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_b5yoy"]
+script = ExtResource("42_g1wl1")
+object_to_spawn = ExtResource("41_8vmc3")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_shp8b"]
+script = ExtResource("42_g1wl1")
+object_to_spawn = ExtResource("44_ua8uw")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_kiig0"]
+script = ExtResource("42_g1wl1")
+object_to_spawn = ExtResource("46_lf2le")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_yaxp3"]
+resource_local_to_scene = true
+script = ExtResource("54_xkckx")
+min_amount = 3
+max_amount = 8
+potential_slots = Array[ExtResource("42_g1wl1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0")])
+money = 500
+title = "Squad Inventory"
+metadata/_custom_type_script = "uid://b34kwea65we13"
+
+[sub_resource type="Resource" id="Resource_75ddp"]
+resource_local_to_scene = true
+script = ExtResource("47_xt1pr")
+inventory = SubResource("Resource_yaxp3")
+price_modifiers = {
+"Ammo": 0.5,
+"Armor": 0.5,
+"Consumable": 0.75,
+"Gear": 0.75,
+"Junk": 0.75,
+"Survival": 0.75,
+"Weapons": 0.5
+}
+faction = null
+title = "Traveler"
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+
 [node name="Overworld" type="Node3D" unique_id=1106168526]
 script = ExtResource("1_6y65m")
 
@@ -1232,8 +1308,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.85559, -37.980083, 306.086
 [node name="Npc" parent="." unique_id=907079178 instance=ExtResource("114_tfd8k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 207.64294, 5.7633076, 212.28369)
 
+[node name="Location" parent="Npc" index="1" unique_id=361678620]
+location_data = SubResource("Resource_c7oi0")
+shop = SubResource("Resource_75ddp")
+
 [connection signal="timeout" from="NpcController/Timer" to="NpcController" method="_on_timer_timeout"]
 [connection signal="timeout" from="NpcController/Timer" to="NpcController/Timer" method="_on_timeout"]
 [connection signal="body_entered" from="Checkpoint/Area3D" to="Checkpoint/Area3D" method="_on_body_entered"]
 
 [editable path="WorldEnvironment"]
+[editable path="Npc"]
+[editable path="Npc/Location"]
+[editable path="Npc/Location/PointOfInterest"]

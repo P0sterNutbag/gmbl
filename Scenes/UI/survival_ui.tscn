@@ -31,6 +31,8 @@
 [ext_resource type="Script" uid="uid://pcx3b5tjvijq" path="res://Scripts/faction_ui_box.gd" id="27_k64vs"]
 [ext_resource type="Script" uid="uid://dlnug53qsfaf6" path="res://Scripts/faction_ui.gd" id="27_o0jpn"]
 [ext_resource type="Theme" uid="uid://crg6v3iu4nx3m" path="res://Art/Themes/text_header_outline.tres" id="28_8cvki"]
+[ext_resource type="PackedScene" uid="uid://st2mrllebqci" path="res://Scenes/UI/spacer.tscn" id="28_w0rat"]
+[ext_resource type="Theme" uid="uid://ddlkdp3v3plc" path="res://Art/Themes/hbox_container.tres" id="29_tlm7h"]
 [ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="31_kmwaq"]
 [ext_resource type="Texture2D" uid="uid://r08gms0nyjju" path="res://Art/Textures/UI/hp icon.png" id="32_lboml"]
 [ext_resource type="PackedScene" uid="uid://cxxj4m44urb7y" path="res://Scenes/UI/skills_box.tscn" id="33_02qtm"]
@@ -367,13 +369,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -573.0
-offset_top = -408.5
-offset_right = 573.0
-offset_bottom = 408.5
+offset_left = -396.0
+offset_top = -259.0
+offset_right = 402.0
+offset_bottom = 259.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 64
+theme = ExtResource("29_tlm7h")
 
 [node name="Inventory" parent="TransferInventory" unique_id=1473971546 node_paths=PackedStringArray("opposing_ui") instance=ExtResource("9_to4rm")]
 unique_name_in_owner = true
@@ -567,17 +569,16 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menus" unique_id=380085495]
-custom_minimum_size = Vector2(0, 898)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -551.0
-offset_top = -433.0
-offset_right = 551.0
-offset_bottom = 433.0
+offset_left = -426.0
+offset_top = -282.0
+offset_right = 426.0
+offset_bottom = 265.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("13_oq622")
@@ -619,6 +620,7 @@ size_flags_horizontal = 1
 text = "Clans"
 
 [node name="SquadTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" unique_id=214550987 instance=ExtResource("22_jtf3n")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 1
 text = "Squad"
@@ -637,7 +639,7 @@ script = null
 [node name="PlayerInventory" type="HBoxContainer" parent="Menus/VBoxContainer" unique_id=2000109519]
 visible = false
 layout_mode = 2
-theme_override_constants/separation = 64
+theme = ExtResource("29_tlm7h")
 
 [node name="Inventory" parent="Menus/VBoxContainer/PlayerInventory" unique_id=41064814 instance=ExtResource("9_to4rm")]
 layout_mode = 2
@@ -690,6 +692,9 @@ text = "Secondary: "
 script = ExtResource("19_jtf3n")
 slot = 1
 
+[node name="Control" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1024254626 instance=ExtResource("28_w0rat")]
+layout_mode = 2
+
 [node name="Label" type="Label" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=915352403]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -707,6 +712,9 @@ layout_mode = 2
 text = "Body: "
 script = ExtResource("19_jtf3n")
 slot = 3
+
+[node name="Control2" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=961842235 instance=ExtResource("28_w0rat")]
+layout_mode = 2
 
 [node name="Label2" type="Label" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=983656834]
 layout_mode = 2
@@ -754,7 +762,7 @@ pause_on_open = true
 [node name="HBoxContainer" type="HBoxContainer" parent="Menus/VBoxContainer/Journal" unique_id=858249551]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 64
+theme = ExtResource("29_tlm7h")
 
 [node name="PanelContainer" type="PanelContainer" parent="Menus/VBoxContainer/Journal/HBoxContainer" unique_id=1871983518]
 custom_minimum_size = Vector2(300, 0)
@@ -770,6 +778,7 @@ layout_mode = 2
 theme = ExtResource("13_oq622")
 
 [node name="Label" type="Label" parent="Menus/VBoxContainer/Journal/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=77434872]
+visible = false
 layout_mode = 2
 theme = ExtResource("28_8cvki")
 text = "Jobs"
@@ -804,13 +813,11 @@ visible = false
 layout_mode = 2
 
 [node name="Title" type="Label" parent="Menus/VBoxContainer/Journal/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1986982747]
-custom_minimum_size = Vector2(670, 0)
 layout_mode = 2
 theme = ExtResource("5_jtf3n")
 autowrap_mode = 2
 
 [node name="Description" type="Label" parent="Menus/VBoxContainer/Journal/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=860515549]
-custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 theme = ExtResource("5_jtf3n")
 autowrap_mode = 2
@@ -820,6 +827,7 @@ layout_mode = 2
 theme = ExtResource("5_jtf3n")
 
 [node name="PanelContainer2" type="PanelContainer" parent="Menus/VBoxContainer/Journal/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=2023987]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 
@@ -840,6 +848,7 @@ layout_mode = 2
 [node name="Factions" type="PanelContainer" parent="Menus/VBoxContainer" unique_id=56908324]
 visible = false
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("11_0pkni")
 script = ExtResource("27_o0jpn")
 

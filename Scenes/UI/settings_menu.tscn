@@ -104,14 +104,20 @@ size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("4_oadur")
 
+[node name="Fullscreen" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1458729078 instance=ExtResource("6_cs2gm")]
+layout_mode = 2
+text = "Fullscreen"
+
 [node name="Resolution" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=418842228 instance=ExtResource("7_sv08j")]
 layout_mode = 2
 text = "Resolution"
 options = Array[ExtResource("8_w0jc6")]([SubResource("Resource_rjkbt"), SubResource("Resource_8t2tk"), SubResource("Resource_sv08j"), SubResource("Resource_w0jc6"), SubResource("Resource_ulty1")])
 
-[node name="Fullscreen" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1458729078 instance=ExtResource("6_cs2gm")]
+[node name="AspectRatio" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=237768494 instance=ExtResource("7_sv08j")]
+visible = false
 layout_mode = 2
-text = "Fullscreen"
+text = "Resolution"
+options = Array[ExtResource("8_w0jc6")]([SubResource("Resource_rjkbt"), SubResource("Resource_8t2tk"), SubResource("Resource_sv08j"), SubResource("Resource_w0jc6"), SubResource("Resource_ulty1")])
 
 [node name="Volume" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1424550850 instance=ExtResource("5_n6o6n")]
 layout_mode = 2
@@ -129,11 +135,11 @@ text = "SFX Volume"
 layout_mode = 2
 text = "Aim Sensitivity"
 
-[node name="HSlider" parent="MarginContainer/VBoxContainer/VBoxContainer/AimSensitivity/HBoxContainer" index="0"]
+[node name="HSlider" parent="MarginContainer/VBoxContainer/VBoxContainer/AimSensitivity/HBoxContainer" parent_id_path=PackedInt32Array(116586170, 1665222154) index="0" unique_id=1123217729]
 min_value = 1.0
 value = 51.0
 
-[node name="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/AimSensitivity/HBoxContainer" index="1"]
+[node name="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/AimSensitivity/HBoxContainer" parent_id_path=PackedInt32Array(116586170, 1665222154) index="1" unique_id=199963667]
 text = "50"
 
 [node name="CRT" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1587634285 instance=ExtResource("6_cs2gm")]
@@ -152,8 +158,9 @@ options = Array[ExtResource("8_w0jc6")]([SubResource("Resource_my5nr"), SubResou
 layout_mode = 2
 text = "Back"
 
-[connection signal="option_changed" from="MarginContainer/VBoxContainer/VBoxContainer/Resolution" to="." method="_on_resolution_option_changed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
+[connection signal="option_changed" from="MarginContainer/VBoxContainer/VBoxContainer/Resolution" to="." method="_on_resolution_option_changed"]
+[connection signal="option_changed" from="MarginContainer/VBoxContainer/VBoxContainer/AspectRatio" to="." method="_on_resolution_option_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/Volume/HBoxContainer/HSlider" to="." method="_on_master_h_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/MusicVolume/HBoxContainer/HSlider" to="." method="_on_music_h_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/SfxVolume/HBoxContainer/HSlider" to="." method="_on_sfx_h_slider_value_changed"]

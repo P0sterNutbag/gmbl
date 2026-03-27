@@ -22,8 +22,8 @@ func _ready() -> void:
 func set_all_settings() -> void:
 	var is_fullscreen = ConfigManager.file.get_value("settings", "fullscreen", true)
 	fullscreen.toggled.emit(is_fullscreen)
-	var res = ConfigManager.file.get_value("settings", "resolution", Vector2i(1920, 1080))
-	resolution.set_index_by_value(res)
+	#var res = ConfigManager.file.get_value("settings", "resolution", Vector2i(1920, 1080))
+	#resolution.set_index_by_value(res)
 	var vol = ConfigManager.file.get_value("settings", "master_volume", 50)
 	volume.h_slider.value = vol
 	var mv = ConfigManager.file.get_value("settings", "music_volume", 50)
@@ -107,9 +107,9 @@ func _on_fullscreen_toggled(toggled_on: bool) -> void:
 	var window = get_window()
 	if toggled_on:
 		window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN
-		resolution.hide()
+		#resolution.hide()
 	else:
 		window.mode = Window.MODE_WINDOWED
-		resolution.show()
+		#resolution.show()
 	ConfigManager.file.set_value("settings", "fullscreen", toggled_on)
 	ConfigManager.save()

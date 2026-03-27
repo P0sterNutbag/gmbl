@@ -169,7 +169,8 @@ func leave_shop() -> void:
 func start_level() -> void:
 	Globals.ui.portraits.hide()
 	UiController.close_interface(self)
-	Globals.overworld.current_encounter.transition_to_level(true)
+	var start_alert = FactionManager.get_faction_relation(Globals.overworld.current_encounter.location_data.faction, FactionManager.factions.player) < 0
+	Globals.overworld.current_encounter.transition_to_level(start_alert)
 
 
 func pay_fee(amount: int, fail_index: int) -> void:
@@ -201,7 +202,7 @@ func set_recruit_price() -> void:
 
 func recruit_npc(amount:int) -> void:
 	#var o = dialogue_tree.owner
-	var location_data = Globals.overworld.current_encounter.location_data
+	#var location_data = Globals.overworld.current_encounter.location_data
 	#if PlayerStats.inventory.money - amount >= 0 and location_data.population > 1:
 	PlayerStats.inventory.money -= amount
 	#location_data.population -= 1

@@ -40,7 +40,6 @@ const text_style = preload("res://Art/Themes/text_small.tres")
 @onready var size_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/Size
 @onready var category_label: Label = %Category
 @onready var stats: HBoxContainer = %Stats
-@onready var stats_panel: PanelContainer = $MarginContainer/VBoxContainer/Panel
 @onready var description: Label = %Label
 @onready var use_controls: HBoxContainer = $Controls/HBoxContainer
 @onready var loot_controls: HBoxContainer = $Controls/HBoxContainer2
@@ -48,6 +47,7 @@ const text_style = preload("res://Art/Themes/text_small.tres")
 @onready var drop_item_text: Label = $DropMenu/PanelContainer/MarginContainer/VBoxContainer/Label
 @onready var drop_amount_h_slider: HSlider = $DropMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/HSlider
 @onready var drop_amount_label: Label = $DropMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Label
+@onready var item_tooltip: Control = $ItemTooltip
 
 
 func _ready() -> void:
@@ -71,6 +71,9 @@ func _process(_delta: float) -> void:
 	if show_size:
 		var space_left = source_inventory.get_space_left()
 		size_label.text = str(source_inventory.space - space_left) + "/" + str(source_inventory.space)
+	# stats panel
+	if item_tooltip.visible:
+		item_tooltip.position = get_local_mouse_position()
 
 
 func set_items():
@@ -158,20 +161,20 @@ func set_description(item: Item = null):
 	for child in stats.get_children():
 		child.queue_free()
 	if !item:
-		stats_panel.hide()
+		item_tooltip.hide()
 		return
 	if item.description != "":
 		description.show()
 		description.text = item.description
-		stats_panel.show()
+		item_tooltip.show()
 	else:
 		description.hide()
 	if item is not Equipment and item.description == "":
-		stats_panel.hide()
+		item_tooltip.hide()
 		return
 	if item is not EquipmentGun:
 		return
-	stats_panel.show()
+	item_tooltip.show()
 	for stat in item.stats:
 		var inst = Label.new()
 		#inst.text = stat + ": " + str(item.stats[stat])

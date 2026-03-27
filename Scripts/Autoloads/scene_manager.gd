@@ -26,9 +26,12 @@ func start_scene_transition(scene, remove_current: bool = false, load_save_data:
 
 func start_encounter_transition(scene) -> void:
 	get_tree().current_scene.set_deferred("process_mode", PROCESS_MODE_DISABLED)
-	var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
-	tween.tween_property(Globals.player.position_offset, "position:z", 2, 1)
-	tween.tween_callback(start_scene_transition.bind(scene, true))
+	if Globals.player.camera_type == Globals.player.camera_types.overhead:
+		var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
+		tween.tween_property(Globals.player.position_offset, "position:z", 2, 1)
+		tween.tween_callback(start_scene_transition.bind(scene, true))
+	else:
+		start_scene_transition(scene, true)
 
 
 func change_scene() -> void:

@@ -40,6 +40,7 @@ var max_breath = 2.0:
 var current_breath = 3.0
 var is_crouching: bool
 var is_sprinting: bool
+var is_walking: bool
 var on_ladder: bool
 var can_hold_breath: bool = true
 var is_holding_breath: bool
@@ -219,6 +220,8 @@ func state_walk(delta):
 			speed = walk_speed
 		elif is_sprinting: #Input.is_action_pressed("sprint") and input.y < 0 and (!gun or (gun.shoot_cooldown_timer.time_left == 0 and !Input.is_action_pressed("shoot"))):
 			speed = run_speed
+		elif is_walking:
+			speed = walk_speed
 		else:
 			speed = base_speed
 	
@@ -229,6 +232,10 @@ func state_walk(delta):
 	else:
 		if Input.is_action_just_pressed("sprint") or input.y >= 0:# or (gun and gun.shoot_cooldown_timer.time_left == 0 and Input.is_action_pressed("shoot")):
 			is_sprinting = false
+	
+	# walking
+	if Input.is_action_just_pressed("walk"):
+		is_walking = !is_walking
 	
 	# jump
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
@@ -260,11 +267,12 @@ func state_walk(delta):
 	
 	# change gun
 	var kit = PlayerStats.inventory.equipment_kit
-	if Input.is_action_just_released("next_gun"):
-		change_gun_slot(wrap(PlayerStats.gun_index - 1, 0, kit.gun_slots.size()))
-	elif Input.is_action_just_released("last_gun"):
-		change_gun_slot(wrap(PlayerStats.gun_index + 1, 0, kit.gun_slots.size()))
-	elif Input.is_action_just_pressed("slot_1"):
+	if !Globals.ui.tooltip.visible:
+		if Input.is_action_just_released("next_gun"):
+			change_gun_slot(wrap(PlayerStats.gun_index - 1, 0, kit.gun_slots.size()))
+		elif Input.is_action_just_released("last_gun"):
+			change_gun_slot(wrap(PlayerStats.gun_index + 1, 0, kit.gun_slots.size()))
+	if Input.is_action_just_pressed("slot_1"):
 		change_gun_slot(0)
 	elif Input.is_action_just_pressed("slot_2"):
 		change_gun_slot(1)
@@ -343,29 +351,35 @@ func state_walk(delta):
 		var collider = interact_cast.get_collider(0)
 		if !collider:
 			return
-		if collider.is_in_group("lootable") or (collider is PhysicalBone3D and collider.health_component and collider.health_component.is_dead):
-			Globals.ui.tooltip.text = "F: Loot"
-		elif collider is ItemPickup:
-			Globals.ui.tooltip.text = "F: Pick Up"
-		elif collider is InteractableObject:
-			Globals.ui.tooltip.text = collider.tooltip_text
+		#if collider.is_in_group("lootable") or (collider is PhysicalBone3D and collider.health_component and collider.health_component.is_dead):
+			#Globals.ui.set_tooltip_custom("Loot")
+		if "interaction_object" in collider:
+			collider = collider.interaction_object
+		if collider is InteractableObject:
+			Globals.ui.set_tooltip(collider)
+			if Input.is_action_just_pressed("next_gun"):
+				collider.index = wrapi(collider.index + 1, 0, collider.actions.size())
+			elif Input.is_action_just_pressed("last_gun"):
+				collider.index = wrapi(collider.index - 1, 0, collider.actions.size())
 	else:
-		Globals.ui.tooltip.text = ""
+		Globals.ui.tooltip.hide()
 	
 	# interact
 	if Input.is_action_just_pressed("interact"):
 		if !interact_cast.is_colliding():
 			return
 		var collider = interact_cast.get_collider(0)
-		if collider.is_in_group("lootable"):
-			Globals.survival_ui.loot(collider.get_parent().inventory)
-			if collider.get_parent() is ItemContainer:
-				collider.get_parent().open()
-		elif collider is PhysicalBone3D:
-			if collider.health_component and collider.health_component.is_dead:
-				Globals.survival_ui.loot(collider.health_component.get_parent().inventory)
-		elif collider is InteractableObject:
+		#if collider.is_in_group("lootable"):
+			#Globals.survival_ui.loot(collider.get_parent().inventory)
+			#if collider.get_parent() is ItemContainer:
+				#collider.get_parent().open()
+		#elif collider is PhysicalBone3D:
+			#if collider.health_component and collider.health_component.is_dead:
+				#Globals.survival_ui.loot(collider.health_component.get_parent().inventory)
+		if collider is InteractableObject:
 			collider.interact()
+		elif "interaction_object" in collider:
+			collider.interaction_object.interact()
 		else:
 			if collider is ItemPickup:
 				collider.pickup()
@@ -694,7 +708,7 @@ func change_gun_slot(slot_index: int) -> void:
 	PlayerStats.gun_index = slot_index
 
 
-func change_gun(new_gun: EquipmentGun) -> void:
+func change_gun(new_gun: Equipment) -> void:
 	if gun and gun_state != gun_states.no_gun:
 		await change_gun_state(gun_states.no_gun)
 	else:

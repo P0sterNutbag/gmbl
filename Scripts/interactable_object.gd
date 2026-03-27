@@ -1,12 +1,9 @@
 extends Node3D
 class_name InteractableObject
 
-@export var tooltip_text: String
+var actions: Array[String]
+var index := 0
 
 
 func interact():
-	if PlayerStats.gun and PlayerStats.inventory.get_item_amount(Globals.player.gun.ammo_item) == 0:
-		PlayerStats.inventory.add_item(Globals.player.gun.ammo_item)
-		#PlayerStats.reload_gun()
-		#PlayerStats.gun.gun_stats.ammo = PlayerStats.gun.gun_stats.max_ammo
-		#Globals.player.gun.gun_stats.ammo = PlayerStats.gun.gun_stats.max_ammo
+	pass

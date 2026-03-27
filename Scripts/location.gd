@@ -113,6 +113,7 @@ func _on_body_entered(_body: Node3D) -> void:
 		return
 	can_transition = false
 	Globals.player.can_enter_location = false
+	Globals.player.navigation_agent.target_position = Vector3.ZERO
 	start_encounter()
 
 

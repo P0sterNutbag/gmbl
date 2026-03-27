@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bx5h70fy0b18o"]
 
-[ext_resource type="Script" uid="uid://bdvokalrlg1k6" path="res://Scripts/item_pickup.gd" id="1_hdplf"]
+[ext_resource type="Script" uid="uid://vj7a3d8oi3gw" path="res://Scripts/gun_pickup.gd" id="1_6u172"]
+[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="2_v1ktk"]
 [ext_resource type="PackedScene" uid="uid://d1pi0mdullohm" path="res://Scenes/Models/Guns/shotgun_model.tscn" id="3_4xcmh"]
 [ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="4_v1ktk"]
 
@@ -20,31 +21,33 @@ size = Vector3(0.075, 0.09210547, 0.119)
 [sub_resource type="BoxShape3D" id="BoxShape3D_3xj32"]
 size = Vector3(0.075, 0.10978906, 0.23)
 
-[node name="Shotgun" type="RigidBody3D"]
+[node name="Shotgun" type="RigidBody3D" unique_id=395996050]
 collision_layer = 16
 angular_damp = 5.0
-script = ExtResource("1_hdplf")
+script = ExtResource("1_6u172")
+ammo_item = ExtResource("2_v1ktk")
+item_amount = 5
 item_slot = SubResource("Resource_2w57p")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=981974288]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.07589927, -0.19143677)
 shape = SubResource("BoxShape3D_rk1p0")
 debug_fill = false
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1952770134]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.02941135, 0.37018788)
 shape = SubResource("BoxShape3D_6u172")
 debug_fill = false
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=1278170963]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, -0.065614864, 0.44905257)
 shape = SubResource("BoxShape3D_v1ktk")
 debug_fill = false
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=453562549]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.04150533, 0.12363976)
 shape = SubResource("BoxShape3D_3xj32")
 debug_fill = false
 
-[node name="Node3D" parent="." instance=ExtResource("3_4xcmh")]
+[node name="Node3D" parent="." unique_id=1462688877 instance=ExtResource("3_4xcmh")]
 transform = Transform3D(-3.27835e-08, 0, -0.75, 0, 0.75, 0, 0.75, 0, -3.27835e-08, 0, -0.104604, 0.123923)

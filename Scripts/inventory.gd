@@ -18,7 +18,7 @@ var items: Array[Item]:
 var equipment_kit := EquipmentKit.new() 
 
 
-func add_item(item: Item, amount: int = 1) -> bool:
+func add_item(item: Item, amount: int = 1, create_notification: bool = false) -> bool:
 	if item is ItemMoney:
 		money += amount
 		return true
@@ -33,7 +33,11 @@ func add_item(item: Item, amount: int = 1) -> bool:
 		if new_slot is Equipment:
 			item.equipped = false
 	else:
+		if create_notification:
+			Globals.survival_ui.create_notification("Not enough room in inventory")
 		return false
+	if create_notification:
+		Globals.survival_ui.create_notification(item.title + " added to inventory")
 	return true
 
 

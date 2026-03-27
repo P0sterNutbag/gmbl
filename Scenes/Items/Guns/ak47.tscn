@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cgtukpis1lq0a"]
 
-[ext_resource type="Script" uid="uid://bdvokalrlg1k6" path="res://Scripts/item_pickup.gd" id="1_2sgkx"]
+[ext_resource type="Script" uid="uid://vj7a3d8oi3gw" path="res://Scripts/gun_pickup.gd" id="1_h7dyn"]
+[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="2_2sgkx"]
 [ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="3_2sgkx"]
 [ext_resource type="PackedScene" uid="uid://rhtj73aayki" path="res://Scenes/Models/Guns/ak47_model.tscn" id="5_unrj6"]
 
@@ -20,31 +21,33 @@ size = Vector3(0.1, 0.0620156, 0.317605)
 [sub_resource type="BoxShape3D" id="BoxShape3D_k4jng"]
 size = Vector3(0.1, 0.212, 0.173)
 
-[node name="AssaultRifle" type="RigidBody3D"]
+[node name="AssaultRifle" type="RigidBody3D" unique_id=1579704798]
 collision_layer = 16
 angular_damp = 5.0
-script = ExtResource("1_2sgkx")
+script = ExtResource("1_h7dyn")
+ammo_item = ExtResource("2_2sgkx")
 item_slot = SubResource("Resource_ibnff")
+actions = Array[String](["Pick up", "Take ammo"])
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=325893986]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, -0.00666812, 0.33604)
 shape = SubResource("BoxShape3D_rk1p0")
 debug_fill = false
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1969170538]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.0673393, 0.00543653)
 shape = SubResource("BoxShape3D_2q4no")
 debug_fill = false
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=936853160]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, 0.0714918, -0.388725)
 shape = SubResource("BoxShape3D_6bf8n")
 debug_fill = false
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=1768191299]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00161743, -0.110099, 0.0341526)
 shape = SubResource("BoxShape3D_k4jng")
 debug_fill = false
 
-[node name="Ak47" parent="." instance=ExtResource("5_unrj6")]
+[node name="Ak47" parent="." unique_id=154952214 instance=ExtResource("5_unrj6")]
 transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, 0, -0.122254, 0.016794)

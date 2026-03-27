@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bdlenssiaotxi"]
+
+[ext_resource type="Script" uid="uid://cy7m702yyltnq" path="res://Scripts/juicy_movement_3d.gd" id="1_n2hmn"]
+[ext_resource type="Shader" uid="uid://de6l4w30bo7u6" path="res://Art/Shaders/cel-shader-base.gdshader" id="1_vls73"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_uq5ae"]
+top_radius = 0.25
+bottom_radius = 0.01
+height = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kirf1"]
+render_priority = 0
+shader = ExtResource("1_vls73")
+shader_parameter/color = Color(1, 1, 0, 1)
+shader_parameter/specular = Color(0, 0, 0, 0)
+shader_parameter/fresnel = Color(0, 0, 0, 0)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+
+[node name="MoveMarker" type="Node3D" unique_id=431028146]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1028542097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.82340944, 0)
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_uq5ae")
+surface_material_override/0 = SubResource("ShaderMaterial_kirf1")
+script = ExtResource("1_n2hmn")

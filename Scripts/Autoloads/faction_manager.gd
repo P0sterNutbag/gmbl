@@ -28,8 +28,8 @@ func change_faction_relation(faction1: factions, faction2: factions, amount: flo
 	var current_relation = get_faction_relation(faction1, faction2)
 	var new_relation = current_relation + amount
 	faction_relations[faction1][faction2] = clamp(new_relation, -10, 10)
-	if create_notification and faction2 == factions.player and faction1 != factions.no_faction:
+	if create_notification and faction2 == factions.player:# and faction1 != factions.no_faction:
 		var change = " decreased"
 		if sign(amount) == 1:
 			change = " increased"
-		Globals.survival_ui.create_notification("Standing with " + faction_data[faction1].name + change)
+		Globals.survival_ui.create_notification(faction_data[faction1].name + " reputation " + change)

@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://bpcuuxvr2yj6j"]
 
-[ext_resource type="Script" uid="uid://bdvokalrlg1k6" path="res://Scripts/item_pickup.gd" id="1_bftxy"]
+[ext_resource type="Script" uid="uid://vj7a3d8oi3gw" path="res://Scripts/gun_pickup.gd" id="1_hvw61"]
 [ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="2_hvw61"]
+[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="2_xv714"]
 [ext_resource type="PackedScene" uid="uid://bt07vvnr66rmp" path="res://Scenes/Models/Guns/sawed_off_model.tscn" id="4_hvw61"]
 
 [sub_resource type="Resource" id="Resource_2w57p"]
@@ -14,8 +15,11 @@ size = Vector3(0.083984375, 0.10055542, 0.46624756)
 [node name="SawedOff" type="RigidBody3D" unique_id=1802182560]
 collision_layer = 16
 angular_damp = 5.0
-script = ExtResource("1_bftxy")
+script = ExtResource("1_hvw61")
+ammo_item = ExtResource("2_xv714")
+item_amount = 2
 item_slot = SubResource("Resource_2w57p")
+actions = Array[String](["Pick up", "Take ammo"])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=641814474]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0069122314, 0.0069885254)

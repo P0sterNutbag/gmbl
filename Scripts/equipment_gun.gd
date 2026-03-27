@@ -26,4 +26,7 @@ func unequip() -> void:
 
 
 func get_modified_price() -> int:
-	return round(price * (gun_stats.condition / 125))
+	if gun_stats:
+		return round(price * (gun_stats.condition / 125))
+	else:
+		return price

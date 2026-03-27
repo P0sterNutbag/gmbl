@@ -2,16 +2,22 @@ extends Node3D
 
 @export var location_data: LocationData
 @export var spawn_parents: Array[Node3D]
+var intel_timer: Timer
 
 
 func _ready() -> void:
 	if Globals.overworld:
 		var current_data = Globals.overworld.current_encounter.location_data
 		location_data = current_data
+	intel_timer = Timer.new()
+	add_child(intel_timer)
+	intel_timer.wait_time = 60
+	intel_timer.one_shot = true
+	intel_timer.start()
 
 
 func update_location_data() -> void:
-	if Globals.overworld:
+	if Globals.overworld and intel_timer.time_left <= 0:
 		var poi = Globals.overworld.current_encounter.point_of_interest
 		poi.show_population = true
 		poi.show_faction = true

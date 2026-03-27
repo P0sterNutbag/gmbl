@@ -67,10 +67,10 @@ layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -414.5
-offset_top = 46.0
-offset_right = 414.5
-offset_bottom = 91.0
+offset_left = -273.0
+offset_top = 32.0
+offset_right = 273.0
+offset_bottom = 77.0
 grow_horizontal = 2
 mouse_filter = 2
 script = ExtResource("8_2dyl4")
@@ -369,10 +369,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -396.0
-offset_top = -259.0
-offset_right = 402.0
-offset_bottom = 259.0
+offset_left = -518.0
+offset_top = -407.0
+offset_right = 524.0
+offset_bottom = 407.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("29_tlm7h")
@@ -575,10 +575,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -426.0
-offset_top = -282.0
-offset_right = 426.0
-offset_bottom = 265.0
+offset_left = -537.0
+offset_top = -399.0
+offset_right = 537.0
+offset_bottom = 382.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("13_oq622")
@@ -648,11 +648,12 @@ can_drop_items = true
 
 [node name="RightPanels" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory" unique_id=992338017]
 layout_mode = 2
+size_flags_horizontal = 8
 
 [node name="Equipment" type="PanelContainer" parent="Menus/VBoxContainer/PlayerInventory/RightPanels" unique_id=1897544360]
 custom_minimum_size = Vector2(497, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 8
 size_flags_vertical = 0
 mouse_filter = 2
 theme = ExtResource("11_0pkni")
@@ -1133,9 +1134,8 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -32.0
+offset_top = -36.0
 offset_right = 223.0
-offset_bottom = -4.0
 grow_vertical = 0
 tooltip_text = "Health"
 theme = ExtResource("4_1kfkr")
@@ -1148,23 +1148,23 @@ script = ExtResource("36_8cvki")
 modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 offset_left = 8.0
-offset_top = -25.0
-offset_right = 15.5
-offset_bottom = -17.5
+offset_top = -29.0
+offset_right = 19.0
+offset_bottom = -18.0
 scale = Vector2(2, 2)
 texture = ExtResource("32_lboml")
 expand_mode = 1
 
 [node name="VBoxContainer" type="HBoxContainer" parent="PlayerHealth" unique_id=684823176]
 layout_mode = 1
-offset_top = -70.0
-offset_right = 72.0
-offset_bottom = -55.0
-scale = Vector2(2, 2)
+offset_top = -80.0
+offset_right = 168.0
+offset_bottom = -44.0
+theme = ExtResource("29_tlm7h")
 
 [node name="Thirst" type="TextureRect" parent="PlayerHealth/VBoxContainer" unique_id=1296685449]
 modulate = Color(1, 1, 0, 1)
-custom_minimum_size = Vector2(15, 15)
+custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 tooltip_text = "Thirst"
 texture = ExtResource("4_k64vs")
@@ -1209,24 +1209,16 @@ show_treshold = 1.0
 custom_minimum_size = Vector2(360, 0)
 offset_left = 32.0
 offset_top = 32.0
-offset_right = 392.0
-offset_bottom = 72.0
+offset_right = 412.0
+offset_bottom = 85.0
 theme = SubResource("Theme_lboml")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_oyp7w")
 
-[node name="MarginContainer" type="MarginContainer" parent="LogContainer" unique_id=1336669230]
-layout_mode = 2
-theme = ExtResource("12_2dyl4")
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 8
-
-[node name="Log" type="VBoxContainer" parent="LogContainer/MarginContainer" unique_id=669236471]
+[node name="Log" type="VBoxContainer" parent="LogContainer" unique_id=669236471]
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 2
-theme = ExtResource("11_0pkni")
+theme = ExtResource("13_oq622")
 
 [node name="MenuButtons" type="VBoxContainer" parent="." unique_id=299956010]
 modulate = Color(1, 1, 0, 1)
@@ -1241,10 +1233,10 @@ offset_right = -32.0
 offset_bottom = -32.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_constants/separation = 6
+theme = ExtResource("13_oq622")
 
 [node name="InventoryButton" type="Button" parent="MenuButtons" unique_id=181181749]
-custom_minimum_size = Vector2(42, 42)
+custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
 tooltip_text = "Inventory"
 theme = ExtResource("33_ft4n5")
@@ -1255,7 +1247,7 @@ expand_icon = true
 script = ExtResource("36_8cvki")
 
 [node name="JournalButton" type="Button" parent="MenuButtons" unique_id=2063062016]
-custom_minimum_size = Vector2(42, 42)
+custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
 tooltip_text = "Jobs"
 theme = ExtResource("33_ft4n5")
@@ -1266,7 +1258,7 @@ expand_icon = true
 script = ExtResource("36_8cvki")
 
 [node name="FactionButton" type="Button" parent="MenuButtons" unique_id=891720633]
-custom_minimum_size = Vector2(42, 42)
+custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
 tooltip_text = "Clans"
 theme = ExtResource("33_ft4n5")
@@ -1278,7 +1270,7 @@ script = ExtResource("36_8cvki")
 
 [node name="CharacterButton" type="Button" parent="MenuButtons" unique_id=1380920761]
 visible = false
-custom_minimum_size = Vector2(42, 42)
+custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
 tooltip_text = "Factions"
 theme = ExtResource("33_ft4n5")
@@ -1289,13 +1281,14 @@ expand_icon = true
 script = ExtResource("36_8cvki")
 
 [node name="PauseButton" type="Button" parent="MenuButtons" unique_id=1332550426]
-custom_minimum_size = Vector2(42, 42)
+custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
 tooltip_text = "Pause"
 theme = ExtResource("33_ft4n5")
-theme_override_constants/icon_max_width = 42
+theme_override_constants/icon_max_width = 100
 icon = ExtResource("33_ohwuk")
 flat = true
+icon_alignment = 1
 expand_icon = true
 script = ExtResource("36_8cvki")
 

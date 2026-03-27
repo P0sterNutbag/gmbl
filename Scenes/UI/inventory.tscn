@@ -27,6 +27,17 @@ VScrollBar/styles/grabber = SubResource("StyleBoxFlat_d513x")
 VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_2lqwa")
 VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_v8bd3")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnhd3"]
+bg_color = Color(0, 0, 0, 0.78431374)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 0, 1)
+shadow_size = 1
+shadow_offset = Vector2(2, 2)
+anti_aliasing_size = 0.01
+
 [node name="Inventory" type="PanelContainer" unique_id=692215425]
 offset_left = 64.0
 offset_top = 64.0
@@ -115,40 +126,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 8
 script = ExtResource("4_ic2qw")
-
-[node name="Panel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=1814885161]
-visible = false
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_vertical = 8
-mouse_filter = 2
-theme = ExtResource("1_osrsm")
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Panel" unique_id=82993363]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer" unique_id=60447760]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 0
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=1949194704]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("8_d513x")
-autowrap_mode = 2
-
-[node name="Stats" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=508532780]
-unique_name_in_owner = true
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 32
 
 [node name="Controls" type="Control" parent="." unique_id=1027290449]
 visible = false
@@ -255,6 +232,55 @@ text = "Yes"
 [node name="DontDrop" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=375805092 instance=ExtResource("11_mnhd3")]
 layout_mode = 2
 text = "No"
+
+[node name="ItemTooltip" type="Control" parent="." unique_id=311219446]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="ItemTooltip" unique_id=1814885161]
+z_index = 10
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -168.0
+offset_top = 32.0
+offset_right = 168.0
+offset_bottom = 93.000015
+grow_horizontal = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme = ExtResource("1_osrsm")
+theme_override_styles/panel = SubResource("StyleBoxFlat_mnhd3")
+
+[node name="MarginContainer" type="MarginContainer" parent="ItemTooltip/PanelContainer" unique_id=82993363]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ItemTooltip/PanelContainer/MarginContainer" unique_id=60447760]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="ItemTooltip/PanelContainer/MarginContainer/VBoxContainer" unique_id=1949194704]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("8_d513x")
+autowrap_mode = 2
+
+[node name="Stats" type="HBoxContainer" parent="ItemTooltip/PanelContainer/MarginContainer/VBoxContainer" unique_id=508532780]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 32
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_focus_exited"]

@@ -20,6 +20,7 @@ var model_rotation: float:
 		else:
 			return 0.0
 var can_enter_location: bool = true
+var is_moving_camera: bool
 var run_animation := "Run"
 var idle_animation := "Idle"
 var state_functions: Dictionary
@@ -48,6 +49,8 @@ var faction := FactionManager.factions.player
 @onready var town_shot: Node3D = %TownShot
 @onready var rotation_offset: Node3D = $CameraAnchor/RotationOffset
 @onready var position_offset: Node3D = $CameraAnchor/RotationOffset/PositionOffset
+@onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
+@onready var move_marker: Node3D = $MoveMarker
 var gun: Node3D
 
 
@@ -74,6 +77,14 @@ func _ready() -> void:
 		PlayerStats.states.pause: state_pause,
 		PlayerStats.states.dead: state_dead,
 	}
+
+
+func _process(_delta: float) -> void:
+	if navigation_agent.target_position != Vector3.ZERO and !navigation_agent.is_target_reached():
+		move_marker.visible = true
+		move_marker.global_position = navigation_agent.target_position
+	else:
+		move_marker.visible = false
 
 
 func _physics_process(delta):
@@ -130,15 +141,19 @@ func state_walk(delta) -> void:
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
+		navigation_agent.set_target_position(Vector3.ZERO)
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
-	#if camera_type != camera_types.overhead:
-		#return
+	
+	if navigation_agent.target_position != Vector3.ZERO:
+		follow_path()
+		direction = velocity.normalized()
+	
 	move_and_slide()
 	
 	# animate
-	if input_dir != Vector2.ZERO:
+	if direction != Vector3.ZERO:
 		animation_player.play(run_animation)
 	else:
 		animation_player.play(idle_animation)
@@ -189,7 +204,15 @@ func state_dead(_delta) -> void:
 	pass
 
 
-func change_gun(new_gun: EquipmentGun) -> void:
+func follow_path():
+	if navigation_agent.is_navigation_finished():
+		return
+	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
+	var path_velocity = global_position.direction_to(next_path_position) * speed
+	velocity = Vector3(path_velocity.x, velocity.y, path_velocity.z)
+
+
+func change_gun(new_gun: Equipment) -> void:
 	PlayerStats.gun = new_gun
 	for i in gun_anchor.get_children():
 		if i != gun:
@@ -223,10 +246,21 @@ func _input(event):
 		match camera_type:
 			camera_types.overhead:
 				camera_anchor.rotate_y(-event.relative.x * mouse_sensitivity * PlayerStats.sensitivity_modifier)
-			#camera_types.fps:
-				#camera_anchor.rotate_y(-event.relative.x * mouse_sensitivity * PlayerStats.sensitivity_modifier)
-				#camera.rotate_x(-event.relative.y * mouse_sensitivity * PlayerStats.sensitivity_modifier)
-				#camera.rotation.x = clampf(camera.rotation.x, -deg_to_rad(70), deg_to_rad(70))
+				is_moving_camera = true
+	elif Input.is_action_just_released("shoot"):
+		if !is_moving_camera:
+			var space_state = get_world_3d().direct_space_state
+			var cam = get_viewport().get_camera_3d()
+			var mousepos = get_viewport().get_mouse_position()
+			var origin = cam.project_ray_origin(mousepos)
+			var end = origin + camera.project_ray_normal(mousepos) * 1000.0
+			var query = PhysicsRayQueryParameters3D.create(origin, end)
+			var result = space_state.intersect_ray(query)
+			if result:
+				navigation_agent.set_target_position(result.position)
+		else:
+			await get_tree().create_timer(0.1).timeout
+			is_moving_camera = false
 
 
 func save() -> Dictionary:

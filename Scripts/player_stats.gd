@@ -36,7 +36,7 @@ var money: int:
 var flashlight_on: bool
 var inventory: Inventory = Inventory.new()
 var quests: Array[Quest]
-var gun: EquipmentGun
+var gun: Equipment
 var gun_index := 0
 var sleep: float
 var hunger: float

@@ -12,7 +12,8 @@ var starting_fog: float
 @onready var death_ui: PanelContainer = $DeathUI
 @onready var load_save: Button = $DeathUI/MarginContainer/VBoxContainer/VBoxContainer/LoadSave
 @onready var ammo_count: Control = $AmmoCount
-@onready var tooltip: Label = $Tooltip
+@onready var tooltip: HBoxContainer = $Tooltip
+@onready var tooltip_holder: VBoxContainer = $Tooltip/VBoxContainer
 @onready var hit_indicator: TextureRect = %HitIndicator
 @onready var dot_crosshair: ColorRect = $DotCrosshair
 @onready var breath: ProgressBar = $Breath
@@ -29,8 +30,9 @@ func _process(delta: float) -> void:
 	# tooltip
 	if UiController.current_ui != null:
 		tooltip.hide()
-	else:
-		tooltip.show()
+	#else:
+		#tooltip.show()
+	
 	
 	# magazine/medkits
 	if Globals.player.gun:
@@ -71,7 +73,7 @@ func _process(delta: float) -> void:
 			Globals.player.gun_state == Globals.player.gun_states.no_gun):
 				crosshair.hide()
 				dot_crosshair.show()
-			if (tooltip.text != "" or Globals.crosshair_type == Globals.crosshairs.none or UiController.current_ui
+			if (tooltip.visible or Globals.crosshair_type == Globals.crosshairs.none or UiController.current_ui
 			or Globals.player.gun_state == Globals.player.gun_states.ads):
 				crosshair.hide()
 				dot_crosshair.hide()
@@ -90,7 +92,7 @@ func _process(delta: float) -> void:
 		Globals.crosshairs.dot:
 			dot_crosshair.show()
 			crosshair.hide()
-			if UiController.current_ui and tooltip.text != "" :
+			if UiController.current_ui and tooltip.visible:
 				dot_crosshair.hide()
 		Globals.crosshairs.none:
 			crosshair.hide()
@@ -112,6 +114,32 @@ func hide_scope() -> void:
 
 func set_mag_count(amount: int) -> void:
 	mags_left.text = str(amount)
+
+
+func set_tooltip(collider: InteractableObject):
+	if "health_component" in collider and !collider.health_component.is_dead:
+		return
+	tooltip.show()
+	for child in tooltip_holder.get_children():
+		child.text = ""
+	for i in collider.actions.size():
+		var label : Label = tooltip_holder.get_child(i)
+		label.text = collider.actions[i]
+		if i != collider.index:
+			label.add_theme_color_override("font_color", Color(0.446, 0.446, 0.0, 1.0))
+		else:
+			label.remove_theme_color_override("font_color")
+
+
+func set_tooltip_custom(text: String):
+	tooltip.show()
+	for i in tooltip_holder.get_child_count():
+		var label : Label = tooltip_holder.get_child(i)
+		label.remove_theme_color_override("font_color")
+		if i == 0:
+			label.text = text
+		else:
+			label.text = ""
 
 
 func play_hit_effect(hit_direction: Vector3) -> void:

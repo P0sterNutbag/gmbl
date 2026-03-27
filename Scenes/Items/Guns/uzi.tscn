@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://51vl25435j83"]
 
-[ext_resource type="Script" uid="uid://bdvokalrlg1k6" path="res://Scripts/item_pickup.gd" id="1_hsks4"]
+[ext_resource type="Script" uid="uid://vj7a3d8oi3gw" path="res://Scripts/gun_pickup.gd" id="1_0iuk2"]
 [ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="2_0iuk2"]
+[ext_resource type="Resource" uid="uid://dgo34up8hytn6" path="res://Resources/Items/Ammo/smg_ammo.tres" id="2_rbj7w"]
 [ext_resource type="PackedScene" uid="uid://bcqk17amj56df" path="res://Scenes/Models/Guns/uzi_model.tscn" id="3_hsks4"]
 
 [sub_resource type="Resource" id="Resource_dwr3s"]
@@ -14,11 +15,13 @@ size = Vector3(0.08766176, 0.1004591, 0.45654392)
 [sub_resource type="BoxShape3D" id="BoxShape3D_rk1p0"]
 size = Vector3(0.07191469, 0.14304733, 0.06275943)
 
-[node name="Pistol" type="RigidBody3D" unique_id=295953114]
+[node name="Uzi" type="RigidBody3D" unique_id=295953114]
 collision_layer = 16
 angular_damp = 5.0
-script = ExtResource("1_hsks4")
+script = ExtResource("1_0iuk2")
+ammo_item = ExtResource("2_rbj7w")
 item_slot = SubResource("Resource_dwr3s")
+actions = Array[String](["Pick up", "Take ammo"])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=739759724]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0005264338, 0.119632214, -0.08359091)

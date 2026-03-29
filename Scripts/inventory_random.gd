@@ -33,7 +33,12 @@ func generate_inventory() -> void:
 func add_random_item() -> void:
 	if potential_slots.size() <= 0:
 		return
-	var spawn_resource = potential_slots[Globals.get_weighted_index(potential_slots)]
+	var rng = RandomNumberGenerator.new()
+	var weights: PackedFloat32Array
+	for i in potential_slots:
+		weights.append(i.spawn_chance)
+	var spawn_resource = potential_slots[rng.rand_weighted(weights)]
+	#var spawn_resource = potential_slots[Globals.get_weighted_index(potential_slots)]
 	var item = spawn_resource.object_to_spawn.duplicate_deep()
 	if "gun_stats" in item:
 		item.gun_stats.condition = randf_range(min_condition, max_condition)

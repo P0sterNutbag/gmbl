@@ -16,7 +16,8 @@ func interact() -> void:
 			object_to_delete.queue_free()
 	elif index == 1:
 		if randf() < 0.25:
-			PlayerStats.inventory.add_item(ammo_item, item_amount, true)
+			if PlayerStats.inventory.add_item(ammo_item, item_amount, true):
+				item_slot.item.gun_stats.ammo = 0
 			actions.remove_at(1)
 			index = 0
 		else:

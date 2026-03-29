@@ -13,6 +13,6 @@ func interact():
 	inst.global_position = global_position
 	owner.health_component.audio_stream_player.play()
 	var scalp = FactionManager.faction_data[owner.faction].scalp.duplicate()
-	PlayerStats.inventory.add_item(scalp)
-	Globals.survival_ui.create_notification(scalp.title + "added to inventory")
+	PlayerStats.inventory.add_item(scalp, 1, true)
+	#Globals.survival_ui.create_notification(scalp.title + "added to inventory")
 	queue_free()

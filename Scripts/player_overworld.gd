@@ -148,7 +148,9 @@ func state_walk(delta) -> void:
 	
 	if navigation_agent.target_position != Vector3.ZERO:
 		follow_path()
-		direction = velocity.normalized()
+		var vel_norm = velocity.normalized()
+		direction.x = vel_norm.x
+		direction.z = vel_norm.z
 	
 	move_and_slide()
 	

@@ -2,7 +2,11 @@ extends PhysicalBone3D
 
 @export var health_component: HealthComponent
 @export var damage_modifier: float = 1.0
-@onready var interaction_object: Node3D = $"../../../../../../Interaction"
+var interaction_object: Node3D
+
+
+func _ready() -> void:
+	interaction_object = owner.get_parent().get_node_or_null("Interaction")
 
 
 func turn_off_simulation() -> void:

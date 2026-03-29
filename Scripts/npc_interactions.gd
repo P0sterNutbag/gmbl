@@ -1,6 +1,7 @@
 extends InteractableObject
 
 @export var health_component: HealthComponent
+@onready var scalp_pos: Node3D = $"../EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_Head/Scalp"
 const BLOODSPATTER = preload("uid://cqvgbxo1nn47e")
 
 
@@ -21,7 +22,7 @@ func interact() -> void:
 		enemy.model.get_scalped()
 		var inst = BLOODSPATTER.instantiate()
 		get_parent().add_child(inst)
-		inst.global_position = global_position
+		inst.global_position = scalp_pos.global_position
 		health_component.audio_stream_player.play()
 		var scalp = FactionManager.faction_data[enemy.faction].scalp.duplicate()
 		PlayerStats.inventory.add_item(scalp)

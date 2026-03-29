@@ -58,7 +58,7 @@ func get_weighted_index(array: Array) -> int:
 	var sum = 0
 	for i in array.size():
 		sum += array[i].spawn_chance
-	var rand_num = randi_range(0, sum)
+	var rand_num = randf_range(0, sum)
 	var current_num = 0
 	for i in array.size():
 		current_num += array[i].spawn_chance

@@ -24,7 +24,7 @@ func on_pressed():
 func use(_target_node):
 	var target
 	if is_health_item:
-		target = Globals.player.get_node("Hitbox")
+		target = Globals.player.hitbox
 	elif custom_path != "":
 		target = Globals.get_tree().root.get_node(custom_path)
 	else:

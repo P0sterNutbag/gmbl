@@ -95,10 +95,9 @@ func stock_shops() -> void:
 		if i is Shop:
 			i.restock_items()
 		if i.has_method("restock_quests"):
-			if i.min_quests > 0 and i.random_quests.size() > 0:
-				i.restock_quests()
-				for q in i.quests:
-					q.return_location = title
+			await i.restock_quests()
+			for q in i.quests:
+				q.return_location = title
 
 
 func transition_to_level(start_alert = alert_enemies) -> void:

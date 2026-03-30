@@ -4,40 +4,14 @@ var data = {}
 var save_dir = "user://"
 var save_path = "user://savegame.save"
 var resource_path = "user://resources.res"
-var saved_resources: SavedResources
 signal save
 signal load
 
 
-func _ready() -> void:
-	if ResourceLoader.exists(resource_path):
-		saved_resources = ResourceLoader.load(resource_path)
+func save_data_to_file():
+	var saved_resources = ResourceLoader.load(resource_path)
 	if !saved_resources:
 		saved_resources = SavedResources.new()
-		ResourceSaver.save(saved_resources, resource_path)
-	#save_data_to_file()
-	#load_data_from_file()
-
-
-#func _process(_delta: float) -> void:
-	#if Input.is_action_just_pressed("ui_copy"):
-		##save_session_data()
-		#save_data_to_file()
-	#if Input.is_action_just_pressed("ui_paste"):
-		#load_data_from_file()
-
-
-#func save_session_data():
-	#var save_nodes = get_tree().get_nodes_in_group("persist")
-	#for node in save_nodes:
-		#if !node.has_method("save"):
-			#print("persistent node '%s' is missing a save() function, skipped" % node.name)
-			#continue
-		#var node_data = node.call("save")
-		#data[str(node.get_path())] = node_data
-
-
-func save_data_to_file():
 	var save_nodes = get_tree().get_nodes_in_group("persist")
 	for node in save_nodes:
 		if !node.has_method("save"):
@@ -67,6 +41,9 @@ func save_data_to_file():
 func load_data_from_file():
 	if not FileAccess.file_exists(save_path):
 		return
+	var saved_resources = ResourceLoader.load(resource_path)
+	if !saved_resources:
+		saved_resources = SavedResources.new()
 	var save_file = FileAccess.open(save_path, FileAccess.READ)
 	while save_file.get_position() < save_file.get_length():
 		var json_string = save_file.get_line()
@@ -110,7 +87,7 @@ func load_data_from_file():
 func delete_save_data() -> void:
 	var dir = DirAccess.open("user://")
 	dir.remove("savegame.save")
-	dir.remove("inventory.res")
+	dir.remove("resources.res")
 
 
 func save_file_exists() -> bool:

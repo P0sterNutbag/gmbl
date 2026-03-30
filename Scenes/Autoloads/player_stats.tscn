@@ -2,11 +2,57 @@
 
 [ext_resource type="Script" uid="uid://bby8q5udlgb6g" path="res://Scripts/player_stats.gd" id="1_vjobs"]
 [ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="2_ey8gb"]
+[ext_resource type="Resource" uid="uid://de20gnenmrrxa" path="res://Resources/Items/Guns/shotgun.tres" id="3_bjmho"]
 [ext_resource type="Script" uid="uid://6ucyr0petjnx" path="res://Scripts/inventory.gd" id="3_v6kd3"]
+[ext_resource type="Resource" uid="uid://dpt1btw7n2g0c" path="res://Resources/Items/Guns/hunting_rifle.tres" id="4_3r183"]
 [ext_resource type="Script" uid="uid://bibbg6vimg64j" path="res://Scripts/character_skills.gd" id="4_v6kd3"]
+[ext_resource type="Resource" uid="uid://ixc4pv5vjlno" path="res://Resources/Items/Guns/ak47.tres" id="5_kx86g"]
+[ext_resource type="Resource" uid="uid://c6b6f17dikat7" path="res://Resources/Items/Guns/uzi.tres" id="6_348xh"]
+[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="7_348xh"]
+[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="8_a5k1m"]
+[ext_resource type="Resource" uid="uid://dgo34up8hytn6" path="res://Resources/Items/Ammo/smg_ammo.tres" id="9_a5k1m"]
+
+[sub_resource type="Resource" id="Resource_a5k1m"]
+script = ExtResource("2_ey8gb")
+item = ExtResource("3_bjmho")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_upw4t"]
+script = ExtResource("2_ey8gb")
+item = ExtResource("4_3r183")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_h6bws"]
+script = ExtResource("2_ey8gb")
+item = ExtResource("5_kx86g")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_jjpmw"]
+script = ExtResource("2_ey8gb")
+item = ExtResource("6_348xh")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_v0t3x"]
+script = ExtResource("2_ey8gb")
+item = ExtResource("7_348xh")
+amount = 5
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_ayap6"]
+script = ExtResource("2_ey8gb")
+item = ExtResource("8_a5k1m")
+amount = 20
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_esrid"]
+script = ExtResource("2_ey8gb")
+item = ExtResource("9_a5k1m")
+amount = 5
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
 
 [sub_resource type="Resource" id="Resource_uiad6"]
 script = ExtResource("3_v6kd3")
+item_slots = Array[ExtResource("2_ey8gb")]([SubResource("Resource_a5k1m"), SubResource("Resource_upw4t"), SubResource("Resource_h6bws"), SubResource("Resource_jjpmw"), SubResource("Resource_v0t3x"), SubResource("Resource_ayap6"), SubResource("Resource_esrid")])
 space = 7
 money = 200
 title = "Inventory"

@@ -255,7 +255,7 @@ dialogue = SubResource("Resource_ym52c")
 random_quests = Array[ExtResource("21_dckhe")]([SubResource("Resource_l1i85"), SubResource("Resource_etgqd")])
 min_quests = 1
 max_quests = 3
-faction = null
+faction = 3
 title = "Drug Den"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
@@ -304,7 +304,7 @@ location_data = SubResource("Resource_0jat8")
 shop = SubResource("Resource_6rs7t")
 
 [node name="Flagpole" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="0" unique_id=800258272]
-transform = Transform3D(-8.742278e-08, 0, -2, 0, 2, 0, 2, 0, -8.742278e-08, 0, 0, -8)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -8)
 visible = true
 
 [node name="Shack" type="Node3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="1" unique_id=85709090]
@@ -317,25 +317,15 @@ surface_material_override/0 = ExtResource("28_84y0d")
 [node name="SpawnRadius" type="Node3D" parent="Meshes/Shack" index="1" unique_id=1248345973]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
 
-[node name="ShippingContainer" type="Node3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="2" unique_id=610350900]
-transform = Transform3D(-0.47105807, 0, 0.8821022, 0, 1, 0, -0.8821022, 0, -0.47105807, 8, 0, 0)
-
-[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Meshes/ShippingContainer" index="0" unique_id=1837403267]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49258, 0)
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="2" unique_id=1837403267]
+transform = Transform3D(-0.47105807, 0, 0.8821022, 0, 1, 0, -0.8821022, 0, -0.47105807, 8, 1.49258, 0)
 mesh = SubResource("ArrayMesh_teulj")
+skeleton = NodePath("")
 
-[node name="SpawnRadius" type="Node3D" parent="Meshes/ShippingContainer" index="1" unique_id=530623657]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
-
-[node name="ShippingContainer2" type="Node3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="3" unique_id=343602886]
-transform = Transform3D(0.4122459, 0, 0.9110726, 0, 1, 0, -0.9110726, 0, 0.4122459, 8, 3.143, 0)
-
-[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Meshes/ShippingContainer2" index="0" unique_id=1495413393]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49258, 0)
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Meshes/CSGBakedMeshInstance3D" index="0" unique_id=1495413393]
+transform = Transform3D(0.6094674, 0, -0.79281116, 0, 1, 0, 0.79281116, 0, 0.6094674, 0, 3.1430001, 0)
 mesh = SubResource("ArrayMesh_teulj")
-
-[node name="SpawnRadius" type="Node3D" parent="Meshes/ShippingContainer2" index="1" unique_id=32113529]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+skeleton = NodePath("")
 
 [node name="PointOfInterest" parent="." index="4" unique_id=2144080138]
 show_faction = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ca476pf2s17wy"]
+[gd_scene format=3 uid="uid://ca476pf2s17wy"]
 
 [ext_resource type="PackedScene" uid="uid://dbt2r2caer33y" path="res://Art/Models/drum barrel.glb" id="1_gfbbv"]
 [ext_resource type="Shader" uid="uid://de6l4w30bo7u6" path="res://Art/Shaders/cel-shader-base.gdshader" id="2_47w1f"]
@@ -30,15 +30,15 @@ shader_parameter/fresnel = Color(0, 0, 0, 0)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 
-[node name="RigidBody3D" type="Node3D"]
+[node name="RigidBody3D" type="Node3D" unique_id=1261689571 groups=["align_normal"]]
 
-[node name="drum barrel2" parent="." instance=ExtResource("1_gfbbv")]
+[node name="drum barrel2" parent="." unique_id=1652748770 instance=ExtResource("1_gfbbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.655, 0)
 
-[node name="Cylinder_001" parent="drum barrel2" index="0"]
+[node name="Cylinder_001" parent="drum barrel2" index="0" unique_id=1823045051]
 surface_material_override/0 = SubResource("ShaderMaterial_ld3no")
 
-[node name="Cylinder" parent="drum barrel2" index="1"]
+[node name="Cylinder" parent="drum barrel2" index="1" unique_id=946301324]
 surface_material_override/0 = SubResource("ShaderMaterial_q76g2")
 surface_material_override/1 = SubResource("ShaderMaterial_jnfs2")
 

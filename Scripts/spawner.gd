@@ -18,7 +18,6 @@ func _ready() -> void:
 		for child in get_children():
 			if ignore_heightmap.has(child):
 				continue
-			position_on_heightmap(child)
 			if face_away_from_center:
 				child.look_at(global_position)
 				child.rotate_y(deg_to_rad(180))
@@ -51,9 +50,3 @@ func spawn():
 	get_tree().current_scene.add_child.call_deferred(inst)
 	inst.global_transform = spawns[index].global_transform
 	used_spawns.append(index)
-
-
-func position_on_heightmap(node: Node3D) -> void:
-	node.global_position.y = Globals.get_heightmap_position(global_position)
-	if location_data_variable == "npc_spawn_chance":
-		node.global_position.y += 0.5

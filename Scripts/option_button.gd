@@ -1,4 +1,4 @@
-extends UiButton
+extends Button
 
 @export var options: Array[StringValuePair]
 var index: int
@@ -7,7 +7,7 @@ signal option_changed(value)
 
 
 func _ready() -> void:
-	super._ready()
+	#super._ready()
 	#await get_tree().current_scene.ready
 	option_label.text = options[index].string
 

@@ -1,4 +1,4 @@
-extends UiButton
+extends Button
 class_name NumberScrollButton
 
 @export var value: float = 0
@@ -12,7 +12,7 @@ signal value_changed(value: float, changed_by: float)
 
 
 func _ready() -> void:
-	super._ready()
+	#super._ready()
 	value_label.text = str(int(value))
 
 

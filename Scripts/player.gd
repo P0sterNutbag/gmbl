@@ -36,7 +36,7 @@ var footstep_timer := 0.0
 var sway_intensity = 3
 var max_breath = 2.0:
 	get():
-		return max_breath + ((PlayerStats.skills.light_guns + PlayerStats.skills.heavy_guns) * 0.3)
+		return max_breath + ((PlayerStats.skills.guns) * 0.3)
 var current_breath = 3.0
 var is_crouching: bool
 var is_sprinting: bool
@@ -565,11 +565,8 @@ func gun_state_ads(delta: float) -> void:
 	var sway_modifier: float = 1
 	if PlayerStats.soberness < PlayerStats.max_soberness:
 		sway_modifier = 2
-	var stat_modifier = PlayerStats.skills.light_guns * 0.2
-	if gun.slot == EquipmentKit.slots.primary_gun:
-		stat_modifier = PlayerStats.skills.heavy_guns * 0.2
-	var x_offset = sway_noise.get_noise_2d(sway_time, 0.0) * (sway_intensity - stat_modifier)
-	var y_offset = sway_noise.get_noise_2d(0.0, sway_time) * (sway_intensity - stat_modifier)
+	var x_offset = sway_noise.get_noise_2d(sway_time, 0.0) * (sway_intensity - PlayerStats.skills.guns * 0.2)
+	var y_offset = sway_noise.get_noise_2d(0.0, sway_time) * (sway_intensity - PlayerStats.skills.guns * 0.2)
 	rotation.y += deg_to_rad(y_offset * sway_modifier)
 	camera.rotation.x += deg_to_rad(x_offset * sway_modifier)
 
@@ -583,7 +580,7 @@ func exit_gun_state_ads() -> void:
 
 
 func enter_gun_state_reload() -> void:
-	var anim_player = gun.get_node("AnimationPlayer")
+	var anim_player: AnimationPlayer = gun.get_node("AnimationPlayer")
 	anim_player.play("reload")
 
 

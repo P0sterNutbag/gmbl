@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_2ous2"]
 [ext_resource type="Script" uid="uid://ejdyuf8c7kui" path="res://addons/zylann.hterrain/hterrain_detail_layer.gd" id="3_xfuh7"]
 [ext_resource type="Texture2D" uid="uid://cuaddiwo4amfh" path="res://Art/Textures/Environment/grass green large.png" id="4_4mg1g"]
+[ext_resource type="ArrayMesh" uid="uid://dpef2d0qcn5d4" path="res://addons/zylann.hterrain/models/grass_quad_x2.obj" id="5_i3cni"]
 [ext_resource type="Texture2D" uid="uid://6jmdwj3vn6m0" path="res://addons/zylann.hterrain/tools/icons/icon_detail_layer_node.svg" id="5_suwvc"]
 [ext_resource type="PackedScene" uid="uid://cueu704ip2q8t" path="res://Scenes/Environment/Prefabs With Spawning/shack_no_windows.tscn" id="6_okfcf"]
 [ext_resource type="PackedScene" uid="uid://yqj3iccq8ppb" path="res://Scenes/Environment/Prefabs With Spawning/shack_stairs.tscn" id="7_nfhko"]
@@ -29,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://bkxsoff507nnd" path="res://Art/Textures/Environment/tin roof.png" id="25_m745e"]
 [ext_resource type="PackedScene" uid="uid://brrtfg5jynxnd" path="res://Scenes/Environment/Nature/rock.tscn" id="25_uxntf"]
 [ext_resource type="Material" uid="uid://b4aard1qnyqin" path="res://Art/Materials/tin_triplanar_gray.tres" id="26_upawx"]
+[ext_resource type="PackedScene" uid="uid://btvgladcn6grn" path="res://Scenes/Environment/Nature/rock_huge.tscn" id="27_4mg1g"]
 
 [sub_resource type="Resource" id="Resource_47wr8"]
 script = ExtResource("2_2ous2")
@@ -242,8 +244,8 @@ metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [sub_resource type="Resource" id="Resource_df5lb"]
 script = ExtResource("12_n5v1j")
-object_to_spawn = ExtResource("25_uxntf")
-spawn_chance = 5.0
+object_to_spawn = ExtResource("27_4mg1g")
+spawn_chance = 0.5
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [sub_resource type="Resource" id="Resource_hu4jt"]
@@ -283,13 +285,11 @@ _surfaces = [{
 [node name="Encounter" unique_id=1332188981 instance=ExtResource("1_xg5g1")]
 location_data = SubResource("Resource_47wr8")
 
-[node name="Shader" parent="." index="3" unique_id=580484789]
-visible = true
-
-[node name="HTerrainDetailLayer" type="Node3D" parent="Terrain" parent_id_path=PackedInt32Array(1995643304) index="1" unique_id=2087938831]
+[node name="HTerrainDetailLayer" type="Node3D" parent="Terrain" parent_id_path=PackedInt32Array(1995643304) index="0" unique_id=2087938831]
 script = ExtResource("3_xfuh7")
 texture = ExtResource("4_4mg1g")
 density = 0.1
+instance_mesh = ExtResource("5_i3cni")
 cast_shadow = 0
 shader_params/u_globalmap_tint_bottom = null
 shader_params/u_globalmap_tint_top = null
@@ -325,6 +325,9 @@ enemies_to_spawn = Array[ExtResource("12_n5v1j")]([SubResource("Resource_87mr3")
 [node name="EnemySpawner" parent="." index="12" unique_id=2109086568]
 process_mode = 4
 spawn_on_start = false
+
+[node name="SnapToTerrain" parent="." index="13" unique_id=196337249]
+position_on_start = true
 
 [node name="EnvironmentGeneratorRuntime" type="Node3D" parent="." index="15" unique_id=454662154]
 script = ExtResource("23_2ous2")

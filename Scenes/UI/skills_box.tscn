@@ -57,23 +57,15 @@ text = "Speed"
 script = ExtResource("7_8oooa")
 stat_name = "speed"
 
-[node name="Handguns" parent="MarginContainer/VBoxContainer" unique_id=1130412460 instance=ExtResource("6_ygj8n")]
+[node name="Guns" parent="MarginContainer/VBoxContainer" unique_id=1130412460 instance=ExtResource("6_ygj8n")]
 layout_mode = 2
-tooltip_text = "Increases accuracy with handguns"
-text = "Handguns"
+tooltip_text = "Increases accuracy, reload speed, and breath limit"
+text = "Guns"
 script = ExtResource("7_8oooa")
-stat_name = "light_guns"
-
-[node name="LongGuns" parent="MarginContainer/VBoxContainer" unique_id=1560769085 instance=ExtResource("6_ygj8n")]
-layout_mode = 2
-tooltip_text = "Increases accuracy with long guns"
-text = "Long Guns"
-script = ExtResource("7_8oooa")
-stat_name = "heavy_guns"
+stat_name = "guns"
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/Toughness" to="." method="_on_toughness_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/Strength" to="." method="_on_strength_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/Speed" to="." method="_on_speed_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/Handguns" to="." method="_on_handguns_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/LongGuns" to="." method="_on_long_guns_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/Guns" to="." method="_on_handguns_value_changed"]

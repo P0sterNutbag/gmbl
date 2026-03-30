@@ -44,6 +44,8 @@ func _ready() -> void:
 	max_ammo = gun_stats.ammo
 	shoot_cooldown_timer.wait_time = shoot_cooldown
 	anim_player = get_node_or_null("AnimationPlayer")
+	if anim_player:
+		anim_player.animation_started.connect(_on_animation_started)
 
 
 func _process(delta: float) -> void:
@@ -122,10 +124,7 @@ func create_bullet(shot_owner: Node3D, is_ads: bool, movement_speed: Vector3) ->
 			stats = PlayerStats.skills
 		else:
 			stats = shot_owner.stats
-		var modifier = Vector2.ONE * stats.light_guns
-		if slot == EquipmentKit.slots.primary_gun:
-			modifier = Vector2.ONE * stats.heavy_guns
-		variance = clamp(variance - (modifier * 0.1), Vector2.ZERO, Vector2.ONE * 360)
+		variance = clamp(variance - (Vector2.ONE * stats.guns * 0.1), Vector2.ZERO, Vector2.ONE * 360)
 	var h_angle_variance = randf_range(-variance.x, variance.x * 1.1)
 	inst.rotate_y(deg_to_rad(h_angle_variance))
 	var v_angle_variance = randf_range(-variance.y, variance.y)
@@ -142,3 +141,7 @@ func create_bullet(shot_owner: Node3D, is_ads: bool, movement_speed: Vector3) ->
 func _on_shoot_cooldown_timeout() -> void:
 	if fire_type == fire_types.auto or !uses_input:
 		can_shoot = true
+
+
+func _on_animation_started(_anim_name: StringName):
+	anim_player.speed_scale = 0.5 + PlayerStats.skills.guns * 0.1

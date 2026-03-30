@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://24sgvi1t84r6"]
 
 [ext_resource type="Theme" uid="uid://tivwhtwiofll" path="res://Art/Themes/button.tres" id="1_1ss3u"]
-[ext_resource type="Texture2D" uid="uid://djj6aa5nkatda" path="res://Art/Textures/UI/arrow.png" id="2_mewsa"]
 [ext_resource type="Script" uid="uid://dq0fy8r72vsgc" path="res://Scripts/number_scroll_button.gd" id="3_1ss3u"]
 [ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="4_o8fg4"]
 [ext_resource type="Texture2D" uid="uid://c8op3uqdsf33p" path="res://Art/Textures/UI/arrow short left.png" id="5_1ss3u"]
@@ -16,7 +15,6 @@ size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("1_1ss3u")
 text = "Name"
-icon = ExtResource("2_mewsa")
 flat = true
 alignment = 0
 script = ExtResource("3_1ss3u")
@@ -46,6 +44,7 @@ theme = ExtResource("4_o8fg4")
 icon = ExtResource("5_1ss3u")
 flat = true
 icon_alignment = 1
+expand_icon = true
 
 [node name="Label" type="Label" parent="Control" unique_id=1794891755]
 unique_name_in_owner = true
@@ -63,6 +62,7 @@ size_flags_horizontal = 8
 icon = ExtResource("7_mewsa")
 flat = true
 icon_alignment = 1
+expand_icon = true
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]
 [connection signal="button_up" from="." to="." method="_on_button_up"]

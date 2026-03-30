@@ -1,6 +1,5 @@
 extends Menu
 
-
 var overlay: CanvasLayer
 @onready var resolution: Button = $MarginContainer/VBoxContainer/VBoxContainer/Resolution
 @onready var fullscreen: Button = $MarginContainer/VBoxContainer/VBoxContainer/Fullscreen

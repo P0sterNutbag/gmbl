@@ -7,11 +7,10 @@
 [ext_resource type="Material" uid="uid://brr5rgo0swhv5" path="res://Art/Materials/wood_triplanar.tres" id="5_f8xfq"]
 [ext_resource type="Texture2D" uid="uid://bkxsoff507nnd" path="res://Art/Textures/Environment/tin roof.png" id="6_04kgb"]
 [ext_resource type="Material" uid="uid://b4aard1qnyqin" path="res://Art/Materials/tin_triplanar_gray.tres" id="7_6xmqw"]
-[ext_resource type="Script" uid="uid://e8g2mqdrdath" path="res://Scripts/building_positioner.gd" id="8_dvxff"]
 
 [sub_resource type="Resource" id="Resource_8alrb"]
 script = ExtResource("2_b2peb")
-min_population = 0
+faction = null
 max_population = 0
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
@@ -59,7 +58,6 @@ transform = Transform3D(0.99202913, 0, 0.12600851, 0, 1, 0, -0.12600851, 0, 0.99
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.1978278)
 mesh = SubResource("ArrayMesh_6o8su")
 surface_material_override/0 = ExtResource("7_6xmqw")
-script = ExtResource("8_dvxff")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Meshes/CSGBakedMeshInstance3D" index="0" unique_id=990893526]
 
@@ -67,9 +65,6 @@ script = ExtResource("8_dvxff")
 shape = SubResource("ConcavePolygonShape3D_0gfoj")
 
 [node name="Flagpole" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="3" unique_id=800258272]
-transform = Transform3D(-8.742278e-08, 0, -2, 0, 2, 0, 2, 0, -8.742278e-08, 6.9291925, 0, 3.0288462e-07)
-
-[node name="PointOfInterest" parent="." index="4" unique_id=2144080138]
-show_population = false
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 6.9291925, 0, 3.0288462e-07)
 
 [editable path="PointOfInterest"]

@@ -19,28 +19,28 @@ shader_parameter/fresnel = Color(0, 0, 0, 0)
 shader_parameter/uv_scale = Vector2(3, 2)
 shader_parameter/uv_offset = Vector2(0, 0)
 
-[node name="CrateTall" type="Node3D"]
+[node name="CrateTall" type="Node3D" unique_id=513624351 groups=["align_normal"]]
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1882736971]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 mass = 2.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1858251493]
 shape = SubResource("BoxShape3D_nolf3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=1722731265]
 mesh = SubResource("BoxMesh_jlwe5")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_hota0")
 
-[node name="Node3D" type="Node3D" parent="RigidBody3D" groups=["cover"]]
+[node name="Node3D" type="Node3D" parent="RigidBody3D" unique_id=536868182 groups=["cover"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -1.15, 0)
 
-[node name="Node3D2" type="Node3D" parent="RigidBody3D" groups=["cover"]]
+[node name="Node3D2" type="Node3D" parent="RigidBody3D" unique_id=1056930140 groups=["cover"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.15, 1.5)
 
-[node name="Node3D3" type="Node3D" parent="RigidBody3D" groups=["cover"]]
+[node name="Node3D3" type="Node3D" parent="RigidBody3D" unique_id=512788473 groups=["cover"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -1.15, 0)
 
-[node name="Node3D4" type="Node3D" parent="RigidBody3D" groups=["cover"]]
+[node name="Node3D4" type="Node3D" parent="RigidBody3D" unique_id=1511983318 groups=["cover"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.15, -1.5)

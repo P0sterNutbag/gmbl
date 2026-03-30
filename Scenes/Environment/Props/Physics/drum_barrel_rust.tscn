@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvpgm7keysw0"]
+[gd_scene format=3 uid="uid://dvpgm7keysw0"]
 
 [ext_resource type="PackedScene" uid="uid://dbt2r2caer33y" path="res://Art/Models/drum barrel.glb" id="1_q76g2"]
 [ext_resource type="Shader" uid="uid://de6l4w30bo7u6" path="res://Art/Shaders/cel-shader-base.gdshader" id="2_agdda"]
@@ -34,21 +34,21 @@ shader_parameter/fresnel = Color(0, 0, 0, 0)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 
-[node name="RigidBody3D" type="Node3D"]
+[node name="RigidBody3D" type="Node3D" unique_id=114731580 groups=["align_normal"]]
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1588531699]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.655, 0)
 collision_mask = 33
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=183747960]
 shape = SubResource("CylinderShape3D_cr7sm")
 
-[node name="drum barrel2" parent="RigidBody3D" instance=ExtResource("1_q76g2")]
+[node name="drum barrel2" parent="RigidBody3D" unique_id=1300431161 instance=ExtResource("1_q76g2")]
 
-[node name="Cylinder_001" parent="RigidBody3D/drum barrel2" index="0"]
+[node name="Cylinder_001" parent="RigidBody3D/drum barrel2" index="0" unique_id=1823045051]
 surface_material_override/0 = SubResource("ShaderMaterial_ld3no")
 
-[node name="Cylinder" parent="RigidBody3D/drum barrel2" index="1"]
+[node name="Cylinder" parent="RigidBody3D/drum barrel2" index="1" unique_id=946301324]
 surface_material_override/0 = SubResource("ShaderMaterial_q76g2")
 surface_material_override/1 = SubResource("ShaderMaterial_jnfs2")
 

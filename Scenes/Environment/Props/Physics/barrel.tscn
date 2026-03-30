@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://caaninc7023am"]
+[gd_scene format=3 uid="uid://caaninc7023am"]
 
 [ext_resource type="PackedScene" uid="uid://caqt1huuf8r1j" path="res://Art/Models/barrel.glb" id="1_1ofwc"]
 [ext_resource type="Shader" uid="uid://de6l4w30bo7u6" path="res://Art/Shaders/cel-shader-base.gdshader" id="2_1u5h1"]
@@ -19,19 +19,19 @@ shader_parameter/fresnel = Color(0, 0, 0, 0)
 shader_parameter/uv_scale = Vector2(1, 1)
 shader_parameter/uv_offset = Vector2(0, 0)
 
-[node name="Barrel" type="Node3D"]
+[node name="Barrel" type="Node3D" unique_id=971786658 groups=["align_normal"]]
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=680239493]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=387943581]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000671387, 0)
 shape = SubResource("CylinderShape3D_1u5h1")
 
-[node name="barrel" parent="RigidBody3D" instance=ExtResource("1_1ofwc")]
+[node name="barrel" parent="RigidBody3D" unique_id=1766542179 instance=ExtResource("1_1ofwc")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="Cylinder" parent="RigidBody3D/barrel" index="0"]
+[node name="Cylinder" parent="RigidBody3D/barrel" index="0" unique_id=966608550]
 surface_material_override/0 = SubResource("ShaderMaterial_hqxg6")
 surface_material_override/1 = ExtResource("4_mkatg")
 

@@ -67,6 +67,7 @@ func _ready() -> void:
 				spawn_enemy(attacker.location_data.faction)
 	
 	# spawn player allies
+	PlayerStats.ally_npcs.clear()
 	for data in PlayerStats.allies:
 		var inst = NPC.instantiate()
 		inst.npc_data = data
@@ -76,6 +77,8 @@ func _ready() -> void:
 		inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
 		inst.follow_target = Globals.player
 		inst.goal = inst.goals.follow
+		inst.health_component.death.connect(PlayerStats._on_ally_death.bind(data, inst))
+		PlayerStats.ally_npcs.append(inst)
 	
 	# spawn wandering squads
 	if randf() <= location_data.squad_spawn_chance:

@@ -38,6 +38,7 @@ func _ready():
 		for i in enemy_amount:
 			spawn_enemy(spawn_pos, squad.faction)
 	# spawn player allies
+	PlayerStats.ally_npcs.clear()
 	for data in PlayerStats.allies:
 		var inst = NPC.instantiate()
 		inst.npc_data = data
@@ -47,6 +48,7 @@ func _ready():
 		inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
 		inst.follow_target = Globals.player
 		inst.goal = inst.goals.follow
+		PlayerStats.ally_npcs.append(inst)
 	await get_tree().process_frame
 	for enemy in enemies:
 		if start_alert:

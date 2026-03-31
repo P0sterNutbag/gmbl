@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="3_6acor"]
 [ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/NPCs/npc.tscn" id="4_fyj08"]
 [ext_resource type="PackedScene" uid="uid://cwn2oirx41io" path="res://Scenes/Environment/Nature/chest.tscn" id="5_m28ai"]
+[ext_resource type="PackedScene" uid="uid://depufq0y5y6jm" path="res://Scenes/Environment/Nature/chest_small.tscn" id="6_eiwgt"]
 [ext_resource type="PackedScene" uid="uid://b77wn23o8x4a3" path="res://Scenes/Environment/Traps/mine.tscn" id="6_kynkf"]
 
 [sub_resource type="Resource" id="Resource_kn4lb"]
@@ -15,6 +16,12 @@ metadata/_custom_type_script = "uid://3uypo1jqxswc"
 [sub_resource type="Resource" id="Resource_rt3de"]
 script = ExtResource("3_6acor")
 object_to_spawn = ExtResource("5_m28ai")
+spawn_chance = 0.5
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_6acor"]
+script = ExtResource("3_6acor")
+object_to_spawn = ExtResource("6_eiwgt")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [sub_resource type="Resource" id="Resource_2gyk4"]
@@ -34,7 +41,7 @@ location_data_variable = "npc_spawn_chance"
 
 [node name="LootSpawns" type="Node3D" parent="." unique_id=1921764103]
 script = ExtResource("2_eiwgt")
-possible_spawns = Array[ExtResource("3_6acor")]([SubResource("Resource_rt3de")])
+possible_spawns = Array[ExtResource("3_6acor")]([SubResource("Resource_rt3de"), SubResource("Resource_6acor")])
 spawn_on_ready = true
 location_data_variable = "loot_spawn_chance"
 

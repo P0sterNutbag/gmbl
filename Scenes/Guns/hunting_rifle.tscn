@@ -54,21 +54,19 @@ gun_stats = SubResource("Resource_cab15")
 ammo_item = SubResource("Resource_ibbuc")
 fire_type = 2
 shoot_cooldown = 0.5
+engagement_range = 100.0
 
-[node name="GunAnchor" parent="." index="0"]
+[node name="GunAnchor" parent="." index="0" unique_id=1970548578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.16403906, -0.3313584)
 
-[node name="FirePoint" parent="GunAnchor" index="0"]
+[node name="FirePoint" parent="GunAnchor" index="0" unique_id=1901170218]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00265765, 0.22518964, -0.68193567)
 
-[node name="RayCast3D" parent="GunAnchor/FirePoint" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025115564, 0)
-
-[node name="AudioStreamPlayer3D" parent="GunAnchor/FirePoint" index="2"]
+[node name="AudioStreamPlayer3D" parent="GunAnchor/FirePoint" index="1" unique_id=382067649]
 stream = SubResource("AudioStreamRandomizer_ibbuc")
 
 [node name="Model" parent="GunAnchor" index="1" unique_id=1635769576 instance=ExtResource("6_anhr3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22452728, 0)
 
-[node name="Chamber" parent="GunAnchor" index="2"]
+[node name="Chamber" parent="GunAnchor" index="2" unique_id=1534345481]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0345904, 0.278975, 0.0372929)

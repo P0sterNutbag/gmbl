@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bt07vvnr66rmp"]
+[gd_scene format=4 uid="uid://bt07vvnr66rmp"]
 
 [ext_resource type="PackedScene" uid="uid://kw2ods1isxg6" path="res://Art/Models/sawed off shotgun.glb" id="1_xeq68"]
 
@@ -96,26 +96,26 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_mm1vu")
 
-[node name="Model" type="Node3D"]
+[node name="Model" type="Node3D" unique_id=1360131290]
 
-[node name="sawed off shotgun" parent="." instance=ExtResource("1_xeq68")]
-transform = Transform3D(-1.2020632e-08, 0, -0.275, 0, 0.275, 0, 0.275, 0, -1.2020632e-08, 0, -0.04637461, 0)
+[node name="sawed off shotgun" parent="." unique_id=969997326 instance=ExtResource("1_xeq68")]
+transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, -2.9802322e-08, -0.0437079, -0.30965632)
 
-[node name="Barrels" parent="sawed off shotgun" index="1"]
+[node name="Barrels" parent="sawed off shotgun" index="1" unique_id=375752082]
 visible = false
 
-[node name="Stock" parent="sawed off shotgun" index="2"]
+[node name="Stock" parent="sawed off shotgun" index="2" unique_id=1315151460]
 visible = false
 
-[node name="Hinge" type="Node3D" parent="sawed off shotgun"]
+[node name="Hinge" type="Node3D" parent="sawed off shotgun" unique_id=365623066]
 transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, 0.6421651, 0.13032669, -2.806993e-08)
 
-[node name="Barrels2" type="MeshInstance3D" parent="sawed off shotgun/Hinge"]
+[node name="Barrels2" type="MeshInstance3D" parent="sawed off shotgun/Hinge" unique_id=1629889812]
 transform = Transform3D(0, 0.6110017, -4.440892e-16, -0.075294435, 0, 0, 0, 3.5527137e-15, 0.075294435, -0.6421651, 0.04222382, -0.06107297)
 mesh = SubResource("ArrayMesh_k2asl")
 skeleton = NodePath("")
 
-[node name="Stock2" type="MeshInstance3D" parent="sawed off shotgun/Hinge"]
+[node name="Stock2" type="MeshInstance3D" parent="sawed off shotgun/Hinge" unique_id=1366102775]
 transform = Transform3D(1, 0, -4.440892e-16, 0, 0.079289906, 0, 3.5527137e-15, 0, 0.10172522, -0.01291585, -0.008785076, 2.8069927e-08)
 mesh = SubResource("ArrayMesh_af5et")
 skeleton = NodePath("")

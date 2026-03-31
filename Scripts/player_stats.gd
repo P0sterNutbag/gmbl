@@ -34,10 +34,8 @@ var money: int:
 	get():
 		return inventory.money
 var flashlight_on: bool
-var inventory: Inventory = Inventory.new()
-var quests: Array[Quest]
-var gun: Equipment
-var gun_index := 0
+var allies_shoot: bool = true
+var gun_index: int = 0
 var sleep: float
 var hunger: float
 var thirst: float
@@ -51,6 +49,10 @@ var hunger_decrease_rate := 0.6
 var thirst_decrease_rate := 0.8
 var skill_points = 5.0
 var player_style: NpcStyle
+var gun: Equipment
+var inventory: Inventory = Inventory.new()
+var quests: Array[Quest]
+var ally_npcs: Array[Enemy]
 @onready var guns: Array[Item]:
 	get(): 
 		return inventory.items.filter(func(i): return i is EquipmentGun and i.gun_stats.ammo > 0)
@@ -223,6 +225,11 @@ func _on_scene_leaving():
 func _on_skill_changed(skill_name: String) -> void:
 	if skill_name == "strength":
 		inventory.space_modifier = int(skills.strength)
+
+
+func _on_ally_death(npc_data: NpcData, npc: Enemy) -> void:
+	allies.erase(npc_data)
+	ally_npcs.erase(npc)
 
 
 func save() -> Dictionary:

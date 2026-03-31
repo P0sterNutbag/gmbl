@@ -18,6 +18,9 @@ var starting_fog: float
 @onready var dot_crosshair: ColorRect = $DotCrosshair
 @onready var breath: ProgressBar = $Breath
 @onready var binocular_overlay: Control = $BinocularOverlay
+@onready var commands: VBoxContainer = $Commands
+@onready var commands_label: Label = $Commands/Label2
+@onready var ally_count: Label = $Commands/HBoxContainer/Label
 
 
 func _ready() -> void:
@@ -30,11 +33,23 @@ func _process(delta: float) -> void:
 	# tooltip
 	if UiController.current_ui != null:
 		tooltip.hide()
-	#else:
-		#tooltip.show()
 	
+	# ally commands
+	if Input.is_action_pressed("command_allies"):
+		commands.show()
+		ally_count.text = str(PlayerStats.allies.size())
+	else:
+		commands.hide()
+	#if commands.visible:
+		#var text = "1: "
+		#if PlayerStats.allies_follow: text += "Stop"
+		#else: text += "Follow"
+		#text += "\n2: "
+		#if PlayerStats.allies_shoot: text += "Hold Fire"
+		#else: text += "Open Fire"
+		#commands_label.text = text
 	
-	# magazine/medkits
+	# magazine visual and count
 	if Globals.player.gun:
 		if Globals.player.gun is Gun:
 			ammo_count.visible = true

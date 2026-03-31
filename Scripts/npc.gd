@@ -10,12 +10,12 @@ class_name Enemy
 @export var max_items: int
 @export var min_items: int
 @export var faction: FactionManager.factions
-enum states {idle, investigate, shoot, search, strafe, hurt, reload, camp, dead, aim, walk, supress, find_cover}
+enum states {idle, investigate, shoot, search, strafe, hurt, reload, camp, dead, aim, walk, supress, find_cover, approach}
 enum goals {guard, travel, follow, none}
 var state = states.idle
 var goal = goals.guard
 var walk_speed := 1.5
-var run_speed := 4.5
+var run_speed := 3.5
 var time_to_detect_max := 1.5
 var camp_chance := 0.1
 var supress_change := 0.25
@@ -32,6 +32,7 @@ var path_index: int
 var is_new_state: bool
 var on_alert: bool
 var is_starting_squad: bool
+var open_fire: bool = true
 var damage_position: Vector3
 var damage_direction: Vector3
 var last_seen_position: Vector3
@@ -89,6 +90,7 @@ func _ready() -> void:
 		states.walk: state_walk,
 		states.supress: state_supress,
 		states.find_cover: state_find_cover,
+		states.approach: state_approach,
 	}
 	# set affinity to player
 	await get_tree().process_frame
@@ -118,7 +120,7 @@ func state_idle(delta) -> void:
 	if goal == goals.follow and follow_target and global_position.distance_to(follow_target.global_position) > 3:
 		change_state(states.walk)
 	# switch to investigate
-	if target != null:
+	if target != null and open_fire:
 		time_to_see += delta
 		if time_to_see > time_to_see_max:
 			time_to_see = 0
@@ -139,18 +141,26 @@ func state_walk(delta) -> void:
 	# follow path
 	var spd = walk_speed
 	if goal == goals.follow:
+		if follow_target == Globals.player:
+			spd = Globals.player.speed - 0.5
+		else:
+			spd = run_speed
+	elif goal == goals.travel and follow_target == Globals.player:
 		spd = run_speed
 	follow_path(spd)
 	# switch to investigate
-	if target != null:
+	if target != null and open_fire:
 		time_to_see += delta
 		if time_to_see > time_to_see_max:
 			time_to_see = 0
 			change_state(states.investigate)
+	# switch to idle
+	if goal == goals.guard:
+		change_state(states.idle)
 	# animate
-	if spd == walk_speed:
+	if spd <= 2.5:
 		anim_player.play("Walk")
-	elif spd == run_speed:
+	else:
 		anim_player.play("Run")
 
 
@@ -170,12 +180,34 @@ func state_investigate(delta) -> void:
 			if randf() > 0.5:
 				change_state(states.find_cover)
 			else:
-				change_state(states.aim)
+				change_state(states.approach)
 	else:
 		if return_to_idle_timer.time_left <= 0:
 			return_to_idle_timer.start()
 	# animate
 	anim_player.play("IdlePoint")
+
+
+func state_approach(_delta) -> void:
+	if is_new_state:
+		if target:
+			if global_position.distance_to(target.global_position) > gun.engagement_range:
+				navigation_agent.target_position = target.global_position
+			else:
+				change_state(states.aim)
+				return
+		is_new_state = false
+	# leave approach
+	if !target:
+		if goal == goals.travel or goal == goals.follow:
+			change_state(states.idle)
+		else:
+			change_state(states.search)
+	# approach and start shooting
+	follow_path(run_speed)
+	if navigation_agent.distance_to_target() <= gun.engagement_range:
+		change_state(states.aim)
+	anim_player.play("Run")
 
 
 func state_aim(_delta) -> void:
@@ -194,19 +226,18 @@ func state_shoot(delta) -> void:
 		on_alert = true
 		anim_player.play("Fire")
 		if !target:
-			if randf() <= camp_chance:
-				change_state(states.camp)
-			#elif randf() <= supress_change:
-				#change_state(states.supress)
+			if goal == goals.travel or goal == goals.follow:
+				change_state(states.idle)
 			else:
-				change_state(states.search)
+				if randf() <= camp_chance:
+					change_state(states.camp)
+				#elif randf() <= supress_change:
+					#change_state(states.supress)
+				else:
+					change_state(states.search)
 			return
 		velocity = Vector3.ZERO
 		is_new_state = false
-	#if !target or target.state == states.dead:
-		#target = null
-		#change_state(states.investigate)
-		#return
 	# look at target
 	if target and gun:
 		last_seen_position = target.global_position
@@ -214,7 +245,7 @@ func state_shoot(delta) -> void:
 		if gun.fire_point != null:
 			gun.fire_point.look_at(detection.target_pos)
 	# switch to search
-	if !target: #!detection.can_see_target(target):
+	if !target:
 		time_since_detect += delta
 		if time_since_detect >= 3:
 			if randf() <= camp_chance:
@@ -272,7 +303,7 @@ func state_search(_delta) -> void:
 	follow_path(run_speed)
 	# return to shoot
 	if target:
-		change_state(states.aim)
+		change_state(states.approach)
 	# animate
 	anim_player.play("WalkPoint")
 
@@ -290,7 +321,7 @@ func state_strafe(_delta) -> void:
 	# stop strafing
 	if velocity.length() < 0.1:
 		look_at_position(last_seen_position)
-		change_state(states.aim)
+		change_state(states.approach)
 	# animate
 	if velocity == Vector3.ZERO:
 		anim_player.play("Idle")
@@ -313,13 +344,13 @@ func state_find_cover(_delta) -> void:
 				return !detection.can_see_target(_target))
 		detection.position = Vector3(0, 1, 0)
 		if potential_cover.size() == 0:
-			change_state(states.aim)#states.strafe)
+			change_state(states.approach)#states.strafe)
 			return
 		potential_cover.sort_custom(func(a, b): return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position))
 		var cover_pos = potential_cover[0].global_position
 		navigation_agent.set_target_position(cover_pos)
 		if !navigation_agent.is_target_reachable():
-			change_state(states.aim)#states.strafe)
+			change_state(states.approach)#states.strafe)
 			return
 		is_new_state = false
 	
@@ -342,8 +373,8 @@ func state_dead(_delta) -> void:
 
 
 func change_state(new_state: states):
-	if state == new_state:
-		return
+	#if state == new_state:
+		#return
 	if state == states.shoot:
 		shoot_timer.stop()
 	state = new_state
@@ -399,7 +430,7 @@ func on_noise_heard(noise_position: Vector3, event_creator):
 		return
 	if target:
 		return
-	if !on_alert:
+	if !on_alert and open_fire:
 		last_seen_position = noise_position
 		#navigation_agent.set_target_position(noise_position)
 		#target = event_creator
@@ -450,6 +481,7 @@ func _on_death() -> void:
 		gun.queue_free()
 	velocity = Vector3.ZERO
 	#anim_player.play("Die")
+	set_collision_layer_value(2, false)
 	anim_player.active = false
 	physical_bone_simulator.active = true
 	physical_bone_simulator.physical_bones_start_simulation()
@@ -479,7 +511,8 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 	elif state == states.walk:
 		if goal == goals.travel:
 			change_state(states.idle)
-			new_destination_timer.start()
+			destination = Vector3.ZERO
+			#new_destination_timer.start()
 		elif goal == goals.follow:
 			change_state(states.idle)
 	elif state == states.find_cover:
@@ -510,7 +543,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name.contains("HitReaction"):
 		look_at_position(damage_position)
 		if randf() > 0.5:
-			change_state(states.aim)
+			change_state(states.approach)
 		else:
 			change_state(states.find_cover)
 	elif anim_name == "Fire":

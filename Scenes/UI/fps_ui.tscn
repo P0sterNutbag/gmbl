@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://c3hs8nxqqu881" path="res://Art/Textures/UI/sleep icon.png" id="8_jr5wk"]
 [ext_resource type="Texture2D" uid="uid://u7nrdkhha2eb" path="res://Art/Textures/UI/drunk icon.png" id="9_3lnm2"]
 [ext_resource type="StyleBox" uid="uid://bcg5bax3erc8w" path="res://Art/Themes/style_box.tres" id="9_6gmlr"]
-[ext_resource type="Shader" uid="uid://clx8i8jbtbgo3" path="res://Art/Shaders/retro.gdshader" id="9_a1pox"]
 [ext_resource type="Texture2D" uid="uid://cvly0bfjs24or" path="res://Art/Textures/UI/sun-moon.png" id="10_a1pox"]
 [ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="11_ettqu"]
 [ext_resource type="Theme" uid="uid://crg6v3iu4nx3m" path="res://Art/Themes/text_header_outline.tres" id="11_jr5wk"]
@@ -21,6 +20,10 @@
 [ext_resource type="Theme" uid="uid://dcnijc3hjurqk" path="res://Art/Themes/text_mediun_outline.tres" id="13_hkj58"]
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="14_hkj58"]
 [ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="15_6gmlr"]
+[ext_resource type="Shader" uid="uid://cjcsm8s887nv7" path="res://Scripts/Shaders/vignette.gdshader" id="16_sdqf4"]
+[ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="22_jr5wk"]
+[ext_resource type="Theme" uid="uid://ddlkdp3v3plc" path="res://Art/Themes/hbox_container.tres" id="22_sdqf4"]
+[ext_resource type="Texture2D" uid="uid://d2ukjid6oonnl" path="res://Art/Textures/UI/population icon.png" id="23_hm5a8"]
 
 [sub_resource type="Gradient" id="Gradient_8v68b"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 0, 0, 1)
@@ -42,10 +45,10 @@ bg_color = Color(0, 0, 0, 0.784314)
 border_color = Color(1, 1, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pl43u"]
-shader = ExtResource("9_a1pox")
-shader_parameter/enabled = true
-shader_parameter/dithering = true
-shader_parameter/dither_size = 1
+shader = ExtResource("16_sdqf4")
+shader_parameter/vignette_color = Color(1, 0, 0, 1)
+shader_parameter/vignette_radius = 0.800000038
+shader_parameter/vignette_softness = 0.6000000285
 
 [node name="FpsUI" type="CanvasLayer" unique_id=1392304047]
 process_mode = 3
@@ -265,7 +268,6 @@ grow_vertical = 0
 color = Color(0, 0, 0, 1)
 
 [node name="HitEffect" type="Control" parent="." unique_id=941024171]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -275,6 +277,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="HitEffect" unique_id=45684532]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -683,14 +686,18 @@ layout_mode = 0
 offset_left = -20.0
 offset_bottom = 2.0
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=270374956]
+[node name="LowHealthVignette" type="ColorRect" parent="." unique_id=731272939]
+process_mode = 4
 visible = false
+z_index = -10
 material = SubResource("ShaderMaterial_pl43u")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
 
 [node name="Label" type="Label" parent="." unique_id=407392284]
 visible = false
@@ -795,6 +802,49 @@ text = "Quit to Main Menu"
 [node name="Quit2" parent="DeathUI/MarginContainer/VBoxContainer/VBoxContainer" unique_id=898834578 instance=ExtResource("15_6gmlr")]
 layout_mode = 2
 text = "Quit to Desktop"
+
+[node name="Commands" type="VBoxContainer" parent="." unique_id=1401421494]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -282.0
+offset_right = 248.0
+offset_bottom = -180.0
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Commands" unique_id=1667268568]
+layout_mode = 2
+theme = ExtResource("22_sdqf4")
+
+[node name="TextureRect" type="TextureRect" parent="Commands/HBoxContainer" unique_id=490246498]
+modulate = Color(1, 1, 0, 1)
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+texture = ExtResource("23_hm5a8")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Commands/HBoxContainer" unique_id=1675294680]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("13_hkj58")
+text = "4"
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Commands" unique_id=1008657504]
+layout_mode = 2
+theme = ExtResource("13_hkj58")
+text = "Commands:"
+
+[node name="Label2" type="Label" parent="Commands" unique_id=368152929]
+layout_mode = 2
+theme = ExtResource("22_jr5wk")
+text = "1: Follow
+2: Go Forward
+3: Stop
+3: Open Fire
+4: Hold Fire"
 
 [connection signal="visibility_changed" from="BinocularOverlay" to="." method="_on_binocular_overlay_visibility_changed"]
 [connection signal="pressed" from="DeathUI/MarginContainer/VBoxContainer/VBoxContainer/LoadSave" to="." method="_on_load_save_pressed"]

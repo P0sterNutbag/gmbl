@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/Effects/Decals/hitmarker.tscn" id="7_2jnj1"]
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="8_enij7"]
 [ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="9_mwii3"]
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="10_4no11"]
+[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="11_fcwna"]
 [ext_resource type="PackedScene" uid="uid://dfxhgieagfc0d" path="res://Scenes/Models/Characters/player_arm.tscn" id="12_ogmfp"]
 [ext_resource type="FontFile" uid="uid://d0fpgnwmxa37x" path="res://Art/Fonts/bedstead-bold.otf" id="13_ixrbb"]
 [ext_resource type="AudioStream" uid="uid://kwc4fqixs4ne" path="res://Audio/Guns/remove_magazine.wav" id="14_ei2r2"]
@@ -29,6 +31,7 @@
 [ext_resource type="AudioStream" uid="uid://ddrjpnastg7jv" path="res://Audio/CharacterActions/footstep-74321.wav" id="28_ejxfg"]
 [ext_resource type="PackedScene" uid="uid://j2m6pd4rb0jy" path="res://Scenes/Guns/grenade.tscn" id="28_rukb4"]
 [ext_resource type="Material" uid="uid://cuiwmfj20a7tt" path="res://Art/Materials/metal.tres" id="29_4no11"]
+[ext_resource type="PackedScene" uid="uid://bdlenssiaotxi" path="res://Scenes/Overworld/Player/move_marker.tscn" id="32_fcwna"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kgvud"]
 
@@ -56,6 +59,24 @@ metadata/_custom_type_script = "uid://c338ifvm4duar"
 script = ExtResource("9_mwii3")
 ammo = 24
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
+[sub_resource type="Resource" id="Resource_q7l5h"]
+script = ExtResource("10_4no11")
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[sub_resource type="Resource" id="Resource_fcwna"]
+resource_local_to_scene = true
+resource_name = "rifle_ammo"
+script = ExtResource("11_fcwna")
+effects = Array[ExtResource("10_4no11")]([SubResource("Resource_q7l5h")])
+method = "reload_gun"
+custom_path = "PlayerStats"
+usable_in_menu = false
+title = "7.62×39mm Magazine"
+category = 1
+price = 35
+description = "Usable in: AK-47, Hunting Rifle"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
 [sub_resource type="Animation" id="Animation_2ijsl"]
 length = 0.001
@@ -163,6 +184,19 @@ metadata/_custom_type_script = "uid://c338ifvm4duar"
 script = ExtResource("9_mwii3")
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
+[sub_resource type="Resource" id="Resource_1agin"]
+resource_local_to_scene = true
+resource_name = "pistol_ammo"
+script = ExtResource("11_fcwna")
+method = "reload_gun"
+custom_path = "PlayerStats"
+usable_in_menu = false
+title = "9mm Magazine"
+category = 1
+price = 25
+description = "Usable in: Pistol"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
+
 [sub_resource type="BoxMesh" id="BoxMesh_igrcy"]
 material = ExtResource("17_po18e")
 size = Vector3(0.05, 0.2, 0.05)
@@ -252,6 +286,27 @@ _data = {
 script = ExtResource("9_mwii3")
 ammo = 5
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
+[sub_resource type="Resource" id="Resource_08fje"]
+script = ExtResource("10_4no11")
+values = Dictionary[String, Variant]({
+"ammo": 1
+})
+add = true
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[sub_resource type="Resource" id="Resource_2jnj1"]
+resource_local_to_scene = true
+resource_name = "shotgun_ammo"
+script = ExtResource("11_fcwna")
+effects = Array[ExtResource("10_4no11")]([SubResource("Resource_08fje")])
+custom_path = "PlayerStats"
+usable_in_menu = false
+title = "Shotgun Shell"
+category = 1
+price = 6
+description = "Usable in: Shotgun, Sawed-off Shotgun"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
 [sub_resource type="Animation" id="Animation_igrcy"]
 length = 0.001
@@ -419,6 +474,19 @@ script = ExtResource("9_mwii3")
 ammo = 6
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
+[sub_resource type="Resource" id="Resource_enij7"]
+resource_local_to_scene = true
+resource_name = "sniper_ammo"
+script = ExtResource("11_fcwna")
+method = "reload_gun"
+custom_path = "PlayerStats"
+usable_in_menu = false
+title = "Sniper Magazine"
+category = 1
+price = 53
+description = "Usable in: Sniper Rifle"
+metadata/_custom_type_script = "uid://dd1ly8qocexg4"
+
 [sub_resource type="Animation" id="Animation_p1odr"]
 resource_name = "reload"
 length = 1.8
@@ -491,6 +559,27 @@ script = ExtResource("9_mwii3")
 ammo = 2
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
+[sub_resource type="Resource" id="Resource_m6ahd"]
+script = ExtResource("10_4no11")
+values = Dictionary[String, Variant]({
+"ammo": 1
+})
+add = true
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[sub_resource type="Resource" id="Resource_2aanf"]
+resource_local_to_scene = true
+resource_name = "shotgun_ammo"
+script = ExtResource("11_fcwna")
+effects = Array[ExtResource("10_4no11")]([SubResource("Resource_m6ahd")])
+custom_path = "PlayerStats"
+usable_in_menu = false
+title = "Shotgun Shell"
+category = 1
+price = 6
+description = "Usable in: Shotgun, Sawed-off Shotgun"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
+
 [sub_resource type="Animation" id="Animation_36dho"]
 length = 0.001
 tracks/0/type = "value"
@@ -534,66 +623,49 @@ tracks/2/keys = {
 resource_name = "reload"
 length = 1.1
 step = 0.1
-tracks/0/type = "method"
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../../../..")
+tracks/0/path = NodePath("GunAnchor/Model/sawed off shotgun/Hinge:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.4, 0.8),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [0.81],
-"method": &"check_reload_ammo"
-}, {
-"args": [0.81],
-"method": &"check_reload_ammo"
-}]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("GunAnchor/Model/sawed off shotgun/Hinge:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.8, 1.1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0.61086524), Vector3(0, 0, 0.61086524), Vector3(0, 0, 0)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("..:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.8666667, 0.93333334, 1.1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0.105, 0), Vector3(0, -0.07, 0), Vector3(0, -0.07, 0), Vector3(0, -0.15, 0), Vector3(0, 0, 0)]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("ArmLAnchor/armL:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmLAnchor/armL:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.6098894, 0.7098894, 0.8098894, 0.90000004, 1.1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(-0.205, -0.295, 0), Vector3(-0.053, 0.138, 0.037), Vector3(0.02, 0.08, 0.055), Vector3(-0.053, 0.138, 0.037), Vector3(-0.205, -0.295, 0), Vector3(-0.053, 0.138, 0.037), Vector3(0.02, 0.08, 0.055), Vector3(-0.053, 0.138, 0.037), Vector3(0, 0, 0)]
 }
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("%GunPivot/../../..")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%GunPivot/../../..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0.4, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
@@ -689,6 +761,24 @@ v_angle_variance_hip = 1.5
 noise_radius = 75.0
 is_hitscan = false
 metadata/_custom_type_script = "uid://c338ifvm4duar"
+
+[sub_resource type="Resource" id="Resource_ixrbb"]
+script = ExtResource("10_4no11")
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[sub_resource type="Resource" id="Resource_ogmfp"]
+resource_local_to_scene = true
+resource_name = "rifle_ammo"
+script = ExtResource("11_fcwna")
+effects = Array[ExtResource("10_4no11")]([SubResource("Resource_ixrbb")])
+method = "reload_gun"
+custom_path = "PlayerStats"
+usable_in_menu = false
+title = "7.62×39mm Magazine"
+category = 1
+price = 35
+description = "Usable in: AK-47, Hunting Rifle"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
 [sub_resource type="Animation" id="Animation_wohnl"]
 length = 0.001
@@ -925,6 +1015,14 @@ target_position = Vector3(0, 0, -2.5)
 collision_mask = 2064
 collide_with_areas = true
 
+[node name="AllyRaycast" type="RayCast3D" parent="CameraAnchor/Camera3D" unique_id=78856679]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.005432e-05, 0)
+enabled = false
+target_position = Vector3(0, 0, -50)
+
+[node name="Node3D" type="Node3D" parent="CameraAnchor/Camera3D/AllyRaycast" unique_id=1655643015]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
+
 [node name="GrenadeSpawn" type="Node3D" parent="CameraAnchor/Camera3D" unique_id=855897590]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.231521, -0.232048, 0)
 
@@ -952,6 +1050,7 @@ visible = false
 uses_input = true
 bullet_stats = SubResource("Resource_l6n3p")
 gun_stats = SubResource("Resource_igrcy")
+ammo_item = SubResource("Resource_fcwna")
 ads_vector = Vector3(-0.188, 0.085, 0)
 cast_shadow = false
 
@@ -1026,6 +1125,7 @@ visible = false
 uses_input = true
 bullet_stats = SubResource("Resource_fd4e3")
 gun_stats = SubResource("Resource_wpjfl")
+ammo_item = SubResource("Resource_1agin")
 fire_type = 0
 ads_vector = Vector3(-0.195, 0.045, 0.07)
 cast_shadow = false
@@ -1095,6 +1195,7 @@ visible = false
 uses_input = true
 bullet_stats = ExtResource("19_8d028")
 gun_stats = SubResource("Resource_qqcod")
+ammo_item = SubResource("Resource_2jnj1")
 zoom_amount = 1.25
 kickback_magnitude = 1.0
 ads_vector = Vector3(-0.099, 0.045, 0.07)
@@ -1154,6 +1255,7 @@ visible = false
 uses_input = true
 bullet_stats = SubResource("Resource_fs7ks")
 gun_stats = SubResource("Resource_olqyp")
+ammo_item = SubResource("Resource_enij7")
 zoom_amount = 3.0
 scope_texture = ExtResource("22_qflxp")
 cast_shadow = false
@@ -1223,14 +1325,14 @@ outline_size = 8
 libraries/ = SubResource("AnimationLibrary_p1odr")
 
 [node name="SawedOff" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor" unique_id=210830844 instance=ExtResource("24_rblve")]
-visible = false
 uses_input = true
 gun_stats = SubResource("Resource_mwii3")
+ammo_item = SubResource("Resource_2aanf")
 
 [node name="GunAnchor" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SawedOff" index="0" unique_id=1970548578]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9802322e-08, -0.2614286, -0.040670156)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9802322e-08, -0.2932862, 0.17806861)
 
-[node name="Hinge" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SawedOff/GunAnchor/Model/sawed off shotgun" index="3"]
+[node name="Hinge" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SawedOff/GunAnchor/Model/sawed off shotgun" parent_id_path=PackedInt32Array(210830844, 550968195, 969997326) index="3" unique_id=365623066]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6421651, 0.13032669, -2.806993e-08)
 
 [node name="ArmLAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SawedOff" unique_id=1224497871]
@@ -1249,6 +1351,7 @@ transform = Transform3D(0.85695136, 0, 0.51539695, 0.1159391, 0.97437, -0.192772
 libraries/ = SubResource("AnimationLibrary_83xs0")
 
 [node name="Uzi" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor" unique_id=1309005030 instance=ExtResource("25_fn4qh")]
+visible = false
 uses_input = true
 bullet_stats = SubResource("Resource_4no11")
 
@@ -1280,6 +1383,7 @@ libraries/ = SubResource("AnimationLibrary_ypfnu")
 visible = false
 uses_input = true
 bullet_stats = SubResource("Resource_rukb4")
+ammo_item = SubResource("Resource_ogmfp")
 
 [node name="GunAnchor" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle" index="0" unique_id=1970548578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247, -0.331)
@@ -1387,13 +1491,6 @@ collision_layer = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_qqcod")
 
-[node name="PlacePosition" type="Node3D" parent="." unique_id=241093471]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63204, -2.5)
-
-[node name="PlacerRaycast3D" type="RayCast3D" parent="PlacePosition" unique_id=78856679]
-enabled = false
-target_position = Vector3(0, -3, 0)
-
 [node name="StepTimer" type="Timer" parent="." unique_id=1383911210]
 wait_time = 0.5
 one_shot = true
@@ -1402,6 +1499,12 @@ one_shot = true
 stream = SubResource("AudioStreamRandomizer_bi64h")
 volume_db = -20.0
 bus = &"SFX"
+
+[node name="MoveMarker" parent="." unique_id=431028146 instance=ExtResource("32_fcwna")]
+visible = false
+
+[node name="MeshInstance3D" parent="MoveMarker" index="0" unique_id=1028542097]
+bob_frequency = 10.0
 
 [connection signal="animation_finished" from="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
@@ -1439,3 +1542,4 @@ bus = &"SFX"
 [editable path="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model/hunting rifle"]
 [editable path="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife"]
 [editable path="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Grenade"]
+[editable path="MoveMarker"]

@@ -41,13 +41,20 @@ func add_item(item: Item, amount: int = 1, create_notification: bool = false) ->
 	return true
 
 
-func remove_item(item: Item, amount: int = 1) -> void:
+func remove_item(item: Item, amount: int = 1, create_notification: bool = false) -> void:
 	var slot = find_item_slot(item)
 	if !slot:
 		return
 	slot.amount -= amount
 	if slot.amount <= 0:
 		item_slots.erase(slot)
+	if create_notification:
+		Globals.survival_ui.create_notification(item.title + " removed from inventory")
+
+
+func remove_item_by_name(item_name: String, amount: int = 1, create_notification: bool = false) -> void:
+	var item = find_item(item_name)
+	remove_item(item, amount, create_notification)
 
 
 func find_item(item_name: String) -> Item:

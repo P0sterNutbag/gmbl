@@ -45,6 +45,7 @@ var on_ladder: bool
 var can_hold_breath: bool = true
 var is_holding_breath: bool
 var aim_rotation: Vector3
+var ally_destination: Vector3
 var ammo: int:
 	get():
 		if gun and "gun_stats" in gun:
@@ -84,12 +85,12 @@ const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var hitbox: HealthComponent = $Hitbox
 @onready var health_component: HealthComponent = $Hitbox
 @onready var grenade_spawn: Node3D = $CameraAnchor/Camera3D/GrenadeSpawn
-@onready var place_position: Node3D = $PlacePosition
-@onready var placer_raycast: RayCast3D = $PlacePosition/PlacerRaycast3D
+@onready var ally_raycast: RayCast3D =$CameraAnchor/Camera3D/AllyRaycast
 @onready var bullet_flyby_sfx: AudioStreamPlayer3D = $CameraAnchor/BulletListener/AudioStreamPlayer3D
 @onready var footstep_sfx: AudioStreamPlayer3D = $FootstepPlayer
 @onready var spot_light: SpotLight3D = $CameraAnchor/Camera3D/SpotLight3D
 @onready var gun_collision_cast: RayCast3D = %GunPivot/GunOffset/RayCast3D
+@onready var move_marker: Node3D = $MoveMarker
 
 
 func _enter_tree() -> void:
@@ -183,6 +184,22 @@ func _process(delta: float) -> void:
 	# state machine
 	if gun_state_functions.has(gun_state):
 		gun_state_functions[gun_state].call(delta)
+	# ally commands
+	for ally in PlayerStats.ally_npcs:
+		ally.open_fire = PlayerStats.allies_shoot
+		#if PlayerStats.allies_follow:
+			#ally.goal = ally.goals.follow
+		#else:
+			#ally.goal = ally.goals.guard
+	if ally_destination != Vector3.ZERO and PlayerStats.allies.size() > 0:
+		var allies = PlayerStats.ally_npcs.filter(func(i): return i.state != i.states.idle)
+		if allies.size() == 0:
+			move_marker.hide()
+		else:
+			move_marker.show()
+			move_marker.global_position = ally_destination
+	else:
+		move_marker.hide()
 
 
 func change_gun_state(new_state):
@@ -272,9 +289,9 @@ func state_walk(delta):
 			change_gun_slot(wrap(PlayerStats.gun_index - 1, 0, kit.gun_slots.size()))
 		elif Input.is_action_just_released("last_gun"):
 			change_gun_slot(wrap(PlayerStats.gun_index + 1, 0, kit.gun_slots.size()))
-	if Input.is_action_just_pressed("slot_1"):
+	if Input.is_action_just_pressed("slot_1") and !Input.is_action_pressed("command_allies"):
 		change_gun_slot(0)
-	elif Input.is_action_just_pressed("slot_2"):
+	elif Input.is_action_just_pressed("slot_2") and !Input.is_action_pressed("command_allies"):
 		change_gun_slot(1)
 	
 	# leaning
@@ -351,8 +368,6 @@ func state_walk(delta):
 		var collider = interact_cast.get_collider(0)
 		if !collider:
 			return
-		#if collider.is_in_group("lootable") or (collider is PhysicalBone3D and collider.health_component and collider.health_component.is_dead):
-			#Globals.ui.set_tooltip_custom("Loot")
 		if "interaction_object" in collider:
 			collider = collider.interaction_object
 		if collider is InteractableObject:
@@ -369,13 +384,6 @@ func state_walk(delta):
 		if !interact_cast.is_colliding():
 			return
 		var collider = interact_cast.get_collider(0)
-		#if collider.is_in_group("lootable"):
-			#Globals.survival_ui.loot(collider.get_parent().inventory)
-			#if collider.get_parent() is ItemContainer:
-				#collider.get_parent().open()
-		#elif collider is PhysicalBone3D:
-			#if collider.health_component and collider.health_component.is_dead:
-				#Globals.survival_ui.loot(collider.health_component.get_parent().inventory)
 		if collider is InteractableObject:
 			collider.interact()
 		elif "interaction_object" in collider:
@@ -416,13 +424,6 @@ func state_walk(delta):
 	
 	# light
 	spot_light.visible = PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.light] != null
-	#var flashlight = PlayerStats.inventory.find_item("flashlight")
-	#if Input.is_action_just_pressed("light") and flashlight and flashlight.equipped:
-		#PlayerStats.flashlight_on = !PlayerStats.flashlight_on
-	#if PlayerStats.flashlight_on:
-		#spot_light.visible = true
-	#else:
-		#spot_light.visible = false
 	
 	# breath
 	if is_holding_breath:
@@ -430,15 +431,37 @@ func state_walk(delta):
 	elif current_breath < max_breath:
 		current_breath += delta
 	
-	# ui
-	#if gun and gun is Gun:
-		#if Input.is_action_just_pressed("aim"):
-			#if gun.scope_texture != null:
-				#Globals.ui.show_scope(gun.scope_texture)
-				#gun.hide()
-		#elif Input.is_action_just_released("aim"):
-			#Globals.ui.scope.hide()
-			#gun.show()
+	# commanding allies
+	if Input.is_action_pressed("command_allies"):
+		if Input.is_action_just_pressed("slot_1"):
+			for ally in PlayerStats.ally_npcs:
+				ally.goal = ally.goals.follow
+			ally_destination = Vector3.ZERO
+			Globals.survival_ui.create_notification("Allies will follow you")
+		elif Input.is_action_just_pressed("slot_2"):
+			ally_raycast.enabled = true
+			ally_raycast.force_raycast_update()
+			if ally_raycast.is_colliding():
+				ally_destination = ally_raycast.get_collision_point()
+			else:
+				ally_destination = ally_raycast.get_child(0).global_position
+				ally_destination.y = Globals.get_heightmap_position(ally_destination)
+			for ally in PlayerStats.ally_npcs:
+				ally.goal = ally.goals.travel
+				ally.destination = ally_destination
+				ally.change_state(ally.states.walk)
+			Globals.survival_ui.create_notification("Allies going forward")
+		elif Input.is_action_just_pressed("slot_3"):
+			for ally in PlayerStats.ally_npcs:
+				ally.goal = ally.goals.guard
+			ally_destination = Vector3.ZERO
+			Globals.survival_ui.create_notification("Allies will stay put")
+		elif Input.is_action_just_pressed("slot_4"):
+			PlayerStats.allies_shoot = true
+			Globals.survival_ui.create_notification("Allies will open fire")
+		elif Input.is_action_just_pressed("slot_5"):
+			PlayerStats.allies_shoot = false
+			Globals.survival_ui.create_notification("Allies will hold fire")
 	
 	# point gun up if colliding
 	if gun_collision_cast.is_colliding():
@@ -633,26 +656,27 @@ func enter_gun_state_no_gun():
 
 
 func gun_state_no_gun(_delta: float):
-	if object_to_place == null:
-		return
-	placer_raycast.global_position = place_position.global_position
-	placer_raycast.enabled = true
-	if placer_raycast.is_colliding():
-		object_to_place.global_position = placer_raycast.get_collision_point()
-	if Input.is_action_just_pressed("interact") or Input.is_action_just_pressed("shoot"):
-		var item_transform = object_to_place.global_transform
-		place_position.remove_child(object_to_place)
-		get_tree().current_scene.add_child(object_to_place)
-		object_to_place.global_transform = item_transform
-		for child in object_to_place.get_children():
-			if child is MeshInstance3D:
-				child.transparency = 0
-		object_to_place = null
-		PlayerStats.delete_current_equip()
+	pass
+	#if object_to_place == null:
+		#return
+	#placer_raycast.global_position = place_position.global_position
+	#placer_raycast.enabled = true
+	#if placer_raycast.is_colliding():
+		#object_to_place.global_position = placer_raycast.get_collision_point()
+	#if Input.is_action_just_pressed("interact") or Input.is_action_just_pressed("shoot"):
+		#var item_transform = object_to_place.global_transform
+		#place_position.remove_child(object_to_place)
+		#get_tree().current_scene.add_child(object_to_place)
+		#object_to_place.global_transform = item_transform
+		#for child in object_to_place.get_children():
+			#if child is MeshInstance3D:
+				#child.transparency = 0
+		#object_to_place = null
+		#PlayerStats.delete_current_equip()
 
 
 func exit_gun_state_no_gun():
-	placer_raycast.enabled = false
+	#placer_raycast.enabled = false
 	gun_pivot.rotation_degrees = Vector3(-45, 0, 0)
 	if gun_tween:
 		gun_tween.kill()
@@ -751,12 +775,13 @@ func throw_grenade() -> void:
 		unequip_gun()
 
 
-func start_place_item(item_to_place: String):
-	if gun != null:
-		await unequip_gun()
-	object_to_place = load(item_to_place).instantiate()
-	object_to_place.placed = false
-	place_position.add_child(object_to_place)
+func start_place_item(_item_to_place: String):
+	pass
+	#if gun != null:
+		#await unequip_gun()
+	#object_to_place = load(item_to_place).instantiate()
+	#object_to_place.placed = false
+	#place_position.add_child(object_to_place)
 
 
 func end_place_item():

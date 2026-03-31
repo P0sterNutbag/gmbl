@@ -27,6 +27,17 @@ VScrollBar/styles/grabber = SubResource("StyleBoxFlat_d513x")
 VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_2lqwa")
 VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_v8bd3")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_or60b"]
+bg_color = Color(0, 0, 0, 0.75000006)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 0, 1)
+shadow_size = 1
+shadow_offset = Vector2(2, 2)
+anti_aliasing_size = 0.01
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnhd3"]
 bg_color = Color(0, 0, 0, 0.78431374)
 border_width_left = 2
@@ -173,6 +184,7 @@ text = "LMB: Trasnfer"
 
 [node name="DropMenu" type="Control" parent="." unique_id=1363426560]
 visible = false
+z_index = 1
 layout_mode = 2
 mouse_filter = 2
 
@@ -190,6 +202,7 @@ offset_bottom = 97.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_osrsm")
+theme_override_styles/panel = SubResource("StyleBoxFlat_or60b")
 
 [node name="MarginContainer" type="MarginContainer" parent="DropMenu/PanelContainer" unique_id=1920624947]
 layout_mode = 2

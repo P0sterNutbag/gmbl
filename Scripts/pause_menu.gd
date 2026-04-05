@@ -72,6 +72,7 @@ func _on_panel_container_visibility_changed() -> void:
 
 
 func _on_save_game_pressed() -> void:
+	Globals.overworld.player_spawn_position = Globals.player.global_position
 	SaveController.save_data_to_file()
 
 

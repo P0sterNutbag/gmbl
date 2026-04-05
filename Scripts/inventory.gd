@@ -69,6 +69,8 @@ func find_item_slot(_item: Item) -> ItemSlot:
 	for slot in item_slots:
 		var item = slot.item
 		if item != null and (item.resource_name == item_name or item.title.to_lower() == item_name.to_lower()):
+			if item is Equipment and item.equipped:
+				continue
 			return slot
 	return null
 

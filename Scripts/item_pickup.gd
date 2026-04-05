@@ -8,5 +8,5 @@ class_name ItemPickup
 func interact() -> void:
 	super.interact()
 	if index == 0:
-		if PlayerStats.inventory.add_item(item_slot.item, item_slot.amount):
+		if PlayerStats.inventory.add_item(item_slot.item, item_slot.amount, true):
 			object_to_delete.queue_free()

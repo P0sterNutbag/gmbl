@@ -63,11 +63,12 @@ func _process(_delta: float) -> void:
 			if UiController.is_canvas_layer_open(Globals.ui):
 				return
 	if Input.is_action_just_pressed("pause") and PlayerStats.state != PlayerStats.states.dead:
-		if !pause_menu.visible:
+		if !menu_holder.visible and !pause_menu.visible:
 			UiController.open_interface(pause_menu)
-		else:
-			if pause_menu.pause_menu.visible:
-				UiController.close_interface(pause_menu)
+		elif pause_menu.visible:
+			UiController.close_interface(pause_menu)
+		elif menu_holder.visible:
+			UiController.close_interface()
 	# compass
 	var compass_item = PlayerStats.inventory.find_item("compass")
 	if compass_item and compass_item.equipped:

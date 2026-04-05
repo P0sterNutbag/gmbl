@@ -1,6 +1,8 @@
 [gd_scene format=4 uid="uid://bt07vvnr66rmp"]
 
 [ext_resource type="PackedScene" uid="uid://kw2ods1isxg6" path="res://Art/Models/sawed off shotgun.glb" id="1_xeq68"]
+[ext_resource type="Material" uid="uid://bm3dcqcamyso3" path="res://Art/Materials/gun_wood.tres" id="2_13cju"]
+[ext_resource type="Material" uid="uid://iagweyrwrs4k" path="res://Art/Materials/off_black.tres" id="2_du8dj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3xnod"]
 resource_name = "Material.001"
@@ -101,10 +103,10 @@ shadow_mesh = SubResource("ArrayMesh_mm1vu")
 [node name="sawed off shotgun" parent="." unique_id=969997326 instance=ExtResource("1_xeq68")]
 transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, -2.9802322e-08, -0.0437079, -0.30965632)
 
-[node name="Barrels" parent="sawed off shotgun" index="1" unique_id=375752082]
+[node name="Barrels" parent="sawed off shotgun" index="1" unique_id=1443959749]
 visible = false
 
-[node name="Stock" parent="sawed off shotgun" index="2" unique_id=1315151460]
+[node name="Stock" parent="sawed off shotgun" index="2" unique_id=1281489864]
 visible = false
 
 [node name="Hinge" type="Node3D" parent="sawed off shotgun" unique_id=365623066]
@@ -114,10 +116,12 @@ transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, 0.64
 transform = Transform3D(0, 0.6110017, -4.440892e-16, -0.075294435, 0, 0, 0, 3.5527137e-15, 0.075294435, -0.6421651, 0.04222382, -0.06107297)
 mesh = SubResource("ArrayMesh_k2asl")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_du8dj")
 
 [node name="Stock2" type="MeshInstance3D" parent="sawed off shotgun/Hinge" unique_id=1366102775]
 transform = Transform3D(1, 0, -4.440892e-16, 0, 0.079289906, 0, 3.5527137e-15, 0, 0.10172522, -0.01291585, -0.008785076, 2.8069927e-08)
 mesh = SubResource("ArrayMesh_af5et")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_13cju")
 
 [editable path="sawed off shotgun"]

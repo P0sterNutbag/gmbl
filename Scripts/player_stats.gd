@@ -75,6 +75,7 @@ func _ready() -> void:
 	thirst = max_thirst
 	faction = FactionManager.factions.player
 	inventory.space_modifier = int(skills.strength)
+	inventory.resource_local_to_scene = true
 	#sensitivity_modifier = ConfigManager.file.get_value("settings", "mouse_sensitivity", sensitivity_modifier)
 
 
@@ -213,6 +214,9 @@ func _on_gun_changed():
 
 
 func _on_scene_changed():
+	#var scene_name = get_tree().current_scene.name
+	#if scene_name == "Overworld"  or scene_name == "MainMenu":
+		#reset_stats()
 	state = states.walk
 
 
@@ -250,6 +254,7 @@ func save() -> Dictionary:
 		"skills" : skills,
 		"skill_points" : skill_points,
 		"player_style" : player_style,
+		"allies" : allies,
 	}
 
 

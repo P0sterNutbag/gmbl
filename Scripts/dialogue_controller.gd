@@ -142,7 +142,7 @@ func return_quests(quest_type: Quest, success_index: int, fail_index: int) -> vo
 	for quest in PlayerStats.quests:
 		if quest.has_method("check_complete"):
 			quest.check_complete()
-	var complete_quests = PlayerStats.quests.filter(func(i): return i.get_class() == quest_type.get_class() and i.return_location == Globals.ui.current_town.title and i.completed)
+	var complete_quests = PlayerStats.quests.filter(func(i): return i.get_class() == quest_type.get_class() and i.return_location == Globals.overworld.current_encounter.title and i.completed)
 	if complete_quests.size() == 0:
 		advance_dialogue(fail_index)
 		return
@@ -195,9 +195,11 @@ func enter_training_menu() -> void:
 
 func set_recruit_price() -> void:
 	var location_data = Globals.overworld.current_encounter.location_data
-	var amount = 300
-	amount -= FactionManager.get_faction_relation(location_data.faction, FactionManager.factions.player) * 20
+	var amount = 150
+	amount -= FactionManager.get_faction_relation(location_data.faction, FactionManager.factions.player) * 10
+	dialogue_tree.bubbles[index + 1].options[0].value2 = amount - 1
 	dialogue_tree.bubbles[index + 1].options[0].text = "Pay " + "($" + str(amount) + ")"
+	dialogue_tree.bubbles[index + 2].arguments[0] = amount
 
 
 func recruit_npc(amount:int) -> void:
@@ -210,6 +212,7 @@ func recruit_npc(amount:int) -> void:
 	Globals.survival_ui.create_notification("-$" + str(amount))
 	Globals.survival_ui.create_notification("Ally added to party")
 	advance_dialogue(index + 1)
+	dialogue_tree.bubbles[1].options.remove_at(1)
 		#exit_to_game()
 	#else:
 		#advance_dialogue(fail_index)

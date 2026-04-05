@@ -64,8 +64,16 @@ text = "Guns"
 script = ExtResource("7_8oooa")
 stat_name = "guns"
 
+[node name="Stealth" parent="MarginContainer/VBoxContainer" unique_id=1023830369 instance=ExtResource("6_ygj8n")]
+layout_mode = 2
+tooltip_text = "Decreases noise from movement, increases detection time and crouch speed"
+text = "Stealth"
+script = ExtResource("7_8oooa")
+stat_name = "stealth"
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/Toughness" to="." method="_on_toughness_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/Strength" to="." method="_on_strength_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/Speed" to="." method="_on_speed_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/Guns" to="." method="_on_handguns_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/Stealth" to="." method="_on_stealth_value_changed"]

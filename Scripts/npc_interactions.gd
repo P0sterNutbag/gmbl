@@ -19,13 +19,14 @@ func interact() -> void:
 			Globals.survival_ui.create_notification("Missing knife")
 			return
 		var enemy = health_component.get_parent()
+		var scalp = FactionManager.faction_data[enemy.faction].scalp.duplicate()
+		if !PlayerStats.inventory.add_item(scalp, 1, true):
+			return
 		enemy.model.get_scalped()
 		var inst = BLOODSPATTER.instantiate()
 		get_parent().add_child(inst)
 		inst.global_position = scalp_pos.global_position
 		health_component.audio_stream_player.play()
-		var scalp = FactionManager.faction_data[enemy.faction].scalp.duplicate()
-		PlayerStats.inventory.add_item(scalp)
-		Globals.survival_ui.create_notification(scalp.title + "added to inventory")
+		#Globals.survival_ui.create_notification(scalp.title + "added to inventory")
 		actions.remove_at(1)
 		index = 0

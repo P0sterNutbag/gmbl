@@ -29,6 +29,7 @@
 [ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="22_3vihp"]
 [ext_resource type="Script" uid="uid://ds2br0dh5ir38" path="res://Scripts/quest_bounty_random.gd" id="23_7jsld"]
 [ext_resource type="Resource" uid="uid://dgo34up8hytn6" path="res://Resources/Items/Ammo/smg_ammo.tres" id="23_wji5k"]
+[ext_resource type="Resource" uid="uid://c3usfn872wp1g" path="res://Resources/Items/Consumable/ghost_powder.tres" id="24_la7xj"]
 [ext_resource type="Material" uid="uid://brr5rgo0swhv5" path="res://Art/Materials/wood_triplanar.tres" id="26_bnevc"]
 [ext_resource type="Texture2D" uid="uid://bkxsoff507nnd" path="res://Art/Textures/Environment/tin roof.png" id="27_ogcrv"]
 [ext_resource type="Script" uid="uid://dc15s83haevrb" path="res://Scripts/item_slot_random.gd" id="27_wji5k"]
@@ -174,25 +175,34 @@ metadata/_custom_type_script = "uid://3e36ru1e7k78"
 script = ExtResource("14_mkt2b")
 object_to_spawn = ExtResource("20_rocs7")
 spawn_chance = 0.2
+max_amount = 2
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_g8r3v"]
 script = ExtResource("14_mkt2b")
 object_to_spawn = ExtResource("21_k764k")
 spawn_chance = 0.2
+max_amount = 2
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_h7l10"]
 script = ExtResource("14_mkt2b")
 object_to_spawn = ExtResource("22_3vihp")
 spawn_chance = 0.2
-max_amount = 5
+max_amount = 10
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_a1wvb"]
 script = ExtResource("14_mkt2b")
 object_to_spawn = ExtResource("23_wji5k")
 spawn_chance = 0.2
+max_amount = 2
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_j3mqp"]
+script = ExtResource("14_mkt2b")
+object_to_spawn = ExtResource("24_la7xj")
+spawn_chance = 2.0
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_bd2jn"]
@@ -200,7 +210,7 @@ resource_local_to_scene = true
 script = ExtResource("19_7t7n5")
 min_amount = 5
 max_amount = 10
-potential_slots = Array[ExtResource("14_mkt2b")]([SubResource("Resource_7jsld"), SubResource("Resource_8sm2v"), SubResource("Resource_bnevc"), SubResource("Resource_7ervs"), SubResource("Resource_e8jdv"), SubResource("Resource_g8r3v"), SubResource("Resource_h7l10"), SubResource("Resource_a1wvb")])
+potential_slots = Array[ExtResource("14_mkt2b")]([SubResource("Resource_7jsld"), SubResource("Resource_8sm2v"), SubResource("Resource_bnevc"), SubResource("Resource_7ervs"), SubResource("Resource_e8jdv"), SubResource("Resource_g8r3v"), SubResource("Resource_h7l10"), SubResource("Resource_a1wvb"), SubResource("Resource_j3mqp")])
 repeat_entries = false
 space = 50
 money = 1000

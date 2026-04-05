@@ -47,6 +47,7 @@ func _ready() -> void:
 	location.encounter_ended.connect(_on_encounter_ended)
 	location.remove_from_group("persist")
 	SaveController.load.connect(_on_load)
+	get_node("Location/PointOfInterest").remove_from_group("persist")
 	await get_tree().process_frame
 	if location.dialogue_tree != null:
 		location.dialogue_tree.npc_style = enemy_model.current_style
@@ -133,12 +134,12 @@ func follow_path(spd: float = walk_speed):
 		return
 	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
 	var path_velocity = global_position.direction_to(next_path_position) * spd
-	velocity = Vector3(path_velocity.x, velocity.y, path_velocity.z)
+	velocity = Vector3(path_velocity.x, path_velocity.y, path_velocity.z)
 	look_at_position(next_path_position)
 
 
 func look_at_position(pos: Vector3):
-	if pos == global_position:
+	if pos == global_position or velocity.length() < 0.1:
 		return
 	var target_pos = pos
 	target_pos.y = global_position.y

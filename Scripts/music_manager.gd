@@ -41,7 +41,7 @@ func on_scene_changed() -> void:
 		audio_stream_player.stop()
 		return
 	var track = tracks[scene_file_name]
-	if audio_stream_player.stream == track:
+	if audio_stream_player.stream == track and audio_stream_player.playing:
 		return
 	audio_stream_player.stream = track
 	audio_stream_player.play()

@@ -9,9 +9,9 @@ signal load
 
 
 func save_data_to_file():
-	var saved_resources = ResourceLoader.load(resource_path)
-	if !saved_resources:
-		saved_resources = SavedResources.new()
+	var saved_resources = SavedResources.new()
+	if ResourceLoader.exists(resource_path):
+		saved_resources = ResourceLoader.load(resource_path, "", ResourceLoader.CACHE_MODE_IGNORE)
 	var save_nodes = get_tree().get_nodes_in_group("persist")
 	for node in save_nodes:
 		if !node.has_method("save"):
@@ -41,9 +41,9 @@ func save_data_to_file():
 func load_data_from_file():
 	if not FileAccess.file_exists(save_path):
 		return
-	var saved_resources = ResourceLoader.load(resource_path)
-	if !saved_resources:
-		saved_resources = SavedResources.new()
+	var saved_resources = SavedResources.new()
+	if ResourceLoader.exists(resource_path):
+		saved_resources = ResourceLoader.load(resource_path, "", ResourceLoader.CACHE_MODE_IGNORE)
 	var save_file = FileAccess.open(save_path, FileAccess.READ)
 	while save_file.get_position() < save_file.get_length():
 		var json_string = save_file.get_line()

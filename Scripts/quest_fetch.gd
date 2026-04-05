@@ -6,9 +6,10 @@ class_name QuestFetch
 
 func check_complete() -> void:
 	var slot2 = PlayerStats.inventory.find_item_slot(required_item.item)
-	if !slot2 or slot2.amount < required_item.amount:
-		return
-	completed = true
+	if slot2 and slot2.amount >= required_item.amount:
+		completed = true
+	else:
+		completed = false
 
 
 func remove_items() -> void:

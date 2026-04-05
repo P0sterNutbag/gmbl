@@ -133,11 +133,13 @@ func transfer_item(menu_item: Control):
 	var item = menu_item.resource
 	# check money
 	if show_price and target_inventory.money < menu_item.price:
-		opposing_ui.money_label.modulate = Color.RED
-		var tween = create_tween()
-		tween.tween_property(opposing_ui.money_label, "modulate", Color.WHITE, 1)
+		#opposing_ui.money_label.modulate = Color.RED
+		#var tween = create_tween()
+		#tween.tween_property(opposing_ui.money_label, "modulate", Color.WHITE, 1)
 		UiController.stop_audio()
 		UiController.error_sfx.play()
+		if Globals.survival_ui:
+			Globals.survival_ui.create_notification("Not enough money")
 		return
 	var amount_to_move = 1
 	if Input.is_action_pressed("shift") or item is ItemMoney:
@@ -155,6 +157,8 @@ func transfer_item(menu_item: Control):
 	else:
 		UiController.stop_audio()
 		UiController.error_sfx.play()
+		if Globals.survival_ui:
+			Globals.survival_ui.create_notification("Not enough room in inventory")
 
 
 func set_description(item: Item = null):

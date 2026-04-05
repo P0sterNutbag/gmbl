@@ -25,6 +25,7 @@ func start_scene_transition(scene, remove_current: bool = false, load_save_data:
 
 
 func start_encounter_transition(scene) -> void:
+	SaveController.save_data_to_file()
 	get_tree().current_scene.set_deferred("process_mode", PROCESS_MODE_DISABLED)
 	if Globals.player.camera_type == Globals.player.camera_types.overhead:
 		var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)

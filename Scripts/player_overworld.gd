@@ -19,7 +19,7 @@ var model_rotation: float:
 			return model.rotation.y
 		else:
 			return 0.0
-var can_enter_location: bool = true
+var can_enter_location: bool = false
 var is_moving_camera: bool
 var run_animation := "Run"
 var idle_animation := "Idle"
@@ -67,6 +67,9 @@ func _enter_tree() -> void:
 		change_gun(PlayerStats.gun)
 	else:
 		unequip_gun()
+	can_enter_location = false
+	await get_tree().create_timer(1.0).timeout
+	can_enter_location = true
 
 
 func _ready() -> void:
@@ -174,7 +177,8 @@ func state_walk(delta) -> void:
 		#change_gun_slot(1)
 	
 	# light
-	spot_light.visible = PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.light] != null
+	var tool = PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.tool]
+	spot_light.visible = tool != null and tool.title == "Flashlight"
 	#var flashlight = PlayerStats.inventory.find_item("flashlight")
 	#if Input.is_action_just_pressed("light") and flashlight and flashlight.equipped:
 		#PlayerStats.flashlight_on = !PlayerStats.flashlight_on
@@ -209,13 +213,18 @@ func state_dead(_delta) -> void:
 func follow_path():
 	if navigation_agent.is_navigation_finished():
 		return
+	if !navigation_agent.is_target_reachable():
+		navigation_agent.set_target_position(Vector3.ZERO)
+		Globals.survival_ui.create_notification("Not reachable")
+		return
 	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
 	var path_velocity = global_position.direction_to(next_path_position) * speed
-	velocity = Vector3(path_velocity.x, velocity.y, path_velocity.z)
+	velocity = Vector3(path_velocity.x, path_velocity.y, path_velocity.z)
 
 
 func change_gun(new_gun: Equipment) -> void:
 	PlayerStats.gun = new_gun
+	gun = get(PlayerStats.gun.resource_name)
 	for i in gun_anchor.get_children():
 		if i != gun:
 			i.visible = false

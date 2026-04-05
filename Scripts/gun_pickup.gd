@@ -11,10 +11,7 @@ func _ready() -> void:
 
 func interact() -> void:
 	super.interact()
-	if index == 0:
-		if PlayerStats.inventory.add_item(item_slot.item, item_slot.amount):
-			object_to_delete.queue_free()
-	elif index == 1:
+	if index == 1:
 		if randf() < 0.25:
 			if PlayerStats.inventory.add_item(ammo_item, item_amount, true):
 				item_slot.item.gun_stats.ammo = 0

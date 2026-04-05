@@ -9,7 +9,7 @@ var quest_marker = preload("res://Scenes/UI/quest_marker.tscn")
 
 func _ready() -> void:
 	await get_tree().process_frame
-	set_quest_markers()
+	#set_quest_markers()
 	if get_tree().current_scene.name == "Overworld":
 		compass_object = Globals.player.get_node_or_null("CameraAnchor")
 	else:
@@ -23,40 +23,38 @@ func _process(_delta: float) -> void:
 	var cam_rot = rad_to_deg(compass_object.global_rotation.y)
 	var location_offset := 0.0
 	if Globals.overworld and get_tree().current_scene != Globals.overworld and Globals.overworld.current_encounter:
-		#location_offset = Vector3.BACK.angle_to(Globals.overworld.player_spawn_vector)
-		#location_offset = rad_to_deg(location_offset)
 		location_offset = rad_to_deg(Globals.overworld.current_encounter.rotation.y)
-	var facing_direciton = (wrapf(cam_rot + location_offset, 0.0, 360.0) / 360.0)# + 0.5
+	var facing_direciton = (wrapf(cam_rot + location_offset + 180.0, 0.0, 360.0) / 360.0)# + 0.5
 	compass.position.x = compass.size.x * facing_direciton - compass.size.x - 70
 	# Position quest marker
-	for i in quests.size():
-		var quest = quests[i]
-		var marker = markers.get_child(i)
-		if quest.completed:
-			marker.hide()
-			continue
-		var quest_object = null
-		if get_tree().current_scene == Globals.overworld:
-			for location in get_tree().get_nodes_in_group("location"):
-				if quest.location.to_lower() == location.title.to_lower():
-					quest_object = location
-		else:
-			if !quest.target_node:
-				return
-			quest_object = quest.target_node
-		var player_forward = -compass_object.global_transform.basis.z.normalized()
-		player_forward.y = 0
-		var to_quest = (quest_object.global_transform.origin - compass_object.global_transform.origin).normalized()
-		to_quest.y = 0
-		var dot_product = clamp(player_forward.dot(to_quest), -1.0, 1.0)
-		var cross = -player_forward.cross(to_quest).y  # positive = to the right, negative = to the left
-		var angle = atan2(cross, dot_product)
-		var angle_deg = rad_to_deg(angle)
-		var fov = 90.0  # adjust as needed
-		var normalized = clamp(angle_deg / (fov / 2.0), -1.0, 1.0)
-		var half_width = size.x / 2.0
-		marker.position.x = half_width + (normalized * half_width)
-		#marker.position.x = clamp(marker.position.x, 0, size.x + 100)
+	#for i in quests.size():
+		#var quest = quests[i]
+		#var marker = markers.get_child(i)
+		#if quest.completed:
+			#marker.hide()
+			#continue
+		#var quest_object = null
+		#if get_tree().current_scene == Globals.overworld:
+			#for location in get_tree().get_nodes_in_group("location"):
+				#if quest.location.to_lower() == location.title.to_lower():
+					#quest_object = location
+		#else:
+			#if !quest.target_node:
+				#return
+			#quest_object = quest.target_node
+		#var player_forward = -compass_object.global_transform.basis.z.normalized()
+		#player_forward.y = 0
+		#var to_quest = (quest_object.global_transform.origin - compass_object.global_transform.origin).normalized()
+		#to_quest.y = 0
+		#var dot_product = clamp(player_forward.dot(to_quest), -1.0, 1.0)
+		#var cross = -player_forward.cross(to_quest).y  # positive = to the right, negative = to the left
+		#var angle = atan2(cross, dot_product)
+		#var angle_deg = rad_to_deg(angle)
+		#var fov = 90.0  # adjust as needed
+		#var normalized = clamp(angle_deg / (fov / 2.0), -1.0, 1.0)
+		#var half_width = size.x / 2.0
+		#marker.position.x = half_width + (normalized * half_width)
+		##marker.position.x = clamp(marker.position.x, 0, size.x + 100)
 
 
 func set_quest_markers():

@@ -167,6 +167,8 @@ func state_walk(delta) -> void:
 func state_investigate(delta) -> void:
 	if is_new_state:
 		time_to_detect = time_to_detect_max
+		if target == Globals.player:
+			time_to_detect += 0.3 * PlayerStats.skills.stealth
 		velocity = Vector3.ZERO
 		is_new_state = false
 	# stop moving
@@ -199,10 +201,10 @@ func state_approach(_delta) -> void:
 		is_new_state = false
 	# leave approach
 	if !target:
-		if goal == goals.travel or goal == goals.follow:
-			change_state(states.idle)
-		else:
-			change_state(states.search)
+		#if goal == goals.follow:
+			#change_state(states.idle)
+		#else:
+		change_state(states.search)
 	# approach and start shooting
 	follow_path(run_speed)
 	if navigation_agent.distance_to_target() <= gun.engagement_range:

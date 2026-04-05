@@ -31,7 +31,6 @@
 [ext_resource type="Script" uid="uid://pcx3b5tjvijq" path="res://Scripts/faction_ui_box.gd" id="27_k64vs"]
 [ext_resource type="Script" uid="uid://dlnug53qsfaf6" path="res://Scripts/faction_ui.gd" id="27_o0jpn"]
 [ext_resource type="Theme" uid="uid://crg6v3iu4nx3m" path="res://Art/Themes/text_header_outline.tres" id="28_8cvki"]
-[ext_resource type="PackedScene" uid="uid://st2mrllebqci" path="res://Scenes/UI/spacer.tscn" id="28_w0rat"]
 [ext_resource type="Theme" uid="uid://ddlkdp3v3plc" path="res://Art/Themes/hbox_container.tres" id="29_tlm7h"]
 [ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="31_kmwaq"]
 [ext_resource type="Texture2D" uid="uid://r08gms0nyjju" path="res://Art/Textures/UI/hp icon.png" id="32_lboml"]
@@ -53,8 +52,6 @@ border_color = Color(1, 1, 0, 1)
 [sub_resource type="Theme" id="Theme_guqia"]
 
 [sub_resource type="Theme" id="Theme_lboml"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oyp7w"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=691466196]
 process_mode = 3
@@ -548,7 +545,7 @@ script = ExtResource("15_k4cvi")
 
 [node name="Continue" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2" unique_id=1136655063 instance=ExtResource("16_1lobq")]
 layout_mode = 2
-text = "Continue"
+text = "Load last save"
 
 [node name="Quit" parent="ProgressMenu/MarginContainer/VBoxContainer3/VBoxContainer2" unique_id=615324257 instance=ExtResource("16_1lobq")]
 layout_mode = 2
@@ -639,6 +636,7 @@ script = null
 [node name="PlayerInventory" type="HBoxContainer" parent="Menus/VBoxContainer" unique_id=2000109519]
 visible = false
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("29_tlm7h")
 
 [node name="Inventory" parent="Menus/VBoxContainer/PlayerInventory" unique_id=41064814 instance=ExtResource("9_to4rm")]
@@ -693,63 +691,80 @@ text = "Secondary: "
 script = ExtResource("19_jtf3n")
 slot = 1
 
-[node name="Control" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1024254626 instance=ExtResource("28_w0rat")]
+[node name="Equipment2" type="PanelContainer" parent="Menus/VBoxContainer/PlayerInventory/RightPanels" unique_id=1874719091]
+custom_minimum_size = Vector2(497, 0)
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("11_0pkni")
 
-[node name="Label" type="Label" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=915352403]
+[node name="MarginContainer" type="MarginContainer" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment2" unique_id=819377811]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("12_2dyl4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment2/MarginContainer" unique_id=255269086]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment2/MarginContainer/VBoxContainer" unique_id=915352403]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("25_6omgk")
 text = "Armor"
 
-[node name="MenuItem3" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2022397610 instance=ExtResource("16_1lobq")]
+[node name="MenuItem3" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment2/MarginContainer/VBoxContainer" unique_id=2022397610 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Head: "
 script = ExtResource("19_jtf3n")
 slot = 2
 
-[node name="MenuItem4" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=2070954494 instance=ExtResource("16_1lobq")]
+[node name="MenuItem4" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment2/MarginContainer/VBoxContainer" unique_id=2070954494 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Body: "
 script = ExtResource("19_jtf3n")
 slot = 3
 
-[node name="Control2" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=961842235 instance=ExtResource("28_w0rat")]
+[node name="Equipment3" type="PanelContainer" parent="Menus/VBoxContainer/PlayerInventory/RightPanels" unique_id=432950038]
+custom_minimum_size = Vector2(497, 0)
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("11_0pkni")
 
-[node name="Label2" type="Label" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=983656834]
+[node name="MarginContainer" type="MarginContainer" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment3" unique_id=1022457850]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("12_2dyl4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment3/MarginContainer" unique_id=1056406132]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label2" type="Label" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment3/MarginContainer/VBoxContainer" unique_id=687657171]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("25_6omgk")
 text = "Utility"
 
-[node name="MenuItem5" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1018790349 instance=ExtResource("16_1lobq")]
+[node name="MenuItem5" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment3/MarginContainer/VBoxContainer" unique_id=93574839 instance=ExtResource("16_1lobq")]
 layout_mode = 2
-text = "Nav: "
-script = ExtResource("19_jtf3n")
-slot = 4
-
-[node name="MenuItem6" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=577037208 instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Light: "
+text = "Tool:"
 script = ExtResource("19_jtf3n")
 slot = 5
 
-[node name="MenuItem7" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=706524143 instance=ExtResource("16_1lobq")]
-layout_mode = 2
-text = "Vision: "
-script = ExtResource("19_jtf3n")
-slot = 6
-
-[node name="MenuItem8" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment/MarginContainer/VBoxContainer/VBoxContainer" unique_id=522861139 instance=ExtResource("16_1lobq")]
+[node name="MenuItem8" parent="Menus/VBoxContainer/PlayerInventory/RightPanels/Equipment3/MarginContainer/VBoxContainer" unique_id=949787177 instance=ExtResource("16_1lobq")]
 layout_mode = 2
 text = "Storage: "
 script = ExtResource("19_jtf3n")
-slot = 7
+slot = 4
 
 [node name="Skills" parent="Menus/VBoxContainer/PlayerInventory/RightPanels" unique_id=2081239647 instance=ExtResource("33_02qtm")]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="Journal" type="PanelContainer" parent="Menus/VBoxContainer" unique_id=210546969 node_paths=PackedStringArray("item_container")]
 visible = false
@@ -766,7 +781,7 @@ size_flags_vertical = 3
 theme = ExtResource("29_tlm7h")
 
 [node name="PanelContainer" type="PanelContainer" parent="Menus/VBoxContainer/Journal/HBoxContainer" unique_id=1871983518]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme = ExtResource("11_0pkni")
 
@@ -1205,19 +1220,23 @@ script = ExtResource("2_k4cvi")
 stat_name = "soberness"
 show_treshold = 1.0
 
-[node name="LogContainer" type="PanelContainer" parent="." unique_id=1491710996]
-custom_minimum_size = Vector2(400, 0)
+[node name="LogContainer" type="Control" parent="." unique_id=2103638854]
+clip_contents = true
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 3
+anchors_preset = 0
 offset_left = 32.0
 offset_top = 32.0
-offset_right = 412.0
-offset_bottom = 85.0
+offset_right = 432.0
+offset_bottom = 454.0
+mouse_filter = 2
 theme = SubResource("Theme_lboml")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_oyp7w")
 
 [node name="Log" type="VBoxContainer" parent="LogContainer" unique_id=669236471]
 unique_name_in_owner = true
 clip_contents = true
-layout_mode = 2
+layout_mode = 0
+mouse_filter = 2
 theme = ExtResource("13_oq622")
 
 [node name="MenuButtons" type="VBoxContainer" parent="." unique_id=299956010]

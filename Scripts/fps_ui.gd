@@ -201,7 +201,6 @@ func _on_load_save_pressed() -> void:
 	#SceneManager.load_on_enter = true
 	if Globals.overworld:
 		Globals.overworld.queue_free()
-	PlayerStats.reset_stats()
 	SceneManager.start_scene_transition("res://Scenes/UI/Levels/character_creation.tscn")
 
 

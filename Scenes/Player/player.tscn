@@ -72,9 +72,9 @@ effects = Array[ExtResource("10_4no11")]([SubResource("Resource_q7l5h")])
 method = "reload_gun"
 custom_path = "PlayerStats"
 usable_in_menu = false
-title = "7.62×39mm Magazine"
+title = "Rifle Magazine"
 category = 1
-price = 35
+price = 42
 description = "Usable in: AK-47, Hunting Rifle"
 metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
@@ -191,7 +191,7 @@ script = ExtResource("11_fcwna")
 method = "reload_gun"
 custom_path = "PlayerStats"
 usable_in_menu = false
-title = "9mm Magazine"
+title = "Pistol Magazine"
 category = 1
 price = 25
 description = "Usable in: Pistol"
@@ -693,6 +693,12 @@ v_angle_variance_ads = 0.5
 is_hitscan = false
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
+[sub_resource type="Resource" id="Resource_ogmfp"]
+resource_local_to_scene = true
+script = ExtResource("9_mwii3")
+ammo = 24
+metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
 [sub_resource type="Animation" id="Animation_83xs0"]
 resource_name = "reload"
 length = 1.8
@@ -762,11 +768,17 @@ noise_radius = 75.0
 is_hitscan = false
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
+[sub_resource type="Resource" id="Resource_ei2r2"]
+resource_local_to_scene = true
+script = ExtResource("9_mwii3")
+ammo = 5
+metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
 [sub_resource type="Resource" id="Resource_ixrbb"]
 script = ExtResource("10_4no11")
 metadata/_custom_type_script = "uid://4c6own63hs8c"
 
-[sub_resource type="Resource" id="Resource_ogmfp"]
+[sub_resource type="Resource" id="Resource_j6uq4"]
 resource_local_to_scene = true
 resource_name = "rifle_ammo"
 script = ExtResource("11_fcwna")
@@ -1034,7 +1046,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.111, 0.06099999, -0.009501
 
 [node name="SpotLight3D" type="SpotLight3D" parent="CameraAnchor/Camera3D" unique_id=1230486555]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.104569435, 0)
-spot_range = 35.0
+spot_range = 55.0
 spot_angle = 30.0
 
 [node name="GunPivot" type="Node3D" parent="CameraAnchor/Camera3D" unique_id=1298606297]
@@ -1060,23 +1072,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196, 0)
 [node name="AudioStreamPlayer3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/FirePoint" parent_id_path=PackedInt32Array(1046860869, 1901170218) index="1" unique_id=382067649]
 unit_size = 10.0
 
-[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="0" unique_id=338598288]
+[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="0" unique_id=1332677861]
 cast_shadow = 0
 
-[node name="Cube_004" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="1" unique_id=1048688262]
+[node name="Cube_004" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="1" unique_id=468124916]
 cast_shadow = 0
 
-[node name="Cube_005" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="2" unique_id=543334201]
+[node name="Cube_005" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="2" unique_id=1689691153]
 cast_shadow = 0
 
-[node name="Cube_007" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="3" unique_id=1524541643]
+[node name="Cube_007" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="3" unique_id=391304037]
 cast_shadow = 0
 
-[node name="Cube_008" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="4" unique_id=152181150]
+[node name="Cube_008" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="4" unique_id=1508645445]
 transform = Transform3D(-0.0887866, 0, 0, 0, -0.498048, 0, 0, 0, -0.229101, 0.285, 1.139, 0)
 cast_shadow = 0
 
-[node name="Cube" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="5" unique_id=1310680043]
+[node name="Cube" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="5" unique_id=1949532489]
 cast_shadow = 0
 
 [node name="Chamber" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor" index="2" unique_id=1534345481]
@@ -1139,16 +1151,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.002657652, 0.10731208, -0.6
 [node name="MuzzleFlash" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/FirePoint" index="0" unique_id=540190188]
 transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 0, 0, 0.39554685)
 
-[node name="Cube" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="0" unique_id=746981911]
+[node name="Cube" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="0" unique_id=790767181]
 cast_shadow = 0
 
-[node name="Cube_003" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="1" unique_id=136810366]
+[node name="Cube_003" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="1" unique_id=66500870]
 cast_shadow = 0
 
-[node name="Cube_004" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="2" unique_id=1159444594]
+[node name="Cube_004" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="2" unique_id=412376715]
 cast_shadow = 0
 
-[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="3" unique_id=1833511950]
+[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="3" unique_id=772289784]
 cast_shadow = 0
 
 [node name="ArmLAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol" unique_id=632983340]
@@ -1204,13 +1216,13 @@ cast_shadow = false
 [node name="GunAnchor" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun" index="0" unique_id=1970548578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.271, -0.191)
 
-[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun/GunAnchor/Model/shotgun" index="0" unique_id=635911477]
+[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun/GunAnchor/Model/shotgun" index="0" unique_id=828295805]
 cast_shadow = 0
 
-[node name="Cube_002" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun/GunAnchor/Model/shotgun" index="1" unique_id=1274703215]
+[node name="Cube_002" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun/GunAnchor/Model/shotgun" index="1" unique_id=18399178]
 cast_shadow = 0
 
-[node name="Cube_003" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun/GunAnchor/Model/shotgun" index="2" unique_id=796401208]
+[node name="Cube_003" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun/GunAnchor/Model/shotgun" index="2" unique_id=597213133]
 cast_shadow = 0
 
 [node name="Pump" type="AudioStreamPlayer3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun" unique_id=435002567]
@@ -1269,22 +1281,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00265765, 0.26089078, -0.64
 [node name="MuzzleFlash" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/FirePoint" index="0" unique_id=540190188]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.062972024, 0)
 
-[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="0" unique_id=898642869]
+[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="0" unique_id=1421538850]
 cast_shadow = 0
 
-[node name="Cube_002" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="1" unique_id=1339274041]
+[node name="Cube_002" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="1" unique_id=1925195900]
 cast_shadow = 0
 
-[node name="Cube_003" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="2" unique_id=271888942]
+[node name="Cube_003" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="2" unique_id=477573040]
 cast_shadow = 0
 
-[node name="Cube_004" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="3" unique_id=1875106516]
+[node name="Cube_004" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="3" unique_id=1105770446]
 cast_shadow = 0
 
-[node name="Cube" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="4" unique_id=1641788002]
+[node name="Cube" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="4" unique_id=435953744]
 cast_shadow = 0
 
-[node name="Cylinder" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="5" unique_id=52603197]
+[node name="Cylinder" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="5" unique_id=40424816]
 cast_shadow = 0
 
 [node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle" unique_id=1694404599]
@@ -1293,7 +1305,7 @@ transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.
 [node name="armR" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/ArmRAnchor" unique_id=1537532125 instance=ExtResource("23_0pk7v")]
 transform = Transform3D(0.75864613, 0, 0.65150315, 0, 1.0000001, 0, -0.65150315, 0, 0.75864613, 0, 0, -2.9802322e-08)
 
-[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/ArmRAnchor/armR" index="0" unique_id=1630894455]
+[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/ArmRAnchor/armR" index="0" unique_id=1984810744]
 cast_shadow = 0
 
 [node name="ArmLAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle" unique_id=599497133]
@@ -1354,6 +1366,7 @@ libraries/ = SubResource("AnimationLibrary_83xs0")
 visible = false
 uses_input = true
 bullet_stats = SubResource("Resource_4no11")
+gun_stats = SubResource("Resource_ogmfp")
 
 [node name="GunAnchor" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Uzi" index="0" unique_id=1970548578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12506485, -0.2550497)
@@ -1383,7 +1396,8 @@ libraries/ = SubResource("AnimationLibrary_ypfnu")
 visible = false
 uses_input = true
 bullet_stats = SubResource("Resource_rukb4")
-ammo_item = SubResource("Resource_ogmfp")
+gun_stats = SubResource("Resource_ei2r2")
+ammo_item = SubResource("Resource_j6uq4")
 
 [node name="GunAnchor" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle" index="0" unique_id=1970548578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247, -0.331)
@@ -1391,16 +1405,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247, -0.331)
 [node name="MeshInstance3D6" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3" parent_id_path=PackedInt32Array(1665818361, 1265223842) index="2" unique_id=1914905470]
 transform = Transform3D(-2.18557e-08, -1, 5.46393e-08, 0, 4.37114e-08, 1.25, -0.5, 4.37114e-08, 3.55271e-15, 0, -0.219, 2.155)
 
-[node name="Cube_002" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model/hunting rifle" index="0" unique_id=270718526]
+[node name="Cube_002" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model/hunting rifle" index="0" unique_id=575607701]
 cast_shadow = 0
 
-[node name="Cylinder" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model/hunting rifle" index="1" unique_id=27818156]
+[node name="Cylinder" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model/hunting rifle" index="1" unique_id=676327991]
 cast_shadow = 0
 
-[node name="Cylinder_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model/hunting rifle" index="2" unique_id=489046850]
+[node name="Cylinder_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model/hunting rifle" index="2" unique_id=691180802]
 cast_shadow = 0
 
-[node name="Cube" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model/hunting rifle" index="4" unique_id=348880888]
+[node name="Cube" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model/hunting rifle" index="4" unique_id=742672632]
 cast_shadow = 0
 
 [node name="ArmLAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle" unique_id=1522161198]

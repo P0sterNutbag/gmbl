@@ -17,7 +17,7 @@ var run_speed := 7.0:
 		return run_speed + PlayerStats.skills.speed * 0.3
 var crouch_speed := 2.5:
 	get():
-		return crouch_speed + PlayerStats.skills.speed * 0.3
+		return crouch_speed + (PlayerStats.skills.speed * 0.3) + (PlayerStats.skills.stealth * 0.2)
 var speed = base_speed
 var jump_speed := 6.5
 var mouse_sensitivity := 0.004
@@ -398,7 +398,8 @@ func state_walk(delta):
 	
 	# camera zoom
 	var target_fov
-	if Input.is_action_pressed("aim") and gun_state == gun_states.no_gun and PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.vision]:
+	var tool = PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.tool]
+	if Input.is_action_pressed("aim") and gun_state == gun_states.no_gun and tool and tool.title == "Binoculars":
 		camera_zoom = zoom_levels.zoom
 		Globals.ui.binocular_overlay.show()
 	elif gun_state == gun_states.ads:
@@ -423,7 +424,7 @@ func state_walk(delta):
 	camera.fov = lerp(camera.fov, target_fov, 30.0 * delta)
 	
 	# light
-	spot_light.visible = PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.light] != null
+	spot_light.visible = tool != null and tool.title == "Flashlight"
 	
 	# breath
 	if is_holding_breath:
@@ -811,9 +812,12 @@ func find_item(item_name: String) -> Resource:
 func step_noise_event():
 	if !Globals.noise_controller:
 		return
-	var step_radius = 20
+	var step_radius = 25
 	if speed == walk_speed:
-		step_radius = 30
+		step_radius = 15
+	if speed == run_speed:
+		step_radius = 45
+	step_radius -= 2 * PlayerStats.skills.stealth
 	Globals.noise_controller.create_noise_event(global_position, self, step_radius)
 
 

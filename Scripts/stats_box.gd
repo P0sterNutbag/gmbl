@@ -4,6 +4,7 @@ extends PanelContainer
 @onready var strength_stat: Button = $MarginContainer/VBoxContainer/Strength
 @onready var speed_stat: Button = $MarginContainer/VBoxContainer/Speed
 @onready var guns_stat: Button = $MarginContainer/VBoxContainer/Guns
+@onready var stealth: Button = $MarginContainer/VBoxContainer/Stealth
 @onready var skill_points_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/StatPoints
 @onready var vbox_container: VBoxContainer = $MarginContainer/VBoxContainer
 signal skill_changed(skill_name: String)
@@ -64,6 +65,10 @@ func _on_speed_value_changed(value: float, changed_by: float) -> void:
 
 func _on_handguns_value_changed(value: float, changed_by: float) -> void:
 	change_stat(guns_stat, value, changed_by)
+
+
+func _on_stealth_value_changed(value: float, changed_by: float) -> void:
+	change_stat(stealth, value, changed_by)
 
 
 func _on_visibility_changed() -> void:

@@ -38,7 +38,7 @@ func open_interface(node_to_open: Control, pause_player: bool = true, show_mouse
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 
-func close_interface(node_to_close: Control, activate_player: bool = true) -> void:
+func close_interface(node_to_close: Control = current_ui, activate_player: bool = true) -> void:
 	ui_closed.emit(node_to_close)
 	node_to_close.hide()
 	current_ui = null

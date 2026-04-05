@@ -10,7 +10,7 @@ var half_day_length: float
 var sky_progress: float
 var is_night: bool:
 	get():
-		return time <= 0 
+		return time <= 0.25 
 signal night_start
 signal day_start
 

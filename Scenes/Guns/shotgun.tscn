@@ -6,8 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://br3gfklclueb" path="res://Scenes/Effects/Decals/hitmarker.tscn" id="3_58v0y"]
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="4_hufxr"]
 [ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="5_58v0y"]
-[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="6_x1ctg"]
-[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="7_qdpfn"]
+[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="6_hufxr"]
 
 [sub_resource type="Resource" id="Resource_x1ctg"]
 script = ExtResource("4_hufxr")
@@ -26,27 +25,6 @@ script = ExtResource("5_58v0y")
 ammo = 5
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
-[sub_resource type="Resource" id="Resource_08fje"]
-script = ExtResource("6_x1ctg")
-values = Dictionary[String, Variant]({
-"ammo": 1
-})
-add = true
-metadata/_custom_type_script = "uid://4c6own63hs8c"
-
-[sub_resource type="Resource" id="Resource_7x6n1"]
-resource_local_to_scene = true
-resource_name = "shotgun_ammo"
-script = ExtResource("7_qdpfn")
-effects = Array[ExtResource("6_x1ctg")]([SubResource("Resource_08fje")])
-custom_path = "PlayerStats"
-usable_in_menu = false
-title = "Shotgun Shell"
-category = 1
-price = 6
-description = "Usable in: Shotgun, Sawed-off Shotgun"
-metadata/_custom_type_script = "uid://2qhh6s86pakx"
-
 [sub_resource type="Curve" id="Curve_x1ctg"]
 _data = [Vector2(0, 0), 0.0, -0.0394176, 0, 0, Vector2(0.25373134, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
@@ -55,7 +33,7 @@ point_count = 3
 uses_input = null
 bullet_stats = SubResource("Resource_x1ctg")
 gun_stats = SubResource("Resource_qdpfn")
-ammo_item = SubResource("Resource_7x6n1")
+ammo_item = ExtResource("6_hufxr")
 fire_type = 2
 shoot_cooldown = 0.5
 zoom_amount = null

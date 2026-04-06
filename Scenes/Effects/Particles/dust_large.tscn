@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://blf0vdwe675ek"]
+
+[ext_resource type="Texture2D" uid="uid://bd2tdmgo141yn" path="res://Art/Textures/Effects/smoke_01.png" id="1_enqo8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5dlq"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.6156863, 0.5568628, 0.44313726, 1)
+albedo_texture = ExtResource("1_enqo8")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_v4kxh"]
+material = SubResource("StandardMaterial3D_o5dlq")
+
+[node name="DustLarge" type="MeshInstance3D" unique_id=1415992441]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_v4kxh")

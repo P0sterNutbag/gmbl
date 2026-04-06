@@ -20,10 +20,10 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if DayNightCycle.is_night:
+	if DayNightCycle.is_night and environment.sky.sky_material != SKY_NIGHTTIME:
 		environment.sky.sky_material = SKY_NIGHTTIME
 		horizon_color = Color()
-	else:
+	elif environment.sky.sky_material != SKY_DAYTIME:
 		environment.sky.sky_material = SKY_DAYTIME
 	if DayNightCycle.normalized_time > 0:
 		sun.rotation.x = lerp(deg_to_rad(10), deg_to_rad(-190), DayNightCycle.sun_time)

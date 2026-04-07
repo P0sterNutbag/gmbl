@@ -71,7 +71,7 @@ func _on_menu_button_pressed() -> void:
 	if Globals.overworld:
 		SceneManager.start_scene_transition(Globals.overworld)
 	else:
-		SceneManager.start_scene_transition("res://Scenes/Overworld/overworld.tscn")
+		SceneManager.start_scene_transition("res://Scenes/Overworld/overworld_demo.tscn")
 
 
 func _on_face_button_option_changed(value: Variant) -> void:

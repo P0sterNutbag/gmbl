@@ -10,6 +10,7 @@ var overlay: CanvasLayer
 @onready var crt: Button = $MarginContainer/VBoxContainer/VBoxContainer/CRT
 @onready var warp: Button = $MarginContainer/VBoxContainer/VBoxContainer/Warp
 @onready var crosshair: Button = $MarginContainer/VBoxContainer/VBoxContainer/Crosshair
+@onready var aspect_ratio: Button = $MarginContainer/VBoxContainer/VBoxContainer/AspectRatio
 
 
 func _ready() -> void:
@@ -21,6 +22,8 @@ func _ready() -> void:
 func set_all_settings() -> void:
 	var is_fullscreen = ConfigManager.file.get_value("settings", "fullscreen", true)
 	fullscreen.toggled.emit(is_fullscreen)
+	var aspect = ConfigManager.file.get_value("settings", "aspect", 0)
+	aspect_ratio.set_index_by_value(aspect)
 	#var res = ConfigManager.file.get_value("settings", "resolution", Vector2i(1920, 1080))
 	#resolution.set_index_by_value(res)
 	var vol = ConfigManager.file.get_value("settings", "master_volume", 50)
@@ -111,4 +114,13 @@ func _on_fullscreen_toggled(toggled_on: bool) -> void:
 		window.mode = Window.MODE_WINDOWED
 		#resolution.show()
 	ConfigManager.file.set_value("settings", "fullscreen", toggled_on)
+	ConfigManager.save()
+
+
+func _on_aspect_ratio_option_changed(value: Variant) -> void:
+	if value == 0:
+		get_tree().root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_KEEP
+	elif value == 1:
+		get_tree().root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_KEEP_HEIGHT
+	ConfigManager.file.set_value("settings", "aspect", value)
 	ConfigManager.save()

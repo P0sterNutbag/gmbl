@@ -5,11 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://dyumojcinahde" path="res://Scenes/Effects/Shaders/outline_fog_shader.tscn" id="3_l5l63"]
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="4_c3so5"]
 [ext_resource type="PackedScene" uid="uid://cc458wgoeu6t4" path="res://Scenes/UI/survival_ui.tscn" id="5_llgcl"]
+[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="6_7kx4p"]
 [ext_resource type="PackedScene" uid="uid://djj4qtaqbuthn" path="res://Scenes/Overworld/UI/town_ui.tscn" id="6_ddb2y"]
 [ext_resource type="Script" uid="uid://bokxkydc5jmf" path="res://addons/zylann.hterrain/hterrain.gd" id="7_4iccq"]
+[ext_resource type="Script" uid="uid://bskid40fk3jt6" path="res://Scripts/demo_message.gd" id="7_pqqn2"]
+[ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="8_la17w"]
 [ext_resource type="Resource" uid="uid://b5m4fenjpy1re" path="res://addons/zylann.hterrain/data/overworld/data.hterrain" id="8_wfy45"]
 [ext_resource type="Shader" uid="uid://c7cgqdo3cj6cs" path="res://addons/zylann.hterrain/shaders/simple4_lite_autotexture.gdshader" id="9_537xa"]
+[ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="9_bdbrb"]
 [ext_resource type="Script" uid="uid://b8f4u7je7ufby" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="10_ddb1d"]
+[ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="10_j1qck"]
 [ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/Environment/sand.png" id="11_7kgcg"]
 [ext_resource type="Texture2D" uid="uid://b6x4l51psqj8s" path="res://Art/Textures/Environment/dirt.png" id="12_t5qc1"]
 [ext_resource type="Texture2D" uid="uid://oamh8tah7tlw" path="res://Art/Textures/Environment/grass and dirt.png" id="13_pu2xk"]
@@ -23,7 +28,6 @@
 [ext_resource type="PackedScene" uid="uid://brrtfg5jynxnd" path="res://Scenes/Environment/Nature/rock.tscn" id="21_qj8l8"]
 [ext_resource type="Script" uid="uid://cp50dadh73l3f" path="res://Scripts/snap_to_terrain.gd" id="22_y6oa7"]
 [ext_resource type="PackedScene" uid="uid://cl4glsi76vapy" path="res://Scenes/Overworld/Player/player.tscn" id="23_u7kx8"]
-[ext_resource type="PackedScene" uid="uid://nyq5u06k06t8" path="res://Scenes/Overworld/Locations/bandit_camp.tscn" id="24_f1m6p"]
 [ext_resource type="PackedScene" uid="uid://bmq0wn4dja58d" path="res://Scenes/Overworld/Locations/rock_canyon.tscn" id="27_eye4p"]
 [ext_resource type="PackedScene" uid="uid://o5r7ocg722wg" path="res://Scenes/Overworld/Locations/sand_dunes.tscn" id="28_b3neu"]
 [ext_resource type="PackedScene" uid="uid://bpdq0mtuutax3" path="res://Scenes/Overworld/Locations/generic_location.tscn" id="29_4aenw"]
@@ -41,7 +45,6 @@
 [ext_resource type="Script" uid="uid://01ir68or13hi" path="res://Scripts/location_data_random.gd" id="41_ueitb"]
 [ext_resource type="PackedScene" uid="uid://lchk3aqiapch" path="res://Scenes/Levels/desert1.tscn" id="42_to8lj"]
 [ext_resource type="PackedScene" uid="uid://dgowbmqkc0fer" path="res://Scenes/Levels/desert2.tscn" id="43_grcd8"]
-[ext_resource type="PackedScene" uid="uid://dxj8rbiqwok26" path="res://Scenes/Levels/desert3.tscn" id="44_7fe5b"]
 [ext_resource type="PackedScene" uid="uid://camjoalnob06k" path="res://Scenes/Overworld/Locations/home.tscn" id="48_yhbnl"]
 [ext_resource type="PackedScene" uid="uid://dojba73gmumuo" path="res://Scenes/Overworld/Locations/small_town.tscn" id="49_e1ghh"]
 [ext_resource type="Script" uid="uid://bbi3gcsb33muk" path="res://Scripts/town.gd" id="50_usl76"]
@@ -117,7 +120,7 @@ shader_parameter/line_color = Color(0, 0, 0, 1)
 shader_parameter/line_width = 2.0000000298024
 shader_parameter/fog_color = Color(0.63529414, 0.5568628, 0.44313726, 1)
 shader_parameter/fog_start = 0.0
-shader_parameter/fog_end = 75.0
+shader_parameter/fog_end = 60.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_ccrpr"]
 material = SubResource("ShaderMaterial_jdigv")
@@ -150,8 +153,8 @@ _surfaces = [{
 [sub_resource type="Resource" id="Resource_mdiyu"]
 script = ExtResource("30_ic0e0")
 faction = 4
-population = 18
-max_population = 18
+population = 10
+max_population = 10
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="Resource" id="Resource_b4834"]
@@ -170,7 +173,7 @@ metadata/_custom_type_script = "uid://de6rxup5nru4w"
 script = ExtResource("34_ns4ld")
 value = "money"
 comparison = 1
-value2 = 1999
+value2 = 999
 failue_message = "You don't have enough money"
 text = "Pass Through"
 destination = 3
@@ -243,16 +246,6 @@ max_starting_population = 10
 faction = 4
 population = 10
 max_population = 10
-metadata/_custom_type_script = "uid://01ir68or13hi"
-
-[sub_resource type="Resource" id="Resource_dfqls"]
-script = ExtResource("41_ueitb")
-possible_factions = [4, 0]
-min_starting_population = 2
-max_starting_population = 10
-faction = 0
-population = 5
-max_population = 5
 metadata/_custom_type_script = "uid://01ir68or13hi"
 
 [sub_resource type="Resource" id="Resource_6lldf"]
@@ -716,7 +709,7 @@ max_quests = 3
 title = "Bounty Board"
 metadata/_custom_type_script = "uid://r3prw1636vsp"
 
-[sub_resource type="Resource" id="Resource_pc0y4"]
+[sub_resource type="Resource" id="Resource_7kx4p"]
 resource_local_to_scene = true
 script = ExtResource("50_usl76")
 title = "Dirt Town"
@@ -954,10 +947,50 @@ transform = Transform3D(1, 0, 0, 0, -0.53365904, 0.84569997, 0, -0.84569997, -0.
 
 [node name="Shader" parent="." unique_id=1454895553 instance=ExtResource("3_l5l63")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.492066, 0, 0)
-visible = false
 mesh = SubResource("QuadMesh_ccrpr")
 
 [node name="SurvivalUi" parent="." unique_id=670440090 instance=ExtResource("5_llgcl")]
+
+[node name="DemoMessage" type="PanelContainer" parent="SurvivalUi" unique_id=891694056]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_7kx4p")
+script = ExtResource("7_pqqn2")
+
+[node name="MarginContainer" type="MarginContainer" parent="SurvivalUi/DemoMessage" unique_id=1242585107]
+layout_mode = 2
+theme = ExtResource("8_la17w")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SurvivalUi/DemoMessage/MarginContainer" unique_id=561587593]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SurvivalUi/DemoMessage/MarginContainer/VBoxContainer" unique_id=2085578984]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("9_bdbrb")
+text = "Welcome to the SLUGMOUTH demo!
+
+This demo features an trimmed down, remixed version of the full game's open world, suitable for a shorter play session. 
+
+The game is still in development so everything is subject to change.
+"
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="SurvivalUi/DemoMessage/MarginContainer/VBoxContainer" unique_id=2087489983]
+layout_mode = 2
+theme = ExtResource("10_j1qck")
+text = "Press any button to start"
+autowrap_mode = 2
 
 [node name="TownUi" parent="." unique_id=1090566369 instance=ExtResource("6_ddb2y")]
 
@@ -1035,25 +1068,11 @@ script = ExtResource("22_y6oa7")
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 209.235, 0.81097287, 203.77374)
 
 [node name="Player" parent="." unique_id=1763906924 instance=ExtResource("23_u7kx8")]
-transform = Transform3D(-0.9999692, -0.007853901, 8.742278e-08, -0.007853901, 0.9999692, 0, -8.7420084e-08, -6.866098e-10, -1, 209.235, 0.81097287, 203.77374)
+transform = Transform3D(-0.9431472, -0.007853901, 0.33228266, -0.007407613, 0.9999692, 0.002609795, -0.3322929, -4.1476345e-10, -0.94317627, 225.8227, 0.9412591, 245.12445)
 
-[node name="BanditCamp" parent="." unique_id=1355807378 groups=["persist"] instance=ExtResource("24_f1m6p")]
-transform = Transform3D(-0.89596, 0, -0.44413477, 0, 1, 0, 0.44413477, 0, -0.89596, 107.41368, 0.40917054, 268.50742)
-
-[node name="ShippingContainer2" parent="BanditCamp/Meshes" parent_id_path=PackedInt32Array(1355807378, 354222542) index="2" unique_id=919067141]
-transform = Transform3D(0.57068586, 0.003088312, -0.8211625, 0.028254112, 0.9993269, 0.023394227, 0.820682, -0.036551975, 0.5702146, 0.9286499, 0.27042854, 11.321777)
-
-[node name="ShippingContainer3" parent="BanditCamp/Meshes" parent_id_path=PackedInt32Array(1355807378, 354222542) index="3" unique_id=2061316047]
-transform = Transform3D(-0.540408, 0.029995024, -0.8408687, 0.043585047, 0.9990207, 0.00762537, 0.8402734, -0.03252848, -0.5411864, -6.889679, 0.3019079, 7.4212646)
-
-[node name="CSGBakedMeshInstance3D" parent="BanditCamp/Meshes/Shack2" parent_id_path=PackedInt32Array(1355807378, 410404074) index="0" unique_id=1638177879]
-transform = Transform3D(0.99999976, 0, 2.9802322e-08, 0, 1, 0, -2.9802322e-08, 0, 0.99999976, 0, 0, 0)
-
-[node name="Flagpole" parent="BanditCamp/Meshes" parent_id_path=PackedInt32Array(1355807378, 354222542) index="5" unique_id=800258272]
-transform = Transform3D(-1.7919194, 0, 0.88826925, 0, 2, 0, -0.88826925, 0, -1.7919194, 0, 0, 0)
-
-[node name="RockCanyon" parent="." unique_id=2040333333 groups=["persist"] instance=ExtResource("27_eye4p")]
-transform = Transform3D(0.032178402, 0, -0.99948215, 0, 1, 0, 0.99948215, 0, 0.032178402, 268.6851, 1.2066438, 295.3471)
+[node name="RockCanyon" parent="." unique_id=2040333333 groups=["align_position", "persist"] instance=ExtResource("27_eye4p")]
+transform = Transform3D(-0.663652, 0, -0.74804145, 0, 1, 0, 0.74804145, 0, -0.663652, 233.26797, 1.2008492, 279.74686)
+metadata/_edit_group_ = true
 
 [node name="rock" parent="RockCanyon/Meshes/Rocks" parent_id_path=PackedInt32Array(2040333333, 1896837462) index="0" unique_id=703520282]
 transform = Transform3D(-0.99934685, -0.036137972, 0, 0.03613797, -0.9993468, 0, 0, -1.1641532e-10, 1, 3.963745, 0.14438677, 0)
@@ -1079,15 +1098,17 @@ transform = Transform3D(0.9354255, 0.2258956, -0.271938, 0, -0.7692211, -0.63898
 [node name="Flagpole" parent="RockCanyon/Meshes" parent_id_path=PackedInt32Array(2040333333, 354222542) index="1" unique_id=800258272]
 transform = Transform3D(0.064356804, 0, 1.9989643, 0, 2, 0, -1.9989643, 0, 0.064356804, 0, 0, 0)
 
-[node name="SandDunes" parent="." unique_id=73567733 groups=["persist"] instance=ExtResource("28_b3neu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 204.53146, 0.9391444, 311.77884)
+[node name="SandDunes" parent="." unique_id=73567733 groups=["align_position", "persist"] instance=ExtResource("28_b3neu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 175.11198, 0.4872743, 280.73206)
+metadata/_edit_group_ = true
 
-[node name="Checkpoint" parent="." unique_id=1342811121 instance=ExtResource("29_4aenw")]
-transform = Transform3D(0.99948496, 0, -0.032091096, 0, 1, 0, 0.032091096, 0, 0.99948496, 177.84828, 2.7232585, 387.87094)
+[node name="Checkpoint" parent="." unique_id=1342811121 groups=["align_position"] instance=ExtResource("29_4aenw")]
+transform = Transform3D(0.7567213, 0, -0.65373766, 0, 1, 0, 0.65373766, 0, 0.7567213, 162.44714, 0.95034945, 322.24094)
 title = "Checkpoint"
 location_data = SubResource("Resource_mdiyu")
 encounter_scene = ExtResource("31_v0u6a")
 dialogue_tree = SubResource("Resource_n8qb3")
+metadata/_edit_group_ = true
 
 [node name="Flagpole" parent="Checkpoint/Meshes" parent_id_path=PackedInt32Array(1342811121, 354222542) index="0" unique_id=800258272]
 transform = Transform3D(1.9989699, 0, 0.06418219, 0, 2, 0, -0.06418219, 0, 1.9989699, 0, 0, 0)
@@ -1111,26 +1132,20 @@ target_level = "res://Scenes/UI/Levels/demo_ending.tscn"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoint/Area3D" unique_id=1868166737]
 shape = SubResource("SphereShape3D_g8jxq")
 
-[node name="GenericLocation" parent="." unique_id=1658362797 instance=ExtResource("29_4aenw")]
-transform = Transform3D(0.97079605, 0, -0.23990622, 0, 1, 0, 0.23990622, 0, 0.97079605, 224.80031, 0.92174816, 341.57388)
+[node name="GenericLocation" parent="." unique_id=1658362797 groups=["align_position"] instance=ExtResource("29_4aenw")]
+transform = Transform3D(0.97079605, 0, -0.23990622, 0, 1, 0, 0.23990622, 0, 0.97079605, 216.31413, 0.21332242, 308.5401)
 title = "Wasteland N"
 location_data = SubResource("Resource_un0bj")
 encounter_scene = ExtResource("42_to8lj")
 
-[node name="GenericLocation2" parent="." unique_id=980996458 instance=ExtResource("29_4aenw")]
-transform = Transform3D(-0.3048976, 0, 0.9523852, 0, 1, 0, -0.9523852, 0, -0.3048976, 238.71046, 1.9258859, 232.8262)
+[node name="GenericLocation2" parent="." unique_id=980996458 groups=["align_position"] instance=ExtResource("29_4aenw")]
+transform = Transform3D(-0.8771211, 0, 0.48026937, 0, 1, 0, -0.48026937, 0, -0.8771211, 183.76128, 0.6934721, 253.50723)
 title = "Wasteland S"
 location_data = SubResource("Resource_or1fq")
 encounter_scene = ExtResource("43_grcd8")
 
-[node name="GenericLocation3" parent="." unique_id=1687233764 instance=ExtResource("29_4aenw")]
-transform = Transform3D(-0.86333394, 0, 0.50463307, 0, 1, 0, -0.50463307, 0, -0.86333394, 178.39404, 0.9025535, 255.03328)
-title = "Wasteland SE"
-location_data = SubResource("Resource_dfqls")
-encounter_scene = ExtResource("44_7fe5b")
-
-[node name="Home" parent="." unique_id=496753311 instance=ExtResource("48_yhbnl")]
-transform = Transform3D(0.29030132, 0, 0.9569353, 0, 1, 0, -0.9569353, 0, 0.29030132, 214.29442, 0.49500558, 208.90747)
+[node name="Home" parent="." unique_id=496753311 groups=["align_position"] instance=ExtResource("48_yhbnl")]
+transform = Transform3D(0.29030132, 0, 0.9569353, 0, 1, 0, -0.9569353, 0, 0.29030132, 232.10783, 0.51233315, 251.95723)
 
 [node name="Flagpole" parent="Home/Meshes" parent_id_path=PackedInt32Array(496753311, 354222542) index="0" unique_id=800258272]
 transform = Transform3D(0.58060265, 0, -1.9138706, 0, 2, 0, 1.9138706, 0, 0.58060265, 0, 0, 0)
@@ -1138,14 +1153,15 @@ transform = Transform3D(0.58060265, 0, -1.9138706, 0, 2, 0, 1.9138706, 0, 0.5806
 [node name="CSGBakedMeshInstance3D" parent="Home/Meshes" parent_id_path=PackedInt32Array(496753311, 354222542) index="1" unique_id=1453791535]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6875143, 0)
 
-[node name="DirtTown" parent="." unique_id=1920182238 groups=["persist"] instance=ExtResource("49_e1ghh")]
-transform = Transform3D(0.34438077, 0, 0.93883, 0, 1, 0, -0.93883, 0, 0.34438077, 211.61537, 0.33828717, 275.9877)
+[node name="DirtTown" parent="." unique_id=1920182238 groups=["align_position", "persist"] instance=ExtResource("49_e1ghh")]
+transform = Transform3D(0.88991046, 0, 0.4561352, 0, 1, 0, -0.4561352, 0, 0.88991046, 209.57349, 0.3309311, 272.06995)
 title = "Dirt Town"
-town = SubResource("Resource_pc0y4")
+town = SubResource("Resource_7kx4p")
 
-[node name="Scrapyard" parent="." unique_id=1638857313 groups=["location", "persist"] instance=ExtResource("102_etm0w")]
-transform = Transform3D(-0.99983275, 0, 0.018290073, 0, 1, 0, -0.018290073, 0, -0.99983275, 243.09473, 1.2979505, 314.08493)
+[node name="Scrapyard" parent="." unique_id=1638857313 groups=["align_position", "location", "persist"] instance=ExtResource("102_etm0w")]
+transform = Transform3D(-0.99983275, 0, 0.018290073, 0, 1, 0, -0.018290073, 0, -0.99983275, 245.88898, 0.37450963, 299.15076)
 shop = SubResource("Resource_ht31n")
+metadata/_edit_group_ = true
 
 [node name="Shack" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="1" unique_id=650727163]
 transform = Transform3D(-0.3139925, 0, -0.9494256, 0, 1, 0, 0.94942546, 0, -0.31399253, -6.7148438, 0.44492865, -3.6951904)
@@ -1154,61 +1170,61 @@ transform = Transform3D(-0.3139925, 0, -0.9494256, 0, 1, 0, 0.94942546, 0, -0.31
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.51856756, 0)
 
 [node name="Tire" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="2" unique_id=941327551]
-transform = Transform3D(0.9998199, 0.018681064, -0.003283366, -0.018753674, 0.99954355, -0.023685364, 0.002839397, 0.023742663, 0.9997148, -2.7050781, -0.035764217, 3.0947266)
+transform = Transform3D(0.9991707, -0.040567875, 0.0034744723, 0.04070218, 0.9974333, -0.05890684, -0.0010758284, 0.058999356, 0.99825823, -2.7054443, -0.49136424, 3.0947266)
 
 [node name="TireStack" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="3" unique_id=1335062152]
-transform = Transform3D(0.9996534, 0.023874728, -0.011239703, -0.024139289, 0.9994196, -0.024017699, 0.010659778, 0.024280623, 0.99964917, -4.794922, -0.073638916, 4.6619873)
+transform = Transform3D(0.9996139, -0.027387122, -0.0050559496, 0.027076302, 0.99818647, -0.053748675, 0.006518816, 0.053590853, 0.99854225, -4.795227, -0.6582002, 4.6639404)
 
 [node name="Tire4" parent="Scrapyard/Meshes/TireStack" index="0" unique_id=1728738655]
-transform = Transform3D(1, -1.8407149e-05, -1.3558521e-08, 1.8407152e-05, 0.99999994, 0.00063539826, 1.8626487e-09, -0.00063539826, 0.99999994, -0.17926025, 0.038597107, -0.26538086)
+transform = Transform3D(1.0000002, -1.8626491e-09, 5.5879465e-09, 1.862649e-09, 1.0000004, 1.1175863e-08, -5.587947e-09, -1.1175866e-08, 1.0000001, -0.1798706, -0.0093688965, -0.26464844)
 
 [node name="Tire5" parent="Scrapyard/Meshes/TireStack" index="1" unique_id=1124442949]
-transform = Transform3D(1, -2.2701026e-09, -8.456793e-18, 2.2701023e-09, 1.0000001, 1.8626447e-09, 4.228398e-18, -1.8626445e-09, 1.0000002, 0.006164551, -0.0049552917, -0.21264648)
+transform = Transform3D(1.0000002, 4.656622e-10, 1.4901191e-08, -4.6566223e-10, 1.0000005, 1.1175865e-08, -1.4901191e-08, -1.1175867e-08, 1.0000002, 0.0051879883, -0.0114860535, -0.21081543)
 
 [node name="Tire6" parent="Scrapyard/Meshes/TireStack" index="2" unique_id=2048793634]
-transform = Transform3D(1, -2.2701026e-09, -8.456793e-18, 2.2701023e-09, 1.0000001, 1.8626447e-09, 4.228398e-18, -1.8626445e-09, 1.0000002, -0.097717285, -0.0072669983, -0.20458984)
+transform = Transform3D(1.0000002, 4.656622e-10, 1.4901191e-08, -4.6566223e-10, 1.0000005, 1.1175865e-08, -1.4901191e-08, -1.1175867e-08, 1.0000002, -0.098083496, -0.008285522, -0.20324707)
 
 [node name="Tire2" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="4" unique_id=1752658556]
-transform = Transform3D(0.9999956, 0.0034008932, 0.00034462498, -0.0033963742, 0.9999177, -0.012373023, -0.00038667637, 0.012371777, 0.99992365, -0.3671875, -0.029058933, 5.1206055)
+transform = Transform3D(0.9994157, -0.033816896, 0.005317348, 0.03402485, 0.99837697, -0.04566678, -0.0037644152, 0.045820918, 0.9989428, -0.3671875, -0.67333645, 5.1206055)
 
 [node name="Tire3" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="5" unique_id=1876500154]
-transform = Transform3D(0.99992675, 0.01136953, -0.004192869, -0.011419858, 0.9998597, -0.012178315, 0.004053822, 0.012225284, 0.99991757, -4.63031, -0.073638916, 6.206299)
+transform = Transform3D(0.9997309, -0.023145592, 0.0017222373, 0.023194859, 0.9989848, -0.038587995, -0.000827348, 0.0386175, 0.9992538, -4.630554, -0.81148326, 6.208252)
 
 [node name="TireStack2" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="6" unique_id=384813771]
-transform = Transform3D(0.9999942, 0.0034008913, -0.0009853275, -0.0034128237, 0.9999171, -0.012368497, 0.0009431825, 0.012371769, 0.9999235, -2.407837, -0.029058933, 6.7509766)
+transform = Transform3D(0.9994159, -0.033816867, 0.0051520728, 0.03401727, 0.9983763, -0.04567243, -0.0035992125, 0.045820888, 0.99894404, -2.4084473, -0.67333645, 6.7529297)
 
 [node name="Tire4" parent="Scrapyard/Meshes/TireStack2" index="0" unique_id=1728738655]
-transform = Transform3D(1, 4.3655767e-11, 1.862646e-09, -4.3655767e-11, 1, -2.4394544e-19, -1.862646e-09, 1.626302e-19, 1, -0.17785645, -0.0038719177, -0.26367188)
+transform = Transform3D(0.9999747, -0.0071288543, -4.9404167e-05, 0.007129027, 0.99995047, 0.006930087, -1.8626454e-09, -0.0069302623, 0.999976, -0.17901611, -0.0059165955, -0.26281738)
 
 [node name="Tire5" parent="Scrapyard/Meshes/TireStack2" index="1" unique_id=1124442949]
-transform = Transform3D(1, 4.3655767e-11, 1.862646e-09, -4.3655767e-11, 1, -2.4394544e-19, -1.862646e-09, 1.626302e-19, 1, -0.0018920898, -0.0026893616, -0.2166748)
+transform = Transform3D(0.9999747, -0.0071288543, -4.9404167e-05, 0.007129027, 0.99995047, 0.006930087, -1.8626454e-09, -0.0069302623, 0.999976, -0.0028076172, -0.009750366, -0.21520996)
 
 [node name="Tire6" parent="Scrapyard/Meshes/TireStack2" index="2" unique_id=2048793634]
-transform = Transform3D(1, 4.3655767e-11, 1.862646e-09, -4.3655767e-11, 1, -2.4394544e-19, -1.862646e-09, 1.626302e-19, 1, -0.113464355, -0.0030269623, -0.21313477)
+transform = Transform3D(0.9999747, -0.0071288543, -4.9404167e-05, 0.007129027, 0.99995047, 0.006930087, -1.8626454e-09, -0.0069302623, 0.999976, -0.11425781, -0.0058250427, -0.21240234)
 
 [node name="TireStack3" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="7" unique_id=114358210]
-transform = Transform3D(0.99999243, 0.0033384815, -0.0027816866, -0.003363248, 0.99995434, -0.008944419, 0.0027517, 0.0089536775, 0.99995756, 0.10095215, -0.035764217, 2.7593994)
+transform = Transform3D(0.997964, -0.06345271, 0.0068046073, 0.06374456, 0.9962187, -0.059033725, -0.0030330298, 0.059347056, 0.99823433, 0.1003418, -0.25916874, 2.7611084)
 
 [node name="Tire4" parent="Scrapyard/Meshes/TireStack3" index="0" unique_id=1728738655]
-transform = Transform3D(1, 8.731165e-11, -1.8626487e-09, -8.731165e-11, 1, 9.313226e-10, 1.8626487e-09, -9.313226e-10, 1, -0.17810059, -0.002957344, -0.26367188)
+transform = Transform3D(1.0000004, -5.762572e-09, 2.0489143e-08, 5.762574e-09, 1, 1.8626448e-08, -2.0489152e-08, -1.862645e-08, 0.99999994, -0.17858887, -0.004135132, -0.26257324)
 
 [node name="Tire5" parent="Scrapyard/Meshes/TireStack3" index="1" unique_id=1124442949]
-transform = Transform3D(1, 8.731165e-11, -1.8626487e-09, -8.731165e-11, 1, 9.313226e-10, 1.8626487e-09, -9.313226e-10, 1, -0.0021362305, -0.0019569397, -0.21801758)
+transform = Transform3D(1.0000004, -5.762572e-09, 2.0489143e-08, 5.762574e-09, 1, 1.8626448e-08, -2.0489152e-08, -1.862645e-08, 0.99999994, -0.003967285, -0.012512207, -0.21520996)
 
 [node name="Tire6" parent="Scrapyard/Meshes/TireStack3" index="2" unique_id=2048793634]
-transform = Transform3D(1, 8.731165e-11, -1.8626487e-09, -8.731165e-11, 1, 9.313226e-10, 1.8626487e-09, -9.313226e-10, 1, -0.113586426, -0.0023117065, -0.21582031)
+transform = Transform3D(1.0000004, -5.762572e-09, 2.0489143e-08, 5.762574e-09, 1, 1.8626448e-08, -2.0489152e-08, -1.862645e-08, 0.99999994, -0.11431885, -0.00541687, -0.21484375)
 
 [node name="RigidBody3D" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="8" unique_id=1182461201]
-transform = Transform3D(0.99993944, -0.0109666195, 0.0008809247, 0.010965308, 0.999938, 0.0014890928, -0.00089720066, -0.0014793413, 0.9999989, -1.2007446, -0.029058933, 7.9995117)
+transform = Transform3D(0.9994034, -0.03381688, 0.0070668785, 0.0341047, 0.99837613, -0.04560715, -0.0055131163, 0.04582088, 0.9989348, -1.2010498, -0.67333645, 8.000488)
 
 [node name="RigidBody3D3" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="9" unique_id=249755868]
-transform = Transform3D(0.9999801, 0.003400891, -0.0053614555, -0.0034669165, 0.9999171, -0.012353447, 0.005318999, 0.012371769, 0.99991006, -3.0471191, -0.029058933, 4.7314453)
+transform = Transform3D(0.99915874, -0.04097557, 0.0018324708, 0.04101589, 0.9984009, -0.03887895, -0.0002364532, 0.038921338, 0.99924296, -3.0473633, -0.67333645, 4.7333984)
 
 [node name="RigidBody3D2" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="10" unique_id=655607314]
-transform = Transform3D(0.99955046, 0.023863472, -0.01818904, -0.024283197, 0.99943537, -0.023214035, 0.017624808, 0.023645256, 0.99956554, -5.600403, -0.024375916, 2.8032227)
+transform = Transform3D(0.99955416, -0.027387137, -0.011919267, 0.026706584, 0.9981869, -0.053933308, 0.013374739, 0.053590875, 0.9984739, -5.60083, -0.6582002, 2.8049316)
 
 [node name="RigidBody3D4" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="11" unique_id=39034147]
-transform = Transform3D(0.9996505, 0.023874728, -0.011477768, -0.024145002, 0.9994198, -0.02401195, 0.010897839, 0.024280626, 0.9996466, -6.8500977, -0.073638916, 6.208374)
+transform = Transform3D(0.99960285, -0.02776645, -0.005094027, 0.027575739, 0.9990301, -0.034319602, 0.006042025, 0.03416541, 0.99939877, -6.850708, -0.81148326, 6.210327)
 
 [node name="Flagpole" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="12" unique_id=800258272]
 transform = Transform3D(-1.999665, 0, -0.036580164, 0, 2, 0, 0.036580138, 0, -1.9996665, 0, 0, 0)
@@ -1219,7 +1235,7 @@ transform = Transform3D(-1.999665, 0, -0.036580164, 0, 2, 0, 0.036580138, 0, -1.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 244.35785, -28.613811, 423.22177)
 
 [node name="RockWall2" parent="Barrier" unique_id=1122919995 instance=ExtResource("112_fmyil")]
-transform = Transform3D(0.99328625, 0, -0.023049708, 0, 1, 0, 0.11568264, 0, 0.1979118, 116.70215, -41.903534, 379.7239)
+transform = Transform3D(0.71292, 0, -0.70124537, 0, 1, 0, 0.70124537, 0, 0.71292, 112.13964, -41.903534, 291.4482)
 
 [node name="RockWall16" parent="Barrier" unique_id=43307978 instance=ExtResource("112_fmyil")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 193.84076, -34.297436, 485.20084)
@@ -1231,48 +1247,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 101.88341, -18.237183, 463.63
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.53165, -24.24126, 373.7957)
 
 [node name="RockWall4" parent="Barrier" unique_id=1276926755 instance=ExtResource("112_fmyil")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.3743438, 240.03021, -42.419685, 390.57736)
+transform = Transform3D(0.83565396, 0, -0.54925627, 0, 1, 0, 0.54925627, 0, 0.83565396, 199.23085, -42.419685, 368.22757)
 
 [node name="RockWall5" parent="Barrier" unique_id=1199662231 instance=ExtResource("112_fmyil")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 303.34268, -45.026142, 404.95926)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 281.06134, -45.026157, 358.39426)
 
 [node name="RockWall6" parent="Barrier" unique_id=942787954 instance=ExtResource("112_fmyil")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 356.17392, -46.603798, 346.60272)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 322.85965, -46.603798, 321.40436)
 
 [node name="RockWall7" parent="Barrier" unique_id=1938810199 instance=ExtResource("112_fmyil")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 391.0368, -33.783222, 307.99234)
-
-[node name="RockWall8" parent="Barrier" unique_id=2107535793 instance=ExtResource("112_fmyil")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 392.25647, -39.292713, 255.38828)
-
-[node name="RockWall9" parent="Barrier" unique_id=1056797974 instance=ExtResource("112_fmyil")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 376.37744, -43.759426, 199.33742)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 314.877, -33.783222, 251.91458)
 
 [node name="RockWall10" parent="Barrier" unique_id=1455863565 instance=ExtResource("112_fmyil")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 310.28116, -33.34161, 164.60855)
-
-[node name="RockWall11" parent="Barrier" unique_id=554276418 instance=ExtResource("112_fmyil")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 243.77786, -42.643124, 120.75595)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 266.5466, -33.34161, 187.2399)
 
 [node name="RockWall12" parent="Barrier" unique_id=1676921243 instance=ExtResource("112_fmyil")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150.74802, -38.410816, 129.05383)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 179.40659, -38.410816, 177.60104)
 
 [node name="RockWall13" parent="Barrier" unique_id=806023737 instance=ExtResource("112_fmyil")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 111.07799, -19.812275, 171.80836)
-
-[node name="RockWall14" parent="Barrier" unique_id=31199092 instance=ExtResource("112_fmyil")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.30184, -32.277424, 227.24387)
-
-[node name="RockWall15" parent="Barrier" unique_id=2031924465 instance=ExtResource("112_fmyil")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.85559, -37.980083, 306.08673)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 123.441986, -19.812275, 213.5184)
 
 [connection signal="timeout" from="NpcController/Timer" to="NpcController" method="_on_timer_timeout"]
 [connection signal="timeout" from="NpcController/Timer" to="NpcController/Timer" method="_on_timeout"]
 [connection signal="body_entered" from="Checkpoint/Area3D" to="Checkpoint/Area3D" method="_on_body_entered"]
 
 [editable path="WorldEnvironment"]
-[editable path="BanditCamp"]
-[editable path="BanditCamp/PointOfInterest"]
 [editable path="RockCanyon"]
 [editable path="RockCanyon/Meshes/Rocks/rock"]
 [editable path="RockCanyon/Meshes/Rocks/rock2"]

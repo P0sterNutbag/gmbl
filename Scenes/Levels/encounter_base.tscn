@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://chxn6jj2cv0p3" path="res://Scripts/scatterer.gd" id="11_wttml"]
 [ext_resource type="Texture2D" uid="uid://b6x4l51psqj8s" path="res://Art/Textures/Environment/dirt.png" id="12_ljuvf"]
 [ext_resource type="Script" uid="uid://cjv5ew7k7wom8" path="res://Scripts/exit_location.gd" id="14_3f870"]
+[ext_resource type="Texture2D" uid="uid://cfsov1xtejnen" path="res://Art/Textures/Environment/gravel.png" id="14_gppfo"]
 [ext_resource type="Texture2D" uid="uid://ddvw71e7xmbt8" path="res://Art/Textures/Effects/exit zone.png" id="15_2a2fa"]
 [ext_resource type="Script" uid="uid://b04s1m7lnvjkt" path="res://Scripts/position_on_terrain.gd" id="15_52w5m"]
 [ext_resource type="Script" uid="uid://vl4exm3hukmx" path="res://Scripts/Overworld/player_spawn.gd" id="15_mydnv"]
@@ -48,7 +49,7 @@ metadata/_custom_type_script = "uid://csmjlx06mdps3"
 [sub_resource type="Resource" id="Resource_my2y4"]
 script = ExtResource("34_khkok")
 mode = 0
-textures = [[ExtResource("6_nue3y"), ExtResource("12_ljuvf"), ExtResource("12_ljuvf"), ExtResource("6_nue3y")], [null, null, null, null]]
+textures = [[ExtResource("6_nue3y"), ExtResource("12_ljuvf"), ExtResource("14_gppfo"), ExtResource("6_nue3y")], [null, null, null, null]]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_6cq5c"]
 agent_radius = 0.75
@@ -183,7 +184,7 @@ chunk_size = 32
 collision_enabled = true
 collision_layer = 1
 collision_mask = 1
-shader_type = "Custom"
+shader_type = "Classic4Lite"
 custom_shader = ExtResource("10_10w7y")
 custom_globalmap_shader = null
 texture_set = SubResource("Resource_my2y4")
@@ -193,10 +194,6 @@ shader_params/u_ground_uv_scale = 2.0
 shader_params/u_depth_blending = true
 shader_params/u_triplanar = true
 shader_params/u_tile_reduction = Vector4(0, 0, 0, 0)
-shader_params/u_height_min = 0.0
-shader_params/u_height_max = 9.0
-shader_params/u_height_contrast = 1.0
-shader_params/u_blend_width = 0.2
 metadata/_custom_type_script = "uid://bokxkydc5jmf"
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=2110071702]

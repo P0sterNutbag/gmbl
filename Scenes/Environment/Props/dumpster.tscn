@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dtkk8pxaxbuyo"]
+
+[ext_resource type="PackedScene" uid="uid://wqusyjqypd4j" path="res://Art/Models/detail-dumpster-closed.glb" id="1_g481g"]
+[ext_resource type="Material" uid="uid://boab7w88vk4yi" path="res://Art/Materials/rock_orange.tres" id="2_53crs"]
+[ext_resource type="Material" uid="uid://cuiwmfj20a7tt" path="res://Art/Materials/metal.tres" id="3_sqgdh"]
+[ext_resource type="Material" uid="uid://iagweyrwrs4k" path="res://Art/Materials/off_black.tres" id="4_yjh3b"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_x48ey"]
+data = PackedVector3Array(0.29999998, 0.5, 0.19999999, 0.29999998, 0.29999998, -0.19999999, 0.29999998, 0, -0.19999999, 0.29999998, 0, -0.19999999, 0.29999998, 0, 0.19999999, 0.29999998, 0.5, 0.19999999, 0.29999998, 0.5, 0.19999999, 0.29999998, 0, 0.19999999, -0.29999998, 0, 0.19999999, -0.29999998, 0, 0.19999999, -0.29999998, 0.5, 0.19999999, 0.29999998, 0.5, 0.19999999, -0.29999998, 0, 0.19999999, -0.29999998, 0, -0.19999999, -0.29999998, 0.29999998, -0.19999999, -0.29999998, 0.29999998, -0.19999999, -0.29999998, 0.5, 0.19999999, -0.29999998, 0, 0.19999999, -0.29999998, 0.29999998, -0.19999999, -0.29999998, 0, -0.19999999, 0.29999998, 0, -0.19999999, 0.29999998, 0, -0.19999999, 0.29999998, 0.29999998, -0.19999999, -0.29999998, 0.29999998, -0.19999999, -0.29999998, 0, 0.19999999, 0.29999998, 0, 0.19999999, 0.29999998, 0, -0.19999999, 0.29999998, 0, -0.19999999, -0.29999998, 0, -0.19999999, -0.29999998, 0, 0.19999999, 0.29999998, 0.32909998, -0.2537, 0.29999998, 0.54469997, 0.1776, -0.29999998, 0.54469997, 0.1776, -0.29999998, 0.54469997, 0.1776, -0.29999998, 0.32909998, -0.2537, 0.29999998, 0.32909998, -0.2537, 0.29999998, 0.54469997, 0.1776, 0.29999998, 0.32909998, -0.2537, 0.29999998, 0.2843, -0.2313, 0.29999998, 0.2843, -0.2313, 0.29999998, 0.5, 0.19999999, 0.29999998, 0.54469997, 0.1776, -0.29999998, 0.32909998, -0.2537, -0.29999998, 0.2843, -0.2313, 0.29999998, 0.2843, -0.2313, 0.29999998, 0.2843, -0.2313, 0.29999998, 0.32909998, -0.2537, -0.29999998, 0.32909998, -0.2537, -0.29999998, 0.2843, -0.2313, -0.29999998, 0.32909998, -0.2537, -0.29999998, 0.54469997, 0.1776, -0.29999998, 0.54469997, 0.1776, -0.29999998, 0.5, 0.19999999, -0.29999998, 0.2843, -0.2313, 0.29999998, 0.54469997, 0.1776, 0.29999998, 0.5, 0.19999999, -0.29999998, 0.5, 0.19999999, -0.29999998, 0.5, 0.19999999, -0.29999998, 0.54469997, 0.1776, 0.29999998, 0.54469997, 0.1776, -0.29999998, 0.5, 0.19999999, 0.29999998, 0.5, 0.19999999, 0.29999998, 0.2843, -0.2313, 0.29999998, 0.2843, -0.2313, -0.29999998, 0.2843, -0.2313, -0.29999998, 0.5, 0.19999999)
+
+[node name="Dumpster" type="Node3D" unique_id=1701337696 groups=["align_normal"]]
+
+[node name="detail-dumpster-closed2" parent="." unique_id=642722373 instance=ExtResource("1_g481g")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="detail-dumpster-closed" parent="detail-dumpster-closed2" index="0" unique_id=26218298]
+surface_material_override/0 = ExtResource("2_53crs")
+surface_material_override/1 = ExtResource("3_sqgdh")
+surface_material_override/2 = ExtResource("4_yjh3b")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="detail-dumpster-closed2/detail-dumpster-closed" index="0" unique_id=460568194]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="detail-dumpster-closed2/detail-dumpster-closed/StaticBody3D" unique_id=1041527904]
+shape = SubResource("ConcavePolygonShape3D_x48ey")
+
+[editable path="detail-dumpster-closed2"]

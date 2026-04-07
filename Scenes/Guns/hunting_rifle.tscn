@@ -6,7 +6,8 @@
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="4_ibbuc"]
 [ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="5_q4et8"]
 [ext_resource type="PackedScene" uid="uid://bchh4kpr6j8ct" path="res://Scenes/Models/Guns/hunting_rifle_model.tscn" id="6_anhr3"]
-[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="6_itq5v"]
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="6_ibbuc"]
+[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="7_q4et8"]
 [ext_resource type="AudioStream" uid="uid://dh8aqylwf7m42" path="res://Audio/Guns/assault_A_shot_single_01.wav" id="8_7a4pu"]
 
 [sub_resource type="Resource" id="Resource_tinbr"]
@@ -19,11 +20,29 @@ noise_radius = 75.0
 is_hitscan = false
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
-[sub_resource type="Resource" id="Resource_cab15"]
+[sub_resource type="Resource" id="Resource_7a4pu"]
 resource_local_to_scene = true
 script = ExtResource("5_q4et8")
 ammo = 5
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
+[sub_resource type="Resource" id="Resource_q7l5h"]
+script = ExtResource("6_ibbuc")
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[sub_resource type="Resource" id="Resource_p5fcd"]
+resource_local_to_scene = true
+resource_name = "rifle_ammo"
+script = ExtResource("7_q4et8")
+effects = Array[ExtResource("6_ibbuc")]([SubResource("Resource_q7l5h")])
+method = "reload_gun"
+custom_path = "PlayerStats"
+usable_in_menu = false
+title = "Rifle Magazine"
+category = 1
+price = 42
+description = "Usable in: AK-47, Hunting Rifle"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ibbuc"]
 random_pitch = 1.1
@@ -32,8 +51,8 @@ stream_0/stream = ExtResource("8_7a4pu")
 
 [node name="HuntingRifle" unique_id=2125937213 instance=ExtResource("1_anhr3")]
 bullet_stats = SubResource("Resource_tinbr")
-gun_stats = SubResource("Resource_cab15")
-ammo_item = ExtResource("6_itq5v")
+gun_stats = SubResource("Resource_7a4pu")
+ammo_item = SubResource("Resource_p5fcd")
 fire_type = 2
 shoot_cooldown = 0.5
 engagement_range = 100.0

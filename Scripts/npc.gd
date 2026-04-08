@@ -16,7 +16,7 @@ var state = states.idle
 var goal = goals.guard
 var walk_speed := 1.5
 var run_speed := 3.5
-var time_to_detect_max := 1.5
+var time_to_detect_max := 0.5
 var camp_chance := 0.1
 var supress_change := 0.25
 var camp_time := 5.0
@@ -168,7 +168,7 @@ func state_investigate(delta) -> void:
 	if is_new_state:
 		time_to_detect = time_to_detect_max
 		if target == Globals.player:
-			time_to_detect += 0.3 * PlayerStats.skills.stealth
+			time_to_detect += 0.2 * PlayerStats.skills.stealth
 		velocity = Vector3.ZERO
 		is_new_state = false
 	# stop moving

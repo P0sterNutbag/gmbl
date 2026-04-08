@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://yffno3ekd1qf"]
+
+[ext_resource type="Material" uid="uid://iagweyrwrs4k" path="res://Art/Materials/off_black.tres" id="1_54850"]
+[ext_resource type="Material" uid="uid://dtk1pre16bpe6" path="res://Art/Materials/orange.tres" id="2_54850"]
+
+[node name="TrafficCone" type="CSGCombiner3D" unique_id=1885511945]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=508439972]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
+size = Vector3(0.75, 0.05, 0.75)
+material = ExtResource("1_54850")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=387953616]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.410972, 0)
+radius = 0.25
+height = 0.75
+sides = 32
+cone = true
+smooth_faces = false
+material = ExtResource("2_54850")
+metadata/_edit_lock_ = true

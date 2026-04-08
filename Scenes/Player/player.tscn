@@ -22,13 +22,14 @@
 [ext_resource type="AudioStream" uid="uid://cto85fmsr4w4y" path="res://Audio/Guns/shotgun_A_reload_01.wav" id="20_0liok"]
 [ext_resource type="PackedScene" uid="uid://dkmenaf8dxpyr" path="res://Scenes/Guns/sniper.tscn" id="21_gyc8k"]
 [ext_resource type="Texture2D" uid="uid://b7o6p645d7r1q" path="res://Art/Textures/UI/scope.png" id="22_qflxp"]
-[ext_resource type="PackedScene" uid="uid://c3hkwyvehkx4y" path="res://Art/Models/arm.glb" id="23_0pk7v"]
 [ext_resource type="PackedScene" uid="uid://cc6hd7m7eqnp" path="res://Scenes/Guns/sawed_off.tscn" id="24_rblve"]
 [ext_resource type="PackedScene" uid="uid://cmgrxwiw6y3kg" path="res://Scenes/Guns/uzi.tscn" id="25_fn4qh"]
+[ext_resource type="Script" uid="uid://dmhkld52ble6j" path="res://Scripts/knife.gd" id="26_1agin"]
 [ext_resource type="PackedScene" uid="uid://bu88iqf6x1y6s" path="res://Scenes/Guns/hunting_rifle.tscn" id="26_5omc3"]
-[ext_resource type="PackedScene" uid="uid://omkm88y2o5u5" path="res://Scenes/Guns/knife.tscn" id="27_2ahak"]
+[ext_resource type="PackedScene" uid="uid://ct0yri7k6jh4c" path="res://Scenes/Models/Guns/knife.tscn" id="27_2jnj1"]
 [ext_resource type="AudioStream" uid="uid://b88hp6hc2yyuq" path="res://Audio/Bullets/weapon_bullet_flyby_02.wav" id="27_pcwjh"]
 [ext_resource type="AudioStream" uid="uid://ddrjpnastg7jv" path="res://Audio/CharacterActions/footstep-74321.wav" id="28_ejxfg"]
+[ext_resource type="AudioStream" uid="uid://cg1ead7veeqpv" path="res://Audio/Guns/antitank_empty.wav" id="28_enij7"]
 [ext_resource type="PackedScene" uid="uid://j2m6pd4rb0jy" path="res://Scenes/Guns/grenade.tscn" id="28_rukb4"]
 [ext_resource type="Material" uid="uid://cuiwmfj20a7tt" path="res://Art/Materials/metal.tres" id="29_4no11"]
 [ext_resource type="PackedScene" uid="uid://bdlenssiaotxi" path="res://Scenes/Overworld/Player/move_marker.tscn" id="32_fcwna"]
@@ -95,14 +96,26 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ArmLAnchor/armL:position")
+tracks/1/path = NodePath("ArmLAnchor/armL:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(2.38419e-07, 0, 0)]
+"values": [Vector3(0, -0.62856287, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmLAnchor/armL:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.3841858e-07, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_pypqk"]
@@ -131,7 +144,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.6, 1.3, 1.56, 1.8),
 "transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943, 0.267943, 0.267943),
 "update": 0,
-"values": [Vector3(2.38419e-07, 0, 0), Vector3(0, -0.01, 0.2), Vector3(0, -0.5, 0.2), Vector3(0, -0.5, 0.2), Vector3(0, 0, 0.2), Vector3(0, 0, 0)]
+"values": [Vector3(2.38419e-07, 0, 0), Vector3(-0.05, -0.01, 0.1), Vector3(-0.05, -0.5, 0.2), Vector3(-0.05, -0.5, 0.2), Vector3(-0.05, 0, 0.2), Vector3(0, 0, 0)]
 }
 tracks/2/type = "audio"
 tracks/2/imported = false
@@ -163,6 +176,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943, 0.267943),
 "update": 0,
 "values": [Vector3(0.285, 1.139, 0), Vector3(0.285, 1.139, 0), Vector3(0.285, -0.496, 0), Vector3(0.285, -0.496, 0), Vector3(0.285, 1.139, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ArmLAnchor/armL:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.5, 1.8),
+"transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943),
+"update": 0,
+"values": [Vector3(0, -0.62831855, 0), Vector3(0, -0.62831855, -1.5707964), Vector3(0, -0.62831855, -1.5707964), Vector3(0, -0.62831855, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2ijsl"]
@@ -215,6 +240,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ArmLAnchor/armL:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.5250648, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_bi64h"]
 resource_name = "reload"
@@ -242,7 +279,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.6, 1.3, 1.56, 1.8),
 "transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943, 0.267943, 0.267943),
 "update": 0,
-"values": [Vector3(2.38419e-07, 0, 0), Vector3(0, -0.01, 0), Vector3(0, -0.5, 0), Vector3(0, -0.5, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+"values": [Vector3(2.38419e-07, 0, 0), Vector3(-0.055, 0.03, 0), Vector3(-0.055, -0.5, 0), Vector3(-0.055, -0.5, 0), Vector3(-0.055, 0, 0), Vector3(0, 0, 0)]
 }
 tracks/2/type = "audio"
 tracks/2/imported = false
@@ -270,10 +307,22 @@ tracks/3/path = NodePath("ArmLAnchor/armL/MeshInstance3D:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.3, 1.6),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.3, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [true, false]
+"values": [false, false, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ArmLAnchor/armL:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 1.6, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.5250648, 0), Vector3(0, -0.52534413, -1.5707964), Vector3(0, -0.52534413, -1.5707964), Vector3(0, -0.52534413, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0gysh"]
@@ -503,25 +552,13 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0.34382987, 0, 0), Vector3(0.34382987, 0, 0), Vector3(0.34383, 0, -0.47822), Vector3(0.34383, 0, -0.47822), Vector3(0, 0, 0)]
 }
-tracks/1/type = "value"
+tracks/1/type = "audio"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ArmLAnchor/armL:position")
+tracks/1/path = NodePath("../../AudioStreamPlayer3D")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 1.3, 1.56, 1.8),
-"transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943, 0.267943, 0.267943),
-"update": 0,
-"values": [Vector3(2.38419e-07, 0, 0), Vector3(0, -0.01, 0.2), Vector3(0, -0.5, 0.2), Vector3(0, -0.5, 0.2), Vector3(0, 0, 0.2), Vector3(0, 0, 0)]
-}
-tracks/2/type = "audio"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../AudioStreamPlayer3D")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
@@ -533,18 +570,42 @@ tracks/2/keys = {
 }],
 "times": PackedFloat32Array(0.3, 1.2)
 }
-tracks/2/use_blend = true
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("GunAnchor/Model/sniper/Cube:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/1/use_blend = true
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GunAnchor/Model/sniper/Cube:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.6, 1.3061086, 1.5),
 "transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943, 0.267943),
 "update": 0,
-"values": [Vector3(0.2853133, 0.52941895, 0), Vector3(0.2853133, 0.52941895, 0), Vector3(0.285, -1.246, 0), Vector3(0.285, -1.246, 0), Vector3(0.2853133, 0.52941895, 0)]
+"values": [Vector3(0.2853133, 0.52941895, 0), Vector3(0.2853133, 0.52941895, 0), Vector3(1.405, -1.246, 0), Vector3(1.405, -1.246, 0), Vector3(0.2853133, 0.52941895, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ArmLAnchor/armL:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 1.3, 1.5, 1.8),
+"transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943, 0.267943, 0.267943),
+"update": 0,
+"values": [Vector3(2.3841858e-07, 0, 0), Vector3(-0.05, 0, 0.1), Vector3(-0.05, -0.5, 0.4), Vector3(-0.05, -0.5, 0.4), Vector3(-0.05, 0, 0.1), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ArmLAnchor/armL:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.5, 1.8),
+"transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943),
+"update": 0,
+"values": [Vector3(0, -0.62831855, 0), Vector3(0, -0.62831855, -1.5707964), Vector3(0, -0.62831855, -1.5707964), Vector3(0, -0.62831855, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p1odr"]
@@ -618,6 +679,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ArmLAnchor/armL:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.47209406, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_y6uwr"]
 resource_name = "reload"
@@ -631,7 +704,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.8, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"transitions": PackedFloat32Array(0.25, 0.25, 0.25, 0.25, 0.25),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0.61086524), Vector3(0, 0, 0.61086524), Vector3(0, 0, 0)]
 }
@@ -643,7 +716,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.8666667, 0.93333334, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"transitions": PackedFloat32Array(0.25, 0.25, 0.25, 0.25, 0.25, 0.25),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0.105, 0), Vector3(0, -0.07, 0), Vector3(0, -0.07, 0), Vector3(0, -0.15, 0), Vector3(0, 0, 0)]
 }
@@ -655,7 +728,7 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.6098894, 0.7098894, 0.8098894, 0.90000004, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"transitions": PackedFloat32Array(0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(-0.205, -0.295, 0), Vector3(-0.053, 0.138, 0.037), Vector3(0.02, 0.08, 0.055), Vector3(-0.053, 0.138, 0.037), Vector3(-0.205, -0.295, 0), Vector3(-0.053, 0.138, 0.037), Vector3(0.02, 0.08, 0.055), Vector3(-0.053, 0.138, 0.037), Vector3(0, 0, 0)]
 }
@@ -675,6 +748,18 @@ tracks/3/keys = {
 "args": [0.9],
 "method": &"check_reload_ammo"
 }]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ArmLAnchor/armL:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.9, 1.1),
+"transitions": PackedFloat32Array(0.25, 0.25, 0.25, 0.25, 0.25),
+"update": 0,
+"values": [Vector3(0, -0.47209406, 0), Vector3(0, -0.47209406, 0), Vector3(0, -0.4712389, 4.1050143), Vector3(0, -0.4712389, 4.1050143), Vector3(0, -0.4712389, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_83xs0"]
@@ -698,6 +783,21 @@ resource_local_to_scene = true
 script = ExtResource("9_mwii3")
 ammo = 24
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
+[sub_resource type="Animation" id="Animation_1agin"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArmLAnchor/armL:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.68940514, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_83xs0"]
 resource_name = "reload"
@@ -727,7 +827,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.6, 1.3, 1.56, 1.8),
 "transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943, 0.267943, 0.267943),
 "update": 0,
-"values": [Vector3(2.38419e-07, 0, 0), Vector3(0, -0.01, 0.165), Vector3(0, -0.5, 0.49), Vector3(0, -0.5, 0.49), Vector3(0, 0, 0.165), Vector3(0, 0, 0)]
+"values": [Vector3(2.38419e-07, 0, 0), Vector3(-0.05, -0.01, 0.165), Vector3(-0.05, -0.5, 0.49), Vector3(-0.05, -0.5, 0.49), Vector3(-0.05, 0, 0.165), Vector3(0, 0, 0)]
 }
 tracks/2/type = "audio"
 tracks/2/imported = false
@@ -736,8 +836,16 @@ tracks/2/path = NodePath("GunAnchor/FirePoint/AudioStreamPlayer3D")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"clips": [],
-"times": PackedFloat32Array()
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("14_ei2r2")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("15_j6uq4")
+}],
+"times": PackedFloat32Array(0.15, 1.5)
 }
 tracks/2/use_blend = true
 tracks/3/type = "value"
@@ -752,9 +860,22 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0.34382987, 0, 0), Vector3(0.34382987, 0, 0), Vector3(0.34382987, 0, 0), Vector3(0.34383, 0, -0.47822), Vector3(0.34383, 0, -0.47822), Vector3(0, 0, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ArmLAnchor/armL:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.5500001, 1.8),
+"transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943),
+"update": 0,
+"values": [Vector3(0, -0.68940514, 0), Vector3(0, -0.6894051, -1.5707964), Vector3(0, -0.6894051, -1.5707964), Vector3(0, -0.6894051, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ypfnu"]
 _data = {
+&"RESET": SubResource("Animation_1agin"),
 &"reload": SubResource("Animation_83xs0")
 }
 
@@ -818,6 +939,30 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(0.8251513, 0.010951828, -0.14530498)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmRAnchor/armR:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.0875573, 1.5707964)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ArmLAnchor/armL:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.52359885, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_xuaoq"]
 resource_name = "pump"
@@ -829,10 +974,10 @@ tracks/0/path = NodePath("ArmRAnchor/armR:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.23333335, 0.33333334, 0.43333334, 0.5333334, 0.6, 0.7047581, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.13333334, 0.23333335, 0.33333334, 0.43333334, 0.5333334, 0.7047581, 1),
+"transitions": PackedFloat32Array(0.26, 0.26, 0.26, 0.26, 0.26, 0.26, 0.26, 0.26),
 "update": 0,
-"values": [Vector3(0, 4.76837e-07, -2.38419e-07), Vector3(0.095, 0.05, -0.055), Vector3(0.095, 0.05, -0.08), Vector3(0.095, 0.05, -0.13), Vector3(0.095, 0.05, -0.13), Vector3(0.095, 0.05, -0.08), Vector3(0.095, 0.05, -0.055), Vector3(0, 4.76837e-07, -2.38419e-07), Vector3(0, 0, 0)]
+"values": [Vector3(0, 4.76837e-07, -2.38419e-07), Vector3(-0.015, 0.115, -0.055), Vector3(-0.015, 0.115, -0.055), Vector3(-0.015, 0.115, -0.155), Vector3(-0.015, 0.115, -0.155), Vector3(-0.015, 0.115, -0.08), Vector3(-0.015, 0.115, -0.08), Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -842,15 +987,27 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0.23333333, 0.3333333, 0.43333334, 0.5333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"transitions": PackedFloat32Array(0.26, 0.26, 0.26, 0.26),
 "update": 0,
 "values": [Vector3(0.8251513, 0.010951828, -0.14530498), Vector3(0.61, 0.011, -0.134), Vector3(0.61, 0.011, -0.134), Vector3(0.825, 0.011, -0.134)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmRAnchor/armR:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.70000005, 1),
+"transitions": PackedFloat32Array(0.26, 0.26, 0.26, 0.26),
+"update": 0,
+"values": [Vector3(0, -3.0875573, 1.5707964), Vector3(-0.5061455, -3.0874875, 0), Vector3(-0.5061455, -3.0874875, 0), Vector3(0, -3.0875573, 1.5707964)]
 }
 
 [sub_resource type="Animation" id="Animation_ypfnu"]
 resource_name = "reload"
 length = 1.8
-step = 0.1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -861,7 +1018,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.6, 1.3, 1.56, 1.8),
 "transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943, 0.267943, 0.267943),
 "update": 0,
-"values": [Vector3(2.38419e-07, 0, 0), Vector3(0, -0.01, 0.2), Vector3(0, -0.5, 0.2), Vector3(0, -0.5, 0.2), Vector3(0, 0, 0.2), Vector3(0, 0, 0)]
+"values": [Vector3(2.38419e-07, 0, 0), Vector3(-0.05, -0.01, 0.2), Vector3(-0.05, -0.5, 0.2), Vector3(-0.05, -0.5, 0.2), Vector3(-0.05, -0.01, 0.2), Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -875,6 +1032,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0.34382987, 0, 0), Vector3(0.34382987, 0, 0), Vector3(0.34382987, 0, 0), Vector3(0.34383, 0, -0.47822), Vector3(0.34383, 0, -0.47822), Vector3(0, 0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmLAnchor/armL:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.56, 1.79),
+"transitions": PackedFloat32Array(0.267943, 0.267943, 0.267943, 0.267943),
+"update": 0,
+"values": [Vector3(0, -0.52359885, 0), Vector3(0, -0.5235988, -1.5707964), Vector3(0, -0.5235988, -1.5707964), Vector3(0, -0.5235988, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wohnl"]
 _data = {
@@ -883,36 +1052,63 @@ _data = {
 &"reload": SubResource("Animation_ypfnu")
 }
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_wqjf8"]
+radius = 0.24190733
+
 [sub_resource type="Animation" id="Animation_rukb4"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/path = NodePath("MeshInstance3D/ArmRAnchor/armR:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-0.043370992, -0.11607134, -0.1489332)]
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D/ArmRAnchor/armR:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.04547399, -3.135519, 0.9756374)]
 }
 
 [sub_resource type="Animation" id="Animation_2ahak"]
 resource_name = "stab"
-length = 0.35
+length = 0.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/path = NodePath("MeshInstance3D/ArmRAnchor/armR:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.35),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5),
+"transitions": PackedFloat32Array(2.65, 2.65, 2.65, 2.65, 2.65),
 "update": 0,
-"values": [Vector3(-0.043370992, -0.11607134, -0.1489332), Vector3(-0.043, -0.116, -0.539), Vector3(-0.043370992, -0.11607134, -0.1489332)]
+"values": [Vector3(0, 0, 0), Vector3(-0.195, 0.195, 0), Vector3(0.078, -0.133, -0.22), Vector3(0.078, -0.133, -0.22), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D/ArmRAnchor/armR:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5),
+"transitions": PackedFloat32Array(2.65, 2.65, 2.65, 2.65, 2.65),
+"update": 0,
+"values": [Vector3(0.04547399, -3.135519, 0.9756374), Vector3(0.045378562, -2.7174776, 0.97563905), Vector3(0.045378562, -3.6058502, 0.97563905), Vector3(0.045378562, -3.6058502, 0.97563905), Vector3(0.04547399, -3.135519, 0.9756374)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4no11"]
@@ -1022,6 +1218,7 @@ near = 0.001
 script = ExtResource("4_4no11")
 
 [node name="RayCast3D" type="ShapeCast3D" parent="CameraAnchor/Camera3D" unique_id=920676200]
+visible = false
 shape = SubResource("SphereShape3D_qqcod")
 target_position = Vector3(0, 0, -2.5)
 collision_mask = 2064
@@ -1029,6 +1226,7 @@ collide_with_areas = true
 
 [node name="AllyRaycast" type="RayCast3D" parent="CameraAnchor/Camera3D" unique_id=78856679]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.005432e-05, 0)
+visible = false
 enabled = false
 target_position = Vector3(0, 0, -50)
 
@@ -1072,23 +1270,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196, 0)
 [node name="AudioStreamPlayer3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/FirePoint" parent_id_path=PackedInt32Array(1046860869, 1901170218) index="1" unique_id=382067649]
 unit_size = 10.0
 
-[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="0" unique_id=1332677861]
+[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="0" unique_id=338598288]
 cast_shadow = 0
 
-[node name="Cube_004" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="1" unique_id=468124916]
+[node name="Cube_004" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="1" unique_id=1048688262]
 cast_shadow = 0
 
-[node name="Cube_005" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="2" unique_id=1689691153]
+[node name="Cube_005" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="2" unique_id=543334201]
 cast_shadow = 0
 
-[node name="Cube_007" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="3" unique_id=391304037]
+[node name="Cube_007" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="3" unique_id=1524541643]
 cast_shadow = 0
 
-[node name="Cube_008" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="4" unique_id=1508645445]
+[node name="Cube_008" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="4" unique_id=152181150]
 transform = Transform3D(-0.0887866, 0, 0, 0, -0.498048, 0, 0, 0, -0.229101, 0.285, 1.139, 0)
 cast_shadow = 0
 
-[node name="Cube" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="5" unique_id=1949532489]
+[node name="Cube" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor/Model/ak47" parent_id_path=PackedInt32Array(1046860869, 913908235, 918207934) index="5" unique_id=1310680043]
 cast_shadow = 0
 
 [node name="Chamber" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/GunAnchor" index="2" unique_id=1534345481]
@@ -1102,13 +1300,13 @@ bus = &"Master"
 transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, -0.005952239, -0.1793114, -0.38702753)
 
 [node name="armL" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/ArmLAnchor" unique_id=297352864 instance=ExtResource("12_ogmfp")]
-transform = Transform3D(-0.7986096, 0.024535917, -0.6013499, -0.018803585, 0.99766374, 0.06567793, -0.6015562, -0.06375854, 0.7962822, 2.38419e-07, 0, 0)
+transform = Transform3D(0.80887336, 0, -0.5879829, 0, 1, 0, 0.5879829, 0, 0.80887336, 2.3841858e-07, 0, 0)
 
 [node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47" unique_id=1105565675]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03319834, -0.15354478, -0.04919365)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03319834, -0.17773426, -0.028308302)
 
 [node name="armR" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/ArmRAnchor" unique_id=1329829766 instance=ExtResource("12_ogmfp")]
-transform = Transform3D(-0.08644006, -0.85964125, 0.5035327, 0.99498254, -0.10004914, 0, 0.050378, 0.5010062, 0.86397606, 0, 4.7683716e-07, -2.3841858e-07)
+transform = Transform3D(0.05137551, -0.97899646, 0.19729805, -0.9986259, -0.052405614, 0, -0.0103395255, 0.19702694, 0.9803436, 0, 4.7683716e-07, -2.3841858e-07)
 
 [node name="Label3D" type="Label3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47" unique_id=1296056890]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0504991, -0.0406023, -0.107153)
@@ -1133,6 +1331,7 @@ outline_size = 8
 libraries/ = SubResource("AnimationLibrary_2ijsl")
 
 [node name="Pistol" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor" unique_id=492546656 instance=ExtResource("16_h5u0x")]
+visible = false
 uses_input = true
 bullet_stats = SubResource("Resource_fd4e3")
 gun_stats = SubResource("Resource_wpjfl")
@@ -1150,23 +1349,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.002657652, 0.10731208, -0.6
 [node name="MuzzleFlash" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/FirePoint" index="0" unique_id=540190188]
 transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 0, 0, 0.39554685)
 
-[node name="Cube" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="0" unique_id=790767181]
+[node name="Cube" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="0" unique_id=746981911]
 cast_shadow = 0
 
-[node name="Cube_003" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="1" unique_id=66500870]
+[node name="Cube_003" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="1" unique_id=136810366]
 cast_shadow = 0
 
-[node name="Cube_004" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="2" unique_id=412376715]
+[node name="Cube_004" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="2" unique_id=1159444594]
 cast_shadow = 0
 
-[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="3" unique_id=772289784]
+[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/GunAnchor/Model/pistol" index="3" unique_id=1833511950]
 cast_shadow = 0
 
 [node name="ArmLAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol" unique_id=632983340]
 transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, -0.0135049485, -0.22251642, -0.15630421)
 
 [node name="armL" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/ArmLAnchor" unique_id=945428721 instance=ExtResource("12_ogmfp")]
-transform = Transform3D(-0.5831745, 0.20977798, -0.78479344, 0.23281993, 0.9687157, 0.08593416, -0.7782688, 0.13260098, 0.61377084, 0, 0, 0)
+transform = Transform3D(0.8652916, 0, -0.5012691, 0, 1, 0, 0.50126916, 0, 0.8652915, 2.38419e-07, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/ArmLAnchor/armL" unique_id=2032405844]
 transform = Transform3D(0.073151164, 0.9973207, 0, -0.9973215, 0.073151104, 0, 0, 0, 1.0000005, -0.031373184, 0.052499108, -9.31323e-10)
@@ -1175,10 +1374,10 @@ cast_shadow = 0
 mesh = SubResource("BoxMesh_igrcy")
 
 [node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol" unique_id=564558457]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049182385, -0.12425995, -0.14091235)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03228858, -0.12425995, -0.14091235)
 
 [node name="armR" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/ArmRAnchor" unique_id=683371683 instance=ExtResource("12_ogmfp")]
-transform = Transform3D(-0.3820145, -0.89843, -0.21653779, 0.92412174, -0.3733956, -0.08108509, -0.008004993, -0.23108295, 0.9729011, 0, 0, 0)
+transform = Transform3D(-4.371139e-08, -1, 0, -1, 4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Label3D" type="Label3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol" unique_id=1706146622]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0375455, 0.0159749, -0.00703703)
@@ -1216,29 +1415,29 @@ cast_shadow = false
 [node name="GunAnchor" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun" index="0" unique_id=1970548578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.271, -0.191)
 
-[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun/GunAnchor/Model/shotgun" index="0" unique_id=828295805]
+[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun/GunAnchor/Model/shotgun" index="0" unique_id=635911477]
 cast_shadow = 0
 
-[node name="Cube_002" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun/GunAnchor/Model/shotgun" index="1" unique_id=18399178]
+[node name="Cube_002" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun/GunAnchor/Model/shotgun" index="1" unique_id=1274703215]
 cast_shadow = 0
 
-[node name="Cube_003" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun/GunAnchor/Model/shotgun" index="2" unique_id=597213133]
+[node name="Cube_003" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun/GunAnchor/Model/shotgun" index="2" unique_id=796401208]
 cast_shadow = 0
 
 [node name="Pump" type="AudioStreamPlayer3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun" unique_id=435002567]
 stream = ExtResource("20_0liok")
 
 [node name="ArmLAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun" unique_id=54016598]
-transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, -0.044855595, -0.11000872, -0.42224616)
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, 0.003822863, -0.11622083, -0.4493255)
 
 [node name="armL" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun/ArmLAnchor" unique_id=1710133055 instance=ExtResource("12_ogmfp")]
-transform = Transform3D(-0.9297765, 0.103320196, -0.35332784, 8.3908844e-08, -0.959805, -0.28066665, -0.3681245, -0.26095724, 0.89240426, 2.38419e-07, 0, 0)
+transform = Transform3D(0.8660254, 0, -0.49999988, 0, 0.99999964, 0, 0.5, 0, 0.8660252, 2.38419e-07, 0, 0)
 
 [node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun" unique_id=212644538]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.010124475, -0.119582176, 0.0366693)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07293801, -0.119582176, 0.0366693)
 
 [node name="armR" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun/ArmRAnchor" unique_id=1992371255 instance=ExtResource("12_ogmfp")]
-transform = Transform3D(0.758646, -1.57586e-08, 0.651503, 5.96047e-08, 1, -4.52188e-08, -0.651503, 7.31377e-08, 0.758646, 0, 4.76837e-07, -2.38419e-07)
+transform = Transform3D(-4.371139e-08, -1, -8.742278e-08, -1, 4.371139e-08, 0, -3.821371e-15, -8.742278e-08, 1, 0, 4.7683716e-07, -2.3841858e-07)
 
 [node name="Label3D" type="Label3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Shotgun" unique_id=1220240581]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0394222, 0.00612307, -0.0474407)
@@ -1281,38 +1480,35 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00265765, 0.26089078, -0.64
 [node name="MuzzleFlash" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/FirePoint" index="0" unique_id=540190188]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.062972024, 0)
 
-[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="0" unique_id=1421538850]
+[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="0" unique_id=898642869]
 cast_shadow = 0
 
-[node name="Cube_002" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="1" unique_id=1925195900]
+[node name="Cube_002" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="1" unique_id=1339274041]
 cast_shadow = 0
 
-[node name="Cube_003" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="2" unique_id=477573040]
+[node name="Cube_003" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="2" unique_id=271888942]
 cast_shadow = 0
 
-[node name="Cube_004" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="3" unique_id=1105770446]
+[node name="Cube_004" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="3" unique_id=1875106516]
 cast_shadow = 0
 
-[node name="Cube" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="4" unique_id=435953744]
+[node name="Cube" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="4" unique_id=1641788002]
 cast_shadow = 0
 
-[node name="Cylinder" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="5" unique_id=40424816]
+[node name="Cylinder" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper" index="5" unique_id=52603197]
 cast_shadow = 0
 
 [node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle" unique_id=1694404599]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.024554007, -0.10447359, 0.060269624)
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.07411021, -0.0907439, 0.04097201)
 
-[node name="armR" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/ArmRAnchor" unique_id=1189674626 instance=ExtResource("23_0pk7v")]
-transform = Transform3D(0.75864613, 0, 0.65150315, 0, 1.0000001, 0, -0.65150315, 0, 0.75864613, 0, 0, -2.9802322e-08)
-
-[node name="Cube_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/ArmRAnchor/armR" index="0" unique_id=1454035606]
-cast_shadow = 0
+[node name="armR" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/ArmRAnchor" unique_id=1189674626 instance=ExtResource("12_ogmfp")]
+transform = Transform3D(-4.371139e-08, -1, 0, -1, 4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="ArmLAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle" unique_id=599497133]
-transform = Transform3D(0.99999964, 0, 0, 0, 0.9999998, 0, 0, 0, 1, -0.027925402, -0.108933926, -0.229639)
+transform = Transform3D(0.99999964, 0, 0, 0, 0.9999998, 0, 0, 0, 1, -0.0043545067, -0.13464141, -0.33127707)
 
-[node name="armL" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/ArmLAnchor" unique_id=1057107219 instance=ExtResource("23_0pk7v")]
-transform = Transform3D(-0.92966735, 0.10333613, -0.35361034, -1.4493395e-07, -0.9598542, -0.28049934, -0.36840013, -0.26077104, 0.892345, 2.38419e-07, 0, 0)
+[node name="armL" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/ArmLAnchor" unique_id=1454921926 instance=ExtResource("12_ogmfp")]
+transform = Transform3D(0.80887336, 0, -0.5879828, 0, 1, 0, 0.5879829, 0, 0.80887324, 2.3841858e-07, 0, 0)
 
 [node name="Label3D" type="Label3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle" unique_id=1625715872]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0681, 0.0165281, -0.00249672)
@@ -1349,22 +1545,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9802322e-08, -0.2932862, 0.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6421651, 0.13032669, -2.806993e-08)
 
 [node name="ArmLAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SawedOff" unique_id=1224497871]
-transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, -0.021730602, -0.1001991, -0.1926254)
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, -0.021730602, -0.09735775, -0.3590631)
 
 [node name="armL" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SawedOff/ArmLAnchor" unique_id=1944271743 instance=ExtResource("12_ogmfp")]
-transform = Transform3D(-0.9297765, 0.10332013, -0.35332778, 1.4492657e-07, -0.9598051, -0.28066665, -0.36812449, -0.2609573, 0.8924042, 0, 0, 0)
+transform = Transform3D(0.89061797, 0, -0.45475215, 0, 0.99999976, 0, 0.4547523, 0, 0.8906177, 0, 0, 0)
 
 [node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SawedOff" unique_id=1388914464]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008788139, -0.09738386, 0.020540819)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.043290466, -0.057828665, 0.020540819)
 
 [node name="armR" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SawedOff/ArmRAnchor" unique_id=352053964 instance=ExtResource("12_ogmfp")]
-transform = Transform3D(0.85695136, 0, 0.51539695, 0.1159391, 0.97437, -0.1927721, -0.50218743, 0.22495107, 0.83498776, 0.015823394, 0.010044073, 0.038904697)
+transform = Transform3D(-4.371139e-08, -1, 0, -1, 4.371139e-08, 0, 0, 0, 1, 0.028340906, -0.0482049, -0.05393292)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SawedOff" unique_id=61051429]
 libraries/ = SubResource("AnimationLibrary_83xs0")
 
 [node name="Uzi" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor" unique_id=1309005030 instance=ExtResource("25_fn4qh")]
-visible = false
 uses_input = true
 bullet_stats = SubResource("Resource_4no11")
 gun_stats = SubResource("Resource_ogmfp")
@@ -1372,11 +1567,14 @@ gun_stats = SubResource("Resource_ogmfp")
 [node name="GunAnchor" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Uzi" index="0" unique_id=1970548578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12506485, -0.2550497)
 
+[node name="AudioStreamPlayer3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Uzi/GunAnchor/FirePoint" parent_id_path=PackedInt32Array(1309005030, 1901170218) index="1" unique_id=382067649]
+stream = null
+
 [node name="ArmLAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Uzi" unique_id=2015937802]
-transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, -0.044980958, -0.13196814, -0.3133642)
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, -0.008003071, -0.1442573, -0.36860394)
 
 [node name="armL" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Uzi/ArmLAnchor" unique_id=1938826753 instance=ExtResource("12_ogmfp")]
-transform = Transform3D(-0.7922944, 0.1724806, -0.5852522, -0.001170665, -0.95963883, -0.28123188, -0.6101383, -0.22213325, 0.7605183, 0, 0, 0)
+transform = Transform3D(0.7716247, 0, -0.6360781, 0, 0.9999997, 0, 0.6360785, 0, 0.7716243, 2.38419e-07, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Uzi/ArmLAnchor/armL" unique_id=470015009]
 transform = Transform3D(0.8143191, -0.007175714, -0.580374, -0.151328, 0.96271497, -0.22423102, 0.560344, 0.270422, 0.782871, -0.019074023, -0.00073468685, -0.015655994)
@@ -1385,10 +1583,10 @@ cast_shadow = 0
 mesh = SubResource("BoxMesh_igrcy")
 
 [node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Uzi" unique_id=9513511]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0019654334, -0.14571095, -0.16460174)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03649625, -0.1429125, -0.20465264)
 
 [node name="armR" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Uzi/ArmRAnchor" unique_id=1078378237 instance=ExtResource("12_ogmfp")]
-transform = Transform3D(1, 0, 0, 0, 0.995116, -0.0987119, 0, 0.0987119, 0.995116, 1.49012e-08, 4.76837e-07, -1.19209e-07)
+transform = Transform3D(-4.371139e-08, -1, -8.742278e-08, -1, 4.371139e-08, 0, -3.821371e-15, -8.742278e-08, 1, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Uzi" unique_id=1125245220]
 libraries/ = SubResource("AnimationLibrary_ypfnu")
@@ -1406,52 +1604,67 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247, -0.331)
 [node name="MeshInstance3D6" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/FirePoint/MuzzleFlash/MeshInstance3D3" parent_id_path=PackedInt32Array(1665818361, 1265223842) index="2" unique_id=1914905470]
 transform = Transform3D(-2.18557e-08, -1, 5.46393e-08, 0, 4.37114e-08, 1.25, -0.5, 4.37114e-08, 3.55271e-15, 0, -0.219, 2.155)
 
-[node name="Cube_002" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model/hunting rifle" index="0" unique_id=575607701]
+[node name="Cube_002" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model/hunting rifle" index="0" unique_id=270718526]
 cast_shadow = 0
 
-[node name="Cylinder" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model/hunting rifle" index="1" unique_id=676327991]
+[node name="Cylinder" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model/hunting rifle" index="1" unique_id=27818156]
 cast_shadow = 0
 
-[node name="Cylinder_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model/hunting rifle" index="2" unique_id=691180802]
+[node name="Cylinder_001" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model/hunting rifle" index="2" unique_id=489046850]
 cast_shadow = 0
 
-[node name="Cube" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model/hunting rifle" index="4" unique_id=742672632]
+[node name="Cube" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model/hunting rifle" index="4" unique_id=348880888]
 cast_shadow = 0
 
 [node name="ArmLAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle" unique_id=1522161198]
-transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, -0.044855595, -0.110313535, -0.26994392)
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 1, 0.006147921, -0.110839486, -0.3041101)
 
 [node name="armL" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/ArmLAnchor" unique_id=317140186 instance=ExtResource("12_ogmfp")]
-transform = Transform3D(-0.9297765, 0.10332013, -0.35332778, 1.4492657e-07, -0.9598051, -0.28066665, -0.36812449, -0.2609573, 0.8924042, 2.38419e-07, 0, 0)
+transform = Transform3D(0.8660254, 0, -0.49999994, 0, 0.99999976, 0, 0.50000006, 0, 0.8660252, 0, 0, 0)
 
 [node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle" unique_id=1791350102]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.022437334, -0.101240754, 0.054855347)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08226065, -0.11670232, -0.020214379)
 
 [node name="armR" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/ArmRAnchor" unique_id=427015522 instance=ExtResource("12_ogmfp")]
-transform = Transform3D(0.758646, -1.57586e-08, 0.651503, 5.96047e-08, 1, -4.52188e-08, -0.651503, 7.31377e-08, 0.758646, 0, 4.76837e-07, -2.38419e-07)
+transform = Transform3D(-4.364759e-08, -0.99854046, 0.054009046, -1, 4.371139e-08, 0, 2.3608104e-09, 0.054009046, 0.99854046, 0, 4.76837e-07, -2.38419e-07)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle" unique_id=1362370012]
 libraries/ = SubResource("AnimationLibrary_wohnl")
 
-[node name="Knife" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor" unique_id=1703628484 instance=ExtResource("27_2ahak")]
+[node name="Knife" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor" unique_id=1703628484]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07228923, 0)
 visible = false
+script = ExtResource("26_1agin")
 damage = null
 uses_input = null
 fire_type = null
 
-[node name="MeshInstance3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife" index="0" unique_id=749730204]
-transform = Transform3D(1.9106855e-15, 4.371139e-08, -1, 1, -4.371139e-08, 0, -4.371139e-08, -1, -4.371139e-08, -0.043370992, -0.11607134, -0.1489332)
+[node name="MeshInstance3D" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife" unique_id=749730204]
 
-[node name="Hitbox" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife/MeshInstance3D" index="0" unique_id=1826706581]
+[node name="Hitbox" type="Area3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife/MeshInstance3D" unique_id=1826706581]
+transform = Transform3D(1.9106855e-15, 1, -4.371139e-08, 4.371139e-08, -4.371139e-08, -1, -1, 0, -4.371139e-08, 2.302383e-08, 0.52672386, 2.302383e-08)
+collision_layer = 0
 collision_mask = 4100
+monitoring = false
+monitorable = false
 
-[node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife/MeshInstance3D" index="1" unique_id=1954067926]
-transform = Transform3D(1.9106855e-15, 1, -4.371139e-08, 4.371139e-08, -4.371139e-08, -1, -1, 0, -4.371139e-08, 0.014830589, -0.20378855, -0.026899494)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife/MeshInstance3D/Hitbox" unique_id=354859236]
+shape = SubResource("SphereShape3D_wqjf8")
+
+[node name="ArmRAnchor" type="Node3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife/MeshInstance3D" unique_id=1954067926]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0.07493928, -0.06882519, -0.17680074)
 
 [node name="armR" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife/MeshInstance3D/ArmRAnchor" unique_id=448601943 instance=ExtResource("12_ogmfp")]
-transform = Transform3D(0.9650667, -1.5758598e-08, 0.26200423, 3.437056e-08, 1, -6.645389e-08, -0.26200423, 7.31377e-08, 0.9650667, 0, 4.7683716e-07, -0.059857428)
+transform = Transform3D(0.56085885, -0.8278889, 0.0060673105, -0.8272035, -0.56006056, 0.04545832, 0.0342364, 0.030514576, 0.9989479, 0, 0, 0)
 
-[node name="AnimationPlayer" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife" index="2" unique_id=2002719477]
+[node name="knife" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife/MeshInstance3D/ArmRAnchor/armR" unique_id=1677519101 instance=ExtResource("27_2jnj1")]
+transform = Transform3D(0.19825682, -0.004925756, -0.025883725, -0.024477828, -0.10713801, -0.16709962, -0.009750199, 0.16881111, -0.10680705, -0.095471635, 0.08134147, -0.00267357)
+
+[node name="Stab" type="AudioStreamPlayer3D" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife" unique_id=154321400]
+stream = ExtResource("28_enij7")
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife" unique_id=2002719477]
 libraries/ = SubResource("AnimationLibrary_4no11")
 
 [node name="Grenade" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor" unique_id=939383847 instance=ExtResource("28_rukb4")]
@@ -1529,6 +1742,9 @@ bob_frequency = 10.0
 [connection signal="animation_finished" from="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Uzi/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife/MeshInstance3D/Hitbox" to="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife" method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife/MeshInstance3D/Hitbox" to="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife" method="_on_area_3d_body_entered"]
+[connection signal="animation_changed" from="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife/AnimationPlayer" to="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife" method="_on_animation_player_animation_changed"]
+[connection signal="animation_finished" from="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife/AnimationPlayer" to="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Grenade/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="CameraAnchor/BulletListener" to="." method="_on_bullet_listener_area_entered"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
@@ -1547,7 +1763,6 @@ bob_frequency = 10.0
 [editable path="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle"]
 [editable path="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model"]
 [editable path="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/GunAnchor/Model/sniper"]
-[editable path="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SniperRifle/ArmRAnchor/armR"]
 [editable path="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SawedOff"]
 [editable path="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SawedOff/GunAnchor/Model"]
 [editable path="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SawedOff/GunAnchor/Model/sawed off shotgun"]
@@ -1555,6 +1770,5 @@ bob_frequency = 10.0
 [editable path="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle"]
 [editable path="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model"]
 [editable path="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle/GunAnchor/Model/hunting rifle"]
-[editable path="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife"]
 [editable path="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Grenade"]
 [editable path="MoveMarker"]

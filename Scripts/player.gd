@@ -466,7 +466,7 @@ func state_walk(delta):
 	
 	# point gun up if colliding
 	if gun_collision_cast.is_colliding():
-		if gun_state != gun_states.point_up and gun_state != gun_states.no_gun and gun_state != gun_states.reload:
+		if gun_state != gun_states.point_up and gun_state != gun_states.no_gun and gun_state != gun_states.reload and (!gun or (gun and PlayerStats.gun == EquipmentGun)):
 			change_gun_state(gun_states.point_up)
 	elif gun_state == gun_states.point_up:
 		change_gun_state(gun_states.point)
@@ -518,11 +518,12 @@ func state_walk(delta):
 
 
 func enter_pause():
-	pass
+	velocity.x = 0
+	velocity.z = 0
 
 
 func state_pause(_delta):
-	pass
+	move_and_slide()
 
 
 func enter_dead():
@@ -531,7 +532,7 @@ func enter_dead():
 	tween.tween_property(camera, "position:y", -1, 0.5)
 	tween.tween_property(camera, "rotation:z", deg_to_rad(45), 1)
 	tween.set_parallel(false)
-	tween.tween_callback(Globals.survival_ui.hide_all_ui)
+	#tween.tween_callback(Globals.survival_ui.hide_all_ui)
 	tween.tween_callback(UiController.open_interface.bind(Globals.survival_ui.death_menu, false))
 
 

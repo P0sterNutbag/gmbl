@@ -32,7 +32,7 @@ func start_battle(location: Location, attacking_location: Location) -> void:
 	battle_timer.start()
 	battle_timer.timeout.connect(_on_battle_timer_timeout)
 	location.animation_player.play("battle")
-	location.point_of_interest.status_holder.show()
+	#location.point_of_interest.status_holder.show()
 	#location.point_of_interest.status_label.text = "Under Attack by " + FactionManager.faction_data[attacker_data.faction].name
 	original_faction = battle_location.location_data.faction
 	#if location.get_parent() is CharacterBody3D:

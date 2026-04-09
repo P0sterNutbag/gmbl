@@ -616,5 +616,5 @@ func _on_supress_timer_timeout() -> void:
 func _on_new_destination_timer_timeout() -> void:
 	if state != states.idle:
 		return
-	destination = get_tree().current_scene.get_node("enemy_spawner").get_destination(global_position)
+	destination = get_tree().current_scene.get_node("EnemySpawner").get_destination(global_position)
 	change_state(states.walk)

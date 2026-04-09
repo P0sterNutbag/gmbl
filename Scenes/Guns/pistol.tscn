@@ -6,7 +6,8 @@
 [ext_resource type="Script" uid="uid://c338ifvm4duar" path="res://Scripts/bullet_stats.gd" id="4_l6qq8"]
 [ext_resource type="PackedScene" uid="uid://dpffikxirjfnq" path="res://Scenes/Models/Guns/pistol_model.tscn" id="5_l6qq8"]
 [ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="5_nwufo"]
-[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="6_yhgdf"]
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="6_3cuqt"]
+[ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="7_mpuu0"]
 [ext_resource type="AudioStream" uid="uid://biqtl4lectxh6" path="res://Audio/Guns/shotgun_B_shot_single_03.wav" id="8_3cuqt"]
 
 [sub_resource type="Resource" id="Resource_nfi5v"]
@@ -18,10 +19,23 @@ is_hitscan = false
 bullet_drop = true
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
-[sub_resource type="Resource" id="Resource_l6qq8"]
+[sub_resource type="Resource" id="Resource_sqv2m"]
 resource_local_to_scene = true
 script = ExtResource("5_nwufo")
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
+
+[sub_resource type="Resource" id="Resource_i0bgb"]
+resource_local_to_scene = true
+resource_name = "pistol_ammo"
+script = ExtResource("7_mpuu0")
+method = "reload_gun"
+custom_path = "PlayerStats"
+usable_in_menu = false
+title = "Pistol Magazine"
+category = 1
+price = 25
+description = "Usable in: Pistol"
+metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3cuqt"]
 random_pitch = 1.0594631
@@ -30,9 +44,9 @@ stream_0/stream = ExtResource("8_3cuqt")
 
 [node name="Pistol" unique_id=1838172339 instance=ExtResource("1_mfn4u")]
 bullet_stats = SubResource("Resource_nfi5v")
-gun_stats = SubResource("Resource_l6qq8")
-ammo_item = ExtResource("6_yhgdf")
-engagement_range = 35.0
+gun_stats = SubResource("Resource_sqv2m")
+ammo_item = SubResource("Resource_i0bgb")
+engagement_range = 45.0
 slot = 1
 
 [node name="GunAnchor" parent="." index="0" unique_id=1970548578]

@@ -115,16 +115,19 @@ func state_idle(delta) -> void:
 		velocity = Vector3.ZERO
 		if goal == goals.travel and destination != Vector3.ZERO and global_position.distance_to(destination) > 1:
 			change_state(states.walk)
+			return
 		is_new_state = false
 	# switch to walk
 	if goal == goals.follow and follow_target and global_position.distance_to(follow_target.global_position) > 3:
 		change_state(states.walk)
+		return
 	# switch to investigate
 	if target != null and open_fire:
 		time_to_see += delta
 		if time_to_see > time_to_see_max:
 			time_to_see = 0
 			change_state(states.investigate)
+			return
 	# animate
 	anim_player.play("Idle")
 
@@ -134,6 +137,7 @@ func state_walk(delta) -> void:
 		if goal == goals.travel:
 			navigation_agent.set_target_position(destination)
 		navigation_agent.path_desired_distance = 3.0
+		is_new_state = false
 	# follow target
 	if goal == goals.follow:
 		#if global_position.distance_to(follow_target.global_position) > 3:
@@ -148,15 +152,21 @@ func state_walk(delta) -> void:
 	elif goal == goals.travel and follow_target == Globals.player:
 		spd = run_speed
 	follow_path(spd)
+	#if navigation_agent.is_navigation_finished():
+		#change_state(states.idle)
+		#return
+	
 	# switch to investigate
 	if target != null and open_fire:
 		time_to_see += delta
 		if time_to_see > time_to_see_max:
 			time_to_see = 0
 			change_state(states.investigate)
+			return
 	# switch to idle
 	if goal == goals.guard:
 		change_state(states.idle)
+		return
 	# animate
 	if spd <= 2.5:
 		anim_player.play("Walk")
@@ -181,8 +191,10 @@ func state_investigate(delta) -> void:
 		if time_to_detect <= 0 or on_alert:
 			if randf() > 0.5:
 				change_state(states.find_cover)
+				return
 			else:
 				change_state(states.approach)
+				return
 	else:
 		if return_to_idle_timer.time_left <= 0:
 			return_to_idle_timer.start()
@@ -205,10 +217,12 @@ func state_approach(_delta) -> void:
 			#change_state(states.idle)
 		#else:
 		change_state(states.search)
+		return
 	# approach and start shooting
 	follow_path(run_speed)
 	if navigation_agent.distance_to_target() <= gun.engagement_range:
 		change_state(states.aim)
+		return
 	anim_player.play("Run")
 
 
@@ -228,7 +242,7 @@ func state_shoot(delta) -> void:
 		on_alert = true
 		anim_player.play("Fire")
 		if !target:
-			if goal == goals.travel or goal == goals.follow:
+			if goal == goals.follow:
 				change_state(states.idle)
 			else:
 				if randf() <= camp_chance:
@@ -256,6 +270,7 @@ func state_shoot(delta) -> void:
 				#change_state(states.supress)
 			else:
 				change_state(states.search)
+			return
 	else:
 		time_since_detect = 0
 
@@ -284,6 +299,7 @@ func state_camp(delta) -> void:
 		is_new_state = false
 	if target:
 		change_state(states.shoot)
+		return
 	time_since_detect += delta
 	if time_since_detect > camp_time:
 		if last_seen_position != Vector3.ZERO:
@@ -306,6 +322,7 @@ func state_search(_delta) -> void:
 	# return to shoot
 	if target:
 		change_state(states.approach)
+		return
 	# animate
 	anim_player.play("WalkPoint")
 
@@ -324,6 +341,7 @@ func state_strafe(_delta) -> void:
 	if velocity.length() < 0.1:
 		look_at_position(last_seen_position)
 		change_state(states.approach)
+		return
 	# animate
 	if velocity == Vector3.ZERO:
 		anim_player.play("Idle")
@@ -484,6 +502,7 @@ func _on_death() -> void:
 	velocity = Vector3.ZERO
 	#anim_player.play("Die")
 	set_collision_layer_value(2, false)
+	set_collision_mask_value(2, false)
 	anim_player.active = false
 	physical_bone_simulator.active = true
 	physical_bone_simulator.physical_bones_start_simulation()
@@ -514,7 +533,8 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 		if goal == goals.travel:
 			change_state(states.idle)
 			destination = Vector3.ZERO
-			#new_destination_timer.start()
+			if !follow_target:
+				new_destination_timer.start()
 		elif goal == goals.follow:
 			change_state(states.idle)
 	elif state == states.find_cover:
@@ -524,10 +544,10 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 
 func _on_return_to_idle_timer_timeout() -> void:
 	if state == states.investigate and !detection.get_visible_target():
-		if on_alert:
-			change_state(states.search)
-		else:
-			change_state(states.idle)
+		#if on_alert:
+			#change_state(states.search)
+		#else:
+		change_state(states.idle)
 
 
 func _on_path_wait_timer_timeout() -> void:

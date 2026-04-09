@@ -47,8 +47,9 @@ var faction := FactionManager.factions.player
 @onready var notification_position: Node3D = $NotificationPosition
 @onready var hud_anchor: Node3D = $HudAnchor
 @onready var town_shot: Node3D = %TownShot
-@onready var rotation_offset: Node3D = $CameraAnchor/RotationOffset
-@onready var position_offset: Node3D = $CameraAnchor/RotationOffset/PositionOffset
+@onready var transition_shot: Node3D = $CameraAnchor/RotationOffset/TransitionShot
+@onready var overhead_shot: Node3D = %OverheadShot
+@onready var spring_arm: SpringArm3D = $CameraAnchor/RotationOffset/SpringArm3D
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var move_marker: Node3D = $MoveMarker
 var gun: Node3D
@@ -101,7 +102,7 @@ func _physics_process(delta):
 			camera_target_zoom = clamp(camera_target_zoom - camera_zoom_incrament, camera_min_zoom, camera_max_zoom)
 		elif Input.is_action_just_pressed("last_gun"):
 			camera_target_zoom = clamp(camera_target_zoom + camera_zoom_incrament, camera_min_zoom, camera_max_zoom)
-	position_offset.position.z = lerp(position_offset.position.z, camera_target_zoom, delta * 5)
+	spring_arm.spring_length = lerp(spring_arm.spring_length, camera_target_zoom, delta * 5)
 	
 	# turn camerea
 	if Input.is_action_pressed("lean_left"):
@@ -109,16 +110,17 @@ func _physics_process(delta):
 	elif Input.is_action_pressed("lean_right"):
 		camera_anchor.rotate_y(-2 * delta)
 	
-	var camera_transform = position_offset.global_transform
+	#overhead_shot.rotation = Vector3.ZERO
+	var camera_target: Node3D = overhead_shot
 	model.show()
 	if camera_type == camera_types.town:
 		var rot = town_shot.rotation
 		town_shot.look_at(Globals.overworld.current_encounter.global_position)
 		town_shot.rotation = Vector3(rot.x, town_shot.rotation.y, rot.z)
-		camera_transform = town_shot.global_transform
+		camera_target = town_shot
 		model.hide()
-	camera.global_transform.origin = lerp(camera.global_transform.origin, camera_transform.origin, delta * 10)
-	camera.global_transform.basis = lerp(camera.global_transform.basis, camera_transform.basis, delta * 10)
+	camera.global_position = lerp(camera.global_position, camera_target.global_position, delta * 10)
+	camera.global_rotation = lerp(camera.global_rotation, camera_target.global_rotation, delta * 10)
 	
 	# clamp position
 	position.x = clamp(position.x, 1, 511)

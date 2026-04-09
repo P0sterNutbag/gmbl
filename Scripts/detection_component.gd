@@ -31,7 +31,8 @@ func can_see_target(target: Node3D = targets[0], check_direction: bool = false) 
 	target_position.z = -global_position.distance_to(target_pos)
 	force_shapecast_update() 
 	if is_colliding():
-		return false
+		if !get_collider(0).is_in_group("see_through"):
+			return false
 	if check_direction and !target_is_ahead(target):
 		return false
 	return true

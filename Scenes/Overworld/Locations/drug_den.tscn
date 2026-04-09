@@ -16,9 +16,7 @@
 [ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="12_dckhe"]
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="13_7jsld"]
 [ext_resource type="Texture2D" uid="uid://cs2j1ok7u1avc" path="res://Art/Textures/Character/npc shirt red sleeve.png" id="13_bnevc"]
-[ext_resource type="Resource" uid="uid://jb6lsvgonmut" path="res://Resources/Items/Junk/ecstacy.tres" id="13_te7rf"]
 [ext_resource type="Script" uid="uid://3e36ru1e7k78" path="res://Scripts/spawn_chance_resource.gd" id="14_mkt2b"]
-[ext_resource type="Resource" uid="uid://b0ujp3jyr8ll6" path="res://Resources/Items/Junk/joint.tres" id="14_qwjv1"]
 [ext_resource type="Resource" uid="uid://clu1tx111108g" path="res://Resources/Items/Consumable/pain_pills.tres" id="15_mkt2b"]
 [ext_resource type="Resource" uid="uid://bbx4x21dta7e7" path="res://Resources/Items/Consumable/morphine.tres" id="16_7t7n5"]
 [ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="19_7t7n5"]
@@ -151,16 +149,6 @@ npc_style = SubResource("Resource_5faom")
 npc_name = "Speed"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
-[sub_resource type="Resource" id="Resource_7jsld"]
-script = ExtResource("14_mkt2b")
-object_to_spawn = ExtResource("13_te7rf")
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_8sm2v"]
-script = ExtResource("14_mkt2b")
-object_to_spawn = ExtResource("14_qwjv1")
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
 [sub_resource type="Resource" id="Resource_bnevc"]
 script = ExtResource("14_mkt2b")
 object_to_spawn = ExtResource("16_7t7n5")
@@ -210,7 +198,7 @@ resource_local_to_scene = true
 script = ExtResource("19_7t7n5")
 min_amount = 5
 max_amount = 10
-potential_slots = Array[ExtResource("14_mkt2b")]([SubResource("Resource_7jsld"), SubResource("Resource_8sm2v"), SubResource("Resource_bnevc"), SubResource("Resource_7ervs"), SubResource("Resource_e8jdv"), SubResource("Resource_g8r3v"), SubResource("Resource_h7l10"), SubResource("Resource_a1wvb"), SubResource("Resource_j3mqp")])
+potential_slots = Array[ExtResource("14_mkt2b")]([SubResource("Resource_bnevc"), SubResource("Resource_7ervs"), SubResource("Resource_e8jdv"), SubResource("Resource_g8r3v"), SubResource("Resource_h7l10"), SubResource("Resource_a1wvb"), SubResource("Resource_j3mqp")])
 repeat_entries = false
 space = 50
 money = 1000

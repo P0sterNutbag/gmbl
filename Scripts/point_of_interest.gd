@@ -12,6 +12,7 @@ class_name PointOfInterest
 @onready var status_holder: HBoxContainer = $CanvasLayer/CardOffset/VBoxContainer/HBoxContainer3
 @onready var status_label: Label = $CanvasLayer/CardOffset/VBoxContainer/HBoxContainer3/Status
 var has_player: bool
+var has_mouse: bool
 
 
 func _ready() -> void:
@@ -28,9 +29,11 @@ func _process(_delta: float) -> void:
 	# mouse hover
 	var viewport = get_viewport()
 	var pos = Globals.player.camera.unproject_position(global_position)
-	if viewport.get_mouse_position().distance_to(pos) < 64 and global_position.distance_to(Globals.player.camera.global_position) <= 85:
+	var had_mouse = has_mouse
+	has_mouse = viewport.get_mouse_position().distance_to(pos) < 64 and global_position.distance_to(Globals.player.camera.global_position) <= 85
+	if !had_mouse and has_mouse:
 		canvas_layer.show()
-	elif !has_player:
+	elif had_mouse and !has_mouse and !has_player:
 		canvas_layer.hide()
 	# set data on card
 	if !canvas_layer.visible:
@@ -69,6 +72,18 @@ func _on_area_3d_body_exited(_body: Node3D) -> void:
 
 #func _exit_tree() -> void:
 	#canvas_layer.hide()
+
+
+func _on_canvas_layer_visibility_changed() -> void:
+	if canvas_layer.visible:
+		if owner.get_parent() is CharacterBody3D:
+			var location = owner.get_parent().location
+			var battle = BattleManager.get_battle(location)
+			if battle:
+				for i in battle.all_locations:
+					var poi = i.point_of_interest
+					if poi != self:
+						poi.canvas_layer.hide()
 
 
 func save() -> Dictionary:

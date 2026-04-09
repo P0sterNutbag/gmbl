@@ -146,15 +146,13 @@ func return_quests(quest_type: Quest, success_index: int, fail_index: int) -> vo
 	if complete_quests.size() == 0:
 		advance_dialogue(fail_index)
 		return
-	var reward = 0
 	for quest in complete_quests:
 		quest.finish_quest(shop.faction)
 		if quest.has_method("remove_items"):
 			quest.remove_items()
 		PlayerStats.inventory.add_item(quest.reward.item, quest.reward.amount)
-		reward += quest.reward.amount
+		Globals.survival_ui.create_notification("You gained $" + str(quest.reward.amount))
 		PlayerStats.quests.erase(quest)
-	dialogue_tree.bubbles[success_index].lines[0] += "($" +  str(reward) + ")"
 	advance_dialogue(success_index)
 
 
@@ -179,7 +177,7 @@ func pay_fee(amount: int, fail_index: int) -> void:
 		var npc = Globals.overworld.current_encounter.get_parent()
 		npc.chase_player = false
 		npc.navigation_agent.set_target_position(npc.destination.global_position)
-		Globals.survival_ui.create_notification("-$" + str(amount))
+		Globals.survival_ui.create_notification("You lost $" + str(amount))
 		exit_to_game()
 	else:
 		advance_dialogue(fail_index)

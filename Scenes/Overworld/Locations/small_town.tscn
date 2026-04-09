@@ -37,9 +37,11 @@
 [ext_resource type="Texture2D" uid="uid://25baqqag6lrp" path="res://Art/Textures/Character/npc_face4.png" id="30_mggfn"]
 [ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="31_j37su"]
 [ext_resource type="Texture2D" uid="uid://whgiy4tx5l5g" path="res://Art/Textures/Character/npc brown jacket.png" id="32_bgwyi"]
+[ext_resource type="Script" uid="uid://b8o6asme5ait4" path="res://Scripts/flagpole.gd" id="38_e14sy"]
 
 [sub_resource type="Resource" id="Resource_vcknj"]
 script = ExtResource("2_jpyr6")
+faction = 0
 population = 4
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
@@ -134,6 +136,7 @@ price_modifiers = {
 "Survival": 0.5
 }
 dialogue = SubResource("Resource_sj5y1")
+faction = null
 title = "General Store"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
@@ -237,6 +240,7 @@ price_modifiers = {
 "Weapons": 0.75
 }
 dialogue = SubResource("Resource_q1nwr")
+faction = null
 title = "Gun Shop"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
@@ -335,10 +339,11 @@ metadata/_custom_type_script = "uid://6ucyr0petjnx"
 script = ExtResource("4_mdi5i")
 inventory = SubResource("Resource_eg73l")
 dialogue = SubResource("Resource_v7uwj")
+faction = null
 title = "Bounty Board"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
-[sub_resource type="Resource" id="Resource_ldia5"]
+[sub_resource type="Resource" id="Resource_e14sy"]
 resource_local_to_scene = true
 script = ExtResource("3_e14sy")
 title = "Small Town"
@@ -437,7 +442,7 @@ _surfaces = [{
 [node name="Town" unique_id=396576117 groups=["location"] instance=ExtResource("1_tn1te")]
 title = "Small Town"
 location_data = SubResource("Resource_vcknj")
-town = SubResource("Resource_ldia5")
+town = SubResource("Resource_e14sy")
 
 [node name="Shack2" type="Node3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="0" unique_id=605900199]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.397, 0, 10)
@@ -473,7 +478,9 @@ mesh = SubResource("ArrayMesh_l8n32")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
 
 [node name="Flagpole" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="3" unique_id=800258272]
+process_mode = 3
 visible = true
+script = ExtResource("38_e14sy")
 
 [node name="PointOfInterest" parent="." index="4" unique_id=2144080138]
 show_faction = true

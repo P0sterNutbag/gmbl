@@ -18,6 +18,8 @@ func _ready() -> void:
 	await get_tree().process_frame
 	if "faction" in parent and parent != Globals.player and get_style_from_faction:
 		style_data = FactionManager.faction_data[parent.faction].style
+	elif "npc_data" in parent and parent.npc_data.style != null:
+		style_data = parent.npc_data.style
 	set_materials(style_data)
 
 

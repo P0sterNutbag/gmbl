@@ -37,7 +37,7 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	Globals.overworld = self
-	Globals.player.position_offset.position.z = 500
+	Globals.player.spring_arm.spring_length = 500
 	SaveController.load.connect(_on_load)
 
 

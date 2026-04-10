@@ -13,16 +13,21 @@ const SKY_NIGHTTIME = preload("uid://dqycx3ovg1v54")
 const SKY_DAYTIME = preload("uid://dqicgdsw2n7pd")
 
 
+func _enter_tree() -> void:
+	await get_tree().process_frame
+	_on_scene_changed()
+
 func _ready() -> void:
 	sun.rotation.y = deg_to_rad(-90)
-	await get_tree().process_frame
-	shader = get_tree().current_scene.get_node_or_null("Shader")
+	SceneManager.scene_changed.connect(_on_scene_changed)
 
 
 func _process(_delta: float) -> void:
-	if DayNightCycle.is_night and environment.sky.sky_material != SKY_NIGHTTIME:
-		environment.sky.sky_material = SKY_NIGHTTIME
-		horizon_color = Color()
+	if DayNightCycle.is_night:
+		if environment.sky.sky_material != SKY_NIGHTTIME:
+			environment.sky.sky_material = SKY_NIGHTTIME
+			var tween = create_tween()
+			tween.tween_property(self, "horizon_color", Color(), 5)
 	elif environment.sky.sky_material != SKY_DAYTIME:
 		environment.sky.sky_material = SKY_DAYTIME
 	if DayNightCycle.normalized_time > 0:
@@ -32,7 +37,7 @@ func _process(_delta: float) -> void:
 	environment.sky.sky_material.energy_multiplier = sky_energy_curve.sample(DayNightCycle.normalized_time)
 	if shader:
 		shader.mesh.material.set_shader_parameter("fog_color", horizon_color)
-	if environment.sky.sky_material is not ProceduralSkyMaterial:
+	if environment.sky.sky_material is PanoramaSkyMaterial:
 		return
 	sky_color = sky_gradient.get_gradient().sample(DayNightCycle.sky_progress)
 	horizon_color = horizon_gradient.get_gradient().sample(DayNightCycle.sky_progress)
@@ -40,3 +45,7 @@ func _process(_delta: float) -> void:
 	environment.sky.sky_material.sky_horizon_color = horizon_color
 	environment.sky.sky_material.ground_bottom_color = horizon_color
 	environment.sky.sky_material.ground_horizon_color = horizon_color
+
+
+func _on_scene_changed() -> void:
+	shader = get_tree().current_scene.get_node_or_null("Shader")

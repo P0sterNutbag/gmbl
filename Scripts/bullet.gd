@@ -69,9 +69,14 @@ func hit():
 	if collider.get_parent() is CharacterBody3D:
 		return
 	var inst = bullet_stats.hitmarker.instantiate()
-	collider.add_child(inst)
-	inst.global_position = raycast.get_collision_point()
-	inst.look_at(inst.global_position + raycast.get_collision_normal(), Vector3.FORWARD)
+	get_tree().current_scene.add_child(inst)
+	var remote_transform = RemoteTransform3D.new()
+	remote_transform.remote_path = inst.get_path()
+	remote_transform.update_scale = false
+	collider.add_child(remote_transform)
+	remote_transform.global_position = raycast.get_collision_point()
+	remote_transform.look_at(remote_transform.global_position + raycast.get_collision_normal(), Vector3.FORWARD)
+	inst.tree_exited.connect(remote_transform.queue_free)
 	audio_stream_player_3d.play()
 	if !bullet_stats.is_hitscan:
 		queue_free()

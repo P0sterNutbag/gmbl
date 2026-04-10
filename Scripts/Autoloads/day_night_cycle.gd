@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 	if !get_tree().current_scene:
 		return
 	var scene_name = get_tree().current_scene.name
-	if !Globals.overworld or scene_name == "CharacterCreation" or scene_name == "MainMenu":
+	if scene_name == "CharacterCreation" or scene_name == "MainMenu":
 		return
 	var was_night = is_night
 	time += delta * time_speed

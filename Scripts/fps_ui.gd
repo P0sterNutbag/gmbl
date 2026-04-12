@@ -41,8 +41,11 @@ func _process(delta: float) -> void:
 	else:
 		commands.hide()
 	
-	if Input.is_action_just_pressed("light") and Input.is_action_pressed("aim"):
-		hide()
+	if Input.is_action_pressed("light") and Input.is_action_just_pressed("aim"):
+		if visible:
+			hide()
+		else:
+			show()
 	#if commands.visible:
 		#var text = "1: "
 		#if PlayerStats.allies_follow: text += "Stop"

@@ -77,8 +77,11 @@ func _process(_delta: float) -> void:
 	else:
 		compass.visible = false
 	
-	if Input.is_action_just_pressed("light") and Input.is_action_pressed("aim"):
-		hide()
+	if Input.is_action_pressed("light") and Input.is_action_just_pressed("aim"):
+		if visible:
+			hide()
+		else:
+			show()
 	# overworld health and status effects
 	#if Globals.overworld == get_tree().current_scene:
 		#stats_anchor.global_position.y = Globals.player.camera.unproject_position(Globals.player.hud_anchor.global_position).y

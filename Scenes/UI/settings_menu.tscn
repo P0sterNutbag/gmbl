@@ -48,7 +48,7 @@ metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
 [sub_resource type="Resource" id="Resource_kxrh3"]
 script = ExtResource("8_w0jc6")
-string = "Stretch"
+string = "Native"
 value = 1
 metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
@@ -121,7 +121,6 @@ layout_mode = 2
 text = "Fullscreen"
 
 [node name="Resolution" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=418842228 instance=ExtResource("7_sv08j")]
-visible = false
 layout_mode = 2
 text = "Resolution"
 options = Array[ExtResource("8_w0jc6")]([SubResource("Resource_rjkbt"), SubResource("Resource_8t2tk"), SubResource("Resource_sv08j"), SubResource("Resource_w0jc6"), SubResource("Resource_ulty1")])
@@ -161,6 +160,11 @@ layout_mode = 2
 layout_mode = 2
 text = "Screen Warp"
 
+[node name="HideHud" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=377695594 instance=ExtResource("6_cs2gm")]
+visible = false
+layout_mode = 2
+text = "Hide HUD"
+
 [node name="Crosshair" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1837821546 instance=ExtResource("7_sv08j")]
 layout_mode = 2
 text = "Crosshair"
@@ -179,6 +183,7 @@ text = "Back"
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/AimSensitivity/HBoxContainer/HSlider" to="." method="_on_aim_sensitivity_h_slider_value_changed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/VBoxContainer/CRT" to="." method="_on_crt_toggled"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/VBoxContainer/Warp" to="." method="_on_warp_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/VBoxContainer/HideHud" to="." method="_on_hide_hud_toggled"]
 [connection signal="option_changed" from="MarginContainer/VBoxContainer/VBoxContainer/Crosshair" to="." method="_on_crosshair_option_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
 

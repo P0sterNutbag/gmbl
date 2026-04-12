@@ -18,6 +18,7 @@ extends CanvasLayer
 @onready var menu_buttons: Control = $MenuButtons
 @onready var skills_menu: Control = %Skills
 @onready var squad: PanelContainer = $Menus/VBoxContainer/Squad
+var menu_buttons_has_mouse: bool
 const LOG_NOTIFICATION = preload("res://Scenes/UI/log_notification.tscn")
 
 
@@ -75,6 +76,9 @@ func _process(_delta: float) -> void:
 		compass.visible = true
 	else:
 		compass.visible = false
+	
+	if Input.is_action_just_pressed("light") and Input.is_action_pressed("aim"):
+		hide()
 	# overworld health and status effects
 	#if Globals.overworld == get_tree().current_scene:
 		#stats_anchor.global_position.y = Globals.player.camera.unproject_position(Globals.player.hud_anchor.global_position).y
@@ -184,3 +188,11 @@ func _on_faction_button_pressed() -> void:
 
 func _on_squad_tab_pressed() -> void:
 	UiController.open_interface(squad)
+
+
+func _on_menu_buttons_mouse_entered() -> void:
+	menu_buttons_has_mouse = true
+
+
+func _on_menu_buttons_mouse_exited() -> void:
+	menu_buttons_has_mouse = false

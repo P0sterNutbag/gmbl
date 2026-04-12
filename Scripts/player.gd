@@ -65,6 +65,7 @@ var gun_exit_functions: Dictionary
 var gun_enter_functions: Dictionary
 var faction = FactionManager.factions.player
 var grenade_object = preload("res://Scenes/Bullets/grenade.tscn")
+const FPS_ARM = preload("uid://b1xdclr1651mj")
 const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var camera = $CameraAnchor/Camera3D
 @onready var gun_pivot: Node3D = %GunPivot
@@ -153,12 +154,12 @@ func _ready() -> void:
 	else:
 		change_gun_state(gun_states.no_gun)
 	# set skin color
-	var arm = gun_anchor.get_child(0).get_node("ArmLAnchor/armL/Cube_001")
-	var material = arm.mesh.surface_get_material(0)
 	var style = PLAYER_STYLE
 	if PlayerStats.player_style:
 		style = PlayerStats.player_style
-	material.set("shader_parameter/color", style.skin_colors[0])
+	var new_color = style.skin_colors[0]
+	new_color.v -= 0.14
+	FPS_ARM.set("shader_parameter/color", new_color)
 	# signals
 	PlayerStats.gun_changed.connect(_on_gun_changed)
 

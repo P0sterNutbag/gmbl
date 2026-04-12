@@ -13,13 +13,10 @@ const SKY_NIGHTTIME = preload("uid://dqycx3ovg1v54")
 const SKY_DAYTIME = preload("uid://dqicgdsw2n7pd")
 
 
-func _enter_tree() -> void:
-	await get_tree().process_frame
-	_on_scene_changed()
-
 func _ready() -> void:
 	sun.rotation.y = deg_to_rad(-90)
-	SceneManager.scene_changed.connect(_on_scene_changed)
+	await get_tree().process_frame
+	shader = get_tree().current_scene.get_node_or_null("Shader")
 
 
 func _process(_delta: float) -> void:
@@ -45,7 +42,3 @@ func _process(_delta: float) -> void:
 	environment.sky.sky_material.sky_horizon_color = horizon_color
 	environment.sky.sky_material.ground_bottom_color = horizon_color
 	environment.sky.sky_material.ground_horizon_color = horizon_color
-
-
-func _on_scene_changed() -> void:
-	shader = get_tree().current_scene.get_node_or_null("Shader")

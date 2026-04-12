@@ -40,6 +40,9 @@ func _process(delta: float) -> void:
 		ally_count.text = str(PlayerStats.allies.size())
 	else:
 		commands.hide()
+	
+	if Input.is_action_just_pressed("light") and Input.is_action_pressed("aim"):
+		hide()
 	#if commands.visible:
 		#var text = "1: "
 		#if PlayerStats.allies_follow: text += "Stop"

@@ -40,17 +40,17 @@ func _process(_delta: float) -> void:
 			activate()
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey or event is InputEventMouseButton or event is InputEventJoypadButton:
-		if !skip_intro and logo_tween and logo_tween.is_running():
-			skip_intro = true
-			logo_tween.kill()
-			logo_tween = create_tween()
-			logo_tween.tween_property(logo, "modulate:a", 0, 0.5)
-			logo_tween.tween_property(color_rect, "modulate:a", 0, 0.5)
-		if !main_menu.visible and color_rect.modulate.a <= 0 and !settings_menu.visible:
-			main_menu.show()
-			activate()
+#func _input(event: InputEvent) -> void:
+	#if event is InputEventKey or event is InputEventMouseButton or event is InputEventJoypadButton:
+		#if !skip_intro and logo_tween and logo_tween.is_running():
+			#skip_intro = true
+			#logo_tween.kill()
+			#logo_tween = create_tween()
+			#logo_tween.tween_property(logo, "modulate:a", 0, 0.5)
+			#logo_tween.tween_property(color_rect, "modulate:a", 0, 0.5)
+		#if !main_menu.visible and color_rect.modulate.a <= 0 and !settings_menu.visible:
+			#main_menu.show()
+			#activate()
 
 
 func _on_menu_item_pressed() -> void:

@@ -1258,6 +1258,7 @@ theme = ExtResource("13_oq622")
 custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
 tooltip_text = "Inventory"
+mouse_filter = 1
 theme = ExtResource("33_ft4n5")
 theme_override_constants/icon_max_width = 100
 icon = ExtResource("41_02qtm")
@@ -1269,6 +1270,7 @@ script = ExtResource("36_8cvki")
 custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
 tooltip_text = "Jobs"
+mouse_filter = 1
 theme = ExtResource("33_ft4n5")
 theme_override_constants/icon_max_width = 100
 icon = ExtResource("35_ft4n5")
@@ -1280,6 +1282,7 @@ script = ExtResource("36_8cvki")
 custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
 tooltip_text = "Clans"
+mouse_filter = 1
 theme = ExtResource("33_ft4n5")
 theme_override_constants/icon_max_width = 100
 icon = ExtResource("36_m6fmc")
@@ -1292,6 +1295,7 @@ visible = false
 custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
 tooltip_text = "Factions"
+mouse_filter = 1
 theme = ExtResource("33_ft4n5")
 theme_override_constants/icon_max_width = 100
 icon = ExtResource("41_02qtm")
@@ -1303,6 +1307,7 @@ script = ExtResource("36_8cvki")
 custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
 tooltip_text = "Pause"
+mouse_filter = 1
 theme = ExtResource("33_ft4n5")
 theme_override_constants/icon_max_width = 100
 icon = ExtResource("33_ohwuk")
@@ -1332,6 +1337,8 @@ script = ExtResource("36_8cvki")
 [connection signal="pressed" from="Menus/VBoxContainer/Journal/ConfirmationMenu/PanelContainer/MarginContainer/VBoxContainer/No" to="Menus/VBoxContainer/Journal" method="_on_no_pressed"]
 [connection signal="visibility_changed" from="Menus/VBoxContainer/Factions" to="Menus/VBoxContainer/Factions" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="Menus/VBoxContainer/Squad" to="Menus/VBoxContainer/Squad" method="_on_visibility_changed"]
+[connection signal="mouse_entered" from="MenuButtons" to="." method="_on_menu_buttons_mouse_entered"]
+[connection signal="mouse_exited" from="MenuButtons" to="." method="_on_menu_buttons_mouse_exited"]
 [connection signal="pressed" from="MenuButtons/InventoryButton" to="." method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="MenuButtons/JournalButton" to="." method="_on_journal_button_pressed"]
 [connection signal="pressed" from="MenuButtons/FactionButton" to="." method="_on_faction_button_pressed"]

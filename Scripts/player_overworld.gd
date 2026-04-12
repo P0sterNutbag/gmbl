@@ -120,7 +120,9 @@ func _physics_process(delta):
 		camera_target = town_shot
 		model.hide()
 	camera.global_position = lerp(camera.global_position, camera_target.global_position, delta * 10)
-	camera.global_rotation = lerp(camera.global_rotation, camera_target.global_rotation, delta * 10)
+	camera.global_rotation.x = lerp_angle(camera.global_rotation.x, camera_target.global_rotation.x, delta * 10)
+	camera.global_rotation.y = lerp_angle(camera.global_rotation.y, camera_target.global_rotation.y, delta * 10)
+	camera.global_rotation.z = lerp_angle(camera.global_rotation.z, camera_target.global_rotation.z, delta * 10)
 	
 	# clamp position
 	position.x = clamp(position.x, 1, 511)
@@ -260,7 +262,7 @@ func _input(event):
 			camera_types.overhead:
 				camera_anchor.rotate_y(-event.relative.x * mouse_sensitivity * PlayerStats.sensitivity_modifier)
 				is_moving_camera = true
-	elif Input.is_action_just_released("shoot"):
+	elif Input.is_action_just_released("shoot") and !Globals.survival_ui.menu_buttons_has_mouse:
 		if !is_moving_camera:
 			var space_state = get_world_3d().direct_space_state
 			var cam = get_viewport().get_camera_3d()

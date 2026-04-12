@@ -11,6 +11,7 @@ var overlay: CanvasLayer
 @onready var warp: Button = $MarginContainer/VBoxContainer/VBoxContainer/Warp
 @onready var crosshair: Button = $MarginContainer/VBoxContainer/VBoxContainer/Crosshair
 @onready var aspect_ratio: Button = $MarginContainer/VBoxContainer/VBoxContainer/AspectRatio
+@onready var hide_hud: Button = $MarginContainer/VBoxContainer/VBoxContainer/HideHud
 
 
 func _ready() -> void:
@@ -22,10 +23,10 @@ func _ready() -> void:
 func set_all_settings() -> void:
 	var is_fullscreen = ConfigManager.file.get_value("settings", "fullscreen", true)
 	fullscreen.toggled.emit(is_fullscreen)
-	var aspect = ConfigManager.file.get_value("settings", "aspect", 0)
+	var aspect = ConfigManager.file.get_value("settings", "aspect", 1)
 	aspect_ratio.set_index_by_value(aspect)
-	#var res = ConfigManager.file.get_value("settings", "resolution", Vector2i(1920, 1080))
-	#resolution.set_index_by_value(res)
+	var res = ConfigManager.file.get_value("settings", "resolution", Vector2i(1920, 1080))
+	resolution.set_index_by_value(res)
 	var vol = ConfigManager.file.get_value("settings", "master_volume", 50)
 	volume.h_slider.value = vol
 	var mv = ConfigManager.file.get_value("settings", "music_volume", 50)
@@ -40,6 +41,8 @@ func set_all_settings() -> void:
 	warp.toggled.emit(warp_on)
 	var cross = ConfigManager.file.get_value("settings", "crosshair_type", 0)
 	crosshair.set_index_by_value(cross)
+	var hud = ConfigManager.file.get_value("settings", "hide_hud", false)
+	hide_hud.toggled.emit(hud)
 
 
 func _on_master_h_slider_value_changed(value: float) -> void:
@@ -109,10 +112,10 @@ func _on_fullscreen_toggled(toggled_on: bool) -> void:
 	var window = get_window()
 	if toggled_on:
 		window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN
-		#resolution.hide()
+		resolution.hide()
 	else:
 		window.mode = Window.MODE_WINDOWED
-		#resolution.show()
+		resolution.show()
 	ConfigManager.file.set_value("settings", "fullscreen", toggled_on)
 	ConfigManager.save()
 
@@ -120,7 +123,14 @@ func _on_fullscreen_toggled(toggled_on: bool) -> void:
 func _on_aspect_ratio_option_changed(value: Variant) -> void:
 	if value == 0:
 		get_tree().root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_KEEP
+		overlay.set_resolution(Vector2(720.0, 540.0))
 	elif value == 1:
 		get_tree().root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_KEEP_HEIGHT
+		overlay.set_resolution(Vector2(960.0, 540.0))
 	ConfigManager.file.set_value("settings", "aspect", value)
+	ConfigManager.save()
+
+
+func _on_hide_hud_toggled(toggled_on: bool) -> void:
+	ConfigManager.file.set_value("settings", "hide_hud", toggled_on)
 	ConfigManager.save()

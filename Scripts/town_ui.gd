@@ -50,7 +50,6 @@ func start_dialogue(dialogue_data: DialogueTree, _shop: TownOption = null) -> vo
 	dialogue.start_dialogue(dialogue_data)
 	UiController.open_interface(dialogue)
 	await get_tree().create_timer(0.05).timeout
-	portraits.show()
 
 
 func enter_shop(shop_data: Shop) -> void:
@@ -90,3 +89,7 @@ func _on_portrait_holder_visibility_changed() -> void:
 			player_model.animation_player.play("Idle")
 		else:
 			child.visible = false
+
+
+func _on_dialogue_visibility_changed() -> void:
+	portraits.visible = dialogue.visible

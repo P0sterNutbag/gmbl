@@ -31,5 +31,5 @@ func change_faction_relation(faction1: factions, faction2: factions, amount: flo
 	if create_notification and faction2 == factions.player:# and faction1 != factions.no_faction:
 		if current_relation >= 0.0 and new_relation < 0:
 			Globals.survival_ui.create_notification(faction_data[faction1].name + " are now hostile")
-		elif current_relation <= 0 and new_relation > 0:
+		elif current_relation < 0 and new_relation >= 0:
 			Globals.survival_ui.create_notification(faction_data[faction1].name + " are no longer hostile")

@@ -53,9 +53,10 @@ var gun: Equipment
 var inventory: Inventory = Inventory.new()
 var quests: Array[Quest]
 var ally_npcs: Array[Enemy]
+var save_guns: Array[Item]
 @onready var guns: Array[Item]:
 	get(): 
-		return inventory.items.filter(func(i): return i is EquipmentGun and i.gun_stats.ammo > 0)
+		return inventory.items.filter(func(i): return i is EquipmentGun)
 signal gun_changed
 signal sleep_finished
 
@@ -255,6 +256,7 @@ func save() -> Dictionary:
 		"skill_points" : skill_points,
 		"player_style" : player_style,
 		"allies" : allies,
+		"save_guns" : guns,
 	}
 
 
@@ -268,3 +270,7 @@ func _on_load():
 	if "model" in Globals.player:
 		Globals.player.model.style_data = player_style
 		Globals.player.model.set_materials()
+	if save_guns.size() > 0:
+		var gun_array = guns
+		for i in save_guns.size():
+			gun_array[i].gun_stats = save_guns[i].gun_stats

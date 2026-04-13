@@ -25,7 +25,7 @@ func save_data_to_file():
 				resource_dict[key] = value
 			elif value is Array:
 				var array = SavedArray.new()
-				array.array = value
+				array.array = value.duplicate_deep(true)
 				resource_dict[key] = array
 		node_data["path"] = node.get_scene_file_path()
 		data[str(node.get_path())] = node_data

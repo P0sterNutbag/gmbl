@@ -32,7 +32,6 @@
 [ext_resource type="Texture2D" uid="uid://bkxsoff507nnd" path="res://Art/Textures/Environment/tin roof.png" id="25_m745e"]
 [ext_resource type="PackedScene" uid="uid://brrtfg5jynxnd" path="res://Scenes/Environment/Nature/rock.tscn" id="25_uxntf"]
 [ext_resource type="Material" uid="uid://b4aard1qnyqin" path="res://Art/Materials/tin_triplanar_gray.tres" id="26_upawx"]
-[ext_resource type="PackedScene" path="res://Scenes/Environment/Nature/rock_huge.tscn" id="27_4mg1g"]
 
 [sub_resource type="Resource" id="Resource_47wr8"]
 script = ExtResource("2_2ous2")
@@ -225,8 +224,29 @@ metadata/_custom_type_script = "uid://3uypo1jqxswc"
 [sub_resource type="Resource" id="Resource_2i6m4"]
 script = ExtResource("16_wy85s")
 objects = Array[ExtResource("12_n5v1j")]([SubResource("Resource_gn7td"), SubResource("Resource_tt5wn"), SubResource("Resource_bc1a7"), SubResource("Resource_ec77s"), SubResource("Resource_rqwpg"), SubResource("Resource_dmrxp"), SubResource("Resource_84rc2"), SubResource("Resource_upa2k"), SubResource("Resource_w8m5o")])
-min_amount = 3
-max_amount = 5
+min_amount = 2
+max_amount = 4
+metadata/_custom_type_script = "uid://yjtjuxrauvya"
+
+[sub_resource type="Resource" id="Resource_ihiok"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("25_uxntf")
+spawn_chance = 5.0
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_jdufs"]
+script = ExtResource("12_n5v1j")
+object_to_spawn = ExtResource("22_4531t")
+spawn_chance = 0.1
+metadata/_custom_type_script = "uid://3uypo1jqxswc"
+
+[sub_resource type="Resource" id="Resource_df5lb"]
+script = ExtResource("16_wy85s")
+objects = Array[ExtResource("12_n5v1j")]([SubResource("Resource_ihiok"), SubResource("Resource_jdufs")])
+min_amount = 75
+max_amount = 75
+rotate_x = true
+rotate_z = true
 metadata/_custom_type_script = "uid://yjtjuxrauvya"
 
 [sub_resource type="Resource" id="Resource_g6kfl"]
@@ -244,17 +264,11 @@ script = ExtResource("12_n5v1j")
 object_to_spawn = ExtResource("20_lbujv")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
-[sub_resource type="Resource" id="Resource_df5lb"]
-script = ExtResource("12_n5v1j")
-object_to_spawn = ExtResource("27_4mg1g")
-spawn_chance = 0.5
-metadata/_custom_type_script = "uid://3uypo1jqxswc"
-
-[sub_resource type="Resource" id="Resource_hu4jt"]
+[sub_resource type="Resource" id="Resource_mept5"]
 script = ExtResource("16_wy85s")
-objects = Array[ExtResource("12_n5v1j")]([SubResource("Resource_g6kfl"), SubResource("Resource_kojol"), SubResource("Resource_0xi4s"), SubResource("Resource_df5lb"), SubResource("Resource_df5lb"), SubResource("Resource_df5lb")])
-min_amount = 25
-max_amount = 35
+objects = Array[ExtResource("12_n5v1j")]([SubResource("Resource_g6kfl"), SubResource("Resource_kojol"), SubResource("Resource_0xi4s")])
+min_amount = 50
+max_amount = 50
 metadata/_custom_type_script = "uid://yjtjuxrauvya"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ohuf"]
@@ -361,7 +375,7 @@ spawn_on_start = false
 
 [node name="EnvironmentGeneratorRuntime" type="Node3D" parent="." index="15" unique_id=454662154]
 script = ExtResource("23_2ous2")
-maps = Array[ExtResource("16_wy85s")]([SubResource("Resource_2i6m4"), SubResource("Resource_hu4jt")])
+maps = Array[ExtResource("16_wy85s")]([SubResource("Resource_2i6m4"), SubResource("Resource_df5lb"), SubResource("Resource_mept5")])
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="." index="17" unique_id=1429587977]
 mesh = SubResource("ArrayMesh_xfuh7")

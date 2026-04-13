@@ -20,11 +20,11 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if DayNightCycle.is_night:
+	if DayNightCycle.normalized_time <= -0.2:
 		if environment.sky.sky_material != SKY_NIGHTTIME:
 			environment.sky.sky_material = SKY_NIGHTTIME
 			var tween = create_tween()
-			tween.tween_property(self, "horizon_color", Color(), 5)
+			tween.tween_property(self, "horizon_color", Color(), 1)
 	elif environment.sky.sky_material != SKY_DAYTIME:
 		environment.sky.sky_material = SKY_DAYTIME
 	if DayNightCycle.normalized_time > 0:

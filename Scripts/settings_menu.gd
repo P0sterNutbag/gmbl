@@ -23,8 +23,8 @@ func _ready() -> void:
 func set_all_settings() -> void:
 	var is_fullscreen = ConfigManager.file.get_value("settings", "fullscreen", true)
 	fullscreen.toggled.emit(is_fullscreen)
-	var aspect = ConfigManager.file.get_value("settings", "aspect", 1)
-	aspect_ratio.set_index_by_value(aspect)
+	#var aspect = ConfigManager.file.get_value("settings", "aspect", 1)
+	#aspect_ratio.set_index_by_value(aspect)
 	var res = ConfigManager.file.get_value("settings", "resolution", Vector2i(1920, 1080))
 	resolution.set_index_by_value(res)
 	var vol = ConfigManager.file.get_value("settings", "master_volume", 50)

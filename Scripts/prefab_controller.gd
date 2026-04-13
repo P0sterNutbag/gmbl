@@ -5,7 +5,7 @@ extends Node3D
 @export var spawn_loot: bool
 @export var spawn_traps: bool
 @export_category("Positioning")
-@export var spin := false : set = rotate_objects
+#@export var spin := false : set = rotate_objects
 @onready var npc_spawns: Node3D = $NpcSpawns
 @onready var loot_spawns: Node3D = $LootSpawns
 @onready var trap_spawns: Node3D = $TrapSpawns

@@ -1316,6 +1316,24 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("36_8cvki")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=96228101]
+visible = false
+custom_minimum_size = Vector2(240, 1080)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=479717576]
+visible = false
+custom_minimum_size = Vector2(240, 1080)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -240.0
+offset_bottom = 1080.0
+grow_horizontal = 0
+color = Color(0, 0, 0, 1)
+
 [connection signal="pressed" from="TransferInventory/Inventory/Control/Button" to="." method="close_transfer_inventory"]
 [connection signal="visibility_changed" from="PauseMenu" to="PauseMenu" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="DeathMenu" to="DeathMenu" method="_on_visibility_changed"]

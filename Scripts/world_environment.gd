@@ -16,17 +16,16 @@ const SKY_DAYTIME = preload("uid://dqicgdsw2n7pd")
 
 func _ready() -> void:
 	sun.rotation.y = deg_to_rad(-90)
-	await get_tree().process_frame
-	#shader = get_tree().current_scene.get_node_or_null("Shader")
+	if environment.sky.sky_material == SKY_NIGHTTIME:
+		horizon_color = Color()
 
 
 func _process(_delta: float) -> void:
 	if DayNightCycle.normalized_time <= -0.2:
 		if environment.sky.sky_material != SKY_NIGHTTIME:
 			environment.sky.sky_material = SKY_NIGHTTIME
-			horizon_color = Color()
-			#var tween = create_tween()
-			#tween.tween_property(self, "horizon_color", Color(), 1)
+			var tween = create_tween()
+			tween.tween_property(self, "horizon_color", Color(), 1)
 	elif environment.sky.sky_material != SKY_DAYTIME:
 		environment.sky.sky_material = SKY_DAYTIME
 	if DayNightCycle.normalized_time > 0:

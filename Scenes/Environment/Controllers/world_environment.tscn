@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://o72anv73qvg8" path="res://Scripts/world_environment.gd" id="1_4ikoo"]
 [ext_resource type="Material" uid="uid://dqicgdsw2n7pd" path="res://Resources/Environment/sky_daytime.tres" id="1_svptk"]
+[ext_resource type="Texture2D" uid="uid://cf2fun6etl228" path="res://Resources/Environment/sky_red.tres" id="3_3i8hd"]
 
 [sub_resource type="Sky" id="Sky_svptk"]
 sky_material = ExtResource("1_svptk")
@@ -11,13 +12,6 @@ background_mode = 2
 sky = SubResource("Sky_svptk")
 ambient_light_source = 2
 ambient_light_color = Color(0.556153, 0.556153, 0.556153, 1)
-
-[sub_resource type="Gradient" id="Gradient_4ikoo"]
-offsets = PackedFloat32Array(0, 0.4, 0.5, 0.6066351, 1)
-colors = PackedColorArray(0.05, 0, 0, 1, 0.05, 0, 0, 1, 0.22, 0.1848, 0.176, 1, 0.90588236, 0.34509805, 0.32941177, 1, 0.90588236, 0.34509805, 0.32941177, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_5l0ki"]
-gradient = SubResource("Gradient_4ikoo")
 
 [sub_resource type="Gradient" id="Gradient_psook"]
 offsets = PackedFloat32Array(0, 0.4, 0.5, 0.6, 1)
@@ -39,7 +33,7 @@ point_count = 4
 [node name="WorldEnvironment" type="WorldEnvironment" unique_id=167554450]
 environment = SubResource("Environment_jgqc4")
 script = ExtResource("1_4ikoo")
-sky_gradient = SubResource("GradientTexture1D_5l0ki")
+sky_gradient = ExtResource("3_3i8hd")
 horizon_gradient = SubResource("GradientTexture1D_dbj7e")
 sun_energy_curve = SubResource("Curve_4ikoo")
 sky_energy_curve = SubResource("Curve_5l0ki")

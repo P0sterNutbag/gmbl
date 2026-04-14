@@ -71,7 +71,7 @@
 [ext_resource type="Resource" uid="uid://05plefgfm4x0" path="res://Resources/Items/Utility/backpack.tres" id="71_qw0vg"]
 [ext_resource type="Resource" uid="uid://c6q45hg5w6m55" path="res://Resources/Items/Utility/knapsack.tres" id="72_xn5xo"]
 [ext_resource type="Resource" uid="uid://b85pvp1hkmjb5" path="res://Resources/Items/Utility/fanny_pack.tres" id="73_uqon5"]
-[ext_resource type="Resource" path="res://Resources/Items/Utility/lockpick.tres" id="74_mqnr7"]
+[ext_resource type="Resource" uid="uid://dk4s1lhf08o1g" path="res://Resources/Items/Utility/lockpick.tres" id="74_mqnr7"]
 [ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="75_1helu"]
 [ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="76_wx0o4"]
 [ext_resource type="Script" uid="uid://g1k0736rje3q" path="res://Scripts/quest_random.gd" id="77_rndhr"]
@@ -104,6 +104,7 @@
 [ext_resource type="Texture2D" uid="uid://br2vhvcrcq8re" path="res://Art/Textures/Character/player face4.png" id="104_r7ceo"]
 [ext_resource type="Resource" uid="uid://6c7s1e0y4ekq" path="res://Resources/Items/Junk/cigarettes.tres" id="106_0dmsd"]
 [ext_resource type="Resource" uid="uid://du57k1x7scpfk" path="res://Resources/Items/Junk/metal_scraps.tres" id="107_qayaa"]
+[ext_resource type="PackedScene" uid="uid://b0cqkj1fgouo2" path="res://Scenes/Overworld/NPCs/npc.tscn" id="108_ihkda"]
 [ext_resource type="Resource" uid="uid://cw12h3yyn5tgy" path="res://Resources/Items/Junk/playing cards.tres" id="108_p7x0p"]
 [ext_resource type="Resource" uid="uid://c7nqsvb4lasw1" path="res://Resources/Items/Armor/kevlar_vest.tres" id="109_bko87"]
 [ext_resource type="PackedScene" uid="uid://ddobx7rgw7u28" path="res://Scenes/Overworld/Environment/rock_wall.tscn" id="112_fmyil"]
@@ -1282,6 +1283,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 179.40659, -38.410816, 177.60
 
 [node name="RockWall13" parent="Barrier" unique_id=806023737 instance=ExtResource("112_fmyil")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 123.441986, -19.812275, 213.5184)
+
+[node name="Npc" parent="." unique_id=907079178 node_paths=PackedStringArray("destination") instance=ExtResource("108_ihkda")]
+transform = Transform3D(-0.19988094, 0, -0.9798202, 0, 1, 0, 0.9798202, 0, -0.19988094, 228.54317, 7.1813245, 276.63)
+destination = NodePath("../RockCanyon")
 
 [connection signal="timeout" from="NpcController/Timer" to="NpcController" method="_on_timer_timeout"]
 [connection signal="timeout" from="NpcController/Timer" to="NpcController/Timer" method="_on_timeout"]

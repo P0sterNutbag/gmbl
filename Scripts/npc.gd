@@ -15,7 +15,7 @@ enum goals {guard, travel, follow, none}
 var state = states.idle
 var goal = goals.guard
 var walk_speed := 1.5
-var run_speed := 3.5
+var run_speed := 3.0
 var time_to_detect_max := 0.5
 var camp_chance := 0.1
 var supress_change := 0.25
@@ -324,7 +324,7 @@ func state_search(_delta) -> void:
 		change_state(states.approach)
 		return
 	# animate
-	anim_player.play("WalkPoint")
+	anim_player.play("Run")
 
 
 func state_strafe(_delta) -> void:

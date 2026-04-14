@@ -106,8 +106,8 @@ func _ready() -> void:
 		faction = PlayerStats.faction
 	for i in gun_anchor.get_children():
 		i.visible = false
-	hitbox.hp = PlayerStats.hp
 	hitbox.hp_bar = Globals.survival_ui.player_hp_bar
+	hitbox.hp = PlayerStats.hp
 	sway_noise.seed = randi()
 	sway_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	sway_noise.frequency = 0.5

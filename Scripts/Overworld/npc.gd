@@ -16,6 +16,7 @@ var chase_player: bool = true
 var can_move: bool
 var original_position: Vector3
 var original_rotation: Vector3
+var spawn_vector: Vector3
 var target: Node3D
 var destination_path: NodePath
 @export var faction: FactionManager.factions = FactionManager.factions.no_faction
@@ -208,6 +209,7 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 				BattleManager.start_battle(destination, location)
 				state = states.battle
 				location.can_transition = false
+				spawn_vector = (destination.global_position - global_position).normalized().rotated(Vector3.UP, -global_rotation.y)
 			else:
 				destination.location_data.change_population(location.location_data.population)
 				print(destination.title + " population is now " + str(destination.location_data.population))

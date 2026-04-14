@@ -6,6 +6,7 @@ extends Node3D
 var spawn_points: Array[Node3D]
 var used_spawns: Array[int]
 @onready var border_parent: Node3D = $"../Border"
+@onready var player_spawn: Node3D = $"../PlayerAnchor"
 const NPC = preload("uid://cb05x24r4r8im")
 
 
@@ -64,7 +65,10 @@ func _ready() -> void:
 	if battle:
 		for attacker in battle.attacker_locations:
 			for i in attacker.location_data.population:
-				spawn_enemy(attacker.location_data.faction)
+				var spawn_pos = Vector3(128.0, 0.0, 128.0) - attacker.get_parent().spawn_vector * 90.0
+				spawn_pos.x = clamp(spawn_pos.x, player_spawn.spawn_clamp.x, player_spawn.spawn_clamp.z)
+				spawn_pos.z = clamp(spawn_pos.z, player_spawn.spawn_clamp.y, player_spawn.spawn_clamp.w)
+				spawn_enemy_position(attacker.location_data.faction, spawn_pos, 10.0, Vector3(128.0, 0.0, 128.0) + attacker.get_parent().spawn_vector * 90.0)
 	
 	# spawn player allies
 	PlayerStats.ally_npcs.clear()
@@ -118,7 +122,8 @@ func _ready() -> void:
 			inst.change_state(inst.states.walk)
 	
 	# make enemies fight if theres a battle
-	if Globals.overworld and BattleManager.get_battle(Globals.overworld.current_encounter):
+	if battle:
+		await get_tree().process_frame
 		for enemy in get_tree().get_nodes_in_group("enemies"):
 			var all_enemies = get_tree().get_nodes_in_group("enemies")
 			all_enemies = all_enemies.filter(func(a): return FactionManager.get_faction_relation(enemy.faction, a.faction) < 0.0)
@@ -156,3 +161,18 @@ func spawn_enemy(faction: FactionManager.factions):
 		inst.goal = inst.goals.travel
 		inst.destination = dest
 		inst.change_state(inst.states.walk)
+
+
+func spawn_enemy_position(faction: FactionManager.factions, spawn_position: Vector3, spawn_variance: float, destination: Vector3 = Vector3.ZERO) -> CharacterBody3D:
+	var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
+	var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
+	get_tree().current_scene.add_child.call_deferred(inst)
+	var spawn_pos = spawn_position + Vector3(randf_range(-spawn_variance, spawn_variance), 1, randf_range(-spawn_variance, spawn_variance))
+	spawn_pos.y = Globals.get_heightmap_position(spawn_pos)
+	inst.set_deferred("global_position", spawn_pos)
+	inst.faction = faction
+	if destination != Vector3.ZERO:
+		inst.goal = inst.goals.travel
+		inst.destination = destination
+		inst.change_state(inst.states.walk)
+	return inst

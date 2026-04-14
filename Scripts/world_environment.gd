@@ -7,24 +7,26 @@ extends WorldEnvironment
 var sky_energy: float = 1.0
 var sky_color: Color
 var horizon_color: Color
-var shader: Node3D
-@onready var sun: DirectionalLight3D = $DirectionalLight3D
+#var shader: Node3D
 const SKY_NIGHTTIME = preload("uid://dqycx3ovg1v54")
 const SKY_DAYTIME = preload("uid://dqicgdsw2n7pd")
+@onready var sun: DirectionalLight3D = $DirectionalLight3D
+@onready var shader: MeshInstance3D = $"../Shader"
 
 
 func _ready() -> void:
 	sun.rotation.y = deg_to_rad(-90)
 	await get_tree().process_frame
-	shader = get_tree().current_scene.get_node_or_null("Shader")
+	#shader = get_tree().current_scene.get_node_or_null("Shader")
 
 
 func _process(_delta: float) -> void:
 	if DayNightCycle.normalized_time <= -0.2:
 		if environment.sky.sky_material != SKY_NIGHTTIME:
 			environment.sky.sky_material = SKY_NIGHTTIME
-			var tween = create_tween()
-			tween.tween_property(self, "horizon_color", Color(), 1)
+			horizon_color = Color()
+			#var tween = create_tween()
+			#tween.tween_property(self, "horizon_color", Color(), 1)
 	elif environment.sky.sky_material != SKY_DAYTIME:
 		environment.sky.sky_material = SKY_DAYTIME
 	if DayNightCycle.normalized_time > 0:

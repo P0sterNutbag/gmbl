@@ -50,7 +50,6 @@ func _ready() -> void:
 		inst.bounty = quest
 		inst.faction = location_data.faction
 		inst.get_node("EnemyModel").style_data = quest.target_style
-		inst.get_node("EnemyModel").get_style_from_faction = false
 		enemy_amount -= 1
 		quest.target_node = inst
 	

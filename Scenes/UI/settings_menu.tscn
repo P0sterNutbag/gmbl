@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="4_oadur"]
 [ext_resource type="PackedScene" uid="uid://bdxd0o243hn4c" path="res://Scenes/UI/slider_button.tscn" id="5_n6o6n"]
 [ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="5_sv08j"]
+[ext_resource type="Theme" uid="uid://dcnijc3hjurqk" path="res://Art/Themes/text_mediun_outline.tres" id="5_w0jc6"]
 [ext_resource type="PackedScene" uid="uid://cg16jkn12mu6s" path="res://Scenes/UI/toggle_button.tscn" id="6_cs2gm"]
 [ext_resource type="PackedScene" uid="uid://dnl56ggtju325" path="res://Scenes/UI/option_button.tscn" id="7_sv08j"]
 [ext_resource type="Script" uid="uid://ba4324tncpb5w" path="res://Scripts/string_resource_pair.gd" id="8_w0jc6"]
@@ -122,6 +123,11 @@ size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("4_oadur")
 
+[node name="Visuals" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=615879523]
+layout_mode = 2
+theme = ExtResource("5_w0jc6")
+text = "Visuals"
+
 [node name="Fullscreen" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1458729078 instance=ExtResource("6_cs2gm")]
 layout_mode = 2
 text = "Fullscreen"
@@ -137,6 +143,15 @@ layout_mode = 2
 text = "Aspect Ratio"
 options = Array[ExtResource("8_w0jc6")]([SubResource("Resource_c2lxf"), SubResource("Resource_kxrh3")])
 
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1965517351]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="Audio" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=353577829]
+layout_mode = 2
+theme = ExtResource("5_w0jc6")
+text = "Audio"
+
 [node name="Volume" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1424550850 instance=ExtResource("5_n6o6n")]
 layout_mode = 2
 text = "Master Volume"
@@ -149,6 +164,15 @@ text = "Music Volume"
 layout_mode = 2
 text = "SFX Volume"
 
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=827382259]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="Controls" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=209124952]
+layout_mode = 2
+theme = ExtResource("5_w0jc6")
+text = "Controls"
+
 [node name="AimSensitivity" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=116586170 instance=ExtResource("5_n6o6n")]
 layout_mode = 2
 text = "Aim Sensitivity"
@@ -159,6 +183,15 @@ value = 51.0
 
 [node name="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/AimSensitivity/HBoxContainer" parent_id_path=PackedInt32Array(116586170, 1665222154) index="1" unique_id=199963667]
 text = "50"
+
+[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1852071322]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="UI" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1676217884]
+layout_mode = 2
+theme = ExtResource("5_w0jc6")
+text = "UI"
 
 [node name="CRT" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1587634285 instance=ExtResource("6_cs2gm")]
 layout_mode = 2
@@ -176,6 +209,10 @@ text = "Hide HUD"
 layout_mode = 2
 text = "Crosshair"
 options = Array[ExtResource("8_w0jc6")]([SubResource("Resource_my5nr"), SubResource("Resource_gqlue"), SubResource("Resource_7vbwh")])
+
+[node name="Control4" type="Control" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=13365937]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
 
 [node name="Back" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=560111112 instance=ExtResource("5_sv08j")]
 layout_mode = 2

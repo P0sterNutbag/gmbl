@@ -1,4 +1,4 @@
-extends UiButton
+extends Button
 
 @onready var color_rect: ColorRect = $HBoxContainer/PanelContainer/MarginContainer/ColorRect
 

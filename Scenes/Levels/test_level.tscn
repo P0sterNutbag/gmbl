@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_hyk2w"]
 [ext_resource type="Texture2D" uid="uid://bncgxdpnk6re7" path="res://Art/Textures/Environment/sand.png" id="2_k8g1k"]
 [ext_resource type="PackedScene" uid="uid://cueu704ip2q8t" path="res://Scenes/Environment/Prefabs With Spawning/shack_no_windows.tscn" id="3_x4x4f"]
+[ext_resource type="PackedScene" uid="uid://cc458wgoeu6t4" path="res://Scenes/UI/survival_ui.tscn" id="5_4v231"]
+[ext_resource type="PackedScene" uid="uid://y6civk4251ei" path="res://Scenes/UI/fps_ui.tscn" id="6_j1jhc"]
 [ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/NPCs/npc.tscn" id="9_lqheo"]
 [ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="10_akmmg"]
 [ext_resource type="Script" uid="uid://3e36ru1e7k78" path="res://Scripts/spawn_chance_resource.gd" id="11_avjiw"]
@@ -21,6 +23,7 @@
 [ext_resource type="Resource" uid="uid://glkl1ugkvv6m" path="res://Resources/Items/Consumable/water.tres" id="22_etqpt"]
 [ext_resource type="Resource" uid="uid://dvooyj5cqcclc" path="res://Resources/Items/Utility/sleeping_bag.tres" id="23_wlfjt"]
 [ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="24_srwfw"]
+[ext_resource type="PackedScene" uid="uid://c055smn111au7" path="res://Scenes/Player/player.tscn" id="25_akmmg"]
 [ext_resource type="PackedScene" uid="uid://dyumojcinahde" path="res://Scenes/Effects/Shaders/outline_fog_shader.tscn" id="25_avjiw"]
 [ext_resource type="PackedScene" uid="uid://p1limlnykapp" path="res://Scenes/Environment/Controllers/noise_controller.tscn" id="26_4v231"]
 [ext_resource type="PackedScene" uid="uid://m7oajasjyoq2" path="res://Scenes/Environment/Props/Physics/glass_bottle.tscn" id="27_4v231"]
@@ -31,9 +34,9 @@ faction = null
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_sufl4"]
-vertices = PackedVector3Array(1, 0.5, 49.5, 48.5, 0.5, 49.5, 48.75, 0.5, 47.25, 48.75, 0.5, 1, 1, 0.5, 1, 52.75, 0.5, 46.75, 53.5, 0.5, 48, 53.75, 0.5, 48, 54.5, 0.5, 46.75, 58.5, 0.5, 1, 49.25, 0.5, 46.75, 58, 0.5, 46.75, 58.5, 0.5, 47.25, 58.75, 0.5, 49, 99, 0.5, 48.75, 99, 0.5, 1, 52.75, 0.5, 49.25, 51, 0.5, 54.5, 56.25, 0.5, 54.5, 54.5, 0.5, 49.25, 56.25, 0.5, 49.25, 51, 0.5, 49.25, 49.75, 3.5, 48.25, 49.75, 3.5, 55.75, 57.25, 3.5, 55.75, 57.25, 3.5, 48.25, 58.75, 0.5, 54.75, 99, 0.5, 55, 1, 0.5, 54.25, 48.5, 0.5, 54.25, 51.25, 0.5, 99, 51.25, 0.5, 57, 49.25, 0.5, 57, 48.5, 0.5, 56.25, 1, 0.5, 99, 58.75, 0.5, 56.25, 58, 0.5, 57, 56, 0.5, 99, 99, 0.5, 99, 56, 0.5, 57)
-polygons = [PackedInt32Array(2, 1, 3), PackedInt32Array(3, 1, 0), PackedInt32Array(3, 0, 4), PackedInt32Array(6, 5, 7), PackedInt32Array(7, 5, 8), PackedInt32Array(8, 5, 3), PackedInt32Array(8, 3, 9), PackedInt32Array(5, 10, 3), PackedInt32Array(9, 12, 11), PackedInt32Array(10, 2, 3), PackedInt32Array(9, 11, 8), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 9), PackedInt32Array(14, 9, 15), PackedInt32Array(7, 19, 6), PackedInt32Array(6, 19, 16), PackedInt32Array(16, 19, 18), PackedInt32Array(16, 18, 17), PackedInt32Array(19, 20, 18), PackedInt32Array(17, 21, 16), PackedInt32Array(25, 24, 22), PackedInt32Array(22, 24, 23), PackedInt32Array(13, 14, 26), PackedInt32Array(26, 14, 27), PackedInt32Array(0, 1, 28), PackedInt32Array(28, 1, 29), PackedInt32Array(32, 31, 30), PackedInt32Array(32, 30, 33), PackedInt32Array(33, 30, 34), PackedInt32Array(33, 34, 28), PackedInt32Array(28, 29, 33), PackedInt32Array(35, 26, 27), PackedInt32Array(35, 27, 36), PackedInt32Array(36, 27, 38), PackedInt32Array(36, 38, 37), PackedInt32Array(37, 39, 36), PackedInt32Array(31, 39, 30), PackedInt32Array(30, 39, 37)]
-agent_radius = 1.0
+vertices = PackedVector3Array(48.25, 0.5, 47.5, 48.75, 0.5, 46.75, 48.75, 0.5, 1.25, 1.25, 0.5, 1.25, 1.25, 0.5, 49.5, 48.25, 0.5, 49.5, 52.75, 0.5, 46.5, 53.5, 0.5, 47.5, 54.5, 0.5, 46.5, 58.5, 0.5, 1.25, 58.5, 0.5, 46.75, 59, 0.5, 47.5, 59, 0.5, 49, 98.75, 0.5, 48.75, 98.75, 0.5, 1.25, 50, 3.5, 48.5, 50, 3.5, 55.5, 57, 3.5, 55.5, 57, 3.5, 48.5, 54.5, 0.5, 49.5, 53.5, 0.5, 48.5, 52.75, 0.5, 49.5, 51.25, 0.5, 54.25, 56, 0.5, 54.25, 56, 0.5, 49.5, 51.25, 0.5, 49.5, 59, 0.5, 54.75, 98.75, 0.5, 55, 1.25, 0.5, 54.25, 48.25, 0.5, 54.25, 51.25, 0.5, 98.75, 51.25, 0.5, 57.25, 49.25, 0.5, 57.25, 48.5, 0.5, 56.75, 1.25, 0.5, 98.75, 59, 0.5, 56.25, 58.5, 0.5, 57, 56, 0.5, 57.25, 56, 0.5, 98.75, 98.75, 0.5, 98.75)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4), PackedInt32Array(0, 5, 4), PackedInt32Array(7, 6, 8), PackedInt32Array(8, 6, 2), PackedInt32Array(8, 2, 9), PackedInt32Array(9, 10, 8), PackedInt32Array(6, 1, 2), PackedInt32Array(13, 12, 11), PackedInt32Array(11, 10, 13), PackedInt32Array(13, 10, 9), PackedInt32Array(13, 9, 14), PackedInt32Array(18, 17, 15), PackedInt32Array(15, 17, 16), PackedInt32Array(20, 19, 21), PackedInt32Array(21, 19, 23), PackedInt32Array(21, 23, 22), PackedInt32Array(19, 24, 23), PackedInt32Array(22, 25, 21), PackedInt32Array(12, 13, 26), PackedInt32Array(26, 13, 27), PackedInt32Array(4, 5, 28), PackedInt32Array(28, 5, 29), PackedInt32Array(32, 31, 30), PackedInt32Array(33, 32, 30), PackedInt32Array(33, 30, 29), PackedInt32Array(29, 30, 28), PackedInt32Array(28, 30, 34), PackedInt32Array(35, 26, 27), PackedInt32Array(36, 35, 27), PackedInt32Array(36, 27, 37), PackedInt32Array(37, 27, 38), PackedInt32Array(38, 27, 39), PackedInt32Array(31, 37, 30), PackedInt32Array(30, 37, 38)]
+agent_radius = 1.25
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_hyk2w"]
 size = Vector2(100, 100)
@@ -151,13 +154,17 @@ potential_slots = Array[ExtResource("11_avjiw")]([SubResource("Resource_3jrad"),
 title = "Enemy"
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
-[node name="TestLevel" type="Node3D" unique_id=116624291]
+[node name="Encounter" type="Node3D" unique_id=116624291]
 script = ExtResource("1_7rivk")
 location_data = SubResource("Resource_mvu5i")
 
 [node name="WorldEnvironment" parent="." unique_id=1872145596 instance=ExtResource("1_npfmg")]
 
 [node name="Shader" parent="." unique_id=125064709 instance=ExtResource("25_avjiw")]
+
+[node name="CanvasLayer" parent="." unique_id=691466196 instance=ExtResource("5_4v231")]
+
+[node name="FpsUI" parent="." unique_id=1392304047 instance=ExtResource("6_j1jhc")]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=2090576721]
 navigation_mesh = SubResource("NavigationMesh_sufl4")
@@ -177,16 +184,12 @@ surface_material_override/0 = SubResource("StandardMaterial3D_mvu5i")
 shape = SubResource("ConcavePolygonShape3D_xxcax")
 
 [node name="Enemy" parent="." unique_id=1717248692 instance=ExtResource("9_lqheo")]
-transform = Transform3D(-0.15815806, 0, 0.9874138, 0, 1, 0, -0.9874138, 0, -0.15815806, 60.29496, 0.6331854, 41.84827)
-wall_min_slide_angle = 3.1415927
+transform = Transform3D(0.99448353, 0, -0.10489304, 0, 1, 0, 0.10489304, 0, 0.99448353, 54.4679, 0.16615748, 50.227924)
 inventory = SubResource("Resource_lqheo")
-faction = 1
 
 [node name="Enemy2" parent="." unique_id=981408261 instance=ExtResource("9_lqheo")]
-transform = Transform3D(-0.15815806, 0, 0.9874138, 0, 1, 0, -0.9874138, 0, -0.15815806, 61.29739, 0.6331854, 44.079823)
-wall_min_slide_angle = 3.1415927
+transform = Transform3D(0.99448353, 0, -0.10489304, 0, 1, 0, 0.10489304, 0, 0.99448353, 52.05212, 0.16615748, 50.613525)
 inventory = SubResource("Resource_akmmg")
-faction = 1
 
 [node name="Enemy4" parent="." unique_id=1962049348 instance=ExtResource("9_lqheo")]
 transform = Transform3D(0.4999849, 0, -0.86603415, 0, 1, 0, 0.86603415, 0, 0.4999849, 45.90235, 0.93068695, 42.80537)
@@ -204,7 +207,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000435829, 0.0134783, 0.001
 [node name="GlassBottle" parent="." unique_id=753377947 instance=ExtResource("27_4v231")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 51.641483, 0.19999988, 45.93937)
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1994604264]
-transform = Transform3D(-0.9978817, -1.9724156e-09, -0.06505485, -0.04441627, 0.7306511, 0.6813049, 0.047532395, 0.6827511, -0.7291033, 52.10212, 8.14655, 38.140812)
+[node name="Player" parent="." unique_id=1261776682 instance=ExtResource("25_akmmg")]
+transform = Transform3D(-0.9994339, 0, 0.033643484, 0, 1, 0, -0.033643484, 0, -0.9994339, 53.16473, 1.0978489, 36.21621)
 
 [editable path="NavigationRegion3D/ShackNoWindows"]

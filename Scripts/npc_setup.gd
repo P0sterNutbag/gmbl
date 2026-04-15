@@ -2,7 +2,6 @@
 extends Node3D
 
 @export var style_data: NpcStyle
-var get_style_from_faction: bool = true
 var current_style := NpcStyle.new()
 @onready var cube: MeshInstance3D = $PersonAnimated/Armature/Skeleton3D/Cube_001
 @onready var cube2: MeshInstance3D = $PersonAnimated/Armature/Skeleton3D/Cube_002
@@ -16,10 +15,10 @@ const BALD_HAIR = preload("uid://cfmrww0wj003t")
 func _ready() -> void:
 	var parent = get_parent()
 	await get_tree().process_frame
-	if "faction" in parent and parent != Globals.player and get_style_from_faction:
-		style_data = FactionManager.faction_data[parent.faction].style
-	elif "npc_data" in parent and parent.npc_data and parent.npc_data.style != null:
+	if "npc_data" in parent and parent.npc_data and parent.npc_data.style != null:
 		style_data = parent.npc_data.style
+	elif "faction" in parent and parent != Globals.player:
+		style_data = FactionManager.faction_data[parent.faction].style
 	set_materials(style_data)
 
 

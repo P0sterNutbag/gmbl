@@ -201,9 +201,6 @@ func _process(delta: float) -> void:
 			move_marker.global_position = ally_destination
 	else:
 		move_marker.hide()
-	
-	if Input.is_action_just_pressed("command_allies"):
-		_on_death()
 
 
 func change_gun_state(new_state):

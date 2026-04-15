@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://l3jxv2m7v02q"]
+
+[ext_resource type="PackedScene" uid="uid://bthbc3nw2jgrn" path="res://Scenes/Environment/Props/fence.tscn" id="1_3k21l"]
+[ext_resource type="Material" uid="uid://cuiwmfj20a7tt" path="res://Art/Materials/metal.tres" id="2_dmqyd"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pip1p"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 2.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pip1p"]
+height = 2.5
+radius = 0.1
+
+[node name="FenceLongEnd" type="Node3D" unique_id=2031636508]
+
+[node name="End" type="Node3D" parent="." unique_id=1718507400 groups=["align_normal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 0)
+
+[node name="Fence2" parent="." unique_id=56914019 instance=ExtResource("1_3k21l")]
+
+[node name="Fence" parent="Fence2/NextPole" parent_id_path=PackedInt32Array(56914019, 1077912177) index="0" unique_id=2139382426 instance=ExtResource("1_3k21l")]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Fence" parent="Fence2/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(2139382426, 1077912177) index="0" unique_id=2106792037 instance=ExtResource("1_3k21l")]
+transform = Transform3D(1.0000004, 0, 0, 0, 1.0000007, 0, 0, 0, 1.0000007, 0, 0, 0)
+
+[node name="Fence" parent="Fence2/NextPole/Fence/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(2106792037, 1077912177) index="0" unique_id=2114023668 instance=ExtResource("1_3k21l")]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.9999996, 0, 0, 0, 0.9999997, 0, 0, 0)
+
+[node name="Fence" parent="Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(2114023668, 1077912177) index="0" unique_id=2022508004 instance=ExtResource("1_3k21l")]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.99999976, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Fence" type="Node3D" parent="Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(2022508004, 1077912177) index="0" unique_id=1619412382 groups=["align_normal"]]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.99999976, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole/Fence" unique_id=696040091]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+material_override = ExtResource("2_dmqyd")
+mesh = SubResource("CylinderMesh_pip1p")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole/Fence/MeshInstance3D" unique_id=227371199]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole/Fence/MeshInstance3D/StaticBody3D" unique_id=702656593]
+shape = SubResource("CylinderShape3D_pip1p")
+
+[editable path="Fence2"]
+[editable path="Fence2/NextPole/Fence"]
+[editable path="Fence2/NextPole/Fence/NextPole/Fence"]
+[editable path="Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence"]
+[editable path="Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole/Fence"]

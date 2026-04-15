@@ -177,7 +177,7 @@ func pay_fee(amount: int, fail_index: int) -> void:
 		var npc = Globals.overworld.current_encounter.get_parent()
 		npc.chase_player = false
 		npc.navigation_agent.set_target_position(npc.destination.global_position)
-		Globals.survival_ui.create_notification("You lost $" + str(amount))
+		Globals.survival_ui.create_notification("-$" + str(amount))
 		exit_to_game()
 	else:
 		advance_dialogue(fail_index)
@@ -206,6 +206,8 @@ func recruit_npc(amount:int) -> void:
 	#if PlayerStats.inventory.money - amount >= 0 and location_data.population > 1:
 	PlayerStats.inventory.money -= amount
 	#location_data.population -= 1
+	var npc_data = NpcData.new()
+	npc_data.style = FactionManager.faction_data[Globals.overworld.current_encounter.location_data.faction].style.generate_style()
 	PlayerStats.allies.append(NpcData.new())
 	Globals.survival_ui.create_notification("-$" + str(amount))
 	Globals.survival_ui.create_notification("Ally added to party")
@@ -214,3 +216,11 @@ func recruit_npc(amount:int) -> void:
 		#exit_to_game()
 	#else:
 		#advance_dialogue(fail_index)
+
+
+func move_player(dest: Vector3) -> void:
+	PlayerStats.inventory.money -= 2000
+	Globals.survival_ui.create_notification("-$2000")
+	Globals.player.position = dest
+	exit_to_game()
+	

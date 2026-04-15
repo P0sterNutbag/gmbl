@@ -71,7 +71,7 @@
 [ext_resource type="Resource" uid="uid://05plefgfm4x0" path="res://Resources/Items/Utility/backpack.tres" id="71_qw0vg"]
 [ext_resource type="Resource" uid="uid://c6q45hg5w6m55" path="res://Resources/Items/Utility/knapsack.tres" id="72_xn5xo"]
 [ext_resource type="Resource" uid="uid://b85pvp1hkmjb5" path="res://Resources/Items/Utility/fanny_pack.tres" id="73_uqon5"]
-[ext_resource type="Resource" path="res://Resources/Items/Utility/lockpick.tres" id="74_mqnr7"]
+[ext_resource type="Resource" uid="uid://dk4s1lhf08o1g" path="res://Resources/Items/Utility/lockpick.tres" id="74_mqnr7"]
 [ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="75_1helu"]
 [ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="76_wx0o4"]
 [ext_resource type="Script" uid="uid://g1k0736rje3q" path="res://Scripts/quest_random.gd" id="77_rndhr"]
@@ -178,7 +178,7 @@ metadata/_custom_type_script = "uid://de6rxup5nru4w"
 
 [sub_resource type="Resource" id="Resource_fgsb2"]
 script = ExtResource("32_x6xbf")
-lines = Array[String](["But if you absolutely must pass through, it'll cost ya $1,000."])
+lines = Array[String](["But if you absolutely must pass through, it'll cost ya $2,000."])
 speaker = 1
 metadata/_custom_type_script = "uid://de6rxup5nru4w"
 
@@ -186,7 +186,7 @@ metadata/_custom_type_script = "uid://de6rxup5nru4w"
 script = ExtResource("34_ns4ld")
 value = "money"
 comparison = 1
-value2 = 999
+value2 = 1999
 failue_message = "You don't have enough money"
 text = "Pass Through"
 destination = 3
@@ -209,11 +209,11 @@ script = ExtResource("35_ea8mk")
 options = Array[ExtResource("33_llayv")]([SubResource("Resource_g61r0"), SubResource("Resource_63r5x"), SubResource("Resource_k8xtr")])
 metadata/_custom_type_script = "uid://cnu4xeujmgk51"
 
-[sub_resource type="Resource" id="Resource_e41e3"]
-script = ExtResource("32_x6xbf")
-lines = Array[String](["You win the demo!"])
-speaker = 1
-metadata/_custom_type_script = "uid://de6rxup5nru4w"
+[sub_resource type="Resource" id="Resource_itdxy"]
+script = ExtResource("37_vt5qi")
+method = "move_player"
+arguments = [Vector3(166.447, 0.95, 326.241)]
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
 [sub_resource type="Resource" id="Resource_3le6t"]
 script = ExtResource("36_i5ci2")
@@ -232,7 +232,7 @@ metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
 [sub_resource type="Resource" id="Resource_n8qb3"]
 script = ExtResource("39_knt17")
-bubbles = Array[ExtResource("32_x6xbf")]([SubResource("Resource_b4834"), SubResource("Resource_fgsb2"), SubResource("Resource_x02ax"), SubResource("Resource_e41e3"), SubResource("Resource_3le6t"), SubResource("Resource_ns634"), SubResource("Resource_6b86h")])
+bubbles = Array[ExtResource("32_x6xbf")]([SubResource("Resource_b4834"), SubResource("Resource_fgsb2"), SubResource("Resource_x02ax"), SubResource("Resource_itdxy"), SubResource("Resource_3le6t"), SubResource("Resource_ns634"), SubResource("Resource_6b86h")])
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g8jxq"]
@@ -716,7 +716,7 @@ metadata/_custom_type_script = "uid://bicpdyf13vj1j"
 [sub_resource type="Resource" id="Resource_1wc3g"]
 script = ExtResource("101_70er4")
 dialogue = SubResource("Resource_v7uwj")
-random_quests = Array[ExtResource("77_rndhr")]([SubResource("Resource_x5gxg"), SubResource("Resource_x5gxg"), SubResource("Resource_a1t0b")])
+random_quests = Array[ExtResource("77_rndhr")]([SubResource("Resource_x5gxg"), SubResource("Resource_a1t0b")])
 min_quests = 2
 max_quests = 3
 title = "Bounty Board"
@@ -917,17 +917,112 @@ amount_max = 8
 item = ExtResource("106_0dmsd")
 metadata/_custom_type_script = "uid://dc15s83haevrb"
 
+[sub_resource type="Resource" id="Resource_wfy45"]
+script = ExtResource("98_vd787")
+amount_min = 4
+amount_max = 8
+item = ExtResource("108_p7x0p")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
 [sub_resource type="Resource" id="Resource_afbx0"]
 script = ExtResource("100_b0ox4")
-potential_items = Array[ExtResource("98_vd787")]([SubResource("Resource_vrfhn"), SubResource("Resource_ljwlg")])
+potential_items = Array[ExtResource("98_vd787")]([SubResource("Resource_vrfhn"), SubResource("Resource_ljwlg"), SubResource("Resource_wfy45")])
 reward_multiplier = 2.0
 metadata/_custom_type_script = "uid://bicpdyf13vj1j"
 
-[sub_resource type="Resource" id="Resource_3uqk4"]
-script = ExtResource("97_edygj")
-rewards = null
-target_factions = Array[int]([4])
-metadata/_custom_type_script = "uid://ds2br0dh5ir38"
+[sub_resource type="Resource" id="Resource_7kx4p"]
+script = ExtResource("98_vd787")
+amount_min = 1
+amount_max = 1
+item = ExtResource("81_cwcog")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
+[sub_resource type="Resource" id="Resource_bdbrb"]
+script = ExtResource("98_vd787")
+amount_min = 1
+amount_max = 1
+item = ExtResource("82_d0dy5")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
+[sub_resource type="Resource" id="Resource_j1qck"]
+script = ExtResource("98_vd787")
+amount_min = 1
+amount_max = 1
+item = ExtResource("83_v5chr")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
+[sub_resource type="Resource" id="Resource_l5l63"]
+script = ExtResource("98_vd787")
+amount_min = 1
+amount_max = 1
+item = ExtResource("84_s1inl")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
+[sub_resource type="Resource" id="Resource_c3so5"]
+script = ExtResource("98_vd787")
+amount_min = 1
+amount_max = 1
+item = ExtResource("85_nyw60")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
+[sub_resource type="Resource" id="Resource_llgcl"]
+script = ExtResource("98_vd787")
+amount_min = 1
+amount_max = 1
+item = ExtResource("86_wpmmu")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
+[sub_resource type="Resource" id="Resource_ddb2y"]
+script = ExtResource("98_vd787")
+amount_min = 1
+amount_max = 1
+item = ExtResource("87_wyiyj")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
+[sub_resource type="Resource" id="Resource_4iccq"]
+script = ExtResource("100_b0ox4")
+potential_items = Array[ExtResource("98_vd787")]([SubResource("Resource_7kx4p"), SubResource("Resource_bdbrb"), SubResource("Resource_j1qck"), SubResource("Resource_l5l63"), SubResource("Resource_c3so5"), SubResource("Resource_llgcl"), SubResource("Resource_ddb2y")])
+metadata/_custom_type_script = "uid://bicpdyf13vj1j"
+
+[sub_resource type="Resource" id="Resource_537xa"]
+script = ExtResource("98_vd787")
+amount_min = 4
+amount_max = 8
+item = ExtResource("88_lifx4")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
+[sub_resource type="Resource" id="Resource_ddb1d"]
+script = ExtResource("98_vd787")
+amount_min = 4
+amount_max = 8
+item = ExtResource("89_hpla5")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
+[sub_resource type="Resource" id="Resource_7kgcg"]
+script = ExtResource("98_vd787")
+amount_min = 20
+amount_max = 40
+item = ExtResource("90_ktdy1")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
+[sub_resource type="Resource" id="Resource_t5qc1"]
+script = ExtResource("98_vd787")
+amount_min = 4
+amount_max = 8
+item = ExtResource("91_lvvmo")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
+[sub_resource type="Resource" id="Resource_pu2xk"]
+script = ExtResource("98_vd787")
+amount_min = 2
+amount_max = 4
+item = ExtResource("92_bs5ia")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
+[sub_resource type="Resource" id="Resource_t3bu4"]
+script = ExtResource("100_b0ox4")
+potential_items = Array[ExtResource("98_vd787")]([SubResource("Resource_537xa"), SubResource("Resource_ddb1d"), SubResource("Resource_7kgcg"), SubResource("Resource_t5qc1"), SubResource("Resource_pu2xk")])
+metadata/_custom_type_script = "uid://bicpdyf13vj1j"
 
 [sub_resource type="Resource" id="Resource_ht31n"]
 script = ExtResource("78_xl32f")
@@ -942,7 +1037,7 @@ price_modifiers = {
 "Weapons": 0.5
 }
 dialogue = SubResource("Resource_pc4vu")
-random_quests = Array[ExtResource("77_rndhr")]([SubResource("Resource_afbx0"), SubResource("Resource_3uqk4")])
+random_quests = Array[ExtResource("77_rndhr")]([SubResource("Resource_afbx0"), SubResource("Resource_4iccq"), SubResource("Resource_t3bu4")])
 min_quests = 1
 max_quests = 3
 faction = 2

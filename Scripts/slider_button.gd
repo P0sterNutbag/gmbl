@@ -1,4 +1,4 @@
-extends UiButton
+extends Button
 class_name SliderButton
 
 @onready var label: Label = $HBoxContainer/Label

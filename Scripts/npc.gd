@@ -36,6 +36,7 @@ var open_fire: bool = true
 var damage_position: Vector3
 var damage_direction: Vector3
 var last_seen_position: Vector3
+var push_velocity: Vector3
 var destination: Vector3
 var state_functions: Dictionary
 var target: Node3D
@@ -103,22 +104,34 @@ func _physics_process(delta: float) -> void:
 	# state machine
 	if state_functions.has(state):
 		state_functions[state].call(delta)
-	# Add gravity and move
+	# Add gravity, push, and move
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	velocity += push_velocity
 	move_and_slide()
+	#if velocity != Vector3.ZERO:
+	velocity -= push_velocity
+	push_velocity = Vector3.ZERO
+	# push other npcs
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider is CharacterBody3D:
+			var _push_velocity = (collider.global_position - global_position).normalized() * walk_speed
+			_push_velocity.y = 0
+			collider.push_velocity = _push_velocity
 
 
 func state_idle(delta) -> void:
 	if is_new_state:
-		on_alert = false
 		velocity = Vector3.ZERO
+		on_alert = false
 		if goal == goals.travel and destination != Vector3.ZERO and global_position.distance_to(destination) > 1:
 			change_state(states.walk)
 			return
 		is_new_state = false
 	# switch to walk
-	if goal == goals.follow and follow_target and global_position.distance_to(follow_target.global_position) > 3:
+	if goal == goals.follow and follow_target and global_position.distance_to(follow_target.global_position) > navigation_agent.target_desired_distance:
 		change_state(states.walk)
 		return
 	# switch to investigate
@@ -135,12 +148,13 @@ func state_idle(delta) -> void:
 func state_walk(delta) -> void:
 	if is_new_state:
 		if goal == goals.travel:
+			navigation_agent.target_desired_distance = 1.0
 			navigation_agent.set_target_position(destination)
-		navigation_agent.path_desired_distance = 3.0
 		is_new_state = false
 	# follow target
 	if goal == goals.follow:
 		#if global_position.distance_to(follow_target.global_position) > 3:
+		navigation_agent.target_desired_distance = 5.0
 		navigation_agent.set_target_position(follow_target.global_position)
 	# follow path
 	var spd = walk_speed
@@ -181,8 +195,6 @@ func state_investigate(delta) -> void:
 			time_to_detect += 0.2 * PlayerStats.skills.stealth
 		velocity = Vector3.ZERO
 		is_new_state = false
-	# stop moving
-	velocity = Vector3.ZERO
 	# detect target
 	if target:
 		look_at_position(target.global_position)
@@ -314,8 +326,8 @@ func state_search(_delta) -> void:
 		if last_seen_position == Vector3.ZERO:
 			change_state(states.investigate)
 			return
+		navigation_agent.target_desired_distance = 3.0
 		navigation_agent.set_target_position(last_seen_position)
-		navigation_agent.path_desired_distance = 1
 		is_new_state = false
 	# go to last seen position
 	follow_path(run_speed)
@@ -332,8 +344,8 @@ func state_strafe(_delta) -> void:
 	if is_new_state:
 		var new_pos = global_position
 		new_pos = global_position + Vector3(randf_range(-4, 4), 0, randf_range(-4, 4))
+		navigation_agent.target_desired_distance = 0.5
 		navigation_agent.set_target_position(new_pos)
-		navigation_agent.path_desired_distance = 0.5
 		is_new_state = false
 	# run to new position
 	follow_path(run_speed)
@@ -351,7 +363,6 @@ func state_strafe(_delta) -> void:
 
 func state_find_cover(_delta) -> void:
 	if is_new_state:
-		navigation_agent.path_desired_distance = 0.5
 		var potential_cover = get_tree().get_nodes_in_group("cover")
 		potential_cover = potential_cover.filter(func(a): 
 			return global_position.distance_to(a.global_position) < 15)
@@ -368,6 +379,7 @@ func state_find_cover(_delta) -> void:
 			return
 		potential_cover.sort_custom(func(a, b): return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position))
 		var cover_pos = potential_cover[0].global_position
+		navigation_agent.target_desired_distance = 0.5
 		navigation_agent.set_target_position(cover_pos)
 		#if !navigation_agent.is_target_reachable():
 			#change_state(states.approach)#states.strafe)

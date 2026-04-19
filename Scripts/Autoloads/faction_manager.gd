@@ -33,3 +33,9 @@ func change_faction_relation(faction1: factions, faction2: factions, amount: flo
 			Globals.survival_ui.create_notification(faction_data[faction1].name + " are now hostile")
 		elif current_relation < 0 and new_relation >= 0:
 			Globals.survival_ui.create_notification(faction_data[faction1].name + " are no longer hostile")
+
+
+func save() -> Dictionary:
+	return {
+		"faction_relations" : faction_relations,
+	}

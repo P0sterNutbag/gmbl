@@ -145,8 +145,8 @@ func transfer_item(menu_item: Control):
 	if Input.is_action_pressed("shift") or item is ItemMoney:
 		var slot = source_inventory.find_item_slot(item)
 		amount_to_move = slot.amount
-	if item is EquipmentGun and item.equipped:
-		item.equip()
+	if item is Equipment and item.equipped:
+		item.unequip()
 	if target_inventory.add_item(item, amount_to_move):
 		source_inventory.remove_item(item, amount_to_move)
 		set_items()

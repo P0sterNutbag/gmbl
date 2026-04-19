@@ -7,15 +7,21 @@ var player_spawn_y: float
 var player_spawn_z: float
 var player_died: bool
 var current_encounter: Node3D
+var poi_populations = [4, 6, 8, 10]
+var poi_factions = [0, 4, 4, 4]
 @onready var npc_controller: Node3D = $NpcController
 @onready var player_start: Node3D = $PlayerStart
 @onready var player: CharacterBody3D = $Player
+@onready var rock_canyon: Location = $RockCanyon
+@onready var sand_dunes: Location = $SandDunes
+@onready var generic_location: Location = $GenericLocation
+@onready var generic_location_2: Location = $GenericLocation2
+@onready var pois = [rock_canyon, sand_dunes, generic_location, generic_location_2]
 
 
 func _enter_tree() -> void:
 	await get_tree().process_frame
 	process_mode = Node.PROCESS_MODE_INHERIT
-	#var player = get_node("Player")
 	if player_died:
 		player.transform = player_start.transform
 		player.camera_anchor.rotation = Vector3.ZERO
@@ -31,14 +37,21 @@ func _enter_tree() -> void:
 		player.rotate_y(deg_to_rad(180))
 		player.rotation.x = 0
 		player.rotation.y = 0
-	#await get_tree().create_timer(0.1).timeout
-	#SaveController.save_data_to_file()
 
 
 func _ready() -> void:
 	Globals.overworld = self
 	Globals.player.spring_arm.spring_length = 500
 	SaveController.load.connect(_on_load)
+	for poi in pois:
+		var data = poi.location_data
+		var index = randi() % poi_populations.size()
+		data.population = poi_populations[index]
+		data.max_population = poi_populations[index]
+		poi_populations.remove_at(index)
+		index = randi() % poi_factions.size()
+		data.faction = poi_factions[index]
+		poi_factions.remove_at(index)
 
 
 func save() -> Dictionary:

@@ -42,7 +42,6 @@
 [ext_resource type="Resource" uid="uid://nm0e00c2fx4" path="res://Resources/NpcStyles/npc_styles.tres" id="38_gisfr"]
 [ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="39_knt17"]
 [ext_resource type="Script" uid="uid://b232v7uxee5yt" path="res://Scripts/level_transition.gd" id="40_n1by1"]
-[ext_resource type="Script" uid="uid://01ir68or13hi" path="res://Scripts/location_data_random.gd" id="41_ueitb"]
 [ext_resource type="PackedScene" uid="uid://lchk3aqiapch" path="res://Scenes/Levels/desert1.tscn" id="42_to8lj"]
 [ext_resource type="PackedScene" uid="uid://dgowbmqkc0fer" path="res://Scenes/Levels/desert2.tscn" id="43_grcd8"]
 [ext_resource type="PackedScene" uid="uid://camjoalnob06k" path="res://Scenes/Overworld/Locations/home.tscn" id="48_yhbnl"]
@@ -71,7 +70,7 @@
 [ext_resource type="Resource" uid="uid://05plefgfm4x0" path="res://Resources/Items/Utility/backpack.tres" id="71_qw0vg"]
 [ext_resource type="Resource" uid="uid://c6q45hg5w6m55" path="res://Resources/Items/Utility/knapsack.tres" id="72_xn5xo"]
 [ext_resource type="Resource" uid="uid://b85pvp1hkmjb5" path="res://Resources/Items/Utility/fanny_pack.tres" id="73_uqon5"]
-[ext_resource type="Resource" uid="uid://dk4s1lhf08o1g" path="res://Resources/Items/Utility/lockpick.tres" id="74_mqnr7"]
+[ext_resource type="Resource" path="res://Resources/Items/Utility/lockpick.tres" id="74_mqnr7"]
 [ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="75_1helu"]
 [ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="76_wx0o4"]
 [ext_resource type="Script" uid="uid://g1k0736rje3q" path="res://Scripts/quest_random.gd" id="77_rndhr"]
@@ -149,12 +148,9 @@ _surfaces = [{
 }]
 
 [sub_resource type="Resource" id="Resource_la17w"]
-script = ExtResource("41_ueitb")
-possible_factions = Array[int]([4])
-min_starting_population = 4
-max_starting_population = 4
-faction = null
-metadata/_custom_type_script = "uid://01ir68or13hi"
+script = ExtResource("30_ic0e0")
+faction = 4
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="Resource" id="Resource_pqqn2"]
 script = ExtResource("30_ic0e0")
@@ -166,8 +162,8 @@ metadata/_custom_type_script = "uid://csmjlx06mdps3"
 [sub_resource type="Resource" id="Resource_mdiyu"]
 script = ExtResource("30_ic0e0")
 faction = 4
-population = 10
-max_population = 10
+population = 12
+max_population = 12
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="Resource" id="Resource_b4834"]
@@ -241,25 +237,15 @@ size = Vector3(17.467407, 5.022339, 1)
 [sub_resource type="SphereShape3D" id="SphereShape3D_g8jxq"]
 radius = 3.3432899
 
-[sub_resource type="Resource" id="Resource_un0bj"]
-script = ExtResource("41_ueitb")
-possible_factions = [4, 4]
-min_starting_population = 2
-max_starting_population = 6
-faction = 4
-population = 10
-max_population = 10
-metadata/_custom_type_script = "uid://01ir68or13hi"
+[sub_resource type="Resource" id="Resource_pc0y4"]
+script = ExtResource("30_ic0e0")
+faction = null
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
-[sub_resource type="Resource" id="Resource_or1fq"]
-script = ExtResource("41_ueitb")
-possible_factions = [4, 4]
-min_starting_population = 2
-max_starting_population = 6
-faction = 4
-population = 10
-max_population = 10
-metadata/_custom_type_script = "uid://01ir68or13hi"
+[sub_resource type="Resource" id="Resource_ihkda"]
+script = ExtResource("30_ic0e0")
+faction = null
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="Resource" id="Resource_6lldf"]
 script = ExtResource("32_x6xbf")
@@ -722,7 +708,7 @@ max_quests = 3
 title = "Bounty Board"
 metadata/_custom_type_script = "uid://r3prw1636vsp"
 
-[sub_resource type="Resource" id="Resource_ihkda"]
+[sub_resource type="Resource" id="Resource_e1cwp"]
 resource_local_to_scene = true
 script = ExtResource("50_usl76")
 title = "Dirt Town"
@@ -1245,13 +1231,13 @@ shape = SubResource("SphereShape3D_g8jxq")
 [node name="GenericLocation" parent="." unique_id=1658362797 groups=["align_position"] instance=ExtResource("29_4aenw")]
 transform = Transform3D(0.97079605, 0, -0.23990622, 0, 1, 0, 0.23990622, 0, 0.97079605, 216.31413, 0.21332242, 308.5401)
 title = "Wasteland NW"
-location_data = SubResource("Resource_un0bj")
+location_data = SubResource("Resource_pc0y4")
 encounter_scene = ExtResource("42_to8lj")
 
 [node name="GenericLocation2" parent="." unique_id=980996458 groups=["align_position"] instance=ExtResource("29_4aenw")]
 transform = Transform3D(-0.67338675, 0, -0.7392904, 0, 1, 0, 0.7392904, 0, -0.67338675, 179.49812, 0.73027325, 256.68927)
 title = "Wasteland E"
-location_data = SubResource("Resource_or1fq")
+location_data = SubResource("Resource_ihkda")
 encounter_scene = ExtResource("43_grcd8")
 
 [node name="Home" parent="." unique_id=496753311 groups=["align_position"] instance=ExtResource("48_yhbnl")]
@@ -1266,7 +1252,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6875143, 0)
 [node name="DirtTown" parent="." unique_id=1920182238 groups=["align_position", "persist"] instance=ExtResource("49_e1ghh")]
 transform = Transform3D(0.88991046, 0, 0.4561352, 0, 1, 0, -0.4561352, 0, 0.88991046, 209.57349, 0.3309311, 272.06995)
 title = "Dirt Town"
-town = SubResource("Resource_ihkda")
+town = SubResource("Resource_e1cwp")
 
 [node name="Scrapyard" parent="." unique_id=1638857313 groups=["align_position", "location", "persist"] instance=ExtResource("102_etm0w")]
 transform = Transform3D(-0.99983275, 0, 0.018290073, 0, 1, 0, -0.018290073, 0, -0.99983275, 245.88898, 0.37450963, 299.15076)

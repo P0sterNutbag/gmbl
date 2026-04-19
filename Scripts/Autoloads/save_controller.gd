@@ -27,6 +27,10 @@ func save_data_to_file():
 				var array = SavedArray.new()
 				array.array = value.duplicate_deep(true)
 				resource_dict[key] = array
+			elif value is Dictionary:
+				var dict = SavedDictionary.new()
+				dict.dictionary = value.duplicate_deep(true)
+				resource_dict[key] = dict
 		node_data["path"] = node.get_scene_file_path()
 		data[str(node.get_path())] = node_data
 		if resource_dict.size() > 0:
@@ -79,6 +83,10 @@ func load_data_from_file():
 					var array = node.get(key)
 					array.clear()
 					array.append_array(value.array)
+				elif value is SavedDictionary:
+					var dict = node.get(key)
+					dict.clear()
+					dict.merge(value.dictionary, true)
 				else:
 					node.set(key, value)
 	load.emit()

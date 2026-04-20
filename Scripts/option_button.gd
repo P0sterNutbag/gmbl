@@ -1,7 +1,7 @@
 extends Button
 
 @export var options: Array[StringValuePair]
-var index: int
+@export var index: int
 @onready var option_label: Label = %Label
 signal option_changed(value)
 

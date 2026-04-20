@@ -4,6 +4,7 @@ var data = {}
 var save_dir = "user://"
 var save_path = "user://savegame.save"
 var resource_path = "user://resources.res"
+var has_loaded: bool
 signal save
 signal load
 
@@ -90,6 +91,7 @@ func load_data_from_file():
 				else:
 					node.set(key, value)
 	load.emit()
+	has_loaded = true
 
 
 func delete_save_data() -> void:

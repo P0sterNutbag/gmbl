@@ -16,12 +16,13 @@ func _ready():
 	set_process(false)
 
 
-func start_scene_transition(scene, remove_current: bool = false, load_save_data: bool = false) -> void:
+func start_scene_transition(scene, remove_current: bool = false, load_save_data: bool = false, save_data_on_enter: bool = false) -> void:
 	get_tree().current_scene.set_deferred("process_mode", PROCESS_MODE_DISABLED)
 	scene_transition.transition_in()
 	next_scene = scene
 	remove_from_tree = remove_current
 	load_on_enter = load_save_data
+	save_on_enter = save_data_on_enter
 
 
 func start_encounter_transition(scene) -> void:
@@ -49,7 +50,7 @@ func change_scene() -> void:
 				new_game_start.emit()
 		elif next_scene is Node3D:
 			get_tree().change_scene_to_node(next_scene)
-			get_tree().current_scene = next_scene
+			#get_tree().current_scene = next_scene
 	scene_transition.transition_out()
 	UiController.reset_list()
 	get_tree().paused = false

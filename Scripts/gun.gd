@@ -62,8 +62,7 @@ func _process(delta: float) -> void:
 	# spread
 	time_shooting -= delta
 	time_shooting = clamp(time_shooting, 0, 1)
-	spread = lerp(1, 2, spread_curve.sample(time_shooting))
-
+	spread = spread_curve.sample(time_shooting)
 
 
 func aim_fire_point(pos: Vector3) -> void:
@@ -112,7 +111,7 @@ func create_bullet(shot_owner: Node3D, is_ads: bool, movement_speed: Vector3) ->
 	inst.global_transform = fire_point.global_transform
 	inst.scale = Vector3.ONE
 	inst.visible = false
-	var variance = Vector2(bullet_stats.h_angle_variance_hip, bullet_stats.v_angle_variance_hip)
+	var variance = Vector2(bullet_stats.h_angle_variance_hip + spread, bullet_stats.v_angle_variance_hip + spread)
 	if is_ads:
 		variance = Vector2(bullet_stats.h_angle_variance_ads, bullet_stats.v_angle_variance_ads)
 	if movement_speed:

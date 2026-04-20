@@ -193,11 +193,6 @@ func go_to_sleep(time_to_skip: float = 1.5):
 	sleep_finished.emit()
 
 
-func save_game() -> void:
-	await get_tree().create_timer(0.1).timeout
-	SaveController.save_data_to_file()
-
-
 func kill_all_npcs() -> void:
 	BattleManager.delete_all_battles()
 	for npc in get_tree().get_nodes_in_group("overworld npcs"):

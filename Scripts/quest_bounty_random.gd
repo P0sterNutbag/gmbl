@@ -38,9 +38,11 @@ func generate_quest() -> Quest:
 	quest.description = "Location: " + quest.location + ""
 	quest.reward = ItemSlot.new()
 	quest.reward.item = ItemMoney.new()#rewards[randi_range(0, rewards.size()-1)]
-	if quest.reward.item is ItemMoney:
-		var location_data = Globals.get_tree().get_nodes_in_group("location").filter(func(i): return i.title == quest.location)[0].location_data
-		quest.reward.amount = location_data.population * 25
+	var amounts = [80, 85, 90, 95, 100, 105, 110, 115, 120]
+	quest.reward.amount = amounts[randi() % amounts.size()]
+	#if quest.reward.item is ItemMoney:
+		#var location_data = Globals.get_tree().get_nodes_in_group("location").filter(func(i): return i.title == quest.location)[0].location_data
+		#quest.reward.amount = location_data.population * 25
 	quest.target = preload("res://Scenes/NPCs/npc.tscn")
 	var style = FactionManager.faction_data[location.location_data.faction].style.generate_style()
 	quest.target_style = style

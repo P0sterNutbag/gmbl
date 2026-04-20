@@ -3,7 +3,7 @@ class_name Enemy
 
 @export var npc_data: NpcData
 @export var title: String = "Enemy"
-@export var strafe_change := 0.5
+@export var strafe_change := 0.2
 @export var items_to_drop: Array[PackedScene]
 @export var potential_gun_items: Array[SpawnChanceResource]
 @export var inventory: Inventory
@@ -100,6 +100,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	target = detection.get_visible_target()
+	if target:
+		last_seen_position = target.global_position
 	$Label3D.text = str(state)
 	# state machine
 	if state_functions.has(state):
@@ -247,6 +249,8 @@ func state_aim(_delta) -> void:
 		is_new_state = false
 	if target:
 		look_at_position(target.global_position)
+	else:
+		look_at_position(last_seen_position)
 
 
 func state_shoot(delta) -> void:
@@ -268,7 +272,6 @@ func state_shoot(delta) -> void:
 		is_new_state = false
 	# look at target
 	if target and gun:
-		last_seen_position = target.global_position
 		look_at_position(last_seen_position)
 		if gun.fire_point != null:
 			gun.fire_point.look_at(detection.target_pos)
@@ -350,10 +353,10 @@ func state_strafe(_delta) -> void:
 	# run to new position
 	follow_path(run_speed)
 	# stop strafing
-	if velocity.length() < 0.1:
-		look_at_position(last_seen_position)
-		change_state(states.approach)
-		return
+	#if velocity.length() < 0.1:
+		#look_at_position(last_seen_position)
+		#change_state(states.approach)
+		#return
 	# animate
 	if velocity == Vector3.ZERO:
 		anim_player.play("Idle")
@@ -375,7 +378,7 @@ func state_find_cover(_delta) -> void:
 				return !detection.can_see_target(_target))
 		detection.position = Vector3(0, 1, 0)
 		if potential_cover.size() == 0:
-			change_state(states.approach)#states.strafe)
+			change_state(states.strafe)
 			return
 		potential_cover.sort_custom(func(a, b): return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position))
 		var cover_pos = potential_cover[0].global_position
@@ -539,8 +542,7 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 	elif state == states.search:
 		change_state(states.investigate)
 	elif state == states.strafe:
-		look_at_position(last_seen_position)
-		change_state(states.shoot)
+		change_state(states.aim)
 	elif state == states.walk:
 		if goal == goals.travel:
 			change_state(states.idle)
@@ -580,20 +582,20 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			change_state(states.approach)
 		else:
 			change_state(states.find_cover)
-	elif anim_name == "Fire":
-		#emit_shoot()
-		gun.gun_stats.ammo -= 1
-		if gun.gun_stats.ammo <= 0:
-			gun.gun_stats.ammo = gun.max_ammo
-			change_state(states.reload)
-			return
-		if state == states.shoot and randf_range(0, 1) <= strafe_change:
-			#change_state(states.strafe)
-			change_state(states.find_cover)
-		else:
-			shoot_timer.start()
-			await shoot_timer.timeout
-			anim_player.play("Fire")
+	#elif anim_name == "Fire":
+		##emit_shoot()
+		#gun.gun_stats.ammo -= 1
+		#if gun.gun_stats.ammo <= 0:
+			#gun.gun_stats.ammo = gun.max_ammo
+			#change_state(states.reload)
+			#return
+		#if state == states.shoot and randf_range(0, 1) <= strafe_change:
+			##change_state(states.strafe)
+			#change_state(states.find_cover)
+		#else:
+			#shoot_timer.start()
+			#await shoot_timer.timeout
+			#anim_player.play("Fire")
 	elif anim_name == "Reload":
 		if target:
 			look_at_position(target.global_position)
@@ -601,10 +603,16 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 
 func _on_shoot_timer_timeout() -> void:
-	pass
-	#if anim_player.current_animation == "Fire":
-		#anim_player.advance(anim_player.current_animation.length())
-
+	gun.gun_stats.ammo -= 1
+	if gun.gun_stats.ammo <= 0:
+		gun.gun_stats.ammo = gun.max_ammo
+		change_state(states.reload)
+		return
+	if state == states.shoot and randf_range(0, 1) <= strafe_change:
+		change_state(states.find_cover)
+	else:
+		anim_player.play("Fire")
+		anim_player.seek(0.0)
 
 func _on_aim_timer_timeout() -> void:
 	change_state(states.shoot)

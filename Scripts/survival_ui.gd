@@ -35,6 +35,7 @@ func _ready() -> void:
 	SaveController.save.connect(_on_game_saved)
 	UiController.ui_opened.connect(_on_ui_opened)
 	UiController.ui_closed.connect(_on_ui_closed)
+	tree_exited.connect(_on_tree_exited)
 
 
 func _process(_delta: float) -> void:
@@ -199,3 +200,8 @@ func _on_menu_buttons_mouse_entered() -> void:
 
 func _on_menu_buttons_mouse_exited() -> void:
 	menu_buttons_has_mouse = false
+
+
+func _on_tree_exited() -> void:
+	for child in log_box.get_children():
+		child.queue_free()

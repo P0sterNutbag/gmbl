@@ -9,14 +9,13 @@ func _process(_delta: float) -> void:
 	if has_player:
 		if Input.is_action_just_pressed("select"):
 			leave_encounter()
-			SceneManager.start_scene_transition(Globals.overworld)
 
 
 func leave_encounter() -> void:
 	var player_vector: Vector3 = (get_parent().global_position - Globals.player.global_position).normalized().rotated(Vector3.UP, -rotation.y)
 	Globals.overworld.player_spawn_vector = player_vector
 	get_tree().current_scene.update_location_data()
-	SceneManager.start_scene_transition(Globals.overworld)
+	SceneManager.start_scene_transition(Globals.overworld, false, false, true)
 
 
 func _on_body_entered(_body: Node3D) -> void:

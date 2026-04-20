@@ -66,12 +66,12 @@ func _process(delta: float) -> void:
 
 func _on_menu_button_pressed() -> void:
 	SaveController.delete_save_data()
-	SceneManager.save_on_enter = true
+	#SceneManager.save_on_enter = true
 	PlayerStats.player_style = player_model.style_data.duplicate()
 	if Globals.overworld:
-		SceneManager.start_scene_transition(Globals.overworld)
+		SceneManager.start_scene_transition(Globals.overworld, false, false, true)
 	else:
-		SceneManager.start_scene_transition("res://Scenes/Overworld/overworld_demo.tscn")
+		SceneManager.start_scene_transition("res://Scenes/Overworld/overworld_demo.tscn", false, false, true)
 
 
 func _on_face_button_option_changed(value: Variant) -> void:

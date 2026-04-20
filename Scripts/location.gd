@@ -55,7 +55,7 @@ func _ready() -> void:
 	if shop:
 		shop.faction = location_data.faction
 		shop.max_money = shop.inventory.money
-	if town != null or shop != null:
+	if !SaveController.has_loaded and (town != null or shop != null):
 		stock_shops()
 
 

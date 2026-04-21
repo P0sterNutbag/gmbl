@@ -13,14 +13,12 @@
 script = ExtResource("4_hufxr")
 amount = 8
 damage = 0.5
-h_angle_variance_hip = 3.0
-v_angle_variance_hip = 3.0
-h_angle_variance_ads = 3.0
-v_angle_variance_ads = 3.0
+angle_variance = 2.5
 is_hitscan = false
+variance_on_ads = true
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
-[sub_resource type="Resource" id="Resource_7x6n1"]
+[sub_resource type="Resource" id="Resource_qdpfn"]
 resource_local_to_scene = true
 script = ExtResource("5_58v0y")
 ammo = 5
@@ -34,7 +32,7 @@ values = Dictionary[String, Variant]({
 add = true
 metadata/_custom_type_script = "uid://4c6own63hs8c"
 
-[sub_resource type="Resource" id="Resource_hk1h3"]
+[sub_resource type="Resource" id="Resource_7x6n1"]
 resource_local_to_scene = true
 resource_name = "shotgun_ammo"
 script = ExtResource("7_qdpfn")
@@ -52,17 +50,13 @@ _data = [Vector2(0, 0), 0.0, -0.0394176, 0, 0, Vector2(0.25373134, 1), 0.0, 0.0,
 point_count = 3
 
 [node name="Gun" unique_id=60030670 instance=ExtResource("1_mej0h")]
-uses_input = null
 bullet_stats = SubResource("Resource_x1ctg")
-gun_stats = SubResource("Resource_7x6n1")
-ammo_item = SubResource("Resource_hk1h3")
+gun_stats = SubResource("Resource_qdpfn")
+ammo_item = SubResource("Resource_7x6n1")
 fire_type = 2
 shoot_cooldown = 0.5
-zoom_amount = null
 engagement_range = 45.0
-kickback_magnitude = null
 spread_curve = SubResource("Curve_x1ctg")
-cast_shadow = null
 
 [node name="GunAnchor" parent="." index="0" unique_id=1970548578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.18473458, -0.190805)

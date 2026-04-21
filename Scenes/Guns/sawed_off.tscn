@@ -13,15 +13,13 @@
 script = ExtResource("4_vcp2d")
 amount = 8
 damage = 0.5
-h_angle_variance_hip = 3.0
-v_angle_variance_hip = 3.0
-h_angle_variance_ads = 3.0
-v_angle_variance_ads = 3.0
+angle_variance = 3.0
 noise_radius = 50.0
 is_hitscan = false
+variance_on_ads = true
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
-[sub_resource type="Resource" id="Resource_h4ysa"]
+[sub_resource type="Resource" id="Resource_vcp2d"]
 resource_local_to_scene = true
 script = ExtResource("5_j0a3k")
 ammo = 2
@@ -35,7 +33,7 @@ values = Dictionary[String, Variant]({
 add = true
 metadata/_custom_type_script = "uid://4c6own63hs8c"
 
-[sub_resource type="Resource" id="Resource_s8ua8"]
+[sub_resource type="Resource" id="Resource_jk3wv"]
 resource_local_to_scene = true
 resource_name = "shotgun_ammo"
 script = ExtResource("7_jk3wv")
@@ -50,8 +48,8 @@ metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
 [node name="SawedOff" unique_id=1516962552 instance=ExtResource("1_ow28f")]
 bullet_stats = SubResource("Resource_ow28f")
-gun_stats = SubResource("Resource_h4ysa")
-ammo_item = SubResource("Resource_s8ua8")
+gun_stats = SubResource("Resource_vcp2d")
+ammo_item = SubResource("Resource_jk3wv")
 fire_type = 0
 shoot_cooldown = 0.5
 engagement_range = 30.0

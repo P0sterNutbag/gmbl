@@ -24,7 +24,16 @@ var ammo: int:
 var max_ammo: int
 var time_since_shot: float
 var time_shooting: float
-var spread := 1.0
+var bullet_spread: float:
+	get():
+		bullet_spread = bullet_stats.angle_variance + spread_over_time
+		if uses_input:
+			var magnitude = clamp(Globals.player.velocity.length(), 1, 2)
+			bullet_spread *= magnitude
+			var stats = PlayerStats.skills
+			bullet_spread = clamp(bullet_spread - (stats.guns * 0.1), 0.0, 360.0)
+		return bullet_spread
+var spread_over_time := 0.0
 var can_shoot: bool = true
 var has_released: bool = true
 var sway_vector: Vector3
@@ -62,7 +71,7 @@ func _process(delta: float) -> void:
 	# spread
 	time_shooting -= delta
 	time_shooting = clamp(time_shooting, 0, 1)
-	spread = spread_curve.sample(time_shooting)
+	spread_over_time = spread_curve.sample(time_shooting)
 
 
 func aim_fire_point(pos: Vector3) -> void:
@@ -82,13 +91,11 @@ func use(shot_owner: Node3D = null) -> bool:
 func shoot(shot_owner: Node3D = null) -> void:#is_ads: bool = false, movement_speed = Vector3.ZERO) -> void:
 	# determine modifiers
 	var is_ads = false
-	var movement_speed = Vector3.ZERO
 	if uses_input:
 		is_ads = Globals.player.gun_state == Globals.player.gun_states.ads
-		movement_speed = Globals.player.velocity
 	# create the bullets
 	for i in bullet_stats.amount:
-		create_bullet(shot_owner, is_ads, movement_speed)
+		create_bullet(shot_owner, is_ads)
 	# adjust variables
 	gun_stats.ammo -= 1
 	gun_stats.condition -= 0.05
@@ -106,28 +113,18 @@ func shoot(shot_owner: Node3D = null) -> void:#is_ads: bool = false, movement_sp
 		Globals.survival_ui.create_notification(PlayerStats.gun.title + " has broken")
 
 
-func create_bullet(shot_owner: Node3D, is_ads: bool, movement_speed: Vector3) -> void:
+func create_bullet(shot_owner: Node3D, is_ads: bool) -> void:
 	var inst = bullet_stats.bullet_scene.instantiate()
 	inst.global_transform = fire_point.global_transform
 	inst.scale = Vector3.ONE
 	inst.visible = false
-	var variance = Vector2(bullet_stats.h_angle_variance_hip + spread, bullet_stats.v_angle_variance_hip + spread)
-	if is_ads:
-		variance = Vector2(bullet_stats.h_angle_variance_ads, bullet_stats.v_angle_variance_ads)
-	if movement_speed:
-		var magnitude = clamp(movement_speed.length(), 1, 2)
-		variance *= magnitude
-	variance *= spread
-	if "stats" in shot_owner or uses_input:
-		var stats: CharacterSkills
-		if uses_input:
-			stats = PlayerStats.skills
-		else:
-			stats = shot_owner.stats
-		variance = clamp(variance - (Vector2.ONE * stats.guns * 0.1), Vector2.ZERO, Vector2.ONE * 360)
-	var h_angle_variance = randf_range(-variance.x, variance.x * 1.1)
+	var h_angle_variance = randf_range(-bullet_spread, bullet_spread * 1.1)
+	if is_ads and !bullet_stats.variance_on_ads:
+		h_angle_variance = 0.0
 	inst.rotate_y(deg_to_rad(h_angle_variance))
-	var v_angle_variance = randf_range(-variance.y, variance.y)
+	var v_angle_variance = randf_range(-bullet_spread, bullet_spread)
+	if is_ads and !bullet_stats.variance_on_ads:
+		v_angle_variance = 0.0
 	inst.rotate_x(deg_to_rad(v_angle_variance))
 	inst.bullet_stats = bullet_stats
 	inst.creator = shot_owner

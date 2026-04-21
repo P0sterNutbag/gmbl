@@ -99,13 +99,13 @@ func _process(delta: float) -> void:
 				crosshair.hide()
 				dot_crosshair.hide()
 			if crosshair.visible:
-				var base_pos = clamp((Globals.player.gun.bullet_stats.h_angle_variance_hip - (PlayerStats.skills.guns * 0.1)) * 10, 4, 100)
+				var base_pos = clamp(Globals.player.gun.bullet_spread * 20, 1, 100)
 				for child in crosshair.get_children():
 					var target_pos = child.position
 					if child.position.x == 0:
-						target_pos.y = (base_pos + Globals.player.gun.bullet_stats.v_angle_variance_hip + (Globals.player.gun.spread * 32)) * sign(child.position.y)
+						target_pos.y = base_pos * sign(child.position.y)
 					elif child.position.y == 0:
-						target_pos.x = (base_pos + Globals.player.gun.bullet_stats.h_angle_variance_hip + (Globals.player.gun.spread * 32)) * sign(child.position.x)
+						target_pos.x = base_pos * sign(child.position.x)
 					child.position = lerp(child.position, target_pos, delta * 20)
 		Globals.crosshairs.dot:
 			dot_crosshair.show()

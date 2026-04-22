@@ -7,8 +7,6 @@ class_name Enemy
 @export var items_to_drop: Array[PackedScene]
 @export var potential_gun_items: Array[SpawnChanceResource]
 @export var inventory: Inventory
-@export var max_items: int
-@export var min_items: int
 @export var faction: FactionManager.factions
 enum states {idle, investigate, shoot, search, strafe, hurt, reload, camp, dead, aim, walk, supress, find_cover, approach}
 enum goals {guard, travel, follow, none}

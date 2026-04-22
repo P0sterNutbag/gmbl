@@ -8,6 +8,8 @@ class_name Gun
 enum fire_types {semi_auto, auto, pump}
 @export var fire_type: fire_types
 @export var shoot_cooldown: float = 0.1
+@export var bullet_spread = 1.0
+@export var ads_spread_mod = 0.0
 @export var zoom_amount: float = 1.25
 @export var engagement_range: float = 50.0
 @export var kickback_magnitude: float = 1
@@ -24,15 +26,15 @@ var ammo: int:
 var max_ammo: int
 var time_since_shot: float
 var time_shooting: float
-var bullet_spread: float:
+var modified_spread: float:
 	get():
-		bullet_spread = bullet_stats.angle_variance + spread_over_time
+		modified_spread = bullet_spread + spread_over_time
 		if uses_input:
 			var magnitude = clamp(Globals.player.velocity.length(), 1, 2)
-			bullet_spread *= magnitude
+			modified_spread *= magnitude
 			var stats = PlayerStats.skills
-			bullet_spread = clamp(bullet_spread - (stats.guns * 0.1), 0.0, 360.0)
-		return bullet_spread
+			modified_spread = clamp(modified_spread - (stats.guns * 0.1), 0.0, 360.0)
+		return modified_spread
 var spread_over_time := 0.0
 var can_shoot: bool = true
 var has_released: bool = true
@@ -118,13 +120,13 @@ func create_bullet(shot_owner: Node3D, is_ads: bool) -> void:
 	inst.global_transform = fire_point.global_transform
 	inst.scale = Vector3.ONE
 	inst.visible = false
-	var h_angle_variance = randf_range(-bullet_spread, bullet_spread * 1.1)
-	if is_ads and !bullet_stats.variance_on_ads:
-		h_angle_variance = 0.0
+	var h_angle_variance = randf_range(-modified_spread, modified_spread * 1.1)
+	if is_ads:
+		h_angle_variance *= ads_spread_mod
 	inst.rotate_y(deg_to_rad(h_angle_variance))
-	var v_angle_variance = randf_range(-bullet_spread, bullet_spread)
-	if is_ads and !bullet_stats.variance_on_ads:
-		v_angle_variance = 0.0
+	var v_angle_variance = randf_range(-modified_spread, modified_spread)
+	if is_ads:
+		v_angle_variance *= ads_spread_mod
 	inst.rotate_x(deg_to_rad(v_angle_variance))
 	inst.bullet_stats = bullet_stats
 	inst.creator = shot_owner

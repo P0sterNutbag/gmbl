@@ -27,6 +27,8 @@ func get_visible_target() -> Node:
 func can_see_target(target: Node3D = targets[0], check_direction: bool = false) -> bool:
 	# check for collision
 	target_pos = target.global_position + Vector3.UP * 1.5
+	if "camera" in target:
+		target_pos = target.camera.global_position
 	look_at(target_pos)
 	target_position.z = -global_position.distance_to(target_pos)
 	force_shapecast_update() 

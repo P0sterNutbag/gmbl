@@ -20,7 +20,7 @@ func _on_timer_timeout() -> void:
 	inst.global_position = spawn_location.global_position
 	inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
 	inst.location.location_data.faction = spawn_location.location_data.faction
-	inst.location.location_data.population = min(4, spawn_location.location_data.population) #max(spawn_location.location_data.population / 2, 1)
+	inst.location.location_data.population = randi_range(min(2, spawn_location.location_data.population), min(4, spawn_location.location_data.population)) #max(spawn_location.location_data.population / 2, 1)
 	inst.faction = spawn_location.location_data.faction
 	var standing = FactionManager.get_faction_relation(inst.faction, FactionManager.factions.player)
 	if standing < 0.0:

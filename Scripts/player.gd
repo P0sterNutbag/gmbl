@@ -92,6 +92,7 @@ const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var spot_light: SpotLight3D = $CameraAnchor/Camera3D/SpotLight3D
 @onready var gun_collision_cast: RayCast3D = %GunPivot/GunOffset/RayCast3D
 @onready var move_marker: Node3D = $MoveMarker
+@onready var hitbox_shape: CollisionShape3D = $Hitbox/CollisionShape3D
 
 
 func _enter_tree() -> void:
@@ -308,6 +309,7 @@ func state_walk(delta):
 	if is_crouching:
 		cam_target_pos = Vector3.DOWN * crouch_height
 	camera.position = lerp(camera.position, cam_target_pos, 10 * delta)
+	hitbox_shape.position = lerp(camera.position, cam_target_pos, 10 * delta)
 	
 	# noise
 	if abs(velocity) > Vector3.ZERO and is_on_floor() and !is_crouching:

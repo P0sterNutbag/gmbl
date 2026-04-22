@@ -4,7 +4,7 @@ enum camera_types {overhead, town}
 var camera_type = camera_types.overhead
 var speed := 4.5:
 	get():
-		return speed + PlayerStats.skills.speed * 0.3
+		return speed + PlayerStats.skills.speed * 0.2
 var mouse_sensitivity := 0.004
 var camera_max_zoom: float = 20.0
 var camera_min_zoom: float = 2.0

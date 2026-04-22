@@ -99,7 +99,7 @@ func _process(delta: float) -> void:
 				crosshair.hide()
 				dot_crosshair.hide()
 			if crosshair.visible:
-				var base_pos = clamp(Globals.player.gun.bullet_spread * 20, 1, 100)
+				var base_pos = clamp(Globals.player.gun.modified_spread * 20, 1, 100)
 				for child in crosshair.get_children():
 					var target_pos = child.position
 					if child.position.x == 0:

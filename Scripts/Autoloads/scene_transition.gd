@@ -2,11 +2,9 @@ extends Control
 
 @onready var timer: Timer = $Timer
 @onready var label: Label = $ColorRect/Label
+@onready var animation_player = $AnimationPlayer
 signal transition_in_done
 signal transition_out_done
-
-
-@onready var animation_player = $AnimationPlayer
 
 
 func transition_in():

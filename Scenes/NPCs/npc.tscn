@@ -120,7 +120,7 @@ metadata/_custom_type_script = "uid://3e36ru1e7k78"
 [sub_resource type="Resource" id="Resource_s0qxi"]
 script = ExtResource("2_7smi2")
 object_to_spawn = ExtResource("16_wbwrh")
-spawn_chance = 0.5
+spawn_chance = 0.2
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_f140h"]
@@ -132,6 +132,7 @@ metadata/_custom_type_script = "uid://3e36ru1e7k78"
 [sub_resource type="Resource" id="Resource_d1wbv"]
 script = ExtResource("2_7smi2")
 object_to_spawn = ExtResource("18_ywqxa")
+spawn_chance = 0.75
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_ftq36"]
@@ -167,7 +168,7 @@ metadata/_custom_type_script = "uid://3e36ru1e7k78"
 [sub_resource type="Resource" id="Resource_1aoyd"]
 script = ExtResource("2_7smi2")
 object_to_spawn = ExtResource("24_aqnio")
-spawn_chance = 0.2
+spawn_chance = 0.1
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_6s4h0"]
@@ -204,8 +205,7 @@ metadata/_custom_type_script = "uid://3e36ru1e7k78"
 [sub_resource type="Resource" id="Resource_6hv5v"]
 resource_local_to_scene = true
 script = ExtResource("28_mcu76")
-min_amount = 3
-max_amount = 5
+max_amount = 4
 potential_slots = Array[ExtResource("2_7smi2")]([SubResource("Resource_ktgl8"), SubResource("Resource_3md2n"), SubResource("Resource_2hm72"), SubResource("Resource_fxmgv"), SubResource("Resource_10bo5"), SubResource("Resource_6vg66"), SubResource("Resource_s0qxi"), SubResource("Resource_f140h"), SubResource("Resource_d1wbv"), SubResource("Resource_ftq36"), SubResource("Resource_76cqn"), SubResource("Resource_w0ffo"), SubResource("Resource_kh5w8"), SubResource("Resource_f22mx"), SubResource("Resource_1aoyd"), SubResource("Resource_6s4h0"), SubResource("Resource_i7r6r"), SubResource("Resource_ue2kp"), SubResource("Resource_y3d1p"), SubResource("Resource_i0rua")])
 title = "Enemy"
 metadata/_custom_type_script = "uid://b34kwea65we13"
@@ -321,8 +321,6 @@ wall_min_slide_angle = 3.1415927
 script = ExtResource("1_coowa")
 potential_gun_items = Array[ExtResource("2_7smi2")]([SubResource("Resource_04m1n"), SubResource("Resource_yuuv7"), SubResource("Resource_mm6xy"), SubResource("Resource_otgkl"), SubResource("Resource_bxotc"), SubResource("Resource_kq8uc"), SubResource("Resource_y5cn3")])
 inventory = SubResource("Resource_6hv5v")
-max_items = 3
-min_items = 1
 faction = 4
 metadata/_edit_group_ = true
 
@@ -367,7 +365,7 @@ surface_material_override/2 = SubResource("ShaderMaterial_6vg66")
 transform = Transform3D(0.37628067, 0.71436304, 0.5899983, -0.39018592, 0.699757, -0.59841007, -0.8403374, -0.0050388225, 0.5420397, -0.17184496, 0.3206781, -1.197086)
 
 [node name="Node3D" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand" index="0" unique_id=1704511197]
-transform = Transform3D(-0.46605355, 0.8540432, 0.23108459, 0.51736325, 0.4749409, -0.711874, -0.71772474, -0.21221623, -0.66320026, 0.062045753, 0.13316575, -0.016535401)
+transform = Transform3D(-0.4660535, 0.8540432, 0.23108459, 0.5173632, 0.4749409, -0.711874, -0.7177247, -0.21221623, -0.66320026, 0.062045753, 0.13316575, -0.016535401)
 
 [node name="ak_47" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="0" unique_id=1397768424]
 gun_stats = SubResource("Resource_jsr6p")
@@ -377,9 +375,9 @@ ammo_item = SubResource("Resource_gc3po")
 transform = Transform3D(0.48840106, -0.28723493, -0.8239905, 0.0023261209, 0.94469756, -0.3279336, 0.87261623, 0.15824647, 0.46205935, 0.27465355, 0.33528757, -1.1173311)
 
 [node name="Physical Bone mixamorig_Hips" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(698778069, 2143382753) index="0" unique_id=1436907244 node_paths=PackedStringArray("health_component")]
-transform = Transform3D(0.9927946, -0.113268346, 0.039105527, 0.10583853, 0.9819, 0.15706904, -0.056188658, -0.15179841, 0.9868132, -0.001458876, 0.01683378, -0.92374885)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.003503867, 0.011161506, -0.10396507)
-body_offset = Transform3D(-0.004694827, 0.9996181, 0.027237296, -0.00041699782, 0.027235627, -0.99962914, -0.999989, -0.004704319, 0.00028893165, -0.008309066, -0.10422903, 0.0035863742)
+transform = Transform3D(0.9927946, -0.113268346, 0.039105527, 0.10583853, 0.9819, 0.15706904, -0.056188658, -0.15179841, 0.9868132, -0.0014659375, 0.016949404, -0.9216804)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0036148638, 0.011361163, -0.10602413)
+body_offset = Transform3D(-0.004694827, 0.9996181, 0.027237296, -0.00041699782, 0.027235627, -0.99962914, -0.999989, -0.004704319, 0.00028893165, -0.008452043, -0.106292725, 0.003698904)
 health_component = NodePath("../../../../../../Hitbox")
 
 [node name="Physical Bone mixamorig_Spine" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(698778069, 2143382753) index="1" unique_id=1644607905 node_paths=PackedStringArray("health_component")]
@@ -395,9 +393,9 @@ body_offset = Transform3D(1.0000005, -0.00022950768, 3.3620745e-05, 3.361702e-05
 health_component = NodePath("../../../../../../Hitbox")
 
 [node name="Physical Bone mixamorig_Spine2" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(698778069, 2143382753) index="3" unique_id=665582917 node_paths=PackedStringArray("health_component")]
-transform = Transform3D(-0.049947396, -0.99875134, 0.0010037271, 0.9986223, -0.049924698, 0.016157892, -0.016087603, 0.0018093885, 0.999869, -0.011236612, -0.018906726, -1.3942646)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0010278871, -2.3191482e-05, -0.0069128317)
-body_offset = Transform3D(1.0000004, -6.089732e-05, 4.8168004e-06, 4.8168004e-06, 3.6954705e-05, -1.0000002, 6.1035156e-05, 1.0000002, 3.6909943e-05, 0.0010279194, -0.0069128275, 2.3509376e-05)
+transform = Transform3D(-0.049947396, -0.99875134, 0.0010037271, 0.9986223, -0.049924698, 0.016157892, -0.016087603, 0.0018093885, 0.999869, -0.011236611, -0.018796181, -1.3908635)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0010835639, -2.3825256e-05, -0.010315184)
+body_offset = Transform3D(1.0000004, -6.089732e-05, 4.8168004e-06, 4.8168004e-06, 3.6954705e-05, -1.0000002, 6.1035156e-05, 1.0000002, 3.6909943e-05, 0.0010836124, -0.01031518, 2.4272129e-05)
 health_component = NodePath("../../../../../../Hitbox")
 
 [node name="Physical Bone mixamorig_Neck" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(698778069, 2143382753) index="4" unique_id=322639261 node_paths=PackedStringArray("health_component")]
@@ -407,9 +405,9 @@ body_offset = Transform3D(7.889047e-05, -0.99825263, -0.059097126, 5.7298457e-05
 health_component = NodePath("../../../../../../Hitbox")
 
 [node name="Physical Bone mixamorig_Head" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(698778069, 2143382753) index="5" unique_id=175936068 node_paths=PackedStringArray("health_component")]
-transform = Transform3D(-0.9890622, 0.12659541, 0.07569466, -0.13767022, -0.97652304, -0.16567986, 0.052943267, -0.17428859, 0.9832703, -0.019764923, 0.0012136049, -1.6566861)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0022980454, 0.010753051, 0.040445153)
-body_offset = Transform3D(0.008443877, -0.9982375, -0.058752067, 0.005887405, 0.058802716, -0.99825263, 0.9999473, 0.008083135, 0.0063734856, 0.013129741, 0.039755702, 0.0019532293)
+transform = Transform3D(-0.9891241, 0.12627134, 0.07542573, -0.1373028, -0.976576, -0.16567245, 0.052739266, -0.17422678, 0.9832922, -0.019764923, 0.0012136049, -1.6566861)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0023123694, 0.010754112, 0.040444057)
+body_offset = Transform3D(0.008789986, -0.99823725, -0.058704793, 0.006133618, 0.05875972, -0.9982537, 0.9999428, 0.008414477, 0.0066392347, 0.013129741, 0.039755702, 0.0019532293)
 health_component = NodePath("../../../../../../Hitbox")
 damage_modifier = 5.0
 
@@ -486,9 +484,9 @@ health_component = NodePath("../../../../../../Hitbox")
 damage_modifier = 0.75
 
 [node name="Physical Bone mixamorig_RightLeg" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(698778069, 2143382753) index="16" unique_id=1667300707 node_paths=PackedStringArray("health_component")]
-transform = Transform3D(0.5031291, -0.8601282, -0.08390787, -0.79179543, -0.4976974, 0.35405838, -0.34629637, -0.111699216, -0.9314516, -0.08627393, -0.0650896, -0.2725641)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011957834, 0.021520372, 0.26091614)
-body_offset = Transform3D(1.0000002, 7.510185e-05, 1.7344952e-05, 1.7344952e-05, -2.4735928e-05, -1.0000002, -7.468462e-05, 0.99999917, -2.464652e-05, -0.011963978, 0.26091653, -0.02151303)
+transform = Transform3D(0.5031291, -0.8601282, -0.08390784, -0.79179543, -0.4976974, 0.3540584, -0.34629637, -0.11169924, -0.9314516, -0.08627393, -0.0650896, -0.2725641)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011957835, 0.021520372, 0.26091614)
+body_offset = Transform3D(1.0000002, 7.5012445e-05, 1.7344952e-05, 1.7344952e-05, -2.4750829e-05, -1.0000002, -7.468462e-05, 0.99999917, -2.464652e-05, -0.011963978, 0.26091653, -0.02151303)
 health_component = NodePath("../../../../../../Hitbox")
 damage_modifier = 0.75
 

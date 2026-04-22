@@ -10,7 +10,6 @@ var menu_item = preload("res://Scenes/UI/menu_item.tscn")
 @onready var label: Label = $"../PortraitHolder/HBoxContainer/NpcName"
 @onready var repair_menu: PanelContainer = $"../Repair"
 @onready var training_menu: PanelContainer = $"../Training"
-signal exit
 
 
 func _process(_delta: float) -> void:
@@ -97,11 +96,6 @@ func exit_to_game() -> void:
 	Globals.overworld.current_encounter.encounter_ended.emit()
 
 
-#func exit_dialogue() -> void:
-	#hide()
-	#PlayerStats.change_state(PlayerStats.states.walk)
-
-
 func enter_shop() -> void:
 	hide()
 	if !shop:
@@ -161,7 +155,6 @@ func leave_shop() -> void:
 	index = 1
 	UiController.open_interface(self)
 	advance_dialogue(index)
-	#get_child(-1).option_container.get_child(0).grab_focus()
 
 
 func start_level() -> void:
@@ -201,11 +194,9 @@ func set_recruit_price() -> void:
 
 
 func recruit_npc(amount:int) -> void:
-	#var o = dialogue_tree.owner
-	#var location_data = Globals.overworld.current_encounter.location_data
-	#if PlayerStats.inventory.money - amount >= 0 and location_data.population > 1:
 	PlayerStats.inventory.money -= amount
-	#location_data.population -= 1
+	var location_data = Globals.overworld.current_encounter.location_data
+	location_data.population = clamp(location_data.population - 1, 1, 100)
 	var npc_data = NpcData.new()
 	npc_data.style = FactionManager.faction_data[Globals.overworld.current_encounter.location_data.faction].style.generate_style()
 	PlayerStats.allies.append(NpcData.new())
@@ -213,14 +204,17 @@ func recruit_npc(amount:int) -> void:
 	Globals.survival_ui.create_notification("Ally added to party")
 	advance_dialogue(index + 1)
 	dialogue_tree.bubbles[1].options.remove_at(1)
-		#exit_to_game()
-	#else:
-		#advance_dialogue(fail_index)
 
 
 func move_player(dest: Vector3) -> void:
+	hide()
 	PlayerStats.inventory.money -= 2000
 	Globals.survival_ui.create_notification("-$2000")
+	var anim_player = SceneManager.scene_transition.animation_player
+	anim_player.play("fade_in")
+	await anim_player.animation_finished
 	Globals.player.position = dest
+	await get_tree().create_timer(1.0).timeout
+	anim_player.play("fade_out")
+	await anim_player.animation_finished
 	exit_to_game()
-	

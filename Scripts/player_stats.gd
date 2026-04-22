@@ -48,12 +48,12 @@ var sleep_decrease_rate := 0.2
 var hunger_decrease_rate := 0.6
 var thirst_decrease_rate := 0.8
 var skill_points = 5.0
-var player_style: NpcStyle
 var gun: Equipment
 var inventory: Inventory = Inventory.new()
 var quests: Array[Quest]
 var ally_npcs: Array[Enemy]
 var save_guns: Array[Item]
+var player_style := preload("uid://b4ypcwfcexyed")
 @onready var guns: Array[Item]:
 	get(): 
 		return inventory.items.filter(func(i): return i is EquipmentGun)

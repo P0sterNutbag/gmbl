@@ -95,7 +95,7 @@ func _process(delta: float) -> void:
 				crosshair.hide()
 				dot_crosshair.show()
 			if (tooltip.visible or Globals.crosshair_type == Globals.crosshairs.none or UiController.current_ui
-			or Globals.player.gun_state == Globals.player.gun_states.ads):
+			or Globals.player.gun_state == Globals.player.gun_states.ads or PlayerStats.state != PlayerStats.states.walk):
 				crosshair.hide()
 				dot_crosshair.hide()
 			if crosshair.visible:
@@ -110,7 +110,7 @@ func _process(delta: float) -> void:
 		Globals.crosshairs.dot:
 			dot_crosshair.show()
 			crosshair.hide()
-			if UiController.current_ui and tooltip.visible:
+			if (UiController.current_ui and tooltip.visible) or PlayerStats.state != PlayerStats.states.walk:
 				dot_crosshair.hide()
 		Globals.crosshairs.none:
 			crosshair.hide()

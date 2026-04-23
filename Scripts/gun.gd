@@ -108,6 +108,7 @@ func shoot(shot_owner: Node3D = null) -> void:#is_ads: bool = false, movement_sp
 	# effects
 	flash_texture.rotate_z(deg_to_rad(randf_range(0, 360)))
 	muzzle_flash.visible = true
+	audio_player.pitch_scale = Engine.time_scale
 	audio_player.play()
 	var tween = create_tween()
 	tween.tween_property(muzzle_flash, "visible", false, 0.1)

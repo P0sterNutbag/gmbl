@@ -3,6 +3,7 @@ extends Node
 @export var starting_inventory: Inventory
 @export var allies: Array[NpcData]
 @export var skills: CharacterSkills
+@export var player_style := preload("uid://b4ypcwfcexyed")
 enum states {walk, pause, dead}
 var state = states.walk
 var faction: FactionManager.factions: 
@@ -48,12 +49,12 @@ var sleep_decrease_rate := 0.2
 var hunger_decrease_rate := 0.6
 var thirst_decrease_rate := 0.8
 var skill_points = 5.0
+var saved_style: NpcStyle
 var gun: Equipment
 var inventory: Inventory = Inventory.new()
 var quests: Array[Quest]
 var ally_npcs: Array[Enemy]
 var save_guns: Array[Item]
-var player_style := preload("uid://b4ypcwfcexyed")
 @onready var guns: Array[Item]:
 	get(): 
 		return inventory.items.filter(func(i): return i is EquipmentGun)
@@ -249,7 +250,7 @@ func save() -> Dictionary:
 		"inventory" : inventory,
 		"skills" : skills,
 		"skill_points" : skill_points,
-		"player_style" : player_style,
+		"saved_style" : player_style,
 		"allies" : allies,
 		"save_guns" : guns,
 	}
@@ -262,9 +263,17 @@ func _on_load():
 		#quests.clear()
 		#quests.append_array(save_quests.array)
 	Globals.player.hitbox.hp = hp
-	if "model" in Globals.player:
-		Globals.player.model.style_data = player_style
-		Globals.player.model.set_materials()
+	player_style.skin_colors = saved_style.skin_colors
+	player_style.hair_colors = saved_style.hair_colors
+	player_style.hair_styles = saved_style.hair_styles
+	player_style.faces = saved_style.faces
+	player_style.shirts = saved_style.shirts
+	player_style.pants_colors = saved_style.pants_colors
+	player_style.shoe_colors = saved_style.shoe_colors
+	#if "model" in Globals.player:
+		#Globals.player.model.style_data = player_style
+		#Globals.player.model.set_materials()
+	Globals.ui.player_model.style_data = player_style
 	if save_guns.size() > 0:
 		var gun_array = guns
 		for i in save_guns.size():

@@ -28,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://cg1ead7veeqpv" path="res://Audio/Guns/antitank_empty.wav" id="28_enij7"]
 [ext_resource type="PackedScene" uid="uid://j2m6pd4rb0jy" path="res://Scenes/Guns/grenade.tscn" id="28_rukb4"]
 [ext_resource type="Material" uid="uid://cuiwmfj20a7tt" path="res://Art/Materials/metal.tres" id="29_4no11"]
+[ext_resource type="PackedScene" uid="uid://civmrgjo06gvr" path="res://Scenes/Player/player_ragdoll.tscn" id="30_rukb4"]
 [ext_resource type="PackedScene" uid="uid://bdlenssiaotxi" path="res://Scenes/Overworld/Player/move_marker.tscn" id="32_fcwna"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kgvud"]
@@ -43,7 +44,7 @@ stream_0/stream = ExtResource("3_rukb4")
 [sub_resource type="SphereShape3D" id="SphereShape3D_qqcod"]
 radius = 0.2
 
-[sub_resource type="Resource" id="Resource_2ahak"]
+[sub_resource type="Resource" id="Resource_rukb4"]
 resource_local_to_scene = true
 script = ExtResource("9_mwii3")
 ammo = 24
@@ -53,7 +54,7 @@ metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 script = ExtResource("10_4no11")
 metadata/_custom_type_script = "uid://4c6own63hs8c"
 
-[sub_resource type="Resource" id="Resource_rukb4"]
+[sub_resource type="Resource" id="Resource_4no11"]
 resource_local_to_scene = true
 resource_name = "rifle_ammo"
 script = ExtResource("11_fcwna")
@@ -188,7 +189,7 @@ _data = {
 script = ExtResource("9_mwii3")
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
-[sub_resource type="Resource" id="Resource_4no11"]
+[sub_resource type="Resource" id="Resource_fcwna"]
 resource_local_to_scene = true
 resource_name = "pistol_ammo"
 script = ExtResource("11_fcwna")
@@ -323,7 +324,7 @@ values = Dictionary[String, Variant]({
 add = true
 metadata/_custom_type_script = "uid://4c6own63hs8c"
 
-[sub_resource type="Resource" id="Resource_fcwna"]
+[sub_resource type="Resource" id="Resource_1agin"]
 resource_local_to_scene = true
 resource_name = "shotgun_ammo"
 script = ExtResource("11_fcwna")
@@ -493,7 +494,7 @@ script = ExtResource("9_mwii3")
 ammo = 6
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
-[sub_resource type="Resource" id="Resource_1agin"]
+[sub_resource type="Resource" id="Resource_2jnj1"]
 resource_local_to_scene = true
 resource_name = "sniper_ammo"
 script = ExtResource("11_fcwna")
@@ -584,7 +585,7 @@ _data = {
 &"reload": SubResource("Animation_p1odr")
 }
 
-[sub_resource type="Resource" id="Resource_2jnj1"]
+[sub_resource type="Resource" id="Resource_enij7"]
 resource_local_to_scene = true
 script = ExtResource("9_mwii3")
 ammo = 2
@@ -598,7 +599,7 @@ values = Dictionary[String, Variant]({
 add = true
 metadata/_custom_type_script = "uid://4c6own63hs8c"
 
-[sub_resource type="Resource" id="Resource_enij7"]
+[sub_resource type="Resource" id="Resource_mwii3"]
 resource_local_to_scene = true
 resource_name = "shotgun_ammo"
 script = ExtResource("11_fcwna")
@@ -738,7 +739,7 @@ _data = {
 &"reload": SubResource("Animation_y6uwr")
 }
 
-[sub_resource type="Resource" id="Resource_mwii3"]
+[sub_resource type="Resource" id="Resource_2aanf"]
 resource_local_to_scene = true
 script = ExtResource("9_mwii3")
 ammo = 24
@@ -850,7 +851,7 @@ _data = {
 &"reload": SubResource("Animation_83xs0")
 }
 
-[sub_resource type="Resource" id="Resource_2aanf"]
+[sub_resource type="Resource" id="Resource_ogmfp"]
 resource_local_to_scene = true
 script = ExtResource("9_mwii3")
 ammo = 5
@@ -860,7 +861,7 @@ metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 script = ExtResource("10_4no11")
 metadata/_custom_type_script = "uid://4c6own63hs8c"
 
-[sub_resource type="Resource" id="Resource_ogmfp"]
+[sub_resource type="Resource" id="Resource_ixrbb"]
 resource_local_to_scene = true
 resource_name = "rifle_ammo"
 script = ExtResource("11_fcwna")
@@ -1194,6 +1195,7 @@ bus = &"SFX"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63204, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraAnchor" unique_id=953227888]
+current = true
 near = 0.001
 script = ExtResource("4_4no11")
 
@@ -1238,8 +1240,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.111368775, -0.061341286, -0
 [node name="AK47" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor" unique_id=1046860869 instance=ExtResource("5_fcwna")]
 visible = false
 uses_input = true
-gun_stats = SubResource("Resource_2ahak")
-ammo_item = SubResource("Resource_rukb4")
+gun_stats = SubResource("Resource_rukb4")
+ammo_item = SubResource("Resource_4no11")
 ads_vector = Vector3(-0.188, 0.085, 0)
 cast_shadow = false
 
@@ -1313,7 +1315,7 @@ libraries/ = SubResource("AnimationLibrary_2ijsl")
 visible = false
 uses_input = true
 gun_stats = SubResource("Resource_wpjfl")
-ammo_item = SubResource("Resource_4no11")
+ammo_item = SubResource("Resource_fcwna")
 fire_type = 0
 ads_vector = Vector3(-0.195, 0.045, 0.07)
 cast_shadow = false
@@ -1383,7 +1385,7 @@ libraries/ = SubResource("AnimationLibrary_0gysh")
 visible = false
 uses_input = true
 gun_stats = SubResource("Resource_qqcod")
-ammo_item = SubResource("Resource_fcwna")
+ammo_item = SubResource("Resource_1agin")
 ads_vector = Vector3(-0.099, 0.045, 0.07)
 cast_shadow = false
 
@@ -1440,7 +1442,7 @@ libraries/ = SubResource("AnimationLibrary_bi64h")
 visible = false
 uses_input = true
 gun_stats = SubResource("Resource_olqyp")
-ammo_item = SubResource("Resource_1agin")
+ammo_item = SubResource("Resource_2jnj1")
 zoom_amount = 3.0
 scope_texture = ExtResource("22_qflxp")
 cast_shadow = false
@@ -1508,8 +1510,8 @@ libraries/ = SubResource("AnimationLibrary_p1odr")
 
 [node name="SawedOff" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor" unique_id=210830844 instance=ExtResource("24_rblve")]
 uses_input = true
-gun_stats = SubResource("Resource_2jnj1")
-ammo_item = SubResource("Resource_enij7")
+gun_stats = SubResource("Resource_enij7")
+ammo_item = SubResource("Resource_mwii3")
 
 [node name="GunAnchor" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/SawedOff" index="0" unique_id=1970548578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9802322e-08, -0.2932862, 0.17806861)
@@ -1535,7 +1537,7 @@ libraries/ = SubResource("AnimationLibrary_83xs0")
 [node name="Uzi" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor" unique_id=1309005030 instance=ExtResource("25_fn4qh")]
 visible = false
 uses_input = true
-gun_stats = SubResource("Resource_mwii3")
+gun_stats = SubResource("Resource_2aanf")
 
 [node name="GunAnchor" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Uzi" index="0" unique_id=1970548578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12506485, -0.2550497)
@@ -1570,8 +1572,8 @@ libraries/ = SubResource("AnimationLibrary_ypfnu")
 [node name="HuntingRifle" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor" unique_id=1665818361 instance=ExtResource("26_5omc3")]
 visible = false
 uses_input = true
-gun_stats = SubResource("Resource_2aanf")
-ammo_item = SubResource("Resource_ogmfp")
+gun_stats = SubResource("Resource_ogmfp")
+ammo_item = SubResource("Resource_ixrbb")
 
 [node name="GunAnchor" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/HuntingRifle" index="0" unique_id=1970548578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.247, -0.331)
@@ -1630,7 +1632,7 @@ shape = SubResource("SphereShape3D_wqjf8")
 transform = Transform3D(0.9999999, 0, 0, 0, 0.97051483, -0.24104118, 0, 0.24104117, 0.9705149, 0.07493928, -0.06882519, -0.17680074)
 
 [node name="armR" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife/MeshInstance3D/ArmRAnchor" unique_id=448601943 instance=ExtResource("12_ogmfp")]
-transform = Transform3D(0.5608588, -0.8278889, 0.006067309, -0.82720345, -0.56006056, 0.045458313, 0.034236398, 0.030514576, 0.99894774, 0, 0, 0)
+transform = Transform3D(0.5608588, -0.8278889, 0.006067309, -0.82720345, -0.5600605, 0.045458313, 0.034236398, 0.030514574, 0.99894774, 0, 0, 0)
 
 [node name="knife" parent="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Knife/MeshInstance3D/ArmRAnchor/armR" unique_id=1677519101 instance=ExtResource("27_2jnj1")]
 transform = Transform3D(0.19825682, -0.004925756, -0.025883725, -0.024477828, -0.10713801, -0.16709962, -0.009750199, 0.16881111, -0.10680705, -0.095471635, 0.08134147, -0.00267357)
@@ -1717,6 +1719,9 @@ visible = false
 
 [node name="MeshInstance3D" parent="MoveMarker" index="0" unique_id=1028542097]
 bob_frequency = 10.0
+
+[node name="PlayerRadgoll" parent="." unique_id=402927275 instance=ExtResource("30_rukb4")]
+visible = false
 
 [connection signal="animation_finished" from="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/AK47/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="CameraAnchor/Camera3D/GunPivot/GunOffset/GunAnchor/Pistol/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

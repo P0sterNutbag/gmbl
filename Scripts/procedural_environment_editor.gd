@@ -7,6 +7,7 @@ extends Node3D
 @export var bounds := Vector4(10,10,247,247)
 @export var terrain: Node3D
 @onready var navigation_region_3d: NavigationRegion3D = $"../NavigationRegion3D"
+@onready var snap_to_terrain: Node3D = $"../SnapToTerrain"
 
 
 func generate_level(_value: bool = false) -> void:
@@ -38,6 +39,7 @@ func generate_level(_value: bool = false) -> void:
 			navigation_region_3d.get_node("Generated").add_child(inst)
 			inst.set_owner(get_tree().edited_scene_root)
 	generate_environment = false
+	snap_to_terrain._position_all_nodes()
 
 
 func get_random_object(array: Array) -> PackedScene:

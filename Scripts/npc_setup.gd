@@ -1,5 +1,7 @@
 #@tool
 extends Node3D
+class_name CharacterSetup
+
 
 @export var style_data: NpcStyle
 var current_style := NpcStyle.new()
@@ -94,9 +96,9 @@ func get_texture_modified_skin(texture: Texture, replace_color: Color, target_co
 		for y in img.get_height():
 			var c: Color = img.get_pixel(x, y)
 			#if c.is_equal_approx(target_color):
-			if (abs(c.r - target_color.r) < 0.1 and 
-			abs(c.g - target_color.g) < 0.1 and 
-			abs(c.b - target_color.b) < 0.1):
+			if (abs(c.r - target_color.r) < 0.01 and 
+			abs(c.g - target_color.g) < 0.01 and 
+			abs(c.b - target_color.b) < 0.01):
 				img.set_pixel(x, y, replace_color)
 	var new_texture = ImageTexture.create_from_image(img)
 	return new_texture

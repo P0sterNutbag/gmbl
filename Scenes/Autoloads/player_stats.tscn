@@ -2,10 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bby8q5udlgb6g" path="res://Scripts/player_stats.gd" id="1_vjobs"]
 [ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="2_v6kd3"]
-[ext_resource type="Resource" uid="uid://oaklo016ku8w" path="res://Resources/Items/Guns/pistol.tres" id="3_btj6c"]
+[ext_resource type="Resource" uid="uid://ixc4pv5vjlno" path="res://Resources/Items/Guns/ak47.tres" id="3_btj6c"]
 [ext_resource type="Script" uid="uid://6ucyr0petjnx" path="res://Scripts/inventory.gd" id="3_uiad6"]
-[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="4_av3m6"]
+[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="4_av3m6"]
 [ext_resource type="Script" uid="uid://bibbg6vimg64j" path="res://Scripts/character_skills.gd" id="4_v6kd3"]
+[ext_resource type="Resource" uid="uid://cf41qwurikia4" path="res://Resources/Items/Consumable/tourniquet.tres" id="5_av3m6"]
 
 [sub_resource type="Resource" id="Resource_bjmho"]
 script = ExtResource("2_v6kd3")
@@ -18,9 +19,14 @@ item = ExtResource("4_av3m6")
 amount = 3
 metadata/_custom_type_script = "uid://cfuex8bm4d62j"
 
+[sub_resource type="Resource" id="Resource_av3m6"]
+script = ExtResource("2_v6kd3")
+item = ExtResource("5_av3m6")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
 [sub_resource type="Resource" id="Resource_kx86g"]
 script = ExtResource("3_uiad6")
-item_slots = Array[ExtResource("2_v6kd3")]([SubResource("Resource_bjmho"), SubResource("Resource_3r183")])
+item_slots = Array[ExtResource("2_v6kd3")]([SubResource("Resource_bjmho"), SubResource("Resource_3r183"), SubResource("Resource_av3m6")])
 money = 200
 title = "Inventory"
 metadata/_custom_type_script = "uid://6ucyr0petjnx"

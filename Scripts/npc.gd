@@ -22,7 +22,7 @@ var camp_time_min := 2.5
 var camp_time_max := 10.0
 var time_to_detect: float = time_to_detect_max
 var time_since_detect: float
-var time_to_see_max: float = 1.0
+@export var time_to_see_max: float = 1.0
 var time_to_see: float = 0.0
 var day_range := 100
 var night_range := 25
@@ -521,7 +521,7 @@ func _on_death() -> void:
 	physical_bone_simulator.physical_bones_start_simulation()
 	var bones = physical_bone_simulator.get_children()
 	bones.sort_custom(func(a, b): return a.global_position.distance_to(damage_position) < b.global_position.distance_to(damage_position))
-	bones[0].apply_impulse(damage_direction.normalized() * 35)
+	bones[0].apply_impulse(-damage_direction.normalized() * 35)
 	if bounty:
 		bounty.completed = true
 		bounty.location = bounty.return_location

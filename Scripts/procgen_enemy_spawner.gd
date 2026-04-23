@@ -7,14 +7,16 @@ var enemies: Array
 var location_data: LocationData
 var squads: Array[LocationData]
 const NPC = preload("uid://cb05x24r4r8im")
+@onready var snap_to_terrain: Node3D = $"../SnapToTerrain"
 
 
 func _ready():
+	var battle
 	if Globals.overworld:
 		location_data = Globals.overworld.current_encounter.location_data
+		battle = BattleManager.get_battle(Globals.overworld.current_encounter)
 	else:
 		location_data = get_parent().location_data
-	var battle = BattleManager.get_battle(Globals.overworld.current_encounter)
 	if battle:
 		for location in battle.get_all_locations():
 			squads.append(location.location_data)

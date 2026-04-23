@@ -93,6 +93,7 @@ const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var gun_collision_cast: RayCast3D = %GunPivot/GunOffset/RayCast3D
 @onready var move_marker: Node3D = $MoveMarker
 @onready var hitbox_shape: CollisionShape3D = $Hitbox/CollisionShape3D
+@onready var player_radgoll: Node3D = $PlayerRadgoll
 
 
 func _enter_tree() -> void:
@@ -530,6 +531,7 @@ func state_pause(_delta):
 
 
 func enter_dead():
+	gun_pivot.hide()
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
 	tween.tween_property(gun_anchor, "position", Vector3.DOWN, 0.25)
 	tween.tween_property(camera, "position:y", -1, 0.5)
@@ -544,6 +546,9 @@ func state_dead(_delta):
 
 
 func exit_dead():
+	gun_pivot.show()
+	camera.current = true
+	player_radgoll.reset()
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
 	tween.tween_property(camera, "position:y", 0, 0.25)
 	tween.tween_property(camera, "rotation:z", deg_to_rad(0), 0.25)
@@ -841,9 +846,11 @@ func check_reload_ammo(time_to_skip_to: float):
 		gun.get_node("AnimationPlayer").seek(time_to_skip_to, true, true)
 
 
-func _on_damaged(_hit_position: Vector3, hit_direction: Vector3, _shooter: Node3D) -> void:
+func _on_damaged(hit_position: Vector3, hit_direction: Vector3, _shooter: Node3D) -> void:
 	hitbox.damage_modifier = PlayerStats.inventory.equipment_kit.get_damage_modifier()
 	Globals.ui.play_hit_effect(hit_direction)
+	if health_component.hp <= 0:
+		player_radgoll.start_ragdoll(hit_position, hit_direction, gun)
 
 
 func _on_death() -> void:

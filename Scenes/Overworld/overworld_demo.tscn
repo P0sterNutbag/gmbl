@@ -44,7 +44,7 @@
 [ext_resource type="Script" uid="uid://b232v7uxee5yt" path="res://Scripts/level_transition.gd" id="40_n1by1"]
 [ext_resource type="PackedScene" uid="uid://l3jxv2m7v02q" path="res://Scenes/Environment/Props/fence_long_end.tscn" id="42_0pbit"]
 [ext_resource type="PackedScene" uid="uid://lchk3aqiapch" path="res://Scenes/Levels/desert1.tscn" id="42_to8lj"]
-[ext_resource type="PackedScene" uid="uid://dgowbmqkc0fer" path="res://Scenes/Levels/desert2.tscn" id="43_grcd8"]
+[ext_resource type="PackedScene" uid="uid://c2w7o4qatwny8" path="res://Scenes/Levels/desert2_big.tscn" id="45_0pbit"]
 [ext_resource type="PackedScene" uid="uid://camjoalnob06k" path="res://Scenes/Overworld/Locations/home.tscn" id="48_yhbnl"]
 [ext_resource type="PackedScene" uid="uid://dojba73gmumuo" path="res://Scenes/Overworld/Locations/small_town.tscn" id="49_e1ghh"]
 [ext_resource type="Script" uid="uid://bbi3gcsb33muk" path="res://Scripts/town.gd" id="50_usl76"]
@@ -71,7 +71,7 @@
 [ext_resource type="Resource" uid="uid://05plefgfm4x0" path="res://Resources/Items/Utility/backpack.tres" id="71_qw0vg"]
 [ext_resource type="Resource" uid="uid://c6q45hg5w6m55" path="res://Resources/Items/Utility/knapsack.tres" id="72_xn5xo"]
 [ext_resource type="Resource" uid="uid://b85pvp1hkmjb5" path="res://Resources/Items/Utility/fanny_pack.tres" id="73_uqon5"]
-[ext_resource type="Resource" uid="uid://dk4s1lhf08o1g" path="res://Resources/Items/Utility/lockpick.tres" id="74_mqnr7"]
+[ext_resource type="Resource" path="res://Resources/Items/Utility/lockpick.tres" id="74_mqnr7"]
 [ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="75_1helu"]
 [ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="76_wx0o4"]
 [ext_resource type="Script" uid="uid://g1k0736rje3q" path="res://Scripts/quest_random.gd" id="77_rndhr"]
@@ -701,8 +701,8 @@ metadata/_custom_type_script = "uid://bicpdyf13vj1j"
 script = ExtResource("101_70er4")
 dialogue = SubResource("Resource_v7uwj")
 random_quests = Array[ExtResource("77_rndhr")]([SubResource("Resource_x5gxg"), SubResource("Resource_a1t0b")])
-min_quests = 2
-max_quests = 3
+min_quests = 8
+max_quests = 10
 title = "Bounty Board"
 metadata/_custom_type_script = "uid://r3prw1636vsp"
 
@@ -1197,7 +1197,7 @@ encounter_scene = ExtResource("42_to8lj")
 transform = Transform3D(-0.67338675, 0, -0.7392904, 0, 1, 0, 0.7392904, 0, -0.67338675, 179.49812, 0.86581266, 256.68927)
 title = "Wasteland E"
 location_data = SubResource("Resource_ihkda")
-encounter_scene = ExtResource("43_grcd8")
+encounter_scene = ExtResource("45_0pbit")
 
 [node name="Home" parent="." unique_id=496753311 groups=["align_position"] instance=ExtResource("48_yhbnl")]
 transform = Transform3D(0.29030132, 0, 0.9569353, 0, 1, 0, -0.9569353, 0, 0.29030132, 232.10783, 0.51233315, 251.95723)
@@ -1229,58 +1229,58 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.51856756, 0)
 transform = Transform3D(0.9991707, -0.040567875, 0.0034744723, 0.04070218, 0.9974333, -0.05890684, -0.0010758284, 0.058999356, 0.99825823, -2.7054443, -0.49136424, 3.0947266)
 
 [node name="TireStack" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="3" unique_id=1335062152]
-transform = Transform3D(0.9996139, -0.02738711, -0.0050559384, 0.027076302, 0.9981861, -0.053748675, 0.006518805, 0.053590834, 0.99854225, -4.795166, -0.6582002, 4.6654053)
+transform = Transform3D(0.9996139, -0.027387109, -0.0050559347, 0.027076302, 0.998186, -0.053748675, 0.006518801, 0.053590827, 0.99854225, -4.795166, -0.6582002, 4.6658936)
 
 [node name="Tire4" parent="Scrapyard/Meshes/TireStack" index="0" unique_id=1728738655]
-transform = Transform3D(1.0000006, -2.5611429e-09, 2.793973e-08, 2.5611433e-09, 1.0000004, 1.11758585e-08, -2.7939743e-08, -1.1175861e-08, 1.0000001, -0.18011475, -0.009361267, -0.26464844)
+transform = Transform3D(1.0000007, -2.0954807e-09, 3.7252974e-08, 2.0954811e-09, 1.0000004, 1.1175858e-08, -3.7253e-08, -1.117586e-08, 1.0000001, -0.18023682, -0.009361267, -0.26464844)
 
 [node name="Tire5" parent="Scrapyard/Meshes/TireStack" index="1" unique_id=1124442949]
-transform = Transform3D(1.0000006, -8.1490936e-10, 2.6077085e-08, 8.149092e-10, 1.0000005, 1.117586e-08, -2.6077094e-08, -1.1175863e-08, 1.0000002, 0.005432129, -0.011497498, -0.21081543)
+transform = Transform3D(1.0000007, -5.820783e-10, 3.166503e-08, 5.820781e-10, 1.0000005, 1.1175859e-08, -3.1665046e-08, -1.1175862e-08, 1.0000002, 0.005432129, -0.011505127, -0.21081543)
 
 [node name="Tire6" parent="Scrapyard/Meshes/TireStack" index="2" unique_id=2048793634]
-transform = Transform3D(1.0000006, -8.1490936e-10, 2.6077085e-08, 8.149092e-10, 1.0000005, 1.117586e-08, -2.6077094e-08, -1.1175863e-08, 1.0000002, -0.097717285, -0.008293152, -0.20324707)
+transform = Transform3D(1.0000007, -5.820783e-10, 3.166503e-08, 5.820781e-10, 1.0000005, 1.1175859e-08, -3.1665046e-08, -1.1175862e-08, 1.0000002, -0.097717285, -0.008293152, -0.20324707)
 
 [node name="Tire2" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="4" unique_id=1752658556]
-transform = Transform3D(0.9994157, -0.033816896, 0.0053173536, 0.03402485, 0.99837697, -0.04566678, -0.0037644207, 0.045820918, 0.9989428, -0.3671875, -0.67333645, 5.1206055)
+transform = Transform3D(0.9994157, -0.033816896, 0.0053173555, 0.03402485, 0.99837697, -0.04566678, -0.0037644226, 0.045820918, 0.9989428, -0.3671875, -0.67333645, 5.1206055)
 
 [node name="Tire3" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="5" unique_id=1876500154]
-transform = Transform3D(0.9997309, -0.023145583, 0.001722216, 0.023194859, 0.99898446, -0.038587976, -0.0008273274, 0.038617484, 0.9992534, -4.6311035, -0.81148326, 6.209717)
+transform = Transform3D(0.9997309, -0.023145579, 0.0017222101, 0.023194857, 0.99898434, -0.038587973, -0.0008273218, 0.038617477, 0.9992533, -4.6311035, -0.81148326, 6.210205)
 
 [node name="TireStack2" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="6" unique_id=384813771]
-transform = Transform3D(0.9994166, -0.03381687, 0.005152082, 0.034017295, 0.9983763, -0.045672465, -0.0035992204, 0.045820888, 0.99894476, -2.4084473, -0.67333645, 6.7543945)
+transform = Transform3D(0.9994168, -0.03381687, 0.005152085, 0.034017306, 0.9983763, -0.045672476, -0.0035992225, 0.045820888, 0.998945, -2.4085693, -0.67333645, 6.754883)
 
 [node name="Tire4" parent="Scrapyard/Meshes/TireStack2" index="0" unique_id=1728738655]
-transform = Transform3D(0.9999747, -0.007128859, -4.940327e-05, 0.0071290317, 0.99995047, 0.006930087, -2.7939682e-09, -0.0069302623, 0.999976, -0.17889404, -0.005886078, -0.26208496)
+transform = Transform3D(0.9999747, -0.0071288603, -4.9401417e-05, 0.007129033, 0.99995047, 0.0069300877, -4.6566133e-09, -0.006930263, 0.999976, -0.17883301, -0.0058937073, -0.26184082)
 
 [node name="Tire5" parent="Scrapyard/Meshes/TireStack2" index="1" unique_id=1124442949]
-transform = Transform3D(0.9999747, -0.007128859, -4.940327e-05, 0.0071290317, 0.99995047, 0.006930087, -2.7939682e-09, -0.0069302623, 0.999976, -0.0026855469, -0.0097465515, -0.21520996)
+transform = Transform3D(0.9999747, -0.0071288603, -4.9401417e-05, 0.007129033, 0.99995047, 0.0069300877, -4.6566133e-09, -0.006930263, 0.999976, -0.0026855469, -0.009754181, -0.21520996)
 
 [node name="Tire6" parent="Scrapyard/Meshes/TireStack2" index="2" unique_id=2048793634]
-transform = Transform3D(0.9999747, -0.007128859, -4.940327e-05, 0.0071290317, 0.99995047, 0.006930087, -2.7939682e-09, -0.0069302623, 0.999976, -0.11462402, -0.005809784, -0.21240234)
+transform = Transform3D(0.9999747, -0.0071288603, -4.9401417e-05, 0.007129033, 0.99995047, 0.0069300877, -4.6566133e-09, -0.006930263, 0.999976, -0.11437988, -0.0058135986, -0.21240234)
 
 [node name="TireStack3" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="7" unique_id=114358210]
-transform = Transform3D(0.997964, -0.06345271, 0.0068046073, 0.06374456, 0.9962187, -0.059033725, -0.0030330298, 0.059347056, 0.99823433, 0.099975586, -0.25916874, 2.7625732)
+transform = Transform3D(0.997964, -0.06345271, 0.0068046073, 0.06374456, 0.9962187, -0.059033725, -0.0030330298, 0.059347056, 0.99823433, 0.099975586, -0.25916874, 2.7630615)
 
 [node name="Tire4" parent="Scrapyard/Meshes/TireStack3" index="0" unique_id=1728738655]
-transform = Transform3D(1.0000011, -4.016339e-09, 5.0291533e-08, 4.0163424e-09, 1, 1.8626448e-08, -5.029159e-08, -1.862645e-08, 0.99999994, -0.17858887, -0.004135132, -0.26257324)
+transform = Transform3D(1.0000011, -3.3760532e-09, 6.1467425e-08, 3.3760557e-09, 1, 1.8626446e-08, -6.1467496e-08, -1.8626448e-08, 0.99999994, -0.17858887, -0.004135132, -0.26257324)
 
 [node name="Tire5" parent="Scrapyard/Meshes/TireStack3" index="1" unique_id=1124442949]
-transform = Transform3D(1.0000011, -4.016339e-09, 5.0291533e-08, 4.0163424e-09, 1, 1.8626448e-08, -5.029159e-08, -1.862645e-08, 0.99999994, -0.003967285, -0.012496948, -0.21520996)
+transform = Transform3D(1.0000011, -3.3760532e-09, 6.1467425e-08, 3.3760557e-09, 1, 1.8626446e-08, -6.1467496e-08, -1.8626448e-08, 0.99999994, -0.0037231445, -0.012512207, -0.21520996)
 
 [node name="Tire6" parent="Scrapyard/Meshes/TireStack3" index="2" unique_id=2048793634]
-transform = Transform3D(1.0000011, -4.016339e-09, 5.0291533e-08, 4.0163424e-09, 1, 1.8626448e-08, -5.029159e-08, -1.862645e-08, 0.99999994, -0.11431885, -0.0055007935, -0.2163086)
+transform = Transform3D(1.0000011, -3.3760532e-09, 6.1467425e-08, 3.3760557e-09, 1, 1.8626446e-08, -6.1467496e-08, -1.8626448e-08, 0.99999994, -0.11425781, -0.0055389404, -0.21679688)
 
 [node name="RigidBody3D" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="8" unique_id=1182461201]
-transform = Transform3D(0.99940413, -0.033816878, 0.0070668897, 0.034104727, 0.99837613, -0.04560715, -0.0055131316, 0.045820884, 0.9989348, -1.2011719, -0.67333645, 8.001953)
+transform = Transform3D(0.9994044, -0.033816878, 0.0070668934, 0.034104735, 0.99837613, -0.04560715, -0.0055131367, 0.045820884, 0.9989348, -1.201355, -0.67333645, 8.002441)
 
 [node name="RigidBody3D3" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="9" unique_id=249755868]
-transform = Transform3D(0.99915874, -0.040975574, 0.001832482, 0.041015893, 0.9984009, -0.03887895, -0.00023646437, 0.038921338, 0.99924296, -3.0473633, -0.67333645, 4.7348633)
+transform = Transform3D(0.99915874, -0.040975574, 0.0018324858, 0.041015893, 0.9984009, -0.03887895, -0.0002364681, 0.038921338, 0.99924296, -3.0474854, -0.67333645, 4.7353516)
 
 [node name="RigidBody3D2" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="10" unique_id=655607314]
-transform = Transform3D(0.9995536, -0.027387127, -0.011919267, 0.026706569, 0.9981865, -0.053933308, 0.013374732, 0.053590856, 0.9984739, -5.60083, -0.6582002, 2.8063965)
+transform = Transform3D(0.9995535, -0.027387124, -0.011919267, 0.026706567, 0.9981864, -0.053933308, 0.013374731, 0.05359085, 0.9984739, -5.60083, -0.6582002, 2.8068848)
 
 [node name="RigidBody3D4" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="11" unique_id=39034147]
-transform = Transform3D(0.99960285, -0.02776645, -0.005094027, 0.027575739, 0.9990301, -0.034319602, 0.006042025, 0.03416541, 0.99939877, -6.850952, -0.81148326, 6.211792)
+transform = Transform3D(0.99960285, -0.02776645, -0.005094027, 0.027575739, 0.9990301, -0.034319602, 0.006042025, 0.03416541, 0.99939877, -6.8511963, -0.81148326, 6.2122803)
 
 [node name="Flagpole" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="12" unique_id=800258272]
 transform = Transform3D(-1.999665, 0, -0.036580164, 0, 2, 0, 0.036580138, 0, -1.9996665, 0, 0, 0)

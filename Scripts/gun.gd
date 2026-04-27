@@ -38,6 +38,7 @@ var modified_spread: float:
 var spread_over_time := 0.0
 var can_shoot: bool = true
 var has_released: bool = true
+var jammed: bool = false
 var sway_vector: Vector3
 var anim_player: AnimationPlayer
 var shell: PackedScene = preload("res://Scenes/Effects/Particles/shell.tscn")
@@ -81,9 +82,9 @@ func aim_fire_point(pos: Vector3) -> void:
 
 
 func use(shot_owner: Node3D = null) -> bool:
-	if !can_shoot:
+	if !can_shoot or gun_stats.condition <= 0.0:
 		return false
-	if ammo <= 0:
+	if ammo <= 0 or jammed:
 		empty_click.play()
 		return false
 	shoot(shot_owner)
@@ -112,8 +113,13 @@ func shoot(shot_owner: Node3D = null) -> void:#is_ads: bool = false, movement_sp
 	audio_player.play()
 	var tween = create_tween()
 	tween.tween_property(muzzle_flash, "visible", false, 0.1)
+	# gun condition
 	if uses_input and gun_stats.condition <= 0.0:
 		Globals.survival_ui.create_notification(PlayerStats.gun.title + " has broken")
+	if uses_input and gun_stats.condition < 50:
+		if randf() < (50 - gun_stats.condition) * 0.002:
+			jammed = true
+			Globals.survival_ui.create_notification(PlayerStats.gun.title + " has jammed. Press R to unjam")
 
 
 func create_bullet(shot_owner: Node3D, is_ads: bool) -> void:

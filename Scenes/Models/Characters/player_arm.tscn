@@ -1,20 +1,13 @@
 [gd_scene format=3 uid="uid://dfxhgieagfc0d"]
 
 [ext_resource type="PackedScene" uid="uid://c3hkwyvehkx4y" path="res://Art/Models/arm.glb" id="1_7ulg5"]
-[ext_resource type="Shader" uid="uid://de6l4w30bo7u6" path="res://Art/Shaders/cel-shader-base.gdshader" id="2_nqico"]
+[ext_resource type="Material" uid="uid://b1xdclr1651mj" path="res://Art/Materials/fps_arm.tres" id="2_nqico"]
+[ext_resource type="Material" uid="uid://iagweyrwrs4k" path="res://Art/Materials/off_black.tres" id="3_82q0c"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nqico"]
-render_priority = 0
-shader = ExtResource("2_nqico")
-shader_parameter/color = Color(0.23, 0.21735, 0.1794, 1)
-shader_parameter/specular = Color(0, 0, 0, 0)
-shader_parameter/fresnel = Color(0, 0, 0, 0)
-shader_parameter/uv_scale = Vector2(1, 1)
-shader_parameter/uv_offset = Vector2(0, 0)
+[node name="arm" unique_id=1119460466 instance=ExtResource("1_7ulg5")]
 
-[node name="arm" unique_id=1189674626 instance=ExtResource("1_7ulg5")]
-
-[node name="Cube_001" parent="." index="0" unique_id=1454035606]
+[node name="Cube_001" parent="." index="0" unique_id=769396725]
 transform = Transform3D(0.005109113, -0.15665403, 1.3369393e-08, 0.07483763, 0.010147102, 0.035524935, 0.017384661, 0.0023571418, -0.15292802, 0, -0.07462923, 0.4304654)
 cast_shadow = 0
-surface_material_override/1 = SubResource("ShaderMaterial_nqico")
+surface_material_override/0 = ExtResource("2_nqico")
+surface_material_override/1 = ExtResource("3_82q0c")

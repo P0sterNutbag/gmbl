@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 enum camera_types {overhead, town}
 var camera_type = camera_types.overhead
-var speed := 4.5:
+var speed := 3.5:
 	get():
 		return speed + PlayerStats.skills.speed * 0.2
 var mouse_sensitivity := 0.004

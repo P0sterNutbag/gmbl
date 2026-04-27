@@ -25,7 +25,7 @@ var time_since_detect: float
 @export var time_to_see_max: float = 1.0
 var time_to_see: float = 0.0
 var day_range := 100
-var night_range := 25
+var night_range := 50
 var path_index: int
 var is_new_state: bool
 var on_alert: bool
@@ -253,9 +253,8 @@ func state_aim(_delta) -> void:
 
 func state_shoot(delta) -> void:
 	if is_new_state:
-		on_alert = true
-		anim_player.play("Fire")
 		if !target:
+			on_alert = true
 			if goal == goals.follow:
 				change_state(states.idle)
 			else:
@@ -266,6 +265,7 @@ func state_shoot(delta) -> void:
 				else:
 					change_state(states.search)
 			return
+		anim_player.play("Fire")
 		velocity = Vector3.ZERO
 		is_new_state = false
 	# look at target
@@ -299,6 +299,7 @@ func state_supress(_delta) -> void:
 
 func state_reload(_delta) -> void:
 	if is_new_state:
+		velocity = Vector3.ZERO
 		anim_player.play("Reload")
 		is_new_state = false
 
@@ -478,6 +479,7 @@ func _on_damaged(hit_position: Vector3, hit_direction: Vector3, shooter: Node3D)
 	velocity = Vector3.ZERO
 	damage_position = hit_position
 	damage_direction = hit_direction
+	last_seen_position = shooter.global_position
 	if faction != shooter.faction:
 		var previous_relation = FactionManager.get_faction_relation(faction, shooter.faction)
 		var show_notificaition = health_component.hp <= 0
@@ -575,7 +577,7 @@ func _on_path_wait_timer_timeout() -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name.contains("HitReaction"):
-		look_at_position(damage_position)
+		look_at_position(last_seen_position)
 		if randf() > 0.5:
 			change_state(states.approach)
 		else:

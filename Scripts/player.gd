@@ -2,7 +2,7 @@ extends CharacterBody3D
 class_name Player
 
 enum zoom_levels {regular, ads, zoom}
-enum gun_states {point, ads, reload, ammo_check, no_gun, point_up, pump}
+enum gun_states {point, ads, reload, ammo_check, no_gun, point_up, pump, unjam}
 var camera_zoom = zoom_levels.regular
 var gun_state = gun_states.point
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -138,6 +138,7 @@ func _ready() -> void:
 		gun_states.no_gun: enter_gun_state_no_gun,
 		gun_states.reload: enter_gun_state_reload,
 		gun_states.point_up: enter_gun_state_point_up,
+		gun_states.unjam: enter_gun_state_unjam,
 	}
 	gun_exit_functions = {
 		gun_states.reload: exit_gun_state_reload,
@@ -170,8 +171,8 @@ func _physics_process(delta):
 	# apply gravity
 	velocity.y += -gravity * delta
 	# stay in boundaries
-	position.x = clamp(position.x, 2, 255)
-	position.z = clamp(position.z, 2, 255)
+	#position.x = clamp(position.x, 2, 255)
+	#position.z = clamp(position.z, 2, 255)
 	# make sure you don't fall under the world
 	if global_position.y < 0:
 		var terrain_y = Globals.get_heightmap_position(global_position)
@@ -361,11 +362,15 @@ func state_walk(delta):
 		#inst.apply_force((Vector3.UP * 500) + -camera.global_transform.basis.z * 750)
 	
 	# reload
-	if Input.is_action_just_pressed("reload") and gun_state != gun_states.reload and gun and gun is Gun:
-		var _ammo = PlayerStats.inventory.find_item(gun.ammo_item.title)
-		if !_ammo or ammo == gun.max_ammo:
-			return
-		change_gun_state(gun_states.reload)
+	if Input.is_action_just_pressed("reload") and gun and gun is Gun:
+		if gun.jammed:
+			if gun_state != gun_states.unjam:
+				change_gun_state(gun_states.unjam)
+		elif gun_state != gun_states.reload:
+			var _ammo = PlayerStats.inventory.find_item(gun.ammo_item.title)
+			if !_ammo or ammo == gun.max_ammo:
+				return
+			change_gun_state(gun_states.reload)
 	
 	# interact tooltip
 	if interact_cast.is_colliding():
@@ -560,8 +565,9 @@ func exit_dead():
 func enter_gun_state_point():
 	if gun_tween:
 		gun_tween.kill()
-	gun_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	gun_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel()
 	gun_tween.tween_property(gun_anchor, "position", Vector3.ZERO, 0.25)
+	gun_tween.tween_property(gun_anchor, "rotation", Vector3.ZERO, 0.25)
 	gun_tween.tween_property(gun, "visible", true, 0)
 	camera_zoom = zoom_levels.regular
 
@@ -723,6 +729,17 @@ func exit_gun_state_point_up() -> void:
 	tween.tween_property(gun_anchor, "position:y", 0, 0.25)
 	tween.tween_property(gun_anchor, "position:z", 0, 0.25)
 	await tween.finished
+
+
+func enter_gun_state_unjam() -> void:
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
+	tween.tween_property(gun_anchor, "position", Vector3(0, -0.25, 0.1), 0.25)
+	tween.tween_property(gun_anchor, "rotation:y", deg_to_rad(45), 0.25)
+	tween.tween_property(gun_anchor, "rotation:x", deg_to_rad(-25), 0.25)
+	tween.set_parallel(false)
+	tween.tween_interval(1.5)
+	tween.tween_property(gun, "jammed", false, 0)
+	tween.tween_callback(change_gun_state.bind(gun_states.point))
 
 
 func change_gun_slot(slot_index: int) -> void:

@@ -82,7 +82,7 @@ const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var knife: Node3D = %GunPivot/GunOffset/GunAnchor/Knife
 @onready var grenade: Node3D = %GunPivot/GunOffset/GunAnchor/Grenade
 @onready var step_timer: Timer = $StepTimer
-@onready var interact_cast: = $CameraAnchor/Camera3D/RayCast3D
+@onready var interact_cast: = $CameraAnchor/Camera3D/ShapeCast3D
 @onready var hitbox: HealthComponent = $Hitbox
 @onready var health_component: HealthComponent = $Hitbox
 @onready var grenade_spawn: Node3D = $CameraAnchor/Camera3D/GrenadeSpawn
@@ -385,8 +385,8 @@ func state_walk(delta):
 				collider.index = wrapi(collider.index + 1, 0, collider.actions.size())
 			elif Input.is_action_just_pressed("last_gun"):
 				collider.index = wrapi(collider.index - 1, 0, collider.actions.size())
-	else:
-		Globals.ui.tooltip.hide()
+	elif Globals.ui.custom_tooltip == "":
+		Globals.ui.hide_tooltip()
 	
 	# interact
 	if Input.is_action_just_pressed("interact"):
@@ -739,6 +739,7 @@ func enter_gun_state_unjam() -> void:
 	tween.set_parallel(false)
 	tween.tween_interval(1.5)
 	tween.tween_property(gun, "jammed", false, 0)
+	tween.tween_callback(Globals.ui.hide_tooltip)
 	tween.tween_callback(change_gun_state.bind(gun_states.point))
 
 

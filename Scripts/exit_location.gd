@@ -21,10 +21,11 @@ func leave_encounter() -> void:
 func _on_body_entered(_body: Node3D) -> void:
 	has_player = true
 	mesh_instance_3d.get_active_material(0).cull_mode = 1
-	Globals.ui.exit_area.show()
+	Globals.ui.set_tooltip_custom("Exit Area")
+	#Globals.ui.exit_area.show()
 
 
 func _on_body_exited(_body: Node3D) -> void:
 	has_player = false
 	mesh_instance_3d.get_active_material(0).cull_mode = 0
-	Globals.ui.exit_area.hide()
+	Globals.ui.hide_tooltip()

@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 var starting_fog: float
+var custom_tooltip: String
 @onready var middle_pos = get_tree().root.get_viewport().size / 8
 @onready var crosshair = $Crosshair
 @onready var player_hp_bar: ProgressBar = %ProgressBar
@@ -138,6 +139,7 @@ func set_tooltip(collider: InteractableObject):
 	if "health_component" in collider and !collider.health_component.is_dead:
 		return
 	tooltip.show()
+	custom_tooltip = ""
 	for child in tooltip_holder.get_children():
 		child.text = ""
 	for i in collider.actions.size():
@@ -151,6 +153,7 @@ func set_tooltip(collider: InteractableObject):
 
 func set_tooltip_custom(text: String):
 	tooltip.show()
+	custom_tooltip = text
 	for i in tooltip_holder.get_child_count():
 		var label : Label = tooltip_holder.get_child(i)
 		label.remove_theme_color_override("font_color")
@@ -158,6 +161,11 @@ func set_tooltip_custom(text: String):
 			label.text = text
 		else:
 			label.text = ""
+
+
+func hide_tooltip() -> void:
+	tooltip.hide()
+	custom_tooltip = ""
 
 
 func play_hit_effect(hit_direction: Vector3) -> void:

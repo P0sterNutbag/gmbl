@@ -2,6 +2,7 @@
 
 [ext_resource type="Material" uid="uid://cuiwmfj20a7tt" path="res://Art/Materials/metal.tres" id="2_irsga"]
 [ext_resource type="Material" uid="uid://ftkcjnpbkrox" path="res://Art/Materials/chain_link.tres" id="3_t7637"]
+[ext_resource type="Script" uid="uid://dr8v7lkb8jdp5" path="res://Scripts/locked_door.gd" id="4_irsga"]
 [ext_resource type="Texture2D" uid="uid://dx1bru6xf04sr" path="res://Art/Textures/Environment/padlock.png" id="5_t7637"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_dc66o"]
@@ -55,6 +56,8 @@ material_override = ExtResource("3_t7637")
 mesh = SubResource("QuadMesh_t7637")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2" unique_id=1924566446]
+collision_layer = 17
+script = ExtResource("4_irsga")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D" unique_id=1520218383]
 shape = SubResource("BoxShape3D_85734")

@@ -523,7 +523,11 @@ func _on_death() -> void:
 	physical_bone_simulator.physical_bones_start_simulation()
 	var bones = physical_bone_simulator.get_children()
 	bones.sort_custom(func(a, b): return a.global_position.distance_to(damage_position) < b.global_position.distance_to(damage_position))
-	bones[0].apply_impulse(-damage_direction.normalized() * 35)
+	for i in bones.size():
+		var bone = bones[i]
+		bone.apply_impulse(-damage_direction * 5)
+		if i > 3:
+			continue
 	if bounty:
 		bounty.completed = true
 		bounty.location = bounty.return_location

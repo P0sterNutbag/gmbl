@@ -34,12 +34,13 @@ var category_icons := {
 }
 var category_index = -1
 const text_style = preload("res://Art/Themes/text_small.tres")
+const hbox_style = preload("uid://ddlkdp3v3plc")
 @onready var item_container: MenuController = %Items
 @onready var title: Label = $MarginContainer/VBoxContainer/Label
 @onready var money_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/Money
 @onready var size_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/Size
 @onready var category_label: Label = %Category
-@onready var stats: HBoxContainer = %Stats
+@onready var stats: VBoxContainer = %Stats
 @onready var description: Label = %Label
 @onready var use_controls: HBoxContainer = $Controls/HBoxContainer
 @onready var loot_controls: HBoxContainer = $Controls/HBoxContainer2
@@ -180,12 +181,24 @@ func set_description(item: Item = null):
 		return
 	item_tooltip.show()
 	for stat in item.stats:
-		var inst = Label.new()
-		#inst.text = stat + ": " + str(item.stats[stat])
-		#inst.text = stat + ": " + str(item.get("gun_stats").condition) + "/" + str(item.get("gun_stats").max_condition)
-		inst.text = stat + ": " + str(item.get(item.stats[stat]))
-		inst.theme = text_style
-		stats.add_child(inst)
+		var hbox_container = HBoxContainer.new()
+		hbox_container.theme = hbox_style
+		stats.add_child(hbox_container)
+		var stat_label = Label.new()
+		stat_label.text = stat.name + ": "
+		stat_label.theme = text_style
+		hbox_container.add_child(stat_label)
+		var value_label = Label.new()
+		var stat_value = item.get(stat.variable_name)
+		value_label.text = str(stat_value)
+		value_label.theme = text_style
+		if stat.max_value > 0.0:
+			if stat_value >= 75.0:
+				value_label.add_theme_color_override("font_color", Color(0.0, 1.0, 0.0, 1.0))
+			elif stat_value <= 25.0:
+				value_label.add_theme_color_override("font_color", Color(1.0, 0.0, 0.0, 1.0))
+		hbox_container.add_child(value_label)
+
 
 
 func filter(category: int) -> void:

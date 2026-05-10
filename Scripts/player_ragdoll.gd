@@ -33,7 +33,12 @@ func start_ragdoll(damage_position: Vector3, fall_direction: Vector3, gun: Gun) 
 	physical_bone_simulator.physical_bones_start_simulation()
 	var bones = physical_bone_simulator.get_children()
 	bones.sort_custom(func(a, b): return a.global_position.distance_to(damage_position) < b.global_position.distance_to(damage_position))
-	bones[0].apply_impulse(-fall_direction.normalized() * 35)
+	for i in bones.size():
+		var bone = bones[i]
+		bone.apply_impulse(-fall_direction * 5)
+		if i > 3:
+			continue
+	print(fall_direction)
 	Engine.time_scale = 0.35
 	await get_tree().create_timer(1).timeout
 	Engine.time_scale = 1.0

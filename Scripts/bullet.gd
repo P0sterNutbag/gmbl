@@ -44,7 +44,7 @@ func hit():
 	#var damage = bullet_stats.damage * (0.5 + min(0.5 * (gun_stats.condition / gun_stats.max_condition) / 0.75, 0.5))
 	if collider is PhysicalBone3D:
 		if collider.health_component:
-			collider.health_component.damage(bullet_stats.damage * collider.damage_modifier, raycast.get_collision_point(), global_rotation, creator)
+			collider.health_component.damage(bullet_stats.damage * collider.damage_modifier, raycast.get_collision_point(), global_transform.basis.z.normalized(), creator)
 		var decal = blood_spatter.instantiate()
 		decal.set_deferred("global_position", raycast.get_collision_point())
 		collider.add_child(decal)
@@ -52,7 +52,7 @@ func hit():
 		#collider.apply_impulse(rotation * 50, raycast.get_collision_point())
 		#collider.turn_off_simulation()
 	elif collider is HealthComponent:
-		collider.damage(bullet_stats.damage, raycast.get_collision_point(), rotation, creator)
+		collider.damage(bullet_stats.damage, raycast.get_collision_point(), global_transform.basis.z.normalized(), creator)
 		if !bullet_stats.is_hitscan:
 			queue_free()
 	elif collider.get_parent() is Trap:

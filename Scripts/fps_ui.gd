@@ -47,6 +47,7 @@ func _process(delta: float) -> void:
 			hide()
 		else:
 			show()
+
 	#if commands.visible:
 		#var text = "1: "
 		#if PlayerStats.allies_follow: text += "Stop"
@@ -178,8 +179,7 @@ func play_hit_effect(hit_direction: Vector3) -> void:
 	# hit indicator
 	hit_indicator.show()
 	hit_indicator.modulate.a = 1
-	var b_basis = Basis.from_euler(hit_direction)
-	var b_fwd = -b_basis.z
+	var b_fwd = -hit_direction
 	b_fwd.y = 0.0
 	b_fwd = b_fwd.normalized()
 	var bullet_yaw = atan2(b_fwd.x, b_fwd.z)

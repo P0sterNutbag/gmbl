@@ -12,6 +12,7 @@
 [ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="10_m06hg"]
 [ext_resource type="PackedScene" uid="uid://bj7gyfau2dx5w" path="res://Scenes/UI/menu_button.tscn" id="11_mnhd3"]
 [ext_resource type="Theme" uid="uid://bfjgfeibxk7i0" path="res://Art/Themes/slider.tres" id="11_or60b"]
+[ext_resource type="Theme" uid="uid://efo20xxcf1e5" path="res://Art/Themes/vbox_container.tres" id="13_or60b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d513x"]
 bg_color = Color(1, 1, 0, 1)
@@ -297,11 +298,11 @@ size_flags_vertical = 3
 theme = ExtResource("8_d513x")
 autowrap_mode = 2
 
-[node name="Stats" type="HBoxContainer" parent="ItemTooltip/PanelContainer/MarginContainer/VBoxContainer" unique_id=508532780]
+[node name="Stats" type="VBoxContainer" parent="ItemTooltip/PanelContainer/MarginContainer/VBoxContainer" unique_id=334120395]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 32
+theme = ExtResource("13_or60b")
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_focus_exited"]

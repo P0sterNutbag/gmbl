@@ -32,11 +32,12 @@
 [ext_resource type="PackedScene" uid="uid://bf3gw6c3ye46j" path="res://Scenes/Environment/Prefabs With Spawning/drum_barrels.tscn" id="28_s1ili"]
 [ext_resource type="PackedScene" uid="uid://l3jxv2m7v02q" path="res://Scenes/Environment/Props/fence_long_end.tscn" id="30_0sbey"]
 
-[sub_resource type="Resource" id="Resource_0sbey"]
+[sub_resource type="Resource" id="Resource_losmd"]
 resource_local_to_scene = true
 script = ExtResource("2_lh7il")
 faction = 4
-population = 4
+population = 12
+max_population = 12
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_j2yn6"]
@@ -133,7 +134,7 @@ rotate_z = true
 metadata/_custom_type_script = "uid://yjtjuxrauvya"
 
 [node name="Encounter" unique_id=699194105 instance=ExtResource("1_d1kxj")]
-location_data = SubResource("Resource_0sbey")
+location_data = SubResource("Resource_losmd")
 
 [node name="Terrain" parent="." index="5" unique_id=1995643304]
 _terrain_data = ExtResource("3_u10sy")
@@ -206,13 +207,13 @@ transform = Transform3D(-0.74438244, -0.14481275, 0.651862, -0.14348309, 0.98808
 transform = Transform3D(-0.7910444, 0, 0.6117587, 0, 1, 0, -0.6117587, 0, -0.7910444, 125.96499, 13.431512, 112.66222)
 
 [node name="RigidBody3D" parent="NavigationRegion3D/Generated" parent_id_path=PackedInt32Array(1747398403) index="6" unique_id=114731580 instance=ExtResource("10_ksibt")]
-transform = Transform3D(-0.77796715, 0.18581459, 0.60019976, 0.11837001, 0.98150593, -0.15043469, -0.61705405, -0.0459875, -0.78557575, 185.63512, 11.2195215, 104.599106)
+transform = Transform3D(-0.77796715, 0.18581454, 0.60019976, 0.11837001, 0.9815057, -0.15043469, -0.61705405, -0.04598749, -0.78557575, 185.63512, 11.2195215, 104.599106)
 
 [node name="@Node3D@66290" parent="NavigationRegion3D/Generated" parent_id_path=PackedInt32Array(1747398403) index="7" unique_id=1594419814 instance=ExtResource("10_ksibt")]
-transform = Transform3D(-0.092629485, -0.030111372, 0.9952431, -0.03299624, 0.9990844, 0.027156558, -0.9951517, -0.030323848, -0.093538426, 129.41676, 9.312435, 40.113117)
+transform = Transform3D(-0.09262946, -0.030111365, 0.99524283, -0.032996234, 0.9990842, 0.02715655, -0.99515146, -0.03032384, -0.0935384, 129.41676, 9.312435, 40.113117)
 
 [node name="@Node3D@66291" parent="NavigationRegion3D/Generated" parent_id_path=PackedInt32Array(1747398403) index="8" unique_id=1946051237 instance=ExtResource("11_gd5m3")]
-transform = Transform3D(-0.89548934, 0.17367218, -0.4098003, 0.19149745, 0.9814895, -0.0025047848, 0.40177977, -0.08071872, -0.9121716, 186.59949, 9.791675, 82.734024)
+transform = Transform3D(-0.89548934, 0.17367218, -0.4098003, 0.19149745, 0.9814895, -0.0025047874, 0.40177977, -0.080718726, -0.9121716, 186.59949, 9.791675, 82.734024)
 
 [node name="@Node3D@66292" parent="NavigationRegion3D/Generated" parent_id_path=PackedInt32Array(1747398403) index="9" unique_id=513624351 instance=ExtResource("15_xdj2q")]
 transform = Transform3D(0.30266905, -0.025866624, -0.95274466, -0.19349469, 0.9771456, -0.087998785, 0.9332477, 0.21098526, 0.29074702, 236.63588, 5.725233, 54.253777)
@@ -242,7 +243,7 @@ transform = Transform3D(0.8185882, 0.12168145, -0.5613438, -0.05862409, 0.989898
 transform = Transform3D(-0.9554612, -0.09376611, -0.27982458, -0.042244777, 0.9818734, -0.18477003, 0.29207745, -0.16471946, -0.9421031, 69.24923, 7.2952046, 135.81488)
 
 [node name="@Node3D@66301" parent="NavigationRegion3D/Generated" parent_id_path=PackedInt32Array(1747398403) index="18" unique_id=1665279538 instance=ExtResource("10_0sbey")]
-transform = Transform3D(-0.14732948, 0.0077149365, -0.9890553, 0.15374118, 0.98799425, -0.0151946405, 0.9770634, -0.15429781, -0.14674683, 47.452866, 8.361556, 146.60197)
+transform = Transform3D(-0.14732945, 0.0077149384, -0.98905504, 0.15374114, 0.98799425, -0.015194633, 0.9770632, -0.1542978, -0.1467468, 47.452866, 8.361556, 146.60197)
 
 [node name="@Node3D@66302" parent="NavigationRegion3D/Generated" parent_id_path=PackedInt32Array(1747398403) index="19" unique_id=1069239682 instance=ExtResource("10_0sbey")]
 transform = Transform3D(0.99585325, -0.08947134, 0.016467784, 0.090958625, 0.97588307, -0.19844097, 0.0016841479, 0.19911596, 0.9799745, 168.35532, 10.627386, 166.39084)
@@ -254,7 +255,7 @@ transform = Transform3D(0.5113571, -0.06184111, 0.85714036, 0.19395527, 0.979977
 transform = Transform3D(0.9372338, 0, 0.3487016, 0, 1, 0, -0.3487016, 0, 0.9372338, 210.57025, 7.747834, 29.761942)
 
 [node name="@Node3D@66305" parent="NavigationRegion3D/Generated" parent_id_path=PackedInt32Array(1747398403) index="22" unique_id=1434059034 instance=ExtResource("10_ksibt")]
-transform = Transform3D(0.45732236, -0.13315319, -0.87927604, 0.025170412, 0.9902671, -0.13687028, 0.88894475, 0.040462017, 0.45622376, 91.63917, 5.199161, 36.687977)
+transform = Transform3D(0.45732236, -0.13315316, -0.87927604, 0.025170412, 0.99026686, -0.13687028, 0.88894475, 0.040462006, 0.45622376, 91.63917, 5.199161, 36.687977)
 
 [node name="@Node3D@66306" parent="NavigationRegion3D/Generated" parent_id_path=PackedInt32Array(1747398403) index="23" unique_id=41762326 instance=ExtResource("10_ksibt")]
 transform = Transform3D(-0.82139474, 0.21333845, -0.5289586, 0.22127016, 0.9739685, 0.04921986, 0.52569026, -0.076613754, -0.8472188, 221.5524, 5.3593793, 111.8155)
@@ -278,10 +279,10 @@ transform = Transform3D(-0.66482854, 0, -0.74699587, 0, 1, 0, 0.74699587, 0, -0.
 transform = Transform3D(-0.9985894, 0, 0.05309626, 0, 1, 0, -0.05309626, 0, -0.9985894, 230.80096, 11.90837, 17.948214)
 
 [node name="@Node3D@66313" parent="NavigationRegion3D/Generated" parent_id_path=PackedInt32Array(1747398403) index="30" unique_id=17555908 instance=ExtResource("15_xdj2q")]
-transform = Transform3D(-0.7766432, -0.11336983, 0.6196552, -0.085502885, 0.9935384, 0.07461004, -0.624111, 0.0049630636, -0.7813199, 115.50649, 8.254207, 42.873783)
+transform = Transform3D(-0.7766432, -0.11336981, 0.6196552, -0.085502885, 0.99353814, 0.07461004, -0.624111, 0.0049630627, -0.7813199, 115.50649, 8.254207, 42.873783)
 
 [node name="@Node3D@66314" parent="NavigationRegion3D/Generated" parent_id_path=PackedInt32Array(1747398403) index="31" unique_id=1230191847 instance=ExtResource("10_ksibt")]
-transform = Transform3D(-0.5935238, 0.10712728, 0.7976547, 0.040423986, 0.9938166, -0.10339399, -0.8038003, -0.029122356, -0.5941857, 50.939667, 5.5992, 11.064387)
+transform = Transform3D(-0.5935238, 0.10712725, 0.7976547, 0.040423986, 0.9938164, -0.10339399, -0.8038003, -0.02912235, -0.5941857, 50.939667, 5.5992, 11.064387)
 
 [node name="@Node3D@66315" parent="NavigationRegion3D/Generated" parent_id_path=PackedInt32Array(1747398403) index="32" unique_id=1895295979 instance=ExtResource("15_xdj2q")]
 transform = Transform3D(-0.10856466, -0.043366794, -0.993143, 0.11855273, 0.99135333, -0.056248143, 0.9869949, -0.123846374, -0.10248469, 138.75027, 11.127426, 58.102497)
@@ -299,16 +300,16 @@ transform = Transform3D(-0.2079041, -0.14148694, 0.9678623, -0.036609262, 0.9899
 transform = Transform3D(-0.19117203, -0.1590185, 0.96858984, -0.09085046, 0.98542035, 0.14385031, -0.97734165, -0.060496747, -0.20283201, 108.73388, 8.165891, 71.79146)
 
 [node name="@Node3D@66320" parent="NavigationRegion3D/Generated" parent_id_path=PackedInt32Array(1747398403) index="37" unique_id=1620681356 instance=ExtResource("10_0sbey")]
-transform = Transform3D(-0.8738415, 0.10621468, 0.4744673, 0.115221456, 0.9932859, -0.010151733, -0.4723609, 0.04579772, -0.8802146, 91.47274, 10.701854, 180.832)
+transform = Transform3D(-0.8738415, 0.10621466, 0.4744673, 0.115221456, 0.99328566, -0.010151733, -0.4723609, 0.04579771, -0.8802146, 91.47274, 10.701854, 180.832)
 
 [node name="@Node3D@66321" parent="NavigationRegion3D/Generated" parent_id_path=PackedInt32Array(1747398403) index="38" unique_id=1402770522 instance=ExtResource("14_s1ili")]
-transform = Transform3D(0.79758364, -0.1183754, 0.59147906, 0.08682628, 0.99287164, 0.08162729, -0.5969267, -0.01374864, 0.80217797, 70.656494, 2.399269, 70.22822)
+transform = Transform3D(0.79758364, -0.11837537, 0.59147906, 0.08682628, 0.9928714, 0.08162729, -0.5969267, -0.013748637, 0.80217797, 70.656494, 2.399269, 70.22822)
 
 [node name="@Node3D@66322" parent="NavigationRegion3D/Generated" parent_id_path=PackedInt32Array(1747398403) index="39" unique_id=318270808 instance=ExtResource("11_gd5m3")]
 transform = Transform3D(0.09359834, 0.14888005, -0.98441565, 0.07333077, 0.9850397, 0.15594675, 0.99290586, -0.0867843, 0.0812806, 190.40955, 11.531816, 122.23484)
 
 [node name="@Node3D@66323" parent="NavigationRegion3D/Generated" parent_id_path=PackedInt32Array(1747398403) index="40" unique_id=1351195913 instance=ExtResource("14_s1ili")]
-transform = Transform3D(0.98735493, 0.05378744, 0.1491098, -0.078177854, 0.9835417, 0.16288066, -0.13789499, -0.17247829, 0.9753121, 45.14922, 5.696474, 130.31839)
+transform = Transform3D(0.9873547, 0.053787448, 0.14910989, -0.078177854, 0.9835417, 0.16288066, -0.13789502, -0.17247829, 0.9753121, 45.14922, 5.696474, 130.31839)
 
 [node name="@Node3D@66324" parent="NavigationRegion3D/Generated" parent_id_path=PackedInt32Array(1747398403) index="41" unique_id=1272629684 instance=ExtResource("11_gd5m3")]
 transform = Transform3D(0.7327538, -0.055145703, -0.67825574, -0.07430569, 0.98426723, -0.16030219, 0.67642486, 0.1678603, 0.71712786, 203.2653, 3.0884812, 233.51123)
@@ -496,80 +497,77 @@ transform = Transform3D(-0.06963542, 0, 0.9975725, 0, 1, 0, -0.9975725, 0, -0.06
 [node name="@Node3D@25693" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="2" unique_id=1664105395 instance=ExtResource("3_j2yn6")]
 transform = Transform3D(0.98661464, 0, -0.16306931, 0, 1, 0, 0.16306931, 0, 0.98661464, 59.31662, 2.8096805, 126.37399)
 
-[node name="TireStacks" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="3" unique_id=765969578 instance=ExtResource("6_ithmn")]
-transform = Transform3D(-0.07452104, 0, -0.9972194, 0, 1, 0, 0.9972194, 0, -0.07452104, 51.916603, 6.1547737, 178.12154)
-
-[node name="ShackNoWindows" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="4" unique_id=1877543432 instance=ExtResource("7_ydsf3")]
+[node name="ShackNoWindows" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="3" unique_id=1877543432 instance=ExtResource("7_ydsf3")]
 transform = Transform3D(0.31474915, 0, -0.9491749, 0, 1, 0, 0.9491749, 0, 0.31474915, 183.24843, 5.0232954, 49.218292)
 
-[node name="TireStacks2" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="5" unique_id=988473134 instance=ExtResource("6_ithmn")]
+[node name="TireStacks2" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="4" unique_id=988473134 instance=ExtResource("6_ithmn")]
 transform = Transform3D(0.9179335, 0, -0.3967343, 0, 1, 0, 0.3967343, 0, 0.9179335, 212.07672, 1.7136517, 160.6961)
 
-[node name="Trash" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="6" unique_id=1656667854 instance=ExtResource("19_lm2te")]
+[node name="Trash" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="5" unique_id=1656667854 instance=ExtResource("19_lm2te")]
 transform = Transform3D(0.7921972, 0, -0.61026514, 0, 1, 0, 0.61026514, 0, 0.7921972, 96.81116, 2.67841, 218.72777)
 
-[node name="WoodenCrates" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="7" unique_id=1936525975 instance=ExtResource("20_0sbey")]
+[node name="WoodenCrates" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="6" unique_id=1936525975 instance=ExtResource("20_0sbey")]
 transform = Transform3D(0.09229828, 0, 0.9957314, 0, 1, 0, -0.9957314, 0, 0.09229828, 231.19215, 0.964241, 218.9623)
 
-[node name="DrumBarrels" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="8" unique_id=1430577914 instance=ExtResource("28_s1ili")]
+[node name="DrumBarrels" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="7" unique_id=1430577914 instance=ExtResource("28_s1ili")]
 transform = Transform3D(-0.9568045, 0, 0.29073182, 0, 1, 0, -0.29073182, 0, -0.9568045, 58.282967, 1.7642436, 133.75775)
 
-[node name="@Node3D@253081" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="9" unique_id=1666946650 instance=ExtResource("19_lm2te")]
+[node name="@Node3D@253081" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="8" unique_id=1666946650 instance=ExtResource("19_lm2te")]
 transform = Transform3D(-0.019701146, 0, -0.99980587, 0, 1, 0, 0.99980587, 0, -0.019701146, 175.7618, 1.6289461, 153.31818)
 
-[node name="@Node3D@253082" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="10" unique_id=277548235 instance=ExtResource("28_s1ili")]
+[node name="@Node3D@253082" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="9" unique_id=277548235 instance=ExtResource("28_s1ili")]
 transform = Transform3D(-0.9709785, 0, -0.23916677, 0, 1, 0, 0.23916677, 0, -0.9709785, 212.29501, 1.0239906, 129.82317)
 
-[node name="@Node3D@253083" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="11" unique_id=1190606065 instance=ExtResource("6_ithmn")]
+[node name="@Node3D@253083" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="10" unique_id=1190606065 instance=ExtResource("6_ithmn")]
 transform = Transform3D(-0.7098394, 0, -0.7043636, 0, 1, 0, 0.7043636, 0, -0.7098394, 130.29332, 2.2260015, 200.24377)
 
-[node name="RockWall" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="12" unique_id=1982699201 instance=ExtResource("9_h8oid")]
+[node name="RockWall" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="11" unique_id=1982699201 instance=ExtResource("9_h8oid")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80.22801, 2, 40.67685)
 
-[node name="RockWall2" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="13" unique_id=1989493255 instance=ExtResource("9_h8oid")]
+[node name="RockWall2" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="12" unique_id=1989493255 instance=ExtResource("9_h8oid")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 84.13023, -2.1990814, 48.79518)
 
-[node name="RockWall3" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="14" unique_id=1544474932 instance=ExtResource("9_h8oid")]
+[node name="RockWall3" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="13" unique_id=1544474932 instance=ExtResource("9_h8oid")]
 transform = Transform3D(2, 0, 0, 0, 5, 0, 0, 0, 2, 65.87319, 3.9163456, 61.49218)
 
-[node name="RockWall4" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="15" unique_id=2121807737 instance=ExtResource("9_h8oid")]
+[node name="RockWall4" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="14" unique_id=2121807737 instance=ExtResource("9_h8oid")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 94.749565, 6.847562, 190.35722)
 
-[node name="RockWall5" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="16" unique_id=361687690 instance=ExtResource("9_h8oid")]
+[node name="RockWall5" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="15" unique_id=361687690 instance=ExtResource("9_h8oid")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 208.41327, 0.33852506, 219.54819)
 
-[node name="RockWall6" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="17" unique_id=1840033137 instance=ExtResource("9_h8oid")]
+[node name="RockWall6" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="16" unique_id=1840033137 instance=ExtResource("9_h8oid")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 203.4299, 4.5566826, 224.80019)
 
-[node name="RockWall7" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="18" unique_id=383443089 instance=ExtResource("9_h8oid")]
+[node name="RockWall7" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="17" unique_id=383443089 instance=ExtResource("9_h8oid")]
 transform = Transform3D(9.877702, 1.559173, 0, -1.559173, 9.877702, 0, 0, 0, 10, 226.35973, 1.4850445, 124.44267)
 
-[node name="Dumpster" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="19" unique_id=1701337696 instance=ExtResource("21_h5vuc")]
+[node name="Dumpster" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="18" unique_id=1701337696 instance=ExtResource("21_h5vuc")]
 transform = Transform3D(-0.7340658, -0.050375868, 0.6772062, 0.059540145, 0.98862857, 0.13808142, -0.67646134, 0.14168185, -0.72272056, 150.62393, 4.81295, 187.45142)
 
-[node name="FenceLong" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="20" unique_id=1878563651 instance=ExtResource("16_kuexq")]
+[node name="FenceLong" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="19" unique_id=1878563651 instance=ExtResource("16_kuexq")]
 transform = Transform3D(0.09155376, 0, -0.99580014, 0, 1, 0, 0.99580014, 0, 0.09155376, 113.93858, 10.136948, 0.24620324)
 
 [node name="End" parent="NavigationRegion3D/Custom/FenceLong" index="0" unique_id=1718507400]
-transform = Transform3D(0.999422, 0.032995492, 0.008178484, -0.032174688, 0.9958007, -0.08569902, -0.010971829, 0.0853863, 0.9962875, 29.999998, -1.4722977, 0.0001373291)
+transform = Transform3D(0.999422, 0.03299549, 0.008178454, -0.03217469, 0.99580044, -0.08569902, -0.0109717995, 0.085386276, 0.9962875, 29.999998, -1.4722977, 0.00019836426)
 
 [node name="FenceLong" parent="NavigationRegion3D/Custom/FenceLong/End" index="0" unique_id=2063295538 instance=ExtResource("16_kuexq")]
 transform = Transform3D(0.9858911, 0, 0.16738823, 0, 1, 0, -0.16738823, 0, 0.9858911, 0, 0, 0)
 
 [node name="End" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong" index="0" unique_id=1718507400]
-transform = Transform3D(0.9923387, -0.12350921, 0.0031796435, 0.12354293, 0.9922303, -0.014699819, -0.0013393764, 0.014980016, 0.99988675, 30.122963, 1.7555282, -0.16355133)
+transform = Transform3D(0.9923391, -0.12350923, 0.003179466, 0.123543, 0.9922302, -0.014699836, -0.0013391982, 0.0149800135, 0.9998866, 30.122974, 1.7555264, -0.1635971)
 
 [node name="FenceLong" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/End" index="0" unique_id=2031636508 instance=ExtResource("16_kuexq")]
 transform = Transform3D(0.9993123, 0, 0.037079744, 0, 1, 0, -0.037079744, 0, 0.9993123, 0, 0, 0)
 
 [node name="End" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/End/FenceLong" index="0" unique_id=1718507400]
-transform = Transform3D(0.999998, -0.001994617, 6.0268718e-05, 0.001995527, 0.999542, -0.030201843, 0, 0.0302019, 0.9995441, 30.053787, 0.5022602, -0.053123474)
+transform = Transform3D(0.99999934, -0.0011423343, 5.411631e-05, 0.0011433221, 0.9996947, -0.024687639, -2.589823e-05, 0.024687676, 0.9996957, 30.058853, 0.5477972, -0.057746887)
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/End/FenceLong/End" index="0" unique_id=56914019 instance=ExtResource("28_losmd")]
-transform = Transform3D(0.9975336, -7.450583e-09, 0.07019169, 6.2555263e-09, 1.0000001, 1.7245434e-08, -0.07019169, -1.6763812e-08, 0.9975336, 0, 0, 0)
+transform = Transform3D(0.9975336, -1.1790458e-08, 0.07019195, 1.4901174e-08, 1.0000002, -4.3793676e-08, -0.07019194, 4.4731603e-08, 0.99753374, 0, 1.9073486e-06, 0)
 
 [node name="Fence2" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/End/FenceLong" index="1" unique_id=56914019]
-transform = Transform3D(1, -1.4901168e-08, 2.980234e-08, 1.4901167e-08, 1.0000001, 1.8626383e-09, -2.9802333e-08, -1.8626376e-09, 1.0000002, 0, 0, 0)
+transform = Transform3D(0.99999994, -1.4901175e-08, 2.6822116e-07, 1.490117e-08, 1.0000004, -7.450631e-09, -2.6822104e-07, 7.450636e-09, 1.0000004, 0, -1.9073486e-06, 0)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/End/FenceLong/Fence2" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -578,7 +576,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/End/FenceLong/Fence2/NextPole" parent_id_path=PackedInt32Array(2031636508, 56914019, 1077912177) index="0" unique_id=2139382426]
-transform = Transform3D(0.99982566, -0.018657716, 0.00014340547, 0.01865827, 0.99979603, -0.007686151, 2.9816867e-08, 0.007687487, 0.9999703, 0.004737854, 0.044405937, -0.0046844482)
+transform = Transform3D(0.99982005, -0.01892994, 0.00013036457, 0.01893039, 0.9997955, -0.006989187, 1.9669665e-06, 0.0069903987, 0.9999752, 0.0022125244, 0.021839142, -0.002380371)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -587,7 +585,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(2031636508, 2139382426, 1077912177) index="0" unique_id=2106792037]
-transform = Transform3D(0.9999653, -0.008399066, 8.7108405e-05, 0.0083995145, 0.9999117, -0.010373835, 2.980234e-08, 0.010374202, 0.9999469, -0.005302429, -0.042015076, 0.004776001)
+transform = Transform3D(0.9999748, -0.007185603, 4.715722e-05, 0.007185745, 0.9999634, -0.004820542, -1.2516983e-05, 0.004820758, 0.999989, 0.011276245, 0.08542061, -0.009155273)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -596,7 +594,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(2031636508, 2106792037, 1077912177) index="0" unique_id=2114023668]
-transform = Transform3D(0.999995, 0.0030958785, -1.2533224e-05, -0.0030959046, 0.9999866, -0.0040483037, -9.094945e-13, 0.0040483233, 0.9999914, 0.012527466, 0.092829704, -0.011543274)
+transform = Transform3D(0.9999981, -0.0017857896, -4.8855227e-08, 0.0017856809, 0.9999371, -0.011020493, 1.9729141e-05, 0.011020471, 0.9999391, -0.010620117, -0.075452805, 0.007659912)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -605,7 +603,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(2031636508, 2114023668, 1077912177) index="0" unique_id=2022508004]
-transform = Transform3D(0.9999734, 0.0072602667, -7.9716825e-05, -0.0072607044, 0.9999134, -0.010958399, 1.4901885e-07, 0.010958687, 0.99993986, -0.010276794, -0.078009605, 0.010017395)
+transform = Transform3D(0.99995667, 0.009283615, 9.014366e-06, -0.009283593, 0.99995583, -0.0013917569, -2.1934506e-05, 0.0013916135, 0.9999988, -0.0055236816, -0.04405594, 0.0057754517)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -614,7 +612,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence2" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong" index="1" unique_id=56914019]
-transform = Transform3D(1, 3.725291e-09, 1.1920932e-07, -3.7252899e-09, 1.0000007, 1.1175867e-08, -1.19209275e-07, -1.1175872e-08, 1.0000004, 0, 0, 0)
+transform = Transform3D(1.0000002, -7.4505895e-09, 1.4901168e-07, 7.450582e-09, 1.000001, 1.3969832e-08, -1.4901164e-07, -1.3969839e-08, 1.0000005, 0, 0, 0)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/Fence2" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -623,7 +621,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/Fence2/NextPole" parent_id_path=PackedInt32Array(2063295538, 56914019, 1077912177) index="0" unique_id=2139382426]
-transform = Transform3D(0.9998027, -0.019840648, -0.000100209894, 0.019840904, 0.9997911, 0.004783813, 5.275016e-06, -0.004784857, 0.9999885, 0.0054626465, 0.10650325, -0.009887695)
+transform = Transform3D(0.9998026, -0.019840641, -0.000100447985, 0.0198409, 0.99979085, 0.0047837943, 5.5134337e-06, -0.004784841, 0.99998856, 0.0054473877, 0.106503606, -0.009902954)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/Fence2/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -632,7 +630,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(2063295538, 2139382426, 1077912177) index="0" unique_id=2106792037]
-transform = Transform3D(0.9996829, -0.025218422, 0.00020014944, 0.025219098, 0.9996711, -0.004834247, -7.817152e-05, 0.0048377593, 0.9999887, 0.003944397, -0.00509429, 0.0002746582)
+transform = Transform3D(0.99968314, -0.02521842, 0.00020029877, 0.025219103, 0.9996711, -0.004834257, -7.832057e-05, 0.0048377733, 0.9999887, 0.0039367676, -0.0051014423, 0.00021362305)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -641,7 +639,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(2063295538, 2106792037, 1077912177) index="0" unique_id=2114023668]
-transform = Transform3D(0.99966043, -0.026035879, -7.00072e-06, 0.026035877, 0.9996599, 0.0009120964, -1.6748903e-05, -0.0009119692, 0.99999917, 0.005882263, 0.101905584, -0.008361816)
+transform = Transform3D(0.99966073, -0.02603589, -7.17979e-06, 0.0260359, 0.99965984, 0.0009121036, -1.6570097e-05, -0.0009119809, 0.9999993, 0.005859375, 0.101908445, -0.008338928)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -650,7 +648,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(2063295538, 2114023668, 1077912177) index="0" unique_id=2022508004]
-transform = Transform3D(0.99961436, -0.027773742, 0.00019268715, 0.027774343, 0.9996033, -0.004714874, -6.1661e-05, 0.0047184075, 0.9999889, 0.0076293945, 0.1340313, -0.010345459)
+transform = Transform3D(0.9996146, -0.027773766, 0.00019256836, 0.027774366, 0.9996035, -0.004714886, -6.154183e-05, 0.004718417, 0.99998915, 0.0076446533, 0.13402605, -0.010360718)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -659,7 +657,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence2" parent="NavigationRegion3D/Custom/FenceLong" index="1" unique_id=56914019]
-transform = Transform3D(0.9990418, 0.043603804, -0.0037709188, -0.043766577, 0.9953261, -0.086077735, -2.2118911e-08, 0.08616032, 0.9962805, 0, -0.08873558, 0)
+transform = Transform3D(0.9990418, 0.043603804, -0.003770896, -0.043766577, 0.9953261, -0.08607772, -4.4703484e-08, 0.086160325, 0.99628025, 0, -0.08873558, 0)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong/Fence2" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -668,7 +666,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong/Fence2/NextPole" parent_id_path=PackedInt32Array(1878563651, 56914019, 1077912177) index="0" unique_id=2139382426]
-transform = Transform3D(0.9999918, 0.0041402043, 3.0844803e-05, -0.0041403156, 0.9999647, 0.0074732, 9.685758e-08, -0.0074732713, 0.9999722, -0.0013484955, 0.03058219, -0.0026474)
+transform = Transform3D(0.999992, 0.004140206, 3.0815056e-05, -0.004140316, 0.99996513, 0.0074732145, 1.2666722e-07, -0.0074732876, 0.9999724, -0.0013523102, 0.03058207, -0.0026474)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong/Fence2/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -677,7 +675,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong/Fence2/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(1878563651, 2139382426, 1077912177) index="0" unique_id=2106792037]
-transform = Transform3D(0.9999942, 0.0034086197, 1.5419257e-05, -0.0034086572, 0.9999833, 0.0045016734, -7.4507625e-08, -0.004501693, 0.9999907, -0.0013084412, 0.026927233, -0.0019454956)
+transform = Transform3D(0.9999941, 0.0034086145, 1.5426645e-05, -0.0034086537, 0.9999827, 0.00450166, -8.195638e-08, -0.0045016776, 0.99999046, -0.0013103485, 0.02693212, -0.0018844604)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong/Fence2/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -686,7 +684,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(1878563651, 2106792037, 1077912177) index="0" unique_id=2114023668]
-transform = Transform3D(1.0000008, -0.00022489854, 7.012894e-07, 0.00022489979, 0.9999938, -0.003515772, 8.94071e-08, 0.0035157755, 0.9999929, 0.0021381378, -0.04146576, 0.0030822754)
+transform = Transform3D(1.0000011, -0.00022489845, 7.310916e-07, 0.00022489988, 0.9999938, -0.0035157718, 5.960471e-08, 0.0035157765, 0.99999255, 0.0021457672, -0.041465998, 0.0030899048)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -695,7 +693,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(1878563651, 2114023668, 1077912177) index="0" unique_id=2022508004]
-transform = Transform3D(0.99998003, -0.0063145664, -6.4534197e-06, 0.006314569, 0.99997956, 0.0010243284, -1.4901614e-08, -0.0010243495, 0.99999875, -0.0024490356, 0.047798157, -0.003730774)
+transform = Transform3D(0.9999801, -0.006314564, -6.3863763e-06, 0.0063145673, 0.99997956, 0.0010243307, -8.195639e-08, -0.0010243515, 0.9999987, -0.0024490356, 0.047798157, -0.003730774)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -703,7 +701,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 [node name="CollisionShape3D" parent="NavigationRegion3D/Custom/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole/Fence/MeshInstance3D/StaticBody3D" parent_id_path=PackedInt32Array(1878563651, 2022508004, 227371199) index="0" unique_id=702656593]
 shape = SubResource("CylinderShape3D_pip1p")
 
-[node name="FenceLong2" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="21" unique_id=955782633 instance=ExtResource("16_kuexq")]
+[node name="FenceLong2" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="20" unique_id=955782633 instance=ExtResource("16_kuexq")]
 transform = Transform3D(0.70017445, 0, -0.7139718, 0, 1, 0, 0.7139718, 0, 0.70017445, 152.67482, 16.351696, 121.63547)
 
 [node name="End" parent="NavigationRegion3D/Custom/FenceLong2" index="0" unique_id=1718507400]
@@ -713,25 +711,25 @@ transform = Transform3D(0.99626994, 0.08628433, -0.0011617134, -0.086292155, 0.9
 transform = Transform3D(0.99293864, 0, 0.11862926, 0, 1, 0, -0.11862926, 0, 0.99293864, 0, 0, 0)
 
 [node name="End" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong" index="0" unique_id=1718507400]
-transform = Transform3D(0.9984922, -0.054885063, 0.00091546, 0.0548927, 0.9983532, -0.016659718, 4.172907e-07, 0.01668485, 0.99986076, 29.906006, 1.1130638, -0.026306152)
+transform = Transform3D(0.9984922, -0.054885063, 0.00091501354, 0.054892693, 0.9983532, -0.01665974, 8.642673e-07, 0.016684849, 0.99986076, 29.906006, 1.1130638, -0.026306152)
 
 [node name="FenceLong" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End" index="0" unique_id=149791262 instance=ExtResource("16_kuexq")]
 transform = Transform3D(0.9931809, 0, 0.11658412, 0, 1, 0, -0.11658412, 0, 0.9931809, 0, 0, 0)
 
 [node name="End" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong" index="0" unique_id=1718507400]
-transform = Transform3D(0.99792033, 0.0644182, 0.0021435327, -0.06445386, 0.9973682, 0.033188153, 2.9802314e-08, -0.0332573, 0.99944645, 30.012512, -0.5056877, 0.022010803)
+transform = Transform3D(0.99792033, 0.06441816, 0.0021435618, -0.06445384, 0.997368, 0.033188153, 0, -0.033257306, 0.99944603, 30.012527, -0.5056858, 0.021972656)
 
 [node name="FenceLong" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/End" index="0" unique_id=820220500 instance=ExtResource("16_kuexq")]
 transform = Transform3D(0.8887213, 0, -0.45844793, 0, 1, 0, 0.45844793, 0, 0.8887213, 0, 0, 0)
 
 [node name="End" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/End/FenceLong" index="0" unique_id=1718507400]
-transform = Transform3D(1, 0.00012875734, -3.246035e-06, -0.00012879816, 0.99971086, -0.02404589, 1.4901161e-07, 0.024045892, 0.9997108, 30.037415, -0.44643784, -0.01411438)
+transform = Transform3D(0.9999999, 0.00012874643, -4.318965e-06, -0.00012881304, 0.99971086, -0.024045885, 1.2218946e-06, 0.024045892, 0.99971056, 30.037445, -0.44643402, -0.01411438)
 
 [node name="FenceLongEnd" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/End/FenceLong/End" index="0" unique_id=2061395848 instance=ExtResource("30_0sbey")]
 transform = Transform3D(0.9926331, 0, 0.12115906, 0, 1, 0, -0.12115906, 0, 0.9926331, 0, 0, 0)
 
 [node name="Fence2" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/End/FenceLong" index="1" unique_id=56914019]
-transform = Transform3D(0.99999976, -7.450576e-09, 2.9802314e-07, 7.450577e-09, 0.99999994, -7.4505713e-09, -2.980231e-07, 7.450574e-09, 0.9999999, 0, 0, 0)
+transform = Transform3D(0.9999995, -1.49011585e-08, -7.450578e-07, 1.49011505e-08, 0.9999998, -5.5879426e-09, 7.4505755e-07, 5.5879315e-09, 0.9999999, 0, 0, 0)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/End/FenceLong/Fence2" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -740,7 +738,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/End/FenceLong/Fence2/NextPole" parent_id_path=PackedInt32Array(820220500, 56914019, 1077912177) index="0" unique_id=2139382426]
-transform = Transform3D(0.99992955, 0.0118644815, -4.7223766e-05, -0.011864575, 0.9999216, -0.004000047, -2.384222e-07, 0.0040003257, 0.999992, 0.0024414063, -0.02898407, -0.00090789795)
+transform = Transform3D(0.99992955, 0.011864481, -4.8415466e-05, -0.011864578, 0.9999216, -0.0040000062, 9.536706e-07, 0.004000299, 0.999992, 0.002532959, -0.028980255, -0.00090026855)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -749,7 +747,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(820220500, 2139382426, 1077912177) index="0" unique_id=2106792037]
-transform = Transform3D(0.999983, 0.0058446904, -2.554299e-05, -0.005844744, 0.99997365, -0.0044415607, -4.1723075e-07, 0.0044416343, 0.99999076, 0.0017700195, -0.017440796, -0.00032806396)
+transform = Transform3D(0.9999828, 0.0058447043, -2.6347607e-05, -0.0058447593, 0.9999738, -0.0044415393, 3.8743013e-07, 0.004441618, 0.99999076, 0.0017089844, -0.01744461, -0.00030517578)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -758,7 +756,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(820220500, 2106792037, 1077912177) index="0" unique_id=2114023668]
-transform = Transform3D(0.99998325, 0.005833413, -3.3406282e-05, -0.0058335126, 0.99996626, -0.0057060854, 1.1920204e-07, 0.0057061817, 0.99998355, 0.009002686, -0.088272095, -0.002067566)
+transform = Transform3D(0.99998313, 0.0058334344, -3.444946e-05, -0.0058335387, 0.9999663, -0.0057060746, 1.162287e-06, 0.005706177, 0.9999836, 0.008972168, -0.08827591, -0.002067566)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -767,7 +765,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(820220500, 2114023668, 1077912177) index="0" unique_id=2022508004]
-transform = Transform3D(0.99996006, -0.00888733, 1.9301106e-05, 0.0088873515, 0.9999577, -0.0021180098, -4.7683696e-07, 0.0021180976, 0.9999973, -0.004699707, 0.0435791, 0.00075531006)
+transform = Transform3D(0.9999599, -0.008887294, 1.80199e-05, 0.0088873105, 0.9999577, -0.0021180576, 8.0466043e-07, 0.0021181346, 0.99999696, -0.004699707, 0.043575287, 0.00075531006)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -776,7 +774,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence2" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong" index="1" unique_id=56914019]
-transform = Transform3D(0.9999999, 7.4505815e-09, -2.9802326e-08, -7.450581e-09, 1, 3.72529e-09, 2.9802322e-08, -3.7252899e-09, 1, 0, 1.9073486e-06, 0)
+transform = Transform3D(0.9999999, 7.4505815e-09, -5.9604645e-08, -7.450581e-09, 1, -3.725289e-09, 5.9604645e-08, 3.7252896e-09, 0.99999994, 0, 3.8146973e-06, 0)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/Fence2" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -785,7 +783,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/Fence2/NextPole" parent_id_path=PackedInt32Array(149791262, 56914019, 1077912177) index="0" unique_id=2139382426]
-transform = Transform3D(0.99995136, -0.00986292, 3.211154e-05, 0.009862976, 0.99994564, -0.003255607, -7.275958e-12, 0.0032557643, 0.99999464, -0.0008544922, 0.039060593, -0.0017471313)
+transform = Transform3D(0.99995136, -0.009862918, 3.220098e-05, 0.009862977, 0.99994546, -0.00325561, -8.9410605e-08, 0.0032557675, 0.99999464, -0.00079345703, 0.039058685, -0.001739502)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -794,7 +792,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(149791262, 2139382426, 1077912177) index="0" unique_id=2106792037]
-transform = Transform3D(0.9998954, 0.014469923, -5.262135e-05, -0.014470015, 0.9998892, -0.0036217822, 2.0860537e-07, 0.0036221629, 0.9999943, 0.0010375977, -0.07344246, 0.0034179688)
+transform = Transform3D(0.9998953, 0.014469932, -5.2651063e-05, -0.014470021, 0.9998892, -0.0036217736, 2.3840767e-07, 0.0036221547, 0.9999943, 0.0010375977, -0.07344055, 0.0034179688)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -803,7 +801,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(149791262, 2106792037, 1077912177) index="0" unique_id=2114023668]
-transform = Transform3D(0.9997918, 0.020401364, 0.00021129013, -0.020402467, 0.9997377, 0.010349567, -8.942151e-08, -0.010351722, 0.999946, 0.00064086914, -0.020151138, 0.0009994507)
+transform = Transform3D(0.99979174, 0.020401359, 0.0002114391, -0.020402467, 0.9997375, 0.010349565, -2.3841855e-07, -0.01035172, 0.99994606, 0.0007019043, -0.020151138, 0.0009918213)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -812,7 +810,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(149791262, 2114023668, 1077912177) index="0" unique_id=2022508004]
-transform = Transform3D(0.9997506, 0.022318725, 0.00032175396, -0.02232105, 0.99964654, 0.014404549, -1.4906978e-07, -0.014408145, 0.9998955, 0.0012207031, -0.024585724, 0.0009841919)
+transform = Transform3D(0.99975044, 0.022318712, 0.00032211124, -0.02232104, 0.9996464, 0.014404538, -5.0666836e-07, -0.014408148, 0.99989504, 0.0012207031, -0.024589539, 0.0009841919)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -821,7 +819,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence2" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong" index="1" unique_id=56914019]
-transform = Transform3D(1, -1.6653332e-15, -4.4703484e-07, 0, 1, -3.7252872e-09, 4.4703484e-07, 3.7252872e-09, 1, 0, 0, 0)
+transform = Transform3D(1, -2.886576e-15, -7.748605e-07, 0, 1, -3.725285e-09, 7.748605e-07, 3.725285e-09, 1, 0, 0, 0)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/Fence2" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -830,7 +828,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/Fence2/NextPole" parent_id_path=PackedInt32Array(1488793883, 56914019, 1077912177) index="0" unique_id=2139382426]
-transform = Transform3D(0.9997125, -0.023982704, -0.00017329205, 0.023983335, 0.99968624, 0.007206045, 4.1723257e-07, -0.007208128, 0.999974, -0.007507324, 0.08843613, -0.0020980835)
+transform = Transform3D(0.99971277, -0.023982717, -0.00017373885, 0.023983356, 0.9996863, 0.0072060265, 8.6426763e-07, -0.007208121, 0.99997395, -0.007583618, 0.08843613, -0.002067566)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/Fence2/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -839,7 +837,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/Fence2/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(1488793883, 2139382426, 1077912177) index="0" unique_id=2106792037]
-transform = Transform3D(0.99997115, -0.007580375, 4.5878776e-05, 0.007580508, 0.9999536, -0.0060402346, -8.940695e-08, 0.0060404083, 0.9999825, 0.0008087158, -0.011779785, 0.00016784668)
+transform = Transform3D(0.9999713, -0.007580362, 4.5878798e-05, 0.007580496, 0.9999536, -0.006040248, -8.940697e-08, 0.0060404204, 0.9999827, 0.0008544922, -0.011779785, 0.00016784668)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -848,7 +846,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(1488793883, 2106792037, 1077912177) index="0" unique_id=2114023668]
-transform = Transform3D(0.9999324, -0.011574462, 0.000121765144, 0.011575103, 0.99987733, -0.010487968, -3.5763492e-07, 0.010488678, 0.99994415, -0.0027770996, 0.052934647, -0.0011978149)
+transform = Transform3D(0.99993193, -0.011574452, 0.000121526726, 0.011575089, 0.99987704, -0.010487976, -1.1920916e-07, 0.010488682, 0.99994385, -0.0028076172, 0.052930832, -0.0012130737)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -857,7 +855,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(1488793883, 2114023668, 1077912177) index="0" unique_id=2022508004]
-transform = Transform3D(0.9999699, -0.007744226, 4.9357543e-05, 0.0077443896, 0.99994934, -0.0062884777, -6.556474e-07, 0.0062886667, 0.99998003, -0.0011291504, 0.02782631, -0.00092315674)
+transform = Transform3D(0.99997026, -0.0077442243, 4.9715185e-05, 0.007744394, 0.99994916, -0.0062884777, -1.0132756e-06, 0.006288668, 0.99998015, -0.0011291504, 0.027828217, -0.00092315674)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/End/FenceLong/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -866,7 +864,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence2" parent="NavigationRegion3D/Custom/FenceLong2" index="1" unique_id=56914019]
-transform = Transform3D(0.9997524, 0.02223194, -9.0209665e-05, -0.02223212, 0.99974424, -0.0040646666, -1.7882842e-07, 0.0040656677, 0.99999124, 0, 0.01884079, 0)
+transform = Transform3D(0.9997521, 0.022231936, -9.0209636e-05, -0.022232113, 0.999744, -0.004064665, -1.7882836e-07, 0.004065667, 0.99999094, 0, 0.01884079, 0)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/Fence2" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -875,7 +873,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong2/Fence2/NextPole" parent_id_path=PackedInt32Array(955782633, 56914019, 1077912177) index="0" unique_id=2139382426]
-transform = Transform3D(0.9995188, 0.031008847, 0.0002777581, -0.031010095, 0.9994787, 0.008945025, -2.3844763e-07, -0.008949334, 0.9999598, 0.0015258789, -0.06881714, 0.0002822876)
+transform = Transform3D(0.9995187, 0.031008845, 0.00027793692, -0.031010093, 0.99947864, 0.008945021, -4.1726148e-07, -0.008949334, 0.99995995, 0.0015258789, -0.068813324, 0.0002822876)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/Fence2/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -884,7 +882,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong2/Fence2/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(955782633, 2139382426, 1077912177) index="0" unique_id=2106792037]
-transform = Transform3D(0.99952066, 0.030961603, 0.00016537351, -0.030962043, 0.99950635, 0.0053443843, 1.7881396e-07, -0.0053469394, 0.9999863, 0.008148193, -0.15281677, -0.00074768066)
+transform = Transform3D(0.9995204, 0.030961582, 0.00016567105, -0.030962028, 0.999506, 0.0053443657, -1.1919472e-07, -0.0053469283, 0.9999863, 0.008148193, -0.1528225, -0.00074768066)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/Fence2/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -893,7 +891,7 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong2/Fence2/NextPole/Fence/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(955782633, 2106792037, 1077912177) index="0" unique_id=2114023668]
-transform = Transform3D(0.99995154, 0.00981846, -5.446485e-06, -0.009818465, 0.9999509, -0.000594151, -3.8743056e-07, 0.0005941756, 0.9999995, -0.0015869141, 0.01889038, 0.00019073486)
+transform = Transform3D(0.9999513, 0.009818488, -4.9400683e-06, -0.009818496, 0.99995035, -0.00059417414, -8.940692e-07, 0.00059419347, 0.9999994, -0.0015869141, 0.018886566, 0.00019073486)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
@@ -902,13 +900,16 @@ mesh = SubResource("CylinderMesh_pip1p")
 shape = SubResource("CylinderShape3D_pip1p")
 
 [node name="Fence" parent="NavigationRegion3D/Custom/FenceLong2/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole" parent_id_path=PackedInt32Array(955782633, 2114023668, 1077912177) index="0" unique_id=2022508004]
-transform = Transform3D(0.9999695, -0.007814136, 4.4853507e-05, 0.007814269, 0.99995273, -0.0057016364, -2.9802322e-07, 0.0057018143, 0.999983, -0.004333496, 0.04573822, 0.0004348755)
+transform = Transform3D(0.9999695, -0.007814152, 4.527069e-05, 0.007814285, 0.99995285, -0.005701617, -7.1525574e-07, 0.005701801, 0.99998266, -0.0043640137, 0.045742035, 0.00044250488)
 
 [node name="MeshInstance3D" parent="NavigationRegion3D/Custom/FenceLong2/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole/Fence" index="0" unique_id=696040091]
 mesh = SubResource("CylinderMesh_pip1p")
 
 [node name="CollisionShape3D" parent="NavigationRegion3D/Custom/FenceLong2/Fence2/NextPole/Fence/NextPole/Fence/NextPole/Fence/NextPole/Fence/MeshInstance3D/StaticBody3D" parent_id_path=PackedInt32Array(955782633, 2022508004, 227371199) index="0" unique_id=702656593]
 shape = SubResource("CylinderShape3D_pip1p")
+
+[node name="Trash2" parent="NavigationRegion3D/Custom" parent_id_path=PackedInt32Array(1769444126) index="21" unique_id=860971464 instance=ExtResource("19_lm2te")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.785027, 11.495552, 177.96086)
 
 [node name="RockWall" parent="Border/Area3D4" parent_id_path=PackedInt32Array(337746418) index="2" unique_id=938914482 instance=ExtResource("9_h8oid")]
 transform = Transform3D(-2, 0, 3.019916e-07, 0, 2, 0, -3.019916e-07, 0, -2, 90.73829, 3.6026871, 132.53719)

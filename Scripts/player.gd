@@ -171,8 +171,8 @@ func _physics_process(delta):
 	# apply gravity
 	velocity.y += -gravity * delta
 	# stay in boundaries
-	#position.x = clamp(position.x, 2, 255)
-	#position.z = clamp(position.z, 2, 255)
+	position.x = clamp(position.x, 2, 255)
+	position.z = clamp(position.z, 2, 255)
 	# make sure you don't fall under the world
 	if global_position.y < 0:
 		var terrain_y = Globals.get_heightmap_position(global_position)

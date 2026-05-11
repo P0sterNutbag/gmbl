@@ -16,6 +16,7 @@ var shops_base_inventory: Dictionary
 var shops_max_money: Dictionary
 var save_population: int = -1
 var save_faction: FactionManager.factions
+const UNAWARE_DIALOGUE = preload("uid://dhbjweb7dwnpn")
 @onready var point_of_interest: PointOfInterest = $PointOfInterest
 @onready var flag: MeshInstance3D = $Meshes/Flagpole/MeshInstance3D
 @onready var flagpole: Node3D = $Meshes/Flagpole
@@ -62,7 +63,12 @@ func _ready() -> void:
 func start_encounter() -> void:
 	Globals.overworld.current_encounter = self
 	if can_stealth_start and encounter_scene and Globals.get_dot(self, Globals.player) > -0.25:
-		transition_to_level()
+		if dialogue_tree:
+			Globals.ui.start_dialogue(UNAWARE_DIALOGUE)
+			Globals.player.camera_type = Globals.player.camera_types.town
+			point_of_interest.canvas_layer.hide()
+		else:
+			transition_to_level()
 		return
 	encounter_started.emit()
 	Globals.overworld.current_encounter = self

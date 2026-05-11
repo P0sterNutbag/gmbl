@@ -1,9 +1,11 @@
 extends CharacterSetup
 
 @onready var physical_bone_simulator: PhysicalBoneSimulator3D = $PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D
-@onready var camera: Camera3D = $CameraAnchor/Camera3D
+@onready var camera1: Camera3D = $CameraAnchor/Camera3D
+@onready var camera2: Camera3D = $PersonAnimated/Armature/Skeleton3D/BoneAttachment3D/Camera3D
 @onready var camera_anchor: Node3D = $CameraAnchor
 @onready var right_hand: Node3D = $PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
+@onready var cameras: Array = [camera1]
 
 
 func _ready() -> void:
@@ -22,6 +24,7 @@ func _process(delta: float) -> void:
 func start_ragdoll(damage_position: Vector3, fall_direction: Vector3, gun: Gun) -> void:
 	show()
 	camera_anchor.rotation = Vector3.ZERO
+	var camera = cameras[randi() % cameras.size()]
 	camera.current = true
 	if gun:
 		if right_hand.get_child_count() > 0:
@@ -42,6 +45,7 @@ func start_ragdoll(damage_position: Vector3, fall_direction: Vector3, gun: Gun) 
 	Engine.time_scale = 0.35
 	await get_tree().create_timer(1).timeout
 	Engine.time_scale = 1.0
+	camera1.current = true
 
 
 func reset() -> void:

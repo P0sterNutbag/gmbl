@@ -260,7 +260,7 @@ func _input(event):
 	if event is InputEventMouseMotion and Input.is_action_pressed("shoot"):
 		match camera_type:
 			camera_types.overhead:
-				camera_anchor.rotate_y(-event.relative.x * mouse_sensitivity * PlayerStats.sensitivity_modifier)
+				camera_anchor.rotate_y(event.relative.x * mouse_sensitivity * PlayerStats.sensitivity_modifier)
 				is_moving_camera = true
 	elif Input.is_action_just_released("shoot") and !Globals.survival_ui.menu_buttons_has_mouse:
 		if !is_moving_camera:

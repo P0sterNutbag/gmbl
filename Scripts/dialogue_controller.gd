@@ -218,3 +218,7 @@ func move_player(dest: Vector3) -> void:
 	anim_player.play("fade_out")
 	await anim_player.animation_finished
 	exit_to_game()
+
+
+func talk_to_npc() -> void:
+	Globals.ui.start_dialogue(Globals.current_encounter.dialogue_tree)

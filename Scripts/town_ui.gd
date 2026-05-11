@@ -15,6 +15,7 @@ var current_shop: TownOption
 @onready var player_name: Label = $PortraitHolder/HBoxContainer/PlayerName
 @onready var training_menu: PanelContainer = $Training
 @onready var bounty_viewport: SubViewport = $BountyPicture
+@onready var item_preferences: VBoxContainer = %ItemPreferences
 
 
 func _enter_tree() -> void:
@@ -66,6 +67,12 @@ func enter_shop(shop_data: Shop) -> void:
 	#if Input.get_connected_joypads().size() > 0:
 		#shop_inventory2.grab_focus()
 	UiController.open_interface(shop)
+	for child in item_preferences.get_children():
+		var modifier = shop_data.price_modifiers[child.name]
+		if modifier >= 0.75:
+			child.modulate = Color(0.0, 1.0, 0.0, 1.0)
+		else:
+			child.modulate = Color(1.0, 0.0, 0.0, 1.0)
 
 
 func close_shop() -> void:

@@ -150,7 +150,7 @@ func spawn_enemy(faction: FactionManager.factions):
 	get_tree().current_scene.add_child.call_deferred(inst)
 	# position enemy at spawn point
 	var spawn_index = randi_range(0, spawn_points.size() - 1)
-	while used_spawns.has(spawn_index) or spawn_points[spawn_index].process_mode == PROCESS_MODE_DISABLED:
+	while used_spawns.has(spawn_index) or spawn_points[spawn_index].process_mode == PROCESS_MODE_DISABLED or spawn_points[spawn_index].global_position.distance_to(player_spawn.global_position) < 25:
 		spawn_index = randi_range(0, spawn_points.size() - 1)
 	used_spawns.append(spawn_index)
 	inst.set_deferred("global_transform", spawn_points[spawn_index].global_transform)

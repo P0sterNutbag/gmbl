@@ -41,6 +41,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# opening things
 	if Input.is_action_just_pressed("inventory"):
+		if transfer_inventory_holder.visible:
+			UiController.close_interface(transfer_inventory_holder)
+			return
 		if !menu_holder.visible:
 			if UiController.is_canvas_layer_open(Globals.ui) or PlayerStats.state != PlayerStats.states.walk:
 				return
@@ -48,8 +51,6 @@ func _process(_delta: float) -> void:
 			UiController.open_interface(player_inventory_holder)
 		else:
 			UiController.close_interface(player_inventory_holder)
-		if transfer_inventory_holder.visible:
-			UiController.close_interface(transfer_inventory_holder)
 	if Input.is_action_just_pressed("journal"):
 		if !journal.visible:
 			if UiController.is_canvas_layer_open(Globals.ui):

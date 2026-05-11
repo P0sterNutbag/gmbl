@@ -42,7 +42,9 @@ uniform float pixel_strength :hint_range(-4.0, 0.0) = -2.0;
 uniform int compression_on :hint_range(0, 1, 1);
 uniform float color_depth :hint_range(0.0, 255.0) = 100.0;
 uniform float color_number :hint_range(0.0, 50.0) = 20.0;
-
+//uniform vec4 color_swap_from : source_color;
+//uniform vec4 color_swap_to : source_color;
+//uniform float color_swap_tolerance: hint_range(0.0, 1.0);
 
 float random(vec2 uv){
     return fract(cos(uv.x * 83.4827 + uv.y * 92.2842) * 43758.5453123);
@@ -177,6 +179,27 @@ vec3 compress_ycbcr_844 (vec3 rgb) {
 	return ycbcr2rgb * ycbcr;
 }
 
+// Color space conversion from https://godotshaders.com/shader/color-range-swap/
+vec3 rgb2hsv(vec3 c)
+{
+    vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+    vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+    vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+
+    float d = q.x - min(q.w, q.y);
+    float e = 1.0e-10;
+    return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+}
+
+// All components are in the range [0…1], including hue.
+vec3 hsv2rgb(vec3 c)
+{
+    vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+    return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+}
+
+
 void fragment(){
 	vec2 pix = FRAGCOORD.xy;
 	vec2 pos = warp(SCREEN_UV);
@@ -193,15 +216,28 @@ void fragment(){
 	}
 
 	vec3 clr = Tri(pos);
-	if(aberation_amount > 0.0){
-		float chromatic = aberation_amount + line * 2.0;
-		vec2 chromatic_x = vec2(chromatic,0.0) / resolution.x;
-		vec2 chromatic_y = vec2(0.0, chromatic/2.0) / resolution.y;
-		float r = Tri(pos - chromatic_x).r;
-		float g = Tri(pos + chromatic_y).g;
-		float b = Tri(pos + chromatic_x).b;
-		clr = vec3(r,g,b);
-	}
+	//if(aberation_amount > 0.0){
+		//float chromatic = aberation_amount + line * 2.0;
+		//vec2 chromatic_x = vec2(chromatic,0.0) / resolution.x;
+		//vec2 chromatic_y = vec2(0.0, chromatic/2.0) / resolution.y;
+		//float r = Tri(pos - chromatic_x).r;
+		//float g = Tri(pos + chromatic_y).g;
+		//float b = Tri(pos + chromatic_x).b;
+		//clr = vec3(r,g,b);
+	//}
+	
+	// color swap
+	//float _tol = color_swap_tolerance * color_swap_tolerance;
+	//vec3 source_hsv = rgb2hsv(clr.rgb);
+	//vec3 initial_hsv = rgb2hsv(color_swap_from.rgb);
+	//vec3 hsv_shift = rgb2hsv(color_swap_to.rgb) - initial_hsv;
+	//float hue = initial_hsv.r;
+	//// the .r here represents HUE, .g is SATURATION, .b is LUMINANCE
+	//if (hue - source_hsv.r >= -_tol && hue - source_hsv.r <= +_tol)
+	//{
+		//vec3 final_hsv = source_hsv + hsv_shift;
+		//clr.rgb = hsv2rgb(final_hsv);
+	//}
 	
 	if(grille_amount > 0.0)clr *= grille(pix);
 	clr *= 1.0 + scan_line_amount * 0.6 + line * 3.0 + grille_amount * 2.0;

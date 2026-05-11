@@ -72,7 +72,7 @@ func _process(delta: float) -> void:
 	if gun_stats.condition <= 0:
 		can_shoot = false
 	# spread
-	time_shooting -= delta
+	time_shooting -= delta * 1.5
 	time_shooting = clamp(time_shooting, 0, 1)
 	spread_over_time = spread_curve.sample(time_shooting)
 

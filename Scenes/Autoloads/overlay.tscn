@@ -3,7 +3,14 @@
 [ext_resource type="Script" uid="uid://ctc5ynr5as16v" path="res://Scripts/overlay.gd" id="1_64of3"]
 [ext_resource type="Shader" uid="uid://ctrmuaf68vbgo" path="res://Art/Shaders/lens_distortion.gdshader" id="3_8wgra"]
 [ext_resource type="Texture2D" uid="uid://cpuqxwinvw514" path="res://Art/Textures/UI/cursor.png" id="4_ac3tm"]
+[ext_resource type="Shader" uid="uid://werd6qv77di2" path="res://Scripts/Shaders/color_swap.gdshader" id="5_8ypfs"]
 [ext_resource type="Shader" uid="uid://ur7ounp8t8w" path="res://Art/Shaders/crt.gdshader" id="5_woari"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gmee6"]
+shader = ExtResource("5_8ypfs")
+shader_parameter/from = Color(1, 1, 0, 1)
+shader_parameter/to = Color(1, 1, 1, 1)
+shader_parameter/tolerance = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8ypfs"]
 shader = ExtResource("5_woari")
@@ -33,8 +40,18 @@ shader_parameter/strength = 0.00500000175098999
 process_mode = 3
 script = ExtResource("1_64of3")
 
+[node name="ColorChange" type="ColorRect" parent="." unique_id=1328711058]
+visible = false
+material = SubResource("ShaderMaterial_gmee6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Mouse" type="TextureRect" parent="." unique_id=1297272277]
 visible = false
+modulate = Color(0.9019608, 0.85490197, 0.21568628, 1)
 z_index = -5
 offset_left = 7.0
 offset_top = 3.0

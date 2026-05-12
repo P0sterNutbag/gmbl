@@ -146,11 +146,10 @@ func set_tooltip(collider: InteractableObject):
 	for i in collider.actions.size():
 		var label : Label = tooltip_holder.get_child(i)
 		label.text = collider.actions[i]
+		label.remove_theme_color_override("font_color")
 		if i != collider.index:
 			var current_color = label.get_theme_color("font_color")
-			label.add_theme_color_override("font_color", current_color.darkened(0.3))
-		else:
-			label.remove_theme_color_override("font_color")
+			label.add_theme_color_override("font_color", current_color.darkened(0.7))
 
 
 func set_tooltip_custom(text: String):

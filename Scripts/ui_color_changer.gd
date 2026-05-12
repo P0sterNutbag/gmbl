@@ -2,8 +2,8 @@
 extends EditorScript
 
 var directory_name := "res://Art/Themes/"
-static var new_color := Color(0.902, 0.0, 0.224, 1.0)
-static var text_color := Color(1.0, 0.12, 0.281, 1.0)
+var new_color := Color(1.0, 0.0, 0.251, 1.0)
+var text_color := Color(1.0, 0.0, 0.251, 1.0)
 var icons: Array = [
 	"res://Art/Textures/UI/ammo icon.png",
 	"res://Art/Textures/UI/armor icon.png",
@@ -35,9 +35,6 @@ var icons: Array = [
 	"res://Art/Textures/UI/thirst icon.png",
 	"res://Art/Textures/UI/trash icon.png",
 	"res://Art/Textures/UI/mag icon sheet.png",]
-var cool_boy_yellow = Color(0.902, 0.855, 0.216, 1.0)
-var slightly_darker_yellow = Color(0.78, 0.74, 0.187, 1.0) 
-var light_yellow := Color(1.0, 0.956, 0.34, 1.0)
 
 
 func _run() -> void:
@@ -56,6 +53,7 @@ func _run() -> void:
 				resource.bg_color = new_color
 			else:
 				resource.border_color = new_color
+		print(directory_name + file)
 		ResourceSaver.save(resource, directory_name + file)
 		ResourceLoader.load(directory_name + file, "", ResourceLoader.CACHE_MODE_REPLACE)
 	
@@ -76,4 +74,5 @@ func _run() -> void:
 					new_color.v = c.v
 					img.set_pixel(x, y, new_color)
 		img.save_png(icon_path)
+		print(icon_path)
 		ResourceLoader.load(icon_path, "", ResourceLoader.CACHE_MODE_REPLACE)

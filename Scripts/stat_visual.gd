@@ -23,10 +23,10 @@ func _process(_delta: float) -> void:
 	if value <= 0:
 		modulate = Color(1.0, 0.051, 0.271, 1.0)
 	elif value < show_treshold:
-		modulate = Color.YELLOW
+		modulate = Color.WHITE
 		modulate.v = 1
 	else:
-		modulate = Color.YELLOW
+		modulate = Color.WHITE
 		modulate.v = 0.5
 	
 	# set value

@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://ba3gw1buyi5y1" path="res://Scripts/main_menu.gd" id="1_n45e2"]
 [ext_resource type="Texture2D" uid="uid://fdqhgbou1nix" path="res://Art/Textures/UI/logo.png" id="2_jewm6"]
-[ext_resource type="Texture2D" uid="uid://dcgpfk37llcwk" path="res://Art/Textures/UI/logo 2.png" id="3_k33u3"]
 [ext_resource type="Theme" uid="uid://b8xwdra3nuahy" path="res://Art/Themes/text_header.tres" id="4_cp0ys"]
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="5_yhxw7"]
 [ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="6_opfnp"]
@@ -70,26 +69,6 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("2_jewm6")
 
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/MainMenu" unique_id=1189291389]
-visible = false
-z_index = -1
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -540.0
-offset_top = -482.0
-offset_right = 540.0
-offset_bottom = 58.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(540, 270)
-mouse_filter = 2
-texture = ExtResource("3_k33u3")
-expand_mode = 2
-
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/MainMenu" unique_id=285885004]
 layout_mode = 1
 anchors_preset = 8
@@ -115,19 +94,6 @@ theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu/PanelContainer/MarginContainer" unique_id=944789446]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1094190075]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_cp0ys")
-text = "DOG VALLEY"
-horizontal_alignment = 1
-
-[node name="Control" type="Control" parent="CanvasLayer/MainMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1383784393]
-visible = false
-custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 mouse_filter = 2
 
@@ -184,8 +150,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_right = 2.0
+offset_left = 40.0
+offset_right = -36.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(923, 205.5)

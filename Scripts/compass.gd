@@ -3,7 +3,7 @@ extends Control
 var compass_object: Node3D
 var quests: Array[Quest]
 var quest_marker = preload("res://Scenes/UI/quest_marker.tscn")
-@onready var compass: ColorRect = $ColorRect
+@onready var compass: Control = $Control
 @onready var markers: Control = $Markers
 
 

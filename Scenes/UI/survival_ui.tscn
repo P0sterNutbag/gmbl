@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bcuhfb0bfkqh0" path="res://Art/Textures/UI/hunger icon.png" id="2_guqia"]
 [ext_resource type="Script" uid="uid://bclh5yhrpmkxf" path="res://Scripts/stat_visual.gd" id="2_k4cvi"]
 [ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="3_1kfkr"]
+[ext_resource type="StyleBox" uid="uid://24u57ipg1t26" path="res://Art/Themes/progress_bar_style_box.tres" id="3_w0rat"]
 [ext_resource type="Theme" uid="uid://lg0ktyb6xeoh" path="res://Art/Themes/hp_bar.tres" id="4_1kfkr"]
 [ext_resource type="Texture2D" uid="uid://dwyciilo4eqwy" path="res://Art/Textures/UI/thirst icon.png" id="4_k64vs"]
 [ext_resource type="Texture2D" uid="uid://c3hs8nxqqu881" path="res://Art/Textures/UI/sleep icon.png" id="5_13ham"]
@@ -43,10 +44,6 @@
 [ext_resource type="Texture2D" uid="uid://brs4ktd7wgyno" path="res://Art/Textures/UI/faction icon.png" id="36_m6fmc"]
 [ext_resource type="Texture2D" uid="uid://d2ukjid6oonnl" path="res://Art/Textures/UI/population icon.png" id="41_02qtm"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_agdr0"]
-bg_color = Color(0, 0, 0, 0.784314)
-border_color = Color(1, 1, 0, 1)
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6h4e4"]
 
 [sub_resource type="Theme" id="Theme_guqia"]
@@ -58,7 +55,6 @@ process_mode = 3
 script = ExtResource("1_e5c6o")
 
 [node name="Compass" type="Control" parent="." unique_id=1584721456]
-modulate = Color(1, 1, 0, 1)
 clip_contents = true
 layout_mode = 3
 anchors_preset = 5
@@ -82,184 +78,99 @@ offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_agdr0")
+theme_override_styles/panel = ExtResource("3_w0rat")
 
-[node name="ColorRect" type="ColorRect" parent="Compass" unique_id=630727920]
-layout_mode = 0
+[node name="Control" type="Control" parent="Compass" unique_id=2132845125]
+anchors_preset = 0
 offset_top = 21.0
 offset_right = 3840.0
 offset_bottom = 23.0
 mouse_filter = 2
 
-[node name="ColorRect2" type="ColorRect" parent="Compass/ColorRect" unique_id=1388339958]
+[node name="Label" type="Label" parent="Compass/Control" unique_id=1197349776]
 layout_mode = 0
-offset_left = 480.0
-offset_top = -2.0
-offset_right = 482.0
-offset_bottom = 4.0
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="Compass/ColorRect/ColorRect2" unique_id=1197349776]
-layout_mode = 0
-offset_left = -5.0
-offset_top = -18.0
-offset_right = 6.0
-offset_bottom = 5.0
+offset_left = 475.0
+offset_top = -12.0
+offset_right = 489.0
+offset_bottom = 13.0
 theme = ExtResource("3_1kfkr")
 text = "N"
 
-[node name="ColorRect7" type="ColorRect" parent="Compass/ColorRect" unique_id=352579803]
+[node name="Label2" type="Label" parent="Compass/Control" unique_id=1643508389]
 layout_mode = 0
-offset_left = 960.0
-offset_top = -2.0
-offset_right = 962.0
-offset_bottom = 4.0
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="Compass/ColorRect/ColorRect7" unique_id=1643508389]
-layout_mode = 0
-offset_left = -10.0
-offset_top = -18.0
-offset_right = 11.0
-offset_bottom = 5.0
+offset_left = 950.0
+offset_top = -12.0
+offset_right = 979.0
+offset_bottom = 13.0
 theme = ExtResource("3_1kfkr")
 text = "NE"
 horizontal_alignment = 1
 
-[node name="ColorRect3" type="ColorRect" parent="Compass/ColorRect" unique_id=222245213]
+[node name="Label3" type="Label" parent="Compass/Control" unique_id=1803490159]
 layout_mode = 0
-offset_left = 1440.0
-offset_top = -2.0
-offset_right = 1442.0
-offset_bottom = 4.0
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="Compass/ColorRect/ColorRect3" unique_id=1803490159]
-layout_mode = 0
-offset_left = -5.0
-offset_top = -18.0
-offset_right = 6.0
-offset_bottom = 5.0
+offset_left = 1435.0
+offset_top = -12.0
+offset_right = 1449.0
+offset_bottom = 13.0
 theme = ExtResource("3_1kfkr")
 text = "E"
 
-[node name="ColorRect8" type="ColorRect" parent="Compass/ColorRect" unique_id=721377248]
+[node name="Label4" type="Label" parent="Compass/Control" unique_id=1475237338]
 layout_mode = 0
-offset_left = 1920.0
-offset_top = -2.0
-offset_right = 1922.0
-offset_bottom = 4.0
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="Compass/ColorRect/ColorRect8" unique_id=1475237338]
-layout_mode = 0
-offset_left = -10.0
-offset_top = -18.0
-offset_right = 11.0
-offset_bottom = 5.0
+offset_left = 1910.0
+offset_top = -12.0
+offset_right = 1939.0
+offset_bottom = 13.0
 theme = ExtResource("3_1kfkr")
 text = "SE"
 horizontal_alignment = 1
 
-[node name="ColorRect4" type="ColorRect" parent="Compass/ColorRect" unique_id=465390647]
+[node name="Label5" type="Label" parent="Compass/Control" unique_id=1919258290]
 layout_mode = 0
-offset_left = 2400.0
-offset_top = -2.0
-offset_right = 2402.0
-offset_bottom = 4.0
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="Compass/ColorRect/ColorRect4" unique_id=1919258290]
-layout_mode = 0
-offset_left = -5.0
-offset_top = -18.0
-offset_right = 6.0
-offset_bottom = 5.0
+offset_left = 2395.0
+offset_top = -12.0
+offset_right = 2409.0
+offset_bottom = 13.0
 theme = ExtResource("3_1kfkr")
 text = "S"
 
-[node name="ColorRect9" type="ColorRect" parent="Compass/ColorRect" unique_id=1690198561]
+[node name="Label6" type="Label" parent="Compass/Control" unique_id=1071677931]
 layout_mode = 0
-offset_left = 2880.0
-offset_top = -2.0
-offset_right = 2882.0
-offset_bottom = 4.0
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="Compass/ColorRect/ColorRect9" unique_id=1071677931]
-layout_mode = 0
-offset_left = -10.0
-offset_top = -18.0
-offset_right = 11.0
-offset_bottom = 5.0
+offset_left = 2870.0
+offset_top = -12.0
+offset_right = 2899.0
+offset_bottom = 13.0
 theme = ExtResource("3_1kfkr")
 text = "SW"
 horizontal_alignment = 1
 
-[node name="ColorRect5" type="ColorRect" parent="Compass/ColorRect" unique_id=466393616]
+[node name="Label7" type="Label" parent="Compass/Control" unique_id=794979202]
 layout_mode = 0
-offset_left = 3360.0
-offset_top = -2.0
-offset_right = 3362.0
-offset_bottom = 4.0
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="Compass/ColorRect/ColorRect5" unique_id=794979202]
-layout_mode = 0
-offset_left = -5.0
-offset_top = -18.0
-offset_right = 6.0
-offset_bottom = 5.0
+offset_left = 3355.0
+offset_top = -12.0
+offset_right = 3369.0
+offset_bottom = 13.0
 theme = ExtResource("3_1kfkr")
 text = "W"
 
-[node name="ColorRect10" type="ColorRect" parent="Compass/ColorRect" unique_id=812909518]
+[node name="Label8" type="Label" parent="Compass/Control" unique_id=421347480]
 layout_mode = 0
-offset_left = 3840.0
-offset_top = -2.0
-offset_right = 3842.0
-offset_bottom = 4.0
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="Compass/ColorRect/ColorRect10" unique_id=421347480]
-layout_mode = 0
-offset_left = -10.0
-offset_top = -18.0
-offset_right = 11.0
-offset_bottom = 5.0
+offset_left = 3830.0
+offset_top = -12.0
+offset_right = 3859.0
+offset_bottom = 13.0
 theme = ExtResource("3_1kfkr")
 text = "NW"
 horizontal_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="Compass/ColorRect" unique_id=272971]
+[node name="Label9" type="Label" parent="Compass/Control" unique_id=1711857735]
 layout_mode = 0
-offset_left = 3842.0
-offset_right = 4842.0
-offset_bottom = 2.0
-mouse_filter = 2
-
-[node name="ColorRect2" type="ColorRect" parent="Compass/ColorRect/ColorRect" unique_id=2095436774]
-layout_mode = 0
-offset_left = 478.0
-offset_top = -2.0
-offset_right = 480.0
-offset_bottom = 4.0
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="Compass/ColorRect/ColorRect/ColorRect2" unique_id=1711857735]
-layout_mode = 0
-offset_left = -5.0
-offset_top = -18.0
-offset_right = 6.0
-offset_bottom = 5.0
+offset_left = 4315.0
+offset_top = -12.0
+offset_right = 4329.0
+offset_bottom = 13.0
 theme = ExtResource("3_1kfkr")
 text = "N"
-
-[node name="ColorRect6" type="ColorRect" parent="Compass/ColorRect" unique_id=929589932]
-layout_mode = 0
-offset_left = -20.0
-offset_bottom = 2.0
-mouse_filter = 2
 
 [node name="Markers" type="Control" parent="Compass" unique_id=1979270960]
 anchors_preset = 0
@@ -1174,7 +1085,6 @@ texture = ExtResource("32_lboml")
 expand_mode = 1
 
 [node name="VBoxContainer" type="HBoxContainer" parent="PlayerHealth" unique_id=684823176]
-modulate = Color(1, 1, 0, 1)
 layout_mode = 1
 offset_top = -80.0
 offset_right = 168.0
@@ -1240,7 +1150,6 @@ mouse_filter = 2
 theme = ExtResource("13_oq622")
 
 [node name="MenuButtons" type="VBoxContainer" parent="." unique_id=299956010]
-modulate = Color(1, 1, 0, 1)
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0

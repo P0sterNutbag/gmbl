@@ -1,6 +1,6 @@
 extends Button
 
-@onready var color_rect: ColorRect = $HBoxContainer/PanelContainer/MarginContainer/ColorRect
+@onready var color_rect: Control = $HBoxContainer/PanelContainer/MarginContainer/ColorRect
 
 
 func _on_toggled(toggled_on: bool) -> void:

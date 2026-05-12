@@ -48,7 +48,7 @@ var max_soberness: float = 1.0
 var sleep_decrease_rate := 0.2
 var hunger_decrease_rate := 0.6
 var thirst_decrease_rate := 0.8
-var skill_points = 5.0
+var skill_points = 3.0
 var saved_style: NpcStyle
 var gun: Equipment
 var inventory: Inventory = Inventory.new()
@@ -112,7 +112,7 @@ func reset_stats() -> void:
 	inventory.equipment_kit.remove_all()
 	inventory = starting_inventory.duplicate(true)
 	skills = CharacterSkills.new()
-	skill_points = 5
+	skill_points = 3
 	quests.clear()
 	hp = max_current_hp
 	sleep = max_sleep

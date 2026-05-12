@@ -68,11 +68,13 @@ func enter_shop(shop_data: Shop) -> void:
 		#shop_inventory2.grab_focus()
 	UiController.open_interface(shop)
 	for child in item_preferences.get_children():
+		if child is not TextureRect:
+			continue
 		var modifier = shop_data.price_modifiers[child.name]
 		if modifier >= 0.75:
-			child.modulate = Color(0.0, 1.0, 0.0, 1.0)
+			child.show()
 		else:
-			child.modulate = Color(1.0, 0.0, 0.0, 1.0)
+			child.hide()
 
 
 func close_shop() -> void:

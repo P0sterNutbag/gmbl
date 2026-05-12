@@ -16,7 +16,7 @@ var custom_tooltip: String
 @onready var tooltip: HBoxContainer = $Tooltip
 @onready var tooltip_holder: VBoxContainer = $Tooltip/VBoxContainer
 @onready var hit_indicator: TextureRect = %HitIndicator
-@onready var dot_crosshair: ColorRect = $DotCrosshair
+@onready var dot_crosshair: Control = $DotCrosshair
 @onready var breath: ProgressBar = $Breath
 @onready var binocular_overlay: Control = $BinocularOverlay
 @onready var commands: VBoxContainer = $Commands
@@ -147,7 +147,8 @@ func set_tooltip(collider: InteractableObject):
 		var label : Label = tooltip_holder.get_child(i)
 		label.text = collider.actions[i]
 		if i != collider.index:
-			label.add_theme_color_override("font_color", Color(0.446, 0.446, 0.0, 1.0))
+			var current_color = label.get_theme_color("font_color")
+			label.add_theme_color_override("font_color", current_color.darkened(0.3))
 		else:
 			label.remove_theme_color_override("font_color")
 

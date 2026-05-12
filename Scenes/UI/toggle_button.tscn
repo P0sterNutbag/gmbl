@@ -3,6 +3,7 @@
 [ext_resource type="Theme" uid="uid://tivwhtwiofll" path="res://Art/Themes/button.tres" id="1_5trl5"]
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="3_5q1wp"]
 [ext_resource type="Script" uid="uid://mv25rt7ybwxe" path="res://Scripts/toggle_button.gd" id="3_qxey7"]
+[ext_resource type="StyleBox" uid="uid://dsp62qfcxwvgs" path="res://Art/Themes/style_box_flat.tres" id="4_qxey7"]
 
 [node name="Button" type="Button" unique_id=377695594]
 offset_right = 263.0
@@ -36,10 +37,10 @@ theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 3
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/PanelContainer/MarginContainer" unique_id=1122202323]
+[node name="ColorRect" type="Panel" parent="HBoxContainer/PanelContainer/MarginContainer" unique_id=1828765594]
 layout_mode = 2
 mouse_filter = 2
-color = Color(0.9019608, 0.85490197, 0.21568628, 1)
+theme_override_styles/panel = ExtResource("4_qxey7")
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_focus_exited"]

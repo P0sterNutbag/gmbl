@@ -18,6 +18,7 @@ enum fire_types {semi_auto, auto, pump}
 @export var scope_texture: Texture2D
 @export var cast_shadow: bool = true
 @export var slot: EquipmentKit.slots
+@export var create_shell_on_shoot: bool = true
 var ammo: int:
 	get(): return gun_stats.ammo
 	set(value): 
@@ -107,6 +108,8 @@ func shoot(shot_owner: Node3D = null) -> void:#is_ads: bool = false, movement_sp
 	has_released = false
 	shoot_cooldown_timer.start()
 	# effects
+	if create_shell_on_shoot:
+		create_shell()
 	flash_texture.rotate_z(deg_to_rad(randf_range(0, 360)))
 	muzzle_flash.visible = true
 	audio_player.pitch_scale = Engine.time_scale
@@ -140,8 +143,15 @@ func create_bullet(shot_owner: Node3D, is_ads: bool) -> void:
 	get_tree().current_scene.add_child(inst)
 	if uses_input and is_ads:
 		inst.global_position = Globals.player.camera.global_position
-		#inst.position.z += 1
-		#inst.global_position.z -= fire_point.position.z
+
+
+func create_shell() -> void:
+	var inst: RigidBody3D = shell.instantiate()
+	get_tree().current_scene.add_child(inst)
+	inst.global_transform = chamber.global_transform
+	#inst.apply_impulse(Vector3(randf_range(0.5, 1), randf_range(0.5, 1), 0))
+	inst.apply_impulse(global_transform.basis.y * randf_range(1.0, 1.5) + global_transform.basis.x * randf_range(1.0, 1.5))
+	inst.apply_torque_impulse(Vector3(randf_range(-0.1, 0.1), randf_range(-0.1, 0.1), randf_range(-0.1, 0.1)))
 
 
 func _on_shoot_cooldown_timeout() -> void:

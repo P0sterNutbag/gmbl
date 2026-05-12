@@ -60,7 +60,7 @@ var gun_item: EquipmentGun
 
 func _ready() -> void:
 	gun_holder.get_child(0).queue_free()
-	gun_item = potential_gun_items[Globals.get_weighted_index(potential_gun_items)].object_to_spawn
+	gun_item = potential_gun_items[Globals.get_weighted_index(potential_gun_items)].object_to_spawn.duplicate_deep()
 	gun = gun_item.gun_object.instantiate()
 	gun.gun_stats.condition = randf_range(10, 20)
 	gun_holder.add_child(gun)

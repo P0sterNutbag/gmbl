@@ -5,7 +5,7 @@ enum states {walk, chase, battle, dead}
 @export var gun_index: guns
 @export var destination: Location
 var state = states.walk
-var speed := 2
+var speed := 1.5
 var walk_speed := 2
 var run_speed := 3
 var path_index := 0

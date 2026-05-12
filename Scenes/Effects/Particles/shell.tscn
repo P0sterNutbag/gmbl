@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://mho6jg5bffl4"]
+[gd_scene format=3 uid="uid://mho6jg5bffl4"]
 
 [ext_resource type="Material" uid="uid://b5xr0e8j1peu3" path="res://Art/Materials/brass.tres" id="1_g8s75"]
 
@@ -22,23 +22,23 @@ height = 0.05
 height = 0.100227
 radius = 0.0205078
 
-[node name="Shell" type="RigidBody3D"]
+[node name="Shell" type="RigidBody3D" unique_id=1499598281]
 collision_layer = 0
 physics_material_override = SubResource("PhysicsMaterial_g8s75")
 angular_damp = 5.0
 script = SubResource("GDScript_g8s75")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1676041945]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 material_override = ExtResource("1_g8s75")
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_qvk4v")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1197332956]
 transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 1.15889e-11, 0.000265121)
 shape = SubResource("CylinderShape3D_5f3kg")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=426345566]
 wait_time = 5.0
 autostart = true
 

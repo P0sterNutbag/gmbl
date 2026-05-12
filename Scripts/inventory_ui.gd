@@ -190,13 +190,13 @@ func set_description(item: Item = null):
 		hbox_container.add_child(stat_label)
 		var value_label = Label.new()
 		var stat_value = item.get(stat.variable_name)
-		value_label.text = str(stat_value)
+		value_label.text = str(int(stat_value)) + "/" + str(stat.max_value)
 		value_label.theme = text_style
-		if stat.max_value > 0.0:
-			if stat_value >= 75.0:
-				value_label.add_theme_color_override("font_color", Color(0.0, 1.0, 0.0, 1.0))
-			elif stat_value <= 25.0:
-				value_label.add_theme_color_override("font_color", Color(1.0, 0.0, 0.0, 1.0))
+		#if stat.max_value > 0.0:
+			#if stat_value >= 75.0:
+				#value_label.add_theme_color_override("font_color", Color(0.0, 1.0, 0.0, 1.0))
+			#elif stat_value <= 25.0:
+				#value_label.add_theme_color_override("font_color", Color(1.0, 0.0, 0.0, 1.0))
 		hbox_container.add_child(value_label)
 
 

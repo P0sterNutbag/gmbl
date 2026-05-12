@@ -221,4 +221,4 @@ func move_player(dest: Vector3) -> void:
 
 
 func talk_to_npc() -> void:
-	Globals.ui.start_dialogue(Globals.current_encounter.dialogue_tree)
+	Globals.ui.start_dialogue(Globals.overworld.current_encounter.dialogue_tree)

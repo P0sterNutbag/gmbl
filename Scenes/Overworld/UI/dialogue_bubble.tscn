@@ -1,17 +1,11 @@
 [gd_scene format=3 uid="uid://d24cwcumucxfb"]
 
+[ext_resource type="StyleBox" uid="uid://cdyvhwt6osqng" path="res://Art/Themes/style_box_no_bottom.tres" id="1_bxbg0"]
 [ext_resource type="Script" uid="uid://vxmg7be0kyok" path="res://Scripts/dialogue_bubble.gd" id="2_bxbg0"]
 [ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="2_hllnk"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_utpw1"]
-bg_color = Color(0, 0, 0, 0.784314)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_color = Color(1, 1, 0, 1)
-
 [sub_resource type="Theme" id="Theme_vifsl"]
-PanelContainer/styles/panel = SubResource("StyleBoxFlat_utpw1")
+PanelContainer/styles/panel = ExtResource("1_bxbg0")
 
 [node name="DialogueBubble" type="PanelContainer" unique_id=1132815401]
 custom_minimum_size = Vector2(384, 0)
@@ -50,4 +44,4 @@ polygon = PackedVector2Array(0, 0, 0, 20, -25, 0)
 [node name="Line2D" type="Line2D" parent="Control" unique_id=1812156511]
 points = PackedVector2Array(1, 0, 1, 20, -25, 0, -498, 0)
 width = 2.0
-default_color = Color(1, 1, 0, 1)
+default_color = Color(1, 0.12156863, 0.28235295, 1)

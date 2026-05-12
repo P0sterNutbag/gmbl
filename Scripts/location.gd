@@ -62,6 +62,7 @@ func _ready() -> void:
 
 func start_encounter() -> void:
 	Globals.overworld.current_encounter = self
+	encounter_started.emit()
 	if can_stealth_start and encounter_scene and Globals.get_dot(self, Globals.player) > -0.25:
 		if dialogue_tree:
 			Globals.ui.start_dialogue(UNAWARE_DIALOGUE)
@@ -70,8 +71,6 @@ func start_encounter() -> void:
 		else:
 			transition_to_level()
 		return
-	encounter_started.emit()
-	Globals.overworld.current_encounter = self
 	if dialogue_tree != null and !BattleManager.get_battle(self) and location_data.population > 0:
 		Globals.ui.start_dialogue(dialogue_tree)
 		Globals.player.camera_type = Globals.player.camera_types.town

@@ -19,13 +19,17 @@
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="11_w00nu"]
 [ext_resource type="Resource" uid="uid://ccm2c5fc8xn15" path="res://Resources/Items/Consumable/medkit.tres" id="12_5j08b"]
 [ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="14_p0jri"]
+[ext_resource type="Resource" uid="uid://c3usfn872wp1g" path="res://Resources/Items/Consumable/ghost_powder.tres" id="15_w00nu"]
+[ext_resource type="Resource" uid="uid://c4vot4kh7bffi" path="res://Resources/Items/Consumable/bandage.tres" id="16_e46jk"]
+[ext_resource type="Resource" uid="uid://bmllms5nonko8" path="res://Resources/Items/Consumable/beer.tres" id="17_fjuww"]
 [ext_resource type="Script" uid="uid://g1k0736rje3q" path="res://Scripts/quest_random.gd" id="17_fyaxn"]
+[ext_resource type="Resource" uid="uid://b531tc4pwfwel" path="res://Resources/Items/Consumable/crackers.tres" id="18_s8dvv"]
 [ext_resource type="Resource" uid="uid://cm4ovx7pecfjd" path="res://Resources/Dialogue/npc_friendly.tres" id="18_yyftb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hf0oe"]
 radius = 0.434372
 
-[sub_resource type="Resource" id="Resource_fyaxn"]
+[sub_resource type="Resource" id="Resource_5j08b"]
 resource_local_to_scene = true
 script = ExtResource("3_f2atc")
 faction = null
@@ -72,20 +76,41 @@ script = ExtResource("5_7npny")
 object_to_spawn = ExtResource("6_yyftb")
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_nv6bg"]
+[sub_resource type="Resource" id="Resource_p0jri"]
+script = ExtResource("5_7npny")
+object_to_spawn = ExtResource("15_w00nu")
+spawn_chance = 0.5
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_6nrh4"]
+script = ExtResource("5_7npny")
+object_to_spawn = ExtResource("16_e46jk")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_fu30t"]
+script = ExtResource("5_7npny")
+object_to_spawn = ExtResource("17_fjuww")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_diqn0"]
+script = ExtResource("5_7npny")
+object_to_spawn = ExtResource("18_s8dvv")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_cif6j"]
 resource_local_to_scene = true
 script = ExtResource("14_p0jri")
 min_amount = 3
 max_amount = 8
-potential_slots = Array[ExtResource("5_7npny")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0")])
+potential_slots = Array[ExtResource("5_7npny")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
 money = 500
 title = "Squad Inventory"
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
-[sub_resource type="Resource" id="Resource_jn6y6"]
+[sub_resource type="Resource" id="Resource_poiom"]
 resource_local_to_scene = true
 script = ExtResource("11_w00nu")
-inventory = SubResource("Resource_nv6bg")
+inventory = SubResource("Resource_cif6j")
 price_modifiers = {
 "Ammo": 0.5,
 "Armor": 0.5,
@@ -116,9 +141,9 @@ shape = SubResource("CapsuleShape3D_hf0oe")
 [node name="Location" parent="." unique_id=361678620 instance=ExtResource("2_jf2yb")]
 collision_mask = 96
 title = "Squad"
-location_data = SubResource("Resource_fyaxn")
+location_data = SubResource("Resource_5j08b")
 encounter_scene = ExtResource("4_w8t3j")
-shop = SubResource("Resource_jn6y6")
+shop = SubResource("Resource_poiom")
 dialogue_tree = ExtResource("18_yyftb")
 can_stealth_start = true
 

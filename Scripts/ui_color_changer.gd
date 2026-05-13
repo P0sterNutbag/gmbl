@@ -2,8 +2,8 @@
 extends EditorScript
 
 var directory_name := "res://Art/Themes/"
-var new_color := Color(1.0, 0.0, 0.251, 1.0)
-var text_color := Color(1.0, 0.0, 0.251, 1.0)
+var new_color := Color(1.0, 0.11, 0.258, 1.0)
+var text_color := Color(1.0, 0.11, 0.258, 1.0)
 var icons: Array = [
 	"res://Art/Textures/UI/ammo icon.png",
 	"res://Art/Textures/UI/armor icon.png",

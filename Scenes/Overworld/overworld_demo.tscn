@@ -101,12 +101,19 @@
 [ext_resource type="Script" uid="uid://r3prw1636vsp" path="res://Scripts/quest_giver.gd" id="101_70er4"]
 [ext_resource type="PackedScene" uid="uid://csjsfdmnghtqx" path="res://Scenes/Overworld/Locations/scrapyard.tscn" id="102_etm0w"]
 [ext_resource type="Script" uid="uid://c6knlgr6wx0i1" path="res://Scripts/quest_fetch.gd" id="103_dt5am"]
+[ext_resource type="Resource" uid="uid://c3usfn872wp1g" path="res://Resources/Items/Consumable/ghost_powder.tres" id="104_l5l63"]
 [ext_resource type="Texture2D" uid="uid://br2vhvcrcq8re" path="res://Art/Textures/Character/player face4.png" id="104_r7ceo"]
 [ext_resource type="Resource" uid="uid://6c7s1e0y4ekq" path="res://Resources/Items/Junk/cigarettes.tres" id="106_0dmsd"]
+[ext_resource type="Resource" uid="uid://b60xm7dcqwqhf" path="res://Resources/Items/Junk/canteen.tres" id="107_l5l63"]
 [ext_resource type="Resource" uid="uid://du57k1x7scpfk" path="res://Resources/Items/Junk/metal_scraps.tres" id="107_qayaa"]
+[ext_resource type="Resource" uid="uid://dobq8qcujl8mx" path="res://Resources/Items/Junk/harmonica.tres" id="108_c3so5"]
 [ext_resource type="Resource" uid="uid://cw12h3yyn5tgy" path="res://Resources/Items/Junk/playing cards.tres" id="108_p7x0p"]
 [ext_resource type="Resource" uid="uid://c7nqsvb4lasw1" path="res://Resources/Items/Armor/kevlar_vest.tres" id="109_bko87"]
+[ext_resource type="Resource" uid="uid://d2754krch83kg" path="res://Resources/Items/Junk/book.tres" id="109_llgcl"]
+[ext_resource type="Resource" uid="uid://db8y03u86d7uv" path="res://Resources/Items/Junk/matches.tres" id="110_ddb2y"]
+[ext_resource type="Resource" uid="uid://b3eie27glwlxx" path="res://Resources/Items/Junk/ring.tres" id="111_4iccq"]
 [ext_resource type="PackedScene" uid="uid://ddobx7rgw7u28" path="res://Scenes/Overworld/Environment/rock_wall.tscn" id="112_fmyil"]
+[ext_resource type="Resource" uid="uid://bsalvk242tr7e" path="res://Resources/Items/Junk/towel.tres" id="112_wfy45"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jdigv"]
 render_priority = 0
@@ -175,7 +182,7 @@ metadata/_custom_type_script = "uid://de6rxup5nru4w"
 
 [sub_resource type="Resource" id="Resource_fgsb2"]
 script = ExtResource("32_x6xbf")
-lines = Array[String](["But if you absolutely must pass through, it'll cost ya $2,000."])
+lines = Array[String](["If you want to pass through, it'll cost ya $2,000."])
 speaker = 1
 metadata/_custom_type_script = "uid://de6rxup5nru4w"
 
@@ -185,7 +192,7 @@ value = "money"
 comparison = 1
 value2 = 1999
 failue_message = "You don't have enough money"
-text = "Pass Through"
+text = "Pay $2000"
 destination = 3
 metadata/_custom_type_script = "uid://bd7d8lpmtob24"
 
@@ -724,7 +731,7 @@ metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
 [sub_resource type="Resource" id="Resource_ri526"]
 script = ExtResource("32_x6xbf")
-lines = Array[String](["You got some useless junk? I'll buy it!"])
+lines = Array[String](["If you're looking to sell some junk, this is the place."])
 speaker = 1
 metadata/_custom_type_script = "uid://de6rxup5nru4w"
 
@@ -839,21 +846,6 @@ npc_style = SubResource("Resource_qw144")
 npc_name = "Tank"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
-[sub_resource type="Resource" id="Resource_jl4w7"]
-script = ExtResource("57_xk1hj")
-object_to_spawn = ExtResource("106_0dmsd")
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_4i57y"]
-script = ExtResource("57_xk1hj")
-object_to_spawn = ExtResource("107_qayaa")
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_nu3le"]
-script = ExtResource("57_xk1hj")
-object_to_spawn = ExtResource("108_p7x0p")
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
 [sub_resource type="Resource" id="Resource_5dqkm"]
 script = ExtResource("57_xk1hj")
 object_to_spawn = ExtResource("109_bko87")
@@ -888,12 +880,18 @@ spawn_chance = 0.2
 max_amount = 2
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
+[sub_resource type="Resource" id="Resource_llgcl"]
+script = ExtResource("57_xk1hj")
+object_to_spawn = ExtResource("104_l5l63")
+max_amount = 3
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
 [sub_resource type="Resource" id="Resource_3jgu8"]
 resource_local_to_scene = true
 script = ExtResource("75_1helu")
-min_amount = 5
-max_amount = 10
-potential_slots = Array[ExtResource("57_xk1hj")]([SubResource("Resource_jl4w7"), SubResource("Resource_4i57y"), SubResource("Resource_nu3le"), SubResource("Resource_5dqkm"), SubResource("Resource_0avbt"), SubResource("Resource_quwpe"), SubResource("Resource_eo6qm"), SubResource("Resource_cc1w5")])
+min_amount = 3
+max_amount = 5
+potential_slots = Array[ExtResource("57_xk1hj")]([SubResource("Resource_5dqkm"), SubResource("Resource_0avbt"), SubResource("Resource_quwpe"), SubResource("Resource_eo6qm"), SubResource("Resource_cc1w5"), SubResource("Resource_llgcl")])
 repeat_entries = false
 min_condition = 50.0
 max_condition = 100.0
@@ -904,69 +902,71 @@ metadata/_custom_type_script = "uid://b34kwea65we13"
 
 [sub_resource type="Resource" id="Resource_vrfhn"]
 script = ExtResource("98_vd787")
-amount_min = 4
-amount_max = 8
+amount_min = 2
+amount_max = 4
 item = ExtResource("107_qayaa")
 metadata/_custom_type_script = "uid://dc15s83haevrb"
 
 [sub_resource type="Resource" id="Resource_ljwlg"]
 script = ExtResource("98_vd787")
-amount_min = 4
-amount_max = 8
+amount_min = 2
+amount_max = 4
 item = ExtResource("106_0dmsd")
 metadata/_custom_type_script = "uid://dc15s83haevrb"
 
 [sub_resource type="Resource" id="Resource_wfy45"]
 script = ExtResource("98_vd787")
-amount_min = 4
-amount_max = 8
+amount_min = 2
+amount_max = 4
 item = ExtResource("108_p7x0p")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
+[sub_resource type="Resource" id="Resource_e1cwp"]
+script = ExtResource("98_vd787")
+amount_min = 2
+amount_max = 4
+item = ExtResource("107_l5l63")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
+[sub_resource type="Resource" id="Resource_fodxx"]
+script = ExtResource("98_vd787")
+amount_min = 1
+amount_max = 3
+item = ExtResource("108_c3so5")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
+[sub_resource type="Resource" id="Resource_qb4bu"]
+script = ExtResource("98_vd787")
+amount_min = 2
+amount_max = 4
+item = ExtResource("109_llgcl")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
+[sub_resource type="Resource" id="Resource_mwlc3"]
+script = ExtResource("98_vd787")
+amount_min = 2
+amount_max = 4
+item = ExtResource("110_ddb2y")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
+[sub_resource type="Resource" id="Resource_1rpls"]
+script = ExtResource("98_vd787")
+amount_min = 1
+amount_max = 3
+item = ExtResource("111_4iccq")
+metadata/_custom_type_script = "uid://dc15s83haevrb"
+
+[sub_resource type="Resource" id="Resource_qj8l8"]
+script = ExtResource("98_vd787")
+amount_min = 2
+amount_max = 4
+item = ExtResource("112_wfy45")
 metadata/_custom_type_script = "uid://dc15s83haevrb"
 
 [sub_resource type="Resource" id="Resource_afbx0"]
 script = ExtResource("100_b0ox4")
-potential_items = Array[ExtResource("98_vd787")]([SubResource("Resource_vrfhn"), SubResource("Resource_ljwlg"), SubResource("Resource_wfy45")])
+potential_items = Array[ExtResource("98_vd787")]([SubResource("Resource_vrfhn"), SubResource("Resource_ljwlg"), SubResource("Resource_wfy45"), SubResource("Resource_e1cwp"), SubResource("Resource_fodxx"), SubResource("Resource_qb4bu"), SubResource("Resource_mwlc3"), SubResource("Resource_1rpls"), SubResource("Resource_qj8l8")])
 reward_multiplier = 2.0
-metadata/_custom_type_script = "uid://bicpdyf13vj1j"
-
-[sub_resource type="Resource" id="Resource_537xa"]
-script = ExtResource("98_vd787")
-amount_min = 4
-amount_max = 8
-item = ExtResource("88_lifx4")
-metadata/_custom_type_script = "uid://dc15s83haevrb"
-
-[sub_resource type="Resource" id="Resource_ddb1d"]
-script = ExtResource("98_vd787")
-amount_min = 4
-amount_max = 8
-item = ExtResource("89_hpla5")
-metadata/_custom_type_script = "uid://dc15s83haevrb"
-
-[sub_resource type="Resource" id="Resource_7kgcg"]
-script = ExtResource("98_vd787")
-amount_min = 20
-amount_max = 40
-item = ExtResource("90_ktdy1")
-metadata/_custom_type_script = "uid://dc15s83haevrb"
-
-[sub_resource type="Resource" id="Resource_t5qc1"]
-script = ExtResource("98_vd787")
-amount_min = 4
-amount_max = 8
-item = ExtResource("91_lvvmo")
-metadata/_custom_type_script = "uid://dc15s83haevrb"
-
-[sub_resource type="Resource" id="Resource_pu2xk"]
-script = ExtResource("98_vd787")
-amount_min = 2
-amount_max = 4
-item = ExtResource("92_bs5ia")
-metadata/_custom_type_script = "uid://dc15s83haevrb"
-
-[sub_resource type="Resource" id="Resource_t3bu4"]
-script = ExtResource("100_b0ox4")
-potential_items = Array[ExtResource("98_vd787")]([SubResource("Resource_537xa"), SubResource("Resource_ddb1d"), SubResource("Resource_7kgcg"), SubResource("Resource_t5qc1"), SubResource("Resource_pu2xk")])
 metadata/_custom_type_script = "uid://bicpdyf13vj1j"
 
 [sub_resource type="Resource" id="Resource_ht31n"]
@@ -981,9 +981,9 @@ price_modifiers = {
 "Weapons": 0.5
 }
 dialogue = SubResource("Resource_pc4vu")
-random_quests = Array[ExtResource("77_rndhr")]([SubResource("Resource_afbx0"), SubResource("Resource_t3bu4")])
-min_quests = 1
-max_quests = 3
+random_quests = Array[ExtResource("77_rndhr")]([SubResource("Resource_afbx0")])
+min_quests = 2
+max_quests = 4
 faction = 2
 title = "Scrapyard"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
@@ -1231,58 +1231,58 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.51856756, 0)
 transform = Transform3D(0.9991707, -0.040567875, 0.0034744723, 0.04070218, 0.9974333, -0.05890684, -0.0010758284, 0.058999356, 0.99825823, -2.7054443, -0.49136424, 3.0947266)
 
 [node name="TireStack" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="3" unique_id=1335062152]
-transform = Transform3D(0.9996139, -0.027387073, -0.0050558937, 0.027076306, 0.9981847, -0.05374867, 0.00651876, 0.053590752, 0.99854225, -4.794861, -0.6582002, 4.6712646)
+transform = Transform3D(0.9996139, -0.02738706, -0.0050558923, 0.027076306, 0.99818414, -0.05374867, 0.0065187584, 0.053590726, 0.99854225, -4.794861, -0.6582002, 4.673462)
 
 [node name="Tire4" parent="Scrapyard/Meshes/TireStack" index="0" unique_id=1728738655]
-transform = Transform3D(1.000002, 5.8207683e-10, 1.0989628e-07, -5.8207883e-10, 1, 7.450562e-09, -1.0989648e-07, -7.450561e-09, 1.0000001, -0.18121338, -0.009334564, -0.26464844)
+transform = Transform3D(1.0000026, 1.0477375e-09, 1.3411069e-07, -1.0477424e-09, 0.9999992, 1.1175836e-08, -1.3411103e-07, -1.11758265e-08, 1.0000001, -0.18164063, -0.009319305, -0.26464844)
 
 [node name="Tire5" parent="Scrapyard/Meshes/TireStack" index="1" unique_id=1124442949]
-transform = Transform3D(1.000002, 3.725297e-09, 6.333006e-08, -3.7253045e-09, 1.0000001, 7.450563e-09, -6.333018e-08, -7.4505624e-09, 1.0000002, 0.006164551, -0.0115242, -0.21081543)
+transform = Transform3D(1.0000026, 3.1432166e-09, 6.705535e-08, -3.1432272e-09, 0.9999994, 1.1175838e-08, -6.705552e-08, -1.1175829e-08, 1.0000002, 0.0065307617, -0.011600494, -0.21240234)
 
 [node name="Tire6" parent="Scrapyard/Meshes/TireStack" index="2" unique_id=2048793634]
-transform = Transform3D(1.000002, 3.725297e-09, 6.333006e-08, -3.7253045e-09, 1.0000001, 7.450563e-09, -6.333018e-08, -7.4505624e-09, 1.0000002, -0.09674072, -0.008319855, -0.20336914)
+transform = Transform3D(1.0000026, 3.1432166e-09, 6.705535e-08, -3.1432272e-09, 0.9999994, 1.1175838e-08, -6.705552e-08, -1.1175829e-08, 1.0000002, -0.09625244, -0.0083351135, -0.20336914)
 
 [node name="Tire2" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="4" unique_id=1752658556]
-transform = Transform3D(0.9994157, -0.033816896, 0.005317376, 0.034024853, 0.99837697, -0.04566678, -0.0037644429, 0.04582092, 0.9989428, -0.3671875, -0.67333645, 5.1206055)
+transform = Transform3D(0.9994157, -0.033816896, 0.0053173844, 0.034024853, 0.99837697, -0.04566678, -0.0037644512, 0.04582092, 0.9989428, -0.3671875, -0.67333645, 5.1206055)
 
 [node name="Tire3" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="5" unique_id=1876500154]
-transform = Transform3D(0.9997309, -0.023145549, 0.0017221594, 0.023194855, 0.998983, -0.03858792, -0.0008272737, 0.03861743, 0.99925196, -4.633301, -0.81148326, 6.2130127)
+transform = Transform3D(0.9997309, -0.023145538, 0.0017221344, 0.023194855, 0.9989825, -0.0385879, -0.0008272495, 0.038617406, 0.9992514, -4.633728, -0.81148326, 6.21521)
 
 [node name="TireStack2" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="6" unique_id=384813771]
-transform = Transform3D(0.99941945, -0.03381687, 0.0051521263, 0.034017395, 0.9983763, -0.045672596, -0.00359926, 0.045820888, 0.9989476, -2.409912, -0.67333645, 6.760254)
+transform = Transform3D(0.9994205, -0.03381687, 0.0051521384, 0.034017432, 0.9983763, -0.045672644, -0.0035992702, 0.045820888, 0.9989487, -2.4104614, -0.67333645, 6.762451)
 
 [node name="Tire4" parent="Scrapyard/Meshes/TireStack2" index="0" unique_id=1728738655]
-transform = Transform3D(0.9999747, -0.007128883, -4.9438695e-05, 0.0071290564, 0.99995047, 0.0069300686, 3.2596294e-08, -0.006930244, 0.999976, -0.17883301, -0.005771637, -0.2593994)
+transform = Transform3D(0.9999745, -0.00712889, -4.9462004e-05, 0.007129064, 0.9999501, 0.0069300625, 5.5886623e-08, -0.006930238, 0.9999756, -0.17883301, -0.005722046, -0.2581787)
 
 [node name="Tire5" parent="Scrapyard/Meshes/TireStack2" index="1" unique_id=1124442949]
-transform = Transform3D(0.9999747, -0.007128883, -4.9438695e-05, 0.0071290564, 0.99995047, 0.0069300686, 3.2596294e-08, -0.006930244, 0.999976, -0.0022583008, -0.00976944, -0.21520996)
+transform = Transform3D(0.9999745, -0.00712889, -4.9462004e-05, 0.007129064, 0.9999501, 0.0069300625, 5.5886623e-08, -0.006930238, 0.9999756, -0.0022583008, -0.00976181, -0.21520996)
 
 [node name="Tire6" parent="Scrapyard/Meshes/TireStack2" index="2" unique_id=2048793634]
-transform = Transform3D(0.9999747, -0.007128883, -4.9438695e-05, 0.0071290564, 0.99995047, 0.0069300686, 3.2596294e-08, -0.006930244, 0.999976, -0.115112305, -0.005794525, -0.21240234)
+transform = Transform3D(0.9999745, -0.00712889, -4.9462004e-05, 0.007129064, 0.9999501, 0.0069300625, 5.5886623e-08, -0.006930238, 0.9999756, -0.115356445, -0.0057907104, -0.21240234)
 
 [node name="TireStack3" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="7" unique_id=114358210]
-transform = Transform3D(0.997964, -0.06345271, 0.0068046073, 0.06374456, 0.9962187, -0.059033725, -0.0030330298, 0.059347056, 0.99823433, 0.09875488, -0.25916874, 2.7684326)
+transform = Transform3D(0.997964, -0.06345271, 0.0068046073, 0.06374456, 0.9962187, -0.059033725, -0.0030330298, 0.059347056, 0.99823433, 0.09875488, -0.25916874, 2.77063)
 
 [node name="Tire4" parent="Scrapyard/Meshes/TireStack3" index="0" unique_id=1728738655]
-transform = Transform3D(1.0000011, -4.3073802e-09, 1.7322638e-07, 4.3073816e-09, 1, 1.8626446e-08, -1.7322658e-07, -1.8626448e-08, 0.99999994, -0.17883301, -0.004096985, -0.26257324)
+transform = Transform3D(1.0000011, -9.837121e-09, 2.0489144e-07, 9.8371284e-09, 1, 1.8626446e-08, -2.0489166e-07, -1.8626446e-08, 0.99999994, -0.17883301, -0.004119873, -0.26257324)
 
 [node name="Tire5" parent="Scrapyard/Meshes/TireStack3" index="1" unique_id=1124442949]
-transform = Transform3D(1.0000011, -4.3073802e-09, 1.7322638e-07, 4.3073816e-09, 1, 1.8626446e-08, -1.7322658e-07, -1.8626448e-08, 0.99999994, -0.0029907227, -0.012542725, -0.21520996)
+transform = Transform3D(1.0000011, -9.837121e-09, 2.0489144e-07, 9.8371284e-09, 1, 1.8626446e-08, -2.0489166e-07, -1.8626446e-08, 0.99999994, -0.0029907227, -0.012565613, -0.21520996)
 
 [node name="Tire6" parent="Scrapyard/Meshes/TireStack3" index="2" unique_id=2048793634]
-transform = Transform3D(1.0000011, -4.3073802e-09, 1.7322638e-07, 4.3073816e-09, 1, 1.8626446e-08, -1.7322658e-07, -1.8626448e-08, 0.99999994, -0.113708496, -0.005874634, -0.22216797)
+transform = Transform3D(1.0000011, -9.837121e-09, 2.0489144e-07, 9.8371284e-09, 1, 1.8626446e-08, -2.0489166e-07, -1.8626446e-08, 0.99999994, -0.113708496, -0.0060043335, -0.22436523)
 
 [node name="RigidBody3D" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="8" unique_id=1182461201]
-transform = Transform3D(0.999407, -0.033816878, 0.007066934, 0.034104824, 0.99837613, -0.04560715, -0.0055131917, 0.045820884, 0.9989348, -1.2016602, -0.67333645, 8.0078125)
+transform = Transform3D(0.99940807, -0.033816878, 0.0070669474, 0.03410486, 0.99837613, -0.04560715, -0.0055132112, 0.045820884, 0.9989348, -1.2020264, -0.67333645, 8.01001)
 
 [node name="RigidBody3D3" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="9" unique_id=249755868]
-transform = Transform3D(0.99915874, -0.040975574, 0.0018325266, 0.041015893, 0.9984009, -0.03887895, -0.00023650908, 0.03892134, 0.99924296, -3.0476074, -0.67333645, 4.7407227)
+transform = Transform3D(0.99915874, -0.04097557, 0.0018325432, 0.041015893, 0.9984009, -0.038878947, -0.00023652572, 0.038921338, 0.99924296, -3.0477295, -0.67333645, 4.74292)
 
 [node name="RigidBody3D2" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="10" unique_id=655607314]
-transform = Transform3D(0.9995522, -0.027387088, -0.011919267, 0.026706532, 0.9981851, -0.053933308, 0.013374713, 0.05359078, 0.9984739, -5.60083, -0.6582002, 2.8122559)
+transform = Transform3D(0.99955165, -0.027387073, -0.011919267, 0.026706517, 0.99818456, -0.053933308, 0.013374706, 0.053590752, 0.9984739, -5.60083, -0.6582002, 2.8144531)
 
 [node name="RigidBody3D4" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="11" unique_id=39034147]
-transform = Transform3D(0.99960285, -0.02776645, -0.005094027, 0.027575739, 0.9990301, -0.034319602, 0.006042025, 0.03416541, 0.99939877, -6.852661, -0.81148326, 6.2176514)
+transform = Transform3D(0.99960285, -0.02776645, -0.005094027, 0.027575739, 0.9990301, -0.034319602, 0.006042025, 0.03416541, 0.99939877, -6.8535767, -0.81148326, 6.2198486)
 
 [node name="Flagpole" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="12" unique_id=800258272]
 transform = Transform3D(-1.999665, 0, -0.036580164, 0, 2, 0, 0.036580138, 0, -1.9996665, 0, 0, 0)

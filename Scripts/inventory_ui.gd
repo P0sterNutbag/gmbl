@@ -194,13 +194,12 @@ func set_description(item: Item = null):
 		if stat.max_value > 0:
 			value_label.text += "/" + str(stat.max_value)
 		value_label.theme = text_style
-		#if stat.max_value > 0.0:
-			#if stat_value >= 75.0:
-				#value_label.add_theme_color_override("font_color", Color(0.0, 1.0, 0.0, 1.0))
-			#elif stat_value <= 25.0:
-				#value_label.add_theme_color_override("font_color", Color(1.0, 0.0, 0.0, 1.0))
+		if stat.max_value > 0.0:
+			if stat_value >= 75.0:
+				value_label.add_theme_color_override("font_color", value_label.get_theme_color("font_color").lightened(0.1))
+			elif stat_value <= 25.0:
+				value_label.add_theme_color_override("font_color", value_label.get_theme_color("font_color").darkened(0.15))
 		hbox_container.add_child(value_label)
-
 
 
 func filter(category: int) -> void:

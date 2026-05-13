@@ -34,10 +34,10 @@ var sway_speed = 0.1
 var sway_speed_hold_breath = 0.01
 var footstep_timer := 0.0
 var sway_intensity = 3
-var max_breath = 2.0:
+var max_breath = 2.5:
 	get():
 		return max_breath + ((PlayerStats.skills.guns) * 0.3)
-var current_breath = 3.0
+var current_breath = 2.5
 var is_crouching: bool
 var is_sprinting: bool
 var is_walking: bool
@@ -93,7 +93,7 @@ const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var gun_collision_cast: RayCast3D = %GunPivot/GunOffset/RayCast3D
 @onready var move_marker: Node3D = $MoveMarker
 @onready var hitbox_shape: CollisionShape3D = $Hitbox/CollisionShape3D
-@onready var player_radgoll: Node3D = $PlayerRadgoll
+@onready var player_third_person: Node3D = $PlayerThirdPerson
 
 
 func _enter_tree() -> void:
@@ -337,9 +337,7 @@ func state_walk(delta):
 	if (gun_state == gun_states.ads or gun_state == gun_states.point) and gun.rotation.y == 0:
 		if Input.is_action_pressed("shoot"):
 			var did_use = gun.use(self)
-			if !did_use:
-				return
-			if gun is Gun:
+			if did_use and gun is Gun:
 				var tween = create_tween().set_ease(Tween.EASE_OUT)
 				tween.tween_property(gun, "position", Vector3(0, 0, 0.1), 0.01)
 				tween.tween_property(gun, "position", Vector3.ZERO, 0.2)
@@ -368,30 +366,26 @@ func state_walk(delta):
 				change_gun_state(gun_states.unjam)
 		elif gun_state != gun_states.reload:
 			var _ammo = PlayerStats.inventory.find_item(gun.ammo_item.title)
-			if !_ammo or ammo == gun.max_ammo:
-				return
-			change_gun_state(gun_states.reload)
+			if _ammo and ammo < gun.max_ammo:
+				change_gun_state(gun_states.reload)
 	
 	# interact tooltip
 	if interact_cast.is_colliding():
 		var collider = interact_cast.get_collider(0)
-		if !collider:
-			return
-		if "interaction_object" in collider:
-			collider = collider.interaction_object
-		if collider is InteractableObject:
-			Globals.ui.set_tooltip(collider)
-			if Input.is_action_just_pressed("next_gun"):
-				collider.index = wrapi(collider.index + 1, 0, collider.actions.size())
-			elif Input.is_action_just_pressed("last_gun"):
-				collider.index = wrapi(collider.index - 1, 0, collider.actions.size())
+		if collider:
+			if "interaction_object" in collider:
+				collider = collider.interaction_object
+			if collider is InteractableObject:
+				Globals.ui.set_tooltip(collider)
+				if Input.is_action_just_pressed("next_gun"):
+					collider.index = wrapi(collider.index + 1, 0, collider.actions.size())
+				elif Input.is_action_just_pressed("last_gun"):
+					collider.index = wrapi(collider.index - 1, 0, collider.actions.size())
 	elif Globals.ui.custom_tooltip == "":
 		Globals.ui.hide_tooltip()
 	
 	# interact
-	if Input.is_action_just_pressed("interact"):
-		if !interact_cast.is_colliding():
-			return
+	if Input.is_action_just_pressed("interact") and interact_cast.is_colliding():
 		var collider = interact_cast.get_collider(0)
 		if collider is InteractableObject:
 			collider.interact()
@@ -553,7 +547,7 @@ func state_dead(_delta):
 func exit_dead():
 	gun_pivot.show()
 	camera.current = true
-	player_radgoll.reset()
+	player_third_person.reset()
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
 	tween.tween_property(camera, "position:y", 0, 0.25)
 	tween.tween_property(camera, "rotation:z", deg_to_rad(0), 0.25)
@@ -597,6 +591,8 @@ func gun_state_ads(delta: float) -> void:
 		if current_breath <= 0:
 			can_hold_breath = false
 			is_holding_breath = false
+	if Input.is_action_pressed("shoot"):
+		current_sway_speed = sway_speed
 	elif current_breath < max_breath:
 		if !can_hold_breath and current_breath > 1:
 			can_hold_breath = true
@@ -868,7 +864,7 @@ func _on_damaged(hit_position: Vector3, hit_direction: Vector3, _shooter: Node3D
 	hitbox.damage_modifier = PlayerStats.inventory.equipment_kit.get_damage_modifier()
 	Globals.ui.play_hit_effect(hit_direction)
 	if health_component.hp <= 0:
-		player_radgoll.start_ragdoll(hit_position, hit_direction, gun)
+		player_third_person.start_ragdoll(hit_position, hit_direction, gun)
 
 
 func _on_death() -> void:

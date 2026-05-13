@@ -22,7 +22,7 @@
 [ext_resource type="Theme" uid="uid://dcnijc3hjurqk" path="res://Art/Themes/text_mediun_outline.tres" id="13_hkj58"]
 [ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="14_hkj58"]
 [ext_resource type="PackedScene" uid="uid://ca8traqagv62t" path="res://Scenes/UI/menu_item.tscn" id="15_6gmlr"]
-[ext_resource type="Shader" path="res://Scripts/Shaders/vignette.gdshader" id="16_sdqf4"]
+[ext_resource type="Shader" uid="uid://cjcsm8s887nv7" path="res://Scripts/Shaders/vignette.gdshader" id="16_sdqf4"]
 [ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="22_jr5wk"]
 [ext_resource type="Theme" uid="uid://ddlkdp3v3plc" path="res://Art/Themes/hbox_container.tres" id="22_sdqf4"]
 [ext_resource type="Texture2D" uid="uid://d2ukjid6oonnl" path="res://Art/Textures/UI/population icon.png" id="23_hm5a8"]
@@ -116,6 +116,7 @@ offset_right = 2.0
 theme_override_styles/panel = ExtResource("2_pfu2r")
 
 [node name="ColorRect3" type="ColorRect" parent="Crosshair/Control" unique_id=1399587005]
+visible = false
 layout_mode = 0
 offset_left = -2.0
 offset_top = -10.0
@@ -142,6 +143,7 @@ offset_bottom = 10.0
 theme_override_styles/panel = ExtResource("2_pfu2r")
 
 [node name="ColorRect4" type="ColorRect" parent="Crosshair/Control2" unique_id=519044760]
+visible = false
 layout_mode = 0
 offset_left = -2.0
 offset_right = 2.0
@@ -169,6 +171,7 @@ rotation = 1.5708
 theme_override_styles/panel = ExtResource("2_pfu2r")
 
 [node name="ColorRect3" type="ColorRect" parent="Crosshair/Control3" unique_id=553718211]
+visible = false
 layout_mode = 0
 offset_top = -2.0
 offset_right = 4.0
@@ -199,6 +202,7 @@ rotation = 1.5708
 theme_override_styles/panel = ExtResource("2_pfu2r")
 
 [node name="ColorRect3" type="ColorRect" parent="Crosshair/Control4" unique_id=1338162493]
+visible = false
 layout_mode = 0
 offset_left = 10.0
 offset_top = -2.0
@@ -238,6 +242,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="DotCrosshair3" type="ColorRect" parent="DotCrosshair" unique_id=1624532020]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -455,18 +460,14 @@ region_enabled = true
 region_rect = Rect2(0, 0, 28, 28)
 
 [node name="Breath" type="ProgressBar" parent="." unique_id=547902577]
-modulate = Color(1, 1, 1, 0.6431373)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -55.75
-offset_top = -241.0
-offset_right = 55.75
-offset_bottom = -233.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -132.0
+offset_right = 284.0
+offset_bottom = -124.0
+grow_vertical = 0
 theme = ExtResource("3_8ucm7")
 theme_override_styles/fill = ExtResource("12_hm5a8")
 max_value = 1.0

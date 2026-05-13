@@ -174,15 +174,25 @@ func decrease_sleep(new_value: float) -> void:
 
 
 func go_to_sleep(time_to_skip: float = 1.5):
-	if get_tree().current_scene != Globals.overworld:
-		return
+	var enemies := []
+	enemies.append_array(get_tree().get_nodes_in_group("enemies"))
+	enemies.append_array(get_tree().get_nodes_in_group("overworld_npcs"))
+	for enemy in enemies:
+		if enemy.target == Globals.player or enemy.global_position.distance_to(Globals.player.global_position) < 25.0:
+			Globals.survival_ui.create_notification("Unable to sleep with enemies nearby")
+			return
+		if get_tree().current_scene != Globals.overworld and enemy.global_position.distance_to(Globals.player.global_position) < 25.0:
+			Globals.survival_ui.create_notification("Unable to sleep with enemies nearby")
+			return
+	#if get_tree().current_scene != Globals.overworld:
+		#return
 	UiController.close_interface(Globals.survival_ui.menu_holder)
 	change_state(states.pause)
 	var tween = create_tween()
 	tween.tween_callback(SceneManager.animation_player.play.bind("fade_in"))
 	tween.tween_callback(DayNightCycle.skip_to_time.bind(time_to_skip))
 	tween.tween_callback(SceneManager.animation_player.play.bind("fade_out")).set_delay(2)
-	tween.tween_callback(kill_all_npcs)
+	tween.tween_callback(progress_npcs)
 	tween.tween_property(self, "sleep", max_sleep, 0)
 	tween.tween_property(self, "soberness", max_soberness, 0)
 	tween.tween_callback(decrease_thirst.bind(-0.3))
@@ -194,10 +204,18 @@ func go_to_sleep(time_to_skip: float = 1.5):
 	sleep_finished.emit()
 
 
-func kill_all_npcs() -> void:
-	BattleManager.delete_all_battles()
+func progress_npcs() -> void:
 	for npc in get_tree().get_nodes_in_group("overworld npcs"):
-		npc.queue_free()
+		if npc.state == npc.states.battle:
+			continue
+		var target_pos = (npc.global_position + npc.navigation_agent.get_final_position()) / 2
+		target_pos.y = Globals.get_heightmap_position(target_pos)
+		npc.global_position = target_pos
+	for npc in get_tree().get_nodes_in_group("enemies"):
+		if npc.state == npc.states.walk:
+			var target_pos = (npc.global_position + npc.navigation_agent.get_final_position()) / 2
+			target_pos.y = Globals.get_heightmap_position(target_pos)
+			npc.global_position = target_pos
 
 
 func add_skill_point() -> void:

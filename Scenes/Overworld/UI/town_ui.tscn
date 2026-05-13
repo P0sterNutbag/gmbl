@@ -1013,9 +1013,9 @@ joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00043046701, -0.00317872
 body_offset = Transform3D(1.0000002, -0.00024315715, -2.7604401e-05, -2.7528033e-05, -0.00017764606, -1.0000004, 0.00024306774, 1.0000002, -0.00017783605, -0.0004272461, 0.14468384, 0.0032043457)
 
 [node name="Physical Bone mixamorig_RightForeArm" parent="PlayerPortrait/Offset/EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(659761963, 2143382753) index="11" unique_id=34845349]
-transform = Transform3D(0.65585905, 0.7504222, 0.08194828, 0.75403124, -0.64609045, -0.11833899, -0.035858195, 0.13940528, -0.98958594, -0.28984547, 0.04257202, -0.9875183)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00048551618, -0.0009203029, 0.15606679)
-body_offset = Transform3D(1.0000001, -0.0004939139, 1.4804304e-05, 1.4863908e-05, 2.9191375e-05, -1.0000005, 0.0004939437, 1.0000004, 2.9064715e-05, -0.00048828125, 0.1560669, 0.00091552734)
+transform = Transform3D(0.65585905, 0.7504221, 0.081948295, 0.75403124, -0.6460903, -0.11833899, -0.035858195, 0.13940527, -0.98958594, -0.28984547, 0.04257202, -0.9875183)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0004855138, -0.0009203039, 0.15606679)
+body_offset = Transform3D(1.0000001, -0.0004939735, 1.4819205e-05, 1.4863908e-05, 2.9191375e-05, -1.0000005, 0.0004939437, 1.0000005, 2.9072165e-05, -0.00048828125, 0.1560669, 0.00091552734)
 
 [node name="Physical Bone mixamorig_LeftUpLeg" parent="PlayerPortrait/Offset/EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(659761963, 2143382753) index="12" unique_id=1063892306]
 transform = Transform3D(-0.1801786, -0.97775567, -0.107375205, -0.96159756, 0.19806638, -0.18999973, 0.20704077, 0.06901784, -0.9758948, 0.124741554, 0.050994873, -0.7642822)
@@ -1047,8 +1047,10 @@ transform = Transform3D(-0.738466, -0.34574306, 0.57890385, -0.6739418, 0.406068
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0016413371, 0.0011110746, 0.12176523)
 body_offset = Transform3D(0.9999995, -3.170967e-05, 5.4597855e-05, 5.3793192e-05, 2.2441149e-05, -1.0000001, 3.1411648e-05, 1.0000002, 2.270937e-05, -0.0016479492, 0.12176514, -0.0011138916)
 
-[node name="Camera3D" type="Camera3D" parent="PlayerPortrait/Offset" unique_id=1418816788]
-transform = Transform3D(-1, 1.7763568e-15, -8.742278e-08, -1.6240486e-08, 0.98259336, 0.18576951, 8.590104e-08, 0.18576951, -0.98259336, -8.881784e-16, 1.8285385, -0.86502075)
+[node name="CameraPivot" type="Node3D" parent="PlayerPortrait/Offset" unique_id=307940891]
+
+[node name="Camera3D" type="Camera3D" parent="PlayerPortrait/Offset/CameraPivot" unique_id=945737618]
+transform = Transform3D(-1, 1.15222285e-08, -1.4836748e-07, -1.6240486e-08, 0.98259336, 0.18576951, 1.4792536e-07, 0.18576951, -0.98259336, 0, 1.8166809, -0.70233154)
 
 [node name="ShopkeeperPortrait" type="SubViewport" parent="." unique_id=969270972]
 transparent_bg = true
@@ -1060,8 +1062,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 500, 500)
 
 [node name="EnemyModel" parent="ShopkeeperPortrait/Offset" unique_id=1920635652 instance=ExtResource("14_747ce")]
 
-[node name="Camera3D" type="Camera3D" parent="ShopkeeperPortrait/Offset" unique_id=261171959]
-transform = Transform3D(-1, 1.15222285e-08, -1.4836748e-07, -1.6240486e-08, 0.98259336, 0.18576951, 1.4792536e-07, 0.18576951, -0.98259336, -8.881784e-16, 1.8285385, -0.86502075)
+[node name="CameraPivot" type="Node3D" parent="ShopkeeperPortrait/Offset" unique_id=1844711424]
+
+[node name="Camera3D" type="Camera3D" parent="ShopkeeperPortrait/Offset/CameraPivot" unique_id=296979698]
+transform = Transform3D(-1, 1.15222285e-08, -1.4836748e-07, -1.6240486e-08, 0.98259336, 0.18576951, 1.4792536e-07, 0.18576951, -0.98259336, 0, 1.8166809, -0.70233154)
 
 [node name="BountyPicture" type="SubViewport" parent="." unique_id=187452334]
 transparent_bg = true
@@ -1127,9 +1131,9 @@ joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13242938, 0.018068232, 
 body_offset = Transform3D(-0.9241507, 0.20298447, 0.32364047, -0.3049005, 0.11852956, -0.94497985, -0.2301772, -0.9719815, -0.047649123, -0.11016846, -0.088897705, -0.015258789)
 
 [node name="Physical Bone mixamorig_Spine2" parent="BountyPicture/Offset/EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(402927275, 2143382753) index="3" unique_id=665582917]
-transform = Transform3D(0.3684844, 0.9254906, 0.08767294, -0.87128794, 0.3109334, 0.37970755, 0.32415524, -0.21630467, 0.9209429, 0.05139923, -0.19021606, -1.3371582)
+transform = Transform3D(0.3684844, 0.9254906, 0.08767296, -0.87128794, 0.3109334, 0.37970752, 0.32415524, -0.21630467, 0.9209429, 0.05139923, -0.19021606, -1.3371582)
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20555544, 0.033723805, -0.007279346)
-body_offset = Transform3D(-0.89034325, 0.2574821, 0.37548956, -0.33872566, 0.176479, -0.9241865, -0.30422744, -0.95003074, -0.06991108, -0.18896484, -0.08230591, -0.03100586)
+body_offset = Transform3D(-0.89034325, 0.2574821, 0.37548956, -0.33872566, 0.176479, -0.9241865, -0.30422744, -0.95003074, -0.06991107, -0.18896484, -0.08230591, -0.03100586)
 
 [node name="Physical Bone mixamorig_Neck" parent="BountyPicture/Offset/EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(402927275, 2143382753) index="4" unique_id=322639261]
 transform = Transform3D(0.92419904, -0.37474018, 0.07366191, 0.32502377, 0.8730445, 0.36352834, -0.20053878, -0.3120306, 0.9286663, 0.03731537, -0.22109985, -1.4350891)
@@ -1204,8 +1208,10 @@ body_offset = Transform3D(-0.9934671, -0.007005438, 0.11389944, 0.056370884, -0.
 [node name="AnimationPlayer" parent="BountyPicture/Offset/EnemyModel/PersonAnimated" parent_id_path=PackedInt32Array(402927275, 375838727) index="1" unique_id=1816909259]
 autoplay = &""
 
-[node name="Camera3D" type="Camera3D" parent="BountyPicture/Offset" unique_id=1685082855]
-transform = Transform3D(-1, 1.15222285e-08, -1.4836748e-07, -1.6240486e-08, 0.98259336, 0.18576951, 1.4792536e-07, 0.18576951, -0.98259336, 4.479988e-08, 1.8166933, -0.7023391)
+[node name="CameraPivot" type="Node3D" parent="BountyPicture/Offset" unique_id=253127506]
+
+[node name="Camera3D" type="Camera3D" parent="BountyPicture/Offset/CameraPivot" unique_id=1685082855]
+transform = Transform3D(-1, 1.15222285e-08, -1.4836748e-07, -1.6240486e-08, 0.98259336, 0.18576951, 1.4792536e-07, 0.18576951, -0.98259336, 0, 1.8166809, -0.70233154)
 
 [connection signal="pressed" from="Shop/Inventory/Control/Button" to="." method="close_shop"]
 [connection signal="exit" from="JobBoard" to="Dialogue" method="_on_shop_exit"]

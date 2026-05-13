@@ -30,6 +30,8 @@ func start_dialogue(tree: DialogueTree) -> void:
 	for child in get_children():
 		child.queue_free()
 	Globals.ui.npc_portrait_model.set_materials(tree.npc_style)
+	var camera_pivot = Globals.ui.npc_portrait_model.get_parent().get_child(-1)
+	camera_pivot.rotation.y = deg_to_rad(tree.camera_angle)
 	label.text = tree.npc_name
 	dialogue_tree = tree
 	advance_dialogue(index + 1)

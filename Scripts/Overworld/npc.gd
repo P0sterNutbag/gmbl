@@ -5,12 +5,12 @@ enum states {walk, chase, battle, dead}
 @export var gun_index: guns
 @export var destination: Location
 var state = states.walk
-var speed := 1.5
-var walk_speed := 2
-var run_speed := 3
+var speed: float
+var walk_speed := 1.5
+var run_speed := 2.5
 var path_index := 0
 var max_enemies := 6
-var min_enemies := 3
+var min_enemies := 2
 var save_population: int = -1
 var chase_player: bool = true
 var can_move: bool
@@ -42,8 +42,11 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	var gun = guns_dict[gun_index][0].instantiate()
+	var population = randi_range(min_enemies, max_enemies)
 	gun_holder.add_child(gun)
-	location.location_data.population = randi_range(min_enemies, max_enemies)
+	walk_speed += float(max_enemies - population) * 0.25
+	run_speed += float(max_enemies - population) * 0.25
+	location.location_data.population = population
 	location.encounter_started.connect(_on_encounter_started)
 	location.encounter_ended.connect(_on_encounter_ended)
 	location.remove_from_group("persist")
@@ -57,6 +60,12 @@ func _ready() -> void:
 			faction_name[-1] = ""
 		location.dialogue_tree.npc_name = faction_name + " " + location.dialogue_tree.npc_name
 		location.title = faction_name + " " + location.title
+	if location.unaware_dialogue:
+		location.unaware_dialogue.npc_style = enemy_model.current_style
+		var faction_name = FactionManager.faction_data[faction].name
+		if faction_name[-1] == "s":
+			faction_name[-1] = ""
+		location.unaware_dialogue.npc_name = faction_name + " " + location.unaware_dialogue.npc_name
 	location.location_data.faction = faction
 	location.shop.faction = faction
 	original_position = global_position
@@ -72,9 +81,11 @@ func _process(_delta: float) -> void:
 			# detect player
 			target = detection.get_visible_target()
 			if target:
-				state = states.chase
-				#if target == Globals.player and !chase_player:
-					#state = states.walk
+				if target == Globals.player:
+					if PlayerStats.allies.size() + 1 <= location.location_data.population:
+						state = states.chase
+				else:
+					state = states.chase
 			# animate
 			if velocity != Vector3.ZERO:
 				anim_player.play("Walk")

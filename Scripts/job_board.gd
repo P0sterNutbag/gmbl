@@ -16,7 +16,7 @@ func on_button_pressed(button: Control, resource: Resource) -> void:
 	if "start_quest" in resource:
 		resource.start_quest()
 	PlayerStats.quests.append(resource)
-	Globals.survival_ui.compass.set_quest_markers()
+	#Globals.survival_ui.compass.set_quest_markers()
 	shop.quests.erase(resource)
 	button.queue_free()
 	#if item_container.get_child_count() == 0:

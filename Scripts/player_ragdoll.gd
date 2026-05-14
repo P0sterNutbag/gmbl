@@ -15,6 +15,7 @@ func _ready() -> void:
 	super._ready()
 	animation_player.play("IdleAim")
 	right_hand.process_mode = Node.PROCESS_MODE_DISABLED
+	hide()
 
 
 func _process(delta: float) -> void:
@@ -42,11 +43,11 @@ func _process(delta: float) -> void:
 		#third_person_camera.fov = 75.0
 
 
-func start_ragdoll(damage_position: Vector3, fall_direction: Vector3, gun: Gun) -> void:
+func start_ragdoll(damage_position: Vector3, fall_direction: Vector3, gun: Node3D) -> void:
 	show()
 	camera_anchor.rotation = Vector3.ZERO
 	death_camera.current = true
-	if gun:
+	if gun and gun.scene_file_path:
 		if right_hand.get_child_count() > 0:
 			right_hand.get_child(0).queue_free()
 		var gun_scene = load(gun.scene_file_path)

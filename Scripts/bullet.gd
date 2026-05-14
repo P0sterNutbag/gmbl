@@ -53,7 +53,7 @@ func hit():
 		#collider.turn_off_simulation()
 	elif collider is HealthComponent:
 		collider.damage(bullet_stats.damage, raycast.get_collision_point(), global_transform.basis.z.normalized(), creator)
-		if !bullet_stats.is_hitscan:
+		if !bullet_stats.is_hitscan and collider.destroy_bullet:
 			queue_free()
 	elif collider.get_parent() is Trap:
 		collider.get_parent().trigger()

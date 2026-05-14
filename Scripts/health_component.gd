@@ -14,6 +14,7 @@ class_name HealthComponent
 @export var hp_bar: Control
 @export var otherHitboxes: Array[HealthComponent]
 @export var blood_on_hit: bool = true
+@export var destroy_bullet: bool = true
 @onready var max_hp: float = hp
 var audio_stream_player: AudioStreamPlayer3D
 var damage_modifier: float = 1.0:
@@ -80,3 +81,7 @@ func revive() -> void:
 	for child in all_children:
 		if child is CollisionShape3D:
 			child.set_deferred("disabled", false)
+
+
+func _on_death() -> void:
+	pass # Replace with function body.

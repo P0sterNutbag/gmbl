@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://b3jb76dpmlkub"]
+
+[ext_resource type="Shader" uid="uid://de6l4w30bo7u6" path="res://Art/Shaders/cel-shader-base.gdshader" id="1_tfofe"]
+[ext_resource type="Texture2D" uid="uid://ppl12gb4cdaw" path="res://Art/Textures/Environment/crate.png" id="2_0w5sj"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j7e7p"]
+particle_flag_align_y = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
+initial_velocity_max = 6.0
+angular_velocity_min = -180.00002
+angular_velocity_max = 179.99998
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dgur7"]
+render_priority = 0
+shader = ExtResource("1_tfofe")
+shader_parameter/color = Color(0.86, 0.86, 0.86, 1)
+shader_parameter/base_texture = ExtResource("2_0w5sj")
+shader_parameter/specular = Color(0.3, 0.3, 0.3, 0)
+shader_parameter/fresnel = Color(0, 0, 0, 0)
+shader_parameter/uv_scale = Vector2(0.1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qt7w8"]
+material = SubResource("ShaderMaterial_dgur7")
+size = Vector3(0.5, 0.05, 0.25)
+
+[node name="BoxBreak" type="GPUParticles3D" unique_id=1498317249]
+emitting = false
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_j7e7p")
+draw_pass_1 = SubResource("BoxMesh_qt7w8")

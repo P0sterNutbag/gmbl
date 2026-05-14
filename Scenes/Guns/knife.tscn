@@ -4,24 +4,30 @@
 [ext_resource type="AudioStream" uid="uid://cg1ead7veeqpv" path="res://Audio/Guns/antitank_empty.wav" id="2_lf1a8"]
 [ext_resource type="PackedScene" uid="uid://ct0yri7k6jh4c" path="res://Scenes/Models/Guns/knife.tscn" id="3_v45xk"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_wqjf8"]
-radius = 0.24190733
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_v45xk"]
 
 [node name="Knife" type="Node3D" unique_id=760138912]
 script = ExtResource("1_wqjf8")
+damage = null
+uses_input = null
+fire_type = null
 
 [node name="MeshInstance3D" type="Node3D" parent="." unique_id=749730204]
 transform = Transform3D(1.9106855e-15, 4.371139e-08, -1, 1, -4.371139e-08, 0, -4.371139e-08, -1, -4.371139e-08, 0, 0, 0)
 
 [node name="Hitbox" type="Area3D" parent="MeshInstance3D" unique_id=1826706581]
-transform = Transform3D(1.9106855e-15, 1, -4.371139e-08, 4.371139e-08, -4.371139e-08, -1, -1, 0, -4.371139e-08, 2.302383e-08, 0.52672386, 2.302383e-08)
+transform = Transform3D(1.9106855e-15, 1, -4.371139e-08, 4.371139e-08, -4.371139e-08, -1, -1, 0, -4.371139e-08, 0, 0, 0)
 collision_layer = 0
-collision_mask = 4
+collision_mask = 5
 monitoring = false
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Hitbox" unique_id=354859236]
-shape = SubResource("SphereShape3D_wqjf8")
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -3.0397565e-08, -0.9874229)
+shape = SubResource("CylinderShape3D_v45xk")
+
+[node name="RayCast3D" type="RayCast3D" parent="MeshInstance3D/Hitbox" unique_id=42642062]
+target_position = Vector3(0, 0, -1)
 
 [node name="knife" parent="MeshInstance3D" unique_id=1677519101 instance=ExtResource("3_v45xk")]
 transform = Transform3D(-1.3113417e-08, 0.3, 0, -0.3, -1.3113417e-08, 0, 0, 0, 0.3, 0, 0, 0)
@@ -32,6 +38,7 @@ bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2002719477]
 
+[connection signal="area_entered" from="MeshInstance3D/Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="MeshInstance3D/Hitbox" to="." method="_on_area_3d_body_entered"]
 [connection signal="animation_changed" from="AnimationPlayer" to="." method="_on_animation_player_animation_changed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

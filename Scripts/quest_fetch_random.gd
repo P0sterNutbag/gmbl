@@ -14,6 +14,8 @@ func generate_quest() -> Quest:
 		filtered_items = potential_items.filter(func(a): return !illegal_items.has(a.item.title))
 	else:
 		filtered_items = potential_items
+	if filtered_items.size() == 0:
+		return null
 	var item_slot = filtered_items[randi() % filtered_items.size()]
 	item_slot.amount = randi_range(item_slot.amount_min, item_slot.amount_max)
 	quest.required_item = item_slot

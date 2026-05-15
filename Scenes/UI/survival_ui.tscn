@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://d34nt8desp71" path="res://Scripts/compass.gd" id="8_2dyl4"]
 [ext_resource type="PackedScene" uid="uid://dht8msbc26v1q" path="res://Scenes/UI/quest_marker.tscn" id="9_e5c6o"]
 [ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="9_to4rm"]
-[ext_resource type="PackedScene" uid="uid://connpctdgiwij" path="res://Scenes/UI/exit_button.tscn" id="10_0pkni"]
 [ext_resource type="Texture2D" uid="uid://u7nrdkhha2eb" path="res://Art/Textures/UI/drunk icon.png" id="10_c2wwi"]
 [ext_resource type="Script" uid="uid://b37bjjekoe1qe" path="res://Scripts/journal_menu.gd" id="10_vghdt"]
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="11_0pkni"]
@@ -30,6 +29,7 @@
 [ext_resource type="Theme" uid="uid://dcnijc3hjurqk" path="res://Art/Themes/text_mediun_outline.tres" id="25_6omgk"]
 [ext_resource type="PackedScene" uid="uid://cvqg8c4yvypa1" path="res://Scenes/UI/confirmation_menu.tscn" id="27_6h4e4"]
 [ext_resource type="Script" uid="uid://pcx3b5tjvijq" path="res://Scripts/faction_ui_box.gd" id="27_k64vs"]
+[ext_resource type="PackedScene" uid="uid://dlkiriq84nxj4" path="res://Scenes/UI/toolbar.tscn" id="27_l6dhw"]
 [ext_resource type="Script" uid="uid://dlnug53qsfaf6" path="res://Scripts/faction_ui.gd" id="27_o0jpn"]
 [ext_resource type="Theme" uid="uid://crg6v3iu4nx3m" path="res://Art/Themes/text_header_outline.tres" id="28_8cvki"]
 [ext_resource type="Theme" uid="uid://ddlkdp3v3plc" path="res://Art/Themes/hbox_container.tres" id="29_tlm7h"]
@@ -270,22 +270,33 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="TransferInventory" type="HBoxContainer" parent="." unique_id=483947959]
+[node name="TransferInventory" type="VBoxContainer" parent="." unique_id=976192550]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -518.0
+offset_left = -524.0
 offset_top = -407.0
 offset_right = 524.0
 offset_bottom = 407.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("13_oq622")
+
+[node name="Toolbar" parent="TransferInventory" unique_id=948533993 instance=ExtResource("27_l6dhw")]
+layout_mode = 2
+
+[node name="Label" parent="TransferInventory/Toolbar/Tabs/MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(948533993, 1909442391) index="0" unique_id=1641508403]
+text = "Transfer"
+
+[node name="HboxContainer" type="HBoxContainer" parent="TransferInventory" unique_id=483947959]
+layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("29_tlm7h")
 
-[node name="Inventory" parent="TransferInventory" unique_id=1473971546 node_paths=PackedStringArray("opposing_ui") instance=ExtResource("9_to4rm")]
+[node name="Inventory" parent="TransferInventory/HboxContainer" unique_id=1473971546 node_paths=PackedStringArray("opposing_ui") instance=ExtResource("9_to4rm")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -293,18 +304,7 @@ mode = 1
 can_drop_items = true
 opposing_ui = NodePath("../Inventory2")
 
-[node name="Control" type="Control" parent="TransferInventory/Inventory" unique_id=656685976]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Button" parent="TransferInventory/Inventory/Control" unique_id=1870459299 instance=ExtResource("10_0pkni")]
-layout_mode = 0
-offset_left = -2.0
-offset_top = 0.0
-offset_right = 22.0
-offset_bottom = 24.0
-
-[node name="Inventory2" parent="TransferInventory" unique_id=515701084 node_paths=PackedStringArray("opposing_ui") instance=ExtResource("9_to4rm")]
+[node name="Inventory2" parent="TransferInventory/HboxContainer" unique_id=515701084 node_paths=PackedStringArray("opposing_ui") instance=ExtResource("9_to4rm")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -494,58 +494,38 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("13_oq622")
 
-[node name="Toolbar" type="HBoxContainer" parent="Menus/VBoxContainer" unique_id=523538809]
+[node name="Toolbar" parent="Menus/VBoxContainer" unique_id=2045520645 instance=ExtResource("27_l6dhw")]
 layout_mode = 2
-theme_override_constants/separation = 8
 
-[node name="Tabs" type="PanelContainer" parent="Menus/VBoxContainer/Toolbar" unique_id=1672038289]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("11_0pkni")
+[node name="Label" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(2045520645, 1909442391) index="0" unique_id=1641508403]
+visible = false
 
-[node name="MarginContainer" type="MarginContainer" parent="Menus/VBoxContainer/Toolbar/Tabs" unique_id=337412086]
-layout_mode = 2
-theme = ExtResource("12_2dyl4")
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 8
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer" unique_id=1565238932]
-layout_mode = 2
-theme_override_constants/separation = 64
-
-[node name="InventoryTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" unique_id=1697876949 instance=ExtResource("22_jtf3n")]
+[node name="InventoryTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(2045520645, 1909442391) index="1" unique_id=998673459 instance=ExtResource("22_jtf3n")]
 layout_mode = 2
 size_flags_horizontal = 1
 text = "Character"
 
-[node name="JournalTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" unique_id=1399101072 instance=ExtResource("22_jtf3n")]
+[node name="JournalTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(2045520645, 1909442391) index="2" unique_id=2085411102 instance=ExtResource("22_jtf3n")]
 layout_mode = 2
 size_flags_horizontal = 1
 text = "Jobs"
 
-[node name="FactionTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" unique_id=1594223131 instance=ExtResource("22_jtf3n")]
+[node name="FactionTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(2045520645, 1909442391) index="3" unique_id=1675341123 instance=ExtResource("22_jtf3n")]
 layout_mode = 2
 size_flags_horizontal = 1
 text = "Clans"
 
-[node name="SquadTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" unique_id=214550987 instance=ExtResource("22_jtf3n")]
+[node name="SquadTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(2045520645, 1909442391) index="4" unique_id=2141166237 instance=ExtResource("22_jtf3n")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 1
 text = "Squad"
 
-[node name="CharacterTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" unique_id=409641333 instance=ExtResource("22_jtf3n")]
+[node name="CharacterTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(2045520645, 1909442391) index="5" unique_id=953192518 instance=ExtResource("22_jtf3n")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 1
 text = "Character"
-
-[node name="ExitMenu" parent="Menus/VBoxContainer/Toolbar" unique_id=1880150906 instance=ExtResource("10_0pkni")]
-custom_minimum_size = Vector2(45, 45)
-layout_mode = 2
-script = null
 
 [node name="PlayerInventory" type="HBoxContainer" parent="Menus/VBoxContainer" unique_id=2000109519]
 visible = false
@@ -1243,7 +1223,7 @@ offset_bottom = 1080.0
 grow_horizontal = 0
 color = Color(0, 0, 0, 1)
 
-[connection signal="pressed" from="TransferInventory/Inventory/Control/Button" to="." method="close_transfer_inventory"]
+[connection signal="pressed" from="TransferInventory/Toolbar/ExitMenu" to="." method="close_transfer_inventory"]
 [connection signal="visibility_changed" from="PauseMenu" to="PauseMenu" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="DeathMenu" to="DeathMenu" method="_on_visibility_changed"]
 [connection signal="pressed" from="DeathMenu/MarginContainer/VBoxContainer3/VBoxContainer/TourniquetButton" to="DeathMenu" method="_on_tourniquet_button_pressed"]
@@ -1256,8 +1236,6 @@ color = Color(0, 0, 0, 1)
 [connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/InventoryTab" to="." method="_on_inventory_tab_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/JournalTab" to="." method="_on_journal_tab_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/FactionTab" to="." method="_on_faction_tab_pressed"]
-[connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/SquadTab" to="." method="_on_squad_tab_pressed"]
-[connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/CharacterTab" to="." method="_on_character_tab_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Toolbar/ExitMenu" to="." method="_on_exit_menu_pressed"]
 [connection signal="visibility_changed" from="Menus/VBoxContainer/Journal" to="Menus/VBoxContainer/Journal" method="_on_visibility_changed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Journal/ConfirmationMenu/PanelContainer/MarginContainer/VBoxContainer/Yes" to="Menus/VBoxContainer/Journal" method="_on_yes_pressed"]
@@ -1272,7 +1250,11 @@ color = Color(0, 0, 0, 1)
 [connection signal="pressed" from="MenuButtons/CharacterButton" to="." method="_on_character_button_pressed"]
 [connection signal="pressed" from="MenuButtons/PauseButton" to="." method="_on_pause_pressed"]
 
+[editable path="TransferInventory/Toolbar"]
 [editable path="PauseMenu"]
+[editable path="PauseMenu/VBoxContainer/Toolbar"]
+[editable path="PauseMenu/Controls/Toolbar"]
 [editable path="PauseMenu/ConfirmationMenu"]
 [editable path="PauseMenu/ConfirmationMenu2"]
+[editable path="Menus/VBoxContainer/Toolbar"]
 [editable path="Menus/VBoxContainer/Journal/ConfirmationMenu"]

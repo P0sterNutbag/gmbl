@@ -12,9 +12,9 @@ func set_relations() -> void:
 			var color: Color = child.get_theme_color("font_color")
 			var new_color = color
 			if score < 0:
-				new_color = color.darkened(0.15)
+				new_color = color.darkened(0.3)
 			elif score > 0:
-				new_color = color.lightened(0.1)
+				new_color = color.lightened(0.2)
 			child.add_theme_color_override("font_color", new_color)
 
 

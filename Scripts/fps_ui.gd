@@ -2,6 +2,7 @@ extends CanvasLayer
 
 var starting_fog: float
 var custom_tooltip: String
+var hide_ammo: bool
 @onready var middle_pos = get_tree().root.get_viewport().size / 8
 @onready var crosshair = $Crosshair
 @onready var player_hp_bar: ProgressBar = %ProgressBar
@@ -28,6 +29,8 @@ func _ready() -> void:
 	Globals.ui = self
 	var shader = get_tree().root.get_node("Encounter/Shader").mesh.material
 	starting_fog = shader.get_shader_parameter("fog_end")
+	hide_ammo = !ConfigManager.file.get_value("settings", "show_ammo", true)
+	ConfigManager.settings_changed.connect(_on_settings_changed)
 
 
 func _process(delta: float) -> void:
@@ -58,7 +61,7 @@ func _process(delta: float) -> void:
 		#commands_label.text = text
 	
 	# magazine visual and count
-	if Globals.player.gun:
+	if Globals.player.gun and !hide_ammo:
 		if Globals.player.gun is Gun:
 			ammo_count.visible = true
 			mag_icon.visible = true
@@ -232,3 +235,7 @@ func _on_binocular_overlay_visibility_changed() -> void:
 		shader.set_shader_parameter("fog_end", starting_fog * 1.75)
 	else:
 		shader.set_shader_parameter("fog_end", starting_fog)
+
+
+func _on_settings_changed() -> void:
+	hide_ammo = !ConfigManager.file.get_value("settings", "show_ammo", true)

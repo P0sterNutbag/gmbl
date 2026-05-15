@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 func toggle_warp(value: bool) -> void:
 	warp_on = value
 	if value:
-		crt.material.set_shader_parameter("warp_amount", 0.005)
+		crt.material.set_shader_parameter("warp_amount", 0.0075)
 	else:
 		crt.material.set_shader_parameter("warp_amount", 0)
 	if !crt.visible:

@@ -3,6 +3,17 @@ class_name MenuController
 
 var index: int
 var menu_item = preload("res://Scenes/UI/menu_item.tscn")
+const MENU_BUTTON = preload("uid://bj7gyfau2dx5w")
+
+
+func create_menu_button(parent = self) -> Control:
+	var inst = MENU_BUTTON.instantiate()
+	if parent != null:
+		add_child(inst)
+	inst.focus_entered.connect(set_index.bind(inst))
+	inst.pressed.connect(select_last_button)
+	return inst
+
 
 
 func create_menu_item(parent = self) -> Control:

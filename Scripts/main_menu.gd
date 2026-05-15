@@ -1,12 +1,13 @@
 extends Menu
 
-@onready var resume_button: MenuItem = $PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/Continue
-@onready var settings_menu: PanelContainer = $SettingsMenu
+@onready var resume_button: MenuItem = $PanelContainer/MarginContainer/VBoxContainer/Continue
+@onready var settings_menu: Control = $SettingsMenu
 @onready var main_menu: PanelContainer = $PanelContainer
 @onready var color_rect: ColorRect = $ColorRect
 @onready var logo: TextureRect = $ColorRect/TextureRect
 @onready var confirmation_menu: Control = $ConfirmationMenu
 @onready var confirmation_menu2: Control = $ConfirmationMenu2
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 var logo_tween: Tween
 var skip_intro: bool
 
@@ -48,13 +49,15 @@ func _input(event: InputEvent) -> void:
 			logo_tween = create_tween()
 			logo_tween.tween_property(logo, "modulate:a", 0, 0.5)
 			logo_tween.tween_property(color_rect, "modulate:a", 0, 0.5)
-		if !main_menu.visible and color_rect.modulate.a <= 0 and !settings_menu.visible:
+		if !main_menu.visible and color_rect.modulate.a <= 0 and !settings_menu.visible and !confirmation_menu.visible and !confirmation_menu2.visible:
 			main_menu.show()
+			audio_stream_player.play()
 			activate()
 
 
 func _on_menu_item_pressed() -> void:
 	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld_demo.tscn", false, true)
+	audio_stream_player.play()
 
 
 func _on_menu_item_2_pressed() -> void:
@@ -63,6 +66,7 @@ func _on_menu_item_2_pressed() -> void:
 		main_menu.hide()
 	else:
 		SceneManager.start_scene_transition("res://Scenes/UI/Levels/character_creation.tscn")
+		audio_stream_player.play()
 
 
 func _on_menu_item_3_pressed() -> void:
@@ -85,6 +89,7 @@ func _on_yes_pressed() -> void:
 	main_menu.show()
 	confirmation_menu.hide()
 	SceneManager.start_scene_transition("res://Scenes/UI/Levels/character_creation.tscn")
+	audio_stream_player.play()
 
 
 func _on_no_pressed() -> void:

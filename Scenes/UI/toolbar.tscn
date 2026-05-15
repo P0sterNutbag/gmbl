@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dlkiriq84nxj4"]
+
+[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_t2stp"]
+[ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="2_cny7s"]
+[ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="3_t2stp"]
+[ext_resource type="PackedScene" uid="uid://connpctdgiwij" path="res://Scenes/UI/exit_button.tscn" id="4_65hbk"]
+
+[node name="Toolbar" type="HBoxContainer" unique_id=948533993]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_constants/separation = 8
+
+[node name="Tabs" type="PanelContainer" parent="." unique_id=144194701]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_t2stp")
+
+[node name="MarginContainer" type="MarginContainer" parent="Tabs" unique_id=1871060273]
+layout_mode = 2
+theme = ExtResource("2_cny7s")
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tabs/MarginContainer" unique_id=1909442391]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="Label" type="Label" parent="Tabs/MarginContainer/HBoxContainer" unique_id=1641508403]
+layout_mode = 2
+theme = ExtResource("3_t2stp")
+text = "Toolbar"
+
+[node name="ExitMenu" parent="." unique_id=381239802 instance=ExtResource("4_65hbk")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = null

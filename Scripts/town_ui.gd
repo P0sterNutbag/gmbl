@@ -3,19 +3,20 @@ extends CanvasLayer
 var current_town: Town
 var current_shop: TownOption
 @onready var town: PanelContainer = $Town
-@onready var shop: HBoxContainer = $Shop
-@onready var shop_inventory: PanelContainer = $Shop/Inventory
-@onready var shop_inventory2: PanelContainer = $Shop/Inventory2
+@onready var shop: VBoxContainer = $Shop
+@onready var shop_inventory: PanelContainer = %Inventory
+@onready var shop_inventory2: PanelContainer = %Inventory2
 @onready var portraits: Control = $PortraitHolder
 @onready var dialogue: VBoxContainer = $Dialogue
 @onready var job_board: HBoxContainer = $JobBoard
 @onready var npc_portrait_model: Node3D = $ShopkeeperPortrait/Offset/EnemyModel
-@onready var repair_menu: PanelContainer = $Repair
+@onready var repair_menu: Control = $Repair
 @onready var player_model: Node3D = $PlayerPortrait/Offset/EnemyModel
 @onready var player_name: Label = $PortraitHolder/HBoxContainer/PlayerName
 @onready var training_menu: PanelContainer = $Training
 @onready var bounty_viewport: SubViewport = $BountyPicture
 @onready var item_preferences: VBoxContainer = %ItemPreferences
+@onready var preferences_holder: Control = %PreferenceHolder
 
 
 func _enter_tree() -> void:
@@ -67,14 +68,18 @@ func enter_shop(shop_data: Shop) -> void:
 	#if Input.get_connected_joypads().size() > 0:
 		#shop_inventory2.grab_focus()
 	UiController.open_interface(shop)
-	for child in item_preferences.get_children():
-		if child is not TextureRect:
-			continue
-		var modifier = shop_data.price_modifiers[child.name]
-		if modifier >= 0.75:
-			child.show()
-		else:
-			child.hide()
+	if shop_data.uses_money:
+		preferences_holder.show()
+		for child in item_preferences.get_children():
+			if child is not TextureRect:
+				continue
+			var modifier = shop_data.price_modifiers[child.name]
+			if modifier >= 0.75:
+				child.show()
+			else:
+				child.hide()
+	else:
+		preferences_holder.hide()
 
 
 func close_shop() -> void:

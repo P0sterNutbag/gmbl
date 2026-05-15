@@ -14,8 +14,7 @@ var transition_started: bool
 var can_transition: bool = true
 var shops_base_inventory: Dictionary
 var shops_max_money: Dictionary
-var save_population: int = -1
-var save_faction: FactionManager.factions
+var saved_shops: Array[TownOption]
 var unaware_dialogue = preload("uid://dhbjweb7dwnpn")
 @onready var point_of_interest: PointOfInterest = $PointOfInterest
 @onready var flag: MeshInstance3D = $Meshes/Flagpole/MeshInstance3D
@@ -35,7 +34,7 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	#SaveController.load.connect(_on_load)
+	SaveController.load.connect(_on_load)
 	flagpole.global_rotation_degrees = Vector3(0, 0, 0)
 	# randomized location data
 	if location_data is LocationDataRandom:
@@ -155,9 +154,17 @@ func _on_battle_timer_timeout() -> void:
 
 
 func save() -> Dictionary:
+	if town:
+		saved_shops = town.shops
 	var dict = {
-		"location_data" : location_data
+		"location_data" : location_data,
+		"saved_shops" : saved_shops,
 	}
 	if town:
 		dict["town"] = town
 	return dict
+
+
+func _on_load() -> void:
+	if town:
+		town.shops = saved_shops

@@ -8,7 +8,7 @@ var dialogue_bubble = preload("res://Scenes/Overworld/UI/dialogue_bubble.tscn")
 var option_bubble = preload("res://Scenes/Overworld/UI/dialogue_options_bubble.tscn")
 var menu_item = preload("res://Scenes/UI/menu_item.tscn")
 @onready var label: Label = $"../PortraitHolder/HBoxContainer/NpcName"
-@onready var repair_menu: PanelContainer = $"../Repair"
+@onready var repair_menu: Control = $"../Repair"
 @onready var training_menu: PanelContainer = $"../Training"
 
 
@@ -48,7 +48,7 @@ func advance_dialogue(next_index: int) -> void:
 		inst.size_flags_horizontal = SIZE_SHRINK_BEGIN
 		add_child(inst)
 		for option in bubble.options:
-			var inst2 = inst.option_container.create_menu_item()
+			var inst2 = inst.option_container.create_menu_button()
 			inst2.text = option.text
 			inst2.pressed.connect(on_option_selected.bind(option, inst2))
 			#inst2.pressed.connect(advance_dialogue.bind(option.destination))

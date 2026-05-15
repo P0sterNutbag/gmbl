@@ -2,7 +2,7 @@ extends CanvasLayer
 
 @onready var player_inventory_holder: HBoxContainer = $Menus/VBoxContainer/PlayerInventory
 @onready var player_inventory = $Menus/VBoxContainer/PlayerInventory/Inventory
-@onready var transfer_inventory_holder: HBoxContainer = $TransferInventory
+@onready var transfer_inventory_holder: VBoxContainer = $TransferInventory
 @onready var player_transfer_inventory: InventoryUI = %Inventory
 @onready var loot_transfer_inventory: InventoryUI = %Inventory2
 @onready var journal: Control = $Menus/VBoxContainer/Journal

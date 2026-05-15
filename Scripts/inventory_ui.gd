@@ -196,9 +196,9 @@ func set_description(item: Item = null):
 		value_label.theme = text_style
 		if stat.max_value > 0.0:
 			if stat_value >= 75.0:
-				value_label.add_theme_color_override("font_color", value_label.get_theme_color("font_color").lightened(0.1))
+				value_label.add_theme_color_override("font_color", text_style.get_color("font_color", "Label").lightened(0.2))
 			elif stat_value <= 25.0:
-				value_label.add_theme_color_override("font_color", value_label.get_theme_color("font_color").darkened(0.15))
+				value_label.add_theme_color_override("font_color", text_style.get_color("font_color", "Label").darkened(0.3))
 		hbox_container.add_child(value_label)
 
 

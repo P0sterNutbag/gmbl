@@ -1,6 +1,7 @@
 extends Node
 
 var mouse_velocity: Vector2
+var camera_zoom := 0.0
 const starting_gear = preload("uid://dpjy0ettwaiyp")
 @onready var cosmetics: PanelContainer = %Cosmetics
 @onready var skills: PanelContainer = %Skills
@@ -18,6 +19,8 @@ const starting_gear = preload("uid://dpjy0ettwaiyp")
 @onready var shirt_options: Button = %Cosmetics/MarginContainer/VBoxContainer/ShirtOptions
 @onready var pants_options: Button = %Cosmetics/MarginContainer/VBoxContainer/PantsOptions
 @onready var shoes_options: Button = %Cosmetics/MarginContainer/VBoxContainer/ShoesOptions
+@onready var camera_default_pos: Node3D = $CameraDefaultPos
+@onready var camera_zoom_pos: Node3D = $CameraZoomPos
 
 
 func _ready() -> void:
@@ -48,10 +51,17 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# move camera
-	camera_3d.position.y = lerp(camera_3d.position.y, 1.3, delta)
+	#camera_3d.position.y = lerp(camera_3d.position.y, 1.3, delta)
 	# spin character
 	player_model.rotate_y(mouse_velocity.x * delta * 0.01)
 	mouse_velocity = lerp(mouse_velocity, Vector2.ZERO, delta * 10)
+	# zoom camera
+	if Input.is_action_just_pressed("next_gun"):
+		camera_zoom = clamp(camera_zoom + 0.2, 0.0, 1.0)
+	if Input.is_action_just_pressed("last_gun"):
+		camera_zoom = clamp(camera_zoom - 0.2, 0.0, 1.0)
+	var target_pos = lerp(camera_default_pos.position, camera_zoom_pos.position, camera_zoom)
+	camera_3d.position = lerp(camera_3d.position, target_pos, delta * 3.0)
 	# set gun and animation
 	if PlayerStats.guns.size() <= 0:
 		animation_player.play("IdleNoGun")

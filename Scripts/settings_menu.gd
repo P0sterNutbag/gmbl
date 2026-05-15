@@ -1,17 +1,17 @@
 extends Menu
 
 var overlay: CanvasLayer
-@onready var resolution: Button = $MarginContainer/VBoxContainer/VBoxContainer/Resolution
-@onready var fullscreen: Button = $MarginContainer/VBoxContainer/VBoxContainer/Fullscreen
-@onready var volume: SliderButton = $MarginContainer/VBoxContainer/VBoxContainer/Volume
-@onready var music_volume: SliderButton = $MarginContainer/VBoxContainer/VBoxContainer/MusicVolume
-@onready var sfx_volume: SliderButton = $MarginContainer/VBoxContainer/VBoxContainer/SfxVolume
-@onready var aim_sensitivity: SliderButton = $MarginContainer/VBoxContainer/VBoxContainer/AimSensitivity
-@onready var crt: Button = $MarginContainer/VBoxContainer/VBoxContainer/CRT
-@onready var warp: Button = $MarginContainer/VBoxContainer/VBoxContainer/Warp
-@onready var crosshair: Button = $MarginContainer/VBoxContainer/VBoxContainer/Crosshair
-@onready var aspect_ratio: Button = $MarginContainer/VBoxContainer/VBoxContainer/AspectRatio
-@onready var hide_hud: Button = $MarginContainer/VBoxContainer/VBoxContainer/HideHud
+@onready var resolution: Button = %Resolution
+@onready var fullscreen: Button = %Fullscreen
+@onready var volume: SliderButton = %Volume
+@onready var music_volume: SliderButton = %MusicVolume
+@onready var sfx_volume: SliderButton = %SfxVolume
+@onready var aim_sensitivity: SliderButton = %AimSensitivity
+@onready var crt: Button = %CRT
+@onready var warp: Button = %Warp
+@onready var crosshair: Button = %Crosshair
+@onready var aspect_ratio: Button = %AspectRatio
+@onready var show_ammo: Button = %ShowAmmo
 
 
 func _ready() -> void:
@@ -41,8 +41,8 @@ func set_all_settings() -> void:
 	warp.toggled.emit(warp_on)
 	var cross = ConfigManager.file.get_value("settings", "crosshair_type", 0)
 	crosshair.set_index_by_value(cross)
-	var hud = ConfigManager.file.get_value("settings", "hide_hud", false)
-	hide_hud.toggled.emit(hud)
+	var hud = ConfigManager.file.get_value("settings", "show_ammo", true)
+	show_ammo.toggled.emit(hud)
 
 
 func _on_master_h_slider_value_changed(value: float) -> void:
@@ -132,5 +132,5 @@ func _on_aspect_ratio_option_changed(value: Variant) -> void:
 
 
 func _on_hide_hud_toggled(toggled_on: bool) -> void:
-	ConfigManager.file.set_value("settings", "hide_hud", toggled_on)
+	ConfigManager.file.set_value("settings", "show_ammo", toggled_on)
 	ConfigManager.save()

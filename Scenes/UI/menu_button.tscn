@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bj7gyfau2dx5w"]
 
 [ext_resource type="Theme" uid="uid://tivwhtwiofll" path="res://Art/Themes/button.tres" id="1_k5i4o"]
-[ext_resource type="Texture2D" uid="uid://djj6aa5nkatda" path="res://Art/Textures/UI/arrow.png" id="2_ujyj2"]
 [ext_resource type="Script" uid="uid://c47qqa8oxrofj" path="res://Scripts/menu_button.gd" id="3_k5i4o"]
 
 [node name="MenuButton" type="Button" unique_id=998673459]
@@ -11,12 +10,14 @@ offset_bottom = 25.0
 size_flags_horizontal = 3
 mouse_filter = 1
 theme = ExtResource("1_k5i4o")
+theme_override_colors/font_focus_color = Color(1, 0.26, 0.38333356, 1)
+theme_override_colors/font_hover_color = Color(1, 0.26, 0.38333356, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.66, 0.072600015, 0.1705002, 1)
 text = "Name"
-icon = ExtResource("2_ujyj2")
 flat = true
 alignment = 0
-expand_icon = true
 script = ExtResource("3_k5i4o")
+show_icon_on_focus = false
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]
 [connection signal="button_up" from="." to="." method="_on_button_up"]

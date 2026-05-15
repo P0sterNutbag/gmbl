@@ -26,7 +26,7 @@ func create_town(town_data: Town) -> void:
 	#show()
 	title.text = town_data.title
 	for shop in town_data.shops:
-		var menu = item_container.create_menu_item()
+		var menu = item_container.create_menu_button()
 		menu.text = shop.title
 		menu.alignment = BoxContainer.ALIGNMENT_CENTER
 		if shop is Shop:
@@ -46,7 +46,7 @@ func create_town(town_data: Town) -> void:
 			menu.pressed.connect(Globals.ui.job_board.set.bind("shop", shop))
 			menu.pressed.connect(Globals.ui.start_dialogue.bind(shop.dialogue, shop))
 			menu.pressed.connect(hide)
-	var inst = item_container.create_menu_item()
+	var inst = item_container.create_menu_button()
 	inst.text = "Leave"
 	inst.alignment = BoxContainer.ALIGNMENT_CENTER 
 	inst.pressed.connect(exit)

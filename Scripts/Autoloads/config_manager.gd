@@ -2,6 +2,7 @@ extends Node
 
 var file = ConfigFile.new()
 var path = "user://config.cfg"
+signal settings_changed
 
 
 func _ready() -> void:
@@ -12,3 +13,4 @@ func _ready() -> void:
 
 func save() -> void:
 	file.save(path)
+	settings_changed.emit()

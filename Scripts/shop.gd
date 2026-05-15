@@ -35,6 +35,8 @@ func restock_quests() -> void:
 		var quest = random_quests[randi() % random_quests.size()]
 		if quest is QuestFetchRandom:
 			quest.shop = self
-			quests.append(quest.generate_quest())
+			var generated_quest = quest.generate_quest()
+			if generated_quest:
+				quests.append(generated_quest)
 		if quest is QuestBountyRandom:
 			quests.append(await quest.generate_quest())

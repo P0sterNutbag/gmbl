@@ -28,7 +28,7 @@ func _ready() -> void:
 	for child in get_children():
 		if child is Control:
 			child.hide()
-	job_board.exit.connect(dialogue.leave_shop)
+	#job_board.exit.connect(dialogue.leave_shop)
 	player_name.text = PlayerStats.player_name
 
 

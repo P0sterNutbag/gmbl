@@ -5,12 +5,13 @@ var has_fired: bool
 
 func _ready() -> void:
 	SaveController.load.connect(_on_load)
-	PlayerStats.change_state(PlayerStats.states.pause)
 
 
 func _process(_delta: float) -> void:
 	if !visible:
 		return
+	if PlayerStats.state != PlayerStats.states.pause:
+		PlayerStats.change_state(PlayerStats.states.pause)
 	if Input.is_action_just_pressed("close"):
 		close()
 

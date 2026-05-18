@@ -8,7 +8,7 @@ var current_shop: TownOption
 @onready var shop_inventory2: PanelContainer = %Inventory2
 @onready var portraits: Control = $PortraitHolder
 @onready var dialogue: VBoxContainer = $Dialogue
-@onready var job_board: HBoxContainer = $JobBoard
+@onready var job_board: Control = $JobBoard
 @onready var npc_portrait_model: Node3D = $ShopkeeperPortrait/Offset/EnemyModel
 @onready var repair_menu: Control = $Repair
 @onready var player_model: Node3D = $PlayerPortrait/Offset/EnemyModel
@@ -21,14 +21,14 @@ var current_shop: TownOption
 
 func _enter_tree() -> void:
 	Globals.ui = self
-	UiController.close_all()
+	UiController.close_all(false)
 
 
 func _ready() -> void:
 	for child in get_children():
 		if child is Control:
 			child.hide()
-	#job_board.exit.connect(dialogue.leave_shop)
+	job_board.exit.connect(dialogue.leave_shop)
 	player_name.text = PlayerStats.player_name
 
 

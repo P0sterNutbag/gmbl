@@ -5,11 +5,13 @@ extends Menu
 @onready var progress_bar: ProgressBar = %LevelBar
 @onready var v_box_container: VBoxContainer = $MarginContainer/VBoxContainer3/VBoxContainer
 @onready var time: Label = %Time
+@onready var continue_button: MenuItem = %Continue
 const PROGRESS_AWARD_MESSAGE = preload("uid://yjunk2cfke0y")
 
 
-func activate():
-	super.activate()
+#func activate():
+	#super.activate()
+	#continue_button.visible = ConfigManager.file.get_value("settings", "difficulty", 0) == 0
 	#var old_xp = ProgressManager.progress_data.xp
 	#var old_level = ProgressManager.progress_data.level
 	#ProgressManager.apply_progress()
@@ -40,7 +42,7 @@ func activate():
 
 func _on_visibility_changed() -> void:
 	if visible:
-		activate()
+		continue_button.visible = ConfigManager.file.get_value("settings", "difficulty", 0) == 0
 
 
 func _on_continue_pressed() -> void:

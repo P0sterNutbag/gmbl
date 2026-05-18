@@ -16,9 +16,13 @@
 [ext_resource type="PackedScene" uid="uid://cvqg8c4yvypa1" path="res://Scenes/UI/confirmation_menu.tscn" id="11_q6o50"]
 [ext_resource type="PackedScene" uid="uid://bj7gyfau2dx5w" path="res://Scenes/UI/menu_button.tscn" id="12_46hhv"]
 [ext_resource type="Script" uid="uid://bokxkydc5jmf" path="res://addons/zylann.hterrain/hterrain.gd" id="13_1yfdm"]
+[ext_resource type="Theme" uid="uid://efo20xxcf1e5" path="res://Art/Themes/vbox_container.tres" id="13_57tbr"]
 [ext_resource type="Resource" path="res://addons/zylann.hterrain/data/main_menu/data.hterrain" id="14_3h8o7"]
+[ext_resource type="PackedScene" uid="uid://dlkiriq84nxj4" path="res://Scenes/UI/toolbar.tscn" id="14_wi4af"]
+[ext_resource type="Theme" uid="uid://dcnijc3hjurqk" path="res://Art/Themes/text_mediun_outline.tres" id="15_aetnk"]
 [ext_resource type="Script" uid="uid://b8f4u7je7ufby" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="15_q6o50"]
 [ext_resource type="Texture2D" uid="uid://cfsov1xtejnen" path="res://Art/Textures/Environment/gravel.png" id="16_46hhv"]
+[ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="16_wi4af"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xr7qs"]
 
@@ -224,6 +228,98 @@ text = "Quit"
 layout_mode = 2
 text = "Back"
 
+[node name="DifficultyOptions" type="VBoxContainer" parent="CanvasLayer/MainMenu" unique_id=1909320085]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -306.0
+offset_top = -95.0
+offset_right = 306.0
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("13_57tbr")
+
+[node name="Toolbar" parent="CanvasLayer/MainMenu/DifficultyOptions" unique_id=948533993 instance=ExtResource("14_wi4af")]
+layout_mode = 2
+
+[node name="Label" parent="CanvasLayer/MainMenu/DifficultyOptions/Toolbar/Tabs/MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(948533993, 1909442391) index="0" unique_id=1641508403]
+text = "Choose Difficulty"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MainMenu/DifficultyOptions" unique_id=642832174]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/MainMenu/DifficultyOptions/HBoxContainer" unique_id=263076348]
+layout_mode = 2
+theme = ExtResource("4_xr7qs")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu/DifficultyOptions/HBoxContainer/PanelContainer" unique_id=26345484]
+layout_mode = 2
+theme = ExtResource("5_uwkgi")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu/DifficultyOptions/HBoxContainer/PanelContainer/MarginContainer" unique_id=791748064]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MainMenu/DifficultyOptions/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=416581177]
+visible = false
+custom_minimum_size = Vector2(332, 0)
+layout_mode = 2
+theme = ExtResource("15_aetnk")
+text = "Thanks for playing! Wishlist on steam to support development."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/MainMenu/DifficultyOptions/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2009617104]
+visible = false
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Normal" parent="CanvasLayer/MainMenu/DifficultyOptions/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1790318066 instance=ExtResource("12_46hhv")]
+layout_mode = 2
+text = "Normal"
+expand_icon = true
+
+[node name="Hard" parent="CanvasLayer/MainMenu/DifficultyOptions/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=969254578 instance=ExtResource("12_46hhv")]
+layout_mode = 2
+text = "Permadeath"
+expand_icon = true
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/MainMenu/DifficultyOptions/HBoxContainer" unique_id=633393689]
+custom_minimum_size = Vector2(0, 132)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_xr7qs")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu/DifficultyOptions/HBoxContainer/PanelContainer2" unique_id=1773195610]
+layout_mode = 2
+theme = ExtResource("5_uwkgi")
+
+[node name="NormalDescription" type="Label" parent="CanvasLayer/MainMenu/DifficultyOptions/HBoxContainer/PanelContainer2/MarginContainer" unique_id=2107826222]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(324, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("16_wi4af")
+text = "Freely load your last save after you die."
+autowrap_mode = 2
+
+[node name="HardDescription" type="Label" parent="CanvasLayer/MainMenu/DifficultyOptions/HBoxContainer/PanelContainer2/MarginContainer" unique_id=563447096]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(324, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("16_wi4af")
+text = "Death permanently deletes you save file."
+autowrap_mode = 2
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=918103074]
 transform = Transform3D(-1, -1.5614963e-15, -8.7422784e-08, 2.0449981e-08, 0.9722557, -0.23392051, 8.499729e-08, -0.23392051, -0.9722557, 256.961, 0, 0)
 
@@ -304,6 +400,12 @@ metadata/_custom_type_script = "uid://bokxkydc5jmf"
 [connection signal="pressed" from="CanvasLayer/MainMenu/ConfirmationMenu2/PanelContainer/MarginContainer/VBoxContainer/Yes" to="CanvasLayer/MainMenu" method="_on_yes2_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/ConfirmationMenu2/PanelContainer/MarginContainer/VBoxContainer/No" to="CanvasLayer/MainMenu" method="_on_no2_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/ConfirmationMenu2/PanelContainer/MarginContainer/VBoxContainer/Back" to="CanvasLayer/MainMenu" method="_on_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/DifficultyOptions/Toolbar/ExitMenu" to="CanvasLayer/MainMenu" method="_on_exit_difficulty_options_pressed"]
+[connection signal="focus_entered" from="CanvasLayer/MainMenu/DifficultyOptions/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Normal" to="CanvasLayer/MainMenu" method="_on_normal_difficulty_focus_entered"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/DifficultyOptions/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Normal" to="CanvasLayer/MainMenu" method="_on_normal_pressed"]
+[connection signal="focus_entered" from="CanvasLayer/MainMenu/DifficultyOptions/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Hard" to="CanvasLayer/MainMenu" method="_on_hard_focus_entered"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/DifficultyOptions/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Hard" to="CanvasLayer/MainMenu" method="_on_hard_pressed"]
 
 [editable path="CanvasLayer/MainMenu/ConfirmationMenu"]
 [editable path="CanvasLayer/MainMenu/ConfirmationMenu2"]
+[editable path="CanvasLayer/MainMenu/DifficultyOptions/Toolbar"]

@@ -7,6 +7,9 @@ extends Menu
 @onready var logo: TextureRect = $ColorRect/TextureRect
 @onready var confirmation_menu: Control = $ConfirmationMenu
 @onready var confirmation_menu2: Control = $ConfirmationMenu2
+@onready var difficulty_options: VBoxContainer = $DifficultyOptions
+@onready var normal_description: Label = %NormalDescription
+@onready var hard_description: Label = %HardDescription
 var logo_tween: Tween
 var skip_intro: bool
 
@@ -48,7 +51,7 @@ func _input(event: InputEvent) -> void:
 			logo_tween = create_tween()
 			logo_tween.tween_property(logo, "modulate:a", 0, 0.5)
 			logo_tween.tween_property(color_rect, "modulate:a", 0, 0.5)
-		if !main_menu.visible and color_rect.modulate.a <= 0 and !settings_menu.visible and !confirmation_menu.visible and !confirmation_menu2.visible:
+		if !main_menu.visible and color_rect.modulate.a <= 0 and !settings_menu.visible and !confirmation_menu.visible and !confirmation_menu2.visible and !difficulty_options.visible:
 			main_menu.show()
 			activate()
 
@@ -58,11 +61,12 @@ func _on_menu_item_pressed() -> void:
 
 
 func _on_menu_item_2_pressed() -> void:
+	main_menu.hide()
 	if resume_button.visible:
 		confirmation_menu.show()
-		main_menu.hide()
 	else:
-		SceneManager.start_scene_transition("res://Scenes/UI/Levels/character_creation.tscn")
+		difficulty_options.show()
+		#SceneManager.start_scene_transition("res://Scenes/UI/Levels/character_creation.tscn")
 
 
 func _on_menu_item_3_pressed() -> void:
@@ -82,9 +86,9 @@ func _on_settings_menu_visibility_changed() -> void:
 
 
 func _on_yes_pressed() -> void:
-	main_menu.show()
+	#main_menu.show()
 	confirmation_menu.hide()
-	SceneManager.start_scene_transition("res://Scenes/UI/Levels/character_creation.tscn")
+	difficulty_options.show()
 
 
 func _on_no_pressed() -> void:
@@ -105,3 +109,30 @@ func _on_no2_pressed() -> void:
 func _on_back_pressed() -> void:
 	main_menu.show()
 	confirmation_menu2.hide()
+
+
+func _on_normal_pressed() -> void:
+	difficulty_options.hide()
+	ConfigManager.file.set_value("settings", "difficulty", 0)
+	SceneManager.start_scene_transition("res://Scenes/UI/Levels/character_creation.tscn")
+
+
+func _on_hard_pressed() -> void:
+	difficulty_options.hide()
+	ConfigManager.file.set_value("settings", "difficulty", 1)
+	SceneManager.start_scene_transition("res://Scenes/UI/Levels/character_creation.tscn")
+
+
+func _on_exit_difficulty_options_pressed() -> void:
+	difficulty_options.hide()
+	main_menu.show()
+
+
+func _on_normal_difficulty_focus_entered() -> void:
+	normal_description.show()
+	hard_description.hide()
+
+
+func _on_hard_focus_entered() -> void:
+	normal_description.hide()
+	hard_description.show()

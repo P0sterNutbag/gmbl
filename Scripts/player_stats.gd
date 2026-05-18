@@ -130,13 +130,6 @@ func change_state(new_state):
 		await Globals.player.enter_functions[PlayerStats.state].call()
 
 
-func give_up() -> void:
-	pass
-	#PlayerStats.reset_stats()
-	#SaveController.delete_save_data()
-	#Globals.overworld.queue_free()
-
-
 func unequip_current_item():
 	for slot in inventory.items_slots:
 		var item = slot.item

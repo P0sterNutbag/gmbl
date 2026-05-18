@@ -1,10 +1,9 @@
 extends MenuList
 
 var shop: TownOption
-@onready var name_label: Label = $PanelContainer2/MarginContainer/VBoxContainer/Title
-@onready var description_label: Label = $PanelContainer2/MarginContainer/VBoxContainer/Description
-@onready var reward_label: Label = $PanelContainer2/MarginContainer/VBoxContainer/Reward
-@onready var exit_button: Button = $PanelContainer/MarginContainer/VBoxContainer/MenuItem2
+@onready var name_label: Label = %Name
+@onready var description_label: Label = %Description
+@onready var reward_label: Label = %Reward
 @onready var bounty_picture: TextureRect = %BountyPicture
 @onready var bounty_viewport: SubViewport = $"../BountyPicture"
 

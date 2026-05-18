@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+var demo_message: Control
+var menu_buttons_has_mouse: bool
 @onready var player_inventory_holder: HBoxContainer = $Menus/VBoxContainer/PlayerInventory
 @onready var player_inventory = $Menus/VBoxContainer/PlayerInventory/Inventory
 @onready var transfer_inventory_holder: VBoxContainer = $TransferInventory
@@ -18,7 +20,6 @@ extends CanvasLayer
 @onready var menu_buttons: Control = $MenuButtons
 @onready var skills_menu: Control = %Skills
 @onready var squad: PanelContainer = $Menus/VBoxContainer/Squad
-var menu_buttons_has_mouse: bool
 const LOG_NOTIFICATION = preload("res://Scenes/UI/log_notification.tscn")
 
 
@@ -36,6 +37,7 @@ func _ready() -> void:
 	UiController.ui_opened.connect(_on_ui_opened)
 	UiController.ui_closed.connect(_on_ui_closed)
 	tree_exited.connect(_on_tree_exited)
+	demo_message = get_node_or_null("DemoMessage")
 
 
 func _process(_delta: float) -> void:
@@ -67,7 +69,8 @@ func _process(_delta: float) -> void:
 				return
 	if Input.is_action_just_pressed("pause") and PlayerStats.state != PlayerStats.states.dead:
 		if !menu_holder.visible and !pause_menu.visible:
-			UiController.open_interface(pause_menu)
+			if !demo_message or !demo_message.visible:
+				UiController.open_interface(pause_menu)
 		elif pause_menu.visible:
 			UiController.close_interface(pause_menu)
 		elif menu_holder.visible:

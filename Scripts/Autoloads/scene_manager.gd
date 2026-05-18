@@ -62,7 +62,7 @@ func change_scene() -> void:
 		SaveController.load_data_from_file()
 	if save_on_enter:
 		save_on_enter = false
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(1.0).timeout
 		SaveController.save_data_to_file()
 
 

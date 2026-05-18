@@ -11,8 +11,8 @@ signal load
 
 func save_data_to_file():
 	var saved_resources = SavedResources.new()
-	if ResourceLoader.exists(resource_path):
-		saved_resources = ResourceLoader.load(resource_path, "", ResourceLoader.CACHE_MODE_IGNORE)
+	#if ResourceLoader.exists(resource_path):
+		#saved_resources = ResourceLoader.load(resource_path, "", ResourceLoader.CACHE_MODE_IGNORE)
 	var save_nodes = get_tree().get_nodes_in_group("persist")
 	for node in save_nodes:
 		if !node.has_method("save"):

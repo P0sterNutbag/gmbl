@@ -28,9 +28,9 @@ signal encounter_ended
 
 func _enter_tree() -> void:
 	await get_tree().process_frame
-	#if location_data:
-		#var color = FactionManager.faction_data[location_data.faction].color
-		#flag.set_instance_shader_parameter("flag_color", color)
+	if flag.visible:
+		var color = FactionManager.faction_data[location_data.faction].color
+		flag.set_instance_shader_parameter("flag_color", color)
 
 
 func _ready() -> void:

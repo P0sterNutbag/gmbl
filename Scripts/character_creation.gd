@@ -1,5 +1,6 @@
 extends Node
 
+var character_has_mouse: bool
 var mouse_velocity: Vector2
 var camera_zoom := 0.0
 const starting_gear = preload("uid://dpjy0ettwaiyp")
@@ -56,10 +57,11 @@ func _process(delta: float) -> void:
 	player_model.rotate_y(mouse_velocity.x * delta * 0.01)
 	mouse_velocity = lerp(mouse_velocity, Vector2.ZERO, delta * 10)
 	# zoom camera
-	if Input.is_action_just_pressed("next_gun"):
-		camera_zoom = clamp(camera_zoom + 0.2, 0.0, 1.0)
-	if Input.is_action_just_pressed("last_gun"):
-		camera_zoom = clamp(camera_zoom - 0.2, 0.0, 1.0)
+	if character_has_mouse:
+		if Input.is_action_just_pressed("next_gun"):
+			camera_zoom = clamp(camera_zoom + 0.2, 0.0, 1.0)
+		if Input.is_action_just_pressed("last_gun"):
+			camera_zoom = clamp(camera_zoom - 0.2, 0.0, 1.0)
 	var target_pos = lerp(camera_default_pos.position, camera_zoom_pos.position, camera_zoom)
 	camera_3d.position = lerp(camera_3d.position, target_pos, delta * 3.0)
 	# set gun and animation
@@ -161,3 +163,11 @@ func _on_spin_character_gui_input(event: InputEvent) -> void:
 
 func _on_line_edit_text_changed(new_text: String) -> void:
 	PlayerStats.player_name = new_text
+
+
+func _on_spin_character_mouse_entered() -> void:
+	character_has_mouse = true
+
+
+func _on_spin_character_mouse_exited() -> void:
+	character_has_mouse = false

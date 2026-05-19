@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="4_yv2ks"]
 [ext_resource type="Script" uid="uid://c6knlgr6wx0i1" path="res://Scripts/quest_fetch.gd" id="5_yfgpb"]
 [ext_resource type="Script" uid="uid://px5dr31pd885" path="res://Scripts/dialogue_loop.gd" id="6_l1eep"]
+[ext_resource type="Texture2D" uid="uid://goputnp33yds" path="res://Art/Textures/Character/npc shirt green sleeve.png" id="8_b7if2"]
 [ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="9_30h7b"]
 [ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="11_w5ove"]
 [ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="12_xc114"]
@@ -88,7 +89,7 @@ metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
 [sub_resource type="Resource" id="Resource_2vpop"]
 script = ExtResource("4_yv2ks")
-method = "exit_to_game"
+method = "enter_town"
 metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
 [sub_resource type="Resource" id="Resource_30h7b"]
@@ -145,24 +146,21 @@ load_path = "res://.godot/imported/player face.png-55921b17ead6e4cdf7678cd30c3bd
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mkhcx"]
 load_path = "res://.godot/imported/player hair4.png-ef68a8944af29a4e1076a0317204e31a.ctex"
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7vdwu"]
-load_path = "res://.godot/imported/npc shirt white.png-6c8e9231c1f2980fccce109df21a472b.ctex"
-
-[sub_resource type="Resource" id="Resource_v0sv6"]
+[sub_resource type="Resource" id="Resource_xbbph"]
 script = ExtResource("9_30h7b")
 skin_colors = Array[Color]([Color(0.37254903, 0.2, 0.0627451, 1)])
 hair_colors = Array[Color]([Color(0.8, 0.6745098, 0.25490198, 1)])
 hair_styles = Array[Texture]([SubResource("CompressedTexture2D_mkhcx")])
 faces = Array[Texture]([SubResource("CompressedTexture2D_xbbph")])
-shirts = Array[Texture]([SubResource("CompressedTexture2D_7vdwu")])
+shirts = Array[Texture]([ExtResource("8_b7if2")])
 pants_colors = Array[Color]([Color(0.48, 0.21888001, 0.15359999, 1)])
 shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1)])
 metadata/_custom_type_script = "uid://b80ipr8q70gqm"
 
-[sub_resource type="Resource" id="Resource_cjiis"]
+[sub_resource type="Resource" id="Resource_mkhcx"]
 script = ExtResource("11_w5ove")
 bubbles = Array[ExtResource("1_y0qu0")]([SubResource("Resource_0qlwp"), SubResource("Resource_yv2ks"), SubResource("Resource_yfgpb"), SubResource("Resource_6eue4"), SubResource("Resource_2vpop"), SubResource("Resource_30h7b"), SubResource("Resource_2iciv"), SubResource("Resource_w5ove"), SubResource("Resource_xc114"), SubResource("Resource_kf3kl"), SubResource("Resource_kfhwa"), SubResource("Resource_86wrp"), SubResource("Resource_08boe"), SubResource("Resource_xta4i")])
-npc_style = SubResource("Resource_v0sv6")
+npc_style = SubResource("Resource_xbbph")
 npc_name = "Axel"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
@@ -300,9 +298,10 @@ price_modifiers = {
 "Junk": 0.5,
 "Weapons": 0.75
 }
-dialogue = SubResource("Resource_cjiis")
+dialogue = SubResource("Resource_mkhcx")
 random_quests = Array[ExtResource("28_o3jm5")]([SubResource("Resource_n8ivh")])
 min_quests = 1
 max_quests = 3
+faction = 2
 title = "Gunsmith"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"

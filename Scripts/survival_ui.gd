@@ -116,7 +116,7 @@ func create_notification(notification_text: String) -> void:
 	var inst = LOG_NOTIFICATION.instantiate()
 	log_box.add_child(inst)
 	#log_box.move_child(inst, 1)
-	inst.text = notification_text
+	inst.text = "-" + notification_text
 	var tween = create_tween()
 	tween.tween_interval(3)
 	tween.tween_property(inst, "modulate:a", 0.0, 1)

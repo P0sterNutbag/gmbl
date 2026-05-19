@@ -52,6 +52,7 @@ func get_destination(faction: FactionManager.factions, spawn_location: Node3D, n
 	# get locaitons
 	var all_nodes = get_tree().get_nodes_in_group("location")
 	all_nodes.erase(spawn_location)
+	all_nodes = all_nodes.filter(func(a): return a.can_spawn_npcs)
 	if goal != 2:
 		all_nodes = all_nodes.filter(func(a): return a.encounter_scene != null)
 	var target_nodes = []

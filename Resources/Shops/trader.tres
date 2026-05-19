@@ -1,18 +1,14 @@
-[gd_resource type="Resource" script_class="Shop" load_steps=21 format=3 uid="uid://b6fhmpdk63hpc"]
+[gd_resource type="Resource" script_class="Shop" format=3 uid="uid://b6fhmpdk63hpc"]
 
 [ext_resource type="Script" uid="uid://de6rxup5nru4w" path="res://Scripts/dialogue.gd" id="1_fon5a"]
-[ext_resource type="Script" uid="uid://2qhh6s86pakx" path="res://Scripts/item.gd" id="1_p8toj"]
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="2_3vf8s"]
 [ext_resource type="Script" uid="uid://ctb2g10cnu2sg" path="res://Scripts/dialogue_option.gd" id="2_21g0w"]
 [ext_resource type="Script" uid="uid://cnu4xeujmgk51" path="res://Scripts/dialogue_options.gd" id="3_hlxbm"]
 [ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="4_1qcnc"]
 [ext_resource type="Resource" uid="uid://nm0e00c2fx4" path="res://Resources/NpcStyles/npc_styles.tres" id="5_g0e7o"]
 [ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="5_gkdsg"]
-[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="7_6k03y"]
-[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="8_g0e7o"]
-[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="9_1vk2m"]
-[ext_resource type="Resource" uid="uid://ixc4pv5vjlno" path="res://Resources/Items/Guns/ak47.tres" id="10_0vq67"]
-[ext_resource type="Resource" uid="uid://04hmx6qx4fsq" path="res://Resources/Items/Survival/medkit.tres" id="11_v3c3c"]
+[ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="7_hlxbm"]
+[ext_resource type="Script" uid="uid://g1k0736rje3q" path="res://Scripts/quest_random.gd" id="8_1qcnc"]
 
 [sub_resource type="Resource" id="Resource_6lldf"]
 script = ExtResource("1_fon5a")
@@ -35,36 +31,25 @@ metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
 [sub_resource type="Resource" id="Resource_8pniq"]
 script = ExtResource("3_hlxbm")
 options = Array[ExtResource("2_21g0w")]([SubResource("Resource_lyof2"), SubResource("Resource_375gu")])
-lines = Array[String]([])
-speaker = 0
 metadata/_custom_type_script = "uid://cnu4xeujmgk51"
 
 [sub_resource type="Resource" id="Resource_xa6dy"]
 script = ExtResource("4_1qcnc")
 method = "enter_shop"
-arguments = []
-lines = Array[String]([])
-speaker = 0
 metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
 [sub_resource type="Resource" id="Resource_26jmx"]
 script = ExtResource("4_1qcnc")
 method = "exit_dialogue"
-arguments = []
-lines = Array[String]([])
-speaker = 0
 metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
 [sub_resource type="Resource" id="Resource_6k03y"]
 script = ExtResource("5_gkdsg")
 bubbles = Array[ExtResource("1_fon5a")]([SubResource("Resource_6lldf"), SubResource("Resource_8pniq"), SubResource("Resource_xa6dy"), SubResource("Resource_26jmx")])
-npc_style = ExtResource("5_g0e7o")
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
 [resource]
 script = ExtResource("2_3vf8s")
-title = "Trader"
-items = Array[ExtResource("1_p8toj")]([ExtResource("7_6k03y"), ExtResource("8_g0e7o"), ExtResource("9_1vk2m"), ExtResource("10_0vq67"), ExtResource("11_v3c3c")])
-money = 100
 dialogue = SubResource("Resource_6k03y")
+title = "Trader"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"

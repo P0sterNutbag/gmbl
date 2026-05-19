@@ -518,6 +518,7 @@ layout_mode = 2
 text = "Jobs"
 
 [node name="HboxContainer" type="HBoxContainer" parent="JobBoard" unique_id=897414437]
+custom_minimum_size = Vector2(0, 432)
 layout_mode = 2
 theme = ExtResource("6_a2hru")
 
@@ -1219,9 +1220,9 @@ joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.058353126, 0.16632877, 
 body_offset = Transform3D(-0.87111926, 0.25324076, -0.42073768, 0.4886986, 0.53118485, -0.69211096, 0.048218742, -0.8085242, -0.586483, 0.06738281, 0.20391846, 0.36079407)
 
 [node name="Physical Bone mixamorig_LeftLeg" parent="BountyPicture/Offset/EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(402927275, 2143382753) index="13" unique_id=287664894]
-transform = Transform3D(-0.54876935, 0.7457279, -0.37781233, 0.0274256, -0.43563974, -0.8997032, -0.83552384, -0.50409126, 0.21861368, -0.2932129, 0.29742432, -0.6411133)
+transform = Transform3D(-0.54876935, 0.7457279, -0.37781236, 0.0274256, -0.43563974, -0.8997032, -0.83552384, -0.50409126, 0.2186137, -0.2932129, 0.29742432, -0.6411133)
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3236549, 0.36855304, 0.036874935)
-body_offset = Transform3D(0.12832347, 0.2671162, 0.9550822, -0.89136463, -0.39110443, 0.2291457, 0.43474475, -0.8807304, 0.18790981, -0.09213257, -0.15280151, 0.45837402)
+body_offset = Transform3D(0.12832347, 0.2671162, 0.9550822, -0.89136463, -0.39110443, 0.2291457, 0.43474475, -0.8807304, 0.18790984, -0.09213257, -0.15280151, 0.45837402)
 
 [node name="Physical Bone mixamorig_LeftFoot" parent="BountyPicture/Offset/EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(402927275, 2143382753) index="14" unique_id=34279325]
 transform = Transform3D(0.831299, -0.28766477, -0.4755954, -0.5462612, -0.5808823, -0.6034687, -0.102668256, 0.7614622, -0.640027, -0.049217224, 0.47216797, -0.47869873)
@@ -1254,7 +1255,7 @@ transform = Transform3D(-1, 1.15222285e-08, -1.4836748e-07, -1.6240486e-08, 0.98
 [connection signal="pressed" from="Shop/Toolbar/ExitMenu" to="." method="close_shop"]
 [connection signal="pressed" from="Shop/HBoxContaier/Inventory/Control/Button" to="." method="close_shop"]
 [connection signal="visibility_changed" from="JobBoard" to="JobBoard" method="_on_visibility_changed"]
-[connection signal="pressed" from="JobBoard/Toolbar/ExitMenu" to="JobBoard/HboxContainer" method="close"]
+[connection signal="pressed" from="JobBoard/Toolbar/ExitMenu" to="JobBoard" method="close"]
 [connection signal="pressed" from="JobBoard/HboxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MenuItem" to="JobBoard/HboxContainer" method="_on_menu_item_pressed"]
 [connection signal="pressed" from="JobBoard/HboxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MenuItem2" to="JobBoard/HboxContainer" method="_on_menu_item_2_pressed"]
 [connection signal="pressed" from="Repair/Toolbar/ExitMenu" to="." method="close_shop"]

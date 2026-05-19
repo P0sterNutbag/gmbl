@@ -52,6 +52,8 @@ func _ready() -> void:
 		index = randi() % poi_factions.size()
 		data.faction = poi_factions[index]
 		poi_factions.remove_at(index)
+		if data.faction == FactionManager.factions.no_faction:
+			data.faction = [FactionManager.factions.no_faction, FactionManager.factions.jackals].pick_random()
 
 
 func save() -> Dictionary:

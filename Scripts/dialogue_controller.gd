@@ -172,7 +172,7 @@ func pay_fee(amount: int, fail_index: int) -> void:
 		var npc = Globals.overworld.current_encounter.get_parent()
 		npc.chase_player = false
 		npc.navigation_agent.set_target_position(npc.destination.global_position)
-		Globals.survival_ui.create_notification("-$" + str(amount))
+		Globals.survival_ui.create_notification("You payed $" + str(amount))
 		exit_to_game()
 	else:
 		advance_dialogue(fail_index)
@@ -202,7 +202,7 @@ func recruit_npc(amount:int) -> void:
 	var npc_data = NpcData.new()
 	npc_data.style = FactionManager.faction_data[Globals.overworld.current_encounter.location_data.faction].style.generate_style()
 	PlayerStats.allies.append(NpcData.new())
-	Globals.survival_ui.create_notification("-$" + str(amount))
+	Globals.survival_ui.create_notification("You payed $" + str(amount))
 	Globals.survival_ui.create_notification("Ally added to party")
 	advance_dialogue(index + 1)
 	dialogue_tree.bubbles[1].options.remove_at(1)
@@ -211,7 +211,7 @@ func recruit_npc(amount:int) -> void:
 func move_player(dest: Vector3) -> void:
 	hide()
 	PlayerStats.inventory.money -= 2000
-	Globals.survival_ui.create_notification("-$2000")
+	Globals.survival_ui.create_notification("You payed $2000")
 	var anim_player = SceneManager.scene_transition.animation_player
 	anim_player.play("fade_in")
 	await anim_player.animation_finished

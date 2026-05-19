@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://d1n2mow4a6dj" path="res://Art/Textures/Character/player face3.png" id="7_1ggwx"]
 [ext_resource type="Texture2D" uid="uid://cfmrww0wj003t" path="res://Art/Textures/Character/player hair3.png" id="8_jc0fq"]
 [ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="9_safwf"]
-[ext_resource type="Texture2D" uid="uid://dl34xibpmsig8" path="res://Art/Textures/Character/npc shirt white sleeve.png" id="10_qsy6n"]
+[ext_resource type="Texture2D" uid="uid://goputnp33yds" path="res://Art/Textures/Character/npc shirt green sleeve.png" id="10_de3ow"]
 [ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="11_4v0af"]
 [ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="12_anv8x"]
 [ext_resource type="Script" uid="uid://g1k0736rje3q" path="res://Scripts/quest_random.gd" id="13_iv4mp"]
@@ -102,21 +102,21 @@ script = ExtResource("6_wauvu")
 next_index = 1
 metadata/_custom_type_script = "uid://px5dr31pd885"
 
-[sub_resource type="Resource" id="Resource_bqxwu"]
+[sub_resource type="Resource" id="Resource_d3ynr"]
 script = ExtResource("9_safwf")
 skin_colors = Array[Color]([Color(0.9372549, 0.7607843, 0.6039216, 1)])
 hair_colors = Array[Color]([Color(0.2901961, 0.09803922, 0, 1)])
 hair_styles = Array[Texture]([ExtResource("8_jc0fq")])
 faces = Array[Texture]([ExtResource("7_1ggwx")])
-shirts = Array[Texture]([ExtResource("10_qsy6n")])
+shirts = Array[Texture]([ExtResource("10_de3ow")])
 pants_colors = Array[Color]([Color(0.14509805, 0.21568628, 0.4117647, 1)])
 shoe_colors = Array[Color]([Color(0.16862746, 0.08627451, 0, 1)])
 metadata/_custom_type_script = "uid://b80ipr8q70gqm"
 
-[sub_resource type="Resource" id="Resource_v7uwj"]
+[sub_resource type="Resource" id="Resource_q0r1y"]
 script = ExtResource("11_4v0af")
 bubbles = Array[ExtResource("1_de3ow")]([SubResource("Resource_5oaiu"), SubResource("Resource_bsumm"), SubResource("Resource_r3o7g"), SubResource("Resource_rtygk"), SubResource("Resource_cvr5w"), SubResource("Resource_4o6vd"), SubResource("Resource_5yx2b"), SubResource("Resource_ksfoy"), SubResource("Resource_6l6oi"), SubResource("Resource_c2v6x"), SubResource("Resource_ua8uw")])
-npc_style = SubResource("Resource_bqxwu")
+npc_style = SubResource("Resource_d3ynr")
 npc_name = "Duster"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
@@ -141,9 +141,10 @@ metadata/_custom_type_script = "uid://bicpdyf13vj1j"
 
 [resource]
 script = ExtResource("18_igu8a")
-dialogue = SubResource("Resource_v7uwj")
+dialogue = SubResource("Resource_q0r1y")
 random_quests = Array[ExtResource("13_iv4mp")]([SubResource("Resource_x5gxg"), SubResource("Resource_x5gxg"), SubResource("Resource_a1t0b")])
 min_quests = 2
 max_quests = 4
+faction = 2
 title = "Bounty Board"
 metadata/_custom_type_script = "uid://r3prw1636vsp"

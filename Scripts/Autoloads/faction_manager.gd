@@ -6,14 +6,14 @@ var faction_relations := {
 	factions.no_faction : {factions.player : 0.0, factions.jackals : 1.0, factions.ragers : 0.0, factions.bandits : -1.0},
 	factions.jackals : {factions.player : 0.0, factions.no_faction : 1.0, factions.ragers : -1.0, factions.bandits : -1.0},
 	factions.ragers : {factions.player : 0.0, factions.no_faction : 0.0, factions.jackals : -1.0, factions.bandits : -1.0},
-	factions.bandits : {factions.player : -1.0, factions.no_faction : -1.0, factions.jackals : -1.0, factions.ragers : -1.0}
+	factions.bandits : {factions.player : -1.0, factions.no_faction : -1.0, factions.jackals : -1.0, factions.ragers : -1.0},
 }
 var faction_data := {
 	factions.no_faction : preload("uid://cutkkksdpwkir"),
 	factions.jackals : preload("uid://bgd28xhfo6e42"),
 	factions.ragers : preload("uid://m1c0c8i8udgu"),
 	factions.bandits : preload("uid://b3tbvkwwoh4lq"),
-	factions.player : preload("uid://cutkkksdpwkir")
+	factions.player : preload("uid://c0dkv8xp1oyd6"),
 }
 var max_score := 10.0
 

@@ -37,7 +37,8 @@ func _on_give_up_button_pressed() -> void:
 	if ConfigManager.file.get_value("settings", "difficulty", 0) == 1:
 		PlayerStats.reset_stats()
 		SaveController.delete_save_data()
-		Globals.overworld.queue_free()
+		if Globals.overworld:
+			Globals.overworld.queue_free()
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	#Globals.overworld.player_died = true
 	#SceneManager.start_scene_transition(Globals.overworld)

@@ -107,8 +107,10 @@ func _physics_process(delta: float) -> void:
 	# Add gravity, push, and move
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		print("not on floor")
 	velocity += push_velocity
 	move_and_slide()
+	print(velocity)
 	#if velocity != Vector3.ZERO:
 	velocity -= push_velocity
 	push_velocity = Vector3.ZERO

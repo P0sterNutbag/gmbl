@@ -1,11 +1,11 @@
 extends CharacterSetup
 
 @onready var physical_bone_simulator: PhysicalBoneSimulator3D = $PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D
-@onready var death_camera: Camera3D = $CameraAnchor/Camera3D
+@onready var death_camera: Camera3D = $CameraAnchor/SpringArm3D/Camera3D
 @onready var fps_camera: Camera3D = $"../CameraAnchor/Camera3D"
 @onready var third_person_camera: Camera3D = $ThirdPersonCamAnchor/Camera3D
 @onready var third_person_cam_anchor: Node3D = $ThirdPersonCamAnchor
-@onready var camera2: Camera3D = $PersonAnimated/Armature/Skeleton3D/BoneAttachment3D/Camera3D
+@onready var head_camera: Camera3D = $PersonAnimated/Armature/Skeleton3D/BoneAttachment3D/Camera3D
 @onready var camera_anchor: Node3D = $CameraAnchor
 @onready var right_hand: Node3D = $PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
 @onready var ray_cast: RayCast3D = $ThirdPersonCamAnchor/Camera3D/RayCast3D

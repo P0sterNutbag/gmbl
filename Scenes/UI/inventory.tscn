@@ -9,16 +9,11 @@
 [ext_resource type="Script" uid="uid://c47qqa8oxrofj" path="res://Scripts/menu_button.gd" id="6_v8bd3"]
 [ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="8_d513x"]
 [ext_resource type="Texture2D" uid="uid://cai4xq5mgv6b0" path="res://Art/Textures/UI/arrow short.png" id="9_x2jye"]
-[ext_resource type="StyleBox" uid="uid://dsp62qfcxwvgs" path="res://Art/Themes/style_box_flat.tres" id="10_aubfq"]
+[ext_resource type="Theme" uid="uid://d0l873sygu3uo" path="res://Art/Themes/scroll_container.tres" id="10_aubfq"]
 [ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="10_m06hg"]
 [ext_resource type="PackedScene" uid="uid://bj7gyfau2dx5w" path="res://Scenes/UI/menu_button.tscn" id="11_mnhd3"]
 [ext_resource type="Theme" uid="uid://bfjgfeibxk7i0" path="res://Art/Themes/slider.tres" id="11_or60b"]
 [ext_resource type="Theme" uid="uid://efo20xxcf1e5" path="res://Art/Themes/vbox_container.tres" id="13_or60b"]
-
-[sub_resource type="Theme" id="Theme_m06hg"]
-VScrollBar/styles/grabber = ExtResource("10_aubfq")
-VScrollBar/styles/grabber_highlight = ExtResource("10_aubfq")
-VScrollBar/styles/grabber_pressed = ExtResource("10_aubfq")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_or60b"]
 bg_color = Color(0, 0, 0, 0.75000006)
@@ -107,7 +102,7 @@ text = "$100"
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=384005126]
 layout_mode = 2
 size_flags_vertical = 3
-theme = SubResource("Theme_m06hg")
+theme = ExtResource("10_aubfq")
 follow_focus = true
 draw_focus_border = true
 

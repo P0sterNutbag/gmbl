@@ -12,6 +12,7 @@
 [ext_resource type="Theme" uid="uid://dcnijc3hjurqk" path="res://Art/Themes/text_mediun_outline.tres" id="8_kxh81"]
 [ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="8_yq7um"]
 [ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="9_my6iw"]
+[ext_resource type="Theme" uid="uid://d0l873sygu3uo" path="res://Art/Themes/scroll_container.tres" id="10_kxh81"]
 
 [node name="PauseMenu" type="Control" unique_id=1023665536 node_paths=PackedStringArray("item_container")]
 process_mode = 3
@@ -133,10 +134,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -564.0
-offset_top = -259.5
-offset_right = 564.0
-offset_bottom = 259.5
+offset_left = -343.0
+offset_top = -312.0
+offset_right = 343.0
+offset_bottom = 312.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_my6iw")
@@ -149,309 +150,311 @@ text = "Controls"
 
 [node name="PanelContainer" type="PanelContainer" parent="Controls" unique_id=84389669]
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("1_kdnb7")
 
 [node name="MarginContainer" type="MarginContainer" parent="Controls/PanelContainer" unique_id=955995574]
 layout_mode = 2
 theme = ExtResource("8_yq7um")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer" unique_id=1760372025]
+[node name="ScrollContainer" type="ScrollContainer" parent="Controls/PanelContainer/MarginContainer" unique_id=1565610063]
 layout_mode = 2
+theme = ExtResource("10_kxh81")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer" unique_id=1076467052]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 64
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer" unique_id=1257322339]
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1257322339]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1977097489]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer" unique_id=1977097489]
 layout_mode = 2
 theme = ExtResource("8_kxh81")
 text = "FPS Controls"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1147384185]
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer" unique_id=1147384185]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=405735989]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=405735989]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
 text = "Move"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=913503045]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=913503045]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "WASD"
 
-[node name="HBoxContainer9" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=502480762]
+[node name="HBoxContainer9" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer" unique_id=502480762]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer9" unique_id=1520492915]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer9" unique_id=1520492915]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
 text = "Jump"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer9" unique_id=728039148]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer9" unique_id=728039148]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "Space"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1372402981]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer" unique_id=1372402981]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1728371127]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1728371127]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
 text = "Crouch"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1365655217]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1365655217]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "Ctrl/C"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1645171537]
+[node name="HBoxContainer3" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer" unique_id=1645171537]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer3" unique_id=1506046682]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3" unique_id=1506046682]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
 text = "Sprint"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer3" unique_id=220629039]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3" unique_id=220629039]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "Shift"
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=716960406]
+[node name="HBoxContainer4" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer" unique_id=716960406]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer4" unique_id=113065186]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer4" unique_id=113065186]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
 text = "Shoot"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer4" unique_id=406171819]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer4" unique_id=406171819]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "LMB"
 
-[node name="HBoxContainer8" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=149875076]
+[node name="HBoxContainer8" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer" unique_id=149875076]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer8" unique_id=1017909041]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer8" unique_id=1017909041]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
 text = "Lean"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer8" unique_id=1984166833]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer8" unique_id=1984166833]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "Q/E"
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=2136758012]
+[node name="HBoxContainer5" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer" unique_id=2136758012]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer5" unique_id=453040143]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer5" unique_id=453040143]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
 text = "Aim Down Sight"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer5" unique_id=1709132029]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer5" unique_id=1709132029]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "RMB"
 
-[node name="HBoxContainer6" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=353443753]
+[node name="HBoxContainer6" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer" unique_id=353443753]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer6" unique_id=1543458874]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer6" unique_id=1543458874]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
 text = "Hold Breath"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer6" unique_id=83901047]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer6" unique_id=83901047]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "Shift"
 
-[node name="HBoxContainer7" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=857927589]
+[node name="HBoxContainer7" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer" unique_id=857927589]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer7" unique_id=892867254]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer7" unique_id=892867254]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
 text = "Loot"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer7" unique_id=530593647]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer7" unique_id=530593647]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "F"
 
-[node name="HBoxContainer16" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=2008939104]
+[node name="HBoxContainer16" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer" unique_id=2008939104]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer16" unique_id=1301080993]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer16" unique_id=1301080993]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
 text = "Cycle Guns"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer16" unique_id=1515813303]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer16" unique_id=1515813303]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "Mouse Wheel"
 
-[node name="HBoxContainer17" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=249303901]
+[node name="HBoxContainer17" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer" unique_id=249303901]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer17" unique_id=772346662]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer17" unique_id=772346662]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
 text = "Equip Primary"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer17" unique_id=1937071758]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer17" unique_id=1937071758]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "1"
 
-[node name="HBoxContainer18" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1216278719]
+[node name="HBoxContainer18" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer" unique_id=1216278719]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer18" unique_id=716930118]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer18" unique_id=716930118]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
 text = "Equip Secondary"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer18" unique_id=467908401]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer18" unique_id=467908401]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "2"
 
-[node name="HBoxContainer19" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=665609081]
+[node name="HBoxContainer19" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer" unique_id=665609081]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer19" unique_id=1620666518]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer19" unique_id=1620666518]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
 text = "Command Allies"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer19" unique_id=1070845351]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer19" unique_id=1070845351]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "Alt"
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer" unique_id=1399463364]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4" unique_id=1438958708]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=1438958708]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer2" unique_id=649005349]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer2" unique_id=649005349]
 layout_mode = 2
 theme = ExtResource("8_kxh81")
 text = "Overworld"
 
-[node name="HBoxContainer10" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer2" unique_id=1944472295]
+[node name="HBoxContainer10" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer2" unique_id=1944472295]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer2/HBoxContainer10" unique_id=683529576]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer2/HBoxContainer10" unique_id=683529576]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
 text = "Move"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer2/HBoxContainer10" unique_id=1841436804]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer2/HBoxContainer10" unique_id=1841436804]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "WASD"
 
-[node name="HBoxContainer11" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer2" unique_id=1279187467]
+[node name="HBoxContainer11" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer2" unique_id=1279187467]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer2/HBoxContainer11" unique_id=1033883361]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer2/HBoxContainer11" unique_id=1033883361]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
 text = "Rotate Camera"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer2/HBoxContainer11" unique_id=1548634603]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer2/HBoxContainer11" unique_id=1548634603]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "LMB + Drag/Q/E"
 
-[node name="HBoxContainer12" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer2" unique_id=294572179]
+[node name="HBoxContainer12" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer2" unique_id=294572179]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer2/HBoxContainer12" unique_id=1417781072]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer2/HBoxContainer12" unique_id=1417781072]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
 text = "Zoom Camera"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer2/HBoxContainer12" unique_id=324494213]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer2/HBoxContainer12" unique_id=324494213]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "Mouse Wheel"
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4" unique_id=606814509]
+[node name="VBoxContainer3" type="VBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer" unique_id=606814509]
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer3" unique_id=1925572862]
+[node name="Label3" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer3" unique_id=1925572862]
 layout_mode = 2
 theme = ExtResource("8_kxh81")
 text = "Menus"
 
-[node name="HBoxContainer13" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer3" unique_id=967112326]
+[node name="HBoxContainer13" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer3" unique_id=967112326]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer3/HBoxContainer13" unique_id=484675403]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer3/HBoxContainer13" unique_id=484675403]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
 text = "Inventory"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer3/HBoxContainer13" unique_id=871323084]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer3/HBoxContainer13" unique_id=871323084]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "Tab/I"
 
-[node name="HBoxContainer14" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer3" unique_id=1024787375]
+[node name="HBoxContainer14" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer3" unique_id=1024787375]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer3/HBoxContainer14" unique_id=782080682]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer3/HBoxContainer14" unique_id=782080682]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
 text = "Journal"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer3/HBoxContainer14" unique_id=386430043]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer3/HBoxContainer14" unique_id=386430043]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "J"
 
-[node name="HBoxContainer15" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer3" unique_id=1859510782]
+[node name="HBoxContainer15" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer3" unique_id=1859510782]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer3/HBoxContainer15" unique_id=1300694733]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer3/HBoxContainer15" unique_id=1300694733]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("9_my6iw")
-text = "Delete Item"
+text = "Drop Item"
 
-[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/VBoxContainer3/HBoxContainer15" unique_id=1483610544]
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer3/HBoxContainer15" unique_id=1483610544]
 layout_mode = 2
 theme = ExtResource("9_my6iw")
 text = "RMB"

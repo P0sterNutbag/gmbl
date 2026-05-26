@@ -36,8 +36,8 @@ func toggle_warp(value: bool) -> void:
 func toggle_crt(value: bool) -> void:
 	crt_on = value
 	crt.visible = value
-	if warp_on:
-		warp.visible = true
+	#if warp_on:
+		#warp.visible = true
 
 
 func set_resolution(new_res: Vector2) -> void:

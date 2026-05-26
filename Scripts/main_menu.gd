@@ -32,6 +32,7 @@ func _ready() -> void:
 		await logo_tween.finished
 	else:
 		main_menu.show()
+		color_rect.hide()
 		activate()
 
 

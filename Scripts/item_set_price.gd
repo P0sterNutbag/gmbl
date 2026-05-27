@@ -17,6 +17,6 @@ func _run() -> void:
 			var resource = load(dir_name + file)
 			if item_prices.prices.has(file):
 				resource.price = item_prices.prices[file]
-	print("items price set")
+	#print("items price set")
 	notify_property_list_changed()
 	pass

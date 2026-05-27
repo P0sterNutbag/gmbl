@@ -19,6 +19,7 @@ var original_rotation: Vector3
 var spawn_vector: Vector3
 var target: Node3D
 var destination_path: NodePath
+var unaware_dialogue: DialogueTree = preload("uid://dhbjweb7dwnpn")
 @export var faction: FactionManager.factions = FactionManager.factions.no_faction
 var guns_dict: Dictionary = {
 	0 : [preload("res://Scenes/Guns/shotgun.tscn"), preload("res://Scenes/Items/Guns/shotgun.tscn")],
@@ -53,19 +54,15 @@ func _ready() -> void:
 	SaveController.load.connect(_on_load)
 	get_node("Location/PointOfInterest").remove_from_group("persist")
 	await get_tree().process_frame
-	if location.dialogue_tree != null:
-		location.dialogue_tree.npc_style = enemy_model.current_style
-		var faction_name = FactionManager.faction_data[faction].name
-		if faction_name[-1] == "s":
-			faction_name[-1] = ""
-		location.dialogue_tree.npc_name = faction_name + " " + location.dialogue_tree.npc_name
-		location.title = faction_name + " " + location.title
-	if location.unaware_dialogue:
-		location.unaware_dialogue.npc_style = enemy_model.current_style
-		var faction_name = FactionManager.faction_data[faction].name
-		if faction_name[-1] == "s":
-			faction_name[-1] = ""
-		location.unaware_dialogue.npc_name = faction_name + " " + location.unaware_dialogue.npc_name
+	location.dialogue_tree.npc_style = enemy_model.current_style
+	var faction_name = FactionManager.faction_data[faction].name
+	if faction_name[-1] == "s":
+		faction_name[-1] = ""
+	location.dialogue_tree.npc_name = faction_name + " " + location.dialogue_tree.npc_name
+	location.title = faction_name + " " + location.title
+	location.unaware_dialogue = unaware_dialogue.duplicate_deep()
+	location.unaware_dialogue.npc_style = enemy_model.current_style
+	location.unaware_dialogue.npc_name = faction_name + " " + location.unaware_dialogue.npc_name
 	location.location_data.faction = faction
 	location.shop.faction = faction
 	original_position = global_position
@@ -223,7 +220,7 @@ func _on_navigation_agent_3d_navigation_finished() -> void:
 				spawn_vector = (destination.global_position - global_position).normalized().rotated(Vector3.UP, -global_rotation.y)
 			else:
 				destination.location_data.change_population(location.location_data.population)
-				print(destination.title + " population is now " + str(destination.location_data.population))
+				#print(destination.title + " population is now " + str(destination.location_data.population))
 				queue_free()
 		else:
 			queue_free()

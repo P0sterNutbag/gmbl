@@ -84,5 +84,5 @@ func get_destination(faction: FactionManager.factions, spawn_location: Node3D, n
 			weight *= mult
 		weights.append(weight)
 	var destination = target_nodes[rng.rand_weighted(weights)]
-	print(faction_data.name + " squad spawned at " + spawn_location.title + " en route to " + destination.title + ". Objective: " + str(goal))
+	#print(faction_data.name + " squad spawned at " + spawn_location.title + " en route to " + destination.title + ". Objective: " + str(goal))
 	return destination

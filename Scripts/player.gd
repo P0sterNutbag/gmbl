@@ -18,7 +18,7 @@ var run_speed := 7.0:
 var crouch_speed := 2.5:
 	get():
 		return crouch_speed + (PlayerStats.skills.speed * 0.3) + (PlayerStats.skills.stealth * 0.2)
-var speed = base_speed
+@onready var speed = base_speed
 var jump_speed := 6.5
 var mouse_sensitivity := 0.004
 var controller_sensitivity := 0.04
@@ -341,8 +341,10 @@ func state_walk(delta):
 				var tween = create_tween().set_ease(Tween.EASE_OUT)
 				tween.tween_property(gun, "position", Vector3(0, 0, 0.1), 0.01)
 				tween.tween_property(gun, "position", Vector3.ZERO, 0.2)
-				var tween2 = create_tween().set_ease(Tween.EASE_OUT)
-				tween2.tween_property(self, "aim_rotation:x", aim_rotation.x + deg_to_rad(gun.kickback_magnitude) / 3, 0.01)
+				var kickback = clamp(gun.kickback_magnitude - PlayerStats.skills.guns * 0.33, 0, 100)
+				var tween2 = create_tween().set_ease(Tween.EASE_OUT).set_parallel()
+				tween2.tween_property(self, "aim_rotation:x", aim_rotation.x + deg_to_rad(kickback) / 3.0, 0.05)
+				tween2.tween_property(self, "aim_rotation:y", aim_rotation.y + deg_to_rad(kickback) / 3.0 * randf_range(-1.0, 1.0), 0.05)
 				Globals.noise_controller.create_noise_event(gun.fire_point.global_position, self, gun.bullet_stats.noise_radius)
 				if gun.fire_type == gun.fire_types.pump:
 					gun.shoot_cooldown_timer.stop()
@@ -368,6 +370,15 @@ func state_walk(delta):
 			var _ammo = PlayerStats.inventory.find_item(gun.ammo_item.title)
 			if _ammo and ammo < gun.max_ammo:
 				change_gun_state(gun_states.reload)
+	
+	# change fire type
+	if Input.is_action_just_pressed("change_fire_type") and gun.can_change_fire_type:
+		if gun.fire_type == gun.fire_types.semi_auto:
+			gun.fire_type = gun.fire_types.auto
+			Globals.survival_ui.create_notification("Gun set to auto")
+		elif gun.fire_type == gun.fire_types.auto:
+			gun.fire_type = gun.fire_types.semi_auto
+			Globals.survival_ui.create_notification("Gun set to semi-auto")
 	
 	# interact tooltip
 	if interact_cast.is_colliding():

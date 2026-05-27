@@ -1,6 +1,5 @@
 extends Node
 
-var overlay: CanvasLayer
 var fullscreen: bool:
 	get: return ConfigManager.file.get_value("settings", "fullscreen", true)
 var resolution: Vector2i:
@@ -19,9 +18,14 @@ var crosshair: int:
 	get: return ConfigManager.file.get_value("settings", "crosshair_type", 0)
 var show_ammo: bool:
 	get: return ConfigManager.file.get_value("settings", "show_ammo", true)
+var difficulty: int:
+	get: return ConfigManager.file.get_value("settings", "difficulty", 0)
+var save_difficulty: int
+var overlay: CanvasLayer
 
 
 func _ready() -> void:
+	SaveController.load.connect(_on_load)
 	overlay = get_tree().root.get_node("Overlay")
 	apply_all_settings()
 
@@ -117,3 +121,13 @@ func set_aspect_ratio(value: Variant) -> void:
 func set_hud(value: bool) -> void:
 	ConfigManager.file.set_value("settings", "show_ammo", value)
 	ConfigManager.save()
+
+
+func save() -> Dictionary:
+	return {
+		"save_difficulty" : difficulty,
+	}
+
+
+func _on_load() -> void:
+	ConfigManager.file.set_value("settings", "difficulty", save_difficulty)

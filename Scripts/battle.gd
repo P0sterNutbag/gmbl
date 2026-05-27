@@ -19,7 +19,7 @@ func start_battle(location: Location, attacking_location: Location) -> void:
 		location_data.faction = attacker_data.faction
 		location_data.population = min(attacker_data.population, location_data.max_population)
 		Globals.survival_ui.create_notification(location.title + " taken by " + FactionManager.faction_data[location_data.faction].name)
-		print(location.title + " taken by " + FactionManager.faction_data[location_data.faction].name)
+		#print(location.title + " taken by " + FactionManager.faction_data[location_data.faction].name)
 		delete()
 		return
 	battle_location = location
@@ -37,7 +37,7 @@ func start_battle(location: Location, attacking_location: Location) -> void:
 	original_faction = battle_location.location_data.faction
 	#if location.get_parent() is CharacterBody3D:
 	Globals.survival_ui.create_notification(location.title + " under attack by " + FactionManager.faction_data[attacker_data.faction].name)
-	print(location.title + " under attack by " + FactionManager.faction_data[attacker_data.faction].name)
+	#print(location.title + " under attack by " + FactionManager.faction_data[attacker_data.faction].name)
 
 
 func end_battle(winner_location: Location = null) -> void:
@@ -88,9 +88,9 @@ func cleanup() -> void:
 	battle_location.point_of_interest.status_holder.hide()
 	if battle_location.location_data.faction != original_faction:
 		Globals.survival_ui.create_notification(battle_location.title + " taken by " + FactionManager.faction_data[battle_location.location_data.faction].name)
-		print(battle_location.title + " taken by " + FactionManager.faction_data[battle_location.location_data.faction].name + ". Population is now: " + str(battle_location.location_data.population))
-	else:
-		print(battle_location.title + " successfuly defended by " + FactionManager.faction_data[battle_location.location_data.faction].name + ". Population is now: " + str(battle_location.location_data.population))
+		#print(battle_location.title + " taken by " + FactionManager.faction_data[battle_location.location_data.faction].name + ". Population is now: " + str(battle_location.location_data.population))
+	#else:
+		#print(battle_location.title + " successfuly defended by " + FactionManager.faction_data[battle_location.location_data.faction].name + ". Population is now: " + str(battle_location.location_data.population))
 	delete()
 
 

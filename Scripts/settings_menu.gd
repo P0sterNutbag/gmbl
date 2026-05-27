@@ -60,7 +60,11 @@ func _on_aim_sensitivity_h_slider_value_changed(value: float) -> void:
 
 
 func _on_resolution_option_changed(value: Variant) -> void:
-	if resolution.visible:
+	if !resolution.visible:
+		return
+	if value > DisplayServer.screen_get_size():
+		resolution.scroll_index()
+	else:
 		SettingsController.set_resolution(value)
 
 

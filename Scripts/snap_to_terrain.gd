@@ -41,14 +41,12 @@ func align_to_normal(inst: Node3D) -> void:
 	query.exclude = to_exclude
 	var result := space_state.intersect_ray(query)
 	if result.is_empty():
-		print("empty result")
 		return
 	var normal: Vector3 = result.normal.normalized()
 	var _scale = inst.scale
 	inst.global_transform = align_with_y(inst.global_transform, normal)
 	inst.scale = _scale
 	position_on_heightmap(inst)
-	print(inst.name + " aligned to normal")
 
 
 func align_with_y(xform, new_y):

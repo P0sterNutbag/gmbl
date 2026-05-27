@@ -7,12 +7,13 @@ class_name Gun
 @export var ammo_item: ItemUsable
 enum fire_types {semi_auto, auto, pump}
 @export var fire_type: fire_types
+@export var can_change_fire_type: bool
 @export var shoot_cooldown: float = 0.1
 @export var bullet_spread = 1.0
 @export var ads_spread_mod = 0.0
 @export var zoom_amount: float = 1.25
 @export var engagement_range: float = 50.0
-@export var kickback_magnitude: float = 1
+@export var kickback_magnitude: float = 3.0
 @export var spread_curve := (preload("res://Resources/Curves/bullet_spread.tres"))
 @export var ads_vector: Vector3
 @export var scope_texture: Texture2D

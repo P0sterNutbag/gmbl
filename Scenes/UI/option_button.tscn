@@ -35,7 +35,7 @@ mouse_filter = 0
 alignment = 1
 
 [node name="LeftScroll" type="Button" parent="Control" unique_id=1028790535]
-custom_minimum_size = Vector2(16, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 theme = ExtResource("4_7ia75")
@@ -52,7 +52,7 @@ text = "Option"
 horizontal_alignment = 1
 
 [node name="RightScroll" type="Button" parent="Control" unique_id=1244779748]
-custom_minimum_size = Vector2(16, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 icon = ExtResource("7_tyr7v")
@@ -67,5 +67,6 @@ expand_icon = true
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]
 [connection signal="pressed" from="Control/LeftScroll" to="." method="_on_left_category_pressed"]
 [connection signal="pressed" from="Control/RightScroll" to="." method="_on_right_category_pressed"]

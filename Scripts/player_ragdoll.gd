@@ -62,7 +62,6 @@ func start_ragdoll(damage_position: Vector3, fall_direction: Vector3, gun: Node3
 		bone.apply_impulse(-fall_direction * 5)
 		if i > 3:
 			continue
-	print(fall_direction)
 	Engine.time_scale = 0.35
 	await get_tree().create_timer(1).timeout
 	Engine.time_scale = 1.0

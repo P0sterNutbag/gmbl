@@ -32,15 +32,19 @@ func setup() -> void:
 
 
 func change_stat(node: Control, value: float, changed_by: float) -> void:
-	if PlayerStats.skill_points > 0 or changed_by < 0:
-		PlayerStats.skills.set(node.stat_name, value)
-		PlayerStats.skill_points = clamp(PlayerStats.skill_points - changed_by, 0, 100)
-		skill_points_label.text = "Points Left: " + str(int(PlayerStats.skill_points))
-		skill_changed.emit(node.stat_name)
-	else:
-		PlayerStats.skill_points += changed_by
-		node.set_value(value - changed_by)
-		node.value_label.text = str(int(node.value))
+	PlayerStats.skills.set(node.stat_name, value)
+	PlayerStats.skill_points = clamp(PlayerStats.skill_points - changed_by, 0, 100)
+	skill_points_label.text = "Points Left: " + str(int(PlayerStats.skill_points))
+	skill_changed.emit(node.stat_name)
+	#if PlayerStats.skill_points > 0 or changed_by < 0:
+		#PlayerStats.skills.set(node.stat_name, value)
+		#PlayerStats.skill_points = clamp(PlayerStats.skill_points - changed_by, 0, 100)
+		#skill_points_label.text = "Points Left: " + str(int(PlayerStats.skill_points))
+		#skill_changed.emit(node.stat_name)
+	#else:
+		#PlayerStats.skill_points += changed_by
+		#node.set_value(value - changed_by)
+		#node.value_label.text = str(int(node.value))
 	if PlayerStats.skill_points <= 0:
 		for child in vbox_container.get_children():
 			if child is NumberScrollButton:

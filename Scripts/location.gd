@@ -15,7 +15,7 @@ var can_transition: bool = true
 var shops_base_inventory: Dictionary
 var shops_max_money: Dictionary
 var saved_shops: Array[TownOption]
-var unaware_dialogue = preload("uid://dhbjweb7dwnpn")
+var unaware_dialogue: DialogueTree
 @onready var point_of_interest: PointOfInterest = $PointOfInterest
 @onready var flag: MeshInstance3D = $Meshes/Flagpole/MeshInstance3D
 @onready var flagpole: Node3D = $Meshes/Flagpole
@@ -62,7 +62,7 @@ func _ready() -> void:
 func start_encounter() -> void:
 	Globals.overworld.current_encounter = self
 	encounter_started.emit()
-	if can_stealth_start and encounter_scene and Globals.get_dot(self, Globals.player) > -0.25:
+	if can_stealth_start and encounter_scene and Globals.get_dot(self, Globals.player) > -0.25 and !BattleManager.get_battle(self):
 		if dialogue_tree:
 			Globals.ui.start_dialogue(unaware_dialogue)
 			Globals.player.camera_type = Globals.player.camera_types.town
@@ -148,9 +148,9 @@ func _on_battle_timer_timeout() -> void:
 	point_of_interest.status_holder.hide()
 	if location_data.faction != original_faction:
 		Globals.survival_ui.create_notification(title + " taken by " + FactionManager.faction_data[location_data.faction].name)
-		print(title + " taken by " + FactionManager.faction_data[location_data.faction].name + ". Population is now: " + str(location_data.population))
-	else:
-		print(title + " successfuly defended by " + FactionManager.faction_data[location_data.faction].name + ". Population is now: " + str(location_data.population))
+		#print(title + " taken by " + FactionManager.faction_data[location_data.faction].name + ". Population is now: " + str(location_data.population))
+	#else:
+		#print(title + " successfuly defended by " + FactionManager.faction_data[location_data.faction].name + ". Population is now: " + str(location_data.population))
 
 
 func save() -> Dictionary:

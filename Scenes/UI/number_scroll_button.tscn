@@ -3,9 +3,9 @@
 [ext_resource type="Theme" uid="uid://tivwhtwiofll" path="res://Art/Themes/button.tres" id="1_1ss3u"]
 [ext_resource type="Script" uid="uid://dq0fy8r72vsgc" path="res://Scripts/number_scroll_button.gd" id="3_1ss3u"]
 [ext_resource type="Theme" uid="uid://crfe4v3mudfp1" path="res://Art/Themes/text_small.tres" id="4_o8fg4"]
-[ext_resource type="Texture2D" uid="uid://c8op3uqdsf33p" path="res://Art/Textures/UI/arrow short left.png" id="5_1ss3u"]
+[ext_resource type="Texture2D" uid="uid://hn5iw0c1x746" path="res://Art/Textures/UI/arrow short left.png" id="5_1ss3u"]
 [ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="6_1ss3u"]
-[ext_resource type="Texture2D" uid="uid://cai4xq5mgv6b0" path="res://Art/Textures/UI/arrow short.png" id="7_mewsa"]
+[ext_resource type="Texture2D" uid="uid://biqih46nijqns" path="res://Art/Textures/UI/arrow short.png" id="7_mewsa"]
 
 [node name="MenuButton" type="Button" unique_id=237768494]
 z_index = 1
@@ -35,10 +35,9 @@ grow_vertical = 2
 alignment = 2
 
 [node name="LeftScroll" type="Button" parent="Control" unique_id=1028790535]
-custom_minimum_size = Vector2(16, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-mouse_filter = 1
 theme = ExtResource("4_o8fg4")
 icon = ExtResource("5_1ss3u")
 flat = true
@@ -49,15 +48,15 @@ expand_icon = true
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
+mouse_filter = 0
 theme = ExtResource("6_1ss3u")
 text = "0"
 horizontal_alignment = 1
 
 [node name="RightScroll" type="Button" parent="Control" unique_id=1244779748]
-custom_minimum_size = Vector2(16, 0)
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-mouse_filter = 1
 icon = ExtResource("7_mewsa")
 flat = true
 icon_alignment = 1
@@ -70,5 +69,6 @@ expand_icon = true
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]
 [connection signal="pressed" from="Control/LeftScroll" to="." method="_on_left_category_pressed"]
 [connection signal="pressed" from="Control/RightScroll" to="." method="_on_right_category_pressed"]

@@ -2,7 +2,6 @@ extends Node
 
 @export var starting_inventory: Inventory
 @export var allies: Array[NpcData]
-@export var skills: CharacterSkills
 @export var player_style := preload("uid://b4ypcwfcexyed")
 enum states {walk, pause, dead}
 var state = states.walk
@@ -51,6 +50,7 @@ var thirst_decrease_rate := 0.8
 var skill_points = 3.0
 var saved_style: NpcStyle
 var gun: Equipment
+var skills: CharacterSkills
 var inventory: Inventory = Inventory.new()
 var quests: Array[Quest]
 var ally_npcs: Array[Enemy]

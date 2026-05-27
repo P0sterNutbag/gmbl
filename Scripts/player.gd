@@ -344,7 +344,7 @@ func state_walk(delta):
 				var kickback = clamp(gun.kickback_magnitude - PlayerStats.skills.guns * 0.33, 0, 100)
 				var tween2 = create_tween().set_ease(Tween.EASE_OUT).set_parallel()
 				tween2.tween_property(self, "aim_rotation:x", aim_rotation.x + deg_to_rad(kickback) / 3.0, 0.05)
-				tween2.tween_property(self, "aim_rotation:y", aim_rotation.y + deg_to_rad(kickback) / 3.0 * randf_range(-1.0, 1.0), 0.05)
+				tween2.tween_property(self, "aim_rotation:y", aim_rotation.y + deg_to_rad(kickback) / 3.0 * randf_range(-0.5, 0.5), 0.05)
 				Globals.noise_controller.create_noise_event(gun.fire_point.global_position, self, gun.bullet_stats.noise_radius)
 				if gun.fire_type == gun.fire_types.pump:
 					gun.shoot_cooldown_timer.stop()

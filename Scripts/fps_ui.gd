@@ -39,11 +39,11 @@ func _process(delta: float) -> void:
 		tooltip.hide()
 	
 	# ally commands
-	if Input.is_action_pressed("command_allies"):
-		commands.show()
-		ally_count.text = str(PlayerStats.allies.size())
-	else:
-		commands.hide()
+	#if Input.is_action_pressed("command_allies"):
+		#commands.show()
+		#ally_count.text = str(PlayerStats.allies.size())
+	#else:
+		#commands.hide()
 	
 	#if Input.is_action_pressed("light") and Input.is_action_just_pressed("aim"):
 		#if visible:

@@ -9,7 +9,6 @@ class_name Location
 @export var dialogue_tree: DialogueTree
 @export var can_spawn_npcs: bool = true
 @export var can_stealth_start: bool
-var alert_enemies: bool
 var transition_started: bool 
 var can_transition: bool = true
 var shops_base_inventory: Dictionary
@@ -104,8 +103,7 @@ func stock_shops() -> void:
 				q.return_location = title
 
 
-func transition_to_level(start_alert = alert_enemies) -> void:
-	alert_enemies = start_alert
+func transition_to_level() -> void:
 	var player_vector: Vector3 = (global_position - Globals.player.global_position).normalized().rotated(Vector3.UP, -global_rotation.y)
 	Globals.overworld.player_spawn_vector = player_vector
 	SceneManager.start_encounter_transition(encounter_scene.resource_path)

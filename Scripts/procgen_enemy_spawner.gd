@@ -32,10 +32,10 @@ func _ready():
 			spawn_pos = Vector3(-64, 0.0, 0.0).rotated(Vector3.UP, deg_to_rad(randf_range(0, 360)))
 			dest = position
 		enemy_destination = dest
-		if Globals.overworld:
-			start_alert = Globals.overworld.current_encounter.alert_enemies
-		if start_alert:
-			dest = Globals.player.global_position
+		#if Globals.overworld:
+			#start_alert = Globals.overworld.current_encounter.alert_enemies
+		#if start_alert:
+			#dest = Globals.player.global_position
 		# spawn enemies
 		for i in enemy_amount:
 			spawn_enemy(spawn_pos, squad.faction)

@@ -372,7 +372,7 @@ func state_walk(delta):
 				change_gun_state(gun_states.reload)
 	
 	# change fire type
-	if Input.is_action_just_pressed("change_fire_type") and gun.can_change_fire_type:
+	if Input.is_action_just_pressed("change_fire_type") and gun and gun.can_change_fire_type:
 		if gun.fire_type == gun.fire_types.semi_auto:
 			gun.fire_type = gun.fire_types.auto
 			Globals.survival_ui.create_notification("Gun set to auto")
@@ -447,36 +447,36 @@ func state_walk(delta):
 		current_breath += delta
 	
 	# commanding allies
-	if Input.is_action_pressed("command_allies"):
-		if Input.is_action_just_pressed("slot_1"):
-			for ally in PlayerStats.ally_npcs:
-				ally.goal = ally.goals.follow
-			ally_destination = Vector3.ZERO
-			Globals.survival_ui.create_notification("Allies will follow you")
-		elif Input.is_action_just_pressed("slot_2"):
-			ally_raycast.enabled = true
-			ally_raycast.force_raycast_update()
-			if ally_raycast.is_colliding():
-				ally_destination = ally_raycast.get_collision_point()
-			else:
-				ally_destination = ally_raycast.get_child(0).global_position
-				ally_destination.y = Globals.get_heightmap_position(ally_destination)
-			for ally in PlayerStats.ally_npcs:
-				ally.goal = ally.goals.travel
-				ally.destination = ally_destination
-				ally.change_state(ally.states.walk)
-			Globals.survival_ui.create_notification("Allies going forward")
-		elif Input.is_action_just_pressed("slot_3"):
-			for ally in PlayerStats.ally_npcs:
-				ally.goal = ally.goals.guard
-			ally_destination = Vector3.ZERO
-			Globals.survival_ui.create_notification("Allies will stay put")
-		elif Input.is_action_just_pressed("slot_4"):
-			PlayerStats.allies_shoot = true
-			Globals.survival_ui.create_notification("Allies will open fire")
-		elif Input.is_action_just_pressed("slot_5"):
-			PlayerStats.allies_shoot = false
-			Globals.survival_ui.create_notification("Allies will hold fire")
+	#if Input.is_action_pressed("command_allies"):
+		#if Input.is_action_just_pressed("slot_1"):
+			#for ally in PlayerStats.ally_npcs:
+				#ally.goal = ally.goals.follow
+			#ally_destination = Vector3.ZERO
+			#Globals.survival_ui.create_notification("Allies will follow you")
+		#elif Input.is_action_just_pressed("slot_2"):
+			#ally_raycast.enabled = true
+			#ally_raycast.force_raycast_update()
+			#if ally_raycast.is_colliding():
+				#ally_destination = ally_raycast.get_collision_point()
+			#else:
+				#ally_destination = ally_raycast.get_child(0).global_position
+				#ally_destination.y = Globals.get_heightmap_position(ally_destination)
+			#for ally in PlayerStats.ally_npcs:
+				#ally.goal = ally.goals.travel
+				#ally.destination = ally_destination
+				#ally.change_state(ally.states.walk)
+			#Globals.survival_ui.create_notification("Allies going forward")
+		#elif Input.is_action_just_pressed("slot_3"):
+			#for ally in PlayerStats.ally_npcs:
+				#ally.goal = ally.goals.guard
+			#ally_destination = Vector3.ZERO
+			#Globals.survival_ui.create_notification("Allies will stay put")
+		#elif Input.is_action_just_pressed("slot_4"):
+			#PlayerStats.allies_shoot = true
+			#Globals.survival_ui.create_notification("Allies will open fire")
+		#elif Input.is_action_just_pressed("slot_5"):
+			#PlayerStats.allies_shoot = false
+			#Globals.survival_ui.create_notification("Allies will hold fire")
 	
 	# point gun up if colliding
 	if gun_collision_cast.is_colliding():

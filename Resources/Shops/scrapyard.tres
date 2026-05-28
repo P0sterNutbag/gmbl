@@ -22,6 +22,7 @@
 [ext_resource type="Resource" uid="uid://dobq8qcujl8mx" path="res://Resources/Items/Junk/harmonica.tres" id="23_a4dn2"]
 [ext_resource type="Resource" uid="uid://db8y03u86d7uv" path="res://Resources/Items/Junk/matches.tres" id="24_6hsh1"]
 [ext_resource type="Resource" uid="uid://du57k1x7scpfk" path="res://Resources/Items/Junk/metal_scraps.tres" id="25_wkig2"]
+[ext_resource type="Resource" uid="uid://81yrbdei6ihs" path="res://Resources/Items/Armor/helmet.tres" id="26_6galo"]
 [ext_resource type="Resource" uid="uid://cw12h3yyn5tgy" path="res://Resources/Items/Junk/playing cards.tres" id="26_8oi13"]
 [ext_resource type="Resource" uid="uid://b3eie27glwlxx" path="res://Resources/Items/Junk/ring.tres" id="27_o86e2"]
 [ext_resource type="Resource" uid="uid://bsalvk242tr7e" path="res://Resources/Items/Junk/towel.tres" id="28_m1bfm"]
@@ -243,12 +244,18 @@ script = ExtResource("13_64dq7")
 object_to_spawn = ExtResource("28_m1bfm")
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
+[sub_resource type="Resource" id="Resource_tgj5r"]
+script = ExtResource("13_64dq7")
+object_to_spawn = ExtResource("26_6galo")
+spawn_chance = 0.75
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
 [sub_resource type="Resource" id="Resource_3jgu8"]
 resource_local_to_scene = true
 script = ExtResource("29_hiey4")
 min_amount = 5
 max_amount = 10
-potential_slots = Array[ExtResource("13_64dq7")]([SubResource("Resource_5dqkm"), SubResource("Resource_0avbt"), SubResource("Resource_quwpe"), SubResource("Resource_eo6qm"), SubResource("Resource_cc1w5"), SubResource("Resource_llgcl"), SubResource("Resource_ddb2y"), SubResource("Resource_4iccq"), SubResource("Resource_537xa"), SubResource("Resource_ddb1d"), SubResource("Resource_7kgcg"), SubResource("Resource_t5qc1"), SubResource("Resource_pu2xk"), SubResource("Resource_t3bu4"), SubResource("Resource_y6oa7")])
+potential_slots = Array[ExtResource("13_64dq7")]([SubResource("Resource_5dqkm"), SubResource("Resource_0avbt"), SubResource("Resource_quwpe"), SubResource("Resource_eo6qm"), SubResource("Resource_cc1w5"), SubResource("Resource_llgcl"), SubResource("Resource_ddb2y"), SubResource("Resource_4iccq"), SubResource("Resource_537xa"), SubResource("Resource_ddb1d"), SubResource("Resource_7kgcg"), SubResource("Resource_t5qc1"), SubResource("Resource_pu2xk"), SubResource("Resource_t3bu4"), SubResource("Resource_y6oa7"), SubResource("Resource_tgj5r")])
 repeat_entries = false
 min_condition = 50.0
 max_condition = 100.0

@@ -159,11 +159,12 @@ func leave_shop() -> void:
 	advance_dialogue(index)
 
 
-func start_level() -> void:
+func start_level(start_alert: bool = false) -> void:
 	Globals.ui.portraits.hide()
 	UiController.close_interface(self)
 	#var start_alert = FactionManager.get_faction_relation(Globals.overworld.current_encounter.location_data.faction, FactionManager.factions.player) < 0
-	Globals.overworld.current_encounter.transition_to_level()#start_alert)
+	Globals.overworld.current_encounter.alert_enemies = start_alert
+	Globals.overworld.current_encounter.transition_to_level()
 
 
 func pay_fee(amount: int, fail_index: int) -> void:

@@ -183,94 +183,6 @@ layout_mode = 0
 offset_left = 829.0
 offset_right = 829.0
 
-[node name="StatsAnchor" type="VBoxContainer" parent="." unique_id=287376221]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -66.0
-offset_top = -27.0
-offset_right = 66.0
-offset_bottom = 27.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 2
-
-[node name="VBoxContainer" type="HBoxContainer" parent="StatsAnchor" unique_id=77679806]
-modulate = Color(1, 1, 0, 1)
-layout_mode = 2
-
-[node name="Hunger" type="TextureRect" parent="StatsAnchor/VBoxContainer" unique_id=177523521]
-visible = false
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-texture = ExtResource("2_guqia")
-expand_mode = 2
-script = ExtResource("2_k4cvi")
-stat_name = "hunger"
-show_treshold = 0.75
-
-[node name="Thirst" type="TextureRect" parent="StatsAnchor/VBoxContainer" unique_id=141843956]
-visible = false
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-texture = ExtResource("4_k64vs")
-expand_mode = 2
-script = ExtResource("2_k4cvi")
-stat_name = "thirst"
-show_treshold = 0.75
-
-[node name="Sleep" type="TextureRect" parent="StatsAnchor/VBoxContainer" unique_id=1847932044]
-visible = false
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-texture = ExtResource("5_13ham")
-expand_mode = 2
-script = ExtResource("2_k4cvi")
-stat_name = "sleep"
-
-[node name="Alcohol" type="TextureRect" parent="StatsAnchor/VBoxContainer" unique_id=1722446149]
-visible = false
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-texture = ExtResource("10_c2wwi")
-expand_mode = 2
-script = ExtResource("2_k4cvi")
-stat_name = "soberness"
-show_treshold = 1.0
-
-[node name="Health" type="Control" parent="StatsAnchor" unique_id=227173842 node_paths=PackedStringArray("progress_bar")]
-visible = false
-custom_minimum_size = Vector2(97, 20)
-layout_mode = 2
-script = ExtResource("2_k4cvi")
-stat_name = "current_hp"
-show_treshold = 1.0
-progress_bar = NodePath("ProgressBar")
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="StatsAnchor/Health" unique_id=359737324]
-layout_mode = 0
-offset_right = 150.99962
-offset_bottom = 28.0
-theme = ExtResource("3_1kfkr")
-text = "HP"
-
-[node name="ProgressBar" type="ProgressBar" parent="StatsAnchor/Health" unique_id=429155260]
-layout_mode = 0
-offset_left = 30.5
-offset_top = 4.0
-offset_right = 131.0
-offset_bottom = 17.0
-theme = ExtResource("4_1kfkr")
-max_value = 1.0
-value = 1.0
-show_percentage = false
-
 [node name="TransferInventory" type="VBoxContainer" parent="." unique_id=976192550]
 visible = false
 anchors_preset = 8
@@ -722,17 +634,17 @@ layout_mode = 2
 
 [node name="Title" type="Label" parent="Menus/VBoxContainer/Journal/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1986982747]
 layout_mode = 2
-theme = ExtResource("5_jtf3n")
+theme = ExtResource("31_kmwaq")
 autowrap_mode = 2
 
 [node name="Description" type="Label" parent="Menus/VBoxContainer/Journal/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=860515549]
 layout_mode = 2
-theme = ExtResource("5_jtf3n")
+theme = ExtResource("31_kmwaq")
 autowrap_mode = 2
 
 [node name="Reward" type="Label" parent="Menus/VBoxContainer/Journal/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=2080700279]
 layout_mode = 2
-theme = ExtResource("5_jtf3n")
+theme = ExtResource("31_kmwaq")
 
 [node name="PanelContainer2" type="PanelContainer" parent="Menus/VBoxContainer/Journal/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=2023987]
 visible = false
@@ -1069,7 +981,7 @@ offset_right = 168.0
 offset_bottom = -44.0
 theme = ExtResource("29_tlm7h")
 
-[node name="Thirst" type="TextureRect" parent="PlayerHealth/VBoxContainer" unique_id=1296685449]
+[node name="Thirst" type="TextureRect" parent="PlayerHealth/VBoxContainer" unique_id=1296685449 groups=["persist"]]
 custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 tooltip_text = "Thirst"
@@ -1077,9 +989,11 @@ texture = ExtResource("4_k64vs")
 expand_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "thirst"
+danger_message = "You feel thirsty"
+critical_message = "You're dying of thirst!"
 show_treshold = 0.75
 
-[node name="Hunger" type="TextureRect" parent="PlayerHealth/VBoxContainer" unique_id=1407439282]
+[node name="Hunger" type="TextureRect" parent="PlayerHealth/VBoxContainer" unique_id=1407439282 groups=["persist"]]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 tooltip_text = "Hunger"
@@ -1087,9 +1001,11 @@ texture = ExtResource("2_guqia")
 expand_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "hunger"
+danger_message = "You feel hungry"
+critical_message = "You're starving!"
 show_treshold = 0.75
 
-[node name="Sleep" type="TextureRect" parent="PlayerHealth/VBoxContainer" unique_id=72998721]
+[node name="Sleep" type="TextureRect" parent="PlayerHealth/VBoxContainer" unique_id=72998721 groups=["persist"]]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 tooltip_text = "Sleepy"
@@ -1097,8 +1013,10 @@ texture = ExtResource("5_13ham")
 expand_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "sleep"
+danger_message = "You feel sleepy"
+critical_message = "You feel extremely tired"
 
-[node name="Alcolhol" type="TextureRect" parent="PlayerHealth/VBoxContainer" unique_id=1716683138]
+[node name="Alcolhol" type="TextureRect" parent="PlayerHealth/VBoxContainer" unique_id=1716683138 groups=["persist"]]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 tooltip_text = "Drunk"
@@ -1106,16 +1024,17 @@ texture = ExtResource("10_c2wwi")
 expand_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "soberness"
+danger_message = "You got drunk"
 show_treshold = 1.0
 
 [node name="LogContainer" type="Control" parent="." unique_id=2103638854]
 clip_contents = true
-custom_minimum_size = Vector2(400, 400)
+custom_minimum_size = Vector2(560, 400)
 layout_mode = 3
 anchors_preset = 0
 offset_left = 32.0
 offset_top = 32.0
-offset_right = 432.0
+offset_right = 592.0
 offset_bottom = 454.0
 mouse_filter = 2
 theme = SubResource("Theme_lboml")

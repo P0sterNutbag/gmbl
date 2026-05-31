@@ -563,7 +563,7 @@ func exit_dead():
 	tween.tween_property(camera, "position:y", 0, 0.25)
 	tween.tween_property(camera, "rotation:z", deg_to_rad(0), 0.25)
 	tween.tween_property(gun_anchor, "position", Vector3.ZERO, 0.25)
-	tween.tween_callback(Globals.survival_ui.show_ui)
+	#tween.tween_callback(Globals.survival_ui.show_ui)
 	hitbox.revive()
 
 

@@ -9,6 +9,7 @@ class_name Location
 @export var dialogue_tree: DialogueTree
 @export var can_spawn_npcs: bool = true
 @export var can_stealth_start: bool
+var alert_enemies: bool
 var transition_started: bool 
 var can_transition: bool = true
 var shops_base_inventory: Dictionary

@@ -5,7 +5,6 @@ var custom_tooltip: String
 var hide_ammo: bool
 @onready var middle_pos = get_tree().root.get_viewport().size / 8
 @onready var crosshair = $Crosshair
-@onready var player_hp_bar: ProgressBar = %ProgressBar
 @onready var hit_effect: Control = $HitEffect
 @onready var scope: TextureRect = $Scope
 @onready var mags_left: Label = %MagsLeft

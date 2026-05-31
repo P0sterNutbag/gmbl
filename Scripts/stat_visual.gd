@@ -1,8 +1,11 @@
 extends Control
 
 @export var stat_name: String
+@export var danger_message: String
+@export var critical_message: String
 @export var show_treshold = 0.5
 @export var progress_bar: ProgressBar
+var level: int = 0
 var tooltip_theme = preload("res://Art/Themes/text_small_outline.tres")
 
 
@@ -11,24 +14,24 @@ func _process(_delta: float) -> void:
 	var stat_value = PlayerStats.get(stat_name)
 	var stat_max = PlayerStats.get("max_" + stat_name)
 	var value = stat_value / stat_max
-	
-	# set visibility
-	#if value < show_treshold:
-		#modulate.v = 1
-	#else:
-		#modulate.v = 0.5
-		#return
-	
+	var previous_level = level
 	# set color
 	if value <= 0:
-		modulate = Color(1.0, 0.051, 0.271, 1.0)
+		level = 2
+		modulate.v = 1.0
 	elif value < show_treshold:
-		modulate = Color.WHITE
-		modulate.v = 1
+		level = 1
+		modulate.v = 0.7
 	else:
-		modulate = Color.WHITE
-		modulate.v = 0.5
-	
+		level = 0
+		modulate.v = 0.4
+	# notifications
+	if previous_level != level:
+		previous_level = level
+		if level == 1:
+			Globals.survival_ui.create_notification(danger_message)
+		if level == 2:
+			Globals.survival_ui.create_notification(critical_message)
 	# set value
 	if !progress_bar:
 		return
@@ -40,3 +43,9 @@ func _make_custom_tooltip(for_text):
 	label.text = for_text
 	label.theme = tooltip_theme
 	return label
+
+
+func save() -> Dictionary:
+	return {
+		"level" : level,
+	}

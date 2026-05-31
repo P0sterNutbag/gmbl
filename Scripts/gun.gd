@@ -161,4 +161,4 @@ func _on_shoot_cooldown_timeout() -> void:
 
 
 func _on_animation_started(_anim_name: StringName):
-	anim_player.speed_scale = 0.5 + PlayerStats.skills.guns * 0.1
+	anim_player.speed_scale = 0.675 + PlayerStats.skills.guns * 0.1

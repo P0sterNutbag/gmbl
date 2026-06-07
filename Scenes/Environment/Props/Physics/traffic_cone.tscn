@@ -40,17 +40,19 @@ bottom_radius = 0.25
 height = 0.75
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qr5be"]
-height = 0.7515869
-radius = 0.2529297
+height = 1.1529846
+radius = 0.38183594
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gloiw"]
-size = Vector3(0.75390625, 0.06793213, 0.7515869)
+size = Vector3(1.1357422, 0.06793213, 1.1210938)
 
 [node name="TrafficCone" type="Node3D" unique_id=1825751531 groups=["align_normal"]]
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=455758684]
+mass = 0.5
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=11117546]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 mesh = SubResource("ArrayMesh_gloiw")
 skeleton = NodePath("../..")
 
@@ -60,7 +62,7 @@ mesh = SubResource("CylinderMesh_gloiw")
 surface_material_override/0 = ExtResource("3_qr5be")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1791309698]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4225464, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62324524, 0)
 shape = SubResource("CylinderShape3D_qr5be")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="RigidBody3D" unique_id=1069421894]

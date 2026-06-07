@@ -1,10 +1,7 @@
 [gd_scene format=3 uid="uid://btjp27ft7kaqr"]
 
 [ext_resource type="Shader" uid="uid://de6l4w30bo7u6" path="res://Art/Shaders/cel-shader-base.gdshader" id="1_hota0"]
-[ext_resource type="Script" uid="uid://bviivhmyms12w" path="res://Scripts/breakable_object.gd" id="1_ien3g"]
-[ext_resource type="PackedScene" uid="uid://b3jb76dpmlkub" path="res://Scenes/Effects/Particles/box_break.tscn" id="2_jtitq"]
 [ext_resource type="Texture2D" uid="uid://dmb4umujpf2cy" path="res://Art/Textures/Environment/crate tall.png" id="3_dgtft"]
-[ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="5_3g2s7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nolf3"]
 size = Vector3(1.15, 2.3, 1.15)
@@ -23,8 +20,6 @@ shader_parameter/uv_scale = Vector2(3, 2)
 shader_parameter/uv_offset = Vector2(0, 0)
 
 [node name="CrateTall" type="Node3D" unique_id=513624351 groups=["align_normal"]]
-script = ExtResource("1_ien3g")
-destory_particle = ExtResource("2_jtitq")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1882736971]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
@@ -37,19 +32,3 @@ shape = SubResource("BoxShape3D_nolf3")
 mesh = SubResource("BoxMesh_jlwe5")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_hota0")
-
-[node name="HealthComponent" type="Area3D" parent="RigidBody3D" unique_id=1584976362]
-collision_layer = 4
-collision_mask = 0
-monitoring = false
-monitorable = false
-script = ExtResource("5_3g2s7")
-hp = 5.0
-blood_on_hit = false
-destroy_bullet = false
-metadata/_custom_type_script = "uid://cdgvftnrtwbf7"
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="RigidBody3D/HealthComponent" unique_id=1175946633]
-shape = SubResource("BoxShape3D_nolf3")
-
-[connection signal="death" from="RigidBody3D/HealthComponent" to="." method="_on_health_component_death"]

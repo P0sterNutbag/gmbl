@@ -1,10 +1,7 @@
 [gd_scene format=3 uid="uid://b3f0jcvvcldns"]
 
 [ext_resource type="Shader" uid="uid://de6l4w30bo7u6" path="res://Art/Shaders/cel-shader-base.gdshader" id="1_a4jlg"]
-[ext_resource type="Script" uid="uid://bviivhmyms12w" path="res://Scripts/breakable_object.gd" id="1_mpfq8"]
 [ext_resource type="Texture2D" uid="uid://ppl12gb4cdaw" path="res://Art/Textures/Environment/crate.png" id="1_nolf3"]
-[ext_resource type="PackedScene" uid="uid://b3jb76dpmlkub" path="res://Scenes/Effects/Particles/box_break.tscn" id="2_qee7m"]
-[ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="4_qee7m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k0cn2"]
 render_priority = 0
@@ -22,12 +19,7 @@ size = Vector3(1.15, 1.15, 1.15)
 [sub_resource type="BoxShape3D" id="BoxShape3D_nolf3"]
 size = Vector3(1.5, 1.5, 1.5)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_xic1o"]
-size = Vector3(1.15, 1.15, 1.15)
-
 [node name="Crate" type="Node3D" unique_id=1194148277 groups=["align_normal"]]
-script = ExtResource("1_mpfq8")
-destory_particle = ExtResource("2_qee7m")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1479794293]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.575, 0)
@@ -41,19 +33,3 @@ skeleton = NodePath("../../../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=2052313675]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 shape = SubResource("BoxShape3D_nolf3")
-
-[node name="HealthComponent" type="Area3D" parent="RigidBody3D" unique_id=297398517]
-collision_layer = 4
-collision_mask = 0
-monitoring = false
-monitorable = false
-script = ExtResource("4_qee7m")
-hp = 3.0
-blood_on_hit = false
-destroy_bullet = false
-metadata/_custom_type_script = "uid://cdgvftnrtwbf7"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/HealthComponent" unique_id=1302455415]
-shape = SubResource("BoxShape3D_xic1o")
-
-[connection signal="death" from="RigidBody3D/HealthComponent" to="." method="_on_health_component_death"]

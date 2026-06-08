@@ -108,6 +108,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	velocity += push_velocity
+	var last_velocity_length = velocity.length()
 	move_and_slide()
 	#if velocity != Vector3.ZERO:
 	velocity -= push_velocity
@@ -120,6 +121,10 @@ func _physics_process(delta: float) -> void:
 			var _push_velocity = (collider.global_position - global_position).normalized() * walk_speed
 			_push_velocity.y = 0
 			collider.push_velocity = _push_velocity
+	# camp if blocked
+	if last_velocity_length > 0 and velocity.length() == 0.0:
+		look_at(last_seen_position)
+		change_state(states.camp)
 
 
 func state_idle(delta) -> void:
@@ -387,10 +392,8 @@ func state_find_cover(_delta) -> void:
 			#change_state(states.approach)#states.strafe)
 			#return
 		is_new_state = false
-	
 	# run to new position
 	follow_path(run_speed)
-	
 	# animate
 	if velocity == Vector3.ZERO:
 		anim_player.play("Idle")

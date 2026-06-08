@@ -33,7 +33,7 @@ func _ready() -> void:
 	else:
 		location_data = get_tree().current_scene.location_data
 	spawn_chance = location_data.get(location_data_variable)
-	var spawn_amount = randi_range(spawn_amount_min, spawn_amount_max)
+	var spawn_amount = clamp(randi_range(spawn_amount_min, spawn_amount_max), 0, get_child_count())
 	if randf() <= spawn_chance:
 		for i in spawn_amount:
 			spawn()

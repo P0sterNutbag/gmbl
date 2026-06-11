@@ -1,7 +1,7 @@
 extends InteractableObject
 
 @export var health_component: HealthComponent
-@onready var scalp_pos: Node3D = $"../EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_Head/Scalp"
+@onready var scalp_pos: Node3D = $"../EnemyModel/PersonAnimated/Armature/Skeleton3D/HeadAttachment/Scalp"
 const BLOODSPATTER = preload("uid://cqvgbxo1nn47e")
 
 

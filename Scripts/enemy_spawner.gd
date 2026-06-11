@@ -5,6 +5,7 @@ extends Node3D
 @export var spawn_on_start: bool = true
 var spawn_points: Array[Node3D]
 var used_spawns: Array[int]
+var location_data: LocationData
 @onready var border_parent: Node3D = $"../Border"
 @onready var player_spawn: Node3D = $"../PlayerAnchor"
 const NPC = preload("uid://cb05x24r4r8im")
@@ -28,7 +29,6 @@ func _ready() -> void:
 	await get_tree().process_frame
 	
 	# get enemy amount
-	var location_data
 	if Globals.overworld:
 		location_data = Globals.overworld.current_encounter.location_data
 	else:
@@ -144,8 +144,10 @@ func spawn_enemy(faction: FactionManager.factions):
 	# get random enemy and spawn it
 	var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
 	var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
-	# assign faction
+	# assign data
 	inst.faction = faction
+	inst.npc_data.fire_power = location_data.fire_power
+	inst.npc_data.armor_level = location_data.armor_level
 	# add to scene
 	get_tree().current_scene.add_child.call_deferred(inst)
 	# position enemy at spawn point

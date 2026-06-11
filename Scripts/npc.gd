@@ -1,11 +1,11 @@
 extends CharacterBody3D
 class_name Enemy
 
-@export var npc_data: NpcData
+@export var npc_data: NpcData = NpcData.new()
 @export var title: String = "Enemy"
 @export var strafe_change := 0.2
 @export var items_to_drop: Array[PackedScene]
-@export var potential_gun_items: Array[SpawnChanceResource]
+@export var potential_guns: Dictionary[int, Array]
 @export var inventory: Inventory
 @export var faction: FactionManager.factions
 enum states {idle, investigate, shoot, search, strafe, hurt, reload, camp, dead, aim, walk, supress, find_cover, approach}
@@ -56,11 +56,17 @@ var gun_item: EquipmentGun
 @onready var physical_bone_simulator: PhysicalBoneSimulator3D = $EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D
 @onready var supress_timer: Timer = $SupressTimer
 @onready var new_destination_timer: Timer = $NewDestinationTimer
+@onready var physical_bone_head: PhysicalBone3D = $"EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_Head"
+@onready var physical_bone_hips: PhysicalBone3D = $"EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_Hips"
+@onready var physical_bone_spine: PhysicalBone3D = $"EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_Spine"
+@onready var physical_bone_spine_1: PhysicalBone3D = $"EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_Spine1"
+@onready var physical_bone_spine_2: PhysicalBone3D = $"EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone mixamorig_Spine2"
 
 
 func _ready() -> void:
 	gun_holder.get_child(0).queue_free()
-	gun_item = potential_gun_items[Globals.get_weighted_index(potential_gun_items)].object_to_spawn.duplicate_deep()
+	var gun_array = potential_guns[npc_data.fire_power]
+	gun_item = gun_array[Globals.get_weighted_index(gun_array)].object_to_spawn.duplicate_deep()
 	gun = gun_item.gun_object.instantiate()
 	gun.gun_stats.condition = randf_range(10, 20)
 	gun_holder.add_child(gun)
@@ -71,6 +77,19 @@ func _ready() -> void:
 	var weights = PackedFloat32Array([1.0, 0.5, 0.1, 0.05])
 	for i in ammo_amount[rng.rand_weighted(weights)]:
 		inventory.add_item(gun.ammo_item)
+	if npc_data.armor_level >= 3:
+		for bone in physical_bone_simulator.get_children():
+			bone.damage_modifier = 0.75
+		model.pads.show()
+	if npc_data.armor_level > 0:
+		physical_bone_hips.damage_modifier = 0.5
+		physical_bone_spine.damage_modifier = 0.5
+		physical_bone_spine_1.damage_modifier = 0.5
+		physical_bone_spine_2.damage_modifier = 0.5
+		model.vest.show()
+	if npc_data.armor_level >= 2:
+		physical_bone_head.damage_modifier = 2.0
+		model.helmet.show()
 	DayNightCycle.night_start.connect(on_night_start)
 	DayNightCycle.day_start.connect(on_day_start)
 	time_to_see_max += randf_range(-0.25, 0.25)

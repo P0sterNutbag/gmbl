@@ -41,7 +41,7 @@ var current_breath = 2.5
 var is_crouching: bool
 var is_sprinting: bool
 var is_walking: bool
-var on_ladder: bool
+var is_climbing: bool
 var can_hold_breath: bool = true
 var is_holding_breath: bool
 var aim_rotation: Vector3
@@ -262,20 +262,31 @@ func state_walk(delta):
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		velocity.y = jump_speed
 	
-	# ladder
-	if on_ladder:
+	# climbing
+	if is_climbing:
 		if input.y != 0:
-			velocity.y = -input.y * speed
-			if !is_on_floor():
-				velocity.x = 0
-				velocity.z = 0
+			velocity.y = -input.y * speed * sign(aim_rotation.x)
+			print(aim_rotation.x)
+			#if !is_on_floor():
+				#velocity.x = 0
+				#velocity.z = 0
+				
 		else:
 			velocity.y = 0
 		if Input.is_action_just_pressed("jump"):
 			transform = transform.translated(Vector3.FORWARD * 0.05)
+	var was_on_floor = is_on_floor()
+	var fall_speed = abs(velocity.y)
 	
 	move_and_slide()
 	
+	# fall damage
+	if !was_on_floor and is_on_floor():
+		print(fall_speed)
+		if fall_speed > 15.0:
+			health_component.damage(0.2 * fall_speed, Vector3.ZERO, Vector3.ZERO, null, false, true, true)
+	
+	# push objects
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody3D:
@@ -537,7 +548,8 @@ func enter_pause():
 
 
 func state_pause(_delta):
-	move_and_slide()
+	if !is_climbing:
+		move_and_slide()
 
 
 func enter_dead():
@@ -873,7 +885,8 @@ func check_reload_ammo(time_to_skip_to: float):
 
 func _on_damaged(hit_position: Vector3, hit_direction: Vector3, _shooter: Node3D) -> void:
 	hitbox.damage_modifier = PlayerStats.inventory.equipment_kit.get_damage_modifier()
-	Globals.ui.play_hit_effect(hit_direction)
+	if hit_position != Vector3.ZERO:
+		Globals.ui.play_hit_effect(hit_direction)
 	if health_component.hp <= 0:
 		player_third_person.start_ragdoll(hit_position, hit_direction, gun)
 
@@ -897,15 +910,14 @@ func _on_step_timer_timeout() -> void:
 	step_noise_event()
 
 
-func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body.is_in_group("ladder"):
-		on_ladder = true
-
-
-func _on_area_3d_body_exited(body: Node3D) -> void:
-	if body.is_in_group("ladder"):
-		on_ladder = false
-		velocity.y = 0
+#func _on_area_3d_body_entered(_body: Node3D) -> void:
+	#is_climbing = true
+	#print("climbing")
+#
+#
+#func _on_area_3d_body_exited(_body: Node3D) -> void:
+	#is_climbing = false
+	#velocity.y = 0
 
 
 func _on_bullet_listener_area_entered(_area: Area3D) -> void:
@@ -921,3 +933,21 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 func _on_breath_timer_timeout() -> void:
 	pass # Replace with function body.
+
+
+func _on_area_3d_area_entered(_area: Area3D) -> void:
+	is_climbing = true
+
+
+func _on_area_3d_area_exited(_area: Area3D) -> void:
+	is_climbing = false
+	velocity.y = 0
+
+
+func _on_area_3d_body_entered(_body: Node3D) -> void:
+	is_climbing = true
+
+
+func _on_area_3d_body_exited(_body: Node3D) -> void:
+	is_climbing = false
+	velocity.y = 0

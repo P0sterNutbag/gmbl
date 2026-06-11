@@ -70,6 +70,8 @@ func spawn_enemy(spawn_position: Vector3, faction: FactionManager.factions) -> v
 	# get random enemy and spawn it
 	var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
 	var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
+	inst.npc_data.fire_power = location_data.fire_power
+	inst.npc_data.armor_level = location_data.armor_level
 	get_tree().current_scene.add_child.call_deferred(inst)
 	# position enemy at spawn point
 	var spawn_offset = spawn_position + Vector3(randf_range(-spawn_radius, spawn_radius), 0, randf_range(-spawn_radius, spawn_radius))

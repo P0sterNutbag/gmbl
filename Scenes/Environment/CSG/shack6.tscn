@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://bho5tvvjqh5oa"]
+
+[ext_resource type="PackedScene" uid="uid://c4oumjgjpl4tq" path="res://Scenes/Environment/Props/staircase.tscn" id="1_k8vxv"]
+[ext_resource type="Material" uid="uid://b4aard1qnyqin" path="res://Art/Materials/tin_triplanar_gray.tres" id="2_kt6is"]
+[ext_resource type="Texture2D" uid="uid://bkxsoff507nnd" path="res://Art/Textures/Environment/tin roof.png" id="3_5otml"]
+[ext_resource type="PackedScene" uid="uid://wfbh2lfg703p" path="res://Scenes/Environment/Props/ladder.tscn" id="4_kt6is"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bewqg"]
+albedo_texture = ExtResource("3_5otml")
+metallic_specular = 0.0
+uv1_triplanar = true
+texture_filter = 0
+
+[node name="Shack2" type="CSGCombiner3D" unique_id=1140071892]
+
+[node name="Stairs2" parent="." unique_id=1330263869 instance=ExtResource("1_k8vxv")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.8, 0, 1.9)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="." unique_id=927304890]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 1.5, 2.85)
+size = Vector3(2, 3, 1.9)
+material = ExtResource("2_kt6is")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="." unique_id=643029400]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9, 3, 0)
+size = Vector3(0.2, 6, 8)
+material = ExtResource("2_kt6is")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="." unique_id=957286224]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9, 3, 0)
+size = Vector3(0.2, 6, 8)
+material = ExtResource("2_kt6is")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="." unique_id=77217344]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 3, 3.9)
+size = Vector3(0.2, 6, 8)
+material = ExtResource("2_kt6is")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="." unique_id=2037238266]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.3841858e-07, 3.1, 2.2391525e-07)
+size = Vector3(7.6, 0.2, 7.6)
+material = ExtResource("2_kt6is")
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="." unique_id=517280683]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 6.1, 0)
+size = Vector3(9, 0.2, 9)
+material = SubResource("StandardMaterial3D_bewqg")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="." unique_id=2072673099]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.65, 3, -3.9)
+size = Vector3(0.2, 6, 2.3)
+material = ExtResource("2_kt6is")
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="." unique_id=1517925210]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.65, 3, -3.9)
+size = Vector3(0.2, 6, 2.3)
+material = ExtResource("2_kt6is")
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="." unique_id=955511232]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 4.5, -3.9)
+size = Vector3(0.2, 3, 3)
+material = ExtResource("2_kt6is")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=277723779]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 3, 0.45000005)
+operation = 2
+size = Vector3(2, 0.6, 2.9)
+material = ExtResource("2_kt6is")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=1684323777]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4.75, 4.125)
+operation = 2
+material = ExtResource("2_kt6is")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=870791515]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4.75, 4.125)
+operation = 2
+material = ExtResource("2_kt6is")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="." unique_id=944419833]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4.75, -3.75)
+operation = 2
+material = ExtResource("2_kt6is")
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="." unique_id=2120521158]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.05, 6.25, 2.5)
+operation = 2
+size = Vector3(1.5, 1, 1.5)
+material = ExtResource("2_kt6is")
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="." unique_id=1760565423]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4.75, -3.75)
+operation = 2
+material = ExtResource("2_kt6is")
+
+[node name="Ladder" parent="." unique_id=103020037 instance=ExtResource("4_kt6is")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75, 3.155, 2.387)

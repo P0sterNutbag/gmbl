@@ -7,6 +7,8 @@ class_name LocationData
 @export var loot_spawn_chance: float = 0.5
 @export var squad_spawn_chance: float = 0.5
 @export var trap_spawn_chance: float = 0.0
+@export var fire_power = 0
+@export var armor_level = 0
 
 
 func change_population(amount: int) -> void:

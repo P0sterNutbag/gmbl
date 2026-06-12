@@ -169,6 +169,10 @@ func state_walk(delta) -> void:
 	if direction != Vector3.ZERO:
 		model.look_at(global_position + direction)
 	
+	var head_armor = PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.head_armor]
+	model.helmet.visible = head_armor != null
+	var body_armor = PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.body_armor]
+	model.vest.visible = body_armor != null
 	# change gun
 	#var kit = PlayerStats.inventory.equipment_kit.gun_slots
 	#if Input.is_action_just_released("next_gun"):
@@ -192,14 +196,14 @@ func state_walk(delta) -> void:
 		#spot_light.visible = false
 	
 	# pick up loot
-	if Input.is_action_just_pressed("interact"):
-		var areas = loot_area.get_overlapping_areas()
-		if areas.size() > 0:
-			Globals.survival_ui.loot(areas[0])
-			return
-		var bodies = loot_area.get_overlapping_bodies()
-		if bodies.size() > 0:
-			Globals.survival_ui.loot(bodies[0])
+	#if Input.is_action_just_pressed("interact"):
+		#var areas = loot_area.get_overlapping_areas()
+		#if areas.size() > 0:
+			#Globals.survival_ui.loot(areas[0])
+			#return
+		#var bodies = loot_area.get_overlapping_bodies()
+		#if bodies.size() > 0:
+			#Globals.survival_ui.loot(bodies[0])
 	
 	# set gun sprite
 	#if gun != PlayerStats.gun:

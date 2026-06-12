@@ -1,7 +1,16 @@
 [gd_scene format=3 uid="uid://b6nrlkb5wnbsg"]
 
 [ext_resource type="PackedScene" uid="uid://ccasv3bhe2jhu" path="res://Art/Models/rock.glb" id="1_su27r"]
-[ext_resource type="Material" uid="uid://glgkpsq6v2xd" path="res://Art/Materials/rock_gray.tres" id="2_su27r"]
+[ext_resource type="Shader" uid="uid://de6l4w30bo7u6" path="res://Art/Shaders/cel-shader-base.gdshader" id="2_su27r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qfiin"]
+render_priority = 0
+shader = ExtResource("2_su27r")
+shader_parameter/color = Color(0.6745098, 0.59607846, 0.4862745, 1)
+shader_parameter/specular = Color(0, 0, 0, 0)
+shader_parameter/fresnel = Color(0, 0, 0, 0)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_vhqkn"]
 data = PackedVector3Array(0, -1, 0, -0.2764, -0.4472, 0.8506, 0.3519, -0.13, 0.6035, -0.2764, -0.4472, 0.8506, 0.497, 0.4867, 0.7507, 0.3519, -0.13, 0.6035, -0.2764, -0.4472, 0.8506, -0.2509, 0.6917, 0.2751, 0.497, 0.4867, 0.7507, -0.2509, 0.6917, 0.2751, 0.1295, 1.1622, -0.1886, 0.497, 0.4867, 0.7507, 0.3519, -0.13, 0.6035, 0.497, 0.4867, 0.7507, 0.8971, 0.1815, 0.0716, 0.497, 0.4867, 0.7507, 0.1295, 1.1622, -0.1886, 0.8971, 0.1815, 0.0716, 0.3519, -0.13, 0.6035, 0.8971, 0.1815, 0.0716, 0.7236, -0.4472, -0.5257, 0.3519, -0.13, 0.6035, 0.7236, -0.4472, -0.5257, 0, -1, 0, 0.7236, -0.4472, -0.5257, 0.8971, 0.1815, 0.0716, -0.1334, 0.5571, -0.7835, 0.8971, 0.1815, 0.0716, 0.1295, 1.1622, -0.1886, -0.1334, 0.5571, -0.7835, 0.7236, -0.4472, -0.5257, -0.1334, 0.5571, -0.7835, -0.2764, -0.4472, -0.8506, 0, -1, 0, 0.7236, -0.4472, -0.5257, -0.2764, -0.4472, -0.8506, -0.2764, -0.4472, -0.8506, -0.1334, 0.5571, -0.7835, -0.7241, 0.4149, -0.3087, -0.1334, 0.5571, -0.7835, 0.1295, 1.1622, -0.1886, -0.7241, 0.4149, -0.3087, -0.2764, -0.4472, -0.8506, -0.7241, 0.4149, -0.3087, -0.8944, -0.4472, 0, 0, -1, 0, -0.2764, -0.4472, -0.8506, -0.8944, -0.4472, 0, -0.8944, -0.4472, 0, -0.7241, 0.4149, -0.3087, -0.2509, 0.6917, 0.2751, -0.7241, 0.4149, -0.3087, 0.1295, 1.1622, -0.1886, -0.2509, 0.6917, 0.2751, -0.8944, -0.4472, 0, -0.2509, 0.6917, 0.2751, -0.2764, -0.4472, 0.8506, 0, -1, 0, -0.8944, -0.4472, 0, -0.2764, -0.4472, 0.8506)
@@ -11,8 +20,8 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 
 [node name="rock" parent="." unique_id=1413687560 instance=ExtResource("1_su27r")]
 
-[node name="Icosphere" parent="rock" index="0" unique_id=1835773896 groups=["align_position"]]
-surface_material_override/0 = ExtResource("2_su27r")
+[node name="Icosphere" parent="rock" index="0" unique_id=198177047 groups=["align_position"]]
+surface_material_override/0 = SubResource("ShaderMaterial_qfiin")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="rock/Icosphere" index="0" unique_id=598362377]
 

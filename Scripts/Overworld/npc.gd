@@ -69,6 +69,17 @@ func _ready() -> void:
 	original_rotation = global_rotation
 	if destination:
 		navigation_agent.set_target_position(destination.global_position)
+	var armor_levels = location.location_data.armor_level_chance
+	var armor_level = 0
+	for i in armor_levels.size():
+		if armor_levels[i] > 0.0:
+			armor_level = i
+	if armor_level >= 1:
+		enemy_model.vest.show()
+	if armor_level >= 2:
+		enemy_model.helmet.show()
+	if armor_level >= 3:
+		enemy_model.pads.show()
 
 
 func _process(_delta: float) -> void:

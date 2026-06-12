@@ -146,8 +146,17 @@ func spawn_enemy(faction: FactionManager.factions):
 	var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
 	# assign data
 	inst.faction = faction
-	inst.npc_data.fire_power = location_data.fire_power
-	inst.npc_data.armor_level = location_data.armor_level
+	var rng = RandomNumberGenerator.new()
+	var weights: PackedFloat32Array
+	for i in location_data.fire_power_chance:
+		weights.append(i)
+	var fire_power = rng.rand_weighted(weights)
+	inst.npc_data.fire_power = fire_power
+	weights.clear()
+	for i in location_data.armor_level_chance:
+		weights.append(i)
+	var armor_level = rng.rand_weighted(weights)
+	inst.npc_data.armor_level = armor_level
 	# add to scene
 	get_tree().current_scene.add_child.call_deferred(inst)
 	# position enemy at spawn point
@@ -172,6 +181,17 @@ func spawn_enemy_position(faction: FactionManager.factions, spawn_position: Vect
 	spawn_pos.y = Globals.get_heightmap_position(spawn_pos)
 	inst.set_deferred("global_position", spawn_pos)
 	inst.faction = faction
+	var rng = RandomNumberGenerator.new()
+	var weights: PackedFloat32Array
+	for i in location_data.fire_power_chance:
+		weights.append(i)
+	var fire_power = rng.rand_weighted(weights)
+	inst.npc_data.fire_power = fire_power
+	weights.clear()
+	for i in location_data.armor_level_chance:
+		weights.append(i)
+	var armor_level = rng.rand_weighted(weights)
+	inst.npc_data.armor_level = armor_level
 	if destination != Vector3.ZERO:
 		inst.goal = inst.goals.travel
 		inst.destination = destination

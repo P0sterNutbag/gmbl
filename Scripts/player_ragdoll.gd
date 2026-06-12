@@ -52,6 +52,10 @@ func start_ragdoll(damage_position: Vector3, fall_direction: Vector3, gun: Node3
 		var gun_scene = load(gun.scene_file_path)
 		var inst = gun_scene.instantiate()
 		right_hand.add_child(inst)
+	if PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.head_armor]:
+		helmet.show()
+	if PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.body_armor]:
+		vest.show()
 	physical_bone_simulator.active = true
 	physical_bone_simulator.physical_bones_start_simulation()
 	var bones = physical_bone_simulator.get_children()

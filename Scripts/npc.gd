@@ -77,9 +77,10 @@ func _ready() -> void:
 	var weights = PackedFloat32Array([1.0, 0.5, 0.1, 0.05])
 	for i in ammo_amount[rng.rand_weighted(weights)]:
 		inventory.add_item(gun.ammo_item)
+	# armor
 	if npc_data.armor_level >= 3:
 		for bone in physical_bone_simulator.get_children():
-			bone.damage_modifier = 0.75
+			bone.damage_modifier = 0.5
 		model.pads.show()
 	if npc_data.armor_level > 0:
 		physical_bone_hips.damage_modifier = 0.5

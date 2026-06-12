@@ -1,5 +1,6 @@
 extends Node3D
 
+var drop_speed := 0.0
 var last_position: Vector3
 var tracer_firepoint: Node3D
 var creator: Node3D
@@ -31,8 +32,8 @@ func _physics_process(delta: float) -> void:
 		hit()
 	global_translate(-global_transform.basis.z.normalized() * bullet_stats.speed * delta)
 	#if bullet_stats.bullet_drop:
-	global_translate(global_transform.basis.y.normalized() * -bullet_stats.drop_speed * delta)
-	bullet_stats.drop_speed = move_toward(bullet_stats.drop_speed, bullet_stats.max_drop_speed, delta)
+	global_translate(global_transform.basis.y.normalized() * -drop_speed * delta)
+	drop_speed += delta * 5
 	visible = true
 
 
@@ -98,3 +99,7 @@ func create_tracer():
 
 func _exit_tree() -> void:
 	Globals.noise_controller.create_noise_event(global_position, self)
+
+
+func _on_timer_timeout() -> void:
+	queue_free()

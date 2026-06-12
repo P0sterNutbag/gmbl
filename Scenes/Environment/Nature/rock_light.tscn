@@ -1,18 +1,18 @@
-[gd_scene format=3 uid="uid://kuu6sm3g6q1y"]
+[gd_scene format=3 uid="uid://de8widmvpoapa"]
 
-[ext_resource type="PackedScene" uid="uid://ccasv3bhe2jhu" path="res://Art/Models/rock.glb" id="1_p6pqi"]
-[ext_resource type="Material" uid="uid://glgkpsq6v2xd" path="res://Art/Materials/rock_gray.tres" id="2_enyci"]
+[ext_resource type="PackedScene" uid="uid://ccasv3bhe2jhu" path="res://Art/Models/rock.glb" id="1_s4mxv"]
+[ext_resource type="Material" uid="uid://cohvk2ycbou53" path="res://Art/Materials/rock_light.tres" id="2_s4mxv"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_arvsk"]
 points = PackedVector3Array(-0.894425, -0.44739, -0.000166476, -0.27645, -0.44739, -0.85064, -7.9751e-05, -1, -0.000166476, -0.27645, -0.44739, 0.850474, -0.251022, 0.691694, 0.275109, -0.724149, 0.41486, -0.308748, 0.723463, -0.44739, -0.525738, -0.13353, 0.557087, -0.783528, 0.351871, -0.130131, 0.603342, 0.897071, 0.181414, 0.0714418, 0.496896, 0.486609, 0.750555, 0.129513, 1.16219, -0.18868)
 
 [node name="Rock" type="Node3D" unique_id=1729590188 groups=["align_position"]]
 
-[node name="rock" parent="." unique_id=280562463 instance=ExtResource("1_p6pqi")]
-transform = Transform3D(3, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+[node name="rock" parent="." unique_id=280562463 instance=ExtResource("1_s4mxv")]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
 
 [node name="Icosphere" parent="rock" index="0" unique_id=198177047]
-surface_material_override/0 = ExtResource("2_enyci")
+surface_material_override/0 = ExtResource("2_s4mxv")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="rock/Icosphere" index="0" unique_id=332501000]
 

@@ -2,7 +2,7 @@ extends CharacterBody3D
 class_name Player
 
 enum zoom_levels {regular, ads, zoom}
-enum gun_states {point, ads, reload, ammo_check, no_gun, point_up, pump, unjam}
+enum gun_states {point, ads, reload, ammo_check, no_gun, point_up, pump, unjam, hide}
 var camera_zoom = zoom_levels.regular
 var gun_state = gun_states.point
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -139,6 +139,7 @@ func _ready() -> void:
 		gun_states.reload: enter_gun_state_reload,
 		gun_states.point_up: enter_gun_state_point_up,
 		gun_states.unjam: enter_gun_state_unjam,
+		gun_states.hide: enter_gun_state_hide,
 	}
 	gun_exit_functions = {
 		gun_states.reload: exit_gun_state_reload,
@@ -169,7 +170,8 @@ func _ready() -> void:
 
 func _physics_process(delta):
 	# apply gravity
-	velocity.y += -gravity * delta
+	if !is_climbing:
+		velocity.y += -gravity * delta
 	# stay in boundaries
 	position.x = clamp(position.x, 2, 255)
 	position.z = clamp(position.z, 2, 255)
@@ -265,16 +267,16 @@ func state_walk(delta):
 	# climbing
 	if is_climbing:
 		if input.y != 0:
-			velocity.y = -input.y * speed * sign(aim_rotation.x)
-			print(aim_rotation.x)
-			#if !is_on_floor():
-				#velocity.x = 0
-				#velocity.z = 0
-				
+			velocity = transform.basis * Vector3(input.x, -input.y, 0) * speed
 		else:
-			velocity.y = 0
+			velocity.y = 0.0
 		if Input.is_action_just_pressed("jump"):
-			transform = transform.translated(Vector3.FORWARD * 0.05)
+			translate(transform.basis.z * 0.15)
+			is_climbing = false
+		if is_on_floor() and input.y > 0:
+			is_climbing = false
+		if gun and gun_state != gun_states.hide:
+			change_gun_state(gun_states.hide)
 	var was_on_floor = is_on_floor()
 	var fall_speed = abs(velocity.y)
 	
@@ -282,8 +284,7 @@ func state_walk(delta):
 	
 	# fall damage
 	if !was_on_floor and is_on_floor():
-		print(fall_speed)
-		if fall_speed > 15.0:
+		if fall_speed > 17.5:
 			health_component.damage(0.2 * fall_speed, Vector3.ZERO, Vector3.ZERO, null, false, true, true)
 	
 	# push objects
@@ -491,7 +492,7 @@ func state_walk(delta):
 	
 	# point gun up if colliding
 	if gun_collision_cast.is_colliding():
-		if gun_state != gun_states.point_up and gun_state != gun_states.no_gun and gun_state != gun_states.reload and (!gun or (gun and PlayerStats.gun is EquipmentGun)):
+		if gun_state == gun_states.point and (!gun or (gun and PlayerStats.gun is EquipmentGun)):
 			change_gun_state(gun_states.point_up)
 	elif gun_state == gun_states.point_up:
 		change_gun_state(gun_states.point)
@@ -762,6 +763,17 @@ func enter_gun_state_unjam() -> void:
 	tween.tween_callback(change_gun_state.bind(gun_states.point))
 
 
+func enter_gun_state_hide() -> void:
+	if gun_tween:
+		gun_tween.kill()
+	gun_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel()
+	gun_tween.tween_property(gun_anchor, "position", Vector3(0, -0.3, 0.3), 0.25)
+	gun_tween.tween_property(gun_pivot, "rotation_degrees", Vector3(-45, 0, 0), 0.25)
+	gun_tween.set_parallel(false)
+	if gun:
+		gun_tween.tween_property(gun, "visible", false, 0)
+
+
 func change_gun_slot(slot_index: int) -> void:
 	var kit = PlayerStats.inventory.equipment_kit
 	var new_gun = kit.equipment[kit.gun_slots[slot_index]]
@@ -937,17 +949,25 @@ func _on_breath_timer_timeout() -> void:
 
 func _on_area_3d_area_entered(_area: Area3D) -> void:
 	is_climbing = true
+	if gun:
+		change_gun_state(gun_states.hide)
 
 
 func _on_area_3d_area_exited(_area: Area3D) -> void:
 	is_climbing = false
 	velocity.y = 0
+	if gun:
+		change_gun_state(gun_states.point)
 
 
 func _on_area_3d_body_entered(_body: Node3D) -> void:
 	is_climbing = true
+	if gun:
+		change_gun_state(gun_states.hide)
 
 
 func _on_area_3d_body_exited(_body: Node3D) -> void:
 	is_climbing = false
 	velocity.y = 0
+	if gun:
+		change_gun_state(gun_states.point)

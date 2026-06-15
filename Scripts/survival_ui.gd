@@ -18,7 +18,7 @@ var menu_buttons_has_mouse: bool
 @onready var player_hp_bar: ProgressBar = %ProgressBar
 @onready var menu_buttons: Control = $MenuButtons
 @onready var skills_menu: Control = %Skills
-@onready var squad: PanelContainer = $Menus/VBoxContainer/Squad
+@onready var squad: Control = $Menus/VBoxContainer/Squad
 const LOG_NOTIFICATION = preload("res://Scenes/UI/log_notification.tscn")
 
 

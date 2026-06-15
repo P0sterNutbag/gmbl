@@ -9,7 +9,6 @@ var option_bubble = preload("res://Scenes/Overworld/UI/dialogue_options_bubble.t
 var menu_item = preload("res://Scenes/UI/menu_item.tscn")
 @onready var label: Label = $"../PortraitHolder/HBoxContainer/NpcName"
 @onready var repair_menu: Control = $"../Repair"
-@onready var training_menu: PanelContainer = $"../Training"
 
 
 func _process(_delta: float) -> void:
@@ -181,10 +180,6 @@ func pay_fee(amount: int, fail_index: int) -> void:
 
 func enter_repair_menu() -> void:
 	UiController.open_interface(repair_menu)
-
-
-func enter_training_menu() -> void:
-	UiController.open_interface(training_menu)
 
 
 func set_recruit_price() -> void:

@@ -65,13 +65,14 @@ var gun_item: EquipmentGun
 
 func _ready() -> void:
 	gun_holder.get_child(0).queue_free()
-	var gun_array = potential_guns[npc_data.fire_power]
-	gun_item = gun_array[Globals.get_weighted_index(gun_array)].object_to_spawn.duplicate_deep()
-	gun = gun_item.gun_object.instantiate()
+	if !npc_data.gun_item:
+		var gun_array = potential_guns[npc_data.fire_power]
+		npc_data.gun_item = gun_array[Globals.get_weighted_index(gun_array)].object_to_spawn.duplicate_deep()
+	gun = npc_data.gun_item.gun_object.instantiate()
 	gun.gun_stats.condition = randf_range(10, 20)
 	gun_holder.add_child(gun)
 	shoot_timer.wait_time = gun.shoot_cooldown
-	items_to_drop.append(gun_item.physical_item)
+	items_to_drop.append(npc_data.gun_item.physical_item)
 	var rng = RandomNumberGenerator.new()
 	var ammo_amount = [0, 1, 2, 3]
 	var weights = PackedFloat32Array([1.0, 0.5, 0.1, 0.05])
@@ -531,8 +532,8 @@ func _on_death() -> void:
 		get_tree().current_scene.add_child.call_deferred(inst)
 		inst.set_deferred("global_position", right_hand.global_position)
 		inst.apply_impulse.call_deferred(Vector3(randf_range(-2, 2), 5, randf_range(-2, 2)))
-		if i == gun_item.physical_item:
-			inst.item_slot.item = gun_item
+		if i == npc_data.gun_item.physical_item:
+			inst.item_slot.item = npc_data.gun_item
 			inst.item_slot.item.gun_stats = gun.gun_stats.duplicate(true)
 		#inst.apply_torque(Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)))
 	if gun:

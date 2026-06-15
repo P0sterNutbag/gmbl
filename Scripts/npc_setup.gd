@@ -10,7 +10,6 @@ var current_style := NpcStyle.new()
 @onready var skeleton_3d: Skeleton3D = $PersonAnimated/Armature/Skeleton3D
 @onready var gun_holder: Node3D = $PersonAnimated/Armature/Skeleton3D/RightHand/Node3D
 @onready var animation_player: AnimationPlayer = $PersonAnimated/AnimationPlayer
-#@export var set_style := false : set = set_materials_editor
 @onready var vest: MeshInstance3D = $PersonAnimated/Armature/Skeleton3D/Vest
 @onready var helmet: MeshInstance3D = $PersonAnimated/Armature/Skeleton3D/Helmet
 @onready var pads: MeshInstance3D = $PersonAnimated/Armature/Skeleton3D/Pads

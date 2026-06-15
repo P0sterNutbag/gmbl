@@ -13,7 +13,6 @@ var current_shop: TownOption
 @onready var repair_menu: Control = $Repair
 @onready var player_model: Node3D = $PlayerPortrait/Offset/EnemyModel
 @onready var player_name: Label = $PortraitHolder/HBoxContainer/PlayerName
-@onready var training_menu: PanelContainer = $Training
 @onready var bounty_viewport: SubViewport = $BountyPicture
 @onready var item_preferences: VBoxContainer = %ItemPreferences
 @onready var preferences_holder: Control = %PreferenceHolder
@@ -41,9 +40,6 @@ func _process(_delta: float) -> void:
 			UiController.close_interface(job_board)
 			dialogue.leave_shop()
 			UiController.open_interface(dialogue)
-		elif training_menu.visible:
-			await get_tree().process_frame
-			UiController.open_interface(Globals.ui.town)
 
 
 func start_dialogue(dialogue_data: DialogueTree, _shop: TownOption = null) -> void:

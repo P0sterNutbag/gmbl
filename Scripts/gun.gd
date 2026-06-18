@@ -43,7 +43,7 @@ var has_released: bool = true
 var jammed: bool = false
 var sway_vector: Vector3
 var anim_player: AnimationPlayer
-var shell: PackedScene = preload("res://Scenes/Effects/Particles/shell.tscn")
+@export var shell: PackedScene = preload("res://Scenes/Effects/Particles/shell.tscn")
 var smoke: PackedScene = preload("res://Scenes/Effects/Particles/gun_smoke.tscn")
 @onready var gun_model: Node3D = $GunAnchor/Model
 @onready var muzzle_flash: Node3D = $GunAnchor/FirePoint/MuzzleFlash

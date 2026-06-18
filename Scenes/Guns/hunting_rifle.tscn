@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="6_ibbuc"]
 [ext_resource type="Script" uid="uid://dd1ly8qocexg4" path="res://Scripts/item_usable.gd" id="7_q4et8"]
 [ext_resource type="AudioStream" uid="uid://dh8aqylwf7m42" path="res://Audio/Guns/assault_A_shot_single_01.wav" id="8_7a4pu"]
+[ext_resource type="PackedScene" uid="uid://bpdf50xqodiqe" path="res://Scenes/Effects/Particles/shell_high_caliber.tscn" id="8_q4et8"]
 
 [sub_resource type="Resource" id="Resource_tinbr"]
 script = ExtResource("4_ibbuc")
@@ -18,7 +19,7 @@ noise_radius = 75.0
 is_hitscan = false
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
-[sub_resource type="Resource" id="Resource_ibbuc"]
+[sub_resource type="Resource" id="Resource_7a4pu"]
 resource_local_to_scene = true
 script = ExtResource("5_q4et8")
 ammo = 5
@@ -28,7 +29,7 @@ metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 script = ExtResource("6_ibbuc")
 metadata/_custom_type_script = "uid://4c6own63hs8c"
 
-[sub_resource type="Resource" id="Resource_q4et8"]
+[sub_resource type="Resource" id="Resource_p5fcd"]
 resource_local_to_scene = true
 resource_name = "rifle_ammo"
 script = ExtResource("7_q4et8")
@@ -49,12 +50,13 @@ stream_0/stream = ExtResource("8_7a4pu")
 
 [node name="HuntingRifle" unique_id=2125937213 instance=ExtResource("1_anhr3")]
 bullet_stats = SubResource("Resource_tinbr")
-gun_stats = SubResource("Resource_ibbuc")
-ammo_item = SubResource("Resource_q4et8")
+gun_stats = SubResource("Resource_7a4pu")
+ammo_item = SubResource("Resource_p5fcd")
 fire_type = 2
 shoot_cooldown = 1.0
 engagement_range = 100.0
 create_shell_on_shoot = false
+shell = ExtResource("8_q4et8")
 
 [node name="GunAnchor" parent="." index="0" unique_id=1970548578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.16403906, -0.3313584)

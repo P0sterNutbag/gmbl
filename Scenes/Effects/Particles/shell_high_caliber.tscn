@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://mho6jg5bffl4"]
+[gd_scene format=3 uid="uid://bpdf50xqodiqe"]
 
-[ext_resource type="PackedScene" uid="uid://bpxr06v3i8lf2" path="res://Art/Models/shell.glb" id="2_juuna"]
+[ext_resource type="PackedScene" uid="uid://dpqewh5xnjxgh" path="res://Art/Models/shell high caliber.glb" id="1_1y7dv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g8s75"]
 rough = true
@@ -14,7 +14,7 @@ func _on_timer_timeout() -> void:
 "
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_5f3kg"]
-height = 0.0992755
+height = 0.13751584
 radius = 0.0205078
 
 [node name="Shell" type="RigidBody3D" unique_id=1499598281]
@@ -24,14 +24,14 @@ angular_damp = 5.0
 script = SubResource("GDScript_g8s75")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1197332956]
-transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 1.1910646e-12, 2.7246308e-05)
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, -3.9589798e-10, -0.00905709)
 shape = SubResource("CylinderShape3D_5f3kg")
 
 [node name="Timer" type="Timer" parent="." unique_id=426345566]
 wait_time = 5.0
 autostart = true
 
-[node name="shell" parent="." unique_id=432478129 instance=ExtResource("2_juuna")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
+[node name="shell high caliber" parent="." unique_id=1484680378 instance=ExtResource("1_1y7dv")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

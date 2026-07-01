@@ -81,6 +81,8 @@ func _ready() -> void:
 		PlayerStats.states.pause: state_pause,
 		PlayerStats.states.dead: state_dead,
 	}
+	await get_tree().process_frame
+	PlayerStats.owned_locations.append(self)
 
 
 func _process(_delta: float) -> void:

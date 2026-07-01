@@ -27,8 +27,11 @@ func _enter_tree() -> void:
 		player.camera_anchor.rotation = Vector3.ZERO
 		player_died = false
 	elif current_encounter:
-		if current_encounter.location_data.population <= 0 and current_encounter.get_parent().has_method("die"):
-			current_encounter.get_parent().die()
+		if current_encounter.location_data.population <= 0:
+			if current_encounter.get_parent().has_method("die"):
+				current_encounter.get_parent().die()
+			else:
+				UiController.open_interface(Globals.survival_ui.territory_popup)
 		var encounter_pos = current_encounter.global_position
 		player_spawn_position = encounter_pos + (player_spawn_vector * 4).rotated(Vector3.UP, current_encounter.rotation.y)
 		player_spawn_position.y = Globals.get_heightmap_position(player_spawn_position)
@@ -43,17 +46,17 @@ func _ready() -> void:
 	Globals.overworld = self
 	Globals.player.spring_arm.spring_length = 500
 	SaveController.load.connect(_on_load)
-	for poi in pois:
-		var data = poi.location_data
-		var index = randi() % poi_populations.size()
-		data.population = poi_populations[index]
-		data.max_population = poi_populations[index]
-		poi_populations.remove_at(index)
-		index = randi() % poi_factions.size()
-		data.faction = poi_factions[index]
-		poi_factions.remove_at(index)
-		if data.faction == FactionManager.factions.no_faction:
-			data.faction = [FactionManager.factions.no_faction, FactionManager.factions.jackals].pick_random()
+	#for poi in pois:
+		#var data = poi.location_data
+		#var index = randi() % poi_populations.size()
+		#data.population = poi_populations[index]
+		#data.max_population = poi_populations[index]
+		#poi_populations.remove_at(index)
+		#index = randi() % poi_factions.size()
+		#data.faction = poi_factions[index]
+		#poi_factions.remove_at(index)
+		#if data.faction == FactionManager.factions.no_faction:
+			#data.faction = [FactionManager.factions.no_faction, FactionManager.factions.jackals].pick_random()
 
 
 func save() -> Dictionary:

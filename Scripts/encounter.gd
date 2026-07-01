@@ -45,7 +45,7 @@ func update_location_data() -> void:
 				if location_data.population == 0:
 					encounter_parent.die()
 	if factions.size() == 0:
-		location_data.faction = FactionManager.factions.no_faction
+		#location_data.faction = FactionManager.factions.no_faction
 		if battle: 
 			battle.end_battle(Globals.overworld.current_encounter)
 	elif factions.size() == 1:

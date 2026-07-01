@@ -15,5 +15,5 @@ func _on_timer_timeout() -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	if body is Enemy:
+	if body is Npc:
 		explode()

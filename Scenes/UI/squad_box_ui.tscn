@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://d0bjk3gk1gu6"]
+
+[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_28bbo"]
+[ext_resource type="Script" uid="uid://btshy4jjxuwp3" path="res://Scripts/squad_box_ui.gd" id="2_jskfj"]
+[ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="2_mtm75"]
+[ext_resource type="Theme" uid="uid://ddlkdp3v3plc" path="res://Art/Themes/hbox_container.tres" id="3_jskfj"]
+[ext_resource type="Theme" uid="uid://dcnijc3hjurqk" path="res://Art/Themes/text_mediun_outline.tres" id="4_p6ekj"]
+[ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="5_8peya"]
+[ext_resource type="Script" uid="uid://wubbbuialo64" path="res://Scripts/menu_controller.gd" id="6_ektsd"]
+
+[node name="PanelContainer" type="PanelContainer" unique_id=1060103420 node_paths=PackedStringArray("item_container")]
+size_flags_horizontal = 3
+theme = ExtResource("1_28bbo")
+script = ExtResource("2_jskfj")
+item_container = NodePath("MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=960730022]
+layout_mode = 2
+theme = ExtResource("2_mtm75")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=466911134]
+layout_mode = 2
+theme = ExtResource("3_jskfj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=2035606140]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=2102509963]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=946081422]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_p6ekj")
+text = "Squad Members"
+
+[node name="Capacity" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1735319176]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_8peya")
+text = "4/4"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=921285602]
+layout_mode = 2
+script = ExtResource("6_ektsd")

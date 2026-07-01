@@ -19,7 +19,12 @@ var menu_buttons_has_mouse: bool
 @onready var menu_buttons: Control = $MenuButtons
 @onready var skills_menu: Control = %Skills
 @onready var squad: Control = $Menus/VBoxContainer/Squad
+@onready var log_menu_container: VBoxContainer = $Menus/VBoxContainer/Log/MarginContainer/ScrollContainer/VBoxContainer
+@onready var log_menu: PanelContainer = $Menus/VBoxContainer/Log
+@onready var faction_manager: Control = $Menus/VBoxContainer/FactionManager
+@onready var territory_popup: Control = $TerritoryPopup
 const LOG_NOTIFICATION = preload("res://Scenes/UI/log_notification.tscn")
+const TEXT_OUTLINE = preload("uid://cral201bx2ck")
 
 
 func _enter_tree() -> void:
@@ -71,7 +76,7 @@ func _process(_delta: float) -> void:
 			if !demo_message or !demo_message.visible:
 				UiController.open_interface(pause_menu)
 		elif pause_menu.visible and pause_menu.pause_menu.visible:
-			UiController.close_interface()
+			UiController.close_interface(pause_menu)
 		elif menu_holder.visible:
 			UiController.close_interface()
 	# compass
@@ -111,15 +116,20 @@ func loot(target: Inventory) -> void:
 	UiController.open_interface(transfer_inventory_holder)
 
 
-func create_notification(notification_text: String) -> void:
+func create_notification(notification_text: String, add_to_log_menu: bool = true) -> void:
 	var inst = LOG_NOTIFICATION.instantiate()
 	log_box.add_child(inst)
-	#log_box.move_child(inst, 1)
 	inst.text = notification_text
 	var tween = create_tween()
 	tween.tween_interval(3)
 	tween.tween_property(inst, "modulate:a", 0.0, 1)
 	tween.tween_callback(inst.queue_free)
+	if !add_to_log_menu:
+		return
+	var label = Label.new()
+	label.theme = TEXT_OUTLINE
+	label.text = notification_text
+	log_menu_container.add_child(label)
 
 
 func close_inventory() -> void:
@@ -159,7 +169,7 @@ func _on_faction_tab_pressed() -> void:
 
 
 func _on_game_saved() -> void:
-	create_notification("Game saved")
+	create_notification("Game saved", false)
 
 
 func _on_pause_pressed() -> void:
@@ -179,6 +189,9 @@ func _on_ui_opened() -> void:
 func _on_ui_closed(closed_node: Control) -> void:
 	if closed_node and closed_node.get_parent().get_parent() == menu_holder:
 		menu_holder.hide()
+		for child in menu_holder.get_child(0).get_children():
+			if child.get_index() > 0:
+				child.hide()
 
 
 func _on_inventory_button_pressed() -> void:
@@ -208,3 +221,11 @@ func _on_menu_buttons_mouse_exited() -> void:
 func _on_tree_exited() -> void:
 	for child in log_box.get_children():
 		child.queue_free()
+
+
+func _on_log_pressed() -> void:
+	UiController.open_interface(log_menu)
+
+
+func _on_faction_manager_pressed() -> void:
+	UiController.open_interface(faction_manager)

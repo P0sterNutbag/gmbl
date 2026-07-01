@@ -1,5 +1,5 @@
 extends CharacterBody3D
-class_name Enemy
+class_name Npc
 
 @export var npc_data: NpcData = NpcData.new()
 @export var title: String = "Enemy"
@@ -8,6 +8,7 @@ class_name Enemy
 @export var potential_guns: Dictionary[int, Array]
 @export var inventory: Inventory
 @export var faction: FactionManager.factions
+@export var time_to_see_max: float = 1.0
 enum states {idle, investigate, shoot, search, strafe, hurt, reload, camp, dead, aim, walk, supress, find_cover, approach}
 enum goals {guard, travel, follow, none}
 var state = states.idle
@@ -22,7 +23,6 @@ var camp_time_min := 2.5
 var camp_time_max := 10.0
 var time_to_detect: float = time_to_detect_max
 var time_since_detect: float
-@export var time_to_see_max: float = 1.0
 var time_to_see: float = 0.0
 var day_range := 100
 var night_range := 50
@@ -92,6 +92,9 @@ func _ready() -> void:
 	if npc_data.armor_level >= 2:
 		physical_bone_head.damage_modifier = 2.0
 		model.helmet.show()
+	faction = npc_data.faction
+	npc_data.hp = health_component.hp
+	npc_data.max_hp = health_component.hp
 	DayNightCycle.night_start.connect(on_night_start)
 	DayNightCycle.day_start.connect(on_day_start)
 	time_to_see_max += randf_range(-0.25, 0.25)
@@ -504,6 +507,7 @@ func _on_damaged(hit_position: Vector3, hit_direction: Vector3, shooter: Node3D)
 	damage_position = hit_position
 	damage_direction = hit_direction
 	last_seen_position = shooter.global_position
+	npc_data.hp = health_component.hp
 	if faction != shooter.faction:
 		var previous_relation = FactionManager.get_faction_relation(faction, shooter.faction)
 		var show_notificaition = health_component.hp <= 0

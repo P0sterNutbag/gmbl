@@ -1,30 +1,62 @@
 [gd_scene format=3 uid="uid://cikxsk48swg6f"]
 
 [ext_resource type="Script" uid="uid://bkewy48cjp8yc" path="res://Scripts/ally_button.gd" id="1_gymfm"]
-[ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="1_rrs8d"]
 [ext_resource type="Theme" uid="uid://tivwhtwiofll" path="res://Art/Themes/button.tres" id="2_gymfm"]
 [ext_resource type="Texture2D" uid="uid://cntov6lhdj8pw" path="res://Art/Textures/UI/exit icon.png" id="3_m4m7t"]
+[ext_resource type="Theme" uid="uid://lg0ktyb6xeoh" path="res://Art/Themes/hp_bar.tres" id="3_sjspn"]
+[ext_resource type="Theme" uid="uid://ddlkdp3v3plc" path="res://Art/Themes/hbox_container.tres" id="3_us01b"]
+[ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="4_sjspn"]
 
-[node name="Ally" type="HBoxContainer" unique_id=47123850]
-offset_right = 498.0
+[node name="Ally" type="Button" unique_id=1650624635]
+custom_minimum_size = Vector2(0, 30)
+offset_right = 426.0
 offset_bottom = 30.0
+theme = ExtResource("2_gymfm")
+text = "Name"
+flat = true
+alignment = 0
 script = ExtResource("1_gymfm")
 
-[node name="Label" type="Label" parent="." unique_id=1615230410]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("1_rrs8d")
-text = "Ally Name"
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=455091649]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -298.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("3_us01b")
+alignment = 2
 
-[node name="Label2" type="Label" parent="." unique_id=687195859]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=324156783]
 layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("1_rrs8d")
+theme = ExtResource("3_us01b")
+
+[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer" unique_id=925371472]
+layout_mode = 2
+theme = ExtResource("4_sjspn")
+text = "Health:"
+
+[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer/HBoxContainer" unique_id=1523719716]
+custom_minimum_size = Vector2(80, 18)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("3_sjspn")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="Label2" type="Label" parent="HBoxContainer" unique_id=687195859]
+layout_mode = 2
+theme = ExtResource("4_sjspn")
 text = "Rank: A"
+horizontal_alignment = 2
 
-[node name="Button" type="Button" parent="." unique_id=573997693]
+[node name="Button" type="Button" parent="HBoxContainer" unique_id=573997693]
+visible = false
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
-theme = ExtResource("2_gymfm")
+theme = ExtResource("4_sjspn")
 icon = ExtResource("3_m4m7t")
 expand_icon = true

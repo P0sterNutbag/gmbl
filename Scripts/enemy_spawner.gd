@@ -3,6 +3,7 @@ extends Node3D
 @export var enemies_to_spawn: Array[SpawnChance]
 @export var enemy_move_chance: float = 0.25
 @export var spawn_on_start: bool = true
+var enemy_index: int
 var spawn_points: Array[Node3D]
 var used_spawns: Array[int]
 var location_data: LocationData
@@ -35,7 +36,7 @@ func _ready() -> void:
 		location_data = get_parent().location_data
 	var enemy_amount: int
 	#if location_data.population < location_data.min_population:
-	enemy_amount = location_data.population
+	enemy_amount = max(location_data.population, location_data.npcs.size())
 	#else: 
 	#	enemy_amount = randi_range(location_data.min_population, location_data.max_population)
 	enemy_amount = clamp(enemy_amount, quests.size(), spawn_points.size())
@@ -145,18 +146,21 @@ func spawn_enemy(faction: FactionManager.factions):
 	var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
 	var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
 	# assign data
-	inst.faction = faction
-	var rng = RandomNumberGenerator.new()
-	var weights: PackedFloat32Array
-	for i in location_data.fire_power_chance:
-		weights.append(i)
-	var fire_power = rng.rand_weighted(weights)
-	inst.npc_data.fire_power = fire_power
-	weights.clear()
-	for i in location_data.armor_level_chance:
-		weights.append(i)
-	var armor_level = rng.rand_weighted(weights)
-	inst.npc_data.armor_level = armor_level
+	if enemy_index < location_data.npcs.size():
+		inst.npc_data = location_data.npcs[enemy_index]
+	else:
+		inst.npc_data.faction = faction
+		var rng = RandomNumberGenerator.new()
+		var weights: PackedFloat32Array
+		for i in location_data.fire_power_chance:
+			weights.append(i)
+		var fire_power = rng.rand_weighted(weights)
+		inst.npc_data.fire_power = fire_power
+		weights.clear()
+		for i in location_data.armor_level_chance:
+			weights.append(i)
+		var armor_level = rng.rand_weighted(weights)
+		inst.npc_data.armor_level = armor_level
 	# add to scene
 	get_tree().current_scene.add_child.call_deferred(inst)
 	# position enemy at spawn point
@@ -171,6 +175,7 @@ func spawn_enemy(faction: FactionManager.factions):
 		inst.goal = inst.goals.travel
 		inst.destination = dest
 		inst.change_state(inst.states.walk)
+	enemy_index += 1
 
 
 func spawn_enemy_position(faction: FactionManager.factions, spawn_position: Vector3, spawn_variance: float, destination: Vector3 = Vector3.ZERO) -> CharacterBody3D:
@@ -180,7 +185,7 @@ func spawn_enemy_position(faction: FactionManager.factions, spawn_position: Vect
 	var spawn_pos = spawn_position + Vector3(randf_range(-spawn_variance, spawn_variance), 1, randf_range(-spawn_variance, spawn_variance))
 	spawn_pos.y = Globals.get_heightmap_position(spawn_pos)
 	inst.set_deferred("global_position", spawn_pos)
-	inst.faction = faction
+	inst.npc_data.faction = faction
 	var rng = RandomNumberGenerator.new()
 	var weights: PackedFloat32Array
 	for i in location_data.fire_power_chance:

@@ -33,6 +33,7 @@ var ammo: int:
 var money: int:
 	get():
 		return inventory.money
+var max_allies := 4
 var flashlight_on: bool
 var allies_shoot: bool = true
 var gun_index: int = 0
@@ -52,9 +53,13 @@ var saved_style: NpcStyle
 var gun: Equipment
 var skills: CharacterSkills
 var inventory: Inventory = Inventory.new()
+var squad_location: LocationData
+var reserve_location: LocationData
 var quests: Array[Quest]
-var ally_npcs: Array[Enemy]
+var ally_npcs: Array[Npc]
 var save_guns: Array[Item]
+var owned_locations: Array[Node3D]
+var saved_owned_locations: Array[String]
 @onready var guns: Array[Item]:
 	get(): 
 		return inventory.items.filter(func(i): return i is EquipmentGun)
@@ -78,6 +83,14 @@ func _ready() -> void:
 	faction = FactionManager.factions.player
 	inventory.space_modifier = int(skills.strength)
 	inventory.resource_local_to_scene = true
+	squad_location = LocationData.new()
+	squad_location.npcs = allies
+	squad_location.population = allies.size()
+	squad_location.max_population = max_allies
+	squad_location.title = "Squad"
+	reserve_location = LocationData.new()
+	reserve_location.max_population = 5
+	reserve_location.title = "Reserve"
 	#sensitivity_modifier = ConfigManager.file.get_value("settings", "mouse_sensitivity", sensitivity_modifier)
 
 
@@ -239,17 +252,16 @@ func _on_skill_changed(skill_name: String) -> void:
 		inventory.space_modifier = int(skills.strength)
 
 
-func _on_ally_death(npc_data: NpcData, npc: Enemy) -> void:
+func _on_ally_death(npc_data: NpcData, npc: Npc) -> void:
 	allies.erase(npc_data)
 	ally_npcs.erase(npc)
 
 
 func save() -> Dictionary:
 	hp = Globals.player.hitbox.hp
-	#ResourceSaver.save(inventory, "user://inventory.res")
-	#var save_quests = ArraySaver.new()
-	#save_quests.array.append_array(quests)
-	#ResourceSaver.save(save_quests, "user://quests.res")
+	for i in owned_locations:
+		if "title" in i:
+			saved_owned_locations.append(i.title)
 	return {
 		"hp": hp,
 		"ammo": ammo,
@@ -264,15 +276,13 @@ func save() -> Dictionary:
 		"saved_style" : player_style,
 		"allies" : allies,
 		"save_guns" : guns,
+		"squad_location" : squad_location,
+		"reserve_location" : reserve_location,
+		"saved_owned_locations" : saved_owned_locations,
 	}
 
 
 func _on_load():
-	#inventory = ResourceLoader.load("user://inventory.res")
-	#var save_quests = ResourceLoader.load("user://quests.res")
-	#if save_quests:
-		#quests.clear()
-		#quests.append_array(save_quests.array)
 	Globals.player.hitbox.hp = hp
 	player_style.skin_colors = saved_style.skin_colors
 	player_style.hair_colors = saved_style.hair_colors
@@ -281,11 +291,11 @@ func _on_load():
 	player_style.shirts = saved_style.shirts
 	player_style.pants_colors = saved_style.pants_colors
 	player_style.shoe_colors = saved_style.shoe_colors
-	#if "model" in Globals.player:
-		#Globals.player.model.style_data = player_style
-		#Globals.player.model.set_materials()
 	Globals.ui.player_model.style_data = player_style
 	if save_guns.size() > 0:
 		var gun_array = guns
 		for i in save_guns.size():
 			gun_array[i].gun_stats = save_guns[i].gun_stats
+	for i in get_tree().get_nodes_in_group("location"):
+		if saved_owned_locations.has(i.title):
+			owned_locations.append(i) 

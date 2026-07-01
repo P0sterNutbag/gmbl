@@ -1,9 +1,11 @@
 extends Resource
 class_name LocationData
 
+@export var title: String
 @export var faction: FactionManager.factions = FactionManager.factions.no_faction
 @export var population: int
 @export var max_population: int = 4
+@export var npcs: Array[NpcData]
 @export var loot_spawn_chance: float = 0.5
 @export var squad_spawn_chance: float = 0.5
 @export var trap_spawn_chance: float = 0.0

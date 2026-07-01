@@ -31,6 +31,7 @@ func open_interface(node_to_open: Control, pause_player: bool = true, show_mouse
 			ui_opened.emit()
 		else:
 			node.hide()
+	#current_ui.process_mode = Node.PROCESS_MODE_INHERIT
 	if pause_player:
 		PlayerStats.change_state(PlayerStats.states.pause)
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
@@ -41,6 +42,8 @@ func open_interface(node_to_open: Control, pause_player: bool = true, show_mouse
 func close_interface(node_to_close: Control = current_ui, activate_player: bool = true) -> void:
 	ui_closed.emit(node_to_close)
 	node_to_close.hide()
+	#if current_ui:
+		#current_ui.process_mode = Node.PROCESS_MODE_DISABLED
 	current_ui = null
 	if activate_player:
 		PlayerStats.change_state(PlayerStats.states.walk)

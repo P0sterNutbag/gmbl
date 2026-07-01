@@ -86,6 +86,9 @@ func _process(_delta: float) -> void:
 	match (state):
 		states.walk:
 			speed = walk_speed
+			if destination and destination.location_data.faction == FactionManager.factions.player:
+				navigation_agent.set_target_position(original_position)
+				destination = null
 			# detect player
 			target = detection.get_visible_target()
 			if target:

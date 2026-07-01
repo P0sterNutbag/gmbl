@@ -29,8 +29,8 @@ func align_to_normal(inst: Node3D) -> void:
 	if !is_inside_tree():
 		return
 	var space_state := get_world_3d().direct_space_state
-	var origin = inst.global_position + Vector3.UP * 0.5
-	var target = origin + Vector3.DOWN * 5.0
+	var origin = inst.global_position + Vector3.UP * 50
+	var target = origin + Vector3.DOWN * 100
 	var query := PhysicsRayQueryParameters3D.create(origin, target)
 	query.collide_with_areas = false
 	query.collide_with_bodies = true

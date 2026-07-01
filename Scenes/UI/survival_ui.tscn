@@ -39,12 +39,9 @@
 [ext_resource type="PackedScene" uid="uid://cxxj4m44urb7y" path="res://Scenes/UI/skills_box.tscn" id="33_02qtm"]
 [ext_resource type="Theme" uid="uid://tivwhtwiofll" path="res://Art/Themes/button.tres" id="33_ft4n5"]
 [ext_resource type="Texture2D" uid="uid://bbjp6yopufgca" path="res://Art/Textures/UI/cog icon.png" id="33_ohwuk"]
-[ext_resource type="Script" uid="uid://cl52lalh6kyr1" path="res://Scripts/faction_ui.gd" id="33_sfbev"]
 [ext_resource type="Script" uid="uid://dhklj12kndwr7" path="res://Scripts/squad_menu.gd" id="34_02qtm"]
 [ext_resource type="Texture2D" uid="uid://duhvnasnxpgc4" path="res://Art/Textures/UI/journal icon.png" id="35_ft4n5"]
-[ext_resource type="Texture2D" uid="uid://hn5iw0c1x746" path="res://Art/Textures/UI/arrow short left.png" id="35_ve5xg"]
 [ext_resource type="Script" uid="uid://boi8n7i6gbf6a" path="res://Scripts/custom_tooltip.gd" id="36_8cvki"]
-[ext_resource type="Texture2D" uid="uid://biqih46nijqns" path="res://Art/Textures/UI/arrow short.png" id="36_ck7xf"]
 [ext_resource type="Texture2D" uid="uid://brs4ktd7wgyno" path="res://Art/Textures/UI/faction icon.png" id="36_m6fmc"]
 [ext_resource type="Texture2D" uid="uid://d2ukjid6oonnl" path="res://Art/Textures/UI/population icon.png" id="41_02qtm"]
 [ext_resource type="Script" uid="uid://d4jjgapk77v2n" path="res://Scripts/territory_popup.gd" id="48_ad2yh"]
@@ -53,8 +50,6 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6h4e4"]
 
 [sub_resource type="Theme" id="Theme_guqia"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_8ky52"]
 
 [sub_resource type="Theme" id="Theme_lboml"]
 
@@ -944,61 +939,6 @@ script = ExtResource("34_02qtm")
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="FactionManager" type="Control" parent="Menus/VBoxContainer" unique_id=534678665]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("29_tlm7h")
-script = ExtResource("33_sfbev")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/FactionManager" unique_id=110082249]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 459.0
-grow_vertical = 2
-
-[node name="PanelContainer" parent="Menus/VBoxContainer/FactionManager/VBoxContainer" unique_id=1060103420 node_paths=PackedStringArray("target_box") instance=ExtResource("32_sfbev")]
-layout_mode = 2
-size_flags_vertical = 3
-target_box = NodePath("../PanelContainer2")
-
-[node name="Button" type="Button" parent="Menus/VBoxContainer/FactionManager/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" parent_id_path=PackedInt32Array(1060103420, 2102509963) index="0" unique_id=600875974]
-custom_minimum_size = Vector2(28, 0)
-layout_mode = 2
-theme = ExtResource("33_ft4n5")
-icon = ExtResource("35_ve5xg")
-expand_icon = true
-
-[node name="Label" parent="Menus/VBoxContainer/FactionManager/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" parent_id_path=PackedInt32Array(1060103420, 2102509963) index="1" unique_id=946081422]
-horizontal_alignment = 1
-
-[node name="Button2" type="Button" parent="Menus/VBoxContainer/FactionManager/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" parent_id_path=PackedInt32Array(1060103420, 2102509963) index="2" unique_id=504026253]
-custom_minimum_size = Vector2(28, 0)
-layout_mode = 2
-theme = ExtResource("33_ft4n5")
-icon = ExtResource("36_ck7xf")
-expand_icon = true
-
-[node name="PanelContainer2" parent="Menus/VBoxContainer/FactionManager/VBoxContainer" unique_id=212884988 node_paths=PackedStringArray("target_box") instance=ExtResource("32_sfbev")]
-layout_mode = 2
-size_flags_vertical = 3
-target_box = NodePath("../PanelContainer")
-
-[node name="Label" parent="Menus/VBoxContainer/FactionManager/VBoxContainer/PanelContainer2/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" parent_id_path=PackedInt32Array(212884988, 2102509963) index="0" unique_id=946081422]
-text = "Reserve"
-
-[node name="CameraAnchor" type="Node3D" parent="Menus/VBoxContainer/FactionManager" unique_id=552720989]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06193, 0)
-
-[node name="SpringArm3D" type="SpringArm3D" parent="Menus/VBoxContainer/FactionManager/CameraAnchor" unique_id=1783752941]
-transform = Transform3D(1, 0, 0, 0, 0.7660449, 0.64278793, 0, -0.64278793, 0.7660449, -4, 0, 0)
-shape = SubResource("SphereShape3D_8ky52")
-spring_length = 10.0
-
-[node name="Camera" type="Camera3D" parent="Menus/VBoxContainer/FactionManager/CameraAnchor/SpringArm3D" unique_id=1366306346]
-transform = Transform3D(1, 0, 0, 0, 0.996194, 0.0871557, 0, -0.0871557, 0.996194, 0, 0, 0)
-
 [node name="Log" type="PanelContainer" parent="Menus/VBoxContainer" unique_id=1512906721]
 visible = false
 layout_mode = 2
@@ -1318,9 +1258,6 @@ color = Color(0, 0, 0, 1)
 [connection signal="pressed" from="Menus/VBoxContainer/Journal/ConfirmationMenu/PanelContainer/MarginContainer/VBoxContainer/No" to="Menus/VBoxContainer/Journal" method="_on_no_pressed"]
 [connection signal="visibility_changed" from="Menus/VBoxContainer/Factions" to="Menus/VBoxContainer/Factions" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="Menus/VBoxContainer/Squad" to="Menus/VBoxContainer/Squad" method="_on_visibility_changed"]
-[connection signal="visibility_changed" from="Menus/VBoxContainer/FactionManager" to="Menus/VBoxContainer/FactionManager" method="_on_visibility_changed"]
-[connection signal="pressed" from="Menus/VBoxContainer/FactionManager/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Button" to="Menus/VBoxContainer/FactionManager" method="_on_button_pressed"]
-[connection signal="pressed" from="Menus/VBoxContainer/FactionManager/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/Button2" to="Menus/VBoxContainer/FactionManager" method="_on_button_2_pressed"]
 [connection signal="visibility_changed" from="Menus/VBoxContainer/Log" to="Menus/VBoxContainer/Log" method="_on_visibility_changed"]
 [connection signal="mouse_entered" from="MenuButtons" to="." method="_on_menu_buttons_mouse_entered"]
 [connection signal="mouse_exited" from="MenuButtons" to="." method="_on_menu_buttons_mouse_exited"]
@@ -1336,5 +1273,3 @@ color = Color(0, 0, 0, 1)
 [editable path="Menus/VBoxContainer/Toolbar"]
 [editable path="Menus/VBoxContainer/Journal/ConfirmationMenu"]
 [editable path="Menus/VBoxContainer/Squad/PanelContainer"]
-[editable path="Menus/VBoxContainer/FactionManager/VBoxContainer/PanelContainer"]
-[editable path="Menus/VBoxContainer/FactionManager/VBoxContainer/PanelContainer2"]

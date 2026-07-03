@@ -2,7 +2,7 @@ extends Area3D
 class_name Location
 
 @export var title: String
-@export var location_data: LocationData# = LocationData.new()
+@export var location_data: LocationData
 @export var encounter_scene: PackedScene
 @export var town: Town
 @export var shop: Shop
@@ -62,6 +62,9 @@ func _ready() -> void:
 func start_encounter() -> void:
 	Globals.overworld.current_encounter = self
 	encounter_started.emit()
+	if encounter_scene and location_data.faction == FactionManager.factions.player and Globals.ui.poi_menu.location != self:
+		Globals.ui.poi_menu.activate(self)
+		return
 	if can_stealth_start and encounter_scene and Globals.get_dot(self, Globals.player) > -0.25 and !BattleManager.get_battle(self):
 		if dialogue_tree:
 			Globals.ui.start_dialogue(unaware_dialogue)
@@ -167,3 +170,10 @@ func save() -> Dictionary:
 func _on_load() -> void:
 	if town:
 		town.shops = saved_shops
+
+
+func _on_grow_timeout() -> void:
+	var amount = randi_range(1, 2)
+	location_data.change_population(amount)
+	if location_data.population == FactionManager.factions.player:
+		Globals.survival_ui.create_notification(title + " population increased by " + str(amount))

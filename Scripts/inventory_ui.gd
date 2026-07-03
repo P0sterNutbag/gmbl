@@ -49,7 +49,9 @@ const hbox_style = preload("uid://ddlkdp3v3plc")
 @onready var drop_amount_h_slider: HSlider = $DropMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/HSlider
 @onready var drop_amount_label: Label = $DropMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Label
 @onready var item_tooltip: Control = $ItemTooltip
-
+signal item_transferred(item: Item)
+signal item_focus_entered(item: Item)
+signal item_focus_exited
 
 func _ready() -> void:
 	is_ready = true
@@ -152,6 +154,7 @@ func transfer_item(menu_item: Control):
 		source_inventory.remove_item(item, amount_to_move)
 		set_items()
 		opposing_ui.set_items()
+		item_transferred.emit(item)
 		if show_price:
 			source_inventory.money += menu_item.price
 			target_inventory.money -= menu_item.price
@@ -266,11 +269,13 @@ func _on_item_focus_entered(menu_item: MenuItem):
 	current_menu_item = menu_item
 	var item = menu_item.resource
 	set_description(item)
+	item_focus_entered.emit(item)
 
 
 func _on_item_focus_exited(_menu_item: MenuItem):
 	current_menu_item = null
 	set_description()
+	item_focus_exited.emit()
 
 
 func _on_item_equipped_changed(menu_item: MenuItem) -> void:

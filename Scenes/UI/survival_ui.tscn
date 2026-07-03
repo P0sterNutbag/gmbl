@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bclh5yhrpmkxf" path="res://Scripts/stat_visual.gd" id="2_k4cvi"]
 [ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="3_1kfkr"]
 [ext_resource type="StyleBox" uid="uid://24u57ipg1t26" path="res://Art/Themes/progress_bar_style_box.tres" id="3_w0rat"]
-[ext_resource type="Theme" uid="uid://lg0ktyb6xeoh" path="res://Art/Themes/hp_bar.tres" id="4_1kfkr"]
+[ext_resource type="Theme" uid="uid://lg0ktyb6xeoh" path="res://Art/Themes/progress_bar.tres" id="4_1kfkr"]
 [ext_resource type="Texture2D" uid="uid://dwyciilo4eqwy" path="res://Art/Textures/UI/thirst icon.png" id="4_k64vs"]
 [ext_resource type="Texture2D" uid="uid://c3hs8nxqqu881" path="res://Art/Textures/UI/sleep icon.png" id="5_13ham"]
 [ext_resource type="Theme" uid="uid://bbm7dwwhqexow" path="res://Art/Themes/text.tres" id="5_jtf3n"]
@@ -37,8 +37,11 @@
 [ext_resource type="Texture2D" uid="uid://r08gms0nyjju" path="res://Art/Textures/UI/hp icon.png" id="32_lboml"]
 [ext_resource type="PackedScene" uid="uid://d0bjk3gk1gu6" path="res://Scenes/UI/squad_box_ui.tscn" id="32_sfbev"]
 [ext_resource type="PackedScene" uid="uid://cxxj4m44urb7y" path="res://Scenes/UI/skills_box.tscn" id="33_02qtm"]
+[ext_resource type="Script" uid="uid://klmhpr6nwq3j" path="res://Scripts/map_ui.gd" id="33_ad2yh"]
+[ext_resource type="Theme" uid="uid://d0l873sygu3uo" path="res://Art/Themes/scroll_container.tres" id="33_ck7xf"]
 [ext_resource type="Theme" uid="uid://tivwhtwiofll" path="res://Art/Themes/button.tres" id="33_ft4n5"]
 [ext_resource type="Texture2D" uid="uid://bbjp6yopufgca" path="res://Art/Textures/UI/cog icon.png" id="33_ohwuk"]
+[ext_resource type="Texture2D" uid="uid://bla0tvexk7d7c" path="res://Art/Textures/UI/map.png" id="33_ve5xg"]
 [ext_resource type="Script" uid="uid://dhklj12kndwr7" path="res://Scripts/squad_menu.gd" id="34_02qtm"]
 [ext_resource type="Texture2D" uid="uid://duhvnasnxpgc4" path="res://Art/Textures/UI/journal icon.png" id="35_ft4n5"]
 [ext_resource type="Script" uid="uid://boi8n7i6gbf6a" path="res://Scripts/custom_tooltip.gd" id="36_8cvki"]
@@ -433,12 +436,13 @@ layout_mode = 2
 size_flags_horizontal = 1
 text = "Squad"
 
-[node name="FactionManager" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(2045520645, 1909442391) index="5" unique_id=127932052 instance=ExtResource("22_jtf3n")]
+[node name="MapTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(2045520645, 1909442391) index="5" unique_id=127932052 instance=ExtResource("22_jtf3n")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 1
-text = "Faction"
+text = "Map"
 
-[node name="Log" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(2045520645, 1909442391) index="6" unique_id=1242990935 instance=ExtResource("22_jtf3n")]
+[node name="LogTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(2045520645, 1909442391) index="6" unique_id=1242990935 instance=ExtResource("22_jtf3n")]
 layout_mode = 2
 size_flags_horizontal = 1
 text = "Log"
@@ -955,6 +959,29 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="Menus/VBoxContainer/Log/MarginContainer/ScrollContainer" unique_id=195597082]
 layout_mode = 2
 
+[node name="Map" type="PanelContainer" parent="Menus/VBoxContainer" unique_id=1862769205]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme = ExtResource("11_0pkni")
+script = ExtResource("33_ad2yh")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Menus/VBoxContainer/Map" unique_id=418869336]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme = ExtResource("33_ck7xf")
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="Menus/VBoxContainer/Map/ScrollContainer" unique_id=725323365]
+custom_minimum_size = Vector2(2540, 1426)
+layout_mode = 2
+texture = ExtResource("33_ve5xg")
+
 [node name="PlayerHealth" type="Control" parent="." unique_id=1342773347]
 layout_mode = 3
 anchors_preset = 2
@@ -1250,8 +1277,8 @@ color = Color(0, 0, 0, 1)
 [connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/JournalTab" to="." method="_on_journal_tab_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/FactionTab" to="." method="_on_faction_tab_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/SquadTab" to="." method="_on_squad_tab_pressed"]
-[connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/FactionManager" to="." method="_on_faction_manager_pressed"]
-[connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/Log" to="." method="_on_log_pressed"]
+[connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/MapTab" to="." method="_on_map_tab_pressed"]
+[connection signal="pressed" from="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer/LogTab" to="." method="_on_log_pressed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Toolbar/ExitMenu" to="." method="_on_exit_menu_pressed"]
 [connection signal="visibility_changed" from="Menus/VBoxContainer/Journal" to="Menus/VBoxContainer/Journal" method="_on_visibility_changed"]
 [connection signal="pressed" from="Menus/VBoxContainer/Journal/ConfirmationMenu/PanelContainer/MarginContainer/VBoxContainer/Yes" to="Menus/VBoxContainer/Journal" method="_on_yes_pressed"]
@@ -1259,6 +1286,7 @@ color = Color(0, 0, 0, 1)
 [connection signal="visibility_changed" from="Menus/VBoxContainer/Factions" to="Menus/VBoxContainer/Factions" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="Menus/VBoxContainer/Squad" to="Menus/VBoxContainer/Squad" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="Menus/VBoxContainer/Log" to="Menus/VBoxContainer/Log" method="_on_visibility_changed"]
+[connection signal="gui_input" from="Menus/VBoxContainer/Map/ScrollContainer/TextureRect" to="Menus/VBoxContainer/Map" method="_on_texture_rect_gui_input"]
 [connection signal="mouse_entered" from="MenuButtons" to="." method="_on_menu_buttons_mouse_entered"]
 [connection signal="mouse_exited" from="MenuButtons" to="." method="_on_menu_buttons_mouse_exited"]
 [connection signal="pressed" from="MenuButtons/InventoryButton" to="." method="_on_inventory_button_pressed"]

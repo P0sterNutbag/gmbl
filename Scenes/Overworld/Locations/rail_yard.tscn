@@ -10,6 +10,7 @@
 
 [sub_resource type="Resource" id="Resource_ot8o7"]
 script = ExtResource("2_elgfm")
+faction = 4
 population = 4
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
@@ -60,34 +61,50 @@ title = "Rail Yard"
 location_data = SubResource("Resource_ot8o7")
 encounter_scene = ExtResource("3_8mqb4")
 
-[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="1" unique_id=536445231]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+[node name="Node3D2" type="Node3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="1" unique_id=602550798 groups=["align_normal"]]
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Meshes/Node3D2" index="0" unique_id=1219533398]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 mesh = SubResource("ArrayMesh_1ecf0")
 skeleton = NodePath("")
 
-[node name="CSGBakedMeshInstance3D2" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="2" unique_id=1381685938]
-mesh = SubResource("ArrayMesh_1ecf0")
-skeleton = NodePath("")
+[node name="Boxcar" type="Node3D" parent="Meshes/Node3D2" index="1" unique_id=1518339331]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 
-[node name="Boxcar" type="Node3D" parent="Meshes/CSGBakedMeshInstance3D2" index="0" unique_id=1518339331]
-
-[node name="CSGBakedMeshInstance3D2" type="MeshInstance3D" parent="Meshes/CSGBakedMeshInstance3D2/Boxcar" index="0" unique_id=920623114]
+[node name="CSGBakedMeshInstance3D2" type="MeshInstance3D" parent="Meshes/Node3D2/Boxcar" index="0" unique_id=920623114]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.15, 0)
 mesh = SubResource("ArrayMesh_fcs3y")
 skeleton = NodePath("")
 
-[node name="CSGBakedMeshInstance3D3" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="3" unique_id=535577534]
+[node name="Node3D" type="Node3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="2" unique_id=1465188495 groups=["align_normal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Meshes/Node3D" index="0" unique_id=536445231]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("ArrayMesh_1ecf0")
+skeleton = NodePath("")
+
+[node name="Node3D3" type="Node3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="3" unique_id=943467537 groups=["align_normal"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Meshes/Node3D3" index="0" unique_id=1612011978]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 mesh = SubResource("ArrayMesh_1ecf0")
 skeleton = NodePath("")
 
-[node name="CSGBakedMeshInstance3D4" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="4" unique_id=1840189957]
+[node name="Node3D4" type="Node3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="4" unique_id=396801553 groups=["align_normal"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Meshes/Node3D4" index="0" unique_id=1845956290]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 mesh = SubResource("ArrayMesh_1ecf0")
 skeleton = NodePath("")
 
-[node name="CSGBakedMeshInstance3D5" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="5" unique_id=550605295]
+[node name="Node3D5" type="Node3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="5" unique_id=763376953 groups=["align_normal"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Meshes/Node3D5" index="0" unique_id=1187641751]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 mesh = SubResource("ArrayMesh_1ecf0")
 skeleton = NodePath("")
 

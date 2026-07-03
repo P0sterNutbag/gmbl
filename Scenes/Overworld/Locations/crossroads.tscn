@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://ditp5knykc8do"]
+
+[ext_resource type="PackedScene" uid="uid://cdr3k44ro53a1" path="res://Scenes/Overworld/Locations/location_base.tscn" id="1_kpinb"]
+[ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_u04bv"]
+[ext_resource type="PackedScene" uid="uid://dgowbmqkc0fer" path="res://Scenes/Levels/crossroads.tscn" id="3_puf6u"]
+[ext_resource type="PackedScene" uid="uid://bwxbdmyl5g7t4" path="res://Scenes/Environment/Props/barrier2.tscn" id="3_u04bv"]
+[ext_resource type="Texture2D" uid="uid://dajv2yyqo82v1" path="res://Art/Textures/Environment/asphalt.png" id="6_puf6u"]
+
+[sub_resource type="Resource" id="Resource_puf6u"]
+script = ExtResource("2_u04bv")
+faction = 4
+population = 6
+max_population = 6
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u04bv"]
+radius = 1.1
+height = 5.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_knna4"]
+size = Vector3(18, 0.5, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xwyqg"]
+albedo_texture = ExtResource("6_puf6u")
+uv1_triplanar = true
+
+[node name="Crossroads" unique_id=1342811121 instance=ExtResource("1_kpinb")]
+title = "Crossroads"
+location_data = SubResource("Resource_puf6u")
+encounter_scene = ExtResource("3_puf6u")
+
+[node name="CollisionShape3D" parent="." index="0" unique_id=1772758538]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.024999857, 0.029060006, 0)
+shape = SubResource("CapsuleShape3D_u04bv")
+
+[node name="Barrier2" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="1" unique_id=801813959 instance=ExtResource("3_u04bv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.3510022)
+
+[node name="Barrier3" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="2" unique_id=2063154483 instance=ExtResource("3_u04bv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7634876, 0, -3.3510022)
+
+[node name="Barrier4" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="3" unique_id=2014623242 instance=ExtResource("3_u04bv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6372688, 0, -3.3510022)
+
+[node name="Barrier5" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="4" unique_id=1835063829 instance=ExtResource("3_u04bv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6372004, 0, -3.3510022)
+
+[node name="Barrier6" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="5" unique_id=1492542955 instance=ExtResource("3_u04bv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4918947, 0, -3.3510022)
+
+[node name="Barrier7" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="6" unique_id=1215660123 instance=ExtResource("3_u04bv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.193169)
+
+[node name="Barrier8" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="7" unique_id=1636718525 instance=ExtResource("3_u04bv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7634876, 0, 3.193169)
+
+[node name="Barrier9" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="8" unique_id=809367507 instance=ExtResource("3_u04bv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6372688, 0, 3.193169)
+
+[node name="Barrier10" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="9" unique_id=242564191 instance=ExtResource("3_u04bv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6372004, 0, 3.193169)
+
+[node name="Barrier11" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="10" unique_id=654538439 instance=ExtResource("3_u04bv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4918947, 0, 3.193169)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="11" unique_id=1493694246 groups=["align_normal"]]
+mesh = SubResource("BoxMesh_knna4")
+surface_material_override/0 = SubResource("StandardMaterial3D_xwyqg")
+
+[editable path="PointOfInterest"]

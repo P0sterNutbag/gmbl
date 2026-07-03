@@ -3,7 +3,6 @@ extends Node3D
 @export var enemies_to_spawn: Array[SpawnChance]
 @export var enemy_move_chance: float = 0.25
 @export var spawn_on_start: bool = true
-var enemy_index: int
 var spawn_points: Array[Node3D]
 var used_spawns: Array[int]
 var location_data: LocationData
@@ -36,7 +35,7 @@ func _ready() -> void:
 		location_data = get_parent().location_data
 	var enemy_amount: int
 	#if location_data.population < location_data.min_population:
-	enemy_amount = max(location_data.population, location_data.npcs.size())
+	enemy_amount = location_data.population
 	#else: 
 	#	enemy_amount = randi_range(location_data.min_population, location_data.max_population)
 	enemy_amount = clamp(enemy_amount, quests.size(), spawn_points.size())
@@ -85,41 +84,41 @@ func _ready() -> void:
 		PlayerStats.ally_npcs.append(inst)
 	
 	# spawn wandering squads
-	if randf() <= location_data.squad_spawn_chance:
-		if Globals.overworld:
-			if !BattleManager.get_battle(Globals.overworld.current_encounter):
-				return
-		# get spawn and destination positions
-		var borders = border_parent.get_children().filter(func(a): return a.process_mode == PROCESS_MODE_INHERIT)
-		var border_index = randi_range(0, borders.size() - 1)
-		while borders[border_index].global_position.distance_to(Globals.player.global_position) < 50:
-			border_index = randi_range(0, borders.size() - 1)
-		var border = borders[border_index]
-		var spawn_point = border.global_position
-		var border_index2 = wrap(border_index + (borders.size() / 2.0), 0, borders.size())
-		while border_index2 == border_index:
-			border_index2 = randi_range(0, borders.size() - 1)
-		var destination = borders[border_index2].global_position
-		# get faction
-		var faction = randi() % FactionManager.factions.size()
-		while faction == FactionManager.factions.player:
-			faction = randi() % FactionManager.factions.size()
-		# spawn enemies
-		for i in randf_range(1, 4):
-			var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
-			var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
-			inst.faction = faction
-			get_tree().current_scene.add_child.call_deferred(inst)
-			var offset = Vector3(randf_range(-5, 5), 0, randf_range(-5, 5))
-			var pos = spawn_point + offset
-			pos.x = clamp(pos.x, 1.0, 255.0)
-			pos.z = clamp(pos.z, 1.0, 255.0)
-			pos.y = Globals.get_heightmap_position(pos) + 0.25
-			inst.set_deferred("global_position", pos)
-			inst.goal = inst.goals.travel
-			inst.destination = destination + offset
-			inst.look_at_position(inst.destination)
-			inst.change_state(inst.states.walk)
+	#if randf() <= location_data.squad_spawn_chance:
+		#if Globals.overworld:
+			#if !BattleManager.get_battle(Globals.overworld.current_encounter):
+				#return
+		## get spawn and destination positions
+		#var borders = border_parent.get_children().filter(func(a): return a.process_mode == PROCESS_MODE_INHERIT)
+		#var border_index = randi_range(0, borders.size() - 1)
+		#while borders[border_index].global_position.distance_to(Globals.player.global_position) < 50:
+			#border_index = randi_range(0, borders.size() - 1)
+		#var border = borders[border_index]
+		#var spawn_point = border.global_position
+		#var border_index2 = wrap(border_index + (borders.size() / 2.0), 0, borders.size())
+		#while border_index2 == border_index:
+			#border_index2 = randi_range(0, borders.size() - 1)
+		#var destination = borders[border_index2].global_position
+		## get faction
+		#var faction = randi() % FactionManager.factions.size()
+		#while faction == FactionManager.factions.player:
+			#faction = randi() % FactionManager.factions.size()
+		## spawn enemies
+		#for i in randf_range(1, 4):
+			#var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
+			#var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
+			#inst.faction = faction
+			#get_tree().current_scene.add_child.call_deferred(inst)
+			#var offset = Vector3(randf_range(-5, 5), 0, randf_range(-5, 5))
+			#var pos = spawn_point + offset
+			#pos.x = clamp(pos.x, 1.0, 255.0)
+			#pos.z = clamp(pos.z, 1.0, 255.0)
+			#pos.y = Globals.get_heightmap_position(pos) + 0.25
+			#inst.set_deferred("global_position", pos)
+			#inst.goal = inst.goals.travel
+			#inst.destination = destination + offset
+			#inst.look_at_position(inst.destination)
+			#inst.change_state(inst.states.walk)
 	
 	# make enemies fight if theres a battle
 	if battle:
@@ -146,21 +145,19 @@ func spawn_enemy(faction: FactionManager.factions):
 	var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
 	var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
 	# assign data
-	if enemy_index < location_data.npcs.size():
-		inst.npc_data = location_data.npcs[enemy_index]
-	else:
-		inst.npc_data.faction = faction
-		var rng = RandomNumberGenerator.new()
-		var weights: PackedFloat32Array
-		for i in location_data.fire_power_chance:
-			weights.append(i)
-		var fire_power = rng.rand_weighted(weights)
-		inst.npc_data.fire_power = fire_power
-		weights.clear()
-		for i in location_data.armor_level_chance:
-			weights.append(i)
-		var armor_level = rng.rand_weighted(weights)
-		inst.npc_data.armor_level = armor_level
+	inst.faction = faction
+	inst.npc_data.faction = faction
+	var rng = RandomNumberGenerator.new()
+	var weights: PackedFloat32Array
+	for i in location_data.fire_power_chance:
+		weights.append(i)
+	var fire_power = rng.rand_weighted(weights)
+	inst.npc_data.fire_power = fire_power
+	weights.clear()
+	for i in location_data.armor_level_chance:
+		weights.append(i)
+	var armor_level = rng.rand_weighted(weights)
+	inst.npc_data.armor_level = armor_level
 	# add to scene
 	get_tree().current_scene.add_child.call_deferred(inst)
 	# position enemy at spawn point
@@ -185,6 +182,7 @@ func spawn_enemy_position(faction: FactionManager.factions, spawn_position: Vect
 	var spawn_pos = spawn_position + Vector3(randf_range(-spawn_variance, spawn_variance), 1, randf_range(-spawn_variance, spawn_variance))
 	spawn_pos.y = Globals.get_heightmap_position(spawn_pos)
 	inst.set_deferred("global_position", spawn_pos)
+	inst.faction = faction
 	inst.npc_data.faction = faction
 	var rng = RandomNumberGenerator.new()
 	var weights: PackedFloat32Array

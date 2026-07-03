@@ -6,10 +6,10 @@ var speed := 2.75:
 	get():
 		return speed + PlayerStats.skills.speed * 0.2
 var mouse_sensitivity := 0.004
-var camera_max_zoom: float = 20.0
-var camera_min_zoom: float = 2.0
-var camera_target_zoom: float = 10.0
-var camera_zoom_incrament: float = 1
+var camera_max_zoom := 20.0
+var camera_min_zoom := 2.0
+var camera_target_zoom := 10.0
+var camera_zoom_incrament := 1.0
 var model_rotation: float:
 	set(value):
 		if model:
@@ -19,7 +19,7 @@ var model_rotation: float:
 			return model.rotation.y
 		else:
 			return 0.0
-var can_enter_location: bool = false
+var can_enter_location: bool
 var is_moving_camera: bool
 var run_animation := "Run"
 var idle_animation := "Idle"
@@ -81,8 +81,6 @@ func _ready() -> void:
 		PlayerStats.states.pause: state_pause,
 		PlayerStats.states.dead: state_dead,
 	}
-	await get_tree().process_frame
-	PlayerStats.owned_locations.append(self)
 
 
 func _process(_delta: float) -> void:
@@ -98,21 +96,20 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	# zoom camera
+	# camera controls
 	if PlayerStats.state != PlayerStats.states.pause:
+		# zoom camera
 		if Input.is_action_just_pressed("next_gun"):
 			camera_target_zoom = clamp(camera_target_zoom - camera_zoom_incrament, camera_min_zoom, camera_max_zoom)
 		elif Input.is_action_just_pressed("last_gun"):
 			camera_target_zoom = clamp(camera_target_zoom + camera_zoom_incrament, camera_min_zoom, camera_max_zoom)
+		# turn camerea
+		if Input.is_action_pressed("lean_left"):
+			camera_anchor.rotate_y(2 * delta)
+		elif Input.is_action_pressed("lean_right"):
+			camera_anchor.rotate_y(-2 * delta)
 	spring_arm.spring_length = lerp(spring_arm.spring_length, camera_target_zoom, delta * 5)
 	
-	# turn camerea
-	if Input.is_action_pressed("lean_left"):
-		camera_anchor.rotate_y(2 * delta)
-	elif Input.is_action_pressed("lean_right"):
-		camera_anchor.rotate_y(-2 * delta)
-	
-	#overhead_shot.rotation = Vector3.ZERO
 	var camera_target: Node3D = overhead_shot
 	model.show()
 	if camera_type == camera_types.town:
@@ -175,41 +172,10 @@ func state_walk(delta) -> void:
 	model.helmet.visible = head_armor != null
 	var body_armor = PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.body_armor]
 	model.vest.visible = body_armor != null
-	# change gun
-	#var kit = PlayerStats.inventory.equipment_kit.gun_slots
-	#if Input.is_action_just_released("next_gun"):
-		#change_gun_slot(wrap(PlayerStats.gun_index - 1, 0, kit.size()))
-	#elif Input.is_action_just_released("last_gun"):
-		#change_gun_slot(wrap(PlayerStats.gun_index + 1, 0, kit.size()))
-	#elif Input.is_action_just_pressed("slot_1"):
-		#change_gun_slot(0)
-	#elif Input.is_action_just_pressed("slot_2"):
-		#change_gun_slot(1)
 	
 	# light
 	var tool = PlayerStats.inventory.equipment_kit.equipment[EquipmentKit.slots.tool]
 	spot_light.visible = tool != null and tool.title == "Flashlight"
-	#var flashlight = PlayerStats.inventory.find_item("flashlight")
-	#if Input.is_action_just_pressed("light") and flashlight and flashlight.equipped:
-		#PlayerStats.flashlight_on = !PlayerStats.flashlight_on
-	#if PlayerStats.flashlight_on:
-		#spot_light.visible = true
-	#else:
-		#spot_light.visible = false
-	
-	# pick up loot
-	#if Input.is_action_just_pressed("interact"):
-		#var areas = loot_area.get_overlapping_areas()
-		#if areas.size() > 0:
-			#Globals.survival_ui.loot(areas[0])
-			#return
-		#var bodies = loot_area.get_overlapping_bodies()
-		#if bodies.size() > 0:
-			#Globals.survival_ui.loot(bodies[0])
-	
-	# set gun sprite
-	#if gun != PlayerStats.gun:
-		#change_gun(PlayerStats.gun)
 
 
 func state_pause(_delta) -> void:

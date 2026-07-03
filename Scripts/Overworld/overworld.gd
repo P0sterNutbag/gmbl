@@ -14,9 +14,9 @@ var poi_factions = [0, 4, 4, 4]
 @onready var player: CharacterBody3D = $Player
 @onready var rock_canyon: Location = $RockCanyon
 @onready var sand_dunes: Location = $SandDunes
-@onready var generic_location: Location = $GenericLocation
-@onready var generic_location_2: Location = $GenericLocation2
-@onready var pois = [rock_canyon, sand_dunes, generic_location, generic_location_2]
+@onready var hillside: Location = $Hillside
+@onready var crossroads: Location = $Crossroads
+@onready var pois = [rock_canyon, sand_dunes, hillside, crossroads]
 
 
 func _enter_tree() -> void:

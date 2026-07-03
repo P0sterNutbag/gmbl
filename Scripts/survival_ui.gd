@@ -21,7 +21,7 @@ var menu_buttons_has_mouse: bool
 @onready var squad: Control = $Menus/VBoxContainer/Squad
 @onready var log_menu_container: VBoxContainer = $Menus/VBoxContainer/Log/MarginContainer/ScrollContainer/VBoxContainer
 @onready var log_menu: PanelContainer = $Menus/VBoxContainer/Log
-#@onready var faction_manager: Control = $Menus/VBoxContainer/FactionManager
+@onready var map: PanelContainer = $Menus/VBoxContainer/Map
 @onready var territory_popup: Control = $TerritoryPopup
 const LOG_NOTIFICATION = preload("res://Scenes/UI/log_notification.tscn")
 const TEXT_OUTLINE = preload("uid://cral201bx2ck")
@@ -227,5 +227,5 @@ func _on_log_pressed() -> void:
 	UiController.open_interface(log_menu)
 
 
-#func _on_faction_manager_pressed() -> void:
-	#UiController.open_interface(faction_manager)
+func _on_map_tab_pressed() -> void:
+	UiController.open_interface(map)

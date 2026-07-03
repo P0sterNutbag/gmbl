@@ -50,7 +50,7 @@ func _on_continue_pressed() -> void:
 		Globals.overworld.queue_free()
 	#SceneManager.start_scene_transition("res://Scenes/UI/Levels/character_creation.tscn")
 	#Globals.overworld.player_died = true
-	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld_demo.tscn", false, true)
+	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld.tscn", false, true)
 
 
 func _on_quit_pressed() -> void:

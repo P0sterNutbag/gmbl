@@ -53,13 +53,9 @@ var saved_style: NpcStyle
 var gun: Equipment
 var skills: CharacterSkills
 var inventory: Inventory = Inventory.new()
-var squad_location: LocationData
-var reserve_location: LocationData
 var quests: Array[Quest]
 var ally_npcs: Array[Npc]
 var save_guns: Array[Item]
-var owned_locations: Array[Node3D]
-var saved_owned_locations: Array[String]
 @onready var guns: Array[Item]:
 	get(): 
 		return inventory.items.filter(func(i): return i is EquipmentGun)
@@ -83,14 +79,6 @@ func _ready() -> void:
 	faction = FactionManager.factions.player
 	inventory.space_modifier = int(skills.strength)
 	inventory.resource_local_to_scene = true
-	squad_location = LocationData.new()
-	squad_location.npcs = allies
-	squad_location.population = allies.size()
-	squad_location.max_population = max_allies
-	squad_location.title = "Squad"
-	reserve_location = LocationData.new()
-	reserve_location.max_population = 5
-	reserve_location.title = "Reserve"
 	#sensitivity_modifier = ConfigManager.file.get_value("settings", "mouse_sensitivity", sensitivity_modifier)
 
 
@@ -259,9 +247,6 @@ func _on_ally_death(npc_data: NpcData, npc: Npc) -> void:
 
 func save() -> Dictionary:
 	hp = Globals.player.hitbox.hp
-	for i in owned_locations:
-		if "title" in i:
-			saved_owned_locations.append(i.title)
 	return {
 		"hp": hp,
 		"ammo": ammo,
@@ -276,9 +261,6 @@ func save() -> Dictionary:
 		"saved_style" : player_style,
 		"allies" : allies,
 		"save_guns" : guns,
-		"squad_location" : squad_location,
-		"reserve_location" : reserve_location,
-		"saved_owned_locations" : saved_owned_locations,
 	}
 
 
@@ -296,6 +278,3 @@ func _on_load():
 		var gun_array = guns
 		for i in save_guns.size():
 			gun_array[i].gun_stats = save_guns[i].gun_stats
-	for i in get_tree().get_nodes_in_group("location"):
-		if saved_owned_locations.has(i.title):
-			owned_locations.append(i) 

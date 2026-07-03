@@ -219,9 +219,6 @@ mesh = SubResource("ArrayMesh_32b5i")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("4_xbhne")
 
-[node name="BattleTimer" type="Timer" parent="." unique_id=177834265]
-one_shot = true
-
 [node name="BattleEffects" type="Node3D" parent="." unique_id=878511027]
 
 [node name="Dust" parent="BattleEffects" unique_id=823910162 instance=ExtResource("4_72fs0")]
@@ -253,8 +250,15 @@ show_population = false
 [node name="TextAnchor" parent="PointOfInterest" index="2" unique_id=2046222566]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 
+[node name="BattleTimer" type="Timer" parent="." unique_id=177834265]
+one_shot = true
+
+[node name="Grow" type="Timer" parent="." unique_id=1824884042]
+wait_time = 60.0
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="timeout" from="BattleTimer" to="." method="_on_battle_timer_timeout"]
+[connection signal="timeout" from="Grow" to="." method="_on_grow_timeout"]
 
 [editable path="PointOfInterest"]

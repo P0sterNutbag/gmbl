@@ -43,11 +43,7 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	var gun = guns_dict[gun_index][0].instantiate()
-	var population = randi_range(min_enemies, max_enemies)
 	gun_holder.add_child(gun)
-	walk_speed += float(max_enemies - population) * 0.25
-	run_speed += float(max_enemies - population) * 0.25
-	location.location_data.population = population
 	location.encounter_started.connect(_on_encounter_started)
 	location.encounter_ended.connect(_on_encounter_ended)
 	location.remove_from_group("persist")
@@ -55,6 +51,8 @@ func _ready() -> void:
 	get_node("Location/PointOfInterest").remove_from_group("persist")
 	await get_tree().process_frame
 	location.dialogue_tree.npc_style = enemy_model.current_style
+	walk_speed += float(max_enemies - location.location_data.population) * 0.25
+	run_speed += float(max_enemies - location.location_data.population) * 0.25
 	var faction_name = FactionManager.faction_data[faction].name
 	if faction_name[-1] == "s":
 		faction_name[-1] = ""

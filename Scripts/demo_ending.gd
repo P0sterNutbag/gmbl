@@ -7,7 +7,7 @@ func _on_wishlist_pressed() -> void:
 
 
 func _on_back_to_game_pressed() -> void:
-	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld_demo.tscn")
+	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld.tscn")
 
 
 func _on_exit_to_menu_pressed() -> void:

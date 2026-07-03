@@ -1,6 +1,5 @@
 extends Node3D
 
-#@export var npcs: Array[SpawnChance]
 const NPC = preload("uid://b0cqkj1fgouo2")
 var starting_enemy_count := 0
 const NPC_ENEMY_DIALOGUE = preload("uid://d20coly46ve2b")

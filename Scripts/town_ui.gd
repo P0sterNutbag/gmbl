@@ -16,6 +16,7 @@ var current_shop: TownOption
 @onready var bounty_viewport: SubViewport = $BountyPicture
 @onready var item_preferences: VBoxContainer = %ItemPreferences
 @onready var preferences_holder: Control = %PreferenceHolder
+@onready var poi_menu: PanelContainer = $PoiMenu
 
 
 func _enter_tree() -> void:

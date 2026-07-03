@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bvom5qk753w37"]
+
+[ext_resource type="PackedScene" uid="uid://cdr3k44ro53a1" path="res://Scenes/Overworld/Locations/location_base.tscn" id="1_wiyeo"]
+[ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_5hhjv"]
+[ext_resource type="PackedScene" uid="uid://bflivx4nobl88" path="res://Art/Models/rock pillar.glb" id="2_jt6j6"]
+[ext_resource type="PackedScene" uid="uid://lchk3aqiapch" path="res://Scenes/Levels/hillside.tscn" id="3_2hv15"]
+[ext_resource type="PackedScene" uid="uid://dkdmdcbv1thv3" path="res://Scenes/Environment/Buildings/shack2.tscn" id="3_f4aox"]
+[ext_resource type="PackedScene" uid="uid://ccvn3d08auy7o" path="res://Scenes/Environment/Props/fence_end.tscn" id="6_2hv15"]
+
+[sub_resource type="Resource" id="Resource_dk72x"]
+script = ExtResource("2_5hhjv")
+faction = 4
+population = 6
+max_population = 6
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2hv15"]
+radius = 1.5043945
+height = 6.0722656
+
+[node name="Hillside" unique_id=1342811121 instance=ExtResource("1_wiyeo")]
+title = "Hillside"
+location_data = SubResource("Resource_dk72x")
+encounter_scene = ExtResource("3_2hv15")
+
+[node name="CollisionShape3D" parent="." index="0" unique_id=1772758538]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.029060006, 0)
+shape = SubResource("CapsuleShape3D_2hv15")
+
+[node name="rock pillar3" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="1" unique_id=643468783 groups=["align_position"] instance=ExtResource("2_jt6j6")]
+transform = Transform3D(2, 0, 0, 0, 6, 0, 0, 0, 2, 8.470676, 2.4596262, 3.1293418)
+
+[node name="Shack2" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="2" unique_id=1065063197 instance=ExtResource("3_f4aox")]
+
+[node name="Fence" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="3" unique_id=56914019 instance=ExtResource("6_2hv15")]
+transform = Transform3D(0.9792865, 0, -0.20247966, 0, 1, 0, 0.20247966, 0, 0.9792865, 4.6302, 0, -3.907855)
+
+[node name="Fence2" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="4" unique_id=1078888310 instance=ExtResource("6_2hv15")]
+transform = Transform3D(0.9660657, 0, 0.2582964, 0, 1, 0, -0.2582964, 0, 0.9660657, -10.293324, 4.7683716e-07, -2.552702)
+
+[editable path="PointOfInterest"]

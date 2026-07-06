@@ -6,7 +6,10 @@ class_name Location
 @export var encounter_scene: PackedScene
 @export var town: Town
 @export var shop: Shop
-@export var dialogue_tree: DialogueTree
+@export var friendly_dialogue_tree: DialogueTree
+@export var enemy_dialogue_tree: DialogueTree
+@export var unaware_dialogue_tree: DialogueTree
+#@export var dialogue_tree: DialogueTree
 @export var can_spawn_npcs: bool = true
 @export var can_stealth_start: bool
 var alert_enemies: bool
@@ -28,6 +31,10 @@ signal encounter_ended
 
 func _enter_tree() -> void:
 	await get_tree().process_frame
+	if location_data.faction == FactionManager.factions.player and get_parent() is not CharacterBody3D:
+		flagpole.show()
+		point_of_interest.show_faction = true
+		point_of_interest.show_population = true
 	if flag.visible:
 		var color = FactionManager.faction_data[location_data.faction].color
 		flag.set_instance_shader_parameter("flag_color", color)
@@ -43,6 +50,17 @@ func _ready() -> void:
 		location_data.max_population = starting_population
 		var starting_faction = location_data.possible_factions[randi() % location_data.possible_factions.size()]
 		location_data.faction = starting_faction
+	# customize dialogue
+	var faction_data: Faction = FactionManager.faction_data[location_data.faction]
+	if friendly_dialogue_tree:
+		friendly_dialogue_tree.npc_style = faction_data.style
+		friendly_dialogue_tree.npc_name = faction_data.npc_name
+	if enemy_dialogue_tree:
+		enemy_dialogue_tree.npc_style = faction_data.style
+		friendly_dialogue_tree.npc_name = faction_data.npc_name
+	if unaware_dialogue_tree:
+		unaware_dialogue_tree.npc_style = faction_data.style
+		friendly_dialogue_tree.npc_name = faction_data.npc_name
 	await get_tree().process_frame
 	# shop timer
 	if town != null:
@@ -61,33 +79,73 @@ func _ready() -> void:
 
 func start_encounter() -> void:
 	Globals.overworld.current_encounter = self
-	encounter_started.emit()
-	if encounter_scene and location_data.faction == FactionManager.factions.player and Globals.ui.poi_menu.location != self:
-		Globals.ui.poi_menu.activate(self)
-		return
-	if can_stealth_start and encounter_scene and Globals.get_dot(self, Globals.player) > -0.25 and !BattleManager.get_battle(self):
-		if dialogue_tree:
-			Globals.ui.start_dialogue(unaware_dialogue)
-			Globals.player.camera_type = Globals.player.camera_types.town
-			point_of_interest.canvas_layer.hide()
-		else:
-			transition_to_level()
-		return
-	if dialogue_tree != null and !BattleManager.get_battle(self) and location_data.population > 0:
-		Globals.ui.start_dialogue(dialogue_tree)
+	var relation_score = FactionManager.get_faction_relation(location_data.faction, FactionManager.factions.player)
+	if BattleManager.get_battle(self):
+		transition_to_level()
+	elif encounter_scene and location_data.faction == FactionManager.factions.player:
+		UiController.open_interface(Globals.ui.poi_menu)
 		Globals.player.camera_type = Globals.player.camera_types.town
 		point_of_interest.canvas_layer.hide()
-	elif encounter_scene != null:
-		transition_to_level() 
+	elif unaware_dialogue and Globals.get_dot(self, Globals.player) > -0.25 and !BattleManager.get_battle(self):
+		start_dialogue(unaware_dialogue)
+	elif relation_score < 0 and enemy_dialogue_tree:
+		start_dialogue(enemy_dialogue_tree)
+	elif relation_score >= 0 and friendly_dialogue_tree:
+		start_dialogue(friendly_dialogue_tree)
+		point_of_interest.show_population = true
+		point_of_interest.show_faction = true
+	elif encounter_scene:
+		transition_to_level()
 	elif town != null:
-		Globals.ui.town.create_town(town)
-		Globals.player.camera_type = Globals.player.camera_types.town
-		point_of_interest.canvas_layer.hide()
+		enter_town()
 	elif shop != null:
-		Globals.ui.job_board.shop = shop
-		Globals.ui.start_dialogue(shop.dialogue, shop)
-		Globals.player.camera_type = Globals.player.camera_types.town
-		point_of_interest.canvas_layer.hide()
+		enter_shop()
+	encounter_started.emit()
+	#if encounter_scene and location_data.faction == FactionManager.factions.player and Globals.ui.poi_menu.location != self:
+		#Globals.ui.poi_menu.activate(self)
+		#return
+	#if can_stealth_start and encounter_scene and Globals.get_dot(self, Globals.player) > -0.25 and !BattleManager.get_battle(self):
+		#if dialogue_tree:
+			#Globals.ui.start_dialogue(unaware_dialogue)
+			#Globals.player.camera_type = Globals.player.camera_types.town
+			#point_of_interest.canvas_layer.hide()
+		#else:
+			#transition_to_level()
+		#return
+	#if dialogue_tree != null and !BattleManager.get_battle(self) and location_data.population > 0:
+		#Globals.ui.start_dialogue(dialogue_tree)
+		#Globals.player.camera_type = Globals.player.camera_types.town
+		#point_of_interest.canvas_layer.hide()
+	#elif encounter_scene != null:
+		#transition_to_level()
+	#elif town != null:
+		#Globals.ui.town.create_town(town)
+		#Globals.player.camera_type = Globals.player.camera_types.town
+		#point_of_interest.canvas_layer.hide()
+	#elif shop != null:
+		#Globals.ui.job_board.shop = shop
+		#Globals.ui.start_dialogue(shop.dialogue, shop)
+		#Globals.player.camera_type = Globals.player.camera_types.town
+		#point_of_interest.canvas_layer.hide()
+
+
+func start_dialogue(dialogue: DialogueTree) -> void:
+	Globals.ui.start_dialogue(dialogue)
+	Globals.player.camera_type = Globals.player.camera_types.town
+	point_of_interest.canvas_layer.hide()
+
+
+func enter_town() -> void:
+	Globals.ui.town.create_town(town)
+	Globals.player.camera_type = Globals.player.camera_types.town
+	point_of_interest.canvas_layer.hide()
+
+
+func enter_shop() -> void:
+	Globals.ui.job_board.shop = shop
+	Globals.ui.start_dialogue(shop.dialogue, shop)
+	Globals.player.camera_type = Globals.player.camera_types.town
+	point_of_interest.canvas_layer.hide()
 
 
 func stock_shops() -> void:

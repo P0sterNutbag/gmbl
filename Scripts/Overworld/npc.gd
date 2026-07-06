@@ -19,7 +19,7 @@ var original_rotation: Vector3
 var spawn_vector: Vector3
 var target: Node3D
 var destination_path: NodePath
-var unaware_dialogue: DialogueTree = preload("uid://dhbjweb7dwnpn")
+#var unaware_dialogue: DialogueTree = preload("uid://dhbjweb7dwnpn")
 @export var faction: FactionManager.factions = FactionManager.factions.no_faction
 var guns_dict: Dictionary = {
 	0 : [preload("res://Scenes/Guns/shotgun.tscn"), preload("res://Scenes/Items/Guns/shotgun.tscn")],
@@ -50,17 +50,22 @@ func _ready() -> void:
 	SaveController.load.connect(_on_load)
 	get_node("Location/PointOfInterest").remove_from_group("persist")
 	await get_tree().process_frame
-	location.dialogue_tree.npc_style = enemy_model.current_style
-	walk_speed += float(max_enemies - location.location_data.population) * 0.25
-	run_speed += float(max_enemies - location.location_data.population) * 0.25
+	if location.friendly_dialogue_tree:
+		location.friendly_dialogue_tree.npc_style = enemy_model.current_style
+	if location.enemy_dialogue_tree:
+		location.enemy_dialogue_tree.npc_style = enemy_model.current_style
+	if location.unaware_dialogue_tree:
+		location.unaware_dialogue_tree.npc_style = enemy_model.current_style
+	#walk_speed += float(max_enemies - location.location_data.population) * 0.25
+	#run_speed += float(max_enemies - location.location_data.population) * 0.25
 	var faction_name = FactionManager.faction_data[faction].name
 	if faction_name[-1] == "s":
 		faction_name[-1] = ""
-	location.dialogue_tree.npc_name = faction_name + " " + location.dialogue_tree.npc_name
-	location.title = faction_name + " " + location.title
-	location.unaware_dialogue = unaware_dialogue.duplicate_deep()
-	location.unaware_dialogue.npc_style = enemy_model.current_style
-	location.unaware_dialogue.npc_name = faction_name + " " + location.unaware_dialogue.npc_name
+	#location.dialogue_tree.npc_name = faction_name + " " + location.dialogue_tree.npc_name
+	#location.title = faction_name + " " + location.title
+	#location.unaware_dialogue = unaware_dialogue.duplicate_deep()
+	#location.unaware_dialogue.npc_style = enemy_model.current_style
+	#location.unaware_dialogue.npc_name = faction_name + " " + location.unaware_dialogue.npc_name
 	location.location_data.faction = faction
 	location.shop.faction = faction
 	original_position = global_position

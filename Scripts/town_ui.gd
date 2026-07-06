@@ -17,6 +17,7 @@ var current_shop: TownOption
 @onready var item_preferences: VBoxContainer = %ItemPreferences
 @onready var preferences_holder: Control = %PreferenceHolder
 @onready var poi_menu: PanelContainer = $PoiMenu
+@onready var territory_popup: VBoxContainer = $TerritoryPopup
 
 
 func _enter_tree() -> void:
@@ -41,6 +42,8 @@ func _process(_delta: float) -> void:
 			UiController.close_interface(job_board)
 			dialogue.leave_shop()
 			UiController.open_interface(dialogue)
+		elif poi_menu.visible:
+			UiController.close_interface(poi_menu)
 
 
 func start_dialogue(dialogue_data: DialogueTree, _shop: TownOption = null) -> void:
@@ -81,7 +84,7 @@ func enter_shop(shop_data: Shop) -> void:
 
 func close_shop() -> void:
 	UiController.close_interface(shop, false)
-	if current_shop.dialogue or Globals.overworld.current_encounter.dialogue_tree:
+	if current_shop.dialogue or Globals.overworld.current_encounter.friendly_dialogue_tree:
 		dialogue.leave_shop()
 	else:
 		await get_tree().process_frame

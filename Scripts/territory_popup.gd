@@ -7,6 +7,9 @@ func _on_button_pressed() -> void:
 	current_encounter.location_data.faction = FactionManager.factions.player
 	current_encounter.point_of_interest.show_faction = true
 	current_encounter.point_of_interest.show_population = true
+	current_encounter.flagpole.show()
+	var color = FactionManager.faction_data[current_encounter.location_data.faction].color
+	current_encounter.flag.set_instance_shader_parameter("flag_color", color)
 	UiController.close_interface(self)
 
 

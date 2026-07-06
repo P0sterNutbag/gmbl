@@ -47,8 +47,6 @@
 [ext_resource type="Script" uid="uid://boi8n7i6gbf6a" path="res://Scripts/custom_tooltip.gd" id="36_8cvki"]
 [ext_resource type="Texture2D" uid="uid://brs4ktd7wgyno" path="res://Art/Textures/UI/faction icon.png" id="36_m6fmc"]
 [ext_resource type="Texture2D" uid="uid://d2ukjid6oonnl" path="res://Art/Textures/UI/population icon.png" id="41_02qtm"]
-[ext_resource type="Script" uid="uid://d4jjgapk77v2n" path="res://Scripts/territory_popup.gd" id="48_ad2yh"]
-[ext_resource type="PackedScene" uid="uid://ch51jxbbspgbo" path="res://Scenes/UI/spacer_line.tscn" id="49_ad2yh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6h4e4"]
 
@@ -1168,83 +1166,6 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("36_8cvki")
 
-[node name="TerritoryPopup" type="VBoxContainer" parent="." unique_id=1724055698]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -326.0
-offset_top = -114.0
-offset_right = 326.0
-offset_bottom = 114.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("13_oq622")
-script = ExtResource("48_ad2yh")
-
-[node name="PanelContainer" type="PanelContainer" parent="TerritoryPopup" unique_id=1081010049]
-layout_mode = 2
-theme = ExtResource("11_0pkni")
-
-[node name="MarginContainer" type="MarginContainer" parent="TerritoryPopup/PanelContainer" unique_id=784284079]
-layout_mode = 2
-theme = ExtResource("12_2dyl4")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="TerritoryPopup/PanelContainer/MarginContainer" unique_id=84513212]
-layout_mode = 2
-theme = ExtResource("13_oq622")
-
-[node name="Label" type="Label" parent="TerritoryPopup/PanelContainer/MarginContainer/VBoxContainer" unique_id=846501102]
-layout_mode = 2
-theme = ExtResource("28_8cvki")
-text = "Territory Cleared"
-horizontal_alignment = 1
-
-[node name="Panel" parent="TerritoryPopup/PanelContainer/MarginContainer/VBoxContainer" unique_id=506396093 instance=ExtResource("49_ad2yh")]
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="TerritoryPopup/PanelContainer/MarginContainer/VBoxContainer" unique_id=1244814866]
-custom_minimum_size = Vector2(600, 0)
-layout_mode = 2
-theme = ExtResource("3_1kfkr")
-text = "Capture it for your faction, or leave it alone?"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TerritoryPopup" unique_id=314336442]
-layout_mode = 2
-theme = ExtResource("29_tlm7h")
-
-[node name="PanelContainer" type="PanelContainer" parent="TerritoryPopup/HBoxContainer" unique_id=1908574500]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("11_0pkni")
-
-[node name="MarginContainer" type="MarginContainer" parent="TerritoryPopup/HBoxContainer/PanelContainer" unique_id=1262006262]
-layout_mode = 2
-theme = ExtResource("12_2dyl4")
-
-[node name="Button" type="Button" parent="TerritoryPopup/HBoxContainer/PanelContainer/MarginContainer" unique_id=1451208042]
-layout_mode = 2
-theme = ExtResource("33_ft4n5")
-text = "Capture"
-
-[node name="PanelContainer2" type="PanelContainer" parent="TerritoryPopup/HBoxContainer" unique_id=1620698732]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("11_0pkni")
-
-[node name="MarginContainer" type="MarginContainer" parent="TerritoryPopup/HBoxContainer/PanelContainer2" unique_id=562350207]
-layout_mode = 2
-theme = ExtResource("12_2dyl4")
-
-[node name="Button2" type="Button" parent="TerritoryPopup/HBoxContainer/PanelContainer2/MarginContainer" unique_id=293670206]
-layout_mode = 2
-theme = ExtResource("33_ft4n5")
-text = "Leave"
-
 [node name="ColorRect" type="ColorRect" parent="." unique_id=96228101]
 visible = false
 custom_minimum_size = Vector2(240, 1080)
@@ -1294,8 +1215,6 @@ color = Color(0, 0, 0, 1)
 [connection signal="pressed" from="MenuButtons/FactionButton" to="." method="_on_faction_button_pressed"]
 [connection signal="pressed" from="MenuButtons/CharacterButton" to="." method="_on_character_button_pressed"]
 [connection signal="pressed" from="MenuButtons/PauseButton" to="." method="_on_pause_pressed"]
-[connection signal="pressed" from="TerritoryPopup/HBoxContainer/PanelContainer/MarginContainer/Button" to="TerritoryPopup" method="_on_button_pressed"]
-[connection signal="pressed" from="TerritoryPopup/HBoxContainer/PanelContainer2/MarginContainer/Button2" to="TerritoryPopup" method="_on_button_2_pressed"]
 
 [editable path="TransferInventory/Toolbar"]
 [editable path="Menus/VBoxContainer/Toolbar"]

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://drspacmd4ini3"]
+
+[ext_resource type="PackedScene" uid="uid://ccasv3bhe2jhu" path="res://Art/Models/rock.glb" id="1_87vdg"]
+[ext_resource type="Material" uid="uid://glgkpsq6v2xd" path="res://Art/Materials/rock_gray.tres" id="2_87vdg"]
+
+[node name="Rock" type="Node3D" unique_id=356968458 groups=["align_position"]]
+
+[node name="rock" parent="." unique_id=280562463 instance=ExtResource("1_87vdg")]
+transform = Transform3D(3, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Icosphere" parent="rock" index="0" unique_id=198177047]
+surface_material_override/0 = ExtResource("2_87vdg")
+
+[editable path="rock"]

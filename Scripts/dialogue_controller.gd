@@ -179,7 +179,7 @@ func pay_fee(amount: int, fail_index: int) -> void:
 
 
 func enter_repair_menu() -> void:
-	UiController.open_interface(repair_menu)
+	UiController.open_subinterface(repair_menu)
 
 
 func set_recruit_price() -> void:

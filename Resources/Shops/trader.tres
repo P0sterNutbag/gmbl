@@ -1,55 +1,108 @@
 [gd_resource type="Resource" script_class="Shop" format=3 uid="uid://b6fhmpdk63hpc"]
 
-[ext_resource type="Script" uid="uid://de6rxup5nru4w" path="res://Scripts/dialogue.gd" id="1_fon5a"]
+[ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="1_dlov2"]
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="2_3vf8s"]
-[ext_resource type="Script" uid="uid://ctb2g10cnu2sg" path="res://Scripts/dialogue_option.gd" id="2_21g0w"]
-[ext_resource type="Script" uid="uid://cnu4xeujmgk51" path="res://Scripts/dialogue_options.gd" id="3_hlxbm"]
-[ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="4_1qcnc"]
-[ext_resource type="Resource" uid="uid://nm0e00c2fx4" path="res://Resources/NpcStyles/npc_styles.tres" id="5_g0e7o"]
-[ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="5_gkdsg"]
+[ext_resource type="Script" uid="uid://3e36ru1e7k78" path="res://Scripts/spawn_chance_resource.gd" id="2_tj3qh"]
+[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="3_curs1"]
+[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="4_ht6ww"]
+[ext_resource type="Resource" uid="uid://bf23ua6ic8mo4" path="res://Resources/Items/Ammo/shotgun_ammo_box.tres" id="5_w3bd1"]
+[ext_resource type="Resource" uid="uid://dgo34up8hytn6" path="res://Resources/Items/Ammo/smg_ammo.tres" id="6_g4nkn"]
+[ext_resource type="Resource" uid="uid://bkae25scq6c12" path="res://Resources/Items/Ammo/sniper_ammo.tres" id="7_062hb"]
 [ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="7_hlxbm"]
 [ext_resource type="Script" uid="uid://g1k0736rje3q" path="res://Scripts/quest_random.gd" id="8_1qcnc"]
+[ext_resource type="Resource" uid="uid://dfkmfm7wu8mw4" path="res://Resources/Items/Consumable/beans.tres" id="8_epd5m"]
+[ext_resource type="Resource" uid="uid://ccm2c5fc8xn15" path="res://Resources/Items/Consumable/medkit.tres" id="9_aggkc"]
+[ext_resource type="Resource" uid="uid://glkl1ugkvv6m" path="res://Resources/Items/Consumable/water.tres" id="10_o2k2h"]
+[ext_resource type="Resource" uid="uid://c3usfn872wp1g" path="res://Resources/Items/Consumable/ghost_powder.tres" id="11_shc6q"]
+[ext_resource type="Resource" uid="uid://c4vot4kh7bffi" path="res://Resources/Items/Consumable/bandage.tres" id="12_ki8xt"]
+[ext_resource type="Resource" uid="uid://bmllms5nonko8" path="res://Resources/Items/Consumable/beer.tres" id="13_ae1kq"]
+[ext_resource type="Resource" uid="uid://b531tc4pwfwel" path="res://Resources/Items/Consumable/crackers.tres" id="14_oikfi"]
+[ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="15_u24cd"]
 
-[sub_resource type="Resource" id="Resource_6lldf"]
-script = ExtResource("1_fon5a")
-lines = Array[String](["What can I do for you?"])
-speaker = 1
-metadata/_custom_type_script = "uid://de6rxup5nru4w"
+[sub_resource type="Resource" id="Resource_kx6ku"]
+script = ExtResource("2_tj3qh")
+object_to_spawn = ExtResource("3_curs1")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_lyof2"]
-script = ExtResource("2_21g0w")
-text = "Show me your wares."
-destination = 2
-metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+[sub_resource type="Resource" id="Resource_0h4u7"]
+script = ExtResource("2_tj3qh")
+object_to_spawn = ExtResource("4_ht6ww")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_375gu"]
-script = ExtResource("2_21g0w")
-text = "Leave"
-destination = 3
-metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+[sub_resource type="Resource" id="Resource_a75c0"]
+script = ExtResource("2_tj3qh")
+object_to_spawn = ExtResource("5_w3bd1")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_8pniq"]
-script = ExtResource("3_hlxbm")
-options = Array[ExtResource("2_21g0w")]([SubResource("Resource_lyof2"), SubResource("Resource_375gu")])
-metadata/_custom_type_script = "uid://cnu4xeujmgk51"
+[sub_resource type="Resource" id="Resource_vljco"]
+script = ExtResource("2_tj3qh")
+object_to_spawn = ExtResource("6_g4nkn")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_xa6dy"]
-script = ExtResource("4_1qcnc")
-method = "enter_shop"
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+[sub_resource type="Resource" id="Resource_mchvl"]
+script = ExtResource("2_tj3qh")
+object_to_spawn = ExtResource("7_062hb")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_26jmx"]
-script = ExtResource("4_1qcnc")
-method = "exit_dialogue"
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+[sub_resource type="Resource" id="Resource_b5yoy"]
+script = ExtResource("2_tj3qh")
+object_to_spawn = ExtResource("8_epd5m")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_6k03y"]
-script = ExtResource("5_gkdsg")
-bubbles = Array[ExtResource("1_fon5a")]([SubResource("Resource_6lldf"), SubResource("Resource_8pniq"), SubResource("Resource_xa6dy"), SubResource("Resource_26jmx")])
-metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+[sub_resource type="Resource" id="Resource_shp8b"]
+script = ExtResource("2_tj3qh")
+object_to_spawn = ExtResource("9_aggkc")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_kiig0"]
+script = ExtResource("2_tj3qh")
+object_to_spawn = ExtResource("10_o2k2h")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_p0jri"]
+script = ExtResource("2_tj3qh")
+object_to_spawn = ExtResource("11_shc6q")
+spawn_chance = 0.5
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_6nrh4"]
+script = ExtResource("2_tj3qh")
+object_to_spawn = ExtResource("12_ki8xt")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_fu30t"]
+script = ExtResource("2_tj3qh")
+object_to_spawn = ExtResource("13_ae1kq")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_diqn0"]
+script = ExtResource("2_tj3qh")
+object_to_spawn = ExtResource("14_oikfi")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_poiom"]
+resource_local_to_scene = true
+script = ExtResource("15_u24cd")
+min_amount = 3
+max_amount = 8
+potential_slots = Array[ExtResource("2_tj3qh")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
+money = 500
+title = "Squad Inventory"
+metadata/_custom_type_script = "uid://b34kwea65we13"
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("2_3vf8s")
-dialogue = SubResource("Resource_6k03y")
-title = "Trader"
+inventory = SubResource("Resource_poiom")
+price_modifiers = {
+"Ammo": 0.5,
+"Armor": 0.5,
+"Consumable": 0.75,
+"Gear": 0.75,
+"Junk": 0.75,
+"Survival": 0.75,
+"Weapons": 0.5
+}
+faction = null
+title = "Traveler"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"

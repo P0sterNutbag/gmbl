@@ -12,6 +12,9 @@ population = 6
 max_population = 6
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_xjrgu"]
+radius = 4.550378
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_xjrgu"]
 top_radius = 2.0
 bottom_radius = 10.426
@@ -27,6 +30,10 @@ uv1_scale = Vector3(5, 5, 5)
 title = "Sand Dunes"
 location_data = SubResource("Resource_vkcj2")
 encounter_scene = ExtResource("4_3vsq3")
+
+[node name="CollisionShape3D" parent="." index="0" unique_id=1772758538]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_xjrgu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="0" unique_id=728756574]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6011953, 0)

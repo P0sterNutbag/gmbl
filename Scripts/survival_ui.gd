@@ -22,7 +22,6 @@ var menu_buttons_has_mouse: bool
 @onready var log_menu_container: VBoxContainer = $Menus/VBoxContainer/Log/MarginContainer/ScrollContainer/VBoxContainer
 @onready var log_menu: PanelContainer = $Menus/VBoxContainer/Log
 @onready var map: PanelContainer = $Menus/VBoxContainer/Map
-@onready var territory_popup: Control = $TerritoryPopup
 const LOG_NOTIFICATION = preload("res://Scenes/UI/log_notification.tscn")
 const TEXT_OUTLINE = preload("uid://cral201bx2ck")
 

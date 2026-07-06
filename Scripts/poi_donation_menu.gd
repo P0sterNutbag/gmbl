@@ -17,12 +17,12 @@ func activate(_location: Location) -> void:
 	location = _location
 	inventory.source_inventory = PlayerStats.inventory
 	inventory.target_inventory = Inventory.new()
+	inventory.show()
 	var location_data = location.location_data
 	name_label.text = location.title
 	name_label.text = location.title
 	resource_label.text = str(int(location_data.resources))
 	equipment_label.text = "lvl " + str(location_data.fire_power + location_data.armor_level)
-	UiController.open_interface(self)
 
 
 func increase_resources(value: int) -> void:
@@ -49,7 +49,7 @@ func _on_inventory_item_transferred(item: Item) -> void:
 
 
 func _on_exit_menu_pressed() -> void:
-	poi_menu.activate(location)
+	UiController.open_interface(poi_menu)
 
 
 func _on_inventory_item_focus_entered(item: Item) -> void:
@@ -62,3 +62,10 @@ func _on_inventory_item_focus_entered(item: Item) -> void:
 func _on_inventory_item_focus_exited() -> void:
 	equipment_bar_back.value = equipment_bar.value
 	resource_bar_back.value = resource_bar.value
+
+
+func _on_visibility_changed() -> void:
+	if visible:
+		activate(Globals.overworld.current_encounter)
+	else:
+		inventory.hide()

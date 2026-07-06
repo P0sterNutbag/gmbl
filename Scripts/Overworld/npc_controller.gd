@@ -2,8 +2,8 @@ extends Node3D
 
 const NPC = preload("uid://b0cqkj1fgouo2")
 var starting_enemy_count := 0
-const NPC_ENEMY_DIALOGUE = preload("uid://d20coly46ve2b")
-const NPC_FRIENDLY_DIALOGUE = preload("uid://cm4ovx7pecfjd")
+#const NPC_ENEMY_DIALOGUE = preload("uid://d20coly46ve2b")
+#const NPC_FRIENDLY_DIALOGUE = preload("uid://cm4ovx7pecfjd")
 
 
 func _ready() -> void:
@@ -23,11 +23,11 @@ func _on_timer_timeout() -> void:
 	inst.location.location_data.fire_power_chance = spawn_location.location_data.fire_power_chance
 	inst.location.location_data.armor_level_chance = spawn_location.location_data.armor_level_chance
 	inst.faction = spawn_location.location_data.faction
-	var standing = FactionManager.get_faction_relation(inst.faction, FactionManager.factions.player)
-	if standing < 0.0:
-		inst.location.dialogue_tree = NPC_ENEMY_DIALOGUE.duplicate(true)
-	else:
-		inst.location.dialogue_tree = NPC_FRIENDLY_DIALOGUE.duplicate(true)
+	#var standing = FactionManager.get_faction_relation(inst.faction, FactionManager.factions.player)
+	#if standing < 0.0:
+		#inst.location.dialogue_tree = NPC_ENEMY_DIALOGUE.duplicate(true)
+	#else:
+		#inst.location.dialogue_tree = NPC_FRIENDLY_DIALOGUE.duplicate(true)
 	# determine desination
 	var dest = get_destination(inst.faction, spawn_location, inst.location.location_data)
 	var pos = dest.global_position# + Vector3.RIGHT.rotated(Vector3.UP, deg_to_rad(randf_range(0, 360))) * dest.target_distance

@@ -81,6 +81,7 @@ func spawn_enemy(spawn_position: Vector3, faction: FactionManager.factions) -> v
 		weights.append(i)
 	var armor_level = rng.rand_weighted(weights)
 	inst.npc_data.armor_level = armor_level
+	inst.faction = faction
 	get_tree().current_scene.add_child.call_deferred(inst)
 	# position enemy at spawn point
 	var spawn_offset = spawn_position + Vector3(randf_range(-spawn_radius, spawn_radius), 0, randf_range(-spawn_radius, spawn_radius))
@@ -92,5 +93,4 @@ func spawn_enemy(spawn_position: Vector3, faction: FactionManager.factions) -> v
 	inst.goal = inst.goals.travel
 	inst.look_at_position(inst.destination)
 	inst.is_starting_squad = true
-	inst.faction = faction
 	enemies.append(inst)

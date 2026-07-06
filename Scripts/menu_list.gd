@@ -6,11 +6,11 @@ class_name MenuList
 signal exit
 
 
-func _process(_delta: float) -> void:
-	if !visible:
-		return
-	if Input.is_action_just_pressed("ui_cancel"):
-		close()
+#func _process(_delta: float) -> void:
+	#if !visible:
+		#return
+	#if Input.is_action_just_pressed("ui_cancel"):
+		#close()
 
 
 func open(array: Array):

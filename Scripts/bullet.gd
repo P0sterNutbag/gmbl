@@ -46,6 +46,7 @@ func hit():
 	if collider is PhysicalBone3D:
 		if collider.health_component:
 			collider.health_component.damage(bullet_stats.damage * collider.damage_modifier, raycast.get_collision_point(), global_transform.basis.z.normalized(), creator)
+			print(collider.damage_modifier)
 		var decal = blood_spatter.instantiate()
 		decal.set_deferred("global_position", raycast.get_collision_point())
 		collider.add_child(decal)

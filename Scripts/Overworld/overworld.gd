@@ -31,7 +31,7 @@ func _enter_tree() -> void:
 			if current_encounter.get_parent().has_method("die"):
 				current_encounter.get_parent().die()
 			else:
-				UiController.open_interface(Globals.survival_ui.territory_popup)
+				UiController.open_interface(Globals.ui.territory_popup)
 		var encounter_pos = current_encounter.global_position
 		player_spawn_position = encounter_pos + (player_spawn_vector * 4).rotated(Vector3.UP, current_encounter.rotation.y)
 		player_spawn_position.y = Globals.get_heightmap_position(player_spawn_position)
@@ -73,4 +73,5 @@ func save() -> Dictionary:
 
 func _on_load() -> void:
 	player_spawn_position = Vector3(player_spawn_x, player_spawn_y, player_spawn_z)
+	player_spawn_position.y = Globals.get_heightmap_position(player_spawn_position)
 	Globals.player.global_position = player_spawn_position

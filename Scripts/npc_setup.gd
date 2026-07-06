@@ -13,7 +13,6 @@ var current_style := NpcStyle.new()
 @onready var vest: MeshInstance3D = $PersonAnimated/Armature/Skeleton3D/Vest
 @onready var helmet: MeshInstance3D = $PersonAnimated/Armature/Skeleton3D/Helmet
 @onready var pads: MeshInstance3D = $PersonAnimated/Armature/Skeleton3D/Pads
-
 const BALD_HAIR = preload("uid://cfmrww0wj003t")
 
 

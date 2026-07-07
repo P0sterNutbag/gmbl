@@ -37,32 +37,32 @@
 
 [sub_resource type="Resource" id="Resource_mmq48"]
 script = ExtResource("1_o86al")
-lines = Array[String](["Welcome, traveler. I got everything you need to survive out there."])
+lines = Array[String](["Come on in and take a load off. Have a drink, or better yet, lose all your money gambling!"])
 speaker = 1
 metadata/_custom_type_script = "uid://de6rxup5nru4w"
 
 [sub_resource type="Resource" id="Resource_tvyf1"]
 script = ExtResource("2_qpmer")
 text = "Trade"
-destination = 9
+destination = 2
 metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
 
 [sub_resource type="Resource" id="Resource_yutm7"]
 script = ExtResource("2_qpmer")
-text = "Take Jobs"
-destination = 2
+text = "Gamble"
+destination = 4
 metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
 
 [sub_resource type="Resource" id="Resource_o86al"]
 script = ExtResource("2_qpmer")
-text = "Return jobs"
-destination = 3
+text = "Recruit"
+destination = 5
 metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
 
 [sub_resource type="Resource" id="Resource_qpmer"]
 script = ExtResource("2_qpmer")
 text = "Leave"
-destination = 4
+destination = 3
 metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
 
 [sub_resource type="Resource" id="Resource_nvcwx"]
@@ -88,7 +88,7 @@ metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
 [sub_resource type="Resource" id="Resource_6nfli"]
 script = ExtResource("4_3d2nb")
-method = "enter_town"
+method = "enter_shop"
 metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
 [sub_resource type="Resource" id="Resource_a1kim"]
@@ -158,30 +158,26 @@ npc_style = SubResource("Resource_muyid")
 npc_name = "Durk"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
-[sub_resource type="Resource" id="Resource_pay3g"]
+[sub_resource type="Resource" id="Resource_jby7l"]
 script = ExtResource("13_pmsm7")
 object_to_spawn = ExtResource("14_2rlcr")
-spawn_chance = 2.0
 max_amount = 3
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_rpeqt"]
 script = ExtResource("13_pmsm7")
 object_to_spawn = ExtResource("15_7e3aa")
-spawn_chance = 3.0
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_xe0o3"]
 script = ExtResource("13_pmsm7")
 object_to_spawn = ExtResource("16_muyid")
-spawn_chance = 3.0
 max_amount = 3
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_lnhnr"]
 script = ExtResource("13_pmsm7")
 object_to_spawn = ExtResource("17_boia1")
-spawn_chance = 2.0
 max_amount = 2
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
@@ -271,7 +267,7 @@ resource_local_to_scene = true
 script = ExtResource("31_r66k1")
 min_amount = 7
 max_amount = 10
-potential_slots = Array[ExtResource("13_pmsm7")]([SubResource("Resource_pay3g"), SubResource("Resource_rpeqt"), SubResource("Resource_xe0o3"), SubResource("Resource_lnhnr"), SubResource("Resource_8jwt6"), SubResource("Resource_tfd8k"), SubResource("Resource_g8jxq"), SubResource("Resource_yld1c"), SubResource("Resource_jy2tk"), SubResource("Resource_dhf1b"), SubResource("Resource_4ptoc"), SubResource("Resource_vqra6"), SubResource("Resource_bn22a"), SubResource("Resource_ckll4"), SubResource("Resource_ho87a"), SubResource("Resource_emdrq"), SubResource("Resource_6j8iu"), SubResource("Resource_7kx4p")])
+potential_slots = Array[ExtResource("13_pmsm7")]([SubResource("Resource_jby7l"), SubResource("Resource_rpeqt"), SubResource("Resource_xe0o3"), SubResource("Resource_lnhnr"), SubResource("Resource_8jwt6"), SubResource("Resource_tfd8k"), SubResource("Resource_g8jxq"), SubResource("Resource_yld1c"), SubResource("Resource_jy2tk"), SubResource("Resource_dhf1b"), SubResource("Resource_4ptoc"), SubResource("Resource_vqra6"), SubResource("Resource_bn22a"), SubResource("Resource_ckll4"), SubResource("Resource_ho87a"), SubResource("Resource_emdrq"), SubResource("Resource_6j8iu"), SubResource("Resource_7kx4p")])
 repeat_entries = false
 space = 50
 money = 1000

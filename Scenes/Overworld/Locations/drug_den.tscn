@@ -2,40 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://cdr3k44ro53a1" path="res://Scenes/Overworld/Locations/location_base.tscn" id="1_x317r"]
 [ext_resource type="Script" uid="uid://csmjlx06mdps3" path="res://Scripts/location_data.gd" id="2_k1gww"]
-[ext_resource type="Script" uid="uid://de6rxup5nru4w" path="res://Scripts/dialogue.gd" id="3_ol2qc"]
-[ext_resource type="Script" uid="uid://ctb2g10cnu2sg" path="res://Scripts/dialogue_option.gd" id="4_o7pm5"]
-[ext_resource type="Script" uid="uid://cnu4xeujmgk51" path="res://Scripts/dialogue_options.gd" id="5_gkq58"]
-[ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="6_0wvw7"]
-[ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="7_inajc"]
-[ext_resource type="Script" uid="uid://c6knlgr6wx0i1" path="res://Scripts/quest_fetch.gd" id="8_te7rf"]
-[ext_resource type="Script" uid="uid://px5dr31pd885" path="res://Scripts/dialogue_loop.gd" id="9_qwjv1"]
-[ext_resource type="Texture2D" uid="uid://c7vuenymtwna4" path="res://Art/Textures/Character/player face2.png" id="10_7jsld"]
-[ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="10_mkt2b"]
-[ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="11_7t7n5"]
-[ext_resource type="Texture2D" uid="uid://caj6h4yuynkru" path="res://Art/Textures/Character/player hair.png" id="11_8sm2v"]
-[ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="12_dckhe"]
-[ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="13_7jsld"]
-[ext_resource type="Texture2D" uid="uid://cs2j1ok7u1avc" path="res://Art/Textures/Character/npc shirt red sleeve.png" id="13_bnevc"]
-[ext_resource type="Script" uid="uid://3e36ru1e7k78" path="res://Scripts/spawn_chance_resource.gd" id="14_mkt2b"]
-[ext_resource type="Resource" uid="uid://clu1tx111108g" path="res://Resources/Items/Consumable/pain_pills.tres" id="15_mkt2b"]
-[ext_resource type="Resource" uid="uid://bbx4x21dta7e7" path="res://Resources/Items/Consumable/morphine.tres" id="16_7t7n5"]
-[ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="19_7t7n5"]
-[ext_resource type="Script" uid="uid://bicpdyf13vj1j" path="res://Scripts/quest_fetch_random.gd" id="19_te7rf"]
-[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="20_rocs7"]
-[ext_resource type="Script" uid="uid://g1k0736rje3q" path="res://Scripts/quest_random.gd" id="21_dckhe"]
-[ext_resource type="Resource" uid="uid://p08i10n3bpxs" path="res://Resources/Items/Ammo/rifle_ammo.tres" id="21_k764k"]
-[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="22_3vihp"]
-[ext_resource type="Script" uid="uid://ds2br0dh5ir38" path="res://Scripts/quest_bounty_random.gd" id="23_7jsld"]
-[ext_resource type="Resource" uid="uid://dgo34up8hytn6" path="res://Resources/Items/Ammo/smg_ammo.tres" id="23_wji5k"]
-[ext_resource type="Resource" uid="uid://c3usfn872wp1g" path="res://Resources/Items/Consumable/ghost_powder.tres" id="24_la7xj"]
+[ext_resource type="Resource" uid="uid://bcvpja34rx3aj" path="res://Resources/Towns/rager_commune.tres" id="3_2cmfo"]
 [ext_resource type="Material" uid="uid://brr5rgo0swhv5" path="res://Art/Materials/wood_triplanar.tres" id="26_bnevc"]
 [ext_resource type="Texture2D" uid="uid://bkxsoff507nnd" path="res://Art/Textures/Environment/tin roof.png" id="27_ogcrv"]
-[ext_resource type="Script" uid="uid://dc15s83haevrb" path="res://Scripts/item_slot_random.gd" id="27_wji5k"]
 [ext_resource type="Material" uid="uid://b4aard1qnyqin" path="res://Art/Materials/tin_triplanar_gray.tres" id="28_84y0d"]
-[ext_resource type="Resource" uid="uid://6c7s1e0y4ekq" path="res://Resources/Items/Junk/cigarettes.tres" id="28_i588a"]
-[ext_resource type="Resource" uid="uid://du57k1x7scpfk" path="res://Resources/Items/Junk/metal_scraps.tres" id="29_i588a"]
 [ext_resource type="Material" uid="uid://bfqtn7csb0xd" path="res://Art/Materials/tin_triplanar_rust.tres" id="29_it00d"]
-[ext_resource type="Resource" uid="uid://cis0ncoy87o3s" path="res://Resources/Items/Junk/scalp_jackal.tres" id="29_la7xj"]
+[ext_resource type="Material" uid="uid://cuiwmfj20a7tt" path="res://Art/Materials/metal.tres" id="37_la7xj"]
+[ext_resource type="Material" uid="uid://iagweyrwrs4k" path="res://Art/Materials/off_black.tres" id="38_lkrnr"]
 
 [sub_resource type="Resource" id="Resource_0jat8"]
 script = ExtResource("2_k1gww")
@@ -43,219 +16,9 @@ faction = 3
 population = 4
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
-[sub_resource type="Resource" id="Resource_ogcrv"]
-script = ExtResource("3_ol2qc")
-lines = Array[String](["You here to buy or sell?"])
-speaker = 1
-metadata/_custom_type_script = "uid://de6rxup5nru4w"
-
-[sub_resource type="Resource" id="Resource_84y0d"]
-script = ExtResource("4_o7pm5")
-text = "Trade"
-destination = 9
-metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
-
-[sub_resource type="Resource" id="Resource_it00d"]
-script = ExtResource("4_o7pm5")
-text = "Take jobs"
-destination = 2
-metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
-
-[sub_resource type="Resource" id="Resource_rocs7"]
-script = ExtResource("4_o7pm5")
-text = "Return jobs"
-destination = 3
-metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
-
-[sub_resource type="Resource" id="Resource_k764k"]
-script = ExtResource("4_o7pm5")
-text = "Leave"
-destination = 4
-metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
-
-[sub_resource type="Resource" id="Resource_3vihp"]
-script = ExtResource("5_gkq58")
-options = Array[ExtResource("4_o7pm5")]([SubResource("Resource_84y0d"), SubResource("Resource_it00d"), SubResource("Resource_rocs7"), SubResource("Resource_k764k")])
-metadata/_custom_type_script = "uid://cnu4xeujmgk51"
-
-[sub_resource type="Resource" id="Resource_wji5k"]
-script = ExtResource("6_0wvw7")
-method = "enter_job_board"
-speaker = 1
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
-
-[sub_resource type="Resource" id="Resource_i588a"]
-script = ExtResource("8_te7rf")
-metadata/_custom_type_script = "uid://c6knlgr6wx0i1"
-
-[sub_resource type="Resource" id="Resource_la7xj"]
-script = ExtResource("6_0wvw7")
-method = "return_quests"
-arguments = [SubResource("Resource_i588a"), 5, 7]
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
-
-[sub_resource type="Resource" id="Resource_lkrnr"]
-script = ExtResource("6_0wvw7")
-method = "exit_to_game"
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
-
-[sub_resource type="Resource" id="Resource_eqpsa"]
-script = ExtResource("3_ol2qc")
-lines = Array[String](["Nice work! Here's the reward."])
-speaker = 1
-metadata/_custom_type_script = "uid://de6rxup5nru4w"
-
-[sub_resource type="Resource" id="Resource_h1sig"]
-script = ExtResource("9_qwjv1")
-next_index = 1
-metadata/_custom_type_script = "uid://px5dr31pd885"
-
-[sub_resource type="Resource" id="Resource_24kub"]
-script = ExtResource("3_ol2qc")
-lines = Array[String](["Looks like you haven't completed any jobs."])
-speaker = 1
-metadata/_custom_type_script = "uid://de6rxup5nru4w"
-
-[sub_resource type="Resource" id="Resource_7pdxe"]
-script = ExtResource("9_qwjv1")
-next_index = 1
-metadata/_custom_type_script = "uid://px5dr31pd885"
-
-[sub_resource type="Resource" id="Resource_panqy"]
-script = ExtResource("6_0wvw7")
-method = "enter_shop"
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
-
-[sub_resource type="Resource" id="Resource_ydedg"]
-script = ExtResource("9_qwjv1")
-next_index = 1
-metadata/_custom_type_script = "uid://px5dr31pd885"
-
-[sub_resource type="Resource" id="Resource_5faom"]
-script = ExtResource("10_mkt2b")
-skin_colors = Array[Color]([Color(0.8117647, 0.5882353, 0.3764706, 1)])
-hair_colors = Array[Color]([Color(0.2901961, 0.09803922, 0, 1)])
-hair_styles = Array[Texture]([ExtResource("11_8sm2v")])
-faces = Array[Texture]([ExtResource("10_7jsld")])
-shirts = Array[Texture]([ExtResource("13_bnevc")])
-pants_colors = Array[Color]([Color(0.16862746, 0.13333334, 0.13333334, 1)])
-shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1)])
-metadata/_custom_type_script = "uid://b80ipr8q70gqm"
-
-[sub_resource type="Resource" id="Resource_ym52c"]
-script = ExtResource("11_7t7n5")
-bubbles = Array[ExtResource("3_ol2qc")]([SubResource("Resource_ogcrv"), SubResource("Resource_3vihp"), SubResource("Resource_wji5k"), SubResource("Resource_la7xj"), SubResource("Resource_lkrnr"), SubResource("Resource_eqpsa"), SubResource("Resource_h1sig"), SubResource("Resource_24kub"), SubResource("Resource_7pdxe"), SubResource("Resource_panqy"), SubResource("Resource_ydedg")])
-npc_style = SubResource("Resource_5faom")
-npc_name = "Speed"
-metadata/_custom_type_script = "uid://c7wqhgal4us2a"
-
-[sub_resource type="Resource" id="Resource_bnevc"]
-script = ExtResource("14_mkt2b")
-object_to_spawn = ExtResource("16_7t7n5")
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_7ervs"]
-script = ExtResource("14_mkt2b")
-object_to_spawn = ExtResource("15_mkt2b")
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_e8jdv"]
-script = ExtResource("14_mkt2b")
-object_to_spawn = ExtResource("20_rocs7")
-spawn_chance = 0.2
-max_amount = 2
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_g8r3v"]
-script = ExtResource("14_mkt2b")
-object_to_spawn = ExtResource("21_k764k")
-spawn_chance = 0.2
-max_amount = 2
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_h7l10"]
-script = ExtResource("14_mkt2b")
-object_to_spawn = ExtResource("22_3vihp")
-spawn_chance = 0.2
-max_amount = 10
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_a1wvb"]
-script = ExtResource("14_mkt2b")
-object_to_spawn = ExtResource("23_wji5k")
-spawn_chance = 0.2
-max_amount = 2
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_j3mqp"]
-script = ExtResource("14_mkt2b")
-object_to_spawn = ExtResource("24_la7xj")
-spawn_chance = 2.0
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_bd2jn"]
-resource_local_to_scene = true
-script = ExtResource("19_7t7n5")
-min_amount = 5
-max_amount = 10
-potential_slots = Array[ExtResource("14_mkt2b")]([SubResource("Resource_bnevc"), SubResource("Resource_7ervs"), SubResource("Resource_e8jdv"), SubResource("Resource_g8r3v"), SubResource("Resource_h7l10"), SubResource("Resource_a1wvb"), SubResource("Resource_j3mqp")])
-repeat_entries = false
-space = 50
-money = 1000
-title = "Drug Den"
-metadata/_custom_type_script = "uid://b34kwea65we13"
-
-[sub_resource type="Resource" id="Resource_ibe1q"]
-script = ExtResource("27_wji5k")
-amount_min = 4
-amount_max = 8
-item = ExtResource("28_i588a")
-metadata/_custom_type_script = "uid://dc15s83haevrb"
-
-[sub_resource type="Resource" id="Resource_hocrx"]
-script = ExtResource("27_wji5k")
-amount_min = 4
-amount_max = 8
-item = ExtResource("29_i588a")
-metadata/_custom_type_script = "uid://dc15s83haevrb"
-
-[sub_resource type="Resource" id="Resource_ex6c5"]
-script = ExtResource("27_wji5k")
-amount_min = 5
-amount_max = 10
-item = ExtResource("29_la7xj")
-metadata/_custom_type_script = "uid://dc15s83haevrb"
-
-[sub_resource type="Resource" id="Resource_l1i85"]
-script = ExtResource("19_te7rf")
-potential_items = Array[ExtResource("27_wji5k")]([SubResource("Resource_ibe1q"), SubResource("Resource_hocrx"), SubResource("Resource_ex6c5")])
-metadata/_custom_type_script = "uid://bicpdyf13vj1j"
-
-[sub_resource type="Resource" id="Resource_etgqd"]
-script = ExtResource("23_7jsld")
-rewards = null
-target_factions = Array[int]([4, 2])
-metadata/_custom_type_script = "uid://ds2br0dh5ir38"
-
-[sub_resource type="Resource" id="Resource_6rs7t"]
-script = ExtResource("13_7jsld")
-inventory = SubResource("Resource_bd2jn")
-price_modifiers = {
-"Ammo": 0.5,
-"Armor": 0.5,
-"Consumables": 0.75,
-"Gear": 0.5,
-"Junk": 0.75,
-"Survival": 0.75,
-"Weapons": 0.5
-}
-dialogue = SubResource("Resource_ym52c")
-random_quests = Array[ExtResource("21_dckhe")]([SubResource("Resource_l1i85"), SubResource("Resource_etgqd")])
-min_quests = 1
-max_quests = 3
-faction = 3
-title = "Drug Den"
-metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_la7xj"]
+radius = 2.1811523
+height = 7.4472656
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ohuf"]
 albedo_texture = ExtResource("27_ogcrv")
@@ -296,26 +59,103 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AABgwAAAwD8AAMC/AABgwAAAwL8AAMC/DDdfQP//vz8AAMC/AABgQAAAwL/Xb7O/AABgQDMzsz8zM7O/AABgQP//vz/Xb7O/AABgwAAAwL8AAMA/AABgwAAAwL97sbw/AABgwP//vz97sbw/AABgQAAAwD/QzEy9AABgQAAAwD+ambk/AABgwAAAwD8AAMC/AABgwAAAwL8AAMA/+LBcQAAAwL/oQbe/DDdfQAAAwL8AAMC/DDdfQAAAwL8AAMC/Sm5ewAAAwL/oQbc/AABgwAAAwL97sbw/DDdfQAAAwL8AAMC/AABgwAAAwL97sbw/AABgwAAAwL8AAMA/AABgwP//vz97sbw/AABgQAAAwD8AAMA/AABgwAAAwD8AAMA/AABgwAAAwD8AAMC/AABgwAAAwD+ambm/AABgwAAAwL+ambm/AABgQAAAwD/QzEy9AABgwAAAwD8AAMC/DDdfQP//vz8AAMC/AABgwP//vz97sbw/AABgwP//vz8NcrU/AABgQAAAwD8AAMA/AABgwP//vz8NcrU/AABgwAAAwD/QzEw9AABgQAAAwD8AAMA/AABgwDMzs78zM7M/AABgwDMzsz8zM7M/AABgwAAAwL8NcrU/AABgQAAAwD8AAMA/AABgwAAAwD+ambm/AABgwAAAwD8AAMC/AABgQAAAwL8AAMA/AABgQAAAwD8AAMA/AABgQAAAwL+ambk/AABgwAAAwD/QzEw9AABgwAAAwD+ambm/AABgQAAAwD8AAMA/AABgwAAAwD8AAMA/AABgQAAAwD8AAMA/AABgwAAAwL8AAMA/AABgwAAAwL8NcrU/AABgwDMzsz8zM7M/AABgwP//vz8NcrU/AABgwAAAwL8AAMA/AABgwP//vz97sbw/AABgwAAAwD8AAMA/AABgQAAAwL/QzEy9AABgwAAAwL8AAMA/AABgQAAAwL+ambk/AABgwAAAwD/QzEw9AABgwDMzsz8zM7M/AABgwDMzsz/QzEw9AABgQAAAwD8AAMA/AABgQAAAwL8AAMA/AABgwAAAwL8AAMA/AABgQAAAwL+ambk/AABgwAAAwL8AAMA/AABgQAAAwL8AAMA/AABgwP//vz8NcrU/AABgwDMzsz8zM7M/AABgwAAAwD/QzEw9AABgwDMzs7/QzEw9AABgwAAAwL8NcrU/AABgwAAAwL/QzEw9AABgQDMzs7/QzEy9AABgQAAAwL/Xb7O/AABgQAAAwL/QzEy9AABgwAAAwL8AAMC/AABgwAAAwD8AAMC/AABgwAAAwL+ambm/AABgQDMzsz8zM7O/AABgQAAAwL/Xb7O/AABgQDMzs78zM7O/AABgQAAAwD+ambk/AABgQAAAwL+ambk/AABgQAAAwD8AAMA/AABgQDMzs78zM7O/AABgQAAAwL/Xb7O/AABgQDMzs7/QzEy9AABgwAAAwL+ambm/DDdfQAAAwL8AAMC/AABgwAAAwL8AAMC/AABgwAAAwL/QzEw9DDdfQAAAwL8AAMC/AABgwAAAwL+ambm/AABgQAAAwL/Xb7O/+LBcQAAAwL/oQbe/AABgQAAAwL/QzEy9AABgwAAAwL/QzEw9Sm5ewAAAwL/oQbc/DDdfQAAAwL8AAMC/AABgQAAAwL/QzEy9+LBcQAAAwL/oQbe/AABgwAAAwL8AAMA/AABgwAAAwD8AAMC/AABgQAAAwD+ambk/AABgQAAAwD8AAMA/AABgQP//vz/Xb7O/AABgQDMzsz/QzEy9AABgQAAAwD/QzEy9AABgwAAAwL8NcrU/Sm5ewAAAwL/oQbc/AABgwAAAwL/QzEw9AABgwDMzs78zM7M/AABgwAAAwL8NcrU/AABgwDMzs7/QzEw9DDdfQP//vz8AAMC/AABgQP//vz/Xb7O/AABgQAAAwD/QzEy9AABgQDMzsz8zM7O/AABgQDMzsz/QzEy9AABgQP//vz/Xb7O/AABgQP//vz/Xb7O/DDdfQP//vz8AAMC/AABgQAAAwD8AAMC/AABgQAAAwD8AAMC/AABgQP//vz8AAMC/AABgQP//vz/Xb7O/AABgQAAAwD8AAMC/DDdfQP//vz8AAMC/AABgQP//vz8AAMC/DDdfQAAAwL8AAMC/DDdfQP//vz8AAMC/AABgwAAAwL8AAMC/AABgQDMzsz8zM7M/AABgwDMzsz/QzEw9AABgwDMzsz8zM7M/AABgQDMzs78zM7O/AABgQDMzs7/QzEy9AABgwDMzs78zM7M/AABgwDMzs78zM7M/AABgQDMzs7/QzEy9AABgQDMzs78zM7M/AABgwDMzsz/QzEw9AABgQDMzsz8zM7M/AABgwDMzsz8zM7O/AABgQDMzsz8zM7M/AABgwDMzsz8zM7M/AABgwDMzs78zM7M/AABgwDMzsz8zM7O/AABgQDMzsz8zM7O/AABgQDMzs78zM7O/AABgwDMzs7/QzEw9AABgwDMzs78zM7O/AABgQDMzs78zM7O/AABgwDMzsz8zM7O/AABgQDMzsz/QzEy9AABgQDMzsz8zM7O/AABgQDMzsz/QzEy9AABgwDMzsz8zM7O/AABgQDMzsz8zM7M/AABgwDMzs7/QzEw9AABgQDMzs78zM7O/AABgwDMzs78zM7M/AABgQDMzs78zM7M/AABgQDMzsz8zM7M/AABgwDMzs78zM7M/AABgwDMzs78zM7O/AABgwDMzsz8zM7O/AABgQDMzs78zM7O/AABgQDMzsz/QzEy9ZmZmQAAAwL/QzEy9AABgQAAAwD/QzEy9ZmZmQAAAwD/QzEy9ZmZmQAAAwD+ambk/AABgQAAAwD/QzEy9ZmZmQAAAwL/QzEy9AABgQDMzs7/QzEy9AABgQAAAwL/QzEy9ZmZmQAAAwD+ambk/AABgQAAAwL+ambk/AABgQAAAwD+ambk/ZmZmQAAAwD+ambk/ZmZmQAAAwD/QzEy9ZmZmQAAAwL/QzEy9AABgQDMzsz/QzEy9AABgQDMzs7/QzEy9ZmZmQAAAwL/QzEy9AABgQDMzsz8zM7M/AABgQDMzs7/QzEy9AABgQDMzsz/QzEy9ZmZmQAAAwL/QzEy9ZmZmQAAAwD/QzEy9AABgQAAAwD/QzEy9ZmZmQAAAwD+ambk/AABgQAAAwD+ambk/AABgQAAAwD/QzEy9ZmZmQAAAwL+ambk/ZmZmQAAAwD+ambk/ZmZmQAAAwL/QzEy9AABgQAAAwL+ambk/ZmZmQAAAwD+ambk/ZmZmQAAAwL+ambk/AABgQDMzs7/QzEy9AABgQDMzsz8zM7M/AABgQDMzs78zM7M/AABgQAAAwL+ambk/ZmZmQAAAwL+ambk/ZmZmQAAAwL/QzEy9ZmZmQAAAwL/QzEy9AABgQAAAwL/QzEy9AABgQAAAwL+ambk/AABgQAAAwL/Xb7O/M+qXQAEAwL/Qgy6/DDdfQAAAwL8AAMC/KuRfQAEAwL+yV8K/KuRfQP//vz+yV8K/DDdfQP//vz8AAMC/zIOZQP//vz9kr0S/KuRfQP//vz+yV8K/KuRfQAEAwL+yV8K/AABgQAAAwL/Xb7O/AABgQP//vz/Xb7O/M+qXQP//vz/Qgy6/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/v/+f/9////+//5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3///wAA/n//f///AAD+f/9///8AAP5//3//////AAD/f/////8AAP9//////wAA/3/+/wAAAAD/f/7/AAAAAP9//v8AAAAAAAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5//3//////AAD/f/////8AAP9//////wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAAAAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//38AAP//AAD/fwAA//8AAP9/AAD//wAAAAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/////f/9//n////9//3/+f////3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5//38AAP//AAD/fwAAAAAAAP9/AAD//wAA/38AAAAAAAD/fwAAAAAAAP9/AAD//wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/38AAAAAAAD/fwAAAAAAAP9/AAAAAAAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5//38AAP//AAD/fwAAAAAAAP9/AAAAAAAAAAD/f/9//n8AAP9//3/+fwAA/3//f/5//3/+/////n//f/7////+f/9//v////5/////f/9//n////9//3/+f////3//f/5//3/+//7/AAD/f/7//v8AAP9//v/+/wAA////f/9//n////9//3/+f////38AAACA/////wAA/z//////AAD/P/////8AAP8//////wAA/z//////AAD/P/////8AAP8//38AAP//////fwAA//////9/AAD//////3//////////f/////////9//////////3//////////f/////////9//////////38AAP//////fwAA//////9/AAD//////////wAA/7//////AAD/v/////8AAP+//3//fwAA/7//f/9/AAD/v/9//38AAP+//3//////////f/////////9//////////38AAP//////fwAA//////9/AAD//////38AAP//////fwAA//////9/AAD//////3//////////f/////////9//////////////wAA/7//////AAD/v/////8AAP+//3//fwAA/7//f/9/AAD/v/9//38AAP+//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA/////wAA/z//////AAD/P/////8AAP8//3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5//////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/38AAAAAkij/fwAAAACSKP9/AAAAAJIoAADZriVR/z8AANmuJVH/PwAA2a4lUf8///8l0f9//n///yXR/3/+f///JdH/f/5/JVH/f/9//n8lUf9//3/+fyVR/3//f/5/JdH/fyVR/z8l0f9/JVH/PyXR/38lUf8//3///wAAkij/f///AACSKP9///8AAJIo/3///wAAkij/f///AACSKP9///8AAJIo/3///wAAkij/f///AACSKP9///8AAJIo/3///wAAkij/f///AACSKP9///8AAJIo/38AAAAAkij/fwAAAACSKP9/AAAAAJIoAADZriVR/z8AANmuAAAAgAAA2a4lUf8//38AAAAAbFf/fwAAAABsV/9/AAAAAGxXJdH/fyVR/z8l0f9/JVH/PyXR/38lUf8/JVH/f/9//n8lUf9//3/+fyVR/3//f/5/JVH/f/9//n8lUf9//3/+fyVR/3//f/5///8l0f9//n///yXR/3/+f///JdH/f/5//38AAAAAkij/fwAAAACSKP9/AAAAAJIoAADZriVR/z8AANmuJVH/PwAA2a4lUf8//38AAP9//z//fwAA/3//P/9/AAD/f/8//////////z//////////P/////////8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/////f/9//n////9//3/+f////3//f/5//3//f/7//z//f/9//v//P/9//3////8//3//f/7//z//f/9//v//P/9//3/+//8//38AAP9//z//fwAA/3//P/9/AAD/f/8//////////z//////////P/////////8/////f/9//n////9//3/+f////3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3////9//z//f////3//P/9/////f/8//3////9//z//f////3//P/9/////f/8//3//f/7//z//f/9//v//P/9//3/+//8//3//f////z//f/9//v//P/9//3/+//8///8l0QAAAID//yXR/3/+f///JdH/f/5//3///yXR/z//f///JdH/P/9///8l0f8//3///yXR/z//f///JdH/P/9///8l0f8//3///yXR/z//f///JdH/P/9///8l0f8/JdH/f///bBcl0f9///9sFyXR/3///2wXJVH/f/9//n8lUf9//3/+fyVR/3//f/5///8l0f9//n///yXR/3/+f///JdH/f/5//38AACXR/z//fwAAJdH/P/9/AAAl0f8//38AACXR/z//fwAAJdH/P/9/AAAl0f8/AADZrv//bBcAANmu//9sFwAA2a7//2wX//8l0f9//n///yXR/3/+f///JdH/f/5//38AACXR/z//fwAAJdH/P/9/AAAl0f8/JdH/f///bBcl0f9///9sFyXR/3///2wX/38AACXR/z//fwAAJdH/P/9/AAAl0f8/AADZrv//bBcAANmu//9sFwAA2a7//2wXJVH/f/9//n8lUf9//3/+fyVR/3//f/5/JdH/f///bBcl0f9///9sFyXR/3///2wX")
 }]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p1jdu"]
+resource_name = "metal"
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gynic"]
+resource_name = "signs"
+transparency = 4
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dbwbj"]
+_surfaces = [{
+"aabb": AABB(-0.2835, 0, -0.066999994, 0.567, 0.3, 0.13399999),
+"format": 34896613377,
+"index_count": 102,
+"index_data": PackedByteArray("EQASABMAEgARABMAFAATABEAEwAUABEAEQAVABQAFQARABQAFgAUABUAFAAWABUAAQAXABgAFwABABgAAgAYAAEAGAACAAEAAQAZAAIAGQABAAIAAAACABkAAgAAABkAAwAEAAUABgAEAAMAAwAIAAYACAAKAAYACAAMAAoADAAOAAoADAAQAA4ADgAQABoAEAAPABoAGgALAA4ACwAaAA8ACwAPAA0ACwANAAkABQALAAkAGwAFAAkABQAbAAMACQAHABsAGwAHAAMA"),
+"lods": [0.09339293, PackedByteArray("AAABAAIAAQAAAAIAAwAEAAUABgAEAAMABQAHAAMAAwAIAAYABwAFAAkACAAKAAYABQALAAkACAAMAAoACwANAAkADAAOAAoACwAPAA0ADwALAA4ADAAQAA4ADgAQAA8A")],
+"name": "metal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 28,
+"vertex_data": PackedByteArray("AAAAAAAAAAA/Hv///38AAAAA////fwAAv+H//8KvAAC/4f//PFAAAL/hqao8UAAAf8P//zxQAAC/4amqwq8AAH/D///CrwAAf8OpqsKvAAB/PP//PFAAAD8eqao8UAAAfzz//8KvAAB/PKmqwq8AAD8e//88UAAAPx6pqsKvAAA/Hv//wq8AAL/h////fwAAv+EAAAAAAAD//wAAAAAAAP//////fwAAv+EAAP//AAD//wAA//8AAD8eAAD//wAAAAAAAP//AAA/HgAAAAAAAD8eqar/fwAAv+Gpqv9/AAA=")
+}, {
+"aabb": AABB(-0.21650001, 0.2, -0.025, 0.43300003, 0.10000001, 0.050000004),
+"format": 34896613377,
+"index_count": 30,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwAEAAAAAwAFAAQABgAHAAgACAAJAAYACQAKAAYACgALAAYACwAMAAYACwANAAwA"),
+"name": "signs",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 14,
+"vertex_data": PackedByteArray("AAD//wAAAAAAAAAAAAAAAP//AAAAAAAA/////wAAAACcJ///AAAAAGLY//8AAAAA//////7/AAD//wAA/v8AAGLYAAD+/wAAnCcAAP7/AAAAAAAA/v8AAAAA///+/wAAYtj///7/AACcJ/////8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_pnkan"]
+resource_name = "detail-barrier-type-b_detail-barrier-type-b"
+_surfaces = [{
+"aabb": AABB(-0.2835, 0, -0.066999994, 0.567, 0.3, 0.13399999),
+"attribute_data": PackedByteArray("uYZ2nSKFiZS5homUIoWJlLmGdp25homUrc9rkd3Qa5Hd0FOUrc9TlP//i/7/////Z/6L/rj1//9P94v+uPWL/pcB//8AAP//AACL/pcBi/6vCP//rwiL/kYK//9GCov+UTBTlCEvU5QhL2uRUTBrkdx6iZTcenadRXl2nUV5iZTcenad3HqJlEV5dp1FeYmUuYaJlLmGdp0ihXadIoWJlLmGdp25homUIoV2nSKFiZTceomU3Hp2nUV5dp1FeYmU3Hp2ndx6iZRFeXadRXmJlCKFdp0ihXadRdBTlP//Rf+49UX/uS9TlA=="),
+"format": 34896613399,
+"index_count": 102,
+"index_data": PackedByteArray("HAAdAB4AHgAfABwAIAAhACIAIwAiACEAJAAlACYAJgAnACQAKAApACoAKwAqACkALAAtAC4ALgAvACwAMAAxADIAMwAyADEAAgAAADQANAABAAIABAAFADUAAwA1AAUABgAHAAgACAA2AAYANgAJAAYADAAKADcANwALAAwACwANAAwADQAOAAwADQAPAA4ADQA4AA8AEAARABIAEgATABAAEwAUABAAEwAVABQAFQAWABQAFQAXABYAOQAZABoAGgAbADkAGwAYADkA"),
+"lods": [0.09339293, PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACAAJAAYACgALAAwACwANAAwADQAOAAwADQAPAA4AEAARABIAEgATABAAEwAUABAAEwAVABQAFQAWABQAFQAXABYAGAAZABoAGgAbABgA")],
+"material": SubResource("StandardMaterial3D_p1jdu"),
+"name": "metal",
+"primitive": 3,
+"uv_scale": Vector4(10.787533, 8.815422, 0, 0),
+"vertex_count": 58,
+"vertex_data": PackedByteArray("AAAAAAAA//8/Hv///3///wAA////f///Px7///9/AAAAAAAAAAAAAAAA////fwAAv+H//8Kv/7+/4f//PFD/v7/hqao8UP+/v+GpqsKv/7+/4amqwq//v7/hqao8UP+/f8OpqsKv/78/HqmqPFD/v388qarCr/+/Px6pqsKv/79/w///PFD//7/h//88UP//v+H//8Kv//9/w///wq///388//88UP//fzz//8Kv//8/Hv//PFD//z8e///Cr///Px6pqsKv/78/HqmqPFD/vz8e//88UP+/Px7//8Kv/7+/4f///3///7/hAAAAAP////8AAAAA/////////3///7/hAAAAAAAAv+H///9/AAD//wAAAAAAAP//////fwAA//////9/84j//wAA///ziL/hAAD///OIv+H///9/84j//wAA///zCP//////f/MIv+EAAP//8wi/4f///3/zCD8e////f/OIPx4AAP//84gAAAAA///ziAAA////f/OIPx4AAP//8wg/Hv///3/zCAAAAAD///MIAAD///9/8wg/HgAAAAD//z8eAAAAAAAAv+Gpqv9//7+/4amq/3//vz8eqar/f///Px6pqv9//7//f0fz/39H8/9/R/P/f0hz/39Ic/9/SHP/fwAA/38AAP9/AAD/fwAAAAD/fwAA/38AAP9/AAD/fwAA/38AAP9//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f////3////9/////f////39H8/9/R/P/f0fz/39H8/9/SHP/f0hz/39Ic/9/SHP///9/////f////3////9/AAD/fwAA/38AAP9/AAD/f////3////9/////f////38AAP9/AAD/fwAA/38AAP9//39H8/9/SHP/fwAAAAD/f/9//z//f///")
+}, {
+"aabb": AABB(-0.21650001, 0.2, -0.025, 0.43300003, 0.10000001, 0.050000004),
+"attribute_data": PackedByteArray("//8z8v////+4qf//uKkz8qXyM/IRtzPy//8z8v////+l8v//Ebf//7ip//+4qTPypfIz8hG3M/I="),
+"format": 34896613399,
+"index_count": 30,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwAEAAAAAwAFAAQABgAHAAgACAAJAAYACQAKAAYACgALAAYACwAMAAYACwANAAwA"),
+"material": SubResource("StandardMaterial3D_gynic"),
+"name": "signs",
+"primitive": 3,
+"uv_scale": Vector4(1.5651054, 2.2607346, 0, 0),
+"vertex_count": 14,
+"vertex_data": PackedByteArray("AAD//wAA//8AAAAAAAD/////AAAAAP///////wAA//+cJ///AAD//2LY//8AAP////////7/AID//wAA/v8AgGLYAAD+/wCAnCcAAP7/AIAAAAAA/v8AgAAA///+/wCAYtj///7///+cJ/////////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9//3//f/9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_dbwbj")
+
 [node name="DrugDen" unique_id=1342811121 instance=ExtResource("1_x317r")]
-title = "Drug Den"
+title = "Rager Commune"
 location_data = SubResource("Resource_0jat8")
-shop = SubResource("Resource_6rs7t")
+town = ExtResource("3_2cmfo")
+
+[node name="CollisionShape3D" parent="." index="0" unique_id=1772758538]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, -0.6014367)
+shape = SubResource("CapsuleShape3D_la7xj")
 
 [node name="Flagpole" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="0" unique_id=800258272]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -8)
 visible = true
 
-[node name="Shack" type="Node3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="1" unique_id=85709090]
-transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -4, 0, 0)
-
-[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Meshes/Shack" index="0" unique_id=1516860789]
+[node name="CSGBakedMeshInstance3D2" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="1" unique_id=1516860789 groups=["align_aabb"]]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -5.5562134, 9.536743e-07, 1.2332487)
 mesh = SubResource("ArrayMesh_32b5i")
+skeleton = NodePath("")
 surface_material_override/0 = ExtResource("28_84y0d")
 
-[node name="SpawnRadius" type="Node3D" parent="Meshes/Shack" index="1" unique_id=1248345973]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+[node name="CSGBakedMeshInstance3D3" type="MeshInstance3D" parent="Meshes/CSGBakedMeshInstance3D2" index="0" unique_id=1474444621]
+transform = Transform3D(0.9266206, 0, 0.37599787, 0, 1, 0, -0.37599787, 0, 0.9266206, 0, 3.267846, 0)
+mesh = SubResource("ArrayMesh_32b5i")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("28_84y0d")
 
-[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="2" unique_id=1837403267]
+[node name="CSGBakedMeshInstance3D4" type="MeshInstance3D" parent="Meshes/CSGBakedMeshInstance3D2" index="1" unique_id=377776266]
+transform = Transform3D(0.95259774, 0, -0.30423257, 0, 1, 0, 0.30423257, 0, 0.95259774, 0, 6.5465884, 0)
+mesh = SubResource("ArrayMesh_32b5i")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("28_84y0d")
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="2" unique_id=1837403267 groups=["align_normal"]]
 transform = Transform3D(-0.47105807, 0, 0.8821022, 0, 1, 0, -0.8821022, 0, -0.47105807, 8, 1.49258, 0)
 mesh = SubResource("ArrayMesh_teulj")
 skeleton = NodePath("")
@@ -325,7 +165,49 @@ transform = Transform3D(0.6094674, 0, -0.79281116, 0, 1, 0, 0.79281116, 0, 0.609
 mesh = SubResource("ArrayMesh_teulj")
 skeleton = NodePath("")
 
-[node name="PointOfInterest" parent="." index="4" unique_id=2144080138]
+[node name="detail-barrier-type-b" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="3" unique_id=477869576 groups=["align_normal"]]
+transform = Transform3D(5.2993817, 0, 1.406816, 0, 2.999998, 0, -2.8136303, 0, 2.6496928, -11.750871, -0.017518748, -7.7871947)
+mesh = SubResource("ArrayMesh_pnkan")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("37_la7xj")
+surface_material_override/1 = ExtResource("38_lkrnr")
+
+[node name="detail-barrier-type-b2" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="4" unique_id=756686039 groups=["align_normal"]]
+transform = Transform3D(5.9073753, 0, 0.5250911, 0, 2.999998, 0, -1.0501815, 0, 2.9536896, -7.190979, -0.017518748, -10.05698)
+mesh = SubResource("ArrayMesh_pnkan")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("37_la7xj")
+surface_material_override/1 = ExtResource("38_lkrnr")
+
+[node name="detail-barrier-type-b3" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="5" unique_id=1270712359 groups=["align_normal"]]
+transform = Transform3D(5.9999824, 0, 0.006582916, 0, 2.9999964, 0, -0.0131646395, 0, 2.9999917, -2.339571, -0.017518736, -10.730935)
+mesh = SubResource("ArrayMesh_pnkan")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("37_la7xj")
+surface_material_override/1 = ExtResource("38_lkrnr")
+
+[node name="detail-barrier-type-b4" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="6" unique_id=1878449775 groups=["align_normal"]]
+transform = Transform3D(5.9995575, 0, 0.036164105, 0, 2.999998, 0, -0.07232833, 0, 2.9997811, 2.5033054, -0.017518748, -10.8792305)
+mesh = SubResource("ArrayMesh_pnkan")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("37_la7xj")
+surface_material_override/1 = ExtResource("38_lkrnr")
+
+[node name="detail-barrier-type-b5" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="7" unique_id=1511698238 groups=["align_normal"]]
+transform = Transform3D(5.974243, 0, -0.27763557, 0, 2.9999983, 0, 0.55526835, 0, 2.987126, 7.3818207, -0.01751875, -10.350168)
+mesh = SubResource("ArrayMesh_pnkan")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("37_la7xj")
+surface_material_override/1 = ExtResource("38_lkrnr")
+
+[node name="detail-barrier-type-b6" type="MeshInstance3D" parent="Meshes" parent_id_path=PackedInt32Array(354222542) index="8" unique_id=47421239 groups=["align_normal"]]
+transform = Transform3D(5.059528, 0, -1.6125383, 0, 2.9999983, 0, 3.2250752, 0, 2.5297656, 11.336434, -0.01751875, -8.444101)
+mesh = SubResource("ArrayMesh_pnkan")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("37_la7xj")
+surface_material_override/1 = ExtResource("38_lkrnr")
+
+[node name="PointOfInterest" parent="." index="3" unique_id=2144080138]
 show_faction = true
 
 [node name="HBoxContainer2" parent="PointOfInterest/CanvasLayer/CardOffset/VBoxContainer" parent_id_path=PackedInt32Array(2144080138, 1870797330) index="2" unique_id=1783460872]

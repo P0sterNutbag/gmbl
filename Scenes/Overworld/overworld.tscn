@@ -69,8 +69,6 @@
 [ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="51_v8snn"]
 [ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="53_ccrpr"]
 [ext_resource type="Resource" uid="uid://c8iwly4phm8u0" path="res://Resources/Shops/general_store.tres" id="53_dh8ic"]
-[ext_resource type="Resource" uid="uid://jbg7thtumlte" path="res://Resources/Shops/gunsmith.tres" id="54_2uctf"]
-[ext_resource type="Resource" uid="uid://blf6trysbrtg8" path="res://Resources/Shops/bounty_board.tres" id="55_2gpn5"]
 [ext_resource type="Texture2D" uid="uid://3th62q3x3liw" path="res://Art/Textures/Character/player face.png" id="56_61ge7"]
 [ext_resource type="Texture2D" uid="uid://c7vuenymtwna4" path="res://Art/Textures/Character/player face2.png" id="57_3le6t"]
 [ext_resource type="Texture2D" uid="uid://d1n2mow4a6dj" path="res://Art/Textures/Character/player face3.png" id="58_g8jxq"]
@@ -86,8 +84,9 @@
 [ext_resource type="Texture2D" uid="uid://c7ele6asl40c4" path="res://Art/Textures/Character/npc shirt bluesleeve.png" id="68_bn22a"]
 [ext_resource type="Script" uid="uid://px5dr31pd885" path="res://Scripts/dialogue_loop.gd" id="72_6l6oi"]
 [ext_resource type="PackedScene" uid="uid://cemkkubm7a1qc" path="res://Scenes/Overworld/Locations/drug_den.tscn" id="79_nggm6"]
-[ext_resource type="PackedScene" uid="uid://csjsfdmnghtqx" path="res://Scenes/Overworld/Locations/scrapyard.tscn" id="80_nggm6"]
+[ext_resource type="Resource" uid="uid://d1uiedufko804" path="res://Resources/Shops/saloon.tres" id="87_t56bl"]
 [ext_resource type="PackedScene" uid="uid://bpdq0mtuutax3" path="res://Scenes/Overworld/Locations/generic_location.tscn" id="90_cvr5w"]
+[ext_resource type="PackedScene" uid="uid://nxh2gpqx0uwj" path="res://Scenes/Overworld/Locations/jackal_fort.tscn" id="90_me12r"]
 [ext_resource type="Script" uid="uid://chxn6jj2cv0p3" path="res://Scripts/scatterer.gd" id="91_jby7l"]
 [ext_resource type="PackedScene" uid="uid://brrtfg5jynxnd" path="res://Scenes/Environment/Nature/rock.tscn" id="92_t56bl"]
 [ext_resource type="PackedScene" uid="uid://kuu6sm3g6q1y" path="res://Scenes/Environment/Nature/rock_long.tscn" id="93_me12r"]
@@ -209,7 +208,7 @@ script = ExtResource("33_ku0d1")
 object_to_spawn = ExtResource("45_3k4bo")
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_jby7l"]
+[sub_resource type="Resource" id="Resource_t56bl"]
 resource_local_to_scene = true
 script = ExtResource("46_lgnbj")
 min_amount = 3
@@ -219,10 +218,10 @@ money = 500
 title = "Squad Inventory"
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
-[sub_resource type="Resource" id="Resource_t56bl"]
+[sub_resource type="Resource" id="Resource_me12r"]
 resource_local_to_scene = true
 script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_jby7l")
+inventory = SubResource("Resource_t56bl")
 price_modifiers = {
 "Ammo": 0.5,
 "Armor": 0.5,
@@ -338,219 +337,219 @@ pants_colors = Array[Color]([Color(0.48, 0.21888001, 0.15359999, 1), Color(0.443
 shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1), Color(0.16862746, 0.08627451, 0, 1), Color(0.23921569, 0.23921569, 0.23921569, 1)])
 metadata/_custom_type_script = "uid://b80ipr8q70gqm"
 
-[sub_resource type="Resource" id="Resource_me12r"]
+[sub_resource type="Resource" id="Resource_bqxwu"]
 resource_local_to_scene = true
 script = ExtResource("53_ccrpr")
 bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_32ux6"), SubResource("Resource_hjxsh"), SubResource("Resource_7tr15"), SubResource("Resource_vxxxk"), SubResource("Resource_eiedg"), SubResource("Resource_hyxfw"), SubResource("Resource_o0qth"), SubResource("Resource_ayre3"), SubResource("Resource_67ejp")])
 npc_style = SubResource("Resource_utl1j")
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
-
-[sub_resource type="Resource" id="Resource_bqxwu"]
-resource_local_to_scene = true
-script = ExtResource("46_lgnbj")
-min_amount = 3
-max_amount = 8
-potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
-money = 500
-title = "Squad Inventory"
-metadata/_custom_type_script = "uid://b34kwea65we13"
 
 [sub_resource type="Resource" id="Resource_cvr5w"]
 resource_local_to_scene = true
-script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_bqxwu")
-price_modifiers = {
-"Ammo": 0.5,
-"Armor": 0.5,
-"Consumable": 0.75,
-"Gear": 0.75,
-"Junk": 0.75,
-"Survival": 0.75,
-"Weapons": 0.5
-}
-faction = null
-title = "Traveler"
-metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+script = ExtResource("46_lgnbj")
+min_amount = 3
+max_amount = 8
+potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
+money = 500
+title = "Squad Inventory"
+metadata/_custom_type_script = "uid://b34kwea65we13"
 
 [sub_resource type="Resource" id="Resource_4o6vd"]
 resource_local_to_scene = true
-script = ExtResource("53_ccrpr")
-bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_32ux6"), SubResource("Resource_hjxsh"), SubResource("Resource_7tr15"), SubResource("Resource_vxxxk"), SubResource("Resource_eiedg"), SubResource("Resource_hyxfw"), SubResource("Resource_o0qth"), SubResource("Resource_ayre3"), SubResource("Resource_67ejp")])
-npc_style = SubResource("Resource_utl1j")
-metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+script = ExtResource("49_pay3g")
+inventory = SubResource("Resource_cvr5w")
+price_modifiers = {
+"Ammo": 0.5,
+"Armor": 0.5,
+"Consumable": 0.75,
+"Gear": 0.75,
+"Junk": 0.75,
+"Survival": 0.75,
+"Weapons": 0.5
+}
+faction = null
+title = "Traveler"
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [sub_resource type="Resource" id="Resource_5yx2b"]
 resource_local_to_scene = true
-script = ExtResource("46_lgnbj")
-min_amount = 3
-max_amount = 8
-potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
-money = 500
-title = "Squad Inventory"
-metadata/_custom_type_script = "uid://b34kwea65we13"
+script = ExtResource("53_ccrpr")
+bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_32ux6"), SubResource("Resource_hjxsh"), SubResource("Resource_7tr15"), SubResource("Resource_vxxxk"), SubResource("Resource_eiedg"), SubResource("Resource_hyxfw"), SubResource("Resource_o0qth"), SubResource("Resource_ayre3"), SubResource("Resource_67ejp")])
+npc_style = SubResource("Resource_utl1j")
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
 [sub_resource type="Resource" id="Resource_ksfoy"]
 resource_local_to_scene = true
-script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_5yx2b")
-price_modifiers = {
-"Ammo": 0.5,
-"Armor": 0.5,
-"Consumable": 0.75,
-"Gear": 0.75,
-"Junk": 0.75,
-"Survival": 0.75,
-"Weapons": 0.5
-}
-faction = null
-title = "Traveler"
-metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+script = ExtResource("46_lgnbj")
+min_amount = 3
+max_amount = 8
+potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
+money = 500
+title = "Squad Inventory"
+metadata/_custom_type_script = "uid://b34kwea65we13"
 
 [sub_resource type="Resource" id="Resource_6l6oi"]
 resource_local_to_scene = true
-script = ExtResource("53_ccrpr")
-bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_32ux6"), SubResource("Resource_hjxsh"), SubResource("Resource_7tr15"), SubResource("Resource_vxxxk"), SubResource("Resource_eiedg"), SubResource("Resource_hyxfw"), SubResource("Resource_o0qth"), SubResource("Resource_ayre3"), SubResource("Resource_67ejp")])
-npc_style = SubResource("Resource_utl1j")
-metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+script = ExtResource("49_pay3g")
+inventory = SubResource("Resource_ksfoy")
+price_modifiers = {
+"Ammo": 0.5,
+"Armor": 0.5,
+"Consumable": 0.75,
+"Gear": 0.75,
+"Junk": 0.75,
+"Survival": 0.75,
+"Weapons": 0.5
+}
+faction = null
+title = "Traveler"
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [sub_resource type="Resource" id="Resource_ptrkr"]
 resource_local_to_scene = true
-script = ExtResource("46_lgnbj")
-min_amount = 3
-max_amount = 8
-potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
-money = 500
-title = "Squad Inventory"
-metadata/_custom_type_script = "uid://b34kwea65we13"
+script = ExtResource("53_ccrpr")
+bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_32ux6"), SubResource("Resource_hjxsh"), SubResource("Resource_7tr15"), SubResource("Resource_vxxxk"), SubResource("Resource_eiedg"), SubResource("Resource_hyxfw"), SubResource("Resource_o0qth"), SubResource("Resource_ayre3"), SubResource("Resource_67ejp")])
+npc_style = SubResource("Resource_utl1j")
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
 [sub_resource type="Resource" id="Resource_rsj15"]
 resource_local_to_scene = true
-script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_ptrkr")
-price_modifiers = {
-"Ammo": 0.5,
-"Armor": 0.5,
-"Consumable": 0.75,
-"Gear": 0.75,
-"Junk": 0.75,
-"Survival": 0.75,
-"Weapons": 0.5
-}
-faction = null
-title = "Traveler"
-metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+script = ExtResource("46_lgnbj")
+min_amount = 3
+max_amount = 8
+potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
+money = 500
+title = "Squad Inventory"
+metadata/_custom_type_script = "uid://b34kwea65we13"
 
 [sub_resource type="Resource" id="Resource_3k4bo"]
 resource_local_to_scene = true
-script = ExtResource("53_ccrpr")
-bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_32ux6"), SubResource("Resource_hjxsh"), SubResource("Resource_7tr15"), SubResource("Resource_vxxxk"), SubResource("Resource_eiedg"), SubResource("Resource_hyxfw"), SubResource("Resource_o0qth"), SubResource("Resource_ayre3"), SubResource("Resource_67ejp")])
-npc_style = SubResource("Resource_utl1j")
-metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+script = ExtResource("49_pay3g")
+inventory = SubResource("Resource_rsj15")
+price_modifiers = {
+"Ammo": 0.5,
+"Armor": 0.5,
+"Consumable": 0.75,
+"Gear": 0.75,
+"Junk": 0.75,
+"Survival": 0.75,
+"Weapons": 0.5
+}
+faction = null
+title = "Traveler"
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [sub_resource type="Resource" id="Resource_lgnbj"]
 resource_local_to_scene = true
-script = ExtResource("46_lgnbj")
-min_amount = 3
-max_amount = 8
-potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
-money = 500
-title = "Squad Inventory"
-metadata/_custom_type_script = "uid://b34kwea65we13"
+script = ExtResource("53_ccrpr")
+bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_32ux6"), SubResource("Resource_hjxsh"), SubResource("Resource_7tr15"), SubResource("Resource_vxxxk"), SubResource("Resource_eiedg"), SubResource("Resource_hyxfw"), SubResource("Resource_o0qth"), SubResource("Resource_ayre3"), SubResource("Resource_67ejp")])
+npc_style = SubResource("Resource_utl1j")
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
 [sub_resource type="Resource" id="Resource_rp2u8"]
 resource_local_to_scene = true
-script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_lgnbj")
-price_modifiers = {
-"Ammo": 0.5,
-"Armor": 0.5,
-"Consumable": 0.75,
-"Gear": 0.75,
-"Junk": 0.75,
-"Survival": 0.75,
-"Weapons": 0.5
-}
-faction = null
-title = "Traveler"
-metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+script = ExtResource("46_lgnbj")
+min_amount = 3
+max_amount = 8
+potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
+money = 500
+title = "Squad Inventory"
+metadata/_custom_type_script = "uid://b34kwea65we13"
 
 [sub_resource type="Resource" id="Resource_aj0wn"]
 resource_local_to_scene = true
-script = ExtResource("53_ccrpr")
-bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_32ux6"), SubResource("Resource_hjxsh"), SubResource("Resource_7tr15"), SubResource("Resource_vxxxk"), SubResource("Resource_eiedg"), SubResource("Resource_hyxfw"), SubResource("Resource_o0qth"), SubResource("Resource_ayre3"), SubResource("Resource_67ejp")])
-npc_style = SubResource("Resource_utl1j")
-metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+script = ExtResource("49_pay3g")
+inventory = SubResource("Resource_rp2u8")
+price_modifiers = {
+"Ammo": 0.5,
+"Armor": 0.5,
+"Consumable": 0.75,
+"Gear": 0.75,
+"Junk": 0.75,
+"Survival": 0.75,
+"Weapons": 0.5
+}
+faction = null
+title = "Traveler"
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [sub_resource type="Resource" id="Resource_pay3g"]
 resource_local_to_scene = true
-script = ExtResource("46_lgnbj")
-min_amount = 3
-max_amount = 8
-potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
-money = 500
-title = "Squad Inventory"
-metadata/_custom_type_script = "uid://b34kwea65we13"
+script = ExtResource("53_ccrpr")
+bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_32ux6"), SubResource("Resource_hjxsh"), SubResource("Resource_7tr15"), SubResource("Resource_vxxxk"), SubResource("Resource_eiedg"), SubResource("Resource_hyxfw"), SubResource("Resource_o0qth"), SubResource("Resource_ayre3"), SubResource("Resource_67ejp")])
+npc_style = SubResource("Resource_utl1j")
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
 [sub_resource type="Resource" id="Resource_61ge7"]
 resource_local_to_scene = true
-script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_pay3g")
-price_modifiers = {
-"Ammo": 0.5,
-"Armor": 0.5,
-"Consumable": 0.75,
-"Gear": 0.75,
-"Junk": 0.75,
-"Survival": 0.75,
-"Weapons": 0.5
-}
-faction = null
-title = "Traveler"
-metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+script = ExtResource("46_lgnbj")
+min_amount = 3
+max_amount = 8
+potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
+money = 500
+title = "Squad Inventory"
+metadata/_custom_type_script = "uid://b34kwea65we13"
 
 [sub_resource type="Resource" id="Resource_3le6t"]
 resource_local_to_scene = true
-script = ExtResource("53_ccrpr")
-bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_32ux6"), SubResource("Resource_hjxsh"), SubResource("Resource_7tr15"), SubResource("Resource_vxxxk"), SubResource("Resource_eiedg"), SubResource("Resource_hyxfw"), SubResource("Resource_o0qth"), SubResource("Resource_ayre3"), SubResource("Resource_67ejp")])
-npc_style = SubResource("Resource_utl1j")
-metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+script = ExtResource("49_pay3g")
+inventory = SubResource("Resource_61ge7")
+price_modifiers = {
+"Ammo": 0.5,
+"Armor": 0.5,
+"Consumable": 0.75,
+"Gear": 0.75,
+"Junk": 0.75,
+"Survival": 0.75,
+"Weapons": 0.5
+}
+faction = null
+title = "Traveler"
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [sub_resource type="Resource" id="Resource_g8jxq"]
 resource_local_to_scene = true
-script = ExtResource("46_lgnbj")
-min_amount = 3
-max_amount = 8
-potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
-money = 500
-title = "Squad Inventory"
-metadata/_custom_type_script = "uid://b34kwea65we13"
+script = ExtResource("53_ccrpr")
+bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_32ux6"), SubResource("Resource_hjxsh"), SubResource("Resource_7tr15"), SubResource("Resource_vxxxk"), SubResource("Resource_eiedg"), SubResource("Resource_hyxfw"), SubResource("Resource_o0qth"), SubResource("Resource_ayre3"), SubResource("Resource_67ejp")])
+npc_style = SubResource("Resource_utl1j")
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
 [sub_resource type="Resource" id="Resource_8jwt6"]
 resource_local_to_scene = true
-script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_g8jxq")
-price_modifiers = {
-"Ammo": 0.5,
-"Armor": 0.5,
-"Consumable": 0.75,
-"Gear": 0.75,
-"Junk": 0.75,
-"Survival": 0.75,
-"Weapons": 0.5
-}
-faction = null
-title = "Traveler"
-metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+script = ExtResource("46_lgnbj")
+min_amount = 3
+max_amount = 8
+potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
+money = 500
+title = "Squad Inventory"
+metadata/_custom_type_script = "uid://b34kwea65we13"
 
 [sub_resource type="Resource" id="Resource_tfd8k"]
 resource_local_to_scene = true
-script = ExtResource("53_ccrpr")
-bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_32ux6"), SubResource("Resource_hjxsh"), SubResource("Resource_7tr15"), SubResource("Resource_vxxxk"), SubResource("Resource_eiedg"), SubResource("Resource_hyxfw"), SubResource("Resource_o0qth"), SubResource("Resource_ayre3"), SubResource("Resource_67ejp")])
-npc_style = SubResource("Resource_utl1j")
-metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+script = ExtResource("49_pay3g")
+inventory = SubResource("Resource_8jwt6")
+price_modifiers = {
+"Ammo": 0.5,
+"Armor": 0.5,
+"Consumable": 0.75,
+"Gear": 0.75,
+"Junk": 0.75,
+"Survival": 0.75,
+"Weapons": 0.5
+}
+faction = null
+title = "Traveler"
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [sub_resource type="Resource" id="Resource_x85w1"]
 resource_local_to_scene = true
+script = ExtResource("53_ccrpr")
+bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_32ux6"), SubResource("Resource_hjxsh"), SubResource("Resource_7tr15"), SubResource("Resource_vxxxk"), SubResource("Resource_eiedg"), SubResource("Resource_hyxfw"), SubResource("Resource_o0qth"), SubResource("Resource_ayre3"), SubResource("Resource_67ejp")])
+npc_style = SubResource("Resource_utl1j")
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+
+[sub_resource type="Resource" id="Resource_r4dmk"]
+resource_local_to_scene = true
 script = ExtResource("46_lgnbj")
 min_amount = 3
 max_amount = 8
@@ -559,10 +558,10 @@ money = 500
 title = "Squad Inventory"
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
-[sub_resource type="Resource" id="Resource_r4dmk"]
+[sub_resource type="Resource" id="Resource_fm8tw"]
 resource_local_to_scene = true
 script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_x85w1")
+inventory = SubResource("Resource_r4dmk")
 price_modifiers = {
 "Ammo": 0.5,
 "Armor": 0.5,
@@ -576,14 +575,14 @@ faction = null
 title = "Traveler"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
-[sub_resource type="Resource" id="Resource_fm8tw"]
+[sub_resource type="Resource" id="Resource_kx8k2"]
 resource_local_to_scene = true
 script = ExtResource("53_ccrpr")
 bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_32ux6"), SubResource("Resource_hjxsh"), SubResource("Resource_7tr15"), SubResource("Resource_vxxxk"), SubResource("Resource_eiedg"), SubResource("Resource_hyxfw"), SubResource("Resource_o0qth"), SubResource("Resource_ayre3"), SubResource("Resource_67ejp")])
 npc_style = SubResource("Resource_utl1j")
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
-[sub_resource type="Resource" id="Resource_kx8k2"]
+[sub_resource type="Resource" id="Resource_n3yag"]
 resource_local_to_scene = true
 script = ExtResource("46_lgnbj")
 min_amount = 3
@@ -593,10 +592,10 @@ money = 500
 title = "Squad Inventory"
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
-[sub_resource type="Resource" id="Resource_n3yag"]
+[sub_resource type="Resource" id="Resource_yld1c"]
 resource_local_to_scene = true
 script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_kx8k2")
+inventory = SubResource("Resource_n3yag")
 price_modifiers = {
 "Ammo": 0.5,
 "Armor": 0.5,
@@ -610,7 +609,7 @@ faction = null
 title = "Traveler"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
-[sub_resource type="Resource" id="Resource_yld1c"]
+[sub_resource type="Resource" id="Resource_bn22a"]
 resource_local_to_scene = true
 script = ExtResource("53_ccrpr")
 bubbles = Array[ExtResource("48_i627v")]([SubResource("Resource_32ux6"), SubResource("Resource_hjxsh"), SubResource("Resource_7tr15"), SubResource("Resource_vxxxk"), SubResource("Resource_eiedg"), SubResource("Resource_hyxfw"), SubResource("Resource_o0qth"), SubResource("Resource_ayre3"), SubResource("Resource_67ejp")])
@@ -626,45 +625,12 @@ script = ExtResource("108_g8jxq")
 population = 4
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
-[sub_resource type="Resource" id="Resource_bn22a"]
+[sub_resource type="Resource" id="Resource_ckll4"]
 resource_local_to_scene = true
 script = ExtResource("32_2uctf")
 title = "Dirt Town"
-shops = Array[ExtResource("31_t56bl")]([ExtResource("53_dh8ic"), ExtResource("54_2uctf"), ExtResource("55_2gpn5")])
+shops = Array[ExtResource("31_t56bl")]([ExtResource("53_dh8ic"), ExtResource("87_t56bl")])
 metadata/_custom_type_script = "uid://bbi3gcsb33muk"
-
-[sub_resource type="Resource" id="Resource_0pbit"]
-script = ExtResource("108_g8jxq")
-faction = 2
-population = 4
-metadata/_custom_type_script = "uid://csmjlx06mdps3"
-
-[sub_resource type="Resource" id="Resource_ckll4"]
-resource_local_to_scene = true
-script = ExtResource("46_lgnbj")
-min_amount = 3
-max_amount = 8
-potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
-money = 500
-title = "Squad Inventory"
-metadata/_custom_type_script = "uid://b34kwea65we13"
-
-[sub_resource type="Resource" id="Resource_ho87a"]
-resource_local_to_scene = true
-script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_ckll4")
-price_modifiers = {
-"Ammo": 0.5,
-"Armor": 0.5,
-"Consumable": 0.75,
-"Gear": 0.75,
-"Junk": 0.75,
-"Survival": 0.75,
-"Weapons": 0.5
-}
-faction = null
-title = "Traveler"
-metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [node name="Overworld" type="Node3D" unique_id=1106168526 groups=["persist"]]
 script = ExtResource("1_6y65m")
@@ -928,8 +894,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 123.441986, -19.812275, 213.5
 [node name="RockCanyon" parent="." unique_id=2040333333 groups=["align_position", "persist"] instance=ExtResource("17_7fbp6")]
 transform = Transform3D(-0.663652, 0, -0.74804145, 0, 1, 0, 0.74804145, 0, -0.663652, 233.26797, 1.2008492, 279.74686)
 location_data = SubResource("Resource_gqxbg")
-shop = SubResource("Resource_t56bl")
-friendly_dialogue_tree = SubResource("Resource_me12r")
+shop = SubResource("Resource_me12r")
+friendly_dialogue_tree = SubResource("Resource_bqxwu")
 
 [node name="CollisionShape3D" parent="RockCanyon" index="0" unique_id=1772758538]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -1.7763568e-15, 0, 1, 0, 0, 0)
@@ -967,17 +933,23 @@ transform = Transform3D(1.870851, 0.45179105, -0.54387593, 0, -1.5384423, -1.277
 [node name="SandDunes" parent="." unique_id=73567733 groups=["align_position", "persist"] instance=ExtResource("18_oedh7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224.68231, 0.67250896, 302.8991)
 location_data = ExtResource("31_gqxbg")
-shop = SubResource("Resource_cvr5w")
-friendly_dialogue_tree = SubResource("Resource_4o6vd")
+shop = SubResource("Resource_4o6vd")
+friendly_dialogue_tree = SubResource("Resource_5yx2b")
+
+[node name="Flagpole" parent="SandDunes/Meshes" parent_id_path=PackedInt32Array(73567733, 354222542) index="6" unique_id=800258272]
+transform = Transform3D(-8.742278e-08, 0, -2, 0, 2, 0, 2, 0, -8.742278e-08, 0, 0, 0)
 
 [node name="Hillside" parent="." unique_id=1342811121 instance=ExtResource("31_c1mwn")]
 transform = Transform3D(-0.81002104, 0, 0.58640075, 0, 1, 0, -0.58640075, 0, -0.81002104, 186.06516, 0.56058085, 252.54721)
 location_data = ExtResource("29_jhm1l")
-shop = SubResource("Resource_ksfoy")
-friendly_dialogue_tree = SubResource("Resource_6l6oi")
+shop = SubResource("Resource_6l6oi")
+friendly_dialogue_tree = SubResource("Resource_ptrkr")
 
 [node name="CollisionShape3D" parent="Hillside" index="0" unique_id=1772758538]
 transform = Transform3D(-4.371139e-08, -1, -2.9802322e-08, 1, -4.371139e-08, 0, 0, -2.9802322e-08, 1, 0, 0.46906924, 0)
+
+[node name="Flagpole" parent="Hillside/Meshes" parent_id_path=PackedInt32Array(1342811121, 354222542) index="0" unique_id=800258272]
+transform = Transform3D(-1.7881393e-07, 0, -2.0000005, 0, 2, 0, 2.0000005, 0, -1.7881393e-07, 0, 1.876277, 0)
 
 [node name="rock pillar3" parent="Hillside/Meshes" parent_id_path=PackedInt32Array(1342811121, 354222542) index="1" unique_id=643468783]
 transform = Transform3D(2, 0, -5.9604645e-08, 0, 6, 0, 5.9604645e-08, 0, 2, 8.470825, 2.3380837, 3.129364)
@@ -989,16 +961,19 @@ transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, 0, 0
 transform = Transform3D(0.97805387, -0.016734835, -0.2076799, 0.040199377, 0.9931973, 0.10928437, 0.20443824, -0.11523458, 0.9720731, 4.630371, 1.1659877, -3.9078064)
 
 [node name="Fence2" parent="Hillside/Meshes" parent_id_path=PackedInt32Array(1342811121, 354222542) index="4" unique_id=1078888310]
-transform = Transform3D(0.9631423, 0.041444153, 0.26578405, -0.06944677, 0.9928719, 0.09683828, -0.25987694, -0.11172649, 0.95915663, -10.293213, 1.3364103, -2.5524902)
+transform = Transform3D(0.9631423, 0.04144414, 0.26578405, -0.06944677, 0.99287146, 0.09683828, -0.25987694, -0.11172645, 0.95915663, -10.293213, 1.3364103, -2.5524902)
 
 [node name="RailYard" parent="." unique_id=1759757433 instance=ExtResource("44_pay3g")]
 transform = Transform3D(-0.87789106, 0, -0.47886035, 0, 1, 0, 0.47886035, 0, -0.87789106, 225.01892, 1.309533, 330.1273)
 location_data = ExtResource("31_gqxbg")
-shop = SubResource("Resource_rsj15")
-friendly_dialogue_tree = SubResource("Resource_3k4bo")
+shop = SubResource("Resource_3k4bo")
+friendly_dialogue_tree = SubResource("Resource_lgnbj")
 
 [node name="CollisionShape3D" parent="RailYard" index="0" unique_id=1772758538]
 transform = Transform3D(1.000001, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1.000001, 0, -0.1403501, 0)
+
+[node name="Flagpole" parent="RailYard/Meshes" parent_id_path=PackedInt32Array(1759757433, 354222542) index="0" unique_id=800258272]
+transform = Transform3D(5.9604645e-08, 0, -2.0000012, 0, 2, 0, 2.0000012, 0, 5.9604645e-08, 0, -0.5614004, 0)
 
 [node name="Node3D2" parent="RailYard/Meshes" parent_id_path=PackedInt32Array(1759757433, 354222542) index="1" unique_id=602550798]
 transform = Transform3D(0.99832946, 0.05783914, -0.0011376739, -0.057849, 0.9979608, -0.026977614, -0.00042504072, 0.026998248, 0.9996356, 0, -0.5614004, 0)
@@ -1013,16 +988,16 @@ transform = Transform3D(0.9998249, 0.017255556, -0.007240504, -0.017436733, 0.99
 transform = Transform3D(0.99945587, 0.032979336, 0.0007187724, -0.032952953, 0.9991743, -0.023766039, -0.0015019774, 0.023729416, 0.9997175, 0.00030517578, -0.6179552, 5.0004883)
 
 [node name="Node3D4" parent="RailYard/Meshes" parent_id_path=PackedInt32Array(1759757433, 354222542) index="4" unique_id=396801553]
-transform = Transform3D(0.9993897, 0.034914825, 7.471442e-05, -0.03490939, 0.99926406, -0.015738133, -0.00062415004, 0.015725888, 0.99987656, 0.00048828125, -0.83268404, 10.000732)
+transform = Transform3D(0.9993897, 0.034914814, 7.471442e-05, -0.03490939, 0.99926364, -0.015738133, -0.00062415004, 0.01572588, 0.99987656, 0.00048828125, -0.83268404, 10.000732)
 
 [node name="Node3D5" parent="RailYard/Meshes" parent_id_path=PackedInt32Array(1759757433, 354222542) index="5" unique_id=763376953]
-transform = Transform3D(0.99923635, 0.038344923, 0.0075104237, -0.038631596, 0.9983363, 0.04268425, -0.0058612227, -0.042941578, 0.99906045, 6.1035156e-05, -0.60910225, -10.000122)
+transform = Transform3D(0.99923635, 0.038344894, 0.0075104237, -0.038631596, 0.9983355, 0.04268425, -0.0058612227, -0.042941544, 0.99906045, 6.1035156e-05, -0.60910225, -10.000122)
 
 [node name="GhostTown" parent="." unique_id=143995200 instance=ExtResource("15_857re")]
 transform = Transform3D(0.78389937, 0, 0.6208879, 0, 1, 0, -0.6208879, 0, 0.78389937, 254.29613, 0.49689007, 334.05212)
 location_data = ExtResource("35_7t5fg")
-shop = SubResource("Resource_rp2u8")
-friendly_dialogue_tree = SubResource("Resource_aj0wn")
+shop = SubResource("Resource_aj0wn")
+friendly_dialogue_tree = SubResource("Resource_pay3g")
 
 [node name="CollisionShape3D" parent="GhostTown" index="0" unique_id=1772758538]
 transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 0, -0.42634478, 0)
@@ -1030,55 +1005,61 @@ transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 0, -0.4263447
 [node name="CSGBakedMeshInstance3D3" parent="GhostTown/Meshes" parent_id_path=PackedInt32Array(143995200, 354222542) index="2" unique_id=182741192]
 transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 0.47686768, -1.8190713, 9.292969)
 
+[node name="Flagpole" parent="GhostTown/Meshes" parent_id_path=PackedInt32Array(143995200, 354222542) index="3" unique_id=800258272]
+transform = Transform3D(0, 0, -2.0000005, 0, 2, 0, 2.0000005, 0, 0, 6.1035156e-05, -1.7053791, 4.1049805)
+
 [node name="Crossroads" parent="." unique_id=1671911261 instance=ExtResource("34_c1mwn")]
-transform = Transform3D(-0.35468268, 0, -0.9349867, 0, 1, 0, 0.9349867, 0, -0.35468268, 212.33711, 0.77523947, 283.0366)
+transform = Transform3D(0.8417464, 0, -0.53987306, 0, 1, 0, 0.53987306, 0, 0.8417464, 212.33711, 0.8297237, 283.0366)
 location_data = ExtResource("37_8yg51")
-shop = SubResource("Resource_61ge7")
-friendly_dialogue_tree = SubResource("Resource_3le6t")
+shop = SubResource("Resource_3le6t")
+friendly_dialogue_tree = SubResource("Resource_g8jxq")
 
 [node name="CollisionShape3D" parent="Crossroads" index="0" unique_id=1772758538]
-transform = Transform3D(-4.3711385e-08, -1, 0, 1, -4.371139e-08, 0, 8.881784e-16, 0, 1, -0.024993896, -0.07192552, 3.0517578e-05)
+transform = Transform3D(-4.3711385e-08, -1, -2.9802322e-08, 1, -4.371139e-08, 0, 0, -2.9802322e-08, 1, -0.024993896, -0.07192552, 4.5776367e-05)
+
+[node name="Flagpole" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="0" unique_id=800258272]
+transform = Transform3D(-5.9604645e-08, 0, -2, 0, 2, 0, 2, 0, -5.9604645e-08, 0, -0.28770208, 0)
 
 [node name="Barrier2" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="1" unique_id=801813959]
-transform = Transform3D(0.9973463, -0.07252851, 0.0062684715, 0.07254995, 0.9973556, -0.0032164068, -0.006018698, 0.0036626626, 0.99996793, -6.1035156e-05, -0.45345235, -3.35083)
+transform = Transform3D(0.9999777, -0.0027080625, 0.0060626566, 0.0022099896, 0.99673116, 0.08070447, -0.0062614083, -0.080689594, 0.99671173, -0.00012207031, -0.55055714, -3.350708)
 
 [node name="Barrier3" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="2" unique_id=2063154483]
-transform = Transform3D(0.9979981, -0.063185126, 0.0025406182, 0.063140556, 0.99789363, 0.01488561, -0.0034758449, -0.01469541, 0.99988556, 3.7634277, -0.018346786, -3.3509521)
+transform = Transform3D(0.99979794, -0.020033786, 0.0013863146, 0.019880371, 0.9971647, 0.0725762, -0.0028363168, -0.07253404, 0.9973615, 3.7635498, -0.7323134, -3.35083)
 
 [node name="Barrier4" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="3" unique_id=2014623242]
-transform = Transform3D(0.9972426, -0.073687814, 0.00842014, 0.07369766, 0.9972762, -0.0008562893, -0.00833413, 0.0014744736, 0.99996376, -3.637085, -0.7323134, -3.3509521)
+transform = Transform3D(0.9999421, 0.0055726916, 0.008862317, -0.006213618, 0.99723303, 0.074018046, -0.008425295, -0.07406876, 0.9972172, -3.637085, -0.7895446, -3.3508606)
 
 [node name="Barrier5" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="4" unique_id=1835063829]
-transform = Transform3D(0.999423, -0.033926643, -0.0007570684, 0.03393485, 0.99909014, 0.025829842, -0.000119924545, -0.025840826, 0.9996593, 7.637207, 0.1854217, -3.35083)
+transform = Transform3D(0.99936783, -0.03546561, -0.0020307302, 0.035523307, 0.9974652, 0.06165331, -0.00016099215, -0.061686996, 0.99808806, 7.637207, -0.5421324, -3.350769)
 
 [node name="Barrier6" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="5" unique_id=1492542955]
-transform = Transform3D(0.99773943, -0.066708975, 0.007395208, 0.06669809, 0.99776906, 0.0016830475, -0.0074910223, -0.0011860058, 0.99996436, -7.4918823, -0.9678545, -3.3509521)
+transform = Transform3D(0.9998069, 0.017181043, 0.008861214, -0.017874049, 0.9962011, 0.08519613, -0.0073638856, -0.08533901, 0.99631715, -7.4919434, -0.54601216, -3.3509216)
 
 [node name="Barrier7" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="6" unique_id=1215660123]
-transform = Transform3D(0.9965063, -0.08328782, 0.0059200227, 0.083038926, 0.995955, 0.03420622, -0.0087450445, -0.033595078, 0.9993961, 0.00012207031, -0.2961371, 3.1934814)
+transform = Transform3D(0.9998944, 0.012813326, 0.0066108406, -0.013341884, 0.9960871, 0.087313056, -0.0054662824, -0.08739191, 0.9961579, 0.00012207031, -0.043601274, 3.193573)
 
 [node name="Barrier8" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="7" unique_id=1636718525]
-transform = Transform3D(0.996693, -0.08113517, 0.0029105842, 0.08098548, 0.99610394, 0.03477185, -0.005720526, -0.03442142, 0.99938416, 3.7634277, -0.043601274, 3.1932373)
+transform = Transform3D(0.99997544, 0.005212117, 0.0030643344, -0.005397567, 0.99793035, 0.06400038, -0.0027244687, -0.064015925, 0.99793756, 3.7633057, -0.018346786, 3.1933594)
 
 [node name="Barrier9" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="8" unique_id=809367507]
-transform = Transform3D(0.9969338, -0.078057446, 0.005492002, 0.077784084, 0.9961997, 0.039189246, -0.0085301995, -0.0386419, 0.99921644, -3.637207, -0.54601216, 3.1932373)
+transform = Transform3D(0.99983644, 0.016949829, 0.0063005984, -0.01743105, 0.99610853, 0.08639432, -0.0048116744, -0.08649005, 0.99624074, -3.637329, -0.043601274, 3.1932983)
 
 [node name="Barrier10" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="9" unique_id=242564191]
-transform = Transform3D(0.9976571, -0.06831256, -0.0011434257, 0.06826581, 0.99602073, 0.057222392, -0.002770096, -0.05716654, 0.9983603, 7.637329, 0.5725815, 3.1932373)
+transform = Transform3D(0.9996519, -0.02610726, -0.001200825, 0.026132416, 0.9978868, 0.059415795, -0.0003529191, -0.059426658, 0.9982321, 7.637329, -0.1743908, 3.1932373)
 
 [node name="Barrier11" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="10" unique_id=654538439]
-transform = Transform3D(0.9974031, -0.07132777, 0.009796858, 0.07110472, 0.99723756, 0.02147977, -0.0113019645, -0.020727564, 0.9997145, -7.4919434, -0.7895446, 3.1932373)
+transform = Transform3D(0.99916136, 0.038829174, 0.012864113, -0.039917096, 0.9942546, 0.099319324, -0.008933783, -0.09975047, 0.99496496, -7.4919434, 0.053803682, 3.1932373)
 
 [node name="MeshInstance3D" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="11" unique_id=1493694246]
-transform = Transform3D(0.99701715, -0.07700846, 0.005122572, 0.076921746, 0.9969183, 0.015388515, -0.0062918663, -0.014948675, 0.9998617, 0, -0.28770208, 0)
+transform = Transform3D(0.9999863, -0.0012534261, 0.00505355, 0.00085316563, 0.9969183, 0.07844072, -0.005136341, -0.07843593, 0.9968985, 0, -0.28770208, 0)
 
 [node name="Checkpoint" parent="." unique_id=1555199660 groups=["align_position"] instance=ExtResource("90_cvr5w")]
 transform = Transform3D(0.45643032, 0, -0.8897592, 0, 1, 0, 0.8897592, 0, 0.45643032, 193.30853, 0.9770535, 310.12946)
 title = "Checkpoint"
 location_data = ExtResource("35_7t5fg")
 encounter_scene = ExtResource("109_g8jxq")
-shop = SubResource("Resource_8jwt6")
-friendly_dialogue_tree = SubResource("Resource_tfd8k")
+shop = SubResource("Resource_tfd8k")
+friendly_dialogue_tree = SubResource("Resource_x85w1")
 can_spawn_npcs = false
 metadata/_edit_group_ = true
 
@@ -1096,29 +1077,32 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 [node name="Crateyard" parent="." unique_id=982147227 instance=ExtResource("16_swbn6")]
 transform = Transform3D(-0.26856682, 0, 0.96326107, 0, 1, 0, -0.96326107, 0, -0.26856682, 177.97003, 0.5392718, 272.54028)
 location_data = ExtResource("35_7t5fg")
-shop = SubResource("Resource_r4dmk")
-friendly_dialogue_tree = SubResource("Resource_fm8tw")
+shop = SubResource("Resource_fm8tw")
+friendly_dialogue_tree = SubResource("Resource_kx8k2")
 
 [node name="CollisionShape3D" parent="Crateyard" index="0" unique_id=1772758538]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39287704, 0)
 
 [node name="ShippingContainer" parent="Crateyard/Meshes" parent_id_path=PackedInt32Array(982147227, 354222542) index="0" unique_id=1538489103]
-transform = Transform3D(0.99702114, -0.07708805, 0.00226745, 0.07711388, 0.99690324, -0.015406089, -0.0010727942, 0.015535057, 0.99987876, -4.800659, 0.96785426, -0.29690552)
+transform = Transform3D(0.99702066, -0.07708805, 0.00226745, 0.07711385, 0.99690324, -0.015406089, -0.001072824, 0.015535057, 0.99987876, -4.800659, 0.96785426, -0.29690552)
 
 [node name="ShippingContainer2" parent="Crateyard/Meshes" parent_id_path=PackedInt32Array(982147227, 354222542) index="1" unique_id=410776108]
 transform = Transform3D(0.8094921, -0.050217796, -0.5849789, 0.041839413, 0.99873644, -0.027839717, 0.5856377, -0.0019391412, 0.8105705, -2.9216309, 1.0615466, 5.8403625)
 
 [node name="ShippingContainer3" parent="Crateyard/Meshes" parent_id_path=PackedInt32Array(982147227, 354222542) index="2" unique_id=1123713101]
-transform = Transform3D(0.98806643, -0.10985364, 0.107972726, 0.1131033, 0.9932823, -0.024428818, -0.10456394, 0.036349326, 0.9938536, 1.5274658, 1.8905332, -5.0199585)
+transform = Transform3D(0.98806643, -0.109853595, 0.107972816, 0.11310331, 0.9932819, -0.024428807, -0.104564026, 0.036349315, 0.9938536, 1.5274658, 1.8905332, -5.0199585)
 
 [node name="ShippingContainer4" parent="Crateyard/Meshes" parent_id_path=PackedInt32Array(982147227, 354222542) index="3" unique_id=232527550]
-transform = Transform3D(0.9952692, -0.09695168, 0.0059908032, 0.09712771, 0.9941222, -0.04775188, -0.0013259649, 0.048107848, 0.9988396, 3.6549072, 1.9575593, 0.6373596)
+transform = Transform3D(0.99526864, -0.09695168, 0.0059908032, 0.09712766, 0.9941222, -0.04775188, -0.0013259649, 0.048107848, 0.9988396, 3.6549072, 1.9575593, 0.6373596)
+
+[node name="Flagpole" parent="Crateyard/Meshes" parent_id_path=PackedInt32Array(982147227, 354222542) index="4" unique_id=800258272]
+transform = Transform3D(-5.9604645e-08, 0, -2, 0, 2, 0, 2, 0, -5.9604645e-08, -0.00036621094, 1.2789218, 2.6803894)
 
 [node name="RadioStation" parent="." unique_id=271568694 instance=ExtResource("47_c1mwn")]
 transform = Transform3D(-0.5009066, 0, 0.86550134, 0, 1, 0, -0.86550134, 0, -0.5009066, 193.84766, 5.25765, 284.4301)
 location_data = ExtResource("31_gqxbg")
-shop = SubResource("Resource_n3yag")
-friendly_dialogue_tree = SubResource("Resource_yld1c")
+shop = SubResource("Resource_yld1c")
+friendly_dialogue_tree = SubResource("Resource_bn22a")
 
 [node name="CollisionShape3D" parent="RadioStation" index="0" unique_id=1772758538]
 transform = Transform3D(-4.371139e-08, 0.9409338, 0.33859017, -1, -4.112953e-08, -1.48002455e-08, 0, -0.33859017, 0.9409338, -1.4824829, -0.43396187, -1.1325073)
@@ -1136,11 +1120,14 @@ transform = Transform3D(1, 0, -8.6426735e-07, 0, 1, 0, 8.6426735e-07, 0, 1, 3.10
 [node name="RadioTower" parent="RadioStation/Meshes" parent_id_path=PackedInt32Array(271568694, 354222542) index="3" unique_id=363170782]
 transform = Transform3D(-0.5668871, 0, -0.19656827, 0, 0.6, 0, 0.19656827, 0, -0.5668871, -0.6065674, -3.072813, -6.0162354)
 
+[node name="Flagpole" parent="RadioStation/Meshes" parent_id_path=PackedInt32Array(271568694, 354222542) index="4" unique_id=800258272]
+transform = Transform3D(-1.7881393e-07, 0, -2, 0, 2, 0, 2, 0, -1.7881393e-07, 0, -2.7912693, 0)
+
 [node name="DirtTown" parent="." unique_id=1920182238 groups=["align_position", "persist"] instance=ExtResource("19_5q0os")]
 transform = Transform3D(0.88991046, 0, 0.4561352, 0, 1, 0, -0.4561352, 0, 0.88991046, 214.64395, 0.23739168, 261.98834)
 title = "Dirt Town"
 location_data = SubResource("Resource_lfi40")
-town = SubResource("Resource_bn22a")
+town = SubResource("Resource_ckll4")
 
 [node name="CollisionShape3D" parent="DirtTown" index="0" unique_id=1772758538]
 transform = Transform3D(1.0000014, -2.9802322e-08, 3.5527137e-15, 0, -4.371139e-08, 1, -2.9802322e-08, -1.0000014, -4.371152e-08, 0.62114716, -0.03337735, 0)
@@ -1148,86 +1135,77 @@ transform = Transform3D(1.0000014, -2.9802322e-08, 3.5527137e-15, 0, -4.371139e-
 [node name="CollisionShape3D2" parent="DirtTown" index="1" unique_id=14480053]
 transform = Transform3D(1.0000014, -2.9802322e-08, 3.5527137e-15, 0, -4.371139e-08, 1, -2.9802322e-08, -1.0000014, -4.371152e-08, -2.1015244, 0.07661325, 0.0004272461)
 
-[node name="Scrapyard" parent="." unique_id=1638857313 groups=["align_position", "location", "persist"] instance=ExtResource("80_nggm6")]
-transform = Transform3D(-0.5971493, 0, 0.80213016, 0, 1, 0, -0.80213016, 0, -0.5971493, 252.64273, 0.20288566, 299.43018)
-title = "Junkyard"
-location_data = SubResource("Resource_0pbit")
-shop = SubResource("Resource_ho87a")
+[node name="Flagpole" parent="DirtTown/Meshes" parent_id_path=PackedInt32Array(1920182238, 354222542) index="3" unique_id=800258272]
+transform = Transform3D(-5.9604645e-08, 0, -2.0000007, 0, 2, 0, 2.0000007, 0, -5.9604645e-08, 0, 0, 0)
 
-[node name="CollisionShape3D" parent="Scrapyard" index="0" unique_id=1772758538]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+[node name="JackalFort" parent="." unique_id=248617744 instance=ExtResource("90_me12r")]
+transform = Transform3D(0.5275342, 0, 0.8495339, 0, 1, 0, -0.8495339, 0, 0.5275342, 252.64273, 0.20288566, 299.43018)
 
-[node name="Shack" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="1" unique_id=650727163]
-transform = Transform3D(-0.3139925, 0, -0.9494256, 0, 1, 0, 0.94942546, 0, -0.31399253, -6.7148438, 0.44492865, -3.6951904)
+[node name="CollisionShape3D" parent="JackalFort" index="0" unique_id=1772758538]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -1.7763568e-15, 0, 1, 0, 0, 0)
 
-[node name="CSGBakedMeshInstance3D" parent="Scrapyard/Meshes/Shack" index="0" unique_id=1049648930]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.51856756, 0)
+[node name="Flagpole" parent="JackalFort/Meshes" parent_id_path=PackedInt32Array(248617744, 354222542) index="0" unique_id=800258272]
+transform = Transform3D(2, 0, -4.172325e-07, 0, 2, 0, 4.172325e-07, 0, 2, -6.1035156e-05, -0.15880823, -4)
 
-[node name="Tire" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="2" unique_id=941327551]
-transform = Transform3D(0.99876785, 0.04961907, 0.0021422207, -0.049553085, 0.9984786, -0.02417069, -0.0033382773, 0.024034604, 0.99970955, -2.7055664, 0.009457469, 3.0946045)
+[node name="CSGBakedMeshInstance3D" parent="JackalFort/Meshes" parent_id_path=PackedInt32Array(248617744, 354222542) index="1" unique_id=182741192]
+transform = Transform3D(0.9169278, 0, 0.39905316, 0, 1, 0, -0.39905316, 0, 0.9169278, 6.6746826, -0.1383897, 1.9042969)
 
-[node name="TireStack" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="3" unique_id=1335062152]
-transform = Transform3D(0.9984842, 0.054801524, -0.005729407, -0.05489169, 0.99833596, -0.016771525, 0.0048007965, 0.017060246, 0.9998448, -4.793457, 0.041736007, 4.676758)
+[node name="CSGBakedMeshInstance3D2" parent="JackalFort/Meshes" parent_id_path=PackedInt32Array(248617744, 354222542) index="2" unique_id=95525987]
+transform = Transform3D(0.9569707, 0, -0.29018444, 0, 1, 0, 0.29018444, 0, 0.9569707, -9.3349, -0.124987364, 3.3908691)
 
-[node name="Tire4" parent="Scrapyard/Meshes/TireStack" index="0" unique_id=1728738655]
-transform = Transform3D(0.9999902, 0.005813416, 4.7683716e-07, -0.005813483, 0.99998015, 0.0008867346, 4.6789646e-06, -0.0008867197, 0.99999636, -0.17895508, -0.014381409, -0.27062988)
+[node name="detail-barrier-strong-type-a" parent="JackalFort/Meshes" parent_id_path=PackedInt32Array(248617744, 354222542) index="3" unique_id=1054252922]
+transform = Transform3D(-3.997703, 0.1352724, 0.008341312, 0.13505103, 3.9967065, -0.08994917, -0.011376381, -0.08961588, -3.99898, 1.7844849, -0.15880823, -6.7526855)
 
-[node name="Tire5" parent="Scrapyard/Meshes/TireStack" index="1" unique_id=1124442949]
-transform = Transform3D(1.0000079, 3.7252903e-09, -3.874302e-07, -1.8626451e-08, 0.9999952, 0, 4.172325e-07, 3.7252903e-09, 1.0000013, 0.01171875, -0.0030670166, -0.22076416)
+[node name="detail-barrier-strong-type-a6" parent="JackalFort/Meshes" parent_id_path=PackedInt32Array(248617744, 354222542) index="4" unique_id=927921906]
+transform = Transform3D(-3.9932036, 0.09037595, -0.2148298, 0.09355223, 3.9985023, -0.056811184, 0.21346581, -0.06173912, -3.9938226, 5.1154785, -0.27707994, -6.711426)
 
-[node name="Tire6" parent="Scrapyard/Meshes/TireStack" index="2" unique_id=2048793634]
-transform = Transform3D(0.9999904, 0.0058134235, 3.2782555e-07, -0.0058134906, 0.9999804, 0.0008867346, 4.8577785e-06, -0.0008867197, 0.99999654, -0.095703125, -0.00869751, -0.20465088)
+[node name="detail-barrier-strong-type-a7" parent="JackalFort/Meshes" parent_id_path=PackedInt32Array(248617744, 354222542) index="5" unique_id=131203292]
+transform = Transform3D(-3.9042368, 0.027063912, 0.8695984, 0.016540742, 3.9996507, -0.050215345, -0.86986244, -0.045417204, -3.9040077, 8.364258, -0.32632884, -6.3825684)
 
-[node name="Tire2" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="4" unique_id=1752658556]
-transform = Transform3D(0.9994156, 0.033938035, 0.0048399866, -0.033859003, 0.99930435, -0.015595319, -0.0053658783, 0.015422244, 0.9998683, -0.3671875, -0.1383897, 5.1204834)
+[node name="detail-barrier-strong-type-a2" parent="JackalFort/Meshes" parent_id_path=PackedInt32Array(248617744, 354222542) index="6" unique_id=117784129]
+transform = Transform3D(-3.9972034, 0.1472639, -0.026008844, 0.14769575, 3.9966698, -0.06939009, 0.023432493, -0.07030195, -3.9993114, -1.6990967, -0.15297574, -6.790039)
 
-[node name="Tire3" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="5" unique_id=1876500154]
-transform = Transform3D(0.9981652, 0.060610533, 0.00074100494, -0.060591184, 0.9980223, -0.016276343, -0.0017260909, 0.016201394, 0.9998671, -4.6394043, 0.041736007, 6.2333374)
+[node name="detail-barrier-strong-type-a3" parent="JackalFort/Meshes" parent_id_path=PackedInt32Array(248617744, 354222542) index="7" unique_id=2004121493]
+transform = Transform3D(-3.9941776, 0.20644876, 0.062683105, 0.2048309, 3.9934707, -0.10082433, -0.067784786, -0.0974675, -3.9982371, -5.016968, 0.021015882, -6.904785)
 
-[node name="TireStack2" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="6" unique_id=384813771]
-transform = Transform3D(0.99911565, 0.042212505, 0.004512608, -0.042177197, 0.9990715, -0.007868347, -0.0048406124, 0.007670806, 0.9999673, -2.4157715, -0.105249524, 6.777405)
+[node name="detail-barrier-strong-type-a4" parent="JackalFort/Meshes" parent_id_path=PackedInt32Array(248617744, 354222542) index="8" unique_id=1559729970]
+transform = Transform3D(-3.9612339, 0.2695505, -0.48576427, 0.28406537, 3.988558, -0.10319251, 0.47742212, -0.13668953, -3.9690485, -8.307922, 0.25736082, -6.6796875)
 
-[node name="Tire4" parent="Scrapyard/Meshes/TireStack2" index="0" unique_id=1728738655]
-transform = Transform3D(0.999998, 7.450581e-09, -0.00012338161, -9.313226e-09, 0.99998003, 5.5879354e-09, 0.00012344122, -3.7252903e-09, 0.9999876, -0.1796875, -0.009674072, -0.26501465)
-
-[node name="Tire5" parent="Scrapyard/Meshes/TireStack2" index="1" unique_id=1124442949]
-transform = Transform3D(0.9999968, 9.313226e-09, -5.1259995e-05, -9.313226e-09, 0.9999804, 3.7252903e-09, 5.1289797e-05, -5.5879354e-09, 0.9999862, -0.0029296875, -0.0018615723, -0.22027588)
-
-[node name="Tire6" parent="Scrapyard/Meshes/TireStack2" index="2" unique_id=2048793634]
-transform = Transform3D(0.9999968, 9.313226e-09, -5.1259995e-05, -9.313226e-09, 0.9999804, 3.7252903e-09, 5.1289797e-05, -5.5879354e-09, 0.9999862, -0.11694336, -0.006591797, -0.20959473)
-
-[node name="TireStack3" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="7" unique_id=114358210]
-transform = Transform3D(0.9994026, 0.03393805, 0.007084906, -0.0338239, 0.9993046, -0.015671358, -0.007611811, 0.015422253, 0.99985504, 0.09472656, -0.1383897, 2.7994995)
-
-[node name="Tire4" parent="Scrapyard/Meshes/TireStack3" index="0" unique_id=1728738655]
-transform = Transform3D(0.9999261, 0.012188712, -0.00011307001, -0.012189338, 0.99987507, -0.009216018, 7.4505806e-07, 0.009216644, 0.9999567, -0.18444824, 0.13772964, -0.253479)
-
-[node name="Tire5" parent="Scrapyard/Meshes/TireStack3" index="1" unique_id=1124442949]
-transform = Transform3D(0.9999261, 0.012188712, -0.00011307001, -0.012189338, 0.99987507, -0.009216018, 7.4505806e-07, 0.009216644, 0.9999567, -0.006958008, 0.14435577, -0.21392822)
-
-[node name="Tire6" parent="Scrapyard/Meshes/TireStack3" index="2" unique_id=2048793634]
-transform = Transform3D(0.9999261, 0.012188712, -0.00011307001, -0.012189338, 0.99987507, -0.009216018, 7.4505806e-07, 0.009216644, 0.9999567, -0.11828613, 0.14035797, -0.2288208)
-
-[node name="RigidBody3D" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="8" unique_id=1182461201]
-transform = Transform3D(0.9992182, 0.03939493, 0.00661543, -0.0393399, 0.99918956, -0.008352133, -0.0069391727, 0.008085194, 0.99994546, -1.2043457, -0.105249524, 8.04541)
-
-[node name="RigidBody3D3" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="9" unique_id=249755868]
-transform = Transform3D(0.99849784, 0.054801702, 0.0010133088, -0.05477706, 0.99833924, -0.017141812, -0.0019510686, 0.017060302, 0.99985427, -3.0483398, 0.041736007, 4.7633667)
-
-[node name="RigidBody3D2" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="10" unique_id=655607314]
-transform = Transform3D(0.9974028, 0.07070611, -0.01329121, -0.070997275, 0.9972039, -0.022856673, 0.0116380155, 0.023740811, 0.99965155, -5.60083, 0.2570598, 2.835022)
-
-[node name="RigidBody3D4" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="11" unique_id=39034147]
-transform = Transform3D(0.99815965, 0.060610954, -0.005981028, -0.060700156, 0.9980293, -0.015867976, 0.005007535, 0.016201513, 0.9998587, -6.8601074, 0.041736007, 6.2373047)
-
-[node name="Flagpole" parent="Scrapyard/Meshes" parent_id_path=PackedInt32Array(1638857313, 354222542) index="12" unique_id=800258272]
-transform = Transform3D(-1.999665, 0, -0.036580164, 0, 2, 0, 0.036580138, 0, -1.9996665, 0, 0, 0)
+[node name="detail-barrier-strong-type-a5" parent="JackalFort/Meshes" parent_id_path=PackedInt32Array(248617744, 354222542) index="9" unique_id=1746441469]
+transform = Transform3D(-3.5674121, 0.30064905, -1.7841456, 0.34589696, 3.984959, -0.020109983, 1.7759284, -0.17221755, -3.580001, -11.4053955, 0.5817448, -5.756958)
 
 [node name="DrugDen" parent="." unique_id=419489395 instance=ExtResource("79_nggm6")]
-transform = Transform3D(-0.10605586, 0, -0.99436015, 0, 1, 0, 0.99436015, 0, -0.10605586, 157.95575, 1.3239393, 275.52942)
+transform = Transform3D(-0.10605586, 0, -0.99436015, 0, 1, 0, 0.99436015, 0, -0.10605586, 157.74272, 1.3239398, 278.51114)
 
 [node name="CollisionShape3D" parent="DrugDen" index="0" unique_id=1772758538]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.115159154, 0)
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -8.881784e-16, 0, 1, 3.0517578e-05, -0.12351596, -0.6014404)
+
+[node name="Flagpole" parent="DrugDen/Meshes" parent_id_path=PackedInt32Array(419489395, 354222542) index="0" unique_id=800258272]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.45817947, -8)
+
+[node name="CSGBakedMeshInstance3D2" parent="DrugDen/Meshes" parent_id_path=PackedInt32Array(419489395, 354222542) index="1" unique_id=1516860789]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -5.555664, -2.4690533, 1.2331543)
+
+[node name="CSGBakedMeshInstance3D" parent="DrugDen/Meshes" parent_id_path=PackedInt32Array(419489395, 354222542) index="2" unique_id=1837403267]
+transform = Transform3D(-0.47008288, -0.18843852, 0.86227196, -0.100163706, 0.9820216, 0.16000226, -0.8769202, -0.011154028, -0.4805063, 7.680664, 0.43508053, -0.06616211)
+
+[node name="detail-barrier-type-b" parent="DrugDen/Meshes" parent_id_path=PackedInt32Array(419489395, 354222542) index="3" unique_id=477869576]
+transform = Transform3D(5.276119, 0.3386729, 1.3877794, -0.5615621, 2.9805462, -0.19362845, -2.8012786, 0.040380403, 2.652655, -11.750488, 0.15651321, -7.7874756)
+
+[node name="detail-barrier-type-b2" parent="DrugDen/Meshes" parent_id_path=PackedInt32Array(419489395, 354222542) index="4" unique_id=756686039]
+transform = Transform3D(5.881268, 0.2853991, 0.52077913, -0.56347066, 2.9863894, -0.045763303, -1.0455401, -0.00404959, 2.9540982, -7.190918, -0.093421936, -10.05719)
+
+[node name="detail-barrier-type-b3" parent="DrugDen/Meshes" parent_id_path=PackedInt32Array(419489395, 354222542) index="5" unique_id=1270712359]
+transform = Transform3D(5.9959235, -0.110331364, 0.006332308, 0.22063406, 2.9979599, 0.0068109627, -0.0131569505, -0.0065734806, 2.9999847, -2.3515625, -0.49641848, -10.731689)
+
+[node name="detail-barrier-type-b4" parent="DrugDen/Meshes" parent_id_path=PackedInt32Array(419489395, 354222542) index="6" unique_id=1878449775]
+transform = Transform3D(5.9712157, -0.2916706, 0.032485634, 0.5825168, 2.9855883, 0.037682008, -0.07198638, -0.034347355, 2.999586, 2.4598389, -0.34911776, -10.883362)
+
+[node name="detail-barrier-type-b5" parent="DrugDen/Meshes" parent_id_path=PackedInt32Array(419489395, 354222542) index="7" unique_id=1511698238]
+transform = Transform3D(5.920451, -0.39577204, -0.28355592, 0.80334187, 2.9726572, 0.044236977, 0.5502708, -0.08161591, 2.9862423, 7.356079, 0.034550667, -10.355713)
+
+[node name="detail-barrier-type-b6" parent="DrugDen/Meshes" parent_id_path=PackedInt32Array(419489395, 354222542) index="8" unique_id=47421239]
+transform = Transform3D(4.994677, -0.42507568, -1.6070459, 0.957574, 2.9612856, -0.039249837, 3.1837373, -0.22380432, 2.5329535, 11.296631, 0.7823353, -8.465393)
 
 [node name="SnapToTerrain" type="Node3D" parent="." unique_id=1726042150]
 script = ExtResource("27_oapb8")
@@ -1270,24 +1248,7 @@ delete_children = true
 [editable path="RadioStation/PointOfInterest"]
 [editable path="DirtTown"]
 [editable path="DirtTown/PointOfInterest"]
-[editable path="Scrapyard"]
-[editable path="Scrapyard/Meshes/Tire"]
-[editable path="Scrapyard/Meshes/Tire/tire"]
-[editable path="Scrapyard/Meshes/TireStack"]
-[editable path="Scrapyard/Meshes/Tire2"]
-[editable path="Scrapyard/Meshes/Tire2/tire"]
-[editable path="Scrapyard/Meshes/Tire3"]
-[editable path="Scrapyard/Meshes/Tire3/tire"]
-[editable path="Scrapyard/Meshes/TireStack2"]
-[editable path="Scrapyard/Meshes/TireStack3"]
-[editable path="Scrapyard/Meshes/RigidBody3D"]
-[editable path="Scrapyard/Meshes/RigidBody3D/drum barrel2"]
-[editable path="Scrapyard/Meshes/RigidBody3D3"]
-[editable path="Scrapyard/Meshes/RigidBody3D3/drum barrel2"]
-[editable path="Scrapyard/Meshes/RigidBody3D2"]
-[editable path="Scrapyard/Meshes/RigidBody3D2/drum barrel2"]
-[editable path="Scrapyard/Meshes/RigidBody3D4"]
-[editable path="Scrapyard/Meshes/RigidBody3D4/drum barrel2"]
-[editable path="Scrapyard/PointOfInterest"]
+[editable path="JackalFort"]
+[editable path="JackalFort/PointOfInterest"]
 [editable path="DrugDen"]
 [editable path="DrugDen/PointOfInterest"]

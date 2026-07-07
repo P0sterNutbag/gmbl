@@ -3,6 +3,7 @@ extends PanelContainer
 var town_resource: Town
 @onready var title: Label = $MarginContainer/VBoxContainer/Label
 @onready var item_container: VBoxContainer = $MarginContainer/VBoxContainer/VBoxContainer
+const SPACER = preload("uid://st2mrllebqci")
 
 
 func _process(_delta: float) -> void:
@@ -46,6 +47,8 @@ func create_town(town_data: Town) -> void:
 			menu.pressed.connect(Globals.ui.job_board.set.bind("shop", shop))
 			menu.pressed.connect(Globals.ui.start_dialogue.bind(shop.dialogue, shop))
 			menu.pressed.connect(hide)
+	var spacer = SPACER.instantiate()
+	item_container.add_child(spacer)
 	var inst = item_container.create_menu_button()
 	inst.text = "Leave"
 	inst.alignment = BoxContainer.ALIGNMENT_CENTER 

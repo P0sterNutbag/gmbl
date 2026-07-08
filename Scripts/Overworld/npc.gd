@@ -7,7 +7,7 @@ enum states {walk, chase, battle, dead}
 var state = states.walk
 var speed: float
 var walk_speed := 1.5
-var run_speed := 2.5
+var run_speed := 3.5
 var path_index := 0
 var max_enemies := 6
 var min_enemies := 2

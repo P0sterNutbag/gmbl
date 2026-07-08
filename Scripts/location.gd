@@ -253,7 +253,7 @@ func _on_attack_area_body_entered(body: Node3D) -> void:
 			return
 		var inst = Globals.npc_controller.spawn_npc(self)
 		inst.navigation_agent.set_target_position(body.global_position)
-		inst.look_at(body)
+		inst.look_at(body.global_position)
 		inst.destination = self
 		can_proxmity_spawn = false
 		proximity_spawn_timer.start()

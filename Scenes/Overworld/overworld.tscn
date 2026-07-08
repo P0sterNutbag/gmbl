@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://c8t4e86xswg1t"]
+[gd_scene format=4 uid="uid://doydk513gm02l"]
 
 [ext_resource type="Script" uid="uid://cii8so5a7ygi4" path="res://Scripts/Overworld/overworld.gd" id="1_6y65m"]
 [ext_resource type="PackedScene" uid="uid://dyumojcinahde" path="res://Scenes/Effects/Shaders/outline_fog_shader.tscn" id="3_2uctf"]
@@ -631,6 +631,12 @@ title = "Dirt Town"
 shops = Array[ExtResource("31_t56bl")]([ExtResource("53_dh8ic"), ExtResource("87_t56bl")])
 metadata/_custom_type_script = "uid://bbi3gcsb33muk"
 
+[sub_resource type="Resource" id="Resource_ckll4"]
+script = ExtResource("108_g8jxq")
+faction = 4
+population = 4
+metadata/_custom_type_script = "uid://csmjlx06mdps3"
+
 [node name="Overworld" type="Node3D" unique_id=1106168526 groups=["persist"]]
 script = ExtResource("1_6y65m")
 
@@ -950,11 +956,14 @@ transform = Transform3D(-4.371139e-08, -1, -2.9802322e-08, 1, -4.371139e-08, 0, 
 [node name="Flagpole" parent="Hillside/Meshes" parent_id_path=PackedInt32Array(1342811121, 354222542) index="0" unique_id=800258272]
 transform = Transform3D(-1.7881393e-07, 0, -2.0000005, 0, 2, 0, 2.0000005, 0, -1.7881393e-07, 0, 1.876277, 0)
 
+[node name="CSGBakedMeshInstance3D2" parent="Hillside/Meshes" parent_id_path=PackedInt32Array(1342811121, 354222542) index="2" unique_id=1497064517]
+transform = Transform3D(1, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1, 0, 0.79115343, 0)
+
 [node name="Fence" parent="Hillside/Meshes" parent_id_path=PackedInt32Array(1342811121, 354222542) index="3" unique_id=56914019]
 transform = Transform3D(0.97805387, -0.016734835, -0.2076799, 0.040199377, 0.9931973, 0.10928437, 0.20443824, -0.11523458, 0.9720731, 4.630371, 1.1659877, -3.9078064)
 
 [node name="Fence2" parent="Hillside/Meshes" parent_id_path=PackedInt32Array(1342811121, 354222542) index="4" unique_id=106204882]
-transform = Transform3D(0.9631423, 0.04144413, 0.26578405, -0.06944677, 0.99287134, 0.09683828, -0.25987694, -0.11172643, 0.95915663, -10.293213, 1.3364103, -2.5524902)
+transform = Transform3D(0.9631423, 0.04144413, 0.26578405, -0.06944677, 0.9928713, 0.09683828, -0.25987694, -0.111726426, 0.95915663, -10.293213, 1.3364103, -2.5524902)
 
 [node name="RailYard" parent="." unique_id=1759757433 instance=ExtResource("44_pay3g")]
 transform = Transform3D(-0.87789106, 0, -0.47886035, 0, 1, 0, 0.47886035, 0, -0.87789106, 225.01892, 1.309533, 330.1273)
@@ -966,7 +975,7 @@ friendly_dialogue_tree = SubResource("Resource_3k4bo")
 transform = Transform3D(1.000001, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1.000001, 0, -0.1403501, 0)
 
 [node name="Flagpole" parent="RailYard/Meshes" parent_id_path=PackedInt32Array(1759757433, 354222542) index="0" unique_id=800258272]
-transform = Transform3D(0, 0, -2.0000017, 0, 2, 0, 2.0000017, 0, 0, 0, -0.5614004, 0)
+transform = Transform3D(0, 0, -2.000002, 0, 2, 0, 2.000002, 0, 0, 0, -0.5614004, 0)
 
 [node name="Node3D2" parent="RailYard/Meshes" parent_id_path=PackedInt32Array(1759757433, 354222542) index="1" unique_id=602550798]
 transform = Transform3D(0.99832946, 0.05783914, -0.0011376739, -0.057849, 0.9979608, -0.026977614, -0.00042504072, 0.026998248, 0.9996356, 0, -0.5614004, 0)
@@ -981,10 +990,10 @@ transform = Transform3D(0.9998249, 0.017255556, -0.007240504, -0.017436733, 0.99
 transform = Transform3D(0.99945587, 0.032979336, 0.0007187724, -0.032952953, 0.9991743, -0.023766039, -0.0015019774, 0.023729416, 0.9997175, 0.00030517578, -0.6179552, 5.0004883)
 
 [node name="Node3D4" parent="RailYard/Meshes" parent_id_path=PackedInt32Array(1759757433, 354222542) index="4" unique_id=396801553]
-transform = Transform3D(0.9993897, 0.034914806, 7.471442e-05, -0.03490939, 0.9992635, -0.015738133, -0.00062415004, 0.015725877, 0.99987656, 0.00048828125, -0.83268404, 10.000732)
+transform = Transform3D(0.9993897, 0.03491481, 7.471442e-05, -0.03490939, 0.99926347, -0.015738133, -0.00062415004, 0.015725875, 0.99987656, 0.00048828125, -0.83268404, 10.000732)
 
 [node name="Node3D5" parent="RailYard/Meshes" parent_id_path=PackedInt32Array(1759757433, 354222542) index="5" unique_id=763376953]
-transform = Transform3D(0.99923635, 0.038344886, 0.0075104237, -0.038631596, 0.99833524, 0.04268425, -0.0058612227, -0.04294153, 0.99906045, 6.1035156e-05, -0.60910225, -10.000122)
+transform = Transform3D(0.99923635, 0.038344882, 0.0075104237, -0.038631596, 0.9983351, 0.04268425, -0.0058612227, -0.042941526, 0.99906045, 6.1035156e-05, -0.60910225, -10.000122)
 
 [node name="GhostTown" parent="." unique_id=143995200 instance=ExtResource("15_857re")]
 transform = Transform3D(0.78389937, 0, 0.6208879, 0, 1, 0, -0.6208879, 0, 0.78389937, 254.29613, 0.49689007, 334.05212)
@@ -1014,31 +1023,31 @@ transform = Transform3D(-4.3711385e-08, -1, -2.9802322e-08, 1, -4.371139e-08, 0,
 transform = Transform3D(-5.9604645e-08, 0, -2, 0, 2, 0, 2, 0, -5.9604645e-08, 0, -0.5056391, 0)
 
 [node name="Barrier2" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="1" unique_id=801813959]
-transform = Transform3D(0.99997795, -0.0027080514, 0.0060626566, 0.0022099821, 0.99673104, 0.08070447, -0.006261468, -0.08068959, 0.99671173, -0.00012207031, -0.7684941, -3.350586)
+transform = Transform3D(0.99997807, -0.0027080514, 0.0060626566, 0.0022099824, 0.996731, 0.08070447, -0.006261468, -0.08068958, 0.99671173, -0.00012207031, -0.7684941, -3.350586)
 
 [node name="Barrier3" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="2" unique_id=2063154483]
-transform = Transform3D(0.99979806, -0.020033784, 0.0013863146, 0.01988037, 0.9971647, 0.0725762, -0.0028364062, -0.07253404, 0.9973615, 3.7635498, -0.9502504, -3.35083)
+transform = Transform3D(0.99979806, -0.020033784, 0.0013863146, 0.019880371, 0.9971647, 0.0725762, -0.0028363764, -0.07253404, 0.9973615, 3.7635498, -0.9502504, -3.35083)
 
 [node name="Barrier4" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="3" unique_id=2014623242]
-transform = Transform3D(0.9999423, 0.005572699, 0.008862287, -0.0062136217, 0.9972329, 0.07401806, -0.008425295, -0.074068755, 0.9972173, -3.637085, -1.0074816, -3.3508606)
+transform = Transform3D(0.99994236, 0.005572699, 0.008862317, -0.006213622, 0.99723285, 0.07401807, -0.008425295, -0.074068755, 0.9972173, -3.637085, -1.0074816, -3.3508606)
 
 [node name="Barrier5" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="4" unique_id=1835063829]
 transform = Transform3D(0.99936783, -0.0354656, -0.0020307302, 0.035523303, 0.9974652, 0.061653312, -0.00016099215, -0.061687, 0.99808806, 7.637207, -0.7600694, -3.350769)
 
 [node name="Barrier6" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="5" unique_id=1492542955]
-transform = Transform3D(0.99980676, 0.017181043, 0.008861184, -0.01787404, 0.996201, 0.08519611, -0.0073637962, -0.085338995, 0.9963169, -7.4919434, -0.76394916, -3.3509216)
+transform = Transform3D(0.99980676, 0.017181043, 0.008861244, -0.017874042, 0.9962009, 0.0851961, -0.0073637962, -0.08533899, 0.9963168, -7.4919434, -0.76394916, -3.3509216)
 
 [node name="Barrier7" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="6" unique_id=1215660123]
-transform = Transform3D(0.99989444, 0.012813311, 0.0066108406, -0.013341871, 0.99608696, 0.08731307, -0.0054662526, -0.0873919, 0.9961579, 0.00012207031, -0.26153827, 3.193573)
+transform = Transform3D(0.99989444, 0.012813315, 0.0066108406, -0.013341871, 0.9960869, 0.08731307, -0.0054662526, -0.08739189, 0.9961579, 0.00012207031, -0.26153827, 3.193573)
 
 [node name="Barrier8" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="7" unique_id=1636718525]
-transform = Transform3D(0.99997556, 0.0052121207, 0.0030643642, -0.005397571, 0.99793047, 0.06400037, -0.0027244687, -0.06401594, 0.99793756, 3.7633057, -0.23628378, 3.1934204)
+transform = Transform3D(0.9999757, 0.0052121207, 0.0030643642, -0.0053975713, 0.9979305, 0.06400037, -0.0027244985, -0.06401594, 0.99793756, 3.7633057, -0.23628378, 3.1934204)
 
 [node name="Barrier9" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="8" unique_id=809367507]
 transform = Transform3D(0.99983644, 0.016949821, 0.0063005686, -0.017431045, 0.99610853, 0.0863943, -0.004811734, -0.086490035, 0.99624074, -3.637329, -0.26153827, 3.1933594)
 
 [node name="Barrier10" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="9" unique_id=242564191]
-transform = Transform3D(0.9996519, -0.02610725, -0.0012007952, 0.026132414, 0.99788666, 0.059415806, -0.0003528893, -0.05942665, 0.99823225, 7.637329, -0.3923278, 3.1932373)
+transform = Transform3D(0.9996519, -0.026107252, -0.0012007952, 0.026132414, 0.9978866, 0.05941581, -0.0003528893, -0.05942665, 0.99823225, 7.637329, -0.3923278, 3.1932373)
 
 [node name="Barrier11" parent="Crossroads/Meshes" parent_id_path=PackedInt32Array(1671911261, 354222542) index="10" unique_id=654538439]
 transform = Transform3D(0.99916136, 0.038829178, 0.012864023, -0.03991708, 0.9942546, 0.09931933, -0.008933693, -0.099750444, 0.99496496, -7.4919434, -0.16413331, 3.1932373)
@@ -1074,13 +1083,13 @@ transform = Transform3D(0.99702054, -0.07708805, 0.00226745, 0.07711384, 0.99690
 transform = Transform3D(0.8094921, -0.050217796, -0.5849789, 0.041839413, 0.99873644, -0.027839717, 0.5856377, -0.0019391412, 0.8105705, -2.9216309, 1.0615466, 5.8403625)
 
 [node name="ShippingContainer3" parent="Crateyard/Meshes" parent_id_path=PackedInt32Array(982147227, 354222542) index="2" unique_id=1123713101]
-transform = Transform3D(0.98806643, -0.10985358, 0.107972816, 0.11310331, 0.9932818, -0.024428807, -0.104564026, 0.03634931, 0.9938536, 1.5274658, 1.8905332, -5.0199585)
+transform = Transform3D(0.98806643, -0.10985357, 0.107972816, 0.11310331, 0.9932817, -0.024428807, -0.104564026, 0.03634931, 0.9938536, 1.5274658, 1.8905332, -5.0199585)
 
 [node name="ShippingContainer4" parent="Crateyard/Meshes" parent_id_path=PackedInt32Array(982147227, 354222542) index="3" unique_id=232527550]
-transform = Transform3D(0.9952685, -0.09695168, 0.0059908032, 0.097127646, 0.9941222, -0.04775188, -0.0013259649, 0.048107848, 0.9988396, 3.6549072, 1.9575593, 0.6373596)
+transform = Transform3D(0.99526846, -0.09695168, 0.0059908032, 0.09712764, 0.9941222, -0.04775188, -0.0013259649, 0.048107848, 0.9988396, 3.6549072, 1.9575593, 0.6373596)
 
 [node name="Flagpole" parent="Crateyard/Meshes" parent_id_path=PackedInt32Array(982147227, 354222542) index="4" unique_id=800258272]
-transform = Transform3D(-5.9604645e-08, 0, -2, 0, 2, 0, 2, 0, -5.9604645e-08, -0.00061035156, 1.2789218, 2.6802368)
+transform = Transform3D(-5.9604645e-08, 0, -2, 0, 2, 0, 2, 0, -5.9604645e-08, -0.0007324219, 1.2789218, 2.6801453)
 
 [node name="RadioStation" parent="." unique_id=271568694 instance=ExtResource("47_c1mwn")]
 transform = Transform3D(-0.5009066, 0, 0.86550134, 0, 1, 0, -0.86550134, 0, -0.5009066, 193.84766, 5.25765, 284.4301)
@@ -1138,7 +1147,7 @@ transform = Transform3D(0.9169278, 0, 0.39905316, 0, 1, 0, -0.39905316, 0, 0.916
 transform = Transform3D(0.9569707, 0, -0.29018444, 0, 1, 0, 0.29018444, 0, 0.9569707, -9.3349, -0.124987364, 3.3908691)
 
 [node name="detail-barrier-strong-type-a" parent="JackalFort/Meshes" parent_id_path=PackedInt32Array(248617744, 354222542) index="3" unique_id=1054252922]
-transform = Transform3D(-3.997703, 0.13527238, 0.008341312, 0.13505103, 3.996706, -0.08994917, -0.011376381, -0.089615874, -3.99898, 1.7844849, -0.15880823, -6.7526855)
+transform = Transform3D(-3.997703, 0.13527237, 0.008341312, 0.13505103, 3.9967058, -0.08994917, -0.011376381, -0.08961586, -3.99898, 1.7844849, -0.15880823, -6.7526855)
 
 [node name="detail-barrier-strong-type-a6" parent="JackalFort/Meshes" parent_id_path=PackedInt32Array(248617744, 354222542) index="4" unique_id=927921906]
 transform = Transform3D(-3.9932036, 0.09037595, -0.2148298, 0.09355223, 3.9985023, -0.056811184, 0.21346581, -0.06173912, -3.9938226, 5.1154785, -0.27707994, -6.711426)
@@ -1147,104 +1156,105 @@ transform = Transform3D(-3.9932036, 0.09037595, -0.2148298, 0.09355223, 3.998502
 transform = Transform3D(-3.9042368, 0.027063912, 0.8695984, 0.016540742, 3.9996507, -0.050215345, -0.86986244, -0.045417204, -3.9040077, 8.364258, -0.32632884, -6.3825684)
 
 [node name="detail-barrier-strong-type-a2" parent="JackalFort/Meshes" parent_id_path=PackedInt32Array(248617744, 354222542) index="6" unique_id=117784129]
-transform = Transform3D(-3.9972034, 0.14726391, -0.026008964, 0.14769576, 3.9966698, -0.069390066, 0.023432493, -0.07030194, -3.999311, -1.6990967, -0.15297574, -6.790039)
+transform = Transform3D(-3.9972034, 0.14726391, -0.026008844, 0.14769576, 3.9966698, -0.06939006, 0.023432493, -0.070301935, -3.9993105, -1.6990967, -0.15297574, -6.790039)
 
 [node name="detail-barrier-strong-type-a3" parent="JackalFort/Meshes" parent_id_path=PackedInt32Array(248617744, 354222542) index="7" unique_id=2004121493]
-transform = Transform3D(-3.9941776, 0.20644875, 0.062683105, 0.2048309, 3.9934702, -0.10082433, -0.067784786, -0.09746749, -3.9982371, -5.016968, 0.021015882, -6.904785)
+transform = Transform3D(-3.9941776, 0.20644873, 0.062683105, 0.2048309, 3.99347, -0.10082433, -0.067784786, -0.09746748, -3.9982371, -5.016968, 0.021015882, -6.904785)
 
 [node name="detail-barrier-strong-type-a4" parent="JackalFort/Meshes" parent_id_path=PackedInt32Array(248617744, 354222542) index="8" unique_id=1559729970]
-transform = Transform3D(-3.9612339, 0.2695505, -0.48576427, 0.28406537, 3.988558, -0.10319251, 0.47742212, -0.13668953, -3.9690485, -8.307922, 0.25736082, -6.6796875)
+transform = Transform3D(-3.9612339, 0.26955047, -0.48576427, 0.28406537, 3.988558, -0.1031925, 0.47742212, -0.13668951, -3.9690485, -8.307922, 0.25736082, -6.6796875)
 
 [node name="detail-barrier-strong-type-a5" parent="JackalFort/Meshes" parent_id_path=PackedInt32Array(248617744, 354222542) index="9" unique_id=1746441469]
-transform = Transform3D(-3.5674121, 0.30064905, -1.7841456, 0.34589696, 3.984959, -0.020109983, 1.7759284, -0.17221755, -3.580001, -11.4053955, 0.5817448, -5.756958)
+transform = Transform3D(-3.5674121, 0.30064905, -1.7841456, 0.34589696, 3.984959, -0.020109996, 1.7759284, -0.17221756, -3.580001, -11.4053955, 0.5817448, -5.756958)
 
 [node name="DrugDen" parent="." unique_id=419489395 instance=ExtResource("79_nggm6")]
 transform = Transform3D(-0.10605586, 0, -0.99436015, 0, 1, 0, 0.99436015, 0, -0.10605586, 157.74272, 1.3239398, 278.51114)
 
 [node name="CollisionShape3D" parent="DrugDen" index="0" unique_id=1772758538]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -1.7763568e-15, 0, 1, 3.0517578e-05, -0.12351596, -0.6014404)
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -2.220446e-15, 0, 1, 3.0517578e-05, -0.12351596, -0.6014404)
 
 [node name="Flagpole" parent="DrugDen/Meshes" parent_id_path=PackedInt32Array(419489395, 354222542) index="0" unique_id=800258272]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.45817947, -8)
 
 [node name="CSGBakedMeshInstance3D2" parent="DrugDen/Meshes" parent_id_path=PackedInt32Array(419489395, 354222542) index="1" unique_id=1516860789]
-transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -5.555176, -2.4690533, 1.2330933)
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -5.5549316, -2.4690533, 1.2329712)
 
 [node name="CSGBakedMeshInstance3D" parent="DrugDen/Meshes" parent_id_path=PackedInt32Array(419489395, 354222542) index="2" unique_id=1837403267]
-transform = Transform3D(-0.4700828, -0.1884385, 0.86227196, -0.10016369, 0.98202145, 0.16000226, -0.87692004, -0.0111540295, -0.4805063, 7.6811523, 0.43508053, -0.066223145)
+transform = Transform3D(-0.47008273, -0.18843849, 0.86227196, -0.10016368, 0.9820214, 0.16000226, -0.87692004, -0.011154028, -0.4805063, 7.6813965, 0.43508053, -0.066223145)
 
 [node name="detail-barrier-type-b" parent="DrugDen/Meshes" parent_id_path=PackedInt32Array(419489395, 354222542) index="3" unique_id=477869576]
-transform = Transform3D(5.276119, 0.33867285, 1.3877789, -0.5615622, 2.980546, -0.1936284, -2.801277, 0.040380385, 2.652655, -11.75, 0.15651321, -7.7876587)
+transform = Transform3D(5.276119, 0.33867285, 1.3877788, -0.56156206, 2.980546, -0.19362837, -2.8012767, 0.0403804, 2.652655, -11.749756, 0.15651321, -7.7877197)
 surface_material_override/0 = null
 surface_material_override/1 = null
 
 [node name="detail-barrier-type-b2" parent="DrugDen/Meshes" parent_id_path=PackedInt32Array(419489395, 354222542) index="4" unique_id=756686039]
-transform = Transform3D(5.881268, 0.2853991, 0.5207789, -0.56347066, 2.9863894, -0.045763284, -1.0455399, -0.004049586, 2.954098, -7.190918, -0.093421936, -10.057434)
+transform = Transform3D(5.881268, 0.2853991, 0.52077883, -0.56347066, 2.9863894, -0.04576328, -1.0455397, -0.0040495805, 2.954098, -7.190918, -0.093421936, -10.057556)
 surface_material_override/0 = null
 surface_material_override/1 = null
 
 [node name="detail-barrier-type-b3" parent="DrugDen/Meshes" parent_id_path=PackedInt32Array(419489395, 354222542) index="5" unique_id=1270712359]
-transform = Transform3D(5.9959226, -0.11033136, 0.0063324273, 0.220634, 2.9979599, 0.006810968, -0.013157129, -0.0065734806, 2.9999852, -2.3510742, -0.49641848, -10.731689)
+transform = Transform3D(5.995922, -0.11033136, 0.006332487, 0.22063398, 2.9979599, 0.0068109706, -0.0131572485, -0.0065734806, 2.9999855, -2.35083, -0.49641848, -10.7317505)
 surface_material_override/0 = null
 surface_material_override/1 = null
 
 [node name="detail-barrier-type-b4" parent="DrugDen/Meshes" parent_id_path=PackedInt32Array(419489395, 354222542) index="6" unique_id=1878449775]
-transform = Transform3D(5.9712157, -0.2916705, 0.032485634, 0.5825168, 2.9855878, 0.037682, -0.07198632, -0.034347348, 2.9995856, 2.4603271, -0.34911776, -10.883423)
+transform = Transform3D(5.9712157, -0.29167047, 0.032485664, 0.5825168, 2.9855876, 0.037682, -0.07198638, -0.03434734, 2.9995854, 2.4605713, -0.34911776, -10.883423)
 surface_material_override/0 = null
 surface_material_override/1 = null
 
 [node name="detail-barrier-type-b5" parent="DrugDen/Meshes" parent_id_path=PackedInt32Array(419489395, 354222542) index="7" unique_id=1511698238]
-transform = Transform3D(5.920451, -0.39577198, -0.28355592, 0.80334187, 2.9726567, 0.044236977, 0.5502708, -0.0816159, 2.9862423, 7.3565674, 0.034550667, -10.355896)
+transform = Transform3D(5.920451, -0.39577195, -0.28355592, 0.80334187, 2.9726565, 0.04423698, 0.5502708, -0.081615895, 2.9862423, 7.3568115, 0.034550667, -10.356018)
 surface_material_override/0 = null
 surface_material_override/1 = null
 
 [node name="detail-barrier-type-b6" parent="DrugDen/Meshes" parent_id_path=PackedInt32Array(419489395, 354222542) index="8" unique_id=47421239]
-transform = Transform3D(4.9946766, -0.4250756, -1.6070459, 0.9575739, 2.9612856, -0.039249886, 3.1837382, -0.22380434, 2.5329528, 11.297119, 0.7823353, -8.465454)
+transform = Transform3D(4.9946766, -0.42507565, -1.607046, 0.957574, 2.9612856, -0.03924991, 3.183739, -0.2238044, 2.5329523, 11.297363, 0.7823353, -8.465515)
 surface_material_override/0 = null
 surface_material_override/1 = null
 
 [node name="DrugDen2" parent="." unique_id=779040308 instance=ExtResource("79_nggm6")]
 transform = Transform3D(0.8792082, 0, -0.47643775, 0, 1, 0, 0.47643775, 0, 0.8792082, 221.27267, 0.58437014, 248.93654)
+location_data = SubResource("Resource_ckll4")
 
 [node name="CollisionShape3D" parent="DrugDen2" index="0" unique_id=1772758538]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -1.7763568e-15, 0, 1, 3.0517578e-05, -0.12351596, -0.6014404)
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 3.0517578e-05, -0.36832917, -0.6014404)
 
 [node name="Flagpole" parent="DrugDen2/Meshes" parent_id_path=PackedInt32Array(779040308, 354222542) index="0" unique_id=800258272]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.45817947, -8)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.5420251, -8.0000305)
 
 [node name="CSGBakedMeshInstance3D2" parent="DrugDen2/Meshes" parent_id_path=PackedInt32Array(779040308, 354222542) index="1" unique_id=1516860789]
-transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -5.555176, -2.4690533, 1.2330933)
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -5.555176, -1.9713848, 1.2329712)
 
 [node name="CSGBakedMeshInstance3D" parent="DrugDen2/Meshes" parent_id_path=PackedInt32Array(779040308, 354222542) index="2" unique_id=1837403267]
-transform = Transform3D(-0.4700828, -0.1884385, 0.86227196, -0.10016369, 0.98202145, 0.16000226, -0.87692004, -0.0111540295, -0.4805063, 7.6811523, 0.43508053, -0.066223145)
+transform = Transform3D(-0.48888335, 0.015215997, 0.8722163, 0.015284814, 0.99984354, -0.008875236, -0.8722149, 0.008992711, -0.48903966, 7.6811523, -1.696937, -0.066223145)
 
 [node name="detail-barrier-type-b" parent="DrugDen2/Meshes" parent_id_path=PackedInt32Array(779040308, 354222542) index="3" unique_id=477869576]
-transform = Transform3D(5.276119, 0.33867285, 1.3877789, -0.5615622, 2.980546, -0.1936284, -2.801277, 0.040380385, 2.652655, -11.75, 0.15651321, -7.7876587)
+transform = Transform3D(5.226715, 0.4700938, 1.3961958, -0.9137846, 2.961601, -0.14196265, -2.80114, -0.088970676, 2.651506, -11.75, 0.12332654, -7.7877197)
 surface_material_override/0 = null
 surface_material_override/1 = null
 
 [node name="detail-barrier-type-b2" parent="DrugDen2/Meshes" parent_id_path=PackedInt32Array(779040308, 354222542) index="4" unique_id=756686039]
-transform = Transform3D(5.881268, 0.2853991, 0.5207789, -0.56347066, 2.9863894, -0.045763284, -1.0455399, -0.004049586, 2.954098, -7.190918, -0.093421936, -10.057434)
+transform = Transform3D(5.8696213, 0.33333212, 0.52513695, -0.6745789, 2.9809687, -0.007183354, -1.045208, -0.052013807, 2.9536724, -7.190918, -0.5543176, -10.057465)
 surface_material_override/0 = null
 surface_material_override/1 = null
 
 [node name="detail-barrier-type-b3" parent="DrugDen2/Meshes" parent_id_path=PackedInt32Array(779040308, 354222542) index="5" unique_id=1270712359]
-transform = Transform3D(5.9959226, -0.11033136, 0.0063324273, 0.220634, 2.9979599, 0.006810968, -0.013157129, -0.0065734806, 2.9999852, -2.3510742, -0.49641848, -10.731689)
+transform = Transform3D(5.9951177, 0.12082861, 0.005122781, -0.24157125, 2.9974742, -0.02320568, -0.01210618, 0.022980541, 2.9999058, -2.3510742, -1.4386821, -10.731689)
 surface_material_override/0 = null
 surface_material_override/1 = null
 
 [node name="detail-barrier-type-b4" parent="DrugDen2/Meshes" parent_id_path=PackedInt32Array(779040308, 354222542) index="6" unique_id=1878449775]
-transform = Transform3D(5.9712157, -0.2916705, 0.032485634, 0.5825168, 2.9855878, 0.037682, -0.07198632, -0.034347348, 2.9995856, 2.4603271, -0.34911776, -10.883423)
+transform = Transform3D(5.9987106, 0.053664, 0.03113091, -0.106523775, 2.9992764, -0.038604017, -0.06362796, 0.03804306, 2.9995883, 2.460205, -1.5654215, -10.883484)
 surface_material_override/0 = null
 surface_material_override/1 = null
 
 [node name="detail-barrier-type-b5" parent="DrugDen2/Meshes" parent_id_path=PackedInt32Array(779040308, 354222542) index="7" unique_id=1511698238]
-transform = Transform3D(5.920451, -0.39577198, -0.28355592, 0.80334187, 2.9726567, 0.044236977, 0.5502708, -0.0816159, 2.9862423, 7.3565674, 0.034550667, -10.355896)
+transform = Transform3D(5.973089, 0.0031378455, -0.2837571, -0.013969131, 2.9997182, -0.04034123, 0.5673759, 0.040820938, 2.9862785, 7.3565674, -1.6745274, -10.355896)
 surface_material_override/0 = null
 surface_material_override/1 = null
 
 [node name="detail-barrier-type-b6" parent="DrugDen2/Meshes" parent_id_path=PackedInt32Array(779040308, 354222542) index="8" unique_id=47421239]
-transform = Transform3D(4.9946766, -0.4250756, -1.6070459, 0.9575739, 2.9612856, -0.039249886, 3.1837382, -0.22380434, 2.5329528, 11.297119, 0.7823353, -8.465454)
+transform = Transform3D(5.066512, 0.0061752927, -1.6070347, -0.04671318, 2.9998007, -0.025291061, 3.2137527, 0.033867896, 2.5331378, 11.297119, -1.7243357, -8.465454)
 surface_material_override/0 = null
 surface_material_override/1 = null
 

@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://c5gx2jdiiwt5x" path="res://Audio/Music/Overworld Theme2.wav" id="2_bthhl"]
 [ext_resource type="AudioStream" uid="uid://bvv1bhopaqmg4" path="res://Audio/Music/Cowboy Boombap.mp3" id="2_v36pn"]
 [ext_resource type="AudioStream" uid="uid://b6c4tk5e2brv0" path="res://Audio/SFX/freesound_community-wind-ambience-14720.mp3" id="3_v36pn"]
+[ext_resource type="AudioStream" uid="uid://dgmrwxvndaaoh" path="res://Audio/SFX/slugmouth spoken.ogg" id="5_crfcu"]
 
 [node name="MusicManager" type="Node" unique_id=1854292778]
 process_mode = 3
@@ -21,4 +22,8 @@ bus = &"Music"
 
 [node name="AmbientSounds" type="AudioStreamPlayer" parent="." unique_id=856763279]
 stream = ExtResource("3_v36pn")
+bus = &"SFX"
+
+[node name="TitleSfx" type="AudioStreamPlayer" parent="." unique_id=2112021202]
+stream = ExtResource("5_crfcu")
 bus = &"SFX"

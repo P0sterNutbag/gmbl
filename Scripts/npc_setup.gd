@@ -14,6 +14,8 @@ var current_style := NpcStyle.new()
 @onready var helmet: MeshInstance3D = $PersonAnimated/Armature/Skeleton3D/Helmet
 @onready var pads: MeshInstance3D = $PersonAnimated/Armature/Skeleton3D/Pads
 const BALD_HAIR = preload("uid://cfmrww0wj003t")
+const PLAYER_EYES = preload("uid://b4b34add2xwvv")
+const PLAYER_FACE_NO_NOSE = preload("uid://wyroqroumohr")
 
 
 func _ready() -> void:
@@ -45,6 +47,10 @@ func set_materials(style: NpcStyle = style_data) -> void:
 		hair_color = style.hair_colors[randi() % style.hair_colors.size()]
 	var hair_texture = style.hair_styles[randi() % style.hair_styles.size()]
 	var face_texture = style.faces[randi() % style.faces.size()]
+	if hair_texture.resource_path.contains("sheisti"):
+		face_texture = PLAYER_EYES
+	elif hair_texture.resource_path.contains("ski"):
+		face_texture = PLAYER_FACE_NO_NOSE
 	var head_image = hair_texture.get_image()
 	head_image.blend_rect(face_texture.get_image(), Rect2i(0, 0, 64, 64), Vector2i(64, 64))
 	var head_texture = ImageTexture.create_from_image(head_image)

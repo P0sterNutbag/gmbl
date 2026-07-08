@@ -3,6 +3,7 @@ extends Node
 @export var tracks: Dictionary[String, AudioStream]
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var ambient_sounds: AudioStreamPlayer = $AmbientSounds
+@onready var title_sfx: AudioStreamPlayer = $TitleSfx
 
 
 func _ready() -> void:

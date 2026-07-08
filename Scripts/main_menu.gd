@@ -59,6 +59,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_menu_item_pressed() -> void:
 	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld.tscn", false, true)
+	MusicManager.title_sfx.play()
 
 
 func _on_menu_item_2_pressed() -> void:
@@ -116,12 +117,14 @@ func _on_normal_pressed() -> void:
 	difficulty_options.hide()
 	ConfigManager.file.set_value("settings", "difficulty", 0)
 	SceneManager.start_scene_transition("res://Scenes/UI/Levels/character_creation.tscn")
+	MusicManager.title_sfx.play()
 
 
 func _on_hard_pressed() -> void:
 	difficulty_options.hide()
 	ConfigManager.file.set_value("settings", "difficulty", 1)
 	SceneManager.start_scene_transition("res://Scenes/UI/Levels/character_creation.tscn")
+	MusicManager.title_sfx.play()
 
 
 func _on_exit_difficulty_options_pressed() -> void:

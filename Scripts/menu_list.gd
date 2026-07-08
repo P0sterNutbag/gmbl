@@ -3,34 +3,38 @@ class_name MenuList
 
 @export var item_container: MenuController
 @export var pause_on_open: bool
+@export var is_subinterface: bool
 signal exit
 
 
-#func _process(_delta: float) -> void:
-	#if !visible:
-		#return
-	#if Input.is_action_just_pressed("ui_cancel"):
-		#close()
-
-
-func open(array: Array):
+func open(array: Array, button_scene: PackedScene = item_container.menu_item):
 	if pause_on_open:
 		PlayerStats.change_state(PlayerStats.states.pause)
 	item_container.delete_children()
 	show()
-	item_container.create_menu_items(array, on_button_pressed, on_button_focus_entered, false)
+	item_container.create_menu_items(array, button_scene, on_button_pressed, on_button_focus_entered, on_button_focus_exited, false)
 
 
 func close() -> void:
-	UiController.close_interface(self, pause_on_open)
+	if is_subinterface:
+		UiController.close_subinterface()
+	else:
+		UiController.close_interface(self, pause_on_open)
 	exit.emit()
-	#if pause_on_open:
-		#PlayerStats.change_state(PlayerStats.states.walk)
 
 
+@warning_ignore("unused_parameter")
 func on_button_pressed(button: Control, resource: Resource) -> void:
 	pass
 
 
+@warning_ignore("unused_parameter")
 func on_button_focus_entered(button: Control, resource: Resource) -> void:
+	var i = 0
+	pass
+
+
+@warning_ignore("unused_parameter")
+func on_button_focus_exited(button: Control) -> void:
+	var i = 0
 	pass

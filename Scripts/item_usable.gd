@@ -6,6 +6,7 @@ class_name ItemUsable
 @export var method: String
 @export var arguments: Array
 @export var custom_path: String
+@export var path_is_relative: bool
 @export var is_health_item: bool
 @export var usable_in_menu: bool = true
 @export var usable_in_fps: bool = true
@@ -26,7 +27,10 @@ func use(_target_node):
 	if is_health_item:
 		target = Globals.player.hitbox
 	elif custom_path != "":
-		target = Globals.get_tree().root.get_node(custom_path)
+		if path_is_relative:
+			target = Globals.get_tree().current_scene.get_node(custom_path)
+		else:
+			target = Globals.get_tree().root.get_node(custom_path)
 	else:
 		target = _target_node
 	for effect in effects:

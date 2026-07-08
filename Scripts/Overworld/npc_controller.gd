@@ -11,28 +11,28 @@ func _ready() -> void:
 
 
 func _on_timer_timeout() -> void:
-	# create enemy
-	var inst = NPC.instantiate()
-	Globals.overworld.add_child(inst)
-	# determine spawn location
+	# spawn npc
 	var spawn_location = get_spawn_location()
-	inst.global_position = spawn_location.global_position
-	inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
-	inst.location.location_data.faction = spawn_location.location_data.faction
-	inst.location.location_data.population = randi_range(min(2, spawn_location.location_data.population), min(4, spawn_location.location_data.population)) #max(spawn_location.location_data.population / 2, 1)
-	inst.location.location_data.fire_power_chance = spawn_location.location_data.fire_power_chance
-	inst.location.location_data.armor_level_chance = spawn_location.location_data.armor_level_chance
-	inst.faction = spawn_location.location_data.faction
-	#var standing = FactionManager.get_faction_relation(inst.faction, FactionManager.factions.player)
-	#if standing < 0.0:
-		#inst.location.dialogue_tree = NPC_ENEMY_DIALOGUE.duplicate(true)
-	#else:
-		#inst.location.dialogue_tree = NPC_FRIENDLY_DIALOGUE.duplicate(true)
+	var inst = spawn_npc(spawn_location)
 	# determine desination
 	var dest = get_destination(inst.faction, spawn_location, inst.location.location_data)
 	var pos = dest.global_position# + Vector3.RIGHT.rotated(Vector3.UP, deg_to_rad(randf_range(0, 360))) * dest.target_distance
 	inst.navigation_agent.set_target_position(pos)
 	inst.destination = dest
+
+
+func spawn_npc(location: Location) -> Node3D:
+	var location_data = location.location_data
+	var inst = NPC.instantiate()
+	inst.faction = location_data.faction
+	Globals.overworld.add_child(inst)
+	inst.location.location_data.faction = location_data.faction
+	inst.location.location_data.population = randi_range(min(2, location_data.population), min(4, location_data.population))
+	inst.location.location_data.fire_power_chance = location_data.fire_power_chance
+	inst.location.location_data.armor_level_chance = location_data.armor_level_chance
+	inst.global_position = location.global_position
+	inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
+	return inst
 
 
 func get_spawn_location() -> Location:

@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bt5vwn1pyvjhq"]
+
+[ext_resource type="Theme" uid="uid://tivwhtwiofll" path="res://Art/Themes/button.tres" id="1_iv5qp"]
+[ext_resource type="PackedScene" uid="uid://c5f6k7pusonjl" path="res://Scenes/UI/progress_bar_background.tscn" id="2_8j483"]
+[ext_resource type="Script" uid="uid://bj4lr70jujgba" path="res://Scripts/repair_button.gd" id="2_nxmj4"]
+[ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="3_nxmj4"]
+
+[node name="RepairButton" type="Button" unique_id=326350099]
+offset_right = 376.0
+offset_bottom = 30.0
+theme = ExtResource("1_iv5qp")
+text = "Gun Name"
+flat = true
+alignment = 0
+script = ExtResource("2_nxmj4")
+
+[node name="Control" type="HBoxContainer" parent="." unique_id=512432156]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -15.0
+offset_bottom = 15.0
+grow_horizontal = 0
+grow_vertical = 2
+alignment = 2
+
+[node name="ProgressBarBackground" parent="Control" unique_id=483102396 instance=ExtResource("2_8j483")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control" unique_id=1149445167]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+mouse_filter = 0
+theme = ExtResource("3_nxmj4")
+text = "$0"
+horizontal_alignment = 1

@@ -9,7 +9,7 @@ var location_data: LocationData
 @onready var border_parent: Node3D = $"../Border"
 @onready var player_spawn: Node3D = $"../PlayerAnchor"
 const NPC = preload("uid://cb05x24r4r8im")
-
+signal enemies_spawned
 
 func _ready() -> void:
 	# get spawn points
@@ -129,6 +129,8 @@ func _ready() -> void:
 			all_enemies.sort_custom(func(a, b): return enemy.global_position.distance_to(a.global_position) < enemy.global_position.distance_to(b.global_position))
 			enemy.last_seen_position = all_enemies[0].global_position
 			enemy.change_state(enemy.states.search)
+	
+	enemies_spawned.emit()
 
 
 func get_destination(position_from: Vector3) -> Vector3:
@@ -162,7 +164,7 @@ func spawn_enemy(faction: FactionManager.factions):
 	get_tree().current_scene.add_child.call_deferred(inst)
 	# position enemy at spawn point
 	var spawn_index = randi_range(0, spawn_points.size() - 1)
-	while used_spawns.has(spawn_index) or spawn_points[spawn_index].process_mode == PROCESS_MODE_DISABLED or spawn_points[spawn_index].global_position.distance_to(player_spawn.global_position) < 25:
+	while used_spawns.has(spawn_index) or spawn_points[spawn_index].process_mode == PROCESS_MODE_DISABLED:# or spawn_points[spawn_index].global_position.distance_to(player_spawn.global_position) < 25:
 		spawn_index = randi_range(0, spawn_points.size() - 1)
 	used_spawns.append(spawn_index)
 	inst.set_deferred("global_transform", spawn_points[spawn_index].global_transform)

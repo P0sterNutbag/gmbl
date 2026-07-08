@@ -1,4 +1,5 @@
 extends Node3D
+class_name Encounter
 
 @export var location_data: LocationData
 @export var spawn_parents: Array[Node3D]

@@ -22,6 +22,7 @@ var menu_buttons_has_mouse: bool
 @onready var log_menu_container: VBoxContainer = $Menus/VBoxContainer/Log/MarginContainer/ScrollContainer/VBoxContainer
 @onready var log_menu: PanelContainer = $Menus/VBoxContainer/Log
 @onready var map: PanelContainer = $Menus/VBoxContainer/Map
+@onready var repair_menu: VBoxContainer = $RepairMenu
 const LOG_NOTIFICATION = preload("res://Scenes/UI/log_notification.tscn")
 const TEXT_OUTLINE = preload("uid://cral201bx2ck")
 
@@ -54,7 +55,7 @@ func _process(_delta: float) -> void:
 				return
 			player_inventory_holder.get_child(0).source_inventory = PlayerStats.inventory
 			UiController.open_interface(player_inventory_holder)
-		else:
+		elif player_inventory_holder.visible:
 			UiController.close_interface(player_inventory_holder)
 	if Input.is_action_just_pressed("journal"):
 		if !journal.visible:
@@ -137,6 +138,11 @@ func close_inventory() -> void:
 
 func close_transfer_inventory() -> void:
 	UiController.close_interface(transfer_inventory_holder)
+
+
+func open_repair_menu(repair_amount := 100.0) -> void:
+	repair_menu.repair_amount = repair_amount
+	UiController.open_subinterface(repair_menu)
 
 
 func hide_all_ui() -> void:

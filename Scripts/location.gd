@@ -10,20 +10,25 @@ class_name Location
 @export var enemy_dialogue_tree: DialogueTree
 @export var unaware_dialogue_tree: DialogueTree
 #@export var dialogue_tree: DialogueTree
+@export var proximity_spawn_chance := 0.5
 @export var can_spawn_npcs: bool = true
 @export var can_stealth_start: bool
 var alert_enemies: bool
-var transition_started: bool 
+var transition_started: bool
 var can_transition: bool = true
+var can_proxmity_spawn: bool = true
 var shops_base_inventory: Dictionary
 var shops_max_money: Dictionary
 var saved_shops: Array[TownOption]
 var unaware_dialogue: DialogueTree
+const NPC = preload("uid://b0cqkj1fgouo2")
 @onready var point_of_interest: PointOfInterest = $PointOfInterest
 @onready var flag: MeshInstance3D = $Meshes/Flagpole/MeshInstance3D
 @onready var flagpole: Node3D = $Meshes/Flagpole
 @onready var battle_timer: Timer = $BattleTimer
 @onready var animation_player: AnimationPlayer = $BattleEffects/AnimationPlayer
+@onready var attack_area_shape: CollisionShape3D = $AttackArea/CollisionShape3D
+@onready var proximity_spawn_timer: Timer = $ProximitySpawnTimer
 signal encounter_started
 @warning_ignore("unused_signal")
 signal encounter_ended
@@ -61,6 +66,8 @@ func _ready() -> void:
 	if unaware_dialogue_tree:
 		unaware_dialogue_tree.npc_style = faction_data.style
 		friendly_dialogue_tree.npc_name = faction_data.npc_name
+	if !can_spawn_npcs:
+		attack_area_shape.disabled = true
 	await get_tree().process_frame
 	# shop timer
 	if town != null:
@@ -235,3 +242,22 @@ func _on_grow_timeout() -> void:
 	location_data.change_population(amount)
 	if location_data.population == FactionManager.factions.player:
 		Globals.survival_ui.create_notification(title + " population increased by " + str(amount))
+
+
+func _on_attack_area_body_entered(body: Node3D) -> void:
+	if !can_proxmity_spawn:
+		return
+	var relation = FactionManager.get_faction_relation(location_data.faction, body.faction)
+	if "faction" in body and relation < 0:
+		if randf() > proximity_spawn_chance:
+			return
+		var inst = Globals.npc_controller.spawn_npc(self)
+		inst.navigation_agent.set_target_position(body.global_position)
+		inst.look_at(body)
+		inst.destination = self
+		can_proxmity_spawn = false
+		proximity_spawn_timer.start()
+
+
+func _on_proximity_spawn_timer_timeout() -> void:
+	can_proxmity_spawn = true

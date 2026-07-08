@@ -70,8 +70,8 @@ func _ready() -> void:
 	location.shop.faction = faction
 	original_position = global_position
 	original_rotation = global_rotation
-	if destination:
-		navigation_agent.set_target_position(destination.global_position)
+	#if destination:
+		#navigation_agent.set_target_position(destination.global_position)
 	var armor_levels = location.location_data.armor_level_chance
 	var armor_level = 0
 	for i in armor_levels.size():

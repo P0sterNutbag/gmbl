@@ -162,6 +162,9 @@ _data = {
 &"battle": SubResource("Animation_gqlbv")
 }
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_hpxtj"]
+radius = 12.0
+
 [node name="Location" type="Area3D" unique_id=1342811121]
 collision_layer = 64
 collision_mask = 32
@@ -216,11 +219,24 @@ show_population = false
 [node name="TextAnchor" parent="PointOfInterest" index="2" unique_id=2046222566]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 
+[node name="AttackArea" type="Area3D" parent="." unique_id=206118518]
+collision_layer = 0
+collision_mask = 34
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea" unique_id=620317125]
+shape = SubResource("SphereShape3D_hpxtj")
+
 [node name="BattleTimer" type="Timer" parent="." unique_id=177834265]
+one_shot = true
+
+[node name="ProximitySpawnTimer" type="Timer" parent="." unique_id=1358639387]
+wait_time = 60.0
 one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="timeout" from="BattleTimer" to="." method="_on_battle_timer_timeout"]
+[connection signal="timeout" from="ProximitySpawnTimer" to="." method="_on_proximity_spawn_timer_timeout"]
 
 [editable path="PointOfInterest"]

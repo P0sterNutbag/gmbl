@@ -24,8 +24,8 @@ func create_menu_button(parent = self) -> Control:
 	return inst
 
 
-func create_menu_item(parent = self) -> Control:
-	var inst = menu_item.instantiate()
+func create_menu_item(parent = self, item_scene: PackedScene = menu_item) -> Control:
+	var inst = item_scene.instantiate()
 	if parent != null:
 		add_child(inst)
 	inst.focus_entered.connect(set_index.bind(inst))
@@ -33,18 +33,20 @@ func create_menu_item(parent = self) -> Control:
 	return inst
 
 
-func create_menu_items(array: Array, on_pressed = null, on_focus = null, loop_focus: bool = true) -> Array:
+func create_menu_items(array: Array, item_scene: PackedScene = menu_item, on_pressed = null, on_focus = null, on_exit_focus = null, loop_focus: bool = true) -> Array:
 	if array.size() <= 0:
 		return []
 	for i in array:
-		var inst = create_menu_item()
+		var inst = create_menu_item(self, item_scene)
 		inst.text = i.title
-		inst.custom_minimum_size.x = size.x
+		#inst.custom_minimum_size.x = size.x
 		if i is Resource:
 			if on_pressed and on_pressed is Callable:
 				inst.pressed.connect(on_pressed.bind(inst, i))
 			if on_focus and on_focus is Callable:
 				inst.focus_entered.connect(on_focus.bind(inst, i))
+			if on_exit_focus:
+				inst.focus_exited.connect(on_exit_focus.bind(inst))
 	if loop_focus:
 		set_menu_item_focus()
 	await get_tree().process_frame

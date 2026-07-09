@@ -92,7 +92,7 @@ func _ready() -> void:
 	if npc_data.armor_level >= 2:
 		physical_bone_head.damage_modifier = 2.0
 		model.helmet.show()
-	faction = npc_data.faction
+	#faction = npc_data.faction
 	npc_data.hp = health_component.hp
 	npc_data.max_hp = health_component.hp
 	DayNightCycle.night_start.connect(on_night_start)
@@ -146,9 +146,9 @@ func _physics_process(delta: float) -> void:
 			_push_velocity.y = 0
 			collider.push_velocity = _push_velocity
 	# camp if blocked
-	if last_velocity_length > 0 and velocity.length() == 0.0:
-		look_at(last_seen_position)
-		change_state(states.camp)
+	#if last_velocity_length > 0 and velocity.length() == 0.0:
+		#look_at(last_seen_position)
+		#change_state(states.camp)
 
 
 func state_idle(delta) -> void:
@@ -177,13 +177,13 @@ func state_idle(delta) -> void:
 func state_walk(delta) -> void:
 	if is_new_state:
 		if goal == goals.travel:
-			navigation_agent.target_desired_distance = 1.0
+			#navigation_agent.target_desired_distance = 1.0
 			navigation_agent.set_target_position(destination)
 		is_new_state = false
 	# follow target
 	if goal == goals.follow:
 		#if global_position.distance_to(follow_target.global_position) > 3:
-		navigation_agent.target_desired_distance = 5.0
+		#navigation_agent.target_desired_distance = 5.0
 		navigation_agent.set_target_position(follow_target.global_position)
 	# follow path
 	var spd = walk_speed
@@ -357,7 +357,7 @@ func state_search(_delta) -> void:
 		if last_seen_position == Vector3.ZERO:
 			change_state(states.investigate)
 			return
-		navigation_agent.target_desired_distance = 3.0
+		#navigation_agent.target_desired_distance = 3.0
 		navigation_agent.set_target_position(last_seen_position)
 		is_new_state = false
 	# go to last seen position
@@ -375,7 +375,7 @@ func state_strafe(_delta) -> void:
 	if is_new_state:
 		var new_pos = global_position
 		new_pos = global_position + Vector3(randf_range(-4, 4), 0, randf_range(-4, 4))
-		navigation_agent.target_desired_distance = 0.5
+		#navigation_agent.target_desired_distance = 0.5
 		navigation_agent.set_target_position(new_pos)
 		is_new_state = false
 	# run to new position
@@ -448,7 +448,6 @@ func follow_path(speed: float = walk_speed):
 	var next_path_position: Vector3 = navigation_agent.get_next_path_position()
 	next_path_position.y = global_position.y
 	var new_velocity: Vector3 = global_position.direction_to(next_path_position) * speed
-	navigation_agent.set_velocity(velocity)
 	velocity = new_velocity
 	look_at_position(next_path_position)
 

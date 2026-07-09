@@ -1,9 +1,10 @@
 extends VBoxContainer
 
-var index: int = -1
+var index := -1
 var can_advance: bool
 var shop: TownOption
 var dialogue_tree: DialogueTree
+var dialogue_branch: DialogueBranch
 var dialogue_bubble = preload("res://Scenes/Overworld/UI/dialogue_bubble.tscn")
 var option_bubble = preload("res://Scenes/Overworld/UI/dialogue_options_bubble.tscn")
 var menu_item = preload("res://Scenes/UI/menu_item.tscn")
@@ -14,14 +15,15 @@ var menu_item = preload("res://Scenes/UI/menu_item.tscn")
 func _process(_delta: float) -> void:
 	if !visible:
 		return
-	if ((Input.is_action_just_pressed("select") or Input.is_action_just_pressed("shoot")) and dialogue_tree.bubbles[index] is not DialogueOptions and can_advance
-	and get_child(-1).can_proceed):
+	var current_bubble = get_child(-1)
+	if ((Input.is_action_just_pressed("select") or Input.is_action_just_pressed("shoot")) and "option_container" not in current_bubble and can_advance
+	and current_bubble.can_proceed):
 		advance_dialogue(index + 1)
 	if Input.is_action_just_pressed("ui_cancel") and dialogue_tree.bubbles[index] is DialogueOptions:
 		if Globals.overworld.current_encounter.town:
 			enter_town()
 		else:
-			exit_to_game()
+			exit_dialogue()
 
 
 func start_dialogue(tree: DialogueTree) -> void:
@@ -33,51 +35,59 @@ func start_dialogue(tree: DialogueTree) -> void:
 	camera_pivot.rotation.y = deg_to_rad(tree.camera_angle)
 	label.text = tree.npc_name
 	dialogue_tree = tree
+	dialogue_branch = null
 	advance_dialogue(index + 1)
 
 
-func advance_dialogue(next_index: int) -> void:
+func advance_dialogue(next_index: int = index + 1) -> void:
+	var bubble
 	index = next_index
-	var bubble = dialogue_tree.bubbles[index]
+	if dialogue_branch:
+		bubble = dialogue_branch.bubbles[index]
+	else:
+		bubble = dialogue_tree.bubbles[index]
 	if bubble is DialogueEvent:
 		var callable = Callable(self, bubble.method)
 		callable.callv(bubble.arguments)
+	elif bubble is DialogueCondition:
+		if bubble.is_condition_true():
+			dialogue_branch = bubble.success_branch
+			advance_dialogue(0)
+		else:
+			dialogue_branch = bubble.failure_branch
+			advance_dialogue(0)
 	elif bubble is DialogueOptions:
 		var inst = option_bubble.instantiate()
 		inst.size_flags_horizontal = SIZE_SHRINK_BEGIN
 		add_child(inst)
 		for option in bubble.options:
-			var inst2 = inst.option_container.create_menu_button()
-			inst2.text = option.text
-			inst2.pressed.connect(on_option_selected.bind(option, inst2))
+			var option_button = inst.option_container.create_menu_button()
+			option_button.text = option.text
+			option_button.pressed.connect(on_option_selected.bind(option, option_button))
 			#inst2.pressed.connect(advance_dialogue.bind(option.destination))
 		inst.option_container.set_menu_item_focus()
 		#if Input.get_connected_joypads().size() > 0:
 			#inst.option_container.get_child(0).grab_focus()
-	if bubble is DialogueLoop:
-		advance_dialogue(bubble.next_index)
-	elif bubble is Dialogue:
-		for line in bubble.lines:
-			var inst = dialogue_bubble.instantiate()
-			inst.size_flags_horizontal = SIZE_SHRINK_END
-			add_child(inst)
-			inst.text = line
+	#if bubble is DialogueLoop:
+		#advance_dialogue(bubble.next_index)
+	if bubble is Dialogue:
+		var inst = dialogue_bubble.instantiate()
+		inst.size_flags_horizontal = SIZE_SHRINK_END
+		add_child(inst)
+		inst.text = bubble.text
 	await get_tree().process_frame
 	can_advance = true
 
 
-func on_option_selected(option: DialogueOption, option_button: Control) -> void:
-	if option is DialogueOptionCondition:
-		if !option.is_condition_true():
-			Globals.survival_ui.create_notification(option.failue_message)
-			return
+func on_option_selected(option: DialogueBranch, option_button: Control) -> void:
 	for child in get_child(-1).option_container.get_children():
 		if child != option_button:
 			child.queue_free()
 		else:
 			child._on_focus_exited()
 			child.disabled = true
-	advance_dialogue(option.destination)
+	dialogue_branch = option
+	advance_dialogue(0)
 	get_child(-1).size.y = 0
 
 
@@ -91,7 +101,7 @@ func on_option_selected(option: DialogueOption, option_button: Control) -> void:
 		#Globals.ui.portraits.hide()
 
 
-func exit_to_game() -> void:
+func exit_dialogue() -> void:
 	Globals.ui.portraits.hide()
 	UiController.close_interface(self)
 	Globals.overworld.current_encounter.encounter_ended.emit()
@@ -153,12 +163,13 @@ func return_quests(quest_type: Quest, success_index: int, fail_index: int) -> vo
 
 func leave_shop() -> void:
 	await get_tree().process_frame
+	dialogue_branch = null
 	index = 1
 	UiController.open_interface(self)
 	advance_dialogue(index)
 
 
-func start_level(start_alert: bool = false) -> void:
+func enter_level(start_alert: bool = false) -> void:
 	Globals.ui.portraits.hide()
 	UiController.close_interface(self)
 	#var start_alert = FactionManager.get_faction_relation(Globals.overworld.current_encounter.location_data.faction, FactionManager.factions.player) < 0
@@ -166,16 +177,13 @@ func start_level(start_alert: bool = false) -> void:
 	Globals.overworld.current_encounter.transition_to_level()
 
 
-func pay_fee(amount: int, fail_index: int) -> void:
-	if PlayerStats.inventory.money - amount >= 0:
-		PlayerStats.inventory.money -= amount
-		var npc = Globals.overworld.current_encounter.get_parent()
-		npc.chase_player = false
-		npc.navigation_agent.set_target_position(npc.destination.global_position)
-		Globals.survival_ui.create_notification("You payed $" + str(amount))
-		exit_to_game()
-	else:
-		advance_dialogue(fail_index)
+func pay_fee(amount: int) -> void:
+	PlayerStats.inventory.money -= amount
+	var npc = Globals.overworld.current_encounter.get_parent()
+	npc.chase_player = false
+	npc.navigation_agent.set_target_position(npc.destination.global_position)
+	Globals.survival_ui.create_notification("You payed $" + str(amount))
+	advance_dialogue(index + 1)
 
 
 func enter_repair_menu() -> void:
@@ -215,8 +223,13 @@ func move_player(dest: Vector3) -> void:
 	await get_tree().create_timer(1.0).timeout
 	anim_player.play("fade_out")
 	await anim_player.animation_finished
-	exit_to_game()
+	exit_dialogue()
 
 
 func talk_to_npc() -> void:
 	Globals.ui.start_dialogue(Globals.overworld.current_encounter.dialogue_tree)
+
+
+func create_notification(text: String) -> void:
+	Globals.survival_ui.create_notification(text)
+	advance_dialogue()

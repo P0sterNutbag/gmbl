@@ -2,7 +2,7 @@ extends Node3D
 
 @export var enemies_to_spawn: Array[SpawnChance]
 @export var enemy_move_chance: float = 0.25
-@export var spawn_on_start: bool = true
+@export var start_alert: bool
 var spawn_points: Array[Node3D]
 var used_spawns: Array[int]
 var location_data: LocationData
@@ -22,9 +22,6 @@ func _ready() -> void:
 		var quest_location = i.location
 		var encounter_location = Globals.overworld.current_encounter.title
 		return "target" in i and quest_location == encounter_location)
-	
-	if !spawn_on_start:
-		return
 	
 	await get_tree().process_frame
 	
@@ -121,13 +118,19 @@ func _ready() -> void:
 			#inst.change_state(inst.states.walk)
 	
 	# make enemies fight if theres a battle
-	if battle:
-		await get_tree().process_frame
+	if battle or start_alert:
+		#await get_tree().process_frame
+		await get_tree().create_timer(0.5).timeout
 		for enemy in get_tree().get_nodes_in_group("enemies"):
-			var all_enemies = get_tree().get_nodes_in_group("enemies")
-			all_enemies = all_enemies.filter(func(a): return FactionManager.get_faction_relation(enemy.faction, a.faction) < 0.0)
-			all_enemies.sort_custom(func(a, b): return enemy.global_position.distance_to(a.global_position) < enemy.global_position.distance_to(b.global_position))
-			enemy.last_seen_position = all_enemies[0].global_position
+			#var all_enemies = get_tree().get_nodes_in_group("enemies")
+			#all_enemies = all_enemies.filter(func(a): return FactionManager.get_faction_relation(enemy.faction, a.faction) < 0.0)
+			#all_enemies.sort_custom(func(a, b): return enemy.global_position.distance_to(a.global_position) < enemy.global_position.distance_to(b.global_position))
+			#enemy.last_seen_position = all_enemies[0].global_position
+			var targets = enemy.detection.targets
+			if targets.size() <= 0:
+				continue
+			targets.sort_custom(func(a, b): return enemy.global_position.distance_to(a.global_position) < enemy.global_position.distance_to(b.global_position))
+			enemy.last_seen_position = targets[0].global_position
 			enemy.change_state(enemy.states.search)
 	
 	enemies_spawned.emit()
@@ -148,7 +151,6 @@ func spawn_enemy(faction: FactionManager.factions):
 	var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
 	# assign data
 	inst.faction = faction
-	inst.npc_data.faction = faction
 	var rng = RandomNumberGenerator.new()
 	var weights: PackedFloat32Array
 	for i in location_data.fire_power_chance:
@@ -185,7 +187,6 @@ func spawn_enemy_position(faction: FactionManager.factions, spawn_position: Vect
 	spawn_pos.y = Globals.get_heightmap_position(spawn_pos)
 	inst.set_deferred("global_position", spawn_pos)
 	inst.faction = faction
-	inst.npc_data.faction = faction
 	var rng = RandomNumberGenerator.new()
 	var weights: PackedFloat32Array
 	for i in location_data.fire_power_chance:

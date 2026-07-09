@@ -1,6 +1,6 @@
-extends Resource
+extends DialogueBase
 class_name Dialogue
 
-enum speakers {player, npc}
-@export_multiline var lines: Array[String]
+enum speakers {npc, player}
+@export_multiline var text: String
 @export var speaker: speakers

@@ -57,10 +57,11 @@ func _ready():
 			enemy.last_seen_position = Globals.player.position
 			enemy.change_state(enemy.states.search)
 		elif Globals.overworld and BattleManager.get_battle(Globals.overworld.current_encounter):
-			var all_enemies = get_tree().get_nodes_in_group("enemies")
-			all_enemies = all_enemies.filter(func(a): return FactionManager.get_faction_relation(enemy.faction, a.faction) < 0.0)
-			all_enemies.sort_custom(func(a, b): return enemy.global_position.distance_to(a.global_position) < enemy.global_position.distance_to(b.global_position))
-			enemy.last_seen_position = all_enemies[0].global_position
+			var targets = enemy.detection.targets
+			if targets.size() <= 0:
+				continue
+			targets.sort_custom(func(a, b): return enemy.global_position.distance_to(a.global_position) < enemy.global_position.distance_to(b.global_position))
+			enemy.last_seen_position = targets[0].global_position
 			enemy.change_state(enemy.states.search)
 		else:
 			enemy.change_state(enemy.states.walk)

@@ -1,108 +1,64 @@
 [gd_resource type="Resource" script_class="DialogueTree" format=3 uid="uid://cm4ovx7pecfjd"]
 
 [ext_resource type="Script" uid="uid://de6rxup5nru4w" path="res://Scripts/dialogue.gd" id="1_772ru"]
-[ext_resource type="Script" uid="uid://ctb2g10cnu2sg" path="res://Scripts/dialogue_option.gd" id="2_67xs3"]
+[ext_resource type="Script" uid="uid://ck7j7t8co2rbt" path="res://Scripts/dialogue_base.gd" id="1_rw2dx"]
 [ext_resource type="Script" uid="uid://cnu4xeujmgk51" path="res://Scripts/dialogue_options.gd" id="3_0f6hd"]
 [ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="4_8o2ac"]
-[ext_resource type="Script" uid="uid://bd7d8lpmtob24" path="res://Scripts/dialogue_option_condition.gd" id="5_0f6hd"]
+[ext_resource type="Script" uid="uid://b2lfe52ud4ctk" path="res://Scripts/dialogue_branch_option.gd" id="5_0f6hd"]
 [ext_resource type="Resource" uid="uid://nm0e00c2fx4" path="res://Resources/NpcStyles/npc_styles.tres" id="5_7qi0g"]
-[ext_resource type="Script" uid="uid://px5dr31pd885" path="res://Scripts/dialogue_loop.gd" id="5_67xs3"]
 [ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="6_7jtwk"]
 
-[sub_resource type="Resource" id="Resource_ux3d7"]
+[sub_resource type="Resource" id="Resource_67xs3"]
 script = ExtResource("1_772ru")
-lines = Array[String](["Hello stranger."])
-speaker = 1
+text = "Hello, stranger."
 metadata/_custom_type_script = "uid://de6rxup5nru4w"
 
-[sub_resource type="Resource" id="Resource_o7rut"]
-script = ExtResource("2_67xs3")
-text = "Trade"
-destination = 2
-metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
-
-[sub_resource type="Resource" id="Resource_7qi0g"]
-script = ExtResource("2_67xs3")
-text = "Recruit"
-destination = 5
-metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
-
-[sub_resource type="Resource" id="Resource_olcnh"]
-script = ExtResource("2_67xs3")
-text = "Enter"
-destination = 3
-metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
-
-[sub_resource type="Resource" id="Resource_yyftb"]
-script = ExtResource("2_67xs3")
-text = "Leave"
-destination = 4
-metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
-
 [sub_resource type="Resource" id="Resource_0f6hd"]
-script = ExtResource("3_0f6hd")
-options = Array[ExtResource("2_67xs3")]([SubResource("Resource_o7rut"), SubResource("Resource_7qi0g"), SubResource("Resource_olcnh"), SubResource("Resource_yyftb")])
-metadata/_custom_type_script = "uid://cnu4xeujmgk51"
-
-[sub_resource type="Resource" id="Resource_t7vrw"]
 script = ExtResource("4_8o2ac")
 method = "enter_shop"
 metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
-[sub_resource type="Resource" id="Resource_jpogg"]
-script = ExtResource("4_8o2ac")
-method = "start_level"
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
-
-[sub_resource type="Resource" id="Resource_fyaxn"]
-script = ExtResource("4_8o2ac")
-method = "exit_to_game"
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
-
-[sub_resource type="Resource" id="Resource_67xs3"]
-script = ExtResource("4_8o2ac")
-method = "set_recruit_price"
-lines = Array[String](["One of us might be willing to join you for a price."])
-speaker = 1
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
-
 [sub_resource type="Resource" id="Resource_8o2ac"]
 script = ExtResource("5_0f6hd")
-value = "money"
-comparison = 1
-value2 = 299
-failue_message = "You don't have enough money"
-text = "Pay ($300)"
-destination = 7
-metadata/_custom_type_script = "uid://bd7d8lpmtob24"
+text = "Trade"
+bubbles = Array[ExtResource("1_rw2dx")]([SubResource("Resource_0f6hd")])
+metadata/_custom_type_script = "uid://b2lfe52ud4ctk"
+
+[sub_resource type="Resource" id="Resource_7qi0g"]
+script = ExtResource("5_0f6hd")
+text = "Recruit"
+metadata/_custom_type_script = "uid://b2lfe52ud4ctk"
 
 [sub_resource type="Resource" id="Resource_7jtwk"]
-script = ExtResource("2_67xs3")
-text = "Never Mind"
-destination = 1
-metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
+script = ExtResource("4_8o2ac")
+method = "enter_level"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
 [sub_resource type="Resource" id="Resource_kix7h"]
-script = ExtResource("3_0f6hd")
-options = Array[ExtResource("2_67xs3")]([SubResource("Resource_8o2ac"), SubResource("Resource_7jtwk")])
-metadata/_custom_type_script = "uid://cnu4xeujmgk51"
+script = ExtResource("5_0f6hd")
+text = "Attack"
+bubbles = Array[ExtResource("1_rw2dx")]([SubResource("Resource_7jtwk")])
+metadata/_custom_type_script = "uid://b2lfe52ud4ctk"
 
 [sub_resource type="Resource" id="Resource_y7t5m"]
 script = ExtResource("4_8o2ac")
-method = "recruit_npc"
-arguments = [300]
-speaker = 1
+method = "exit_dialogue"
 metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
 
 [sub_resource type="Resource" id="Resource_ki2uv"]
-script = ExtResource("5_67xs3")
-next_index = 1
-speaker = 1
-metadata/_custom_type_script = "uid://px5dr31pd885"
+script = ExtResource("5_0f6hd")
+text = "Leave"
+bubbles = Array[ExtResource("1_rw2dx")]([SubResource("Resource_y7t5m")])
+metadata/_custom_type_script = "uid://b2lfe52ud4ctk"
+
+[sub_resource type="Resource" id="Resource_5kq5o"]
+script = ExtResource("3_0f6hd")
+options = Array[ExtResource("5_0f6hd")]([SubResource("Resource_8o2ac"), SubResource("Resource_7qi0g"), SubResource("Resource_kix7h"), SubResource("Resource_ki2uv")])
+metadata/_custom_type_script = "uid://cnu4xeujmgk51"
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("6_7jtwk")
-bubbles = Array[ExtResource("1_772ru")]([SubResource("Resource_ux3d7"), SubResource("Resource_0f6hd"), SubResource("Resource_t7vrw"), SubResource("Resource_jpogg"), SubResource("Resource_fyaxn"), SubResource("Resource_67xs3"), SubResource("Resource_kix7h"), SubResource("Resource_y7t5m"), SubResource("Resource_ki2uv")])
+bubbles = Array[ExtResource("1_rw2dx")]([SubResource("Resource_67xs3"), SubResource("Resource_5kq5o")])
 npc_name = "Squad"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"

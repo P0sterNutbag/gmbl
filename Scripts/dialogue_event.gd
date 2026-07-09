@@ -1,4 +1,4 @@
-extends Dialogue
+extends DialogueBase
 class_name DialogueEvent
 
 @export var method: String

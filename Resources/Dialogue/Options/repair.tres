@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="DialogueBranchOption" format=3 uid="uid://cdn5ls8uix1w6"]
+
+[ext_resource type="Script" uid="uid://ck7j7t8co2rbt" path="res://Scripts/dialogue_base.gd" id="1_1olvg"]
+[ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="2_8chu3"]
+[ext_resource type="Script" uid="uid://b2lfe52ud4ctk" path="res://Scripts/dialogue_branch_option.gd" id="2_erfk8"]
+
+[sub_resource type="Resource" id="Resource_ak2q0"]
+script = ExtResource("2_8chu3")
+method = "enter_repair_menu"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[resource]
+script = ExtResource("2_erfk8")
+text = "Repair"
+bubbles = Array[ExtResource("1_1olvg")]([SubResource("Resource_ak2q0")])
+metadata/_custom_type_script = "uid://b2lfe52ud4ctk"

@@ -10,7 +10,7 @@ class_name Location
 @export var enemy_dialogue_tree: DialogueTree
 @export var unaware_dialogue_tree: DialogueTree
 #@export var dialogue_tree: DialogueTree
-@export var proximity_spawn_chance := 0.5
+@export var proximity_spawn_chance := 1.0
 @export var can_spawn_npcs: bool = true
 @export var can_stealth_start: bool
 var alert_enemies: bool
@@ -20,7 +20,6 @@ var can_proxmity_spawn: bool = true
 var shops_base_inventory: Dictionary
 var shops_max_money: Dictionary
 var saved_shops: Array[TownOption]
-var unaware_dialogue: DialogueTree
 const NPC = preload("uid://b0cqkj1fgouo2")
 @onready var point_of_interest: PointOfInterest = $PointOfInterest
 @onready var flag: MeshInstance3D = $Meshes/Flagpole/MeshInstance3D
@@ -93,8 +92,8 @@ func start_encounter() -> void:
 		UiController.open_interface(Globals.ui.poi_menu)
 		Globals.player.camera_type = Globals.player.camera_types.town
 		point_of_interest.canvas_layer.hide()
-	elif unaware_dialogue and Globals.get_dot(self, Globals.player) > -0.25 and !BattleManager.get_battle(self):
-		start_dialogue(unaware_dialogue)
+	elif unaware_dialogue_tree and Globals.get_dot(self, Globals.player) > -0.25 and !BattleManager.get_battle(self):
+		start_dialogue(unaware_dialogue_tree)
 	elif relation_score < 0 and enemy_dialogue_tree:
 		start_dialogue(enemy_dialogue_tree)
 	elif relation_score >= 0 and friendly_dialogue_tree:
@@ -138,7 +137,10 @@ func start_encounter() -> void:
 
 func start_dialogue(dialogue: DialogueTree) -> void:
 	Globals.ui.start_dialogue(dialogue)
-	Globals.player.camera_type = Globals.player.camera_types.town
+	if get_parent() is not CharacterBody3D:
+		Globals.player.camera_type = Globals.player.camera_types.town
+	elif dialogue != unaware_dialogue_tree:
+		get_parent().look_at(Globals.player.global_position)
 	point_of_interest.canvas_layer.hide()
 
 
@@ -226,6 +228,7 @@ func save() -> Dictionary:
 	var dict = {
 		"location_data" : location_data,
 		"saved_shops" : saved_shops,
+		"can_proxmity_spawn" : can_proxmity_spawn
 	}
 	if town:
 		dict["town"] = town
@@ -235,6 +238,8 @@ func save() -> Dictionary:
 func _on_load() -> void:
 	if town:
 		town.shops = saved_shops
+	if !can_proxmity_spawn:
+		proximity_spawn_timer.start()
 
 
 func _on_grow_timeout() -> void:
@@ -245,17 +250,17 @@ func _on_grow_timeout() -> void:
 
 
 func _on_attack_area_body_entered(body: Node3D) -> void:
-	if !can_proxmity_spawn:
+	if !can_proxmity_spawn or !can_spawn_npcs:
 		return
 	var relation = FactionManager.get_faction_relation(location_data.faction, body.faction)
 	if "faction" in body and relation < 0:
+		can_proxmity_spawn = false
 		if randf() > proximity_spawn_chance:
 			return
 		var inst = Globals.npc_controller.spawn_npc(self)
 		inst.navigation_agent.set_target_position(body.global_position)
 		inst.look_at(body.global_position)
 		inst.destination = self
-		can_proxmity_spawn = false
 		proximity_spawn_timer.start()
 
 

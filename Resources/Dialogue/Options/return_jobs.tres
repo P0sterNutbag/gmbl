@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="DialogueBranchOption" format=3 uid="uid://bewf2cdhk33gy"]
+
+[ext_resource type="Script" uid="uid://ck7j7t8co2rbt" path="res://Scripts/dialogue_base.gd" id="1_c20bs"]
+[ext_resource type="Script" uid="uid://b2lfe52ud4ctk" path="res://Scripts/dialogue_branch_option.gd" id="2_6qo7k"]
+[ext_resource type="Script" uid="uid://c1j4mu4lxn4gq" path="res://Scripts/dialogue_condition_method.gd" id="2_rabdk"]
+[ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="3_rll8h"]
+[ext_resource type="Script" uid="uid://de6rxup5nru4w" path="res://Scripts/dialogue.gd" id="4_lrlpx"]
+[ext_resource type="Script" uid="uid://brq5lvk7ek4ux" path="res://Scripts/dialogue_branch.gd" id="5_86cej"]
+
+[sub_resource type="Resource" id="Resource_rll8h"]
+script = ExtResource("4_lrlpx")
+text = "Come back when you've actually finished the work I gave you."
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_lrlpx"]
+script = ExtResource("5_86cej")
+bubbles = Array[ExtResource("1_c20bs")]([SubResource("Resource_rll8h")])
+metadata/_custom_type_script = "uid://brq5lvk7ek4ux"
+
+[sub_resource type="Resource" id="Resource_iuuxe"]
+script = ExtResource("3_rll8h")
+method = "return_quests"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_ou4pj"]
+script = ExtResource("4_lrlpx")
+text = "Job job, here's your reward."
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_5bn7c"]
+script = ExtResource("5_86cej")
+bubbles = Array[ExtResource("1_c20bs")]([SubResource("Resource_iuuxe"), SubResource("Resource_ou4pj")])
+metadata/_custom_type_script = "uid://brq5lvk7ek4ux"
+
+[sub_resource type="Resource" id="Resource_y7gpq"]
+script = ExtResource("2_rabdk")
+method = "has_completed_quests"
+success_branch = SubResource("Resource_5bn7c")
+failure_branch = SubResource("Resource_lrlpx")
+metadata/_custom_type_script = "uid://c1j4mu4lxn4gq"
+
+[resource]
+script = ExtResource("2_6qo7k")
+text = "Return Jobs"
+bubbles = Array[ExtResource("1_c20bs")]([SubResource("Resource_y7gpq")])
+metadata/_custom_type_script = "uid://b2lfe52ud4ctk"

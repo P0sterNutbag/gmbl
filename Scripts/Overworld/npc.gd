@@ -19,6 +19,7 @@ var original_rotation: Vector3
 var spawn_vector: Vector3
 var target: Node3D
 var destination_path: NodePath
+var npc_style: NpcStyle
 #var unaware_dialogue: DialogueTree = preload("uid://dhbjweb7dwnpn")
 @export var faction: FactionManager.factions = FactionManager.factions.no_faction
 var guns_dict: Dictionary = {
@@ -46,7 +47,7 @@ func _ready() -> void:
 	gun_holder.add_child(gun)
 	location.encounter_started.connect(_on_encounter_started)
 	location.encounter_ended.connect(_on_encounter_ended)
-	location.remove_from_group("persist")
+	#location.remove_from_group("persist")
 	SaveController.load.connect(_on_load)
 	get_node("Location/PointOfInterest").remove_from_group("persist")
 	await get_tree().process_frame
@@ -203,30 +204,6 @@ func die():
 	queue_free()
 
 
-func save() -> Dictionary:
-	var dic = {"pos_x": global_position.x,
-		"pos_y": global_position.y,
-		"pos_z": global_position.z,
-		"faction" : faction,
-		"save_population" : location.location_data.population,
-		"state" : state
-	}
-	if destination:
-		dic["destination_path"] = destination.get_path()
-	return dic
-
-
-func _on_load() -> void:
-	location.location_data.population = save_population
-	if !destination_path:
-		return
-	await get_tree().process_frame
-	destination = get_tree().root.get_node(destination_path)
-	var pos = destination.global_position
-	navigation_agent.set_target_position(pos)
-	state = states.walk
-
-
 func _on_navigation_agent_3d_navigation_finished() -> void:
 	if destination:
 		if destination.encounter_scene != null:
@@ -275,3 +252,32 @@ func _on_location_area_entered(area: Area3D) -> void:
 		BattleManager.start_battle(area, location)
 		state = states.battle
 		look_at(area.global_position)
+
+
+func save() -> Dictionary:
+	var dic = {
+		"pos_x": global_position.x,
+		"pos_y": global_position.y,
+		"pos_z": global_position.z,
+		"rot_y" : global_rotation.y,
+		"faction" : faction,
+		"save_population" : location.location_data.population,
+		"state" : state,
+		"npc_style" : enemy_model.current_style,
+		"chase_player" : chase_player,
+	}
+	if destination:
+		dic["destination_path"] = destination.get_path()
+	return dic
+
+
+func _on_load() -> void:
+	enemy_model.current_style = npc_style
+	location.location_data.population = save_population
+	if !destination_path:
+		return
+	await get_tree().process_frame
+	destination = get_tree().root.get_node(destination_path)
+	var pos = destination.global_position
+	navigation_agent.set_target_position(pos)
+	state = states.walk

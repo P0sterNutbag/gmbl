@@ -645,6 +645,7 @@ func _on_shoot_timer_timeout() -> void:
 		anim_player.play("Fire")
 		anim_player.seek(0.0)
 
+
 func _on_aim_timer_timeout() -> void:
 	change_state(states.shoot)
 

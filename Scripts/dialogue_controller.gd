@@ -1,6 +1,7 @@
 extends VBoxContainer
 
 var index := -1
+var last_option_index: int
 var can_advance: bool
 var shop: TownOption
 var dialogue_tree: DialogueTree
@@ -19,11 +20,11 @@ func _process(_delta: float) -> void:
 	if ((Input.is_action_just_pressed("select") or Input.is_action_just_pressed("shoot")) and "option_container" not in current_bubble and can_advance
 	and current_bubble.can_proceed):
 		advance_dialogue(index + 1)
-	if Input.is_action_just_pressed("ui_cancel") and dialogue_tree.bubbles[index] is DialogueOptions:
-		if Globals.overworld.current_encounter.town:
-			enter_town()
-		else:
-			exit_dialogue()
+	#if Input.is_action_just_pressed("ui_cancel") and dialogue_tree.bubbles[index] is DialogueOptions:
+		#if Globals.overworld.current_encounter.town:
+			#enter_town()
+		#else:
+			#exit_dialogue()
 
 
 func start_dialogue(tree: DialogueTree) -> void:
@@ -43,14 +44,26 @@ func advance_dialogue(next_index: int = index + 1) -> void:
 	var bubble
 	index = next_index
 	if dialogue_branch:
-		bubble = dialogue_branch.bubbles[index]
+		if index > dialogue_branch.bubbles.size() - 1:
+			index = last_option_index
+			bubble = dialogue_tree.bubbles[index]
+		else:
+			bubble = dialogue_branch.bubbles[index]
 	else:
 		bubble = dialogue_tree.bubbles[index]
 	if bubble is DialogueEvent:
 		var callable = Callable(self, bubble.method)
 		callable.callv(bubble.arguments)
-	elif bubble is DialogueCondition:
+	elif bubble is DialogueConditionVariable:
 		if bubble.is_condition_true():
+			dialogue_branch = bubble.success_branch
+			advance_dialogue(0)
+		else:
+			dialogue_branch = bubble.failure_branch
+			advance_dialogue(0)
+	elif bubble is DialogueConditionMethod:
+		var result = callv(bubble.method, bubble.arguments)
+		if result:
 			dialogue_branch = bubble.success_branch
 			advance_dialogue(0)
 		else:
@@ -66,6 +79,7 @@ func advance_dialogue(next_index: int = index + 1) -> void:
 			option_button.pressed.connect(on_option_selected.bind(option, option_button))
 			#inst2.pressed.connect(advance_dialogue.bind(option.destination))
 		inst.option_container.set_menu_item_focus()
+		last_option_index = index
 		#if Input.get_connected_joypads().size() > 0:
 			#inst.option_container.get_child(0).grab_focus()
 	#if bubble is DialogueLoop:
@@ -120,45 +134,44 @@ func enter_town() -> void:
 	Globals.ui.town.re_enter_town()
 
 
-func enter_job_board(no_jobs_index: int = -1) -> void:
-	if shop.quests.size() > 0:
-		hide()
-		Globals.ui.town.enter_job_board()
-	elif no_jobs_index != -1:
-		advance_dialogue(no_jobs_index)
+func enter_job_board() -> void:
+	hide()
+	Globals.ui.town.enter_job_board(shop)
 
 
-func return_bounties() -> void:
-	var complete_quests = PlayerStats.quests.filter(func(i): return i is QuestBounty and i.completed)
-	if complete_quests.size() == 0:
-		advance_dialogue(7)
-		return
-	var reward = 0
-	for quest in complete_quests:
-		PlayerStats.inventory.add_item(quest.reward)
-		reward += quest.reward.amount
-		PlayerStats.quests.erase(quest)
-		ProgressManager.quests_completed += 1
-	dialogue_tree.bubbles[5].lines[0] += "($" +  str(reward) + ")"
-	advance_dialogue(5)
+#func return_bounties() -> void:
+	#var complete_quests = PlayerStats.quests.filter(func(i): return i is QuestBounty and i.completed)
+	#if complete_quests.size() == 0:
+		#advance_dialogue(7)
+		#return
+	#var reward = 0
+	#for quest in complete_quests:
+		#PlayerStats.inventory.add_item(quest.reward)
+		#reward += quest.reward.amount
+		#PlayerStats.quests.erase(quest)
+		#ProgressManager.quests_completed += 1
+	#dialogue_tree.bubbles[5].lines[0] += "($" +  str(reward) + ")"
+	#advance_dialogue(5)
 
 
-func return_quests(quest_type: Quest, success_index: int, fail_index: int) -> void:
-	for quest in PlayerStats.quests:
-		if quest.has_method("check_complete"):
-			quest.check_complete()
-	var complete_quests = PlayerStats.quests.filter(func(i): return i.get_class() == quest_type.get_class() and i.return_location == Globals.overworld.current_encounter.title and i.completed)
-	if complete_quests.size() == 0:
-		advance_dialogue(fail_index)
-		return
+func return_quests() -> void:
+	var complete_quests = PlayerStats.quests.filter(func(i): return i.return_location == Globals.overworld.current_encounter.title and i.completed)
 	for quest in complete_quests:
 		quest.finish_quest(shop.faction)
 		if quest.has_method("remove_items"):
 			quest.remove_items()
 		PlayerStats.inventory.add_item(quest.reward.item, quest.reward.amount)
-		Globals.survival_ui.create_notification("You gained $" + str(quest.reward.amount))
+		Globals.survival_ui.create_notification("'" + quest.title + "' completed. " + "You gained $" + str(quest.reward.amount))
 		PlayerStats.quests.erase(quest)
-	advance_dialogue(success_index)
+	advance_dialogue()
+
+
+func has_completed_quests() -> bool:
+	for quest in PlayerStats.quests:
+		if quest.has_method("check_complete"):
+			quest.check_complete()
+	var complete_quests = PlayerStats.quests.filter(func(i): return i.return_location == Globals.overworld.current_encounter.title and i.completed)
+	return complete_quests.size() > 0
 
 
 func leave_shop() -> void:
@@ -227,9 +240,29 @@ func move_player(dest: Vector3) -> void:
 
 
 func talk_to_npc() -> void:
-	Globals.ui.start_dialogue(Globals.overworld.current_encounter.dialogue_tree)
+	#Globals.ui.start_dialogue(Globals.overworld.current_encounter.dialogue_tree)
+	var npc_location = Globals.overworld.current_encounter
+	var unaware_dialogue_tree = npc_location.unaware_dialogue_tree
+	npc_location.unaware_dialogue_tree = null
+	npc_location.start_encounter()
+	await get_tree().process_frame
+	npc_location.unaware_dialogue_tree = unaware_dialogue_tree
 
 
 func create_notification(text: String) -> void:
 	Globals.survival_ui.create_notification(text)
+	advance_dialogue()
+
+
+func shop_has_quests() -> bool:
+	return shop.quests.size() > 0
+
+
+func surrender_to_enemy() -> void:
+	PlayerStats.money = 0
+	PlayerStats.inventory.item_slots.clear()
+	Globals.survival_ui.create_notification("All money and items lost")
+	var npc = Globals.overworld.current_encounter.get_parent()
+	npc.chase_player = false
+	npc.navigation_agent.set_target_position(npc.destination.global_position)
 	advance_dialogue()

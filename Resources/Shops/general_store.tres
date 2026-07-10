@@ -1,6 +1,15 @@
 [gd_resource type="Resource" script_class="Shop" format=3 uid="uid://c8iwly4phm8u0"]
 
-[ext_resource type="Resource" uid="uid://dokw1q114linj" path="res://Resources/Dialogue/shop_dialogue.tres" id="1_iagy3"]
+[ext_resource type="Script" uid="uid://de6rxup5nru4w" path="res://Scripts/dialogue.gd" id="1_o86al"]
+[ext_resource type="Script" uid="uid://ck7j7t8co2rbt" path="res://Scripts/dialogue_base.gd" id="1_yutm7"]
+[ext_resource type="Script" uid="uid://cnu4xeujmgk51" path="res://Scripts/dialogue_options.gd" id="3_nvcwx"]
+[ext_resource type="Script" uid="uid://b2lfe52ud4ctk" path="res://Scripts/dialogue_branch_option.gd" id="3_o86al"]
+[ext_resource type="Resource" uid="uid://cyg58nktkkkgs" path="res://Resources/Dialogue/Options/trade.tres" id="4_qpmer"]
+[ext_resource type="Resource" uid="uid://d1tcj8cecao73" path="res://Resources/Dialogue/Options/take_jobs.tres" id="5_nvcwx"]
+[ext_resource type="Resource" uid="uid://bewf2cdhk33gy" path="res://Resources/Dialogue/Options/return_jobs.tres" id="6_3d2nb"]
+[ext_resource type="Resource" uid="uid://bq7jxm84v8xce" path="res://Resources/Dialogue/Options/leave_shop.tres" id="7_f82rp"]
+[ext_resource type="Resource" uid="uid://nm0e00c2fx4" path="res://Resources/NpcStyles/npc_styles.tres" id="9_0h1yl"]
+[ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="11_w665q"]
 [ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="12_ltj7a"]
 [ext_resource type="Script" uid="uid://3e36ru1e7k78" path="res://Scripts/spawn_chance_resource.gd" id="13_pmsm7"]
 [ext_resource type="Resource" uid="uid://dfkmfm7wu8mw4" path="res://Resources/Items/Consumable/beans.tres" id="14_2rlcr"]
@@ -19,13 +28,28 @@
 [ext_resource type="Resource" uid="uid://05plefgfm4x0" path="res://Resources/Items/Utility/backpack.tres" id="27_stefh"]
 [ext_resource type="Resource" uid="uid://c6q45hg5w6m55" path="res://Resources/Items/Utility/knapsack.tres" id="28_kqqcr"]
 [ext_resource type="Resource" uid="uid://b85pvp1hkmjb5" path="res://Resources/Items/Utility/fanny_pack.tres" id="29_r3bq7"]
-[ext_resource type="Resource" uid="uid://dk4s1lhf08o1g" path="res://Resources/Items/Utility/lockpick.tres" id="30_qhuyg"]
+[ext_resource type="Resource" path="res://Resources/Items/Utility/lockpick.tres" id="30_qhuyg"]
 [ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="31_r66k1"]
 [ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="32_2kdy0"]
 [ext_resource type="Script" uid="uid://g1k0736rje3q" path="res://Scripts/quest_random.gd" id="33_vuus1"]
 [ext_resource type="Script" uid="uid://dc15s83haevrb" path="res://Scripts/item_slot_random.gd" id="34_q57is"]
 [ext_resource type="Script" uid="uid://bicpdyf13vj1j" path="res://Scripts/quest_fetch_random.gd" id="35_btam7"]
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="36_64bgl"]
+
+[sub_resource type="Resource" id="Resource_6nfli"]
+script = ExtResource("1_o86al")
+text = "I got anything you need to survive here."
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_a1kim"]
+script = ExtResource("3_nvcwx")
+options = Array[ExtResource("3_o86al")]([ExtResource("4_qpmer"), ExtResource("5_nvcwx"), ExtResource("6_3d2nb"), ExtResource("7_f82rp")])
+metadata/_custom_type_script = "uid://cnu4xeujmgk51"
+
+[sub_resource type="Resource" id="Resource_qmf62"]
+script = ExtResource("11_w665q")
+bubbles = Array[ExtResource("1_yutm7")]([SubResource("Resource_6nfli"), SubResource("Resource_a1kim")])
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
 [sub_resource type="Resource" id="Resource_jby7l"]
 script = ExtResource("13_pmsm7")
@@ -237,7 +261,7 @@ price_modifiers = {
 "Junk": 0.5,
 "Weapons": 0.5
 }
-dialogue = ExtResource("1_iagy3")
+dialogue = SubResource("Resource_qmf62")
 random_quests = Array[ExtResource("33_vuus1")]([SubResource("Resource_bol33")])
 min_quests = 1
 max_quests = 3

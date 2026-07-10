@@ -2,18 +2,14 @@
 
 [ext_resource type="Script" uid="uid://bbi3gcsb33muk" path="res://Scripts/town.gd" id="1_odqgs"]
 [ext_resource type="Script" uid="uid://dsdpmpehomy6m" path="res://Scripts/town_option.gd" id="2_emu4u"]
-[ext_resource type="Script" uid="uid://cdjlwglvj2lmy" path="res://Scripts/town_action.gd" id="3_p617y"]
-
-[sub_resource type="Resource" id="Resource_wfc8q"]
-script = ExtResource("3_p617y")
-node_path = "SceneManager"
-method = "StartSceneTransition"
-args = ["res://Scenes/Levels/arena.tscn", true]
-title = "Arena"
-metadata/_custom_type_script = "uid://cdjlwglvj2lmy"
+[ext_resource type="Resource" uid="uid://c8iwly4phm8u0" path="res://Resources/Shops/general_store.tres" id="3_odqgs"]
+[ext_resource type="Resource" uid="uid://jbg7thtumlte" path="res://Resources/Shops/gunsmith.tres" id="4_1tlri"]
+[ext_resource type="Resource" uid="uid://yx4vef3v1e1k" path="res://Resources/Shops/armorer.tres" id="6_i5cu7"]
+[ext_resource type="Resource" uid="uid://ddcwdwarvswme" path="res://Resources/Shops/arena.tres" id="7_emu4u"]
+[ext_resource type="Resource" uid="uid://blf6trysbrtg8" path="res://Resources/Shops/bounty_board.tres" id="7_rxp0k"]
 
 [resource]
 script = ExtResource("1_odqgs")
 title = "Rager Complex"
-shops = Array[ExtResource("2_emu4u")]([SubResource("Resource_wfc8q")])
+shops = Array[ExtResource("2_emu4u")]([ExtResource("3_odqgs"), ExtResource("4_1tlri"), ExtResource("6_i5cu7"), ExtResource("7_rxp0k"), ExtResource("7_emu4u")])
 metadata/_custom_type_script = "uid://bbi3gcsb33muk"

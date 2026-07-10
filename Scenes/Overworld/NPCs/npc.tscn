@@ -24,15 +24,41 @@
 [ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="20_cx3hl"]
 [ext_resource type="Script" uid="uid://g1k0736rje3q" path="res://Scripts/quest_random.gd" id="21_hunj6"]
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="22_vltld"]
-[ext_resource type="Resource" uid="uid://d20coly46ve2b" path="res://Resources/Dialogue/npc_enemy.tres" id="23_s8dvv"]
-[ext_resource type="Resource" uid="uid://cm4ovx7pecfjd" path="res://Resources/Dialogue/npc_friendly.tres" id="24_5j08b"]
-[ext_resource type="Resource" uid="uid://dhbjweb7dwnpn" path="res://Resources/Dialogue/npc_unaware.tres" id="25_p0jri"]
+[ext_resource type="Script" uid="uid://de6rxup5nru4w" path="res://Scripts/dialogue.gd" id="23_orsgc"]
+[ext_resource type="Script" uid="uid://ck7j7t8co2rbt" path="res://Scripts/dialogue_base.gd" id="23_u8du1"]
+[ext_resource type="Script" uid="uid://cnu4xeujmgk51" path="res://Scripts/dialogue_options.gd" id="25_a8jx0"]
+[ext_resource type="Script" uid="uid://b2lfe52ud4ctk" path="res://Scripts/dialogue_branch_option.gd" id="25_iad7m"]
+[ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="26_c3qbh"]
+[ext_resource type="Resource" uid="uid://cyg58nktkkkgs" path="res://Resources/Dialogue/Options/trade.tres" id="26_j88d2"]
+[ext_resource type="Resource" uid="uid://jpgn1htvc2ho" path="res://Resources/Dialogue/Options/recruit.tres" id="27_nbhg3"]
+[ext_resource type="Resource" uid="uid://cd805f0ey2ey1" path="res://Resources/Dialogue/Options/attack.tres" id="28_brh7d"]
+[ext_resource type="Resource" uid="uid://nm0e00c2fx4" path="res://Resources/NpcStyles/npc_styles.tres" id="29_s4tpr"]
+[ext_resource type="Resource" uid="uid://cca726cqbqeyw" path="res://Resources/Dialogue/Options/leave_dialogue.tres" id="29_sds2o"]
+[ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="30_b823r"]
+[ext_resource type="Texture2D" uid="uid://bo7tofhok4iw1" path="res://Art/Textures/Character/npc_face1.png" id="31_tedqe"]
+[ext_resource type="Texture2D" uid="uid://cdy46hgsd08s6" path="res://Art/Textures/Character/npc_face2.png" id="32_015ol"]
+[ext_resource type="Texture2D" uid="uid://25baqqag6lrp" path="res://Art/Textures/Character/npc_face4.png" id="33_2cinx"]
+[ext_resource type="Resource" uid="uid://c4q23h4rbcwsc" path="res://Resources/Dialogue/Options/pay_enemy.tres" id="33_j88d2"]
+[ext_resource type="Texture2D" uid="uid://oacru53rac71" path="res://Art/Textures/Character/player_face.png" id="34_2h65x"]
+[ext_resource type="Resource" uid="uid://dkfe4rbqx0t2u" path="res://Resources/Dialogue/Options/surrender.tres" id="34_nbhg3"]
+[ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="35_kwq8g"]
+[ext_resource type="Texture2D" uid="uid://b4d58y5scbpqf" path="res://Art/Textures/Character/npc shirt blue.png" id="36_c8vh4"]
+[ext_resource type="Texture2D" uid="uid://c7ele6asl40c4" path="res://Art/Textures/Character/npc shirt bluesleeve.png" id="37_a5nxi"]
+[ext_resource type="Texture2D" uid="uid://1xvaybl7sxs0" path="res://Art/Textures/Character/npc shirt gray sleeve.png" id="38_g57of"]
+[ext_resource type="Texture2D" uid="uid://bl0ffxu4fdk20" path="res://Art/Textures/Character/npc shirt gray.png" id="39_cl5fl"]
+[ext_resource type="Texture2D" uid="uid://goputnp33yds" path="res://Art/Textures/Character/npc shirt green sleeve.png" id="40_qw0vm"]
+[ext_resource type="Texture2D" uid="uid://bxwwj6o80psth" path="res://Art/Textures/Character/npc shirt green.png" id="41_r4yfy"]
+[ext_resource type="Texture2D" uid="uid://cs2j1ok7u1avc" path="res://Art/Textures/Character/npc shirt red sleeve.png" id="42_ru1cj"]
+[ext_resource type="Texture2D" uid="uid://c1xie2e2lk41r" path="res://Art/Textures/Character/npc shirt red.png" id="43_mlerl"]
+[ext_resource type="Texture2D" uid="uid://dl34xibpmsig8" path="res://Art/Textures/Character/npc shirt white sleeve.png" id="44_yepit"]
+[ext_resource type="Texture2D" uid="uid://x3spqeyiq8cr" path="res://Art/Textures/Character/npc shirt white.png" id="45_0kvup"]
+[ext_resource type="Texture2D" uid="uid://whgiy4tx5l5g" path="res://Art/Textures/Character/npc brown jacket.png" id="46_clfn8"]
 [ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="47_2cshw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hf0oe"]
 radius = 0.434372
 
-[sub_resource type="Resource" id="Resource_cif6j"]
+[sub_resource type="Resource" id="Resource_j88d2"]
 resource_local_to_scene = true
 script = ExtResource("3_f2atc")
 faction = null
@@ -100,7 +126,7 @@ script = ExtResource("6_2cshw")
 object_to_spawn = ExtResource("18_face8")
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_poiom"]
+[sub_resource type="Resource" id="Resource_nbhg3"]
 resource_local_to_scene = true
 script = ExtResource("19_4t6uh")
 min_amount = 3
@@ -110,10 +136,10 @@ money = 500
 title = "Squad Inventory"
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
-[sub_resource type="Resource" id="Resource_migh6"]
+[sub_resource type="Resource" id="Resource_brh7d"]
 resource_local_to_scene = true
 script = ExtResource("22_vltld")
-inventory = SubResource("Resource_poiom")
+inventory = SubResource("Resource_nbhg3")
 price_modifiers = {
 "Ammo": 0.5,
 "Armor": 0.5,
@@ -127,12 +153,101 @@ faction = null
 title = "Traveler"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
+[sub_resource type="Resource" id="Resource_67xs3"]
+script = ExtResource("23_orsgc")
+text = "Hello, stranger."
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_5kq5o"]
+script = ExtResource("25_a8jx0")
+options = Array[ExtResource("25_iad7m")]([ExtResource("26_j88d2"), ExtResource("27_nbhg3"), ExtResource("28_brh7d"), ExtResource("29_sds2o")])
+metadata/_custom_type_script = "uid://cnu4xeujmgk51"
+
+[sub_resource type="Resource" id="Resource_sds2o"]
+resource_local_to_scene = true
+script = ExtResource("30_b823r")
+bubbles = Array[ExtResource("23_u8du1")]([SubResource("Resource_67xs3"), SubResource("Resource_5kq5o")])
+npc_name = "Squad"
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+
+[sub_resource type="Resource" id="Resource_02tet"]
+script = ExtResource("23_orsgc")
+text = "These parts belong to us! Hand over 50 bucks and we'll spare your life."
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_5rdyj"]
+script = ExtResource("25_a8jx0")
+options = Array[ExtResource("25_iad7m")]([ExtResource("33_j88d2"), ExtResource("28_brh7d"), ExtResource("34_nbhg3")])
+metadata/_custom_type_script = "uid://cnu4xeujmgk51"
+
+[sub_resource type="Resource" id="Resource_tntug"]
+script = ExtResource("35_kwq8g")
+faces = Array[Texture]([ExtResource("31_tedqe"), ExtResource("32_015ol"), ExtResource("33_2cinx"), ExtResource("34_2h65x")])
+shirts = Array[Texture]([ExtResource("36_c8vh4"), ExtResource("37_a5nxi"), ExtResource("38_g57of"), ExtResource("39_cl5fl"), ExtResource("40_qw0vm"), ExtResource("41_r4yfy"), ExtResource("42_ru1cj"), ExtResource("43_mlerl"), ExtResource("44_yepit"), ExtResource("45_0kvup"), ExtResource("46_clfn8")])
+pants_colors = Array[Color]([Color(0.48, 0.21888001, 0.15359999, 1), Color(0.32160002, 0.53644663, 0.67, 1)])
+shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1), Color(0.133333, 0.12549, 0.203922, 1), Color(0.4, 0.19146667, 0.128, 1)])
+metadata/_custom_type_script = "uid://b80ipr8q70gqm"
+
+[sub_resource type="Resource" id="Resource_2h4o4"]
+resource_local_to_scene = true
+script = ExtResource("30_b823r")
+bubbles = Array[ExtResource("23_u8du1")]([SubResource("Resource_02tet"), SubResource("Resource_5rdyj")])
+npc_style = SubResource("Resource_tntug")
+npc_name = "Squad"
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+
+[sub_resource type="Resource" id="Resource_gjynn"]
+script = ExtResource("26_c3qbh")
+method = "talk_to_npc"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_amn8i"]
+script = ExtResource("25_iad7m")
+text = "Approach"
+bubbles = Array[ExtResource("23_u8du1")]([SubResource("Resource_gjynn")])
+metadata/_custom_type_script = "uid://b2lfe52ud4ctk"
+
+[sub_resource type="Resource" id="Resource_yv8xv"]
+script = ExtResource("26_c3qbh")
+method = "enter_level"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_wfpnu"]
+script = ExtResource("25_iad7m")
+text = "Attack"
+bubbles = Array[ExtResource("23_u8du1")]([SubResource("Resource_yv8xv")])
+metadata/_custom_type_script = "uid://b2lfe52ud4ctk"
+
+[sub_resource type="Resource" id="Resource_rp0ii"]
+script = ExtResource("26_c3qbh")
+method = "exit_dialogue"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_mj345"]
+script = ExtResource("25_iad7m")
+text = "Leave"
+bubbles = Array[ExtResource("23_u8du1")]([SubResource("Resource_rp0ii")])
+metadata/_custom_type_script = "uid://b2lfe52ud4ctk"
+
+[sub_resource type="Resource" id="Resource_51mjk"]
+script = ExtResource("25_a8jx0")
+options = Array[ExtResource("25_iad7m")]([SubResource("Resource_amn8i"), SubResource("Resource_wfpnu"), SubResource("Resource_mj345")])
+metadata/_custom_type_script = "uid://cnu4xeujmgk51"
+
+[sub_resource type="Resource" id="Resource_h5x2d"]
+resource_local_to_scene = true
+script = ExtResource("30_b823r")
+bubbles = Array[ExtResource("23_u8du1")]([SubResource("Resource_51mjk")])
+npc_name = "Squad"
+camera_angle = 180.0
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_e46jk"]
 radius = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fjuww"]
 
-[node name="Npc" type="CharacterBody3D" unique_id=907079178 groups=["overworld npcs"]]
+[node name="Npc" type="CharacterBody3D" unique_id=907079178 groups=["overworld npcs", "persist"]]
 collision_layer = 2
 floor_max_angle = 1.5707964
 script = ExtResource("1_ldcoh")
@@ -144,12 +259,12 @@ shape = SubResource("CapsuleShape3D_hf0oe")
 [node name="Location" parent="." unique_id=361678620 instance=ExtResource("2_jf2yb")]
 collision_mask = 96
 title = "Squad"
-location_data = SubResource("Resource_cif6j")
+location_data = SubResource("Resource_j88d2")
 encounter_scene = ExtResource("4_w8t3j")
-shop = SubResource("Resource_migh6")
-friendly_dialogue_tree = ExtResource("24_5j08b")
-enemy_dialogue_tree = ExtResource("23_s8dvv")
-unaware_dialogue_tree = ExtResource("25_p0jri")
+shop = SubResource("Resource_brh7d")
+friendly_dialogue_tree = SubResource("Resource_sds2o")
+enemy_dialogue_tree = SubResource("Resource_2h4o4")
+unaware_dialogue_tree = SubResource("Resource_h5x2d")
 can_spawn_npcs = false
 can_stealth_start = true
 

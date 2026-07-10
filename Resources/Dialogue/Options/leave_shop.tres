@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="DialogueBranchOption" format=3 uid="uid://bq7jxm84v8xce"]
+
+[ext_resource type="Script" uid="uid://ck7j7t8co2rbt" path="res://Scripts/dialogue_base.gd" id="1_ilv5a"]
+[ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="2_ilv5a"]
+[ext_resource type="Script" uid="uid://b2lfe52ud4ctk" path="res://Scripts/dialogue_branch_option.gd" id="3_m7fv1"]
+
+[sub_resource type="Resource" id="Resource_7di58"]
+script = ExtResource("2_ilv5a")
+method = "enter_town"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[resource]
+script = ExtResource("3_m7fv1")
+text = "Leave"
+bubbles = Array[ExtResource("1_ilv5a")]([SubResource("Resource_7di58")])
+metadata/_custom_type_script = "uid://b2lfe52ud4ctk"

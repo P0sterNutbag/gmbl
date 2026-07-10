@@ -65,6 +65,7 @@ func re_enter_town() -> void:
 	get_parent().portraits.hide()
 
 
-func enter_job_board() -> void:
+func enter_job_board(shop: TownOption) -> void:
 	UiController.open_interface(Globals.ui.job_board)
-	Globals.ui.job_board.open(Globals.ui.job_board.shop.quests)
+	Globals.ui.job_board.shop = shop
+	Globals.ui.job_board.open(shop.quests)

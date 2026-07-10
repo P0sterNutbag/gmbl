@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="DialogueBranchOption" format=3 uid="uid://cyg58nktkkkgs"]
+
+[ext_resource type="Script" uid="uid://ck7j7t8co2rbt" path="res://Scripts/dialogue_base.gd" id="1_ym3ga"]
+[ext_resource type="Script" uid="uid://b2lfe52ud4ctk" path="res://Scripts/dialogue_branch_option.gd" id="2_c0q5y"]
+[ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="2_qx4ur"]
+
+[sub_resource type="Resource" id="Resource_iqwhj"]
+script = ExtResource("2_qx4ur")
+method = "enter_shop"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[resource]
+script = ExtResource("2_c0q5y")
+text = "Trade"
+bubbles = Array[ExtResource("1_ym3ga")]([SubResource("Resource_iqwhj")])
+metadata/_custom_type_script = "uid://b2lfe52ud4ctk"

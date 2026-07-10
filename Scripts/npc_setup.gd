@@ -25,7 +25,10 @@ func _ready() -> void:
 		style_data = parent.npc_data.style
 	elif "faction" in parent and parent != Globals.player:
 		style_data = FactionManager.faction_data[parent.faction].style
-	set_materials(style_data)
+	var style = style_data
+	if current_style and current_style.skin_colors.size() > 0:
+		style = current_style
+	set_materials(style)
 
 
 func set_materials_editor(_b: bool) -> void:
@@ -81,6 +84,7 @@ func set_materials(style: NpcStyle = style_data) -> void:
 	cube2.set_surface_override_material(1, pants_material)
 	cube2.set_surface_override_material(2, shoes_material)
 	# Set current style
+	current_style = NpcStyle.new()
 	current_style.skin_colors.clear()
 	current_style.skin_colors.append(skin_color)
 	current_style.hair_colors.clear()

@@ -81,7 +81,6 @@
 [ext_resource type="PackedScene" uid="uid://cemkkubm7a1qc" path="res://Scenes/Overworld/Locations/drug_den.tscn" id="79_nggm6"]
 [ext_resource type="Resource" uid="uid://c8iwly4phm8u0" path="res://Resources/Shops/general_store.tres" id="80_p80om"]
 [ext_resource type="Resource" uid="uid://d1uiedufko804" path="res://Resources/Shops/saloon.tres" id="81_n62ny"]
-[ext_resource type="PackedScene" uid="uid://b0cqkj1fgouo2" path="res://Scenes/Overworld/NPCs/npc.tscn" id="86_g1wl1"]
 [ext_resource type="PackedScene" uid="uid://nxh2gpqx0uwj" path="res://Scenes/Overworld/Locations/jackal_fort.tscn" id="90_me12r"]
 [ext_resource type="Script" uid="uid://chxn6jj2cv0p3" path="res://Scripts/scatterer.gd" id="91_jby7l"]
 [ext_resource type="PackedScene" uid="uid://brrtfg5jynxnd" path="res://Scenes/Environment/Nature/rock.tscn" id="92_t56bl"]
@@ -203,7 +202,7 @@ script = ExtResource("33_ku0d1")
 object_to_spawn = ExtResource("45_3k4bo")
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_p80om"]
+[sub_resource type="Resource" id="Resource_2063u"]
 resource_local_to_scene = true
 script = ExtResource("46_lgnbj")
 min_amount = 3
@@ -213,10 +212,10 @@ money = 500
 title = "Squad Inventory"
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
-[sub_resource type="Resource" id="Resource_n62ny"]
+[sub_resource type="Resource" id="Resource_p80om"]
 resource_local_to_scene = true
 script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_p80om")
+inventory = SubResource("Resource_2063u")
 price_modifiers = {
 "Ammo": 0.5,
 "Armor": 0.5,
@@ -241,158 +240,158 @@ pants_colors = Array[Color]([Color(0.48, 0.21888001, 0.15359999, 1), Color(0.443
 shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1), Color(0.16862746, 0.08627451, 0, 1), Color(0.23921569, 0.23921569, 0.23921569, 1)])
 metadata/_custom_type_script = "uid://b80ipr8q70gqm"
 
-[sub_resource type="Resource" id="Resource_xkckx"]
+[sub_resource type="Resource" id="Resource_n62ny"]
 resource_local_to_scene = true
 script = ExtResource("53_ccrpr")
 npc_style = SubResource("Resource_utl1j")
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+
+[sub_resource type="Resource" id="Resource_xkckx"]
+resource_local_to_scene = true
+script = ExtResource("46_lgnbj")
+min_amount = 3
+max_amount = 8
+potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
+money = 500
+title = "Squad Inventory"
+metadata/_custom_type_script = "uid://b34kwea65we13"
 
 [sub_resource type="Resource" id="Resource_ku0d1"]
 resource_local_to_scene = true
-script = ExtResource("46_lgnbj")
-min_amount = 3
-max_amount = 8
-potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
-money = 500
-title = "Squad Inventory"
-metadata/_custom_type_script = "uid://b34kwea65we13"
+script = ExtResource("49_pay3g")
+inventory = SubResource("Resource_xkckx")
+price_modifiers = {
+"Ammo": 0.5,
+"Armor": 0.5,
+"Consumable": 0.75,
+"Gear": 0.75,
+"Junk": 0.75,
+"Survival": 0.75,
+"Weapons": 0.5
+}
+faction = null
+title = "Traveler"
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [sub_resource type="Resource" id="Resource_jby7l"]
 resource_local_to_scene = true
-script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_ku0d1")
-price_modifiers = {
-"Ammo": 0.5,
-"Armor": 0.5,
-"Consumable": 0.75,
-"Gear": 0.75,
-"Junk": 0.75,
-"Survival": 0.75,
-"Weapons": 0.5
-}
-faction = null
-title = "Traveler"
-metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+script = ExtResource("53_ccrpr")
+npc_style = SubResource("Resource_utl1j")
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
 [sub_resource type="Resource" id="Resource_t56bl"]
 resource_local_to_scene = true
-script = ExtResource("53_ccrpr")
-npc_style = SubResource("Resource_utl1j")
-metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+script = ExtResource("46_lgnbj")
+min_amount = 3
+max_amount = 8
+potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
+money = 500
+title = "Squad Inventory"
+metadata/_custom_type_script = "uid://b34kwea65we13"
 
 [sub_resource type="Resource" id="Resource_me12r"]
 resource_local_to_scene = true
-script = ExtResource("46_lgnbj")
-min_amount = 3
-max_amount = 8
-potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
-money = 500
-title = "Squad Inventory"
-metadata/_custom_type_script = "uid://b34kwea65we13"
+script = ExtResource("49_pay3g")
+inventory = SubResource("Resource_t56bl")
+price_modifiers = {
+"Ammo": 0.5,
+"Armor": 0.5,
+"Consumable": 0.75,
+"Gear": 0.75,
+"Junk": 0.75,
+"Survival": 0.75,
+"Weapons": 0.5
+}
+faction = null
+title = "Traveler"
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [sub_resource type="Resource" id="Resource_bqxwu"]
 resource_local_to_scene = true
-script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_me12r")
-price_modifiers = {
-"Ammo": 0.5,
-"Armor": 0.5,
-"Consumable": 0.75,
-"Gear": 0.75,
-"Junk": 0.75,
-"Survival": 0.75,
-"Weapons": 0.5
-}
-faction = null
-title = "Traveler"
-metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+script = ExtResource("53_ccrpr")
+npc_style = SubResource("Resource_utl1j")
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
 [sub_resource type="Resource" id="Resource_cvr5w"]
 resource_local_to_scene = true
-script = ExtResource("53_ccrpr")
-npc_style = SubResource("Resource_utl1j")
-metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+script = ExtResource("46_lgnbj")
+min_amount = 3
+max_amount = 8
+potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
+money = 500
+title = "Squad Inventory"
+metadata/_custom_type_script = "uid://b34kwea65we13"
 
 [sub_resource type="Resource" id="Resource_4o6vd"]
 resource_local_to_scene = true
-script = ExtResource("46_lgnbj")
-min_amount = 3
-max_amount = 8
-potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
-money = 500
-title = "Squad Inventory"
-metadata/_custom_type_script = "uid://b34kwea65we13"
+script = ExtResource("49_pay3g")
+inventory = SubResource("Resource_cvr5w")
+price_modifiers = {
+"Ammo": 0.5,
+"Armor": 0.5,
+"Consumable": 0.75,
+"Gear": 0.75,
+"Junk": 0.75,
+"Survival": 0.75,
+"Weapons": 0.5
+}
+faction = null
+title = "Traveler"
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [sub_resource type="Resource" id="Resource_5yx2b"]
 resource_local_to_scene = true
-script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_4o6vd")
-price_modifiers = {
-"Ammo": 0.5,
-"Armor": 0.5,
-"Consumable": 0.75,
-"Gear": 0.75,
-"Junk": 0.75,
-"Survival": 0.75,
-"Weapons": 0.5
-}
-faction = null
-title = "Traveler"
-metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+script = ExtResource("53_ccrpr")
+npc_style = SubResource("Resource_utl1j")
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
 [sub_resource type="Resource" id="Resource_ksfoy"]
 resource_local_to_scene = true
-script = ExtResource("53_ccrpr")
-npc_style = SubResource("Resource_utl1j")
-metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+script = ExtResource("46_lgnbj")
+min_amount = 3
+max_amount = 8
+potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
+money = 500
+title = "Squad Inventory"
+metadata/_custom_type_script = "uid://b34kwea65we13"
 
 [sub_resource type="Resource" id="Resource_6l6oi"]
 resource_local_to_scene = true
-script = ExtResource("46_lgnbj")
-min_amount = 3
-max_amount = 8
-potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
-money = 500
-title = "Squad Inventory"
-metadata/_custom_type_script = "uid://b34kwea65we13"
+script = ExtResource("49_pay3g")
+inventory = SubResource("Resource_ksfoy")
+price_modifiers = {
+"Ammo": 0.5,
+"Armor": 0.5,
+"Consumable": 0.75,
+"Gear": 0.75,
+"Junk": 0.75,
+"Survival": 0.75,
+"Weapons": 0.5
+}
+faction = null
+title = "Traveler"
+metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
 [sub_resource type="Resource" id="Resource_ptrkr"]
 resource_local_to_scene = true
-script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_6l6oi")
-price_modifiers = {
-"Ammo": 0.5,
-"Armor": 0.5,
-"Consumable": 0.75,
-"Gear": 0.75,
-"Junk": 0.75,
-"Survival": 0.75,
-"Weapons": 0.5
-}
-faction = null
-title = "Traveler"
-metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
+script = ExtResource("53_ccrpr")
+npc_style = SubResource("Resource_utl1j")
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
 [sub_resource type="Resource" id="Resource_rsj15"]
 resource_local_to_scene = true
-script = ExtResource("53_ccrpr")
-npc_style = SubResource("Resource_utl1j")
-metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+script = ExtResource("46_lgnbj")
+min_amount = 3
+max_amount = 8
+potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
+money = 500
+title = "Squad Inventory"
+metadata/_custom_type_script = "uid://b34kwea65we13"
 
 [sub_resource type="Resource" id="Resource_3k4bo"]
 resource_local_to_scene = true
-script = ExtResource("46_lgnbj")
-min_amount = 3
-max_amount = 8
-potential_slots = Array[ExtResource("33_ku0d1")]([SubResource("Resource_kx6ku"), SubResource("Resource_0h4u7"), SubResource("Resource_a75c0"), SubResource("Resource_vljco"), SubResource("Resource_mchvl"), SubResource("Resource_b5yoy"), SubResource("Resource_shp8b"), SubResource("Resource_kiig0"), SubResource("Resource_p0jri"), SubResource("Resource_6nrh4"), SubResource("Resource_fu30t"), SubResource("Resource_diqn0")])
-money = 500
-title = "Squad Inventory"
-metadata/_custom_type_script = "uid://b34kwea65we13"
-
-[sub_resource type="Resource" id="Resource_lgnbj"]
-resource_local_to_scene = true
 script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_3k4bo")
+inventory = SubResource("Resource_rsj15")
 price_modifiers = {
 "Ammo": 0.5,
 "Armor": 0.5,
@@ -406,13 +405,13 @@ faction = null
 title = "Traveler"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
-[sub_resource type="Resource" id="Resource_rp2u8"]
+[sub_resource type="Resource" id="Resource_lgnbj"]
 resource_local_to_scene = true
 script = ExtResource("53_ccrpr")
 npc_style = SubResource("Resource_utl1j")
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
-[sub_resource type="Resource" id="Resource_aj0wn"]
+[sub_resource type="Resource" id="Resource_rp2u8"]
 resource_local_to_scene = true
 script = ExtResource("46_lgnbj")
 min_amount = 3
@@ -422,10 +421,10 @@ money = 500
 title = "Squad Inventory"
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
-[sub_resource type="Resource" id="Resource_pay3g"]
+[sub_resource type="Resource" id="Resource_aj0wn"]
 resource_local_to_scene = true
 script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_aj0wn")
+inventory = SubResource("Resource_rp2u8")
 price_modifiers = {
 "Ammo": 0.5,
 "Armor": 0.5,
@@ -439,13 +438,30 @@ faction = null
 title = "Traveler"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
-[sub_resource type="Resource" id="Resource_61ge7"]
+[sub_resource type="Resource" id="Resource_pay3g"]
 resource_local_to_scene = true
 script = ExtResource("53_ccrpr")
 npc_style = SubResource("Resource_utl1j")
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
 [sub_resource type="Resource" id="Resource_3le6t"]
+script = ExtResource("64_kx8k2")
+skin_colors = Array[Color]([Color(0.9372549, 0.7607843, 0.6039216, 1), Color(0.9183898, 0.7063087, 0.51790106, 1), Color(0.8117647, 0.5882353, 0.3764706, 1), Color(0.5764706, 0.37254903, 0.21568628, 1), Color(0.37254903, 0.2, 0.0627451, 1)])
+hair_colors = Array[Color]([Color(0.14117648, 0.1254902, 0.20392157, 1), Color(0, 0, 0, 1), Color(0.2901961, 0.09803922, 0, 1), Color(0.5803922, 0.2784314, 0, 1), Color(0.8, 0.6745098, 0.25490198, 1)])
+hair_styles = Array[Texture]([ExtResource("60_tfd8k"), ExtResource("61_x85w1"), ExtResource("62_r4dmk"), ExtResource("63_fm8tw")])
+faces = Array[Texture]([ExtResource("56_61ge7"), ExtResource("57_3le6t"), ExtResource("58_g8jxq"), ExtResource("59_8jwt6")])
+shirts = Array[Texture]([ExtResource("65_n3yag"), ExtResource("66_lfi40"), ExtResource("67_yld1c"), ExtResource("68_bn22a")])
+pants_colors = Array[Color]([Color(0.48, 0.21888001, 0.15359999, 1), Color(0.44313726, 0.47058824, 0.54901963, 1), Color(0.14509805, 0.21568628, 0.4117647, 1), Color(0.7882353, 0.6901961, 0.53333336, 1), Color(0.11372549, 0.105882354, 0.12156863, 1)])
+shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1), Color(0.16862746, 0.08627451, 0, 1), Color(0.23921569, 0.23921569, 0.23921569, 1)])
+metadata/_custom_type_script = "uid://b80ipr8q70gqm"
+
+[sub_resource type="Resource" id="Resource_61ge7"]
+resource_local_to_scene = true
+script = ExtResource("53_ccrpr")
+npc_style = SubResource("Resource_3le6t")
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
+
+[sub_resource type="Resource" id="Resource_g8jxq"]
 resource_local_to_scene = true
 script = ExtResource("46_lgnbj")
 min_amount = 3
@@ -455,10 +471,10 @@ money = 500
 title = "Squad Inventory"
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
-[sub_resource type="Resource" id="Resource_g8jxq"]
+[sub_resource type="Resource" id="Resource_8jwt6"]
 resource_local_to_scene = true
 script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_3le6t")
+inventory = SubResource("Resource_g8jxq")
 price_modifiers = {
 "Ammo": 0.5,
 "Armor": 0.5,
@@ -472,13 +488,13 @@ faction = null
 title = "Traveler"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
-[sub_resource type="Resource" id="Resource_8jwt6"]
+[sub_resource type="Resource" id="Resource_tfd8k"]
 resource_local_to_scene = true
 script = ExtResource("53_ccrpr")
 npc_style = SubResource("Resource_utl1j")
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
-[sub_resource type="Resource" id="Resource_tfd8k"]
+[sub_resource type="Resource" id="Resource_x85w1"]
 resource_local_to_scene = true
 script = ExtResource("46_lgnbj")
 min_amount = 3
@@ -488,10 +504,10 @@ money = 500
 title = "Squad Inventory"
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
-[sub_resource type="Resource" id="Resource_x85w1"]
+[sub_resource type="Resource" id="Resource_r4dmk"]
 resource_local_to_scene = true
 script = ExtResource("49_pay3g")
-inventory = SubResource("Resource_tfd8k")
+inventory = SubResource("Resource_x85w1")
 price_modifiers = {
 "Ammo": 0.5,
 "Armor": 0.5,
@@ -505,7 +521,7 @@ faction = null
 title = "Traveler"
 metadata/_custom_type_script = "uid://bbxr36dk0j8aw"
 
-[sub_resource type="Resource" id="Resource_r4dmk"]
+[sub_resource type="Resource" id="Resource_fm8tw"]
 resource_local_to_scene = true
 script = ExtResource("53_ccrpr")
 npc_style = SubResource("Resource_utl1j")
@@ -519,13 +535,6 @@ height = 6.06958
 script = ExtResource("108_g8jxq")
 population = 4
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
-
-[sub_resource type="Resource" id="Resource_fm8tw"]
-resource_local_to_scene = true
-script = ExtResource("78_nmfa1")
-title = "Dirt Town"
-shops = Array[ExtResource("79_2063u")]([ExtResource("80_p80om"), ExtResource("81_n62ny")])
-metadata/_custom_type_script = "uid://bbi3gcsb33muk"
 
 [sub_resource type="Resource" id="Resource_kx8k2"]
 resource_local_to_scene = true
@@ -796,8 +805,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 123.441986, -19.812275, 213.5
 [node name="RockCanyon" parent="." unique_id=2040333333 groups=["align_position", "persist"] instance=ExtResource("17_7fbp6")]
 transform = Transform3D(-0.663652, 0, -0.74804145, 0, 1, 0, 0.74804145, 0, -0.663652, 233.26797, 1.2008492, 279.74686)
 location_data = SubResource("Resource_gqxbg")
-shop = SubResource("Resource_n62ny")
-friendly_dialogue_tree = SubResource("Resource_xkckx")
+shop = SubResource("Resource_p80om")
+friendly_dialogue_tree = SubResource("Resource_n62ny")
 
 [node name="CollisionShape3D" parent="RockCanyon" index="0" unique_id=1772758538]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -1.7763568e-15, 0, 1, 0, 0, 0)
@@ -835,8 +844,8 @@ transform = Transform3D(1.870851, 0.45179105, -0.54387593, 0, -1.5384423, -1.277
 [node name="SandDunes" parent="." unique_id=73567733 groups=["align_position", "persist"] instance=ExtResource("18_oedh7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224.68231, 0.67250896, 302.8991)
 location_data = ExtResource("31_gqxbg")
-shop = SubResource("Resource_jby7l")
-friendly_dialogue_tree = SubResource("Resource_t56bl")
+shop = SubResource("Resource_ku0d1")
+friendly_dialogue_tree = SubResource("Resource_jby7l")
 
 [node name="Flagpole" parent="SandDunes/Meshes" parent_id_path=PackedInt32Array(73567733, 354222542) index="6" unique_id=800258272]
 transform = Transform3D(-8.742278e-08, 0, -2, 0, 2, 0, 2, 0, -8.742278e-08, 0, 0, 0)
@@ -844,8 +853,8 @@ transform = Transform3D(-8.742278e-08, 0, -2, 0, 2, 0, 2, 0, -8.742278e-08, 0, 0
 [node name="Hillside" parent="." unique_id=1342811121 instance=ExtResource("31_c1mwn")]
 transform = Transform3D(-0.81002104, 0, 0.58640075, 0, 1, 0, -0.58640075, 0, -0.81002104, 186.06516, 0.56058085, 252.54721)
 location_data = ExtResource("29_jhm1l")
-shop = SubResource("Resource_bqxwu")
-friendly_dialogue_tree = SubResource("Resource_cvr5w")
+shop = SubResource("Resource_me12r")
+friendly_dialogue_tree = SubResource("Resource_bqxwu")
 
 [node name="CollisionShape3D" parent="Hillside" index="0" unique_id=1772758538]
 transform = Transform3D(-4.371139e-08, -1, -2.9802322e-08, 1, -4.371139e-08, 0, 0, -2.9802322e-08, 1, 0, 0.46906924, 0)
@@ -865,8 +874,8 @@ transform = Transform3D(0.9631423, 0.04144413, 0.26578405, -0.06944677, 0.992871
 [node name="RailYard" parent="." unique_id=1759757433 instance=ExtResource("44_pay3g")]
 transform = Transform3D(-0.87789106, 0, -0.47886035, 0, 1, 0, 0.47886035, 0, -0.87789106, 225.01892, 1.309533, 330.1273)
 location_data = ExtResource("31_gqxbg")
-shop = SubResource("Resource_5yx2b")
-friendly_dialogue_tree = SubResource("Resource_ksfoy")
+shop = SubResource("Resource_4o6vd")
+friendly_dialogue_tree = SubResource("Resource_5yx2b")
 
 [node name="CollisionShape3D" parent="RailYard" index="0" unique_id=1772758538]
 transform = Transform3D(1.000001, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1.000001, 0, -0.1403501, 0)
@@ -895,8 +904,8 @@ transform = Transform3D(0.99923635, 0.038344882, 0.0075104237, -0.038631596, 0.9
 [node name="GhostTown" parent="." unique_id=143995200 instance=ExtResource("15_857re")]
 transform = Transform3D(0.78389937, 0, 0.6208879, 0, 1, 0, -0.6208879, 0, 0.78389937, 254.29613, 0.49689007, 334.05212)
 location_data = ExtResource("35_7t5fg")
-shop = SubResource("Resource_ptrkr")
-friendly_dialogue_tree = SubResource("Resource_rsj15")
+shop = SubResource("Resource_6l6oi")
+friendly_dialogue_tree = SubResource("Resource_ptrkr")
 
 [node name="CollisionShape3D" parent="GhostTown" index="0" unique_id=1772758538]
 transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 0, -0.42634478, 0)
@@ -910,8 +919,8 @@ transform = Transform3D(0, 0, -2.0000005, 0, 2, 0, 2.0000005, 0, 0, 6.1035156e-0
 [node name="Crossroads" parent="." unique_id=1671911261 instance=ExtResource("34_c1mwn")]
 transform = Transform3D(0.8417464, 0, -0.53987306, 0, 1, 0, 0.53987306, 0, 0.8417464, 212.33711, 0.8297237, 283.0366)
 location_data = ExtResource("37_8yg51")
-shop = SubResource("Resource_lgnbj")
-friendly_dialogue_tree = SubResource("Resource_rp2u8")
+shop = SubResource("Resource_3k4bo")
+friendly_dialogue_tree = SubResource("Resource_lgnbj")
 
 [node name="CollisionShape3D" parent="Crossroads" index="0" unique_id=1772758538]
 transform = Transform3D(-4.3711385e-08, -1, -2.9802322e-08, 1, -4.371139e-08, 0, 0, -2.9802322e-08, 1, -0.024993896, -0.12640977, 4.5776367e-05)
@@ -957,8 +966,8 @@ transform = Transform3D(0.45643032, 0, -0.8897592, 0, 1, 0, 0.8897592, 0, 0.4564
 title = "Checkpoint"
 location_data = ExtResource("35_7t5fg")
 encounter_scene = ExtResource("109_g8jxq")
-shop = SubResource("Resource_pay3g")
-friendly_dialogue_tree = SubResource("Resource_61ge7")
+shop = SubResource("Resource_aj0wn")
+friendly_dialogue_tree = SubResource("Resource_pay3g")
 enemy_dialogue_tree = SubResource("Resource_61ge7")
 
 [node name="Flagpole" parent="Checkpoint/Meshes" parent_id_path=PackedInt32Array(1240485400, 354222542) index="0" unique_id=800258272]
@@ -967,8 +976,8 @@ transform = Transform3D(-2, 0, 1.7881393e-07, 0, 2, 0, -1.7881393e-07, 0, -2, 0,
 [node name="Crateyard" parent="." unique_id=982147227 instance=ExtResource("16_swbn6")]
 transform = Transform3D(-0.26856682, 0, 0.96326107, 0, 1, 0, -0.96326107, 0, -0.26856682, 177.97003, 0.5392718, 272.54028)
 location_data = ExtResource("35_7t5fg")
-shop = SubResource("Resource_g8jxq")
-friendly_dialogue_tree = SubResource("Resource_8jwt6")
+shop = SubResource("Resource_8jwt6")
+friendly_dialogue_tree = SubResource("Resource_tfd8k")
 
 [node name="CollisionShape3D" parent="Crateyard" index="0" unique_id=1772758538]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39287704, 0)
@@ -991,8 +1000,8 @@ transform = Transform3D(-5.9604645e-08, 0, -2, 0, 2, 0, 2, 0, -5.9604645e-08, -0
 [node name="RadioStation" parent="." unique_id=271568694 instance=ExtResource("47_c1mwn")]
 transform = Transform3D(-0.5009066, 0, 0.86550134, 0, 1, 0, -0.86550134, 0, -0.5009066, 193.84766, 5.25765, 284.4301)
 location_data = ExtResource("31_gqxbg")
-shop = SubResource("Resource_x85w1")
-friendly_dialogue_tree = SubResource("Resource_r4dmk")
+shop = SubResource("Resource_r4dmk")
+friendly_dialogue_tree = SubResource("Resource_fm8tw")
 
 [node name="CollisionShape3D" parent="RadioStation" index="0" unique_id=1772758538]
 transform = Transform3D(-4.371139e-08, 0.9409338, 0.33859017, -1, -4.112953e-08, -1.48002455e-08, 0, -0.33859017, 0.9409338, -1.4824829, -0.43396187, -1.1325073)
@@ -1016,7 +1025,8 @@ transform = Transform3D(-1.7881393e-07, 0, -2, 0, 2, 0, 2, 0, -1.7881393e-07, 0,
 [node name="DirtTown" parent="." unique_id=1920182238 groups=["align_position", "persist"] instance=ExtResource("19_5q0os")]
 transform = Transform3D(0.88991046, 0, 0.4561352, 0, 1, 0, -0.4561352, 0, 0.88991046, 214.64395, 0.23739168, 261.98834)
 location_data = SubResource("Resource_lfi40")
-town = SubResource("Resource_fm8tw")
+town = SubResource("Resource_kx8k2")
+friendly_dialogue_tree = null
 
 [node name="CollisionShape3D" parent="DirtTown" index="0" unique_id=1772758538]
 transform = Transform3D(1.0000014, -2.9802322e-08, 3.5527137e-15, 0, -4.371139e-08, 1, -2.9802322e-08, -1.0000014, -4.371152e-08, 0.62114716, -0.03337735, 0)
@@ -1027,22 +1037,9 @@ transform = Transform3D(1.0000014, -2.9802322e-08, 3.5527137e-15, 0, -4.371139e-
 [node name="Flagpole" parent="DirtTown/Meshes" parent_id_path=PackedInt32Array(1920182238, 354222542) index="3" unique_id=800258272]
 transform = Transform3D(-5.9604645e-08, 0, -2.0000007, 0, 2, 0, 2.0000007, 0, -5.9604645e-08, 0, 0, 0)
 
-[node name="DirtTown2" parent="." unique_id=396576117 groups=["align_position", "persist"] instance=ExtResource("19_5q0os")]
-transform = Transform3D(0.88991046, 0, 0.4561352, 0, 1, 0, -0.4561352, 0, 0.88991046, 221.73752, 0.23739168, 248.02823)
-location_data = SubResource("Resource_lfi40")
-town = SubResource("Resource_kx8k2")
-
-[node name="CollisionShape3D" parent="DirtTown2" index="0" unique_id=1772758538]
-transform = Transform3D(1.0000014, -2.9802322e-08, 3.5527137e-15, 0, -4.371139e-08, 1, -2.9802322e-08, -1.0000014, -4.371152e-08, 0.62114716, -0.03337735, 0)
-
-[node name="CollisionShape3D2" parent="DirtTown2" index="1" unique_id=14480053]
-transform = Transform3D(1.0000014, -2.9802322e-08, 3.5527137e-15, 0, -4.371139e-08, 1, -2.9802322e-08, -1.0000014, -4.371152e-08, -2.1015244, 0.07661325, 0.0004272461)
-
-[node name="Flagpole" parent="DirtTown2/Meshes" parent_id_path=PackedInt32Array(396576117, 354222542) index="3" unique_id=800258272]
-transform = Transform3D(-5.9604645e-08, 0, -2.0000007, 0, 2, 0, 2.0000007, 0, -5.9604645e-08, 0, 0, 0)
-
 [node name="JackalFort" parent="." unique_id=248617744 instance=ExtResource("90_me12r")]
 transform = Transform3D(0.5275342, 0, 0.8495339, 0, 1, 0, -0.8495339, 0, 0.5275342, 252.64273, 0.20288566, 299.43018)
+friendly_dialogue_tree = null
 
 [node name="CollisionShape3D" parent="JackalFort" index="0" unique_id=1772758538]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -1.7763568e-15, 0, 1, 0, 0, 0)
@@ -1079,6 +1076,7 @@ transform = Transform3D(-3.5674121, 0.30064905, -1.7841456, 0.34589696, 3.984959
 
 [node name="DrugDen" parent="." unique_id=419489395 instance=ExtResource("79_nggm6")]
 transform = Transform3D(-0.10605586, 0, -0.99436015, 0, 1, 0, 0.99436015, 0, -0.10605586, 157.74272, 1.3239398, 278.51114)
+friendly_dialogue_tree = null
 
 [node name="CollisionShape3D" parent="DrugDen" index="0" unique_id=1772758538]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -2.220446e-15, 0, 1, 3.0517578e-05, -0.12351596, -0.6014404)
@@ -1136,9 +1134,6 @@ random_rotate_y = true
 random_rotate_z = true
 delete_children = true
 
-[node name="Npc" parent="." unique_id=907079178 instance=ExtResource("86_g1wl1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 231.20862, 0.6922388, 249.6426)
-
 [connection signal="pressed" from="SurvivalUi/DemoMessage/Toolbar/ExitMenu" to="SurvivalUi/DemoMessage" method="_on_exit_menu_pressed"]
 [connection signal="timeout" from="NpcController/Timer" to="NpcController" method="_on_timer_timeout"]
 [connection signal="timeout" from="NpcController/Timer" to="NpcController/Timer" method="_on_timeout"]
@@ -1165,8 +1160,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 231.20862, 0.6922388, 249.642
 [editable path="RadioStation/PointOfInterest"]
 [editable path="DirtTown"]
 [editable path="DirtTown/PointOfInterest"]
-[editable path="DirtTown2"]
-[editable path="DirtTown2/PointOfInterest"]
 [editable path="JackalFort"]
 [editable path="JackalFort/PointOfInterest"]
 [editable path="DrugDen"]

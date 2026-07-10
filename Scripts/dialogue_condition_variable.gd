@@ -1,5 +1,5 @@
 extends DialogueBase
-class_name DialogueCondition
+class_name DialogueConditionVariable
 
 enum comparisons {equals, greater_than, lesser_than}
 @export var path: String

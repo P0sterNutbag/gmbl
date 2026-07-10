@@ -1,12 +1,15 @@
 [gd_resource type="Resource" script_class="Shop" format=3 uid="uid://jbg7thtumlte"]
 
+[ext_resource type="Script" uid="uid://ck7j7t8co2rbt" path="res://Scripts/dialogue_base.gd" id="1_midgj"]
 [ext_resource type="Script" uid="uid://de6rxup5nru4w" path="res://Scripts/dialogue.gd" id="1_y0qu0"]
-[ext_resource type="Script" uid="uid://ctb2g10cnu2sg" path="res://Scripts/dialogue_option.gd" id="2_v5h8g"]
+[ext_resource type="Script" uid="uid://b2lfe52ud4ctk" path="res://Scripts/dialogue_branch_option.gd" id="3_0qlwp"]
 [ext_resource type="Script" uid="uid://cnu4xeujmgk51" path="res://Scripts/dialogue_options.gd" id="3_5jydk"]
-[ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="4_yv2ks"]
-[ext_resource type="Script" uid="uid://c6knlgr6wx0i1" path="res://Scripts/quest_fetch.gd" id="5_yfgpb"]
-[ext_resource type="Script" uid="uid://px5dr31pd885" path="res://Scripts/dialogue_loop.gd" id="6_l1eep"]
+[ext_resource type="Resource" uid="uid://cyg58nktkkkgs" path="res://Resources/Dialogue/Options/trade.tres" id="4_tcirx"]
+[ext_resource type="Resource" uid="uid://cdn5ls8uix1w6" path="res://Resources/Dialogue/Options/repair.tres" id="5_y0qu0"]
+[ext_resource type="Resource" uid="uid://d1tcj8cecao73" path="res://Resources/Dialogue/Options/take_jobs.tres" id="6_v5h8g"]
+[ext_resource type="Resource" uid="uid://bewf2cdhk33gy" path="res://Resources/Dialogue/Options/return_jobs.tres" id="7_y0qu0"]
 [ext_resource type="Texture2D" uid="uid://goputnp33yds" path="res://Art/Textures/Character/npc shirt green sleeve.png" id="8_b7if2"]
+[ext_resource type="Resource" uid="uid://bq7jxm84v8xce" path="res://Resources/Dialogue/Options/leave_shop.tres" id="8_v5h8g"]
 [ext_resource type="Script" uid="uid://b80ipr8q70gqm" path="res://Scripts/npc_styles.gd" id="9_30h7b"]
 [ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="11_w5ove"]
 [ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="12_xc114"]
@@ -30,115 +33,14 @@
 [ext_resource type="Script" uid="uid://bicpdyf13vj1j" path="res://Scripts/quest_fetch_random.gd" id="30_url1g"]
 [ext_resource type="Script" uid="uid://bbxr36dk0j8aw" path="res://Scripts/shop.gd" id="31_8teru"]
 
-[sub_resource type="Resource" id="Resource_0qlwp"]
-script = ExtResource("1_y0qu0")
-lines = Array[String](["Make this quick, I don' have all day."])
-speaker = 1
-metadata/_custom_type_script = "uid://de6rxup5nru4w"
-
 [sub_resource type="Resource" id="Resource_b7if2"]
-script = ExtResource("2_v5h8g")
-text = "Trade"
-destination = 9
-metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
-
-[sub_resource type="Resource" id="Resource_tcirx"]
-script = ExtResource("2_v5h8g")
-text = "Repair guns"
-destination = 13
-metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
-
-[sub_resource type="Resource" id="Resource_y0qu0"]
-script = ExtResource("2_v5h8g")
-text = "Take Jobs"
-destination = 2
-metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
-
-[sub_resource type="Resource" id="Resource_v5h8g"]
-script = ExtResource("2_v5h8g")
-text = "Return jobs"
-destination = 3
-metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
-
-[sub_resource type="Resource" id="Resource_5jydk"]
-script = ExtResource("2_v5h8g")
-text = "Leave"
-destination = 4
-metadata/_custom_type_script = "uid://ctb2g10cnu2sg"
-
-[sub_resource type="Resource" id="Resource_yv2ks"]
-script = ExtResource("3_5jydk")
-options = Array[ExtResource("2_v5h8g")]([SubResource("Resource_b7if2"), SubResource("Resource_tcirx"), SubResource("Resource_y0qu0"), SubResource("Resource_v5h8g"), SubResource("Resource_5jydk")])
-metadata/_custom_type_script = "uid://cnu4xeujmgk51"
+script = ExtResource("1_y0qu0")
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
 
 [sub_resource type="Resource" id="Resource_yfgpb"]
-script = ExtResource("4_yv2ks")
-method = "enter_job_board"
-arguments = [11]
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
-
-[sub_resource type="Resource" id="Resource_l1eep"]
-script = ExtResource("5_yfgpb")
-metadata/_custom_type_script = "uid://c6knlgr6wx0i1"
-
-[sub_resource type="Resource" id="Resource_6eue4"]
-script = ExtResource("4_yv2ks")
-method = "return_quests"
-arguments = [SubResource("Resource_l1eep"), 5, 7]
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
-
-[sub_resource type="Resource" id="Resource_2vpop"]
-script = ExtResource("4_yv2ks")
-method = "enter_town"
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
-
-[sub_resource type="Resource" id="Resource_30h7b"]
-script = ExtResource("1_y0qu0")
-lines = Array[String](["Nice work! Here's the reward."])
-speaker = 1
-metadata/_custom_type_script = "uid://de6rxup5nru4w"
-
-[sub_resource type="Resource" id="Resource_2iciv"]
-script = ExtResource("6_l1eep")
-next_index = 1
-metadata/_custom_type_script = "uid://px5dr31pd885"
-
-[sub_resource type="Resource" id="Resource_w5ove"]
-script = ExtResource("1_y0qu0")
-lines = Array[String](["Looks like you haven't completed any jobs."])
-speaker = 1
-metadata/_custom_type_script = "uid://de6rxup5nru4w"
-
-[sub_resource type="Resource" id="Resource_xc114"]
-script = ExtResource("6_l1eep")
-next_index = 1
-metadata/_custom_type_script = "uid://px5dr31pd885"
-
-[sub_resource type="Resource" id="Resource_kf3kl"]
-script = ExtResource("4_yv2ks")
-method = "enter_shop"
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
-
-[sub_resource type="Resource" id="Resource_kfhwa"]
-script = ExtResource("6_l1eep")
-next_index = 1
-metadata/_custom_type_script = "uid://px5dr31pd885"
-
-[sub_resource type="Resource" id="Resource_86wrp"]
-script = ExtResource("1_y0qu0")
-lines = Array[String](["All out of jobs for now. Come back tommorow if you want more work."])
-speaker = 1
-metadata/_custom_type_script = "uid://de6rxup5nru4w"
-
-[sub_resource type="Resource" id="Resource_08boe"]
-script = ExtResource("6_l1eep")
-next_index = 1
-metadata/_custom_type_script = "uid://px5dr31pd885"
-
-[sub_resource type="Resource" id="Resource_xta4i"]
-script = ExtResource("4_yv2ks")
-method = "enter_repair_menu"
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+script = ExtResource("3_5jydk")
+options = Array[ExtResource("3_0qlwp")]([ExtResource("4_tcirx"), ExtResource("5_y0qu0"), ExtResource("6_v5h8g"), ExtResource("7_y0qu0"), ExtResource("8_v5h8g")])
+metadata/_custom_type_script = "uid://cnu4xeujmgk51"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xbbph"]
 load_path = "res://.godot/imported/player face.png-55921b17ead6e4cdf7678cd30c3bdfcd.ctex"
@@ -159,7 +61,7 @@ metadata/_custom_type_script = "uid://b80ipr8q70gqm"
 
 [sub_resource type="Resource" id="Resource_mkhcx"]
 script = ExtResource("11_w5ove")
-bubbles = Array[ExtResource("1_y0qu0")]([SubResource("Resource_0qlwp"), SubResource("Resource_yv2ks"), SubResource("Resource_yfgpb"), SubResource("Resource_6eue4"), SubResource("Resource_2vpop"), SubResource("Resource_30h7b"), SubResource("Resource_2iciv"), SubResource("Resource_w5ove"), SubResource("Resource_xc114"), SubResource("Resource_kf3kl"), SubResource("Resource_kfhwa"), SubResource("Resource_86wrp"), SubResource("Resource_08boe"), SubResource("Resource_xta4i")])
+bubbles = Array[ExtResource("1_midgj")]([SubResource("Resource_b7if2"), SubResource("Resource_yfgpb")])
 npc_style = SubResource("Resource_xbbph")
 npc_name = "Axel"
 metadata/_custom_type_script = "uid://c7wqhgal4us2a"

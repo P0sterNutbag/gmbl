@@ -1,5 +1,4 @@
 extends Node
-var data = {}
 
 var save_dir = "user://"
 var save_path = "user://savegame.save"
@@ -10,10 +9,10 @@ signal load
 
 
 func save_data_to_file():
+	var data = {}
 	var saved_resources = SavedResources.new()
-	#if ResourceLoader.exists(resource_path):
-		#saved_resources = ResourceLoader.load(resource_path, "", ResourceLoader.CACHE_MODE_IGNORE)
 	var save_nodes = get_tree().get_nodes_in_group("persist")
+	var size = save_nodes.size()
 	for node in save_nodes:
 		if !node.has_method("save"):
 			print("persistent node '%s' is missing a save() function, skipped" % node.name)
@@ -33,6 +32,7 @@ func save_data_to_file():
 				dict.dictionary = value.duplicate_deep(true)
 				resource_dict[key] = dict
 		node_data["path"] = node.get_scene_file_path()
+		#node_data["name"] = node.name
 		data[str(node.get_path())] = node_data
 		if resource_dict.size() > 0:
 			saved_resources.resources[str(node.get_path())] = resource_dict
@@ -46,6 +46,10 @@ func save_data_to_file():
 func load_data_from_file():
 	if not FileAccess.file_exists(save_path):
 		return
+	var data = {}
+	#var save_nodes = get_tree().get_nodes_in_group("Persist")
+	#for i in save_nodes:
+		#i.queue_free()
 	var saved_resources = SavedResources.new()
 	if ResourceLoader.exists(resource_path):
 		saved_resources = ResourceLoader.load(resource_path, "", ResourceLoader.CACHE_MODE_IGNORE)
@@ -63,6 +67,7 @@ func load_data_from_file():
 		var node = get_tree().root.get_node_or_null(node_path)
 		if !node:
 			node = load(data[node_path]["path"]).instantiate()
+			#node.set_name(data[node_path]["name"])
 			get_tree().current_scene.add_child(node)
 		for node_data in data[node_path]:
 			var value = data[node_path][node_data]

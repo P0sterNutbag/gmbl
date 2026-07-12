@@ -6,6 +6,7 @@ var battles: Array[Battle]
 func _ready() -> void:
 	SceneManager.scene_changed.connect(_on_scene_changed)
 	SceneManager.new_game_start.connect(_on_new_game_start)
+	SaveController.load.connect(_on_load)
 
 
 func start_battle(location, attacking_location):
@@ -46,3 +47,17 @@ func _on_scene_changed() -> void:
 
 func _on_new_game_start() -> void:
 	delete_all_battles()
+
+
+func save() -> Dictionary: 
+	for battle in battles:
+		battle.save_battle()
+	return {
+		"battles" : battles
+	}
+
+
+func _on_load() -> void:
+	await get_tree().process_frame
+	for battle in battles:
+		battle.resume_battle()

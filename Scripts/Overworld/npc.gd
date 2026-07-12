@@ -4,7 +4,7 @@ enum guns {shotgun, ak47, sniper, pistol}
 enum states {walk, chase, battle, dead}
 @export var gun_index: guns
 @export var destination: Location
-var state = states.walk
+var state := states.walk
 var speed: float
 var walk_speed := 1.5
 var run_speed := 3.5
@@ -235,18 +235,10 @@ func _on_encounter_ended() -> void:
 	can_move = true
 
 
-func _on_battle_timer_timeout() -> void:
-	if location.location_data.population <= 0:
-		die()
-	else:
-		can_move = true
-		state = states.walk
-
-
 func _on_location_area_entered(area: Area3D) -> void:
 	if area is not Location:
 		return
-	if area.encounter_scene == location.encounter_scene:
+	if area.encounter_scene == location.encounter_scene and state != states.battle:
 		if FactionManager.get_faction_relation(faction, area.location_data.faction) >= 0.0:
 			return
 		BattleManager.start_battle(area, location)

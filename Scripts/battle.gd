@@ -3,6 +3,8 @@ class_name Battle
 
 var battle_location: Location
 var attacker_locations: Array[Location]
+@export var location_path: String
+@export var attacker_paths: Array[String]
 var battle_timer := Timer.new()
 var original_faction : FactionManager.factions
 var all_locations: Array: 
@@ -99,6 +101,20 @@ func get_all_locations() -> Array:
 	array.append(battle_location)
 	array.append_array(attacker_locations)
 	return array
+
+
+func save_battle() -> void:
+	location_path = battle_location.get_path()
+	attacker_paths.clear()
+	for i in attacker_locations:
+		attacker_paths.append(i.get_path())
+
+
+func resume_battle() -> void:
+	battle_location = Globals.get_tree().root.get_node(location_path)
+	for i in attacker_paths:
+		attacker_locations.append(Globals.get_tree().root.get_node(i))
+	battle_location.animation_player.play("battle")
 
 
 func delete() -> void:

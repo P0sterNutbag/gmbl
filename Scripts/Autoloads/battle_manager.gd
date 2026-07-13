@@ -9,10 +9,19 @@ func _ready() -> void:
 	SaveController.load.connect(_on_load)
 
 
+func _process(delta: float) -> void:
+	if get_tree().current_scene != Globals.overworld:
+		return
+	for battle in battles:
+		battle.time_left -= delta
+		if battle.time_left <= 0:
+			battle.end_battle()
+
+
 func start_battle(location, attacking_location):
 	var battle = get_battle(location)
 	if battle:
-		if !battle.all_locations.has(attacking_location):
+		if !battle.get_all_locations().has(attacking_location):
 			battle.attacker_locations.append(attacking_location)
 	else:
 		battle = Battle.new()

@@ -1,50 +1,28 @@
 extends Menu
 
-@onready var tourniquet_button: UiButton = $MarginContainer/VBoxContainer3/VBoxContainer/TourniquetButton
-@onready var morphine_button: UiButton = $MarginContainer/VBoxContainer3/VBoxContainer/MorphineButton
-var torniquet_item: ItemUsable = preload("uid://cf41qwurikia4")
-var morphine_item: ItemUsable = preload("uid://bbx4x21dta7e7")
-
-
-func activate() -> void:
-	var torniquet_amount = PlayerStats.inventory.get_item_amount(torniquet_item)
-	tourniquet_button.text = torniquet_item.title +  "(x" + str(torniquet_amount) + ")"
-	tourniquet_button.disabled = torniquet_amount == 0
-	var morphine_amount = PlayerStats.inventory.get_item_amount(morphine_item)
-	morphine_button.text = morphine_item.title + "(x" + str(morphine_amount) + ")"
-	morphine_button.disabled = morphine_amount == 0
-
-
-func _on_tourniquet_button_pressed() -> void:
-	var item = PlayerStats.inventory.find_item(torniquet_item.title)
-	item.use(Globals.player.hitbox)
-	revive_player()
-
-
-func _on_morphine_button_pressed() -> void:
-	var item = PlayerStats.inventory.find_item(morphine_item.title)
-	item.use(Globals.player.hitbox)
-	revive_player()
-
-
-func revive_player() -> void:
-	#PlayerStats.change_state(PlayerStats.states.walk)
-	UiController.close_interface(self)
-
-
-func _on_give_up_button_pressed() -> void:
-	UiController.open_interface(Globals.survival_ui.progress_menu, false, true)
-	if ConfigManager.file.get_value("settings", "difficulty", 0) == 1:
-		PlayerStats.reset_stats()
-		SaveController.delete_save_data()
-		if Globals.overworld:
-			Globals.overworld.queue_free()
-	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	#Globals.overworld.player_died = true
-	#SceneManager.start_scene_transition(Globals.overworld)
+@onready var kills: Label = %Kills
+@onready var level: Label = %Level
+@onready var progress_bar: ProgressBar = %LevelBar
+@onready var v_box_container: VBoxContainer = $MarginContainer/VBoxContainer3/VBoxContainer
+@onready var time: Label = %Time
+@onready var continue_button: MenuItem = %Continue
+const PROGRESS_AWARD_MESSAGE = preload("uid://yjunk2cfke0y")
 
 
 func _on_visibility_changed() -> void:
 	if visible:
-		activate()
-		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+		continue_button.visible = ConfigManager.file.get_value("settings", "difficulty", 0) == 0
+
+
+func _on_continue_pressed() -> void:
+	if Globals.overworld:
+		Globals.overworld.queue_free()
+	SceneManager.start_scene_transition("res://Scenes/Overworld/overworld.tscn", false, true)
+
+
+func _on_quit_pressed() -> void:
+	SceneManager.start_scene_transition("res://Scenes/UI/Levels/main_menu.tscn")
+
+
+func _on_quit_2_pressed() -> void:
+	get_tree().quit()

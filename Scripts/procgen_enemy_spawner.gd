@@ -26,7 +26,7 @@ func _ready():
 	var start_alert = false
 	for squad in squads:
 		var enemy_amount = squad.population#randi_range(squad.min_population, squad.max_population)
-		var spawn_pos = Vector3.ZERO
+		var spawn_pos = Vector3(128, 0, 128)
 		var dest = position + Vector3(0, 0, -115)
 		if squads.find(squad) > 0:
 			spawn_pos = Vector3(-64, 0.0, 0.0).rotated(Vector3.UP, deg_to_rad(randf_range(0, 360)))
@@ -57,11 +57,7 @@ func _ready():
 			enemy.last_seen_position = Globals.player.position
 			enemy.change_state(enemy.states.search)
 		elif Globals.overworld and BattleManager.get_battle(Globals.overworld.current_encounter):
-			var targets = enemy.detection.targets
-			if targets.size() <= 0:
-				continue
-			targets.sort_custom(func(a, b): return enemy.global_position.distance_to(a.global_position) < enemy.global_position.distance_to(b.global_position))
-			enemy.last_seen_position = targets[0].global_position
+			enemy.in_battle = true
 			enemy.change_state(enemy.states.search)
 		else:
 			enemy.change_state(enemy.states.walk)
@@ -69,8 +65,7 @@ func _ready():
 
 func spawn_enemy(spawn_position: Vector3, faction: FactionManager.factions) -> void:
 	# get random enemy and spawn it
-	var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
-	var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
+	var inst = NPC.instantiate()
 	var rng = RandomNumberGenerator.new()
 	var weights: PackedFloat32Array
 	for i in location_data.fire_power_chance:

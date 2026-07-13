@@ -33,7 +33,7 @@ func update_location_data() -> void:
 	if Globals.overworld:
 		battle = BattleManager.get_battle(Globals.overworld.current_encounter)
 	if battle:
-		for location in battle.all_locations:
+		for location in battle.get_all_locations():
 			var data = location.location_data
 			var population = enemies.filter(func(a): return a.state != a.states.dead and a.faction == data.faction).size()
 			data.population = population
@@ -51,7 +51,7 @@ func update_location_data() -> void:
 			battle.end_battle(Globals.overworld.current_encounter)
 	elif factions.size() == 1:
 		if battle:
-			var winner = battle.all_locations.filter(func(a): return a.location_data.population > 0)[0]
+			var winner = battle.get_all_locations().filter(func(a): return a.location_data.population > 0)[0]
 			battle.end_battle(winner)
 	if Globals.overworld and Globals.overworld.current_encounter:
 		Globals.overworld.current_encounter.location_data = location_data

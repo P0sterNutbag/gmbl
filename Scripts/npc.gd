@@ -29,6 +29,7 @@ var night_range := 50
 var path_index: int
 var is_new_state: bool
 var on_alert: bool
+var in_battle: bool
 var is_starting_squad: bool
 var open_fire: bool = true
 var damage_position: Vector3
@@ -132,7 +133,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	velocity += push_velocity
-	var last_velocity_length = velocity.length()
+	#var last_velocity_length = velocity.length()
 	move_and_slide()
 	#if velocity != Vector3.ZERO:
 	velocity -= push_velocity
@@ -282,18 +283,19 @@ func state_aim(_delta) -> void:
 
 func state_shoot(delta) -> void:
 	if is_new_state:
-		if !target:
-			on_alert = true
-			if goal == goals.follow:
-				change_state(states.idle)
-			else:
-				if randf() <= camp_chance:
-					change_state(states.camp)
-				#elif randf() <= supress_change:
-					#change_state(states.supress)
-				else:
-					change_state(states.search)
-			return
+		on_alert = true
+		#if !target:
+			#on_alert = true
+			#if goal == goals.follow:
+				#change_state(states.idle)
+			#else:
+				#if randf() <= camp_chance:
+					#change_state(states.camp)
+				##elif randf() <= supress_change:
+					##change_state(states.supress)
+				#else:
+					#change_state(states.search)
+			#return
 		anim_player.play("Fire")
 		velocity = Vector3.ZERO
 		is_new_state = false
@@ -311,6 +313,7 @@ func state_shoot(delta) -> void:
 			#elif randf() <= supress_change:
 				#change_state(states.supress)
 			else:
+				
 				change_state(states.search)
 			return
 	else:
@@ -354,6 +357,13 @@ func state_camp(delta) -> void:
 
 func state_search(_delta) -> void:
 	if is_new_state:
+		if in_battle:
+			var targets = detection.targets
+			if targets.size() <= 0:
+				change_state(states.investigate)
+				return
+			targets.sort_custom(func(a, b): return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position))
+			last_seen_position = targets[0].global_position
 		if last_seen_position == Vector3.ZERO:
 			change_state(states.investigate)
 			return
@@ -600,12 +610,6 @@ func _on_path_wait_timer_timeout() -> void:
 		path_index = wrap(path_index + 1, 0, get_parent().curve.point_count)
 
 
-#func _on_shoot_finished() -> void:
-	## switch to strafe
-	#if randf_range(0, 1) <= strafe_change:
-		#change_state(states.strafe)
-
-
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name.contains("HitReaction"):
 		look_at_position(last_seen_position)
@@ -613,20 +617,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			change_state(states.approach)
 		else:
 			change_state(states.find_cover)
-	#elif anim_name == "Fire":
-		##emit_shoot()
-		#gun.gun_stats.ammo -= 1
-		#if gun.gun_stats.ammo <= 0:
-			#gun.gun_stats.ammo = gun.max_ammo
-			#change_state(states.reload)
-			#return
-		#if state == states.shoot and randf_range(0, 1) <= strafe_change:
-			##change_state(states.strafe)
-			#change_state(states.find_cover)
-		#else:
-			#shoot_timer.start()
-			#await shoot_timer.timeout
-			#anim_player.play("Fire")
 	elif anim_name == "Reload":
 		if target:
 			look_at_position(target.global_position)
@@ -668,5 +658,5 @@ func _on_supress_timer_timeout() -> void:
 func _on_new_destination_timer_timeout() -> void:
 	if state != states.idle:
 		return
-	destination = get_tree().current_scene.get_node("EnemySpawner").get_destination(global_position)
-	change_state(states.walk)
+	#destination = get_tree().current_scene.get_node("EnemySpawner").get_destination(global_position)
+	#change_state(states.walk)

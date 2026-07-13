@@ -1,7 +1,5 @@
 extends CharacterBody3D
 
-enum camera_types {overhead, town}
-var camera_type = camera_types.overhead
 var speed := 2.75:
 	get():
 		return speed + PlayerStats.skills.speed * 0.2
@@ -59,10 +57,10 @@ func _enter_tree() -> void:
 	Globals.player = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	global_position.y = Globals.get_heightmap_position(global_position)
-	camera_type = camera_types.overhead
 	if PlayerStats.faction:
 		faction = PlayerStats.faction
 	await get_tree().process_frame
+	camera.camera_type = camera.camera_types.overhead
 	hitbox.hp = PlayerStats.hp
 	if PlayerStats.gun:
 		change_gun(PlayerStats.gun)
@@ -103,25 +101,12 @@ func _physics_process(delta):
 			camera_target_zoom = clamp(camera_target_zoom - camera_zoom_incrament, camera_min_zoom, camera_max_zoom)
 		elif Input.is_action_just_pressed("last_gun"):
 			camera_target_zoom = clamp(camera_target_zoom + camera_zoom_incrament, camera_min_zoom, camera_max_zoom)
-		# turn camerea
+		# turn camera
 		if Input.is_action_pressed("lean_left"):
 			camera_anchor.rotate_y(2 * delta)
 		elif Input.is_action_pressed("lean_right"):
 			camera_anchor.rotate_y(-2 * delta)
 	spring_arm.spring_length = lerp(spring_arm.spring_length, camera_target_zoom, delta * 5)
-	
-	var camera_target: Node3D = overhead_shot
-	model.show()
-	if camera_type == camera_types.town:
-		var rot = town_shot.rotation
-		town_shot.look_at(Globals.overworld.current_encounter.global_position)
-		town_shot.rotation = Vector3(rot.x, town_shot.rotation.y, rot.z)
-		camera_target = town_shot
-		model.hide()
-	camera.global_position = lerp(camera.global_position, camera_target.global_position, delta * 10)
-	camera.global_rotation.x = lerp_angle(camera.global_rotation.x, camera_target.global_rotation.x, delta * 10)
-	camera.global_rotation.y = lerp_angle(camera.global_rotation.y, camera_target.global_rotation.y, delta * 10)
-	camera.global_rotation.z = lerp_angle(camera.global_rotation.z, camera_target.global_rotation.z, delta * 10)
 	
 	# clamp position
 	position.x = clamp(position.x, 1, 511)
@@ -139,7 +124,8 @@ func state_walk(delta) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	# set camera
-	camera_type = camera_types.overhead
+	camera.camera_type = camera.camera_types.overhead
+	model.show()
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -226,12 +212,17 @@ func unequip_gun() -> void:
 	idle_animation = "IdleNoGun"
 
 
+func enter_town() -> void:
+	camera.camera_type = camera.camera_types.town
+	model.hide()
+
+
 func _input(event):
 	if PlayerStats.state != PlayerStats.states.walk:
 		return
 	if event is InputEventMouseMotion and Input.is_action_pressed("shoot"):
-		match camera_type:
-			camera_types.overhead:
+		match camera.camera_type:
+			camera.camera_types.overhead:
 				camera_anchor.rotate_y(event.relative.x * mouse_sensitivity * PlayerStats.sensitivity_modifier)
 				is_moving_camera = true
 	elif Input.is_action_just_released("shoot") and !Globals.survival_ui.menu_buttons_has_mouse:

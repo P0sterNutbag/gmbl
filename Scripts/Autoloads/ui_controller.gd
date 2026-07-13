@@ -35,9 +35,9 @@ func open_interface(node_to_open: Control, pause_player: bool = true, show_mouse
 		else:
 			node.hide()
 	sub_ui.clear()
-	#current_ui.process_mode = Node.PROCESS_MODE_INHERIT
 	if pause_player:
-		PlayerStats.change_state(PlayerStats.states.pause)
+		get_tree().paused = true
+		#PlayerStats.change_state(PlayerStats.states.pause)
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	elif show_mouse:
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
@@ -49,7 +49,8 @@ func close_interface(node_to_close: Control = current_ui, activate_player: bool 
 	current_ui = null
 	sub_ui.clear()
 	if activate_player:
-		PlayerStats.change_state(PlayerStats.states.walk)
+		get_tree().paused = false
+		#PlayerStats.change_state(PlayerStats.states.walk)
 		if Globals.overworld and get_tree().current_scene == Globals.overworld:
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		else:
@@ -81,7 +82,8 @@ func close_all(activate_player: bool = true) -> void:
 	ui_closed.emit(current_ui)
 	current_ui = null
 	if activate_player:
-		PlayerStats.change_state(PlayerStats.states.walk)
+		get_tree().paused = false
+		#PlayerStats.change_state(PlayerStats.states.walk)
 		if Globals.overworld and get_tree().current_scene == Globals.overworld:
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		else:
@@ -90,7 +92,7 @@ func close_all(activate_player: bool = true) -> void:
 
 func is_canvas_layer_open(canvas_layer: CanvasLayer) -> bool:
 	for node in ui_nodes:
-		if node.visible and node.get_parent() == canvas_layer:
+		if node.visible and node.owner == canvas_layer:
 			return true
 	return false
 

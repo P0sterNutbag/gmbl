@@ -20,7 +20,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if Globals.player.camera_type == Globals.player.camera_types.town:
+	if Globals.player.camera.camera_type == Globals.player.camera.camera_types.town:
 		canvas_layer.hide()
 		return
 	if global_position.distance_to(Globals.player.global_position) < 25.5:
@@ -67,20 +67,20 @@ func _on_area_3d_body_exited(_body: Node3D) -> void:
 	has_player = false
 
 
-func _on_canvas_layer_visibility_changed() -> void:
-	if canvas_layer.visible:
-		if owner.get_parent() is CharacterBody3D:
-			var location = owner.get_parent().location
-			var battle = BattleManager.get_battle(location)
-			if battle:
-				for i in battle.all_locations:
-					var poi = i.point_of_interest
-					if poi != self:
-						poi.canvas_layer.hide()
+#func _on_canvas_layer_visibility_changed() -> void:
+	#if canvas_layer.visible:
+		#if owner.get_parent() is CharacterBody3D:
+			#var location = owner.get_parent().location
+			#var battle = BattleManager.get_battle(location)
+			#if battle:
+				#for i in battle.all_locations:
+					#var poi = i.point_of_interest
+					#if poi != self:
+						#poi.canvas_layer.hide()
 
 
-func save() -> Dictionary:
-	return {
-		"show_faction" : show_faction,
-		"show_population" : show_population,
-	}
+#func save() -> Dictionary:
+	#return {
+		#"show_faction" : show_faction,
+		#"show_population" : show_population,
+	#}

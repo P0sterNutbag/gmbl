@@ -32,7 +32,7 @@ func save_data_to_file():
 				dict.dictionary = value.duplicate_deep(true)
 				resource_dict[key] = dict
 		node_data["path"] = node.get_scene_file_path()
-		#node_data["name"] = node.name
+		node_data["name"] = node.name
 		data[str(node.get_path())] = node_data
 		if resource_dict.size() > 0:
 			saved_resources.resources[str(node.get_path())] = resource_dict
@@ -67,8 +67,8 @@ func load_data_from_file():
 		var node = get_tree().root.get_node_or_null(node_path)
 		if !node:
 			node = load(data[node_path]["path"]).instantiate()
-			#node.set_name(data[node_path]["name"])
 			get_tree().current_scene.add_child(node)
+			node.set_name(data[node_path]["name"])
 		for node_data in data[node_path]:
 			var value = data[node_path][node_data]
 			if node_data == "pos_x": 

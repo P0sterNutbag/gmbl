@@ -10,7 +10,6 @@ var menu_buttons_has_mouse: bool
 @onready var journal: Control = $Menus/VBoxContainer/Journal
 @onready var compass: Control = $Compass
 @onready var pause_menu: Control = $PauseMenu
-@onready var progress_menu: PanelContainer = $ProgressMenu
 @onready var death_menu: PanelContainer = $DeathMenu
 @onready var menu_holder: Control = $Menus
 @onready var factions: PanelContainer = $Menus/VBoxContainer/Factions
@@ -46,6 +45,13 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	# opening things
+	if Input.is_action_just_pressed("close"):
+		if !pause_menu.visible and PlayerStats.state != PlayerStats.states.dead:
+			if UiController.is_canvas_layer_open(self):
+				UiController.close_all()
+				return
+			if UiController.is_canvas_layer_open(Globals.ui):
+				return
 	if Input.is_action_just_pressed("inventory"):
 		if transfer_inventory_holder.visible:
 			UiController.close_interface(transfer_inventory_holder)
@@ -64,13 +70,6 @@ func _process(_delta: float) -> void:
 			UiController.open_interface(journal)
 		else:
 			UiController.close_interface(journal)
-	if Input.is_action_just_pressed("close"):
-		if !pause_menu.visible and PlayerStats.state != PlayerStats.states.dead:
-			if UiController.is_canvas_layer_open(self):
-				UiController.close_all()
-				return
-			if UiController.is_canvas_layer_open(Globals.ui):
-				return
 	if Input.is_action_just_pressed("pause") and PlayerStats.state != PlayerStats.states.dead:
 		if !menu_holder.visible and !pause_menu.visible:
 			if !demo_message or !demo_message.visible:

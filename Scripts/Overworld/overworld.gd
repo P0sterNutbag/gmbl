@@ -28,9 +28,9 @@ func _enter_tree() -> void:
 		player_died = false
 	elif current_encounter:
 		if current_encounter.location_data.population <= 0:
-			if current_encounter.get_parent().has_method("die"):
+			if current_encounter.get_parent() is CharacterBody3D:
 				current_encounter.get_parent().die()
-			else:
+			elif current_encounter.location_data.faction != FactionManager.factions.player and !BattleManager.get_battle(current_encounter):
 				UiController.open_interface(Globals.ui.territory_popup)
 		var encounter_pos = current_encounter.global_position
 		player_spawn_position = encounter_pos + (player_spawn_vector * 4).rotated(Vector3.UP, current_encounter.rotation.y)

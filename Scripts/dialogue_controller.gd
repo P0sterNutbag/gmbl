@@ -259,7 +259,7 @@ func shop_has_quests() -> bool:
 
 
 func surrender_to_enemy() -> void:
-	PlayerStats.money = 0
+	PlayerStats.inventory.money = 0
 	PlayerStats.inventory.item_slots.clear()
 	Globals.survival_ui.create_notification("All money and items lost")
 	var npc = Globals.overworld.current_encounter.get_parent()

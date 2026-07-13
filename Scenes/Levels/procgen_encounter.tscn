@@ -19,7 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://7ckg1cl2oun2" path="res://Scenes/Environment/Prefabs With Spawning/trash.tscn" id="12_pgyq3"]
 [ext_resource type="PackedScene" uid="uid://c8837t6cigbtp" path="res://Scenes/Environment/Prefabs With Spawning/wooden_crates.tscn" id="13_0fst8"]
 [ext_resource type="Script" uid="uid://gw7xclj5260y" path="res://Scripts/procgen_enemy_spawner.gd" id="14_nfhko"]
-[ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/NPCs/npc.tscn" id="15_dardl"]
 [ext_resource type="Script" uid="uid://yjtjuxrauvya" path="res://Scripts/procgen_map.gd" id="16_wy85s"]
 [ext_resource type="PackedScene" uid="uid://btjp27ft7kaqr" path="res://Scenes/Environment/Props/Physics/crate_tall.tscn" id="17_2ous2"]
 [ext_resource type="PackedScene" uid="uid://wubvthultu6w" path="res://Scenes/Environment/Props/Physics/crate_tall_horizontal.tscn" id="18_jm6d2"]
@@ -169,11 +168,6 @@ metadata/_custom_type_script = "uid://3uypo1jqxswc"
 [sub_resource type="Resource" id="Resource_kj7rs"]
 script = ExtResource("12_n5v1j")
 object_to_spawn = ExtResource("25_uxntf")
-metadata/_custom_type_script = "uid://3uypo1jqxswc"
-
-[sub_resource type="Resource" id="Resource_87mr3"]
-script = ExtResource("12_n5v1j")
-object_to_spawn = ExtResource("15_dardl")
 metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [sub_resource type="Resource" id="Resource_gn7td"]
@@ -364,23 +358,18 @@ script = ExtResource("1_n2q0j")
 maps = Array[ExtResource("16_wy85s")]([SubResource("Resource_4531t"), SubResource("Resource_oftcu")])
 cover_objects = Array[ExtResource("12_n5v1j")]([SubResource("Resource_upawx"), SubResource("Resource_4mg1g"), SubResource("Resource_suwvc"), SubResource("Resource_i3cni"), SubResource("Resource_7gbaa"), SubResource("Resource_m74pn"), SubResource("Resource_kj7rs")])
 
-[node name="StartingSquadSpawner" type="Node3D" parent="." index="11" unique_id=1019129059]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 0, 128)
-script = ExtResource("14_nfhko")
-enemies_to_spawn = Array[ExtResource("12_n5v1j")]([SubResource("Resource_87mr3")])
-
-[node name="EnemySpawner" parent="." index="12" unique_id=2109086568]
+[node name="EnemySpawner" parent="." index="11" unique_id=2109086568]
 process_mode = 4
-spawn_on_start = false
+script = ExtResource("14_nfhko")
 
-[node name="SnapToTerrain" parent="." index="13" unique_id=196337249]
+[node name="SnapToTerrain" parent="." index="12" unique_id=196337249]
 position_on_start = false
 
-[node name="EnvironmentGeneratorRuntime" type="Node3D" parent="." index="15" unique_id=454662154]
+[node name="EnvironmentGeneratorRuntime" type="Node3D" parent="." index="14" unique_id=454662154]
 script = ExtResource("23_2ous2")
 maps = Array[ExtResource("16_wy85s")]([SubResource("Resource_2i6m4"), SubResource("Resource_df5lb"), SubResource("Resource_mept5")])
 
-[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="." index="17" unique_id=1429587977]
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="." index="16" unique_id=1429587977]
 mesh = SubResource("ArrayMesh_xfuh7")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("26_upawx")

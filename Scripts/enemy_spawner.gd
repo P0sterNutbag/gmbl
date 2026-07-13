@@ -1,6 +1,5 @@
 extends Node3D
 
-@export var enemies_to_spawn: Array[SpawnChance]
 @export var enemy_move_chance: float = 0.25
 @export var start_alert: bool
 var spawn_points: Array[Node3D]
@@ -10,6 +9,7 @@ var location_data: LocationData
 @onready var player_spawn: Node3D = $"../PlayerAnchor"
 const NPC = preload("uid://cb05x24r4r8im")
 signal enemies_spawned
+
 
 func _ready() -> void:
 	# get spawn points
@@ -122,15 +122,7 @@ func _ready() -> void:
 		#await get_tree().process_frame
 		await get_tree().create_timer(0.5).timeout
 		for enemy in get_tree().get_nodes_in_group("enemies"):
-			#var all_enemies = get_tree().get_nodes_in_group("enemies")
-			#all_enemies = all_enemies.filter(func(a): return FactionManager.get_faction_relation(enemy.faction, a.faction) < 0.0)
-			#all_enemies.sort_custom(func(a, b): return enemy.global_position.distance_to(a.global_position) < enemy.global_position.distance_to(b.global_position))
-			#enemy.last_seen_position = all_enemies[0].global_position
-			var targets = enemy.detection.targets
-			if targets.size() <= 0:
-				continue
-			targets.sort_custom(func(a, b): return enemy.global_position.distance_to(a.global_position) < enemy.global_position.distance_to(b.global_position))
-			enemy.last_seen_position = targets[0].global_position
+			enemy.in_battle = true
 			enemy.change_state(enemy.states.search)
 	
 	enemies_spawned.emit()
@@ -147,8 +139,7 @@ func get_destination(position_from: Vector3) -> Vector3:
 
 func spawn_enemy(faction: FactionManager.factions):
 	# get random enemy and spawn it
-	var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
-	var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
+	var inst = NPC.instantiate()
 	# assign data
 	inst.faction = faction
 	var rng = RandomNumberGenerator.new()
@@ -176,12 +167,10 @@ func spawn_enemy(faction: FactionManager.factions):
 		inst.goal = inst.goals.travel
 		inst.destination = dest
 		inst.change_state(inst.states.walk)
-	enemy_index += 1
 
 
 func spawn_enemy_position(faction: FactionManager.factions, spawn_position: Vector3, spawn_variance: float, destination: Vector3 = Vector3.ZERO) -> CharacterBody3D:
-	var enemy_index = Globals.get_weighted_index(enemies_to_spawn)
-	var inst = enemies_to_spawn[enemy_index].object_to_spawn.instantiate()
+	var inst = NPC.instantiate()
 	get_tree().current_scene.add_child.call_deferred(inst)
 	var spawn_pos = spawn_position + Vector3(randf_range(-spawn_variance, spawn_variance), 1, randf_range(-spawn_variance, spawn_variance))
 	spawn_pos.y = Globals.get_heightmap_position(spawn_pos)

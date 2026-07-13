@@ -46,8 +46,8 @@ var max_hunger: float
 var max_thirst: float
 var max_soberness: float = 1.0
 var sleep_decrease_rate := 0.2
-var hunger_decrease_rate := 0.6
-var thirst_decrease_rate := 0.8
+var hunger_decrease_rate := 0.3
+var thirst_decrease_rate := 0.4
 var skill_points = 3.0
 var saved_style: NpcStyle
 var gun: Equipment

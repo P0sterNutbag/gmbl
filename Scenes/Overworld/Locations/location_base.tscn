@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://baylryxodu5ig" path="res://Audio/Guns/handgun_A_shot_single_01.wav" id="6_24t6m"]
 [ext_resource type="AudioStream" uid="uid://gsdbj01b6ork" path="res://Audio/Guns/shotgun_B_shot_single_04.wav" id="7_nlwjl"]
 [ext_resource type="AudioStream" uid="uid://b55utbl22kuql" path="res://Audio/Guns/submngun_B_shTL_single_01.wav" id="8_gwsd1"]
+[ext_resource type="Script" uid="uid://bxtcknb4rx5h2" path="res://Scripts/random_timer.gd" id="11_24t6m"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hwnis"]
 radius = 2.1244218
@@ -214,7 +215,7 @@ max_distance = 10.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BattleEffects" unique_id=157663737]
 libraries/ = SubResource("AnimationLibrary_24t6m")
 
-[node name="PointOfInterest" parent="." unique_id=2144080138 groups=["persist"] instance=ExtResource("3_lyudo")]
+[node name="PointOfInterest" parent="." unique_id=2144080138 instance=ExtResource("3_lyudo")]
 show_faction = false
 show_population = false
 
@@ -228,8 +229,10 @@ collision_mask = 34
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea" unique_id=620317125]
 shape = SubResource("SphereShape3D_hpxtj")
 
-[node name="BattleTimer" type="Timer" parent="." unique_id=177834265]
-one_shot = true
+[node name="SpawnTimer" type="Timer" parent="." unique_id=846598689]
+script = ExtResource("11_24t6m")
+min_wait_time = 60.0
+max_wait_time = 120.0
 
 [node name="ProximitySpawnTimer" type="Timer" parent="." unique_id=1358639387]
 wait_time = 60.0
@@ -238,7 +241,7 @@ one_shot = true
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
-[connection signal="timeout" from="BattleTimer" to="." method="_on_battle_timer_timeout"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="ProximitySpawnTimer" to="." method="_on_proximity_spawn_timer_timeout"]
 
 [editable path="PointOfInterest"]

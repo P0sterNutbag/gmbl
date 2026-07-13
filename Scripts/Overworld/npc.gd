@@ -20,7 +20,6 @@ var spawn_vector: Vector3
 var target: Node3D
 var destination_path: NodePath
 var npc_style: NpcStyle
-#var unaware_dialogue: DialogueTree = preload("uid://dhbjweb7dwnpn")
 @export var faction: FactionManager.factions = FactionManager.factions.no_faction
 var guns_dict: Dictionary = {
 	0 : [preload("res://Scenes/Guns/shotgun.tscn"), preload("res://Scenes/Items/Guns/shotgun.tscn")],
@@ -38,6 +37,7 @@ var guns_dict: Dictionary = {
 
 func _enter_tree() -> void:
 	can_move = true
+	set_name(name)
 	await get_tree().create_timer(0.1).timeout
 	get_tree().call_group("overworld npcs", "set_detection_targets")
 
@@ -47,23 +47,25 @@ func _ready() -> void:
 	gun_holder.add_child(gun)
 	location.encounter_started.connect(_on_encounter_started)
 	location.encounter_ended.connect(_on_encounter_ended)
-	#location.remove_from_group("persist")
 	SaveController.load.connect(_on_load)
 	get_node("Location/PointOfInterest").remove_from_group("persist")
 	await get_tree().process_frame
-	if location.friendly_dialogue_tree:
-		location.friendly_dialogue_tree.npc_style = enemy_model.current_style
-	if location.enemy_dialogue_tree:
-		location.enemy_dialogue_tree.npc_style = enemy_model.current_style
-	if location.unaware_dialogue_tree:
-		location.unaware_dialogue_tree.npc_style = enemy_model.current_style
-	#walk_speed += float(max_enemies - location.location_data.population) * 0.25
-	#run_speed += float(max_enemies - location.location_data.population) * 0.25
 	var faction_name = FactionManager.faction_data[faction].name
 	if faction_name[-1] == "s":
 		faction_name[-1] = ""
+	location.title = faction_name + " " + location.title
+	if location.friendly_dialogue_tree:
+		location.friendly_dialogue_tree.npc_style = enemy_model.current_style
+		location.friendly_dialogue_tree.npc_name = location.title
+	if location.enemy_dialogue_tree:
+		location.enemy_dialogue_tree.npc_style = enemy_model.current_style
+		location.enemy_dialogue_tree.npc_name = location.title
+	if location.unaware_dialogue_tree:
+		location.unaware_dialogue_tree.npc_style = enemy_model.current_style
+		location.unaware_dialogue_tree.npc_name = location.title
+	#walk_speed += float(max_enemies - location.location_data.population) * 0.25
+	#run_speed += float(max_enemies - location.location_data.population) * 0.25
 	#location.dialogue_tree.npc_name = faction_name + " " + location.dialogue_tree.npc_name
-	#location.title = faction_name + " " + location.title
 	#location.unaware_dialogue = unaware_dialogue.duplicate_deep()
 	#location.unaware_dialogue.npc_style = enemy_model.current_style
 	#location.unaware_dialogue.npc_name = faction_name + " " + location.unaware_dialogue.npc_name
@@ -192,7 +194,7 @@ func return_to_path() -> void:
 func die():
 	state = states.dead
 	set_collision_layer_value(1, false)
-	location.queue_free()
+	location.get_child(0).disabled = true
 	velocity = Vector3.ZERO
 	set_process(false)
 	set_physics_process(false)
@@ -247,6 +249,7 @@ func _on_location_area_entered(area: Area3D) -> void:
 
 
 func save() -> Dictionary:
+	var pop = location.location_data.population
 	var dic = {
 		"pos_x": global_position.x,
 		"pos_y": global_position.y,
@@ -272,4 +275,4 @@ func _on_load() -> void:
 	destination = get_tree().root.get_node(destination_path)
 	var pos = destination.global_position
 	navigation_agent.set_target_position(pos)
-	state = states.walk
+	#state = states.walk

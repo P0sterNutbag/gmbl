@@ -2,8 +2,6 @@ extends Node3D
 
 const NPC = preload("uid://b0cqkj1fgouo2")
 var starting_enemy_count := 0
-#const NPC_ENEMY_DIALOGUE = preload("uid://d20coly46ve2b")
-#const NPC_FRIENDLY_DIALOGUE = preload("uid://cm4ovx7pecfjd")
 
 
 func _ready() -> void:
@@ -16,7 +14,7 @@ func _on_timer_timeout() -> void:
 	var inst = spawn_npc(spawn_location)
 	# determine desination
 	var dest = get_destination(inst.faction, spawn_location, inst.location.location_data)
-	var pos = dest.global_position# + Vector3.RIGHT.rotated(Vector3.UP, deg_to_rad(randf_range(0, 360))) * dest.target_distance
+	var pos = dest.global_position
 	inst.navigation_agent.set_target_position(pos)
 	inst.destination = dest
 
@@ -32,6 +30,10 @@ func spawn_npc(location: Location) -> Node3D:
 	inst.location.location_data.armor_level_chance = location_data.armor_level_chance
 	inst.global_position = location.global_position
 	inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
+	var dest = get_destination(inst.faction, location, inst.location.location_data)
+	var pos = dest.global_position
+	inst.navigation_agent.set_target_position(pos)
+	inst.destination = dest
 	return inst
 
 
@@ -73,7 +75,6 @@ func get_destination(faction: FactionManager.factions, spawn_location: Node3D, n
 	if target_nodes.size() == 0:
 		target_nodes = all_nodes
 	target_nodes.sort_custom(func(a, b): return spawn_location.global_position.distance_to(a.global_position) < spawn_location.global_position.distance_to(b.global_position))
-	#target_nodes.sort_custom(func(a, b): return a.location_data.population < b.location_data.population)
 	rng.randomize()
 	weights.clear()
 	for i in target_nodes.size():
@@ -85,5 +86,4 @@ func get_destination(faction: FactionManager.factions, spawn_location: Node3D, n
 			weight *= mult
 		weights.append(weight)
 	var destination = target_nodes[rng.rand_weighted(weights)]
-	#print(faction_data.name + " squad spawned at " + spawn_location.title + " en route to " + destination.title + ". Objective: " + str(goal))
 	return destination

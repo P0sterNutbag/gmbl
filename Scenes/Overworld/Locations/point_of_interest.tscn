@@ -8,18 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://d2ukjid6oonnl" path="res://Art/Textures/UI/population icon.png" id="6_6ax13"]
 [ext_resource type="Texture2D" uid="uid://bawi5rh4k705r" path="res://Art/Textures/UI/gun icon.png" id="7_vqbos"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_cpnmm"]
-radius = 6.021006
-
 [node name="PointOfInterest" type="Node3D" unique_id=2014583324]
 script = ExtResource("1_wb1da")
-
-[node name="Area3D" type="Area3D" parent="." unique_id=1869803366]
-collision_layer = 0
-collision_mask = 32
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2133373798]
-shape = SubResource("SphereShape3D_cpnmm")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1632069402]
 
@@ -104,6 +94,4 @@ text = "Status"
 
 [node name="TextAnchor" type="Node3D" parent="." unique_id=2046222566]
 
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
 [connection signal="visibility_changed" from="CanvasLayer" to="." method="_on_canvas_layer_visibility_changed"]

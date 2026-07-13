@@ -119,7 +119,7 @@ func start_encounter() -> void:
 func start_dialogue(dialogue: DialogueTree) -> void:
 	Globals.ui.start_dialogue(dialogue)
 	if get_parent() is not CharacterBody3D:
-		Globals.player.camera_type = Globals.player.camera_types.town
+		Globals.player.camera.camera_type = Globals.player.camera.camera_types.town
 	elif dialogue != unaware_dialogue_tree:
 		get_parent().look_at(Globals.player.global_position)
 	point_of_interest.canvas_layer.hide()

@@ -156,6 +156,11 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	move_and_slide()
+	# dont't fall through floor
+	if global_position.y < 0:
+		var terrain_y = Globals.get_heightmap_position(global_position)
+		if global_position.y < terrain_y:
+			global_position.y = terrain_y
 
 
 func follow_path(spd: float = walk_speed):

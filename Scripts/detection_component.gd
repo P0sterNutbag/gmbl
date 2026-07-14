@@ -45,6 +45,6 @@ func target_is_ahead(target: Node3D) -> bool:
 	var forward = get_parent().global_transform.basis.z.normalized()
 	var to_player = (target.global_transform.origin - get_parent().global_transform.origin).normalized()
 	var dot_product = forward.dot(to_player)
-	if dot_product < -0.25:
+	if dot_product < view_angle:
 		return true
 	return false

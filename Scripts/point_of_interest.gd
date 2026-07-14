@@ -16,7 +16,6 @@ var has_mouse: bool
 func _ready() -> void:
 	canvas_layer.hide()
 	UiController.ui_opened.connect(_on_ui_opened)
-	UiController.ui_closed.connect(_on_ui_closed)
 	title_label.text = get_parent().title
 
 
@@ -46,7 +45,3 @@ func _process(_delta: float) -> void:
 
 func _on_ui_opened() -> void:
 	canvas_layer.hide()
-
-
-func _on_ui_closed(_node) -> void:
-	canvas_layer.show()

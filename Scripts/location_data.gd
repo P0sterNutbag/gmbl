@@ -12,7 +12,7 @@ class_name LocationData
 @export var fire_power_chance = [1.0, 0.0, 0.0]
 @export var armor_level = 0
 @export var armor_level_chance = [1.0, 0.0, 0.0, 0.0]
-var resources := 1.0
+@export var resources := 1.0
 
 
 func change_population(amount: int = 1) -> void:

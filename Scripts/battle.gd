@@ -29,7 +29,8 @@ func start_battle(location: Location, attacking_location: Location) -> void:
 	#battle_timer.timeout.connect(_on_battle_timer_timeout)
 	location.animation_player.play("battle")
 	original_faction = battle_location.location_data.faction
-	Globals.survival_ui.create_notification(location.title + " under attack by " + FactionManager.faction_data[attacker_data.faction].name)
+	if location.can_spawn_npcs:
+		Globals.survival_ui.create_notification(location.title + " under attack by " + FactionManager.faction_data[attacker_data.faction].name)
 
 
 func end_battle(winner_location: Location = null) -> void:
@@ -92,7 +93,6 @@ func resume_battle() -> void:
 
 func cleanup() -> void:
 	battle_location.animation_player.stop()
-	battle_location.point_of_interest.status_holder.hide()
 	if battle_location.location_data.faction != original_faction:
 		Globals.survival_ui.create_notification(battle_location.title + " taken by " + FactionManager.faction_data[battle_location.location_data.faction].name)
 	delete()

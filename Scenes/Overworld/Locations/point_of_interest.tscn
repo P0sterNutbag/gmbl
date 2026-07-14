@@ -4,9 +4,10 @@
 [ext_resource type="Theme" uid="uid://djqipqwy5toiu" path="res://Art/Themes/VBoxContainer.tres" id="3_5twat"]
 [ext_resource type="Theme" uid="uid://dcnijc3hjurqk" path="res://Art/Themes/text_mediun_outline.tres" id="3_avo8c"]
 [ext_resource type="Texture2D" uid="uid://brs4ktd7wgyno" path="res://Art/Textures/UI/faction icon.png" id="4_e2awd"]
+[ext_resource type="Theme" uid="uid://ddlkdp3v3plc" path="res://Art/Themes/hbox_container.tres" id="4_mri1m"]
 [ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="5_e2awd"]
 [ext_resource type="Texture2D" uid="uid://d2ukjid6oonnl" path="res://Art/Textures/UI/population icon.png" id="6_6ax13"]
-[ext_resource type="Texture2D" uid="uid://bawi5rh4k705r" path="res://Art/Textures/UI/gun icon.png" id="7_vqbos"]
+[ext_resource type="PackedScene" uid="uid://st2mrllebqci" path="res://Scenes/UI/spacer.tscn" id="7_4fr08"]
 
 [node name="PointOfInterest" type="Node3D" unique_id=2014583324]
 script = ExtResource("1_wb1da")
@@ -47,50 +48,41 @@ autowrap_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CardOffset/VBoxContainer" unique_id=379623766]
 layout_mode = 2
 mouse_filter = 2
+theme = ExtResource("4_mri1m")
 theme_override_constants/separation = 8
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CardOffset/VBoxContainer/HBoxContainer" unique_id=1732315125]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CardOffset/VBoxContainer/HBoxContainer" unique_id=1436821346]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CardOffset/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1732315125]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("4_e2awd")
 
-[node name="Faction" type="Label" parent="CanvasLayer/CardOffset/VBoxContainer/HBoxContainer" unique_id=1418799481]
+[node name="Faction" type="Label" parent="CanvasLayer/CardOffset/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1418799481]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("5_e2awd")
 text = "Faction"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/CardOffset/VBoxContainer" unique_id=1783460872]
+[node name="Control" parent="CanvasLayer/CardOffset/VBoxContainer/HBoxContainer" unique_id=1024254626 instance=ExtResource("7_4fr08")]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/CardOffset/VBoxContainer/HBoxContainer" unique_id=1783460872]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 8
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CardOffset/VBoxContainer/HBoxContainer2" unique_id=2007288668]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CardOffset/VBoxContainer/HBoxContainer/HBoxContainer2" unique_id=2007288668]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("6_6ax13")
 
-[node name="Population" type="Label" parent="CanvasLayer/CardOffset/VBoxContainer/HBoxContainer2" unique_id=596984599]
+[node name="Population" type="Label" parent="CanvasLayer/CardOffset/VBoxContainer/HBoxContainer/HBoxContainer2" unique_id=596984599]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("5_e2awd")
 text = "Population"
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/CardOffset/VBoxContainer" unique_id=1792581353]
-visible = false
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 8
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CardOffset/VBoxContainer/HBoxContainer3" unique_id=201819302]
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("7_vqbos")
-
-[node name="Status" type="Label" parent="CanvasLayer/CardOffset/VBoxContainer/HBoxContainer3" unique_id=628145280]
-layout_mode = 2
-theme = ExtResource("5_e2awd")
-text = "Status"
 
 [node name="TextAnchor" type="Node3D" parent="." unique_id=2046222566]
 

@@ -9,7 +9,6 @@ var player_died: bool
 var current_encounter: Node3D
 var poi_populations = [4, 6, 8, 10]
 var poi_factions = [0, 4, 4, 4]
-@onready var npc_controller: Node3D = $NpcController
 @onready var player_start: Node3D = $PlayerStart
 @onready var player: CharacterBody3D = $Player
 @onready var rock_canyon: Location = $RockCanyon

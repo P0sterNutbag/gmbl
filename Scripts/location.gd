@@ -30,6 +30,7 @@ const NPC = preload("uid://b0cqkj1fgouo2")
 @onready var attack_area_shape: CollisionShape3D = $AttackArea/CollisionShape3D
 @onready var proximity_spawn_timer: Timer = $ProximitySpawnTimer
 @onready var spawn_timer: Timer = $SpawnTimer
+@onready var grow_timer: Timer = $GrowTimer
 signal encounter_started
 @warning_ignore("unused_signal")
 signal encounter_ended
@@ -161,6 +162,61 @@ func transition_to_level() -> void:
 	SceneManager.start_encounter_transition(encounter_scene.resource_path)
 
 
+func spawn_squad() -> Node3D:
+	# spawn and position on map
+	var inst = NPC.instantiate()
+	inst.faction = location_data.faction
+	Globals.overworld.add_child(inst)
+	inst.location.location_data.faction = location_data.faction
+	inst.location.location_data.population = randi_range(min(2, location_data.population), min(4, location_data.population))
+	inst.location.location_data.fire_power_chance = location_data.fire_power_chance
+	inst.location.location_data.armor_level_chance = location_data.armor_level_chance
+	inst.global_position = global_position
+	inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
+	# set destination
+	#var faction_data = FactionManager.faction_data[location_data.faction]
+	#var rng = RandomNumberGenerator.new()
+	#var objectives = [0, 1, 2] # 0 = self, 1 = enemy, 2 = ally
+	#var weights = PackedFloat32Array([faction_data.defense, faction_data.agression, faction_data.enterprising])
+	#var goal = objectives[rng.rand_weighted(weights)]
+	#var all_nodes = get_tree().get_nodes_in_group("location")
+	#all_nodes = all_nodes.filter(func(a): return a.can_spawn_npcs and a != self)
+	#if goal != 2:
+		#all_nodes = all_nodes.filter(func(a): return a.encounter_scene != null)
+	#var target_nodes = []
+	#for f in FactionManager.factions.size():
+		#var score = FactionManager.get_faction_relation(location_data.faction, f)
+		#if goal == 0:
+			#if f != location_data.faction:
+				#continue
+		#elif goal == 1:
+			#if score >= 0.0:
+				#continue
+		#elif goal == 2:
+			#if score < 0.0:
+				#continue
+		#var faction_locations = all_nodes.filter(func(a): return a.location_data.faction == f)
+		#target_nodes.append_array(faction_locations)
+	#if target_nodes.size() == 0:
+		#target_nodes = all_nodes
+	#target_nodes.sort_custom(func(a, b): return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position))
+	#rng.randomize()
+	#weights.clear()
+	var rng = RandomNumberGenerator.new()
+	var weights := []
+	var target_nodes = get_tree().get_nodes_in_group("location")
+	target_nodes = target_nodes.filter(func(a): return a.can_spawn_npcs and a != self)
+	target_nodes.sort_custom(func(a, b): return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position))
+	for i in target_nodes.size():
+		var weight = max(target_nodes.size() - i, 1)
+		weights.append(weight)
+	var destination = target_nodes[rng.rand_weighted(weights)]
+	var pos = destination.global_position
+	inst.navigation_agent.set_target_position(pos)
+	inst.destination = destination
+	return inst
+
+
 func _on_body_entered(_body: Node3D) -> void:
 	if !can_transition or PlayerStats.state != PlayerStats.states.walk or !Globals.player.can_enter_location:
 		return
@@ -176,11 +232,13 @@ func _on_body_exited(_body: Node3D) -> void:
 		Globals.player.can_enter_location = true
 
 
-func _on_grow_timeout() -> void:
-	var amount = randi_range(1, 2)
+func _on_grow_timer_timeout() -> void:
+	var amount = 1#randi_range(1, 2)
 	location_data.change_population(amount)
 	if location_data.population == FactionManager.factions.player:
 		Globals.survival_ui.create_notification(title + " population increased by " + str(amount))
+	#var new_time = lerp(30.0, 60.0, (5.0 - location_data.resources) / 5.0)
+	#grow_timer.wait_time = new_time
 
 
 func _on_attack_area_body_entered(body: Node3D) -> void:
@@ -191,20 +249,20 @@ func _on_attack_area_body_entered(body: Node3D) -> void:
 		can_proxmity_spawn = false
 		if randf() > proximity_spawn_chance:
 			return
-		var inst = Globals.npc_controller.spawn_npc(self)
+		var inst = spawn_squad()
 		inst.navigation_agent.set_target_position(body.global_position)
 		inst.look_at(body.global_position)
 		inst.destination = self
 		proximity_spawn_timer.start()
 
 
-func _on_proximity_spawn_timer_timeout() -> void:
-	can_proxmity_spawn = true
-
-
 func _on_spawn_timer_timeout() -> void:
 	if location_data.population > 0:
-		Globals.npc_controller.spawn_npc(self)
+		spawn_squad()
+
+
+func _on_proximity_spawn_timer_timeout() -> void:
+	can_proxmity_spawn = true
 
 
 func save() -> Dictionary:

@@ -54,11 +54,16 @@
 [ext_resource type="Texture2D" uid="uid://x3spqeyiq8cr" path="res://Art/Textures/Character/npc shirt white.png" id="45_0kvup"]
 [ext_resource type="Texture2D" uid="uid://whgiy4tx5l5g" path="res://Art/Textures/Character/npc brown jacket.png" id="46_clfn8"]
 [ext_resource type="Theme" uid="uid://cral201bx2ck" path="res://Art/Themes/text_outline.tres" id="47_2cshw"]
+[ext_resource type="Texture2D" uid="uid://d2ukjid6oonnl" path="res://Art/Textures/UI/population icon.png" id="55_brh7d"]
+[ext_resource type="Theme" uid="uid://ddlkdp3v3plc" path="res://Art/Themes/hbox_container.tres" id="55_h5x2d"]
+[ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="56_sds2o"]
+[ext_resource type="PackedScene" uid="uid://st2mrllebqci" path="res://Scenes/UI/spacer.tscn" id="57_hnstm"]
+[ext_resource type="Script" uid="uid://bch0nms62oqch" path="res://Scripts/npc_poi_display.gd" id="64_a8jx0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hf0oe"]
-radius = 0.434372
+radius = 0.54003906
 
-[sub_resource type="Resource" id="Resource_j88d2"]
+[sub_resource type="Resource" id="Resource_h5x2d"]
 resource_local_to_scene = true
 script = ExtResource("3_f2atc")
 faction = null
@@ -126,7 +131,7 @@ script = ExtResource("6_2cshw")
 object_to_spawn = ExtResource("18_face8")
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_nbhg3"]
+[sub_resource type="Resource" id="Resource_hnstm"]
 resource_local_to_scene = true
 script = ExtResource("19_4t6uh")
 min_amount = 3
@@ -136,10 +141,10 @@ money = 500
 title = "Squad Inventory"
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
-[sub_resource type="Resource" id="Resource_brh7d"]
+[sub_resource type="Resource" id="Resource_face8"]
 resource_local_to_scene = true
 script = ExtResource("22_vltld")
-inventory = SubResource("Resource_nbhg3")
+inventory = SubResource("Resource_hnstm")
 price_modifiers = {
 "Ammo": 0.5,
 "Armor": 0.5,
@@ -163,7 +168,7 @@ script = ExtResource("25_a8jx0")
 options = Array[ExtResource("25_iad7m")]([ExtResource("26_j88d2"), ExtResource("27_nbhg3"), ExtResource("28_brh7d"), ExtResource("29_sds2o")])
 metadata/_custom_type_script = "uid://cnu4xeujmgk51"
 
-[sub_resource type="Resource" id="Resource_sds2o"]
+[sub_resource type="Resource" id="Resource_4t6uh"]
 resource_local_to_scene = true
 script = ExtResource("30_b823r")
 bubbles = Array[ExtResource("23_u8du1")]([SubResource("Resource_67xs3"), SubResource("Resource_5kq5o")])
@@ -188,7 +193,7 @@ pants_colors = Array[Color]([Color(0.48, 0.21888001, 0.15359999, 1), Color(0.321
 shoe_colors = Array[Color]([Color(0.100739, 0.100739, 0.100739, 1), Color(0.133333, 0.12549, 0.203922, 1), Color(0.4, 0.19146667, 0.128, 1)])
 metadata/_custom_type_script = "uid://b80ipr8q70gqm"
 
-[sub_resource type="Resource" id="Resource_2h4o4"]
+[sub_resource type="Resource" id="Resource_cx3hl"]
 resource_local_to_scene = true
 script = ExtResource("30_b823r")
 bubbles = Array[ExtResource("23_u8du1")]([SubResource("Resource_02tet"), SubResource("Resource_5rdyj")])
@@ -234,7 +239,7 @@ script = ExtResource("25_a8jx0")
 options = Array[ExtResource("25_iad7m")]([SubResource("Resource_amn8i"), SubResource("Resource_wfpnu"), SubResource("Resource_mj345")])
 metadata/_custom_type_script = "uid://cnu4xeujmgk51"
 
-[sub_resource type="Resource" id="Resource_h5x2d"]
+[sub_resource type="Resource" id="Resource_hunj6"]
 resource_local_to_scene = true
 script = ExtResource("30_b823r")
 bubbles = Array[ExtResource("23_u8du1")]([SubResource("Resource_51mjk")])
@@ -253,18 +258,18 @@ floor_max_angle = 1.5707964
 script = ExtResource("1_ldcoh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1640265759]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.143, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_hf0oe")
 
 [node name="Location" parent="." unique_id=361678620 instance=ExtResource("2_jf2yb")]
 collision_mask = 96
 title = "Squad"
-location_data = SubResource("Resource_j88d2")
+location_data = SubResource("Resource_h5x2d")
 encounter_scene = ExtResource("4_w8t3j")
-shop = SubResource("Resource_brh7d")
-friendly_dialogue_tree = SubResource("Resource_sds2o")
-enemy_dialogue_tree = SubResource("Resource_2h4o4")
-unaware_dialogue_tree = SubResource("Resource_h5x2d")
+shop = SubResource("Resource_face8")
+friendly_dialogue_tree = SubResource("Resource_4t6uh")
+enemy_dialogue_tree = SubResource("Resource_cx3hl")
+unaware_dialogue_tree = SubResource("Resource_hunj6")
 can_spawn_npcs = false
 can_stealth_start = true
 
@@ -272,8 +277,15 @@ can_stealth_start = true
 shape = SubResource("SphereShape3D_e46jk")
 
 [node name="PointOfInterest" parent="Location" index="3" unique_id=2144080138]
+visible = false
 show_faction = true
 show_population = true
+
+[node name="CanvasLayer" parent="Location/PointOfInterest" index="0" unique_id=1632069402]
+visible = false
+
+[node name="CardOffset" parent="Location/PointOfInterest/CanvasLayer" index="0" unique_id=155479337]
+visible = false
 
 [node name="Title" parent="Location/PointOfInterest/CanvasLayer/CardOffset/VBoxContainer" parent_id_path=PackedInt32Array(361678620, 2144080138, 1870797330) index="0" unique_id=1297630741]
 theme = ExtResource("47_2cshw")
@@ -286,11 +298,63 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89564, 0)
 shape = SubResource("SphereShape3D_fjuww")
 target_position = Vector3(0, 0, -50)
 script = ExtResource("5_eaoej")
+view_angle = -0.5
 detection_range = 13.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=266136752]
 
 [node name="EnemyModel" parent="." unique_id=299130526 instance=ExtResource("6_c01de")]
+
+[node name="TextAnchor" type="Node3D" parent="." unique_id=1347147883]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.216693, 0)
+
+[node name="TitleDisplay" type="Control" parent="." unique_id=204596508]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("64_a8jx0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TitleDisplay" unique_id=1956808405]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -132.0
+offset_top = -30.0
+offset_right = 132.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("55_h5x2d")
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Title" type="Label" parent="TitleDisplay/HBoxContainer" unique_id=590950998]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme = ExtResource("47_2cshw")
+text = "Squad Title"
+vertical_alignment = 2
+
+[node name="Control" parent="TitleDisplay/HBoxContainer" unique_id=1024254626 instance=ExtResource("57_hnstm")]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TitleDisplay/HBoxContainer" unique_id=1696313005]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="TitleDisplay/HBoxContainer/HBoxContainer2" unique_id=2025750225]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("55_brh7d")
+
+[node name="Population" type="Label" parent="TitleDisplay/HBoxContainer/HBoxContainer2" unique_id=108963553]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("56_sds2o")
+text = "0"
 
 [connection signal="area_entered" from="Location" to="." method="_on_location_area_entered"]
 [connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]

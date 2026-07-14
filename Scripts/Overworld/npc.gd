@@ -48,7 +48,7 @@ func _ready() -> void:
 	location.encounter_started.connect(_on_encounter_started)
 	location.encounter_ended.connect(_on_encounter_ended)
 	SaveController.load.connect(_on_load)
-	get_node("Location/PointOfInterest").remove_from_group("persist")
+	location.remove_from_group("persist")
 	await get_tree().process_frame
 	var faction_name = FactionManager.faction_data[faction].name
 	if faction_name[-1] == "s":

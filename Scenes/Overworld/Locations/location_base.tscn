@@ -167,7 +167,7 @@ _data = {
 [sub_resource type="SphereShape3D" id="SphereShape3D_hpxtj"]
 radius = 12.0
 
-[node name="Location" type="Area3D" unique_id=1342811121]
+[node name="Location" type="Area3D" unique_id=1342811121 groups=["persist"]]
 collision_layer = 64
 collision_mask = 32
 script = ExtResource("1_lyudo")
@@ -219,7 +219,7 @@ libraries/ = SubResource("AnimationLibrary_24t6m")
 show_faction = false
 show_population = false
 
-[node name="TextAnchor" parent="PointOfInterest" index="2" unique_id=2046222566]
+[node name="TextAnchor" parent="PointOfInterest" index="1" unique_id=2046222566]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 
 [node name="AttackArea" type="Area3D" parent="." unique_id=206118518]
@@ -232,16 +232,21 @@ shape = SubResource("SphereShape3D_hpxtj")
 [node name="SpawnTimer" type="Timer" parent="." unique_id=846598689]
 script = ExtResource("11_24t6m")
 min_wait_time = 60.0
-max_wait_time = 120.0
+max_wait_time = 180.0
 
 [node name="ProximitySpawnTimer" type="Timer" parent="." unique_id=1358639387]
 wait_time = 60.0
 one_shot = true
+
+[node name="GrowTimer" type="Timer" parent="." unique_id=1392575284]
+wait_time = 60.0
+autostart = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="ProximitySpawnTimer" to="." method="_on_proximity_spawn_timer_timeout"]
+[connection signal="timeout" from="GrowTimer" to="." method="_on_grow_timer_timeout"]
 
 [editable path="PointOfInterest"]

@@ -3,10 +3,7 @@ extends PanelContainer
 @onready var label: Label = $MarginContainer/Label
 @onready var line: Line2D = $Control/Line2D
 var can_proceed: bool = false
-var text: String: 
-	set(value):
-		text = value
-		start_typewriter(value)
+var text: String
 
 
 func _process(_delta: float) -> void:
@@ -20,6 +17,7 @@ func _process(_delta: float) -> void:
 
 
 func start_typewriter(new_text: String) -> void:
+	text = new_text
 	label.text = ""
 	for i in new_text.length():
 		if can_proceed:

@@ -9,6 +9,7 @@ var save_on_enter: bool
 signal scene_changed
 signal new_game_start
 signal scene_leaving
+signal transition_started
 
 
 func _ready():
@@ -23,6 +24,7 @@ func start_scene_transition(scene, remove_current: bool = false, load_save_data:
 	remove_from_tree = remove_current
 	load_on_enter = load_save_data
 	save_on_enter = save_data_on_enter
+	transition_started.emit()
 
 
 func start_encounter_transition(scene) -> void:

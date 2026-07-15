@@ -308,12 +308,12 @@ detection_range = 13.0
 [node name="TextAnchor" type="Node3D" parent="." unique_id=1347147883]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.216693, 0)
 
-[node name="TitleDisplay" type="Control" parent="." unique_id=204596508]
+[node name="PopulationDisplay" type="Control" parent="." unique_id=204596508]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("64_a8jx0")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TitleDisplay" unique_id=1956808405]
+[node name="HBoxContainer" type="HBoxContainer" parent="PopulationDisplay" unique_id=1956808405]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -329,28 +329,20 @@ theme = ExtResource("55_h5x2d")
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Title" type="Label" parent="TitleDisplay/HBoxContainer" unique_id=590950998]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-theme = ExtResource("47_2cshw")
-text = "Squad Title"
-vertical_alignment = 2
-
-[node name="Control" parent="TitleDisplay/HBoxContainer" unique_id=1024254626 instance=ExtResource("57_hnstm")]
+[node name="Control" parent="PopulationDisplay/HBoxContainer" unique_id=1024254626 instance=ExtResource("57_hnstm")]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="TitleDisplay/HBoxContainer" unique_id=1696313005]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PopulationDisplay/HBoxContainer" unique_id=1696313005]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 8
 
-[node name="TextureRect" type="TextureRect" parent="TitleDisplay/HBoxContainer/HBoxContainer2" unique_id=2025750225]
+[node name="TextureRect" type="TextureRect" parent="PopulationDisplay/HBoxContainer/HBoxContainer2" unique_id=2025750225]
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("55_brh7d")
 
-[node name="Population" type="Label" parent="TitleDisplay/HBoxContainer/HBoxContainer2" unique_id=108963553]
+[node name="Population" type="Label" parent="PopulationDisplay/HBoxContainer/HBoxContainer2" unique_id=108963553]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("56_sds2o")

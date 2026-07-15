@@ -35,16 +35,18 @@ func _enter_tree() -> void:
 		player_spawn_position = encounter_pos + (player_spawn_vector * 4).rotated(Vector3.UP, current_encounter.rotation.y)
 		player_spawn_position.y = Globals.get_heightmap_position(player_spawn_position)
 		player.global_position = player_spawn_position
-		player.look_at(current_encounter.global_position)
-		player.rotate_y(deg_to_rad(180))
+		player.model.look_at(current_encounter.global_position)
+		player.model.rotate_y(deg_to_rad(180))
 		player.rotation.x = 0
 		player.rotation.y = 0
+
 
 
 func _ready() -> void:
 	Globals.overworld = self
 	Globals.player.spring_arm.spring_length = 500
 	SaveController.load.connect(_on_load)
+	SceneManager.transition_started.connect(_on_scene_manager_transition_started)
 	#for poi in pois:
 		#var data = poi.location_data
 		#var index = randi() % poi_populations.size()
@@ -56,6 +58,13 @@ func _ready() -> void:
 		#poi_factions.remove_at(index)
 		#if data.faction == FactionManager.factions.no_faction:
 			#data.faction = [FactionManager.factions.no_faction, FactionManager.factions.jackals].pick_random()
+
+
+func _on_scene_manager_transition_started() -> void:
+	if !is_inside_tree():
+		return
+	var player_vector: Vector3 = (current_encounter.global_position - Globals.player.global_position).normalized().rotated(Vector3.UP, -current_encounter.global_rotation.y)
+	player_spawn_vector = player_vector
 
 
 func save() -> Dictionary:

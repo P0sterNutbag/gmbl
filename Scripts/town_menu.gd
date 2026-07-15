@@ -47,6 +47,8 @@ func create_town(town_data: Town) -> void:
 			menu.pressed.connect(Globals.ui.job_board.set.bind("shop", shop))
 			menu.pressed.connect(Globals.ui.start_dialogue.bind(shop.dialogue, shop))
 			menu.pressed.connect(hide)
+		elif shop is TownDialogue:
+			menu.pressed.connect(Globals.ui.start_dialogue.bind(shop.dialogue, shop))
 	var spacer = SPACER.instantiate()
 	item_container.add_child(spacer)
 	var inst = item_container.create_menu_button()

@@ -13,17 +13,15 @@ var max_hp: float = 3
 
 
 func get_rank() -> String:
-	var pwr_lvl = armor_level + fire_power
+	var pwr_lvl = fire_power
 	if pwr_lvl == 0:
-		return "F"
-	elif pwr_lvl == 1:
 		return "D"
-	elif pwr_lvl == 2:
+	elif pwr_lvl == 1:
 		return "C"
-	elif pwr_lvl == 3:
+	elif pwr_lvl == 2:
 		return "B"
-	elif pwr_lvl == 4:
+	elif pwr_lvl == 3:
 		return "A"
-	elif pwr_lvl >= 5:
+	elif pwr_lvl >= 4:
 		return "S"
 	return "F"

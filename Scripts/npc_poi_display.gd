@@ -1,7 +1,6 @@
-extends PoiDisplay
+extends HoverDisplay
 
 var parent: Node3D
-@onready var title: Label = %Title
 @onready var population: Label = %Population
 
 
@@ -12,5 +11,4 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	super._process(delta)
-	title.text = parent.location.title
 	population.text = str(parent.location.location_data.population)

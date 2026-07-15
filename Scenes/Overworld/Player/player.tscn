@@ -15,28 +15,23 @@
 [ext_resource type="PackedScene" uid="uid://cmgrxwiw6y3kg" path="res://Scenes/Guns/uzi.tscn" id="13_66fs6"]
 [ext_resource type="PackedScene" uid="uid://bu88iqf6x1y6s" path="res://Scenes/Guns/hunting_rifle.tscn" id="14_ceiit"]
 [ext_resource type="PackedScene" uid="uid://bdlenssiaotxi" path="res://Scenes/Overworld/Player/move_marker.tscn" id="16_rlpq3"]
+[ext_resource type="Script" uid="uid://d32q8ks7e8ari" path="res://Scripts/player_population_display.gd" id="17_438s2"]
 [ext_resource type="Script" uid="uid://c0qexjirp8h8a" path="res://Scripts/move_marker.gd" id="17_ssbof"]
+[ext_resource type="Theme" uid="uid://ddlkdp3v3plc" path="res://Art/Themes/hbox_container.tres" id="18_eoa6m"]
+[ext_resource type="PackedScene" uid="uid://st2mrllebqci" path="res://Scenes/UI/spacer.tscn" id="19_0plbp"]
+[ext_resource type="Texture2D" uid="uid://d2ukjid6oonnl" path="res://Art/Textures/UI/population icon.png" id="20_kbhwc"]
+[ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="21_am0eb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kgvud"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dc60h"]
-
-[sub_resource type="GDScript" id="GDScript_6ovkh"]
-resource_name = "camera_anchor"
-script/source = "extends Node3D
-
-func save() -> Dictionary:
-	return {
-		\"rot_y\": global_rotation.y,
-	}
-"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rlpq3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kqvqf"]
 radius = 3.69271
 
-[sub_resource type="Resource" id="Resource_rlpq3"]
+[sub_resource type="Resource" id="Resource_438s2"]
 resource_local_to_scene = true
 script = ExtResource("10_thunu")
 ammo = 24
@@ -46,7 +41,7 @@ metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 script = ExtResource("6_pjhsg")
 metadata/_custom_type_script = "uid://4c6own63hs8c"
 
-[sub_resource type="Resource" id="Resource_ssbof"]
+[sub_resource type="Resource" id="Resource_eoa6m"]
 resource_local_to_scene = true
 resource_name = "rifle_ammo"
 script = ExtResource("7_mpjt2")
@@ -60,12 +55,12 @@ price = 50
 description = "Usable in: AK-47"
 metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
-[sub_resource type="Resource" id="Resource_xsidk"]
+[sub_resource type="Resource" id="Resource_0plbp"]
 resource_local_to_scene = true
 script = ExtResource("10_thunu")
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
-[sub_resource type="Resource" id="Resource_fogxm"]
+[sub_resource type="Resource" id="Resource_kbhwc"]
 resource_local_to_scene = true
 resource_name = "pistol_ammo"
 script = ExtResource("7_mpjt2")
@@ -78,7 +73,7 @@ price = 25
 description = "Usable in: Pistol"
 metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
-[sub_resource type="Resource" id="Resource_lbtxg"]
+[sub_resource type="Resource" id="Resource_am0eb"]
 resource_local_to_scene = true
 script = ExtResource("10_thunu")
 ammo = 5
@@ -92,7 +87,7 @@ values = Dictionary[String, Variant]({
 add = true
 metadata/_custom_type_script = "uid://4c6own63hs8c"
 
-[sub_resource type="Resource" id="Resource_438s2"]
+[sub_resource type="Resource" id="Resource_41hn6"]
 resource_local_to_scene = true
 resource_name = "shotgun_ammo"
 script = ExtResource("7_mpjt2")
@@ -106,13 +101,13 @@ price = 5
 description = "Usable in: Shotgun"
 metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
-[sub_resource type="Resource" id="Resource_eoa6m"]
+[sub_resource type="Resource" id="Resource_6mvfr"]
 resource_local_to_scene = true
 script = ExtResource("10_thunu")
 ammo = 5
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
-[sub_resource type="Resource" id="Resource_0plbp"]
+[sub_resource type="Resource" id="Resource_75wce"]
 resource_local_to_scene = true
 resource_name = "sniper_ammo"
 script = ExtResource("7_mpjt2")
@@ -125,7 +120,7 @@ price = 10
 description = "Usable in: Sniper Rifle"
 metadata/_custom_type_script = "uid://dd1ly8qocexg4"
 
-[sub_resource type="Resource" id="Resource_kbhwc"]
+[sub_resource type="Resource" id="Resource_4lte7"]
 resource_local_to_scene = true
 script = ExtResource("10_thunu")
 ammo = 2
@@ -139,7 +134,7 @@ values = Dictionary[String, Variant]({
 add = true
 metadata/_custom_type_script = "uid://4c6own63hs8c"
 
-[sub_resource type="Resource" id="Resource_am0eb"]
+[sub_resource type="Resource" id="Resource_bfna1"]
 resource_local_to_scene = true
 resource_name = "shotgun_ammo"
 script = ExtResource("7_mpjt2")
@@ -153,13 +148,13 @@ price = 5
 description = "Usable in: Shotgun"
 metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
-[sub_resource type="Resource" id="Resource_41hn6"]
+[sub_resource type="Resource" id="Resource_lrfbo"]
 resource_local_to_scene = true
 script = ExtResource("10_thunu")
 ammo = 24
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
-[sub_resource type="Resource" id="Resource_6mvfr"]
+[sub_resource type="Resource" id="Resource_mqfat"]
 resource_local_to_scene = true
 resource_name = "pistol_ammo"
 script = ExtResource("7_mpjt2")
@@ -172,7 +167,7 @@ price = 25
 description = "Usable in: Pistol"
 metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
-[sub_resource type="Resource" id="Resource_75wce"]
+[sub_resource type="Resource" id="Resource_bgma0"]
 resource_local_to_scene = true
 script = ExtResource("10_thunu")
 ammo = 5
@@ -182,7 +177,7 @@ metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 script = ExtResource("6_pjhsg")
 metadata/_custom_type_script = "uid://4c6own63hs8c"
 
-[sub_resource type="Resource" id="Resource_4lte7"]
+[sub_resource type="Resource" id="Resource_pnv2i"]
 resource_local_to_scene = true
 resource_name = "rifle_ammo"
 script = ExtResource("7_mpjt2")
@@ -222,9 +217,8 @@ metadata/_custom_type_script = "uid://cdgvftnrtwbf7"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HealthComponent" unique_id=1621695297]
 shape = SubResource("CapsuleShape3D_dc60h")
 
-[node name="CameraAnchor" type="Node3D" parent="." unique_id=803083033 groups=["persist"]]
+[node name="CameraAnchor" type="Node3D" parent="." unique_id=803083033]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06193, 0)
-script = SubResource("GDScript_6ovkh")
 
 [node name="RotationOffset" type="Node3D" parent="CameraAnchor" unique_id=809248583]
 transform = Transform3D(1, 0, 0, 0, 0.7071072, 0.7071072, 0, -0.7071072, 0.7071072, 0, 0, 0)
@@ -267,42 +261,42 @@ style_data = ExtResource("5_mpjt2")
 transform = Transform3D(-0.46602932, 0.85408324, 0.23099455, 0.51744384, 0.47487253, -0.71186185, -0.7176822, -0.212222, -0.66324455, 0.0620147, 0.13318256, -0.01654774)
 
 [node name="ak_47" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="0" unique_id=1397768424]
-gun_stats = SubResource("Resource_rlpq3")
-ammo_item = SubResource("Resource_ssbof")
+gun_stats = SubResource("Resource_438s2")
+ammo_item = SubResource("Resource_eoa6m")
 
 [node name="Pistol" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="1" unique_id=1773221283 instance=ExtResource("5_ppqj6")]
 transform = Transform3D(1.3100002, 4.4703484e-08, 1.1920929e-07, -2.9802322e-08, 1.3100003, 8.940697e-08, 1.1920929e-07, 5.9604645e-08, 1.31, 0, 0, 0)
 visible = false
-gun_stats = SubResource("Resource_xsidk")
-ammo_item = SubResource("Resource_fogxm")
+gun_stats = SubResource("Resource_0plbp")
+ammo_item = SubResource("Resource_kbhwc")
 
 [node name="Shotgun" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="2" unique_id=1566369455 instance=ExtResource("6_xjgfg")]
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 visible = false
-gun_stats = SubResource("Resource_lbtxg")
-ammo_item = SubResource("Resource_438s2")
+gun_stats = SubResource("Resource_am0eb")
+ammo_item = SubResource("Resource_41hn6")
 
 [node name="SniperRifle" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="3" unique_id=1758674747 instance=ExtResource("7_dc60h")]
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 visible = false
-gun_stats = SubResource("Resource_eoa6m")
-ammo_item = SubResource("Resource_0plbp")
+gun_stats = SubResource("Resource_6mvfr")
+ammo_item = SubResource("Resource_75wce")
 
 [node name="SawedOff" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="4" unique_id=311720028 instance=ExtResource("12_eapgu")]
 visible = false
-gun_stats = SubResource("Resource_kbhwc")
-ammo_item = SubResource("Resource_am0eb")
+gun_stats = SubResource("Resource_4lte7")
+ammo_item = SubResource("Resource_bfna1")
 
 [node name="Uzi" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="5" unique_id=768518156 instance=ExtResource("13_66fs6")]
 visible = false
-gun_stats = SubResource("Resource_41hn6")
-ammo_item = SubResource("Resource_6mvfr")
+gun_stats = SubResource("Resource_lrfbo")
+ammo_item = SubResource("Resource_mqfat")
 
 [node name="HuntingRifle" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="6" unique_id=834318549 instance=ExtResource("14_ceiit")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000004, 0, 0, 0)
 visible = false
-gun_stats = SubResource("Resource_75wce")
-ammo_item = SubResource("Resource_4lte7")
+gun_stats = SubResource("Resource_bgma0")
+ammo_item = SubResource("Resource_pnv2i")
 
 [node name="PhysicalBoneSimulator3D" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D" parent_id_path=PackedInt32Array(434139760, 375838727, 425082780) index="8" unique_id=2143382753]
 visible = false
@@ -373,9 +367,9 @@ joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0011449304, -0.00013007
 body_offset = Transform3D(1, -9.775162e-06, 2.2247434e-05, 2.2307038e-05, 7.253699e-05, -1.0000001, 9.790063e-06, 0.99999934, 7.252954e-05, 0.0011399984, 0.22162795, 0.000114008784)
 
 [node name="Physical Bone mixamorig_LeftLeg" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="13" unique_id=287664894]
-transform = Transform3D(-0.22031365, -0.970699, -0.09594462, -0.052125953, -0.086504675, 0.9948872, -0.97403556, 0.22418842, -0.031540457, 0.17462933, 0.3295289, 0.12591389)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00073041016, 0.0012454453, 0.21993004)
-body_offset = Transform3D(0.9998989, 0.013720393, -0.0037138592, -0.0036175828, -0.007033434, -0.9999689, -0.013746232, 0.99988043, -0.006983118, 6.9364905e-05, 0.21993458, 0.00030054152)
+transform = Transform3D(-0.22031365, -0.970699, -0.09594462, -0.052125953, -0.086504675, 0.9948872, -0.97403556, 0.22418842, -0.031540457, 0.17514487, 0.32352898, 0.12598303)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0005985809, 0.0012113615, 0.22595094)
+body_offset = Transform3D(0.9998989, 0.013720393, -0.0037138592, -0.0036175828, -0.007033434, -0.9999689, -0.013746232, 0.99988043, -0.006983118, 0.00022400916, 0.22595456, 0.0003748536)
 
 [node name="Physical Bone mixamorig_LeftFoot" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" index="14" unique_id=34279325]
 transform = Transform3D(-0.8700988, 0.24346855, -0.42854524, -0.021176385, 0.8502074, 0.5260222, 0.49242222, 0.46676636, -0.7346087, 0.24817067, 0.068711124, 0.22339149)
@@ -425,6 +419,49 @@ script = ExtResource("17_ssbof")
 [node name="MeshInstance3D" parent="MoveMarker" index="0" unique_id=1028542097]
 surface_material_override/0 = SubResource("StandardMaterial3D_bgma0")
 script = null
+
+[node name="TextAnchor" type="Node3D" parent="." unique_id=697443868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.216693, 0)
+
+[node name="PopulationDisplay" type="Control" parent="." unique_id=870017797]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("17_438s2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopulationDisplay" unique_id=1692461991]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -132.0
+offset_top = -30.0
+offset_right = 132.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("18_eoa6m")
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Control" parent="PopulationDisplay/HBoxContainer" unique_id=1024254626 instance=ExtResource("19_0plbp")]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PopulationDisplay/HBoxContainer" unique_id=1401171977]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="PopulationDisplay/HBoxContainer/HBoxContainer2" unique_id=1070020892]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("20_kbhwc")
+
+[node name="Population" type="Label" parent="PopulationDisplay/HBoxContainer/HBoxContainer2" unique_id=256385161]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("21_am0eb")
+text = "0"
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1276054028]
 target_desired_distance = 0.1

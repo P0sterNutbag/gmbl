@@ -8,6 +8,9 @@ var state := states.walk
 var speed: float
 var walk_speed := 1.5
 var run_speed := 3.5
+var stamina: float
+var min_stamina := 3.0
+var max_stamina := 20.0
 var path_index := 0
 var max_enemies := 6
 var min_enemies := 2
@@ -49,6 +52,8 @@ func _ready() -> void:
 	location.encounter_ended.connect(_on_encounter_ended)
 	SaveController.load.connect(_on_load)
 	location.remove_from_group("persist")
+	stamina = randf_range(min_stamina, max_stamina)
+	max_stamina = stamina
 	await get_tree().process_frame
 	var faction_name = FactionManager.faction_data[faction].name
 	if faction_name[-1] == "s":
@@ -88,7 +93,7 @@ func _ready() -> void:
 		enemy_model.pads.show()
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	match (state):
 		states.walk:
 			speed = walk_speed
@@ -112,6 +117,13 @@ func _process(_delta: float) -> void:
 		states.chase:
 			speed = run_speed
 			# stop chasing player
+			stamina -= delta
+			if stamina < 0:
+				chase_player = false
+				stamina = max_stamina
+				look_at(destination.global_position)
+				navigation_agent.set_target_position(destination.global_position)
+				state = states.walk
 			if target == Globals.player:
 				if (UiController.is_canvas_layer_open(Globals.ui) or !chase_player):
 					detection.targets.erase(target)

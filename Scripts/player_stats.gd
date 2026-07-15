@@ -49,6 +49,8 @@ var sleep_decrease_rate := 0.2
 var hunger_decrease_rate := 0.3
 var thirst_decrease_rate := 0.4
 var skill_points = 3.0
+var arena_level := 0
+var shooting_level := 0
 var saved_style: NpcStyle
 var gun: Equipment
 var skills: CharacterSkills
@@ -261,6 +263,8 @@ func save() -> Dictionary:
 		"saved_style" : player_style,
 		"allies" : allies,
 		"save_guns" : guns,
+		"arena_level" : arena_level,
+		"shooting_level" : shooting_level,
 	}
 
 

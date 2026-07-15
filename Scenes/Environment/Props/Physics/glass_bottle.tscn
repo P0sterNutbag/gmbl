@@ -1,10 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://m7oajasjyoq2"]
+[gd_scene format=3 uid="uid://m7oajasjyoq2"]
 
 [ext_resource type="Script" uid="uid://dsaxreqtvwkc5" path="res://Scripts/shootable_prop.gd" id="1_tenp6"]
 [ext_resource type="PackedScene" uid="uid://gpfqtgcs5ijd" path="res://Art/Models/glass bottle.glb" id="1_xxb70"]
 [ext_resource type="Material" uid="uid://bnhbcoaduaiil" path="res://Art/Materials/tree_green.tres" id="2_5jiyo"]
 [ext_resource type="Script" uid="uid://cdgvftnrtwbf7" path="res://Scripts/health_component.gd" id="3_aowso"]
-[ext_resource type="ArrayMesh" uid="uid://d7dquh6w3uqc" path="res://Art/Meshes/glass_shard.res" id="5_3n1rn"]
+[ext_resource type="ArrayMesh" uid="uid://dqddb66akxi4b" path="res://Art/Meshes/glass_shard.res" id="5_3n1rn"]
 [ext_resource type="AudioStream" uid="uid://cxrv5wxnjiyh5" path="res://Audio/SFX/glass-shattering-hit.ogg" id="6_dt7e2"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_5jiyo"]
@@ -33,41 +33,42 @@ random_pitch = 1.2
 streams_count = 1
 stream_0/stream = ExtResource("6_dt7e2")
 
-[node name="GlassBottle" type="Node3D"]
+[node name="GlassBottle" type="Node3D" unique_id=487864903 groups=["targets"]]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 script = ExtResource("1_tenp6")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=2059897698]
 
-[node name="glass bottle" parent="RigidBody3D" instance=ExtResource("1_xxb70")]
+[node name="glass bottle" parent="RigidBody3D" unique_id=2023994819 instance=ExtResource("1_xxb70")]
 
-[node name="Cylinder" parent="RigidBody3D/glass bottle" index="0"]
+[node name="Cylinder" parent="RigidBody3D/glass bottle" index="0" unique_id=391263269]
 surface_material_override/0 = ExtResource("2_5jiyo")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1886695576]
 shape = SubResource("CylinderShape3D_5jiyo")
 
-[node name="HealthComponent" type="Area3D" parent="."]
+[node name="HealthComponent" type="Area3D" parent="RigidBody3D" unique_id=2139992467]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 script = ExtResource("3_aowso")
 hp = 1.0
 blood_on_hit = false
 metadata/_custom_type_script = "uid://cdgvftnrtwbf7"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HealthComponent"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/HealthComponent" unique_id=174579740]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0021972647, 0)
 shape = SubResource("CylinderShape3D_tenp6")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=2107951201]
 emitting = false
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_dt7e2")
 draw_pass_1 = ExtResource("5_3n1rn")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=128211150]
 stream = SubResource("AudioStreamRandomizer_dt7e2")
 
-[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
+[connection signal="death" from="RigidBody3D/HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="finished" from="AudioStreamPlayer3D" to="." method="_on_audio_stream_player_3d_finished"]
 
 [editable path="RigidBody3D/glass bottle"]

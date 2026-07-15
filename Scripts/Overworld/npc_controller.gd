@@ -6,6 +6,8 @@ var starting_npcs := 3
 
 func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout
+	if SaveController.has_loaded:
+		return
 	var locations = get_tree().get_nodes_in_group("location")
 	for i in starting_npcs:
 		var location = locations[randi() % locations.size()]

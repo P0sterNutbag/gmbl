@@ -54,6 +54,16 @@ func advance_dialogue(next_index: int = index + 1) -> void:
 	if bubble is DialogueEvent:
 		var callable = Callable(self, bubble.method)
 		callable.callv(bubble.arguments)
+	elif bubble is DialogueConditionLine:
+		var _text: String
+		if bubble.is_condition_true():
+			_text = bubble.success_text
+		else:
+			_text = bubble.fail_text
+		var inst = dialogue_bubble.instantiate()
+		inst.size_flags_horizontal = SIZE_SHRINK_END
+		add_child(inst)
+		inst.start_typewriter(_text)
 	elif bubble is DialogueConditionVariable:
 		if bubble.is_condition_true():
 			dialogue_branch = bubble.success_branch
@@ -88,7 +98,7 @@ func advance_dialogue(next_index: int = index + 1) -> void:
 		var inst = dialogue_bubble.instantiate()
 		inst.size_flags_horizontal = SIZE_SHRINK_END
 		add_child(inst)
-		inst.text = bubble.text
+		inst.start_typewriter(bubble.text)
 	await get_tree().process_frame
 	can_advance = true
 
@@ -190,11 +200,16 @@ func enter_level(start_alert: bool = false) -> void:
 	Globals.overworld.current_encounter.transition_to_level()
 
 
+func change_scene(scene_path: String) -> void:
+	SceneManager.start_scene_transition(scene_path, true)
+
+
 func pay_fee(amount: int) -> void:
 	PlayerStats.inventory.money -= amount
-	var npc = Globals.overworld.current_encounter.get_parent()
-	npc.chase_player = false
-	npc.navigation_agent.set_target_position(npc.destination.global_position)
+	var parent = Globals.overworld.current_encounter.get_parent()
+	if parent is CharacterBody3D:
+		parent.chase_player = false
+		parent.navigation_agent.set_target_position(parent.destination.global_position)
 	Globals.survival_ui.create_notification("You payed $" + str(amount))
 	advance_dialogue(index + 1)
 
@@ -266,3 +281,7 @@ func surrender_to_enemy() -> void:
 	npc.chase_player = false
 	npc.navigation_agent.set_target_position(npc.destination.global_position)
 	advance_dialogue()
+
+
+func _exit_tree() -> void:
+	UiController.close_interface(self)

@@ -1,5 +1,5 @@
 extends Control
-class_name PoiDisplay
+class_name HoverDisplay
 
 @export var display_distance: float = 25.5
 @onready var text_anchor: Node3D = $"../TextAnchor"

@@ -93,7 +93,6 @@ func _ready() -> void:
 	if npc_data.armor_level >= 2:
 		physical_bone_head.damage_modifier = 2.0
 		model.helmet.show()
-	#faction = npc_data.faction
 	npc_data.hp = health_component.hp
 	npc_data.max_hp = health_component.hp
 	DayNightCycle.night_start.connect(on_night_start)
@@ -517,7 +516,7 @@ func _on_damaged(hit_position: Vector3, hit_direction: Vector3, shooter: Node3D)
 	damage_direction = hit_direction
 	last_seen_position = shooter.global_position
 	npc_data.hp = health_component.hp
-	if faction != shooter.faction:
+	if faction != shooter.faction and get_tree().current_scene.kills_effect_relation:
 		var previous_relation = FactionManager.get_faction_relation(faction, shooter.faction)
 		var show_notificaition = health_component.hp <= 0
 		FactionManager.change_faction_relation(faction, shooter.faction, -1, show_notificaition)

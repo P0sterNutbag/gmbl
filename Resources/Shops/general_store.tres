@@ -23,12 +23,18 @@
 [ext_resource type="Resource" uid="uid://dvooyj5cqcclc" path="res://Resources/Items/Utility/sleeping_bag.tres" id="24_4na45"]
 [ext_resource type="Resource" uid="uid://cf41qwurikia4" path="res://Resources/Items/Consumable/tourniquet.tres" id="25_nwrvt"]
 [ext_resource type="Resource" uid="uid://byelqsyqj7y7y" path="res://Resources/Items/Utility/binoculars.tres" id="26_51hhp"]
+[ext_resource type="Resource" uid="uid://oaklo016ku8w" path="res://Resources/Items/Guns/pistol.tres" id="27_3d2nb"]
 [ext_resource type="Resource" uid="uid://05plefgfm4x0" path="res://Resources/Items/Utility/backpack.tres" id="27_stefh"]
+[ext_resource type="Resource" uid="uid://lrml50x6ifrj" path="res://Resources/Items/Guns/sawed_off.tres" id="28_f82rp"]
 [ext_resource type="Resource" uid="uid://c6q45hg5w6m55" path="res://Resources/Items/Utility/knapsack.tres" id="28_kqqcr"]
+[ext_resource type="Resource" uid="uid://c6b6f17dikat7" path="res://Resources/Items/Guns/uzi.tres" id="29_0h1yl"]
 [ext_resource type="Resource" uid="uid://b85pvp1hkmjb5" path="res://Resources/Items/Utility/fanny_pack.tres" id="29_r3bq7"]
+[ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="30_6nfli"]
 [ext_resource type="Resource" uid="uid://dk4s1lhf08o1g" path="res://Resources/Items/Utility/lockpick.tres" id="30_qhuyg"]
+[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="31_a1kim"]
 [ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="31_r66k1"]
 [ext_resource type="Script" uid="uid://dkuy8ne1y8df" path="res://Scripts/quest.gd" id="32_2kdy0"]
+[ext_resource type="Resource" uid="uid://dgo34up8hytn6" path="res://Resources/Items/Ammo/smg_ammo.tres" id="32_qmf62"]
 [ext_resource type="Script" uid="uid://g1k0736rje3q" path="res://Scripts/quest_random.gd" id="33_vuus1"]
 [ext_resource type="Script" uid="uid://dc15s83haevrb" path="res://Scripts/item_slot_random.gd" id="34_q57is"]
 [ext_resource type="Script" uid="uid://bicpdyf13vj1j" path="res://Scripts/quest_fetch_random.gd" id="35_btam7"]
@@ -58,6 +64,7 @@ metadata/_custom_type_script = "uid://3e36ru1e7k78"
 [sub_resource type="Resource" id="Resource_rpeqt"]
 script = ExtResource("13_pmsm7")
 object_to_spawn = ExtResource("15_7e3aa")
+max_amount = 3
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_xe0o3"]
@@ -130,9 +137,38 @@ min_amount = 3
 max_amount = 5
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_7kx4p"]
+[sub_resource type="Resource" id="Resource_7c80c"]
 script = ExtResource("13_pmsm7")
-object_to_spawn = ExtResource("30_qhuyg")
+object_to_spawn = ExtResource("27_3d2nb")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_w665q"]
+script = ExtResource("13_pmsm7")
+object_to_spawn = ExtResource("28_f82rp")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_ltj7a"]
+script = ExtResource("13_pmsm7")
+object_to_spawn = ExtResource("29_0h1yl")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_pmsm7"]
+script = ExtResource("13_pmsm7")
+object_to_spawn = ExtResource("30_6nfli")
+max_amount = 3
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_2rlcr"]
+script = ExtResource("13_pmsm7")
+object_to_spawn = ExtResource("31_a1kim")
+min_amount = 4
+max_amount = 12
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_7e3aa"]
+script = ExtResource("13_pmsm7")
+object_to_spawn = ExtResource("32_qmf62")
+max_amount = 3
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_7qwb0"]
@@ -140,7 +176,7 @@ resource_local_to_scene = true
 script = ExtResource("31_r66k1")
 min_amount = 7
 max_amount = 10
-potential_slots = Array[ExtResource("13_pmsm7")]([SubResource("Resource_jby7l"), SubResource("Resource_rpeqt"), SubResource("Resource_xe0o3"), SubResource("Resource_lnhnr"), SubResource("Resource_8jwt6"), SubResource("Resource_tfd8k"), SubResource("Resource_g8jxq"), SubResource("Resource_yld1c"), SubResource("Resource_4ptoc"), SubResource("Resource_bn22a"), SubResource("Resource_ckll4"), SubResource("Resource_ho87a"), SubResource("Resource_emdrq"), SubResource("Resource_6j8iu"), SubResource("Resource_7kx4p")])
+potential_slots = Array[ExtResource("13_pmsm7")]([SubResource("Resource_jby7l"), SubResource("Resource_rpeqt"), SubResource("Resource_xe0o3"), SubResource("Resource_lnhnr"), SubResource("Resource_8jwt6"), SubResource("Resource_tfd8k"), SubResource("Resource_g8jxq"), SubResource("Resource_yld1c"), SubResource("Resource_4ptoc"), SubResource("Resource_bn22a"), SubResource("Resource_ckll4"), SubResource("Resource_ho87a"), SubResource("Resource_emdrq"), SubResource("Resource_6j8iu"), SubResource("Resource_7c80c"), SubResource("Resource_w665q"), SubResource("Resource_ltj7a"), SubResource("Resource_pmsm7"), SubResource("Resource_2rlcr"), SubResource("Resource_7e3aa")])
 repeat_entries = false
 space = 50
 money = 1000

@@ -6,6 +6,7 @@ extends PanelContainer
 @onready var equipmnt_label: Label = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer3/Label
 @onready var poi_donations: VBoxContainer = $"../PoiDonations"
 @onready var recruit_menu: VBoxContainer = $"../RecruitMenu"
+@onready var upgrade_menu: VBoxContainer = $"../PoiUpgradeMenu"
 var location: Location
 
 
@@ -28,13 +29,13 @@ func _on_enter_pressed() -> void:
 	location.transition_to_level()
 
 
-func _on_donate_pressed() -> void:
-	UiController.open_subinterface(poi_donations)
+func _on_upgrade_pressed() -> void:
+	UiController.open_subinterface(upgrade_menu)
 
 
 func _on_recruit_pressed() -> void:
 	if location.location_data.population <= 0:
-		Globals.survival_ui.create_notification("There's no one here to recruit.")
+		Globals.survival_ui.create_notification("There's no one here to recruit. Wait for reinforcements.")
 	else:
 		UiController.open_subinterface(recruit_menu)
 

@@ -3,6 +3,7 @@ class_name Encounter
 
 @export var location_data: LocationData
 @export var spawn_parents: Array[Node3D]
+@export var kills_effect_relation: bool = true
 var intel_timer: Timer
 
 

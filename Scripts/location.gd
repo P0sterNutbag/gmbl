@@ -9,7 +9,6 @@ class_name Location
 @export var friendly_dialogue_tree: DialogueTree
 @export var enemy_dialogue_tree: DialogueTree
 @export var unaware_dialogue_tree: DialogueTree
-#@export var dialogue_tree: DialogueTree
 @export var proximity_spawn_chance := 0.5
 @export var can_spawn_npcs: bool = true
 @export var can_stealth_start: bool
@@ -157,8 +156,6 @@ func stock_shops() -> void:
 
 
 func transition_to_level() -> void:
-	var player_vector: Vector3 = (global_position - Globals.player.global_position).normalized().rotated(Vector3.UP, -global_rotation.y)
-	Globals.overworld.player_spawn_vector = player_vector
 	SceneManager.start_encounter_transition(encounter_scene.resource_path)
 
 
@@ -172,36 +169,7 @@ func spawn_squad() -> Node3D:
 	inst.location.location_data.fire_power_chance = location_data.fire_power_chance
 	inst.location.location_data.armor_level_chance = location_data.armor_level_chance
 	inst.global_position = global_position
-	inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
-	# set destination
-	#var faction_data = FactionManager.faction_data[location_data.faction]
-	#var rng = RandomNumberGenerator.new()
-	#var objectives = [0, 1, 2] # 0 = self, 1 = enemy, 2 = ally
-	#var weights = PackedFloat32Array([faction_data.defense, faction_data.agression, faction_data.enterprising])
-	#var goal = objectives[rng.rand_weighted(weights)]
-	#var all_nodes = get_tree().get_nodes_in_group("location")
-	#all_nodes = all_nodes.filter(func(a): return a.can_spawn_npcs and a != self)
-	#if goal != 2:
-		#all_nodes = all_nodes.filter(func(a): return a.encounter_scene != null)
-	#var target_nodes = []
-	#for f in FactionManager.factions.size():
-		#var score = FactionManager.get_faction_relation(location_data.faction, f)
-		#if goal == 0:
-			#if f != location_data.faction:
-				#continue
-		#elif goal == 1:
-			#if score >= 0.0:
-				#continue
-		#elif goal == 2:
-			#if score < 0.0:
-				#continue
-		#var faction_locations = all_nodes.filter(func(a): return a.location_data.faction == f)
-		#target_nodes.append_array(faction_locations)
-	#if target_nodes.size() == 0:
-		#target_nodes = all_nodes
-	#target_nodes.sort_custom(func(a, b): return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position))
-	#rng.randomize()
-	#weights.clear()
+	inst.global_position.y = Globals.get_heightmap_position(inst.global_position)	
 	var rng = RandomNumberGenerator.new()
 	var weights := []
 	var target_nodes = get_tree().get_nodes_in_group("location")
@@ -233,7 +201,7 @@ func _on_body_exited(_body: Node3D) -> void:
 
 
 func _on_grow_timer_timeout() -> void:
-	var amount = 1#randi_range(1, 2)
+	var amount = randi_range(1, 2)
 	location_data.change_population(amount)
 	if location_data.population == FactionManager.factions.player:
 		Globals.survival_ui.create_notification(title + " population increased by " + str(amount))
@@ -244,6 +212,10 @@ func _on_grow_timer_timeout() -> void:
 func _on_attack_area_body_entered(body: Node3D) -> void:
 	if !can_proxmity_spawn or !can_spawn_npcs:
 		return
+	if body == Globals.player:
+		var population_difference = PlayerStats.allies.size() + 1 - location_data.population
+		if population_difference < 0:
+			return
 	var relation = FactionManager.get_faction_relation(location_data.faction, body.faction)
 	if "faction" in body and relation < 0:
 		can_proxmity_spawn = false

@@ -1,12 +1,116 @@
-[gd_resource type="Resource" script_class="TownAction" format=3 uid="uid://deu4n0nieo0l7"]
+[gd_resource type="Resource" script_class="TownDialogue" format=3 uid="uid://deu4n0nieo0l7"]
 
-[ext_resource type="Script" uid="uid://cdjlwglvj2lmy" path="res://Scripts/town_action.gd" id="1_vtpr7"]
+[ext_resource type="Script" uid="uid://ck7j7t8co2rbt" path="res://Scripts/dialogue_base.gd" id="1_h0dk1"]
+[ext_resource type="Script" uid="uid://de6rxup5nru4w" path="res://Scripts/dialogue.gd" id="2_48ogp"]
+[ext_resource type="Script" uid="uid://d36xpf3aobxt1" path="res://Scripts/dialogue_condition_line.gd" id="2_hth06"]
+[ext_resource type="Script" uid="uid://b2lfe52ud4ctk" path="res://Scripts/dialogue_branch_option.gd" id="3_hth06"]
+[ext_resource type="Script" uid="uid://cxdd8jo8xmqfb" path="res://Scripts/dialogue_condition_variable.gd" id="4_n3ys7"]
+[ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="5_dbbdt"]
+[ext_resource type="Script" uid="uid://brq5lvk7ek4ux" path="res://Scripts/dialogue_branch.gd" id="6_7yobo"]
+[ext_resource type="Script" uid="uid://cnu4xeujmgk51" path="res://Scripts/dialogue_options.gd" id="7_ba6bo"]
+[ext_resource type="Resource" uid="uid://nm0e00c2fx4" path="res://Resources/NpcStyles/npc_styles.tres" id="9_xytjy"]
+[ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="10_16y8u"]
+[ext_resource type="Script" uid="uid://dvrfbejelk3he" path="res://Scripts/town_dialogue.gd" id="11_jdl0v"]
+
+[sub_resource type="Resource" id="Resource_h0dk1"]
+script = ExtResource("2_hth06")
+path = "PlayerStats"
+value = "shooting_level"
+comparison = 1
+value2 = 0
+success_text = "Good to see you again. You're welcome to use our range any time."
+fail_text = "Hey there, sharpshooter. We're hosting a shooting contest with a cash prize if you're interested."
+metadata/_custom_type_script = "uid://d36xpf3aobxt1"
+
+[sub_resource type="Resource" id="Resource_48ogp"]
+script = ExtResource("2_48ogp")
+text = "Entry is $50. The prize is $75 is you can hit all the targets within the time limit."
+metadata/_custom_type_script = "uid://de6rxup5nru4w"
+
+[sub_resource type="Resource" id="Resource_oilue"]
+script = ExtResource("5_dbbdt")
+method = "create_notification"
+arguments = ["You don't have enough money"]
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_8x2d6"]
+script = ExtResource("6_7yobo")
+bubbles = Array[ExtResource("1_h0dk1")]([SubResource("Resource_oilue")])
+metadata/_custom_type_script = "uid://brq5lvk7ek4ux"
+
+[sub_resource type="Resource" id="Resource_ch5i3"]
+script = ExtResource("5_dbbdt")
+method = "pay_fee"
+arguments = [50]
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_ip6nd"]
+script = ExtResource("5_dbbdt")
+method = "change_scene"
+arguments = ["res://Scenes/Levels/shooting_range.tscn"]
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_ufi6q"]
+script = ExtResource("6_7yobo")
+bubbles = Array[ExtResource("1_h0dk1")]([SubResource("Resource_ch5i3"), SubResource("Resource_ip6nd")])
+metadata/_custom_type_script = "uid://brq5lvk7ek4ux"
+
+[sub_resource type="Resource" id="Resource_c3pbh"]
+script = ExtResource("4_n3ys7")
+path = "PlayerStats"
+value = "money"
+comparison = 1
+value2 = 49
+success_branch = SubResource("Resource_ufi6q")
+failure_branch = SubResource("Resource_8x2d6")
+metadata/_custom_type_script = "uid://cxdd8jo8xmqfb"
+
+[sub_resource type="Resource" id="Resource_hth06"]
+script = ExtResource("3_hth06")
+text = "Pay"
+bubbles = Array[ExtResource("1_h0dk1")]([SubResource("Resource_c3pbh")])
+metadata/_custom_type_script = "uid://b2lfe52ud4ctk"
+
+[sub_resource type="Resource" id="Resource_n3ys7"]
+script = ExtResource("3_hth06")
+text = "Return"
+metadata/_custom_type_script = "uid://b2lfe52ud4ctk"
+
+[sub_resource type="Resource" id="Resource_dbbdt"]
+script = ExtResource("7_ba6bo")
+options = Array[ExtResource("3_hth06")]([SubResource("Resource_hth06"), SubResource("Resource_n3ys7")])
+metadata/_custom_type_script = "uid://cnu4xeujmgk51"
+
+[sub_resource type="Resource" id="Resource_7yobo"]
+script = ExtResource("3_hth06")
+text = "Join"
+bubbles = Array[ExtResource("1_h0dk1")]([SubResource("Resource_48ogp"), SubResource("Resource_dbbdt")])
+metadata/_custom_type_script = "uid://b2lfe52ud4ctk"
+
+[sub_resource type="Resource" id="Resource_7di58"]
+script = ExtResource("5_dbbdt")
+method = "enter_town"
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_ba6bo"]
+script = ExtResource("3_hth06")
+text = "Leave"
+bubbles = Array[ExtResource("1_h0dk1")]([SubResource("Resource_7di58")])
+metadata/_custom_type_script = "uid://b2lfe52ud4ctk"
+
+[sub_resource type="Resource" id="Resource_lbcag"]
+script = ExtResource("7_ba6bo")
+options = Array[ExtResource("3_hth06")]([SubResource("Resource_7yobo"), SubResource("Resource_ba6bo")])
+metadata/_custom_type_script = "uid://cnu4xeujmgk51"
+
+[sub_resource type="Resource" id="Resource_xytjy"]
+script = ExtResource("10_16y8u")
+bubbles = Array[ExtResource("1_h0dk1")]([SubResource("Resource_h0dk1"), SubResource("Resource_lbcag")])
+metadata/_custom_type_script = "uid://c7wqhgal4us2a"
 
 [resource]
 resource_local_to_scene = true
-script = ExtResource("1_vtpr7")
-node_path = "SceneManager"
-method = "start_scene_transition"
-args = ["res://Scenes/Levels/shooting_range.tscn", true]
+script = ExtResource("11_jdl0v")
+dialogue = SubResource("Resource_xytjy")
 title = "Shooting Range"
 metadata/_custom_type_script = "uid://cdjlwglvj2lmy"

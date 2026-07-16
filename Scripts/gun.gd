@@ -143,7 +143,7 @@ func create_bullet(shot_owner: Node3D, is_ads: bool) -> void:
 	inst.creator = shot_owner
 	get_tree().current_scene.add_child(inst)
 	if uses_input and is_ads:
-		inst.global_position = Globals.player.camera.global_position
+		inst.global_position.y = Globals.player.camera.global_position.y
 
 
 func create_shell() -> void:

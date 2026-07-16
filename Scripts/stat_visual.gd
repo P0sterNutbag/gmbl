@@ -2,8 +2,10 @@ extends Control
 
 @export var stat_name: String
 @export var danger_message: String
+@export var danger_message2 : String
 @export var critical_message: String
-@export var show_treshold = 0.5
+@export var show_treshold := 0.9
+@export var warning_treshold := 0.5
 @export var progress_bar: ProgressBar
 var level: int = 0
 var tooltip_theme = preload("res://Art/Themes/text_small_outline.tres")
@@ -17,20 +19,28 @@ func _process(_delta: float) -> void:
 	var previous_level = level
 	# set color
 	if value <= 0:
-		level = 2
+		level = 3
+		show()
 		modulate.v = 1.0
+	elif value < warning_treshold:
+		level = 2
+		show()
+		modulate.v = 0.8
 	elif value < show_treshold:
 		level = 1
-		modulate.v = 0.7
+		show()
+		modulate.v = 0.65
 	else:
 		level = 0
-		modulate.v = 0.4
+		hide()
 	# notifications
 	if previous_level != level:
 		previous_level = level
 		if level == 1:
 			Globals.survival_ui.create_notification(danger_message)
-		if level == 2:
+		elif level == 2:
+			Globals.survival_ui.create_notification(danger_message2)
+		elif level == 3:
 			Globals.survival_ui.create_notification(critical_message)
 	# set value
 	if !progress_bar:

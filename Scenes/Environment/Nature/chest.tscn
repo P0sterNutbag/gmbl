@@ -12,12 +12,8 @@
 [ext_resource type="Resource" uid="uid://bkae25scq6c12" path="res://Resources/Items/Ammo/sniper_ammo.tres" id="8_adlyc"]
 [ext_resource type="Resource" uid="uid://ccm2c5fc8xn15" path="res://Resources/Items/Consumable/medkit.tres" id="8_bfds5"]
 [ext_resource type="Material" uid="uid://cwhba100ef4q3" path="res://Art/Materials/chest.tres" id="9_3milu"]
-[ext_resource type="Resource" uid="uid://ixc4pv5vjlno" path="res://Resources/Items/Guns/ak47.tres" id="9_ftq36"]
-[ext_resource type="Resource" uid="uid://dpt1btw7n2g0c" path="res://Resources/Items/Guns/hunting_rifle.tres" id="10_lj2k4"]
 [ext_resource type="Resource" uid="uid://oaklo016ku8w" path="res://Resources/Items/Guns/pistol.tres" id="11_b8r4r"]
 [ext_resource type="Resource" uid="uid://lrml50x6ifrj" path="res://Resources/Items/Guns/sawed_off.tres" id="12_p87s2"]
-[ext_resource type="Resource" uid="uid://de20gnenmrrxa" path="res://Resources/Items/Guns/shotgun.tres" id="13_5cxrs"]
-[ext_resource type="Resource" uid="uid://bhs8tbv5iox6e" path="res://Resources/Items/Guns/sniper_rifle.tres" id="14_he2c8"]
 [ext_resource type="Resource" uid="uid://c6b6f17dikat7" path="res://Resources/Items/Guns/uzi.tres" id="15_tvho2"]
 [ext_resource type="Resource" uid="uid://6c7s1e0y4ekq" path="res://Resources/Items/Junk/cigarettes.tres" id="16_pm71s"]
 [ext_resource type="Resource" uid="uid://du57k1x7scpfk" path="res://Resources/Items/Junk/metal_scraps.tres" id="17_pxco1"]
@@ -35,10 +31,11 @@
 [ext_resource type="Resource" uid="uid://bmllms5nonko8" path="res://Resources/Items/Consumable/beer.tres" id="29_xtniw"]
 [ext_resource type="Resource" uid="uid://c3usfn872wp1g" path="res://Resources/Items/Consumable/ghost_powder.tres" id="31_pxco1"]
 [ext_resource type="Resource" uid="uid://b85pvp1hkmjb5" path="res://Resources/Items/Utility/fanny_pack.tres" id="35_fhb31"]
-[ext_resource type="Resource" uid="uid://c6q45hg5w6m55" path="res://Resources/Items/Utility/knapsack.tres" id="36_2cu0c"]
-[ext_resource type="Resource" uid="uid://05plefgfm4x0" path="res://Resources/Items/Utility/backpack.tres" id="37_c1b8b"]
+[ext_resource type="PackedScene" uid="uid://cgtukpis1lq0a" path="res://Scenes/Items/Guns/ak47.tscn" id="37_c1b8b"]
 [ext_resource type="Resource" uid="uid://b60xm7dcqwqhf" path="res://Resources/Items/Junk/canteen.tres" id="37_vqwww"]
 [ext_resource type="Resource" uid="uid://dobq8qcujl8mx" path="res://Resources/Items/Junk/harmonica.tres" id="38_7pmke"]
+[ext_resource type="PackedScene" uid="uid://b0bma8cj8ymso" path="res://Scenes/Items/Guns/hunting_rifle.tscn" id="38_atcha"]
+[ext_resource type="PackedScene" uid="uid://dig2vgrs53m37" path="res://Scenes/Items/Guns/sniper_rifle.tscn" id="39_1ipjs"]
 [ext_resource type="Resource" uid="uid://d2754krch83kg" path="res://Resources/Items/Junk/book.tres" id="39_qr8nu"]
 [ext_resource type="Resource" uid="uid://db8y03u86d7uv" path="res://Resources/Items/Junk/matches.tres" id="40_rqkl3"]
 [ext_resource type="Resource" uid="uid://b3eie27glwlxx" path="res://Resources/Items/Junk/ring.tres" id="41_ktgl8"]
@@ -79,46 +76,22 @@ spawn_chance = 0.3
 max_amount = 3
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_c1b8b"]
-script = ExtResource("3_nxxjw")
-object_to_spawn = ExtResource("9_ftq36")
-spawn_chance = 0.2
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_atcha"]
-script = ExtResource("3_nxxjw")
-object_to_spawn = ExtResource("10_lj2k4")
-spawn_chance = 0.1
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
 [sub_resource type="Resource" id="Resource_1ipjs"]
 script = ExtResource("3_nxxjw")
 object_to_spawn = ExtResource("11_b8r4r")
-spawn_chance = 0.3
+spawn_chance = 0.1
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_vqwww"]
 script = ExtResource("3_nxxjw")
 object_to_spawn = ExtResource("12_p87s2")
-spawn_chance = 0.3
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_7pmke"]
-script = ExtResource("3_nxxjw")
-object_to_spawn = ExtResource("13_5cxrs")
-spawn_chance = 0.2
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_qr8nu"]
-script = ExtResource("3_nxxjw")
-object_to_spawn = ExtResource("14_he2c8")
-spawn_chance = 0.02
+spawn_chance = 0.1
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_rqkl3"]
 script = ExtResource("3_nxxjw")
 object_to_spawn = ExtResource("15_tvho2")
-spawn_chance = 0.3
+spawn_chance = 0.1
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_ktgl8"]
@@ -216,71 +189,70 @@ object_to_spawn = ExtResource("31_pxco1")
 spawn_chance = 0.1
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_4wdfq"]
+[sub_resource type="Resource" id="Resource_m75ds"]
 script = ExtResource("3_nxxjw")
 object_to_spawn = ExtResource("35_fhb31")
 spawn_chance = 0.2
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_6kd6u"]
-script = ExtResource("3_nxxjw")
-object_to_spawn = ExtResource("36_2cu0c")
-spawn_chance = 0.1
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_mhhqv"]
-script = ExtResource("3_nxxjw")
-object_to_spawn = ExtResource("37_c1b8b")
-spawn_chance = 0.05
-metadata/_custom_type_script = "uid://3e36ru1e7k78"
-
-[sub_resource type="Resource" id="Resource_vjghr"]
+[sub_resource type="Resource" id="Resource_swrgm"]
 script = ExtResource("3_nxxjw")
 object_to_spawn = ExtResource("37_vqwww")
 spawn_chance = 0.5
-max_amount = 2
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_2ygic"]
+[sub_resource type="Resource" id="Resource_doxk5"]
 script = ExtResource("3_nxxjw")
 object_to_spawn = ExtResource("38_7pmke")
 spawn_chance = 0.35
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_6dcql"]
+[sub_resource type="Resource" id="Resource_hrn82"]
 script = ExtResource("3_nxxjw")
 object_to_spawn = ExtResource("39_qr8nu")
 spawn_chance = 0.35
-max_amount = 2
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_py4py"]
+[sub_resource type="Resource" id="Resource_lr8hq"]
 script = ExtResource("3_nxxjw")
 object_to_spawn = ExtResource("40_rqkl3")
 spawn_chance = 0.5
-max_amount = 2
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_otxe0"]
+[sub_resource type="Resource" id="Resource_hrjhm"]
 script = ExtResource("3_nxxjw")
 object_to_spawn = ExtResource("41_ktgl8")
 spawn_chance = 0.25
-max_amount = 2
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
-[sub_resource type="Resource" id="Resource_qdwoy"]
+[sub_resource type="Resource" id="Resource_hjn7c"]
 script = ExtResource("3_nxxjw")
 object_to_spawn = ExtResource("42_3md2n")
 spawn_chance = 0.5
-max_amount = 2
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_7pmke"]
+script = ExtResource("3_nxxjw")
+object_to_spawn = ExtResource("37_c1b8b")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_qr8nu"]
+script = ExtResource("3_nxxjw")
+object_to_spawn = ExtResource("38_atcha")
 metadata/_custom_type_script = "uid://3e36ru1e7k78"
 
 [sub_resource type="Resource" id="Resource_8mq0c"]
+script = ExtResource("3_nxxjw")
+object_to_spawn = ExtResource("39_1ipjs")
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_pqunv"]
 resource_local_to_scene = true
 script = ExtResource("5_urdfy")
 min_amount = 1
-max_amount = 5
-potential_slots = Array[ExtResource("3_nxxjw")]([SubResource("Resource_3jrad"), SubResource("Resource_e1mr1"), SubResource("Resource_ildup"), SubResource("Resource_fhb31"), SubResource("Resource_2cu0c"), SubResource("Resource_c1b8b"), SubResource("Resource_atcha"), SubResource("Resource_1ipjs"), SubResource("Resource_vqwww"), SubResource("Resource_7pmke"), SubResource("Resource_qr8nu"), SubResource("Resource_rqkl3"), SubResource("Resource_ktgl8"), SubResource("Resource_3md2n"), SubResource("Resource_2hm72"), SubResource("Resource_fxmgv"), SubResource("Resource_xtniw"), SubResource("Resource_pxco1"), SubResource("Resource_s0qxi"), SubResource("Resource_ftq36"), SubResource("Resource_f140h"), SubResource("Resource_pm71s"), SubResource("Resource_ce5ce"), SubResource("Resource_m3og3"), SubResource("Resource_nb4j4"), SubResource("Resource_ol2yb"), SubResource("Resource_h25ep"), SubResource("Resource_dh78f"), SubResource("Resource_4wdfq"), SubResource("Resource_6kd6u"), SubResource("Resource_mhhqv"), SubResource("Resource_vjghr"), SubResource("Resource_2ygic"), SubResource("Resource_6dcql"), SubResource("Resource_py4py"), SubResource("Resource_otxe0"), SubResource("Resource_qdwoy")])
+max_amount = 6
+potential_slots = Array[ExtResource("3_nxxjw")]([SubResource("Resource_3jrad"), SubResource("Resource_e1mr1"), SubResource("Resource_ildup"), SubResource("Resource_fhb31"), SubResource("Resource_2cu0c"), SubResource("Resource_1ipjs"), SubResource("Resource_vqwww"), SubResource("Resource_rqkl3"), SubResource("Resource_ktgl8"), SubResource("Resource_3md2n"), SubResource("Resource_2hm72"), SubResource("Resource_fxmgv"), SubResource("Resource_xtniw"), SubResource("Resource_pxco1"), SubResource("Resource_s0qxi"), SubResource("Resource_ftq36"), SubResource("Resource_f140h"), SubResource("Resource_pm71s"), SubResource("Resource_ce5ce"), SubResource("Resource_m3og3"), SubResource("Resource_nb4j4"), SubResource("Resource_ol2yb"), SubResource("Resource_h25ep"), SubResource("Resource_dh78f"), SubResource("Resource_m75ds"), SubResource("Resource_swrgm"), SubResource("Resource_doxk5"), SubResource("Resource_hrn82"), SubResource("Resource_lr8hq"), SubResource("Resource_hrjhm"), SubResource("Resource_hjn7c"), SubResource("Resource_7pmke"), SubResource("Resource_qr8nu"), SubResource("Resource_8mq0c")])
+max_condition = 50.0
 title = "Chest"
 metadata/_custom_type_script = "uid://b34kwea65we13"
 
@@ -289,7 +261,7 @@ size = Vector3(1, 0.5, 0.75)
 
 [node name="chest2" unique_id=322397117 groups=["persist"] instance=ExtResource("1_lewkn")]
 
-[node name="Cube" parent="." index="0" unique_id=724951894]
+[node name="Cube" parent="." index="0" unique_id=698671006]
 transform = Transform3D(0.5, 0, 0, 0, 0.25, 0, 0, 0, 0.375, 0, 0.25, 0)
 surface_material_override/0 = ExtResource("9_3milu")
 
@@ -297,8 +269,8 @@ surface_material_override/0 = ExtResource("9_3milu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 collision_layer = 17
 script = ExtResource("2_aceba")
-inventory = SubResource("Resource_8mq0c")
-locked_chance = 0.25
+inventory = SubResource("Resource_pqunv")
+locked_chance = 0.1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=890127212]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.96046e-08)

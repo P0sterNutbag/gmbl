@@ -17,8 +17,8 @@ func _process(_delta: float) -> void:
 			all_dead = false
 	if all_dead:
 		Globals.survival_ui.create_notification("Victory!")
-		Globals.survival_ui.create_notification("You recieved $100")
-		PlayerStats.inventory.money += 100
+		Globals.survival_ui.create_notification("You recieved $50")
+		PlayerStats.inventory.money += 50
 		PlayerStats.arena_level += 1
 		transition_timer.start()
 		set_process(false)

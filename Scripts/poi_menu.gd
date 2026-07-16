@@ -7,6 +7,7 @@ extends PanelContainer
 @onready var poi_donations: VBoxContainer = $"../PoiDonations"
 @onready var recruit_menu: VBoxContainer = $"../RecruitMenu"
 @onready var upgrade_menu: VBoxContainer = $"../PoiUpgradeMenu"
+@onready var build_menu: VBoxContainer = $"../PoiBuildMenu"
 var location: Location
 
 
@@ -30,7 +31,7 @@ func _on_enter_pressed() -> void:
 
 
 func _on_upgrade_pressed() -> void:
-	UiController.open_subinterface(upgrade_menu)
+	UiController.open_subinterface(build_menu)
 
 
 func _on_recruit_pressed() -> void:

@@ -4,6 +4,7 @@ class_name Encounter
 @export var location_data: LocationData
 @export var spawn_parents: Array[Node3D]
 @export var kills_effect_relation: bool = true
+@export var change_location_data: bool = true
 var intel_timer: Timer
 
 
@@ -19,6 +20,8 @@ func _ready() -> void:
 
 
 func update_location_data() -> void:
+	if !change_location_data:
+		return
 	if Globals.overworld and intel_timer.time_left <= 0:
 		var poi = Globals.overworld.current_encounter.point_of_interest
 		poi.show_population = true

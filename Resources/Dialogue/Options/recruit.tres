@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://ck7j7t8co2rbt" path="res://Scripts/dialogue_base.gd" id="1_gi58c"]
 [ext_resource type="Script" uid="uid://b2lfe52ud4ctk" path="res://Scripts/dialogue_branch_option.gd" id="2_3wowj"]
 [ext_resource type="Script" uid="uid://de6rxup5nru4w" path="res://Scripts/dialogue.gd" id="2_foobv"]
+[ext_resource type="Resource" uid="uid://8ugbv0u0urvn" path="res://Resources/Dialogue/insufficient_funds.tres" id="4_clqv4"]
+[ext_resource type="Script" uid="uid://cxdd8jo8xmqfb" path="res://Scripts/dialogue_condition_variable.gd" id="5_ln1el"]
+[ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="6_olxch"]
+[ext_resource type="Script" uid="uid://brq5lvk7ek4ux" path="res://Scripts/dialogue_branch.gd" id="7_nqxmp"]
 [ext_resource type="Script" uid="uid://cnu4xeujmgk51" path="res://Scripts/dialogue_options.gd" id="7_olxch"]
 
 [sub_resource type="Resource" id="Resource_6pml4"]
@@ -10,9 +14,31 @@ script = ExtResource("2_foobv")
 text = "One of us would be willing to join you. How does 100 bucks sound?"
 metadata/_custom_type_script = "uid://de6rxup5nru4w"
 
+[sub_resource type="Resource" id="Resource_ryqxs"]
+script = ExtResource("6_olxch")
+method = "recruit_npc"
+arguments = [100]
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_qsdtj"]
+script = ExtResource("7_nqxmp")
+bubbles = Array[ExtResource("1_gi58c")]([SubResource("Resource_ryqxs")])
+metadata/_custom_type_script = "uid://brq5lvk7ek4ux"
+
+[sub_resource type="Resource" id="Resource_uo43m"]
+script = ExtResource("5_ln1el")
+path = "PlayerStats"
+value = "money"
+comparison = 1
+value2 = 99
+success_branch = SubResource("Resource_qsdtj")
+failure_branch = ExtResource("4_clqv4")
+metadata/_custom_type_script = "uid://cxdd8jo8xmqfb"
+
 [sub_resource type="Resource" id="Resource_si50u"]
 script = ExtResource("2_3wowj")
 text = "Pay"
+bubbles = Array[ExtResource("1_gi58c")]([SubResource("Resource_uo43m")])
 metadata/_custom_type_script = "uid://b2lfe52ud4ctk"
 
 [sub_resource type="Resource" id="Resource_7aqto"]

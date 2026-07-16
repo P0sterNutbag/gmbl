@@ -7,6 +7,7 @@ class_name QuestDeliveryRandom
 
 func generate_quest() -> Quest:
 	var quest = QuestDelivery.new()
+	quest.resource_local_to_scene = true
 	quest.type = "Delivery"
 	var item = potential_items[randi() % potential_items.size()]
 	quest.delivery_item = item

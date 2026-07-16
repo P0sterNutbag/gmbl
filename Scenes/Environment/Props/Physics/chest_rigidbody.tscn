@@ -1,17 +1,63 @@
-[gd_scene load_steps=3 format=3 uid="uid://cos56l7j2174s"]
+[gd_scene format=4 uid="uid://cos56l7j2174s"]
 
-[ext_resource type="PackedScene" uid="uid://m12xhyrtsknj" path="res://Art/Models/chest.glb" id="1_ama8l"]
+[ext_resource type="Script" uid="uid://dqdp6l81o8ei8" path="res://Scripts/item_container.gd" id="1_1d6oh"]
+[ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="2_hjvsu"]
+[ext_resource type="Script" uid="uid://6ucyr0petjnx" path="res://Scripts/inventory.gd" id="3_n2o1x"]
+[ext_resource type="Material" uid="uid://cwhba100ef4q3" path="res://Art/Materials/chest.tres" id="42_1d6oh"]
+
+[sub_resource type="Resource" id="Resource_m448y"]
+resource_local_to_scene = true
+script = ExtResource("3_n2o1x")
+space = 5
+title = "Chest"
+metadata/_custom_type_script = "uid://6ucyr0petjnx"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_70v2p"]
-size = Vector3(2, 1, 1.5)
+size = Vector3(0.6, 0.5, 0.6)
 
-[node name="ChestRigidbody" type="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+[sub_resource type="ArrayMesh" id="ArrayMesh_hjvsu"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAAAEAAEAAwAFAAIABQAAAAIABgAEAAAABQAGAAAABwABAAQABwADAAEABgAHAAQABQADAAcABQAHAAYA"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////wAAAAAAAP////8AAAAA//8AAAAAAAAAAP//AAD///////8AAAAAAAAAAAAA//8AAAAAAAD//wAA//8AAA==")
+}]
+blend_shape_mode = 0
 
-[node name="chest" parent="." instance=ExtResource("1_ama8l")]
+[sub_resource type="ArrayMesh" id="ArrayMesh_pmo8m"]
+resource_name = "chest_Cube"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"attribute_data": PackedByteArray("qqr//wAAiZ2qqomdAAD//6qqxE4AAAAAqqoAAAAAxE6qqiZ2//8AAP//JnaqqgAAqqr//wAAiZ2qqomdAAD//6qqJnb//wAA//8mdqqqAACqqomdAADETqqqxE4AAImd"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": ExtResource("42_1d6oh"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAAVNUAAP////9U1QAA//8AAFTV////////VNX//wAA//8AgAAA/////wCA////////AIAAAAAA//8AgAAAAAD//1TVAAD//wAAVNUAAP////9U1QAAAAAAAFTVAAAAAAAAVNX//wAA//9U1f//AAAAAFTVAAAAAP//VNX//wAAAABU1f///////1TV/////wAAVNX//wAA//9U1QAAAAAAAP///////wAA//8AAP//AAD/////AAAAAP//VNWqKlTVqipU1aoqVNWqKv9/////f////3////9///9U1VTVVNVU1VTVVNVU1VTVVFVUVVRVVFVUVVRVVFVUVaoqqiqqKqoqqiqqKqoqqir/f////3////9/////f///")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_hjvsu")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.96046e-08, -5.96046e-08)
+[node name="ChestRigidbody" type="RigidBody3D" unique_id=1041178891]
+collision_layer = 17
+script = ExtResource("1_1d6oh")
+inventory = SubResource("Resource_m448y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2121948054]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0026855469, 0.25402832, 0)
 shape = SubResource("BoxShape3D_70v2p")
 
-[editable path="chest"]
+[node name="Cube" type="MeshInstance3D" parent="." unique_id=1160549016]
+transform = Transform3D(0.3, 0, 0, 0, 0.25, 0, 0, 0, 0.3, 0, 0.25, 0)
+mesh = SubResource("ArrayMesh_pmo8m")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("42_1d6oh")

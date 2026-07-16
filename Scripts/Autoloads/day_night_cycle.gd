@@ -32,10 +32,10 @@ func _process(delta: float) -> void:
 	time += delta * time_speed
 	if time >= half_day_length:
 		time = half_day_length - 0.01
-		time_speed = -1
+		time_speed *= -1
 	if time <= -half_day_length:
 		time = -half_day_length + 0.01
-		time_speed = 1
+		time_speed = abs(time_speed)
 	if was_night != is_night:
 		if time_speed < 0:
 			night_start.emit()

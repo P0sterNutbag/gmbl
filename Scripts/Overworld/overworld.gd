@@ -26,11 +26,11 @@ func _enter_tree() -> void:
 		player.camera_anchor.rotation = Vector3.ZERO
 		player_died = false
 	elif current_encounter:
-		if current_encounter.location_data.population <= 0:
-			if current_encounter.get_parent() is CharacterBody3D:
-				current_encounter.get_parent().die()
-			elif current_encounter.location_data.faction != FactionManager.factions.player and !BattleManager.get_battle(current_encounter):
-				UiController.open_interface(Globals.ui.territory_popup)
+		#if current_encounter.location_data.population <= 0:
+			#if current_encounter.get_parent() is CharacterBody3D:
+				#current_encounter.get_parent().die()
+			#elif current_encounter.location_data.faction != FactionManager.factions.player and !BattleManager.get_battle(current_encounter):
+				#UiController.open_interface(Globals.ui.territory_popup)
 		var encounter_pos = current_encounter.global_position
 		player_spawn_position = encounter_pos + (player_spawn_vector * 4).rotated(Vector3.UP, current_encounter.rotation.y)
 		player_spawn_position.y = Globals.get_heightmap_position(player_spawn_position)

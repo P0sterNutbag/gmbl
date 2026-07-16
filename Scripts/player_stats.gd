@@ -46,9 +46,9 @@ var max_hunger: float
 var max_thirst: float
 var max_soberness: float = 1.0
 var sleep_decrease_rate := 0.2
-var hunger_decrease_rate := 0.3
-var thirst_decrease_rate := 0.4
-var skill_points = 3.0
+var hunger_decrease_rate := 0.2
+var thirst_decrease_rate := 0.25
+var skill_points := 3.0
 var arena_level := 0
 var shooting_level := 0
 var saved_style: NpcStyle
@@ -72,9 +72,9 @@ func _ready() -> void:
 	SaveController.load.connect(_on_load)
 	gun_changed.connect(_on_gun_changed)
 	await get_tree().process_frame
-	max_sleep = DayNightCycle.day_length / sleep_decrease_rate
-	max_hunger = DayNightCycle.day_length / hunger_decrease_rate
-	max_thirst = DayNightCycle.day_length / thirst_decrease_rate
+	max_sleep = DayNightCycle.day_length / (sleep_decrease_rate * abs(DayNightCycle.time_speed))
+	max_hunger = DayNightCycle.day_length / (hunger_decrease_rate * abs(DayNightCycle.time_speed))
+	max_thirst = DayNightCycle.day_length / (thirst_decrease_rate * abs(DayNightCycle.time_speed))
 	sleep = max_sleep
 	hunger = max_hunger
 	thirst = max_thirst

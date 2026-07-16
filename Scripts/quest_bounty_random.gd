@@ -29,6 +29,7 @@ class_name QuestBountyRandom
 
 func generate_quest() -> Quest:
 	var quest = QuestBounty.new()
+	quest.resource_local_to_scene = true
 	quest.type = type
 	var locations = Globals.get_tree().get_nodes_in_group("location").filter(func(i): return target_factions.has(i.location_data.faction) and i.encounter_scene != null and i.can_spawn_npcs)
 	var location = locations[randi_range(0, locations.size()-1)]

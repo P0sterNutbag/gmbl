@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="DialogueBranch" format=3 uid="uid://8ugbv0u0urvn"]
+
+[ext_resource type="Script" uid="uid://ck7j7t8co2rbt" path="res://Scripts/dialogue_base.gd" id="1_1y021"]
+[ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="2_as6yn"]
+[ext_resource type="Script" uid="uid://brq5lvk7ek4ux" path="res://Scripts/dialogue_branch.gd" id="3_6cd6j"]
+
+[sub_resource type="Resource" id="Resource_lqy31"]
+script = ExtResource("2_as6yn")
+method = "create_notification"
+arguments = ["You don't have enough monye"]
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[resource]
+script = ExtResource("3_6cd6j")
+bubbles = Array[ExtResource("1_1y021")]([SubResource("Resource_lqy31")])
+metadata/_custom_type_script = "uid://brq5lvk7ek4ux"

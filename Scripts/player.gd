@@ -94,7 +94,7 @@ const PLAYER_STYLE = preload("uid://b4ypcwfcexyed")
 @onready var move_marker: Node3D = $MoveMarker
 @onready var hitbox_shape: CollisionShape3D = $Hitbox/CollisionShape3D
 @onready var player_third_person: Node3D = $PlayerThirdPerson
-
+signal reload_finished
 
 func _enter_tree() -> void:
 	PlayerStats.state = PlayerStats.states.walk
@@ -952,6 +952,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		gun.can_shoot = true
 	if anim_name == "reload":
 		change_gun_state(gun_states.point)
+		reload_finished.emit()
 
 
 func _on_breath_timer_timeout() -> void:

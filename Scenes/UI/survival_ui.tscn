@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://d34nt8desp71" path="res://Scripts/compass.gd" id="8_2dyl4"]
 [ext_resource type="PackedScene" uid="uid://dht8msbc26v1q" path="res://Scenes/UI/quest_marker.tscn" id="9_e5c6o"]
 [ext_resource type="PackedScene" uid="uid://dvwo5rcugthhe" path="res://Scenes/UI/inventory.tscn" id="9_to4rm"]
-[ext_resource type="Texture2D" uid="uid://u7nrdkhha2eb" path="res://Art/Textures/UI/drunk icon.png" id="10_c2wwi"]
 [ext_resource type="Script" uid="uid://b37bjjekoe1qe" path="res://Scripts/journal_menu.gd" id="10_vghdt"]
 [ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="11_0pkni"]
 [ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="12_2dyl4"]
@@ -217,7 +216,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mode = 1
-can_drop_items = true
 opposing_ui = NodePath("../Inventory2")
 
 [node name="Inventory2" parent="TransferInventory/HboxContainer" unique_id=515701084 node_paths=PackedStringArray("opposing_ui") instance=ExtResource("9_to4rm")]
@@ -225,6 +223,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mode = 1
+show_money = false
 opposing_ui = NodePath("../Inventory")
 
 [node name="PauseMenu" parent="." unique_id=74152501 instance=ExtResource("19_oq622")]
@@ -370,6 +369,7 @@ size_flags_horizontal = 1
 text = "Clans"
 
 [node name="SquadTab" parent="Menus/VBoxContainer/Toolbar/Tabs/MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(2045520645, 1909442391) index="4" unique_id=2141166237 instance=ExtResource("22_jtf3n")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 1
 text = "Squad"
@@ -974,8 +974,10 @@ expand_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "thirst"
 danger_message = "You feel thirsty"
+danger_message2 = "You are sick from dehydration."
 critical_message = "You're dying of thirst!"
 show_treshold = 0.75
+warning_treshold = 0.3
 
 [node name="Hunger" type="TextureRect" parent="PlayerHealth/VBoxContainer" unique_id=1407439282 groups=["persist"]]
 custom_minimum_size = Vector2(15, 15)
@@ -986,8 +988,10 @@ expand_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "hunger"
 danger_message = "You feel hungry"
+danger_message2 = "You are sick from malnutrition."
 critical_message = "You're starving!"
 show_treshold = 0.75
+warning_treshold = 0.3
 
 [node name="Sleep" type="TextureRect" parent="PlayerHealth/VBoxContainer" unique_id=72998721 groups=["persist"]]
 custom_minimum_size = Vector2(15, 15)
@@ -998,18 +1002,10 @@ expand_mode = 2
 script = ExtResource("2_k4cvi")
 stat_name = "sleep"
 danger_message = "You feel sleepy"
+danger_message2 = "You feel really tired"
 critical_message = "You feel extremely tired"
-
-[node name="Alcolhol" type="TextureRect" parent="PlayerHealth/VBoxContainer" unique_id=1716683138 groups=["persist"]]
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 2
-tooltip_text = "Drunk"
-texture = ExtResource("10_c2wwi")
-expand_mode = 2
-script = ExtResource("2_k4cvi")
-stat_name = "soberness"
-danger_message = "You got drunk"
-show_treshold = 1.0
+show_treshold = 0.5
+warning_treshold = 0.25
 
 [node name="LogContainer" type="Control" parent="." unique_id=2103638854]
 clip_contents = true

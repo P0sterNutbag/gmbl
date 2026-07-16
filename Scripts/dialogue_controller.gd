@@ -227,7 +227,7 @@ func set_recruit_price() -> void:
 	dialogue_tree.bubbles[index + 2].arguments[0] = amount
 
 
-func recruit_npc(amount:int) -> void:
+func recruit_npc(amount: int) -> void:
 	PlayerStats.inventory.money -= amount
 	var location_data = Globals.overworld.current_encounter.location_data
 	location_data.population = clamp(location_data.population - 1, 1, 100)
@@ -237,7 +237,6 @@ func recruit_npc(amount:int) -> void:
 	Globals.survival_ui.create_notification("You payed $" + str(amount))
 	Globals.survival_ui.create_notification("Ally added to party")
 	advance_dialogue(index + 1)
-	dialogue_tree.bubbles[1].options.remove_at(1)
 
 
 func move_player(dest: Vector3) -> void:

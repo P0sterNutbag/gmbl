@@ -92,6 +92,9 @@ func _ready() -> void:
 
 func start_encounter() -> void:
 	Globals.overworld.current_encounter = self
+	if location_data.population == 0:
+		UiController.open_interface(Globals.ui.empty_poi_menu)
+		return
 	var relation_score = FactionManager.get_faction_relation(location_data.faction, FactionManager.factions.player)
 	if BattleManager.get_battle(self):
 		transition_to_level()
@@ -160,6 +163,8 @@ func transition_to_level() -> void:
 
 
 func spawn_squad() -> Node3D:
+	if location_data.population == 0:
+		return
 	# spawn and position on map
 	var inst = NPC.instantiate()
 	inst.faction = location_data.faction

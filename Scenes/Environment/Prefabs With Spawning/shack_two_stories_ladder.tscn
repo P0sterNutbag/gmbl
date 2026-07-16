@@ -4,6 +4,7 @@
 [ext_resource type="Material" uid="uid://b4aard1qnyqin" path="res://Art/Materials/tin_triplanar_gray.tres" id="2_mdli8"]
 [ext_resource type="Texture2D" uid="uid://bkxsoff507nnd" path="res://Art/Textures/Environment/tin roof.png" id="3_oakhu"]
 [ext_resource type="PackedScene" uid="uid://c4oumjgjpl4tq" path="res://Scenes/Environment/Props/staircase.tscn" id="4_aot5j"]
+[ext_resource type="Material" uid="uid://b1n5rdswyy3bx" path="res://Art/Materials/tin_triplanar_gray_horizontal.tres" id="4_oakhu"]
 [ext_resource type="PackedScene" uid="uid://wfbh2lfg703p" path="res://Scenes/Environment/Props/ladder.tscn" id="5_h7ipw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bewqg"]
@@ -74,12 +75,14 @@ transform = Transform3D(-0.889982, 0, 0.455995, 0, 1, 0, -0.455995, 0, -0.889982
 [node name="CSGBakedMeshInstance3D2" type="MeshInstance3D" parent="Objects" parent_id_path=PackedInt32Array(1515362158) index="0" unique_id=812278716 groups=["align_aabb"]]
 mesh = SubResource("ArrayMesh_xr450")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_mdli8")
+surface_material_override/1 = ExtResource("4_oakhu")
 
 [node name="Stairs2" parent="Objects/CSGBakedMeshInstance3D2" index="0" unique_id=1330263869 instance=ExtResource("4_aot5j")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.8, 0, 1.9)
 
 [node name="Ladder" parent="Objects/CSGBakedMeshInstance3D2" index="1" unique_id=103020037 instance=ExtResource("5_h7ipw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75, 3.155, 2.387)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75, 3.155, 2.533556)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Objects/CSGBakedMeshInstance3D2" index="2" unique_id=46814437]
 

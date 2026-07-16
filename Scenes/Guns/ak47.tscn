@@ -18,7 +18,7 @@ noise_radius = 75.0
 is_hitscan = false
 metadata/_custom_type_script = "uid://c338ifvm4duar"
 
-[sub_resource type="Resource" id="Resource_j0gby"]
+[sub_resource type="Resource" id="Resource_e4l5w"]
 resource_local_to_scene = true
 script = ExtResource("5_7hf8y")
 ammo = 24
@@ -28,7 +28,7 @@ metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 script = ExtResource("6_48urk")
 metadata/_custom_type_script = "uid://4c6own63hs8c"
 
-[sub_resource type="Resource" id="Resource_a8cla"]
+[sub_resource type="Resource" id="Resource_j0gby"]
 resource_local_to_scene = true
 resource_name = "rifle_ammo"
 script = ExtResource("7_e4l5w")
@@ -49,14 +49,18 @@ stream_0/stream = ExtResource("8_48urk")
 
 [node name="AK47" unique_id=1046860869 instance=ExtResource("1_y3opf")]
 bullet_stats = SubResource("Resource_rtl1f")
-gun_stats = SubResource("Resource_j0gby")
-ammo_item = SubResource("Resource_a8cla")
+gun_stats = SubResource("Resource_e4l5w")
+ammo_item = SubResource("Resource_j0gby")
 can_change_fire_type = true
 engagement_range = 75.0
 shell = ExtResource("8_e4l5w")
 
 [node name="FirePoint" parent="GunAnchor" parent_id_path=PackedInt32Array(1970548578) index="0" unique_id=1901170218]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00265765, 0.12846725, -0.8650912)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00265765, 0.12846725, -0.7919046)
+visible = false
+
+[node name="MuzzleFlash" parent="GunAnchor/FirePoint" index="0" unique_id=540190188]
+visible = true
 
 [node name="AudioStreamPlayer3D" parent="GunAnchor/FirePoint" index="1" unique_id=382067649]
 stream = SubResource("AudioStreamRandomizer_48urk")

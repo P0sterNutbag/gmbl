@@ -1,7 +1,7 @@
 extends InteractableObject
 class_name ItemContainer
 
-@export var inventory: InventoryRandom
+@export var inventory: Inventory
 @export var locked_chance: float
 var locked: bool
 

@@ -1,14 +1,8 @@
 [gd_scene format=4 uid="uid://l1eb7nix2iki"]
 
 [ext_resource type="Material" uid="uid://brr5rgo0swhv5" path="res://Art/Materials/wood_triplanar.tres" id="1_ubey6"]
-[ext_resource type="Texture2D" uid="uid://bkxsoff507nnd" path="res://Art/Textures/Environment/tin roof.png" id="2_2goq3"]
+[ext_resource type="Material" uid="uid://b1n5rdswyy3bx" path="res://Art/Materials/tin_triplanar_gray_horizontal.tres" id="2_2goq3"]
 [ext_resource type="Material" uid="uid://b4aard1qnyqin" path="res://Art/Materials/tin_triplanar_gray.tres" id="3_2goq3"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ohuf"]
-albedo_texture = ExtResource("2_2goq3")
-metallic_specular = 0.0
-uv1_triplanar = true
-texture_filter = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_32b5i"]
 _surfaces = [{
@@ -24,7 +18,7 @@ _surfaces = [{
 "aabb": AABB(-4.62195, 2.98391, -4.65278, 9.15277, 0.25, 9.33423),
 "attribute_data": PackedByteArray("AAAAAAAAgD+98bM+sjluP7RjaT2zOW4/AACAPwAAgD+98bM+sjluPwAAAAAAAIA/vfGzPrI5bj9S9CE/cF5nP73xsz5wXmc/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/vfGzPnBeZz9S9CE/cF5nP4rerD2Igcs9AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AAAAAAAAgD+0Y2k9szluP7RjaT1wXmc/vfGzPnBeZz+K3qw9iIHLPYrerD1wXmc/AAAAAAAAgD+0Y2k9cF5nPxvcaT2Igcs9G9xpPYiByz20Y2k9cF5nPxvcaT1wXmc/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAABWX2k9caeUPdpXbj9xp5Q9AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAgD8b3Gk9iIHLPVZfaT2Igcs9AAAAAAAAgD9WX2k9iIHLPVZfaT1xp5Q9AAAAAAAAgD9WX2k9caeUPQAAAAAAAAAA2lduP3GnlD0AAIA/AAAAAAAAAAAAAAAA9NtuP/LclT0AAIA/AAAAANpXbj9xp5Q9AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAACAPwAAAAD0224/8tyVPfTbbj/vI24/it6sPYiByz1S9CE/cF5nP+XdZz9wXmc/9NtuP/LclT3aV24/caeUPdpXbj/y3JU9AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAA5d1nP4KByz2K3qw9iIHLPeXdZz9wXmc/AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAvfGzPrI5bj9S9CE/szluP1L0IT9wXmc/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAgD9S9CE/szluP73xsz6yOW4/AACAPwAAAAD0224/7yNuP6Pabj+yOW4/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAAACj2m4/sjluPwAAgD8AAIA/AACAPwAAgD+j2m4/sjluP1L0IT+zOW4/o9puP7I5bj/0224/7yNuP6Pabj/vI24/"),
 "format": 34359738391,
-"material": SubResource("StandardMaterial3D_1ohuf"),
+"material": ExtResource("2_2goq3"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 102,
@@ -44,6 +38,3 @@ surface_material_override/0 = ExtResource("3_2goq3")
 
 [node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="CSGBakedMeshInstance3D/StaticBody3D" unique_id=1874085844]
 shape = SubResource("ConcavePolygonShape3D_8iy47")
-
-[node name="SpawnRadius" type="Node3D" parent="." unique_id=659753546]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)

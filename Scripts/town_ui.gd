@@ -17,7 +17,7 @@ var current_shop: TownOption
 @onready var item_preferences: VBoxContainer = %ItemPreferences
 @onready var preferences_holder: Control = %PreferenceHolder
 @onready var poi_menu: PanelContainer = $PoiMenu
-@onready var territory_popup: VBoxContainer = $TerritoryPopup
+@onready var empty_poi_menu: PanelContainer = $EmptyPoiMenu
 
 
 func _enter_tree() -> void:

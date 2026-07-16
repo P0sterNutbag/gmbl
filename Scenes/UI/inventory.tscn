@@ -13,6 +13,7 @@
 [ext_resource type="Theme" uid="uid://brvyivgqkhmtc" path="res://Art/Themes/margin_container.tres" id="10_m06hg"]
 [ext_resource type="PackedScene" uid="uid://bj7gyfau2dx5w" path="res://Scenes/UI/menu_button.tscn" id="11_mnhd3"]
 [ext_resource type="Theme" uid="uid://bfjgfeibxk7i0" path="res://Art/Themes/slider.tres" id="11_or60b"]
+[ext_resource type="PackedScene" uid="uid://st2mrllebqci" path="res://Scenes/UI/spacer.tscn" id="12_kovtf"]
 [ext_resource type="Theme" uid="uid://efo20xxcf1e5" path="res://Art/Themes/vbox_container.tres" id="13_or60b"]
 
 [node name="Inventory" type="PanelContainer" unique_id=692215425]
@@ -184,6 +185,7 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Label2" type="Label" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1317589874]
+visible = false
 custom_minimum_size = Vector2(332, 0)
 layout_mode = 2
 theme = ExtResource("8_d513x")
@@ -191,9 +193,8 @@ text = "(cannot be recovered)"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Control" type="Control" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=218653395]
+[node name="Control2" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1024254626 instance=ExtResource("12_kovtf")]
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1428276076]
 layout_mode = 2
@@ -209,6 +210,9 @@ value = 100.0
 layout_mode = 2
 theme = ExtResource("3_mnhd3")
 text = "1"
+
+[node name="Control3" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1347258596 instance=ExtResource("12_kovtf")]
+layout_mode = 2
 
 [node name="DropItem" parent="DropMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=2140297426 instance=ExtResource("11_mnhd3")]
 layout_mode = 2

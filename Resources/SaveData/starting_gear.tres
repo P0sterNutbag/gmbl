@@ -4,17 +4,31 @@
 [ext_resource type="Script" uid="uid://6ucyr0petjnx" path="res://Scripts/inventory.gd" id="2_0kk57"]
 [ext_resource type="Resource" uid="uid://oaklo016ku8w" path="res://Resources/Items/Guns/pistol.tres" id="2_uj3ux"]
 [ext_resource type="Resource" uid="uid://6vfmilbkneur" path="res://Resources/Items/Ammo/pistol_ammo.tres" id="3_7nhum"]
+[ext_resource type="Resource" uid="uid://lrml50x6ifrj" path="res://Resources/Items/Guns/sawed_off.tres" id="3_x3xbf"]
 [ext_resource type="Resource" uid="uid://b531tc4pwfwel" path="res://Resources/Items/Consumable/crackers.tres" id="4_areri"]
+[ext_resource type="Resource" uid="uid://c6b6f17dikat7" path="res://Resources/Items/Guns/uzi.tres" id="4_rh8oq"]
 [ext_resource type="Resource" uid="uid://c4vot4kh7bffi" path="res://Resources/Items/Consumable/bandage.tres" id="5_2xu7k"]
 [ext_resource type="Resource" uid="uid://bmllms5nonko8" path="res://Resources/Items/Consumable/beer.tres" id="6_2xu7k"]
 [ext_resource type="Resource" uid="uid://m28p1phfm50g" path="res://Resources/Items/Utility/compass.tres" id="7_yh1cm"]
 [ext_resource type="Resource" uid="uid://fioag0fe2wqb" path="res://Resources/Items/Utility/flashlight.tres" id="8_no4hw"]
 [ext_resource type="Resource" uid="uid://pl1ophn2prl0" path="res://Resources/Items/Guns/knife.tres" id="9_no4hw"]
 [ext_resource type="Resource" uid="uid://cf41qwurikia4" path="res://Resources/Items/Consumable/tourniquet.tres" id="11_ov6eg"]
+[ext_resource type="Resource" uid="uid://dgo34up8hytn6" path="res://Resources/Items/Ammo/smg_ammo.tres" id="13_f5r8p"]
+[ext_resource type="Resource" uid="uid://c0mlniyk1an3w" path="res://Resources/Items/Ammo/shotgun_ammo.tres" id="14_lick1"]
 
 [sub_resource type="Resource" id="Resource_2xu7k"]
 script = ExtResource("1_gifll")
 item = ExtResource("2_uj3ux")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_gt22b"]
+script = ExtResource("1_gifll")
+item = ExtResource("3_x3xbf")
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_xam1g"]
+script = ExtResource("1_gifll")
+item = ExtResource("4_rh8oq")
 metadata/_custom_type_script = "uid://cfuex8bm4d62j"
 
 [sub_resource type="Resource" id="Resource_a7yvq"]
@@ -61,9 +75,21 @@ script = ExtResource("1_gifll")
 item = ExtResource("11_ov6eg")
 metadata/_custom_type_script = "uid://cfuex8bm4d62j"
 
+[sub_resource type="Resource" id="Resource_xxxlv"]
+script = ExtResource("1_gifll")
+item = ExtResource("13_f5r8p")
+amount = 3
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
+[sub_resource type="Resource" id="Resource_40htm"]
+script = ExtResource("1_gifll")
+item = ExtResource("14_lick1")
+amount = 9
+metadata/_custom_type_script = "uid://cfuex8bm4d62j"
+
 [resource]
 script = ExtResource("2_0kk57")
-item_slots = Array[ExtResource("1_gifll")]([SubResource("Resource_2xu7k"), SubResource("Resource_a7yvq"), SubResource("Resource_ov6eg"), SubResource("Resource_x3xbf"), SubResource("Resource_rh8oq"), SubResource("Resource_uj3ux"), SubResource("Resource_7nhum"), SubResource("Resource_areri"), SubResource("Resource_lick1")])
+item_slots = Array[ExtResource("1_gifll")]([SubResource("Resource_2xu7k"), SubResource("Resource_gt22b"), SubResource("Resource_xam1g"), SubResource("Resource_a7yvq"), SubResource("Resource_ov6eg"), SubResource("Resource_x3xbf"), SubResource("Resource_rh8oq"), SubResource("Resource_uj3ux"), SubResource("Resource_7nhum"), SubResource("Resource_areri"), SubResource("Resource_lick1"), SubResource("Resource_xxxlv"), SubResource("Resource_40htm")])
 space = 100
 money = 10000
 title = "Available Gear"

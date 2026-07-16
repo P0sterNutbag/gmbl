@@ -7,6 +7,7 @@ var shop: Shop
 
 func generate_quest() -> Quest:
 	var quest = QuestFetch.new()
+	quest.resource_local_to_scene = true
 	quest.type = "Fetch"
 	var filtered_items
 	if shop:

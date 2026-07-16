@@ -13,6 +13,7 @@ class_name LocationData
 @export var armor_level = 0
 @export var armor_level_chance = [1.0, 0.0, 0.0, 0.0]
 @export var resources := 1.0
+@export_storage var current_buildings : Array[String]
 
 
 func change_population(amount: int = 1) -> void:

@@ -1,15 +1,8 @@
 [gd_scene format=4 uid="uid://dergqrsprx3qg"]
 
-[ext_resource type="Texture2D" uid="uid://bkxsoff507nnd" path="res://Art/Textures/Environment/tin roof.png" id="2_8kmit"]
 [ext_resource type="Material" uid="uid://b1n5rdswyy3bx" path="res://Art/Materials/tin_triplanar_gray_horizontal.tres" id="3_cxd5t"]
 [ext_resource type="PackedScene" uid="uid://c4oumjgjpl4tq" path="res://Scenes/Environment/Props/staircase.tscn" id="4_3fv3q"]
 [ext_resource type="Material" uid="uid://b4aard1qnyqin" path="res://Art/Materials/tin_triplanar_gray.tres" id="4_kvwnx"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqdgb"]
-albedo_texture = ExtResource("2_8kmit")
-metallic_specular = 0.0
-uv1_triplanar = true
-texture_filter = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_kvwnx"]
 _surfaces = [{
@@ -25,7 +18,7 @@ _surfaces = [{
 "aabb": AABB(-4.5, 3, -4.5, 9, 0.19999981, 9),
 "attribute_data": PackedByteArray("AACAPwAAgD8cx3E/HMdxP8IWbD8cx3E/AACAPwAAgD/CFmw/HMdxP6uqKj8cx3E/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8cx3E/8kmfPRzHcT8cx3E/AACAPwAAAADBFmw/chzHPgAAgD8AAIA/whZsP8EWbD/BFmw/P+mTPsEWbD/HcRw/whZsP8EWbD/BFmw/x3EcPzMzMz/HcRw/AACAPwAAAAAzMzM/chzHPsEWbD9yHMc+AACAPwAAgD+rqio/HMdxP6qqqj4cx3E/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/q6oqPxzHcT+rqio/whZsP6qqqj4cx3E/AACAPwAAAAAAAAAAAAAAADMzMz9yHMc+whZsP8EWbD/ySZ899UmfPauqKj/CFmw/whZsP8EWbD8zMzM/x3EcP/JJnz31SZ89AACAPwAAgD8cx3E/K45jPRzHcT/ySZ89whZsP8EWbD/CFmw/8kmfPcEWbD8/6ZM+AACAPwAAgD8AAIA/AAAAABzHcT8rjmM9AAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAACAPwAAgD/BFmw/chzHPsEWbD9hCzY/whZsP/JJnz3BFmw/9UmfPcEWbD8/6ZM+whZsP/JJnz0zMzM/9UmfPcEWbD/1SZ89AACAPwAAgD/BFmw/YQs2PwAAAAAAAIA/AACAPwAAAAA5jmM9OY5jPRzHcT8rjmM9AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AAAAAAAAgD/BFmw/YQs2PzMzMz9hCzY/whZsP/JJnz3ySZ899UmfPTMzMz/1SZ89AACAPwAAgD+qqqo+HMdxPwAAAAAAAIA/q6oqP8IWbD+qqqo+wRZsP6qqqj4cx3E/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAzMzM/YQs2PzMzMz9yHMc+q6oqP8IWbD/ySZ899UmfPaqqqj7BFmw/qqqqPhzHcT/ySZ89HMdxPwAAAAAAAIA/8kmfPRzHcT85jmM9HMdxPwAAAAAAAIA/qqqqPsEWbD/ySZ899UmfPfJJnz3CFmw/OY5jPRzHcT85jmM99UmfPQAAAAAAAIA/AAAAAAAAgD8AAIA/AACAPwAAAAAAAAAA8kmfPfVJnz0zMzM/x3EcPzMzMz8+6ZM+MzMzP/VJnz3ySZ899UmfPTMzMz8+6ZM+AACAPwAAAAAAAAAAAAAAADmOYz05jmM9AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPzMzMz9hCzY/AAAAAAAAgD85jmM99UmfPTmOYz05jmM9AAAAAAAAgD85jmM9OY5jPQAAAAAAAAAAAAAAAAAAAAAAAIA/AACAPwAAgD8AAAAA"),
 "format": 34359738391,
-"material": SubResource("StandardMaterial3D_aqdgb"),
+"material": ExtResource("3_cxd5t"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 132,
@@ -56,6 +49,3 @@ shape = SubResource("ConcavePolygonShape3D_rsttb")
 
 [node name="Stairs" parent="CSGBakedMeshInstance3D2" unique_id=52321104 instance=ExtResource("4_3fv3q")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.8, 0, 1.9)
-
-[node name="SpawnRadius" type="Node3D" parent="." unique_id=626188538]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)

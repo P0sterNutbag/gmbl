@@ -239,12 +239,23 @@ func item_is_in_category(item: Item) -> bool:
 
 func drop_item():
 	var item = menu_item_to_drop.resource
-	source_inventory.remove_item(item, int(drop_amount_h_slider.value))
+	var amount = int(drop_amount_h_slider.value)
+	source_inventory.remove_item(item, amount)
 	var item_slot = source_inventory.find_item_slot(item)
 	if item_slot:
 		menu_item_to_drop.amount = item_slot.amount
 	else:
 		menu_item_to_drop.queue_free()
+	var chest_scene = load("res://Scenes/Environment/Props/Physics/chest_rigidbody.tscn")
+	var inst = chest_scene.instantiate()
+	get_tree().current_scene.add_child(inst)
+	var spawn_pos = Globals.player.global_transform.origin - Globals.player.global_transform.basis.z
+	inst.global_position = spawn_pos
+	inst.global_position.y = Globals.get_heightmap_position(inst.global_position)
+	inst.inventory.add_item(item, amount)
+	inst.look_at(Globals.player.global_position)
+	inst.rotation_degrees.x = 0
+	inst.rotation_degrees.z = 0
 
 
 func _on_v_box_container_visibility_changed() -> void:

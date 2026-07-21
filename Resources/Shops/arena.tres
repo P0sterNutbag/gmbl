@@ -3,10 +3,8 @@
 [ext_resource type="Script" uid="uid://ck7j7t8co2rbt" path="res://Scripts/dialogue_base.gd" id="1_u2ik2"]
 [ext_resource type="Script" uid="uid://de6rxup5nru4w" path="res://Scripts/dialogue.gd" id="2_3qrl7"]
 [ext_resource type="Script" uid="uid://b2lfe52ud4ctk" path="res://Scripts/dialogue_branch_option.gd" id="3_aw8pd"]
-[ext_resource type="Script" uid="uid://cxdd8jo8xmqfb" path="res://Scripts/dialogue_condition_variable.gd" id="4_aw8pd"]
-[ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="4_ch5i3"]
 [ext_resource type="Script" uid="uid://cnu4xeujmgk51" path="res://Scripts/dialogue_options.gd" id="5_8kgow"]
-[ext_resource type="Script" uid="uid://brq5lvk7ek4ux" path="res://Scripts/dialogue_branch.gd" id="6_ch5i3"]
+[ext_resource type="Resource" uid="uid://j7f10swjqxod" path="res://Resources/Dialogue/pay.tres" id="5_aw8pd"]
 [ext_resource type="Resource" uid="uid://nm0e00c2fx4" path="res://Resources/NpcStyles/npc_styles.tres" id="6_ufi6q"]
 [ext_resource type="Script" uid="uid://c7wqhgal4us2a" path="res://Scripts/dialogue_tree.gd" id="7_c3pbh"]
 [ext_resource type="Resource" uid="uid://bq7jxm84v8xce" path="res://Resources/Dialogue/Options/leave_shop.tres" id="8_ch5i3"]
@@ -28,48 +26,10 @@ script = ExtResource("2_3qrl7")
 text = "Great! The entry fee is $25, but if you win you'll earn $50."
 metadata/_custom_type_script = "uid://de6rxup5nru4w"
 
-[sub_resource type="Resource" id="Resource_oilue"]
-script = ExtResource("4_ch5i3")
-method = "create_notification"
-arguments = ["You don't have enough money"]
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
-
-[sub_resource type="Resource" id="Resource_8x2d6"]
-script = ExtResource("6_ch5i3")
-bubbles = Array[ExtResource("1_u2ik2")]([SubResource("Resource_oilue")])
-metadata/_custom_type_script = "uid://brq5lvk7ek4ux"
-
-[sub_resource type="Resource" id="Resource_ch5i3"]
-script = ExtResource("4_ch5i3")
-method = "pay_fee"
-arguments = [25]
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
-
-[sub_resource type="Resource" id="Resource_ip6nd"]
-script = ExtResource("4_ch5i3")
-method = "change_scene"
-arguments = ["res://Scenes/Levels/shooting_range.tscn"]
-metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
-
-[sub_resource type="Resource" id="Resource_ufi6q"]
-script = ExtResource("6_ch5i3")
-bubbles = Array[ExtResource("1_u2ik2")]([SubResource("Resource_ch5i3"), SubResource("Resource_ip6nd")])
-metadata/_custom_type_script = "uid://brq5lvk7ek4ux"
-
-[sub_resource type="Resource" id="Resource_c3pbh"]
-script = ExtResource("4_aw8pd")
-path = "PlayerStats"
-value = "money"
-comparison = 1
-value2 = 24
-success_branch = SubResource("Resource_ufi6q")
-failure_branch = SubResource("Resource_8x2d6")
-metadata/_custom_type_script = "uid://cxdd8jo8xmqfb"
-
 [sub_resource type="Resource" id="Resource_xgq6i"]
 script = ExtResource("3_aw8pd")
 text = "Pay"
-bubbles = Array[ExtResource("1_u2ik2")]([SubResource("Resource_c3pbh")])
+bubbles = Array[ExtResource("1_u2ik2")]([ExtResource("5_aw8pd")])
 metadata/_custom_type_script = "uid://b2lfe52ud4ctk"
 
 [sub_resource type="Resource" id="Resource_x1n3t"]

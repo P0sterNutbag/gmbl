@@ -6,14 +6,14 @@ class_name NpcData
 @export var style: NpcStyle
 @export var inventory: Inventory
 @export var armor_level: int
-@export var fire_power: int
+@export var firepower: int
 @export var gun_item: EquipmentGun
 var hp: float = 3
 var max_hp: float = 3
 
 
 func get_rank() -> String:
-	var pwr_lvl = fire_power
+	var pwr_lvl = firepower
 	if pwr_lvl == 0:
 		return "D"
 	elif pwr_lvl == 1:

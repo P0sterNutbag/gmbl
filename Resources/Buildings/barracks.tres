@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Building" format=3 uid="uid://b5jq04vjhbesn"]
+
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="1_kra1k"]
+[ext_resource type="Script" uid="uid://cwlbu21533kig" path="res://Scripts/building.gd" id="2_opjtn"]
+
+[sub_resource type="Resource" id="Resource_kra1k"]
+script = ExtResource("1_kra1k")
+values = Dictionary[String, Variant]({
+"max_population": 4
+})
+add = true
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[resource]
+script = ExtResource("2_opjtn")
+title = "Barracks"
+description = "+4 Max Population"
+price = 120
+effects = Array[ExtResource("1_kra1k")]([SubResource("Resource_kra1k")])
+metadata/_custom_type_script = "uid://cwlbu21533kig"

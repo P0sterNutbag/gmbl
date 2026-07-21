@@ -67,7 +67,7 @@ var gun_item: EquipmentGun
 func _ready() -> void:
 	gun_holder.get_child(0).queue_free()
 	if !npc_data.gun_item:
-		var gun_array = potential_guns[npc_data.fire_power]
+		var gun_array = potential_guns[npc_data.firepower]
 		npc_data.gun_item = gun_array[Globals.get_weighted_index(gun_array)].object_to_spawn.duplicate_deep()
 	gun = npc_data.gun_item.gun_object.instantiate()
 	gun.gun_stats.condition = randf_range(10, 20)

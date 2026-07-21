@@ -42,6 +42,10 @@ uniform float pixel_strength :hint_range(-4.0, 0.0) = -2.0;
 uniform int compression_on :hint_range(0, 1, 1);
 uniform float color_depth :hint_range(0.0, 255.0) = 100.0;
 uniform float color_number :hint_range(0.0, 50.0) = 20.0;
+uniform float dither_amount :hint_range(0.0, 1.0) = 0.0;
+//uniform vec3  tint_color = vec3(0.95, 1.03, 0.9);
+uniform vec4 tint_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform float tint_strength : hint_range(0.0, 1.0) = 0.15;
 //uniform vec4 color_swap_from : source_color;
 //uniform vec4 color_swap_to : source_color;
 //uniform float color_swap_tolerance: hint_range(0.0, 1.0);
@@ -169,6 +173,18 @@ const mat3 ycbcr2rgb = mat3(
     vec3(1.402, -0.714136, 0.0)
 );
 
+float bayer4x4(vec2 p){
+    int x = int(mod(p.x, 4.0));
+    int y = int(mod(p.y, 4.0));
+    int m[16] = int[16](
+        0,  8,  2, 10,
+       12,  4, 14,  6,
+        3, 11,  1,  9,
+       15,  7, 13,  5
+    );
+    return (float(m[y*4 + x]) + 0.5) / 16.0;
+}
+
 // simulating 8:4:4 compression ratio (16bit)
 vec3 compress_ycbcr_844 (vec3 rgb) {
 	vec3 ycbcr = rgb2ycbcr * rgb;
@@ -246,6 +262,16 @@ void fragment(){
 	if(compression_on > 0){
 		clr = compress_ycbcr_844(clr);
 	}
+	
+	if (dither_amount > 0.0) {
+		vec2 frag_xy = floor(SCREEN_UV / SCREEN_PIXEL_SIZE / 3.0);
+		float b = bayer4x4(frag_xy);
+		vec3 q = floor(clr * 8.0 + b * dither_amount);
+		clr = q / (8.0 - 1.0);
+	}
+	
+	vec3 _tint_color = vec3(tint_color.x, tint_color.y, tint_color.z);
+	clr = mix(clr, clr * _tint_color, tint_strength);
 	
 	COLOR.rgb = clr;
 	COLOR.a = 1.0;

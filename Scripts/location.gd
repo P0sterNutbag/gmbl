@@ -171,7 +171,7 @@ func spawn_squad() -> Node3D:
 	Globals.overworld.add_child(inst)
 	inst.location.location_data.faction = location_data.faction
 	inst.location.location_data.population = randi_range(min(2, location_data.population), min(4, location_data.population))
-	inst.location.location_data.fire_power_chance = location_data.fire_power_chance
+	inst.location.location_data.firepower_chance = location_data.firepower_chance
 	inst.location.location_data.armor_level_chance = location_data.armor_level_chance
 	inst.global_position = global_position
 	inst.global_position.y = Globals.get_heightmap_position(inst.global_position)	
@@ -215,7 +215,7 @@ func _on_grow_timer_timeout() -> void:
 
 
 func _on_attack_area_body_entered(body: Node3D) -> void:
-	if !can_proxmity_spawn or !can_spawn_npcs:
+	if !can_proxmity_spawn or !can_spawn_npcs or location_data.population == 0:
 		return
 	if body == Globals.player:
 		var population_difference = PlayerStats.allies.size() + 1 - location_data.population

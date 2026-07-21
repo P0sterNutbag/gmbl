@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://duj5tq2rlr20w"]
+
+[ext_resource type="Theme" uid="uid://cxuwiageci4sa" path="res://Art/Themes/panel_container.tres" id="1_346dn"]
+[ext_resource type="Script" uid="uid://csisv8e5b6fw7" path="res://Scripts/tooltip.gd" id="1_nkbhs"]
+[ext_resource type="Theme" uid="uid://dxelpr43irarh" path="res://Art/Themes/text_small_outline.tres" id="2_nkbhs"]
+[ext_resource type="Theme" uid="uid://efo20xxcf1e5" path="res://Art/Themes/vbox_container.tres" id="3_vvaoc"]
+
+[node name="ItemTooltip" type="Control" unique_id=2130222902]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_nkbhs")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=756679721]
+z_index = 10
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -168.0
+offset_top = 32.0
+offset_right = 168.0
+offset_bottom = 93.000015
+grow_horizontal = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme = ExtResource("1_346dn")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=507720414]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=471126681]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1734297354]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_nkbhs")
+autowrap_mode = 2
+
+[node name="Stats" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=920733864]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("3_vvaoc")

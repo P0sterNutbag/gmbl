@@ -2,15 +2,14 @@ extends Node
 
 @export var time_curve: Curve
 var day_length := 480.0
-var time: float = 240.0
+var time: float = 60.0
 var sun_time: float = 0.25
 var time_speed: float = 1.0
 var normalized_time: float
 var half_day_length: float
-var sky_progress: float
 var is_night: bool:
 	get():
-		return time <= 0.25 
+		return time > half_day_length 
 signal night_start
 signal day_start
 
@@ -19,7 +18,6 @@ func _ready() -> void:
 	SceneManager.new_game_start.connect(reset_cycle)
 	half_day_length = day_length / 2.0
 	normalized_time = time / half_day_length
-	sky_progress = (normalized_time + 1.0) / 2.0
 
 
 func _process(delta: float) -> void:
@@ -30,41 +28,32 @@ func _process(delta: float) -> void:
 		return
 	var was_night = is_night
 	time += delta * time_speed
-	if time >= half_day_length:
-		time = half_day_length - 0.01
-		time_speed *= -1
-	if time <= -half_day_length:
-		time = -half_day_length + 0.01
-		time_speed = abs(time_speed)
+	if time >= day_length:
+		time = 0
 	if was_night != is_night:
 		if time_speed < 0:
 			night_start.emit()
 		else:
 			day_start.emit()
-	normalized_time = time / half_day_length
-	sky_progress = (normalized_time + 1.0) / 2.0
-	if time > 0:
-		sun_time += delta / day_length
+	normalized_time = time / day_length
+	if !is_night:
+		#sun_time += (delta / day_length * 0.75) * abs(time_speed)
+		sun_time = time / half_day_length
 	else:
 		sun_time = 0
 
 
 func reset_cycle() -> void:
-	time = half_day_length / 2
+	time = half_day_length / 4
 	#time_speed = -0.01
 	sun_time = 0.25
 
 
 func skip_to_time(amount_to_skip: float) -> void:
-	var starting_norm_time = normalized_time
-	normalized_time += amount_to_skip * time_speed
-	if abs(normalized_time) > 1:
-		var overtime = abs(normalized_time) - 1
-		normalized_time += overtime * -time_speed * 2
-		time_speed *= -1
-	time = half_day_length * normalized_time
-	if starting_norm_time < 0.0 and normalized_time >= 0:
+	if amount_to_skip + normalized_time > 1:
 		day_start.emit()
+	normalized_time = wrap(normalized_time + amount_to_skip, 0, 1)
+	time = day_length * normalized_time
 
 
 func save() -> Dictionary: 

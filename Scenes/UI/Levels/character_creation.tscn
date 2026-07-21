@@ -40,11 +40,16 @@
 [ext_resource type="PackedScene" uid="uid://cnwsl1ltxxegm" path="res://Scenes/Guns/pistol.tscn" id="28_wahcg"]
 [ext_resource type="PackedScene" uid="uid://cc6hd7m7eqnp" path="res://Scenes/Guns/sawed_off.tscn" id="29_bq3xa"]
 [ext_resource type="Texture2D" uid="uid://dqk530cqde5sy" path="res://Art/Textures/Character/npc no shirt.png" id="29_gx4n8"]
+[ext_resource type="Texture2D" uid="uid://bte3wf63sw6dp" path="res://Art/Textures/Character/muscle tee white.png" id="30_kgbab"]
 [ext_resource type="Script" uid="uid://cgnh45iuq5gl3" path="res://Scripts/gun_stats.gd" id="30_l0gxb"]
 [ext_resource type="PackedScene" uid="uid://dts12bmvycipb" path="res://Scenes/Guns/shotgun.tscn" id="31_36mat"]
+[ext_resource type="Texture2D" uid="uid://b0nu0ic4gtjll" path="res://Art/Textures/Character/button down white.png" id="31_ktceq"]
 [ext_resource type="PackedScene" uid="uid://dkmenaf8dxpyr" path="res://Scenes/Guns/sniper.tscn" id="32_e4cpa"]
+[ext_resource type="Texture2D" uid="uid://b5qm5dojv8x61" path="res://Art/Textures/Character/polo white.png" id="32_s7bfm"]
 [ext_resource type="PackedScene" uid="uid://dyumojcinahde" path="res://Scenes/Effects/Shaders/outline_fog_shader.tscn" id="32_sb010"]
 [ext_resource type="PackedScene" uid="uid://cmgrxwiw6y3kg" path="res://Scenes/Guns/uzi.tscn" id="33_miwqf"]
+[ext_resource type="Texture2D" uid="uid://cc2ksonn5b2b2" path="res://Art/Textures/Character/jean jacket blue.png" id="33_n31ri"]
+[ext_resource type="Texture2D" uid="uid://d2t0lnsyixhh7" path="res://Art/Textures/Character/jean jacket navy.png" id="34_yj43v"]
 [ext_resource type="Shader" uid="uid://bsvijaud8ak2w" path="res://Art/Shaders/wireframe.gdshader" id="46_gx4n8"]
 
 [sub_resource type="Resource" id="Resource_sb010"]
@@ -197,6 +202,36 @@ string = "Shirtless"
 value = ExtResource("29_gx4n8")
 metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
+[sub_resource type="Resource" id="Resource_ygrfb"]
+script = ExtResource("24_36mat")
+string = "Muscle Tee"
+value = ExtResource("30_kgbab")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
+[sub_resource type="Resource" id="Resource_fvamf"]
+script = ExtResource("24_36mat")
+string = "Button-down"
+value = ExtResource("31_ktceq")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
+[sub_resource type="Resource" id="Resource_vd78f"]
+script = ExtResource("24_36mat")
+string = "Polo Tee"
+value = ExtResource("32_s7bfm")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
+[sub_resource type="Resource" id="Resource_hn5i2"]
+script = ExtResource("24_36mat")
+string = "Denim Jacket Light"
+value = ExtResource("33_n31ri")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
+[sub_resource type="Resource" id="Resource_j0bqt"]
+script = ExtResource("24_36mat")
+string = "Denim Jacket Navy"
+value = ExtResource("34_yj43v")
+metadata/_custom_type_script = "uid://ba4324tncpb5w"
+
 [sub_resource type="Resource" id="Resource_232fn"]
 script = ExtResource("24_36mat")
 string = "Brown"
@@ -245,7 +280,7 @@ string = "Brown"
 value = Color(0.3, 0.18885002, 0.12900001, 1)
 metadata/_custom_type_script = "uid://ba4324tncpb5w"
 
-[sub_resource type="Resource" id="Resource_ygrfb"]
+[sub_resource type="Resource" id="Resource_y7a80"]
 resource_local_to_scene = true
 script = ExtResource("30_l0gxb")
 ammo = 24
@@ -255,7 +290,7 @@ metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 script = ExtResource("25_011oh")
 metadata/_custom_type_script = "uid://4c6own63hs8c"
 
-[sub_resource type="Resource" id="Resource_y7a80"]
+[sub_resource type="Resource" id="Resource_3jura"]
 resource_local_to_scene = true
 resource_name = "rifle_ammo"
 script = ExtResource("26_j6ghl")
@@ -269,13 +304,13 @@ price = 50
 description = "Usable in: AK-47"
 metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
-[sub_resource type="Resource" id="Resource_3jura"]
+[sub_resource type="Resource" id="Resource_oje6o"]
 resource_local_to_scene = true
 script = ExtResource("30_l0gxb")
 ammo = 5
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
-[sub_resource type="Resource" id="Resource_oje6o"]
+[sub_resource type="Resource" id="Resource_gm0mx"]
 resource_local_to_scene = true
 resource_name = "rifle_ammo"
 script = ExtResource("26_j6ghl")
@@ -289,12 +324,12 @@ price = 50
 description = "Usable in: AK-47"
 metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
-[sub_resource type="Resource" id="Resource_gm0mx"]
+[sub_resource type="Resource" id="Resource_fr1du"]
 resource_local_to_scene = true
 script = ExtResource("30_l0gxb")
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
-[sub_resource type="Resource" id="Resource_fr1du"]
+[sub_resource type="Resource" id="Resource_7thdm"]
 resource_local_to_scene = true
 resource_name = "pistol_ammo"
 script = ExtResource("26_j6ghl")
@@ -307,7 +342,7 @@ price = 25
 description = "Usable in: Pistol"
 metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
-[sub_resource type="Resource" id="Resource_7thdm"]
+[sub_resource type="Resource" id="Resource_l4r3l"]
 resource_local_to_scene = true
 script = ExtResource("30_l0gxb")
 ammo = 2
@@ -321,7 +356,7 @@ values = Dictionary[String, Variant]({
 add = true
 metadata/_custom_type_script = "uid://4c6own63hs8c"
 
-[sub_resource type="Resource" id="Resource_l4r3l"]
+[sub_resource type="Resource" id="Resource_k24se"]
 resource_local_to_scene = true
 resource_name = "shotgun_ammo"
 script = ExtResource("26_j6ghl")
@@ -335,7 +370,7 @@ price = 5
 description = "Usable in: Shotgun"
 metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
-[sub_resource type="Resource" id="Resource_k24se"]
+[sub_resource type="Resource" id="Resource_ig60w"]
 resource_local_to_scene = true
 script = ExtResource("30_l0gxb")
 ammo = 5
@@ -349,7 +384,7 @@ values = Dictionary[String, Variant]({
 add = true
 metadata/_custom_type_script = "uid://4c6own63hs8c"
 
-[sub_resource type="Resource" id="Resource_ig60w"]
+[sub_resource type="Resource" id="Resource_saal6"]
 resource_local_to_scene = true
 resource_name = "shotgun_ammo"
 script = ExtResource("26_j6ghl")
@@ -363,13 +398,13 @@ price = 5
 description = "Usable in: Shotgun"
 metadata/_custom_type_script = "uid://2qhh6s86pakx"
 
-[sub_resource type="Resource" id="Resource_saal6"]
+[sub_resource type="Resource" id="Resource_6mwrv"]
 resource_local_to_scene = true
 script = ExtResource("30_l0gxb")
 ammo = 5
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
-[sub_resource type="Resource" id="Resource_6mwrv"]
+[sub_resource type="Resource" id="Resource_x52rw"]
 resource_local_to_scene = true
 resource_name = "sniper_ammo"
 script = ExtResource("26_j6ghl")
@@ -382,13 +417,13 @@ price = 10
 description = "Usable in: Sniper Rifle"
 metadata/_custom_type_script = "uid://dd1ly8qocexg4"
 
-[sub_resource type="Resource" id="Resource_x52rw"]
+[sub_resource type="Resource" id="Resource_n8nr2"]
 resource_local_to_scene = true
 script = ExtResource("30_l0gxb")
 ammo = 24
 metadata/_custom_type_script = "uid://cgnh45iuq5gl3"
 
-[sub_resource type="Resource" id="Resource_n8nr2"]
+[sub_resource type="Resource" id="Resource_bndpt"]
 resource_local_to_scene = true
 resource_name = "pistol_ammo"
 script = ExtResource("26_j6ghl")
@@ -554,7 +589,7 @@ options = Array[ExtResource("24_36mat")]([SubResource("Resource_oheva"), SubReso
 [node name="ShirtOptions" parent="CanvasLayer/HBoxContainer/VBoxContainer/HBoxContainer3/Cosmetics/MarginContainer/VBoxContainer" unique_id=893020077 instance=ExtResource("22_l0gxb")]
 layout_mode = 2
 text = "Shirt"
-options = Array[ExtResource("24_36mat")]([SubResource("Resource_5527h"), SubResource("Resource_gx4n8"), SubResource("Resource_kgbab"), SubResource("Resource_011oh"), SubResource("Resource_s7bfm")])
+options = Array[ExtResource("24_36mat")]([SubResource("Resource_5527h"), SubResource("Resource_gx4n8"), SubResource("Resource_kgbab"), SubResource("Resource_011oh"), SubResource("Resource_s7bfm"), SubResource("Resource_ygrfb"), SubResource("Resource_fvamf"), SubResource("Resource_vd78f"), SubResource("Resource_hn5i2"), SubResource("Resource_j0bqt")])
 
 [node name="PantsOptions" parent="CanvasLayer/HBoxContainer/VBoxContainer/HBoxContainer3/Cosmetics/MarginContainer/VBoxContainer" unique_id=2098596898 instance=ExtResource("22_l0gxb")]
 layout_mode = 2
@@ -646,41 +681,41 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.63
 style_data = ExtResource("25_j6ghl")
 
 [node name="Node3D" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand" parent_id_path=PackedInt32Array(996259794, 63411806) index="0" unique_id=1704511197]
-transform = Transform3D(-0.46606925, 0.8540359, 0.23108615, 0.5173196, 0.47494268, -0.71190524, -0.7177453, -0.21225181, -0.6631665, 0.06204629, 0.13316673, -0.01652199)
+transform = Transform3D(-0.46606922, 0.8540359, 0.23108615, 0.51731956, 0.47494268, -0.71190524, -0.7177453, -0.21225181, -0.6631665, 0.06204629, 0.13316673, -0.01652199)
 
 [node name="ak_47" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="0" unique_id=1397768424]
-gun_stats = SubResource("Resource_ygrfb")
-ammo_item = SubResource("Resource_y7a80")
+gun_stats = SubResource("Resource_y7a80")
+ammo_item = SubResource("Resource_3jura")
 
 [node name="hunting_rifle" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="1" unique_id=459190655 instance=ExtResource("27_fuobc")]
 visible = false
-gun_stats = SubResource("Resource_3jura")
-ammo_item = SubResource("Resource_oje6o")
+gun_stats = SubResource("Resource_oje6o")
+ammo_item = SubResource("Resource_gm0mx")
 
 [node name="pistol" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="2" unique_id=1849467869 instance=ExtResource("28_wahcg")]
 transform = Transform3D(1.3100002, 4.4703484e-08, 1.1920929e-07, -2.9773219e-08, 1.3100002, 8.8475645e-08, 1.1920929e-07, 6.053597e-08, 1.3099998, 0, 0, 0)
-gun_stats = SubResource("Resource_gm0mx")
-ammo_item = SubResource("Resource_fr1du")
+gun_stats = SubResource("Resource_fr1du")
+ammo_item = SubResource("Resource_7thdm")
 
 [node name="sawed_off" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="3" unique_id=1248236345 instance=ExtResource("29_bq3xa")]
 visible = false
-gun_stats = SubResource("Resource_7thdm")
-ammo_item = SubResource("Resource_l4r3l")
+gun_stats = SubResource("Resource_l4r3l")
+ammo_item = SubResource("Resource_k24se")
 
 [node name="shotgun" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="4" unique_id=1808888500 instance=ExtResource("31_36mat")]
 visible = false
-gun_stats = SubResource("Resource_k24se")
-ammo_item = SubResource("Resource_ig60w")
+gun_stats = SubResource("Resource_ig60w")
+ammo_item = SubResource("Resource_saal6")
 
 [node name="sniper_rifle" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="5" unique_id=1186663732 instance=ExtResource("32_e4cpa")]
 visible = false
-gun_stats = SubResource("Resource_saal6")
-ammo_item = SubResource("Resource_6mwrv")
+gun_stats = SubResource("Resource_6mwrv")
+ammo_item = SubResource("Resource_x52rw")
 
 [node name="uzi" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/RightHand/Node3D" index="6" unique_id=1825769213 instance=ExtResource("33_miwqf")]
 visible = false
-gun_stats = SubResource("Resource_x52rw")
-ammo_item = SubResource("Resource_n8nr2")
+gun_stats = SubResource("Resource_n8nr2")
+ammo_item = SubResource("Resource_bndpt")
 
 [node name="Physical Bone mixamorig_Hips" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(996259794, 2143382753) index="0" unique_id=1436907244]
 transform = Transform3D(0.9923879, -0.11641585, 0.040170714, 0.05704293, 0.14543736, -0.9877219, 0.109144166, 0.98249465, 0.15097098, 0.004308361, 0.7985713, 0.035711307)
@@ -723,9 +758,9 @@ joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0006255514, -0.00315905
 body_offset = Transform3D(1, 0.00016185641, 2.8267503e-05, 2.8595328e-05, -0.0022628214, -0.99999774, -0.00016185641, 0.99999756, -0.0022628754, 0.00062192976, 0.14619988, 0.0034897923)
 
 [node name="Physical Bone mixamorig_LeftForeArm" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(996259794, 2143382753) index="8" unique_id=1562873051]
-transform = Transform3D(0.48870152, -0.82389313, 0.28700337, -0.8724488, -0.46227467, 0.1585423, 0.002052469, -0.32787567, -0.9447189, 0.31944716, 1.1416997, 0.18800686)
+transform = Transform3D(0.48870152, -0.82389313, 0.28700337, -0.8724488, -0.46227467, 0.1585423, 0.0020524717, -0.32787567, -0.9447189, 0.31944716, 1.1416997, 0.18800686)
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00022687342, -0.000137239, 0.15562159)
-body_offset = Transform3D(1.0000001, 0.00023594295, -0.00037119514, -0.00037115533, 6.109476e-05, -0.99999994, -0.00023597665, 0.99999994, 6.112456e-05, 0.00028467178, 0.15562151, 0.00012767315)
+body_offset = Transform3D(1.0000001, 0.00023594295, -0.00037119514, -0.00037115265, 6.109476e-05, -0.99999994, -0.00023597758, 0.99999994, 6.112456e-05, 0.00028467178, 0.15562151, 0.00012767315)
 
 [node name="Physical Bone mixamorig_RightShoulder" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(996259794, 2143382753) index="9" unique_id=1022579480]
 transform = Transform3D(0.2482328, 0.52593577, 0.8134938, 0.00042011085, -0.8398371, 0.5428389, 0.9687006, -0.13440864, -0.20869604, -0.17513612, 1.4804196, -0.008363495)
@@ -748,9 +783,9 @@ joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00027540987, -2.1919624
 body_offset = Transform3D(0.99999994, -1.2770295e-05, 1.6391277e-07, 2.0861626e-07, -7.821247e-06, -1.0000001, 1.2785196e-05, 0.9999992, -7.826835e-06, 0.00027537346, 0.2203973, 2.3648143e-05)
 
 [node name="Physical Bone mixamorig_LeftLeg" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(996259794, 2143382753) index="13" unique_id=287664894]
-transform = Transform3D(-0.2331948, -0.96689385, -0.103617236, -0.057471767, -0.09266509, 0.9940376, -0.97073054, 0.23775946, -0.03396008, 0.17483728, 0.32795295, 0.12580946)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0003168498, -0.00020723685, 0.22151905)
-body_offset = Transform3D(0.99999994, 9.968877e-06, 0.00047306716, 0.00047308952, -6.108824e-05, -1.0000001, -1.013279e-05, 0.9999993, -6.1132945e-05, 0.00021205842, 0.2215192, 0.0002207756)
+transform = Transform3D(-0.2331948, -0.96689385, -0.103617236, -0.057471767, -0.09266509, 0.9940376, -0.97073054, 0.23775946, -0.03396008, 0.17502224, 0.3244248, 0.12583463)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00045206104, -0.00036130933, 0.22504619)
+body_offset = Transform3D(0.99999994, 9.968877e-06, 0.00047306716, 0.00047308952, -6.108824e-05, -1.0000001, -1.013279e-05, 0.9999993, -6.1132945e-05, 0.00034560263, 0.2250464, 0.00037506223)
 
 [node name="Physical Bone mixamorig_LeftFoot" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(996259794, 2143382753) index="14" unique_id=34279325]
 transform = Transform3D(-0.8700613, 0.24337977, -0.42867205, -0.02132181, 0.85022235, 0.5259923, 0.49248242, 0.4667856, -0.7345562, 0.24814726, 0.068818115, 0.22277744)
@@ -768,9 +803,9 @@ joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000100858735, 0.00078357
 body_offset = Transform3D(1.0000002, 3.6984682e-05, 4.312396e-05, 4.3183565e-05, -9.49353e-05, -1.0000002, -3.6656857e-05, 0.99999934, -9.486079e-05, -0.000109925866, 0.20958516, -0.0007636845)
 
 [node name="Physical Bone mixamorig_RightFoot" parent="EnemyModel/PersonAnimated/Armature/Skeleton3D/PhysicalBoneSimulator3D" parent_id_path=PackedInt32Array(996259794, 2143382753) index="17" unique_id=2007622375]
-transform = Transform3D(-0.62435275, -0.40473592, 0.6681111, 0.021750683, 0.8459608, 0.5328018, -0.7808398, 0.34718817, -0.5193747, -0.1403558, 0.055307455, -0.05929776)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.030948155, 0.01614898, 0.12054634)
-body_offset = Transform3D(0.99999946, -2.6166439e-05, 6.082654e-05, 6.0141087e-05, 1.5676022e-05, -0.9999999, 2.5689602e-05, 1.0000002, 1.5899539e-05, -0.030955046, 0.12054421, -0.016151696)
+transform = Transform3D(-0.62435275, -0.40473592, 0.6681111, 0.021750683, 0.8459608, 0.5328018, -0.7808398, 0.34718817, -0.51937467, -0.1403558, 0.055307455, -0.05929776)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.030948158, 0.016148977, 0.120546326)
+body_offset = Transform3D(0.99999946, -2.6166439e-05, 6.0796738e-05, 6.0141087e-05, 1.5676022e-05, -1, 2.5689602e-05, 1.0000002, 1.5929341e-05, -0.030955046, 0.12054421, -0.016151696)
 
 [node name="WorldEnvironment" parent="." unique_id=1620214030 instance=ExtResource("3_eda0b")]
 script = null

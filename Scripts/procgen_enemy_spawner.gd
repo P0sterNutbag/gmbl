@@ -68,10 +68,10 @@ func spawn_enemy(spawn_position: Vector3, faction: FactionManager.factions) -> v
 	var inst = NPC.instantiate()
 	var rng = RandomNumberGenerator.new()
 	var weights: PackedFloat32Array
-	for i in location_data.fire_power_chance:
+	for i in location_data.firepower_chance:
 		weights.append(i)
-	var fire_power = rng.rand_weighted(weights)
-	inst.npc_data.fire_power = fire_power
+	var firepower = rng.rand_weighted(weights)
+	inst.npc_data.firepower = firepower
 	weights.clear()
 	for i in location_data.armor_level_chance:
 		weights.append(i)

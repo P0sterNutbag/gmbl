@@ -1,67 +1,58 @@
 extends Control
 
-@onready var buildings_list: VBoxContainer = $HBoxContainer2/PanelContainer2/MarginContainer/VBoxContainer
-@onready var trading_post: UiButton = $HBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TradingPost
-@onready var barracks: UiButton = $HBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/Barracks
-@onready var factory: UiButton = $HBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/Factory
-@onready var buttons = [trading_post, barracks, factory]
+@onready var buildings_list: VBoxContainer = %VBoxContainer
+@onready var money_label: Label = %Label2
+@onready var tooltip: Control = $ItemTooltip
+@onready var tooltip_label: Label = $ItemTooltip/PanelContainer/MarginContainer/VBoxContainer/Label
+@onready var availabel_buildings: VBoxContainer = $HBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer
 const TEXT_OUTLINE = preload("uid://cral201bx2ck")
+const MENU_ITEM = preload("uid://ca8traqagv62t")
 
 
 func activate() -> void:
 	var location_data = Globals.overworld.current_encounter.location_data
+	for child in availabel_buildings.get_children():
+		child.queue_free()
 	for child in buildings_list.get_children():
-		if child.get_index() > 1 :
-			child.queue_free()
-	for string in location_data.current_buildings:
+		child.queue_free()
+	for building in location_data.available_buildings:
+		var inst = MENU_ITEM.instantiate()
+		availabel_buildings.add_child(inst)
+		inst.text = building.title
+		inst.price = building.price
+		inst.pressed.connect(_on_building_pressed.bind(building))
+		inst.mouse_entered.connect(_on_button_mouse_entered.bind(building))
+		inst.mouse_exited.connect(_on_button_mouse_exited)
+	for building in location_data.current_buildings:
 		var inst = Label.new()
-		inst.text = string
+		inst.text = building.title
 		inst.theme = TEXT_OUTLINE
 		buildings_list.add_child(inst)
-	for button in buttons:
-		if PlayerStats.money < 100:
-			button.disabled = true
-		else:
-			button.disabled = false
-		if location_data.current_buildings.has(button.text):
-			button.get_parent().hide()
-		else:
-			button.get_parent().show()
+	money_label.text = "$" + str(PlayerStats.inventory.money)
 
 
-func add_building(building_name: String, cost: int) -> bool:
-	if PlayerStats.money < cost:
+func _on_building_pressed(building: Building) -> void:
+	if PlayerStats.money < building.price:
 		UiController.stop_audio()
 		UiController.error_sfx.play()
-		if Globals.survival_ui:
-			Globals.survival_ui.create_notification("Not enough money")
-		return false
-	Globals.overworld.current_encounter.location_data.current_buildings.append(building_name)
-	PlayerStats.inventory.money -= 100
-	Globals.survival_ui.create_notification("You spent $" + str(cost))
+		return
+	PlayerStats.inventory.money -= building.price
+	var location_data: LocationData = Globals.overworld.current_encounter.location_data
+	for effect in building.effects:
+		effect.change_value(location_data)
+	location_data.available_buildings.erase(building)
+	location_data.current_buildings.append(building)
 	activate()
-	return true
 
 
-func _on_trading_post_pressed() -> void:
-	if add_building("Trading Post", 100):
-		pass
+func _on_button_mouse_entered(building: Building) -> void:
+	tooltip.show()
+	tooltip.description.text = building.description
 
 
-func _on_barracks_pressed() -> void:
-	if add_building("Barracks", 100):
-		var locaiton = Globals.overworld.current_encounter
-		locaiton.locaiton_data.max_population += 4
-		Globals.survival_ui.create_notification(locaiton.title + " max population increased by 4")
-
-
-func _on_factory_pressed() -> void:
-	if add_building("Factory", 100):
-		Globals.overworld.current_encounter.location_data.fire_power += 1
-		Globals.overworld.current_encounter.location_data.armor_level += 1
-		var locaiton = Globals.overworld.current_encounter
-		locaiton.locaiton_data.max_population += 4
-		Globals.survival_ui.create_notification(locaiton.title + " units equipment level increased by 1")
+func _on_button_mouse_exited() -> void:
+	tooltip.hide()
+	
 
 
 func _on_exit_menu_pressed() -> void:

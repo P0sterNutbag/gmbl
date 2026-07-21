@@ -40,8 +40,8 @@ const hbox_style = preload("uid://ddlkdp3v3plc")
 @onready var money_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/Money
 @onready var size_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/Size
 @onready var category_label: Label = %Category
-@onready var stats: VBoxContainer = %Stats
-@onready var description: Label = %Label
+@onready var stats: Label = $ItemTooltip/PanelContainer/MarginContainer/VBoxContainer/Label
+@onready var description: VBoxContainer = $ItemTooltip/PanelContainer/MarginContainer/VBoxContainer/Stats
 @onready var use_controls: HBoxContainer = $Controls/HBoxContainer
 @onready var loot_controls: HBoxContainer = $Controls/HBoxContainer2
 @onready var drop_menu: Control = $DropMenu
@@ -226,6 +226,7 @@ func sort_by_category() -> void:
 		filtered_children = filtered_children.filter(func(a): return a.resource.category == category) 
 		filtered_children.sort_custom(func(a, b): return a.text.naturalnocasecmp_to(b.text) < 0)
 		sorted_children.append_array(filtered_children)
+	await get_tree().process_frame
 	for child in item_container.get_children():
 		item_container.move_child.call_deferred(child, sorted_children.find(child))
 	item_container.set_menu_item_focus()

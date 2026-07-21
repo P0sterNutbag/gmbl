@@ -18,7 +18,6 @@
 [ext_resource type="Script" uid="uid://vl4exm3hukmx" path="res://Scripts/Overworld/player_spawn.gd" id="15_mydnv"]
 [ext_resource type="PackedScene" uid="uid://c055smn111au7" path="res://Scenes/Player/player.tscn" id="16_6tord"]
 [ext_resource type="Script" uid="uid://3uypo1jqxswc" path="res://Scripts/spawn_chance.gd" id="16_52w5m"]
-[ext_resource type="PackedScene" uid="uid://cb05x24r4r8im" path="res://Scenes/NPCs/npc.tscn" id="17_48aj5"]
 [ext_resource type="Script" uid="uid://cp3dswmfni4xd" path="res://Scripts/enemy_spawner.gd" id="19_21ixx"]
 [ext_resource type="Script" uid="uid://cp50dadh73l3f" path="res://Scripts/snap_to_terrain.gd" id="21_lsls5"]
 [ext_resource type="Script" uid="uid://dc3rt20oacl4v" path="res://Scripts/procedural_environment_editor.gd" id="24_10w7y"]
@@ -38,7 +37,6 @@
 [sub_resource type="Resource" id="Resource_fwcaj"]
 resource_local_to_scene = true
 script = ExtResource("2_yd52q")
-faction = null
 population = 4
 metadata/_custom_type_script = "uid://csmjlx06mdps3"
 
@@ -68,11 +66,6 @@ distance_fade_max_distance = 0.0
 [sub_resource type="BoxMesh" id="BoxMesh_wgdbt"]
 material = SubResource("StandardMaterial3D_l3vu0")
 size = Vector3(257, 5, 30)
-
-[sub_resource type="Resource" id="Resource_21ixx"]
-script = ExtResource("16_52w5m")
-object_to_spawn = ExtResource("17_48aj5")
-metadata/_custom_type_script = "uid://3uypo1jqxswc"
 
 [sub_resource type="Resource" id="Resource_g6kfl"]
 script = ExtResource("16_52w5m")
@@ -153,6 +146,7 @@ location_data = SubResource("Resource_fwcaj")
 [node name="WorldEnvironment" parent="." unique_id=836606963 instance=ExtResource("2_os0xi")]
 
 [node name="DirectionalLight3D" parent="WorldEnvironment" index="0" unique_id=2040729916]
+transform = Transform3D(1, 0, 0, 0, 0.70710695, 0.70710695, 0, -0.70710695, 0.70710695, 0, 0, 0)
 shadow_normal_bias = 10.0
 
 [node name="Shader" parent="." unique_id=580484789 instance=ExtResource("6_21ixx")]
@@ -270,7 +264,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 95)
 
 [node name="EnemySpawner" type="Node3D" parent="." unique_id=2109086568]
 script = ExtResource("19_21ixx")
-enemies_to_spawn = Array[ExtResource("16_52w5m")]([SubResource("Resource_21ixx")])
 
 [node name="SnapToTerrain" type="Node3D" parent="." unique_id=196337249]
 script = ExtResource("21_lsls5")

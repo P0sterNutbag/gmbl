@@ -60,8 +60,8 @@ func _ready() -> void:
 			#data.faction = [FactionManager.factions.no_faction, FactionManager.factions.jackals].pick_random()
 
 
-func _on_scene_manager_transition_started() -> void:
-	if !is_inside_tree():
+func _on_scene_manager_transition_started(scene) -> void:
+	if !is_inside_tree() or scene == "res://Scenes/UI/Levels/main_menu.tscn":
 		return
 	var player_vector: Vector3 = (current_encounter.global_position - Globals.player.global_position).normalized().rotated(Vector3.UP, -current_encounter.global_rotation.y)
 	player_spawn_vector = player_vector

@@ -14,20 +14,26 @@ ambient_light_source = 2
 ambient_light_color = Color(0.556153, 0.556153, 0.556153, 1)
 
 [sub_resource type="Gradient" id="Gradient_psook"]
-offsets = PackedFloat32Array(0, 0.4, 0.5, 0.6, 1)
-colors = PackedColorArray(0.05, 0, 0, 1, 0.05, 0, 0, 1, 0.34, 0.3264, 0.2584, 1, 0.6156863, 0.5568628, 0.44313726, 1, 0.6156863, 0.5568628, 0.44313726, 1)
+offsets = PackedFloat32Array(0, 0.34507042, 0.5, 0.6619718, 0.91079813, 1)
+colors = PackedColorArray(0.6156863, 0.5568628, 0.44313726, 1, 0.6156863, 0.5568628, 0.44313726, 1, 0.34, 0.3264, 0.2584, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6156863, 0.5568628, 0.44313726, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_dbj7e"]
 gradient = SubResource("Gradient_psook")
 
+[sub_resource type="Gradient" id="Gradient_fissc"]
+offsets = PackedFloat32Array(0.002202643, 0.3876652, 0.5110132, 0.6365639, 1)
+colors = PackedColorArray(1, 0.5019608, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l1k82"]
+gradient = SubResource("Gradient_fissc")
+
 [sub_resource type="Curve" id="Curve_4ikoo"]
-_limits = [0.0, 1.0, -1.0, 1.0]
-_data = [Vector2(-1, 0), 0.0, 0.0, 0, 0, Vector2(0.0030487776, 0), 0.0, 0.0, 0, 0, Vector2(0.24695122, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 4
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5020161, 1), 0.0, 0.0, 0, 0, Vector2(0.6512097, 0), 0.0, 0.0, 0, 0, Vector2(0.9455645, 0), 0.0, 0.0, 0, 0, Vector2(0.99999, 1), 0.0, 0.0, 0, 0]
+point_count = 5
 
 [sub_resource type="Curve" id="Curve_5l0ki"]
-_limits = [0.0, 1.0, -1.0, 1.0]
-_data = [Vector2(-1, 0.1), 0.0, 0.0, 0, 0, Vector2(-0.251, 0.1), 0.0, 0.0, 0, 0, Vector2(0.2548262, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_limits = [0.0, 1.0, -0.016129017, 1.0]
+_data = [Vector2(0.4407193, 1), 0.0, 0.0, 0, 0, Vector2(0.58002734, 0.09962475), 0.0, 0.0, 0, 0, Vector2(0.9323947, 0.095998764), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [node name="WorldEnvironment" type="WorldEnvironment" unique_id=167554450]
@@ -35,6 +41,7 @@ environment = SubResource("Environment_jgqc4")
 script = ExtResource("1_4ikoo")
 sky_gradient = ExtResource("3_3i8hd")
 horizon_gradient = SubResource("GradientTexture1D_dbj7e")
+sun_gradient = SubResource("GradientTexture1D_l1k82")
 sun_energy_curve = SubResource("Curve_4ikoo")
 sky_energy_curve = SubResource("Curve_5l0ki")
 

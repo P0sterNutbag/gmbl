@@ -22,7 +22,7 @@ func activate(_location: Location) -> void:
 	name_label.text = location.title
 	name_label.text = location.title
 	resource_label.text = str(int(location_data.resources))
-	equipment_label.text = "lvl " + str(location_data.fire_power + location_data.armor_level)
+	equipment_label.text = "lvl " + str(location_data.firepower + location_data.armor_level)
 
 
 func increase_resources(value: int) -> void:
@@ -36,8 +36,8 @@ func increase_resources(value: int) -> void:
 func increase_equipment(value: int) -> void:
 	var current_value = equipment_bar.value
 	if current_value + value > 100:
-		location.location_data.fire_power += 1
-		equipment_label.text = "lvl " +  str(location.location_data.fire_power + location.location_data.armor_level)
+		location.location_data.firepower += 1
+		equipment_label.text = "lvl " +  str(location.location_data.firepower + location.location_data.armor_level)
 	equipment_bar.value = wrapi(current_value + value, 0, 100)
 
 

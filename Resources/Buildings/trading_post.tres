@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Building" format=3 uid="uid://bvarqtik12eep"]
+
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="1_frlwp"]
+[ext_resource type="Script" uid="uid://cwlbu21533kig" path="res://Scripts/building.gd" id="2_rtg7q"]
+
+[sub_resource type="Resource" id="Resource_frlwp"]
+script = ExtResource("1_frlwp")
+values = Dictionary[String, Variant]({
+"income_amount": 50
+})
+add = true
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[resource]
+script = ExtResource("2_rtg7q")
+title = "Trading Post"
+description = "+$50 income"
+price = 150
+effects = Array[ExtResource("1_frlwp")]([SubResource("Resource_frlwp")])
+metadata/_custom_type_script = "uid://cwlbu21533kig"

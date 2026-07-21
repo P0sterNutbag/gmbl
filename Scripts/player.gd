@@ -250,7 +250,7 @@ func state_walk(delta):
 	
 	# sprint
 	if !is_sprinting:
-		if Input.is_action_just_pressed("sprint"):
+		if Input.is_action_just_pressed("sprint") and is_on_floor():
 			is_sprinting = true
 	else:
 		if Input.is_action_just_pressed("sprint") or input.y >= 0:# or (gun and gun.shoot_cooldown_timer.time_left == 0 and Input.is_action_pressed("shoot")):

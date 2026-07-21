@@ -36,7 +36,7 @@ func _ready() -> void:
 	#Globals.overworld.add_child(inst)
 	#inst.location.location_data.faction = location_data.faction
 	#inst.location.location_data.population = randi_range(min(2, location_data.population), min(4, location_data.population))
-	#inst.location.location_data.fire_power_chance = location_data.fire_power_chance
+	#inst.location.location_data.firepower_chance = location_data.firepower_chance
 	#inst.location.location_data.armor_level_chance = location_data.armor_level_chance
 	#inst.global_position = location.global_position
 	#inst.global_position.y = Globals.get_heightmap_position(inst.global_position)

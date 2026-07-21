@@ -2,7 +2,7 @@ extends PanelContainer
 
 @onready var name_label: Label = $MarginContainer/VBoxContainer/Label
 @onready var population_label: Label = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer/Label
-@onready var resources_label: Label = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer2/Label
+@onready var income_label: Label = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer2/Label
 @onready var equipmnt_label: Label = $MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer3/Label
 @onready var poi_donations: VBoxContainer = $"../PoiDonations"
 @onready var recruit_menu: VBoxContainer = $"../RecruitMenu"
@@ -16,8 +16,8 @@ func activate(_location: Location) -> void:
 	var location_data = location.location_data
 	name_label.text = location.title
 	population_label.text = str(location_data.population) + "/" + str(location_data.max_population)
-	equipmnt_label.text =  "lvl " + str(location_data.fire_power + location_data.armor_level)
-	resources_label.text = str(int(location_data.resources))
+	equipmnt_label.text =  str(location_data.firepower + location_data.armor_level)
+	income_label.text = str(location_data.income_amount)
 
 
 func _on_return_pressed() -> void:

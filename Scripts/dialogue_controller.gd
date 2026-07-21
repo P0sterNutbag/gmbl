@@ -282,5 +282,13 @@ func surrender_to_enemy() -> void:
 	advance_dialogue()
 
 
+func sleep() -> void:
+	exit_dialogue()
+	UiController.open_interface(Globals.ui.town)
+	UiController.open_interface(Globals.ui.sleep_menu)
+	#await get_tree().create_timer(0.2).timeout
+	#PlayerStats.go_to_sleep()
+
+
 func _exit_tree() -> void:
 	UiController.close_interface(self)

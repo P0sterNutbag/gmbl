@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Building" format=3 uid="uid://ctgs5b2ersn74"]
+
+[ext_resource type="Script" uid="uid://4c6own63hs8c" path="res://Scripts/change_variable.gd" id="1_y1cpt"]
+[ext_resource type="Script" uid="uid://cwlbu21533kig" path="res://Scripts/building.gd" id="2_p0213"]
+
+[sub_resource type="Resource" id="Resource_y1cpt"]
+script = ExtResource("1_y1cpt")
+values = Dictionary[String, Variant]({
+"armor_level": 1,
+"firepower": 1
+})
+add = true
+metadata/_custom_type_script = "uid://4c6own63hs8c"
+
+[resource]
+script = ExtResource("2_p0213")
+title = "Weapons Cache"
+description = "+1 Firepower"
+price = 80
+effects = Array[ExtResource("1_y1cpt")]([SubResource("Resource_y1cpt")])
+metadata/_custom_type_script = "uid://cwlbu21533kig"

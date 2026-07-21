@@ -2,6 +2,7 @@ extends WorldEnvironment
 
 @export var sky_gradient: GradientTexture1D
 @export var horizon_gradient: GradientTexture1D
+@export var sun_gradient: GradientTexture1D
 @export var sun_energy_curve: Curve
 @export var sky_energy_curve: Curve
 var sky_energy: float = 1.0
@@ -21,23 +22,25 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if DayNightCycle.normalized_time <= -0.2:
+	if DayNightCycle.normalized_time > 0.55 and DayNightCycle.normalized_time < 0.9:
 		if environment.sky.sky_material != SKY_NIGHTTIME:
 			environment.sky.sky_material = SKY_NIGHTTIME
-			var tween = create_tween()
-			tween.tween_property(self, "horizon_color", Color(), 1)
+			#var tween = create_tween()
+			#tween.tween_property(self, "horizon_color", Color(), 1)
 	elif environment.sky.sky_material != SKY_DAYTIME:
 		environment.sky.sky_material = SKY_DAYTIME
 	if DayNightCycle.normalized_time > 0:
 		sun.rotation.x = lerp(deg_to_rad(10), deg_to_rad(-190), DayNightCycle.sun_time)
 	sun.light_energy = sun_energy_curve.sample(DayNightCycle.normalized_time)
+	sun.light_color = sun_gradient.get_gradient().sample(DayNightCycle.sun_time)
 	environment.ambient_light_energy = sky_energy_curve.sample(DayNightCycle.normalized_time)
 	environment.sky.sky_material.energy_multiplier = sky_energy_curve.sample(DayNightCycle.normalized_time)
 	if environment.sky.sky_material is PanoramaSkyMaterial:
 		horizon_color = Color()
 	else:
-		sky_color = sky_gradient.get_gradient().sample(DayNightCycle.sky_progress)
-		horizon_color = horizon_gradient.get_gradient().sample(DayNightCycle.sky_progress)
+		sky_color = sky_gradient.get_gradient().sample(DayNightCycle.normalized_time)
+		horizon_color = horizon_gradient.get_gradient().sample(DayNightCycle.normalized_time)
+		horizon_color = horizon_color.darkened(1 - environment.sky.sky_material.energy_multiplier)
 		environment.sky.sky_material.sky_top_color = sky_color
 		environment.sky.sky_material.sky_horizon_color = horizon_color
 		environment.sky.sky_material.ground_bottom_color = horizon_color

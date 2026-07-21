@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="DialogueConditionVariable" format=3 uid="uid://j7f10swjqxod"]
+
+[ext_resource type="Script" uid="uid://ck7j7t8co2rbt" path="res://Scripts/dialogue_base.gd" id="1_62ty1"]
+[ext_resource type="Script" uid="uid://ba3pwbmpdnwa8" path="res://Scripts/dialogue_event.gd" id="2_pp6g2"]
+[ext_resource type="Script" uid="uid://brq5lvk7ek4ux" path="res://Scripts/dialogue_branch.gd" id="3_nxtu3"]
+[ext_resource type="Script" uid="uid://cxdd8jo8xmqfb" path="res://Scripts/dialogue_condition_variable.gd" id="4_4rp4d"]
+
+[sub_resource type="Resource" id="Resource_oilue"]
+script = ExtResource("2_pp6g2")
+method = "create_notification"
+arguments = ["You don't have enough money"]
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_8x2d6"]
+script = ExtResource("3_nxtu3")
+bubbles = Array[ExtResource("1_62ty1")]([SubResource("Resource_oilue")])
+metadata/_custom_type_script = "uid://brq5lvk7ek4ux"
+
+[sub_resource type="Resource" id="Resource_ch5i3"]
+script = ExtResource("2_pp6g2")
+method = "pay_fee"
+arguments = [25]
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_ip6nd"]
+script = ExtResource("2_pp6g2")
+method = "change_scene"
+arguments = ["res://Scenes/Levels/shooting_range.tscn"]
+metadata/_custom_type_script = "uid://ba3pwbmpdnwa8"
+
+[sub_resource type="Resource" id="Resource_ufi6q"]
+script = ExtResource("3_nxtu3")
+bubbles = Array[ExtResource("1_62ty1")]([SubResource("Resource_ch5i3"), SubResource("Resource_ip6nd")])
+metadata/_custom_type_script = "uid://brq5lvk7ek4ux"
+
+[resource]
+script = ExtResource("4_4rp4d")
+path = "PlayerStats"
+value = "money"
+comparison = 1
+value2 = 24
+success_branch = SubResource("Resource_ufi6q")
+failure_branch = SubResource("Resource_8x2d6")
+metadata/_custom_type_script = "uid://cxdd8jo8xmqfb"

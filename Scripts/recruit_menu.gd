@@ -16,7 +16,7 @@ func _on_recruit_pressed() -> void:
 		location_data.population = clamp(location_data.population - 1, 0, 100)
 		var npc_data = NpcData.new()
 		npc_data.style = FactionManager.faction_data[Globals.overworld.current_encounter.location_data.faction].style.generate_style()
-		npc_data.fire_power = location_data.fire_power
+		npc_data.firepower = location_data.firepower
 		npc_data.armor_level = location_data.armor_level
 		PlayerStats.allies.append(npc_data)
 	Globals.survival_ui.create_notification(str(int(h_slider.value)) + " allies added to party")

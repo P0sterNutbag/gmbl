@@ -4,7 +4,9 @@
 [ext_resource type="Shader" uid="uid://ctrmuaf68vbgo" path="res://Art/Shaders/lens_distortion.gdshader" id="3_8wgra"]
 [ext_resource type="Texture2D" uid="uid://cpuqxwinvw514" path="res://Art/Textures/UI/cursor.png" id="4_ac3tm"]
 [ext_resource type="Shader" uid="uid://werd6qv77di2" path="res://Scripts/Shaders/color_swap.gdshader" id="5_8ypfs"]
+[ext_resource type="Shader" uid="uid://dfcamcrd3b8jg" path="res://Scripts/Shaders/horror.gdshader" id="5_gmee6"]
 [ext_resource type="Shader" uid="uid://ur7ounp8t8w" path="res://Art/Shaders/crt.gdshader" id="5_woari"]
+[ext_resource type="Texture2D" uid="uid://bgtj2hkiw3u6a" path="res://Art/Textures/UI/screenshot.png" id="7_gmee6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gmee6"]
 shader = ExtResource("5_8ypfs")
@@ -31,6 +33,26 @@ shader_parameter/pixel_strength = -2.0
 shader_parameter/compression_on = 0
 shader_parameter/color_depth = 255.0
 shader_parameter/color_number = 30.000001425
+shader_parameter/dither_amount = 0.0
+shader_parameter/tint_color = Color(1, 0.6333333, 0, 1)
+shader_parameter/tint_strength = 0.10000000475
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s5f5c"]
+shader = ExtResource("5_gmee6")
+shader_parameter/exposure = 1.0
+shader_parameter/contrast = 1.05
+shader_parameter/saturation = 0.9
+shader_parameter/enable_pixelate = false
+shader_parameter/pixel_factor = 6.0
+shader_parameter/enable_posterize = true
+shader_parameter/color_levels = 8.0
+shader_parameter/dither_strength = 1.0
+shader_parameter/chrom_aberration = 0.0
+shader_parameter/vignette_strength = 1.0
+shader_parameter/grain_strength = 1.0
+shader_parameter/tint_color = Vector3(0.95, 1.03, 0.9)
+shader_parameter/tint_strength = 1.0
+shader_parameter/viewport_size_override = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ac3tm"]
 shader = ExtResource("3_8wgra")
@@ -70,6 +92,17 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="Horror" type="ColorRect" parent="." unique_id=1666716447]
+visible = false
+z_index = 10
+material = SubResource("ShaderMaterial_s5f5c")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="Warp" type="ColorRect" parent="." unique_id=192660043]
 visible = false
 material = SubResource("ShaderMaterial_ac3tm")
@@ -79,3 +112,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Screenshot" type="Sprite2D" parent="." unique_id=916828536]
+visible = false
+position = Vector2(958.00006, 542)
+scale = Vector2(0.53768283, 0.5813074)
+texture = ExtResource("7_gmee6")

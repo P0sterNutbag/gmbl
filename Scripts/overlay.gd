@@ -3,9 +3,14 @@ extends CanvasLayer
 var crt_on: bool = true
 var warp_on: bool = true
 var mouse_timer: float
+var tint_color: Color
 @onready var crt: ColorRect = $CRT
 @onready var warp: ColorRect = $Warp
 @onready var mouse: TextureRect = $Mouse
+
+
+func _ready() -> void:
+	tint_color = get_tint_color()
 
 
 func _process(delta: float) -> void:
@@ -21,6 +26,10 @@ func _process(delta: float) -> void:
 			mouse.show()
 	else:
 		mouse_timer = 0.0
+	var current_color = crt.material.get_shader_parameter("tint_color")
+	if tint_color != current_color:
+		current_color = lerp(current_color, tint_color, delta)
+		crt.material.set_shader_parameter("tint_color", current_color)
 
 
 func toggle_warp(value: bool) -> void:
@@ -42,3 +51,12 @@ func toggle_crt(value: bool) -> void:
 
 func set_resolution(new_res: Vector2) -> void:
 	crt.material.set_shader_parameter("resolution", new_res)
+
+
+func get_tint_color() -> Color:
+	return crt.material.get_shader_parameter("tint_color")
+
+
+func set_tint_color(new_color: Color) -> void:
+	tint_color = new_color
+	#crt.material.set_shader_parameter("tint_color", new_color)

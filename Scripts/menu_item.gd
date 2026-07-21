@@ -8,15 +8,6 @@ var amount: int = 1:
 		if amount <= 1: 
 			return
 		text += " (" + str(value) + ")"
-#var equipped: bool:
-	#set(value):
-		#equipped = value
-		##text = text.rstrip("*")
-		#if equipped:
-			#hide()
-			##text += "*"
-		#else:
-			#show()
 var price: int:
 	set(value):
 		price = value

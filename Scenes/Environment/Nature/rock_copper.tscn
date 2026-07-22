@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://rngge24sint8"]
+
+[ext_resource type="PackedScene" uid="uid://ccasv3bhe2jhu" path="res://Art/Models/rock.glb" id="1_q3wwj"]
+[ext_resource type="Shader" uid="uid://de6l4w30bo7u6" path="res://Art/Shaders/cel-shader-base.gdshader" id="2_q3wwj"]
+[ext_resource type="Script" uid="uid://dqdp6l81o8ei8" path="res://Scripts/item_container.gd" id="3_pfi6r"]
+[ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="4_sbd3x"]
+[ext_resource type="Script" uid="uid://3e36ru1e7k78" path="res://Scripts/spawn_chance_resource.gd" id="5_22m2c"]
+[ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="6_ljcml"]
+[ext_resource type="Resource" uid="uid://kvphfnb8ldyv" path="res://Resources/Items/Junk/copper.tres" id="6_sbd3x"]
+[ext_resource type="Script" uid="uid://bfaiq1ouiaxlr" path="res://Scripts/condition.gd" id="8_22m2c"]
+[ext_resource type="Script" uid="uid://fk3ofhxbptsc" path="res://Scripts/condition_method.gd" id="9_ljcml"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rwtl7"]
+render_priority = 0
+shader = ExtResource("2_q3wwj")
+shader_parameter/color = Color(0.67, 0.45783335, 0.335, 1)
+shader_parameter/specular = Color(0, 0, 0, 0.5019608)
+shader_parameter/fresnel = Color(0, 0, 0, 0)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_arvsk"]
+points = PackedVector3Array(-0.894425, -0.44739, -0.000166476, -0.27645, -0.44739, -0.85064, -7.9751e-05, -1, -0.000166476, -0.27645, -0.44739, 0.850474, -0.251022, 0.691694, 0.275109, -0.724149, 0.41486, -0.308748, 0.723463, -0.44739, -0.525738, -0.13353, 0.557087, -0.783528, 0.351871, -0.130131, 0.603342, 0.897071, 0.181414, 0.0714418, 0.496896, 0.486609, 0.750555, 0.129513, 1.16219, -0.18868)
+
+[sub_resource type="Resource" id="Resource_22m2c"]
+script = ExtResource("5_22m2c")
+object_to_spawn = ExtResource("6_sbd3x")
+max_amount = 3
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_h6pxd"]
+resource_local_to_scene = true
+script = ExtResource("6_ljcml")
+min_amount = 1
+max_amount = 1
+potential_slots = Array[ExtResource("5_22m2c")]([SubResource("Resource_22m2c")])
+title = "Copper Deposit"
+metadata/_custom_type_script = "uid://b34kwea65we13"
+
+[sub_resource type="Resource" id="Resource_7iuj4"]
+script = ExtResource("9_ljcml")
+path = "PlayerStats"
+method = "has_item"
+args = ["pickaxe"]
+metadata/_custom_type_script = "uid://fk3ofhxbptsc"
+
+[node name="RockCopper" type="Node3D" unique_id=1729590188 groups=["align_position"]]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="rock" parent="." unique_id=280562463 instance=ExtResource("1_q3wwj")]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
+
+[node name="Icosphere" parent="rock" index="0" unique_id=198177047]
+surface_material_override/0 = SubResource("ShaderMaterial_rwtl7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="rock/Icosphere" index="0" unique_id=332501000]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="rock/Icosphere/StaticBody3D" unique_id=1782633603]
+shape = SubResource("ConvexPolygonShape3D_arvsk")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=179944658 groups=["lootable"]]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("3_pfi6r")
+inventory = SubResource("Resource_h6pxd")
+action_verb = "Mine"
+conditions = Array[ExtResource("8_22m2c")]([SubResource("Resource_7iuj4")])
+error_message = "Missing pickaxe"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=54368847]
+shape = SubResource("ConvexPolygonShape3D_arvsk")
+
+[editable path="rock"]

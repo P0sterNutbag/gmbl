@@ -14,7 +14,7 @@ var current_shop: TownOption
 @onready var player_model: Node3D = $PlayerPortrait/Offset/EnemyModel
 @onready var player_name: Label = $PortraitHolder/HBoxContainer/PlayerName
 @onready var bounty_viewport: SubViewport = $BountyPicture
-@onready var item_preferences: VBoxContainer = %ItemPreferences
+@onready var item_preferences: Container = %ItemPreferences
 @onready var preferences_holder: Control = %PreferenceHolder
 @onready var poi_menu: PanelContainer = $PoiMenu
 @onready var empty_poi_menu: PanelContainer = $EmptyPoiMenu

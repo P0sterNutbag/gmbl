@@ -14,7 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://bj7gyfau2dx5w" path="res://Scenes/UI/menu_button.tscn" id="11_mnhd3"]
 [ext_resource type="Theme" uid="uid://bfjgfeibxk7i0" path="res://Art/Themes/slider.tres" id="11_or60b"]
 [ext_resource type="PackedScene" uid="uid://st2mrllebqci" path="res://Scenes/UI/spacer.tscn" id="12_kovtf"]
-[ext_resource type="PackedScene" uid="uid://duj5tq2rlr20w" path="res://Scenes/UI/tooltip.tscn" id="15_kovtf"]
+[ext_resource type="Script" uid="uid://csisv8e5b6fw7" path="res://Scripts/inventory_tooltip.gd" id="15_3dxge"]
+[ext_resource type="Script" uid="uid://b5bftu0nmjaha" path="res://Scripts/shop_tooltip.gd" id="16_1s6bo"]
+[ext_resource type="PackedScene" uid="uid://ch51jxbbspgbo" path="res://Scenes/UI/spacer_line.tscn" id="17_3dxge"]
+[ext_resource type="Theme" uid="uid://efo20xxcf1e5" path="res://Art/Themes/vbox_container.tres" id="17_3hus3"]
 
 [node name="Inventory" type="PanelContainer" unique_id=692215425]
 offset_left = 64.0
@@ -63,10 +66,11 @@ show_icon_on_focus = false
 
 [node name="Category" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Control3" unique_id=1581399649]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("8_d513x")
-text = "Survival"
+text = "Weapons"
 horizontal_alignment = 1
 
 [node name="RightCategory" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Control3" unique_id=695472778]
@@ -79,15 +83,25 @@ expand_icon = true
 script = ExtResource("6_v8bd3")
 show_icon_on_focus = false
 
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1514206498]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="Size" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1372619807]
 layout_mode = 2
 theme = ExtResource("8_d513x")
 text = "20/20"
+horizontal_alignment = 2
 
 [node name="Money" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=2122339366]
 layout_mode = 2
 theme = ExtResource("8_d513x")
 text = "$100"
+horizontal_alignment = 2
+
+[node name="Panel" parent="MarginContainer/VBoxContainer" unique_id=506396093 instance=ExtResource("17_3dxge")]
+visible = false
+layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=384005126]
 layout_mode = 2
@@ -103,50 +117,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 8
 script = ExtResource("4_ic2qw")
-
-[node name="Controls" type="Control" parent="." unique_id=1027290449]
-visible = false
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Controls" unique_id=240085402]
-visible = false
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = 45.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/separation = 32
-
-[node name="Label" type="Label" parent="Controls/HBoxContainer" unique_id=1396113207]
-layout_mode = 2
-theme = ExtResource("8_d513x")
-text = "LMB: Use/Equip"
-
-[node name="Label2" type="Label" parent="Controls/HBoxContainer" unique_id=816332132]
-layout_mode = 2
-theme = ExtResource("8_d513x")
-text = "X: Drop"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Controls" unique_id=839689602]
-visible = false
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = 45.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/separation = 32
-
-[node name="Label" type="Label" parent="Controls/HBoxContainer2" unique_id=1228165828]
-layout_mode = 2
-theme = ExtResource("8_d513x")
-text = "LMB: Trasnfer"
 
 [node name="DropMenu" type="Control" parent="." unique_id=1363426560]
 visible = false
@@ -222,9 +192,151 @@ text = "Yes"
 layout_mode = 2
 text = "No"
 
-[node name="ItemTooltip" parent="." unique_id=2130222902 instance=ExtResource("15_kovtf")]
-visible = false
+[node name="Offset" type="Control" parent="." unique_id=584567004]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="Tooltips" type="Control" parent="Offset" unique_id=745350651]
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("15_3dxge")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Offset/Tooltips" unique_id=2089493450]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -168.0
+offset_top = 23.0
+offset_right = 168.0
+offset_bottom = 23.0
+grow_horizontal = 2
+mouse_filter = 2
+theme = ExtResource("17_3hus3")
+
+[node name="ItemTooltip" type="PanelContainer" parent="Offset/Tooltips/VBoxContainer" unique_id=756679721]
+visible = false
+z_index = 10
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme = ExtResource("1_osrsm")
+
+[node name="MarginContainer" type="MarginContainer" parent="Offset/Tooltips/VBoxContainer/ItemTooltip" unique_id=507720414]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Offset/Tooltips/VBoxContainer/ItemTooltip/MarginContainer" unique_id=471126681]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Offset/Tooltips/VBoxContainer/ItemTooltip/MarginContainer/VBoxContainer" unique_id=1734297354]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("8_d513x")
+autowrap_mode = 2
+
+[node name="Stats" type="VBoxContainer" parent="Offset/Tooltips/VBoxContainer/ItemTooltip/MarginContainer/VBoxContainer" unique_id=920733864]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("17_3hus3")
+
+[node name="ShopTooltip" type="PanelContainer" parent="Offset/Tooltips/VBoxContainer" unique_id=396080310]
+visible = false
+z_index = 10
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme = ExtResource("1_osrsm")
+script = ExtResource("16_1s6bo")
+
+[node name="MarginContainer" type="MarginContainer" parent="Offset/Tooltips/VBoxContainer/ShopTooltip" unique_id=266799044]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Offset/Tooltips/VBoxContainer/ShopTooltip/MarginContainer" unique_id=1834400176]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Offset/Tooltips/VBoxContainer/ShopTooltip/MarginContainer/VBoxContainer" unique_id=446515654]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Offset/Tooltips/VBoxContainer/ShopTooltip/MarginContainer/VBoxContainer/HBoxContainer" unique_id=667535034]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("8_d513x")
+text = "Value:"
+
+[node name="Label2" type="Label" parent="Offset/Tooltips/VBoxContainer/ShopTooltip/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1488272294]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("8_d513x")
+text = "$100"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Offset/Tooltips/VBoxContainer/ShopTooltip/MarginContainer/VBoxContainer" unique_id=150002374]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Offset/Tooltips/VBoxContainer/ShopTooltip/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1226285847]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("8_d513x")
+text = "Condition:"
+
+[node name="Label2" type="Label" parent="Offset/Tooltips/VBoxContainer/ShopTooltip/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1635549941]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("8_d513x")
+text = "-$100"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Offset/Tooltips/VBoxContainer/ShopTooltip/MarginContainer/VBoxContainer" unique_id=1638041452]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Offset/Tooltips/VBoxContainer/ShopTooltip/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1359449313]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("8_d513x")
+text = "Trader Offer:"
+
+[node name="Label2" type="Label" parent="Offset/Tooltips/VBoxContainer/ShopTooltip/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=925734936]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("8_d513x")
+text = "-25%"
+
+[node name="Panel" parent="Offset/Tooltips/VBoxContainer/ShopTooltip/MarginContainer/VBoxContainer" unique_id=1314935370 instance=ExtResource("17_3dxge")]
+layout_mode = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Offset/Tooltips/VBoxContainer/ShopTooltip/MarginContainer/VBoxContainer" unique_id=1643126580]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Offset/Tooltips/VBoxContainer/ShopTooltip/MarginContainer/VBoxContainer/HBoxContainer4" unique_id=1343708693]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("8_d513x")
+text = "Sell Value:"
+
+[node name="Label2" type="Label" parent="Offset/Tooltips/VBoxContainer/ShopTooltip/MarginContainer/VBoxContainer/HBoxContainer4" unique_id=1774467655]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("8_d513x")
+text = "$100"
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
@@ -236,5 +348,3 @@ layout_mode = 2
 [connection signal="value_changed" from="DropMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="pressed" from="DropMenu/PanelContainer/MarginContainer/VBoxContainer/DropItem" to="." method="_on_drop_item_pressed"]
 [connection signal="pressed" from="DropMenu/PanelContainer/MarginContainer/VBoxContainer/DontDrop" to="." method="_on_dont_drop_pressed"]
-
-[editable path="ItemTooltip"]

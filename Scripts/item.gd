@@ -1,7 +1,7 @@
 extends Resource
 class_name Item
 
-enum categories {consumable, ammo, guns, armor, junk, gear}
+enum categories {aid, ammo, guns, armor, junk, gear}
 @export var title: String
 @export var category: categories
 @export var icon: Texture

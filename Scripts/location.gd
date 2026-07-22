@@ -206,12 +206,12 @@ func _on_body_exited(_body: Node3D) -> void:
 
 
 func _on_grow_timer_timeout() -> void:
+	if location_data.faction == FactionManager.factions.no_faction:
+		return
 	var amount = randi_range(1, 2)
 	location_data.change_population(amount)
 	if location_data.population == FactionManager.factions.player:
 		Globals.survival_ui.create_notification(title + " population increased by " + str(amount))
-	#var new_time = lerp(30.0, 60.0, (5.0 - location_data.resources) / 5.0)
-	#grow_timer.wait_time = new_time
 
 
 func _on_attack_area_body_entered(body: Node3D) -> void:

@@ -1,7 +1,6 @@
 extends TownOption
 class_name Shop
 
-#@export var title: String
 @export var inventory: Inventory
 @export var price_modifiers: Dictionary = {
 	"Survival" : 0.75,
@@ -10,8 +9,8 @@ class_name Shop
 	"Ammo" : 0.75,
 	"Junk" : 0.75,
 	"Gear" : 0.75,
-	"Consumable" : 0.75,
-}
+	"Aid" : 0.75,
+	}
 @export var dialogue: DialogueTree
 @export var quests: Array[Quest]
 @export var random_quests: Array[QuestRandom]

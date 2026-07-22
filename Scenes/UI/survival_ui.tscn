@@ -52,7 +52,7 @@
 
 [sub_resource type="Theme" id="Theme_lboml"]
 
-[node name="CanvasLayer" type="CanvasLayer" unique_id=691466196]
+[node name="SurvivalUi" type="CanvasLayer" unique_id=691466196]
 process_mode = 3
 script = ExtResource("1_e5c6o")
 
@@ -186,6 +186,7 @@ offset_left = 829.0
 offset_right = 829.0
 
 [node name="TransferInventory" type="VBoxContainer" parent="." unique_id=976192550]
+process_mode = 2
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -227,10 +228,12 @@ show_money = false
 opposing_ui = NodePath("../Inventory")
 
 [node name="PauseMenu" parent="." unique_id=74152501 instance=ExtResource("19_oq622")]
+process_mode = 2
 visible = false
 mouse_filter = 2
 
 [node name="DeathMenu" type="PanelContainer" parent="." unique_id=2103221503 node_paths=PackedStringArray("item_container")]
+process_mode = 2
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -323,6 +326,7 @@ layout_mode = 2
 text = "Quit to Desktop"
 
 [node name="Menus" type="Control" parent="." unique_id=1904849120]
+process_mode = 2
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -920,6 +924,67 @@ custom_minimum_size = Vector2(2540, 1426)
 layout_mode = 2
 texture = ExtResource("33_ve5xg")
 
+[node name="RepairMenu" type="VBoxContainer" parent="." unique_id=601518580 node_paths=PackedStringArray("item_container")]
+process_mode = 2
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -268.5
+offset_top = -224.0
+offset_right = 268.5
+offset_bottom = 224.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("13_oq622")
+script = ExtResource("48_ck7xf")
+uses_money = false
+one_use = true
+item_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer")
+is_subinterface = true
+
+[node name="Toolbar" parent="RepairMenu" unique_id=1705860667 instance=ExtResource("27_l6dhw")]
+layout_mode = 2
+
+[node name="Label" parent="RepairMenu/Toolbar/Tabs/MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(1705860667, 1909442391) index="0" unique_id=1641508403]
+text = "Repair"
+
+[node name="PanelContainer" type="PanelContainer" parent="RepairMenu" unique_id=1647798090]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("11_0pkni")
+
+[node name="MarginContainer" type="MarginContainer" parent="RepairMenu/PanelContainer" unique_id=889439153]
+layout_mode = 2
+theme = ExtResource("12_2dyl4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RepairMenu/PanelContainer/MarginContainer" unique_id=1330469907]
+layout_mode = 2
+
+[node name="Money" type="Label" parent="RepairMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=870342064]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme = ExtResource("3_1kfkr")
+text = "$100"
+
+[node name="Control" type="Control" parent="RepairMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1061436620]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="ScrollContainer" parent="RepairMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1780605704]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RepairMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1158386689]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("15_k4cvi")
+
 [node name="PlayerHealth" type="Control" parent="." unique_id=1342773347]
 layout_mode = 3
 anchors_preset = 2
@@ -1102,66 +1167,6 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("36_8cvki")
 
-[node name="RepairMenu" type="VBoxContainer" parent="." unique_id=601518580 node_paths=PackedStringArray("item_container")]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -268.5
-offset_top = -224.0
-offset_right = 268.5
-offset_bottom = 224.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("13_oq622")
-script = ExtResource("48_ck7xf")
-uses_money = false
-one_use = true
-item_container = NodePath("PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer")
-is_subinterface = true
-
-[node name="Toolbar" parent="RepairMenu" unique_id=1705860667 instance=ExtResource("27_l6dhw")]
-layout_mode = 2
-
-[node name="Label" parent="RepairMenu/Toolbar/Tabs/MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(1705860667, 1909442391) index="0" unique_id=1641508403]
-text = "Repair"
-
-[node name="PanelContainer" type="PanelContainer" parent="RepairMenu" unique_id=1647798090]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("11_0pkni")
-
-[node name="MarginContainer" type="MarginContainer" parent="RepairMenu/PanelContainer" unique_id=889439153]
-layout_mode = 2
-theme = ExtResource("12_2dyl4")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="RepairMenu/PanelContainer/MarginContainer" unique_id=1330469907]
-layout_mode = 2
-
-[node name="Money" type="Label" parent="RepairMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=870342064]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-theme = ExtResource("3_1kfkr")
-text = "$100"
-
-[node name="Control" type="Control" parent="RepairMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1061436620]
-custom_minimum_size = Vector2(0, 8)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="VBoxContainer" type="ScrollContainer" parent="RepairMenu/PanelContainer/MarginContainer/VBoxContainer" unique_id=1780605704]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="RepairMenu/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1158386689]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource("15_k4cvi")
-
 [node name="ColorRect" type="ColorRect" parent="." unique_id=96228101]
 visible = false
 custom_minimum_size = Vector2(240, 1080)
@@ -1200,6 +1205,8 @@ color = Color(0, 0, 0, 1)
 [connection signal="visibility_changed" from="Menus/VBoxContainer/Squad" to="Menus/VBoxContainer/Squad" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="Menus/VBoxContainer/Log" to="Menus/VBoxContainer/Log" method="_on_visibility_changed"]
 [connection signal="gui_input" from="Menus/VBoxContainer/Map/ScrollContainer/TextureRect" to="Menus/VBoxContainer/Map" method="_on_texture_rect_gui_input"]
+[connection signal="visibility_changed" from="RepairMenu" to="RepairMenu" method="_on_visibility_changed"]
+[connection signal="pressed" from="RepairMenu/Toolbar/ExitMenu" to="RepairMenu" method="close"]
 [connection signal="mouse_entered" from="MenuButtons" to="." method="_on_menu_buttons_mouse_entered"]
 [connection signal="mouse_exited" from="MenuButtons" to="." method="_on_menu_buttons_mouse_exited"]
 [connection signal="pressed" from="MenuButtons/InventoryButton" to="." method="_on_inventory_button_pressed"]
@@ -1207,8 +1214,6 @@ color = Color(0, 0, 0, 1)
 [connection signal="pressed" from="MenuButtons/FactionButton" to="." method="_on_faction_button_pressed"]
 [connection signal="pressed" from="MenuButtons/CharacterButton" to="." method="_on_character_button_pressed"]
 [connection signal="pressed" from="MenuButtons/PauseButton" to="." method="_on_pause_pressed"]
-[connection signal="visibility_changed" from="RepairMenu" to="RepairMenu" method="_on_visibility_changed"]
-[connection signal="pressed" from="RepairMenu/Toolbar/ExitMenu" to="RepairMenu" method="close"]
 
 [editable path="TransferInventory/Toolbar"]
 [editable path="Menus/VBoxContainer/Toolbar"]

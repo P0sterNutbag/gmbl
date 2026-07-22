@@ -19,19 +19,19 @@ var categories = {
 	-1 : "All" ,
 	Item.categories.guns : "Weapons",
 	Item.categories.ammo : "Ammo",
-	Item.categories.consumable : "Consumable",
+	Item.categories.aid : "Aid",
 	Item.categories.gear : "Gear",
 	Item.categories.armor: "Armor",
 	Item.categories.junk : "Junk",
 	}
 var category_icons := {
-	Item.categories.consumable : preload("uid://d255ivp8epdww"),
+	Item.categories.aid : preload("uid://d255ivp8epdww"),
 	Item.categories.guns : preload("uid://bawi5rh4k705r"),
 	Item.categories.ammo : preload("uid://cfaqpxn6m5qtm"),
 	Item.categories.armor: preload("uid://blmj1u6o3d12r"),
 	Item.categories.junk : preload("uid://dchj1pn34qgj6"),
 	Item.categories.gear : preload("uid://bhmodnqjb2gkx"),
-}
+	}
 var category_index = -1
 const text_style = preload("res://Art/Themes/text_small.tres")
 const hbox_style = preload("uid://ddlkdp3v3plc")
@@ -40,18 +40,19 @@ const hbox_style = preload("uid://ddlkdp3v3plc")
 @onready var money_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/Money
 @onready var size_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/Size
 @onready var category_label: Label = %Category
-@onready var stats: Label = $ItemTooltip/PanelContainer/MarginContainer/VBoxContainer/Label
-@onready var description: VBoxContainer = $ItemTooltip/PanelContainer/MarginContainer/VBoxContainer/Stats
-@onready var use_controls: HBoxContainer = $Controls/HBoxContainer
-@onready var loot_controls: HBoxContainer = $Controls/HBoxContainer2
+@onready var stats: VBoxContainer = $Offset/Tooltips/VBoxContainer/ItemTooltip/MarginContainer/VBoxContainer/Stats
+@onready var description: Label = $Offset/Tooltips/VBoxContainer/ItemTooltip/MarginContainer/VBoxContainer/Label
 @onready var drop_menu: Control = $DropMenu
 @onready var drop_item_text: Label = $DropMenu/PanelContainer/MarginContainer/VBoxContainer/Label
 @onready var drop_amount_h_slider: HSlider = $DropMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/HSlider
 @onready var drop_amount_label: Label = $DropMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Label
-@onready var item_tooltip: Control = $ItemTooltip
+@onready var item_tooltip: Control = $Offset/Tooltips/VBoxContainer/ItemTooltip
+@onready var shop_tooltip: Control = $Offset/Tooltips/VBoxContainer/ShopTooltip
+@onready var tooltips: Control = $Offset/Tooltips
 signal item_transferred(item: Item)
 signal item_focus_entered(item: Item)
 signal item_focus_exited
+
 
 func _ready() -> void:
 	is_ready = true
@@ -74,9 +75,6 @@ func _process(_delta: float) -> void:
 	if show_size:
 		var space_left = source_inventory.get_space_left()
 		size_label.text = str(source_inventory.space - space_left) + "/" + str(source_inventory.space)
-	# stats panel
-	if item_tooltip.visible:
-		item_tooltip.position = get_local_mouse_position()
 
 
 func set_items():
@@ -98,9 +96,9 @@ func set_items():
 		inst.icon = inst.icon_texture_unfocus
 		if show_price:
 			var price_modifier = 1.0
-			if shop:
-				var faction_rating = FactionManager.get_faction_relation(shop.faction, FactionManager.factions.player)
-				price_modifier -= sign(faction_rating) * faction_discount
+			#if shop:
+				#var faction_rating = FactionManager.get_faction_relation(shop.faction, FactionManager.factions.player)
+				#price_modifier -= sign(faction_rating) * faction_discount
 			if opposing_ui.shop != null:
 				price_modifier = opposing_ui.shop.price_modifiers[categories[item.category]]
 			if item is EquipmentGun:
@@ -119,8 +117,6 @@ func set_items():
 				if item.used_up.is_connected(_on_use_item):
 					item.used_up.disconnect(_on_use_item)
 				item.used_up.connect(_on_use_item.bind(inst))
-				#if !item.used_up.is_connected(source_inventory.remove_item):
-					#item.used_up.connect(source_inventory.remove_item.bind(item))
 			inst.pressed.connect(item.on_pressed)
 		elif mode == modes.loot:
 			inst.pressed.connect(transfer_item.bind(inst))
@@ -128,7 +124,6 @@ func set_items():
 				inst.text += " (equipped)"
 	filter(category_index)
 	if item_container.get_child_count() > 0:
-		#item_container.sort_menu_items()
 		sort_by_category()
 
 
@@ -136,9 +131,6 @@ func transfer_item(menu_item: Control):
 	var item = menu_item.resource
 	# check money
 	if show_price and target_inventory.money < menu_item.price:
-		#opposing_ui.money_label.modulate = Color.RED
-		#var tween = create_tween()
-		#tween.tween_property(opposing_ui.money_label, "modulate", Color.WHITE, 1)
 		UiController.stop_audio()
 		UiController.error_sfx.play()
 		if Globals.survival_ui:
@@ -281,18 +273,20 @@ func _on_item_focus_entered(menu_item: MenuItem):
 	current_menu_item = menu_item
 	var item = menu_item.resource
 	set_description(item)
+	if source_inventory == PlayerStats.inventory and opposing_ui and show_price:
+		shop_tooltip.set_item(item, opposing_ui.shop, menu_item)
 	item_focus_entered.emit(item)
 
 
 func _on_item_focus_exited(_menu_item: MenuItem):
 	current_menu_item = null
 	set_description()
+	shop_tooltip.hide()
 	item_focus_exited.emit()
 
 
 func _on_item_equipped_changed(menu_item: MenuItem) -> void:
 	var item = menu_item.resource
-	#source_inventory.equipment_kit.equipment[item.slot] = item
 	if mode == modes.use and item_is_in_category(item):
 		menu_item.visible = !item.equipped
 
@@ -307,44 +301,6 @@ func _on_right_category_pressed() -> void:
 	category_index = wrapi(category_index + 1, -1, categories.size() - 1)
 	filter(category_index)
 	UiController.tab_sfx.play()
-
-
-#func create_physical_item(physical_item: PackedScene = null) -> void:
-	#if physical_item == null or get_tree().current_scene == Globals.overworld:
-		## determine amount to move
-		#var amount_to_move = 1
-		#if Input.is_action_just_pressed("shift"):
-			#amount_to_move = resource.amount
-		## move to pouch
-		#var new_item = resource.duplicate()
-		#new_item.amount = amount_to_move
-		#var pouches: Array = Globals.player.loot_area.get_overlapping_areas()
-		#pouches.filter(func(i): return i.is_in_group("pouches"))
-		#if pouches.size() > 0:
-			#var previous_item = Globals.find_item(pouches[0].items, resource.title)
-			#if previous_item:
-				#previous_item.amount += amount_to_move
-			#else:
-				#pouches[0].items.append(new_item)
-			#return
-		## create new physical pouch
-		#var p = pouch.instantiate()
-		#get_tree().current_scene.add_child(p)
-		#var offset = -Globals.player.basis.z
-		#if get_tree().current_scene == Globals.overworld:
-			#offset = -Globals.player.model.basis.z
-		#p.global_position = Globals.player.global_position + offset
-		#p.global_position.y = Globals.get_heightmap_position(p.global_position)
-		#p.items.append(new_item)
-		#return
-	#var inst: RigidBody3D = physical_item.instantiate()
-	#get_tree().current_scene.add_child.call_deferred(inst)
-	#inst.set_deferred("global_position", Globals.player.global_position + Vector3.UP * 1.5)
-	#inst.apply_impulse.call_deferred(-Globals.player.basis.z * 5)
-	#inst.apply_torque_impulse.call_deferred(Vector3(randf_range(-0.1, 0.1), randf_range(-5, 5), randf_range(-0.1, 0.1)))
-	#inst.item = resource
-	#if inst.item is EquipmentGun:
-		#inst.item.gun_stats = resource.gun_stats
 
 
 func _on_drop_item_pressed() -> void:

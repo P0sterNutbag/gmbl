@@ -7,6 +7,7 @@ extends Node3D
 
 
 func _ready() -> void:
+	await get_tree().process_frame
 	if position_on_start:
 		_position_all_nodes()
 

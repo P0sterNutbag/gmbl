@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bharw4v25fhu0"]
+
+[ext_resource type="PackedScene" uid="uid://rngge24sint8" path="res://Scenes/Environment/Nature/rock_copper.tscn" id="1_c7yvg"]
+[ext_resource type="Shader" uid="uid://de6l4w30bo7u6" path="res://Art/Shaders/cel-shader-base.gdshader" id="2_jnevm"]
+[ext_resource type="Script" uid="uid://cfuex8bm4d62j" path="res://Scripts/item_slot.gd" id="2_yxqni"]
+[ext_resource type="Script" uid="uid://3e36ru1e7k78" path="res://Scripts/spawn_chance_resource.gd" id="3_jnevm"]
+[ext_resource type="Resource" uid="uid://b620vnkduhu8h" path="res://Resources/Items/Junk/silver.tres" id="4_c7yvg"]
+[ext_resource type="Script" uid="uid://b34kwea65we13" path="res://Scripts/inventory_random.gd" id="5_uw70o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2g1hm"]
+render_priority = 0
+shader = ExtResource("2_jnevm")
+shader_parameter/color = Color(0.61960787, 0.67058825, 0.67058825, 1)
+shader_parameter/specular = Color(0, 0, 0, 0)
+shader_parameter/fresnel = Color(0, 0, 0, 0)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_22m2c"]
+script = ExtResource("3_jnevm")
+object_to_spawn = ExtResource("4_c7yvg")
+max_amount = 2
+metadata/_custom_type_script = "uid://3e36ru1e7k78"
+
+[sub_resource type="Resource" id="Resource_cgsyj"]
+resource_local_to_scene = true
+script = ExtResource("5_uw70o")
+min_amount = 1
+max_amount = 1
+potential_slots = Array[ExtResource("3_jnevm")]([SubResource("Resource_22m2c")])
+title = "Silver Deposit"
+metadata/_custom_type_script = "uid://b34kwea65we13"
+
+[node name="RockSilver" unique_id=1729590188 instance=ExtResource("1_c7yvg")]
+
+[node name="Icosphere" parent="rock" parent_id_path=PackedInt32Array(280562463) index="0" unique_id=198177047]
+surface_material_override/0 = SubResource("ShaderMaterial_2g1hm")
+
+[node name="Area3D" parent="." index="1" unique_id=179944658]
+inventory = SubResource("Resource_cgsyj")
+
+[editable path="rock"]

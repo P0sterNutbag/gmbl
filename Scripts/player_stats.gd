@@ -70,6 +70,7 @@ func _ready() -> void:
 	SceneManager.scene_changed.connect(_on_scene_changed)
 	SceneManager.scene_leaving.connect(_on_scene_leaving)
 	SaveController.load.connect(_on_load)
+	DayNightCycle.day_start.connect(_on_day_started)
 	gun_changed.connect(_on_gun_changed)
 	await get_tree().process_frame
 	max_sleep = DayNightCycle.day_length / (sleep_decrease_rate * abs(DayNightCycle.time_speed))
@@ -179,6 +180,10 @@ func add_skill_point() -> void:
 		Globals.survival_ui.skills_menu.setup()
 
 
+func has_item(item_name: String) -> bool:
+	return inventory.find_item(item_name) != null
+
+
 func _on_gun_changed():
 	gun = inventory.equipment_kit.equipment[gun_index]
 
@@ -204,6 +209,17 @@ func _on_skill_changed(skill_name: String) -> void:
 func _on_ally_death(npc_data: NpcData, npc: Npc) -> void:
 	allies.erase(npc_data)
 	ally_npcs.erase(npc)
+
+
+func _on_day_started() -> void:
+	var dir := DirAccess.open("res://my_folder")
+	if dir == null: printerr("Could not open folder"); return
+	dir.list_dir_begin()
+	for file: String in dir.get_files():
+		var resource := load(dir.get_current_dir() + "/" + file)
+		print(resource)
+	#for location in owned_locations:
+		#inventory.money += location.location_data.income
 
 
 func save() -> Dictionary:

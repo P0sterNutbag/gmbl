@@ -2,6 +2,9 @@ extends InteractableObject
 class_name ItemContainer
 
 @export var inventory: Inventory
+@export var action_verb: String = "Loot"
+@export var conditions: Array[Condition]
+@export_multiline() var error_message: String
 @export var locked_chance: float
 var locked: bool
 
@@ -12,11 +15,15 @@ func _ready() -> void:
 	if locked:
 		actions = ["Pick Lock"]
 	else:
-		actions = ["Loot"]
+		actions = [action_verb]
 
 
 func interact() -> void:
 	super.interact()
+	for condition in conditions:
+		if !condition.is_met():
+			Globals.survival_ui.create_notification(error_message)
+			return
 	if locked:
 		if PlayerStats.inventory.find_item("lockpick"):
 			PlayerStats.inventory.remove_item_by_name("lockpick", 1, true)
